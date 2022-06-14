@@ -1,20 +1,22 @@
-﻿using UnityEngine.SceneManagement;
-using UnityEngine;
-using System;
+﻿using System;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 namespace CodeBase.Infrastructure
 {
-
     public class SceneLoader
     {
         private readonly ICoroutineRunner _coroutineRunner;
 
-        public SceneLoader(ICoroutineRunner coroutineRunner) =>
+        public SceneLoader(ICoroutineRunner coroutineRunner)
+        {
             _coroutineRunner = coroutineRunner;
+        }
 
-        public void Load(string name, Action onLoaded = null) =>
+        public void Load(string name, Action onLoaded = null)
+        {
             _coroutineRunner.StartCoroutine(LoadScene(name, onLoaded));
+        }
 
         public IEnumerator LoadScene(string nextScene, Action onLoaded = null)
         {
@@ -22,9 +24,9 @@ namespace CodeBase.Infrastructure
             {
                 onLoaded?.Invoke();
                 yield break;
-                
             }
-            AsyncOperation waitNextScene = SceneManager.LoadSceneAsync(nextScene);
+
+            var waitNextScene = SceneManager.LoadSceneAsync(nextScene);
 
             while (!waitNextScene.isDone)
                 yield return null;
@@ -32,6 +34,4 @@ namespace CodeBase.Infrastructure
             onLoaded?.Invoke();
         }
     }
-
-
 }

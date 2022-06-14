@@ -2,13 +2,13 @@
 
 namespace SimpleInputNamespace
 {
-	public class KeyInputSwipeGesture : SwipeGestureBase<KeyCode, bool>
-	{
-		public SimpleInput.KeyInput key = new SimpleInput.KeyInput();
+    public class KeyInputSwipeGesture : SwipeGestureBase<KeyCode, bool>
+    {
+        public SimpleInput.KeyInput key = new SimpleInput.KeyInput();
 
-		protected override BaseInput<KeyCode, bool> Input { get { return key; } }
-		protected override bool Value { get { return true; } }
+        protected override BaseInput<KeyCode, bool> Input => key;
+        protected override bool Value => true;
 
-		public override int Priority { get { return 1; } }
-	}
+        public override int Priority => 1;
+    }
 }

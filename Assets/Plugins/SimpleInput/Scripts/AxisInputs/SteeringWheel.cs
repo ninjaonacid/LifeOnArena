@@ -1,115 +1,111 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace SimpleInputNamespace
 {
-	public class SteeringWheel : MonoBehaviour, ISimpleInputDraggable
-	{
-		public SimpleInput.AxisInput axis = new SimpleInput.AxisInput( "Horizontal" );
+    public class SteeringWheel : MonoBehaviour, ISimpleInputDraggable
+    {
+        public SimpleInput.AxisInput axis = new SimpleInput.AxisInput("Horizontal");
+        private Vector2 centerPoint;
 
-		private Graphic wheel;
+        public float maximumSteeringAngle = 200f;
+        public float valueMultiplier = 1f;
 
-		private RectTransform wheelTR;
-		private Vector2 centerPoint;
+        private Graphic wheel;
 
-		public float maximumSteeringAngle = 200f;
-		public float wheelReleasedSpeed = 350f;
-		public float valueMultiplier = 1f;
+        private bool wheelBeingHeld;
+        private float wheelPrevAngle;
+        public float wheelReleasedSpeed = 350f;
 
-		private float wheelAngle = 0f;
-		private float wheelPrevAngle = 0f;
+        private RectTransform wheelTR;
+        public float Value { get; private set; }
 
-		private bool wheelBeingHeld = false;
+        public float Angle { get; private set; }
 
-		private float m_value;
-		public float Value { get { return m_value; } }
+        public void OnPointerDown(PointerEventData eventData)
+        {
+            // Executed when mouse/finger starts touching the steering wheel
+            wheelBeingHeld = true;
+            centerPoint = RectTransformUtility.WorldToScreenPoint(eventData.pressEventCamera, wheelTR.position);
+            wheelPrevAngle = Vector2.Angle(Vector2.up, eventData.position - centerPoint);
+        }
 
-		public float Angle { get { return wheelAngle; } }
+        public void OnDrag(PointerEventData eventData)
+        {
+            // Executed when mouse/finger is dragged over the steering wheel
+            var pointerPos = eventData.position;
 
-		private void Awake()
-		{
-			wheel = GetComponent<Graphic>();
-			wheelTR = wheel.rectTransform;
+            var wheelNewAngle = Vector2.Angle(Vector2.up, pointerPos - centerPoint);
 
-			SimpleInputDragListener eventReceiver = gameObject.AddComponent<SimpleInputDragListener>();
-			eventReceiver.Listener = this;
-		}
+            // Do nothing if the pointer is too close to the center of the wheel
+            if ((pointerPos - centerPoint).sqrMagnitude >= 400f)
+            {
+                if (pointerPos.x > centerPoint.x)
+                    Angle += wheelNewAngle - wheelPrevAngle;
+                else
+                    Angle -= wheelNewAngle - wheelPrevAngle;
+            }
 
-		private void OnEnable()
-		{
-			axis.StartTracking();
-			SimpleInput.OnUpdate += OnUpdate;
-		}
+            // Make sure wheel angle never exceeds maximumSteeringAngle
+            Angle = Mathf.Clamp(Angle, -maximumSteeringAngle, maximumSteeringAngle);
+            wheelPrevAngle = wheelNewAngle;
+        }
 
-		private void OnDisable()
-		{
-			wheelBeingHeld = false;
-			wheelAngle = wheelPrevAngle = m_value = 0f;
-			wheelTR.localEulerAngles = Vector3.zero;
+        public void OnPointerUp(PointerEventData eventData)
+        {
+            // Executed when mouse/finger stops touching the steering wheel
+            // Performs one last OnDrag calculation, just in case
+            OnDrag(eventData);
 
-			axis.StopTracking();
-			SimpleInput.OnUpdate -= OnUpdate;
-		}
+            wheelBeingHeld = false;
+        }
 
-		private void OnUpdate()
-		{
-			// If the wheel is released, reset the rotation
-			// to initial (zero) rotation by wheelReleasedSpeed degrees per second
-			if( !wheelBeingHeld && wheelAngle != 0f )
-			{
-				float deltaAngle = wheelReleasedSpeed * Time.deltaTime;
-				if( Mathf.Abs( deltaAngle ) > Mathf.Abs( wheelAngle ) )
-					wheelAngle = 0f;
-				else if( wheelAngle > 0f )
-					wheelAngle -= deltaAngle;
-				else
-					wheelAngle += deltaAngle;
-			}
+        private void Awake()
+        {
+            wheel = GetComponent<Graphic>();
+            wheelTR = wheel.rectTransform;
 
-			// Rotate the wheel image
-			wheelTR.localEulerAngles = new Vector3( 0f, 0f, -wheelAngle );
+            var eventReceiver = gameObject.AddComponent<SimpleInputDragListener>();
+            eventReceiver.Listener = this;
+        }
 
-			m_value = wheelAngle * valueMultiplier / maximumSteeringAngle;
-			axis.value = m_value;
-		}
+        private void OnEnable()
+        {
+            axis.StartTracking();
+            SimpleInput.OnUpdate += OnUpdate;
+        }
 
-		public void OnPointerDown( PointerEventData eventData )
-		{
-			// Executed when mouse/finger starts touching the steering wheel
-			wheelBeingHeld = true;
-			centerPoint = RectTransformUtility.WorldToScreenPoint( eventData.pressEventCamera, wheelTR.position );
-			wheelPrevAngle = Vector2.Angle( Vector2.up, eventData.position - centerPoint );
-		}
+        private void OnDisable()
+        {
+            wheelBeingHeld = false;
+            Angle = wheelPrevAngle = Value = 0f;
+            wheelTR.localEulerAngles = Vector3.zero;
 
-		public void OnDrag( PointerEventData eventData )
-		{
-			// Executed when mouse/finger is dragged over the steering wheel
-			Vector2 pointerPos = eventData.position;
+            axis.StopTracking();
+            SimpleInput.OnUpdate -= OnUpdate;
+        }
 
-			float wheelNewAngle = Vector2.Angle( Vector2.up, pointerPos - centerPoint );
+        private void OnUpdate()
+        {
+            // If the wheel is released, reset the rotation
+            // to initial (zero) rotation by wheelReleasedSpeed degrees per second
+            if (!wheelBeingHeld && Angle != 0f)
+            {
+                var deltaAngle = wheelReleasedSpeed * Time.deltaTime;
+                if (Mathf.Abs(deltaAngle) > Mathf.Abs(Angle))
+                    Angle = 0f;
+                else if (Angle > 0f)
+                    Angle -= deltaAngle;
+                else
+                    Angle += deltaAngle;
+            }
 
-			// Do nothing if the pointer is too close to the center of the wheel
-			if( ( pointerPos - centerPoint ).sqrMagnitude >= 400f )
-			{
-				if( pointerPos.x > centerPoint.x )
-					wheelAngle += wheelNewAngle - wheelPrevAngle;
-				else
-					wheelAngle -= wheelNewAngle - wheelPrevAngle;
-			}
+            // Rotate the wheel image
+            wheelTR.localEulerAngles = new Vector3(0f, 0f, -Angle);
 
-			// Make sure wheel angle never exceeds maximumSteeringAngle
-			wheelAngle = Mathf.Clamp( wheelAngle, -maximumSteeringAngle, maximumSteeringAngle );
-			wheelPrevAngle = wheelNewAngle;
-		}
-
-		public void OnPointerUp( PointerEventData eventData )
-		{
-			// Executed when mouse/finger stops touching the steering wheel
-			// Performs one last OnDrag calculation, just in case
-			OnDrag( eventData );
-
-			wheelBeingHeld = false;
-		}
-	}
+            Value = Angle * valueMultiplier / maximumSteeringAngle;
+            axis.value = Value;
+        }
+    }
 }

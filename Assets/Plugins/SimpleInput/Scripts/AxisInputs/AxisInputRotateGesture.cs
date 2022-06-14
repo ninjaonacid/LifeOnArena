@@ -4,66 +4,69 @@ using UnityEngine.EventSystems;
 
 namespace SimpleInputNamespace
 {
-	[RequireComponent( typeof( SimpleInputMultiDragListener ) )]
-	public class AxisInputRotateGesture : MonoBehaviour, ISimpleInputDraggableMultiTouch
-	{
-		private const float MULTIPLIER = 180f / Mathf.PI;
+    [RequireComponent(typeof(SimpleInputMultiDragListener))]
+    public class AxisInputRotateGesture : MonoBehaviour, ISimpleInputDraggableMultiTouch
+    {
+        private const float MULTIPLIER = 180f / Mathf.PI;
 
-		public SimpleInput.AxisInput axis = new SimpleInput.AxisInput();
+        public SimpleInput.AxisInput axis = new SimpleInput.AxisInput();
+        public bool clockwise = true;
 
-		public float sensitivity = 0.25f;
-		public bool clockwise = true;
+        private SimpleInputMultiDragListener eventReceiver;
 
-		private SimpleInputMultiDragListener eventReceiver;
+        public float sensitivity = 0.25f;
 
-		public int Priority { get { return 2; } }
+        public int Priority => 2;
 
-		private void Awake()
-		{
-			eventReceiver = GetComponent<SimpleInputMultiDragListener>();
-		}
+        public bool OnUpdate(List<PointerEventData> mousePointers, List<PointerEventData> touchPointers,
+            ISimpleInputDraggableMultiTouch activeListener)
+        {
+            axis.value = 0f;
 
-		private void OnEnable()
-		{
-			eventReceiver.AddListener( this );
-			axis.StartTracking();
-		}
+            if (activeListener != null && activeListener.Priority > Priority)
+                return false;
 
-		private void OnDisable()
-		{
-			eventReceiver.RemoveListener( this );
-			axis.StopTracking();
-		}
+            if (touchPointers.Count < 2)
+            {
+                if (ReferenceEquals(activeListener, this) && touchPointers.Count == 1)
+                    touchPointers[0].pressPosition = touchPointers[0].position;
 
-		public bool OnUpdate( List<PointerEventData> mousePointers, List<PointerEventData> touchPointers, ISimpleInputDraggableMultiTouch activeListener )
-		{
-			axis.value = 0f;
+                return false;
+            }
 
-			if( activeListener != null && activeListener.Priority > Priority )
-				return false;
+            var touch1 = touchPointers[touchPointers.Count - 1];
+            var touch2 = touchPointers[touchPointers.Count - 2];
 
-			if( touchPointers.Count < 2 )
-			{
-				if( ReferenceEquals( activeListener, this ) && touchPointers.Count == 1 )
-					touchPointers[0].pressPosition = touchPointers[0].position;
+            var deltaPosition = touch2.position - touch1.position;
+            var prevDeltaPosition = deltaPosition - (touch2.delta - touch1.delta);
 
-				return false;
-			}
+            var deltaAngle =
+                (Mathf.Atan2(prevDeltaPosition.y, prevDeltaPosition.x) -
+                 Mathf.Atan2(deltaPosition.y, deltaPosition.x)) * MULTIPLIER;
+            if (deltaAngle > 180f)
+                deltaAngle -= 360f;
+            else if (deltaAngle < -180f)
+                deltaAngle += 360f;
 
-			PointerEventData touch1 = touchPointers[touchPointers.Count - 1];
-			PointerEventData touch2 = touchPointers[touchPointers.Count - 2];
+            axis.value = clockwise ? deltaAngle * sensitivity : -deltaAngle * sensitivity;
+            return true;
+        }
 
-			Vector2 deltaPosition = touch2.position - touch1.position;
-			Vector2 prevDeltaPosition = deltaPosition - ( touch2.delta - touch1.delta );
+        private void Awake()
+        {
+            eventReceiver = GetComponent<SimpleInputMultiDragListener>();
+        }
 
-			float deltaAngle = ( Mathf.Atan2( prevDeltaPosition.y, prevDeltaPosition.x ) - Mathf.Atan2( deltaPosition.y, deltaPosition.x ) ) * MULTIPLIER;
-			if( deltaAngle > 180f )
-				deltaAngle -= 360f;
-			else if( deltaAngle < -180f )
-				deltaAngle += 360f;
+        private void OnEnable()
+        {
+            eventReceiver.AddListener(this);
+            axis.StartTracking();
+        }
 
-			axis.value = clockwise ? deltaAngle * sensitivity : -deltaAngle * sensitivity;
-			return true;
-		}
-	}
+        private void OnDisable()
+        {
+            eventReceiver.RemoveListener(this);
+            axis.StopTracking();
+        }
+    }
 }

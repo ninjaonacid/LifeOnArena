@@ -3,100 +3,102 @@ using UnityEngine.EventSystems;
 
 namespace SimpleInputNamespace
 {
-	public class Dpad : MonoBehaviour, ISimpleInputDraggable
-	{
-		public SimpleInput.AxisInput xAxis = new SimpleInput.AxisInput( "Horizontal" );
-		public SimpleInput.AxisInput yAxis = new SimpleInput.AxisInput( "Vertical" );
+    public class Dpad : MonoBehaviour, ISimpleInputDraggable
+    {
+        private Vector2 m_value = Vector2.zero;
 
-		public float valueMultiplier = 1f;
+        private RectTransform rectTransform;
 
-#pragma warning disable 0649
-		[Tooltip( "Radius of the deadzone at the center of the Dpad that will yield no input" )]
-		[SerializeField]
-		private float deadzoneRadius = 20f;
-		private float deadzoneRadiusSqr;
-#pragma warning restore 0649
+        public float valueMultiplier = 1f;
+        public SimpleInput.AxisInput xAxis = new SimpleInput.AxisInput("Horizontal");
+        public SimpleInput.AxisInput yAxis = new SimpleInput.AxisInput("Vertical");
+        public Vector2 Value => m_value;
 
-		private RectTransform rectTransform;
+        public void OnPointerDown(PointerEventData eventData)
+        {
+            CalculateInput(eventData);
+        }
 
-		private Vector2 m_value = Vector2.zero;
-		public Vector2 Value { get { return m_value; } }
+        public void OnDrag(PointerEventData eventData)
+        {
+            CalculateInput(eventData);
+        }
 
-		private void Awake()
-		{
-			rectTransform = (RectTransform) transform;
-			gameObject.AddComponent<SimpleInputDragListener>().Listener = this;
+        public void OnPointerUp(PointerEventData eventData)
+        {
+            m_value = Vector2.zero;
 
-			deadzoneRadiusSqr = deadzoneRadius * deadzoneRadius;
-		}
+            xAxis.value = 0f;
+            yAxis.value = 0f;
+        }
 
-		private void OnEnable()
-		{
-			xAxis.StartTracking();
-			yAxis.StartTracking();
-		}
+        private void Awake()
+        {
+            rectTransform = (RectTransform)transform;
+            gameObject.AddComponent<SimpleInputDragListener>().Listener = this;
 
-		private void OnDisable()
-		{
-			xAxis.StopTracking();
-			yAxis.StopTracking();
-		}
+            deadzoneRadiusSqr = deadzoneRadius * deadzoneRadius;
+        }
+
+        private void OnEnable()
+        {
+            xAxis.StartTracking();
+            yAxis.StartTracking();
+        }
+
+        private void OnDisable()
+        {
+            xAxis.StopTracking();
+            yAxis.StopTracking();
+        }
 
 #if UNITY_EDITOR
-		private void OnValidate()
-		{
-			deadzoneRadiusSqr = deadzoneRadius * deadzoneRadius;
-		}
+        private void OnValidate()
+        {
+            deadzoneRadiusSqr = deadzoneRadius * deadzoneRadius;
+        }
 #endif
 
-		public void OnPointerDown( PointerEventData eventData )
-		{
-			CalculateInput( eventData );
-		}
+        private void CalculateInput(PointerEventData eventData)
+        {
+            Vector2 pointerPos;
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(rectTransform, eventData.position,
+                eventData.pressEventCamera, out pointerPos);
 
-		public void OnDrag( PointerEventData eventData )
-		{
-			CalculateInput( eventData );
-		}
+            if (pointerPos.sqrMagnitude <= deadzoneRadiusSqr)
+            {
+                m_value.Set(0f, 0f);
+            }
+            else
+            {
+                var angle = Vector2.Angle(pointerPos, Vector2.right);
+                if (pointerPos.y < 0f)
+                    angle = 360f - angle;
 
-		public void OnPointerUp( PointerEventData eventData )
-		{
-			m_value = Vector2.zero;
+                if (angle >= 25f && angle <= 155f)
+                    m_value.y = valueMultiplier;
+                else if (angle >= 205f && angle <= 335f)
+                    m_value.y = -valueMultiplier;
+                else
+                    m_value.y = 0f;
 
-			xAxis.value = 0f;
-			yAxis.value = 0f;
-		}
+                if (angle <= 65f || angle >= 295f)
+                    m_value.x = valueMultiplier;
+                else if (angle >= 115f && angle <= 245f)
+                    m_value.x = -valueMultiplier;
+                else
+                    m_value.x = 0f;
+            }
 
-		private void CalculateInput( PointerEventData eventData )
-		{
-			Vector2 pointerPos;
-			RectTransformUtility.ScreenPointToLocalPointInRectangle( rectTransform, eventData.position, eventData.pressEventCamera, out pointerPos );
+            xAxis.value = m_value.x;
+            yAxis.value = m_value.y;
+        }
 
-			if( pointerPos.sqrMagnitude <= deadzoneRadiusSqr )
-				m_value.Set( 0f, 0f );
-			else
-			{
-				float angle = Vector2.Angle( pointerPos, Vector2.right );
-				if( pointerPos.y < 0f )
-					angle = 360f - angle;
+#pragma warning disable 0649
+        [Tooltip("Radius of the deadzone at the center of the Dpad that will yield no input")] [SerializeField]
+        private readonly float deadzoneRadius = 20f;
 
-				if( angle >= 25f && angle <= 155f )
-					m_value.y = valueMultiplier;
-				else if( angle >= 205f && angle <= 335f )
-					m_value.y = -valueMultiplier;
-				else
-					m_value.y = 0f;
-
-				if( angle <= 65f || angle >= 295f )
-					m_value.x = valueMultiplier;
-				else if( angle >= 115f && angle <= 245f )
-					m_value.x = -valueMultiplier;
-				else
-					m_value.x = 0f;
-			}
-
-			xAxis.value = m_value.x;
-			yAxis.value = m_value.y;
-		}
-	}
+        private float deadzoneRadiusSqr;
+#pragma warning restore 0649
+    }
 }

@@ -4,79 +4,79 @@ using UnityEngine.EventSystems;
 
 namespace SimpleInputNamespace
 {
-	[RequireComponent( typeof( SimpleInputMultiDragListener ) )]
-	public abstract class SwipeGestureBase<K, V> : SelectivePointerInput, ISimpleInputDraggableMultiTouch
-	{
-		public Vector2 swipeAmount = new Vector2( 0f, 25f );
+    [RequireComponent(typeof(SimpleInputMultiDragListener))]
+    public abstract class SwipeGestureBase<K, V> : SelectivePointerInput, ISimpleInputDraggableMultiTouch
+    {
+        private SimpleInputMultiDragListener eventReceiver;
+        public Vector2 swipeAmount = new Vector2(0f, 25f);
 
-		private SimpleInputMultiDragListener eventReceiver;
+        protected abstract BaseInput<K, V> Input { get; }
+        protected abstract V Value { get; }
 
-		protected abstract BaseInput<K, V> Input { get; }
-		protected abstract V Value { get; }
+        public abstract int Priority { get; }
 
-		public abstract int Priority { get; }
+        public bool OnUpdate(List<PointerEventData> mousePointers, List<PointerEventData> touchPointers,
+            ISimpleInputDraggableMultiTouch activeListener)
+        {
+            Input.ResetValue();
 
-		private void Awake()
-		{
-			eventReceiver = GetComponent<SimpleInputMultiDragListener>();
-		}
+            if (activeListener != null && activeListener.Priority > Priority)
+                return false;
 
-		private void OnEnable()
-		{
-			eventReceiver.AddListener( this );
-			Input.StartTracking();
-		}
+            var pointer = GetSatisfyingPointer(mousePointers, touchPointers);
+            if (pointer == null)
+                return false;
 
-		private void OnDisable()
-		{
-			eventReceiver.RemoveListener( this );
-			Input.StopTracking();
-		}
+            if (!IsSwipeSatisfied(pointer))
+                return ReferenceEquals(activeListener, this);
 
-		public bool OnUpdate( List<PointerEventData> mousePointers, List<PointerEventData> touchPointers, ISimpleInputDraggableMultiTouch activeListener )
-		{
-			Input.ResetValue();
+            Input.value = Value;
+            return true;
+        }
 
-			if( activeListener != null && activeListener.Priority > Priority )
-				return false;
+        private void Awake()
+        {
+            eventReceiver = GetComponent<SimpleInputMultiDragListener>();
+        }
 
-			PointerEventData pointer = GetSatisfyingPointer( mousePointers, touchPointers );
-			if( pointer == null )
-				return false;
+        private void OnEnable()
+        {
+            eventReceiver.AddListener(this);
+            Input.StartTracking();
+        }
 
-			if( !IsSwipeSatisfied( pointer ) )
-				return ReferenceEquals( activeListener, this );
+        private void OnDisable()
+        {
+            eventReceiver.RemoveListener(this);
+            Input.StopTracking();
+        }
 
-			Input.value = Value;
-			return true;
-		}
+        private bool IsSwipeSatisfied(PointerEventData eventData)
+        {
+            var deltaPosition = eventData.position - eventData.pressPosition;
+            if (swipeAmount.x > 0f)
+            {
+                if (deltaPosition.x < swipeAmount.x)
+                    return false;
+            }
+            else if (swipeAmount.x < 0f)
+            {
+                if (deltaPosition.x > swipeAmount.x)
+                    return false;
+            }
 
-		private bool IsSwipeSatisfied( PointerEventData eventData )
-		{
-			Vector2 deltaPosition = eventData.position - eventData.pressPosition;
-			if( swipeAmount.x > 0f )
-			{
-				if( deltaPosition.x < swipeAmount.x )
-					return false;
-			}
-			else if( swipeAmount.x < 0f )
-			{
-				if( deltaPosition.x > swipeAmount.x )
-					return false;
-			}
+            if (swipeAmount.y > 0f)
+            {
+                if (deltaPosition.y < swipeAmount.y)
+                    return false;
+            }
+            else if (swipeAmount.y < 0f)
+            {
+                if (deltaPosition.y > swipeAmount.y)
+                    return false;
+            }
 
-			if( swipeAmount.y > 0f )
-			{
-				if( deltaPosition.y < swipeAmount.y )
-					return false;
-			}
-			else if( swipeAmount.y < 0f )
-			{
-				if( deltaPosition.y > swipeAmount.y )
-					return false;
-			}
-
-			return true;
-		}
-	}
+            return true;
+        }
+    }
 }

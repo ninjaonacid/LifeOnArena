@@ -3,112 +3,114 @@ using UnityEngine.EventSystems;
 
 namespace SimpleInputNamespace
 {
-	public class AxisInputUIArrows : MonoBehaviour, ISimpleInputDraggable
-	{
-		public SimpleInput.AxisInput xAxis = new SimpleInput.AxisInput( "Horizontal" );
-		public SimpleInput.AxisInput yAxis = new SimpleInput.AxisInput( "Vertical" );
+    public class AxisInputUIArrows : MonoBehaviour, ISimpleInputDraggable
+    {
+        private Vector2 m_value = Vector2.zero;
 
-		public float valueMultiplier = 1f;
+        private RectTransform rectTransform;
 
-#pragma warning disable 0649
-		[Tooltip( "Radius of the deadzone at the center of the arrows that will yield no input" )]
-		[SerializeField]
-		private float deadzoneRadius;
-		private float deadzoneRadiusSqr;
-#pragma warning restore 0649
+        public float valueMultiplier = 1f;
+        public SimpleInput.AxisInput xAxis = new SimpleInput.AxisInput("Horizontal");
+        public SimpleInput.AxisInput yAxis = new SimpleInput.AxisInput("Vertical");
+        public Vector2 Value => m_value;
 
-		private RectTransform rectTransform;
+        public void OnPointerDown(PointerEventData eventData)
+        {
+            CalculateInput(eventData);
+        }
 
-		private Vector2 m_value = Vector2.zero;
-		public Vector2 Value { get { return m_value; } }
+        public void OnDrag(PointerEventData eventData)
+        {
+            CalculateInput(eventData);
+        }
 
-		private void Awake()
-		{
-			rectTransform = (RectTransform) transform;
-			gameObject.AddComponent<SimpleInputDragListener>().Listener = this;
+        public void OnPointerUp(PointerEventData eventData)
+        {
+            m_value = Vector2.zero;
 
-			deadzoneRadiusSqr = deadzoneRadius * deadzoneRadius;
-		}
+            xAxis.value = 0f;
+            yAxis.value = 0f;
+        }
 
-		private void OnEnable()
-		{
-			xAxis.StartTracking();
-			yAxis.StartTracking();
-		}
+        private void Awake()
+        {
+            rectTransform = (RectTransform)transform;
+            gameObject.AddComponent<SimpleInputDragListener>().Listener = this;
 
-		private void OnDisable()
-		{
-			xAxis.StopTracking();
-			yAxis.StopTracking();
-		}
+            deadzoneRadiusSqr = deadzoneRadius * deadzoneRadius;
+        }
+
+        private void OnEnable()
+        {
+            xAxis.StartTracking();
+            yAxis.StartTracking();
+        }
+
+        private void OnDisable()
+        {
+            xAxis.StopTracking();
+            yAxis.StopTracking();
+        }
 
 #if UNITY_EDITOR
-		private void OnValidate()
-		{
-			deadzoneRadiusSqr = deadzoneRadius * deadzoneRadius;
-		}
+        private void OnValidate()
+        {
+            deadzoneRadiusSqr = deadzoneRadius * deadzoneRadius;
+        }
 #endif
 
-		public void OnPointerDown( PointerEventData eventData )
-		{
-			CalculateInput( eventData );
-		}
+        private void CalculateInput(PointerEventData eventData)
+        {
+            Vector2 pointerPos;
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(rectTransform, eventData.position,
+                eventData.pressEventCamera, out pointerPos);
 
-		public void OnDrag( PointerEventData eventData )
-		{
-			CalculateInput( eventData );
-		}
+            if (!yAxis.IsKeyValid())
+            {
+                if (pointerPos.x * pointerPos.x <= deadzoneRadiusSqr)
+                    m_value.Set(0f, 0f);
+                else
+                    m_value.Set(pointerPos.x >= 0f ? valueMultiplier : -valueMultiplier, 0f);
+            }
+            else if (!xAxis.IsKeyValid())
+            {
+                if (pointerPos.y * pointerPos.y <= deadzoneRadiusSqr)
+                    m_value.Set(0f, 0f);
+                else
+                    m_value.Set(0f, pointerPos.y >= 0f ? valueMultiplier : -valueMultiplier);
+            }
+            else
+            {
+                if (pointerPos.sqrMagnitude <= deadzoneRadiusSqr)
+                {
+                    m_value.Set(0f, 0f);
+                }
+                else
+                {
+                    var angle = Vector2.Angle(pointerPos, Vector2.right);
+                    if (pointerPos.y < 0f)
+                        angle = 360f - angle;
 
-		public void OnPointerUp( PointerEventData eventData )
-		{
-			m_value = Vector2.zero;
+                    if (angle >= 45f && angle <= 135f)
+                        m_value.Set(0f, valueMultiplier);
+                    else if (angle >= 135f && angle <= 225f)
+                        m_value.Set(-valueMultiplier, 0f);
+                    else if (angle >= 225f && angle <= 315f)
+                        m_value.Set(0f, -valueMultiplier);
+                    else
+                        m_value.Set(valueMultiplier, 0f);
+                }
+            }
 
-			xAxis.value = 0f;
-			yAxis.value = 0f;
-		}
+            xAxis.value = m_value.x;
+            yAxis.value = m_value.y;
+        }
 
-		private void CalculateInput( PointerEventData eventData )
-		{
-			Vector2 pointerPos;
-			RectTransformUtility.ScreenPointToLocalPointInRectangle( rectTransform, eventData.position, eventData.pressEventCamera, out pointerPos );
+#pragma warning disable 0649
+        [Tooltip("Radius of the deadzone at the center of the arrows that will yield no input")] [SerializeField]
+        private float deadzoneRadius;
 
-			if( !yAxis.IsKeyValid() )
-			{
-				if( pointerPos.x * pointerPos.x <= deadzoneRadiusSqr )
-					m_value.Set( 0f, 0f );
-				else
-					m_value.Set( pointerPos.x >= 0f ? valueMultiplier : -valueMultiplier, 0f );
-			}
-			else if( !xAxis.IsKeyValid() )
-			{
-				if( pointerPos.y * pointerPos.y <= deadzoneRadiusSqr )
-					m_value.Set( 0f, 0f );
-				else
-					m_value.Set( 0f, pointerPos.y >= 0f ? valueMultiplier : -valueMultiplier );
-			}
-			else
-			{
-				if( pointerPos.sqrMagnitude <= deadzoneRadiusSqr )
-					m_value.Set( 0f, 0f );
-				else
-				{
-					float angle = Vector2.Angle( pointerPos, Vector2.right );
-					if( pointerPos.y < 0f )
-						angle = 360f - angle;
-
-					if( angle >= 45f && angle <= 135f )
-						m_value.Set( 0f, valueMultiplier );
-					else if( angle >= 135f && angle <= 225f )
-						m_value.Set( -valueMultiplier, 0f );
-					else if( angle >= 225f && angle <= 315f )
-						m_value.Set( 0f, -valueMultiplier );
-					else
-						m_value.Set( valueMultiplier, 0f );
-				}
-			}
-
-			xAxis.value = m_value.x;
-			yAxis.value = m_value.y;
-		}
-	}
+        private float deadzoneRadiusSqr;
+#pragma warning restore 0649
+    }
 }

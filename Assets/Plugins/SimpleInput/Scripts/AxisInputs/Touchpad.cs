@@ -4,61 +4,61 @@ using UnityEngine.EventSystems;
 
 namespace SimpleInputNamespace
 {
-	[RequireComponent( typeof( SimpleInputMultiDragListener ) )]
-	public class Touchpad : SelectivePointerInput, ISimpleInputDraggableMultiTouch
-	{
-		public SimpleInput.AxisInput xAxis = new SimpleInput.AxisInput( "Horizontal" );
-		public SimpleInput.AxisInput yAxis = new SimpleInput.AxisInput( "Vertical" );
+    [RequireComponent(typeof(SimpleInputMultiDragListener))]
+    public class Touchpad : SelectivePointerInput, ISimpleInputDraggableMultiTouch
+    {
+        private SimpleInputMultiDragListener eventReceiver;
 
-		public bool invertHorizontal, invertVertical;
-		public float sensitivity = 1f;
+        public bool invertHorizontal, invertVertical;
 
-		private SimpleInputMultiDragListener eventReceiver;
+        private Vector2 m_value = Vector2.zero;
+        public float sensitivity = 1f;
+        public SimpleInput.AxisInput xAxis = new SimpleInput.AxisInput("Horizontal");
+        public SimpleInput.AxisInput yAxis = new SimpleInput.AxisInput("Vertical");
+        public Vector2 Value => m_value;
 
-		public int Priority { get { return 1; } }
+        public int Priority => 1;
 
-		private Vector2 m_value = Vector2.zero;
-		public Vector2 Value { get { return m_value; } }
+        public bool OnUpdate(List<PointerEventData> mousePointers, List<PointerEventData> touchPointers,
+            ISimpleInputDraggableMultiTouch activeListener)
+        {
+            xAxis.value = 0f;
+            yAxis.value = 0f;
 
-		private void Awake()
-		{
-			eventReceiver = GetComponent<SimpleInputMultiDragListener>();
-		}
+            if (activeListener != null && activeListener.Priority > Priority)
+                return false;
 
-		private void OnEnable()
-		{
-			eventReceiver.AddListener( this );
+            var pointer = GetSatisfyingPointer(mousePointers, touchPointers);
+            if (pointer == null)
+                return false;
 
-			xAxis.StartTracking();
-			yAxis.StartTracking();
-		}
+            m_value = pointer.delta * SimpleInputUtils.ResolutionMultiplier * sensitivity;
 
-		private void OnDisable()
-		{
-			eventReceiver.RemoveListener( this );
+            xAxis.value = invertHorizontal ? -m_value.x : m_value.x;
+            yAxis.value = invertVertical ? -m_value.y : m_value.y;
 
-			xAxis.StopTracking();
-			yAxis.StopTracking();
-		}
+            return true;
+        }
 
-		public bool OnUpdate( List<PointerEventData> mousePointers, List<PointerEventData> touchPointers, ISimpleInputDraggableMultiTouch activeListener )
-		{
-			xAxis.value = 0f;
-			yAxis.value = 0f;
+        private void Awake()
+        {
+            eventReceiver = GetComponent<SimpleInputMultiDragListener>();
+        }
 
-			if( activeListener != null && activeListener.Priority > Priority )
-				return false;
+        private void OnEnable()
+        {
+            eventReceiver.AddListener(this);
 
-			PointerEventData pointer = GetSatisfyingPointer( mousePointers, touchPointers );
-			if( pointer == null )
-				return false;
+            xAxis.StartTracking();
+            yAxis.StartTracking();
+        }
 
-			m_value = pointer.delta * SimpleInputUtils.ResolutionMultiplier * sensitivity;
+        private void OnDisable()
+        {
+            eventReceiver.RemoveListener(this);
 
-			xAxis.value = invertHorizontal ? -m_value.x : m_value.x;
-			yAxis.value = invertVertical ? -m_value.y : m_value.y;
-
-			return true;
-		}
-	}
+            xAxis.StopTracking();
+            yAxis.StopTracking();
+        }
+    }
 }

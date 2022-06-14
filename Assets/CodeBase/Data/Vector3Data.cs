@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CodeBase
+namespace CodeBase.Data
 {
     [Serializable]
     public class Vector3Data

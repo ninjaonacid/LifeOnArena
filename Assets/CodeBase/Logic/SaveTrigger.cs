@@ -1,6 +1,5 @@
-using CodeBase.Infrastructure.Services;
-using CodeBase.Infrastructure.Services.SaveLoad;
-
+using CodeBase.Services;
+using CodeBase.Services.SaveLoad;
 using UnityEngine;
 
 namespace CodeBase.Logic
@@ -10,6 +9,7 @@ namespace CodeBase.Logic
         private ISaveLoadService _saveLoadService;
 
         public BoxCollider Collider;
+
         private void Awake()
         {
             _saveLoadService = AllServices.Container.Single<ISaveLoadService>();

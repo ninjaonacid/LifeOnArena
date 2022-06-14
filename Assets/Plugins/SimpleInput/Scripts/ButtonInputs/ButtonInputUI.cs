@@ -4,35 +4,35 @@ using UnityEngine.UI;
 
 namespace SimpleInputNamespace
 {
-	public class ButtonInputUI : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
-	{
-		public SimpleInput.ButtonInput button = new SimpleInput.ButtonInput();
+    public class ButtonInputUI : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
+    {
+        public SimpleInput.ButtonInput button = new SimpleInput.ButtonInput();
 
-		private void Awake()
-		{
-			Graphic graphic = GetComponent<Graphic>();
-			if( graphic != null )
-				graphic.raycastTarget = true;
-		}
+        public void OnPointerDown(PointerEventData eventData)
+        {
+            button.value = true;
+        }
 
-		private void OnEnable()
-		{
-			button.StartTracking();
-		}
+        public void OnPointerUp(PointerEventData eventData)
+        {
+            button.value = false;
+        }
 
-		private void OnDisable()
-		{
-			button.StopTracking();
-		}
+        private void Awake()
+        {
+            var graphic = GetComponent<Graphic>();
+            if (graphic != null)
+                graphic.raycastTarget = true;
+        }
 
-		public void OnPointerDown( PointerEventData eventData )
-		{
-			button.value = true;
-		}
+        private void OnEnable()
+        {
+            button.StartTracking();
+        }
 
-		public void OnPointerUp( PointerEventData eventData )
-		{
-			button.value = false;
-		}
-	}
+        private void OnDisable()
+        {
+            button.StopTracking();
+        }
+    }
 }

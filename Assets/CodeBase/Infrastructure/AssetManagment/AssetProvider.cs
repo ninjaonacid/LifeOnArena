@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace CodeBase.Infrastructure.AssetManagment
@@ -11,6 +9,7 @@ namespace CodeBase.Infrastructure.AssetManagment
             var prefab = Resources.Load<GameObject>(path);
             return Object.Instantiate(prefab);
         }
+
         public GameObject Instantiate(string path, Vector3 point)
         {
             var prefab = Resources.Load<GameObject>(path);

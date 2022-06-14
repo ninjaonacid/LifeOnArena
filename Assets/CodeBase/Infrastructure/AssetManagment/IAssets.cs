@@ -1,9 +1,8 @@
-﻿using CodeBase.Infrastructure.Services;
+﻿using CodeBase.Services;
 using UnityEngine;
 
 namespace CodeBase.Infrastructure.AssetManagment
 {
-
     public interface IAssets : IService
     {
         GameObject Instantiate(string path);

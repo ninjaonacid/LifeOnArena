@@ -4,67 +4,67 @@ using UnityEngine.EventSystems;
 
 namespace SimpleInputNamespace
 {
-	[RequireComponent( typeof( SimpleInputMultiDragListener ) )]
-	public class AxisInputMoveGesture : MonoBehaviour, ISimpleInputDraggableMultiTouch
-	{
-		public SimpleInput.AxisInput horizontal = new SimpleInput.AxisInput( "Mouse X" );
-		public SimpleInput.AxisInput vertical = new SimpleInput.AxisInput( "Mouse Y" );
+    [RequireComponent(typeof(SimpleInputMultiDragListener))]
+    public class AxisInputMoveGesture : MonoBehaviour, ISimpleInputDraggableMultiTouch
+    {
+        private SimpleInputMultiDragListener eventReceiver;
+        public SimpleInput.AxisInput horizontal = new SimpleInput.AxisInput("Mouse X");
+        public bool invertValue = true;
 
-		public float sensitivity = 1f;
-		public bool invertValue = true;
+        public float sensitivity = 1f;
+        public SimpleInput.AxisInput vertical = new SimpleInput.AxisInput("Mouse Y");
 
-		private SimpleInputMultiDragListener eventReceiver;
+        public int Priority => 2;
 
-		public int Priority { get { return 2; } }
+        public bool OnUpdate(List<PointerEventData> mousePointers, List<PointerEventData> touchPointers,
+            ISimpleInputDraggableMultiTouch activeListener)
+        {
+            horizontal.value = 0f;
+            vertical.value = 0f;
 
-		private void Awake()
-		{
-			eventReceiver = GetComponent<SimpleInputMultiDragListener>();
-		}
+            if (activeListener != null && activeListener.Priority > Priority)
+                return false;
 
-		private void OnEnable()
-		{
-			eventReceiver.AddListener( this );
+            if (touchPointers.Count < 2)
+            {
+                if (ReferenceEquals(activeListener, this) && touchPointers.Count == 1)
+                    touchPointers[0].pressPosition = touchPointers[0].position;
 
-			horizontal.StartTracking();
-			vertical.StartTracking();
-		}
+                return false;
+            }
 
-		private void OnDisable()
-		{
-			eventReceiver.RemoveListener( this );
+            var touch1 = touchPointers[touchPointers.Count - 1];
+            var touch2 = touchPointers[touchPointers.Count - 2];
 
-			horizontal.StopTracking();
-			vertical.StopTracking();
-		}
+            var pinchAmount = sensitivity * SimpleInputUtils.ResolutionMultiplier * (touch1.delta + touch2.delta);
+            if (invertValue)
+                pinchAmount = -pinchAmount;
 
-		public bool OnUpdate( List<PointerEventData> mousePointers, List<PointerEventData> touchPointers, ISimpleInputDraggableMultiTouch activeListener )
-		{
-			horizontal.value = 0f;
-			vertical.value = 0f;
+            horizontal.value = pinchAmount.x;
+            vertical.value = pinchAmount.y;
 
-			if( activeListener != null && activeListener.Priority > Priority )
-				return false;
+            return true;
+        }
 
-			if( touchPointers.Count < 2 )
-			{
-				if( ReferenceEquals( activeListener, this ) && touchPointers.Count == 1 )
-					touchPointers[0].pressPosition = touchPointers[0].position;
+        private void Awake()
+        {
+            eventReceiver = GetComponent<SimpleInputMultiDragListener>();
+        }
 
-				return false;
-			}
+        private void OnEnable()
+        {
+            eventReceiver.AddListener(this);
 
-			PointerEventData touch1 = touchPointers[touchPointers.Count - 1];
-			PointerEventData touch2 = touchPointers[touchPointers.Count - 2];
+            horizontal.StartTracking();
+            vertical.StartTracking();
+        }
 
-			Vector2 pinchAmount = sensitivity * SimpleInputUtils.ResolutionMultiplier * ( touch1.delta + touch2.delta );
-			if( invertValue )
-				pinchAmount = -pinchAmount;
+        private void OnDisable()
+        {
+            eventReceiver.RemoveListener(this);
 
-			horizontal.value = pinchAmount.x;
-			vertical.value = pinchAmount.y;
-
-			return true;
-		}
-	}
+            horizontal.StopTracking();
+            vertical.StopTracking();
+        }
+    }
 }
