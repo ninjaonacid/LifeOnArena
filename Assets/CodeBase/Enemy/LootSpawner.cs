@@ -8,14 +8,14 @@ namespace CodeBase.Enemy
     public class LootSpawner : MonoBehaviour
     {
         private IRandomService _randomService;
-        private IEnemyFactory _factory;
+        private IEnemyFactory _enemyFactory;
         public EnemyDeath EnemyDeath;
         private int _lootMin;
         private int _lootMax;
 
         public void Construct(IEnemyFactory factory, IRandomService randomService)
         {
-            _factory = factory;
+            _enemyFactory = factory;
             _randomService = randomService;
         }
 
@@ -26,7 +26,7 @@ namespace CodeBase.Enemy
 
         private void SpawnLoot()
         {
-            LootPiece loot = _factory.CreateLoot();
+            LootPiece loot = _enemyFactory.CreateLoot();
 
             loot.transform.position = transform.position;
 

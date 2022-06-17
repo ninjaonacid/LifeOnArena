@@ -1,15 +1,11 @@
-﻿using System.Collections.Generic;
-using CodeBase.Enemy;
-using CodeBase.Services;
-using CodeBase.Services.PersistentProgress;
-using CodeBase.StaticData;
+﻿using CodeBase.Services;
 using UnityEngine;
 
 
 namespace CodeBase.Infrastructure.Factory
 {
-    public interface IGameFactory : IFactory
-    {
+    public interface IGameFactory : IService {
+
         GameObject CreateHud();
         GameObject InstantiateRegistered(string prefabPath);
     }

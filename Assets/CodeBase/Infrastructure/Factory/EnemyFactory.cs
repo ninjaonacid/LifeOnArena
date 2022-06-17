@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using CodeBase.Enemy;
 using CodeBase.Infrastructure.AssetManagment;
 using CodeBase.Logic;

@@ -1,16 +1,10 @@
-﻿using System.Collections.Generic;
-using CodeBase.Enemy;
-using CodeBase.Infrastructure.AssetManagment;
-using CodeBase.Logic;
-using CodeBase.Logic.EnemySpawners;
+﻿using CodeBase.Infrastructure.AssetManagment;
 using CodeBase.Services;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.RandomService;
 using CodeBase.Services.SaveLoad;
-using CodeBase.StaticData;
 using CodeBase.UI;
 using UnityEngine;
-using UnityEngine.AI;
 
 namespace CodeBase.Infrastructure.Factory
 {
