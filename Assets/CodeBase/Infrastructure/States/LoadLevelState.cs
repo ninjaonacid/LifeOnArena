@@ -4,6 +4,7 @@ using CodeBase.Infrastructure.Factory;
 using CodeBase.Logic;
 using CodeBase.Services;
 using CodeBase.Services.PersistentProgress;
+using CodeBase.Services.SaveLoad;
 using CodeBase.StaticData;
 using CodeBase.UI;
 using UnityEngine;
@@ -18,9 +19,12 @@ namespace CodeBase.Infrastructure.States
         private readonly SceneLoader _sceneLoader;
         private readonly AllServices _services;
         private readonly GameStateMachine _stateMachine;
+        private IEnemyFactory _enemyFactory;
+        private IHeroFactory _heroFactory;
         private IGameFactory _gameFactory;
         private IPersistentProgressService _progressService;
         private IStaticDataService _staticData;
+        private ISaveLoadService _saveLoadService;
 
         public LoadLevelState(GameStateMachine stateMachine, SceneLoader sceneLoader,
             LoadingCurtain curtain, AllServices services)
@@ -34,11 +38,14 @@ namespace CodeBase.Infrastructure.States
         public void Enter(string sceneName)
         {
             _progressService = _services.Single<IPersistentProgressService>();
+            _enemyFactory = _services.Single<IEnemyFactory>();
+            _heroFactory = _services.Single<IHeroFactory>();
             _gameFactory = _services.Single<IGameFactory>();
             _staticData = _services.Single<IStaticDataService>();
+            _saveLoadService = _services.Single<ISaveLoadService>();
 
             _curtain.Show();
-            _gameFactory.Cleanup();
+            _saveLoadService.Cleanup();
             _sceneLoader.Load(sceneName, OnLoaded);
         }
 
@@ -56,7 +63,7 @@ namespace CodeBase.Infrastructure.States
 
         private void InformProgressReaders()
         {
-            foreach (var progressReader in _gameFactory.ProgressReaders)
+            foreach (var progressReader in _saveLoadService.ProgressReaders)
                 progressReader.LoadProgress(_progressService.Progress);
         }
 
@@ -79,7 +86,7 @@ namespace CodeBase.Infrastructure.States
 
             foreach (EnemySpawnerData spawnerData in levelData.EnemySpawners)
             {
-                _gameFactory.CreateSpawner(
+                _enemyFactory.CreateSpawner(
                     spawnerData.Position, 
                     spawnerData.Id, 
                     spawnerData.MonsterTypeId);
@@ -96,7 +103,7 @@ namespace CodeBase.Infrastructure.States
 
         private GameObject InitHero()
         {
-            return _gameFactory.CreateHero(GameObject
+            return _heroFactory.CreateHero(GameObject
                 .FindGameObjectWithTag(InitialPointTag));
         }
 

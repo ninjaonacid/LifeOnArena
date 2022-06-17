@@ -6,6 +6,7 @@ using CodeBase.Logic.EnemySpawners;
 using CodeBase.Services;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.RandomService;
+using CodeBase.Services.SaveLoad;
 using CodeBase.StaticData;
 using CodeBase.UI;
 using UnityEngine;
@@ -19,75 +20,17 @@ namespace CodeBase.Infrastructure.Factory
         private readonly IStaticDataService _staticData;
         private readonly IRandomService _randomService;
         private readonly IPersistentProgressService _progressService;
-        
-        public int SpawnerCount { get; private set; }
-        public GameFactory(IAssets assets, IStaticDataService staticData,
-                            IRandomService randomService,
-                            IPersistentProgressService progressService)
+        private readonly ISaveLoadService _saveLoadService;
+
+        public GameFactory(IAssets assets, IPersistentProgressService progressService,
+                            ISaveLoadService saveLoadService)
         {
             _assets = assets;
-            _staticData = staticData;
-            _randomService = randomService;
             _progressService = progressService;
+            _saveLoadService = saveLoadService;
         }
 
-        private GameObject HeroGameObject { get; set; }
-
-        public List<ISavedProgressReader> ProgressReaders { get; } =
-            new List<ISavedProgressReader>();
-
-        public List<ISavedProgress> ProgressWriters { get; } = new List<ISavedProgress>();
-
-        public void Cleanup()
-        {
-            ProgressReaders.Clear();
-            ProgressWriters.Clear();
-        }
-
-        public GameObject CreateMonster(MonsterTypeId monsterTypeId, Transform parent)
-        {
-            var monsterData = _staticData.ForMonster(monsterTypeId);
-            var monster = Object.Instantiate(monsterData.Prefab,
-                parent.position,
-                Quaternion.identity, parent);
-
-            var health = monster.GetComponent<IHealth>();
-            health.Current = monsterData.Hp;
-            health.Max = monsterData.Hp;
-
-            monster.GetComponent<ActorUI>().Construct(health);
-            monster.GetComponent<AgentMoveToPlayer>().Construct(HeroGameObject.transform);
-            monster.GetComponent<NavMeshAgent>().speed = monsterData.MoveSpeed;
-
-            var lootSpawner = monster.GetComponentInChildren<LootSpawner>();
-            lootSpawner.Construct(this, _randomService);
-            lootSpawner.SetLoot(monsterData.MinLoot, monsterData.MaxLoot);
-
-            var attack = monster.GetComponent<EnemyAttack>();
-            attack.Construct(HeroGameObject.transform);
-            attack.Damage = monsterData.Damage;
-            attack.Cleavage = monsterData.Cleavage;
-            attack.EffectiveDistance = monsterData.EffectiveDistance;
-
-            return monster;
-        }
-
-        public LootPiece CreateLoot()
-        {
-            var lootPiece = InstantiateRegistered(AssetPath.LootPath)
-                .GetComponent<LootPiece>();
-            lootPiece.Construct(_progressService.Progress.WorldData);
-            return lootPiece;
-        }
-
-
-        public GameObject CreateHero(GameObject initialPoint)
-        {
-            HeroGameObject = InstantiateRegistered(AssetPath.HeroPath,
-                initialPoint.transform.position);
-
-            return HeroGameObject;
-        }
+        
 
         public GameObject CreateHud()
         {
@@ -99,47 +42,19 @@ namespace CodeBase.Infrastructure.Factory
             return hud;
         }
 
-        public void CreateSpawner(Vector3 at, string spawnerDataId, MonsterTypeId spawnerDataMonsterTypeId)
-        {
-            SpawnPoint spawner = InstantiateRegistered(AssetPath.Spawner, at)
-                .GetComponent<SpawnPoint>();
-            spawner.Construct();
-            spawner.Id = spawnerDataId;
-            spawner.MonsterTypeId = spawnerDataMonsterTypeId;
-            SpawnerCount++;
-        }
-
-        public void Register(ISavedProgressReader progressReader)
-        {
-            if (progressReader is ISavedProgress progressWriter)
-                ProgressWriters.Add(progressWriter);
-
-            ProgressReaders.Add(progressReader);
-        }
-
-        private GameObject InstantiateRegistered(string prefabPath)
+        public GameObject InstantiateRegistered(string prefabPath)
         {
             var go = _assets.Instantiate(prefabPath);
 
 
-            RegisterProgressWatchers(go);
+            _saveLoadService.RegisterProgressWatchers(go);
             return go;
         }
 
-        private GameObject InstantiateRegistered(string prefabPath, Vector3 position)
+
+        public GameObject InstantiateRegistered(string prefabPath, Vector3 position)
         {
-            var go = _assets.Instantiate(prefabPath, position);
-
-
-            RegisterProgressWatchers(go);
-            return go;
-        }
-
-        private void RegisterProgressWatchers(GameObject go)
-        {
-            foreach (var progressReader in
-                     go.GetComponentsInChildren<ISavedProgressReader>())
-                Register(progressReader);
+            throw new System.NotImplementedException();
         }
     }
 }

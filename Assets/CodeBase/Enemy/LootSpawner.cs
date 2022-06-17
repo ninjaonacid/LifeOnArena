@@ -8,12 +8,12 @@ namespace CodeBase.Enemy
     public class LootSpawner : MonoBehaviour
     {
         private IRandomService _randomService;
-        private IGameFactory _factory;
+        private IEnemyFactory _factory;
         public EnemyDeath EnemyDeath;
         private int _lootMin;
         private int _lootMax;
 
-        public void Construct(IGameFactory factory, IRandomService randomService)
+        public void Construct(IEnemyFactory factory, IRandomService randomService)
         {
             _factory = factory;
             _randomService = randomService;

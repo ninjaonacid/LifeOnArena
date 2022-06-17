@@ -52,20 +52,31 @@ namespace CodeBase.Infrastructure.States
             _services.RegisterSingle<IPersistentProgressService>
                 (new PersistentProgressService());
 
-            _services.RegisterSingle<IGameFactory>
-            (new GameFactory(
-                _services.Single<IAssets>(),
-                _services.Single<IStaticDataService>(),
-                _services.Single<IRandomService>(),
-                _services.Single<IPersistentProgressService>()));
-
-            _services.RegisterSingle<IObjectPool>(new GameObjectPool
-                (_services.Single<IGameFactory>()));
-
             _services.RegisterSingle<ISaveLoadService>
             (new SaveLoadService(
                 _services.Single<IPersistentProgressService>(),
                 _services.Single<IGameFactory>()));
+
+            _services.RegisterSingle<IGameFactory>
+            (new GameFactory(
+                _services.Single<IAssets>(),
+                _services.Single<IPersistentProgressService>(),
+                _services.Single<ISaveLoadService>()));
+
+            _services.RegisterSingle<IHeroFactory>(new HeroFactory(
+                _services.Single<IAssets>(),
+                _services.Single<ISaveLoadService>()));
+
+            _services.RegisterSingle<IEnemyFactory>(new EnemyFactory(
+                _services.Single<IHeroFactory>(),
+                _services.Single<IStaticDataService>(),
+                _services.Single<IAssets>(),
+                _services.Single<ISaveLoadService>(),
+                _services.Single<IPersistentProgressService>(),
+                _services.Single<IRandomService>()));
+
+            _services.RegisterSingle<IObjectPool>(new GameObjectPool
+                (_services.Single<IEnemyFactory>()));
         }
 
         private void RegisterStaticData()

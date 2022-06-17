@@ -1,12 +1,10 @@
 using System.Collections;
 using CodeBase.Data;
 using CodeBase.Enemy;
-using CodeBase.Infrastructure.Factory;
 using CodeBase.Infrastructure.ObjectPool;
 using CodeBase.Services;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.StaticData;
-using CodeBase.UI;
 using UnityEngine;
 
 namespace CodeBase.Logic.EnemySpawners
@@ -15,6 +13,8 @@ namespace CodeBase.Logic.EnemySpawners
     {
         private EnemyDeath _enemyDeath;
         private IObjectPool _enemyObjectPool;
+
+        private float _enemyTimer = 15;
         public string Id { get; set; }
 
         public MonsterTypeId MonsterTypeId;
@@ -33,28 +33,31 @@ namespace CodeBase.Logic.EnemySpawners
                 Slain = true;
             else
                 Spawn();
+
+            StartCoroutine(ChangeSpawnTimer());
         }
 
         public void UpdateProgress(PlayerProgress progress)
         {
-           if (Slain)
+            if (Slain)
                 progress.KillData.ClearedSpawners.Add(Id);
         }
 
         private void Spawn()
         {
             var monster = _enemyObjectPool.GetObject(MonsterTypeId, transform);
-            
+
             _enemyDeath = monster.GetComponent<EnemyDeath>();
             _enemyDeath.Happened += Slay;
         }
 
         private void Slay()
         {
-            /* if (_enemyDeath != null)
+           /* if (_enemyDeath != null)
                  _enemyDeath.Happened -= Slay;*/
 
-            _enemyObjectPool.ReturnObject(_enemyDeath.gameObject);
+            _enemyObjectPool.ReturnObject(MonsterTypeId, _enemyDeath.gameObject);
+
             StartCoroutine(RespawnEnemy());
             Slain = true;
 
@@ -63,10 +66,19 @@ namespace CodeBase.Logic.EnemySpawners
         private IEnumerator RespawnEnemy()
         {
             yield return new WaitForSeconds(3);
-            var monster = _enemyObjectPool.GetObject(MonsterTypeId, transform);
-            monster.transform.position = transform.position;
-            monster.SetActive(true);
 
+            _enemyObjectPool.GetObject(MonsterTypeId, transform);
+        }
+
+        private IEnumerator ChangeSpawnTimer()
+        {
+            while (_enemyTimer > 0)
+            {
+                _enemyTimer -= Time.deltaTime;
+                yield return null;
+            }
+            _enemyTimer = 30;
+            yield break;
         }
     }
 }

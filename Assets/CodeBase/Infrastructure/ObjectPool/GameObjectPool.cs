@@ -7,35 +7,48 @@ namespace CodeBase.Infrastructure.ObjectPool
 {
     public class GameObjectPool : IObjectPool
     {
-        public List<GameObject> _enemyObjectsStock;
-        private readonly IGameFactory _gameFactory;
-        public GameObjectPool(IGameFactory gameFactory)
+        
+        public Dictionary<MonsterTypeId, List<GameObject>> _enemyObjectsStock;
+
+        private readonly IEnemyFactory _enemyFactory;
+        public GameObjectPool(IEnemyFactory enemyFactory)
         {
-            _enemyObjectsStock = new List<GameObject>();
-            _gameFactory = gameFactory;
+            _enemyObjectsStock = new Dictionary<MonsterTypeId, List<GameObject>>();
+            _enemyFactory = enemyFactory;
         }
 
         public GameObject GetObject(MonsterTypeId monsterTypeId, Transform parent)
         {
             GameObject result = null;
 
-            if (_enemyObjectsStock.Count > 0)
+            if (CheckForExist(monsterTypeId))
             {
-                result = _enemyObjectsStock[0];
-                _enemyObjectsStock.RemoveAt(0);
+                result = _enemyObjectsStock[monsterTypeId][0];
+                _enemyObjectsStock[monsterTypeId].RemoveAt(0);
             }
             else
-            { 
-               result =  _gameFactory.CreateMonster(monsterTypeId, parent);
+            {
+                if (!_enemyObjectsStock.ContainsKey(monsterTypeId))
+                    _enemyObjectsStock.Add(monsterTypeId, new List<GameObject>());
+
+                result = _enemyFactory.CreateMonster(monsterTypeId, parent);
             }
+
+            result.transform.position = parent.position;
             result.SetActive(true);
             return result;
         }
 
-        public void ReturnObject(GameObject obj)
+        public void ReturnObject(MonsterTypeId monsterTypeId, GameObject obj)
         {
+            _enemyObjectsStock[monsterTypeId].Add(obj);
             
-            _enemyObjectsStock.Add(obj);
+        }
+
+        private bool CheckForExist(MonsterTypeId monsterTypeId)
+        {
+            return _enemyObjectsStock.ContainsKey(monsterTypeId) && _enemyObjectsStock[monsterTypeId].Count > 0;
+            
         }
     }
 }
