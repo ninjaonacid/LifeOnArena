@@ -12,7 +12,7 @@ namespace CodeBase.Logic
         private void OnTriggerEnter(Collider other)
         {
             var equipment = other.gameObject.GetComponent<HeroEquipment>();
-            equipment.EquipItem(weaponData);
+            equipment.EquipWeapon(weaponData);
             Destroy(gameObject);
         }
     }

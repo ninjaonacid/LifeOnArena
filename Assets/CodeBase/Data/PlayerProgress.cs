@@ -1,4 +1,5 @@
 using System;
+using UnityEngine.Serialization;
 
 namespace CodeBase.Data
 {
@@ -6,7 +7,7 @@ namespace CodeBase.Data
     public class PlayerProgress
     {
         public State HeroState;
-        public Stats HeroStats;
+        public CharacterStats CharacterStats;
         public KillData KillData;
         public WorldData WorldData;
 
@@ -14,7 +15,7 @@ namespace CodeBase.Data
         {
             WorldData = new WorldData(initialLevel);
             HeroState = new State();
-            HeroStats = new Stats();
+            CharacterStats = new CharacterStats();
             KillData = new KillData();
         }
     }

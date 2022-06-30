@@ -2,8 +2,8 @@ using UnityEngine;
 
 namespace CodeBase.StaticData
 {
-    [CreateAssetMenu(menuName = "Equipment/Weapon", fileName = "Weapon")]
-    public class WeaponData : ScriptableObject
+    [CreateAssetMenu(menuName = "StaticData/Weapon", fileName = "NewWeapon")]
+    public class WeaponData : InventoryItem
     {
         public float AttackRadius;
         public float AttackSpeed;

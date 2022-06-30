@@ -1,6 +1,7 @@
 ﻿using CodeBase.Infrastructure.AssetManagment;
 using CodeBase.Infrastructure.Factory;
 using CodeBase.Infrastructure.ObjectPool;
+using CodeBase.Infrastructure.Services;
 using CodeBase.Services;
 using CodeBase.Services.Input;
 using CodeBase.Services.PersistentProgress;
@@ -45,6 +46,7 @@ namespace CodeBase.Infrastructure.States
         private void RegisterServices()
         {
             RegisterStaticData();
+            _services.RegisterSingle<IGameStateMachine>(_stateMachine);
             _services.RegisterSingle<IRandomService>(new RandomService());
             _services.RegisterSingle<IAssets>(new AssetProvider());
             _services.RegisterSingle(InputService());
@@ -54,8 +56,7 @@ namespace CodeBase.Infrastructure.States
 
             _services.RegisterSingle<ISaveLoadService>
             (new SaveLoadService(
-                _services.Single<IPersistentProgressService>(),
-                _services.Single<IGameFactory>()));
+                _services.Single<IPersistentProgressService>()));
 
             _services.RegisterSingle<IGameFactory>
             (new GameFactory(

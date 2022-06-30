@@ -14,14 +14,14 @@ namespace CodeBase.Hero
         private readonly Collider[] _hits = new Collider[2];
         private IInputService _input;
 
-        private Stats _stats;
+        private CharacterStats _characterStats;
         public CharacterController CharacterController;
         public HeroAnimator HeroAnimator;
 
 
         public void LoadProgress(PlayerProgress progress)
         {
-            _stats = progress.HeroStats;
+            _characterStats = progress.CharacterStats;
         }
 
         private void Awake()
@@ -40,8 +40,8 @@ namespace CodeBase.Hero
         {
             for (var i = 0; i < Hit(); i++)
             {
-                _hits[i].transform.parent.GetComponent<IHealth>().TakeDamage(_stats.Damage);
-                Debug.Log("Damage amount: " + _stats.Damage);
+                _hits[i].transform.parent.GetComponent<IHealth>().TakeDamage(_characterStats.BaseDamage);
+                Debug.Log("BaseDamage amount: " + _characterStats.BaseDamage);
 
                 Debug.Log(_hits[i].ToString());
             }
@@ -51,13 +51,13 @@ namespace CodeBase.Hero
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(StartPoint() + transform.forward, _stats.DamageRadius);
+            Gizmos.DrawWireSphere(StartPoint() + transform.forward, _characterStats.BaseAttackRadius);
         }
 
         private int Hit()
         {
             return Physics.OverlapSphereNonAlloc(StartPoint() + transform.forward,
-                _stats.DamageRadius,
+                _characterStats.BaseAttackRadius,
                 _hits,
                 _layerMask);
         }

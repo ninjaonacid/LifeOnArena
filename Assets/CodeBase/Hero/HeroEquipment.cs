@@ -2,6 +2,7 @@ using CodeBase.Data;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.StaticData;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace CodeBase.Hero
 {
@@ -10,27 +11,27 @@ namespace CodeBase.Hero
         private GameObject currentWeapon;
 
         private WeaponData equippedWeapon;
-        public Stats HeroStats;
+        [FormerlySerializedAs("HeroStats")] public CharacterStats heroCharacterStats;
         public GameObject WeaponSlot;
 
         public void LoadProgress(PlayerProgress progress)
         {
-            HeroStats = progress.HeroStats;
+            heroCharacterStats = progress.CharacterStats;
         }
 
         public void UpdateProgress(PlayerProgress progress)
         {
         }
 
-        public void EquipItem(WeaponData weapon)
+        public void EquipWeapon(WeaponData weapon)
         {
             equippedWeapon = weapon;
             if (currentWeapon != null)
                 Destroy(currentWeapon);
 
-            HeroStats.AttackSpeed = equippedWeapon.AttackSpeed;
-            HeroStats.DamageRadius = equippedWeapon.AttackRadius;
-            HeroStats.Damage = equippedWeapon.Damage;
+            heroCharacterStats.BaseAttackSpeed = equippedWeapon.AttackSpeed;
+            heroCharacterStats.BaseAttackRadius = equippedWeapon.AttackRadius;
+            heroCharacterStats.BaseDamage = equippedWeapon.Damage;
 
             currentWeapon = Instantiate(equippedWeapon.WeaponPrefab, WeaponSlot.transform, 
                                         true);

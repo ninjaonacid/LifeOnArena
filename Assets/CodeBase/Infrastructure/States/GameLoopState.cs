@@ -1,17 +1,29 @@
-﻿namespace CodeBase.Infrastructure.States
+﻿using System.Collections;
+using UnityEngine;
+
+namespace CodeBase.Infrastructure.States
 {
     public class GameLoopState : IState
     {
-        public GameLoopState(GameStateMachine stateMachine)
+        private readonly GameStateMachine _stateMachine;
+        private readonly SceneLoader _sceneLoader;
+        
+        public GameLoopState(GameStateMachine stateMachine, SceneLoader sceneLoader)
         {
+            _stateMachine = stateMachine;
+            _sceneLoader = sceneLoader;
         }
 
         public void Enter()
         {
+            
         }
 
         public void Exit()
         {
         }
+
+
+        
     }
 }

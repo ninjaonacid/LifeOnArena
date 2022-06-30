@@ -1,6 +1,4 @@
-using System.Collections.Generic;
 using CodeBase.Infrastructure.AssetManagment;
-using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.SaveLoad;
 using UnityEngine;
 
@@ -18,10 +16,10 @@ namespace CodeBase.Infrastructure.Factory
         }
         public GameObject HeroGameObject { get; set; }
 
-        public GameObject CreateHero(GameObject initialPoint)
+        public GameObject CreateHero(Vector3 initialPoint)
         {
             HeroGameObject = InstantiateRegistered(AssetPath.HeroPath,
-                initialPoint.transform.position);
+                initialPoint);
 
             return HeroGameObject;
         }

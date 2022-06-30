@@ -10,28 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 70f773d672fc7be4b85eb2e6f0b9ccd1, type: 3}
-  m_Name: LevelData
+  m_Name: MainLevelData
   m_EditorClassIdentifier: 
   LevelKey: MainScene
   EnemySpawners:
-  - Id: MainScene_a3c2006d-b888-4080-a2ce-c3d18b60e0c2
-    MonsterTypeId: 10
-    Position: {x: 10.93469, y: 0.05506897, z: 49.5}
-  - Id: MainScene_0c63200f-e0e1-42c2-a63b-d8cabd23224c
-    MonsterTypeId: 10
-    Position: {x: -1.3117995, y: 0.05506897, z: 47.7}
-  - Id: MainScene_b69ed349-2ded-4ab3-b2dc-1160117f7465
-    MonsterTypeId: 0
-    Position: {x: -34, y: 0.05506897, z: -49.7}
   - Id: MainScene_7d8eb433-ad6a-442b-906d-ff6afb4ccbd7
     MonsterTypeId: 10
     Position: {x: -49.3, y: 0.055070877, z: 8.1}
   - Id: MainScene_5087eb3b-fa7f-46ea-985b-d14782fd46a9
     MonsterTypeId: 0
     Position: {x: -1.3117995, y: 0.05506897, z: -58.9}
+  - Id: MainScene_0c63200f-e0e1-42c2-a63b-d8cabd23224c
+    MonsterTypeId: 10
+    Position: {x: -1.3117995, y: 0.05506897, z: 47.7}
   - Id: MainScene_7bf9b390-ed3f-43d1-95b1-b385dbb26119
     MonsterTypeId: 0
-    Position: {x: -45.9, y: 0.055070877, z: -30.2}
+    Position: {x: -48.2, y: 0.055070877, z: -8.9}
   - Id: MainScene_a8bf4b3e-8d42-49f1-9c8b-5e1ecac3e147
     MonsterTypeId: 0
     Position: {x: 10.93469, y: 0.05506897, z: -60}
@@ -41,3 +35,10 @@ MonoBehaviour:
   - Id: _0702d4e2-cb82-46aa-80c3-7a3c4b588b61
     MonsterTypeId: 0
     Position: {x: 24.22815, y: 0.055070877, z: -41.792572}
+  - Id: MainScene_b69ed349-2ded-4ab3-b2dc-1160117f7465
+    MonsterTypeId: 0
+    Position: {x: -34, y: 0.05506897, z: -49.7}
+  - Id: MainScene_a3c2006d-b888-4080-a2ce-c3d18b60e0c2
+    MonsterTypeId: 10
+    Position: {x: 10.93469, y: 0.05506897, z: 49.5}
+  HeroInitialPosition: {x: 0, y: 0, z: 12.4}

@@ -73,6 +73,14 @@ namespace CodeBase.Infrastructure.Factory
         }
 
 
+        public LootPiece CreateLoot()
+        {
+            var lootPiece = InstantiateRegistered(AssetPath.LootPath)
+                .GetComponent<LootPiece>();
+            lootPiece.Construct(_progressService.Progress.WorldData);
+            return lootPiece;
+        }
+
         public GameObject InstantiateRegistered(string prefabPath, Vector3 position)
         {
             var go = _assets.Instantiate(prefabPath, position);
@@ -89,14 +97,6 @@ namespace CodeBase.Infrastructure.Factory
 
             _saveLoadService.RegisterProgressWatchers(go);
             return go;
-        }
-
-        public LootPiece CreateLoot()
-        {
-            var lootPiece = InstantiateRegistered(AssetPath.LootPath)
-                .GetComponent<LootPiece>();
-            lootPiece.Construct(_progressService.Progress.WorldData);
-            return lootPiece;
         }
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using CodeBase.Infrastructure.Services;
 using CodeBase.Logic;
 using CodeBase.Services;
 using CodeBase.Services.PersistentProgress;
@@ -8,7 +9,7 @@ using UnityEngine;
 
 namespace CodeBase.Infrastructure.States
 {
-    public class GameStateMachine
+    public class GameStateMachine : IGameStateMachine
     {
         private readonly Dictionary<Type, IExitableState> _states;
         private IExitableState _activeState;
@@ -24,7 +25,7 @@ namespace CodeBase.Infrastructure.States
                 [typeof(LoadProgressState)] = new LoadProgressState(this,
                     services.Single<IPersistentProgressService>(),
                     services.Single<ISaveLoadService>()),
-                [typeof(GameLoopState)] = new GameLoopState(this)
+                [typeof(GameLoopState)] = new GameLoopState(this, sceneLoader)
             };
         }
 

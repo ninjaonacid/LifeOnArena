@@ -6,6 +6,6 @@ namespace CodeBase.Infrastructure.Factory
     public interface IHeroFactory : IService
     {
         GameObject HeroGameObject { get; set; }
-        GameObject CreateHero(GameObject initialPoint);
+        GameObject CreateHero(Vector3 initialPoint);
     }
 }

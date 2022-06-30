@@ -24,7 +24,6 @@ namespace CodeBase.Logic.EnemySpawners
         public void Construct()
         {
             _enemyObjectPool = AllServices.Container.Single<IObjectPool>();
-
         }
 
         public void LoadProgress(PlayerProgress progress)
