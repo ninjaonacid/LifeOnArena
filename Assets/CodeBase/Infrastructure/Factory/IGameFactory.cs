@@ -8,5 +8,7 @@ namespace CodeBase.Infrastructure.Factory
 
         GameObject CreateHud();
         GameObject InstantiateRegistered(string prefabPath);
+        GameObject CreateInventoryDisplay();
+        GameObject CreateInventorySlot(Transform parent);
     }
 }

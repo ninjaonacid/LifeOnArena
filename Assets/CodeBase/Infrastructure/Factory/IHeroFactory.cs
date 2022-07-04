@@ -1,3 +1,4 @@
+using CodeBase.Hero;
 using CodeBase.Services;
 using UnityEngine;
 
@@ -7,5 +8,7 @@ namespace CodeBase.Infrastructure.Factory
     {
         GameObject HeroGameObject { get; set; }
         GameObject CreateHero(Vector3 initialPoint);
+
+        HeroInventory GetHeroInventory();
     }
 }

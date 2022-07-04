@@ -2,6 +2,7 @@
 using CodeBase.Hero;
 using CodeBase.Infrastructure.Factory;
 using CodeBase.Logic;
+using CodeBase.Logic.Inventory;
 using CodeBase.Services;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.SaveLoad;
@@ -78,6 +79,8 @@ namespace CodeBase.Infrastructure.States
 
             InitHud(hero);
 
+            InitInventoryDisplay(hero);
+
             CameraFollow(hero);
         }
 
@@ -91,7 +94,18 @@ namespace CodeBase.Infrastructure.States
                     spawnerData.Id, 
                     spawnerData.MonsterTypeId);
             }
+        }
 
+        
+        private void InitInventoryDisplay(GameObject hero)
+        {
+            var inventoryDisplay = _gameFactory.CreateInventoryDisplay();
+            var heroInventory = hero.GetComponent<HeroInventory>();
+
+            inventoryDisplay
+                .GetComponent<InventoryDisplay>()
+                .InventoryItemsView
+                .Construct(heroInventory, _gameFactory);
         }
 
         private void InitHud(GameObject hero)

@@ -24,7 +24,20 @@ namespace CodeBase.Infrastructure.Factory
             _saveLoadService = saveLoadService;
         }
 
-        
+        public GameObject CreateInventoryDisplay()
+        {
+            GameObject InventoryDisplay =
+                InstantiateRegistered(AssetPath.InventoryDisplayPath);
+
+            return InventoryDisplay;
+        }
+
+        public GameObject CreateInventorySlot(Transform parent)
+        {
+            GameObject InventorySlot = 
+                InstantiateRegistered(AssetPath.InventorySlotPath, parent);
+            return InventorySlot;
+        }
 
         public GameObject CreateHud()
         {
@@ -46,9 +59,12 @@ namespace CodeBase.Infrastructure.Factory
         }
 
 
-        public GameObject InstantiateRegistered(string prefabPath, Vector3 position)
+        public GameObject InstantiateRegistered(string prefabPath, Transform parent)
         {
-            throw new System.NotImplementedException();
+            var go = _assets.Instantiate(prefabPath, parent);
+
+            _saveLoadService.RegisterProgressWatchers(go);
+            return go;
         }
     }
 }

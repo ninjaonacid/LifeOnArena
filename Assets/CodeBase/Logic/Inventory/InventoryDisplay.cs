@@ -1,5 +1,7 @@
 using System;
 using CodeBase.Hero;
+using CodeBase.Services;
+using CodeBase.Services.Input;
 using CodeBase.UI;
 using UnityEngine;
 
@@ -7,26 +9,25 @@ namespace CodeBase.Logic.Inventory
 {
     public class InventoryDisplay : MonoBehaviour
     {
-        public InventorySlotUI inventorySlotPrefab;
+        public InventoryItemsView InventoryItemsView;
 
-        private HeroInventory _heroInventory;
-        private void Start()
+        private IInputService _input;
+
+        private void Awake()
         {
-            _heroInventory = HeroInventory.Instance;
+            _input = AllServices.Container.Single<IInputService>();
         }
 
-        public void Redraw()
+        private void Update()
         {
-            foreach (Transform child in transform)
-            {
-                Destroy(child);
-            }
+            ShowHideInventory();
+        }
 
-            for (int i = 0; i < _heroInventory.GetInventorySize(); i++)
+        private void ShowHideInventory()
+        {
+            if (_input.InventoryButton())
             {
-                InventorySlotUI inventoryItem =
-                    Instantiate(inventorySlotPrefab, transform);
-                inventoryItem.Setup(_heroInventory, i);
+                gameObject.SetActive(true);
             }
         }
     }

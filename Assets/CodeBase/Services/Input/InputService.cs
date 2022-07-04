@@ -7,8 +7,11 @@ namespace CodeBase.Services.Input
         protected const string Horizontal = "Horizontal";
         protected const string Vertical = "Vertical";
         private const string Attack = "Fire1";
-
+        private const KeyCode InventoryKey = KeyCode.I;
         public abstract Vector2 Axis { get; }
+
+        public bool InventoryButton() =>
+            SimpleInput.GetKey(InventoryKey);
 
         public bool isAttackButtonUp()
         {

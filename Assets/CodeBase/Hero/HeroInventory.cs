@@ -1,4 +1,6 @@
 using System;
+using CodeBase.Services;
+using CodeBase.Services.Input;
 using CodeBase.StaticData;
 using UnityEngine;
 
@@ -25,6 +27,8 @@ namespace CodeBase.Hero
             Instance = this;
             inventorySlots = new InventorySlot[inventorySize];
         }
+
+   
 
         public void RemoveItemFromSlot(int slot, int amount)
         {

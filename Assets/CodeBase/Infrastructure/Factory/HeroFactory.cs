@@ -1,3 +1,4 @@
+using CodeBase.Hero;
 using CodeBase.Infrastructure.AssetManagment;
 using CodeBase.Services.SaveLoad;
 using UnityEngine;
@@ -23,6 +24,11 @@ namespace CodeBase.Infrastructure.Factory
 
             return HeroGameObject;
         }
+
+        public HeroInventory GetHeroInventory() =>
+            HeroGameObject.GetComponent<HeroInventory>();
+        
+        
 
         public GameObject InstantiateRegistered(string prefabPath, Vector3 position)
         {

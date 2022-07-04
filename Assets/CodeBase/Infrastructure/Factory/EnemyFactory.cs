@@ -77,6 +77,7 @@ namespace CodeBase.Infrastructure.Factory
         {
             var lootPiece = InstantiateRegistered(AssetPath.LootPath)
                 .GetComponent<LootPiece>();
+
             lootPiece.Construct(_progressService.Progress.WorldData);
             return lootPiece;
         }

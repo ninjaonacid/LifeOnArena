@@ -5,9 +5,8 @@ using UnityEngine.UI;
 namespace CodeBase.UI
 {
     [RequireComponent(typeof(Image))]
-    public class ItemIcon : MonoBehaviour
+    public class InventoryItemIcon : MonoBehaviour
     {
-
         public void SetItem(InventoryItem item)
         {
             var icon = gameObject.GetComponent<Image>();
