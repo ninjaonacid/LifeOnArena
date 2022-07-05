@@ -1,12 +1,12 @@
 using System;
-using CodeBase.Services;
-using CodeBase.Services.Input;
+using CodeBase.Data;
+using CodeBase.Services.PersistentProgress;
 using CodeBase.StaticData;
 using UnityEngine;
 
 namespace CodeBase.Hero
 {
-    public class HeroInventory : MonoBehaviour
+    public class HeroInventory : MonoBehaviour, ISavedProgress
     {
         private int inventorySize = 20;
 
@@ -20,15 +20,11 @@ namespace CodeBase.Hero
 
         public event Action OnInventoryChanged;
 
-        public static HeroInventory Instance;
 
         private void Awake()
         {
-            Instance = this;
             inventorySlots = new InventorySlot[inventorySize];
         }
-
-   
 
         public void RemoveItemFromSlot(int slot, int amount)
         {
@@ -113,6 +109,23 @@ namespace CodeBase.Hero
             }
 
             return -1;
+        }
+
+        public void LoadProgress(PlayerProgress progress)
+        {
+            for (int i = 0; i < progress.InventoryData.InventoryItems.Count; i++)
+            {
+                inventorySlots[i].item = progress.InventoryData.InventoryItems[i];
+            }
+            progress.InventoryData.InventoryItems.Clear();
+        }
+
+        public void UpdateProgress(PlayerProgress progress)
+        {
+            for (int i = 0; i < inventorySlots.Length; i++)
+            {
+                progress.InventoryData.InventoryItems.Add(inventorySlots[i].item);
+            }
         }
     }
 }

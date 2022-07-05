@@ -11,7 +11,7 @@ namespace CodeBase.Services.Input
         public abstract Vector2 Axis { get; }
 
         public bool InventoryButton() =>
-            SimpleInput.GetKey(InventoryKey);
+            SimpleInput.GetKeyUp(InventoryKey);
 
         public bool isAttackButtonUp()
         {

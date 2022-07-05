@@ -5,6 +5,6 @@ namespace CodeBase.UI
 {
     public class ItemPreviewUI : MonoBehaviour
     {
-        
+        public Image ItemPreViewIcon;
     }
 }

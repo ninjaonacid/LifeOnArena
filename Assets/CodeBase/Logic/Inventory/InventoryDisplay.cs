@@ -10,12 +10,18 @@ namespace CodeBase.Logic.Inventory
     public class InventoryDisplay : MonoBehaviour
     {
         public InventoryItemsView InventoryItemsView;
+        public GameObject InventoryContainer;
 
         private IInputService _input;
 
         private void Awake()
         {
             _input = AllServices.Container.Single<IInputService>();
+        }
+
+        private void Start()
+        {
+            InventoryContainer.SetActive(false);
         }
 
         private void Update()
@@ -27,8 +33,10 @@ namespace CodeBase.Logic.Inventory
         {
             if (_input.InventoryButton())
             {
-                gameObject.SetActive(true);
+                InventoryContainer.SetActive(!InventoryContainer.activeSelf);
+                
             }
+           
         }
     }
 }
