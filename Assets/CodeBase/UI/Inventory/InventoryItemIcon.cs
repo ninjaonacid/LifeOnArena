@@ -2,11 +2,12 @@ using CodeBase.StaticData;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace CodeBase.UI
+namespace CodeBase.UI.Inventory
 {
     [RequireComponent(typeof(Image))]
     public class InventoryItemIcon : MonoBehaviour
     {
+       
         public void SetItem(InventoryItem item)
         {
             var icon = gameObject.GetComponent<Image>();
@@ -20,6 +21,7 @@ namespace CodeBase.UI
                 icon.sprite = item.GetIcon();
             }
         }
+
         public void SetItem(InventoryItem item, int amount)
         {
 

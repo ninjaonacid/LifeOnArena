@@ -1,15 +1,17 @@
-using System;
-using CodeBase.Hero;
 using CodeBase.Services;
 using CodeBase.Services.Input;
-using CodeBase.UI;
+using CodeBase.UI.Inventory;
 using UnityEngine;
+
 
 namespace CodeBase.Logic.Inventory
 {
     public class InventoryDisplay : MonoBehaviour
     {
         public InventoryItemsView InventoryItemsView;
+        public EquipmentItems equipmentItems;
+        public ItemPreviewUI ItemPreviewUI;
+
         public GameObject InventoryContainer;
 
         private IInputService _input;
@@ -34,9 +36,7 @@ namespace CodeBase.Logic.Inventory
             if (_input.InventoryButton())
             {
                 InventoryContainer.SetActive(!InventoryContainer.activeSelf);
-                
             }
-           
         }
     }
 }

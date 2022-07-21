@@ -19,10 +19,12 @@ namespace CodeBase.Hero
         }
 
         public event Action OnInventoryChanged;
+        public static HeroInventory Instance;
 
 
         private void Awake()
         {
+            Instance = this;
             inventorySlots = new InventorySlot[inventorySize];
         }
 
@@ -102,7 +104,7 @@ namespace CodeBase.Hero
 
             for (int i = 0; i < inventorySlots.Length; i++)
             {
-                if (object.ReferenceEquals(inventorySlots[i], item))
+                if (object.ReferenceEquals(inventorySlots[i].item, item))
                 {
                     return i;
                 }

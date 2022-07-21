@@ -8,6 +8,7 @@ using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.SaveLoad;
 using CodeBase.StaticData;
 using CodeBase.UI;
+using CodeBase.UI.Inventory;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -96,16 +97,51 @@ namespace CodeBase.Infrastructure.States
             }
         }
 
-        
         private void InitInventoryDisplay(GameObject hero)
         {
             var inventoryDisplay = _gameFactory.CreateInventoryDisplay();
             var heroInventory = hero.GetComponent<HeroInventory>();
+            var heroEquipment = hero.GetComponent<HeroEquipment>();
 
+            ItemPreviewUI itemPreview = inventoryDisplay.GetComponentInChildren<ItemPreviewUI>();
+            itemPreview.Construct(heroEquipment);
+            
             inventoryDisplay
                 .GetComponent<InventoryDisplay>()
                 .InventoryItemsView
                 .Construct(heroInventory, _gameFactory);
+            inventoryDisplay
+                .GetComponent<InventoryDisplay>()
+                .equipmentItems
+                .Construct(heroEquipment);
+                
+
+            inventoryDisplay
+                .GetComponent<InventoryDisplay>()
+                .equipmentItems
+                .Weapon
+                .Construct(heroEquipment, itemPreview);
+
+            inventoryDisplay
+                .GetComponent<InventoryDisplay>()
+                .equipmentItems
+                .Boots
+                .Construct(heroEquipment, itemPreview);
+
+            inventoryDisplay
+                .GetComponent<InventoryDisplay>()
+                .equipmentItems
+                .Head
+                .Construct(heroEquipment, itemPreview);
+
+            inventoryDisplay
+                .GetComponent<InventoryDisplay>()
+                .equipmentItems
+                .Chest
+                .Construct(heroEquipment, itemPreview);
+                
+                
+                
         }
 
         private void InitHud(GameObject hero)

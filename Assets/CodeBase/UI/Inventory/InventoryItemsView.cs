@@ -1,21 +1,20 @@
-using System;
 using CodeBase.Hero;
 using CodeBase.Infrastructure.Factory;
 using UnityEngine;
-using UnityEngine.UI;
 
-namespace CodeBase.UI
+namespace CodeBase.UI.Inventory
 {
     public class InventoryItemsView : MonoBehaviour
     {
+        public ItemPreviewUI ItemPreviewUI;
+
         private HeroInventory _heroInventory;
         private IGameFactory _gameFactory;
+        
         public void Construct(HeroInventory heroInventory, IGameFactory gameFactory)
-
         {
             _gameFactory =  gameFactory;
             _heroInventory = heroInventory;
-           
         }
         
         private void Start()
@@ -39,7 +38,7 @@ namespace CodeBase.UI
                         .CreateInventorySlot(transform)
                         .GetComponent<InventorySlotUI>();
                 
-                inventoryItem.Setup(_heroInventory, i);
+                inventoryItem.Setup(_heroInventory, ItemPreviewUI, i);
             }
         }
     }
