@@ -1,4 +1,3 @@
-using System.Reflection.Emit;
 using CodeBase.Hero;
 using CodeBase.StaticData;
 using TMPro;
@@ -15,38 +14,22 @@ namespace CodeBase.UI.Inventory
 
 
         public EquipmentItems equipmentItems;
-        private InventoryItem _selectedItem { get; set; }
-
-
-        public void Construct(HeroEquipment heroEquipment)
-        {
-            //_heroEquipment = heroEquipment;
-        }
+        public InventoryItem SelectedItem { get; set; }
 
         public void SetItemInfo(InventoryItem item)
         {
-            _selectedItem = item;
+            SelectedItem = item;
             if (item is WeaponData)
             {
                 var weapon = item as WeaponData;
-                TextMeshPro.text = weapon.AttackRadius.ToString() + 
+                TextMeshPro.text = "AttackRadius " + weapon.AttackRadius.ToString() + 
                                    "\n" + 
-                                   weapon.AttackSpeed.ToString();
+                                    "AttackDamage " + weapon.AttackSpeed.ToString();
                 ItemPreViewIcon.sprite = item.GetIcon();
             }
         }
 
-        public void EquipItem()
-        {
-            if (_selectedItem is IEquipable)
-            {
-                var equipableItem = _selectedItem as IEquipable;
-
-                equipmentItems.SetEquippedItem(equipableItem, equipableItem.GetEquipmentSlot());
-            }
-        }
-
-        public InventoryItem GetSelectedItem() => _selectedItem;
+        public InventoryItem GetSelectedItem() => SelectedItem;
 
         
     }

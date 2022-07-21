@@ -1,8 +1,5 @@
-using System;
 using CodeBase.Hero;
-using CodeBase.Infrastructure;
 using CodeBase.StaticData;
-using CodeBase.UI.Inventory;
 using UnityEngine;
 
 namespace CodeBase.Logic

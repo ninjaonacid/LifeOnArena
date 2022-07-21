@@ -104,12 +104,13 @@ namespace CodeBase.Infrastructure.States
             var heroEquipment = hero.GetComponent<HeroEquipment>();
 
             ItemPreviewUI itemPreview = inventoryDisplay.GetComponentInChildren<ItemPreviewUI>();
-            itemPreview.Construct(heroEquipment);
+            
             
             inventoryDisplay
                 .GetComponent<InventoryDisplay>()
                 .InventoryItemsView
                 .Construct(heroInventory, _gameFactory);
+
             inventoryDisplay
                 .GetComponent<InventoryDisplay>()
                 .equipmentItems
@@ -139,9 +140,7 @@ namespace CodeBase.Infrastructure.States
                 .equipmentItems
                 .Chest
                 .Construct(heroEquipment, itemPreview);
-                
-                
-                
+       
         }
 
         private void InitHud(GameObject hero)
