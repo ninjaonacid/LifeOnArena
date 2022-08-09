@@ -5,6 +5,8 @@ namespace CodeBase.Logic
         Unknown,
         Idle,
         Attack,
+        Attack2,
+        Attack3,
         Walking,
         Died
     }

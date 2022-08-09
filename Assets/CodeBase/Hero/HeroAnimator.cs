@@ -9,11 +9,17 @@ namespace CodeBase.Hero
         private static readonly int Die = Animator.StringToHash("Die");
         private static readonly int Hit = Animator.StringToHash("Hit");
         private static readonly int Attack = Animator.StringToHash("Attack");
+        private static readonly int Attack2 = Animator.StringToHash("Attack2");
+        private static readonly int Attack3 = Animator.StringToHash("Attack3");
         private static readonly int Move = Animator.StringToHash("Move");
-        private readonly int _attackStateHash = Animator.StringToHash("Attack");
+
+        private readonly int _attackStateHash = Animator.StringToHash("Attack01");
+        private readonly int _attackStateHash2 = Animator.StringToHash("Attack02");
+        private readonly int _attackStateHash3 = Animator.StringToHash("Attack03");
+
         private readonly int _dieStateHash = Animator.StringToHash("Dying");
 
-        private readonly int _idleStateHash = Animator.StringToHash("Idle");
+        private readonly int _idleStateHash = Animator.StringToHash("IDLE");
         private readonly int _runStateHash = Animator.StringToHash("Run");
         private CharacterController _characterController;
 
@@ -21,10 +27,12 @@ namespace CodeBase.Hero
         private Animator _heroAnimator;
 
         public AnimatorState State { get; private set; }
-
+   
         public void EnteredState(int stateHash)
         {
             State = StateFor(stateHash);
+            Debug.Log(State.ToString());
+            Debug.Log("Animation Called");
             StateEntered?.Invoke(StateFor(stateHash));
         }
 
@@ -68,7 +76,14 @@ namespace CodeBase.Hero
 
         public void PlayAttack()
         {
+            if(State != AnimatorState.Attack && State != AnimatorState.Attack2)
             _heroAnimator.SetTrigger(Attack);
+
+            else if (State == AnimatorState.Attack)
+            _heroAnimator.SetTrigger(Attack2);
+
+            else if (State == AnimatorState.Attack2)
+            _heroAnimator.SetTrigger(Attack3);
         }
 
         public void PlayDeath()
@@ -85,6 +100,10 @@ namespace CodeBase.Hero
                 state = AnimatorState.Died;
             else if (stateHash == _attackStateHash)
                 state = AnimatorState.Attack;
+            else if (stateHash == _attackStateHash2)
+                state = AnimatorState.Attack2;
+            else if (stateHash == _attackStateHash3)
+                state = AnimatorState.Attack3;
             else if (stateHash == _idleStateHash)
                 state = AnimatorState.Idle;
             else if (stateHash == _runStateHash)

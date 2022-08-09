@@ -497,9 +497,9 @@ GameObject:
   - component: {fileID: 7046878093413620408}
   - component: {fileID: 5306633349511518799}
   - component: {fileID: 8881719371883239237}
-  - component: {fileID: 7877576447482990251}
   - component: {fileID: -4813362892774789116}
   - component: {fileID: 8352266413316842955}
+  - component: {fileID: 7877576447482990251}
   m_Layer: 12
   m_Name: Hero
   m_TagString: Player
@@ -628,19 +628,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CharacterController: {fileID: 7390316171520665865}
   HeroAnimator: {fileID: 7390316171520665867}
---- !u!65 &7877576447482990251
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6031708160037518034}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 3.3546906, y: 5.0335736, z: 1.7876854}
-  m_Center: {x: -0.10360861, y: 2.0167868, z: 0.1048069}
 --- !u!114 &-4813362892774789116
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -673,6 +660,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d69df2f1e6fbd7e4fa5d57f8b3a95ddb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &7877576447482990251
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6031708160037518034}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.3546906, y: 5.0335736, z: 1.7876854}
+  m_Center: {x: -0.10360861, y: 2.0167868, z: 0.1048069}
 --- !u!1 &6123176685334656487
 GameObject:
   m_ObjectHideFlags: 0

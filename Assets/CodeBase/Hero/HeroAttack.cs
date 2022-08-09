@@ -18,7 +18,6 @@ namespace CodeBase.Hero
         public CharacterController CharacterController;
         public HeroAnimator HeroAnimator;
 
-
         public void LoadProgress(PlayerProgress progress)
         {
             _characterStats = progress.CharacterStats;
@@ -27,13 +26,13 @@ namespace CodeBase.Hero
         private void Awake()
         {
             _input = AllServices.Container.Single<IInputService>();
-
+            
             _layerMask = 1 << LayerMask.NameToLayer("Hittable");
         }
 
         private void Update()
         {
-            if (_input.isAttackButtonUp() && !HeroAnimator.IsAttacking()) HeroAnimator.PlayAttack();
+            if (_input.isAttackButtonUp()) HeroAnimator.PlayAttack();
         }
 
         public void OnAttack()
@@ -57,7 +56,7 @@ namespace CodeBase.Hero
         private int Hit()
         {
             return Physics.OverlapSphereNonAlloc(StartPoint() + transform.forward,
-                _characterStats.BaseAttackRadius,
+                _characterStats.BaseAttackRadius ,
                 _hits,
                 _layerMask);
         }
