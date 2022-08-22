@@ -1,4 +1,5 @@
 using CodeBase.Data;
+using CodeBase.Hero.HeroStates;
 using CodeBase.Logic;
 using CodeBase.Services;
 using CodeBase.Services.Input;
@@ -13,7 +14,9 @@ namespace CodeBase.Hero
         private static int _layerMask;
         private readonly Collider[] _hits = new Collider[2];
         private IInputService _input;
-
+        private float _attackCooldown;
+        private float _comboDelay = 0.5f;
+        private HeroStateMachine heroStateMachine;
         private CharacterStats _characterStats;
         public CharacterController CharacterController;
         public HeroAnimator HeroAnimator;
@@ -30,13 +33,20 @@ namespace CodeBase.Hero
             _layerMask = 1 << LayerMask.NameToLayer("Hittable");
         }
 
-        private void Update()
+        /*private void Update()
         {
-            if (_input.isAttackButtonUp()) HeroAnimator.PlayAttack();
-        }
+            UpdateAttackCooldown();
 
+            if (_input.isAttackButtonUp() && IsAttackReady())
+            {
+                HeroAnimator.PlayAttack();
+                
+            }
+        }
+        */
         public void OnAttack()
         {
+            _attackCooldown = _characterStats.BaseAttackSpeed;
             for (var i = 0; i < Hit(); i++)
             {
                 _hits[i].transform.parent.GetComponent<IHealth>().TakeDamage(_characterStats.BaseDamage);
@@ -44,13 +54,12 @@ namespace CodeBase.Hero
 
                 Debug.Log(_hits[i].ToString());
             }
-
         }
 
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(StartPoint() + transform.forward, _characterStats.BaseAttackRadius);
+           // Gizmos.DrawWireSphere(StartPoint() + transform.forward, _characterStats.BaseAttackRadius);
         }
 
         private int Hit()
@@ -65,6 +74,18 @@ namespace CodeBase.Hero
         private Vector3 StartPoint()
         {
             return new Vector3(transform.position.x, CharacterController.center.y, transform.position.z);
+        }
+
+        private void UpdateAttackCooldown()
+        {
+            if (!IsAttackReady())
+            {
+                _attackCooldown -= Time.deltaTime;
+            }
+        }
+        private bool IsAttackReady()
+        {
+            return _attackCooldown <= 0;
         }
     }
 }

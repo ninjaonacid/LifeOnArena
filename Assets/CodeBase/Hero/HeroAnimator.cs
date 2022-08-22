@@ -1,4 +1,5 @@
 using System;
+using CodeBase.Hero.HeroStates;
 using CodeBase.Logic;
 using UnityEngine;
 
@@ -20,10 +21,10 @@ namespace CodeBase.Hero
         private readonly int _dieStateHash = Animator.StringToHash("Dying");
 
         private readonly int _idleStateHash = Animator.StringToHash("IDLE");
-        private readonly int _runStateHash = Animator.StringToHash("Run");
+        private readonly int _runStateHash = Animator.StringToHash("WALKING");
+
+        private HeroVFX _heroVFX;
         private CharacterController _characterController;
-
-
         private Animator _heroAnimator;
 
         public AnimatorState State { get; private set; }
@@ -31,8 +32,7 @@ namespace CodeBase.Hero
         public void EnteredState(int stateHash)
         {
             State = StateFor(stateHash);
-            Debug.Log(State.ToString());
-            Debug.Log("Animation Called");
+            
             StateEntered?.Invoke(StateFor(stateHash));
         }
 
@@ -46,12 +46,14 @@ namespace CodeBase.Hero
 
         private void Awake()
         {
+            _heroVFX = GetComponent<HeroVFX>();
             _heroAnimator = GetComponent<Animator>();
             _characterController = GetComponent<CharacterController>();
         }
 
         private void Update()
         {
+            
             Moving();
         }
 
@@ -65,7 +67,10 @@ namespace CodeBase.Hero
 
         public bool IsAttacking()
         {
-            return State == AnimatorState.Attack;
+            return 
+                State == AnimatorState.Attack
+                   || State == AnimatorState.Attack2
+                   || State == AnimatorState.Attack3;
         }
 
         public void PlayHit()
@@ -74,16 +79,22 @@ namespace CodeBase.Hero
         }
 
 
-        public void PlayAttack()
+        public void PlayAttack(HeroBaseState state)
         {
-            if(State != AnimatorState.Attack && State != AnimatorState.Attack2)
-            _heroAnimator.SetTrigger(Attack);
+            if (state is FirstAttackState)
+            {
+                _heroAnimator.SetTrigger(Attack);
+                _heroVFX.PlaySwordSlash(AnimatorState.Attack);
+                Debug.Log("Attack1");
+            } 
+            else if (state is SecondAttackState)
+            {
+                _heroAnimator.SetTrigger(Attack2);
+                _heroVFX.PlaySwordSlash(AnimatorState.Attack2);
+                Debug.Log("Attack2");
+            }
 
-            else if (State == AnimatorState.Attack)
-            _heroAnimator.SetTrigger(Attack2);
 
-            else if (State == AnimatorState.Attack2)
-            _heroAnimator.SetTrigger(Attack3);
         }
 
         public void PlayDeath()

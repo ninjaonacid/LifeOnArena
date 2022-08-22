@@ -3,7 +3,7 @@
 namespace CodeBase.Data
 {
     [Serializable]
-    public class State
+    public class HeroHP
     {
         public float CurrentHP;
         public float MaxHP;

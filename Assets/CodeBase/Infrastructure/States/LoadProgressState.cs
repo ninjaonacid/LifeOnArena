@@ -42,10 +42,11 @@ namespace CodeBase.Infrastructure.States
         {
             var progress = new PlayerProgress("MainScene");
 
-            progress.HeroState.MaxHP = 500f;
+            progress.heroHeroHp.MaxHP = 500f;
             progress.CharacterStats.BaseDamage = 0f;
             progress.CharacterStats.BaseAttackRadius = 1f;
-            progress.HeroState.ResetHP();
+            progress.CharacterStats.BaseAttackSpeed = 1f;
+            progress.heroHeroHp.ResetHP();
 
             return progress;
         }

@@ -12,6 +12,7 @@ namespace CodeBase.Hero
     public class PlayerController : MonoBehaviour, ISavedProgress
     {
         private CharacterController _characterController;
+        private HeroAnimator _heroAnimator;
 
         private IInputService _input;
         private readonly float _movementSpeed = 10f;
@@ -36,15 +37,16 @@ namespace CodeBase.Hero
         private void Awake()
         {
             _input = AllServices.Container.Single<IInputService>();
+            _heroAnimator = GetComponent<HeroAnimator>();
             _characterController = GetComponent<CharacterController>();
         }
 
         private void Update()
         {
-            Movement();
+           Movement();
         }
 
-        private void Movement()
+        public void Movement()
         {
             var movementVector = Vector3.zero;
 
