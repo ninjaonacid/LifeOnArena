@@ -15,7 +15,7 @@ namespace CodeBase.Hero
         private readonly Collider[] _hits = new Collider[2];
         private IInputService _input;
         private float _attackCooldown;
-        private float _comboDelay = 0.5f;
+ 
         private HeroStateMachine heroStateMachine;
         private CharacterStats _characterStats;
         public CharacterController CharacterController;
@@ -44,6 +44,9 @@ namespace CodeBase.Hero
             }
         }
         */
+        /// <summary>
+        ///  AnimationEvent
+        /// </summary>
         public void OnAttack()
         {
             _attackCooldown = _characterStats.BaseAttackSpeed;

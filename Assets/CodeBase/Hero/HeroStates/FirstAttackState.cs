@@ -6,19 +6,11 @@ namespace CodeBase.Hero.HeroStates
     public class FirstAttackState : HeroBaseState
     {
         private float duration = 0.5f;
-        private readonly HeroStateMachine _heroStateMachine;
-        private HeroAnimator _heroAnimator;
-        private IInputService _input;
-        
-
         public FirstAttackState(HeroStateMachine heroStateMachine, 
             IInputService input, 
             HeroAnimator heroAnimator) : base(heroStateMachine, input, heroAnimator)
         {
-            _heroStateMachine = heroStateMachine;
-            _heroAnimator = heroAnimator;
-            _input = input;
-            
+
         }
 
 
@@ -30,6 +22,7 @@ namespace CodeBase.Hero.HeroStates
 
         public override void Tick(float deltaTime)
         {
+           
             duration -= Time.deltaTime;
             if (_input.isAttackButtonUp() && duration > 0)
             {

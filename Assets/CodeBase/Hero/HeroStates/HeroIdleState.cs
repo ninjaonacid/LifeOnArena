@@ -5,17 +5,12 @@ namespace CodeBase.Hero.HeroStates
 {
     public class HeroIdleState : HeroBaseState
     {
-        private readonly HeroStateMachine _heroStateMachine;
-        private readonly IInputService _inputService;
-        private readonly HeroAnimator _heroAnimator;
 
         public HeroIdleState(HeroStateMachine heroStateMachine, 
             IInputService input, 
             HeroAnimator heroAnimator) : base(heroStateMachine, input, heroAnimator)
         {
-            _heroStateMachine = heroStateMachine;
-            _inputService = input;
-            _heroAnimator = heroAnimator;
+  
         }
 
 
@@ -26,10 +21,11 @@ namespace CodeBase.Hero.HeroStates
 
         public override void Tick(float deltaTime)
         {
-            if (_inputService.isAttackButtonUp())
+            if (_input.isAttackButtonUp())
             {
-                _heroStateMachine.ChangeState(new FirstAttackState(_heroStateMachine, _inputService, _heroAnimator));
+                _heroStateMachine.ChangeState(new FirstAttackState(_heroStateMachine, _input, _heroAnimator));
             }
+
         }
 
         public override void Exit()

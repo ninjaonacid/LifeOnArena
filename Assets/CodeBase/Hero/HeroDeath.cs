@@ -10,7 +10,7 @@ namespace CodeBase.Hero
         public HeroAttack Attack;
         public HeroHealth Health;
 
-        public PlayerController PlayerController;
+        public HeroMovement heroMovement;
 
         private void Start()
         {
@@ -31,7 +31,7 @@ namespace CodeBase.Hero
         {
             _isDead = true;
 
-            PlayerController.enabled = false;
+            heroMovement.enabled = false;
             Animator.PlayDeath();
         }
     }
