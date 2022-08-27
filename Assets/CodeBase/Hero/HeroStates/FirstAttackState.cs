@@ -1,42 +1,69 @@
+using System.Numerics;
+using CodeBase.Logic;
 using CodeBase.Services.Input;
+using TMPro;
 using UnityEngine;
+using Vector3 = UnityEngine.Vector3;
+
 
 namespace CodeBase.Hero.HeroStates
 {
     public class FirstAttackState : HeroBaseState
     {
-        private float duration = 0.5f;
-        public FirstAttackState(HeroStateMachine heroStateMachine, 
+        private float _duration;
+        private float _attackTransition;
+        private bool _canChain;
+        private HeroLookRotation _heroLook;
+        public FirstAttackState(
+            HeroStateMachine heroStateMachine, 
             IInputService input, 
-            HeroAnimator heroAnimator) : base(heroStateMachine, input, heroAnimator)
+            HeroAnimator heroAnimator, HeroLookRotation heroLook) : base(heroStateMachine, input, heroAnimator)
         {
-
+            _heroLook = heroLook;
         }
-
 
         public override void Enter()
         {
+            //_heroLook.OnAttackEnterRotation();
             _heroAnimator.PlayAttack(this);
-            Debug.Log("Entered FristState");
+            _duration = 1f;
+            _attackTransition = 0.5f;
+            _canChain = false;
+            Debug.Log("Entered FirstState");
         }
 
         public override void Tick(float deltaTime)
         {
-           
-            duration -= Time.deltaTime;
-            if (_input.isAttackButtonUp() && duration > 0)
+            _duration -= deltaTime;
+
+            if (_input.isAttackButtonUp())
             {
-                _heroStateMachine.ChangeState(new SecondAttackState(_heroStateMachine, _input, _heroAnimator));
+                _canChain = true;
             }
-            if (duration <= 0)
+
+            if (_canChain)
             {
-                _heroStateMachine.ChangeState(new HeroIdleState(_heroStateMachine, _input, _heroAnimator));
+                _attackTransition -= deltaTime;
+                if (_attackTransition <= 0)
+                {
+                    _heroStateMachine.Enter<SecondAttackState>();
+                }
+            }
+            if (StateEnds())
+            {
+                _heroStateMachine.Enter<HeroIdleState>();
             }
         }
 
         public override void Exit()
         {
-          
+
+            //_heroLook.OnAttackExitRotation();
+        }
+
+        private bool StateEnds()
+        {
+            return _duration <= 0;
         }
     }
 }

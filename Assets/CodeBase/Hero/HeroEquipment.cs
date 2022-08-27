@@ -10,13 +10,14 @@ namespace CodeBase.Hero
 {
     public class HeroEquipment : MonoBehaviour, ISavedProgress
     {
-        private GameObject currentWeapon;
+        private GameObject _currentWeapon;
         private WeaponData equippedWeapon;
+        private CharacterStats _heroCharacterStats;
 
-        public CharacterStats heroCharacterStats;
+
         public GameObject WeaponSlot;
         
-        private Dictionary<EquipmentSlot, IEquipable> _equippedItems =
+        private readonly Dictionary<EquipmentSlot, IEquipable> _equippedItems =
          new Dictionary<EquipmentSlot, IEquipable>();
 
         public event Action OnEquipmentChanged;
@@ -42,19 +43,19 @@ namespace CodeBase.Hero
         public void EquipWeapon(WeaponData weapon)
         {
             equippedWeapon = weapon;
-            if (currentWeapon != null)
-                Destroy(currentWeapon);
+            if (_currentWeapon != null)
+                Destroy(_currentWeapon);
 
-            heroCharacterStats.BaseAttackSpeed = equippedWeapon.AttackSpeed;
-            heroCharacterStats.BaseAttackRadius = equippedWeapon.AttackRadius;
-            heroCharacterStats.BaseDamage = equippedWeapon.Damage;
+            _heroCharacterStats.BaseAttackSpeed = equippedWeapon.AttackSpeed;
+            _heroCharacterStats.BaseAttackRadius = equippedWeapon.AttackRadius;
+            _heroCharacterStats.BaseDamage = equippedWeapon.Damage;
 
-            currentWeapon = Instantiate(equippedWeapon.WeaponPrefab, WeaponSlot.transform, 
+            _currentWeapon = Instantiate(equippedWeapon.WeaponPrefab, WeaponSlot.transform, 
                                         true);
 
-            currentWeapon.transform.localPosition = Vector3.zero;
+            _currentWeapon.transform.localPosition = Vector3.zero;
 
-            currentWeapon.transform.localRotation = Quaternion.Euler(160, 0, 0);
+            _currentWeapon.transform.localRotation = Quaternion.Euler(160, 0, 0);
         }
 
         public void UnEquip()
@@ -63,7 +64,7 @@ namespace CodeBase.Hero
 
         public void LoadProgress(PlayerProgress progress)
         {
-            heroCharacterStats = progress.CharacterStats;
+            _heroCharacterStats = progress.CharacterStats;
         }
 
         public void UpdateProgress(PlayerProgress progress)

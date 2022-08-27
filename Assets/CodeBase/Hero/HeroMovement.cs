@@ -12,7 +12,6 @@ namespace CodeBase.Hero
     public class HeroMovement : MonoBehaviour, ISavedProgress
     {
         private CharacterController _characterController;
-        private HeroAnimator _heroAnimator;
 
         private IInputService _input;
         private readonly float _movementSpeed = 10f;
@@ -37,17 +36,18 @@ namespace CodeBase.Hero
         private void Awake()
         {
             _input = AllServices.Container.Single<IInputService>();
-            _heroAnimator = GetComponent<HeroAnimator>();
             _characterController = GetComponent<CharacterController>();
         }
 
-        private void Update()
-        {
-           Movement();
-        }
+        public void StopMove() =>
+            _characterController.Move(Vector3.zero);
+
+
+        public float GetVelocity() =>
+            _characterController.velocity.magnitude;
 
         public void Movement()
-        {
+        { 
             var movementVector = Vector3.zero;
 
             if (_input.Axis.sqrMagnitude > Constants.Epsilon)
@@ -55,8 +55,6 @@ namespace CodeBase.Hero
                 movementVector = Camera.main.transform.TransformDirection(_input.Axis);
                 movementVector.y = 0;
                 movementVector.Normalize();
-
-                transform.forward = movementVector;
             }
 
             movementVector += Physics.gravity;

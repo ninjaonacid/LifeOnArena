@@ -1,5 +1,6 @@
-using System;
+
 using UnityEngine;
+
 
 namespace CodeBase.StateMachine
 {
@@ -10,6 +11,7 @@ namespace CodeBase.StateMachine
         private void Update()
         {
             _currentState?.Tick(Time.deltaTime);
+            
         }
 
         public void ChangeState(State newState)
@@ -18,5 +20,11 @@ namespace CodeBase.StateMachine
             _currentState = newState;
             _currentState?.Enter();
         }
+
+        public void InitState(State newState)
+        {
+            _currentState ??= newState;
+        }
+
     }
 }

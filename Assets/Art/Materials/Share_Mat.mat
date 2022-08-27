@@ -16,7 +16,6 @@ Material:
   - DIFFUSE
   - MATCAP
   - MATCAP_CONTRAST
-  - MATCAP_PERSPECTIVE
   - VERTEX_COLORS_CONTRAST
   - _DETAILBLEND_MULTIPLY
   - _DETAILUV_UV1
@@ -27,11 +26,11 @@ Material:
   - _LIGHTMAPUV_UV1
   - _MATCAPBLEND_MULTIPLY_LIGHTEN
   - _NORMALUV_UV1
-  - _OPTFALLBACK_ALL
-  - _OPTFOG_ALL
-  - _OPTLIGHTMAPPING_ALL
-  - _OPTPOINTLIGHTS_ALL
-  - _OPTSHADOW_ALL
+  - _OPTFALLBACK_DISABLED
+  - _OPTFOG_DISABLED
+  - _OPTLIGHTMAPPING_DISABLED
+  - _OPTPOINTLIGHTS_DISABLED
+  - _OPTSHADOW_DISABLED
   - _PLANTTYPE_PLANT
   - _RIMBLEND_ADDITIVE
   - _SHADOWOVERLAYANIMATION_SCROLL
@@ -40,7 +39,7 @@ Material:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 2000
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
@@ -107,7 +106,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MatCapTex:
-        m_Texture: {fileID: 2800000, guid: 9f074a449fd6a48f88237f973fca60f4, type: 3}
+        m_Texture: {fileID: 2800000, guid: 2adfe4909c57a49f7bf2ae75e2049022, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -171,9 +170,9 @@ Material:
     - _AlphaClip: 0
     - _AmbientBrightness: 1
     - _Anime: 1
-    - _AnimeSoftness: 0.01
-    - _AnimeThreshold1: 0.52
-    - _AnimeThreshold2: 0.91
+    - _AnimeSoftness: 0.078
+    - _AnimeThreshold1: 1.51
+    - _AnimeThreshold2: 0
     - _Blend: 0
     - _BlendOp: 0
     - _Brightness: 1
@@ -229,21 +228,21 @@ Material:
     - _LightmapHDR: 0
     - _LightmapUV: 0
     - _MatCapBlend: 1
-    - _MatCapBrightness: 1.4
-    - _MatCapContrast: 6.6
-    - _MatCapPerspective: 1
+    - _MatCapBrightness: 1
+    - _MatCapContrast: 2.4
+    - _MatCapPerspective: 0
     - _MatCapStatic: 0
     - _Metallic: 0
     - _NormalStrength: 1
     - _NormalUV: 0
     - _OcclusionStrength: 1
-    - _OptFallback: 0
-    - _OptFog: 0
-    - _OptLightmapping: 0
-    - _OptPointLights: 0
-    - _OptShadow: 0
+    - _OptFallback: 1
+    - _OptFog: 1
+    - _OptLightmapping: 1
+    - _OptPointLights: 1
+    - _OptShadow: 1
     - _Outline: 0
-    - _OutlineWidth: 0.0095
+    - _OutlineWidth: 0.0271
     - _Parallax: 0.005
     - _Plant: 0
     - _PlantBaseHeight: 0

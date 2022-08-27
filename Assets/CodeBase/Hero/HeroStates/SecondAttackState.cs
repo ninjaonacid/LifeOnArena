@@ -5,32 +5,61 @@ namespace CodeBase.Hero.HeroStates
 {
     public class SecondAttackState : HeroBaseState
     {
-        private float duration = 0.5f;
-        public SecondAttackState(HeroStateMachine heroStateMachine, 
-            IInputService input, 
-            HeroAnimator heroAnimator) : base(heroStateMachine, input, heroAnimator)
+        private float _duration;
+        private bool _canChain;
+        private float _attackTransition;
+        private HeroLookRotation _heroLook;
+        public SecondAttackState(
+            HeroStateMachine heroStateMachine,
+            IInputService input,
+            HeroAnimator heroAnimator, HeroLookRotation heroLook 
+            ) : base(heroStateMachine, input, heroAnimator)
         {
-
+            _heroLook = heroLook;
         }
 
         public override void Enter()
         {
+            //_heroLook.OnAttackEnterRotation();
             _heroAnimator.PlayAttack(this);
-            Debug.Log("Entered secondState");
+            _attackTransition = 0.5f;
+            _canChain = false;
+            _duration = 1f;
+            Debug.Log("Entered SecondState");
         }
 
         public override void Tick(float deltaTime)
         {
-            duration -= Time.deltaTime;
-            if (duration <= 0)
+            _duration -= deltaTime;
+
+            if (_input.isAttackButtonUp())
             {
-                _heroStateMachine.ChangeState(new HeroIdleState(_heroStateMachine, _input, _heroAnimator));
+                _canChain = true;
+            }
+
+            if (_canChain)
+            {
+                _attackTransition -= deltaTime;
+                if (_attackTransition <= 0)
+                {
+                    _heroStateMachine.Enter<ThirdAttackState>();
+                }
+            }
+            if (StateEnds())
+            {
+                _heroStateMachine.Enter<HeroIdleState>();
             }
         }
 
         public override void Exit()
         {
-            
+            //_heroLook.OnAttackExitRotation();
         }
+
+        private bool StateEnds()
+        {
+            return _duration < 0;
+        }
+
     }
 }

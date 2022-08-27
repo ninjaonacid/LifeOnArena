@@ -5,31 +5,38 @@ namespace CodeBase.Hero.HeroStates
 {
     public class MovementState : HeroBaseState
     {
-        private HeroStateMachine _heroStateMachine;
-        private IInputService _inputService;
-        private HeroAnimator _heroAnimator;
-        public MovementState(HeroStateMachine heroStateMachine, 
-            IInputService input, 
-            HeroAnimator heroAnimator) : base(heroStateMachine, input, heroAnimator)
+        private readonly HeroMovement _heroMovement;
+        public MovementState(HeroStateMachine heroStateMachine,
+            IInputService input,
+            HeroAnimator heroAnimator, 
+            HeroMovement heroMovement) : base(heroStateMachine, input, heroAnimator)
         {
-            _heroStateMachine = heroStateMachine;
-            _inputService = input;
-            _heroAnimator = heroAnimator;
-            
+            _heroMovement = heroMovement;
         }
 
         public override void Enter()
         {
+            _heroAnimator.PlayRun();
         }
 
         public override void Tick(float deltaTime)
         {
-            _heroStateMachine.heroMovement.Movement();
+            _heroMovement.Movement();
+
+            if (_heroMovement.GetVelocity() <= 0)
+            {
+                _heroStateMachine.Enter<HeroIdleState>();
+            } 
+            else if (_input.isAttackButtonUp())
+            {
+                _heroStateMachine.Enter<FirstAttackState>();
+            }
 
         }
 
         public override void Exit()
         {
+           _heroMovement.StopMove();
         }
     }
 }

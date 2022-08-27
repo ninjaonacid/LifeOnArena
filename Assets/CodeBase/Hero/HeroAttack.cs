@@ -13,11 +13,8 @@ namespace CodeBase.Hero
     {
         private static int _layerMask;
         private readonly Collider[] _hits = new Collider[2];
-        private IInputService _input;
-        private float _attackCooldown;
- 
-        private HeroStateMachine heroStateMachine;
         private CharacterStats _characterStats;
+        private float _attackCooldown = 1f;
         public CharacterController CharacterController;
         public HeroAnimator HeroAnimator;
 
@@ -28,28 +25,17 @@ namespace CodeBase.Hero
 
         private void Awake()
         {
-            _input = AllServices.Container.Single<IInputService>();
             
             _layerMask = 1 << LayerMask.NameToLayer("Hittable");
         }
 
-        /*private void Update()
-        {
-            UpdateAttackCooldown();
 
-            if (_input.isAttackButtonUp() && IsAttackReady())
-            {
-                HeroAnimator.PlayAttack();
-                
-            }
-        }
-        */
         /// <summary>
         ///  AnimationEvent
         /// </summary>
         public void OnAttack()
         {
-            _attackCooldown = _characterStats.BaseAttackSpeed;
+            
             for (var i = 0; i < Hit(); i++)
             {
                 _hits[i].transform.parent.GetComponent<IHealth>().TakeDamage(_characterStats.BaseDamage);
@@ -79,16 +65,6 @@ namespace CodeBase.Hero
             return new Vector3(transform.position.x, CharacterController.center.y, transform.position.z);
         }
 
-        private void UpdateAttackCooldown()
-        {
-            if (!IsAttackReady())
-            {
-                _attackCooldown -= Time.deltaTime;
-            }
-        }
-        private bool IsAttackReady()
-        {
-            return _attackCooldown <= 0;
-        }
+   
     }
 }

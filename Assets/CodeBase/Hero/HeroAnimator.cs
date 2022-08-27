@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using CodeBase.Hero.HeroStates;
 using CodeBase.Logic;
 using UnityEngine;
@@ -23,6 +24,7 @@ namespace CodeBase.Hero
         private readonly int _idleStateHash = Animator.StringToHash("IDLE");
         private readonly int _runStateHash = Animator.StringToHash("WALKING");
 
+
         private HeroVFX _heroVFX;
         private CharacterController _characterController;
         private Animator _heroAnimator;
@@ -46,6 +48,7 @@ namespace CodeBase.Hero
 
         private void Awake()
         {
+   
             _heroVFX = GetComponent<HeroVFX>();
             _heroAnimator = GetComponent<Animator>();
             _characterController = GetComponent<CharacterController>();
@@ -53,10 +56,13 @@ namespace CodeBase.Hero
 
         private void Update()
         {
-            
-            Moving();
+      
         }
 
+        public void PlayRun()
+        {
+            _heroAnimator.CrossFade(_runStateHash, 0.1f);
+        }
         private void Moving()
         {
             _heroAnimator.SetFloat(Move,
@@ -73,6 +79,9 @@ namespace CodeBase.Hero
                    || State == AnimatorState.Attack3;
         }
 
+        public void ToIdleState() =>
+            _heroAnimator.CrossFade(_idleStateHash, 0.1f);
+
         public void PlayHit()
         {
             _heroAnimator.SetTrigger(Hit);
@@ -83,18 +92,25 @@ namespace CodeBase.Hero
         {
             if (state is FirstAttackState)
             {
-                _heroAnimator.SetTrigger(Attack);
-                _heroVFX.PlaySwordSlash(AnimatorState.Attack);
-                Debug.Log("Attack1");
+                //_heroAnimator.SetTrigger(Attack);
+                _heroAnimator.CrossFade(_attackStateHash, 0.1f);
+               // _heroVFX.PlaySwordSlash(AnimatorState.Attack);
+                //Debug.Log("Attack1");
             } 
             else if (state is SecondAttackState)
             {
-                _heroAnimator.SetTrigger(Attack2);
-                _heroVFX.PlaySwordSlash(AnimatorState.Attack2);
-                Debug.Log("Attack2");
+                //_heroAnimator.SetTrigger(Attack2);
+                _heroAnimator.CrossFade(_attackStateHash2, 0.1f);
+                //_heroVFX.PlaySwordSlash(AnimatorState.Attack2);
+                //Debug.Log("Attack2");
             }
-
-
+            else if (state is ThirdAttackState)
+            {
+                _heroAnimator.CrossFade(_attackStateHash3, 0.1f);
+                // _heroAnimator.SetTrigger(Attack3);
+                //_heroVFX.PlaySwordSlash(AnimatorState.Attack2);
+                //Debug.Log("Attack3");
+            }
         }
 
         public void PlayDeath()

@@ -533,6 +533,7 @@ GameObject:
   - component: {fileID: 7877576447482990251}
   - component: {fileID: 3621045196253950929}
   - component: {fileID: 2908170630176531158}
+  - component: {fileID: -8125679809969938510}
   m_Layer: 12
   m_Name: Hero
   m_TagString: Player
@@ -647,7 +648,7 @@ MonoBehaviour:
   Animator: {fileID: 7390316171520665867}
   Attack: {fileID: 8881719371883239237}
   Health: {fileID: 7046878093413620408}
-  PlayerController: {fileID: 7390316171520665878}
+  heroMovement: {fileID: 7390316171520665878}
 --- !u!114 &8881719371883239237
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -674,13 +675,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9466cee06eb9bcd488e95278cf55a2f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heroCharacterStats:
-    CurrentLevel: 0
-    Exp: 0
-    BaseAttackSpeed: 0
-    BaseDamage: 0
-    BaseAttackRadius: 0
-    GoldRate: 0
   WeaponSlot: {fileID: 5057940072512345967}
 --- !u!114 &8352266413316842955
 MonoBehaviour:
@@ -737,9 +731,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 060437e1f929dd34ca66be33c78bab2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerController: {fileID: 7390316171520665878}
-  HeroAttack: {fileID: 8881719371883239237}
-  _heroAnimator: {fileID: 7390316171520665867}
+--- !u!114 &-8125679809969938510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6031708160037518034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cc5451c354228348aac0d3c952dd14d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSmooth: 2
+  rotationSpeed: 5
 --- !u!1 &6123176685334656487
 GameObject:
   m_ObjectHideFlags: 0
