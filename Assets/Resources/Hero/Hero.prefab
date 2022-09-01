@@ -528,12 +528,11 @@ GameObject:
   - component: {fileID: 7046878093413620408}
   - component: {fileID: 5306633349511518799}
   - component: {fileID: 8881719371883239237}
-  - component: {fileID: -4813362892774789116}
-  - component: {fileID: 8352266413316842955}
   - component: {fileID: 7877576447482990251}
   - component: {fileID: 3621045196253950929}
   - component: {fileID: 2908170630176531158}
   - component: {fileID: -8125679809969938510}
+  - component: {fileID: -4398335753682384271}
   m_Layer: 12
   m_Name: Hero
   m_TagString: Player
@@ -663,31 +662,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CharacterController: {fileID: 7390316171520665865}
   HeroAnimator: {fileID: 7390316171520665867}
---- !u!114 &-4813362892774789116
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6031708160037518034}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9466cee06eb9bcd488e95278cf55a2f7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  WeaponSlot: {fileID: 5057940072512345967}
---- !u!114 &8352266413316842955
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6031708160037518034}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d69df2f1e6fbd7e4fa5d57f8b3a95ddb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &7877576447482990251
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -745,6 +719,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationSmooth: 2
   rotationSpeed: 5
+--- !u!114 &-4398335753682384271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6031708160037518034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c299851cb24a9a843aeeefd2f3e6137b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WeaponSlot: {fileID: 9184684936429490085}
 --- !u!1 &6123176685334656487
 GameObject:
   m_ObjectHideFlags: 0

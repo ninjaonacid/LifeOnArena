@@ -1,8 +1,4 @@
-﻿//------------------------------------
-//             OmniShade
-//     Copyright© 2022 OmniShade     
-//------------------------------------
-
+﻿
 Shader "OmniShade/Standard URP" {
 	Properties {
 		[Header(SHADOWS AND ENVIRONMENT)]
