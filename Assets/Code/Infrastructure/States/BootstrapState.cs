@@ -8,6 +8,7 @@ using Code.Services.PersistentProgress;
 using Code.Services.RandomService;
 using Code.Services.SaveLoad;
 using Code.StaticData;
+using Code.UI.Services;
 using UnityEngine;
 
 namespace Code.Infrastructure.States
@@ -50,19 +51,30 @@ namespace Code.Infrastructure.States
             _services.RegisterSingle<IRandomService>(new RandomService());
             _services.RegisterSingle<IAssets>(new AssetProvider());
             _services.RegisterSingle(InputService());
-
+            _services.RegisterSingle<IWindowService>(
+                new WindowsService(_services.Single<IUIFactory>()));
             _services.RegisterSingle<IPersistentProgressService>
                 (new PersistentProgressService());
+
+            
 
             _services.RegisterSingle<ISaveLoadService>
             (new SaveLoadService(
                 _services.Single<IPersistentProgressService>()));
 
+            _services.RegisterSingle<IUIFactory>(new UIFactory
+            (_services.Single<IAssets>(),
+                _services.Single<IStaticDataService>()));
+
+            _services.RegisterSingle<IWindowService>(new WindowsService(
+                _services.Single<IUIFactory>()));
+
             _services.RegisterSingle<IGameFactory>
             (new GameFactory(
                 _services.Single<IAssets>(),
                 _services.Single<IPersistentProgressService>(),
-                _services.Single<ISaveLoadService>()));
+                _services.Single<ISaveLoadService>(),
+                _services.Single<IWindowService>()));
 
             _services.RegisterSingle<IHeroFactory>(new HeroFactory(
                 _services.Single<IAssets>(),

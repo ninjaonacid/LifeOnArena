@@ -8,6 +8,7 @@ using Code.Services.SaveLoad;
 using Code.StaticData;
 using Code.UI;
 using Code.UI.HUD;
+using Code.UI.Services;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -25,14 +26,16 @@ namespace Code.Infrastructure.States
         private IPersistentProgressService _progressService;
         private IStaticDataService _staticData;
         private ISaveLoadService _saveLoadService;
+        private readonly IUIFactory _uiFactory;
 
         public LoadLevelState(GameStateMachine stateMachine, SceneLoader sceneLoader,
-            LoadingCurtain curtain, AllServices services)
+            LoadingCurtain curtain, AllServices services, IUIFactory uiFactory)
         {
             _stateMachine = stateMachine;
             _sceneLoader = sceneLoader;
             _curtain = curtain;
             _services = services;
+            _uiFactory = uiFactory;
         }
 
         public void Enter(string sceneName)
@@ -56,6 +59,7 @@ namespace Code.Infrastructure.States
 
         private void OnLoaded()
         {
+            InitUiCore();
             InitGameWorld();
             InformProgressReaders();
             _stateMachine.Enter<GameLoopState>();
@@ -65,6 +69,11 @@ namespace Code.Infrastructure.States
         {
             foreach (var progressReader in _saveLoadService.ProgressReaders)
                 progressReader.LoadProgress(_progressService.Progress);
+        }
+
+        private void InitUiCore()
+        {
+            _uiFactory.CreateCore();
         }
 
         private void InitGameWorld()

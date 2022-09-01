@@ -7,6 +7,6 @@ namespace Code.Services.Input
         Vector2 Axis { get; }
 
         bool isAttackButtonUp();
-        bool InventoryButton();
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Runtime.InteropServices.WindowsRuntime;
+using UnityEngine;
 
 namespace Code.Services.Input
 {
@@ -6,12 +7,9 @@ namespace Code.Services.Input
     {
         protected const string Horizontal = "Horizontal";
         protected const string Vertical = "Vertical";
-        private const string Attack = "Fire1";
-        private const KeyCode InventoryKey = KeyCode.I;
-        public abstract Vector2 Axis { get; }
+        private const string Attack = "Attack1";
 
-        public bool InventoryButton() =>
-            SimpleInput.GetKeyUp(InventoryKey);
+        public abstract Vector2 Axis { get; }
 
         public bool isAttackButtonUp()
         {

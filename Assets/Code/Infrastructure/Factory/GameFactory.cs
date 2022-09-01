@@ -3,8 +3,9 @@ using Code.Services;
 using Code.Services.PersistentProgress;
 using Code.Services.RandomService;
 using Code.Services.SaveLoad;
-using Code.UI;
+using Code.UI.Buttons;
 using Code.UI.HUD;
+using Code.UI.Services;
 using UnityEngine;
 
 namespace Code.Infrastructure.Factory
@@ -16,29 +17,18 @@ namespace Code.Infrastructure.Factory
         private readonly IRandomService _randomService;
         private readonly IPersistentProgressService _progressService;
         private readonly ISaveLoadService _saveLoadService;
+        private readonly IWindowService _windowService;
 
         public GameFactory(IAssets assets, IPersistentProgressService progressService,
-                            ISaveLoadService saveLoadService)
+                            ISaveLoadService saveLoadService, IWindowService windowService)
         {
             _assets = assets;
             _progressService = progressService;
             _saveLoadService = saveLoadService;
+            _windowService = windowService;
         }
 
-        public GameObject CreateInventoryDisplay()
-        {
-            GameObject InventoryDisplay =
-                InstantiateRegistered(AssetPath.InventoryDisplayPath);
-
-            return InventoryDisplay;
-        }
-
-        public GameObject CreateInventorySlot(Transform parent)
-        {
-            GameObject InventorySlot = 
-                InstantiateRegistered(AssetPath.InventorySlotPath, parent);
-            return InventorySlot;
-        }
+    
 
         public GameObject CreateHud()
         {
@@ -47,6 +37,10 @@ namespace Code.Infrastructure.Factory
             hud.GetComponentInChildren<LootCounter>()
                 .Construct(_progressService.Progress.WorldData);
 
+            foreach (var openWindowButton in hud.GetComponentsInChildren<OpenWindowButton>())
+            {
+                openWindowButton.Construct(_windowService);
+            }
             return hud;
         }
 

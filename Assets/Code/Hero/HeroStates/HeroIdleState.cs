@@ -1,5 +1,6 @@
 using Code.Logic;
 using Code.Services.Input;
+using UnityEngine;
 
 namespace Code.Hero.HeroStates
 {
@@ -25,8 +26,6 @@ namespace Code.Hero.HeroStates
                 HeroStateMachine.Enter<FirstAttackState>();
 
             }
-
-
             if (Input.Axis.sqrMagnitude > Constants.Epsilon)
             {
                 HeroStateMachine.Enter<MovementState>();

@@ -5,6 +5,7 @@ using Code.Logic;
 using Code.Services;
 using Code.Services.PersistentProgress;
 using Code.Services.SaveLoad;
+using Code.UI.Services;
 using UnityEngine;
 
 namespace Code.Infrastructure.States
@@ -21,7 +22,7 @@ namespace Code.Infrastructure.States
             {
                 [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader, services),
                 [typeof(LoadLevelState)] = new LoadLevelState(this, sceneLoader,
-                    curtain, services),
+                    curtain, services, services.Single<IUIFactory>()),
                 [typeof(LoadProgressState)] = new LoadProgressState(this,
                     services.Single<IPersistentProgressService>(),
                     services.Single<ISaveLoadService>()),
