@@ -93,7 +93,6 @@ namespace Code.Infrastructure.States
 
         private void InitSpawners(LevelStaticData levelData)
         {
-
             foreach (EnemySpawnerData spawnerData in levelData.EnemySpawners)
             {
                 _enemyFactory.CreateSpawner(

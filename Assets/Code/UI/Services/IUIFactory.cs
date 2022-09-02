@@ -6,6 +6,7 @@ namespace Code.UI.Services
     public interface IUIFactory : IService
     {
         public void CreateCore();
-        void CreateSelectionMenu();
+        WindowBase CreateSelectionMenu(IWindowService windowService);
+        void CreateWeaponWindow();
     }
 }

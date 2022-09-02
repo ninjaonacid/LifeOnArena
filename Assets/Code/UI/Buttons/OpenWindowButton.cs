@@ -19,10 +19,7 @@ namespace Code.UI.Buttons
             Button.onClick.AddListener(Open);
 
 
-
         private void Open() =>
             _windowService.Open(WindowId);
-
-
     }
 }

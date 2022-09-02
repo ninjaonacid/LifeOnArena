@@ -1,3 +1,4 @@
+using Code.StaticData.UIWindows;
 using UnityEngine;
 
 namespace Code.UI.Services
@@ -5,7 +6,7 @@ namespace Code.UI.Services
     public class WindowsService : IWindowService
     {
         private readonly IUIFactory _uiFactory;
-
+        private WindowBase _activeWindow;
         public WindowsService(IUIFactory uiFactory)
         {
             _uiFactory = uiFactory;
@@ -15,8 +16,13 @@ namespace Code.UI.Services
         {
             switch (windowId)
             {
-                case UIWindowID.SelectionMenu: 
-                    _uiFactory.CreateSelectionMenu();
+                case UIWindowID.SelectionMenu:
+                    _activeWindow?.CloseButton.onClick.Invoke();
+                    _activeWindow = _uiFactory.CreateSelectionMenu(this);
+                    break;
+
+                case UIWindowID.Weapon:
+                    _uiFactory.CreateWeaponWindow();
                     break;
             }
         }

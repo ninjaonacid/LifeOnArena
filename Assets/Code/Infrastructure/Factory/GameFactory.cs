@@ -28,8 +28,6 @@ namespace Code.Infrastructure.Factory
             _windowService = windowService;
         }
 
-    
-
         public GameObject CreateHud()
         {
             GameObject hud = InstantiateRegistered(AssetPath.HudPath);

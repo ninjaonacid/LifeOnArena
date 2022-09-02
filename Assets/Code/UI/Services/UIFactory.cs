@@ -1,6 +1,8 @@
 using Code.Infrastructure.AssetManagment;
 using Code.Services;
 using Code.StaticData.UIWindows;
+using Code.UI.Buttons;
+using Code.UI.MainMenu;
 using UnityEngine;
 
 namespace Code.UI.Services
@@ -16,9 +18,22 @@ namespace Code.UI.Services
             _staticData = staticDataService;
         }
 
-        public void CreateSelectionMenu()
+        public WindowBase CreateSelectionMenu(IWindowService windowService)
         {
             WindowConfig config = _staticData.ForWindow(UIWindowID.SelectionMenu);
+            var menu = Object.Instantiate(config.Prefab, _uiCoreTransform);
+
+            foreach (var openButton in menu.GetComponentsInChildren<OpenWindowButton>())
+            {
+                openButton.Construct(windowService);
+            }
+
+            return menu;
+        }
+
+        public void CreateWeaponWindow()
+        {
+            WindowConfig config = _staticData.ForWindow(UIWindowID.Weapon);
             Object.Instantiate(config.Prefab, _uiCoreTransform);
         }
 
