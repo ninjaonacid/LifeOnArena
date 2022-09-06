@@ -8,5 +8,9 @@ namespace Code.Services.Input
 
         bool isAttackButtonUp();
 
+        bool isSkillButton1();
+        bool isSkillButton2();
+        bool isSkillButton3();
+
     }
 }

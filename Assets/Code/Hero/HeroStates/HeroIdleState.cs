@@ -24,8 +24,13 @@ namespace Code.Hero.HeroStates
             if (Input.isAttackButtonUp())
             {
                 HeroStateMachine.Enter<FirstAttackState>();
-
             }
+
+            if (Input.isSkillButton1())
+            {
+                HeroStateMachine.Enter<SpinAttackState>();
+            }
+
             if (Input.Axis.sqrMagnitude > Constants.Epsilon)
             {
                 HeroStateMachine.Enter<MovementState>();

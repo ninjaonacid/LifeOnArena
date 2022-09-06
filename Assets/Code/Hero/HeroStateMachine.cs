@@ -4,6 +4,7 @@ using Code.Hero.HeroStates;
 using Code.Services;
 using Code.Services.Input;
 using Code.StateMachine;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace Code.Hero
@@ -13,20 +14,18 @@ namespace Code.Hero
     {
         private HeroMovement _heroMovement;
         private HeroAnimator _heroAnimator;
-        private HeroRotation _hero;
         private Dictionary<Type, HeroBaseState> _states;
         private List<HeroTransition> _transitions;
+        private Dictionary<Type, List<HeroTransition>> _possibleTransition;
         private IInputService _input;
 
-        private void Start()
+        private void Awake()
         {
             _input = AllServices.Container.Single<IInputService>();
             _heroAnimator = GetComponent<HeroAnimator>();
             _heroMovement = GetComponent<HeroMovement>();
-            _hero = GetComponent<HeroRotation>();
 
             _states = new Dictionary<Type, HeroBaseState>
-
             {
                 [typeof(FirstAttackState)] =
                     new FirstAttackState(this, _input, _heroAnimator),
@@ -38,24 +37,44 @@ namespace Code.Hero
                     new HeroIdleState(this, _input, _heroAnimator),
                 [typeof(MovementState)] =
                     new MovementState(this, _input, _heroAnimator, _heroMovement),
-
+                [typeof(SpinAttackState)] =
+                    new SpinAttackState(this, _input, _heroAnimator),
             };
-
-            _transitions = new List<HeroTransition>()
-            {
-                new ComboOne(GetState<FirstAttackState>(), GetState<SecondAttackState>()),
-                new ComboTwo(GetState<SecondAttackState>(), GetState<ThirdAttackState>()),
-            };
+            _possibleTransition = new Dictionary<Type, List<HeroTransition>>();
 
             InitState(_states[typeof(HeroIdleState)]);
+        }
 
+        public void AddTransition(HeroBaseState from, HeroBaseState to, float transitionTime, Func<bool> condition)
+        {
+            if (_possibleTransition.TryGetValue(from.GetType(), out var transitions) == false)
+            {
+                transitions = new List<HeroTransition>();
+                _possibleTransition[from.GetType()] = transitions;
+            }
+            transitions.Add(new HeroTransition(to, transitionTime, condition));
         }
 
         public void MakeTransition(HeroBaseState state)
         {
-            
+            foreach (var transition in _possibleTransition[state.GetType()])
+            {
+                if (transition.Condition())
+                {
+                    ChangeState(transition.To);
+                    break;
+                }
+            }
+
         }
-        public void Enter<TState>() where TState : HeroBaseState =>
+
+        async UniTask TransitionTask(int transitionTime)
+        {
+            await UniTask.Delay(transitionTime);
+        }
+        public State GetCurrentState() => CurrentState;
+        
+        public void Enter<TState>() where TState : HeroBaseState => 
             ChangeState(GetState<TState>());
         
         

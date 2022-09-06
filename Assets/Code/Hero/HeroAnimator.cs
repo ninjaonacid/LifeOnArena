@@ -14,6 +14,9 @@ namespace Code.Hero
         private readonly int _attackStateHash = Animator.StringToHash("Attack01");
         private readonly int _attackStateHash2 = Animator.StringToHash("Attack02");
         private readonly int _attackStateHash3 = Animator.StringToHash("Attack03");
+
+        private readonly int _spinAttackStateHash = Animator.StringToHash("SPIN_ATTACK");
+
         private readonly int _dieStateHash = Animator.StringToHash("Dying");
         private readonly int _idleStateHash = Animator.StringToHash("IDLE");
         private readonly int _runStateHash = Animator.StringToHash("WALKING");
@@ -81,6 +84,10 @@ namespace Code.Hero
             _heroAnimator.SetTrigger(Hit);
         }
 
+        public void PlaySpinAttackSkill()
+        {
+            _heroAnimator.CrossFade(_spinAttackStateHash, 0.1f);
+        }
 
         public void PlayAttack(HeroBaseState state)
         {

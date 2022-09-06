@@ -1,14 +1,19 @@
+using System;
 using Code.StateMachine;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace Code.Hero.HeroStates
 {
-    public abstract class HeroTransition : BaseTransition
+    public class HeroTransition : BaseTransition
     {
-        public abstract float TransitionTime { get; set; }
+        public float TransitionTime { get; }
+        public Func<bool> Condition;
 
-        protected HeroTransition(State from, State to) : base(from, to)
+        public HeroTransition(State to, float transitionTime, Func<bool> condition) : base(to)
         {
+            TransitionTime = transitionTime;
+            Condition = condition;
         }
     }
 }

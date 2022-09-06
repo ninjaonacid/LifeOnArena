@@ -5,6 +5,9 @@ namespace Code.Hero.HeroStates
 {
     public abstract class HeroBaseState : State
     {
+
+        protected float duration;
+        protected float attackTransition;
         protected HeroStateMachine HeroStateMachine;
         protected IInputService Input;
         protected HeroAnimator HeroAnimator;

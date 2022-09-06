@@ -1,6 +1,5 @@
 using Code.UI.Services;
 using UnityEngine;
-using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 namespace Code.UI.Buttons
