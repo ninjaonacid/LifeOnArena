@@ -31,6 +31,7 @@ namespace Code.Hero.HeroStates
             if (Input.isAttackButtonUp())
             {
                 _canChain = true;
+                
             }
 
             if (_canChain)

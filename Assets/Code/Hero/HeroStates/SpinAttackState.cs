@@ -13,7 +13,7 @@ namespace Code.Hero.HeroStates
         {
             HeroAnimator.PlaySpinAttackSkill();
             duration = 1f;
-            attackTransition = 0.5f;
+            TransitionTime = 100;
         }
 
         public override void Tick(float deltaTime)

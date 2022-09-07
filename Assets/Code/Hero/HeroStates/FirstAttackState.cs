@@ -6,70 +6,70 @@ namespace Code.Hero.HeroStates
 {
     public class FirstAttackState : HeroBaseState
     {
-        private float _duration;
-        private float _attackTransition;
-        private bool _canChain;
+        private bool _isInTransition;
         public FirstAttackState(
             HeroStateMachine heroStateMachine, 
             IInputService input, 
             HeroAnimator heroAnimator) : base(heroStateMachine, input, heroAnimator)
         {
- 
         }
 
         public override void Enter()
         {
             HeroAnimator.PlayAttack(this);
-            _duration = 1f;
-            _attackTransition = 0.5f;
-            _canChain = false;
-            Func<bool> AttackPressed() => () => Input.isAttackButtonUp();
-            Func<bool> FirstSkillPressed() => () => Input.isSkillButton1();
-            HeroStateMachine.AddTransition(this, HeroStateMachine.GetState<SecondAttackState>(), attackTransition, AttackPressed());
-            HeroStateMachine.AddTransition(this, HeroStateMachine.GetState<SpinAttackState>(), attackTransition, FirstSkillPressed());
+            duration = 0.7f;
+            TransitionTime = 1000;
             Debug.Log("Entered FirstState");
-
+            IsEnded = false;
+            _isInTransition = false;
         }
 
         public override void Tick(float deltaTime)
         {
 
-
-            HeroStateMachine.MakeTransition(this);
-            /*_duration -= deltaTime;
-            if (Input.isAttackButtonUp())
+            duration -= deltaTime;
+            if (duration <= 0)
             {
-                _canChain = true;
-                HeroStateMachine.MakeTransition(this);
+                IsEnded = true;
+            }
+            
+            if (Input.isAttackButtonUp() || Input.isSkillButton1() || duration <= 0f)
+            {
+                if(!_isInTransition)
+                    HeroStateMachine.DoTransition(this);
+
+                _isInTransition = true;
             }
 
-            if (Input.isSkillButton1())
+            
+            /*else if (Input.isSkillButton1())
             {
-                HeroStateMachine.Enter<SpinAttackState>();
+                HeroStateMachine.GetTransition(this, TransitionTime);
             }
 
-            if (_canChain)
+            if (duration <= 0f)
+            {
+                HeroStateMachine.GetTransition(this, TransitionTime);
+            }*/
+            /*if (_canChain)
             {
                 _attackTransition -= deltaTime;
                 if (_attackTransition <= 0)
                 {
                     HeroStateMachine.Enter<SecondAttackState>();
                 }
-            }
-            if (StateEnds())
-            {
-                HeroStateMachine.Enter<HeroIdleState>();
             }*/
+     
         }
 
         public override void Exit()
         {
-
+        
         }
 
-        private bool StateEnds()
+        public bool StateEnds()
         {
-            return _duration <= 0;
+            return duration <= 0;
         }
     }
 }
