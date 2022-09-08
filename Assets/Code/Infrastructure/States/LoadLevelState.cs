@@ -36,7 +36,6 @@ namespace Code.Infrastructure.States
             _services = services;
             _uiFactory = uiFactory;
         }
-
         public void Enter(string sceneName)
         {
             _progressService = _services.Single<IPersistentProgressService>();
@@ -63,13 +62,11 @@ namespace Code.Infrastructure.States
             InformProgressReaders();
             _stateMachine.Enter<GameLoopState>();
         }
-
         private void InformProgressReaders()
         {
             foreach (var progressReader in _saveLoadService.ProgressReaders)
                 progressReader.LoadProgress(_progressService.Progress);
         }
-
         private void InitUiCore()
         {
             _uiFactory.CreateCore();
@@ -89,7 +86,7 @@ namespace Code.Infrastructure.States
 
             CameraFollow(hero);
         }
-
+            
         private void InitSpawners(LevelStaticData levelData)
         {
             foreach (EnemySpawnerData spawnerData in levelData.EnemySpawners)
@@ -100,8 +97,6 @@ namespace Code.Infrastructure.States
                     spawnerData.MonsterTypeId);
             }
         }
-
-
         private void InitHud(GameObject hero)
         {
             var hud = _gameFactory.CreateHud();

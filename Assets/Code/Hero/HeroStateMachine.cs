@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using Code.Hero.HeroStates;
+using Code.Logic;
 using Code.Services;
 using Code.Services.Input;
 using Code.StateMachine;
@@ -16,6 +17,7 @@ namespace Code.Hero
     {
         private HeroMovement _heroMovement;
         private HeroAnimator _heroAnimator;
+        private HeroSkills _heroSkills;
         private Dictionary<Type, HeroBaseState> _states;
         private HeroTransition _currentTransition;
         private Dictionary<Type, List<HeroTransition>> _transitions;
@@ -26,6 +28,7 @@ namespace Code.Hero
             _input = AllServices.Container.Single<IInputService>();
             _heroAnimator = GetComponent<HeroAnimator>();
             _heroMovement = GetComponent<HeroMovement>();
+            _heroSkills = GetComponent<HeroSkills>();
 
             _states = new Dictionary<Type, HeroBaseState>
             {
@@ -42,18 +45,25 @@ namespace Code.Hero
                 [typeof(SpinAttackState)] =
                     new SpinAttackState(this, _input, _heroAnimator),
             };
-            //_currentTransitions = new List<HeroTransition>();
+
             _transitions = new Dictionary<Type, List<HeroTransition>>();
 
             Func<bool> AttackPressed() => () => _input.isAttackButtonUp();
             Func<bool> FirstSkillPressed() => () => _input.isSkillButton1();
-            Func<bool> StateDurationEnd() => () => GetCurrentState().duration <= 0;
+            Func<bool> StateDurationEnd() => () => GetCurrentState().Duration <= 0;
+            Func<bool> MovementStart() => () => _input.Axis.sqrMagnitude > Constants.Epsilon;
 
             AddTransition(GetState<FirstAttackState>(), GetState<SecondAttackState>(),  AttackPressed());
             AddTransition(GetState<FirstAttackState>(), GetState<SpinAttackState>(), FirstSkillPressed());
             AddTransition(GetState<FirstAttackState>(), GetState<HeroIdleState>(), StateDurationEnd());
+
+            AddTransition(GetState<SecondAttackState>(), GetState<ThirdAttackState>(),  AttackPressed());
+            AddTransition(GetState<SecondAttackState>(), GetState<SpinAttackState>(), FirstSkillPressed());
+            AddTransition(GetState<SecondAttackState>(), GetState<HeroIdleState>(), StateDurationEnd());
+
             AddTransition(GetState<HeroIdleState>(), GetState<SpinAttackState>(),FirstSkillPressed());
             AddTransition(GetState<HeroIdleState>(), GetState<FirstAttackState>(), AttackPressed());
+            AddTransition(GetState<HeroIdleState>(), GetState<MovementState>(), MovementStart());
             InitState(_states[typeof(HeroIdleState)]);
         }
 
@@ -83,28 +93,18 @@ namespace Code.Hero
         public async void DoTransition(HeroBaseState state)
         {
             GetTransition(state);
-            await UniTask.WaitUntil(() => state.IsEnded);
+            if (state is HeroBaseAttackState attackState)
+            {
+                await UniTask.WaitUntil(() => attackState.IsEnded );
+            }
             ChangeState(_currentTransition.To);
         }
 
-        async UniTask TransitionTask(int transitionTime,CancellationToken cancellationToken)
-        {
-            await UniTask.Delay(transitionTime, cancellationToken: cancellationToken);
-            
-        }
-
-        private IEnumerator TransitionDelay(float transitionTime, HeroTransition transition)
-        {
-            yield return new WaitForSeconds(transitionTime);
-            
-            StopAllCoroutines();
-        }
-        public HeroBaseState GetCurrentState() =>
-            CurrentState as HeroBaseState;
+        public HeroBaseAttackState GetCurrentState() =>
+            CurrentState as HeroBaseAttackState;
         
         public void Enter<TState>() where TState : HeroBaseState => 
             ChangeState(GetState<TState>());
-        
         
         public HeroBaseState GetState<TState>() =>
             _states[typeof(TState)];

@@ -4,9 +4,8 @@ using UnityEngine;
 using UniRx;
 namespace Code.Hero.HeroStates
 {
-    public class FirstAttackState : HeroBaseState
+    public class FirstAttackState : HeroBaseAttackState
     {
-        private bool _isInTransition;
         public FirstAttackState(
             HeroStateMachine heroStateMachine, 
             IInputService input, 
@@ -17,49 +16,31 @@ namespace Code.Hero.HeroStates
         public override void Enter()
         {
             HeroAnimator.PlayAttack(this);
-            duration = 0.7f;
-            TransitionTime = 1000;
+            Duration = 0.7f;
             Debug.Log("Entered FirstState");
             IsEnded = false;
-            _isInTransition = false;
+            IsInTransition = false;
         }
 
         public override void Tick(float deltaTime)
         {
 
-            duration -= deltaTime;
-            if (duration <= 0)
+            Duration -= deltaTime;
+     
+            
+            if (Input.isAttackButtonUp() || Input.isSkillButton1() || Duration <= 0)
+            {
+                if(!IsInTransition)
+                    HeroStateMachine.DoTransition(this);
+
+                IsInTransition = true;
+            }
+
+            if (Duration <= 0)
             {
                 IsEnded = true;
             }
-            
-            if (Input.isAttackButtonUp() || Input.isSkillButton1() || duration <= 0f)
-            {
-                if(!_isInTransition)
-                    HeroStateMachine.DoTransition(this);
 
-                _isInTransition = true;
-            }
-
-            
-            /*else if (Input.isSkillButton1())
-            {
-                HeroStateMachine.GetTransition(this, TransitionTime);
-            }
-
-            if (duration <= 0f)
-            {
-                HeroStateMachine.GetTransition(this, TransitionTime);
-            }*/
-            /*if (_canChain)
-            {
-                _attackTransition -= deltaTime;
-                if (_attackTransition <= 0)
-                {
-                    HeroStateMachine.Enter<SecondAttackState>();
-                }
-            }*/
-     
         }
 
         public override void Exit()
@@ -69,7 +50,7 @@ namespace Code.Hero.HeroStates
 
         public bool StateEnds()
         {
-            return duration <= 0;
+            return Duration <= 0;
         }
     }
 }

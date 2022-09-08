@@ -5,6 +5,7 @@ namespace Code.UI
         Default,
         Shop,
         Weapon,
+        Skills,
         SelectionMenu
 
     }

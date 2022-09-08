@@ -2,7 +2,6 @@ using Code.Infrastructure.AssetManagment;
 using Code.Services;
 using Code.StaticData.UIWindows;
 using Code.UI.Buttons;
-using Code.UI.MainMenu;
 using UnityEngine;
 
 namespace Code.UI.Services
@@ -31,6 +30,11 @@ namespace Code.UI.Services
             return menu;
         }
 
+        public void CreateSkillWindow()
+        {
+            WindowConfig config = _staticData.ForWindow(UIWindowID.Skills);
+            Object.Instantiate(config.Prefab, _uiCoreTransform);
+        }
         public void CreateWeaponWindow()
         {
             WindowConfig config = _staticData.ForWindow(UIWindowID.Weapon);

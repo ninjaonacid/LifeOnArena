@@ -1,9 +1,8 @@
 using Code.Services.Input;
-using UnityEngine;
 
 namespace Code.Hero.HeroStates
 {
-    public class SpinAttackState : HeroBaseState
+    public class SpinAttackState : HeroBaseAttackState
     {
         public SpinAttackState(HeroStateMachine heroStateMachine, IInputService input, HeroAnimator heroAnimator) : base(heroStateMachine, input, heroAnimator)
         {
@@ -12,14 +11,14 @@ namespace Code.Hero.HeroStates
         public override void Enter()
         {
             HeroAnimator.PlaySpinAttackSkill();
-            duration = 1f;
-            TransitionTime = 100;
+            Duration = 1f;
+ 
         }
 
         public override void Tick(float deltaTime)
         {
-            duration -= deltaTime;
-            if (duration <= 0f)
+            Duration -= deltaTime;
+            if (Duration <= 0f)
             {
                 HeroStateMachine.Enter<HeroIdleState>();
             }

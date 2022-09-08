@@ -3,11 +3,8 @@ using UnityEngine;
 
 namespace Code.Hero.HeroStates
 {
-    public class SecondAttackState : HeroBaseState
+    public class SecondAttackState : HeroBaseAttackState
     {
-        private float _duration;
-        private bool _canChain;
-        private float _attackTransition;
         public SecondAttackState(
             HeroStateMachine heroStateMachine,
             IInputService input,
@@ -18,45 +15,41 @@ namespace Code.Hero.HeroStates
         public override void Enter()
         {
             HeroAnimator.PlayAttack(this);
-            _attackTransition = 0.7f;
-            _canChain = false;
-            _duration = 1f;
+            IsEnded = false;
+            Duration = 0.7f;
             Debug.Log("Entered SecondState");
         }
 
         public override void Tick(float deltaTime)
         {
-            _duration -= deltaTime;
+            Duration -= deltaTime;
 
-            if (Input.isAttackButtonUp())
+            if (TransitionCondition())
             {
-                _canChain = true;
-                
+                if(!IsInTransition)
+                    HeroStateMachine.DoTransition(this);
+                IsInTransition = true;
+
             }
 
-            if (_canChain)
+            if (Duration <= 0)
             {
-                _attackTransition -= deltaTime;
-                if (_attackTransition <= 0)
-                {
-                    HeroStateMachine.Enter<ThirdAttackState>();
-                }
+                IsEnded = true;
             }
-            if (StateEnds())
-            {
-                HeroStateMachine.Enter<HeroIdleState>();
-            }
+        }
+
+        private bool TransitionCondition()
+        {
+            return Input.isAttackButtonUp() || Input.isSkillButton1() || 
+                   Input.isSkillButton2() || Input.isSkillButton3() || Duration <= 0;
         }
 
         public override void Exit()
         {
-            
+
         }
 
-        private bool StateEnds()
-        {
-            return _duration < 0;
-        }
+
 
     }
 }

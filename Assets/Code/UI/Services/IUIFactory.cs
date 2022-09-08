@@ -8,5 +8,6 @@ namespace Code.UI.Services
         public void CreateCore();
         WindowBase CreateSelectionMenu(IWindowService windowService);
         void CreateWeaponWindow();
+        void CreateSkillWindow();
     }
 }
