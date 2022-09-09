@@ -4,24 +4,29 @@ namespace Code.UI.SkillsMenu
 {
     public class SkillListContainer : MonoBehaviour
     {
-        public SkillHolderContainer SkillContainer;
+        public SkillHolderContainer SkillHolderContainer;
         private SkillItem[] _skillItems;
 
         private void Awake()
         {
             _skillItems = GetComponentsInChildren<SkillItem>();
 
-            foreach (var item in _skillItems)
-            {
-              item.Setup(this);
-            }
+            Setup();
         }
 
         public void SkillChange(SkillItem skill)
         {
-            if (SkillContainer.CurrentSelectedSlot != null)
+            if (SkillHolderContainer.CurrentSelectedSlot != null)
             {
-                SkillContainer.CurrentSelectedSlot.Skill = skill;
+                SkillHolderContainer.CurrentSelectedSlot.SetSkill(skill);
+            }
+        }
+
+        private void Setup()
+        {
+            foreach (SkillItem skillItem in _skillItems)
+            {
+                skillItem.Construct(this);
             }
         }
     }

@@ -1,7 +1,10 @@
 using Code.Infrastructure.AssetManagment;
 using Code.Services;
+using Code.Services.PersistentProgress;
+using Code.Services.SaveLoad;
 using Code.StaticData.UIWindows;
 using Code.UI.Buttons;
+using Code.UI.MainMenu;
 using UnityEngine;
 
 namespace Code.UI.Services
@@ -10,11 +13,18 @@ namespace Code.UI.Services
     {
         private readonly IAssets _assets;
         private readonly IStaticDataService _staticData;
+        private readonly ISaveLoadService _saveLoad;
+        private readonly IPersistentProgressService _progress;
         private Transform _uiCoreTransform;
-        public UIFactory(IAssets assets, IStaticDataService staticDataService)
+        public UIFactory(IAssets assets, 
+            IStaticDataService staticDataService, 
+            ISaveLoadService saveLoad,
+            IPersistentProgressService progress)
         {
             _assets = assets;
             _staticData = staticDataService;
+            _saveLoad = saveLoad;
+            _progress = progress;
         }
 
         public WindowBase CreateSelectionMenu(IWindowService windowService)
@@ -33,7 +43,8 @@ namespace Code.UI.Services
         public void CreateSkillWindow()
         {
             WindowConfig config = _staticData.ForWindow(UIWindowID.Skills);
-            Object.Instantiate(config.Prefab, _uiCoreTransform);
+            var window = Object.Instantiate(config.Prefab, _uiCoreTransform) as SkillMenuWindow;
+            window.Construct(_progress);
         }
         public void CreateWeaponWindow()
         {

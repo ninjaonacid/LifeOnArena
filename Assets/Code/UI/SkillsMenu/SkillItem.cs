@@ -10,15 +10,16 @@ namespace Code.UI.SkillsMenu
         public Image Image;
         private SkillListContainer _skillListContainer;
 
+        public void Construct(SkillListContainer skillListContainer)
+        {
+            _skillListContainer = skillListContainer;
+        }
+
         private void Awake()
         {
             Image = GetComponent<Image>();
         }
 
-        public void Setup(SkillListContainer skillListContainer)
-        {
-            _skillListContainer = skillListContainer;
-        }
         public void OnPointerDown(PointerEventData eventData)
         {
             _skillListContainer.SkillChange(this);

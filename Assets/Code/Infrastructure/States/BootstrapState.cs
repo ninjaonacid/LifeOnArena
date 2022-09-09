@@ -64,7 +64,9 @@ namespace Code.Infrastructure.States
 
             _services.RegisterSingle<IUIFactory>(new UIFactory
             (_services.Single<IAssets>(),
-                _services.Single<IStaticDataService>()));
+                _services.Single<IStaticDataService>(),
+                _services.Single<ISaveLoadService>(),
+                _services.Single<IPersistentProgressService>()));
 
             _services.RegisterSingle<IWindowService>(new WindowsService(
                 _services.Single<IUIFactory>()));

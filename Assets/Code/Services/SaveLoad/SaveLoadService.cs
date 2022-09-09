@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Code.Data;
 using Code.Services.PersistentProgress;
+using Code.UI;
 using UnityEngine;
 
 namespace Code.Services.SaveLoad
@@ -15,11 +16,9 @@ namespace Code.Services.SaveLoad
             _progressService = progressService;
             
         }
-
         public List<ISavedProgressReader> ProgressReaders { get; } = new List<ISavedProgressReader>();
 
         public List<ISavedProgress> ProgressWriters { get; } = new List<ISavedProgress>();
-
 
         public void Cleanup()
         {
@@ -47,6 +46,7 @@ namespace Code.Services.SaveLoad
                      go.GetComponentsInChildren<ISavedProgressReader>())
                 Register(progressReader);
         }
+
 
         public void Register(ISavedProgressReader progressReader)
         {

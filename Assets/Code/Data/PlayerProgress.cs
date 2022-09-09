@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using Code.UI.SkillsMenu;
 
 namespace Code.Data
 {
@@ -22,10 +20,5 @@ namespace Code.Data
             InventoryData = new InventoryData();
             SkillsData = new SkillsData();
         }
-    }
-
-    public class SkillsData
-    {
-        public List<SkillHolder> skillHolders = new List<SkillHolder>();
     }
 }

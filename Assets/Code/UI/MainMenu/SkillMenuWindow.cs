@@ -1,19 +1,30 @@
-using Code.Data;
+using System.Reflection.Emit;
+using Code.Services;
 using Code.Services.PersistentProgress;
+using Code.Services.SaveLoad;
+using Code.UI.SkillsMenu;
+using UnityEngine;
 
 namespace Code.UI.MainMenu
 {
-    public class SkillMenuWindow : WindowBase, ISavedProgress
+    public class SkillMenuWindow : WindowBase
     {
-   
 
+        public SkillHolderContainer SkillHolderContainer;
+        public SkillListContainer SkillListContainer;
 
-        public void LoadProgress(PlayerProgress progress)
+        private IPersistentProgressService _progress;
+
+        public void Construct(IPersistentProgressService persistentProgress)
         {
+            base.Construct(persistentProgress);
+            SkillHolderContainer.Construct(persistentProgress);
+        }
+        protected override void OnAwake()
+        {
+            base.OnAwake();
+
         }
 
-        public void UpdateProgress(PlayerProgress progress)
-        {
-        }
     }
 }
