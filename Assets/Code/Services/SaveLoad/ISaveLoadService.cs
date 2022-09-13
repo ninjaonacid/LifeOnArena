@@ -15,5 +15,6 @@ namespace Code.Services.SaveLoad
         void Cleanup();
         void RegisterProgressWatchers(GameObject go);
         void Register(ISavedProgressReader progressReader);
+        void SaveProgressAtPath();
     }
 }

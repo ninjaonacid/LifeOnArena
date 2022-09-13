@@ -1,3 +1,4 @@
+using Code.Data;
 using Code.Services.PersistentProgress;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,7 +9,7 @@ namespace Code.UI
     {
         public Button CloseButton;
         protected IPersistentProgressService _progressService;
-
+        protected PlayerProgress Progress => _progressService.Progress;
         public void Construct(IPersistentProgressService persistentProgress)
         {
             _progressService = persistentProgress;

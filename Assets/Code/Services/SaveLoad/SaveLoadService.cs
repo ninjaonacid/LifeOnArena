@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.IO;
 using Code.Data;
 using Code.Services.PersistentProgress;
 using Code.UI;
@@ -38,6 +39,12 @@ namespace Code.Services.SaveLoad
                 progressWriter.UpdateProgress(_progressService.Progress);
 
             PlayerPrefs.SetString(ProgressKey, _progressService.Progress.ToJson());
+        }
+
+        public void SaveProgressAtPath()
+        {
+           string json = _progressService.Progress.ToJson();
+           File.WriteAllText(Application.dataPath + "/save.txt", json);
         }
 
         public void RegisterProgressWatchers(GameObject go)

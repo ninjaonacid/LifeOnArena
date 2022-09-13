@@ -101,6 +101,7 @@ namespace Code.Infrastructure.States
         {
             var hud = _gameFactory.CreateHud();
 
+            hud.GetComponentInChildren<HudSkillContainer>().Construct(_progressService);
             hud.GetComponentInChildren<ActorUI>().Construct(hero.GetComponent<HeroHealth>());
         }
 

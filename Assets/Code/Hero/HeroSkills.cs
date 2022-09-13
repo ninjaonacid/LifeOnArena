@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Code.StaticData;
+using Code.StaticData.Ability;
 using UnityEngine;
 
 namespace Code.Hero

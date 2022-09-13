@@ -1,4 +1,5 @@
 using System;
+using Code.StaticData.Ability;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -10,19 +11,19 @@ namespace Code.UI.SkillsMenu
         private Image _image;
         public Image Image => _image;
 
-        public SkillItem Skill;
+        public HeroAbility_SO HeroAbility;
 
-        public event Action OnSlotChanged;
+        public event Action<SkillHolder> OnSlotChanged;
 
         private SkillHolderContainer _skillHolderContainer;
 
         public void SetSkill(SkillItem skillItem)
         {
-            Skill = skillItem;
-            Image.sprite = Skill.Image.sprite;
+            HeroAbility = skillItem.HeroAbility;
+            _image.sprite = HeroAbility.SkillIcon;
             _skillHolderContainer.StopFade();
             _skillHolderContainer.ResetSelection();
-            OnSlotChanged?.Invoke();
+            OnSlotChanged?.Invoke(this);
         }
         public void Construct(SkillHolderContainer skillHolderContainer)
         {
@@ -32,7 +33,6 @@ namespace Code.UI.SkillsMenu
         private void Awake()
         {
             _image = GetComponent<Image>();
-
         }
 
         public void OnPointerDown(PointerEventData eventData)

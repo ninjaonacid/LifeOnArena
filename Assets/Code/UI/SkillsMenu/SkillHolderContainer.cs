@@ -2,11 +2,8 @@ using Code.Data;
 using Code.Services;
 using Code.Services.PersistentProgress;
 using Code.Services.SaveLoad;
-using Code.StaticData;
 using DG.Tweening;
-using UnityEditorInternal;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Code.UI.SkillsMenu
 {
@@ -17,7 +14,8 @@ namespace Code.UI.SkillsMenu
         private Tweener _fade;
     
         private IPersistentProgressService _progressService;
-        private ISaveLoadService saveLoad;
+        private PlayerProgress _progress => _progressService.Progress;
+        private ISaveLoadService _saveLoad;
         public SkillHolder CurrentSelectedSlot
         {
             get => _currentSlot;
@@ -35,35 +33,42 @@ namespace Code.UI.SkillsMenu
         public void Construct(IPersistentProgressService progressService)
         {
             _progressService = progressService;
+            
+            _skillHolders = GetComponentsInChildren<SkillHolder>();
 
+          
             for (var index = 0; index < _skillHolders.Length; index++)
             {
-                _skillHolders[index] = _progressService.Progress.SkillsData.skillHolders[index];
+                if (_progress.SkillsData.HeroAbility[index] != null)
+                {
+                    _skillHolders[index].HeroAbility = _progress.SkillsData.HeroAbility[index];
+                    _skillHolders[index].Image.sprite = _progress.SkillsData.HeroAbility[index].SkillIcon;
+                }
+
+                _skillHolders[index].Construct(this);
+                _skillHolders[index].OnSlotChanged += UpdateProgress;
             }
-            
         }
 
         private void Awake()
         {
-            saveLoad = AllServices.Container.Single<ISaveLoadService>();
-           _skillHolders = GetComponentsInChildren<SkillHolder>();
-           foreach (var skillHolder in _skillHolders)
-           {
-               skillHolder.Construct(this);
-               skillHolder.OnSlotChanged += UpdateProgress;
-           }
+            _saveLoad = AllServices.Container.Single<ISaveLoadService>();
         }
 
-        public void UpdateProgress()
+        public void UpdateProgress(SkillHolder skillHolder)
         {
-            Debug.Log("EventTriggeered");
             for (var index = 0; index < _skillHolders.Length; index++)
             {
-                var skillHolder = _skillHolders[index];
-                _progressService.Progress.SkillsData.skillHolders[index] = _skillHolders[index];
+                _progress.SkillsData.HeroAbility[index] = _skillHolders[index].HeroAbility;
             }
-            saveLoad.SaveProgress();
         }
+
+        private void OnDestroy()
+        {
+            _saveLoad.SaveProgress();
+            _saveLoad.SaveProgressAtPath();
+        }
+
         public void FadeSelectedSlot()
         {
             _fade = _currentSlot.Image
@@ -74,7 +79,7 @@ namespace Code.UI.SkillsMenu
 
         public void ResetSelection()
         {
-            _currentSlot = null;
+            //_currentSlot = null;
         }
 
         public void StopFade()
@@ -82,6 +87,5 @@ namespace Code.UI.SkillsMenu
             _fade.Rewind();
             _fade.Kill();
         }
-  
     }
 }
