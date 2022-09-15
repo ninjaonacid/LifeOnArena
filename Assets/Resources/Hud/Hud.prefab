@@ -1155,7 +1155,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -37, y: 10.095}
+  m_AnchoredPosition: {x: -37, y: 10.094971}
   m_SizeDelta: {x: 434.4591, y: 429.81}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &1206263350690194180
@@ -1265,6 +1265,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SkillButton
       objectReference: {fileID: 0}
+    - target: {fileID: 7202479468229353429, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
+      propertyPath: button.m_key
+      value: Skill3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
 --- !u!224 &2758674967794167905 stripped
@@ -1366,6 +1370,10 @@ PrefabInstance:
     - target: {fileID: 6510519317988240789, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
       propertyPath: m_Name
       value: SkillButton (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7202479468229353429, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
+      propertyPath: button.m_key
+      value: Skill2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}

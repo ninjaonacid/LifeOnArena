@@ -2,10 +2,10 @@ using Code.Services.Input;
 
 namespace Code.Hero.HeroStates
 {
-    public class MovementState : HeroBaseState
+    public class HeroMovementState : HeroBaseState
     {
         private readonly HeroMovement _heroMovement;
-        public MovementState(HeroStateMachine heroStateMachine,
+        public HeroMovementState(HeroStateMachine heroStateMachine,
             IInputService input,
             HeroAnimator heroAnimator, 
             HeroMovement heroMovement) : base(heroStateMachine, input, heroAnimator)
@@ -22,13 +22,9 @@ namespace Code.Hero.HeroStates
         {
             _heroMovement.Movement();
 
-            if (_heroMovement.GetVelocity() <= 0)
+            if (_heroMovement.GetVelocity() <= 0 || Input.isAttackButtonUp() || Input.isSkillButton1())
             {
-                HeroStateMachine.Enter<HeroIdleState>();
-            } 
-            else if (Input.isAttackButtonUp())
-            {
-                HeroStateMachine.Enter<FirstAttackState>();
+                HeroStateMachine.DoTransition(this);
             }
 
         }

@@ -40,7 +40,6 @@ namespace Code.Hero.HeroStates
             {
                 IsEnded = true;
             }
-
         }
 
         public override void Exit()

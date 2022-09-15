@@ -14,12 +14,12 @@ namespace Code.UI.Services
         private readonly IAssets _assets;
         private readonly IStaticDataService _staticData;
         private readonly ISaveLoadService _saveLoad;
-        private readonly IPersistentProgressService _progress;
+        private readonly IProgressService _progress;
         private Transform _uiCoreTransform;
         public UIFactory(IAssets assets, 
             IStaticDataService staticDataService, 
             ISaveLoadService saveLoad,
-            IPersistentProgressService progress)
+            IProgressService progress)
         {
             _assets = assets;
             _staticData = staticDataService;
@@ -44,7 +44,7 @@ namespace Code.UI.Services
         {
             WindowConfig config = _staticData.ForWindow(UIWindowID.Skills);
             var window = Object.Instantiate(config.Prefab, _uiCoreTransform) as SkillMenuWindow;
-            window.Construct(_progress);
+            window.Construct(_progress, _staticData);
         }
         public void CreateWeaponWindow()
         {

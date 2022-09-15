@@ -2,6 +2,7 @@ using Code.Data;
 using Code.Services;
 using Code.Services.PersistentProgress;
 using Code.Services.SaveLoad;
+using Code.StaticData.Ability;
 using DG.Tweening;
 using UnityEngine;
 
@@ -13,7 +14,8 @@ namespace Code.UI.SkillsMenu
         private SkillHolder _currentSlot;
         private Tweener _fade;
     
-        private IPersistentProgressService _progressService;
+        private IProgressService _progressService;
+        private IStaticDataService _staticData;
         private PlayerProgress _progress => _progressService.Progress;
         private ISaveLoadService _saveLoad;
         public SkillHolder CurrentSelectedSlot
@@ -30,22 +32,17 @@ namespace Code.UI.SkillsMenu
             }
         }
 
-        public void Construct(IPersistentProgressService progressService)
+        public void Construct(IProgressService progressService, IStaticDataService staticData)
         {
             _progressService = progressService;
-            
+            _staticData = staticData;
+
             _skillHolders = GetComponentsInChildren<SkillHolder>();
 
-          
             for (var index = 0; index < _skillHolders.Length; index++)
             {
-                if (_progress.SkillsData.HeroAbility[index] != null)
-                {
-                    _skillHolders[index].HeroAbility = _progress.SkillsData.HeroAbility[index];
-                    _skillHolders[index].Image.sprite = _progress.SkillsData.HeroAbility[index].SkillIcon;
-                }
-
-                _skillHolders[index].Construct(this);
+                _skillHolders[index].AbilityId = _progress.SkillsData.AbilityID[index];   
+                _skillHolders[index].Construct(this, _staticData);
                 _skillHolders[index].OnSlotChanged += UpdateProgress;
             }
         }
@@ -59,16 +56,35 @@ namespace Code.UI.SkillsMenu
         {
             for (var index = 0; index < _skillHolders.Length; index++)
             {
-                _progress.SkillsData.HeroAbility[index] = _skillHolders[index].HeroAbility;
+                if (_skillHolders[index].HeroAbility != null)
+                    _progress.SkillsData.AbilityID[index] = _skillHolders[index].HeroAbility.AbilityId;
             }
         }
-
         private void OnDestroy()
         {
             _saveLoad.SaveProgress();
             _saveLoad.SaveProgressAtPath();
         }
 
+        public bool IsSkillInHolder(SkillItem skillItem)
+        {
+            for (int i = 0; i < _skillHolders.Length; i++)
+            {
+                return skillItem.HeroAbility == _skillHolders[i].HeroAbility;
+            }
+            return false;
+        }
+
+        public void SwapSkill(SkillItem skillItem)
+        {
+            for (int i = 0; i < _skillHolders.Length; i++)
+            {
+                if (skillItem.HeroAbility == _skillHolders[i].HeroAbility)
+                {
+                    
+                }
+            }
+        }
         public void FadeSelectedSlot()
         {
             _fade = _currentSlot.Image
@@ -79,7 +95,7 @@ namespace Code.UI.SkillsMenu
 
         public void ResetSelection()
         {
-            //_currentSlot = null;
+            _currentSlot = null;
         }
 
         public void StopFade()

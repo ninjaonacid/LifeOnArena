@@ -1,3 +1,4 @@
+using Code.Services;
 using Code.Services.PersistentProgress;
 using Code.UI.SkillsMenu;
 
@@ -9,10 +10,10 @@ namespace Code.UI.MainMenu
         public SkillHolderContainer SkillHolderContainer;
         public SkillListContainer SkillListContainer;
 
-        public void Construct(IPersistentProgressService persistentProgress)
+        public void Construct(IProgressService progress, IStaticDataService staticData)
         {
-            base.Construct(persistentProgress);
-            SkillHolderContainer.Construct(persistentProgress);
+            base.Construct(progress);
+            SkillHolderContainer.Construct(progress, staticData);
             
         }
         protected override void OnAwake()

@@ -31,7 +31,7 @@ namespace Code.Services.Input
 
         public bool isSkillButton3()
         {
-            return SimpleInput.GetButton(Skill3);
+            return SimpleInput.GetButtonUp(Skill3);
         }
 
         protected static Vector2 SimpleInputAxis()

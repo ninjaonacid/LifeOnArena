@@ -8,6 +8,6 @@ namespace Code.Data
     [Serializable]
     public class SkillsData
     {
-        public HeroAbility_SO[] HeroAbility = new HeroAbility_SO[3];
+        public AbilityId[] AbilityID = new AbilityId[3];
     }
 }

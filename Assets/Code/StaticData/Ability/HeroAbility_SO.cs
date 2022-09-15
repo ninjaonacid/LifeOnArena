@@ -1,3 +1,4 @@
+using Code.Hero.HeroStates;
 using UnityEngine;
 
 namespace Code.StaticData.Ability
@@ -8,6 +9,7 @@ namespace Code.StaticData.Ability
         public float Cooldown;
         public float Damage;
         public Sprite SkillIcon;
-        public AbilityID AbilityId;
+        public AbilityId AbilityId;
+        public HeroBaseAttackState AttackState;
     }
 }

@@ -3,9 +3,8 @@ using UnityEngine;
 
 namespace Code.Hero.HeroStates
 {
-    public class ThirdAttackState : HeroBaseState
+    public class ThirdAttackState : HeroBaseAttackState
     {
-        private float _duration = 1f;
 
         public ThirdAttackState(
             HeroStateMachine heroStateMachine, 
@@ -16,28 +15,32 @@ namespace Code.Hero.HeroStates
 
         public override void Enter()
         {
+            Duration = 0.7f;
+            IsEnded = false;
+            IsInTransition = false;
             HeroAnimator.PlayAttack(this);
             Debug.Log("Entered ThirdState");
         }
 
         public override void Tick(float deltaTime)
         {
-            _duration -= deltaTime;
+            Duration -= deltaTime;
             
             if (StateEnds())
             {
+                IsEnded = true;
                 HeroStateMachine.Enter<HeroIdleState>();
             }
         }
 
         private bool StateEnds()
         {
-            return _duration < 0;
+            return Duration < 0;
         }
 
         public override void Exit()
         {
-            _duration = 0.7f;
+            
 
         }
     }

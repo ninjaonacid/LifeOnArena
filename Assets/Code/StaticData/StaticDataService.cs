@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Code.Services;
+using Code.StaticData.Ability;
 using Code.StaticData.UIWindows;
 using Code.UI;
 using UnityEngine;
@@ -12,6 +13,7 @@ namespace Code.StaticData
         private Dictionary<MonsterTypeId, MonsterStaticData> _monsters;
         private Dictionary<string, LevelStaticData> _levels; 
         private Dictionary<UIWindowID, WindowConfig> _windowConfigs;
+        private Dictionary<AbilityId, HeroAbility_SO> _heroAbilities;
 
         public void Load()
         {
@@ -27,12 +29,24 @@ namespace Code.StaticData
                 .Load<WindowsStaticData>("StaticData/UIWindows/WindowsStaticData")
                 .Configs
                 .ToDictionary(x => x.WindowId, x => x);
+
+            _heroAbilities = Resources
+                .LoadAll<HeroAbility_SO>("StaticData/HeroSkills")
+                .ToDictionary(x => x.AbilityId, x => x);
         }
 
         public MonsterStaticData ForMonster(MonsterTypeId typeId)
         {
             if (_monsters.TryGetValue(typeId, out var monsterStaticData))
                 return monsterStaticData;
+
+            return null;
+        }
+
+        public HeroAbility_SO ForAbility(AbilityId abilityId)
+        {
+            if(_heroAbilities.TryGetValue(abilityId, out var heroAbility))
+                return heroAbility;
 
             return null;
         }

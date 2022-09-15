@@ -9,19 +9,24 @@ namespace Code.UI.HUD
     public class HudSkillButton : MonoBehaviour
     {
         private HeroAbility_SO _heroAbility;
-        private AbilityID _abilityId;
-        private Image _image;
+        private AbilityId _abilityId;
+        private  HudSkillIcon _skillIcon;
         public void Construct(HeroAbility_SO heroAbility)
         {
+            _skillIcon = GetComponentInChildren<HudSkillIcon>();
+            
             _heroAbility = heroAbility;
-
-            _image.sprite = _heroAbility.SkillIcon;
-            _abilityId = _heroAbility.AbilityId;
+            if (heroAbility != null)
+            {
+                _abilityId = _heroAbility.AbilityId;
+                _skillIcon.Image.sprite = _heroAbility.SkillIcon;
+                _skillIcon.Image.enabled = true;
+            }
+            else
+            {
+                _skillIcon.Image.enabled = false;
+            }
         }
 
-        private void Awake()
-        {
-            _image = GetComponent<Image>();
-        }
     }
 }

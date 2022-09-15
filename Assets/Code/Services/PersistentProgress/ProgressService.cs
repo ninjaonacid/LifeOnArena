@@ -2,7 +2,7 @@ using Code.Data;
 
 namespace Code.Services.PersistentProgress
 {
-    public class PersistentProgressService : IPersistentProgressService
+    public class ProgressService : IProgressService
     {
         public PlayerProgress Progress { get; set; }
     }

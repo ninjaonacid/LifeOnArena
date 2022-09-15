@@ -1,4 +1,5 @@
 ﻿using Code.StaticData;
+using Code.StaticData.Ability;
 using Code.StaticData.UIWindows;
 using Code.UI;
 
@@ -10,5 +11,6 @@ namespace Code.Services
         void Load();
         LevelStaticData ForLevel(string sceneKey);
         WindowConfig ForWindow(UIWindowID menuId);
+        HeroAbility_SO ForAbility(AbilityId abilityId);
     }
 }

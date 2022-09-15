@@ -32,7 +32,6 @@ namespace Code.Hero
         /// </summary>
         public void OnAttack()
         {
-            
             for (var i = 0; i < Hit(); i++)
             {
                 _hits[i].transform.parent.GetComponent<IHealth>().TakeDamage(_characterStats.BaseDamage);

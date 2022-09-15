@@ -15,11 +15,11 @@ namespace Code.Infrastructure.Factory
         private readonly IAssets _assets;
         private readonly IStaticDataService _staticData;
         private readonly IRandomService _randomService;
-        private readonly IPersistentProgressService _progressService;
+        private readonly IProgressService _progressService;
         private readonly ISaveLoadService _saveLoadService;
         private readonly IWindowService _windowService;
 
-        public GameFactory(IAssets assets, IPersistentProgressService progressService,
+        public GameFactory(IAssets assets, IProgressService progressService,
                             ISaveLoadService saveLoadService, IWindowService windowService)
         {
             _assets = assets;

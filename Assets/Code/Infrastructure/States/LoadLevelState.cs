@@ -22,7 +22,7 @@ namespace Code.Infrastructure.States
         private IEnemyFactory _enemyFactory;
         private IHeroFactory _heroFactory;
         private IGameFactory _gameFactory;
-        private IPersistentProgressService _progressService;
+        private IProgressService _progressService;
         private IStaticDataService _staticData;
         private ISaveLoadService _saveLoadService;
         private readonly IUIFactory _uiFactory;
@@ -38,7 +38,7 @@ namespace Code.Infrastructure.States
         }
         public void Enter(string sceneName)
         {
-            _progressService = _services.Single<IPersistentProgressService>();
+            _progressService = _services.Single<IProgressService>();
             _enemyFactory = _services.Single<IEnemyFactory>();
             _heroFactory = _services.Single<IHeroFactory>();
             _gameFactory = _services.Single<IGameFactory>();
@@ -101,7 +101,7 @@ namespace Code.Infrastructure.States
         {
             var hud = _gameFactory.CreateHud();
 
-            hud.GetComponentInChildren<HudSkillContainer>().Construct(_progressService);
+            hud.GetComponentInChildren<HudSkillContainer>().Construct(_progressService, _staticData);
             hud.GetComponentInChildren<ActorUI>().Construct(hero.GetComponent<HeroHealth>());
         }
 

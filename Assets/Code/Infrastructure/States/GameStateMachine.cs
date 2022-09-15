@@ -24,7 +24,7 @@ namespace Code.Infrastructure.States
                 [typeof(LoadLevelState)] = new LoadLevelState(this, sceneLoader,
                     curtain, services, services.Single<IUIFactory>()),
                 [typeof(LoadProgressState)] = new LoadProgressState(this,
-                    services.Single<IPersistentProgressService>(),
+                    services.Single<IProgressService>(),
                     services.Single<ISaveLoadService>()),
                 [typeof(GameLoopState)] = new GameLoopState(this, sceneLoader)
             };

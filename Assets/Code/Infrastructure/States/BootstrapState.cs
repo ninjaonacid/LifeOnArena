@@ -53,20 +53,20 @@ namespace Code.Infrastructure.States
             _services.RegisterSingle(InputService());
             _services.RegisterSingle<IWindowService>(
                 new WindowsService(_services.Single<IUIFactory>()));
-            _services.RegisterSingle<IPersistentProgressService>
-                (new PersistentProgressService());
+            _services.RegisterSingle<IProgressService>
+                (new ProgressService());
 
             
 
             _services.RegisterSingle<ISaveLoadService>
             (new SaveLoadService(
-                _services.Single<IPersistentProgressService>()));
+                _services.Single<IProgressService>()));
 
             _services.RegisterSingle<IUIFactory>(new UIFactory
             (_services.Single<IAssets>(),
                 _services.Single<IStaticDataService>(),
                 _services.Single<ISaveLoadService>(),
-                _services.Single<IPersistentProgressService>()));
+                _services.Single<IProgressService>()));
 
             _services.RegisterSingle<IWindowService>(new WindowsService(
                 _services.Single<IUIFactory>()));
@@ -74,7 +74,7 @@ namespace Code.Infrastructure.States
             _services.RegisterSingle<IGameFactory>
             (new GameFactory(
                 _services.Single<IAssets>(),
-                _services.Single<IPersistentProgressService>(),
+                _services.Single<IProgressService>(),
                 _services.Single<ISaveLoadService>(),
                 _services.Single<IWindowService>()));
 
@@ -87,7 +87,7 @@ namespace Code.Infrastructure.States
                 _services.Single<IStaticDataService>(),
                 _services.Single<IAssets>(),
                 _services.Single<ISaveLoadService>(),
-                _services.Single<IPersistentProgressService>(),
+                _services.Single<IProgressService>(),
                 _services.Single<IRandomService>()));
 
             _services.RegisterSingle<IObjectPool>(new GameObjectPool

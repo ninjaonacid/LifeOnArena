@@ -51,11 +51,6 @@ namespace Code.Hero
             _characterController = GetComponent<CharacterController>();
         }
 
-        private void Update()
-        {
-      
-        }
-
         public void PlayRun()
         {
             _heroAnimator.CrossFade(_runStateHash, 0.1f);

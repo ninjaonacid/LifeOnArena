@@ -21,11 +21,11 @@ namespace Code.Infrastructure.Factory
         private readonly IStaticDataService _staticData;
         private readonly IAssets _assets;
         private readonly ISaveLoadService _saveLoadService;
-        private readonly IPersistentProgressService _progressService;
+        private readonly IProgressService _progressService;
         private readonly IRandomService _randomService;
 
         public EnemyFactory(IHeroFactory heroFactory, IStaticDataService staticData, IAssets assets, 
-            ISaveLoadService saveLoadService, IPersistentProgressService progressService,
+            ISaveLoadService saveLoadService, IProgressService progressService,
             IRandomService randomService)
         {
             _heroFactory = heroFactory;

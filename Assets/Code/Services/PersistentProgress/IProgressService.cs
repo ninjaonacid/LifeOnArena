@@ -3,7 +3,7 @@
 namespace Code.Services.PersistentProgress
 {
     public interface 
-        IPersistentProgressService : IService
+        IProgressService : IService
     {
         PlayerProgress Progress { get; set; }
     }
