@@ -5,7 +5,6 @@ namespace Code.Hero.HeroStates
 {
     public class ThirdAttackState : HeroBaseAttackState
     {
-
         public ThirdAttackState(
             HeroStateMachine heroStateMachine, 
             IInputService input, 
@@ -25,11 +24,20 @@ namespace Code.Hero.HeroStates
         public override void Tick(float deltaTime)
         {
             Duration -= deltaTime;
-            
+
+            if (Input.isAttackButtonUp() || Input.isSkillButton1() || Input.isSkillButton2() ||
+                Input.isSkillButton3() || Duration <= 0)
+            {
+                if (!IsInTransition)
+                {
+                    HeroStateMachine.DoTransition(this);
+                    IsInTransition = true;
+                }
+            }
             if (StateEnds())
             {
                 IsEnded = true;
-                HeroStateMachine.Enter<HeroIdleState>();
+                HeroStateMachine.DoTransition(this);
             }
         }
 

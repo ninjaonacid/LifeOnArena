@@ -24,9 +24,7 @@ namespace Code.Hero.HeroStates
 
         public override void Tick(float deltaTime)
         {
-
             Duration -= deltaTime;
-     
             
             if (Input.isAttackButtonUp() || Input.isSkillButton1() || Duration <= 0)
             {

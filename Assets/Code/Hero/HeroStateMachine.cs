@@ -18,21 +18,18 @@ namespace Code.Hero
     {
         private HeroMovement _heroMovement;
         private HeroAnimator _heroAnimator;
-        private HeroSkills _heroSkills;
-        private Dictionary<Type, HeroBaseState> _states;
-        private HeroTransition _currentTransition;
-        private Dictionary<Type, List<HeroTransition>> _transitions;
-        private IInputService _input;
-
         private SkillsData _skillsData;
+        private Dictionary<Type, HeroBaseState> _states;
+        private Dictionary<Type, List<HeroTransition>> _transitions;
+        private HeroTransition _currentTransition;
 
+        private IInputService _input;
 
         private void Awake()
         {
             _input = AllServices.Container.Single<IInputService>();
             _heroAnimator = GetComponent<HeroAnimator>();
             _heroMovement = GetComponent<HeroMovement>();
-            _heroSkills = GetComponent<HeroSkills>();
 
             _states = new Dictionary<Type, HeroBaseState>
             {
@@ -108,6 +105,11 @@ namespace Code.Hero
             AddTransition(GetState<SecondAttackState>(), GetSkillState(secondSkill), SecondSkillPressed());
             AddTransition(GetState<SecondAttackState>(), GetSkillState(thirdSkill), ThirdSkillPressed());
             AddTransition(GetState<SecondAttackState>(), GetState<HeroIdleState>(), StateDurationEnd());
+
+            AddTransition(GetState<ThirdAttackState>(), GetSkillState(firstSkill), FirstSkillPressed());
+            AddTransition(GetState<ThirdAttackState>(), GetSkillState(secondSkill), SecondSkillPressed());
+            AddTransition(GetState<ThirdAttackState>(), GetSkillState(thirdSkill), ThirdSkillPressed());
+            AddTransition(GetState<ThirdAttackState>(), GetState<HeroIdleState>(), StateDurationEnd());
 
             AddTransition(GetState<HeroIdleState>(), GetSkillState(firstSkill), FirstSkillPressed());
             AddTransition(GetState<HeroIdleState>(), GetState<FirstAttackState>(), AttackPressed());

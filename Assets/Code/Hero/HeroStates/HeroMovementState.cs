@@ -22,7 +22,7 @@ namespace Code.Hero.HeroStates
         {
             _heroMovement.Movement();
 
-            if (_heroMovement.GetVelocity() <= 0 || Input.isAttackButtonUp() || Input.isSkillButton1())
+            if (_heroMovement.GetVelocity() <= 0 || Input.isAttackButtonUp() || Input.isSkillButton1() || Input.isSkillButton2() || Input.isSkillButton3())
             {
                 HeroStateMachine.DoTransition(this);
             }

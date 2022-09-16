@@ -56,8 +56,6 @@ namespace Code.Infrastructure.States
             _services.RegisterSingle<IProgressService>
                 (new ProgressService());
 
-            
-
             _services.RegisterSingle<ISaveLoadService>
             (new SaveLoadService(
                 _services.Single<IProgressService>()));
