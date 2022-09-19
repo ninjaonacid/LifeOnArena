@@ -16,7 +16,6 @@ namespace Code.Hero.HeroStates
         {
             HeroAnimator.PlayAttack(this);
             IsEnded = false;
-            IsInTransition = false;
             Duration = 0.7f;
             Debug.Log("Entered SecondState");
         }
@@ -27,9 +26,8 @@ namespace Code.Hero.HeroStates
 
             if (TransitionCondition())
             {
-                if(!IsInTransition)
+                if(!HeroStateMachine.IsInTransition)
                     HeroStateMachine.DoTransition(this);
-                IsInTransition = true;
             }
 
             if (Duration <= 0)

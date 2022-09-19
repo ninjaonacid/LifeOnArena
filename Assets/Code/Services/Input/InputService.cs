@@ -9,7 +9,7 @@ namespace Code.Services.Input
         protected const string Vertical = "Vertical";
         private const string Attack = "Attack";
         private const string Skill1 = "Skill1";
-        private const string Skill2 = "Skill1";
+        private const string Skill2 = "Skill2";
         private const string Skill3 = "Skill3";
 
         public abstract Vector2 Axis { get; }

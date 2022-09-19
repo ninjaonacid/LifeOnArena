@@ -11,6 +11,7 @@ namespace Code.Hero
         private static int _layerMask;
         private readonly Collider[] _hits = new Collider[2];
         private CharacterStats _characterStats;
+        private SkillsData _skillData;
   
         public CharacterController CharacterController;
         public HeroAnimator HeroAnimator;
@@ -18,6 +19,7 @@ namespace Code.Hero
         public void LoadProgress(PlayerProgress progress)
         {
             _characterStats = progress.CharacterStats;
+            _skillData = progress.SkillsData;
         }
 
         private void Awake()
@@ -34,7 +36,7 @@ namespace Code.Hero
         {
             for (var i = 0; i < Hit(); i++)
             {
-                _hits[i].transform.parent.GetComponent<IHealth>().TakeDamage(_characterStats.BaseDamage);
+                _hits[i].transform.parent.GetComponent<IHealth>().TakeDamage(_characterStats.BaseDamage + _skillData.FastSlash.Damage);
                 Debug.Log("BaseDamage amount: " + _characterStats.BaseDamage);
 
                 Debug.Log(_hits[i].ToString());

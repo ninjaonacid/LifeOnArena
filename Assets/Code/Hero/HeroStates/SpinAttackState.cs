@@ -12,7 +12,6 @@ namespace Code.Hero.HeroStates
         {
             HeroAnimator.PlaySpinAttackSkill();
             Duration = 1f;
- 
         }
 
         public override void Tick(float deltaTime)

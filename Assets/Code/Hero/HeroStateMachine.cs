@@ -18,10 +18,11 @@ namespace Code.Hero
     {
         private HeroMovement _heroMovement;
         private HeroAnimator _heroAnimator;
-        private SkillsData _skillsData;
+        private SkillHolderData _skillHolderData;
         private Dictionary<Type, HeroBaseState> _states;
         private Dictionary<Type, List<HeroTransition>> _transitions;
-        private HeroTransition _currentTransition;
+
+        public bool IsInTransition { get; private set; }
 
         private IInputService _input;
 
@@ -54,38 +55,43 @@ namespace Code.Hero
 
         public void LoadProgress(PlayerProgress progress)
         {
-            _skillsData = progress.SkillsData;
+            _skillHolderData = progress.SkillHolderData;
             InitializeTransitions();
         }
 
         private void AddTransition(HeroBaseState from, HeroBaseState to, Func<bool> condition)
         {
+            if (from == null || to == null) return;
+            
             if (_transitions.TryGetValue(from.GetType(), out var transitions) == false)
             {
                 transitions = new List<HeroTransition>();
                 _transitions[from.GetType()] = transitions;
             }
+        
             transitions.Add(new HeroTransition(to, condition));
         }
 
-        private void GetTransition(HeroBaseState state)
+        private HeroTransition GetTransition(HeroBaseState state)
         {
             foreach (var transition in _transitions[state.GetType()])
             {
                 if (transition.Condition())
                 {
-                    _currentTransition = transition;
-                    break;
+                    return transition;
                 }
             }
+
+            return null;
         }
 
         private void InitializeTransitions()
         {
-            AbilityId firstSkill = _skillsData.AbilityID[0];
-            AbilityId secondSkill = _skillsData.AbilityID[1];
-            AbilityId thirdSkill = _skillsData.AbilityID[2];
+            AbilityId firstSkill = _skillHolderData.AbilityID[0];
+            AbilityId secondSkill = _skillHolderData.AbilityID[1];
+            AbilityId thirdSkill = _skillHolderData.AbilityID[2];
 
+            Debug.Log(firstSkill.ToString());
             Func<bool> AttackPressed() => () => _input.isAttackButtonUp();
             Func<bool> FirstSkillPressed() => () => _input.isSkillButton1();
             Func<bool> SecondSkillPressed() => () => _input.isSkillButton2();
@@ -110,8 +116,10 @@ namespace Code.Hero
             AddTransition(GetState<ThirdAttackState>(), GetSkillState(secondSkill), SecondSkillPressed());
             AddTransition(GetState<ThirdAttackState>(), GetSkillState(thirdSkill), ThirdSkillPressed());
             AddTransition(GetState<ThirdAttackState>(), GetState<HeroIdleState>(), StateDurationEnd());
-
+            
             AddTransition(GetState<HeroIdleState>(), GetSkillState(firstSkill), FirstSkillPressed());
+            AddTransition(GetState<HeroIdleState>(), GetSkillState(secondSkill), SecondSkillPressed());
+            AddTransition(GetState<HeroIdleState>(), GetSkillState(thirdSkill), ThirdSkillPressed());
             AddTransition(GetState<HeroIdleState>(), GetState<FirstAttackState>(), AttackPressed());
             AddTransition(GetState<HeroIdleState>(), GetState<HeroMovementState>(), MovementStart());
 
@@ -144,12 +152,17 @@ namespace Code.Hero
 
         public async void DoTransition(HeroBaseState state)
         {
-            GetTransition(state);
+            var nextTransition = GetTransition(state);
+            if (nextTransition == null) return;
+            IsInTransition = true;
+
             if (state is HeroBaseAttackState attackState)
             {
                 await UniTask.WaitUntil(() => attackState.IsEnded);
             }
-            ChangeState(_currentTransition.To);
+
+            ChangeState(nextTransition.To);
+            IsInTransition = false;
         }
 
         private HeroBaseAttackState GetCurrentState() =>

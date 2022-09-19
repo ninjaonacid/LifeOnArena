@@ -20,15 +20,6 @@ namespace Code.Hero
         private void Update()
         {
             
-            if (_inputService.isAttackButtonUp())
-            {
-                
-            }
-
-            if (_inputService.isSkillButton1())
-            {
-                
-            }
         }
     }
 }

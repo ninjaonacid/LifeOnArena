@@ -1,15 +1,12 @@
-using Code.Data;
-using Code.Services.PersistentProgress;
 using Code.StaticData.Ability;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Code.UI.HUD
 {
     public class HudSkillButton : MonoBehaviour
     {
         private HeroAbility_SO _heroAbility;
-        private AbilityId _abilityId;
+        public AbilityId _abilityId;
         private  HudSkillIcon _skillIcon;
         public void Construct(HeroAbility_SO heroAbility)
         {

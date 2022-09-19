@@ -19,19 +19,17 @@ namespace Code.Hero.HeroStates
             Duration = 0.7f;
             Debug.Log("Entered FirstState");
             IsEnded = false;
-            IsInTransition = false;
         }
 
         public override void Tick(float deltaTime)
         {
             Duration -= deltaTime;
             
-            if (Input.isAttackButtonUp() || Input.isSkillButton1() || Duration <= 0)
+            if (Input.isAttackButtonUp() || Input.isSkillButton1() || Input.isSkillButton2()||  Duration <= 0)
             {
-                if(!IsInTransition)
+                if(!HeroStateMachine.IsInTransition)
                     HeroStateMachine.DoTransition(this);
 
-                IsInTransition = true;
             }
 
             if (Duration <= 0)

@@ -41,7 +41,7 @@ namespace Code.UI.SkillsMenu
 
             for (var index = 0; index < _skillHolders.Length; index++)
             {
-                _skillHolders[index].AbilityId = _progress.SkillsData.AbilityID[index];   
+                _skillHolders[index].AbilityId = _progress.SkillHolderData.AbilityID[index];   
                 _skillHolders[index].Construct(this, _staticData);
                 _skillHolders[index].OnSlotChanged += UpdateProgress;
             }
@@ -57,7 +57,7 @@ namespace Code.UI.SkillsMenu
             for (var index = 0; index < _skillHolders.Length; index++)
             {
                 if (_skillHolders[index].HeroAbility != null)
-                    _progress.SkillsData.AbilityID[index] = _skillHolders[index].HeroAbility.AbilityId;
+                    _progress.SkillHolderData.AbilityID[index] = _skillHolders[index].HeroAbility.AbilityId;
             }
         }
         private void OnDestroy()

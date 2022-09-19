@@ -21,7 +21,7 @@ namespace Code.UI.HUD
 
             for (int i = 0; i < _skillButtons.Length; i++)
             {
-                _skillButtons[i].Construct(staticData.ForAbility(_progress.SkillsData.AbilityID[i]));
+                _skillButtons[i].Construct(staticData.ForAbility(_progress.SkillHolderData.AbilityID[i]));
             }
         }
      

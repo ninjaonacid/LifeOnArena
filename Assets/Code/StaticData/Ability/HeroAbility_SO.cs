@@ -10,6 +10,5 @@ namespace Code.StaticData.Ability
         public float Damage;
         public Sprite SkillIcon;
         public AbilityId AbilityId;
-        public HeroBaseAttackState AttackState;
     }
 }

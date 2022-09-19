@@ -5,7 +5,6 @@ namespace Code.Hero.HeroStates
 {
     public abstract class HeroBaseAttackState : HeroBaseState
     {
-        protected bool IsInTransition;
         public float Duration;
         protected bool _isEnded { get; set; }
         public bool IsEnded { get { return _isEnded; }
