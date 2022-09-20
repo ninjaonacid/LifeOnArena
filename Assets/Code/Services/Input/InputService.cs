@@ -14,6 +14,12 @@ namespace Code.Services.Input
 
         public abstract Vector2 Axis { get; }
 
+        public bool isAttackOrSkillPressed()
+        {
+            return isAttackButtonUp() || isSkillButton1() || isSkillButton2()
+                || isSkillButton3();
+        }
+
         public bool isAttackButtonUp()
         {
             return SimpleInput.GetButtonUp(Attack);

@@ -4,12 +4,15 @@ namespace Code.Hero.HeroStates
 {
     public class SpinAttackState : HeroBaseAttackState
     {
-        public SpinAttackState(HeroStateMachine heroStateMachine, IInputService input, HeroAnimator heroAnimator) : base(heroStateMachine, input, heroAnimator)
+        private readonly HeroRotation _heroRotation;
+        public SpinAttackState(HeroStateMachine heroStateMachine, IInputService input, HeroAnimator heroAnimator, HeroRotation heroRotation) : base(heroStateMachine, input, heroAnimator)
         {
+            _heroRotation = heroRotation;
         }
 
         public override void Enter()
         {
+            _heroRotation.enabled = false;
             HeroAnimator.PlaySpinAttackSkill();
             Duration = 1f;
         }
@@ -17,14 +20,15 @@ namespace Code.Hero.HeroStates
         public override void Tick(float deltaTime)
         {
             Duration -= deltaTime;
-            if (Duration <= 0f)
+            if (IsEnded())
             {
-                HeroStateMachine.Enter<HeroIdleState>();
+                HeroStateMachine.DoTransition(this);
             }
         }
 
         public override void Exit()
         {
+            _heroRotation.enabled = true;
         }
     }
 }

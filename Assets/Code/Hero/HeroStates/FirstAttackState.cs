@@ -1,7 +1,6 @@
-using System;
 using Code.Services.Input;
 using UnityEngine;
-using UniRx;
+
 namespace Code.Hero.HeroStates
 {
     public class FirstAttackState : HeroBaseAttackState
@@ -16,36 +15,25 @@ namespace Code.Hero.HeroStates
         public override void Enter()
         {
             HeroAnimator.PlayAttack(this);
+
             Duration = 0.7f;
+
             Debug.Log("Entered FirstState");
-            IsEnded = false;
         }
 
         public override void Tick(float deltaTime)
         {
             Duration -= deltaTime;
             
-            if (Input.isAttackButtonUp() || Input.isSkillButton1() || Input.isSkillButton2()||  Duration <= 0)
+            if (Input.isAttackOrSkillPressed() || IsEnded() && !HeroStateMachine.IsInTransition)
             {
-                if(!HeroStateMachine.IsInTransition)
-                    HeroStateMachine.DoTransition(this);
-
-            }
-
-            if (Duration <= 0)
-            {
-                IsEnded = true;
+                HeroStateMachine.DoTransition(this);
             }
         }
 
         public override void Exit()
         {
         
-        }
-
-        public bool StateEnds()
-        {
-            return Duration <= 0;
         }
     }
 }

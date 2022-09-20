@@ -15,7 +15,6 @@ namespace Code.Hero.HeroStates
         public override void Enter()
         {
             Duration = 0.7f;
-            IsEnded = false;
             HeroAnimator.PlayAttack(this);
             Debug.Log("Entered ThirdState");
         }
@@ -24,30 +23,14 @@ namespace Code.Hero.HeroStates
         {
             Duration -= deltaTime;
 
-            if (Input.isAttackButtonUp() || Input.isSkillButton1() || Input.isSkillButton2() ||
-                Input.isSkillButton3() || Duration <= 0)
+            if (Input.isAttackOrSkillPressed() || IsEnded() && !HeroStateMachine.IsInTransition)
             {
-                if (!HeroStateMachine.IsInTransition)
-                {
-                    HeroStateMachine.DoTransition(this);
-                }
-            }
-            if (StateEnds())
-            {
-                IsEnded = true;
                 HeroStateMachine.DoTransition(this);
             }
         }
 
-        private bool StateEnds()
-        {
-            return Duration < 0;
-        }
-
         public override void Exit()
         {
-            
-
         }
     }
 }

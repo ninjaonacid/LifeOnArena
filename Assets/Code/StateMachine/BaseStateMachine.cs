@@ -7,7 +7,7 @@ namespace Code.StateMachine
     {
         private State _currentState;
         public State CurrentState => _currentState;
-        private void Update()
+        public virtual void Update()
         {
             _currentState?.Tick(Time.deltaTime);
         }

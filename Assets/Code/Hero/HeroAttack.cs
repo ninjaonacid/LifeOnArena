@@ -1,4 +1,5 @@
 using Code.Data;
+using Code.Hero.HeroStates;
 using Code.Logic;
 using Code.Services.PersistentProgress;
 using UnityEngine;
@@ -28,17 +29,24 @@ namespace Code.Hero
             _layerMask = 1 << LayerMask.NameToLayer("Hittable");
         }
 
-
-        /// <summary>
-        ///  AnimationEvent
-        /// </summary>
-        public void OnAttack()
+        public void DoAttack(HeroBaseAttackState state)
+        {
+            if (state is SpinAttackState)
+            {
+              Attack(_skillData.SpinAttack.Damage);
+            } 
+            else if (state is FirstAttackState)
+            {
+                Attack(_characterStats.BaseDamage);
+            }
+        }
+        public void Attack(float damage)
         {
             for (var i = 0; i < Hit(); i++)
             {
-                _hits[i].transform.parent.GetComponent<IHealth>().TakeDamage(_characterStats.BaseDamage + _skillData.FastSlash.Damage);
-                Debug.Log("BaseDamage amount: " + _characterStats.BaseDamage);
+                _hits[i].transform.parent.GetComponent<IHealth>().TakeDamage(damage);
 
+                Debug.Log("BaseDamage amount: " + _characterStats.BaseDamage);
                 Debug.Log(_hits[i].ToString());
             }
         }

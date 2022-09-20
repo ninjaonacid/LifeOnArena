@@ -16,7 +16,7 @@ namespace Code.UI.SkillsMenu
         public AbilityId AbilityId = AbilityId.Empty;
         public HeroAbility_SO HeroAbility;
         private SkillHolderIcon _skillHolderIcon;
-        public event Action<SkillHolder> OnSlotChanged;
+        public event Action OnSlotChanged;
 
         private SkillHolderContainer _skillHolderContainer;
 
@@ -54,7 +54,7 @@ namespace Code.UI.SkillsMenu
             _skillHolderIcon.Image.enabled = true;
             _skillHolderContainer.StopFade();
             _skillHolderContainer.ResetSelection();
-            OnSlotChanged?.Invoke(this);
+            OnSlotChanged?.Invoke();
         }
 
         public void ResetSlot()

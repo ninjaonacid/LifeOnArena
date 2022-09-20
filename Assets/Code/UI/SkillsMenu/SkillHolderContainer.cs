@@ -5,6 +5,7 @@ using Code.Services.SaveLoad;
 using Code.StaticData.Ability;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 namespace Code.UI.SkillsMenu
 {
@@ -52,18 +53,13 @@ namespace Code.UI.SkillsMenu
             _saveLoad = AllServices.Container.Single<ISaveLoadService>();
         }
 
-        public void UpdateProgress(SkillHolder skillHolder)
+        public void UpdateProgress()
         {
             for (var index = 0; index < _skillHolders.Length; index++)
             {
                 if (_skillHolders[index].HeroAbility != null)
                     _progress.SkillHolderData.AbilityID[index] = _skillHolders[index].HeroAbility.AbilityId;
             }
-        }
-        private void OnDestroy()
-        {
-            _saveLoad.SaveProgress();
-            _saveLoad.SaveProgressAtPath();
         }
 
         public bool IsSkillInHolder(SkillItem skillItem)

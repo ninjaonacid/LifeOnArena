@@ -5,13 +5,12 @@ namespace Code.Hero.HeroStates
 {
     public abstract class HeroBaseAttackState : HeroBaseState
     {
-        public float Duration;
-        protected bool _isEnded { get; set; }
-        public bool IsEnded { get { return _isEnded; }
-            set { _isEnded = value; }
-        }
+        protected float Duration;
+   
         protected HeroBaseAttackState(HeroStateMachine heroStateMachine, IInputService input, HeroAnimator heroAnimator) : base(heroStateMachine, input, heroAnimator)
         {
         }
+
+        public bool IsEnded() => Duration <= 0;
     }
 }

@@ -44,7 +44,7 @@ namespace Code.UI.Services
         {
             WindowConfig config = _staticData.ForWindow(UIWindowID.Skills);
             var window = Object.Instantiate(config.Prefab, _uiCoreTransform) as SkillMenuWindow;
-            window.Construct(_progress, _staticData);
+            window.Construct(_progress, _staticData, _saveLoad);
         }
         public void CreateWeaponWindow()
         {

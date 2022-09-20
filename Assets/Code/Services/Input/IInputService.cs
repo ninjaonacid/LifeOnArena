@@ -6,8 +6,8 @@ namespace Code.Services.Input
     {
         Vector2 Axis { get; }
 
+        bool isAttackOrSkillPressed();
         bool isAttackButtonUp();
-
         bool isSkillButton1();
         bool isSkillButton2();
         bool isSkillButton3();
