@@ -1,4 +1,5 @@
 using Code.Services.Input;
+using UnityEngine;
 
 namespace Code.Hero.HeroStates
 {
@@ -16,22 +17,17 @@ namespace Code.Hero.HeroStates
         public override void Enter()
         {
             HeroAnimator.PlayRun();
+            Debug.Log("Entered Movement State");
         }
 
         public override void Tick(float deltaTime)
         {
             _heroMovement.Movement();
-
-            if (_heroMovement.GetVelocity() <= 0 || Input.isAttackButtonUp() || Input.isSkillButton1() || Input.isSkillButton2() || Input.isSkillButton3())
-            {
-                HeroStateMachine.DoTransition(this);
-            }
-
         }
 
         public override void Exit()
         {
-           _heroMovement.StopMove();
+           
         }
     }
 }

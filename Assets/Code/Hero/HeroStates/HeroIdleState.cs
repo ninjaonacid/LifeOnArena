@@ -20,15 +20,6 @@ namespace Code.Hero.HeroStates
 
         public override void Tick(float deltaTime)
         {
- 
-            if (Input.isAttackButtonUp() || 
-                Input.isSkillButton1() || 
-                Input.isSkillButton2() || 
-                Input.Axis.sqrMagnitude > Constants.Epsilon)
-            {
-               HeroStateMachine.DoTransition(this);
-            }
-    
         }
 
         public override void Exit()

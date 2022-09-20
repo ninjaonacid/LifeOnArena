@@ -22,12 +22,6 @@ namespace Code.Hero.HeroStates
         public override void Tick(float deltaTime)
         {
             Duration -= deltaTime;
-
-            if (Input.isAttackOrSkillPressed() || IsEnded() && !HeroStateMachine.IsInTransition)
-            {
-                HeroStateMachine.DoTransition(this);
-            }
-
         }
 
         public override void Exit()

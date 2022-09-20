@@ -20,10 +20,6 @@ namespace Code.Hero.HeroStates
         public override void Tick(float deltaTime)
         {
             Duration -= deltaTime;
-            if (IsEnded())
-            {
-                HeroStateMachine.DoTransition(this);
-            }
         }
 
         public override void Exit()

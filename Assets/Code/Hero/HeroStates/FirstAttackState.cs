@@ -25,10 +25,6 @@ namespace Code.Hero.HeroStates
         {
             Duration -= deltaTime;
             
-            if (Input.isAttackOrSkillPressed() || IsEnded() && !HeroStateMachine.IsInTransition)
-            {
-                HeroStateMachine.DoTransition(this);
-            }
         }
 
         public override void Exit()

@@ -58,7 +58,8 @@ namespace Code.Hero
         public override void Update()
         {
             base.Update();
-            
+            if(!IsInTransition)
+                DoTransition(CurrentState as HeroBaseState);
         }
 
         public void LoadProgress(PlayerProgress progress)
@@ -71,6 +72,7 @@ namespace Code.Hero
         {
             var nextTransition = GetTransition(state);
             if (nextTransition == null) return;
+            if (nextTransition.To == CurrentState) return;
             IsInTransition = true;
 
             if (state is HeroBaseAttackState attackState)
@@ -120,7 +122,7 @@ namespace Code.Hero
             Func<bool> ThirdSkillPressed() => () => _input.isSkillButton3();
             Func<bool> StateDurationEnd() => () => GetCurrentState().IsEnded();
             Func<bool> MovementStart() => () => _input.Axis.sqrMagnitude > Constants.Epsilon;
-            Func<bool> MovementEnd() => () => _heroMovement.GetVelocity() <= 0;
+            Func<bool> MovementEnd() => () => _input.Axis.sqrMagnitude < Constants.Epsilon;
 
             AddTransition(GetState<FirstAttackState>(), GetState<SecondAttackState>(), AttackPressed());
             AddTransition(GetState<FirstAttackState>(), GetSkillState(firstSkill), FirstSkillPressed());
