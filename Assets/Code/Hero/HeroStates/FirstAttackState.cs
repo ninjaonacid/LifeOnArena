@@ -17,7 +17,6 @@ namespace Code.Hero.HeroStates
             HeroAnimator.PlayAttack(this);
 
             Duration = 0.7f;
-
             Debug.Log("Entered FirstState");
         }
 

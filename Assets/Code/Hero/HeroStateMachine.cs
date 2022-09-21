@@ -9,6 +9,7 @@ using Code.Services.PersistentProgress;
 using Code.StateMachine;
 using Code.StaticData.Ability;
 using Cysharp.Threading.Tasks;
+using UnityEditor.Rendering;
 using UnityEngine;
 
 namespace Code.Hero
@@ -25,7 +26,6 @@ namespace Code.Hero
         private Dictionary<Type, List<HeroTransition>> _transitions;
 
         public bool IsInTransition { get; private set; }
-
 
         private void Awake()
         {
@@ -58,8 +58,11 @@ namespace Code.Hero
         public override void Update()
         {
             base.Update();
-            if(!IsInTransition)
-                DoTransition(CurrentState as HeroBaseState);
+            var nextTransition = GetTransition(CurrentState);
+            if (nextTransition != null && !IsInTransition)
+            {
+                DoTransition(nextTransition);
+            }
         }
 
         public void LoadProgress(PlayerProgress progress)
@@ -68,23 +71,21 @@ namespace Code.Hero
             InitializeTransitions();
         }
 
-        public async void DoTransition(HeroBaseState state)
+        public async void DoTransition(HeroTransition transition)
         {
-            var nextTransition = GetTransition(state);
-            if (nextTransition == null) return;
-            if (nextTransition.To == CurrentState) return;
             IsInTransition = true;
 
-            if (state is HeroBaseAttackState attackState)
+            if (CurrentState is HeroBaseAttackState attackState)
             {
-                await UniTask.WaitUntil(() => attackState.IsEnded());
+                await UniTask.WaitUntil(() => attackState.IsEnded(), cancellationToken: this.GetCancellationTokenOnDestroy());
             }
 
-            ChangeState(nextTransition.To);
+            ChangeState(transition.To);
+
             IsInTransition = false;
         }
 
-        private HeroTransition GetTransition(HeroBaseState state)
+        private HeroTransition GetTransition(State state)
         {
             foreach (var transition in _transitions[state.GetType()])
             {
