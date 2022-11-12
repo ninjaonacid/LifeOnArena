@@ -43,9 +43,10 @@ namespace Code.Infrastructure.States
             var progress = new PlayerProgress("MainScene");
 
             progress.heroHeroHp.MaxHP = 500f;
-            progress.CharacterStats.BaseDamage = 0f;
+            progress.CharacterStats.BaseDamage = 5f;
             progress.CharacterStats.BaseAttackRadius = 1f;
             progress.CharacterStats.BaseAttackSpeed = 1f;
+            progress.SkillsData.SpinAttack.Damage = 20f;
             progress.heroHeroHp.ResetHP();
 
             return progress;

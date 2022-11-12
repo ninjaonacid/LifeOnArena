@@ -33,14 +33,14 @@ namespace Code.Hero
         {
             if (state is SpinAttackState)
             {
-              Attack(_skillData.SpinAttack.Damage);
+                DoDamage(_skillData.SpinAttack.Damage);
             } 
-            else if (state is FirstAttackState)
+            else if (state is FirstAttackState || state is SecondAttackState || state is ThirdAttackState)
             {
-                Attack(_characterStats.BaseDamage);
+                DoDamage(_characterStats.BaseDamage);
             }
         }
-        public void Attack(float damage)
+        public void DoDamage(float damage)
         {
             for (var i = 0; i < Hit(); i++)
             {
@@ -54,7 +54,7 @@ namespace Code.Hero
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.red;
-           // Gizmos.DrawWireSphere(StartPoint() + transform.forward, _characterStats.BaseAttackRadius);
+           Gizmos.DrawWireSphere(StartPoint() + transform.forward, _characterStats.BaseAttackRadius);
         }
 
         private int Hit()

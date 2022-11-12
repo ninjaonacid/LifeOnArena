@@ -25,6 +25,7 @@ namespace Code.Hero
         private HeroVFX _heroVFX;
         private CharacterController _characterController;
         private Animator _heroAnimator;
+        private HeroAttack _heroAttack;
 
         public AnimatorState State { get; private set; }
    
@@ -49,6 +50,7 @@ namespace Code.Hero
             _heroVFX = GetComponent<HeroVFX>();
             _heroAnimator = GetComponent<Animator>();
             _characterController = GetComponent<CharacterController>();
+            _heroAttack = GetComponent<HeroAttack>();
         }
 
         public void PlayRun()
@@ -84,7 +86,7 @@ namespace Code.Hero
             _heroAnimator.CrossFade(_spinAttackStateHash, 0.1f);
         }
 
-        public void PlayAttack(HeroBaseState state)
+        public void PlayAttack(HeroBaseAttackState state)
         {
             if (state is FirstAttackState)
             {
@@ -106,6 +108,10 @@ namespace Code.Hero
                 // _heroAnimator.SetTrigger(Attack3);
                 //_heroVFX.PlaySwordSlash(AnimatorState.Attack2);
                 //Debug.Log("Attack3");
+            }
+            else if (state is SpinAttackState)
+            {
+                PlaySpinAttackSkill();
             }
         }
 

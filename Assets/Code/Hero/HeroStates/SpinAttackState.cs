@@ -5,7 +5,11 @@ namespace Code.Hero.HeroStates
     public class SpinAttackState : HeroBaseAttackState
     {
         private readonly HeroRotation _heroRotation;
-        public SpinAttackState(HeroStateMachine heroStateMachine, IInputService input, HeroAnimator heroAnimator, HeroRotation heroRotation) : base(heroStateMachine, input, heroAnimator)
+        public SpinAttackState(HeroStateMachine heroStateMachine, 
+            IInputService input, 
+            HeroAnimator heroAnimator, 
+            HeroRotation heroRotation,
+            HeroAttack heroAttack) : base(heroStateMachine, input, heroAnimator, heroAttack)
         {
             _heroRotation = heroRotation;
         }
@@ -13,7 +17,8 @@ namespace Code.Hero.HeroStates
         public override void Enter()
         {
             _heroRotation.enabled = false;
-            HeroAnimator.PlaySpinAttackSkill();
+            HeroAnimator.PlayAttack(this);
+            HeroAttack.DoAttack(this);
             Duration = 1f;
         }
 

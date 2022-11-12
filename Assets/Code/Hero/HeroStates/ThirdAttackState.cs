@@ -5,10 +5,10 @@ namespace Code.Hero.HeroStates
 {
     public class ThirdAttackState : HeroBaseAttackState
     {
-        public ThirdAttackState(
-            HeroStateMachine heroStateMachine, 
+        public ThirdAttackState(HeroStateMachine heroStateMachine, 
             IInputService input, 
-            HeroAnimator heroAnimator) : base(heroStateMachine, input, heroAnimator)
+            HeroAnimator heroAnimator, 
+            HeroAttack heroAttack) : base(heroStateMachine, input, heroAnimator, heroAttack)
         {
         }
 
@@ -16,6 +16,7 @@ namespace Code.Hero.HeroStates
         {
             Duration = 0.7f;
             HeroAnimator.PlayAttack(this);
+            HeroAttack.DoAttack(this);
             Debug.Log("Entered ThirdState");
         }
 

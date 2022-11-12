@@ -21,6 +21,7 @@ namespace Code.Hero
         private HeroMovement _heroMovement;
         private HeroAnimator _heroAnimator;
         private HeroRotation _heroRotation;
+        private HeroAttack _heroAttack;
         private SkillHolderData _skillHolderData;
         private Dictionary<Type, HeroBaseState> _states;
         private Dictionary<Type, List<HeroTransition>> _transitions;
@@ -33,21 +34,22 @@ namespace Code.Hero
             _heroAnimator = GetComponent<HeroAnimator>();
             _heroMovement = GetComponent<HeroMovement>();
             _heroRotation = GetComponent<HeroRotation>();
+            _heroAttack = GetComponent<HeroAttack>();
 
             _states = new Dictionary<Type, HeroBaseState>
             {
                 [typeof(FirstAttackState)] =
-                    new FirstAttackState(this, _input, _heroAnimator),
+                    new FirstAttackState(this, _input, _heroAnimator, _heroAttack),
                 [typeof(SecondAttackState)] =
-                    new SecondAttackState(this, _input, _heroAnimator),
+                    new SecondAttackState(this, _input, _heroAnimator, _heroAttack),
                 [typeof(ThirdAttackState)] =
-                    new ThirdAttackState(this, _input, _heroAnimator),
+                    new ThirdAttackState(this, _input, _heroAnimator, _heroAttack),
                 [typeof(HeroIdleState)] =
                     new HeroIdleState(this, _input, _heroAnimator),
                 [typeof(HeroMovementState)] =
                     new HeroMovementState(this, _input, _heroAnimator, _heroMovement),
                 [typeof(SpinAttackState)] =
-                    new SpinAttackState(this, _input, _heroAnimator, _heroRotation),
+                    new SpinAttackState(this, _input, _heroAnimator, _heroRotation, _heroAttack),
             };
 
             _transitions = new Dictionary<Type, List<HeroTransition>>();

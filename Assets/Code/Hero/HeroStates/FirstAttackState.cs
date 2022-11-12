@@ -8,14 +8,14 @@ namespace Code.Hero.HeroStates
         public FirstAttackState(
             HeroStateMachine heroStateMachine, 
             IInputService input, 
-            HeroAnimator heroAnimator) : base(heroStateMachine, input, heroAnimator)
+            HeroAnimator heroAnimator, HeroAttack heroAttack) : base(heroStateMachine, input, heroAnimator, heroAttack)
         {
         }
 
         public override void Enter()
         {
             HeroAnimator.PlayAttack(this);
-
+            HeroAttack.DoAttack(this);
             Duration = 0.7f;
             Debug.Log("Entered FirstState");
         }
