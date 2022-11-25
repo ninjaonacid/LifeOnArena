@@ -90,9 +90,9 @@ namespace Code.Hero
         {
             if (state is FirstAttackState)
             {
-                //_heroAnimator.SetTrigger(Attack);
+                //_heroAnimator.SetTrigger(DoDamage);
                 _heroAnimator.CrossFade(_attackStateHash, 0.1f);
-               // _heroVFX.PlaySwordSlash(AnimatorState.Attack);
+               // _heroVFX.PlaySwordSlash(AnimatorState.DoDamage);
                 //Debug.Log("Attack1");
             } 
             else if (state is SecondAttackState)

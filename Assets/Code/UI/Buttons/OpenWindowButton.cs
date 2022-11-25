@@ -18,7 +18,10 @@ namespace Code.UI.Buttons
             Button.onClick.AddListener(Open);
 
 
-        private void Open() =>
+        private void Open()
+        {
             _windowService.Open(WindowId);
+            Debug.Log("Clicked" + gameObject.name);
+        }
     }
 }

@@ -21,11 +21,12 @@ namespace Code.Infrastructure.States
             _states = new Dictionary<Type, IExitableState>
             {
                 [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader, services),
-                [typeof(LoadLevelState)] = new LoadLevelState(this, sceneLoader,
-                    curtain, services, services.Single<IUIFactory>()),
                 [typeof(LoadProgressState)] = new LoadProgressState(this,
                     services.Single<IProgressService>(),
                     services.Single<ISaveLoadService>()),
+                [typeof(MainMenuState)] = new MainMenuState(this, sceneLoader, services, curtain),
+                [typeof(LoadLevelState)] = new LoadLevelState(this, sceneLoader,
+                    curtain, services, services.Single<IUIFactory>()),
                 [typeof(GameLoopState)] = new GameLoopState(this, sceneLoader)
             };
         }

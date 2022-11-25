@@ -22,8 +22,9 @@ namespace Code.Infrastructure.States
         public void Enter()
         {
             LoadProgressOrInitNew();
-            _gameStateMachine.Enter<LoadLevelState, string>(
-                _progressService.Progress.WorldData.PositionOnLevel.Level);
+            /*_gameStateMachine.Enter<LoadLevelState, string>(
+                _progressService.Progress.WorldData.PositionOnLevel.Level);*/
+            _gameStateMachine.Enter<MainMenuState>();
         }
 
         public void Exit()

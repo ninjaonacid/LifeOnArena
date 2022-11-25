@@ -54,7 +54,7 @@ namespace Code.Hero
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.red;
-           Gizmos.DrawWireSphere(StartPoint() + transform.forward, _characterStats.BaseAttackRadius);
+            Gizmos.DrawWireSphere(StartPoint() + transform.forward, _characterStats.BaseAttackRadius);
         }
 
         private int Hit()
@@ -68,7 +68,7 @@ namespace Code.Hero
 
         private Vector3 StartPoint()
         {
-            return new Vector3(transform.position.x, CharacterController.center.y, transform.position.z);
+            return new Vector3(transform.position.x, CharacterController.center.y, transform.position.z + 1f);
         }
 
    
