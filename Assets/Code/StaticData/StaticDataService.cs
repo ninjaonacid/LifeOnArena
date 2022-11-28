@@ -14,6 +14,7 @@ namespace Code.StaticData
         private Dictionary<string, LevelStaticData> _levels; 
         private Dictionary<UIWindowID, WindowConfig> _windowConfigs;
         private Dictionary<AbilityId, HeroAbility_SO> _heroAbilities;
+        private Dictionary<ParticleId, ParticlesStaticData> _particles;
 
         public void Load()
         {
@@ -33,6 +34,18 @@ namespace Code.StaticData
             _heroAbilities = Resources
                 .LoadAll<HeroAbility_SO>("StaticData/HeroSkills")
                 .ToDictionary(x => x.AbilityId, x => x);
+
+            _particles = Resources
+                .LoadAll<ParticlesStaticData>("StaticData/Particles")
+                .ToDictionary(x => x.ParticleId, x => x);
+        }
+
+        public ParticlesStaticData ForParticle(ParticleId id)
+        {
+            if(_particles.TryGetValue(id, out var particlesStaticData))
+                return particlesStaticData;
+
+            return null;
         }
 
         public MonsterStaticData ForMonster(MonsterTypeId typeId)

@@ -2,7 +2,7 @@ using Code.Logic.EnemySpawners;
 using UnityEditor;
 using UnityEngine;
 
-namespace CodeBase.Editor
+namespace Code.Editor
 {
     [CustomEditor(typeof(SpawnMarker))]
     public class SpawnerMarkerEditor : UnityEditor.Editor

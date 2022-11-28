@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Code.Infrastructure.ObjectPool
 {
-    public interface IObjectPool :  IService
+    public interface IEnemyObjectPool :  IService
     {
         public GameObject GetObject(MonsterTypeId monsterTypeId, Transform parent);
         public void ReturnObject(MonsterTypeId monsterTypeId, GameObject obj);

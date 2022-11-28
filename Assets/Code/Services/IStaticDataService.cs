@@ -9,6 +9,7 @@ namespace Code.Services
     {
         MonsterStaticData ForMonster(MonsterTypeId typeId);
         void Load();
+        ParticlesStaticData ForParticle(ParticleId id);
         LevelStaticData ForLevel(string sceneKey);
         WindowConfig ForWindow(UIWindowID menuId);
         HeroAbility_SO ForAbility(AbilityId abilityId);

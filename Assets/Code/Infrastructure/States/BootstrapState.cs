@@ -69,6 +69,9 @@ namespace Code.Infrastructure.States
             _services.RegisterSingle<IWindowService>(new WindowsService(
                 _services.Single<IUIFactory>()));
 
+            _services.RegisterSingle<IParticleObjectPool>(new ParticleObjectPool
+                (_services.Single<IStaticDataService>()));
+
             _services.RegisterSingle<IGameFactory>
             (new GameFactory(
                 _services.Single<IAssets>(),
@@ -88,7 +91,7 @@ namespace Code.Infrastructure.States
                 _services.Single<IProgressService>(),
                 _services.Single<IRandomService>()));
 
-            _services.RegisterSingle<IObjectPool>(new GameObjectPool
+            _services.RegisterSingle<IEnemyObjectPool>(new EnemyObjectPool
                 (_services.Single<IEnemyFactory>()));
         }
 

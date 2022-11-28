@@ -1,5 +1,6 @@
 using Code.Enemy;
 using Code.Infrastructure.AssetManagment;
+using Code.Infrastructure.ObjectPool;
 using Code.Logic;
 using Code.Logic.EnemySpawners;
 using Code.Services;
@@ -23,6 +24,7 @@ namespace Code.Infrastructure.Factory
         private readonly ISaveLoadService _saveLoadService;
         private readonly IProgressService _progressService;
         private readonly IRandomService _randomService;
+
 
         public EnemyFactory(IHeroFactory heroFactory, IStaticDataService staticData, IAssets assets, 
             ISaveLoadService saveLoadService, IProgressService progressService,

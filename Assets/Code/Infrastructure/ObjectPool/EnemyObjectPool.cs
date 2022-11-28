@@ -5,13 +5,13 @@ using UnityEngine;
 
 namespace Code.Infrastructure.ObjectPool
 {
-    public class GameObjectPool : IObjectPool
+    public class EnemyObjectPool : IEnemyObjectPool
     {
         
         public Dictionary<MonsterTypeId, List<GameObject>> _enemyObjectsStock;
 
         private readonly IEnemyFactory _enemyFactory;
-        public GameObjectPool(IEnemyFactory enemyFactory)
+        public EnemyObjectPool(IEnemyFactory enemyFactory)
         {
             _enemyObjectsStock = new Dictionary<MonsterTypeId, List<GameObject>>();
             _enemyFactory = enemyFactory;

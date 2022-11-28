@@ -12,18 +12,24 @@ namespace Code.Logic.EnemySpawners
     public class SpawnPoint : MonoBehaviour, ISavedProgress
     {
         private EnemyDeath _enemyDeath;
-        private IObjectPool _enemyObjectPool;
+        private IEnemyObjectPool _enemyObjectPool;
+        private IParticleObjectPool _particleObjectPool;
+        private IStaticDataService _staticDataService;
 
         private float _enemyTimer = 15;
+        private GameObject _spawnParticle;
         public string Id { get; set; }
 
-        public MonsterTypeId MonsterTypeId;
 
+        public MonsterTypeId MonsterTypeId;
+        public ParticleId ParticleId = ParticleId.SpawnParticle;
         public bool Slain { get; private set; }
 
         public void Construct()
         {
-            _enemyObjectPool = AllServices.Container.Single<IObjectPool>();
+            _enemyObjectPool = AllServices.Container.Single<IEnemyObjectPool>();
+            _particleObjectPool = AllServices.Container.Single<IParticleObjectPool>();
+            _staticDataService = AllServices.Container.Single<IStaticDataService>();
         }
 
         public void LoadProgress(PlayerProgress progress)
@@ -45,7 +51,7 @@ namespace Code.Logic.EnemySpawners
         private void Spawn()
         {
             var monster = _enemyObjectPool.GetObject(MonsterTypeId, transform);
-
+           _spawnParticle =  _particleObjectPool.GetObject(ParticleId, transform);
             _enemyDeath = monster.GetComponent<EnemyDeath>();
             _enemyDeath.Happened += Slay;
         }
@@ -56,7 +62,7 @@ namespace Code.Logic.EnemySpawners
                  _enemyDeath.Happened -= Slay;*/
 
             _enemyObjectPool.ReturnObject(MonsterTypeId, _enemyDeath.gameObject);
-
+            _particleObjectPool.ReturnObject(ParticleId, _spawnParticle);
             StartCoroutine(RespawnEnemy());
             Slain = true;
 
@@ -67,6 +73,7 @@ namespace Code.Logic.EnemySpawners
             yield return new WaitForSeconds(3);
 
             _enemyObjectPool.GetObject(MonsterTypeId, transform);
+            _particleObjectPool.GetObject(ParticleId, transform);
         }
 
         private IEnumerator ChangeSpawnTimer()
