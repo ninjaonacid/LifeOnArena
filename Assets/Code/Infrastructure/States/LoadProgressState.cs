@@ -44,7 +44,7 @@ namespace Code.Infrastructure.States
             var progress = new PlayerProgress("Level1");
 
             progress.heroHeroHp.MaxHP = 500f;
-            progress.CharacterStats.BaseDamage = 5f;
+            progress.CharacterStats.BaseDamage = 20f;
             progress.CharacterStats.BaseAttackRadius = 1f;
             progress.CharacterStats.BaseAttackSpeed = 1f;
             progress.SkillsData.SpinAttack.Damage = 20f;

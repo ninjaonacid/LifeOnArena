@@ -9,7 +9,8 @@ namespace Code.Enemy
     {
         public EnemyAnimator Animator;
         public EnemyHealth Health;
-
+        public GameObject FracturedPrefab;
+        public GameObject EnemyModel;
 
         public event Action Happened;
 
@@ -33,6 +34,9 @@ namespace Code.Enemy
         {
             Health.HealthChanged -= HealthChanged;
             Animator.PlayDeath();
+            //EnemyModel.SetActive(false);
+           // FracturedPrefab.SetActive(true);
+            //FracturedPrefab.GetComponentInChildren<Rigidbody>().AddExplosionForce(10f, Vector3.down, 1f);
             StartCoroutine(DestroyTimer());
             
             Happened?.Invoke();
@@ -41,6 +45,8 @@ namespace Code.Enemy
         private IEnumerator DestroyTimer()
         {
             yield return new WaitForSeconds(1);
+           // EnemyModel.SetActive(true);
+           // FracturedPrefab.SetActive(false);
             gameObject.SetActive(false);
         }
 

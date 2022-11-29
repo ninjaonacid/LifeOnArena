@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Code.Enemy
 {
-    public class Agro : MonoBehaviour
+    public class Aggression : MonoBehaviour
     {
         private Coroutine _aggroCoroutine;
         private bool _hasAggroTarget;
