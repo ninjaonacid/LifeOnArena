@@ -1,7 +1,10 @@
-﻿using Code.CameraLogic;
+﻿using System.Collections.Generic;
+using Code.CameraLogic;
 using Code.Hero;
 using Code.Infrastructure.Factory;
+using Code.Infrastructure.ObjectPool;
 using Code.Logic;
+using Code.Logic.EnemySpawners;
 using Code.Services;
 using Code.Services.PersistentProgress;
 using Code.Services.SaveLoad;
@@ -25,6 +28,9 @@ namespace Code.Infrastructure.States
         private IProgressService _progressService;
         private IStaticDataService _staticData;
         private ISaveLoadService _saveLoadService;
+        private IGameEventHandler _gameEventHandler;
+        private IEnemyObjectPool _enemyObjectPool;
+        private IParticleObjectPool _particleObjectPool;
         private readonly IUIFactory _uiFactory;
 
         public LoadLevelState(GameStateMachine stateMachine, SceneLoader sceneLoader,
@@ -42,11 +48,17 @@ namespace Code.Infrastructure.States
             _enemyFactory = _services.Single<IEnemyFactory>();
             _heroFactory = _services.Single<IHeroFactory>();
             _gameFactory = _services.Single<IGameFactory>();
+            _enemyObjectPool = _services.Single<IEnemyObjectPool>();
+            _particleObjectPool = _services.Single<IParticleObjectPool>();
             _staticData = _services.Single<IStaticDataService>();
             _saveLoadService = _services.Single<ISaveLoadService>();
+            _gameEventHandler = _services.Single<IGameEventHandler>();
 
             _curtain.Show();
+            _enemyObjectPool.Cleanup();
+            _particleObjectPool.Cleanup();
             _saveLoadService.Cleanup();
+
             _sceneLoader.Load(sceneName, OnLoaded);
         }
 
@@ -80,21 +92,31 @@ namespace Code.Infrastructure.States
 
             InitSpawners(levelData);
 
+            SetupEventHandler(levelData);
+
             var hero = InitHero(levelData);
 
             InitHud(hero);
 
             CameraFollow(hero);
         }
-            
+
+        private void SetupEventHandler(LevelStaticData levelData)
+        {
+            _gameEventHandler.LevelSpawnersCount = levelData.EnemySpawners.Count;
+            _gameEventHandler.ResetClearedCounter();
+        }
         private void InitSpawners(LevelStaticData levelData)
         {
             foreach (EnemySpawnerData spawnerData in levelData.EnemySpawners)
             {
-                _enemyFactory.CreateSpawner(
+                SpawnPoint spawner = _enemyFactory.CreateSpawner(
                     spawnerData.Position, 
                     spawnerData.Id, 
-                    spawnerData.MonsterTypeId);
+                    spawnerData.MonsterTypeId,
+                    spawnerData.RespawnCount);
+
+                spawner.Construct(_enemyObjectPool, _particleObjectPool, _gameEventHandler);
             }
         }
         private void InitHud(GameObject hero)
@@ -107,7 +129,10 @@ namespace Code.Infrastructure.States
 
         private GameObject InitHero(LevelStaticData levelData)
         {
-            return _heroFactory.CreateHero(levelData.HeroInitialPosition);
+            var hero =  _heroFactory.CreateHero(levelData.HeroInitialPosition);
+
+            hero.GetComponent<HeroDeath>().Construct(_gameEventHandler);
+            return hero;
         }
 
         private static void CameraFollow(GameObject hero)

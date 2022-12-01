@@ -9,6 +9,6 @@ namespace Code.Infrastructure.ObjectPool
         public GameObject GetObject(MonsterTypeId monsterTypeId, Transform parent);
         public void ReturnObject(MonsterTypeId monsterTypeId, GameObject obj);
 
-        
+        void Cleanup();
     }
 }

@@ -15,7 +15,10 @@ namespace Code.Infrastructure.ObjectPool
             _particleStock = new Dictionary<ParticleId, List<GameObject>>();
             _staticData = staticData;
         }
-
+        public void Cleanup()
+        {
+            _particleStock.Clear();
+        }
         public GameObject GetObject(ParticleId particleId, Transform parent)
         {
             GameObject result = null;
@@ -33,9 +36,8 @@ namespace Code.Infrastructure.ObjectPool
                 var particleData = _staticData.ForParticle(particleId);
                 result = Object.Instantiate(particleData.ParticlePrefab, parent);
 
-
             }
-
+            result.SetActive(true);
             return result;
 
         }
@@ -43,11 +45,12 @@ namespace Code.Infrastructure.ObjectPool
         public void ReturnObject(ParticleId particleId, GameObject obj)
         {
             _particleStock[particleId].Add(obj);
+            obj.SetActive(false);
         }
 
         private bool CheckForExist(ParticleId particleId)
         {
-            return _particleStock.ContainsKey(particleId) && _particleStock[particleId].Count > 4;
+            return _particleStock.ContainsKey(particleId) && _particleStock[particleId].Count > 0;
 
         }
     }

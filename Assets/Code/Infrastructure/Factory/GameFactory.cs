@@ -1,4 +1,5 @@
 ﻿using Code.Infrastructure.AssetManagment;
+using Code.Logic;
 using Code.Services;
 using Code.Services.PersistentProgress;
 using Code.Services.RandomService;
@@ -14,7 +15,6 @@ namespace Code.Infrastructure.Factory
     {
         private readonly IAssets _assets;
         private readonly IStaticDataService _staticData;
-        private readonly IRandomService _randomService;
         private readonly IProgressService _progressService;
         private readonly ISaveLoadService _saveLoadService;
         private readonly IWindowService _windowService;
@@ -26,6 +26,13 @@ namespace Code.Infrastructure.Factory
             _progressService = progressService;
             _saveLoadService = saveLoadService;
             _windowService = windowService;
+        }
+
+        public GameObject CreateLevelEventHandler()
+        {
+            GameObject levelHandler = _assets.Instantiate(AssetPath.LevelEventHandler);
+
+            return levelHandler;
         }
 
         public GameObject CreateHud()

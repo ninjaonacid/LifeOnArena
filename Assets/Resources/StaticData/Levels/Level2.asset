@@ -15,15 +15,25 @@ MonoBehaviour:
   LevelKey: Level2
   EnemySpawners:
   - Id: MainScene_0c63200f-e0e1-42c2-a63b-d8cabd23224c
-    MonsterTypeId: 10
-    Position: {x: -4.3, y: 0.05506897, z: 50.2}
+    RespawnCount: 0
+    MonsterTypeId: 0
+    Position: {x: -4.3, y: 0.05506897, z: 78.2}
   - Id: MainScene_78bc97f4-c0a4-4825-a960-efb032b60f57
+    RespawnCount: 0
     MonsterTypeId: 0
     Position: {x: 32, y: 0.05506897, z: 33.6}
   - Id: MainScene_6d37bdf6-01d1-4859-976f-5f36b6d44c8f
-    MonsterTypeId: 10
+    RespawnCount: 0
+    MonsterTypeId: 0
     Position: {x: 15.76, y: 0.05506897, z: 50.6}
   - Id: MainScene_3643eddb-4bc4-4761-9f86-7da8b1720421
+    RespawnCount: 0
     MonsterTypeId: 0
     Position: {x: -24.4, y: 0.05506897, z: 34.5}
+  - Id: Level1_5b8e5faf-5a85-4381-ba35-1f86bd06b33b
+    RespawnCount: 3
+    MonsterTypeId: 0
+    Position: {x: -4.3, y: 0.05506897, z: 35.5}
   HeroInitialPosition: {x: 0, y: 0, z: 18.2}
+  NextLevelDoorPosition: {x: -2.24, y: -0.86, z: 76.2}
+  NextLevelDoorRotation: {x: -0, y: -0, z: -0, w: 1}

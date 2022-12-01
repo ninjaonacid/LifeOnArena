@@ -27,7 +27,7 @@ namespace Code.Infrastructure.States
                 [typeof(MainMenuState)] = new MainMenuState(this, sceneLoader, services, curtain),
                 [typeof(LoadLevelState)] = new LoadLevelState(this, sceneLoader,
                     curtain, services, services.Single<IUIFactory>()),
-                [typeof(GameLoopState)] = new GameLoopState(this, sceneLoader)
+                [typeof(GameLoopState)] = new GameLoopState(this, sceneLoader, services.Single<IGameEventHandler>()),
             };
         }
 

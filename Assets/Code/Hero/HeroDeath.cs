@@ -1,3 +1,5 @@
+using Code.Services;
+using TMPro.EditorUtilities;
 using UnityEngine;
 
 namespace Code.Hero
@@ -12,6 +14,11 @@ namespace Code.Hero
 
         public HeroMovement heroMovement;
 
+        private IGameEventHandler _gameEventHandler;
+        public void Construct(IGameEventHandler gameEventHandler)
+        {
+            _gameEventHandler = gameEventHandler;
+        }
         private void Start()
         {
             Health.HealthChanged += HealthChanged;
@@ -30,7 +37,7 @@ namespace Code.Hero
         private void Die()
         {
             _isDead = true;
-
+            _gameEventHandler.HeroDeath();
             heroMovement.enabled = false;
             Animator.PlayDeath();
         }

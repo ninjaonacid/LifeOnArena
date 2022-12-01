@@ -60,6 +60,8 @@ namespace Code.Infrastructure.States
             (new SaveLoadService(
                 _services.Single<IProgressService>()));
 
+            _services.RegisterSingle<IGameEventHandler>(new GameEventHandler());
+
             _services.RegisterSingle<IUIFactory>(new UIFactory
             (_services.Single<IAssets>(),
                 _services.Single<IStaticDataService>(),
@@ -91,8 +93,9 @@ namespace Code.Infrastructure.States
                 _services.Single<IProgressService>(),
                 _services.Single<IRandomService>()));
 
-            _services.RegisterSingle<IEnemyObjectPool>(new EnemyObjectPool
-                (_services.Single<IEnemyFactory>()));
+            _services.RegisterSingle<IEnemyObjectPool>(new EnemyObjectPool(
+                _services.Single<IEnemyFactory>()));
+
         }
 
         private void RegisterStaticData()

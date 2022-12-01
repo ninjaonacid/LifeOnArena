@@ -25,11 +25,11 @@ namespace Code.Infrastructure.Factory
         private readonly IProgressService _progressService;
         private readonly IRandomService _randomService;
 
-
         public EnemyFactory(IHeroFactory heroFactory, IStaticDataService staticData, IAssets assets, 
             ISaveLoadService saveLoadService, IProgressService progressService,
             IRandomService randomService)
         {
+    
             _heroFactory = heroFactory;
             _staticData = staticData;
             _assets = assets;
@@ -38,13 +38,17 @@ namespace Code.Infrastructure.Factory
             _randomService = randomService;
         }
 
-        public void CreateSpawner(Vector3 at, string spawnerDataId, MonsterTypeId spawnerDataMonsterTypeId)
+        public SpawnPoint CreateSpawner(Vector3 at, 
+            string spawnerDataId, 
+            MonsterTypeId spawnerDataMonsterTypeId, 
+            int spawnerRespawnCount)
         {
             SpawnPoint spawner = InstantiateRegistered(AssetPath.Spawner, at)
                 .GetComponent<SpawnPoint>();
-            spawner.Construct();
             spawner.Id = spawnerDataId;
             spawner.MonsterTypeId = spawnerDataMonsterTypeId;
+            spawner.RespawnCount = spawnerRespawnCount;
+            return spawner;
         }
 
         public GameObject CreateMonster(MonsterTypeId monsterTypeId, Transform parent)

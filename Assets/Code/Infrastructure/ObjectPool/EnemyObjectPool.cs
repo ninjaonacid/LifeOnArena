@@ -17,6 +17,11 @@ namespace Code.Infrastructure.ObjectPool
             _enemyFactory = enemyFactory;
         }
 
+        public void Cleanup()
+        {
+            _enemyObjectsStock.Clear();
+        }
+
         public GameObject GetObject(MonsterTypeId monsterTypeId, Transform parent)
         {
             GameObject result = null;
@@ -48,7 +53,8 @@ namespace Code.Infrastructure.ObjectPool
         private bool CheckForExist(MonsterTypeId monsterTypeId)
         {
             return _enemyObjectsStock.ContainsKey(monsterTypeId) && _enemyObjectsStock[monsterTypeId].Count > 0;
-
         }
+
+        
     }
 }

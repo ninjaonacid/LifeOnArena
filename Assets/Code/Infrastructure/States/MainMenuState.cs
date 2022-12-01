@@ -36,13 +36,10 @@ namespace Code.Infrastructure.States
             _windowService = _services.Single<IWindowService>();
             _uiFactory = _services.Single<IUIFactory>();
 
+            _curtain.Show();
             _sceneLoader.Load("MainMenu", InitMainMenu);
         }
 
-        private void EnterLoadLevelState()
-        {
-            _gameStateMachine.Enter<LoadLevelState,string>(_progress.Progress.WorldData.PositionOnLevel.Level);
-        }
         public void InitMainMenu()
         {
             _uiFactory.CreateCore();
@@ -50,6 +47,11 @@ namespace Code.Infrastructure.States
            menu.GetComponentInChildren<StartGameButton>().Button.onClick.AddListener(EnterLoadLevelState);
             
             _curtain.Hide();
+        }
+
+        private void EnterLoadLevelState()
+        {
+            _gameStateMachine.Enter<LoadLevelState,string>(_progress.Progress.WorldData.PositionOnLevel.Level);
         }
     }
 }

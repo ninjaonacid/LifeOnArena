@@ -11,5 +11,8 @@ namespace Code.StaticData
         public List<EnemySpawnerData> EnemySpawners;
 
         public Vector3 HeroInitialPosition;
+
+        public Vector3 NextLevelDoorPosition;
+        public Quaternion NextLevelDoorRotation;
     }
 }

@@ -9,6 +9,7 @@
         public const string LootPath = "Loot/Loot";
         public const string Spawner = "Enemies/SpawnPoint";
         public const string UICore = "UI/CoreUI";
+        public const string LevelEventHandler = "Logic/GameEventHandler";
 
     }
 }
