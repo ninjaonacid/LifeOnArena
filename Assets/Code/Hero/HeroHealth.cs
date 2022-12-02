@@ -40,14 +40,14 @@ namespace Code.Hero
 
         public void LoadProgress(PlayerProgress progress)
         {
-            _heroHp = progress.heroHeroHp;
+            _heroHp = progress.HeroHp;
             HealthChanged?.Invoke();
         }
 
         public void UpdateProgress(PlayerProgress progress)
         {
-            progress.heroHeroHp.CurrentHP = Current;
-            progress.heroHeroHp.MaxHP = Max;
+            progress.HeroHp.CurrentHP = Current;
+            progress.HeroHp.MaxHP = Max;
         }
     }
 }

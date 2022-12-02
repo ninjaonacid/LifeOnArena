@@ -7,21 +7,24 @@ namespace Code.Logic
     public class NextLevelDoor : MonoBehaviour
     {
         private IGameEventHandler _gameEventHandler;
+        [SerializeField] private GameObject RightDoor;
+        [SerializeField] private GameObject LeftDoor;
         private void Awake()
         {
             _gameEventHandler = AllServices.Container.Single<IGameEventHandler>();
 
-            _gameEventHandler.MonsterSpawnersCleared += OpenNextLevel;
+            _gameEventHandler.MonsterSpawnersCleared += OpenNextLevelDoor;
         }
 
         private void OnDestroy()
         {
-            _gameEventHandler.MonsterSpawnersCleared -= OpenNextLevel;
+            _gameEventHandler.MonsterSpawnersCleared -= OpenNextLevelDoor;
         }
 
-        private void OpenNextLevel()
+        private void OpenNextLevelDoor()
         {
-            transform.DOMoveY(100, 5f);
+            RightDoor.transform.DORotate(new Vector3(transform.rotation.x, 60, transform.rotation.z), 2f);
+            LeftDoor.transform.DORotate(new Vector3(transform.rotation.x, -60, transform.rotation.z), 2f);
         }
     }
 }

@@ -74,6 +74,8 @@ namespace Code.Infrastructure.States
             InformProgressReaders();
             _stateMachine.Enter<GameLoopState>();
         }
+
+
         private void InformProgressReaders()
         {
             foreach (var progressReader in _saveLoadService.ProgressReaders)
@@ -96,9 +98,16 @@ namespace Code.Infrastructure.States
 
             var hero = InitHero(levelData);
 
+            ResetHeroHp();
+
             InitHud(hero);
 
             CameraFollow(hero);
+        }
+
+        private void ResetHeroHp()
+        {
+            _progressService.Progress.HeroHp.ResetHP();
         }
 
         private void SetupEventHandler(LevelStaticData levelData)

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using Code.Services;
 using Cysharp.Threading.Tasks;
 
@@ -24,10 +25,12 @@ namespace Code.Infrastructure.States
 
         private async void ReturnToMainMenu()
         {
-            await UniTask.Delay(TimeSpan.FromSeconds(5), ignoreTimeScale: false);
+            var cts = new CancellationTokenSource();
+            await UniTask.Delay(TimeSpan.FromSeconds(5), ignoreTimeScale: false, cancellationToken: cts.Token);
             _stateMachine.Enter<MainMenuState>();
         }
 
+        
         public void Exit()
         {
         }

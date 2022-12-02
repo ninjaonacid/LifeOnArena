@@ -43,12 +43,12 @@ namespace Code.Infrastructure.States
         {
             var progress = new PlayerProgress("Level1");
 
-            progress.heroHeroHp.MaxHP = 50f;
+            progress.HeroHp.MaxHP = 50f;
             progress.CharacterStats.BaseDamage = 20f;
             progress.CharacterStats.BaseAttackRadius = 1f;
             progress.CharacterStats.BaseAttackSpeed = 1f;
             progress.SkillsData.SpinAttack.Damage = 20f;
-            progress.heroHeroHp.ResetHP();
+            progress.HeroHp.ResetHP();
 
             return progress;
         }

@@ -26,7 +26,7 @@ namespace Code.UI.MainMenu
         protected override void OnAwake()
         {
             base.OnAwake();
-            CloseButton.onClick.AddListener(() => _saveLoadService.SaveProgress());
+           // CloseButton.onClick.AddListener(() => _saveLoadService.SaveProgress());
         }
 
     }
