@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2608229393186722381}
   - component: {fileID: 1413445584403013096}
   - component: {fileID: 3781165567197538594}
+  - component: {fileID: -8691812657102176990}
   m_Layer: 0
   m_Name: RustySword
   m_TagString: Untagged
@@ -25,9 +26,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3420935253409188087}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 4, z: 2}
+  m_LocalScale: {x: 3, y: 6, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -83,3 +84,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &-8691812657102176990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3420935253409188087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25c124d3552a2984ebbddbe8e037fbe5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WeaponData: {fileID: 11400000, guid: cf39cfdcac6cebb418e41811a04f8381, type: 2}

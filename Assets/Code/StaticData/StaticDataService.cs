@@ -15,6 +15,7 @@ namespace Code.StaticData
         private Dictionary<UIWindowID, WindowConfig> _windowConfigs;
         private Dictionary<AbilityId, HeroAbility_SO> _heroAbilities;
         private Dictionary<ParticleId, ParticlesStaticData> _particles;
+        private Dictionary<WeaponId, WeaponData> _weapons;
 
         public void Load()
         {
@@ -38,6 +39,18 @@ namespace Code.StaticData
             _particles = Resources
                 .LoadAll<ParticlesStaticData>("StaticData/Particles")
                 .ToDictionary(x => x.ParticleId, x => x);
+
+            _weapons = Resources
+                .LoadAll<WeaponData>("StaticData/Equipment/Weapons")
+                .ToDictionary(x => x.WeaponId, x => x);
+        }
+
+        public WeaponData ForWeapon(WeaponId weaponId)
+        {
+            if(_weapons.TryGetValue(weaponId, out var weaponStaticData))
+                return weaponStaticData;
+
+            return null;
         }
 
         public ParticlesStaticData ForParticle(ParticleId id)

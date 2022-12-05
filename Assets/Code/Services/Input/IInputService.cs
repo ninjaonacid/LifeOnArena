@@ -12,5 +12,6 @@ namespace Code.Services.Input
         bool isSkillButton2();
         bool isSkillButton3();
 
+        bool isInteractButtonUp();
     }
 }

@@ -96,24 +96,26 @@ namespace Code.Infrastructure.States
 
             SetupEventHandler(levelData);
 
-            var hero = InitHero(levelData);
+            InitDoors(levelData);
 
-            ResetHeroHp();
+            var hero = InitHero(levelData);
 
             InitHud(hero);
 
             CameraFollow(hero);
         }
 
-        private void ResetHeroHp()
+        private void InitDoors(LevelStaticData levelData)
         {
-            _progressService.Progress.HeroHp.ResetHP();
+            NextLevelDoor door = _gameFactory.CreateLevelDoor(levelData.NextLevelDoorPosition)
+                .GetComponent<NextLevelDoor>();
+            door.Construct(_gameEventHandler);
         }
-
         private void SetupEventHandler(LevelStaticData levelData)
         {
             _gameEventHandler.LevelSpawnersCount = levelData.EnemySpawners.Count;
-            _gameEventHandler.ResetClearedCounter();
+            _gameEventHandler.ResetSpawnerCounter();
+
         }
         private void InitSpawners(LevelStaticData levelData)
         {

@@ -28,6 +28,12 @@ namespace Code.Infrastructure.Factory
             _windowService = windowService;
         }
 
+        public GameObject CreateLevelDoor(Vector3 position)
+        {
+            GameObject levelDoor = _assets.Instantiate(AssetPath.DoorPath, position);
+
+            return levelDoor;
+        }
         public GameObject CreateLevelEventHandler()
         {
             GameObject levelHandler = _assets.Instantiate(AssetPath.LevelEventHandler);

@@ -1,3 +1,4 @@
+using System.Reflection.Emit;
 using Code.Services;
 using DG.Tweening;
 using UnityEngine;
@@ -9,13 +10,12 @@ namespace Code.Logic
         private IGameEventHandler _gameEventHandler;
         [SerializeField] private GameObject RightDoor;
         [SerializeField] private GameObject LeftDoor;
-        private void Awake()
-        {
-            _gameEventHandler = AllServices.Container.Single<IGameEventHandler>();
 
+        public void Construct(IGameEventHandler gameEventHandler)
+        {
+            _gameEventHandler  = gameEventHandler;
             _gameEventHandler.MonsterSpawnersCleared += OpenNextLevelDoor;
         }
-
         private void OnDestroy()
         {
             _gameEventHandler.MonsterSpawnersCleared -= OpenNextLevelDoor;

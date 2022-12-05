@@ -10,6 +10,7 @@
         public const string Spawner = "Enemies/SpawnPoint";
         public const string UICore = "UI/CoreUI";
         public const string LevelEventHandler = "Logic/GameEventHandler";
+        public const string DoorPath = "SceneAssets/NextLevelDoor";
 
     }
 }

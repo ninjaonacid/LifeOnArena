@@ -7,6 +7,7 @@ namespace Code.Services.Input
     {
         protected const string Horizontal = "Horizontal";
         protected const string Vertical = "Vertical";
+        private const string Interact = "Interact";
         private const string Attack = "Attack";
         private const string Skill1 = "Skill1";
         private const string Skill2 = "Skill2";
@@ -40,6 +41,10 @@ namespace Code.Services.Input
             return SimpleInput.GetButtonUp(Skill3);
         }
 
+        public bool isInteractButtonUp()
+        {
+            return SimpleInput.GetButtonUp(Interact);
+        }
         protected static Vector2 SimpleInputAxis()
         {
             return new Vector2(SimpleInput.GetAxis(Horizontal),

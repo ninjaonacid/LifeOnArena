@@ -11,7 +11,7 @@ namespace Code.Services
         public int LevelSpawnersCount { get; set; }
         public int ClearedSpawnersCount { get; set; }
 
-        public void ResetClearedCounter()
+        public void ResetSpawnerCounter()
         {
             ClearedSpawnersCount = 0;
         }

@@ -15,6 +15,6 @@ namespace Code.Services
         void MonsterSpawnerSlain(SpawnPoint spawner);
         void HeroDeath();
 
-        void ResetClearedCounter();
+        void ResetSpawnerCounter();
     }
 }

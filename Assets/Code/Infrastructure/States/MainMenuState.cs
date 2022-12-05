@@ -28,6 +28,12 @@ namespace Code.Infrastructure.States
         }
         public void Exit()
         {
+            ResetPlayerHp();
+        }
+
+        private void ResetPlayerHp()
+        {
+            _progress.Progress.HeroHp.ResetHP();
         }
 
         public void Enter()

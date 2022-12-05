@@ -12,7 +12,7 @@ namespace Code.UI.SkillsMenu
     {
         private Image _image;
         public Image Image => _image;
-
+        public int SlotId;
         public AbilityId AbilityId = AbilityId.Empty;
         public HeroAbility_SO HeroAbility;
         private SkillHolderIcon _skillHolderIcon;
@@ -55,11 +55,6 @@ namespace Code.UI.SkillsMenu
             _skillHolderContainer.StopFade();
             _skillHolderContainer.ResetSelection();
             OnSlotChanged?.Invoke();
-        }
-
-        public void ResetSlot()
-        {
-
         }
 
         public void OnPointerDown(PointerEventData eventData)

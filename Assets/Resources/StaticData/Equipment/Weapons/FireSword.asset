@@ -12,14 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ec85cfef59c751479b3ac3c5068c7da, type: 3}
   m_Name: FireSword
   m_EditorClassIdentifier: 
-  ItemTypeId: 1
-  DisplayName: Fire Sword
-  Amount: 0
-  ItemDropPrefab: {fileID: 2175081686480672917, guid: 64a98e2bfd27b3e48a59343d52a2a2db, type: 3}
-  ItemIcon: {fileID: 21300000, guid: 642a41a2858c4304fa7640644530387e, type: 3}
-  IsStackableItem: 0
+  Ability: {fileID: 0}
+  WeaponPrefab: {fileID: 2175081686480672917, guid: 64a98e2bfd27b3e48a59343d52a2a2db, type: 3}
+  WeaponId: 2
   AttackRadius: 10
   AttackSpeed: 3
   Damage: 100
-  EquipmentSlot: 1
-  WeaponPrefab: {fileID: 2175081686480672917, guid: 64a98e2bfd27b3e48a59343d52a2a2db, type: 3}
+  Rotation: {x: 0, y: 0, z: 0}
