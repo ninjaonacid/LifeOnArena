@@ -1,4 +1,5 @@
 using Code.Data;
+using Code.Services;
 using Code.Services.PersistentProgress;
 using Code.StaticData;
 using UnityEngine;
@@ -12,6 +13,12 @@ namespace Code.Hero
 
         private IProgressService _progressService;
         private PlayerProgress _progress => _progressService.Progress;
+
+        private void Awake()
+        {
+            _progressService = AllServices.Container.Single<IProgressService>();
+        }
+
         public void EquipWeapon(WeaponData weaponData)
         {
             if (_currentWeapon != null)
@@ -25,7 +32,7 @@ namespace Code.Hero
                 weaponData.Rotation.y, 
                 weaponData.Rotation.z);
 
-            _progress.SkillHolderData.ChangeSkillUI(weaponData.Ability);
+            _progress.skillHudData.ChangeWeaponSkill(weaponData.Ability);
 
         }
     }

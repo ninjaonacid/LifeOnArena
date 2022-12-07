@@ -1,11 +1,10 @@
 ﻿using Code.Infrastructure.AssetManagment;
-using Code.Logic;
 using Code.Services;
 using Code.Services.PersistentProgress;
-using Code.Services.RandomService;
 using Code.Services.SaveLoad;
 using Code.UI.Buttons;
 using Code.UI.HUD;
+using Code.UI.HUD.Skills;
 using Code.UI.Services;
 using UnityEngine;
 
@@ -47,7 +46,9 @@ namespace Code.Infrastructure.Factory
 
             hud.GetComponentInChildren<LootCounter>()
                 .Construct(_progressService.Progress.WorldData);
-
+            hud.GetComponentInChildren<HudSkillContainer>()
+                .Construct(_progressService.Progress.skillHudData, _staticData);
+            
             foreach (var openWindowButton in hud.GetComponentsInChildren<OpenWindowButton>())
             {
                 openWindowButton.Construct(_windowService);

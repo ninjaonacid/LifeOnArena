@@ -1,4 +1,5 @@
 ﻿using System;
+using Newtonsoft.Json;
 
 namespace Code.Data
 {
@@ -7,8 +8,10 @@ namespace Code.Data
     {
         public int Collected;
 
+        [JsonIgnore]
         public Action CountChanged;
 
+        
         public void Collect(Loot loot)
         {
             Collected += loot.Value;

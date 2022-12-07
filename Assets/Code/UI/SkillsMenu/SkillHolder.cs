@@ -14,7 +14,7 @@ namespace Code.UI.SkillsMenu
         public Image Image => _image;
         public int SlotId;
         public AbilityId AbilityId = AbilityId.Empty;
-        public HeroAbility_SO HeroAbility;
+        public HeroAbility HeroAbility;
         private SkillHolderIcon _skillHolderIcon;
         public event Action OnSlotChanged;
 

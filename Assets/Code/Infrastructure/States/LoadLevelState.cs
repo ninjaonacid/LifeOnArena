@@ -1,15 +1,16 @@
-﻿using System.Collections.Generic;
-using Code.CameraLogic;
+﻿using Code.CameraLogic;
 using Code.Hero;
 using Code.Infrastructure.Factory;
 using Code.Infrastructure.ObjectPool;
 using Code.Logic;
 using Code.Logic.EnemySpawners;
 using Code.Services;
+using Code.Services.Input;
 using Code.Services.PersistentProgress;
 using Code.Services.SaveLoad;
 using Code.StaticData;
 using Code.UI.HUD;
+using Code.UI.HUD.Skills;
 using Code.UI.Services;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -26,6 +27,7 @@ namespace Code.Infrastructure.States
         private IHeroFactory _heroFactory;
         private IGameFactory _gameFactory;
         private IProgressService _progressService;
+        private IInputService _inputService;
         private IStaticDataService _staticData;
         private ISaveLoadService _saveLoadService;
         private IGameEventHandler _gameEventHandler;
@@ -44,6 +46,7 @@ namespace Code.Infrastructure.States
         }
         public void Enter(string sceneName)
         {
+            _inputService = _services.Single<IInputService>();
             _progressService = _services.Single<IProgressService>();
             _enemyFactory = _services.Single<IEnemyFactory>();
             _heroFactory = _services.Single<IHeroFactory>();
@@ -130,20 +133,22 @@ namespace Code.Infrastructure.States
                 spawner.Construct(_enemyObjectPool, _particleObjectPool, _gameEventHandler);
             }
         }
-        private void InitHud(GameObject hero)
-        {
-            var hud = _gameFactory.CreateHud();
-
-            hud.GetComponentInChildren<HudSkillContainer>().Construct(_progressService, _staticData);
-            hud.GetComponentInChildren<ActorUI>().Construct(hero.GetComponent<HeroHealth>());
-        }
 
         private GameObject InitHero(LevelStaticData levelData)
         {
             var hero =  _heroFactory.CreateHero(levelData.HeroInitialPosition);
 
             hero.GetComponent<HeroDeath>().Construct(_gameEventHandler);
+            //hero.GetComponent<HeroSkills>().Construct();
+            hero.GetComponent<HeroStateMachine>().Construct(_inputService, _progressService);
             return hero;
+        }
+
+        private void InitHud(GameObject hero)
+        {
+            var hud = _gameFactory.CreateHud();
+
+            hud.GetComponentInChildren<ActorUI>().Construct(hero.GetComponent<HeroHealth>());
         }
 
         private static void CameraFollow(GameObject hero)

@@ -9,7 +9,7 @@ namespace Code.UI.SkillsMenu
     public class SkillItem : MonoBehaviour, IPointerDownHandler
     {
         public Image Image;
-        public HeroAbility_SO HeroAbility;
+        public HeroAbility HeroAbility;
         private SkillListContainer _skillListContainer;
         public void Construct(SkillListContainer skillListContainer)
         {

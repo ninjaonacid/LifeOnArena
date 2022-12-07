@@ -10,7 +10,7 @@ namespace Code.Data
         public KillData KillData;
         public WorldData WorldData;
         public SkillsData SkillsData;
-        public SkillHolderData SkillHolderData;
+        public SkillHudData skillHudData;
         public InventoryData InventoryData;
         public PlayerProgress(string initialLevel)
         {
@@ -20,7 +20,7 @@ namespace Code.Data
             KillData = new KillData();
             InventoryData = new InventoryData();
             SkillsData = new SkillsData();
-            SkillHolderData = new SkillHolderData();
+            skillHudData = new SkillHudData();
         }
     }
 }

@@ -1163,6 +1163,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1029952865140048372}
     m_Modifications:
+    - target: {fileID: 819212837027285666, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
+      propertyPath: SkillSlotID
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2624927343658051704, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1269,6 +1273,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1029952865140048372}
     m_Modifications:
+    - target: {fileID: 819212837027285666, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
+      propertyPath: SkillSlotID
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2624927343658051704, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1375,6 +1383,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1029952865140048372}
     m_Modifications:
+    - target: {fileID: 1952344347578689738, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
+      propertyPath: Image
+      value: 
+      objectReference: {fileID: 1701955810035707626}
     - target: {fileID: 2624927343658051704, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1465,6 +1477,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
+--- !u!114 &1701955810035707626 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 36618261984182031, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
+  m_PrefabInstance: {fileID: 1665372912855339493}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &3706755331959716253 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2624927343658051704, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}

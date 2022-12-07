@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using UnityEngine;
 
 namespace Code.Data
@@ -16,12 +17,13 @@ namespace Code.Data
 
         public static string ToJson(this object obj)
         {
-            return JsonUtility.ToJson(obj);
+            return JsonConvert.SerializeObject(obj, Formatting.Indented);
+
         }
 
         public static T ToDeserialized<T>(this string json)
         {
-            return JsonUtility.FromJson<T>(json);
+            return JsonConvert.DeserializeObject<T>(json);
         }
 
         public static Vector3 AddY(this Vector3 vector, float y)

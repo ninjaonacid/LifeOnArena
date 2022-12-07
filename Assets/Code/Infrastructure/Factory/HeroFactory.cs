@@ -21,7 +21,7 @@ namespace Code.Infrastructure.Factory
         {
             HeroGameObject = InstantiateRegistered(AssetPath.HeroPath,
                 initialPoint);
-
+            
             return HeroGameObject;
         }
 

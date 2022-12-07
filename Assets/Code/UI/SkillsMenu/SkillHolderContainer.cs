@@ -2,10 +2,8 @@ using Code.Data;
 using Code.Services;
 using Code.Services.PersistentProgress;
 using Code.Services.SaveLoad;
-using Code.StaticData.Ability;
 using DG.Tweening;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 
 namespace Code.UI.SkillsMenu
 {
@@ -39,13 +37,6 @@ namespace Code.UI.SkillsMenu
             _staticData = staticData;
 
             _skillHolders = GetComponentsInChildren<SkillHolder>();
-
-            for (var index = 0; index < _skillHolders.Length; index++)
-            {
-                _skillHolders[index].AbilityId = _progress.SkillHolderData.AbilityID[index];   
-                _skillHolders[index].Construct(this, _staticData);
-                _skillHolders[index].OnSlotChanged += UpdateProgress;
-            }
         }
 
         private void Awake()
@@ -53,14 +44,7 @@ namespace Code.UI.SkillsMenu
             _saveLoad = AllServices.Container.Single<ISaveLoadService>();
         }
 
-        public void UpdateProgress()
-        {
-            for (var index = 0; index < _skillHolders.Length; index++)
-            {
-                if (_skillHolders[index].HeroAbility != null)
-                    _progress.SkillHolderData.AbilityID[index] = _skillHolders[index].HeroAbility.AbilityId;
-            }
-        }
+
 
         public bool IsSkillInHolder(SkillItem skillItem)
         {
