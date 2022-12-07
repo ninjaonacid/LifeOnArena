@@ -678,7 +678,7 @@ MonoBehaviour:
   _heroAnimator: {fileID: 7390316171520665867}
   _heroRotation: {fileID: -8125679809969938510}
   _heroAttack: {fileID: 8881719371883239237}
-  _heroSkills: {fileID: 0}
+  _heroSkills: {fileID: -7543322082994891675}
 --- !u!114 &-8125679809969938510
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -706,6 +706,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   WeaponSlot: {fileID: 9184684936429490085}
+  HeroSkills: {fileID: -7543322082994891675}
 --- !u!114 &-7543322082994891675
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -718,10 +719,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecf359ceca450a042b0bd9bf851eb298, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AbilityHolder: {fileID: 0}
-  WeaponSkill: 0
-  DodgeSkill: 1
-  RageSkill: 2
+  SkillSlots:
+  - skillSlotId: 0
+    ability: {fileID: 11400000, guid: 79010f399b659164382ea975c02707e0, type: 2}
+  - skillSlotId: 2
+    ability: {fileID: 11400000, guid: fffe394e0d0852846b336d330d517c5a, type: 2}
+  - skillSlotId: 1
+    ability: {fileID: 0}
 --- !u!1 &6123176685334656487
 GameObject:
   m_ObjectHideFlags: 0

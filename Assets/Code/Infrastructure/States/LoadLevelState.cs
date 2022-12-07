@@ -95,6 +95,7 @@ namespace Code.Infrastructure.States
 
             LevelStaticData levelData = _staticData.ForLevel(sceneKey);
 
+
             InitSpawners(levelData);
 
             SetupEventHandler(levelData);
@@ -140,7 +141,7 @@ namespace Code.Infrastructure.States
 
             hero.GetComponent<HeroDeath>().Construct(_gameEventHandler);
             //hero.GetComponent<HeroSkills>().Construct();
-            hero.GetComponent<HeroStateMachine>().Construct(_inputService, _progressService);
+            hero.GetComponent<HeroStateMachine>().Construct(_inputService);
             return hero;
         }
 
@@ -149,6 +150,7 @@ namespace Code.Infrastructure.States
             var hud = _gameFactory.CreateHud();
 
             hud.GetComponentInChildren<ActorUI>().Construct(hero.GetComponent<HeroHealth>());
+            hud.GetComponentInChildren<HudSkillContainer>().Construct(hero.GetComponent<HeroSkills>());
         }
 
         private static void CameraFollow(GameObject hero)

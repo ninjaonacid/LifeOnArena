@@ -46,9 +46,7 @@ namespace Code.Infrastructure.Factory
 
             hud.GetComponentInChildren<LootCounter>()
                 .Construct(_progressService.Progress.WorldData);
-            hud.GetComponentInChildren<HudSkillContainer>()
-                .Construct(_progressService.Progress.skillHudData, _staticData);
-            
+
             foreach (var openWindowButton in hud.GetComponentsInChildren<OpenWindowButton>())
             {
                 openWindowButton.Construct(_windowService);

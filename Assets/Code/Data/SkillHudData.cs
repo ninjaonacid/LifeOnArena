@@ -8,7 +8,6 @@ namespace Code.Data
     [Serializable]
     public class SkillHudData
     {
-        public event Action<HeroAbility> WeaponSkillChanged;
 
         public Dictionary<SkillSlotID, AbilityId> SlotSkill;
 
@@ -17,15 +16,7 @@ namespace Code.Data
             SlotSkill = new Dictionary<SkillSlotID, AbilityId>();
         }
 
-        public void ChangeWeaponSkill(HeroAbility heroAbility)
-        {
-            if (SlotSkill.TryAdd(heroAbility.SkillSlotID, heroAbility.AbilityId))
-                SlotSkill[heroAbility.SkillSlotID] = heroAbility.AbilityId;
-
-
-            WeaponSkillChanged?.Invoke(heroAbility);
-        }
-
+    
     }
 
 }

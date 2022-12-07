@@ -77,6 +77,11 @@ namespace Code.StaticData
             return null;
         }
 
+        public Dictionary<AbilityId, HeroAbility> AbilityList()
+        {
+            return _heroAbilities;
+        }
+
         public LevelStaticData ForLevel(string sceneKey) =>
         
             _levels.TryGetValue(sceneKey, out LevelStaticData staticData)

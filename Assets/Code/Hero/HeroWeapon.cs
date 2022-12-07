@@ -1,6 +1,3 @@
-using Code.Data;
-using Code.Services;
-using Code.Services.PersistentProgress;
 using Code.StaticData;
 using UnityEngine;
 
@@ -9,15 +6,10 @@ namespace Code.Hero
     public class HeroWeapon : MonoBehaviour
     {
         public Transform WeaponSlot;
+        public HeroSkills HeroSkills;
+
         private GameObject _currentWeapon;
 
-        private IProgressService _progressService;
-        private PlayerProgress _progress => _progressService.Progress;
-
-        private void Awake()
-        {
-            _progressService = AllServices.Container.Single<IProgressService>();
-        }
 
         public void EquipWeapon(WeaponData weaponData)
         {
@@ -32,7 +24,7 @@ namespace Code.Hero
                 weaponData.Rotation.y, 
                 weaponData.Rotation.z);
 
-            _progress.skillHudData.ChangeWeaponSkill(weaponData.Ability);
+            HeroSkills.ChangeSkill(weaponData.Ability);
 
         }
     }

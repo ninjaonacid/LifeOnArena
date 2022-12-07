@@ -15,7 +15,7 @@ namespace Code.Hero
     public class HeroStateMachine : BaseStateMachine
     {
         private IInputService _input;
-        private IProgressService _progress;
+   
         [SerializeField] private HeroMovement _heroMovement;
         [SerializeField] private HeroAnimator _heroAnimator;
         [SerializeField] private HeroRotation _heroRotation;
@@ -27,12 +27,11 @@ namespace Code.Hero
 
         public bool IsInTransition { get; private set; }
 
-        public void Construct(IInputService input, IProgressService progress)
+        public void Construct(IInputService input)
         {
             _input = input;
-            _progress = progress;
-            _progress.Progress.skillHudData.WeaponSkillChanged += ChangeStateMachine;
-
+       
+            _heroSkills.OnSkillChanged += BuildTransitions;
             InitializeStateMachine();
             BuildTransitions();
         }
@@ -70,15 +69,9 @@ namespace Code.Hero
             InitState(_states[typeof(HeroIdleState)]);
         }
 
-        private void ChangeStateMachine(HeroAbility obj)
-        {
-
-            // FindTransitions(GetSkillState(weaponSkill));
-
-        }
-
         private void BuildTransitions()
         {
+
             Func<bool> AttackPressed() => () => _input.isAttackButtonUp();
             Func<bool> FirstSkillPressed() => () => _input.isSkillButton1();
             Func<bool> SecondSkillPressed() => () => _input.isSkillButton2();

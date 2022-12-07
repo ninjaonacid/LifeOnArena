@@ -1,5 +1,4 @@
-using Code.Data;
-using Code.Services;
+using Code.Hero;
 using UnityEngine;
 
 namespace Code.UI.HUD.Skills
@@ -7,16 +6,24 @@ namespace Code.UI.HUD.Skills
     public class HudSkillContainer : MonoBehaviour
     {
         private HudSkillButton[] _skillButtons;
-
-        public void Construct(SkillHudData skillHudData,
-            IStaticDataService staticData)
+        private HeroSkills _heroSkills;
+        public void Construct(HeroSkills heroSkills)
         {
-
+            _heroSkills = heroSkills;
             _skillButtons = GetComponentsInChildren<HudSkillButton>();
+            _heroSkills.OnSkillChanged += SetSkillSlots;
+            SetSkillSlots();
+        }
 
+        private void SetSkillSlots()
+        {
             for (int i = 0; i < _skillButtons.Length; i++)
             {
-                _skillButtons[i].Construct(staticData, skillHudData);
+                if (_skillButtons[i].SkillSlotID == _heroSkills.SkillSlots[i].skillSlotId)
+                {
+                    _skillButtons[i].HeroAbility = _heroSkills.SkillSlots[i].ability;
+                    _skillButtons[i].UpdateSkill();
+                }
             }
         }
     }
