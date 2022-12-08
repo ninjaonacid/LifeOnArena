@@ -1,5 +1,4 @@
-using Code.Data;
-using Code.Hero;
+using Code.Hero.Abilities;
 using Code.StaticData.Ability;
 using UnityEngine;
 
@@ -10,7 +9,7 @@ namespace Code.UI.HUD.Skills
         public AbilityId AbilityId;
         public SkillSlotID SkillSlotID;
 
-        public HeroAbilityData heroAbilityData;
+        public Ability heroAbility;
 
         private HudSkillIcon _skillIcon;
 
@@ -20,12 +19,11 @@ namespace Code.UI.HUD.Skills
             _skillIcon.Image.enabled = false;
         }
 
-        public void UpdateSkill()
+        public void UpdateSkillView()
         {
-            if (heroAbilityData != null)
+            if (heroAbility != null)
             {
-                AbilityId = heroAbilityData.AbilityId;
-                _skillIcon.Image.sprite = heroAbilityData.SkillIcon;
+                _skillIcon.Image.sprite = heroAbility.AbilityIcon;
                 _skillIcon.Image.enabled = true;
             }
         }

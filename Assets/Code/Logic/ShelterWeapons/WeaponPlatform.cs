@@ -3,6 +3,7 @@ using Code.Hero;
 using Code.Services;
 using Code.Services.Input;
 using Code.StaticData;
+using Code.UI.WeaponPlatform;
 using UnityEngine;
 
 namespace Code.Logic.ShelterWeapons
@@ -10,8 +11,9 @@ namespace Code.Logic.ShelterWeapons
     public class WeaponPlatform : MonoBehaviour
     {
         [SerializeField] private WeaponId weaponId;
+        [SerializeField] private WeaponPlatformAbilityUi abilityView;
 
-        public WeaponData weaponData;
+        public WeaponData WeaponData;
         public Transform WeaponContainer;
         public EquipWeaponButton EquipWeaponButton;
         private bool _isPlayerNear;
@@ -19,20 +21,20 @@ namespace Code.Logic.ShelterWeapons
         private IInputService _input;
         private HeroWeapon _heroWeapon;
 
-        public void Construct(StaticDataService staticData)
-        {
-        }
+
         private void Update()
         {
             if (_isPlayerNear && _input.isInteractButtonUp())
             {
-               _heroWeapon.EquipWeapon(weaponData);
+               _heroWeapon.EquipWeapon(WeaponData);
             }
         }
 
         private void Awake()
         {
             _input = AllServices.Container.Single<IInputService>();
+
+            abilityView.Construct(WeaponData);
 
             TriggerObserver.TriggerEnter += TriggerEnter;
             TriggerObserver.TriggerExit += TriggerExit;

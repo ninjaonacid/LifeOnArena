@@ -1,12 +1,10 @@
 using System;
-using System.Collections.Generic;
 using Code.Data;
 using Code.Hero.Abilities;
 using Code.Infrastructure.Factory;
 using Code.Services.PersistentProgress;
 using Code.StaticData.Ability;
 using Code.UI.HUD.Skills;
-using Cysharp.Threading.Tasks.Triggers;
 using UnityEngine;
 
 namespace Code.Hero
@@ -17,59 +15,59 @@ namespace Code.Hero
 
         public SkillHudData SkillHudData;
 
-        public SkillSlot WeaponSkill;
-        public SkillSlot DodgeSkill;
-        public SkillSlot RageSkill;
+        public SkillSlot[] SkillSlots;
 
         private IAbilityFactory _abilityFactory;
         [Serializable]
         public class SkillSlot
         {
-            public SkillSlotID skillSlotId;
-            public AbilityId abilityId;
-            public HeroAbilityData abilityData;
+            public SkillSlotID SkillSlotId;
+            public AbilityId AbilityId;
+            public Ability Ability;
         }
-
 
         public void Construct(IAbilityFactory abilityFactory)
         {
             _abilityFactory = abilityFactory;
         }
-        private void Awake()
-        {
-
-        }
-
+    
         public void ChangeWeaponSkill(HeroAbilityData heroAbilityData)
         {
-            WeaponSkill.abilityData = heroAbilityData;
-            WeaponSkill.abilityId = heroAbilityData.AbilityId;
+            foreach (var slot in SkillSlots)
+            {
+                if (heroAbilityData.SkillSlotID == slot.SkillSlotId)
+                {
+                    slot.AbilityId = heroAbilityData.AbilityId;
+                    slot.Ability = _abilityFactory.CreateAbility(heroAbilityData.AbilityId);
+                    OnSkillChanged?.Invoke();
+                }
+            }
 
             OnSkillChanged?.Invoke();
         }
 
         private void LoadAbilities()
         {
-            _abilityFactory.CreateAbility(WeaponSkill.abilityId);
-            _abilityFactory.CreateAbility(DodgeSkill.abilityId);
-            _abilityFactory.CreateAbility(RageSkill.abilityId);
+            foreach (var slot in SkillSlots)
+            {
+               slot.Ability =  _abilityFactory.CreateAbility(slot.AbilityId);
+               
+            }
+
+            OnSkillChanged?.Invoke();
         }
     
         public void LoadProgress(PlayerProgress progress)
         {
             SkillHudData = progress.skillHudData;
-            if (SkillHudData.SlotSkill.TryGetValue(WeaponSkill.skillSlotId, out var weaponAbility))
+
+            foreach (var slot in SkillSlots)
             {
-                WeaponSkill.abilityId = weaponAbility;
-            };
-            if (SkillHudData.SlotSkill.TryGetValue(DodgeSkill.skillSlotId, out var dodgeAbility))
-            {
-                DodgeSkill.abilityId = dodgeAbility;
-            };
-            if (SkillHudData.SlotSkill.TryGetValue(WeaponSkill.skillSlotId, out var rageAbility))
-            {
-                RageSkill.abilityId = rageAbility;
-            };
+                if(SkillHudData.SlotSkill.TryGetValue(slot.SkillSlotId, out var abilityId))
+                {
+                    slot.AbilityId = abilityId;
+                }
+            }
 
             LoadAbilities();
 
@@ -77,19 +75,12 @@ namespace Code.Hero
 
         public void UpdateProgress(PlayerProgress progress)
         {
-            if (SkillHudData.SlotSkill.TryAdd(WeaponSkill.skillSlotId, WeaponSkill.abilityId))
+            foreach (var slot in SkillSlots)
             {
-                SkillHudData.SlotSkill[WeaponSkill.skillSlotId] = WeaponSkill.abilityId;
-            };
-
-            if (SkillHudData.SlotSkill.TryAdd(DodgeSkill.skillSlotId, DodgeSkill.abilityId))
-            {
-                SkillHudData.SlotSkill[DodgeSkill.skillSlotId] = DodgeSkill.abilityId;
-            };
-
-            if(SkillHudData.SlotSkill.TryAdd(RageSkill.skillSlotId, RageSkill.abilityId))
-            {
-                SkillHudData.SlotSkill[RageSkill.skillSlotId] = RageSkill.abilityId;
+                if(SkillHudData.SlotSkill.TryAdd(slot.SkillSlotId, slot.AbilityId))
+                {
+                    SkillHudData.SlotSkill[slot.SkillSlotId] = slot.AbilityId;
+                }
             }
         }
     }

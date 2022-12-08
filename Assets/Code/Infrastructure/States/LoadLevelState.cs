@@ -26,6 +26,7 @@ namespace Code.Infrastructure.States
         private IEnemyFactory _enemyFactory;
         private IHeroFactory _heroFactory;
         private IGameFactory _gameFactory;
+        private IAbilityFactory _abilityFactory;
         private IProgressService _progressService;
         private IInputService _inputService;
         private IStaticDataService _staticData;
@@ -56,6 +57,7 @@ namespace Code.Infrastructure.States
             _staticData = _services.Single<IStaticDataService>();
             _saveLoadService = _services.Single<ISaveLoadService>();
             _gameEventHandler = _services.Single<IGameEventHandler>();
+            _abilityFactory = _services.Single<IAbilityFactory>();
 
             _curtain.Show();
             _enemyObjectPool.Cleanup();
@@ -140,7 +142,7 @@ namespace Code.Infrastructure.States
             var hero =  _heroFactory.CreateHero(levelData.HeroInitialPosition);
 
             hero.GetComponent<HeroDeath>().Construct(_gameEventHandler);
-            //hero.GetComponent<HeroSkills>().Construct();
+            hero.GetComponent<HeroSkills>().Construct(_abilityFactory);
             hero.GetComponent<HeroStateMachine>().Construct(_inputService);
             return hero;
         }

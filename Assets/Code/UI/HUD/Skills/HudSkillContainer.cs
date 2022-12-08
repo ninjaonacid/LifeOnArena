@@ -19,10 +19,11 @@ namespace Code.UI.HUD.Skills
         {
             for (int i = 0; i < _skillButtons.Length; i++)
             {
-                if (_skillButtons[i].SkillSlotID == _heroSkills.SkillSlots[i].skillSlotId)
+                if (_skillButtons[i].SkillSlotID == _heroSkills.SkillSlots[i].SkillSlotId)
                 {
-                    _skillButtons[i].heroAbilityData = _heroSkills.SkillSlots[i].abilityData;
-                    _skillButtons[i].UpdateSkill();
+                    _skillButtons[i].AbilityId = _heroSkills.SkillSlots[i].AbilityId;
+                    _skillButtons[i].heroAbility = _heroSkills.SkillSlots[i].Ability;
+                    _skillButtons[i].UpdateSkillView();
                 }
             }
         }

@@ -123,6 +123,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 23800000, guid: 58cad8cf590aca14e908cd153c454f69, type: 2}
+--- !u!114 &1596139 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4838607972585291443, guid: 2bbf36ffd78ce7740b5c66b331847e0a, type: 3}
+  m_PrefabInstance: {fileID: 816992933}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29dcefee6b857d843bc57cb98dc153c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &62533652
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -198,7 +209,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh26980
+  m_Name: pb_Mesh26986
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1621,9 +1632,21 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4605570060385569054, guid: 2bbf36ffd78ce7740b5c66b331847e0a, type: 3}
+      propertyPath: weaponId
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4605570060385569054, guid: 2bbf36ffd78ce7740b5c66b331847e0a, type: 3}
+      propertyPath: WeaponData
+      value: 
+      objectReference: {fileID: 11400000, guid: 55740ba5cc3529f4cb6cd977ecb5ae33, type: 2}
+    - target: {fileID: 4605570060385569054, guid: 2bbf36ffd78ce7740b5c66b331847e0a, type: 3}
       propertyPath: weaponData
       value: 
       objectReference: {fileID: 11400000, guid: 55740ba5cc3529f4cb6cd977ecb5ae33, type: 2}
+    - target: {fileID: 4605570060385569054, guid: 2bbf36ffd78ce7740b5c66b331847e0a, type: 3}
+      propertyPath: abilityView
+      value: 
+      objectReference: {fileID: 1596139}
     - target: {fileID: 7989954635120383049, guid: 2bbf36ffd78ce7740b5c66b331847e0a, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -1703,9 +1726,17 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2357330012653590075, guid: a071a822ba034354eb401b65444d3503, type: 3}
+      propertyPath: WeaponData
+      value: 
+      objectReference: {fileID: 11400000, guid: cf39cfdcac6cebb418e41811a04f8381, type: 2}
+    - target: {fileID: 2357330012653590075, guid: a071a822ba034354eb401b65444d3503, type: 3}
       propertyPath: weaponData
       value: 
       objectReference: {fileID: 11400000, guid: cf39cfdcac6cebb418e41811a04f8381, type: 2}
+    - target: {fileID: 2357330012653590075, guid: a071a822ba034354eb401b65444d3503, type: 3}
+      propertyPath: abilityView
+      value: 
+      objectReference: {fileID: 1168622811}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a071a822ba034354eb401b65444d3503, type: 3}
 --- !u!1001 &984903662
@@ -3774,7 +3805,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh27014
+  m_Name: pb_Mesh27020
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -4078,6 +4109,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 953ab5adfd5de784e9c5dd0e59e0de40, type: 3}
+--- !u!114 &1168622811 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6663813322459111830, guid: a071a822ba034354eb401b65444d3503, type: 3}
+  m_PrefabInstance: {fileID: 970355400}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29dcefee6b857d843bc57cb98dc153c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1239223261
 PrefabInstance:
   m_ObjectHideFlags: 0

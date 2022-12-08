@@ -6,12 +6,16 @@ namespace Code.UI.WeaponPlatform
 {
     public class WeaponPlatformAbilityUi : MonoBehaviour
     {
-        public WeaponData weaponData;
+        private WeaponData _platformWeapon;
 
-        private void Awake()
+
+        public void Construct(WeaponData platformWeapon)
         {
+            _platformWeapon = platformWeapon;
+
             var image = GetComponent<Image>();
-            image.sprite = weaponData.abilityData.SkillIcon;
+            image.sprite = _platformWeapon.abilityData.SkillIcon;
         }
+     
     }
 }
