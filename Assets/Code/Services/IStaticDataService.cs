@@ -12,6 +12,6 @@ namespace Code.Services
         ParticlesStaticData ForParticle(ParticleId id);
         LevelStaticData ForLevel(string sceneKey);
         WindowConfig ForWindow(UIWindowID menuId);
-        HeroAbility ForAbility(AbilityId abilityId);
+        HeroAbilityData ForAbility(AbilityId abilityId);
     }
 }

@@ -50,7 +50,7 @@ namespace Code.UI.SkillsMenu
         {
             for (int i = 0; i < _skillHolders.Length; i++)
             {
-                return skillItem.HeroAbility == _skillHolders[i].HeroAbility;
+                return skillItem.heroAbilityData == _skillHolders[i].heroAbilityData;
             }
             return false;
         }
@@ -59,7 +59,7 @@ namespace Code.UI.SkillsMenu
         {
             for (int i = 0; i < _skillHolders.Length; i++)
             {
-                if (skillItem.HeroAbility == _skillHolders[i].HeroAbility)
+                if (skillItem.heroAbilityData == _skillHolders[i].heroAbilityData)
                 {
                     
                 }

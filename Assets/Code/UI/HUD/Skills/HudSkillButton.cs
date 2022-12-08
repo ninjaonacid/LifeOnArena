@@ -10,7 +10,7 @@ namespace Code.UI.HUD.Skills
         public AbilityId AbilityId;
         public SkillSlotID SkillSlotID;
 
-        public HeroAbility HeroAbility;
+        public HeroAbilityData heroAbilityData;
 
         private HudSkillIcon _skillIcon;
 
@@ -22,10 +22,10 @@ namespace Code.UI.HUD.Skills
 
         public void UpdateSkill()
         {
-            if (HeroAbility != null)
+            if (heroAbilityData != null)
             {
-                AbilityId = HeroAbility.AbilityId;
-                _skillIcon.Image.sprite = HeroAbility.SkillIcon;
+                AbilityId = heroAbilityData.AbilityId;
+                _skillIcon.Image.sprite = heroAbilityData.SkillIcon;
                 _skillIcon.Image.enabled = true;
             }
         }

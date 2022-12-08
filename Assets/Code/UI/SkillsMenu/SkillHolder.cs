@@ -14,7 +14,7 @@ namespace Code.UI.SkillsMenu
         public Image Image => _image;
         public int SlotId;
         public AbilityId AbilityId = AbilityId.Empty;
-        public HeroAbility HeroAbility;
+        public HeroAbilityData heroAbilityData;
         private SkillHolderIcon _skillHolderIcon;
         public event Action OnSlotChanged;
 
@@ -29,10 +29,10 @@ namespace Code.UI.SkillsMenu
         public void Construct(SkillHolderContainer skillHolderContainer, IStaticDataService staticData)
         {
             _skillHolderContainer = skillHolderContainer;
-            HeroAbility = staticData.ForAbility(AbilityId);
-            if (HeroAbility != null)
+            heroAbilityData = staticData.ForAbility(AbilityId);
+            if (heroAbilityData != null)
             {
-                _skillHolderIcon.Image.sprite = HeroAbility.SkillIcon;
+                _skillHolderIcon.Image.sprite = heroAbilityData.SkillIcon;
                 _skillHolderIcon.Image.enabled = true;
             }
             else
@@ -48,9 +48,9 @@ namespace Code.UI.SkillsMenu
                 _skillHolderContainer.SwapSkill(skillItem);
                 return;
             }*/
-            HeroAbility = skillItem.HeroAbility;
-            AbilityId = skillItem.HeroAbility.AbilityId;
-            _skillHolderIcon.Image.sprite = HeroAbility.SkillIcon;
+            heroAbilityData = skillItem.heroAbilityData;
+            AbilityId = skillItem.heroAbilityData.AbilityId;
+            _skillHolderIcon.Image.sprite = heroAbilityData.SkillIcon;
             _skillHolderIcon.Image.enabled = true;
             _skillHolderContainer.StopFade();
             _skillHolderContainer.ResetSelection();

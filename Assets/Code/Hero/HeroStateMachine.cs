@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Code.Hero.HeroStates;
 using Code.Logic;
 using Code.Services.Input;
-using Code.Services.PersistentProgress;
 using Code.StateMachine;
 using Code.StaticData.Ability;
 using Cysharp.Threading.Tasks;
@@ -24,7 +23,7 @@ namespace Code.Hero
    
         private Dictionary<Type, HeroBaseState> _states;
         private Dictionary<Type, List<HeroTransition>> _transitions;
-
+        private Dictionary<AbilityId, Type> _abilityStates;
         public bool IsInTransition { get; private set; }
 
         public void Construct(IInputService input)
@@ -62,6 +61,11 @@ namespace Code.Hero
                     new HeroMovementState(this, _input, _heroAnimator, _heroMovement),
                 [typeof(SpinAttackState)] =
                     new SpinAttackState(this, _input, _heroAnimator, _heroRotation, _heroAttack),
+            };
+
+            _abilityStates = new Dictionary<AbilityId, Type>
+            {
+                [AbilityId.SpinAttack] = typeof(SpinAttackState),
             };
 
             _transitions = new Dictionary<Type, List<HeroTransition>>();
@@ -112,20 +116,6 @@ namespace Code.Hero
             //AddTransition(GetSkillState(weaponSkill), GetState<HeroIdleState>(), StateDurationEnd());
         }
 
-        private void FindTransitions(HeroBaseState stateToRemove)
-        {
-            foreach (var item in _transitions)
-            {
-                var result = item.Value;
-                for (int i = 0; i < result.Count; i++)
-                {
-                    if (result[i].To.GetType() == stateToRemove.GetType())
-                    {
-                        result.RemoveAt(i);
-                    }
-                }
-            }
-        }
         public async void DoTransition(HeroTransition transition)
         {
             IsInTransition = true;

@@ -11,7 +11,7 @@ namespace Code.UI.WeaponPlatform
         private void Awake()
         {
             var image = GetComponent<Image>();
-            image.sprite = weaponData.Ability.SkillIcon;
+            image.sprite = weaponData.abilityData.SkillIcon;
         }
     }
 }

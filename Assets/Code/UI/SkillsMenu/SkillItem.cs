@@ -9,7 +9,7 @@ namespace Code.UI.SkillsMenu
     public class SkillItem : MonoBehaviour, IPointerDownHandler
     {
         public Image Image;
-        public HeroAbility HeroAbility;
+        public HeroAbilityData heroAbilityData;
         private SkillListContainer _skillListContainer;
         public void Construct(SkillListContainer skillListContainer)
         {
@@ -19,7 +19,7 @@ namespace Code.UI.SkillsMenu
         private void Awake()
         {
             Image = GetComponent<Image>();
-            Image.sprite = HeroAbility.SkillIcon;
+            Image.sprite = heroAbilityData.SkillIcon;
         }
 
         public void OnPointerDown(PointerEventData eventData)

@@ -93,6 +93,10 @@ namespace Code.Infrastructure.States
                 _services.Single<IProgressService>(),
                 _services.Single<IRandomService>()));
 
+            _services.RegisterSingle<IAbilityFactory>(new AbilityFactory(
+                _services.Single<IStaticDataService>(),
+                _services.Single<IProgressService>()));
+
             _services.RegisterSingle<IEnemyObjectPool>(new EnemyObjectPool(
                 _services.Single<IEnemyFactory>()));
 

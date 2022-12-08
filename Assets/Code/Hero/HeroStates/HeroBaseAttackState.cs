@@ -1,6 +1,4 @@
-using System;
 using Code.Services.Input;
-using UnityEngine;
 
 namespace Code.Hero.HeroStates
 {

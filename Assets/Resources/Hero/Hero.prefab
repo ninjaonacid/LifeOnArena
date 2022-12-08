@@ -721,11 +721,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SkillSlots:
   - skillSlotId: 0
-    ability: {fileID: 11400000, guid: 79010f399b659164382ea975c02707e0, type: 2}
+    ability: 0
+    abilityData: {fileID: 0}
   - skillSlotId: 2
-    ability: {fileID: 11400000, guid: fffe394e0d0852846b336d330d517c5a, type: 2}
+    ability: 0
+    abilityData: {fileID: 0}
   - skillSlotId: 1
-    ability: {fileID: 0}
+    ability: 0
+    abilityData: {fileID: 0}
+  WeaponSkill:
+    skillSlotId: 0
+    ability: 0
+    abilityData: {fileID: 0}
+  DashSkill:
+    skillSlotId: 2
+    ability: 4
+    abilityData: {fileID: 0}
+  RageSkill:
+    skillSlotId: 1
+    ability: 0
+    abilityData: {fileID: 0}
 --- !u!1 &6123176685334656487
 GameObject:
   m_ObjectHideFlags: 0
