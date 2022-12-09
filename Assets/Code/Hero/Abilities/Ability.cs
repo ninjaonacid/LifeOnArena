@@ -17,12 +17,12 @@ namespace Code.Hero.Abilities
 
         public AbilityId AbilityId;
 
-        public Ability(float damage, float cooldown, AbilityId abilityId, Sprite icon, Type stateMachinestate)
+        public Ability(float damage, float cooldown, AbilityId abilityId, Sprite icon, Type stateMachineState)
         {
             Damage = damage;
             Cooldown = cooldown;
             AbilityId = abilityId;
-            StateMachineState = stateMachinestate;
+            StateMachineState = stateMachineState;
             AbilityIcon = icon;
 
         }

@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
+using Code.Hero.Abilities;
 using Code.Hero.HeroStates;
 using Code.Logic;
 using Code.Services.Input;
 using Code.StateMachine;
 using Code.StaticData.Ability;
+using Code.UI.HUD.Skills;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
@@ -75,6 +77,10 @@ namespace Code.Hero
 
         private void BuildTransitions()
         {
+            _transitions.Clear();
+            Ability WeaponAbility = _heroSkills.GetSkillSlotAbility(SkillSlotID.WeaponSkillSlot);
+            Ability DodgeAbility = _heroSkills.GetSkillSlotAbility(SkillSlotID.Dodge);
+            Ability RageAbility = _heroSkills.GetSkillSlotAbility(SkillSlotID.Rage);
 
             Func<bool> AttackPressed() => () => _input.isAttackButtonUp();
             Func<bool> FirstSkillPressed() => () => _input.isSkillButton1();
@@ -85,35 +91,34 @@ namespace Code.Hero
             Func<bool> MovementEnd() => () => _input.Axis.sqrMagnitude < Constants.Epsilon;
 
             AddTransition(GetState<FirstAttackState>(), GetState<SecondAttackState>(), AttackPressed());
-            //AddTransition(GetState<FirstAttackState>(), GetSkillState(weaponSkill), FirstSkillPressed());
-            //AddTransition(GetState<FirstAttackState>(), GetSkillState(dodgeSkill), SecondSkillPressed());
-            //AddTransition(GetState<FirstAttackState>(), GetSkillState(rageSkill), ThirdSkillPressed());
+            AddTransition(GetState<FirstAttackState>(), GetSkillState(WeaponAbility), FirstSkillPressed());
+            AddTransition(GetState<FirstAttackState>(), GetSkillState(DodgeAbility), SecondSkillPressed());
+            AddTransition(GetState<FirstAttackState>(), GetSkillState(RageAbility), ThirdSkillPressed());
             AddTransition(GetState<FirstAttackState>(), GetState<HeroIdleState>(), StateDurationEnd());
 
             AddTransition(GetState<SecondAttackState>(), GetState<ThirdAttackState>(), AttackPressed());
-            //AddTransition(GetState<SecondAttackState>(), GetSkillState(weaponSkill), FirstSkillPressed());
-            //AddTransition(GetState<SecondAttackState>(), GetSkillState(dodgeSkill), SecondSkillPressed());
-            //AddTransition(GetState<SecondAttackState>(), GetSkillState(rageSkill), ThirdSkillPressed());
+            AddTransition(GetState<SecondAttackState>(), GetSkillState(WeaponAbility), FirstSkillPressed());
+            AddTransition(GetState<SecondAttackState>(), GetSkillState(DodgeAbility), SecondSkillPressed());
+            AddTransition(GetState<SecondAttackState>(), GetSkillState(RageAbility), ThirdSkillPressed());
             AddTransition(GetState<SecondAttackState>(), GetState<HeroIdleState>(), StateDurationEnd());
 
-            //AddTransition(GetState<ThirdAttackState>(), GetSkillState(weaponSkill), FirstSkillPressed());
-            //AddTransition(GetState<ThirdAttackState>(), GetSkillState(dodgeSkill), SecondSkillPressed());
-            //AddTransition(GetState<ThirdAttackState>(), GetSkillState(rageSkill), ThirdSkillPressed());
+            AddTransition(GetState<ThirdAttackState>(), GetSkillState(WeaponAbility), FirstSkillPressed());
+            AddTransition(GetState<ThirdAttackState>(), GetSkillState(DodgeAbility), SecondSkillPressed());
+            AddTransition(GetState<ThirdAttackState>(), GetSkillState(RageAbility), ThirdSkillPressed());
             AddTransition(GetState<ThirdAttackState>(), GetState<HeroIdleState>(), StateDurationEnd());
 
-            //AddTransition(GetState<HeroIdleState>(), GetSkillState(weaponSkill), FirstSkillPressed());
-            //AddTransition(GetState<HeroIdleState>(), GetSkillState(dodgeSkill), SecondSkillPressed());
-            //AddTransition(GetState<HeroIdleState>(), GetSkillState(rageSkill), ThirdSkillPressed());
+            AddTransition(GetState<HeroIdleState>(), GetSkillState(WeaponAbility), FirstSkillPressed());
+            AddTransition(GetState<HeroIdleState>(), GetSkillState(DodgeAbility), SecondSkillPressed());
+            AddTransition(GetState<HeroIdleState>(), GetSkillState(RageAbility), ThirdSkillPressed());
             AddTransition(GetState<HeroIdleState>(), GetState<FirstAttackState>(), AttackPressed());
             AddTransition(GetState<HeroIdleState>(), GetState<HeroMovementState>(), MovementStart());
 
             AddTransition(GetState<HeroMovementState>(), GetState<HeroIdleState>(), MovementEnd());
             AddTransition(GetState<HeroMovementState>(), GetState<FirstAttackState>(), AttackPressed());
-            //AddTransition(GetState<HeroMovementState>(), GetSkillState(weaponSkill), FirstSkillPressed());
-            //AddTransition(GetState<HeroMovementState>(), GetSkillState(dodgeSkill), SecondSkillPressed());
-            //AddTransition(GetState<HeroMovementState>(), GetSkillState(rageSkill), ThirdSkillPressed());
-
-            //AddTransition(GetSkillState(weaponSkill), GetState<HeroIdleState>(), StateDurationEnd());
+            AddTransition(GetState<HeroMovementState>(), GetSkillState(WeaponAbility), FirstSkillPressed());
+            AddTransition(GetState<HeroMovementState>(), GetSkillState(DodgeAbility), SecondSkillPressed());
+            AddTransition(GetState<HeroMovementState>(), GetSkillState(RageAbility), ThirdSkillPressed());
+            AddTransition(GetSkillState(WeaponAbility), GetState<HeroIdleState>(), StateDurationEnd());
         }
 
         public async void DoTransition(HeroTransition transition)
@@ -156,9 +161,9 @@ namespace Code.Hero
             transitions.Add(new HeroTransition(to, condition));
         }
 
-        private HeroBaseState GetSkillState(AbilityId abilityId)
+        private HeroBaseState GetSkillState(Ability ability)
         {
-            switch (abilityId)
+            switch (ability?.AbilityId)
             {
                 case AbilityId.SpinAttack:
                     {

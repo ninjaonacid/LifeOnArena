@@ -13,7 +13,7 @@ namespace Code.Hero
     {
         public event Action OnSkillChanged;
 
-        public SkillHudData SkillHudData;
+        private SkillHudData _skillHudData;
 
         public SkillSlot[] SkillSlots;
 
@@ -30,58 +30,71 @@ namespace Code.Hero
         {
             _abilityFactory = abilityFactory;
         }
-    
-        public void ChangeWeaponSkill(HeroAbilityData heroAbilityData)
+
+        public Ability GetSkillSlotAbility(SkillSlotID skillSlot)
         {
-            foreach (var slot in SkillSlots)
+            for (int i = 0; i < SkillSlots.Length; i++)
             {
-                if (heroAbilityData.SkillSlotID == slot.SkillSlotId)
+                if (SkillSlots[i].SkillSlotId == skillSlot)
                 {
-                    slot.AbilityId = heroAbilityData.AbilityId;
-                    slot.Ability = _abilityFactory.CreateAbility(heroAbilityData.AbilityId);
-                    OnSkillChanged?.Invoke();
+                    return SkillSlots[i].Ability;
                 }
             }
+            return null;
+        }
+        
 
-            OnSkillChanged?.Invoke();
+    public void ChangeWeaponSkill(HeroAbilityData heroAbilityData)
+    {
+        foreach (var slot in SkillSlots)
+        {
+            if (heroAbilityData.SkillSlotID == slot.SkillSlotId)
+            {
+                slot.AbilityId = heroAbilityData.AbilityId;
+                slot.Ability = _abilityFactory.CreateAbility(heroAbilityData.AbilityId);
+                OnSkillChanged?.Invoke();
+            }
         }
 
-        private void LoadAbilities()
+        OnSkillChanged?.Invoke();
+    }
+
+    private void LoadAbilities()
+    {
+        foreach (var slot in SkillSlots)
         {
-            foreach (var slot in SkillSlots)
-            {
-               slot.Ability =  _abilityFactory.CreateAbility(slot.AbilityId);
-               
-            }
-
-            OnSkillChanged?.Invoke();
-        }
-    
-        public void LoadProgress(PlayerProgress progress)
-        {
-            SkillHudData = progress.skillHudData;
-
-            foreach (var slot in SkillSlots)
-            {
-                if(SkillHudData.SlotSkill.TryGetValue(slot.SkillSlotId, out var abilityId))
-                {
-                    slot.AbilityId = abilityId;
-                }
-            }
-
-            LoadAbilities();
+            slot.Ability = _abilityFactory.CreateAbility(slot.AbilityId);
 
         }
 
-        public void UpdateProgress(PlayerProgress progress)
+        OnSkillChanged?.Invoke();
+    }
+
+    public void LoadProgress(PlayerProgress progress)
+    {
+        _skillHudData = progress.skillHudData;
+
+        foreach (var slot in SkillSlots)
         {
-            foreach (var slot in SkillSlots)
+            if (_skillHudData.SlotSkill.TryGetValue(slot.SkillSlotId, out var abilityId))
             {
-                if(SkillHudData.SlotSkill.TryAdd(slot.SkillSlotId, slot.AbilityId))
-                {
-                    SkillHudData.SlotSkill[slot.SkillSlotId] = slot.AbilityId;
-                }
+                slot.AbilityId = abilityId;
+            }
+        }
+
+        LoadAbilities();
+
+    }
+
+    public void UpdateProgress(PlayerProgress progress)
+    {
+        foreach (var slot in SkillSlots)
+        {
+            if (_skillHudData.SlotSkill.TryAdd(slot.SkillSlotId, slot.AbilityId))
+            {
+                _skillHudData.SlotSkill[slot.SkillSlotId] = slot.AbilityId;
             }
         }
     }
+}
 }
