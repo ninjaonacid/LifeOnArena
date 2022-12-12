@@ -16,7 +16,7 @@ namespace Code.Hero.HeroStates
         {
             Duration = 0.7f;
             HeroAnimator.PlayAttack(this);
-            HeroAttack.DoAttack(this);
+            HeroAttack.BaseAttack();
             Debug.Log("Entered ThirdState");
         }
 

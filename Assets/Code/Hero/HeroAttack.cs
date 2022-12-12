@@ -2,25 +2,27 @@ using Code.Data;
 using Code.Hero.HeroStates;
 using Code.Logic;
 using Code.Services.PersistentProgress;
+using Code.StaticData.Ability;
 using UnityEngine;
 
 namespace Code.Hero
 {
     [RequireComponent(typeof(HeroAnimator), typeof(CharacterController))]
-    public class HeroAttack : MonoBehaviour, ISavedProgressReader
+    public class HeroAttack : MonoBehaviour, IAttack, ISavedProgressReader
     {
         private static int _layerMask;
         private readonly Collider[] _hits = new Collider[2];
         private CharacterStats _characterStats;
-        private SkillsData _skillData;
-  
+        private AttackDefinition _activeSkill;
+
+
+        public HeroWeapon HeroWeapon;
         public CharacterController CharacterController;
         public HeroAnimator HeroAnimator;
 
         public void LoadProgress(PlayerProgress progress)
         {
             _characterStats = progress.CharacterStats;
-            _skillData = progress.SkillsData;
         }
 
         private void Awake()
@@ -29,17 +31,21 @@ namespace Code.Hero
             _layerMask = 1 << LayerMask.NameToLayer("Hittable");
         }
 
-        public void DoAttack(HeroBaseAttackState state)
+        public void SetActiveSkill(AttackDefinition attackSkill)
         {
-            if (state is SpinAttackState)
-            {
-                DoDamage(_skillData.SpinAttack.Damage);
-            } 
-            else if (state is FirstAttackState || state is SecondAttackState || state is ThirdAttackState)
-            {
-                DoDamage(_characterStats.BaseDamage);
-            }
+            _activeSkill = attackSkill;
         }
+
+        public void BaseAttack()
+        {
+            DoDamage(_characterStats.BaseDamage);
+        }
+
+        public void SkillAttack()
+        {
+            DoDamage(_activeSkill.Damage);
+        }
+
         public void DoDamage(float damage)
         {
             for (var i = 0; i < Hit(); i++)
@@ -70,7 +76,5 @@ namespace Code.Hero
         {
             return new Vector3(transform.position.x, CharacterController.center.y, transform.position.z + 1f);
         }
-
-   
     }
 }

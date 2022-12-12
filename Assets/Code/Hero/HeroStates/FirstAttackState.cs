@@ -15,7 +15,7 @@ namespace Code.Hero.HeroStates
         public override void Enter()
         {
             HeroAnimator.PlayAttack(this);
-            HeroAttack.DoAttack(this);
+            HeroAttack.BaseAttack();
             Duration = 0.7f;
             Debug.Log("Entered FirstState");
         }

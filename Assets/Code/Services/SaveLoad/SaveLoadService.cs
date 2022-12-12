@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.IO;
 using Code.Data;
 using Code.Services.PersistentProgress;
-using Code.UI;
 using UnityEngine;
 
 namespace Code.Services.SaveLoad
@@ -39,6 +38,7 @@ namespace Code.Services.SaveLoad
                 progressWriter.UpdateProgress(_progressService.Progress);
 
             PlayerPrefs.SetString(ProgressKey, _progressService.Progress.ToJson());
+            SaveProgressAtPath();
         }
 
         public void SaveProgressAtPath()

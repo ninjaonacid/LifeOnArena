@@ -13,7 +13,11 @@ MonoBehaviour:
   m_Name: Shelter
   m_EditorClassIdentifier: 
   LevelKey: Shelter
-  EnemySpawners: []
+  EnemySpawners:
+  - Id: _0702d4e2-cb82-46aa-80c3-7a3c4b588b61
+    RespawnCount: 0
+    MonsterTypeId: 0
+    Position: {x: 10.6, y: -2.0998993, z: 45.5}
   HeroInitialPosition: {x: 0, y: 0, z: 18.2}
   NextLevelDoorPosition: {x: 5.8, y: -2.0998983, z: 75.91}
   NextLevelDoorRotation: {x: 0, y: 0, z: 0, w: 1}

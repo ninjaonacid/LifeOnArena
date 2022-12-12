@@ -11,6 +11,6 @@ namespace Code.Data
         public float BaseAttackSpeed;
         public float BaseDamage;
         public float BaseAttackRadius;
-        public float GoldRate;
+ 
     }
 }

@@ -11,18 +11,15 @@ namespace Code.Hero.Abilities
 
         public float Cooldown;
 
-        public Type StateMachineState;
-
         public Sprite AbilityIcon;
 
         public AbilityId AbilityId;
 
-        public Ability(float damage, float cooldown, AbilityId abilityId, Sprite icon, Type stateMachineState)
+        public Ability(float damage, float cooldown, AbilityId abilityId, Sprite icon)
         {
             Damage = damage;
             Cooldown = cooldown;
             AbilityId = abilityId;
-            StateMachineState = stateMachineState;
             AbilityIcon = icon;
 
         }

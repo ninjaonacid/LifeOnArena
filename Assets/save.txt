@@ -1,1 +1,57 @@
-{"heroHeroHp":{"CurrentHP":102.80001831054688,"MaxHP":500.0},"CharacterStats":{"CurrentLevel":0.0,"Exp":0.0,"BaseAttackSpeed":1.0,"BaseDamage":0.0,"BaseAttackRadius":1.0,"GoldRate":0.0},"KillData":{"ClearedSpawners":[]},"WorldData":{"PositionOnLevel":{"Level":"MainScene","Position":{"X":-38.6508903503418,"Y":0.08010005950927735,"Z":87.36761474609375}},"LootData":{"Collected":0}},"SkillsData":{"SpinAttack":{"Damage":0.0,"Cooldown":0.0,"Level":0.0},"FastSlash":{"Damage":0.0,"CoolDown":0.0,"Radius":0.0}},"SkillHolderData":{"AbilityID":[2,3,3]},"InventoryData":{"InventoryItems":[],"ItemAmount":1}}
+{
+  "HeroHp": {
+    "CurrentHP": 50.0,
+    "MaxHP": 50.0
+  },
+  "CharacterStats": {
+    "CurrentLevel": 0.0,
+    "Exp": 0.0,
+    "BaseAttackSpeed": 1.0,
+    "BaseDamage": 20.0,
+    "BaseAttackRadius": 1.0
+  },
+  "KillData": {
+    "ClearedSpawners": []
+  },
+  "WorldData": {
+    "PositionOnLevel": {
+      "Level": "Shelter",
+      "Position": {
+        "X": -4.90652752,
+        "Y": 1.98010015,
+        "Z": 41.41261
+      }
+    },
+    "LootData": {
+      "Collected": 0
+    }
+  },
+  "SkillsData": {
+    "SpinAttack": {
+      "Damage": 20.0,
+      "Cooldown": 0.0,
+      "Level": 0.0
+    },
+    "FastSlash": {
+      "Damage": 0.0,
+      "CoolDown": 0.0,
+      "Radius": 0.0
+    }
+  },
+  "skillHudData": {
+    "SlotSkill": {
+      "WeaponSkillSlot": {
+        "Damage": 100.0,
+        "Cooldown": 1.0,
+        "StateMachineState": "Code.Hero.HeroStates.SpinAttackState, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "AbilityId": 1
+      },
+      "Dodge": null,
+      "Rage": null
+    }
+  },
+  "InventoryData": {
+    "InventoryItems": [],
+    "ItemAmount": 1
+  }
+}

@@ -25,7 +25,7 @@ namespace Code.Hero
    
         private Dictionary<Type, HeroBaseState> _states;
         private Dictionary<Type, List<HeroTransition>> _transitions;
-        private Dictionary<AbilityId, Type> _abilityStates;
+        private Dictionary<AbilityId, HeroBaseState> _abilityStates;
         public bool IsInTransition { get; private set; }
 
         public void Construct(IInputService input)
@@ -65,9 +65,9 @@ namespace Code.Hero
                     new SpinAttackState(this, _input, _heroAnimator, _heroRotation, _heroAttack),
             };
 
-            _abilityStates = new Dictionary<AbilityId, Type>
+            _abilityStates = new Dictionary<AbilityId, HeroBaseState>
             {
-                [AbilityId.SpinAttack] = typeof(SpinAttackState),
+                
             };
 
             _transitions = new Dictionary<Type, List<HeroTransition>>();
@@ -171,9 +171,9 @@ namespace Code.Hero
                     }
 
                 case AbilityId.FastSlash:
-                    {
-                        return null;
-                    }
+                {
+                    return null;
+                }
                 default: return null;
             }
         }

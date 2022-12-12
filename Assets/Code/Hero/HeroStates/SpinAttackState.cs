@@ -18,7 +18,7 @@ namespace Code.Hero.HeroStates
         {
             _heroRotation.enabled = false;
             HeroAnimator.PlayAttack(this);
-            HeroAttack.DoAttack(this);
+            HeroAttack.SkillAttack();
             Duration = 1f;
         }
 
