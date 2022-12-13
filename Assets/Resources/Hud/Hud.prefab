@@ -1164,9 +1164,25 @@ PrefabInstance:
     m_TransformParent: {fileID: 1029952865140048372}
     m_Modifications:
     - target: {fileID: 819212837027285666, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
+      propertyPath: Button
+      value: Skill3
+      objectReference: {fileID: 0}
+    - target: {fileID: 819212837027285666, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
+      propertyPath: button
+      value: 
+      objectReference: {fileID: 7048429378334246860}
+    - target: {fileID: 819212837027285666, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
+      propertyPath: ButtonInput
+      value: 
+      objectReference: {fileID: 7048429378334246860}
+    - target: {fileID: 819212837027285666, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
       propertyPath: SkillSlotID
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 819212837027285666, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
+      propertyPath: SimpleInputButton
+      value: 
+      objectReference: {fileID: 7048429378334246860}
     - target: {fileID: 2624927343658051704, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1266,6 +1282,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2624927343658051704, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
   m_PrefabInstance: {fileID: 154624073619511321}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7048429378334246860 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7202479468229353429, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
+  m_PrefabInstance: {fileID: 154624073619511321}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 995f34434fbe45d46aacf4e120446279, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &272811684381260122
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1274,9 +1301,25 @@ PrefabInstance:
     m_TransformParent: {fileID: 1029952865140048372}
     m_Modifications:
     - target: {fileID: 819212837027285666, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
+      propertyPath: Button
+      value: Skill2
+      objectReference: {fileID: 0}
+    - target: {fileID: 819212837027285666, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
+      propertyPath: button
+      value: 
+      objectReference: {fileID: 6934804702240712335}
+    - target: {fileID: 819212837027285666, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
+      propertyPath: ButtonInput
+      value: 
+      objectReference: {fileID: 6934804702240712335}
+    - target: {fileID: 819212837027285666, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
       propertyPath: SkillSlotID
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 819212837027285666, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
+      propertyPath: SimpleInputButton
+      value: 
+      objectReference: {fileID: 6934804702240712335}
     - target: {fileID: 2624927343658051704, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1376,6 +1419,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2624927343658051704, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
   m_PrefabInstance: {fileID: 272811684381260122}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6934804702240712335 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7202479468229353429, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
+  m_PrefabInstance: {fileID: 272811684381260122}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 995f34434fbe45d46aacf4e120446279, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1665372912855339493
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1383,6 +1437,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1029952865140048372}
     m_Modifications:
+    - target: {fileID: 819212837027285666, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
+      propertyPath: Button
+      value: Skill1
+      objectReference: {fileID: 0}
+    - target: {fileID: 819212837027285666, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
+      propertyPath: button
+      value: 
+      objectReference: {fileID: 8424210965047152176}
+    - target: {fileID: 819212837027285666, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
+      propertyPath: ButtonInput
+      value: 
+      objectReference: {fileID: 8424210965047152176}
+    - target: {fileID: 819212837027285666, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
+      propertyPath: SimpleInputButton
+      value: 
+      objectReference: {fileID: 8424210965047152176}
     - target: {fileID: 1952344347578689738, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
       propertyPath: Image
       value: 
@@ -1493,6 +1563,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2624927343658051704, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
   m_PrefabInstance: {fileID: 1665372912855339493}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8424210965047152176 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7202479468229353429, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
+  m_PrefabInstance: {fileID: 1665372912855339493}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 995f34434fbe45d46aacf4e120446279, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4885572156878908648
 PrefabInstance:
   m_ObjectHideFlags: 0

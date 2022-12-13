@@ -152,7 +152,10 @@ namespace Code.Infrastructure.States
             var hud = _gameFactory.CreateHud();
 
             hud.GetComponentInChildren<ActorUI>().Construct(hero.GetComponent<HeroHealth>());
-            hud.GetComponentInChildren<HudSkillContainer>().Construct(hero.GetComponent<HeroSkills>());
+            hud.GetComponentInChildren<HudSkillContainer>().Construct(
+                hero.GetComponent<HeroSkills>(), 
+                hero.GetComponent<HeroAbilityCooldown>(),
+                _inputService);
         }
 
         private static void CameraFollow(GameObject hero)

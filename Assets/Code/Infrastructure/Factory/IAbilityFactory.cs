@@ -6,6 +6,6 @@ namespace Code.Infrastructure.Factory
 {
     public interface IAbilityFactory : IService
     {
-        Ability CreateAbility(AbilityId abilityId);
+        HeroAbilityData CreateAbility(AbilityId abilityId);
     }
 }

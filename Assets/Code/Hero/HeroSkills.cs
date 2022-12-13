@@ -24,7 +24,7 @@ namespace Code.Hero
         {
             public SkillSlotID SkillSlotId;
             public AbilityId AbilityId;
-            public Ability Ability;
+            public HeroAbilityData Ability;
         }
 
         public void Construct(IAbilityFactory abilityFactory)
@@ -32,7 +32,7 @@ namespace Code.Hero
             _abilityFactory = abilityFactory;
         }
 
-        public Ability GetSkillSlotAbility(SkillSlotID skillSlot)
+        public HeroAbilityData GetSkillSlotAbility(SkillSlotID skillSlot)
         {
             for (int i = 0; i < SkillSlots.Length; i++)
             {

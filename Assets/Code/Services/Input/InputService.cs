@@ -1,5 +1,4 @@
-﻿using System.Runtime.InteropServices.WindowsRuntime;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Code.Services.Input
 {
@@ -15,33 +14,32 @@ namespace Code.Services.Input
 
         public abstract Vector2 Axis { get; }
 
-        public bool isAttackOrSkillPressed()
+        public bool IsButtonPressed(string buttonKey)
         {
-            return isAttackButtonUp() || isSkillButton1() || isSkillButton2()
-                || isSkillButton3();
+            return SimpleInput.GetButtonUp(buttonKey);
         }
 
-        public bool isAttackButtonUp()
+        public bool IsAttackButtonUp()
         {
             return SimpleInput.GetButtonUp(Attack);
         }
 
-        public bool isSkillButton1()
+        public bool IsSkillButton1()
         {
             return SimpleInput.GetButtonUp(Skill1);
         }
 
-        public bool isSkillButton2()
+        public bool IsSkillButton2()
         {
             return SimpleInput.GetButtonUp(Skill2);
         }
 
-        public bool isSkillButton3()
+        public bool IsSkillButton3()
         {
             return SimpleInput.GetButtonUp(Skill3);
         }
 
-        public bool isInteractButtonUp()
+        public bool IsInteractButtonUp()
         {
             return SimpleInput.GetButtonUp(Interact);
         }

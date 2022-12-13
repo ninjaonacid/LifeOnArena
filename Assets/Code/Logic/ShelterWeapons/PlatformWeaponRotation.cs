@@ -5,10 +5,9 @@ namespace Code.Logic.ShelterWeapons
 {
     public class PlatformWeaponRotation : MonoBehaviour
     {
-        private void Start()
+        private void Update()
         {
-            transform.DORotate(new Vector3(0, 180, 0), 5f).SetLoops(-1, LoopType.Incremental);
+            transform.Rotate(new Vector3(0, 1, 0));
         }
-
     }
 }

@@ -20,6 +20,7 @@ namespace Code.Hero
         private readonly int _dieStateHash = Animator.StringToHash("Dying");
         private readonly int _idleStateHash = Animator.StringToHash("IDLE");
         private readonly int _runStateHash = Animator.StringToHash("WALKING");
+        private readonly int _rollStateHash = Animator.StringToHash("Roll");
 
 
         private HeroVFX _heroVFX;
@@ -51,6 +52,11 @@ namespace Code.Hero
             _heroAnimator = GetComponent<Animator>();
             _characterController = GetComponent<CharacterController>();
             _heroAttack = GetComponent<HeroAttack>();
+        }
+
+        public void PlayRoll()
+        {
+            _heroAnimator.CrossFade(_rollStateHash, 0.1f);
         }
 
         public void PlayRun()
@@ -137,6 +143,8 @@ namespace Code.Hero
                 state = AnimatorState.Idle;
             else if (stateHash == _runStateHash)
                 state = AnimatorState.Walking;
+            else if (stateHash == _rollStateHash)
+                state = AnimatorState.Roll;
             else
                 state = AnimatorState.Unknown;
 

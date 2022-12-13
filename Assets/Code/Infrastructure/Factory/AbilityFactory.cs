@@ -20,18 +20,11 @@ namespace Code.Infrastructure.Factory
             _progress = progress;
 
         }
-        public Ability CreateAbility(AbilityId abilityId)
-        {
-            var abilityData = _staticData.ForAbility(abilityId);
-            if (abilityData == null) return null;
-            var ability = new Ability(
-                abilityData.Damage,
-                abilityData.Cooldown,
-                abilityData.AbilityId,
-                abilityData.SkillIcon);
-
-            return ability;
-        }
+        public HeroAbilityData CreateAbility(AbilityId abilityId) =>
+            _staticData.ForAbility(abilityId);
+        
+            
+        
 
     }
 }

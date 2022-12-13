@@ -503,6 +503,7 @@ GameObject:
   - component: {fileID: -8125679809969938510}
   - component: {fileID: -4398335753682384271}
   - component: {fileID: -7543322082994891675}
+  - component: {fileID: 7773590576850612865}
   m_Layer: 12
   m_Name: Hero
   m_TagString: Player
@@ -724,10 +725,25 @@ MonoBehaviour:
   SkillSlots:
   - SkillSlotId: 0
     AbilityId: 0
+    Ability: {fileID: 0}
   - SkillSlotId: 2
-    AbilityId: 0
+    AbilityId: 4
+    Ability: {fileID: 11400000, guid: fffe394e0d0852846b336d330d517c5a, type: 2}
   - SkillSlotId: 1
     AbilityId: 0
+    Ability: {fileID: 0}
+--- !u!114 &7773590576850612865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6031708160037518034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d128eafd50474b441b7186ab87d9318e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6123176685334656487
 GameObject:
   m_ObjectHideFlags: 0

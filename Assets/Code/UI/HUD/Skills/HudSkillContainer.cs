@@ -1,4 +1,5 @@
 using Code.Hero;
+using Code.Services.Input;
 using UnityEngine;
 
 namespace Code.UI.HUD.Skills
@@ -7,11 +8,24 @@ namespace Code.UI.HUD.Skills
     {
         private HudSkillButton[] _skillButtons;
         private HeroSkills _heroSkills;
-        public void Construct(HeroSkills heroSkills)
+
+        public void Construct(
+            HeroSkills heroSkills,
+            HeroAbilityCooldown heroAbilityCooldown,
+                IInputService input)
         {
             _heroSkills = heroSkills;
+
+
             _skillButtons = GetComponentsInChildren<HudSkillButton>();
+
+            foreach (var button in _skillButtons)
+            {
+                button.Construct(heroAbilityCooldown, input);
+            }
+
             _heroSkills.OnSkillChanged += SetSkillSlots;
+
             SetSkillSlots();
         }
 

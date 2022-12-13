@@ -5,13 +5,12 @@ namespace Code.Services.Input
     public interface IInputService : IService
     {
         Vector2 Axis { get; }
+        bool IsAttackButtonUp();
+        bool IsSkillButton1();
+        bool IsSkillButton2();
+        bool IsSkillButton3();
 
-        bool isAttackOrSkillPressed();
-        bool isAttackButtonUp();
-        bool isSkillButton1();
-        bool isSkillButton2();
-        bool isSkillButton3();
-
-        bool isInteractButtonUp();
+        bool IsInteractButtonUp();
+        bool IsButtonPressed(string buttonKey);
     }
 }

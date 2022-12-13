@@ -8,6 +8,7 @@ namespace Code.Logic
         Attack2,
         Attack3,
         Walking,
+        Roll,
         Died
     }
 }

@@ -24,7 +24,7 @@ namespace Code.Logic.ShelterWeapons
 
         private void Update()
         {
-            if (_isPlayerNear && _input.isInteractButtonUp())
+            if (_isPlayerNear && _input.IsInteractButtonUp())
             {
                _heroWeapon.EquipWeapon(WeaponData);
             }

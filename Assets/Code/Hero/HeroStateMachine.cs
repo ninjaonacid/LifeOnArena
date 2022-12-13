@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Code.Hero.Abilities;
 using Code.Hero.HeroStates;
 using Code.Logic;
 using Code.Services.Input;
@@ -16,22 +15,22 @@ namespace Code.Hero
     public class HeroStateMachine : BaseStateMachine
     {
         private IInputService _input;
-   
+
         [SerializeField] private HeroMovement _heroMovement;
         [SerializeField] private HeroAnimator _heroAnimator;
         [SerializeField] private HeroRotation _heroRotation;
         [SerializeField] private HeroAttack _heroAttack;
         [SerializeField] private HeroSkills _heroSkills;
-   
+
+
         private Dictionary<Type, HeroBaseState> _states;
         private Dictionary<Type, List<HeroTransition>> _transitions;
-        private Dictionary<AbilityId, HeroBaseState> _abilityStates;
         public bool IsInTransition { get; private set; }
 
         public void Construct(IInputService input)
         {
             _input = input;
-       
+
             _heroSkills.OnSkillChanged += BuildTransitions;
             InitializeStateMachine();
             BuildTransitions();
@@ -63,12 +62,10 @@ namespace Code.Hero
                     new HeroMovementState(this, _input, _heroAnimator, _heroMovement),
                 [typeof(SpinAttackState)] =
                     new SpinAttackState(this, _input, _heroAnimator, _heroRotation, _heroAttack),
+                [typeof(RollState)] =
+                    new RollState(this, _input, _heroAnimator, _heroAttack),
             };
 
-            _abilityStates = new Dictionary<AbilityId, HeroBaseState>
-            {
-                
-            };
 
             _transitions = new Dictionary<Type, List<HeroTransition>>();
 
@@ -78,14 +75,14 @@ namespace Code.Hero
         private void BuildTransitions()
         {
             _transitions.Clear();
-            Ability WeaponAbility = _heroSkills.GetSkillSlotAbility(SkillSlotID.WeaponSkillSlot);
-            Ability DodgeAbility = _heroSkills.GetSkillSlotAbility(SkillSlotID.Dodge);
-            Ability RageAbility = _heroSkills.GetSkillSlotAbility(SkillSlotID.Rage);
+            HeroAbilityData WeaponAbility = _heroSkills.GetSkillSlotAbility(SkillSlotID.WeaponSkillSlot);
+            HeroAbilityData DodgeAbility = _heroSkills.GetSkillSlotAbility(SkillSlotID.Dodge);
+            HeroAbilityData RageAbility = _heroSkills.GetSkillSlotAbility(SkillSlotID.Rage);
 
-            Func<bool> AttackPressed() => () => _input.isAttackButtonUp();
-            Func<bool> FirstSkillPressed() => () => _input.isSkillButton1();
-            Func<bool> SecondSkillPressed() => () => _input.isSkillButton2();
-            Func<bool> ThirdSkillPressed() => () => _input.isSkillButton3();
+            Func<bool> AttackPressed() => () => _input.IsAttackButtonUp();
+            Func<bool> FirstSkillPressed() => () => _input.IsSkillButton1() && WeaponAbility.IsAbilityReady();
+            Func<bool> SecondSkillPressed() => () => _input.IsSkillButton2() && DodgeAbility.IsAbilityReady();
+            Func<bool> ThirdSkillPressed() => () => _input.IsSkillButton3() && RageAbility.IsAbilityReady();
             Func<bool> StateDurationEnd() => () => GetCurrentState().IsEnded();
             Func<bool> MovementStart() => () => _input.Axis.sqrMagnitude > Constants.Epsilon;
             Func<bool> MovementEnd() => () => _input.Axis.sqrMagnitude < Constants.Epsilon;
@@ -119,6 +116,7 @@ namespace Code.Hero
             AddTransition(GetState<HeroMovementState>(), GetSkillState(DodgeAbility), SecondSkillPressed());
             AddTransition(GetState<HeroMovementState>(), GetSkillState(RageAbility), ThirdSkillPressed());
             AddTransition(GetSkillState(WeaponAbility), GetState<HeroIdleState>(), StateDurationEnd());
+            AddTransition(GetSkillState(DodgeAbility), GetState<HeroIdleState>(), StateDurationEnd());
         }
 
         public async void DoTransition(HeroTransition transition)
@@ -161,7 +159,7 @@ namespace Code.Hero
             transitions.Add(new HeroTransition(to, condition));
         }
 
-        private HeroBaseState GetSkillState(Ability ability)
+        private HeroBaseState GetSkillState(HeroAbilityData ability)
         {
             switch (ability?.AbilityId)
             {
@@ -171,10 +169,15 @@ namespace Code.Hero
                     }
 
                 case AbilityId.FastSlash:
-                {
-                    return null;
-                }
+                    {
+                        return null;
+                    }
+                case AbilityId.Dash:
+                    {
+                        return GetState<RollState>();
+                    }
                 default: return null;
+
             }
         }
 
