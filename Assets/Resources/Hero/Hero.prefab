@@ -66,6 +66,37 @@ Transform:
   m_Father: {fileID: 5753956939129530247}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1740073509922607427
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4420980359280050101}
+  m_Layer: 12
+  m_Name: InteractionPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4420980359280050101
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1740073509922607427}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 3.05, z: 0.91}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6412912777281413224}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2065645129617713867
 GameObject:
   m_ObjectHideFlags: 0
@@ -362,7 +393,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9184684936429490085}
   m_Layer: 0
-  m_Name: WeaponSlot
+  m_Name: WeaponPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -479,7 +510,7 @@ Transform:
   - {fileID: 3326749602853550019}
   - {fileID: 1209099032646398831}
   m_Father: {fileID: 6412912777281413224}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6031708160037518034
 GameObject:
@@ -504,6 +535,7 @@ GameObject:
   - component: {fileID: -4398335753682384271}
   - component: {fileID: -7543322082994891675}
   - component: {fileID: 7773590576850612865}
+  - component: {fileID: 8173807624078759481}
   m_Layer: 12
   m_Name: Hero
   m_TagString: Player
@@ -524,6 +556,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7822357431564974861}
+  - {fileID: 4420980359280050101}
   - {fileID: 1490529836012290300}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -707,7 +740,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c299851cb24a9a843aeeefd2f3e6137b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WeaponSlot: {fileID: 9184684936429490085}
+  WeaponPosition: {fileID: 9184684936429490085}
   HeroSkills: {fileID: -7543322082994891675}
 --- !u!114 &-7543322082994891675
 MonoBehaviour:
@@ -744,6 +777,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d128eafd50474b441b7186ab87d9318e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8173807624078759481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6031708160037518034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e23610a8e35628b4f81885971821a415, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interactPoint: {fileID: 4420980359280050101}
+  _interactRadius: 5
+  _interactMask:
+    serializedVersion: 2
+    m_Bits: 131072
 --- !u!1 &6123176685334656487
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8331421932585572548}
   - component: {fileID: 1386966466204904747}
   - component: {fileID: 7930321526546978185}
-  m_Layer: 12
+  m_Layer: 17
   m_Name: DetectHeroTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,7 +70,7 @@ GameObject:
   - component: {fileID: 531048824742830012}
   - component: {fileID: 531048824742830011}
   - component: {fileID: 531048824742830010}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: platformModel
   m_TagString: WeaponPlatform
   m_Icon: {fileID: 0}
@@ -165,7 +165,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5911586754432011440}
   - component: {fileID: 2382091833827008692}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: WeaponContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -208,7 +208,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4086764922619673003}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -240,7 +240,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8466166641591782899}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: WeaponPrice
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -274,7 +274,7 @@ GameObject:
   - component: {fileID: 1023985460556881381}
   - component: {fileID: 7456193029470846382}
   - component: {fileID: 6506500403051090149}
-  m_Layer: 5
+  m_Layer: 17
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -350,7 +350,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2501094721465994576}
   - component: {fileID: -9006517364452109849}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: WeaponPlatformBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -389,7 +389,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponId: 2
-  weaponData: {fileID: 0}
+  abilityView: {fileID: 0}
+  WeaponData: {fileID: 0}
   WeaponContainer: {fileID: 5911586754432011440}
   EquipWeaponButton: {fileID: 2871627171662051221}
   TriggerObserver: {fileID: 7930321526546978185}
@@ -405,7 +406,7 @@ GameObject:
   - component: {fileID: 8196828897558214177}
   - component: {fileID: 2052543784317736563}
   - component: {fileID: 2417043906177221654}
-  m_Layer: 5
+  m_Layer: 17
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -508,7 +509,7 @@ GameObject:
   - component: {fileID: 5826608048900979680}
   - component: {fileID: 5374737785199912434}
   - component: {fileID: 2871627171662051221}
-  m_Layer: 5
+  m_Layer: 17
   m_Name: Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -641,7 +642,7 @@ GameObject:
   - component: {fileID: 878591295610801849}
   - component: {fileID: 9095601935129415339}
   - component: {fileID: 5149417451102662442}
-  m_Layer: 5
+  m_Layer: 17
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -777,7 +778,7 @@ GameObject:
   - component: {fileID: 9209326797413721676}
   - component: {fileID: 9209326797413721677}
   - component: {fileID: 9209326797413721674}
-  m_Layer: 5
+  m_Layer: 17
   m_Name: WeaponAbility
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -854,4 +855,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29dcefee6b857d843bc57cb98dc153c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponData: {fileID: 11400000, guid: 55740ba5cc3529f4cb6cd977ecb5ae33, type: 2}

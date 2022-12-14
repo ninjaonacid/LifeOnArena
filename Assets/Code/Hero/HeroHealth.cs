@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Code.Hero
 {
-    public class HeroHealth : MonoBehaviour, ISavedProgress, IHealth
+    public class HeroHealth : MonoBehaviour, ISave, IHealth
     {
         private HeroHP _heroHp;
 

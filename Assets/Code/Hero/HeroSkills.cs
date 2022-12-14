@@ -9,16 +9,18 @@ using UnityEngine;
 
 namespace Code.Hero
 {
-    public class HeroSkills : MonoBehaviour, ISavedProgress
+    public class HeroSkills : MonoBehaviour, ISave
     {
         public event Action OnSkillChanged;
 
         public HeroAttack HeroAttack;
-        private SkillHudData _skillHudData;
-
         public SkillSlot[] SkillSlots;
 
+        private SkillHudData _skillHudData;
         private IAbilityFactory _abilityFactory;
+
+
+
         [Serializable]
         public class SkillSlot
         {

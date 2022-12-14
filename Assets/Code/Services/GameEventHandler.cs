@@ -1,5 +1,6 @@
 using System;
 using Code.Logic.EnemySpawners;
+using Code.StaticData;
 
 namespace Code.Services
 {
@@ -29,5 +30,9 @@ namespace Code.Services
             }
         }
 
+        public void SetLevelSpawnerCount(LevelStaticData levelData)
+        {
+            LevelSpawnersCount = levelData.EnemySpawners.Count;
+        }
     }
 }

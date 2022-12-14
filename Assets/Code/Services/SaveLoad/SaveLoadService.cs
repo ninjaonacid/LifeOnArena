@@ -16,9 +16,9 @@ namespace Code.Services.SaveLoad
             _progressService = progressService;
             
         }
-        public List<ISavedProgressReader> ProgressReaders { get; } = new List<ISavedProgressReader>();
+        public List<ISaveReader> ProgressReaders { get; } = new List<ISaveReader>();
 
-        public List<ISavedProgress> ProgressWriters { get; } = new List<ISavedProgress>();
+        public List<ISave> ProgressWriters { get; } = new List<ISave>();
 
         public void Cleanup()
         {
@@ -50,14 +50,14 @@ namespace Code.Services.SaveLoad
         public void RegisterProgressWatchers(GameObject go)
         {
             foreach (var progressReader in
-                     go.GetComponentsInChildren<ISavedProgressReader>())
+                     go.GetComponentsInChildren<ISaveReader>())
                 Register(progressReader);
         }
 
 
-        public void Register(ISavedProgressReader progressReader)
+        public void Register(ISaveReader progressReader)
         {
-            if (progressReader is ISavedProgress progressWriter)
+            if (progressReader is ISave progressWriter)
                 ProgressWriters.Add(progressWriter);
 
             ProgressReaders.Add(progressReader);

@@ -10,7 +10,7 @@ using UnityEngine.Android;
 
 namespace Code.Logic.EnemySpawners
 {
-    public class SpawnPoint : MonoBehaviour, ISavedProgress
+    public class SpawnPoint : MonoBehaviour, ISave
     {
         private EnemyDeath _enemyDeath;
         private IEnemyObjectPool _enemyObjectPool;

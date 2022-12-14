@@ -8,7 +8,7 @@ using UnityEngine;
 namespace Code.Hero
 {
     [RequireComponent(typeof(HeroAnimator), typeof(CharacterController))]
-    public class HeroAttack : MonoBehaviour, IAttack, ISavedProgressReader
+    public class HeroAttack : MonoBehaviour, IAttack, ISaveReader
     {
         private static int _layerMask;
         private readonly Collider[] _hits = new Collider[2];
@@ -57,11 +57,11 @@ namespace Code.Hero
             }
         }
 
-        private void OnDrawGizmos()
+       /* private void OnDrawGizmos()
         {
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(StartPoint() + transform.forward, _characterStats.BaseAttackRadius);
-        }
+        }*/
 
         private int Hit()
         {

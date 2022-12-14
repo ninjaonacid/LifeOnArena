@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 namespace Code.Hero
 {
     [RequireComponent(typeof(CharacterController))]
-    public class HeroMovement : MonoBehaviour, ISavedProgress
+    public class HeroMovement : MonoBehaviour, ISave
     {
         private CharacterController _characterController;
 

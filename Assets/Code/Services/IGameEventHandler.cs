@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Code.Logic.EnemySpawners;
+using Code.StaticData;
 using UnityEngine;
 using UnityEngine.Android;
 
@@ -16,5 +17,6 @@ namespace Code.Services
         void HeroDeath();
 
         void ResetSpawnerCounter();
+        void SetLevelSpawnerCount(LevelStaticData levelData);
     }
 }

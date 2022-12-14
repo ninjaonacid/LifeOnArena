@@ -1,4 +1,5 @@
 using System;
+using Code.Hero;
 
 namespace Code.Data
 {
@@ -7,6 +8,7 @@ namespace Code.Data
     {
         public HeroHP HeroHp;
         public CharacterStats CharacterStats;
+        public HeroEquipment HeroEquipment;
         public KillData KillData;
         public WorldData WorldData;
         public SkillsData SkillsData;
@@ -16,6 +18,7 @@ namespace Code.Data
         {
             WorldData = new WorldData(initialLevel);
             HeroHp = new HeroHP();
+            HeroEquipment = new HeroEquipment();
             CharacterStats = new CharacterStats();
             KillData = new KillData();
             InventoryData = new InventoryData();

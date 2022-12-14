@@ -34,6 +34,7 @@ namespace Code.Infrastructure.States
         private IGameEventHandler _gameEventHandler;
         private IEnemyObjectPool _enemyObjectPool;
         private IParticleObjectPool _particleObjectPool;
+        private IItemFactory _itemFactory;
         private readonly IUIFactory _uiFactory;
 
         public LoadLevelState(GameStateMachine stateMachine, SceneLoader sceneLoader,
@@ -58,6 +59,7 @@ namespace Code.Infrastructure.States
             _saveLoadService = _services.Single<ISaveLoadService>();
             _gameEventHandler = _services.Single<IGameEventHandler>();
             _abilityFactory = _services.Single<IAbilityFactory>();
+            _itemFactory = _services.Single<IItemFactory>();
 
             _curtain.Show();
             _enemyObjectPool.Cleanup();
@@ -119,7 +121,7 @@ namespace Code.Infrastructure.States
         }
         private void SetupEventHandler(LevelStaticData levelData)
         {
-            _gameEventHandler.LevelSpawnersCount = levelData.EnemySpawners.Count;
+            _gameEventHandler.SetLevelSpawnerCount(levelData);
             _gameEventHandler.ResetSpawnerCounter();
 
         }
@@ -144,6 +146,7 @@ namespace Code.Infrastructure.States
             hero.GetComponent<HeroDeath>().Construct(_gameEventHandler);
             hero.GetComponent<HeroSkills>().Construct(_abilityFactory);
             hero.GetComponent<HeroStateMachine>().Construct(_inputService);
+            hero.GetComponent<HeroWeapon>().Construct(_itemFactory);
             return hero;
         }
 

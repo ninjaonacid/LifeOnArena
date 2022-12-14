@@ -100,6 +100,9 @@ namespace Code.Infrastructure.States
             _services.RegisterSingle<IEnemyObjectPool>(new EnemyObjectPool(
                 _services.Single<IEnemyFactory>()));
 
+            _services.RegisterSingle<IItemFactory>(new ItemFactory(
+                _services.Single<IStaticDataService>()));
+
         }
 
         private void RegisterStaticData()

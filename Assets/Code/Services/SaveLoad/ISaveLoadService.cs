@@ -10,11 +10,11 @@ namespace Code.Services.SaveLoad
     {
         void SaveProgress();
         PlayerProgress LoadProgress();
-        List<ISavedProgressReader> ProgressReaders { get; }
-        List<ISavedProgress> ProgressWriters { get; }
+        List<ISaveReader> ProgressReaders { get; }
+        List<ISave> ProgressWriters { get; }
         void Cleanup();
         void RegisterProgressWatchers(GameObject go);
-        void Register(ISavedProgressReader progressReader);
+        void Register(ISaveReader progressReader);
         void SaveProgressAtPath();
     }
 }

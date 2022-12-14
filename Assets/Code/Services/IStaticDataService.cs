@@ -13,5 +13,6 @@ namespace Code.Services
         LevelStaticData ForLevel(string sceneKey);
         WindowConfig ForWindow(UIWindowID menuId);
         HeroAbilityData ForAbility(AbilityId abilityId);
+        WeaponData ForWeapon(WeaponId weaponId);
     }
 }
