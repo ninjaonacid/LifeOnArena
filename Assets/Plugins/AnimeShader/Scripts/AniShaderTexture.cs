@@ -1,20 +1,14 @@
-//------------------------------------
-//             OmniShade
-//     Copyright© 2022 OmniShade     
-//------------------------------------
 
 using UnityEngine;
 using System.Collections.Generic;
 
-/**
- * This component supports animating the texture UVs of the shader.
- */
+
 [RequireComponent(typeof(Renderer))]
-public class OmniShadeAnimateTexture : MonoBehaviour {
-	const string SHADER_TRIPLANAR_NAME = "OmniShade/Triplanar";
+public class AniShaderTexture : MonoBehaviour {
+	const string SHADER_TRIPLANAR_NAME = "AniShader/Triplanar";
 	const int TRIPLANAR_UV_SCALE = 32;
 
-	public enum OmniShadeTexture {
+	public enum AniShaderAnimate {
 		// DO NOT CHANGE THIS ORDER
 		MainTexture, SpecularMap, EmissiveMap, DetailMap, LightmapTex, MatCapTexture, NormalMap, 
 		Layer1Texture, Layer2Texture, Layer3Texture, TransparencyMaskText, HeightColorsTex,
@@ -24,7 +18,7 @@ public class OmniShadeAnimateTexture : MonoBehaviour {
 	[System.Serializable]
 	public class AnimatedTexture {
 		public int matIndex;
-		public OmniShadeTexture texture;
+		public AniShaderAnimate animate;
 		public Vector2 speed;
 
 		[Header("Ping Pong")]
@@ -64,8 +58,8 @@ public class OmniShadeAnimateTexture : MonoBehaviour {
 				continue;
 			}
 
-			// Initialize texture ID and UV
-			string texName = this.GetTextureName(animTex.texture);
+			// Initialize animate ID and UV
+			string texName = this.GetTextureName(animTex.animate);
 			animTex.isTriplanar = mat.shader.name == SHADER_TRIPLANAR_NAME;
 			animTex.textureID = Shader.PropertyToID(texName);
 			animTex.currentUV = mat.GetTextureOffset(animTex.textureID);
@@ -115,7 +109,7 @@ public class OmniShadeAnimateTexture : MonoBehaviour {
 		}
 	}
 
-	string GetTextureName(OmniShadeTexture texture) {
-		return "_" + texture.ToString().Replace("Texture", "Tex").Replace("Map", "Tex");
+	string GetTextureName(AniShaderAnimate animate) {
+		return "_" + animate.ToString().Replace("Texture", "Tex").Replace("Map", "Tex");
 	}
 }

@@ -1,9 +1,5 @@
-﻿//------------------------------------
-//             OmniShade
-//     Copyright© 2022 OmniShade     
-//------------------------------------
-
-#include "OmniShadeURP.cginc"
+﻿
+#include "AniShaderURP.cginc"
 
 //////////////////////////////////////////////////////////////////////////////////////////
 // PROPERTY DECLARATIONS

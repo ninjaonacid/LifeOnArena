@@ -1,5 +1,6 @@
 ﻿
-Shader "OmniShade/Standard URP" {
+
+Shader "AniShader/Standard" { 
 	Properties {
 		[Header(SHADOWS AND ENVIRONMENT)]
 		[Toggle(SHADOWS_ENABLED)] _ShadowsEnabled ("Receive Shadows", Float) = 1
@@ -153,7 +154,7 @@ Shader "OmniShade/Standard URP" {
 		_AnimeThreshold2 ("Luminance Threshold 2", range(0, 3)) = 0.85
 		[HDR] _AnimeColor3 ("Color 3", Color) = (2, 2, 2, 1)
 		_AnimeSoftness ("Softness", range(0, 0.25)) = 0.01
-
+		
 		[Header(PRESETS FOR CULLING AND BLENDING)]
 		[Space] [Enum(Opaque, 0, Transparent, 1, Transparent Additive, 2, Transparent Additive Alpha, 3)] _Preset ("", Float) = 0
 
@@ -176,35 +177,35 @@ Shader "OmniShade/Standard URP" {
 		[KeywordEnum(All, Disabled, Enabled Only)] _OptLightmapping ("Lightmapping", Float) = 0
 		[KeywordEnum(All, Disabled)] _OptFallback ("Fallback for OpenGL ES 2", Float) = 0
 	}
-
+	
 	Subshader {
 		Pass {
 			name "Forward"
-			Tags { "RenderPipeline" = "UniversalPipeline" "LightMode" = "UniversalForward" }
+			Tags { "LightMode" = "ForwardBase" }
 			Cull [_Cull]
 			ZWrite [_ZWrite]
 			ZTest [_ZTest]
 			Blend [_SourceBlend][_DestBlend]
 			BlendOp [_BlendOp]
 
-			HLSLPROGRAM
-			#define URP 1
-			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
-			#include "OmniShadeCore.cginc"
+			CGPROGRAM
+			#include "UnityCG.cginc"
+			#include "UnityLightingCommon.cginc"
+			#include "AutoLight.cginc"
+			#include "AniShaderCore.cginc"
 			#pragma target 3.5
 			#pragma vertex vert
 			#pragma fragment frag
 			#pragma multi_compile_fog
 			#pragma multi_compile_instancing
-			#pragma multi_compile _ _ADDITIONAL_LIGHTS
+			#pragma multi_compile _ VERTEXLIGHT_ON
 			#pragma multi_compile _ LIGHTMAP_ON
 			#pragma multi_compile _ DIRLIGHTMAP_COMBINED
-            #pragma multi_compile _ _MAIN_LIGHT_SHADOWS
-            #pragma multi_compile _ _MAIN_LIGHT_SHADOWS_CASCADE
-            #pragma multi_compile _ _SHADOWS_SOFT
+			#pragma multi_compile _ SHADOWS_SCREEN
+			#pragma multi_compile _ SHADOWS_SHADOWMASK
 			#pragma shader_feature SHADOWS_ENABLED
 			#pragma shader_feature FOG
-			#pragma shader_feature AMBIENT		
+			#pragma shader_feature AMBIENT
 			#pragma shader_feature FLAT
 			#pragma shader_feature CUTOUT
 			#pragma shader_feature BASE_CONTRAST
@@ -255,12 +256,12 @@ Shader "OmniShade/Standard URP" {
 			#pragma shader_feature _PLANTTYPE_PLANT _PLANTTYPE_LEAF _PLANTTYPE_VERTEX_COLOR_ALPHA
 			#pragma shader_feature ZOFFSET
 			#pragma shader_feature ANIME
-			#pragma shader_feature ANIME_SOFT	
+			#pragma shader_feature ANIME_SOFT
 			#pragma shader_feature _OPTSHADOW_ALL _OPTSHADOW_DISABLED _OPTSHADOW_ENABLED_ONLY
 			#pragma shader_feature _OPTPOINTLIGHTS_ALL _OPTPOINTLIGHTS_DISABLED
 			#pragma shader_feature _OPTFOG_ALL _OPTFOG_DISABLED _OPTFOG_ENABLED_ONLY
 			#pragma shader_feature _OPTLIGHTMAPPING_ALL _OPTLIGHTMAPPING_DISABLED _OPTLIGHTMAPPING_ENABLED_ONLY
-			ENDHLSL
+			ENDCG
 		}
 
 		Pass {
@@ -270,11 +271,10 @@ Shader "OmniShade/Standard URP" {
 			ZWrite Off
 			Blend SrcAlpha OneMinusSrcAlpha
 
-			HLSLPROGRAM
-			#define URP 1
+			CGPROGRAM
 			#define OUTLINE_PASS 1
-			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
-			#include "OmniShadeCore.cginc"
+			#include "UnityCG.cginc"
+			#include "AniShaderCore.cginc"
 			#pragma target 3.5
 			#pragma vertex vert
 			#pragma fragment frag
@@ -282,24 +282,22 @@ Shader "OmniShade/Standard URP" {
 			#pragma shader_feature PLANT_SWAY
 			#pragma shader_feature _PLANTTYPE_PLANT _PLANTTYPE_LEAF _PLANTTYPE_VERTEX_COLOR_ALPHA
 			#pragma shader_feature OUTLINE
-			ENDHLSL
+			ENDCG
 		}
 
 		Pass {
 			name "ShadowCaster"
-			Tags { "RenderPipeline" = "UniversalPipeline" "LightMode" = "ShadowCaster" }
+			Tags { "LightMode" = "ShadowCaster" }
 			Cull [_Cull]
 			ZWrite [_ZWrite]
 			ZTest [_ZTest]
 			Blend [_SourceBlend][_DestBlend]
 			BlendOp [_BlendOp]
 
-			HLSLPROGRAM
-			#define URP 1
+			CGPROGRAM
 			#define SHADOW_CASTER 1
-			#include "Packages/com.unity.render-pipelines.universal/Shaders/LitInput.hlsl"
-    		#include "Packages/com.unity.render-pipelines.universal/Shaders/ShadowCasterPass.hlsl"
-			#include "OmniShadeCore.cginc"
+			#include "UnityCG.cginc"
+			#include "AniShaderCore.cginc"
 			#pragma target 3.5
 			#pragma vertex vert
 			#pragma fragment frag
@@ -307,53 +305,52 @@ Shader "OmniShade/Standard URP" {
 			#pragma shader_feature CUTOUT
 			#pragma shader_feature PLANT_SWAY
 			#pragma shader_feature _PLANTTYPE_PLANT _PLANTTYPE_LEAF _PLANTTYPE_VERTEX_COLOR_ALPHA
-			ENDHLSL
+			ENDCG
 		}
 
-        Pass {
+		Pass {
 			Name "Lightmap Meta"
-            Tags { "RenderPipeline" = "UniversalPipeline" "LightMode" = "Meta" }
-            Cull [_Cull]
-            ZWrite [_ZWrite]
-            ZTest [_ZTest]
-            Blend [_SourceBlend][_DestBlend]
-            BlendOp [_BlendOp]
+			Tags { "LightMode" = "Meta" }
+			Cull [_Cull]
+			ZWrite [_ZWrite]
+			ZTest [_ZTest]
+			Blend [_SourceBlend][_DestBlend]
+			BlendOp [_BlendOp]
 
-            HLSLPROGRAM
-            #define URP 1
-            #define META 1
-            #include "Packages/com.unity.render-pipelines.universal/Shaders/LitInput.hlsl"
-            #include "Packages/com.unity.render-pipelines.universal/Shaders/ShadowCasterPass.hlsl"
-            #include "OmniShadeCore.cginc"
-            #pragma target 3.5
-            #pragma vertex vert
-            #pragma fragment frag
-            #pragma multi_compile_instancing
-            #pragma shader_feature BASE_CONTRAST
-            #pragma shader_feature EMISSIVE_MAP
-            #pragma shader_feature VERTEX_COLORS
-            #pragma shader_feature VERTEX_COLORS_CONTRAST
-            #pragma shader_feature DETAIL
-            #pragma shader_feature DETAIL_CONTRAST
-            #pragma shader_feature _DETAILBLEND_ALPHA_BLEND _DETAILBLEND_ADDITIVE _DETAILBLEND_MULTIPLY _DETAILBLEND_MULTIPLY_LIGHTEN
+			CGPROGRAM
+			#define META 1
+			#include "UnityCG.cginc"
+			#include "UnityMetaPass.cginc"
+			#include "AniShaderCore.cginc"
+			#pragma target 3.5
+			#pragma vertex vert
+			#pragma fragment frag
+			#pragma multi_compile_instancing
+			#pragma shader_feature BASE_CONTRAST
+			#pragma shader_feature EMISSIVE_MAP
+			#pragma shader_feature VERTEX_COLORS
+			#pragma shader_feature VERTEX_COLORS_CONTRAST
+			#pragma shader_feature DETAIL
+			#pragma shader_feature DETAIL_CONTRAST
+			#pragma shader_feature _DETAILBLEND_ALPHA_BLEND _DETAILBLEND_ADDITIVE _DETAILBLEND_MULTIPLY _DETAILBLEND_MULTIPLY_LIGHTEN
 			#pragma shader_feature _DETAILUV_UV1 _DETAILUV_UV2
-            #pragma shader_feature DETAIL_VERTEX_COLORS
-            #pragma shader_feature MATCAP
-            #pragma shader_feature MATCAP_CONTRAST
-            #pragma shader_feature _MATCAPBLEND_MULTIPLY _MATCAPBLEND_MULTIPLY_LIGHTEN
-            #pragma shader_feature LAYER1
-            #pragma shader_feature _LAYER1BLEND_ALPHA_BLEND _LAYER1BLEND_ADDITIVE _LAYER1BLEND_MULTIPLY _LAYER1BLEND_MULTIPLY_LIGHTEN
-            #pragma shader_feature LAYER2
-            #pragma shader_feature _LAYER2BLEND_ALPHA_BLEND _LAYER2BLEND_ADDITIVE _LAYER2BLEND_MULTIPLY _LAYER2BLEND_MULTIPLY_LIGHTEN
-            #pragma shader_feature LAYER3
-            #pragma shader_feature _LAYER3BLEND_ALPHA_BLEND _LAYER3BLEND_ADDITIVE _LAYER3BLEND_MULTIPLY _LAYER3BLEND_MULTIPLY_LIGHTEN
-            #pragma shader_feature TRANSPARENCY_MASK
-            #pragma shader_feature TRANSPARENCY_MASK_CONTRAST
-            #pragma shader_feature HEIGHT_COLORS
-            #pragma shader_feature _HEIGHTCOLORSBLEND_ALPHA_BLEND _HEIGHTCOLORSBLEND_ADDITIVE _HEIGHTCOLORSBLEND_LIT
-            #pragma shader_feature HEIGHT_COLORS_TEX
-            ENDHLSL
-        }
+			#pragma shader_feature DETAIL_VERTEX_COLORS
+			#pragma shader_feature MATCAP
+			#pragma shader_feature MATCAP_CONTRAST
+			#pragma shader_feature _MATCAPBLEND_MULTIPLY _MATCAPBLEND_MULTIPLY_LIGHTEN
+			#pragma shader_feature LAYER1
+			#pragma shader_feature _LAYER1BLEND_ALPHA_BLEND _LAYER1BLEND_ADDITIVE _LAYER1BLEND_MULTIPLY _LAYER1BLEND_MULTIPLY_LIGHTEN
+			#pragma shader_feature LAYER2
+			#pragma shader_feature _LAYER2BLEND_ALPHA_BLEND _LAYER2BLEND_ADDITIVE _LAYER2BLEND_MULTIPLY _LAYER2BLEND_MULTIPLY_LIGHTEN
+			#pragma shader_feature LAYER3
+			#pragma shader_feature _LAYER3BLEND_ALPHA_BLEND _LAYER3BLEND_ADDITIVE _LAYER3BLEND_MULTIPLY _LAYER3BLEND_MULTIPLY_LIGHTEN
+			#pragma shader_feature TRANSPARENCY_MASK
+			#pragma shader_feature TRANSPARENCY_MASK_CONTRAST
+			#pragma shader_feature HEIGHT_COLORS
+			#pragma shader_feature _HEIGHTCOLORSBLEND_ALPHA_BLEND _HEIGHTCOLORSBLEND_ADDITIVE _HEIGHTCOLORSBLEND_LIT
+			#pragma shader_feature HEIGHT_COLORS_TEX
+			ENDCG
+		}
 	}
 
 	Subshader {
@@ -361,24 +358,24 @@ Shader "OmniShade/Standard URP" {
 
 		Pass {
 			Name "Fallback"
-			Tags { "RenderPipeline" = "UniversalPipeline" "LightMode" = "UniversalForward" }
+			Tags { "LightMode" = "ForwardBase" }
 			Cull [_Cull]
 			ZWrite [_ZWrite]
 			ZTest [_ZTest]
 			Blend [_SourceBlend][_DestBlend]
 			BlendOp [_BlendOp]
 
-			HLSLPROGRAM
+			CGPROGRAM
 			#define FALLBACK_PASS 1
-			#define URP 1
-			#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"
-			#include "OmniShadeCore.cginc"
+			#include "UnityCG.cginc"
+			#include "UnityLightingCommon.cginc"
+			#include "AniShaderCore.cginc"
 			#pragma vertex vert
 			#pragma fragment frag
 			#pragma multi_compile_fog
 			#pragma multi_compile _ LIGHTMAP_ON
 			#pragma shader_feature FOG
-			#pragma shader_feature AMBIENT	
+			#pragma shader_feature AMBIENT
 			#pragma shader_feature FLAT
 			#pragma shader_feature DIFFUSE
 			#pragma shader_feature SPECULAR
@@ -397,14 +394,15 @@ Shader "OmniShade/Standard URP" {
 			#pragma shader_feature LAYER3
 			#pragma shader_feature _LAYER3BLEND_ALPHA_BLEND _LAYER3BLEND_ADDITIVE _LAYER3BLEND_MULTIPLY _LAYER3BLEND_MULTIPLY_LIGHTEN
 			#pragma shader_feature TRANSPARENCY_MASK
+			#pragma shader_feature ZOFFSET
 			#pragma shader_feature ANIME
-			#pragma shader_feature ZOFFSET	
 			#pragma shader_feature _OPTFOG_ALL _OPTFOG_DISABLED _OPTFOG_ENABLED_ONLY
 			#pragma shader_feature _OPTLIGHTMAPPING_ALL _OPTLIGHTMAPPING_DISABLED _OPTLIGHTMAPPING_ENABLED_ONLY
 			#pragma shader_feature _OPTFALLBACK_ALL _OPTFALLBACK_DISABLED
-			ENDHLSL
+			ENDCG
 		}
 	}
 
-	CustomEditor "OmniShadeGUI"
+	Fallback "Diffuse"
+	CustomEditor "AniShaderGUI"
 }

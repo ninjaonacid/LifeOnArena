@@ -1,8 +1,4 @@
-﻿//------------------------------------
-//             OmniShade
-//     Copyright© 2022 OmniShade     
-//------------------------------------
-
+﻿
 using UnityEditor;
 using UnityEngine;
 using System.Collections.Generic;
@@ -10,8 +6,8 @@ using System.Collections.Generic;
 /**
  * This class manages the GUI for the shader, automatically enabling/disabling keywords when values change.
  */
-public class OmniShadeGUI : ShaderGUI {
-	public const string SHADER_NAME = "OmniShade";
+public class AniShaderGUI : ShaderGUI {
+	public const string SHADER_NAME = "AniShader";
 
 	enum PropertyType {
 		Float, Vector, Texture

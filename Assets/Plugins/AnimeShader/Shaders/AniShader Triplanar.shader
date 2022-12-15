@@ -1,9 +1,5 @@
-﻿//------------------------------------
-//             OmniShade
-//     Copyright© 2022 OmniShade     
-//------------------------------------
-
-Shader "OmniShade/Triplanar" {
+﻿
+Shader "AniShader/Triplanar" {
 	Properties {	
 		[Header(SHADOWS AND ENVIRONMENT)]
 		[Toggle(SHADOWS_ENABLED)] _ShadowsEnabled ("Receive Shadows", Float) = 1
@@ -167,7 +163,7 @@ Shader "OmniShade/Triplanar" {
 			#include "UnityCG.cginc"
 			#include "UnityLightingCommon.cginc"
 			#include "AutoLight.cginc"
-			#include "OmniShadeCore.cginc"
+			#include "AniShaderCore.cginc"
 			#pragma target 3.5
 			#pragma vertex vert
 			#pragma fragment frag
@@ -239,7 +235,7 @@ Shader "OmniShade/Triplanar" {
 			#define TRIPLANAR 1
 			#define OUTLINE_PASS 1
 			#include "UnityCG.cginc"
-			#include "OmniShadeCore.cginc"
+			#include "AniShaderCore.cginc"
 			#pragma target 3.5
 			#pragma vertex vert
 			#pragma fragment frag
@@ -263,7 +259,7 @@ Shader "OmniShade/Triplanar" {
 			#define TRIPLANAR 1
 			#define SHADOW_CASTER 1
 			#include "UnityCG.cginc"
-			#include "OmniShadeCore.cginc"
+			#include "AniShaderCore.cginc"
 			#pragma target 3.5
 			#pragma vertex vert
 			#pragma fragment frag
@@ -287,7 +283,7 @@ Shader "OmniShade/Triplanar" {
 			#define META 1
 			#include "UnityCG.cginc"
 			#include "UnityMetaPass.cginc"
-			#include "OmniShadeCore.cginc"
+			#include "AniShaderCore.cginc"
 			#pragma target 3.5
 			#pragma vertex vert
 			#pragma fragment frag
@@ -329,7 +325,7 @@ Shader "OmniShade/Triplanar" {
 			#define TRIPLANAR 1
 			#include "UnityCG.cginc"
 			#include "UnityLightingCommon.cginc"
-			#include "OmniShadeCore.cginc"
+			#include "AniShaderCore.cginc"
 			#pragma vertex vert
 			#pragma fragment frag
 			#pragma multi_compile_fog
@@ -359,5 +355,5 @@ Shader "OmniShade/Triplanar" {
 	}
 	
 	Fallback "Diffuse"
-	CustomEditor "OmniShadeGUI"
+	CustomEditor "AniShaderGUI"
 }

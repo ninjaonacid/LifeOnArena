@@ -1,8 +1,4 @@
-﻿//------------------------------------
-//             OmniShade
-//     Copyright© 2022 OmniShade     
-//------------------------------------
-
+﻿
 using UnityEditor.Build;
 using UnityEditor.Rendering;
 using UnityEngine;
@@ -14,7 +10,7 @@ using System.Collections.Generic;
  * Note that you should adjust the project-wide Shader Stripping settings in Project Settings->Graphics first.
  * It is completely optional to toggle the optimization flags in the material.
  */
-public class OmniShadePreprocess : IPreprocessShaders {
+public class AniShaderPreprocess : IPreprocessShaders {
     // PROJECT-WIDE SETTINGS
     // Set these values to always strip certain variants
     const bool ALWAYS_STRIP_SHADOWS = false;
@@ -60,7 +56,7 @@ public class OmniShadePreprocess : IPreprocessShaders {
     const string OUTLINE_PASS_NAME = "Outline";
 
     public void OnProcessShader(Shader shader, ShaderSnippetData snippet, IList<ShaderCompilerData> data) {
-        if (!shader.name.Contains(OmniShadeGUI.SHADER_NAME))
+        if (!shader.name.Contains(AniShaderGUI.SHADER_NAME))
             return;
 
         for (int i = data.Count - 1; i >= 0; --i) {
