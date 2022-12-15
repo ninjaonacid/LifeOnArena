@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Code.StaticData.Spawners;
 using UnityEngine;
 
 namespace Code.StaticData
@@ -9,6 +10,7 @@ namespace Code.StaticData
         public string LevelKey;
 
         public List<EnemySpawnerData> EnemySpawners;
+        public List<WeaponPlatformSpawnerData> WeaponPlatformSpawners;
 
         public Vector3 HeroInitialPosition;
 

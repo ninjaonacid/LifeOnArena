@@ -6,6 +6,7 @@
         public const string HudPath = "Hud/Hud";
         public const string InventoryDisplayPath = "Inventory/InventoryDisplay";
         public const string InventorySlotPath = "Inventory/InventorySlot";
+        public const string WeaponPlatform = "SceneAssets/WeaponPlatformSpawner";
         public const string LootPath = "Loot/Loot";
         public const string Spawner = "Enemies/SpawnPoint";
         public const string UICore = "UI/CoreUI";

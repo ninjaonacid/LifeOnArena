@@ -13,7 +13,7 @@ namespace Code.StaticData
         public float AttackRadius;
         public float AttackSpeed;
         public float Damage;
-
+        public int Price;
         public Vector3 Rotation;
 
     }

@@ -1,6 +1,5 @@
 using Code.Enemy;
 using Code.Infrastructure.AssetManagment;
-using Code.Infrastructure.ObjectPool;
 using Code.Logic;
 using Code.Logic.EnemySpawners;
 using Code.Services;
@@ -8,7 +7,6 @@ using Code.Services.PersistentProgress;
 using Code.Services.RandomService;
 using Code.Services.SaveLoad;
 using Code.StaticData;
-using Code.UI;
 using Code.UI.HUD;
 using UnityEngine;
 using UnityEngine.AI;

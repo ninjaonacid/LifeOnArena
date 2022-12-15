@@ -4,11 +4,13 @@ using Code.Infrastructure.Factory;
 using Code.Infrastructure.ObjectPool;
 using Code.Logic;
 using Code.Logic.EnemySpawners;
+using Code.Logic.LevelObjectsSpawners;
 using Code.Services;
 using Code.Services.Input;
 using Code.Services.PersistentProgress;
 using Code.Services.SaveLoad;
 using Code.StaticData;
+using Code.StaticData.Spawners;
 using Code.UI.HUD;
 using Code.UI.HUD.Skills;
 using Code.UI.Services;
@@ -136,6 +138,16 @@ namespace Code.Infrastructure.States
                     spawnerData.RespawnCount);
 
                 spawner.Construct(_enemyObjectPool, _particleObjectPool, _gameEventHandler);
+            }
+
+            foreach (WeaponPlatformSpawnerData weaponPlatform in levelData.WeaponPlatformSpawners)
+            {
+                WeaponPlatformSpawner spawner = _itemFactory.CreateWeaponPlatformSpawner(
+                    weaponPlatform.Position,
+                    weaponPlatform.Id,
+                    weaponPlatform.WeaponId
+                );
+
             }
         }
 

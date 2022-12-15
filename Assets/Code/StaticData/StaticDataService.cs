@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Code.Logic.ShelterWeapons;
 using Code.Services;
 using Code.StaticData.Ability;
 using Code.StaticData.UIWindows;
@@ -43,6 +44,7 @@ namespace Code.StaticData
             _weapons = Resources
                 .LoadAll<WeaponData>("StaticData/Equipment/Weapons")
                 .ToDictionary(x => x.WeaponId, x => x);
+
         }
 
         public WeaponData ForWeapon(WeaponId weaponId)

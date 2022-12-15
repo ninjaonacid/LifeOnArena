@@ -106,7 +106,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MatCapTex:
-        m_Texture: {fileID: 2800000, guid: 2adfe4909c57a49f7bf2ae75e2049022, type: 3}
+        m_Texture: {fileID: 2800000, guid: 546d1dcea21ba4c49bb059148492a09a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -170,9 +170,9 @@ Material:
     - _AlphaClip: 0
     - _AmbientBrightness: 1
     - _Anime: 1
-    - _AnimeSoftness: 0.148
-    - _AnimeThreshold1: 1.08
-    - _AnimeThreshold2: 1.27
+    - _AnimeSoftness: 0.25
+    - _AnimeThreshold1: 0.81
+    - _AnimeThreshold2: 1.2
     - _Blend: 0
     - _BlendOp: 0
     - _Brightness: 1
@@ -193,10 +193,10 @@ Material:
     - _DetailUV: 0
     - _DetailVertexColors: 0
     - _Diffuse: 1
-    - _DiffuseBrightness: 1
-    - _DiffuseContrast: 1
+    - _DiffuseBrightness: 0.8
+    - _DiffuseContrast: 0.6
     - _DiffusePerPixel: 0
-    - _DiffuseWrap: 0.37
+    - _DiffuseWrap: 0.02
     - _DstBlend: 0
     - _EnvironmentReflections: 1
     - _Flat: 0
@@ -228,8 +228,8 @@ Material:
     - _LightmapHDR: 0
     - _LightmapUV: 0
     - _MatCapBlend: 1
-    - _MatCapBrightness: 1
-    - _MatCapContrast: 2.4
+    - _MatCapBrightness: 0
+    - _MatCapContrast: 0.4
     - _MatCapPerspective: 0
     - _MatCapStatic: 0
     - _Metallic: 0
@@ -290,8 +290,8 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _AnimeColor1: {r: 1, g: 1, b: 1, a: 1}
-    - _AnimeColor2: {r: 1.35, g: 1.35, b: 1.35, a: 1}
-    - _AnimeColor3: {r: 2, g: 2, b: 2, a: 1}
+    - _AnimeColor2: {r: 0, g: 0, b: 0, a: 1}
+    - _AnimeColor3: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DetailColor: {r: 1, g: 1, b: 1, a: 1}
