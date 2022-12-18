@@ -20,7 +20,7 @@ namespace Code.Services
         {
             PlayerDead?.Invoke();
         }
-        public void MonsterSpawnerSlain(SpawnPoint spawner)
+        public void MonsterSpawnerSlain(EnemySpawnPoint spawner)
         {
             ClearedSpawnersCount++;
 

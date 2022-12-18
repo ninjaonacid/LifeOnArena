@@ -10,10 +10,10 @@ namespace Code.StaticData
         public HeroAbilityData abilityData;
         public GameObject WeaponPrefab;
         public WeaponId WeaponId;
+        public int Price;
         public float AttackRadius;
         public float AttackSpeed;
         public float Damage;
-        public int Price;
         public Vector3 Rotation;
 
     }

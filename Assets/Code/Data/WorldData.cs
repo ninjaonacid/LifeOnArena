@@ -7,10 +7,12 @@ namespace Code.Data
     {
         public PositionOnLevel PositionOnLevel;
         public LootData LootData;
+        public WeaponPurchaseData WeaponPurchaseData;
         public WorldData(string initialLevel)
         {
             PositionOnLevel = new PositionOnLevel(initialLevel);
             LootData = new LootData();
+            WeaponPurchaseData = new WeaponPurchaseData();
         }
     }
 }

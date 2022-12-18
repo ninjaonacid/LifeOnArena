@@ -14,5 +14,6 @@ namespace Code.Services
         WindowConfig ForWindow(UIWindowID menuId);
         HeroAbilityData ForAbility(AbilityId abilityId);
         WeaponData ForWeapon(WeaponId weaponId);
+        WeaponPlatformStaticData ForWeaponPlatforms(WeaponId weaponId);
     }
 }

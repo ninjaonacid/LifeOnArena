@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace Code.Logic.EnemySpawners
 {
-    public class SpawnPoint : MonoBehaviour, ISave
+    public class EnemySpawnPoint : MonoBehaviour, ISave
     {
         private EnemyDeath _enemyDeath;
         private IEnemyObjectPool _enemyObjectPool;

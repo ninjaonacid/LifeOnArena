@@ -36,13 +36,13 @@ namespace Code.Infrastructure.Factory
             _randomService = randomService;
         }
 
-        public SpawnPoint CreateSpawner(Vector3 at, 
+        public EnemySpawnPoint CreateSpawner(Vector3 at, 
             string spawnerDataId, 
             MonsterTypeId spawnerDataMonsterTypeId, 
             int spawnerRespawnCount)
         {
-            SpawnPoint spawner = InstantiateRegistered(AssetPath.Spawner, at)
-                .GetComponent<SpawnPoint>();
+            EnemySpawnPoint spawner = InstantiateRegistered(AssetPath.Spawner, at)
+                .GetComponent<EnemySpawnPoint>();
             spawner.Id = spawnerDataId;
             spawner.MonsterTypeId = spawnerDataMonsterTypeId;
             spawner.RespawnCount = spawnerRespawnCount;
@@ -90,7 +90,6 @@ namespace Code.Infrastructure.Factory
         public GameObject InstantiateRegistered(string prefabPath, Vector3 position)
         {
             var go = _assets.Instantiate(prefabPath, position);
-
 
             _saveLoadService.RegisterProgressWatchers(go);
             return go;

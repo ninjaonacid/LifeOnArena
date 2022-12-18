@@ -1,5 +1,4 @@
 using System;
-using Code.Hero;
 
 namespace Code.Data
 {

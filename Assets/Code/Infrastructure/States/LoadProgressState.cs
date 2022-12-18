@@ -48,6 +48,7 @@ namespace Code.Infrastructure.States
             progress.CharacterStats.BaseAttackRadius = 1f;
             progress.CharacterStats.BaseAttackSpeed = 1f;
             progress.SkillsData.SpinAttack.Damage = 20f;
+            progress.WorldData.LootData.Collected = 100;
             progress.HeroHp.ResetHP();
 
             return progress;

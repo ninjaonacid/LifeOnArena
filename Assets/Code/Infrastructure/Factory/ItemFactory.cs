@@ -2,6 +2,7 @@ using Code.Infrastructure.AssetManagment;
 using Code.Logic.LevelObjectsSpawners;
 using Code.Logic.ShelterWeapons;
 using Code.Services;
+using Code.Services.PersistentProgress;
 using Code.Services.SaveLoad;
 using Code.StaticData;
 using UnityEngine;
@@ -14,12 +15,17 @@ namespace Code.Infrastructure.Factory
         private readonly IStaticDataService _staticData;
         private readonly ISaveLoadService _saveLoadService;
         private readonly IAssets _assets;
+        private readonly IProgressService _progressService;
 
-        public ItemFactory(IStaticDataService staticData, ISaveLoadService saveLoadService, IAssets assets)
+        public ItemFactory(IStaticDataService staticData, 
+            ISaveLoadService saveLoadService, 
+            IAssets assets,
+            IProgressService progressService)
         {
             _staticData = staticData;
             _saveLoadService = saveLoadService;
             _assets = assets;
+            _progressService = progressService;
         }
         public WeaponData LoadWeapon(WeaponId weaponId) =>
             _staticData.ForWeapon(weaponId);
@@ -37,9 +43,13 @@ namespace Code.Infrastructure.Factory
             return WeaponPlatformSpawner;
         }
 
-        public WeaponPlatform CreateWeaponPlatform(Vector3 position, WeaponId weaponId)
+        public WeaponPlatform CreateWeaponPlatform(WeaponId weaponId, Transform parent)
         {
-            return null;
+            var weaponPlatformData = _staticData.ForWeaponPlatforms(weaponId);
+            var weaponPlatform = Object.Instantiate(weaponPlatformData.Prefab, parent);
+            weaponPlatform.Construct(_progressService.Progress.WorldData.LootData);
+            return weaponPlatform;
+
         }
         public GameObject InstantiateRegistered(string prefabPath, Vector3 position)
         {

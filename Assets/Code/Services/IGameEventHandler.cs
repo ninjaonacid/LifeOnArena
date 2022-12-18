@@ -13,7 +13,7 @@ namespace Code.Services
         event Action MonsterSpawnersCleared;
         int LevelSpawnersCount { get; set; }
         int ClearedSpawnersCount { get; set; }
-        void MonsterSpawnerSlain(SpawnPoint spawner);
+        void MonsterSpawnerSlain(EnemySpawnPoint spawner);
         void HeroDeath();
 
         void ResetSpawnerCounter();

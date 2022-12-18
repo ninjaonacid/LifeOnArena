@@ -17,6 +17,7 @@ namespace Code.StaticData
         private Dictionary<AbilityId, HeroAbilityData> _heroAbilities;
         private Dictionary<ParticleId, ParticlesStaticData> _particles;
         private Dictionary<WeaponId, WeaponData> _weapons;
+        private Dictionary<WeaponId, WeaponPlatformStaticData> _weaponPlatforms;
 
         public void Load()
         {
@@ -45,6 +46,9 @@ namespace Code.StaticData
                 .LoadAll<WeaponData>("StaticData/Equipment/Weapons")
                 .ToDictionary(x => x.WeaponId, x => x);
 
+            _weaponPlatforms = Resources
+                .LoadAll<WeaponPlatformStaticData>("StaticData/WeaponPlatforms")
+                .ToDictionary(x => x.WeaponPlatformId, x => x);
         }
 
         public WeaponData ForWeapon(WeaponId weaponId)
@@ -55,6 +59,13 @@ namespace Code.StaticData
             return null;
         }
 
+        public WeaponPlatformStaticData ForWeaponPlatforms(WeaponId weaponId)
+        {
+            if(_weaponPlatforms.TryGetValue(weaponId, out var weaponPlatformStaticData ))
+                return weaponPlatformStaticData;
+
+            return null;
+        }
         public ParticlesStaticData ForParticle(ParticleId id)
         {
             if(_particles.TryGetValue(id, out var particlesStaticData))

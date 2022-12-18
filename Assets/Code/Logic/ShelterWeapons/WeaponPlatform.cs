@@ -1,28 +1,30 @@
+using System;
 using Code.Data;
 using Code.Enemy;
 using Code.Hero;
-using Code.Services.PersistentProgress;
 using Code.StaticData;
 using Code.UI.WeaponPlatform;
 using UnityEngine;
 
 namespace Code.Logic.ShelterWeapons
 {
-    public class WeaponPlatform : MonoBehaviour, IInteractable, ISave
+    public class WeaponPlatform : MonoBehaviour, IInteractable
     {
-        [SerializeField] private WeaponId weaponId;
         [SerializeField] private WeaponPlatformAbilityUi abilityView;
 
+        public event Action OnWeaponPurchase;
         public WeaponData WeaponData;
         public Transform WeaponContainer;
         public EquipWeaponButton EquipWeaponButton;
         public TriggerObserver TriggerObserver;
         private LootData _lootData;
-        private bool _isOwned;
 
+        public void Construct(LootData lootData)
+        {
+            _lootData = lootData;
+        }
         private void Awake()
         {
-
             abilityView.Construct(WeaponData);
 
             TriggerObserver.TriggerEnter += TriggerEnter;
@@ -46,18 +48,18 @@ namespace Code.Logic.ShelterWeapons
            if (_lootData.Collected >= WeaponData.Price)
            {
                _lootData.Collected -= WeaponData.Price;
-               _isOwned = true;
+               _lootData.CountChanged?.Invoke();
+
+               OnWeaponPurchase?.Invoke();
+
                heroWeapon.EquipWeapon(WeaponData);
            }
         }
 
-        public void LoadProgress(PlayerProgress progress)
+        public void UnlockWeapon()
         {
-            _lootData = progress.WorldData.LootData;
+
         }
 
-        public void UpdateProgress(PlayerProgress progress)
-        {
-        }
     }
 }

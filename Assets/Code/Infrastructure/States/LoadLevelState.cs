@@ -131,7 +131,7 @@ namespace Code.Infrastructure.States
         {
             foreach (EnemySpawnerData spawnerData in levelData.EnemySpawners)
             {
-                SpawnPoint spawner = _enemyFactory.CreateSpawner(
+                EnemySpawnPoint spawner = _enemyFactory.CreateSpawner(
                     spawnerData.Position, 
                     spawnerData.Id, 
                     spawnerData.MonsterTypeId,
@@ -147,6 +147,8 @@ namespace Code.Infrastructure.States
                     weaponPlatform.Id,
                     weaponPlatform.WeaponId
                 );
+
+                spawner.Construct(_itemFactory);
 
             }
         }

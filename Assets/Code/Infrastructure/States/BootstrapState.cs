@@ -103,7 +103,8 @@ namespace Code.Infrastructure.States
             _services.RegisterSingle<IItemFactory>(new ItemFactory(
                 _services.Single<IStaticDataService>(),
                 _services.Single<ISaveLoadService>(),
-                _services.Single<IAssets>()));
+                _services.Single<IAssets>(),
+                _services.Single<IProgressService>()));
 
         }
 
