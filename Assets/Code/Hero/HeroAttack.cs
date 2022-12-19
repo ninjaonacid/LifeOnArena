@@ -27,7 +27,7 @@ namespace Code.Hero
 
         private void Awake()
         {
-            
+
             _layerMask = 1 << LayerMask.NameToLayer("Hittable");
         }
 
@@ -57,16 +57,16 @@ namespace Code.Hero
             }
         }
 
-       /* private void OnDrawGizmos()
+        private void OnDrawGizmos()
         {
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(StartPoint() + transform.forward, _characterStats.BaseAttackRadius);
-        }*/
+        }
 
         private int Hit()
         {
             return Physics.OverlapSphereNonAlloc(StartPoint() + transform.forward,
-                _characterStats.BaseAttackRadius ,
+                _characterStats.BaseAttackRadius,
                 _hits,
                 _layerMask);
         }

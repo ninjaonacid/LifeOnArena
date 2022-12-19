@@ -14,27 +14,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LevelKey: Level2
   EnemySpawners:
+  - Id: Level2_0768ea83-1619-4467-9d93-85905e649ce2
+    RespawnCount: 0
+    MonsterTypeId: 10
+    Position: {x: -4.3, y: 0.05506897, z: 28.5}
+  - Id: Level2_f2390f0f-82b2-4326-86ad-5764d708d7f1
+    RespawnCount: 0
+    MonsterTypeId: 10
+    Position: {x: 15.76, y: 0.05506897, z: 27.8}
   - Id: MainScene_0c63200f-e0e1-42c2-a63b-d8cabd23224c
     RespawnCount: 0
-    MonsterTypeId: 0
-    Position: {x: -4.3, y: 0.05506897, z: 78.2}
+    MonsterTypeId: 10
+    Position: {x: -4.3, y: 0.05506897, z: 41.2}
   - Id: MainScene_78bc97f4-c0a4-4825-a960-efb032b60f57
     RespawnCount: 0
     MonsterTypeId: 0
     Position: {x: 32, y: 0.05506897, z: 33.6}
   - Id: MainScene_6d37bdf6-01d1-4859-976f-5f36b6d44c8f
     RespawnCount: 0
-    MonsterTypeId: 0
-    Position: {x: 15.76, y: 0.05506897, z: 50.6}
+    MonsterTypeId: 10
+    Position: {x: 15.76, y: 0.05506897, z: 41.2}
   - Id: MainScene_3643eddb-4bc4-4761-9f86-7da8b1720421
     RespawnCount: 0
     MonsterTypeId: 0
     Position: {x: -24.4, y: 0.05506897, z: 34.5}
-  - Id: Level1_5b8e5faf-5a85-4381-ba35-1f86bd06b33b
-    RespawnCount: 3
-    MonsterTypeId: 0
-    Position: {x: -4.3, y: 0.05506897, z: 35.5}
   WeaponPlatformSpawners: []
-  HeroInitialPosition: {x: 0, y: 0, z: 18.2}
+  HeroInitialPosition: {x: 0, y: 0, z: 12.4}
   NextLevelDoorPosition: {x: -2.24, y: -0.86, z: 76.2}
   NextLevelDoorRotation: {x: -0, y: -0, z: -0, w: 1}

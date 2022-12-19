@@ -45,7 +45,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.89199895, g: 0.89364296, b: 0.8962264, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -133,6 +133,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _target: {fileID: 0}
   CamPosition: {x: 0, y: 0, z: 0}
-  Distance: 22
+  Distance: 30
   OffsetY: 5
   RotationAngleX: 55
+  RotationAngleY: 0

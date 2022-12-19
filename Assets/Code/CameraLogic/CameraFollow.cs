@@ -11,11 +11,12 @@ namespace Code.CameraLogic
         public float OffsetY;
 
         public float RotationAngleX;
+        public float RotationAngleY;
 
         private void LateUpdate()
         {
             if (_target == null) return;
-            var rotation = Quaternion.Euler(RotationAngleX, 0, 0);
+            var rotation = Quaternion.Euler(RotationAngleX, RotationAngleY, 0);
 
             var position = rotation * new Vector3(0, 0, -Distance) +
                            TargetFollowPosition();

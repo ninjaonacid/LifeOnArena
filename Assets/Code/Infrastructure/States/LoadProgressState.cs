@@ -45,7 +45,7 @@ namespace Code.Infrastructure.States
 
             progress.HeroHp.MaxHP = 50f;
             progress.CharacterStats.BaseDamage = 20f;
-            progress.CharacterStats.BaseAttackRadius = 1f;
+            progress.CharacterStats.BaseAttackRadius = 2f;
             progress.CharacterStats.BaseAttackSpeed = 1f;
             progress.SkillsData.SpinAttack.Damage = 20f;
             progress.WorldData.LootData.Collected = 100;

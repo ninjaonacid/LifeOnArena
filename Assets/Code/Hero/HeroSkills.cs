@@ -56,7 +56,6 @@ namespace Code.Hero
                     slot.AbilityId = heroAbilityData.AbilityId;
                     slot.Ability = _abilityFactory.CreateAbility(heroAbilityData.AbilityId);
                     HeroAttack.SetActiveSkill(heroAbilityData);
-                    OnSkillChanged?.Invoke();
                 }
             }
 
