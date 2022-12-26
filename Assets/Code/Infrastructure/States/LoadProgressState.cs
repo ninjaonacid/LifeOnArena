@@ -41,7 +41,7 @@ namespace Code.Infrastructure.States
 
         private PlayerProgress NewProgress()
         {
-            var progress = new PlayerProgress("Shelter");
+            var progress = new PlayerProgress("Level2");
 
             progress.HeroHp.MaxHP = 50f;
             progress.CharacterStats.BaseDamage = 20f;

@@ -1,6 +1,5 @@
 using System;
 using Code.Data;
-using Code.Hero.Abilities;
 using Code.Infrastructure.Factory;
 using Code.Services.PersistentProgress;
 using Code.StaticData.Ability;

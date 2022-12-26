@@ -8,39 +8,15 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Share_Mat
-  m_Shader: {fileID: 4800000, guid: a2a06e22c08354d9699356710b69ca9c, type: 3}
-  m_ValidKeywords:
-  - AMBIENT
-  - ANIME
-  - ANIME_SOFT
-  - DIFFUSE
-  - MATCAP
-  - MATCAP_CONTRAST
-  - _DETAILBLEND_MULTIPLY
-  - _DETAILUV_UV1
-  - _HEIGHTCOLORSBLEND_ALPHA_BLEND
-  - _LAYER1BLEND_ALPHA_BLEND
-  - _LAYER2BLEND_ALPHA_BLEND
-  - _LAYER3BLEND_ALPHA_BLEND
-  - _LIGHTMAPUV_UV1
-  - _MATCAPBLEND_MULTIPLY_LIGHTEN
-  - _NORMALUV_UV1
-  - _OPTFALLBACK_DISABLED
-  - _OPTFOG_DISABLED
-  - _OPTLIGHTMAPPING_DISABLED
-  - _OPTPOINTLIGHTS_DISABLED
-  - _OPTSHADOW_DISABLED
-  - _PLANTTYPE_PLANT
-  - _RIMBLEND_ADDITIVE
-  - _SHADOWOVERLAYANIMATION_SCROLL
-  - _SPECULARUV_UV1
-  m_InvalidKeywords:
-  - TRIPLANAR_SHARPNESS
+  m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
-  stringTagMap: {}
+  stringTagMap:
+    RenderType: Opaque
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
@@ -203,6 +179,7 @@ Material:
     - _Fog: 0
     - _GlossMapScale: 0
     - _Glossiness: 0
+    - _GlossinessSource: 0
     - _GlossyReflections: 0
     - _HeightColors: 0
     - _HeightColorsAlpha: 1
@@ -259,15 +236,19 @@ Material:
     - _RimBlend: 1
     - _RimContrast: 5
     - _RimInverse: 0
+    - _SampleGI: 0
     - _ShadowOverlayAnimation: 0
     - _ShadowOverlayBrightness: 1
     - _ShadowOverlaySpeedU: 0.1
     - _ShadowOverlaySpeedV: 0.03
     - _ShadowOverlaySwayAmount: 0.01
     - _ShadowsEnabled: 0
+    - _Shininess: 0
     - _Smoothness: 0.5
+    - _SmoothnessSource: 0
     - _SmoothnessTextureChannel: 0
     - _SourceBlend: 5
+    - _SpecSource: 0
     - _Specular: 0
     - _SpecularBrightness: 1
     - _SpecularHair: 0

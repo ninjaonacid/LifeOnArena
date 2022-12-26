@@ -106,7 +106,7 @@ namespace Code.Infrastructure.States
 
             SetupEventHandler(levelData);
 
-            InitDoors(levelData);
+           // InitDoors(levelData);
 
             var hero = InitHero(levelData);
 
@@ -115,12 +115,12 @@ namespace Code.Infrastructure.States
             CameraFollow(hero);
         }
 
-        private void InitDoors(LevelStaticData levelData)
+       /* private void InitDoors(LevelStaticData levelData)
         {
             NextLevelDoor door = _gameFactory.CreateLevelDoor(levelData.NextLevelDoorPosition)
                 .GetComponent<NextLevelDoor>();
             door.Construct(_gameEventHandler);
-        }
+        }*/
         private void SetupEventHandler(LevelStaticData levelData)
         {
             _gameEventHandler.SetLevelSpawnerCount(levelData);
