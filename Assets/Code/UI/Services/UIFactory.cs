@@ -11,17 +11,17 @@ namespace Code.UI.Services
 {
     public class UIFactory : IUIFactory
     {
-        private readonly IAssets _assets;
+        private readonly IAssetsProvider _assetsProvider;
         private readonly IStaticDataService _staticData;
         private readonly ISaveLoadService _saveLoad;
         private readonly IProgressService _progress;
         private Transform _uiCoreTransform;
-        public UIFactory(IAssets assets, 
+        public UIFactory(IAssetsProvider assetsProvider, 
             IStaticDataService staticDataService, 
             ISaveLoadService saveLoad,
             IProgressService progress)
         {
-            _assets = assets;
+            _assetsProvider = assetsProvider;
             _staticData = staticDataService;
             _saveLoad = saveLoad;
             _progress = progress;
@@ -54,7 +54,7 @@ namespace Code.UI.Services
 
         public void CreateCore()
         {
-            _uiCoreTransform = _assets.Instantiate(AssetPath.UICore).transform;
+            _uiCoreTransform = _assetsProvider.Instantiate(AssetPath.UICore).transform;
         }
     }
 }

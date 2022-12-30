@@ -15,5 +15,9 @@ namespace Code.StaticData.Ability
         public bool IsAbilityReady() =>
             CurrentCooldown <= 0;
 
+        private void OnEnable()
+        {
+            CurrentCooldown = 0;
+        }
     }
 }

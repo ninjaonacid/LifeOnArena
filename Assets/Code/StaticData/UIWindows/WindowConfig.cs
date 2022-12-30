@@ -1,6 +1,5 @@
 ﻿using System;
 using Code.UI;
-using UnityEngine;
 
 namespace Code.StaticData.UIWindows
 {

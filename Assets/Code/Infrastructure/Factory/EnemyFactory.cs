@@ -18,19 +18,19 @@ namespace Code.Infrastructure.Factory
     {
         private readonly IHeroFactory _heroFactory;
         private readonly IStaticDataService _staticData;
-        private readonly IAssets _assets;
+        private readonly IAssetsProvider _assetsProvider;
         private readonly ISaveLoadService _saveLoadService;
         private readonly IProgressService _progressService;
         private readonly IRandomService _randomService;
 
-        public EnemyFactory(IHeroFactory heroFactory, IStaticDataService staticData, IAssets assets, 
+        public EnemyFactory(IHeroFactory heroFactory, IStaticDataService staticData, IAssetsProvider assetsProvider, 
             ISaveLoadService saveLoadService, IProgressService progressService,
             IRandomService randomService)
         {
     
             _heroFactory = heroFactory;
             _staticData = staticData;
-            _assets = assets;
+            _assetsProvider = assetsProvider;
             _saveLoadService = saveLoadService;
             _progressService = progressService;
             _randomService = randomService;
@@ -89,7 +89,7 @@ namespace Code.Infrastructure.Factory
 
         public GameObject InstantiateRegistered(string prefabPath, Vector3 position)
         {
-            var go = _assets.Instantiate(prefabPath, position);
+            var go = _assetsProvider.Instantiate(prefabPath, position);
 
             _saveLoadService.RegisterProgressWatchers(go);
             return go;
@@ -97,7 +97,7 @@ namespace Code.Infrastructure.Factory
 
         public GameObject InstantiateRegistered(string prefabPath)
         {
-            var go = _assets.Instantiate(prefabPath);
+            var go = _assetsProvider.Instantiate(prefabPath);
 
 
             _saveLoadService.RegisterProgressWatchers(go);

@@ -7,12 +7,12 @@ namespace Code.Infrastructure.Factory
 {
     public class HeroFactory : IHeroFactory
     {
-        private readonly IAssets _assets;
+        private readonly IAssetsProvider _assetsProvider;
         private readonly ISaveLoadService _saveLoadService;
 
-        public HeroFactory(IAssets assets, ISaveLoadService saveLoadService)
+        public HeroFactory(IAssetsProvider assetsProvider, ISaveLoadService saveLoadService)
         {
-            _assets = assets;
+            _assetsProvider = assetsProvider;
             _saveLoadService = saveLoadService;
         }
         public GameObject HeroGameObject { get; set; }
@@ -27,7 +27,7 @@ namespace Code.Infrastructure.Factory
 
         public GameObject InstantiateRegistered(string prefabPath, Vector3 position)
         {
-            var go = _assets.Instantiate(prefabPath, position);
+            var go = _assetsProvider.Instantiate(prefabPath, position);
 
 
             _saveLoadService.RegisterProgressWatchers(go);

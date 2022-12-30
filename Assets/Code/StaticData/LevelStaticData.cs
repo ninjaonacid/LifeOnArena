@@ -11,7 +11,7 @@ namespace Code.StaticData
 
         public List<EnemySpawnerData> EnemySpawners;
         public List<WeaponPlatformSpawnerData> WeaponPlatformSpawners;
-
+        public List<NextLevelDoorSpawnerData> NextLevelDoorSpawners;
         public Vector3 HeroInitialPosition;
 
         public Vector3 NextLevelDoorPosition;

@@ -106,21 +106,25 @@ namespace Code.Infrastructure.States
 
             SetupEventHandler(levelData);
 
-           // InitDoors(levelData);
+            InitDoors(levelData);
 
             var hero = InitHero(levelData);
-
             InitHud(hero);
 
             CameraFollow(hero);
         }
 
-       /* private void InitDoors(LevelStaticData levelData)
+        private void InitDoors(LevelStaticData levelData)
         {
-            NextLevelDoor door = _gameFactory.CreateLevelDoor(levelData.NextLevelDoorPosition)
-                .GetComponent<NextLevelDoor>();
-            door.Construct(_gameEventHandler);
-        }*/
+            foreach (var nextLevelDoorData in levelData.NextLevelDoorSpawners)
+            {
+                NextLevelDoor door = _gameFactory.CreateLevelDoor(nextLevelDoorData.Position)
+                    .GetComponent<NextLevelDoor>();
+                door.transform.rotation = nextLevelDoorData.Rotation;
+                door.Construct(_gameEventHandler);
+            }
+           
+        }
         private void SetupEventHandler(LevelStaticData levelData)
         {
             _gameEventHandler.SetLevelSpawnerCount(levelData);
@@ -132,8 +136,8 @@ namespace Code.Infrastructure.States
             foreach (EnemySpawnerData spawnerData in levelData.EnemySpawners)
             {
                 EnemySpawnPoint spawner = _enemyFactory.CreateSpawner(
-                    spawnerData.Position, 
-                    spawnerData.Id, 
+                    spawnerData.Position,
+                    spawnerData.Id,
                     spawnerData.MonsterTypeId,
                     spawnerData.RespawnCount);
 
@@ -155,7 +159,7 @@ namespace Code.Infrastructure.States
 
         private GameObject InitHero(LevelStaticData levelData)
         {
-            var hero =  _heroFactory.CreateHero(levelData.HeroInitialPosition);
+            var hero = _heroFactory.CreateHero(levelData.HeroInitialPosition);
 
             hero.GetComponent<HeroDeath>().Construct(_gameEventHandler);
             hero.GetComponent<HeroSkills>().Construct(_abilityFactory);
@@ -170,7 +174,7 @@ namespace Code.Infrastructure.States
 
             hud.GetComponentInChildren<ActorUI>().Construct(hero.GetComponent<HeroHealth>());
             hud.GetComponentInChildren<HudSkillContainer>().Construct(
-                hero.GetComponent<HeroSkills>(), 
+                hero.GetComponent<HeroSkills>(),
                 hero.GetComponent<HeroAbilityCooldown>(),
                 _inputService);
         }

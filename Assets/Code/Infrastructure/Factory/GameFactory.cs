@@ -11,16 +11,16 @@ namespace Code.Infrastructure.Factory
 {
     public class GameFactory : IGameFactory
     {
-        private readonly IAssets _assets;
+        private readonly IAssetsProvider _assetsProvider;
         private readonly IStaticDataService _staticData;
         private readonly IProgressService _progressService;
         private readonly ISaveLoadService _saveLoadService;
         private readonly IWindowService _windowService;
 
-        public GameFactory(IAssets assets, IProgressService progressService,
+        public GameFactory(IAssetsProvider assetsProvider, IProgressService progressService,
                             ISaveLoadService saveLoadService, IWindowService windowService)
         {
-            _assets = assets;
+            _assetsProvider = assetsProvider;
             _progressService = progressService;
             _saveLoadService = saveLoadService;
             _windowService = windowService;
@@ -28,13 +28,13 @@ namespace Code.Infrastructure.Factory
 
         public GameObject CreateLevelDoor(Vector3 position)
         {
-            GameObject levelDoor = _assets.Instantiate(AssetPath.DoorPath, position);
+            GameObject levelDoor = _assetsProvider.Instantiate(AssetPath.DoorPath, position);
 
             return levelDoor;
         }
         public GameObject CreateLevelEventHandler()
         {
-            GameObject levelHandler = _assets.Instantiate(AssetPath.LevelEventHandler);
+            GameObject levelHandler = _assetsProvider.Instantiate(AssetPath.LevelEventHandler);
 
             return levelHandler;
         }
@@ -55,7 +55,7 @@ namespace Code.Infrastructure.Factory
 
         public GameObject InstantiateRegistered(string prefabPath)
         {
-            var go = _assets.Instantiate(prefabPath);
+            var go = _assetsProvider.Instantiate(prefabPath);
 
 
             _saveLoadService.RegisterProgressWatchers(go);
@@ -65,7 +65,7 @@ namespace Code.Infrastructure.Factory
 
         public GameObject InstantiateRegistered(string prefabPath, Transform parent)
         {
-            var go = _assets.Instantiate(prefabPath, parent);
+            var go = _assetsProvider.Instantiate(prefabPath, parent);
 
             _saveLoadService.RegisterProgressWatchers(go);
             return go;

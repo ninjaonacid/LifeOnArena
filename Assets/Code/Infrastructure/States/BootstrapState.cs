@@ -49,7 +49,7 @@ namespace Code.Infrastructure.States
             RegisterStaticData();
             _services.RegisterSingle<IGameStateMachine>(_stateMachine);
             _services.RegisterSingle<IRandomService>(new RandomService());
-            _services.RegisterSingle<IAssets>(new AssetProvider());
+            _services.RegisterSingle<IAssetsProvider>(new AssetProvider());
             _services.RegisterSingle(InputService());
             _services.RegisterSingle<IWindowService>(
                 new WindowsService(_services.Single<IUIFactory>()));
@@ -63,7 +63,7 @@ namespace Code.Infrastructure.States
             _services.RegisterSingle<IGameEventHandler>(new GameEventHandler());
 
             _services.RegisterSingle<IUIFactory>(new UIFactory
-            (_services.Single<IAssets>(),
+            (_services.Single<IAssetsProvider>(),
                 _services.Single<IStaticDataService>(),
                 _services.Single<ISaveLoadService>(),
                 _services.Single<IProgressService>()));
@@ -76,19 +76,19 @@ namespace Code.Infrastructure.States
 
             _services.RegisterSingle<IGameFactory>
             (new GameFactory(
-                _services.Single<IAssets>(),
+                _services.Single<IAssetsProvider>(),
                 _services.Single<IProgressService>(),
                 _services.Single<ISaveLoadService>(),
                 _services.Single<IWindowService>()));
 
             _services.RegisterSingle<IHeroFactory>(new HeroFactory(
-                _services.Single<IAssets>(),
+                _services.Single<IAssetsProvider>(),
                 _services.Single<ISaveLoadService>()));
 
             _services.RegisterSingle<IEnemyFactory>(new EnemyFactory(
                 _services.Single<IHeroFactory>(),
                 _services.Single<IStaticDataService>(),
-                _services.Single<IAssets>(),
+                _services.Single<IAssetsProvider>(),
                 _services.Single<ISaveLoadService>(),
                 _services.Single<IProgressService>(),
                 _services.Single<IRandomService>()));
@@ -103,7 +103,7 @@ namespace Code.Infrastructure.States
             _services.RegisterSingle<IItemFactory>(new ItemFactory(
                 _services.Single<IStaticDataService>(),
                 _services.Single<ISaveLoadService>(),
-                _services.Single<IAssets>(),
+                _services.Single<IAssetsProvider>(),
                 _services.Single<IProgressService>()));
 
         }

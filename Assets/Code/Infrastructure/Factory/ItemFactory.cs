@@ -14,17 +14,17 @@ namespace Code.Infrastructure.Factory
     {
         private readonly IStaticDataService _staticData;
         private readonly ISaveLoadService _saveLoadService;
-        private readonly IAssets _assets;
+        private readonly IAssetsProvider _assetsProvider;
         private readonly IProgressService _progressService;
 
         public ItemFactory(IStaticDataService staticData, 
             ISaveLoadService saveLoadService, 
-            IAssets assets,
+            IAssetsProvider assetsProvider,
             IProgressService progressService)
         {
             _staticData = staticData;
             _saveLoadService = saveLoadService;
-            _assets = assets;
+            _assetsProvider = assetsProvider;
             _progressService = progressService;
         }
         public WeaponData LoadWeapon(WeaponId weaponId) =>
@@ -53,7 +53,7 @@ namespace Code.Infrastructure.Factory
         }
         public GameObject InstantiateRegistered(string prefabPath, Vector3 position)
         {
-            var go = _assets.Instantiate(prefabPath, position);
+            var go = _assetsProvider.Instantiate(prefabPath, position);
 
 
             _saveLoadService.RegisterProgressWatchers(go);

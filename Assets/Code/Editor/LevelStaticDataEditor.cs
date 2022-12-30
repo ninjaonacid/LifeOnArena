@@ -1,4 +1,3 @@
-
 using System.Linq;
 using Code.Logic;
 using Code.Logic.EnemySpawners;
@@ -35,13 +34,15 @@ namespace Code.Editor
                         .Select(x => new WeaponPlatformSpawnerData(x.GetComponent<UniqueId>().Id,
                             x.WeaponId, x.transform.position))
                         .ToList();
-
+                levelData.NextLevelDoorSpawners =
+                    FindObjectsOfType<NextLevelDoorMarker>()
+                        .Select(x => new NextLevelDoorSpawnerData(x.transform.position, x.transform.rotation))
+                        .ToList();
+                        
                 levelData.LevelKey = SceneManager.GetActiveScene().name;
 
                 levelData.HeroInitialPosition = GameObject.FindWithTag(InitialPointTag).transform.position;
-
-                levelData.NextLevelDoorPosition = GameObject.FindWithTag(NextLevelDoorTag).transform.position;
-                levelData.NextLevelDoorRotation = GameObject.FindWithTag(NextLevelDoorTag).transform.rotation;
+                
 
             }
 

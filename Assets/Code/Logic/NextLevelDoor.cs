@@ -7,9 +7,8 @@ namespace Code.Logic
     public class NextLevelDoor : MonoBehaviour
     {
         private IGameEventHandler _gameEventHandler;
-        [SerializeField] private GameObject RightDoor;
+        [SerializeField] public GameObject RightDoor;
         [SerializeField] private GameObject LeftDoor;
-
         public void Construct(IGameEventHandler gameEventHandler)
         {
             _gameEventHandler  = gameEventHandler;
@@ -22,8 +21,8 @@ namespace Code.Logic
 
         private void OpenNextLevelDoor()
         {
-            RightDoor.transform.DORotate(new Vector3(transform.rotation.x, 60, transform.rotation.z), 2f);
-            LeftDoor.transform.DORotate(new Vector3(transform.rotation.x, -60, transform.rotation.z), 2f);
+            RightDoor.transform.DOLocalRotate(new Vector3(RightDoor.transform.rotation.x, 60, RightDoor.transform.rotation.z), 2f);
+            LeftDoor.transform.DOLocalRotate(new Vector3(LeftDoor.transform.rotation.x, -60, LeftDoor.transform.rotation.z), 2f);
         }
     }
 }
