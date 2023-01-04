@@ -25,7 +25,7 @@ namespace Code.Hero
             {
                 for (int i = 0; i < GetInteractables(); i++)
                 {
-                    _interactableColliders[i].GetComponentInParent<IInteractable>().Interact(this);
+                    _interactableColliders[i].GetComponent<IInteractable>().Interact(this);
                     break;
                 }
             }

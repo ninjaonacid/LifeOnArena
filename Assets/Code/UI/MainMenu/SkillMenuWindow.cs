@@ -2,7 +2,6 @@ using Code.Services;
 using Code.Services.PersistentProgress;
 using Code.Services.SaveLoad;
 using Code.UI.SkillsMenu;
-using UnityEngine;
 
 namespace Code.UI.MainMenu
 {

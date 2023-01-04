@@ -46,12 +46,20 @@ namespace Code.UI.Services
             var window = Object.Instantiate(config.Prefab, _uiCoreTransform) as SkillMenuWindow;
             window.Construct(_progress, _staticData, _saveLoad);
         }
+
+        public void CreateUpgradeMenu()
+        {
+            WindowConfig config = _staticData.ForWindow(UIWindowID.UpgradeMenu);
+            var window = Object.Instantiate(config.Prefab, _uiCoreTransform);
+
+        }
+
         public void CreateWeaponWindow()
         {
             WindowConfig config = _staticData.ForWindow(UIWindowID.Weapon);
             Object.Instantiate(config.Prefab, _uiCoreTransform);
         }
-
+        
         public void CreateCore()
         {
             _uiCoreTransform = _assetsProvider.Instantiate(AssetPath.UICore).transform;

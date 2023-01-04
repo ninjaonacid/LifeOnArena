@@ -1,5 +1,4 @@
 using Code.Services;
-using UnityEngine;
 
 namespace Code.UI.Services
 {
@@ -9,5 +8,6 @@ namespace Code.UI.Services
         WindowBase CreateSelectionMenu(IWindowService windowService);
         void CreateWeaponWindow();
         void CreateSkillWindow();
+        void CreateUpgradeMenu();
     }
 }

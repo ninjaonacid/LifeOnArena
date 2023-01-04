@@ -1,6 +1,3 @@
-using Code.StaticData.UIWindows;
-using UnityEngine;
-
 namespace Code.UI.Services
 {
     public class WindowsService : IWindowService
@@ -27,6 +24,10 @@ namespace Code.UI.Services
                 
                 case UIWindowID.Skills:
                     _uiFactory.CreateSkillWindow();
+                    break;
+
+                case UIWindowID.UpgradeMenu:
+                    _uiFactory.CreateUpgradeMenu();
                     break;
             }
         }

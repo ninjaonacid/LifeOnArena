@@ -6,6 +6,7 @@ namespace Code.UI
         Shop,
         Weapon,
         Skills,
+        UpgradeMenu,
         SelectionMenu
 
     }
