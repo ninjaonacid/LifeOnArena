@@ -63,7 +63,7 @@ namespace Code.Hero
                 [typeof(SpinAttackState)] =
                     new SpinAttackState(this, _input, _heroAnimator, _heroRotation, _heroAttack),
                 [typeof(RollState)] =
-                    new RollState(this, _input, _heroAnimator, _heroAttack),
+                    new RollState(this, _input, _heroAnimator, _heroAttack, _heroMovement, _heroRotation),
             };
 
 

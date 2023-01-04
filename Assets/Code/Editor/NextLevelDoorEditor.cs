@@ -12,13 +12,14 @@ namespace Code.Editor
         public static void RenderCustomGizmo(NextLevelDoorMarker doorMarker, GizmoType gizmo)
         {
             Gizmos.color = Color.red;
+            Gizmos.matrix = doorMarker.transform.localToWorldMatrix;
 
             var meshFilters = doorMarker.DoorPrefab.GetComponentsInChildren<MeshFilter>();
 
             for (var index = 0; index < meshFilters.Length; index++)
             {
                 var meshFilter = meshFilters[index];
-                Gizmos.matrix = doorMarker.transform.localToWorldMatrix;
+                
                 Gizmos.DrawMesh(meshFilter.sharedMesh, 
                     Vector3.zero + doorMarker.DoorPrefab.transform.GetChild(index).transform.localPosition,
                     Quaternion.identity);
