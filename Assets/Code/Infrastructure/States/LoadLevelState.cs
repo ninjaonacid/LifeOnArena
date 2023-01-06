@@ -10,6 +10,7 @@ using Code.Services.Input;
 using Code.Services.PersistentProgress;
 using Code.Services.SaveLoad;
 using Code.StaticData;
+using Code.StaticData.Levels;
 using Code.StaticData.Spawners;
 using Code.UI.HUD;
 using Code.UI.HUD.Skills;

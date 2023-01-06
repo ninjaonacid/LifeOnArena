@@ -1,6 +1,7 @@
 using System;
 using Code.Logic.EnemySpawners;
 using Code.StaticData;
+using Code.StaticData.Levels;
 
 namespace Code.Services
 {
@@ -9,6 +10,8 @@ namespace Code.Services
 
         public event Action MonsterSpawnersCleared;
         public event Action PlayerDead;
+
+
         public int LevelSpawnersCount { get; set; }
         public int ClearedSpawnersCount { get; set; }
 
@@ -20,6 +23,7 @@ namespace Code.Services
         {
             PlayerDead?.Invoke();
         }
+
         public void MonsterSpawnerSlain(EnemySpawnPoint spawner)
         {
             ClearedSpawnersCount++;

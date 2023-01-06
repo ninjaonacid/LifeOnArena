@@ -10,12 +10,15 @@ namespace Code.Logic
     {
         private IGameEventHandler _gameEventHandler;
         private IWindowService _windowService;
+        private bool _isActive = false;
         private void Awake()
         {
             _gameEventHandler = AllServices.Container.Single<IGameEventHandler>();
             _windowService = AllServices.Container.Single<IWindowService>();
+
         }
 
+        
         public void Interact(HeroInteraction interactor)
         {
             _windowService.Open(UIWindowID.UpgradeMenu);

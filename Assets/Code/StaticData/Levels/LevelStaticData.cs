@@ -1,0 +1,20 @@
+﻿using System.Collections.Generic;
+using Code.StaticData.Spawners;
+using UnityEngine;
+
+namespace Code.StaticData.Levels
+{
+    [CreateAssetMenu(fileName = "LevelData", menuName = "StaticData/Level")]
+    public class LevelStaticData : ScriptableObject
+    {
+        public string LevelKey;
+
+        public List<EnemySpawnerData> EnemySpawners;
+        public List<WeaponPlatformSpawnerData> WeaponPlatformSpawners;
+        public List<NextLevelDoorSpawnerData> NextLevelDoorSpawners;
+        public Vector3 HeroInitialPosition;
+
+        public Vector3 NextLevelDoorPosition;
+        public Quaternion NextLevelDoorRotation;
+    }
+}

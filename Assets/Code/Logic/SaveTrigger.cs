@@ -8,7 +8,7 @@ namespace Code.Logic
     {
         private ISaveLoadService _saveLoadService;
 
-        public BoxCollider Collider;
+        [SerializeField] private BoxCollider _collider;
 
         private void Awake()
         {
@@ -24,11 +24,11 @@ namespace Code.Logic
 
         private void OnDrawGizmos()
         {
-            if (Collider == null)
+            if (_collider == null)
                 return;
 
             Gizmos.color = new Color32(30, 200, 30, 130);
-            Gizmos.DrawCube(transform.position + Collider.center, Collider.size);
+            Gizmos.DrawCube(transform.position + _collider.center, _collider.size);
         }
     }
 }

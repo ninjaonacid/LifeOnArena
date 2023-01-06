@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Code.Logic.EnemySpawners;
 using Code.StaticData;
+using Code.StaticData.Levels;
 using UnityEngine;
 using UnityEngine.Android;
 

@@ -3,6 +3,7 @@ using Code.Logic;
 using Code.Logic.EnemySpawners;
 using Code.Logic.LevelObjectsSpawners;
 using Code.StaticData;
+using Code.StaticData.Levels;
 using Code.StaticData.Spawners;
 using UnityEditor;
 using UnityEngine;

@@ -163,6 +163,7 @@ GameObject:
   - component: {fileID: 581845984920309187}
   - component: {fileID: 581845984920309185}
   - component: {fileID: 581845984920309186}
+  - component: {fileID: 5616897947372564127}
   m_Layer: 0
   m_Name: UpgradeContainer
   m_TagString: Untagged
@@ -231,6 +232,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &5616897947372564127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 581845984920309196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d57b6585e9546d54ea24a724f5f00aeb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UpgradeImage: {fileID: 581845984916777142}
+  UpgradeRarityImage: {fileID: 5672218126538564445}
+  UpgradeText: {fileID: 581845985600257560}
 --- !u!1 &581845985600257562
 GameObject:
   m_ObjectHideFlags: 0
