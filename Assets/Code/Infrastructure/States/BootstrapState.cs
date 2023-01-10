@@ -4,6 +4,7 @@ using Code.Infrastructure.ObjectPool;
 using Code.Infrastructure.Services;
 using Code.Services;
 using Code.Services.Input;
+using Code.Services.LevelTransitionService;
 using Code.Services.PersistentProgress;
 using Code.Services.RandomService;
 using Code.Services.SaveLoad;
@@ -17,11 +18,11 @@ namespace Code.Infrastructure.States
     {
         private const string InitialScene = "Initialize";
         private readonly SceneLoader _sceneLoader;
-        private readonly AllServices _services;
+        private readonly ServiceLocator _services;
         private readonly GameStateMachine _stateMachine;
 
         public BootstrapState(GameStateMachine stateMachine, SceneLoader sceneLoader,
-            AllServices services)
+            ServiceLocator services)
         {
             _stateMachine = stateMachine;
             _sceneLoader = sceneLoader;
@@ -60,7 +61,7 @@ namespace Code.Infrastructure.States
             (new SaveLoadService(
                 _services.Single<IProgressService>()));
 
-            _services.RegisterSingle<IGameEventHandler>(new GameEventHandler());
+            _services.RegisterSingle<ILevelEventHandler>(new LevelEventHandler());
 
             _services.RegisterSingle<IUIFactory>(new UIFactory
             (_services.Single<IAssetsProvider>(),
@@ -106,6 +107,8 @@ namespace Code.Infrastructure.States
                 _services.Single<IAssetsProvider>(),
                 _services.Single<IProgressService>()));
 
+            _services.RegisterSingle<ILevelTransitionService>(new LevelTransitionService(
+                _services.Single<IStaticDataService>(), _services.Single<IRandomService>()));
         }
 
         private void RegisterStaticData()

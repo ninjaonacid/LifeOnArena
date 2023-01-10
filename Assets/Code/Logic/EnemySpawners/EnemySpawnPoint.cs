@@ -14,7 +14,7 @@ namespace Code.Logic.EnemySpawners
         private EnemyDeath _enemyDeath;
         private IEnemyObjectPool _enemyObjectPool;
         private IParticleObjectPool _particleObjectPool;
-        private IGameEventHandler _gameEventHandler;
+        private ILevelEventHandler _levelEventHandler;
 
         private float _enemyTimer = 15;
 
@@ -28,12 +28,12 @@ namespace Code.Logic.EnemySpawners
 
         public void Construct(IEnemyObjectPool enemyObjectPool,
             IParticleObjectPool particleObjectPool,
-            IGameEventHandler gameEventHandler
+            ILevelEventHandler levelEventHandler
         )
         {
             _enemyObjectPool = enemyObjectPool;
             _particleObjectPool = particleObjectPool;
-            _gameEventHandler = gameEventHandler;
+            _levelEventHandler = levelEventHandler;
         }
 
         public void LoadProgress(PlayerProgress progress)
@@ -76,7 +76,7 @@ namespace Code.Logic.EnemySpawners
             else
             {
                 Slain = true;
-                _gameEventHandler.MonsterSpawnerSlain(this);
+                _levelEventHandler.MonsterSpawnerSlain(this);
             }
         }
 

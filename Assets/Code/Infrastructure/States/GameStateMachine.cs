@@ -16,7 +16,7 @@ namespace Code.Infrastructure.States
         private IExitableState _activeState;
 
         public GameStateMachine(SceneLoader sceneLoader, LoadingCurtain curtain,
-            AllServices services)
+            ServiceLocator services)
         {
             _states = new Dictionary<Type, IExitableState>
             {
@@ -27,7 +27,7 @@ namespace Code.Infrastructure.States
                 [typeof(MainMenuState)] = new MainMenuState(this, sceneLoader, services, curtain),
                 [typeof(LoadLevelState)] = new LoadLevelState(this, sceneLoader,
                     curtain, services, services.Single<IUIFactory>()),
-                [typeof(GameLoopState)] = new GameLoopState(this, sceneLoader, services.Single<IGameEventHandler>()),
+                [typeof(GameLoopState)] = new GameLoopState(this, sceneLoader, services.Single<ILevelEventHandler>()),
             };
         }
 

@@ -41,7 +41,7 @@ namespace Code.UI.SkillsMenu
 
         private void Awake()
         {
-            _saveLoad = AllServices.Container.Single<ISaveLoadService>();
+            _saveLoad = ServiceLocator.Container.Single<ISaveLoadService>();
         }
 
 

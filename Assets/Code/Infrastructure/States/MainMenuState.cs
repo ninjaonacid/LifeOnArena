@@ -12,13 +12,13 @@ namespace Code.Infrastructure.States
         private readonly SceneLoader _sceneLoader;
         private readonly LoadingCurtain _curtain;
 
-        private readonly AllServices _services;
+        private readonly ServiceLocator _services;
         private IWindowService _windowService;
         private IUIFactory _uiFactory;
         private IProgressService _progress;
         public MainMenuState(GameStateMachine gameStateMachine, 
             SceneLoader sceneLoader, 
-            AllServices services,
+            ServiceLocator services,
             LoadingCurtain curtain)
         {
             _sceneLoader = sceneLoader;

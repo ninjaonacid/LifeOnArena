@@ -9,25 +9,26 @@ namespace Code.Infrastructure.States
     {
         private readonly GameStateMachine _stateMachine;
         private readonly SceneLoader _sceneLoader;
-        private readonly IGameEventHandler _gameEventHandler;
+        private readonly ILevelEventHandler _levelEventHandler;
         
-        public GameLoopState(GameStateMachine stateMachine, SceneLoader sceneLoader, IGameEventHandler gameEventHandler)
+        public GameLoopState(GameStateMachine stateMachine, SceneLoader sceneLoader, ILevelEventHandler levelEventHandler)
         {
             _stateMachine = stateMachine;
             _sceneLoader = sceneLoader;
-            _gameEventHandler = gameEventHandler;
+            _levelEventHandler = levelEventHandler;
         }
 
         public void Enter()
         {
-            _gameEventHandler.PlayerDead += ReturnToMainMenu;
+            _levelEventHandler.PlayerDead += ReturnToMainMenu;
         }
 
         private async void ReturnToMainMenu()
         {
+
             var cts = new CancellationTokenSource();
             await UniTask.Delay(TimeSpan.FromSeconds(5), ignoreTimeScale: false, cancellationToken: cts.Token);
-            _stateMachine.Enter<MainMenuState>();
+            _stateMachine.Enter<LoadLevelState, string>("Shelter");
         }
 
         
@@ -35,7 +36,5 @@ namespace Code.Infrastructure.States
         {
         }
 
-
-        
     }
 }

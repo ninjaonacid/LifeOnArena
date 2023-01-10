@@ -6,17 +6,17 @@ namespace Code.Logic
 {
     public class NextLevelDoor : MonoBehaviour
     {
-        private IGameEventHandler _gameEventHandler;
+        private ILevelEventHandler _levelEventHandler;
         [SerializeField] public GameObject RightDoor;
         [SerializeField] private GameObject LeftDoor;
-        public void Construct(IGameEventHandler gameEventHandler)
+        public void Construct(ILevelEventHandler levelEventHandler)
         {
-            _gameEventHandler  = gameEventHandler;
-            _gameEventHandler.MonsterSpawnersCleared += OpenNextLevelDoor;
+            _levelEventHandler  = levelEventHandler;
+            _levelEventHandler.MonsterSpawnersCleared += OpenNextLevelDoor;
         }
         private void OnDestroy()
         {
-            _gameEventHandler.MonsterSpawnersCleared -= OpenNextLevelDoor;
+            _levelEventHandler.MonsterSpawnersCleared -= OpenNextLevelDoor;
         }
 
         private void OpenNextLevelDoor()

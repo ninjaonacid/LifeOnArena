@@ -1,4 +1,5 @@
-﻿using Code.StaticData;
+﻿using System.Collections.Generic;
+using Code.StaticData;
 using Code.StaticData.Ability;
 using Code.StaticData.Levels;
 using Code.StaticData.UIWindows;
@@ -11,10 +12,11 @@ namespace Code.Services
         MonsterStaticData ForMonster(MonsterTypeId typeId);
         void Load();
         ParticlesStaticData ForParticle(ParticleId id);
-        LevelStaticData ForLevel(string sceneKey);
+        LevelConfig ForLevel(string sceneKey);
         WindowConfig ForWindow(UIWindowID menuId);
         HeroAbilityData ForAbility(AbilityId abilityId);
         WeaponData ForWeapon(WeaponId weaponId);
         WeaponPlatformStaticData ForWeaponPlatforms(WeaponId weaponId);
+        List<LevelConfig> GetAllLevels();
     }
 }

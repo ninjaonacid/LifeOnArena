@@ -8,13 +8,13 @@ namespace Code.Logic
 {
     public class TreasureBox : MonoBehaviour, IInteractable
     {
-        private IGameEventHandler _gameEventHandler;
+        private ILevelEventHandler _levelEventHandler;
         private IWindowService _windowService;
         private bool _isActive = false;
         private void Awake()
         {
-            _gameEventHandler = AllServices.Container.Single<IGameEventHandler>();
-            _windowService = AllServices.Container.Single<IWindowService>();
+            _levelEventHandler = ServiceLocator.Container.Single<ILevelEventHandler>();
+            _windowService = ServiceLocator.Container.Single<IWindowService>();
 
         }
 

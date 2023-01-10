@@ -34,7 +34,7 @@ namespace Code.Hero
 
         private void Awake()
         {
-            _input = AllServices.Container.Single<IInputService>();
+            _input = ServiceLocator.Container.Single<IInputService>();
             _characterController = GetComponent<CharacterController>();
         }
 

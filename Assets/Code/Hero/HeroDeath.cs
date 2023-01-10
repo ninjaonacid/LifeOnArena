@@ -13,10 +13,10 @@ namespace Code.Hero
 
         public HeroMovement heroMovement;
 
-        private IGameEventHandler _gameEventHandler;
-        public void Construct(IGameEventHandler gameEventHandler)
+        private ILevelEventHandler _levelEventHandler;
+        public void Construct(ILevelEventHandler levelEventHandler)
         {
-            _gameEventHandler = gameEventHandler;
+            _levelEventHandler = levelEventHandler;
         }
         private void Start()
         {
@@ -36,7 +36,7 @@ namespace Code.Hero
         private void Die()
         {
             _isDead = true;
-            _gameEventHandler.HeroDeath();
+            _levelEventHandler.HeroDeath();
             heroMovement.enabled = false;
             Animator.PlayDeath();
         }

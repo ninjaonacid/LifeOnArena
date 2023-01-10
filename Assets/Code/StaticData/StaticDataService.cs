@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using Code.Logic.ShelterWeapons;
 using Code.Services;
 using Code.StaticData.Ability;
 using Code.StaticData.Levels;
@@ -13,7 +12,7 @@ namespace Code.StaticData
     public class StaticDataService : IStaticDataService
     {
         private Dictionary<MonsterTypeId, MonsterStaticData> _monsters;
-        private Dictionary<string, LevelStaticData> _levels; 
+        private Dictionary<string, LevelConfig> _levels; 
         private Dictionary<UIWindowID, WindowConfig> _windowConfigs;
         private Dictionary<AbilityId, HeroAbilityData> _heroAbilities;
         private Dictionary<ParticleId, ParticlesStaticData> _particles;
@@ -27,7 +26,7 @@ namespace Code.StaticData
                 .ToDictionary(x => x.MonsterTypeId, x => x);
 
             _levels = Resources
-                .LoadAll<LevelStaticData>("StaticData/Levels")
+                .LoadAll<LevelConfig>("StaticData/Levels")
                 .ToDictionary(x => x.LevelKey, x => x);
             
             _windowConfigs = Resources
@@ -91,16 +90,29 @@ namespace Code.StaticData
             return null;
         }
 
-        public Dictionary<AbilityId, HeroAbilityData> AbilityList()
-        {
-            return _heroAbilities;
-        }
-
-        public LevelStaticData ForLevel(string sceneKey) =>
+        public LevelConfig ForLevel(string sceneKey) =>
         
-            _levels.TryGetValue(sceneKey, out LevelStaticData staticData)
+            _levels.TryGetValue(sceneKey, out LevelConfig staticData)
                 ? staticData
                 : null;
+
+        public List<LevelConfig> GetAllLevels() =>
+        _levels.Values.ToList();
+        
+            
+        
+        public Dictionary<LocationType, List<LevelConfig>> GetLevelsByType()
+        {
+            var dict = new Dictionary<LocationType, List<LevelConfig>>();
+
+            var values = _levels.Values.ToList();
+
+            dict = values
+                .GroupBy(x => x.LocationType)
+                .ToDictionary(x => x.Key, x => x.ToList());
+
+            return dict;
+        }
 
         public WindowConfig ForWindow(UIWindowID menuId) =>
         

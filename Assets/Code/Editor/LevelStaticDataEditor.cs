@@ -11,7 +11,7 @@ using UnityEngine.SceneManagement;
 
 namespace Code.Editor
 {
-    [CustomEditor(typeof(LevelStaticData))]
+    [CustomEditor(typeof(LevelConfig))]
     public class LevelStaticDataEditor : UnityEditor.Editor
     {
         private const string InitialPointTag = "InitialPoint";
@@ -20,7 +20,7 @@ namespace Code.Editor
         {
             base.OnInspectorGUI();
 
-            LevelStaticData levelData = (LevelStaticData)target;
+            LevelConfig levelData = (LevelConfig)target;
 
             if (GUILayout.Button("Collect"))
             {

@@ -11,7 +11,7 @@ namespace Code.Infrastructure
         public Game(ICoroutineRunner coroutineRunner, LoadingCurtain curtain)
         {
             StateMachine = new GameStateMachine(new SceneLoader(coroutineRunner),
-                curtain, new AllServices());
+                curtain, new ServiceLocator());
         }
     }
 }

@@ -5,11 +5,12 @@ using Code.Infrastructure.ObjectPool;
 using Code.Logic;
 using Code.Logic.EnemySpawners;
 using Code.Logic.LevelObjectsSpawners;
+using Code.Logic.LevelTransition;
 using Code.Services;
 using Code.Services.Input;
+using Code.Services.LevelTransitionService;
 using Code.Services.PersistentProgress;
 using Code.Services.SaveLoad;
-using Code.StaticData;
 using Code.StaticData.Levels;
 using Code.StaticData.Spawners;
 using Code.UI.HUD;
@@ -24,7 +25,7 @@ namespace Code.Infrastructure.States
     {
         private readonly LoadingCurtain _curtain;
         private readonly SceneLoader _sceneLoader;
-        private readonly AllServices _services;
+        private readonly ServiceLocator _services;
         private readonly GameStateMachine _stateMachine;
         private IEnemyFactory _enemyFactory;
         private IHeroFactory _heroFactory;
@@ -34,14 +35,15 @@ namespace Code.Infrastructure.States
         private IInputService _inputService;
         private IStaticDataService _staticData;
         private ISaveLoadService _saveLoadService;
-        private IGameEventHandler _gameEventHandler;
+        private ILevelEventHandler _levelEventHandler;
         private IEnemyObjectPool _enemyObjectPool;
         private IParticleObjectPool _particleObjectPool;
         private IItemFactory _itemFactory;
+        private ILevelTransitionService _levelTransitionService;
         private readonly IUIFactory _uiFactory;
 
         public LoadLevelState(GameStateMachine stateMachine, SceneLoader sceneLoader,
-            LoadingCurtain curtain, AllServices services, IUIFactory uiFactory)
+            LoadingCurtain curtain, ServiceLocator services, IUIFactory uiFactory)
         {
             _stateMachine = stateMachine;
             _sceneLoader = sceneLoader;
@@ -60,9 +62,10 @@ namespace Code.Infrastructure.States
             _particleObjectPool = _services.Single<IParticleObjectPool>();
             _staticData = _services.Single<IStaticDataService>();
             _saveLoadService = _services.Single<ISaveLoadService>();
-            _gameEventHandler = _services.Single<IGameEventHandler>();
+            _levelEventHandler = _services.Single<ILevelEventHandler>();
             _abilityFactory = _services.Single<IAbilityFactory>();
             _itemFactory = _services.Single<IItemFactory>();
+            _levelTransitionService = _services.Single<ILevelTransitionService>();
 
             _curtain.Show();
             _enemyObjectPool.Cleanup();
@@ -85,7 +88,6 @@ namespace Code.Infrastructure.States
             _stateMachine.Enter<GameLoopState>();
         }
 
-
         private void InformProgressReaders()
         {
             foreach (var progressReader in _saveLoadService.ProgressReaders)
@@ -100,41 +102,50 @@ namespace Code.Infrastructure.States
         {
             string sceneKey = SceneManager.GetActiveScene().name;
 
-            LevelStaticData levelData = _staticData.ForLevel(sceneKey);
+            LevelConfig levelConfig = _staticData.ForLevel(sceneKey);
 
+            SetupLevelTransitionService(levelConfig);
 
-            InitSpawners(levelData);
+            SetupEventHandler(levelConfig);
 
-            SetupEventHandler(levelData);
+            InitSpawners(levelConfig);
 
-            InitDoors(levelData);
+            InitDoors(levelConfig);
 
-            var hero = InitHero(levelData);
+            var hero = InitHero(levelConfig);
             InitHud(hero);
 
             CameraFollow(hero);
         }
 
-        private void InitDoors(LevelStaticData levelData)
+        private void InitDoors(LevelConfig levelConfig)
         {
-            foreach (var nextLevelDoorData in levelData.NextLevelDoorSpawners)
+            foreach (var nextLevelDoorData in levelConfig.NextLevelDoorSpawners)
             {
                 NextLevelDoor door = _gameFactory.CreateLevelDoor(nextLevelDoorData.Position)
                     .GetComponent<NextLevelDoor>();
                 door.transform.rotation = nextLevelDoorData.Rotation;
-                door.Construct(_gameEventHandler);
-            }
-           
-        }
-        private void SetupEventHandler(LevelStaticData levelData)
-        {
-            _gameEventHandler.SetLevelSpawnerCount(levelData);
-            _gameEventHandler.ResetSpawnerCounter();
+                door.Construct(_levelEventHandler);
 
+                var levelTrigger = door.GetComponentInChildren<LevelTrigger>();
+                levelTrigger.Construct(_stateMachine, _levelTransitionService);
+            }
         }
-        private void InitSpawners(LevelStaticData levelData)
+
+        private void SetupLevelTransitionService(LevelConfig levelConfig)
         {
-            foreach (EnemySpawnerData spawnerData in levelData.EnemySpawners)
+            _levelTransitionService.SetCurrentLevel(levelConfig);
+        }
+
+        private void SetupEventHandler(LevelConfig levelConfig)
+        {
+            _levelEventHandler.SetCurrentLevel(levelConfig);
+            _levelEventHandler.ResetSpawnerCounter();
+        }
+
+        private void InitSpawners(LevelConfig levelConfig)
+        {
+            foreach (EnemySpawnerData spawnerData in levelConfig.EnemySpawners)
             {
                 EnemySpawnPoint spawner = _enemyFactory.CreateSpawner(
                     spawnerData.Position,
@@ -142,10 +153,10 @@ namespace Code.Infrastructure.States
                     spawnerData.MonsterTypeId,
                     spawnerData.RespawnCount);
 
-                spawner.Construct(_enemyObjectPool, _particleObjectPool, _gameEventHandler);
+                spawner.Construct(_enemyObjectPool, _particleObjectPool, _levelEventHandler);
             }
 
-            foreach (WeaponPlatformSpawnerData weaponPlatform in levelData.WeaponPlatformSpawners)
+            foreach (WeaponPlatformSpawnerData weaponPlatform in levelConfig.WeaponPlatformSpawners)
             {
                 WeaponPlatformSpawner spawner = _itemFactory.CreateWeaponPlatformSpawner(
                     weaponPlatform.Position,
@@ -154,15 +165,14 @@ namespace Code.Infrastructure.States
                 );
 
                 spawner.Construct(_itemFactory);
-
             }
         }
 
-        private GameObject InitHero(LevelStaticData levelData)
+        private GameObject InitHero(LevelConfig levelConfig)
         {
-            var hero = _heroFactory.CreateHero(levelData.HeroInitialPosition);
+            var hero = _heroFactory.CreateHero(levelConfig.HeroInitialPosition);
 
-            hero.GetComponent<HeroDeath>().Construct(_gameEventHandler);
+            hero.GetComponent<HeroDeath>().Construct(_levelEventHandler);
             hero.GetComponent<HeroSkills>().Construct(_abilityFactory);
             hero.GetComponent<HeroStateMachine>().Construct(_inputService);
             hero.GetComponent<HeroWeapon>().Construct(_itemFactory);

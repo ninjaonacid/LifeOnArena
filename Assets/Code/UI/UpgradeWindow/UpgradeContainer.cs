@@ -11,5 +11,6 @@ namespace Code.UI.UpgradeWindow
         [SerializeField] private Image UpgradeRarityImage;
         [SerializeField] private TextMeshProUGUI UpgradeText;
 
+
     }
 }
