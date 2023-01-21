@@ -25,7 +25,7 @@ namespace Code.Hero
         {
             public SkillSlotID SkillSlotId;
             public HeroAbilityId heroAbilityId;
-            public HeroAbilityData Ability;
+            public HeroAbilityData ability;
         }
 
         public void Construct(IAbilityFactory abilityFactory)
@@ -39,7 +39,7 @@ namespace Code.Hero
             {
                 if (SkillSlots[i].SkillSlotId == skillSlot)
                 {
-                    return SkillSlots[i].Ability;
+                    return SkillSlots[i].ability;
                 }
             }
             return null;
@@ -53,7 +53,7 @@ namespace Code.Hero
                 if (heroAbilityData.SkillSlotID == slot.SkillSlotId)
                 {
                     slot.heroAbilityId = heroAbilityData.HeroAbilityId;
-                    slot.Ability = _abilityFactory.CreateAbility(heroAbilityData.HeroAbilityId);
+                    slot.ability = _abilityFactory.CreateAbility(heroAbilityData.HeroAbilityId);
                     HeroAttack.SetActiveSkill(heroAbilityData);
                 }
             }
@@ -65,7 +65,7 @@ namespace Code.Hero
         {
             foreach (var slot in SkillSlots)
             {
-                slot.Ability = _abilityFactory.CreateAbility(slot.heroAbilityId);
+                slot.ability = _abilityFactory.CreateAbility(slot.heroAbilityId);
 
             }
 

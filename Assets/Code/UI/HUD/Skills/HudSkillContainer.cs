@@ -36,7 +36,7 @@ namespace Code.UI.HUD.Skills
                 if (_skillButtons[i].SkillSlotID == _heroSkills.SkillSlots[i].SkillSlotId)
                 {
                     _skillButtons[i].heroAbilityId = _heroSkills.SkillSlots[i].heroAbilityId;
-                    _skillButtons[i].heroAbility = _heroSkills.SkillSlots[i].Ability;
+                    _skillButtons[i].heroAbility = _heroSkills.SkillSlots[i].ability;
                     _skillButtons[i].UpdateSkillView();
                 }
             }

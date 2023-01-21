@@ -7,7 +7,8 @@ namespace Code.Services.Input
         public override Vector2 Axis
         {
             get
-            {
+            {   
+                if(_isDisabled) return Vector2.zero;
                 var axis = SimpleInputAxis();
                 if (axis == Vector2.zero) axis = UnityAxis();
                 return axis;

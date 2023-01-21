@@ -4,6 +4,8 @@ namespace Code.Services.Input
 {
     public interface IInputService : IService
     {
+        void DisableInput();
+        void EnableInput();
         Vector2 Axis { get; }
         bool IsAttackButtonUp();
         bool IsSkillButton1();
