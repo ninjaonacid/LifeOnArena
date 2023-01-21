@@ -161,18 +161,18 @@ namespace Code.Hero
 
         private HeroBaseState GetSkillState(HeroAbilityData ability)
         {
-            switch (ability?.AbilityId)
+            switch (ability?.HeroAbilityId)
             {
-                case AbilityId.SpinAttack:
+                case HeroAbilityId.SpinAttack:
                     {
                         return GetState<SpinAttackState>();
                     }
 
-                case AbilityId.FastSlash:
+                case HeroAbilityId.FastSlash:
                     {
                         return null;
                     }
-                case AbilityId.Dash:
+                case HeroAbilityId.Dash:
                     {
                         return GetState<RollState>();
                     }

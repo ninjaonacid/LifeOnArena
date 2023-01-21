@@ -9,7 +9,8 @@ namespace Code.Logic.LevelTransition
     public class LevelTrigger : MonoBehaviour
     {
         [SerializeField] private BoxCollider _collider;
-        public LevelConfig NextLevelData;
+
+        private LevelConfig _nextLevelData;
 
         private IGameStateMachine _gameStateMachine;
         private ILevelTransitionService _levelTransitionService;
@@ -19,7 +20,7 @@ namespace Code.Logic.LevelTransition
         {
             _gameStateMachine = gameStateMachine;
             _levelTransitionService = levelTransition;
-
+            InitializeNextLevel();
         }
 
         private void OnTriggerEnter(Collider other)
@@ -28,10 +29,14 @@ namespace Code.Logic.LevelTransition
 
             if (other.CompareTag("Player"))
             {
-                NextLevelData = _levelTransitionService.GetNextLevel();
-                _gameStateMachine.Enter<LoadLevelState, string>(NextLevelData.LevelKey);
+                _gameStateMachine.Enter<LoadLevelState, string>(_nextLevelData.LevelKey);
                 _isTriggered = true;
             }
+        }
+
+        private void InitializeNextLevel()
+        {
+            _nextLevelData = _levelTransitionService.GetNextLevel();
         }
 
         private void OnDrawGizmos()

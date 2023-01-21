@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Code.StaticData;
 using Code.StaticData.Ability;
+using Code.StaticData.HeroUpgrades;
 using Code.StaticData.Levels;
 using Code.StaticData.UIWindows;
 using Code.UI;
@@ -14,9 +15,10 @@ namespace Code.Services
         ParticlesStaticData ForParticle(ParticleId id);
         LevelConfig ForLevel(string sceneKey);
         WindowConfig ForWindow(UIWindowID menuId);
-        HeroAbilityData ForAbility(AbilityId abilityId);
+        HeroAbilityData ForAbility(HeroAbilityId heroAbilityId);
         WeaponData ForWeapon(WeaponId weaponId);
         WeaponPlatformStaticData ForWeaponPlatforms(WeaponId weaponId);
         List<LevelConfig> GetAllLevels();
+        List<PowerUp> GetUpgrades();
     }
 }

@@ -1,10 +1,12 @@
 using Code.Infrastructure.AssetManagment;
+using Code.Infrastructure.Factory;
 using Code.Services;
 using Code.Services.PersistentProgress;
 using Code.Services.SaveLoad;
 using Code.StaticData.UIWindows;
 using Code.UI.Buttons;
 using Code.UI.MainMenu;
+using Code.UI.UpgradeMenu;
 using UnityEngine;
 
 namespace Code.UI.Services
@@ -15,13 +17,19 @@ namespace Code.UI.Services
         private readonly IStaticDataService _staticData;
         private readonly ISaveLoadService _saveLoad;
         private readonly IProgressService _progress;
+        
+
         private Transform _uiCoreTransform;
+        private readonly IAbilityFactory _abilityFactory;
+
         public UIFactory(IAssetsProvider assetsProvider, 
             IStaticDataService staticDataService, 
             ISaveLoadService saveLoad,
-            IProgressService progress)
+            IProgressService progress,
+            IAbilityFactory abilityFactory)
         {
             _assetsProvider = assetsProvider;
+            _abilityFactory = abilityFactory;
             _staticData = staticDataService;
             _saveLoad = saveLoad;
             _progress = progress;
@@ -50,7 +58,8 @@ namespace Code.UI.Services
         public void CreateUpgradeMenu()
         {
             WindowConfig config = _staticData.ForWindow(UIWindowID.UpgradeMenu);
-            var window = Object.Instantiate(config.Prefab, _uiCoreTransform);
+            var window = Object.Instantiate(config.Prefab, _uiCoreTransform) as UpgradeWindow;
+            window.Construct(_abilityFactory);
 
         }
 

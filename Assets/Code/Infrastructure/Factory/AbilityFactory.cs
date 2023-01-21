@@ -1,8 +1,7 @@
-using System;
 using System.Collections.Generic;
-using Code.Hero.Abilities;
 using Code.Services;
 using Code.Services.PersistentProgress;
+using Code.Services.RandomService;
 using Code.StaticData.Ability;
 
 namespace Code.Infrastructure.Factory
@@ -10,21 +9,27 @@ namespace Code.Infrastructure.Factory
     public class AbilityFactory : IAbilityFactory
     {
         private readonly IStaticDataService _staticData;
-        private IProgressService _progress;
+        private readonly IRandomService _random;
 
-        private readonly Dictionary<AbilityId, Type> _abilityStates;
+        private List<PowerUp> _heroUpgrades = new List<PowerUp>();
 
-        public AbilityFactory(IStaticDataService staticData, IProgressService progress)
+        public AbilityFactory(IStaticDataService staticData, IProgressService progress, IRandomService random)
         {
             _staticData = staticData;
-            _progress = progress;
+            _random = random;
+            SetUpgradeList();
 
         }
-        public HeroAbilityData CreateAbility(AbilityId abilityId) =>
-            _staticData.ForAbility(abilityId);
-        
-            
-        
+        public HeroAbilityData CreateAbility(HeroAbilityId heroAbilityId) =>
+            _staticData.ForAbility(heroAbilityId);
 
+        private void SetUpgradeList() =>
+            _heroUpgrades = _staticData.GetUpgrades();
+        
+        
+        public PowerUp GetUpgrade()
+        {
+            return _heroUpgrades[_random.GetRandomNumber(_heroUpgrades.Count)];
+        }
     }
 }

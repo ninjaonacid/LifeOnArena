@@ -11,7 +11,7 @@ namespace Code.UI.HUD.Skills
         public ButtonInputUI ButtonInput;
         private IInputService _input;
 
-        public AbilityId AbilityId;
+        public HeroAbilityId heroAbilityId;
         public SkillSlotID SkillSlotID;
 
         public HeroAbilityData heroAbility;
@@ -44,7 +44,7 @@ namespace Code.UI.HUD.Skills
         {
             if (heroAbility != null)
             {
-                _skillIcon.Image.sprite = heroAbility.SkillIcon;
+                _skillIcon.Image.sprite = heroAbility.Icon;
                 _skillIcon.Image.enabled = true;
             }
         }

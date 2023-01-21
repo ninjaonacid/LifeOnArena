@@ -19,7 +19,7 @@ namespace Code.UI.SkillsMenu
         private void Awake()
         {
             Image = GetComponent<Image>();
-            Image.sprite = heroAbilityData.SkillIcon;
+            Image.sprite = heroAbilityData.Icon;
         }
 
         public void OnPointerDown(PointerEventData eventData)

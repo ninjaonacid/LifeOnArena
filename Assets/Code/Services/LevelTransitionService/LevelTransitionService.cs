@@ -75,7 +75,6 @@ namespace Code.Services.LevelTransitionService
                 .ToDictionary(x => x.Key, x => x.ToList());
         }
 
-
         private void NextLocationGroup(LocationType location)
         {
             switch (location)

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8331421932585572548}
   - component: {fileID: 1386966466204904747}
   - component: {fileID: 7930321526546978185}
-  m_Layer: 17
+  m_Layer: 0
   m_Name: DetectHeroTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,7 +70,7 @@ GameObject:
   - component: {fileID: 531048824742830012}
   - component: {fileID: 531048824742830011}
   - component: {fileID: 531048824742830010}
-  m_Layer: 17
+  m_Layer: 0
   m_Name: platformModel
   m_TagString: WeaponPlatform
   m_Icon: {fileID: 0}
@@ -350,6 +350,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2501094721465994576}
   - component: {fileID: -9006517364452109849}
+  - component: {fileID: -4752674982614609551}
   m_Layer: 17
   m_Name: WeaponPlatformBase
   m_TagString: Untagged
@@ -388,12 +389,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55c71a6672b134f4bba52345df1ba5aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponId: 2
   abilityView: {fileID: 9209326797413721674}
   WeaponData: {fileID: 0}
   WeaponContainer: {fileID: 5911586754432011440}
   EquipWeaponButton: {fileID: 2871627171662051221}
   TriggerObserver: {fileID: 7930321526546978185}
+--- !u!65 &-4752674982614609551
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3645414194042833783}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 8, y: 8, z: 8}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4741970344385280567
 GameObject:
   m_ObjectHideFlags: 0

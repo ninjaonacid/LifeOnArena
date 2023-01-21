@@ -15,6 +15,7 @@ namespace Code.Hero
 
         private GameObject _currentWeapon;
         private IItemFactory _itemFactory;
+
         public class WeaponSlot
         {
             public WeaponId WeaponId;
@@ -47,6 +48,15 @@ namespace Code.Hero
 
         }
 
+        public WeaponData GetEquippedWeapon()
+        {
+            if (_weapon != null)
+            {
+                return _weapon.WeaponData;
+            }
+
+            return null;
+        }
 
         public void LoadProgress(PlayerProgress progress)
         {

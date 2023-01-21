@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Code.Hero.Abilities;
 using Code.StaticData.Ability;
 using Code.UI.HUD.Skills;
 
@@ -11,11 +10,11 @@ namespace Code.Data
     {
 
  
-        public Dictionary<SkillSlotID, AbilityId> SlotSkill;
+        public Dictionary<SkillSlotID, HeroAbilityId> SlotSkill;
 
         public SkillHudData()
         {
-            SlotSkill = new Dictionary<SkillSlotID, AbilityId>();
+            SlotSkill = new Dictionary<SkillSlotID, HeroAbilityId>();
         }
 
     

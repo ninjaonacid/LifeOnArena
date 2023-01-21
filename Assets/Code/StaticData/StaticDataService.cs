@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Code.Services;
 using Code.StaticData.Ability;
+using Code.StaticData.HeroUpgrades;
 using Code.StaticData.Levels;
 using Code.StaticData.UIWindows;
 using Code.UI;
@@ -14,10 +15,12 @@ namespace Code.StaticData
         private Dictionary<MonsterTypeId, MonsterStaticData> _monsters;
         private Dictionary<string, LevelConfig> _levels; 
         private Dictionary<UIWindowID, WindowConfig> _windowConfigs;
-        private Dictionary<AbilityId, HeroAbilityData> _heroAbilities;
+        private Dictionary<HeroAbilityId, HeroAbilityData> _heroAbilities;
         private Dictionary<ParticleId, ParticlesStaticData> _particles;
         private Dictionary<WeaponId, WeaponData> _weapons;
         private Dictionary<WeaponId, WeaponPlatformStaticData> _weaponPlatforms;
+
+        private List<PowerUp> _heroUpgrades; 
 
         public void Load()
         {
@@ -36,7 +39,7 @@ namespace Code.StaticData
 
             _heroAbilities = Resources
                 .LoadAll<HeroAbilityData>("StaticData/HeroSkills")
-                .ToDictionary(x => x.AbilityId, x => x);
+                .ToDictionary(x => x.HeroAbilityId, x => x);
 
             _particles = Resources
                 .LoadAll<ParticlesStaticData>("StaticData/Particles")
@@ -49,6 +52,8 @@ namespace Code.StaticData
             _weaponPlatforms = Resources
                 .LoadAll<WeaponPlatformStaticData>("StaticData/WeaponPlatforms")
                 .ToDictionary(x => x.WeaponPlatformId, x => x);
+
+            _heroUpgrades = Resources.LoadAll<PowerUp>("StaticData/HeroUpgrades").ToList();
         }
 
         public WeaponData ForWeapon(WeaponId weaponId)
@@ -82,37 +87,27 @@ namespace Code.StaticData
             return null;
         }
 
-        public HeroAbilityData ForAbility(AbilityId abilityId)
+        public HeroAbilityData ForAbility(HeroAbilityId heroAbilityId)
         {
-            if(_heroAbilities.TryGetValue(abilityId, out var heroAbility))
+            if(_heroAbilities.TryGetValue(heroAbilityId, out var heroAbility))
                 return heroAbility;
 
             return null;
         }
 
+        public List<PowerUp> GetUpgrades() => _heroUpgrades;
+        
+        
         public LevelConfig ForLevel(string sceneKey) =>
         
             _levels.TryGetValue(sceneKey, out LevelConfig staticData)
                 ? staticData
                 : null;
 
+
         public List<LevelConfig> GetAllLevels() =>
         _levels.Values.ToList();
         
-            
-        
-        public Dictionary<LocationType, List<LevelConfig>> GetLevelsByType()
-        {
-            var dict = new Dictionary<LocationType, List<LevelConfig>>();
-
-            var values = _levels.Values.ToList();
-
-            dict = values
-                .GroupBy(x => x.LocationType)
-                .ToDictionary(x => x.Key, x => x.ToList());
-
-            return dict;
-        }
 
         public WindowConfig ForWindow(UIWindowID menuId) =>
         

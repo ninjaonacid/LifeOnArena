@@ -11,7 +11,7 @@
         public const string Spawner = "Enemies/EnemySpawnPoint";
         public const string UICore = "UI/CoreUI";
         public const string LevelEventHandler = "Logic/LevelEventHandler";
-        public const string DoorPath = "SceneAssets/HellDoor";
+        public const string DoorPath = "SceneAssets/HellDoorTiled";
 
     }
 }

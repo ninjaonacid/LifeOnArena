@@ -1,5 +1,4 @@
 using Code.Data;
-using Code.Hero.HeroStates;
 using Code.Logic;
 using Code.Services.PersistentProgress;
 using Code.StaticData.Ability;
@@ -13,8 +12,7 @@ namespace Code.Hero
         private static int _layerMask;
         private readonly Collider[] _hits = new Collider[2];
         private CharacterStats _characterStats;
-        private AttackDefinition _activeSkill;
-
+        private HeroAbilityData _activeSkill;
 
         public HeroWeapon HeroWeapon;
         public CharacterController CharacterController;
@@ -31,24 +29,36 @@ namespace Code.Hero
             _layerMask = 1 << LayerMask.NameToLayer("Hittable");
         }
 
-        public void SetActiveSkill(AttackDefinition attackSkill)
+        public void SetActiveSkill(HeroAbilityData attackSkill)
         {
             _activeSkill = attackSkill;
         }
 
         public void BaseAttack()
         {
-            DoDamage(_characterStats.BaseDamage);
+            if (HeroWeapon.GetEquippedWeapon() != null)
+            {
+                DoDamage(_characterStats.BaseDamage +
+                         HeroWeapon.GetEquippedWeapon().Damage,
+                    HeroWeapon.GetEquippedWeapon().AttackRadius);
+            } 
+            else DoDamage(_characterStats.BaseDamage, _characterStats.BaseAttackRadius);
         }
 
         public void SkillAttack()
         {
-            DoDamage(_activeSkill.Damage);
+            if (HeroWeapon.GetEquippedWeapon() != null)
+            {
+                DoDamage(_activeSkill.Damage +
+                         HeroWeapon.GetEquippedWeapon().Damage,
+                    HeroWeapon.GetEquippedWeapon().AttackRadius);
+            }
+            else DoDamage(_characterStats.BaseDamage, _characterStats.BaseAttackRadius);
         }
 
-        public void DoDamage(float damage)
+        public void DoDamage(float damage, float attackRadius)
         {
-            for (var i = 0; i < Hit(); i++)
+            for (var i = 0; i < Hit(attackRadius); i++)
             {
                 _hits[i].transform.parent.GetComponent<IHealth>().TakeDamage(damage);
 
@@ -57,13 +67,7 @@ namespace Code.Hero
             }
         }
 
-        private void OnDrawGizmos()
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(StartPoint() + transform.forward, _characterStats.BaseAttackRadius);
-        }
-
-        private int Hit()
+        private int Hit(float attackRadius)
         {
             return Physics.OverlapSphereNonAlloc(StartPoint() + transform.forward,
                 _characterStats.BaseAttackRadius,
@@ -71,10 +75,15 @@ namespace Code.Hero
                 _layerMask);
         }
 
-
         private Vector3 StartPoint()
         {
             return new Vector3(transform.position.x, CharacterController.center.y, transform.position.z + 1f);
+        }
+
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(StartPoint() + transform.forward, _characterStats.BaseAttackRadius);
         }
     }
 }

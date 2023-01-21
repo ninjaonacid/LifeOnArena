@@ -11,7 +11,7 @@ namespace Code.Hero
         [SerializeField] private float _interactRadius;
         [SerializeField] private LayerMask _interactMask;
 
-        private Collider[] _interactableColliders = new Collider[2];
+        private readonly Collider[] _interactableColliders = new Collider[2];
         private IInputService _input;
 
         private void Awake()

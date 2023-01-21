@@ -63,11 +63,17 @@ namespace Code.Infrastructure.States
 
             _services.RegisterSingle<ILevelEventHandler>(new LevelEventHandler());
 
+            _services.RegisterSingle<IAbilityFactory>(new AbilityFactory(
+                _services.Single<IStaticDataService>(),
+                _services.Single<IProgressService>(),
+                _services.Single<IRandomService>()));
+
             _services.RegisterSingle<IUIFactory>(new UIFactory
             (_services.Single<IAssetsProvider>(),
                 _services.Single<IStaticDataService>(),
                 _services.Single<ISaveLoadService>(),
-                _services.Single<IProgressService>()));
+                _services.Single<IProgressService>(),
+                _services.Single<IAbilityFactory>()));
 
             _services.RegisterSingle<IWindowService>(new WindowsService(
                 _services.Single<IUIFactory>()));
@@ -94,9 +100,6 @@ namespace Code.Infrastructure.States
                 _services.Single<IProgressService>(),
                 _services.Single<IRandomService>()));
 
-            _services.RegisterSingle<IAbilityFactory>(new AbilityFactory(
-                _services.Single<IStaticDataService>(),
-                _services.Single<IProgressService>()));
 
             _services.RegisterSingle<IEnemyObjectPool>(new EnemyObjectPool(
                 _services.Single<IEnemyFactory>()));

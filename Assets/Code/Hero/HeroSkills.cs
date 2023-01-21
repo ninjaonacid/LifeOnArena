@@ -24,7 +24,7 @@ namespace Code.Hero
         public class SkillSlot
         {
             public SkillSlotID SkillSlotId;
-            public AbilityId AbilityId;
+            public HeroAbilityId heroAbilityId;
             public HeroAbilityData Ability;
         }
 
@@ -52,8 +52,8 @@ namespace Code.Hero
             {
                 if (heroAbilityData.SkillSlotID == slot.SkillSlotId)
                 {
-                    slot.AbilityId = heroAbilityData.AbilityId;
-                    slot.Ability = _abilityFactory.CreateAbility(heroAbilityData.AbilityId);
+                    slot.heroAbilityId = heroAbilityData.HeroAbilityId;
+                    slot.Ability = _abilityFactory.CreateAbility(heroAbilityData.HeroAbilityId);
                     HeroAttack.SetActiveSkill(heroAbilityData);
                 }
             }
@@ -65,7 +65,7 @@ namespace Code.Hero
         {
             foreach (var slot in SkillSlots)
             {
-                slot.Ability = _abilityFactory.CreateAbility(slot.AbilityId);
+                slot.Ability = _abilityFactory.CreateAbility(slot.heroAbilityId);
 
             }
 
@@ -80,7 +80,7 @@ namespace Code.Hero
             {
                 if (_skillHudData.SlotSkill.TryGetValue(slot.SkillSlotId, out var abilityId))
                 {
-                    slot.AbilityId = abilityId;
+                    slot.heroAbilityId = abilityId;
                 }
             }
 
@@ -92,9 +92,9 @@ namespace Code.Hero
         {
             foreach (var slot in SkillSlots)
             {
-                if (_skillHudData.SlotSkill.TryAdd(slot.SkillSlotId, slot.AbilityId))
+                if (_skillHudData.SlotSkill.TryAdd(slot.SkillSlotId, slot.heroAbilityId))
                 {
-                    _skillHudData.SlotSkill[slot.SkillSlotId] = slot.AbilityId;
+                    _skillHudData.SlotSkill[slot.SkillSlotId] = slot.heroAbilityId;
                 }
             }
         }

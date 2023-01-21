@@ -4,12 +4,12 @@ using UnityEngine;
 namespace Code.StaticData.Ability
 {
     [CreateAssetMenu(menuName = "StaticData/HeroAttack/HeroAbility", fileName = "HeroSkill")]
-    public class HeroAbilityData : AttackDefinition
+    public class HeroAbilityData : Ability
     {
+        public float Damage;
         public float Cooldown;
         public float CurrentCooldown;
-        public Sprite SkillIcon;
-        public AbilityId AbilityId;
+        public HeroAbilityId HeroAbilityId;
         public SkillSlotID SkillSlotID;
 
         public bool IsAbilityReady() =>

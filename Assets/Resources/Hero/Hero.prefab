@@ -536,6 +536,7 @@ GameObject:
   - component: {fileID: -7543322082994891675}
   - component: {fileID: 7773590576850612865}
   - component: {fileID: 8173807624078759481}
+  - component: {fileID: 3913474188381500253}
   m_Layer: 12
   m_Name: Hero
   m_TagString: Player
@@ -757,13 +758,13 @@ MonoBehaviour:
   HeroAttack: {fileID: 8881719371883239237}
   SkillSlots:
   - SkillSlotId: 0
-    AbilityId: 0
+    heroAbilityId: 0
     Ability: {fileID: 0}
   - SkillSlotId: 2
-    AbilityId: 4
+    heroAbilityId: 4
     Ability: {fileID: 11400000, guid: fffe394e0d0852846b336d330d517c5a, type: 2}
   - SkillSlotId: 1
-    AbilityId: 0
+    heroAbilityId: 0
     Ability: {fileID: 0}
 --- !u!114 &7773590576850612865
 MonoBehaviour:
@@ -794,6 +795,18 @@ MonoBehaviour:
   _interactMask:
     serializedVersion: 2
     m_Bits: 131072
+--- !u!114 &3913474188381500253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6031708160037518034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51e52f135bf4db44d8fe84c8965efbe8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6123176685334656487
 GameObject:
   m_ObjectHideFlags: 0
