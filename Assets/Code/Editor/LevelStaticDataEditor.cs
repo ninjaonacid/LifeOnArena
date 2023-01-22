@@ -2,7 +2,6 @@ using System.Linq;
 using Code.Logic;
 using Code.Logic.EnemySpawners;
 using Code.Logic.LevelObjectsSpawners;
-using Code.StaticData;
 using Code.StaticData.Levels;
 using Code.StaticData.Spawners;
 using UnityEditor;
@@ -15,7 +14,6 @@ namespace Code.Editor
     public class LevelStaticDataEditor : UnityEditor.Editor
     {
         private const string InitialPointTag = "InitialPoint";
-        private const string NextLevelDoorTag = "NextLevelDoor";
         public override void OnInspectorGUI()
         {
             base.OnInspectorGUI();
