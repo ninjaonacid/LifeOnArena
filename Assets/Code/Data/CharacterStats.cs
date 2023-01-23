@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 namespace Code.Data
 {
@@ -6,15 +7,15 @@ namespace Code.Data
     public class CharacterStats
     {
         public float CurrentHP;
-
         public float BaseMaxHP;
-        public float BaseDamage;
-        public float BaseAttackRadius;
-        public float BaseArmor;
 
-        public float DamageModifier = 3;
+        [SerializeField] private float _baseDamage;
+        [SerializeField] private float _baseAttackRadius;
+        [SerializeField] private float _baseArmor;
+
+        public float DamageModifier = 1;
         public float AttackRadiusModifier = 1;
-        public float MaxHPModifier = 3;
+        public float MaxHPModifier = 1;
         public float ArmorModifier = 1;
         
         public void ResetHP()
@@ -24,19 +25,26 @@ namespace Code.Data
 
         public float CalculateHeroDamage()
         {
-            return BaseDamage * DamageModifier;
+            return _baseDamage * DamageModifier;
         }
 
         public float CalculateHeroHealth()
         {
             return BaseMaxHP * MaxHPModifier;
         }
+
+        public float CalculateHeroAttackRadius()
+        {
+            return _baseAttackRadius * AttackRadiusModifier;
+        }
+
+
         public void InitBaseStats(float baseHp, float baseArmor, float baseDamage, float attackRadius)
         {
             BaseMaxHP = baseHp;
-            BaseArmor = baseArmor;
-            BaseDamage = baseDamage;
-            BaseAttackRadius = attackRadius;
+            _baseArmor = baseArmor;
+            _baseDamage = baseDamage;
+            _baseAttackRadius = attackRadius;
         }
     }
 }

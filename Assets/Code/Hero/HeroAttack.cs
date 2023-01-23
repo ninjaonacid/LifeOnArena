@@ -42,7 +42,7 @@ namespace Code.Hero
                          HeroWeapon.GetEquippedWeapon().Damage,
                     HeroWeapon.GetEquippedWeapon().AttackRadius);
             } 
-            else DoDamage(_characterStats.CalculateHeroDamage(), _characterStats.BaseAttackRadius);
+            else DoDamage(_characterStats.CalculateHeroDamage(), _characterStats.CalculateHeroAttackRadius());
         }
 
         public void SkillAttack()
@@ -53,7 +53,7 @@ namespace Code.Hero
                          HeroWeapon.GetEquippedWeapon().Damage,
                     HeroWeapon.GetEquippedWeapon().AttackRadius);
             }
-            else DoDamage(_characterStats.CalculateHeroDamage(), _characterStats.BaseAttackRadius);
+            else DoDamage(_characterStats.CalculateHeroDamage(), _characterStats.CalculateHeroAttackRadius());
         }
 
         public void DoDamage(float damage, float attackRadius)
@@ -62,7 +62,7 @@ namespace Code.Hero
             {
                 _hits[i].transform.parent.GetComponent<IHealth>().TakeDamage(damage);
 
-                Debug.Log("BaseDamage amount: " + _characterStats.BaseDamage);
+                Debug.Log("BaseDamage amount: " + _characterStats.CalculateHeroDamage());
                 Debug.Log(_hits[i].ToString());
             }
         }
@@ -70,7 +70,7 @@ namespace Code.Hero
         private int Hit(float attackRadius)
         {
             return Physics.OverlapSphereNonAlloc(StartPoint() + transform.forward,
-                _characterStats.BaseAttackRadius,
+                _characterStats.CalculateHeroAttackRadius(),
                 _hits,
                 _layerMask);
         }
@@ -83,7 +83,7 @@ namespace Code.Hero
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(StartPoint() + transform.forward, _characterStats.BaseAttackRadius);
+            Gizmos.DrawWireSphere(StartPoint() + transform.forward, _characterStats.CalculateHeroAttackRadius());
         }
     }
 }
