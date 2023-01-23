@@ -8,18 +8,18 @@ namespace Code.Hero
 {
     public class HeroHealth : MonoBehaviour, ISave, IHealth
     {
-        private HeroHP _heroHp;
+        private CharacterStats _characterStats;
 
         public event Action HealthChanged;
 
         public float Current
         {
-            get => _heroHp.CurrentHP;
+            get => _characterStats.CurrentHP;
             set
             {
-                if (_heroHp.CurrentHP != value)
+                if (_characterStats.CurrentHP != value)
                 {
-                    _heroHp.CurrentHP = value;
+                    _characterStats.CurrentHP = value;
                     HealthChanged?.Invoke();
                 }
             }
@@ -27,8 +27,8 @@ namespace Code.Hero
 
         public float Max
         {
-            get => _heroHp.MaxHP;
-            set => _heroHp.MaxHP = value;
+            get => _characterStats.CalculateHeroHealth();
+            set => _characterStats.BaseMaxHP = value;
         }
 
         public void TakeDamage(float damage)
@@ -40,14 +40,14 @@ namespace Code.Hero
 
         public void LoadProgress(PlayerProgress progress)
         {
-            _heroHp = progress.HeroHp;
+            _characterStats = progress.CharacterStats;
             HealthChanged?.Invoke();
         }
 
         public void UpdateProgress(PlayerProgress progress)
         {
-            progress.HeroHp.CurrentHP = Current;
-            progress.HeroHp.MaxHP = Max;
+            progress.CharacterStats.CurrentHP = Current;
+            progress.CharacterStats.BaseMaxHP = Max;
         }
     }
 }

@@ -5,7 +5,6 @@ namespace Code.Data
     [Serializable]
     public class PlayerProgress
     {
-        public HeroHP HeroHp;
         public CharacterStats CharacterStats;
         public HeroEquipment HeroEquipment;
         public KillData KillData;
@@ -16,7 +15,6 @@ namespace Code.Data
         public PlayerProgress(string initialLevel)
         {
             WorldData = new WorldData(initialLevel);
-            HeroHp = new HeroHP();
             HeroEquipment = new HeroEquipment();
             CharacterStats = new CharacterStats();
             KillData = new KillData();

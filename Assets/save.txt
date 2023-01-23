@@ -1,18 +1,21 @@
 {
-  "HeroHp": {
-    "CurrentHP": 50.0,
-    "MaxHP": 50.0
-  },
   "CharacterStats": {
-    "BaseAttackSpeed": 1.0,
+    "CurrentHP": 0.0,
+    "BaseMaxHP": 0.0,
     "BaseDamage": 20.0,
-    "BaseAttackRadius": 2.0
+    "BaseAttackRadius": 2.0,
+    "BaseArmor": 0.0,
+    "DamageModifier": 1.0,
+    "AttackRadiusModifier": 1.0,
+    "MaxHPModifier": 1.0,
+    "ArmorModifier": 1.0
   },
   "HeroEquipment": {
     "HeroWeapon": 0
   },
   "KillData": {
     "ClearedSpawners": [
+      "_0702d4e2-cb82-46aa-80c3-7a3c4b588b61",
       "_0702d4e2-cb82-46aa-80c3-7a3c4b588b61",
       "_0702d4e2-cb82-46aa-80c3-7a3c4b588b61",
       "_0702d4e2-cb82-46aa-80c3-7a3c4b588b61",
@@ -23,9 +26,9 @@
     "PositionOnLevel": {
       "Level": "Shelter",
       "Position": {
-        "X": 8.365966,
-        "Y": 3.38520384,
-        "Z": 73.1527
+        "X": 8.587123,
+        "Y": 2.25161123,
+        "Z": 73.626976
       }
     },
     "LootData": {
@@ -33,6 +36,7 @@
     },
     "WeaponPurchaseData": {
       "PurchasedWeapons": [
+        "Shelter_99c588f2-9d95-4634-8c52-954e8de26d59",
         "Shelter_99c588f2-9d95-4634-8c52-954e8de26d59",
         "Shelter_99c588f2-9d95-4634-8c52-954e8de26d59",
         "Shelter_99c588f2-9d95-4634-8c52-954e8de26d59",

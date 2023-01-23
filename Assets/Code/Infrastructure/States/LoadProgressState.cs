@@ -1,6 +1,7 @@
 ﻿using Code.Data;
 using Code.Services.PersistentProgress;
 using Code.Services.SaveLoad;
+using UnityEngine;
 
 namespace Code.Infrastructure.States
 {
@@ -43,13 +44,10 @@ namespace Code.Infrastructure.States
         {
             var progress = new PlayerProgress("Shelter");
 
-            progress.HeroHp.MaxHP = 50f;
-            progress.CharacterStats.BaseDamage = 20f;
-            progress.CharacterStats.BaseAttackRadius = 2f;
-            progress.CharacterStats.BaseAttackSpeed = 1f;
-            progress.SkillsData.SpinAttack.Damage = 20f;
+            
+            progress.CharacterStats.InitBaseStats(100, 10, 10, 1);
             progress.WorldData.LootData.Collected = 100;
-            progress.HeroHp.ResetHP();
+            progress.CharacterStats.ResetHP();
 
             return progress;
         }

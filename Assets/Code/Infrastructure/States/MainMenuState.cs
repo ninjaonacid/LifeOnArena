@@ -33,7 +33,7 @@ namespace Code.Infrastructure.States
 
         private void ResetPlayerHp()
         {
-            _progress.Progress.HeroHp.ResetHP();
+            _progress.Progress.CharacterStats.ResetHP();
         }
 
         public void Enter()

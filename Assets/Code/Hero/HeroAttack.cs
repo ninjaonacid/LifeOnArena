@@ -38,11 +38,11 @@ namespace Code.Hero
         {
             if (HeroWeapon.GetEquippedWeapon() != null)
             {
-                DoDamage(_characterStats.BaseDamage +
+                DoDamage(_characterStats.CalculateHeroDamage() +
                          HeroWeapon.GetEquippedWeapon().Damage,
                     HeroWeapon.GetEquippedWeapon().AttackRadius);
             } 
-            else DoDamage(_characterStats.BaseDamage, _characterStats.BaseAttackRadius);
+            else DoDamage(_characterStats.CalculateHeroDamage(), _characterStats.BaseAttackRadius);
         }
 
         public void SkillAttack()
@@ -53,7 +53,7 @@ namespace Code.Hero
                          HeroWeapon.GetEquippedWeapon().Damage,
                     HeroWeapon.GetEquippedWeapon().AttackRadius);
             }
-            else DoDamage(_characterStats.BaseDamage, _characterStats.BaseAttackRadius);
+            else DoDamage(_characterStats.CalculateHeroDamage(), _characterStats.BaseAttackRadius);
         }
 
         public void DoDamage(float damage, float attackRadius)
