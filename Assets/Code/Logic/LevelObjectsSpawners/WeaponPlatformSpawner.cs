@@ -28,6 +28,7 @@ namespace Code.Logic.LevelObjectsSpawners
         {
             IsPurchased = true;
         }
+
         public void LoadProgress(PlayerProgress progress)
         {
             if (progress.WorldData.WeaponPurchaseData.PurchasedWeapons.Contains(Id))

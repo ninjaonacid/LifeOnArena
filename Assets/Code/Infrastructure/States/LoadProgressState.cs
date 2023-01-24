@@ -45,7 +45,7 @@ namespace Code.Infrastructure.States
             var progress = new PlayerProgress("Shelter");
 
             
-            progress.CharacterStats.InitBaseStats(100, 10, 10, 1);
+            progress.CharacterStats.InitBaseStats(100, 10, 30, 1);
             progress.WorldData.LootData.Collected = 100;
             progress.CharacterStats.ResetHP();
 

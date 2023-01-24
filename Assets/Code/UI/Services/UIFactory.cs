@@ -59,7 +59,7 @@ namespace Code.UI.Services
         {
             WindowConfig config = _staticData.ForWindow(UIWindowID.UpgradeMenu);
             var window = Object.Instantiate(config.Prefab, _uiCoreTransform) as UpgradeWindow;
-            window.Construct(_abilityFactory);
+            window.Construct(_abilityFactory, _progress);
 
         }
 
