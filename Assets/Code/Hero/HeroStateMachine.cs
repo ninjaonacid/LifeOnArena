@@ -22,7 +22,6 @@ namespace Code.Hero
         [SerializeField] private HeroAttack _heroAttack;
         [SerializeField] private HeroSkills _heroSkills;
 
-
         private Dictionary<Type, HeroBaseState> _states;
         private Dictionary<Type, List<HeroTransition>> _transitions;
         public bool IsInTransition { get; private set; }
@@ -75,10 +74,11 @@ namespace Code.Hero
         private void BuildTransitions()
         {
             _transitions.Clear();
+
             HeroAbilityData weaponAbility = _heroSkills.GetSkillSlotAbility(SkillSlotID.WeaponSkillSlot);
             HeroAbilityData dodgeAbility = _heroSkills.GetSkillSlotAbility(SkillSlotID.Dodge);
             HeroAbilityData rageAbility = _heroSkills.GetSkillSlotAbility(SkillSlotID.Rage);
-
+            var heroAbilityBluePrint = new SpinAttack();
             Func<bool> AttackPressed() => () => _input.IsAttackButtonUp();
             Func<bool> FirstSkillPressed() => () => _input.IsSkillButton1() && weaponAbility.IsAbilityReady();
             Func<bool> SecondSkillPressed() => () => _input.IsSkillButton2() && dodgeAbility.IsAbilityReady();
@@ -184,7 +184,7 @@ namespace Code.Hero
         private HeroBaseAttackState GetCurrentState() =>
             CurrentState as HeroBaseAttackState;
 
-        private HeroBaseState GetState<TState>() =>
+        private HeroBaseState GetState<TState>() where TState : HeroBaseState =>
             _states[typeof(TState)];
     }
 }
