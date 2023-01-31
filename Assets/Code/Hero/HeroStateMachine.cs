@@ -78,7 +78,7 @@ namespace Code.Hero
             HeroAbilityData weaponAbility = _heroSkills.GetSkillSlotAbility(SkillSlotID.WeaponSkillSlot);
             HeroAbilityData dodgeAbility = _heroSkills.GetSkillSlotAbility(SkillSlotID.Dodge);
             HeroAbilityData rageAbility = _heroSkills.GetSkillSlotAbility(SkillSlotID.Rage);
-            var heroAbilityBluePrint = new SpinAttack();
+           
             Func<bool> AttackPressed() => () => _input.IsAttackButtonUp();
             Func<bool> FirstSkillPressed() => () => _input.IsSkillButton1() && weaponAbility.IsAbilityReady();
             Func<bool> SecondSkillPressed() => () => _input.IsSkillButton2() && dodgeAbility.IsAbilityReady();
@@ -184,6 +184,7 @@ namespace Code.Hero
         private HeroBaseAttackState GetCurrentState() =>
             CurrentState as HeroBaseAttackState;
 
+        
         private HeroBaseState GetState<TState>() where TState : HeroBaseState =>
             _states[typeof(TState)];
     }

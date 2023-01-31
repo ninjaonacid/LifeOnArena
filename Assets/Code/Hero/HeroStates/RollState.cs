@@ -4,8 +4,8 @@ namespace Code.Hero.HeroStates
 {
     public class RollState : HeroBaseAttackState
     {
-        private HeroMovement _heroMovement;
-        private HeroRotation _heroRotation;
+        private readonly HeroMovement _heroMovement;
+        private readonly HeroRotation _heroRotation;
         public RollState(HeroStateMachine heroStateMachine, IInputService input, HeroAnimator heroAnimator, HeroAttack heroAttack, HeroMovement heroMovement, HeroRotation heroRotation) : base(heroStateMachine, input, heroAnimator, heroAttack)
         {
             _heroRotation = heroRotation;
