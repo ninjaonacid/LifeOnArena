@@ -1069,6 +1069,7 @@ GameObject:
   - component: {fileID: 8173807624078759481}
   - component: {fileID: 3913474188381500253}
   - component: {fileID: 4893598800002227442}
+  - component: {fileID: 4195340829786993569}
   m_Layer: 12
   m_Name: Hero
   m_TagString: Player
@@ -1242,11 +1243,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 060437e1f929dd34ca66be33c78bab2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _heroMovement: {fileID: 7390316171520665878}
-  _heroAnimator: {fileID: 7390316171520665867}
-  _heroRotation: {fileID: -8125679809969938510}
-  _heroAttack: {fileID: 8881719371883239237}
-  _heroSkills: {fileID: -7543322082994891675}
 --- !u!114 &-8125679809969938510
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1352,6 +1348,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ability: {fileID: 11400000, guid: 8dd9ff36be4e16245bc901cf9abfe852, type: 2}
+--- !u!114 &4195340829786993569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6031708160037518034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32b05c083ecadad44902758f69e9a44f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _heroAnimator: {fileID: 7390316171520665867}
+  _heroMovement: {fileID: 7390316171520665878}
+  _heroAttack: {fileID: 8881719371883239237}
 --- !u!1 &6102055456085068060
 GameObject:
   m_ObjectHideFlags: 0

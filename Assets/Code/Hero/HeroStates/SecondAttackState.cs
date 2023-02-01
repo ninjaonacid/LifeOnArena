@@ -5,29 +5,41 @@ namespace Code.Hero.HeroStates
 {
     public class SecondAttackState : HeroBaseAttackState
     {
-        public SecondAttackState(HeroStateMachine heroStateMachine, 
-            IInputService input, 
-            HeroAnimator heroAnimator, 
-            HeroAttack heroAttack) : base(heroStateMachine, input, heroAnimator, heroAttack)
+        public SecondAttackState(HeroAnimator animator, HeroAttack heroAttack, bool needExitTime, bool isGhostState) : base(animator, heroAttack, needExitTime:true, isGhostState)
         {
+
         }
 
-        public override void Enter()
+        public override void Init()
         {
+            base.Init();
+        }
+
+        public override void OnEnter()
+        {
+            base.OnEnter();
             HeroAnimator.PlayAttack(this);
             HeroAttack.BaseAttack();
             Duration = 0.7f;
-            Debug.Log("Entered SecondState");
         }
 
-        public override void Tick(float deltaTime)
+        public override void OnLogic()
         {
-            Duration -= deltaTime;
+            base.OnLogic();
+            Duration -= Time.deltaTime;
         }
 
-        public override void Exit()
+        public override void OnExit()
         {
+            base.OnExit();
+        }
 
+        public override void OnExitRequest()
+        {
+            if (IsEnded())
+            {
+                fsm.StateCanExit();
+            }
         }
     }
 }

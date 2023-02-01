@@ -4,20 +4,15 @@ using Code.StateMachine.Base;
 
 namespace Code.Hero.HeroStates
 {
-    public abstract class HeroBaseState : State
+    public abstract class HeroBaseState : StateBase
     {
 
-        protected HeroStateMachine HeroStateMachine;
-        protected IInputService Input;
         protected HeroAnimator HeroAnimator;
 
-        protected HeroBaseState(HeroStateMachine heroStateMachine,
-            IInputService input, HeroAnimator heroAnimator)
+
+        protected HeroBaseState(HeroAnimator animator, bool needExitTime, bool isGhostState) : base(needExitTime, isGhostState)
         {
-            HeroStateMachine = heroStateMachine;
-            Input = input;
-            HeroAnimator = heroAnimator;
-            
+            HeroAnimator = animator;
         }
     }
 }

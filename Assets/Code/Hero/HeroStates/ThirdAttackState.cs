@@ -5,14 +5,12 @@ namespace Code.Hero.HeroStates
 {
     public class ThirdAttackState : HeroBaseAttackState
     {
-        public ThirdAttackState(HeroStateMachine heroStateMachine, 
-            IInputService input, 
-            HeroAnimator heroAnimator, 
-            HeroAttack heroAttack) : base(heroStateMachine, input, heroAnimator, heroAttack)
+        public ThirdAttackState(HeroAnimator animator, HeroAttack heroAttack, bool needExitTime, bool isGhostState) : base(animator, heroAttack, needExitTime : true, isGhostState)
         {
         }
 
-        public override void Enter()
+
+        public override void OnEnter()
         {
             Duration = 0.7f;
             HeroAnimator.PlayAttack(this);
@@ -20,13 +18,22 @@ namespace Code.Hero.HeroStates
             Debug.Log("Entered ThirdState");
         }
 
-        public override void Tick(float deltaTime)
+        public override void OnLogic()
         {
-            Duration -= deltaTime;
+            Duration -= Time.deltaTime;
         }
 
-        public override void Exit()
+        public override void OnExit()
         {
+            base.OnExit();
+        }
+
+        public override void OnExitRequest()
+        {
+            if (IsEnded())
+            {
+                fsm.StateCanExit();
+            }
         }
     }
 }

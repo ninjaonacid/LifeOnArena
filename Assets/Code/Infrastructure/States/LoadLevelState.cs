@@ -174,7 +174,7 @@ namespace Code.Infrastructure.States
 
             hero.GetComponent<HeroDeath>().Construct(_levelEventHandler);
             hero.GetComponent<HeroSkills>().Construct(_abilityFactory);
-            hero.GetComponent<HeroStateMachine>().Construct(_inputService);
+            //hero.GetComponent<HeroStateMachine>().Construct(_inputService);
             hero.GetComponent<HeroWeapon>().Construct(_itemFactory);
             return hero;
         }

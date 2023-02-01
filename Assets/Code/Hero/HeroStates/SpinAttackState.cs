@@ -6,16 +6,14 @@ namespace Code.Hero.HeroStates
     public class SpinAttackState : HeroBaseAttackState
     {
         private readonly HeroRotation _heroRotation;
-        public SpinAttackState(HeroStateMachine heroStateMachine, 
-            IInputService input, 
-            HeroAnimator heroAnimator, 
-            HeroRotation heroRotation,
-            HeroAttack heroAttack) : base(heroStateMachine, input, heroAnimator, heroAttack)
+
+
+        public SpinAttackState(HeroAnimator animator, HeroAttack heroAttack, bool needExitTime, bool isGhostState) : base(animator, heroAttack, needExitTime : true, isGhostState)
         {
-            _heroRotation = heroRotation;
         }
 
-        public override void Enter()
+
+        public override void OnEnter()
         {
             _heroRotation.enabled = false;
             HeroAnimator.PlayAttack(this);
@@ -24,14 +22,22 @@ namespace Code.Hero.HeroStates
             Duration = 1f;
         }
 
-        public override void Tick(float deltaTime)
+        public override void OnLogic()
         {
-            Duration -= deltaTime;
+            Duration -= Time.deltaTime;
         }
 
-        public override void Exit()
+        public override void OnExit()
         {
             _heroRotation.enabled = true;
+        }
+
+        public override void OnExitRequest()
+        {
+            if (IsEnded())
+            {
+                fsm.StateCanExit();
+            }
         }
     }
 }

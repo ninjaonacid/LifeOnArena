@@ -6,28 +6,33 @@ namespace Code.Hero.HeroStates
     public class HeroMovementState : HeroBaseState
     {
         private readonly HeroMovement _heroMovement;
-        public HeroMovementState(HeroStateMachine heroStateMachine,
-            IInputService input,
-            HeroAnimator heroAnimator, 
-            HeroMovement heroMovement) : base(heroStateMachine, input, heroAnimator)
+
+
+        public HeroMovementState(HeroAnimator animator, HeroMovement heroMovement, bool needExitTime, bool isGhostState) : base(animator, needExitTime, isGhostState)
         {
             _heroMovement = heroMovement;
         }
 
-        public override void Enter()
+
+        public override void OnEnter()
         {
+            base.OnEnter();
             HeroAnimator.PlayRun();
-            Debug.Log("Entered Movement State");
         }
 
-        public override void Tick(float deltaTime)
+        public override void OnLogic()
         {
             _heroMovement.Movement();
         }
 
-        public override void Exit()
+        public override void OnExit()
         {
-           
+            base.OnExit();
+        }
+
+        public override void OnExitRequest()
+        {
+            base.OnExitRequest();
         }
     }
 }

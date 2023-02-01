@@ -1,4 +1,5 @@
 using Code.Services.Input;
+using UnityEngine;
 
 namespace Code.Hero.HeroStates
 {
@@ -6,29 +7,35 @@ namespace Code.Hero.HeroStates
     {
         private readonly HeroMovement _heroMovement;
         private readonly HeroRotation _heroRotation;
-        public RollState(HeroStateMachine heroStateMachine, IInputService input, HeroAnimator heroAnimator, HeroAttack heroAttack, HeroMovement heroMovement, HeroRotation heroRotation) : base(heroStateMachine, input, heroAnimator, heroAttack)
-        {
-            _heroRotation = heroRotation;
-            _heroMovement = heroMovement;
-        }
 
-        public override void Enter()
+        public RollState(HeroAnimator animator, HeroAttack heroAttack, bool needExitTime, bool isGhostState) : base(animator, heroAttack, needExitTime, isGhostState)
         {
+        }
+        public override void OnEnter()
+        {
+            base.OnEnter();
             HeroAnimator.PlayRoll();
             _heroRotation.enabled = false;
-            
+
             Duration = 1f;
         }
 
-        public override void Tick(float deltaTime)
+        public override void OnLogic()
         {
-            Duration -= deltaTime;
+            base.OnLogic();
+            Duration -= Time.deltaTime;
             _heroMovement.ForceMove();
         }
 
-        public override void Exit()
+        public override void OnExit()
         {
+            base.OnExit();
             _heroRotation.enabled = true;
+        }
+
+        public override void OnExitRequest()
+        {
+            base.OnExitRequest();
         }
     }
 }

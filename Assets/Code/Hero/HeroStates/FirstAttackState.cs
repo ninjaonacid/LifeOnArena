@@ -5,14 +5,11 @@ namespace Code.Hero.HeroStates
 {
     public class FirstAttackState : HeroBaseAttackState
     {
-        public FirstAttackState(
-            HeroStateMachine heroStateMachine, 
-            IInputService input, 
-            HeroAnimator heroAnimator, HeroAttack heroAttack) : base(heroStateMachine, input, heroAnimator, heroAttack)
+        public FirstAttackState(HeroAnimator animator, HeroAttack heroAttack, bool needExitTime, bool isGhostState) : base(animator, heroAttack, needExitTime, isGhostState)
         {
         }
 
-        public override void Enter()
+        public override void OnEnter()
         {
             HeroAnimator.PlayAttack(this);
             HeroAttack.BaseAttack();
@@ -20,15 +17,24 @@ namespace Code.Hero.HeroStates
             Debug.Log("Entered FirstState");
         }
 
-        public override void Tick(float deltaTime)
+        public override void OnLogic()
         {
-            Duration -= deltaTime;
-            
+            base.OnLogic();
+            Duration -= Time.deltaTime;
         }
 
-        public override void Exit()
+        public override void OnExit()
         {
-        
+            base.OnExit();
+        }
+
+        public override void OnExitRequest()
+        {
+            base.OnExitRequest();
+            if (IsEnded())
+            {
+                fsm.StateCanExit();
+            }
         }
     }
 }

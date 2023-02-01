@@ -1,4 +1,5 @@
 using Code.Services.Input;
+using Code.StateMachine.Base;
 
 namespace Code.Hero.HeroStates
 {
@@ -6,12 +7,12 @@ namespace Code.Hero.HeroStates
     {
         protected float Duration;
         protected HeroAttack HeroAttack;
-        protected HeroBaseAttackState(HeroStateMachine heroStateMachine, IInputService input, HeroAnimator heroAnimator,
-            HeroAttack heroAttack) : base(heroStateMachine, input, heroAnimator)
+        
+        public bool IsEnded() => Duration <= 0;
+
+        protected HeroBaseAttackState(HeroAnimator animator, HeroAttack heroAttack, bool needExitTime, bool isGhostState) : base(animator, needExitTime : true, isGhostState)
         {
             HeroAttack = heroAttack;
         }
-
-        public bool IsEnded() => Duration <= 0;
     }
 }

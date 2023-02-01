@@ -5,25 +5,24 @@ namespace Code.Hero.HeroStates
 {
     public class HeroIdleState : HeroBaseState
     {
-        public HeroIdleState(HeroStateMachine heroStateMachine,
-            IInputService input,
-            HeroAnimator heroAnimator) : base(heroStateMachine, input, heroAnimator)
+        public HeroIdleState(HeroAnimator animator, bool needExitTime, bool isGhostState) : base(animator, needExitTime : false, isGhostState)
         {
         }
 
-        public override void Enter()
+        public override void OnEnter()
         {
+            base.OnEnter();
             HeroAnimator.ToIdleState();
-            Debug.Log("IDLE");
         }
 
-        public override void Tick(float deltaTime)
+        public override void OnLogic()
         {
+            base.OnLogic();
         }
 
-        public override void Exit()
+        public override void OnExit()
         {
-
+            base.OnExit();
         }
     }
 }

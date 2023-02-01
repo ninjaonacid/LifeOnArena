@@ -13,7 +13,7 @@ namespace Code.Hero
 {
     [RequireComponent(typeof(HeroAnimator), typeof(HeroMovement))]
     public class HeroStateMachine : BaseStateMachine
-    {
+    { /*
         private IInputService _input;
 
         [SerializeField] private HeroMovement _heroMovement;
@@ -187,5 +187,7 @@ namespace Code.Hero
         
         private HeroBaseState GetState<TState>() where TState : HeroBaseState =>
             _states[typeof(TState)];
+        */
     }
+        
 }
