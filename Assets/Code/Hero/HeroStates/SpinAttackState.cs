@@ -15,6 +15,7 @@ namespace Code.Hero.HeroStates
 
         public override void OnEnter()
         {
+            base.OnEnter();
             _heroRotation.enabled = false;
             HeroAnimator.PlayAttack(this);
             HeroAttack.SkillAttack();

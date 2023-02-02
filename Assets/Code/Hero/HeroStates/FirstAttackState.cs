@@ -11,16 +11,19 @@ namespace Code.Hero.HeroStates
 
         public override void OnEnter()
         {
+            base.OnEnter();
             HeroAnimator.PlayAttack(this);
             HeroAttack.BaseAttack();
-            Duration = 0.7f;
-            Debug.Log("Entered FirstState");
+            Duration = 0.6f;
         }
 
         public override void OnLogic()
         {
             base.OnLogic();
             Duration -= Time.deltaTime;
+
+            if(IsEnded()) fsm.StateCanExit(); 
+
         }
 
         public override void OnExit()

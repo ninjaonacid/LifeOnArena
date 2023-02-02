@@ -20,7 +20,7 @@ namespace Code.Hero.HeroStates
             base.OnEnter();
             HeroAnimator.PlayAttack(this);
             HeroAttack.BaseAttack();
-            Duration = 0.7f;
+            Duration = 0.6f;
         }
 
         public override void OnLogic()

@@ -1,7 +1,6 @@
 using System;
 using Code.Data;
 using Code.Infrastructure.Factory;
-using Code.Services.PersistentProgress;
 using Code.StaticData.Ability;
 using Code.UI.HUD.Skills;
 using UnityEngine;
@@ -44,7 +43,7 @@ namespace Code.Hero
         }
 
 
-       /* public void ChangeWeaponSkill(HeroAbilityData heroAbilityData)
+        public void ChangeWeaponSkill(HeroAbilityData heroAbilityData)
         {
             foreach (var slot in SkillSlots)
             {
@@ -96,6 +95,6 @@ namespace Code.Hero
                 }
             }
         }
-       */
+       
     }
 }

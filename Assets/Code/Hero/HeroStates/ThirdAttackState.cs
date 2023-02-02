@@ -12,7 +12,7 @@ namespace Code.Hero.HeroStates
 
         public override void OnEnter()
         {
-            Duration = 0.7f;
+            Duration = 0.6f;
             HeroAnimator.PlayAttack(this);
             HeroAttack.BaseAttack();
             Debug.Log("Entered ThirdState");
