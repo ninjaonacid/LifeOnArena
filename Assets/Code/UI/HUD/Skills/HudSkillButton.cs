@@ -12,7 +12,7 @@ namespace Code.UI.HUD.Skills
         private IInputService _input;
 
         public HeroAbilityId heroAbilityId;
-        public SkillSlotID SkillSlotID;
+        public AbilitySlotID abilitySlotID;
 
         public HeroAbilityData heroAbility;
 

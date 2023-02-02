@@ -10,7 +10,7 @@ namespace Code.StaticData.Ability
         public float Cooldown;
         public float CurrentCooldown;
         public HeroAbilityId HeroAbilityId;
-        public SkillSlotID SkillSlotID;
+        public AbilitySlotID abilitySlotID;
 
         public bool IsAbilityReady() =>
             CurrentCooldown <= 0;

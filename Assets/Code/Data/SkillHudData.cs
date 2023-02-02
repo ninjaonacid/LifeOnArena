@@ -10,11 +10,11 @@ namespace Code.Data
     {
 
  
-        public Dictionary<SkillSlotID, HeroAbilityId> SlotSkill;
+        public Dictionary<AbilitySlotID, HeroAbilityId> SlotSkill;
 
         public SkillHudData()
         {
-            SlotSkill = new Dictionary<SkillSlotID, HeroAbilityId>();
+            SlotSkill = new Dictionary<AbilitySlotID, HeroAbilityId>();
         }
 
     

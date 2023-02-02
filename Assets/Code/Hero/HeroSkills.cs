@@ -18,12 +18,10 @@ namespace Code.Hero
         private SkillHudData _skillHudData;
         private IAbilityFactory _abilityFactory;
 
-
-
         [Serializable]
         public class SkillSlot
         {
-            public SkillSlotID SkillSlotId;
+            public AbilitySlotID abilitySlotID;
             public HeroAbilityId heroAbilityId;
             public HeroAbilityData ability;
         }
@@ -33,11 +31,11 @@ namespace Code.Hero
             _abilityFactory = abilityFactory;
         }
 
-        public HeroAbilityData GetSkillSlotAbility(SkillSlotID skillSlot)
+        public HeroAbilityData GetSkillSlotAbility(AbilitySlotID abilitySlot)
         {
             for (int i = 0; i < SkillSlots.Length; i++)
             {
-                if (SkillSlots[i].SkillSlotId == skillSlot)
+                if (SkillSlots[i].abilitySlotID == abilitySlot)
                 {
                     return SkillSlots[i].ability;
                 }
@@ -50,7 +48,7 @@ namespace Code.Hero
         {
             foreach (var slot in SkillSlots)
             {
-                if (heroAbilityData.SkillSlotID == slot.SkillSlotId)
+                if (heroAbilityData.abilitySlotID == slot.abilitySlotID)
                 {
                     slot.heroAbilityId = heroAbilityData.HeroAbilityId;
                     slot.ability = _abilityFactory.CreateAbility(heroAbilityData.HeroAbilityId);
@@ -78,7 +76,7 @@ namespace Code.Hero
 
             foreach (var slot in SkillSlots)
             {
-                if (_skillHudData.SlotSkill.TryGetValue(slot.SkillSlotId, out var abilityId))
+                if (_skillHudData.SlotSkill.TryGetValue(slot.abilitySlotID, out var abilityId))
                 {
                     slot.heroAbilityId = abilityId;
                 }
@@ -92,9 +90,9 @@ namespace Code.Hero
         {
             foreach (var slot in SkillSlots)
             {
-                if (_skillHudData.SlotSkill.TryAdd(slot.SkillSlotId, slot.heroAbilityId))
+                if (_skillHudData.SlotSkill.TryAdd(slot.abilitySlotID, slot.heroAbilityId))
                 {
-                    _skillHudData.SlotSkill[slot.SkillSlotId] = slot.heroAbilityId;
+                    _skillHudData.SlotSkill[slot.abilitySlotID] = slot.heroAbilityId;
                 }
             }
         }
