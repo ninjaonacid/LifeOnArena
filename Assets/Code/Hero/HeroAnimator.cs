@@ -1,6 +1,7 @@
 using System;
 using Code.Hero.HeroStates;
 using Code.Logic;
+using Code.StaticData.Ability;
 using UnityEngine;
 
 namespace Code.Hero
@@ -121,6 +122,10 @@ namespace Code.Hero
             }
         }
 
+        public void PlayAbilityAnimation(IAbility ability)
+        {
+
+        }
         public void PlayDeath()
         {
             _heroAnimator.SetTrigger(Die);

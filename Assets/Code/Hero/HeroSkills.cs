@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Code.Hero
 {
-    public class HeroSkills : MonoBehaviour, ISave
+    public class HeroSkills : MonoBehaviour
     {
         public event Action OnSkillChanged;
 
@@ -44,7 +44,7 @@ namespace Code.Hero
         }
 
 
-        public void ChangeWeaponSkill(HeroAbilityData heroAbilityData)
+       /* public void ChangeWeaponSkill(HeroAbilityData heroAbilityData)
         {
             foreach (var slot in SkillSlots)
             {
@@ -96,5 +96,6 @@ namespace Code.Hero
                 }
             }
         }
+       */
     }
 }
