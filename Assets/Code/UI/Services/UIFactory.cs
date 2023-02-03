@@ -48,13 +48,6 @@ namespace Code.UI.Services
             return menu;
         }
 
-        public void CreateSkillWindow()
-        {
-            WindowConfig config = _staticData.ForWindow(UIWindowID.Skills);
-            var window = Object.Instantiate(config.Prefab, _uiCoreTransform) as SkillMenuWindow;
-            window.Construct(_progress, _staticData, _saveLoad);
-        }
-
         public void CreateUpgradeMenu()
         {
             WindowConfig config = _staticData.ForWindow(UIWindowID.UpgradeMenu);

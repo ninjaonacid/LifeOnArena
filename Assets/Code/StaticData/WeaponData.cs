@@ -7,7 +7,7 @@ namespace Code.StaticData
     [CreateAssetMenu(menuName = "StaticData/Weapon", fileName = "NewWeapon")]
     public class WeaponData : ScriptableObject
     {
-        public HeroAbilityData abilityData;
+        public AbilityBluePrintBase abilityData;
         public GameObject WeaponPrefab;
         public WeaponId WeaponId;
         public int Price;

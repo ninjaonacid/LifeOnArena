@@ -44,7 +44,7 @@ namespace Code.Hero
                 weaponData.Rotation.y, 
                 weaponData.Rotation.z);
 
-            HeroSkills.ChangeWeaponSkill(weaponData.abilityData);
+            HeroSkills.ChangeSkill(weaponData.abilityData);
 
         }
 

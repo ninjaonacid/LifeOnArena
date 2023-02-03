@@ -8,8 +8,9 @@ namespace Code.Hero.HeroStates
         private readonly HeroRotation _heroRotation;
 
 
-        public SpinAttackState(HeroAnimator animator, HeroAttack heroAttack, bool needExitTime, bool isGhostState) : base(animator, heroAttack, needExitTime : true, isGhostState)
+        public SpinAttackState(HeroAnimator animator, HeroAttack heroAttack, HeroRotation heroRotation, bool needExitTime, bool isGhostState) : base(animator, heroAttack, needExitTime : true, isGhostState)
         {
+            _heroRotation = heroRotation;
         }
 
 
@@ -20,12 +21,16 @@ namespace Code.Hero.HeroStates
             HeroAnimator.PlayAttack(this);
             HeroAttack.SkillAttack();
             Debug.Log("Enter spinAttack");
-            Duration = 1f;
+            Duration = 0.7f;
         }
 
         public override void OnLogic()
         {
             Duration -= Time.deltaTime;
+            if (IsEnded())
+            {
+                fsm.StateCanExit();
+            }
         }
 
         public override void OnExit()

@@ -20,13 +20,14 @@ namespace Code.Infrastructure.Factory
             SetUpgradeList();
 
         }
-        public HeroAbilityData CreateAbility(HeroAbilityId heroAbilityId) =>
+
+        public AbilityBluePrintBase CreateAbility(string heroAbilityId) =>
             _staticData.ForAbility(heroAbilityId);
 
         private void SetUpgradeList() =>
             _heroUpgrades = _staticData.GetUpgrades();
-        
-        
+
+
         public PowerUp GetUpgrade()
         {
             return _heroUpgrades[_random.GetRandomNumber(_heroUpgrades.Count)];

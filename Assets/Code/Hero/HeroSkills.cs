@@ -1,6 +1,7 @@
 using System;
 using Code.Data;
 using Code.Infrastructure.Factory;
+using Code.Services.Input;
 using Code.StaticData.Ability;
 using Code.UI.HUD.Skills;
 using UnityEngine;
@@ -13,88 +14,63 @@ namespace Code.Hero
 
         public HeroAttack HeroAttack;
         public SkillSlot[] SkillSlots;
-
+   
         private SkillHudData _skillHudData;
         private IAbilityFactory _abilityFactory;
+        private IInputService _input;
 
         [Serializable]
         public class SkillSlot
         {
-            public AbilitySlotID abilitySlotID;
-            public HeroAbilityId heroAbilityId;
-            public HeroAbilityData ability;
+            public AbilitySlotID AbilitySlotID;
+            public AbilityBluePrintBase Ability;
+            public string ButtonKey { get; set; }
         }
+
 
         public void Construct(IAbilityFactory abilityFactory)
         {
             _abilityFactory = abilityFactory;
         }
 
-        public HeroAbilityData GetSkillSlotAbility(AbilitySlotID abilitySlot)
+        public void ChangeSkill(AbilityBluePrintBase heroAbility)
         {
-            for (int i = 0; i < SkillSlots.Length; i++)
+            foreach (var slot in SkillSlots)
             {
-                if (SkillSlots[i].abilitySlotID == abilitySlot)
+                if (heroAbility.abilitySlot == slot.AbilitySlotID)
                 {
-                    return SkillSlots[i].ability;
+                    slot.Ability = _abilityFactory.CreateAbility(heroAbility.Id);
+                    HeroAttack.SetActiveSkill(heroAbility);
                 }
             }
+
+            OnSkillChanged?.Invoke();
+        }
+
+        public SkillSlot GetWeaponSkillSlot()
+        {
+            foreach (var slot in SkillSlots)
+            {
+                if (slot.AbilitySlotID == AbilitySlotID.WeaponSkillSlot)
+                {
+                    return slot;
+                }
+            }
+
             return null;
         }
 
-
-        public void ChangeWeaponSkill(HeroAbilityData heroAbilityData)
+        public SkillSlot GetDodgeSkillSlot()
         {
             foreach (var slot in SkillSlots)
             {
-                if (heroAbilityData.abilitySlotID == slot.abilitySlotID)
+                if (slot.AbilitySlotID == AbilitySlotID.Dodge)
                 {
-                    slot.heroAbilityId = heroAbilityData.HeroAbilityId;
-                    slot.ability = _abilityFactory.CreateAbility(heroAbilityData.HeroAbilityId);
-                    HeroAttack.SetActiveSkill(heroAbilityData);
+                    return slot;
                 }
             }
 
-            OnSkillChanged?.Invoke();
+            return null;
         }
-
-        private void LoadAbilities()
-        {
-            foreach (var slot in SkillSlots)
-            {
-                slot.ability = _abilityFactory.CreateAbility(slot.heroAbilityId);
-
-            }
-
-            OnSkillChanged?.Invoke();
-        }
-
-        public void LoadProgress(PlayerProgress progress)
-        {
-            _skillHudData = progress.skillHudData;
-
-            foreach (var slot in SkillSlots)
-            {
-                if (_skillHudData.SlotSkill.TryGetValue(slot.abilitySlotID, out var abilityId))
-                {
-                    slot.heroAbilityId = abilityId;
-                }
-            }
-
-            LoadAbilities();
-
-        }
-
-        public void UpdateProgress(PlayerProgress progress)
-        {
-            foreach (var slot in SkillSlots)
-            {
-                if (_skillHudData.SlotSkill.TryAdd(slot.abilitySlotID, slot.heroAbilityId))
-                {
-                    _skillHudData.SlotSkill[slot.abilitySlotID] = slot.heroAbilityId;
-                }
-            }
-        }
-       
     }
 }

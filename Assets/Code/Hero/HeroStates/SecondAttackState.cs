@@ -27,6 +27,12 @@ namespace Code.Hero.HeroStates
         {
             base.OnLogic();
             Duration -= Time.deltaTime;
+
+            if (IsEnded())
+            {
+                fsm.StateCanExit();
+            }
+
         }
 
         public override void OnExit()

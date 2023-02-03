@@ -6,7 +6,7 @@ namespace Code.Infrastructure.Factory
 {
     public interface IAbilityFactory : IService
     {
-        HeroAbilityData CreateAbility(HeroAbilityId heroAbilityId);
+        AbilityBluePrintBase CreateAbility(string heroAbilityId);
         PowerUp GetUpgrade();
     }
 }

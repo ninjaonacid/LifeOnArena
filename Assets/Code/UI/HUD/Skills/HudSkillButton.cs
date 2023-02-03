@@ -11,10 +11,9 @@ namespace Code.UI.HUD.Skills
         public ButtonInputUI ButtonInput;
         private IInputService _input;
 
-        public HeroAbilityId heroAbilityId;
         public AbilitySlotID abilitySlotID;
 
-        public HeroAbilityData heroAbility;
+        public AbilityBluePrintBase heroAbility;
 
         private HeroAbilityCooldown _heroAbilityCooldown;
 

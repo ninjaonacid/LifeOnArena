@@ -9,7 +9,7 @@ namespace Code.StaticData.Ability
         public float Damage;
         public float Cooldown;
         public float CurrentCooldown;
-        public HeroAbilityId HeroAbilityId;
+        //public HeroAbilityId HeroAbilityId;
         public AbilitySlotID abilitySlotID;
 
         public bool IsAbilityReady() =>

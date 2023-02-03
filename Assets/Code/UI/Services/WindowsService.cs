@@ -21,10 +21,6 @@ namespace Code.UI.Services
                 case UIWindowID.Weapon:
                     _uiFactory.CreateWeaponWindow();
                     break;
-                
-                case UIWindowID.Skills:
-                    _uiFactory.CreateSkillWindow();
-                    break;
 
                 case UIWindowID.UpgradeMenu:
                     _uiFactory.CreateUpgradeMenu();
