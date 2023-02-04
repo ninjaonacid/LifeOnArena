@@ -12,16 +12,17 @@ namespace Code.Hero.HeroStates
 
         public override void OnEnter()
         {
+            base.OnEnter();
             Duration = 0.6f;
             HeroAnimator.PlayAttack(this);
             HeroAttack.BaseAttack();
-            Debug.Log("Entered ThirdState");
+          
         }
 
         public override void OnLogic()
         {
             Duration -= Time.deltaTime;
-            if (IsEnded())
+            if (IsStateOver())
             {
                 fsm.StateCanExit();
             }
@@ -34,10 +35,15 @@ namespace Code.Hero.HeroStates
 
         public override void OnExitRequest()
         {
-            if (IsEnded())
+            if (IsStateOver())
             {
                 fsm.StateCanExit();
             }
         }
+
+        public override bool IsStateOver() => IsEnded();
+
+
+
     }
 }

@@ -20,7 +20,7 @@ namespace Code.Hero.HeroStates
             base.OnEnter();
             HeroAnimator.PlayAttack(this);
             HeroAttack.BaseAttack();
-            Duration = 0.6f;
+            Duration = 0.8f;
         }
 
         public override void OnLogic()
@@ -28,7 +28,7 @@ namespace Code.Hero.HeroStates
             base.OnLogic();
             Duration -= Time.deltaTime;
 
-            if (IsEnded())
+            if (IsStateOver())
             {
                 fsm.StateCanExit();
             }
@@ -42,10 +42,15 @@ namespace Code.Hero.HeroStates
 
         public override void OnExitRequest()
         {
-            if (IsEnded())
+            if (IsStateOver())
             {
                 fsm.StateCanExit();
             }
         }
+
+        public override bool IsStateOver() => IsEnded();
+
+
+
     }
 }

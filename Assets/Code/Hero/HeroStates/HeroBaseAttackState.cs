@@ -14,5 +14,6 @@ namespace Code.Hero.HeroStates
         {
             HeroAttack = heroAttack;
         }
+
     }
 }

@@ -33,7 +33,6 @@ namespace Code.Hero
 
         private int GetInteractables()
         {
-
             return Physics.OverlapSphereNonAlloc(
                 _interactPoint.gameObject.transform.position,
                 _interactRadius,

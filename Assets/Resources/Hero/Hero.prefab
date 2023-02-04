@@ -1283,18 +1283,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecf359ceca450a042b0bd9bf851eb298, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _heroCooldown: {fileID: 7773590576850612865}
   HeroAttack: {fileID: 8881719371883239237}
   SkillSlots:
   - AbilitySlotID: 0
     Ability: {fileID: 0}
-    ButtonKey: 
   - AbilitySlotID: 2
     Ability: {fileID: 0}
-    ButtonKey: 
-  WeaponSkillSlot:
-    AbilitySlotID: 0
-    Ability: {fileID: 0}
-    ButtonKey: 
 --- !u!114 &7773590576850612865
 MonoBehaviour:
   m_ObjectHideFlags: 0

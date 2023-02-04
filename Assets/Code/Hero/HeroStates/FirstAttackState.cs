@@ -22,7 +22,7 @@ namespace Code.Hero.HeroStates
             base.OnLogic();
             Duration -= Time.deltaTime;
 
-            if(IsEnded()) fsm.StateCanExit(); 
+            if(IsStateOver()) fsm.StateCanExit(); 
 
         }
 
@@ -34,10 +34,16 @@ namespace Code.Hero.HeroStates
         public override void OnExitRequest()
         {
             base.OnExitRequest();
-            if (IsEnded())
+
+            if (IsStateOver())
             {
                 fsm.StateCanExit();
             }
         }
+
+        public override bool IsStateOver() => IsEnded();
+
+
+
     }
 }

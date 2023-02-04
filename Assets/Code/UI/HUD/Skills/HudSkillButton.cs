@@ -27,10 +27,7 @@ namespace Code.UI.HUD.Skills
 
         private void Update()
         {
-            if (_input.IsButtonPressed(ButtonInput.button.Key) && heroAbility)
-            {
-                _heroAbilityCooldown.StartCooldown(heroAbility);
-            }
+
         }
 
         private void Awake()

@@ -19,7 +19,6 @@ namespace Code.StaticData
         private Dictionary<WeaponId, WeaponData> _weapons;
         private Dictionary<WeaponId, WeaponPlatformStaticData> _weaponPlatforms;
 
-        private List<PowerUp> _heroUpgrades; 
 
         public void Load()
         {
@@ -52,7 +51,7 @@ namespace Code.StaticData
                 .LoadAll<WeaponPlatformStaticData>("StaticData/WeaponPlatforms")
                 .ToDictionary(x => x.WeaponPlatformId, x => x);
 
-            _heroUpgrades = Resources.LoadAll<PowerUp>("StaticData/HeroUpgrades").ToList();
+     
         }
 
         public WeaponData ForWeapon(WeaponId weaponId)
@@ -94,7 +93,6 @@ namespace Code.StaticData
             return null;
         }
 
-        public List<PowerUp> GetUpgrades() => _heroUpgrades;
         
         
         public LevelConfig ForLevel(string sceneKey) =>

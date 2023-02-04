@@ -11,26 +11,18 @@ namespace Code.Infrastructure.Factory
         private readonly IStaticDataService _staticData;
         private readonly IRandomService _random;
 
-        private List<PowerUp> _heroUpgrades = new List<PowerUp>();
-
         public AbilityFactory(IStaticDataService staticData, IProgressService progress, IRandomService random)
         {
             _staticData = staticData;
             _random = random;
-            SetUpgradeList();
 
         }
 
         public AbilityBluePrintBase CreateAbility(string heroAbilityId) =>
             _staticData.ForAbility(heroAbilityId);
 
-        private void SetUpgradeList() =>
-            _heroUpgrades = _staticData.GetUpgrades();
 
 
-        public PowerUp GetUpgrade()
-        {
-            return _heroUpgrades[_random.GetRandomNumber(_heroUpgrades.Count)];
-        }
+    
     }
 }

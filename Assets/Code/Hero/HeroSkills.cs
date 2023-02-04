@@ -1,6 +1,7 @@
 using System;
 using Code.Data;
 using Code.Infrastructure.Factory;
+using Code.Services;
 using Code.Services.Input;
 using Code.StaticData.Ability;
 using Code.UI.HUD.Skills;
@@ -12,9 +13,10 @@ namespace Code.Hero
     {
         public event Action OnSkillChanged;
 
+        [SerializeField] private HeroAbilityCooldown _heroCooldown;
         public HeroAttack HeroAttack;
         public SkillSlot[] SkillSlots;
-   
+
         private SkillHudData _skillHudData;
         private IAbilityFactory _abilityFactory;
         private IInputService _input;
@@ -22,15 +24,36 @@ namespace Code.Hero
         [Serializable]
         public class SkillSlot
         {
+            public string ButtonKey { get; set; }
             public AbilitySlotID AbilitySlotID;
             public AbilityBluePrintBase Ability;
-            public string ButtonKey { get; set; }
         }
 
 
         public void Construct(IAbilityFactory abilityFactory)
         {
             _abilityFactory = abilityFactory;
+        }
+
+        private void Awake()
+        {
+            _input = ServiceLocator.Container.Single<IInputService>();
+        }
+
+        private void Update()
+        {
+            foreach (var slot in SkillSlots)
+            {
+                if (_input.IsButtonPressed(slot.ButtonKey))
+                {
+                    if (slot.Ability && slot.Ability.IsReady())
+                    {
+                        // slot.Ability.GetAbility().Use();
+                        _heroCooldown.StartCooldown(slot.Ability);
+                    }
+                }
+
+            }
         }
 
         public void ChangeSkill(AbilityBluePrintBase heroAbility)
