@@ -48,11 +48,11 @@ namespace Code.Hero
                 {
                     if (slot.Ability && slot.Ability.IsReady())
                     {
-                        // slot.Ability.GetAbility().Use();
+                     //   slot.Ability.GetAbility().Use();
+                        slot.Ability.State = AbilityState.Active;
                         _heroCooldown.StartCooldown(slot.Ability);
                     }
                 }
-
             }
         }
 
@@ -60,7 +60,7 @@ namespace Code.Hero
         {
             foreach (var slot in SkillSlots)
             {
-                if (heroAbility.abilitySlot == slot.AbilitySlotID)
+                if (heroAbility.AbilitySlot == slot.AbilitySlotID)
                 {
                     slot.Ability = _abilityFactory.CreateAbility(heroAbility.Id);
                     HeroAttack.SetActiveSkill(heroAbility);

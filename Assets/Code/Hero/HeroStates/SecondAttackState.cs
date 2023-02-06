@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Code.Hero.HeroStates
 {
-    public class SecondAttackState : HeroBaseAttackState
+    public class SecondAttackState : HeroBaseAbilityState
     {
         public SecondAttackState(HeroAnimator animator, HeroAttack heroAttack, bool needExitTime, bool isGhostState) : base(animator, heroAttack, needExitTime:true, isGhostState)
         {
@@ -48,7 +48,7 @@ namespace Code.Hero.HeroStates
             }
         }
 
-        public override bool IsStateOver() => IsEnded();
+        public override bool IsStateOver() => Duration <= 0;
 
 
 

@@ -15,20 +15,15 @@ namespace Code.UI.HUD.Skills
 
         public AbilityBluePrintBase heroAbility;
 
-        private HeroAbilityCooldown _heroAbilityCooldown;
 
         private HudSkillIcon _skillIcon;
 
-        public void Construct(HeroAbilityCooldown heroAbilityCooldown, IInputService input)
+        public void Construct(IInputService input)
         {
-            _heroAbilityCooldown = heroAbilityCooldown;
+            
             _input = input;
         }
 
-        private void Update()
-        {
-
-        }
 
         private void Awake()
         {

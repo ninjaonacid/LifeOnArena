@@ -14,8 +14,15 @@ namespace Code.Hero
             for (int i = 0; i < _abilitiesOnCooldown.Count; i++)
             {
                 _abilitiesOnCooldown[i].CurrentCooldown -= Time.deltaTime;
+                _abilitiesOnCooldown[i].CurrentActiveTime -= Time.deltaTime;
+
+                if (_abilitiesOnCooldown[i].CurrentActiveTime <= 0)
+                {
+                    _abilitiesOnCooldown[i].State = AbilityState.Cooldown;
+                }
                 if (_abilitiesOnCooldown[i].CurrentCooldown <= 0)
                 {
+                    _abilitiesOnCooldown[i].State = AbilityState.Ready;
                     _abilitiesOnCooldown.RemoveAt(i);
                 }
             }
@@ -25,6 +32,7 @@ namespace Code.Hero
         {
             if (!_abilitiesOnCooldown.Contains(ability))
             {
+                ability.CurrentActiveTime = ability.ActiveTime;   
                 ability.CurrentCooldown = ability.Cooldown;
                 _abilitiesOnCooldown.Add(ability);
             }

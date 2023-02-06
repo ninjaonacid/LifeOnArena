@@ -21,7 +21,7 @@ namespace Code.UI.HUD.Skills
 
             foreach (var button in _skillButtons)
             {
-                button.Construct(heroAbilityCooldown, input);
+                button.Construct(input);
             }
 
             _heroSkills.OnSkillChanged += SetSkillSlots;

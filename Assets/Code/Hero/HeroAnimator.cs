@@ -93,9 +93,9 @@ namespace Code.Hero
             _heroAnimator.CrossFade(_spinAttackStateHash, 0.1f);
         }
 
-        public void PlayAttack(HeroBaseAttackState state)
+        public void PlayAttack(HeroBaseAbilityState state)
         {
-            if (state is FirstAttackState)
+            if (state is FirstAbilityState)
             {
                 //_heroAnimator.SetTrigger(DoDamage);
                 _heroAnimator.CrossFade(_attackStateHash, 0.1f);
@@ -109,14 +109,14 @@ namespace Code.Hero
                 //_heroVFX.PlaySwordSlash(AnimatorState.Attack2);
                 //Debug.Log("Attack2");
             }
-            else if (state is ThirdAttackState)
+            else if (state is ThirdAbilityState)
             {
                 _heroAnimator.CrossFade(_attackStateHash3, 0.1f);
                 // _heroAnimator.SetTrigger(Attack3);
                 //_heroVFX.PlaySwordSlash(AnimatorState.Attack2);
                 //Debug.Log("Attack3");
             }
-            else if (state is SpinAttackState)
+            else if (state is SpinAbilityState)
             {
                 PlaySpinAttackSkill();
             }

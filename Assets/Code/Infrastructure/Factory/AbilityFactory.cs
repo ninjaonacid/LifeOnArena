@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Code.Services;
 using Code.Services.PersistentProgress;
 using Code.Services.RandomService;
@@ -11,7 +10,10 @@ namespace Code.Infrastructure.Factory
         private readonly IStaticDataService _staticData;
         private readonly IRandomService _random;
 
-        public AbilityFactory(IStaticDataService staticData, IProgressService progress, IRandomService random)
+        public AbilityFactory(
+            IStaticDataService staticData, 
+            IProgressService progress, 
+            IRandomService random)
         {
             _staticData = staticData;
             _random = random;
@@ -22,7 +24,10 @@ namespace Code.Infrastructure.Factory
             _staticData.ForAbility(heroAbilityId);
 
 
-
+        //public IAbility CreateAbilitys(string heroAbilityId)
+        //{
+        //    var ability = _staticData.ForAbility(heroAbilityId).GetAbility();
+        //}
     
     }
 }
