@@ -14,7 +14,7 @@ namespace Code.StaticData
         private Dictionary<MonsterTypeId, MonsterStaticData> _monsters;
         private Dictionary<string, LevelConfig> _levels; 
         private Dictionary<UIWindowID, WindowConfig> _windowConfigs;
-        private Dictionary<string, AbilityBluePrintBase> _heroAbilities;
+        private Dictionary<string, AbilityTemplateBase> _heroAbilities;
         private Dictionary<ParticleId, ParticlesStaticData> _particles;
         private Dictionary<WeaponId, WeaponData> _weapons;
         private Dictionary<WeaponId, WeaponPlatformStaticData> _weaponPlatforms;
@@ -36,7 +36,7 @@ namespace Code.StaticData
                 .ToDictionary(x => x.WindowId, x => x);
 
             _heroAbilities = Resources
-                .LoadAll<AbilityBluePrintBase>("StaticData/HeroSkills")
+                .LoadAll<AbilityTemplateBase>("StaticData/HeroSkills")
                 .ToDictionary(x => x.Id, x => x);
 
             _particles = Resources
@@ -85,7 +85,7 @@ namespace Code.StaticData
             return null;
         }
 
-        public AbilityBluePrintBase ForAbility(string heroAbilityId)
+        public AbilityTemplateBase ForAbility(string heroAbilityId)    
         {
             if (_heroAbilities.TryGetValue(heroAbilityId, out var heroAbility))
                 return heroAbility;

@@ -95,7 +95,7 @@ namespace Code.Hero
 
         public void PlayAttack(HeroBaseAbilityState state)
         {
-            if (state is FirstAbilityState)
+            if (state is FirstAttackState)
             {
                 //_heroAnimator.SetTrigger(DoDamage);
                 _heroAnimator.CrossFade(_attackStateHash, 0.1f);
@@ -109,7 +109,7 @@ namespace Code.Hero
                 //_heroVFX.PlaySwordSlash(AnimatorState.Attack2);
                 //Debug.Log("Attack2");
             }
-            else if (state is ThirdAbilityState)
+            else if (state is ThirdAttackState)
             {
                 _heroAnimator.CrossFade(_attackStateHash3, 0.1f);
                 // _heroAnimator.SetTrigger(Attack3);

@@ -3,12 +3,11 @@ using UnityEngine;
 
 namespace Code.Hero.HeroStates
 {
-    public class ThirdAbilityState : HeroBaseAbilityState
+    public class ThirdAttackState : HeroBaseAbilityState
     {
-        public ThirdAbilityState(HeroAnimator animator, HeroAttack heroAttack, bool needExitTime, bool isGhostState) : base(animator, heroAttack, needExitTime : true, isGhostState)
+        public ThirdAttackState(HeroAnimator animator, HeroAttack heroAttack, bool needExitTime, bool isGhostState) : base(animator, heroAttack, needExitTime : true, isGhostState)
         {
         }
-
 
         public override void OnEnter()
         {

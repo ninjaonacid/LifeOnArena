@@ -14,7 +14,7 @@ namespace Code.Services
         ParticlesStaticData ForParticle(ParticleId id);
         LevelConfig ForLevel(string sceneKey);
         WindowConfig ForWindow(UIWindowID menuId);
-        AbilityBluePrintBase ForAbility(string heroAbilityId);
+        AbilityTemplateBase ForAbility(string heroAbilityId);
         WeaponData ForWeapon(WeaponId weaponId);
         WeaponPlatformStaticData ForWeaponPlatforms(WeaponId weaponId);
         List<LevelConfig> GetAllLevels();

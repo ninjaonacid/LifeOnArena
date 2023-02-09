@@ -20,7 +20,7 @@ namespace Code.Infrastructure.Factory
 
         }
 
-        public AbilityBluePrintBase CreateAbility(string heroAbilityId) =>
+        public AbilityTemplateBase CreateAbility(string heroAbilityId) =>
             _staticData.ForAbility(heroAbilityId);
 
 

@@ -13,7 +13,7 @@ namespace Code.UI.HUD.Skills
 
         public AbilitySlotID abilitySlotID;
 
-        public AbilityBluePrintBase heroAbility;
+        public AbilityTemplateBase heroAbility;
 
 
         private HudSkillIcon _skillIcon;

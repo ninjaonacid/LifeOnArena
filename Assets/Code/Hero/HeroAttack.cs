@@ -12,7 +12,7 @@ namespace Code.Hero
         private static int _layerMask;
         private readonly Collider[] _hits = new Collider[2];
         private CharacterStats _characterStats;
-        private AbilityBluePrintBase _activeSkill;
+        private AbilityTemplateBase _activeSkill;
 
         public HeroWeapon HeroWeapon;
         public CharacterController CharacterController;
@@ -29,7 +29,7 @@ namespace Code.Hero
             _layerMask = 1 << LayerMask.NameToLayer("Hittable");
         }
 
-        public void SetActiveSkill(AbilityBluePrintBase attackSkill)
+        public void SetActiveSkill(AbilityTemplateBase attackSkill)
         {
             _activeSkill = attackSkill;
         }

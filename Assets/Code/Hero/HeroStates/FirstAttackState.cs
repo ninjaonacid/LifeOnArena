@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace Code.Hero.HeroStates
 {
-    public class FirstAbilityState : HeroBaseAbilityState
+    public class FirstAttackState : HeroBaseAbilityState
     {
-        public FirstAbilityState(HeroAnimator animator, HeroAttack heroAttack, bool needExitTime, bool isGhostState) : base(animator, heroAttack, needExitTime, isGhostState)
+        public FirstAttackState(HeroAnimator animator, HeroAttack heroAttack, bool needExitTime, bool isGhostState) : base(animator, heroAttack, needExitTime, isGhostState)
         {
         }
 

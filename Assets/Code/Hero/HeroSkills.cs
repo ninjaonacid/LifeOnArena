@@ -26,7 +26,7 @@ namespace Code.Hero
         {
             public string ButtonKey { get; set; }
             public AbilitySlotID AbilitySlotID;
-            public AbilityBluePrintBase Ability;
+            public AbilityTemplateBase Ability;
         }
 
 
@@ -56,7 +56,7 @@ namespace Code.Hero
             }
         }
 
-        public void ChangeSkill(AbilityBluePrintBase heroAbility)
+        public void ChangeSkill(AbilityTemplateBase heroAbility)
         {
             foreach (var slot in SkillSlots)
             {

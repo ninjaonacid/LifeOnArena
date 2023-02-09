@@ -6,7 +6,7 @@ namespace Code.Hero
 {
     public class HeroAbilityCooldown : MonoBehaviour
     {
-        private readonly List<AbilityBluePrintBase> _abilitiesOnCooldown = new List<AbilityBluePrintBase>();
+        private readonly List<AbilityTemplateBase> _abilitiesOnCooldown = new List<AbilityTemplateBase>();
 
 
         private void Update()
@@ -28,7 +28,7 @@ namespace Code.Hero
             }
         }
 
-        public void StartCooldown(AbilityBluePrintBase ability)
+        public void StartCooldown(AbilityTemplateBase ability)
         {
             if (!_abilitiesOnCooldown.Contains(ability))
             {
