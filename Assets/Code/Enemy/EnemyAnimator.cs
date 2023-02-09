@@ -11,6 +11,7 @@ namespace Code.Enemy
         private static readonly int IsMoving = Animator.StringToHash("IsMoving");
         private static readonly int Attack = Animator.StringToHash("Attack");
         private static readonly int GetHit = Animator.StringToHash("GetHit");
+        private static readonly int Idle = Animator.StringToHash("Idle");
 
         private Animator _enemyAnimator;
 
@@ -42,6 +43,10 @@ namespace Code.Enemy
             _enemyAnimator.SetTrigger(GetHit);
         }
 
+        public void PlayIdle()
+        {
+            _enemyAnimator.CrossFade(Idle, 0.5f);
+        }
         public void Move(float speed)
         {
             _enemyAnimator.SetFloat(Speed, speed);

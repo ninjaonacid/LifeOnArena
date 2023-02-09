@@ -14,12 +14,7 @@ namespace Code.Enemy
             _heroTransform = heroTransform;
         }
 
-        private void Update()
-        {
-            SetDestination();
-        }
-
-        private void SetDestination()
+        public void SetDestination()
         {
             if (_heroTransform != null) Agent.destination = _heroTransform.position;
         }

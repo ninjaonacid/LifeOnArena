@@ -10,6 +10,7 @@ namespace Code.Enemy
         private float _attackCooldown;
         private bool _attackIsActive;
 
+        public bool AttackIsActive => _attackIsActive;
         private Transform _heroTransform;
         private readonly Collider[] _hits = new Collider[1];
         private bool _isAttacking;
@@ -33,14 +34,6 @@ namespace Code.Enemy
             _isAttacking = false;
         }
 
-        private void Update()
-        {
-            UpdateCooldown();
-
-            if (CanAttack())
-                StartAttack();
-        }
-
 
         public void EnableAttack()
         {
@@ -58,7 +51,17 @@ namespace Code.Enemy
             _heroTransform = heroTransform;
         }
 
-        private void UpdateCooldown()
+        public void Attack()
+        {
+            if (CanAttack())
+            {
+                transform.LookAt(_heroTransform);
+                Animator.PlayAttack();
+                _isAttacking = true;
+            }
+        }
+
+        public void UpdateCooldown()
         {
             if (!CoolDownIsUp())
                 _attackCooldown -= Time.deltaTime;
@@ -103,13 +106,6 @@ namespace Code.Enemy
         private bool CoolDownIsUp()
         {
             return _attackCooldown <= 0f;
-        }
-
-        private void StartAttack()
-        {
-            transform.LookAt(_heroTransform);
-            Animator.PlayAttack();
-            _isAttacking = true;
         }
     }
 }

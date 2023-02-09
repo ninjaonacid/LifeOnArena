@@ -25,6 +25,7 @@ namespace Code.Hero.HeroStates
             {
                 fsm.StateCanExit();
             }
+            
         }
 
         public override void OnExit()
