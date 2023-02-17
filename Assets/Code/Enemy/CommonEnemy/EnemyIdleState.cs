@@ -4,9 +4,16 @@ namespace Code.Enemy.CommonEnemy
 {
     public class EnemyIdleState : CommonEnemyState
     {
+        private readonly EnemyTarget _target;
+        private readonly Aggression _aggression;
         
-        public EnemyIdleState(EnemyAnimator enemyAnimator, bool needsExitTime, bool isGhostState = false) : base(enemyAnimator, needsExitTime, isGhostState)
+        public EnemyIdleState(EnemyAnimator enemyAnimator, 
+            EnemyTarget enemyTarget, 
+            Aggression agression,
+            bool needsExitTime, bool isGhostState = false) : base(enemyAnimator, needsExitTime, isGhostState)
         {
+            _target = enemyTarget;
+            _aggression = agression;
         }
 
         public override void OnEnter()
@@ -19,7 +26,11 @@ namespace Code.Enemy.CommonEnemy
         public override void OnLogic()
         {
             base.OnLogic();
-            
+
+            if (_aggression.HasTarget)
+            {
+                _target.RotationToTarget();
+            }
         }
 
         public override void OnExit()

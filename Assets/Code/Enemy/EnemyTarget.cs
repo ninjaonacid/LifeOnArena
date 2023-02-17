@@ -12,5 +12,10 @@ namespace Code.Enemy
         {
             _heroTransform = heroTransform;
         }
+
+        public void RotationToTarget()
+        {
+            transform.LookAt(_heroTransform);
+        }
     }
 }

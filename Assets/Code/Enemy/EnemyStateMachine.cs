@@ -16,26 +16,42 @@ namespace Code.Enemy
         [SerializeField] private EnemyAttack _enemyAttack;
         [SerializeField] private EnemyAnimator _enemyAnimator;
         [SerializeField] private Aggression _aggression;
+        [SerializeField] private EnemyTarget _enemyTarget;
 
         private const string ChaseState = "EnemyChaseState";
         private const string AttackState = "EnemyAttackState";
         private const string IdleState = "EnemyIdleState";
+
         private void Start()
         {
             _fsm = new FiniteStateMachine();
 
-            _fsm.AddState(ChaseState, new EnemyChaseState(_enemyAnimator, _agentMoveToPlayer, false, false));
-            _fsm.AddState(AttackState, new EnemyAttackState(_enemyAnimator,_enemyAttack, _agentMoveToPlayer, false, false));
-            _fsm.AddState(IdleState, new EnemyIdleState(_enemyAnimator, false, false));
+            _fsm.AddState(ChaseState, new EnemyChaseState(
+                _enemyAnimator, 
+                _agentMoveToPlayer, 
+                false, 
+                false));
+
+            _fsm.AddState(AttackState, new EnemyAttackState(
+                _enemyAnimator,
+                _enemyAttack,
+                _enemyTarget,
+                _agentMoveToPlayer, false, false));
+
+            _fsm.AddState(IdleState, new EnemyIdleState(
+                _enemyAnimator,
+                _enemyTarget, 
+                _aggression, false, false));
 
             _fsm.AddTransition(new Transition(
                 IdleState,
                 ChaseState,
                 (transition) => _aggression.HasTarget && !_enemyAttack.TargetInAttackRange));
 
-            _fsm.AddTransition(new Transition(
+            _fsm.AddTransition(new TransitionAfter(
                 AttackState,
                 ChaseState,
+                _enemyAttack.AttackDuration,
                 (transition) => _aggression.HasTarget && !_enemyAttack.TargetInAttackRange));
                 
             _fsm.AddTransition(new TransitionAfter(

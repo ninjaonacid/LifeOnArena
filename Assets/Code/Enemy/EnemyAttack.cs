@@ -12,7 +12,6 @@ namespace Code.Enemy
         private bool _attackIsActive;
 
         public bool TargetInAttackRange => _attackIsActive;
-        private Transform _heroTransform;
         private readonly Collider[] _hits = new Collider[1];
 
         private bool _isAttacking;
@@ -25,11 +24,6 @@ namespace Code.Enemy
         public float Cleavage;
         public float Damage;
         public float EffectiveDistance;
-
-        public void Construct(Transform heroTransform)
-        {
-            _heroTransform = heroTransform;
-        }
 
         private void Awake()
         {
@@ -56,11 +50,7 @@ namespace Code.Enemy
         {
             _attackIsActive = false;
         }
-
-        public void LookAtTarget()
-        {
-            transform.LookAt(_heroTransform);
-        }
+        
 
         private void UpdateCooldown()
         {
@@ -68,12 +58,18 @@ namespace Code.Enemy
                 _attackCooldown -= Time.deltaTime;
         }
 
+        public void AttackEnded()
+        {
+            _attackCooldown = AttackCooldown;
+            _isAttacking = false;
+        }
+
         public bool CanAttack()
         {
             return CoolDownIsUp() && !_isAttacking && _attackIsActive;
         }
 
-        private void OnAttack()
+        public void Attack()
         {
             _isAttacking = true;
             if (Hit(out var hit)) hit.transform.GetComponent<IHealth>().TakeDamage(Damage);
@@ -97,12 +93,6 @@ namespace Code.Enemy
             return new Vector3(transform.position.x,
                 transform.position.y + 2f,
                 transform.position.z) + transform.forward * EffectiveDistance;
-        }
-
-        private void OnAttackEnded()
-        {
-            _attackCooldown = AttackCooldown;
-            _isAttacking = false;
         }
 
         private bool CoolDownIsUp()
