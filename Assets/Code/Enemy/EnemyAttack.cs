@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using Code.Logic;
 using UnityEngine;
@@ -10,23 +11,29 @@ namespace Code.Enemy
         private float _attackCooldown;
         private bool _attackIsActive;
 
-        public bool AttackIsActive => _attackIsActive;
+        public bool TargetInAttackRange => _attackIsActive;
         private Transform _heroTransform;
         private readonly Collider[] _hits = new Collider[1];
+
         private bool _isAttacking;
 
         private int _layerMask;
-        public EnemyAnimator Animator;
+  
 
         public float AttackCooldown;
+        public float AttackDuration;
         public float Cleavage;
         public float Damage;
         public float EffectiveDistance;
 
+        public void Construct(Transform heroTransform)
+        {
+            _heroTransform = heroTransform;
+        }
+
         private void Awake()
         {
             _layerMask = 1 << LayerMask.NameToLayer("Player");
-            
         }
 
         private void OnEnable()
@@ -34,6 +41,10 @@ namespace Code.Enemy
             _isAttacking = false;
         }
 
+        private void Update()
+        {
+            UpdateCooldown();
+        }
 
         public void EnableAttack()
         {
@@ -46,34 +57,25 @@ namespace Code.Enemy
             _attackIsActive = false;
         }
 
-        public void Construct(Transform heroTransform)
+        public void LookAtTarget()
         {
-            _heroTransform = heroTransform;
+            transform.LookAt(_heroTransform);
         }
 
-        public void Attack()
-        {
-            if (CanAttack())
-            {
-                transform.LookAt(_heroTransform);
-                Animator.PlayAttack();
-                _isAttacking = true;
-            }
-        }
-
-        public void UpdateCooldown()
+        private void UpdateCooldown()
         {
             if (!CoolDownIsUp())
                 _attackCooldown -= Time.deltaTime;
         }
 
-        private bool CanAttack()
+        public bool CanAttack()
         {
             return CoolDownIsUp() && !_isAttacking && _attackIsActive;
         }
 
         private void OnAttack()
         {
+            _isAttacking = true;
             if (Hit(out var hit)) hit.transform.GetComponent<IHealth>().TakeDamage(Damage);
         }
 

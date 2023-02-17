@@ -69,10 +69,11 @@ namespace Code.Infrastructure.Factory
             lootSpawner.SetLoot(monsterData.MinLoot, monsterData.MaxLoot);
 
             var attack = monster.GetComponent<EnemyAttack>();
-            attack.Construct(_heroFactory.HeroGameObject.transform);
+      
             attack.Damage = monsterData.Damage;
             attack.Cleavage = monsterData.Cleavage;
             attack.EffectiveDistance = monsterData.EffectiveDistance;
+            attack.AttackDuration = monsterData.AttackDuration;
 
             return monster;
         }

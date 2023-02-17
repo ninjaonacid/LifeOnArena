@@ -13,6 +13,8 @@ namespace Code.StaticData
 
         [Range(1, 100)] public int Hp;
 
+        public float AttackDuration;
+
         public int MaxLoot;
         public int MinLoot;
 

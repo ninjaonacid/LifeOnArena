@@ -13,10 +13,14 @@ namespace Code.Enemy
         {
             _heroTransform = heroTransform;
         }
-
         public void SetDestination()
         {
             if (_heroTransform != null) Agent.destination = _heroTransform.position;
+        }
+
+        public void ShouldMove(bool context)
+        {
+            Agent.isStopped = !context;
         }
     }
 }
