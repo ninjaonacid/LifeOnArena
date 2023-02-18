@@ -35,9 +35,6 @@ namespace Code.Enemy
         public void TakeDamage(float damage)
         {
             Current -= damage;
-
-            Animator.PlayHit();
-
             HealthChanged?.Invoke();
         }
     }

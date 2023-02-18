@@ -2,11 +2,12 @@ using System;
 using System.Collections.Generic;
 using Code.StateMachine.Base;
 using Code.StateMachine.Transitions;
+using UnityEditor.PackageManager;
 using UnityEngine;
 
 namespace Code.StateMachine
 {
-    public class FiniteStateMachine<TState> : IStateMachine<TState>
+    public class FiniteStateMachine<TState, TEvent> : IStateMachine<TState>, ITriggerable<TEvent>
     {
         private StateBase<TState> _activeState = null;
 
@@ -15,8 +16,20 @@ namespace Code.StateMachine
         private static readonly  List<TransitionBase<TState>> noTransitions = 
             new List<TransitionBase<TState>>();
 
+        private static readonly Dictionary<TEvent, List<TransitionBase<TState>>> noTriggerTransitions =
+            new Dictionary<TEvent, List<TransitionBase<TState>>>();
+
+
+        private Dictionary<TEvent, List<TransitionBase<TState>>> _triggerTransitions = noTriggerTransitions;
         private List<TransitionBase<TState>> _possibleTransitions = noTransitions;
-        private List<TransitionBase<TState>> _transitionsFromAny = new List<TransitionBase<TState>>();
+
+        private Dictionary<TEvent, List<TransitionBase<TState>>> _triggerTransitionsFromAny =
+            new Dictionary<TEvent, List<TransitionBase<TState>>>();
+
+        private List<TransitionBase<TState>> _transitionsFromAny = 
+            new List<TransitionBase<TState>>();
+        
+       
 
         private Dictionary<TState, StateStorage> _states = new Dictionary<TState, StateStorage>();
 
@@ -25,17 +38,24 @@ namespace Code.StateMachine
 
         public StateBase<TState> ActiveState  => _activeState;
 
-        public TState ActiveStateName { get; }
+        public TState ActiveStateName => _activeState.name;
 
         private class StateStorage
         {
-            public StateBase<TState> state;
-            public List<TransitionBase<TState>> _transitions;
+            public StateBase<TState> State;
+            public List<TransitionBase<TState>> Transitions;
+            public Dictionary<TEvent, List<TransitionBase<TState>>> TriggerTransitions;
 
             public void AddTransition(TransitionBase<TState> transition)
             {
-                _transitions = _transitions ?? new List<TransitionBase<TState>>();
-                _transitions.Add(transition);
+                Transitions = Transitions ?? new List<TransitionBase<TState>>();
+                Transitions.Add(transition);
+            }
+
+            public void AddTriggerTransition(TEvent trigger, TransitionBase<TState> transition)
+            {
+                TriggerTransitions = TriggerTransitions
+                                     ?? new Dictionary<TEvent, List<TransitionBase<TState>>>();
             }
         }
 
@@ -48,14 +68,27 @@ namespace Code.StateMachine
                 throw new ArgumentException("NoState");
             }
 
-            _possibleTransitions = stateStorage._transitions ?? noTransitions;
+            _possibleTransitions = stateStorage.Transitions ?? noTransitions;
 
-            _activeState = stateStorage.state;
+            _activeState = stateStorage.State;
             _activeState.OnEnter();
 
             foreach (var transition in _possibleTransitions)
             {
                 transition.OnEnter();
+            }
+
+            foreach (List<TransitionBase<TState>> transitions in _triggerTransitions.Values)
+            {
+                foreach (var transition in transitions)
+                {
+                    transition.OnEnter();
+                }
+            }
+
+            if (ActiveState.IsGhostState)
+            {
+                TryDirectTransitions();
             }
         }
 
@@ -127,7 +160,7 @@ namespace Code.StateMachine
             state.Init();
 
             StateStorage stateStorage = GetOrCreateStateStorage(name);
-            stateStorage.state = state;
+            stateStorage.State = state;
 
             if (_states.Count == 1 && !startState.hasState)
             {
@@ -203,10 +236,74 @@ namespace Code.StateMachine
             }
             return storage;
         }
+
+        public void AddTriggerTransition(TEvent trigger, TransitionBase<TState> transition)
+        {
+            InitTransition(transition);
+
+            StateStorage storage = GetOrCreateStateStorage(transition.FromState);
+            storage.AddTriggerTransition(trigger, transition);
+        }
+
+        public void AddTriggerTransitionFromAny(TEvent trigger, TransitionBase<TState> transition)
+        {
+            InitTransition(transition);
+
+            List<TransitionBase<TState>> transitionsOfTrigger;
+
+            if (!_triggerTransitionsFromAny.TryGetValue(trigger, out transitionsOfTrigger))
+            {
+                transitionsOfTrigger = new List<TransitionBase<TState>>();
+                _triggerTransitionsFromAny.Add(trigger, transitionsOfTrigger);
+            }
+
+            transitionsOfTrigger.Add(transition);
+        }
+
+        private bool TryTrigger(TEvent trigger)
+        {
+
+            List<TransitionBase<TState>> triggerTransitions;
+
+            if (_triggerTransitionsFromAny.TryGetValue(trigger, out triggerTransitions))
+            {
+                for (int i = 0; i < triggerTransitions.Count; i++)
+                {
+                    TransitionBase<TState> transition = triggerTransitions[i];
+
+                    if (EqualityComparer<TState>.Default.Equals(transition.ToState, _activeState.name))
+                        continue;
+
+                    if (TryTransition(transition))
+                        return true;
+                }
+            }
+
+            if (_triggerTransitions.TryGetValue(trigger, out triggerTransitions))
+            {
+                for (int i = 0; i < triggerTransitions.Count; i++)
+                {
+                    TransitionBase<TState> transition = triggerTransitions[i];
+
+                    if (TryTransition(transition))
+                        return true;
+                }
+            }
+
+            return false;
+        }
+
+        public void Trigger(TEvent trigger)
+        {
+            if (TryTrigger(trigger)) return;
+
+            (_activeState as ITriggerable<TEvent>)?.Trigger(trigger);
+        }
     }
 
-    public class FiniteStateMachine : FiniteStateMachine<string>
+    public class FiniteStateMachine : FiniteStateMachine<string, string>
     {
 
     }
+
 }

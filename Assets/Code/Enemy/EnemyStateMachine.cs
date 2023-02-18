@@ -17,13 +17,17 @@ namespace Code.Enemy
         [SerializeField] private EnemyAnimator _enemyAnimator;
         [SerializeField] private Aggression _aggression;
         [SerializeField] private EnemyTarget _enemyTarget;
+        [SerializeField] private EnemyHealth _enemyHealth;
 
         private const string ChaseState = "EnemyChaseState";
         private const string AttackState = "EnemyAttackState";
         private const string IdleState = "EnemyIdleState";
+        private const string HitStaggerState = "EnemyHitStagger";
 
         private void Start()
         {
+            _enemyHealth.HealthChanged += TriggerDamageState;
+
             _fsm = new FiniteStateMachine();
 
             _fsm.AddState(ChaseState, new EnemyChaseState(
@@ -31,6 +35,12 @@ namespace Code.Enemy
                 _agentMoveToPlayer, 
                 false, 
                 false));
+
+            _fsm.AddState(HitStaggerState, new EnemyHitStaggerState(
+                _enemyAnimator,
+                false,
+                true));
+            
 
             _fsm.AddState(AttackState, new EnemyAttackState(
                 _enemyAnimator,
@@ -60,6 +70,15 @@ namespace Code.Enemy
                 _aggression.Cooldown,
                 (transition) => !_aggression.HasTarget));
 
+            _fsm.AddTriggerTransitionFromAny("OnDamage", new Transition(
+                    " ", 
+                    HitStaggerState
+                    ));
+            
+            _fsm.AddTransition(new Transition(
+                HitStaggerState,
+                IdleState
+            ));
 
             _fsm.AddTransition(new Transition(
                 ChaseState,
@@ -81,6 +100,12 @@ namespace Code.Enemy
 
 
             _fsm.InitStateMachine();
+        }
+
+
+        private void TriggerDamageState()
+        {
+            _fsm.Trigger("OnDamage");
         }
 
         private void Update()
