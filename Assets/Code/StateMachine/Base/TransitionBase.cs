@@ -9,11 +9,13 @@ namespace Code.StateMachine.Base
 
         public bool IsForceTransition;
 
-        protected TransitionBase(TState from, TState to, bool isForceTransition = false)
+        public bool IsRepeatableTransition;
+        protected TransitionBase(TState from, TState to, bool isForceTransition = false, bool isRepeatableTransition = false)
         {
             FromState = from;
             ToState = to;
             IsForceTransition = isForceTransition;
+            IsRepeatableTransition = isRepeatableTransition;
         }
 
         public virtual void Init()

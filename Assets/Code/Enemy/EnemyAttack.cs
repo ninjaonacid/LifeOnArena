@@ -8,6 +8,8 @@ namespace Code.Enemy
     [RequireComponent(typeof(EnemyAnimator))]
     public class EnemyAttack : MonoBehaviour
     {
+
+        [SerializeField] private EnemyConfig _config;
         private float _attackCooldown;
         private bool _attackIsActive;
 
@@ -17,13 +19,7 @@ namespace Code.Enemy
         private bool _isAttacking;
 
         private int _layerMask;
-  
 
-        public float AttackCooldown;
-        public float AttackDuration;
-        public float Cleavage;
-        public float Damage;
-        public float EffectiveDistance;
 
         private void Awake()
         {
@@ -60,7 +56,7 @@ namespace Code.Enemy
 
         public void AttackEnded()
         {
-            _attackCooldown = AttackCooldown;
+            _attackCooldown = _config.AttackCooldown;
             _isAttacking = false;
         }
 
@@ -72,7 +68,7 @@ namespace Code.Enemy
         public void Attack()
         {
             _isAttacking = true;
-            if (Hit(out var hit)) hit.transform.GetComponent<IHealth>().TakeDamage(Damage);
+            if (Hit(out var hit)) hit.transform.GetComponent<IHealth>().TakeDamage(_config.Damage);
         }
 
         private bool Hit(out Collider hit)
@@ -80,7 +76,7 @@ namespace Code.Enemy
             var startPoint = StartPoint();
 
             var hitscount = Physics.OverlapSphereNonAlloc(startPoint,
-                Cleavage,
+                _config.Cleavage,
                 _hits,
                 _layerMask);
             hit = _hits.FirstOrDefault();
@@ -92,7 +88,7 @@ namespace Code.Enemy
         {
             return new Vector3(transform.position.x,
                 transform.position.y + 2f,
-                transform.position.z) + transform.forward * EffectiveDistance;
+                transform.position.z) + transform.forward * _config.EffectiveDistance;
         }
 
         private bool CoolDownIsUp()

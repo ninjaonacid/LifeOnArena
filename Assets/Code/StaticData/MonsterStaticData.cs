@@ -15,6 +15,8 @@ namespace Code.StaticData
 
         public float AttackDuration;
 
+        public float HitStaggerDuration;
+
         public int MaxLoot;
         public int MinLoot;
 

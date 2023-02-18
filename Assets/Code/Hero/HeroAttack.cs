@@ -1,3 +1,4 @@
+using System;
 using Code.Data;
 using Code.Logic;
 using Code.Services.PersistentProgress;
@@ -28,6 +29,7 @@ namespace Code.Hero
 
             _layerMask = 1 << LayerMask.NameToLayer("Hittable");
         }
+
 
         public void SetActiveSkill(AbilityTemplateBase attackSkill)
         {
@@ -69,7 +71,7 @@ namespace Code.Hero
 
         private int Hit(float attackRadius)
         {
-            return Physics.OverlapSphereNonAlloc(StartPoint() + transform.forward,
+            return Physics.OverlapSphereNonAlloc(StartPoint() + transform.forward * 2 ,
                 _characterStats.CalculateHeroAttackRadius(),
                 _hits,
                 _layerMask);
@@ -77,13 +79,13 @@ namespace Code.Hero
 
         private Vector3 StartPoint()
         {
-            return new Vector3(transform.position.x, CharacterController.center.y, transform.position.z + 1f);
+            return new Vector3(transform.position.x, CharacterController.center.y, transform.position.z);
         }
 
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(StartPoint() + transform.forward, _characterStats.CalculateHeroAttackRadius());
+            Gizmos.DrawWireSphere(StartPoint() + transform.forward * 2, _characterStats.CalculateHeroAttackRadius());
         }
     }
 }

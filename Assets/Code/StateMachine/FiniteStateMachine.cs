@@ -207,6 +207,7 @@ namespace Code.StateMachine
             {
                 var transition = _transitionsFromAny[i];
 
+
                 if (EqualityComparer<TState>.Default.Equals(transition.ToState, _activeState.name))
                     continue;
 
@@ -270,6 +271,14 @@ namespace Code.StateMachine
                 for (int i = 0; i < triggerTransitions.Count; i++)
                 {
                     TransitionBase<TState> transition = triggerTransitions[i];
+
+                    if (transition.IsRepeatableTransition)
+                    {
+                        if (TryTransition(transition))
+                        {
+                            return true;
+                        }
+                    }
 
                     if (EqualityComparer<TState>.Default.Equals(transition.ToState, _activeState.name))
                         continue;

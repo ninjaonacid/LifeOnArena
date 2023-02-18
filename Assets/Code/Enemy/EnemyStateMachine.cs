@@ -1,5 +1,3 @@
-using System;
-using System.Net.Http.Headers;
 using Code.Enemy.CommonEnemy;
 using Code.StateMachine;
 using Code.StateMachine.Transitions;
@@ -18,6 +16,7 @@ namespace Code.Enemy
         [SerializeField] private Aggression _aggression;
         [SerializeField] private EnemyTarget _enemyTarget;
         [SerializeField] private EnemyHealth _enemyHealth;
+        [SerializeField] private EnemyConfig _enemyConfig;
 
         private const string ChaseState = "EnemyChaseState";
         private const string AttackState = "EnemyAttackState";
@@ -61,7 +60,7 @@ namespace Code.Enemy
             _fsm.AddTransition(new TransitionAfter(
                 AttackState,
                 ChaseState,
-                _enemyAttack.AttackDuration,
+                _enemyConfig.AttackDuration,
                 (transition) => _aggression.HasTarget && !_enemyAttack.TargetInAttackRange));
                 
             _fsm.AddTransition(new TransitionAfter(
@@ -70,14 +69,16 @@ namespace Code.Enemy
                 _aggression.Cooldown,
                 (transition) => !_aggression.HasTarget));
 
-            _fsm.AddTriggerTransitionFromAny("OnDamage", new Transition(
+            _fsm.AddTriggerTransitionFromAny("OnDamage", new CycleTransition(
                     " ", 
-                    HitStaggerState
-                    ));
+                    HitStaggerState,
+            false, true
+            ));
             
-            _fsm.AddTransition(new Transition(
+            _fsm.AddTransition(new TransitionAfter(
                 HitStaggerState,
-                IdleState
+                IdleState,
+                _enemyConfig.HitStaggerDuration
             ));
 
             _fsm.AddTransition(new Transition(
@@ -88,7 +89,7 @@ namespace Code.Enemy
             _fsm.AddTransition(new TransitionAfter(
                 AttackState,
                 IdleState,
-                _enemyAttack.AttackDuration
+                _enemyConfig.AttackDuration
                 ));
 
             

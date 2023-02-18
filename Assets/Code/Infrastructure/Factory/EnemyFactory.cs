@@ -69,12 +69,13 @@ namespace Code.Infrastructure.Factory
             lootSpawner.Construct(this, _randomService);
             lootSpawner.SetLoot(monsterData.MinLoot, monsterData.MaxLoot);
 
-            var attack = monster.GetComponent<EnemyAttack>();
+            var enemyConfig = monster.GetComponent<EnemyConfig>();
       
-            attack.Damage = monsterData.Damage;
-            attack.Cleavage = monsterData.Cleavage;
-            attack.EffectiveDistance = monsterData.EffectiveDistance;
-            attack.AttackDuration = monsterData.AttackDuration;
+            enemyConfig.Damage = monsterData.Damage;
+            enemyConfig.Cleavage = monsterData.Cleavage;
+            enemyConfig.EffectiveDistance = monsterData.EffectiveDistance;
+            enemyConfig.AttackDuration = monsterData.AttackDuration;
+            enemyConfig.HitStaggerDuration = monsterData.HitStaggerDuration;
 
             return monster;
         }
