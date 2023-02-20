@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Threading.Tasks;
 using Code.Data;
 using Code.Enemy;
 using Code.Infrastructure.ObjectPool;
@@ -52,9 +53,9 @@ namespace Code.Logic.EnemySpawners
                 progress.KillData.ClearedSpawners.Add(Id);
         }
 
-        private void Spawn()
+        private async void Spawn()
         {
-            var monster = _enemyObjectPool.GetObject(MonsterTypeId, transform);
+            var monster = await _enemyObjectPool.GetObject(MonsterTypeId, transform);
             _spawnParticle = _particleObjectPool.GetObject(ParticleId, transform);
 
             _enemyDeath = monster.GetComponent<EnemyDeath>();
@@ -93,7 +94,7 @@ namespace Code.Logic.EnemySpawners
         {
             while (_enemyTimer > 0)
             {
-                _enemyTimer -= Time.deltaTime;
+                _enemyTimer -= Time.deltaTime; 
                 yield return null;
             }
             _enemyTimer = 30;

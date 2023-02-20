@@ -14,7 +14,7 @@ namespace Code.Infrastructure.ObjectPool
             _particleStock = new Dictionary<ParticleId, List<GameObject>>();
             _staticData = staticData;
         }
-        public void Cleanup()
+        public void CleanUp()
         {
             _particleStock.Clear();
         }

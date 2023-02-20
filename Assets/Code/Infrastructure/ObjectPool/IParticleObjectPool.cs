@@ -8,6 +8,6 @@ namespace Code.Infrastructure.ObjectPool
     {
       public GameObject GetObject(ParticleId particleId, Transform parent);
       public void ReturnObject(ParticleId particleId, GameObject obj);
-      void Cleanup();
+      void CleanUp();
     }
 }

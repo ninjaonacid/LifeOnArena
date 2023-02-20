@@ -1,5 +1,7 @@
-﻿using Code.Services;
+﻿using System.Threading.Tasks;
+using Code.Services;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace Code.Infrastructure.AssetManagment
 {
@@ -8,6 +10,8 @@ namespace Code.Infrastructure.AssetManagment
         GameObject Instantiate(string path);
         GameObject Instantiate(string path, Vector3 point);
         GameObject Instantiate(string path, Transform parent);
-  
+
+        Task<T> Load<T>(AssetReferenceGameObject assetReference) where T : class;
+        void Cleanup();
     }
 }

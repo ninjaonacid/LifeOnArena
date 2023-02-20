@@ -69,8 +69,9 @@ namespace Code.Infrastructure.States
 
             _curtain.Show();
             _enemyObjectPool.Cleanup();
-            _particleObjectPool.Cleanup();
+            _particleObjectPool.CleanUp();
             _saveLoadService.Cleanup();
+            _enemyFactory.CleanUp();
 
             _sceneLoader.Load(sceneName, OnLoaded);
         }

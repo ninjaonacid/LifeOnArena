@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Code.Enemy;
 using Code.Infrastructure.AssetManagment;
 using Code.Logic;
@@ -9,7 +10,9 @@ using Code.Services.SaveLoad;
 using Code.StaticData;
 using Code.UI.HUD;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.AI;
+using UnityEngine.ResourceManagement.AsyncOperations;
 using Object = UnityEngine.Object;
 
 namespace Code.Infrastructure.Factory
@@ -49,14 +52,16 @@ namespace Code.Infrastructure.Factory
             return spawner;
         }
 
-        public GameObject CreateMonster(MonsterTypeId monsterTypeId, Transform parent)
+        public async Task<GameObject> CreateMonster(MonsterTypeId monsterTypeId, Transform parent)
         {
             var monsterData = _staticData.ForMonster(monsterTypeId);
-            var monster = Object.Instantiate<GameObject>(monsterData.Prefab,
-                parent.position,
+
+            GameObject prefab = await _assetsProvider.Load<GameObject>(monsterData.PrefabReference);
+            GameObject monster = Object.Instantiate<GameObject>(prefab,
+                parent.position, 
                 Quaternion.identity, parent);
 
-            var health = monster.GetComponent<IHealth>();
+            IHealth health = monster.GetComponent<IHealth>();
             health.Current = monsterData.Hp;
             health.Max = monsterData.Hp;
 
@@ -105,6 +110,11 @@ namespace Code.Infrastructure.Factory
 
             _saveLoadService.RegisterProgressWatchers(go);
             return go;
+        }
+
+        public void CleanUp()
+        {
+            _assetsProvider.Cleanup();
         }
     }
 }
