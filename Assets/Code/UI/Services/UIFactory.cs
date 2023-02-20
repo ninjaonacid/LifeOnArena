@@ -64,7 +64,7 @@ namespace Code.UI.Services
         
         public void CreateCore()
         {
-            _uiCoreTransform = _assetsProvider.Instantiate(AssetPath.UICore).transform;
+            _uiCoreTransform = _assetsProvider.Instantiate(AssetAddress.UICore).transform;
         }
     }
 }

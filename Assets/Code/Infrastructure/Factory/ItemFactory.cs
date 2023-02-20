@@ -35,7 +35,7 @@ namespace Code.Infrastructure.Factory
             WeaponId weaponId)
 
         {
-            var WeaponPlatformSpawner = InstantiateRegistered(AssetPath.WeaponPlatform, point)
+            var WeaponPlatformSpawner = InstantiateRegistered(AssetAddress.WeaponPlatform, point)
                 .GetComponent<WeaponPlatformSpawner>();
 
             WeaponPlatformSpawner.Id = spawnerId;

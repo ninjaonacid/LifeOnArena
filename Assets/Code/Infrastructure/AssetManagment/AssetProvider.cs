@@ -15,6 +15,10 @@ namespace Code.Infrastructure.AssetManagment
         private Dictionary<string, List<AsyncOperationHandle>> _handles = 
             new Dictionary<string, List<AsyncOperationHandle>>();
 
+        public void Initialize()
+        {
+            Addressables.InitializeAsync();
+        }
         public async Task<T> Load<T>(AssetReferenceGameObject assetReference) where T : class
         {
             if (_completedCache.TryGetValue(assetReference.AssetGUID, 
@@ -23,23 +27,24 @@ namespace Code.Infrastructure.AssetManagment
                 return completedHandle.Result as T;
             }
 
-            AsyncOperationHandle<T> handle = Addressables.LoadAssetAsync<T>(assetReference);
+            return await LoadWithCache(
+                Addressables.LoadAssetAsync<T>(assetReference),
+                assetReference.AssetGUID);
+        }
 
-            handle.Completed += operation =>
+        public async Task<T> Load<T>(string assetAddress) where T : class
+        {
+            if (_completedCache.TryGetValue(assetAddress,
+                    out AsyncOperationHandle completedHandle))
             {
-                _completedCache[assetReference.AssetGUID] = operation;
-            };
-
-            if (!_handles.TryGetValue(assetReference.AssetGUID, out List<AsyncOperationHandle> resourcesHandles))
-            {
-                resourcesHandles = new List<AsyncOperationHandle>();
-                _handles[assetReference.AssetGUID] = resourcesHandles;
+                return completedHandle.Result as T;
             }
 
-            resourcesHandles.Add(handle);
-
-            return await handle.Task;
+            return await LoadWithCache(
+                Addressables.LoadAssetAsync<T>(assetAddress),
+                assetAddress);
         }
+
 
         public GameObject Instantiate(string path)
         {
@@ -71,6 +76,26 @@ namespace Code.Infrastructure.AssetManagment
 
             _completedCache.Clear();
             _handles.Clear();
+        }
+
+        private async Task<T> LoadWithCache<T>(AsyncOperationHandle<T> handle, string cacheKey) where T : class
+        {
+            handle.Completed += operation => { _completedCache[cacheKey] = operation; };
+
+            AddHandleOperation(handle, cacheKey);
+
+            return await handle.Task;
+        }
+
+        private void AddHandleOperation<T>(AsyncOperationHandle<T> handle, string cacheKey) where T : class
+        {
+            if (!_handles.TryGetValue(cacheKey, out List<AsyncOperationHandle> resourcesHandles))
+            {
+                resourcesHandles = new List<AsyncOperationHandle>();
+                _handles[cacheKey] = resourcesHandles;
+            }
+
+            resourcesHandles.Add(handle);
         }
     }
 }

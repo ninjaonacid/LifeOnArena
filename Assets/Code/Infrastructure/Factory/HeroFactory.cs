@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Code.Infrastructure.AssetManagment;
 using Code.Services.SaveLoad;
 using UnityEngine;
@@ -16,17 +17,23 @@ namespace Code.Infrastructure.Factory
         }
         public GameObject HeroGameObject { get; set; }
 
-        public GameObject CreateHero(Vector3 initialPoint)
+        public void InitAssets()
         {
-            HeroGameObject = InstantiateRegistered(AssetPath.HeroPath,
+            _assetsProvider.Load<GameObject>(AssetAddress.Hero);
+        }
+        public async Task<GameObject> CreateHero(Vector3 initialPoint)
+        {
+            GameObject prefab = await _assetsProvider.Load<GameObject>(AssetAddress.Hero);
+
+            HeroGameObject = InstantiateRegistered(prefab,
                 initialPoint);
             
             return HeroGameObject;
         }
 
-        public GameObject InstantiateRegistered(string prefabPath, Vector3 position)
+        public GameObject InstantiateRegistered(GameObject prefab, Vector3 position)
         {
-            var go = _assetsProvider.Instantiate(prefabPath, position);
+            var go = Object.Instantiate(prefab, position, Quaternion.identity);
 
 
             _saveLoadService.RegisterProgressWatchers(go);

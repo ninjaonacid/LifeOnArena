@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using Code.StateMachine.Base;
 using Code.StateMachine.Transitions;
-using UnityEditor.PackageManager;
 using UnityEngine;
 
 namespace Code.StateMachine

@@ -50,7 +50,7 @@ namespace Code.Infrastructure.States
             RegisterStaticData();
             _services.RegisterSingle<IGameStateMachine>(_stateMachine);
             _services.RegisterSingle<IRandomService>(new RandomService());
-            _services.RegisterSingle<IAssetsProvider>(new AssetProvider());
+            RegisterAssetProvider();
             _services.RegisterSingle(InputService());
             _services.RegisterSingle<IWindowService>(
                 new WindowsService(_services.Single<IUIFactory>()));
@@ -112,6 +112,15 @@ namespace Code.Infrastructure.States
 
             _services.RegisterSingle<ILevelTransitionService>(new LevelTransitionService(
                 _services.Single<IStaticDataService>(), _services.Single<IRandomService>()));
+        }
+
+        private void RegisterAssetProvider()
+        {
+            IAssetsProvider assetsProvider = new AssetProvider();
+            assetsProvider.Initialize();
+
+            _services.RegisterSingle<IAssetsProvider>(assetsProvider);
+
         }
 
         private void RegisterStaticData()

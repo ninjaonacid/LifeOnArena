@@ -1,5 +1,7 @@
-﻿using Code.CameraLogic;
+﻿using System.Threading.Tasks;
+using Code.CameraLogic;
 using Code.Hero;
+using Code.Infrastructure.AssetManagment;
 using Code.Infrastructure.Factory;
 using Code.Infrastructure.ObjectPool;
 using Code.Logic;
@@ -40,6 +42,7 @@ namespace Code.Infrastructure.States
         private IParticleObjectPool _particleObjectPool;
         private IItemFactory _itemFactory;
         private ILevelTransitionService _levelTransitionService;
+        private IAssetsProvider _assetsProvider;
         private readonly IUIFactory _uiFactory;
 
         public LoadLevelState(GameStateMachine stateMachine, SceneLoader sceneLoader,
@@ -66,12 +69,17 @@ namespace Code.Infrastructure.States
             _abilityFactory = _services.Single<IAbilityFactory>();
             _itemFactory = _services.Single<IItemFactory>();
             _levelTransitionService = _services.Single<ILevelTransitionService>();
+            _assetsProvider = _services.Single<IAssetsProvider>();
 
             _curtain.Show();
+
             _enemyObjectPool.Cleanup();
             _particleObjectPool.CleanUp();
             _saveLoadService.Cleanup();
-            _enemyFactory.CleanUp();
+            _assetsProvider.Cleanup();
+
+            _enemyFactory.InitAssets();
+            _heroFactory.InitAssets();
 
             _sceneLoader.Load(sceneName, OnLoaded);
         }
@@ -81,10 +89,10 @@ namespace Code.Infrastructure.States
             _curtain.Hide();
         }
 
-        private void OnLoaded()
+        private async void OnLoaded()
         {
             InitUiCore();
-            InitGameWorld();
+            await InitGameWorld();
             InformProgressReaders();
             _stateMachine.Enter<GameLoopState>();
         }
@@ -99,7 +107,7 @@ namespace Code.Infrastructure.States
             _uiFactory.CreateCore();
         }
 
-        private void InitGameWorld()
+        private async Task InitGameWorld()
         {
             string sceneKey = SceneManager.GetActiveScene().name;
 
@@ -113,7 +121,8 @@ namespace Code.Infrastructure.States
 
             InitDoors(levelConfig);
 
-            var hero = InitHero(levelConfig);
+            var hero = await InitHero(levelConfig);
+
             InitHud(hero);
 
             CameraFollow(hero);
@@ -144,11 +153,11 @@ namespace Code.Infrastructure.States
             _levelEventHandler.ResetSpawnerCounter();
         }
 
-        private void InitSpawners(LevelConfig levelConfig)
+        private async void InitSpawners(LevelConfig levelConfig)
         {
             foreach (EnemySpawnerData spawnerData in levelConfig.EnemySpawners)
             {
-                EnemySpawnPoint spawner = _enemyFactory.CreateSpawner(
+                EnemySpawnPoint spawner = await _enemyFactory.CreateSpawner(
                     spawnerData.Position,
                     spawnerData.Id,
                     spawnerData.MonsterTypeId,
@@ -157,21 +166,21 @@ namespace Code.Infrastructure.States
                 spawner.Construct(_enemyObjectPool, _particleObjectPool, _levelEventHandler);
             }
 
-            foreach (WeaponPlatformSpawnerData weaponPlatform in levelConfig.WeaponPlatformSpawners)
-            {
-                WeaponPlatformSpawner spawner = _itemFactory.CreateWeaponPlatformSpawner(
-                    weaponPlatform.Position,
-                    weaponPlatform.Id,
-                    weaponPlatform.WeaponId
-                );
+            //foreach (WeaponPlatformSpawnerData weaponPlatform in levelConfig.WeaponPlatformSpawners)
+            //{
+            //    WeaponPlatformSpawner spawner = _itemFactory.CreateWeaponPlatformSpawner(
+            //        weaponPlatform.Position,
+            //        weaponPlatform.Id,
+            //        weaponPlatform.WeaponId
+            //    );
 
-                spawner.Construct(_itemFactory);
-            }
+            //    spawner.Construct(_itemFactory);
+            //}
         }
 
-        private GameObject InitHero(LevelConfig levelConfig)
+        private async Task<GameObject> InitHero(LevelConfig levelConfig)
         {
-            var hero = _heroFactory.CreateHero(levelConfig.HeroInitialPosition);
+            GameObject hero = await _heroFactory.CreateHero(levelConfig.HeroInitialPosition);
 
             hero.GetComponent<HeroDeath>().Construct(_levelEventHandler);
             hero.GetComponent<HeroSkills>().Construct(_abilityFactory);

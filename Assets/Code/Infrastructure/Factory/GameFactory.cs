@@ -28,20 +28,20 @@ namespace Code.Infrastructure.Factory
 
         public GameObject CreateLevelDoor(Vector3 position)
         {
-            GameObject levelDoor = _assetsProvider.Instantiate(AssetPath.DoorPath, position);
+            GameObject levelDoor = _assetsProvider.Instantiate(AssetAddress.DoorPath, position);
 
             return levelDoor;
         }
         public GameObject CreateLevelEventHandler()
         {
-            GameObject levelHandler = _assetsProvider.Instantiate(AssetPath.LevelEventHandler);
+            GameObject levelHandler = _assetsProvider.Instantiate(AssetAddress.LevelEventHandler);
 
             return levelHandler;
         }
 
         public GameObject CreateHud()
         {
-            GameObject hud = InstantiateRegistered(AssetPath.HudPath);
+            GameObject hud = InstantiateRegistered(AssetAddress.HudPath);
 
             hud.GetComponentInChildren<LootCounter>()
                 .Construct(_progressService.Progress.WorldData);

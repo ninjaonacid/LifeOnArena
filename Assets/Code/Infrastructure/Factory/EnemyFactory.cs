@@ -9,6 +9,7 @@ using Code.Services.RandomService;
 using Code.Services.SaveLoad;
 using Code.StaticData;
 using Code.UI.HUD;
+using Cysharp.Threading.Tasks.Triggers;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.AI;
@@ -39,12 +40,20 @@ namespace Code.Infrastructure.Factory
             _randomService = randomService;
         }
 
-        public EnemySpawnPoint CreateSpawner(Vector3 at, 
+        public async Task InitAssets()
+        {
+            await _assetsProvider.Load<GameObject>(AssetAddress.EnemySpawner);
+            await _assetsProvider.Load<GameObject>(AssetAddress.Loot);
+        }
+
+        public async Task<EnemySpawnPoint> CreateSpawner(Vector3 at, 
             string spawnerDataId, 
             MonsterTypeId spawnerDataMonsterTypeId, 
             int spawnerRespawnCount)
         {
-            EnemySpawnPoint spawner = InstantiateRegistered(AssetPath.Spawner, at)
+            var prefab = await _assetsProvider.Load<GameObject>(AssetAddress.EnemySpawner);
+
+            EnemySpawnPoint spawner = InstantiateRegistered(prefab, at)
                 .GetComponent<EnemySpawnPoint>();
             spawner.Id = spawnerDataId;
             spawner.MonsterTypeId = spawnerDataMonsterTypeId;
@@ -86,35 +95,33 @@ namespace Code.Infrastructure.Factory
         }
 
 
-        public LootPiece CreateLoot()
+        public async Task<LootPiece> CreateLoot()
         {
-            var lootPiece = InstantiateRegistered(AssetPath.LootPath)
+            var prefab = await _assetsProvider.Load<GameObject>(AssetAddress.Loot);
+
+            var lootPiece = InstantiateRegistered(prefab)
                 .GetComponent<LootPiece>();
 
             lootPiece.Construct(_progressService.Progress.WorldData);
             return lootPiece;
         }
 
-        public GameObject InstantiateRegistered(string prefabPath, Vector3 position)
+        public GameObject InstantiateRegistered(GameObject prefab, Vector3 position)
         {
-            var go = _assetsProvider.Instantiate(prefabPath, position);
+            var go = Object.Instantiate(prefab, position, Quaternion.identity);
 
             _saveLoadService.RegisterProgressWatchers(go);
             return go;
         }
 
-        public GameObject InstantiateRegistered(string prefabPath)
+        public GameObject InstantiateRegistered(GameObject prefab)
         {
-            var go = _assetsProvider.Instantiate(prefabPath);
+            var go = Object.Instantiate(prefab);
 
 
             _saveLoadService.RegisterProgressWatchers(go);
             return go;
         }
 
-        public void CleanUp()
-        {
-            _assetsProvider.Cleanup();
-        }
     }
 }

@@ -24,9 +24,9 @@ namespace Code.Enemy
             EnemyDeath.Happened += SpawnLoot;
         }
 
-        private void SpawnLoot()
+        private async void SpawnLoot()
         {
-            LootPiece loot = _enemyFactory.CreateLoot();
+            LootPiece loot = await _enemyFactory.CreateLoot();
 
             loot.transform.position = transform.position;
 
