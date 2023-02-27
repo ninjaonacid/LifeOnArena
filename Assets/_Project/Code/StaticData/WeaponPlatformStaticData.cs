@@ -1,5 +1,6 @@
 using Code.Logic.ShelterWeapons;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 
 namespace Code.StaticData
@@ -12,7 +13,7 @@ namespace Code.StaticData
   
         public WeaponId WeaponPlatformId;
         public WeaponData Weapon;
-        public WeaponPlatform Prefab;
+        public AssetReferenceGameObject PrefabReference;
 
     }
 

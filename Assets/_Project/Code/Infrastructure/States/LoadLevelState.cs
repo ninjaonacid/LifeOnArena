@@ -18,6 +18,7 @@ using Code.StaticData.Spawners;
 using Code.UI.HUD;
 using Code.UI.HUD.Skills;
 using Code.UI.Services;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -80,6 +81,7 @@ namespace Code.Infrastructure.States
 
             _enemyFactory.InitAssets();
             _heroFactory.InitAssets();
+            _itemFactory.InitAssets();
 
             _sceneLoader.Load(sceneName, OnLoaded);
         }
@@ -93,7 +95,9 @@ namespace Code.Infrastructure.States
         {
             InitUiCore();
             await InitGameWorld();
+
             InformProgressReaders();
+
             _stateMachine.Enter<GameLoopState>();
         }
 
@@ -117,7 +121,8 @@ namespace Code.Infrastructure.States
 
             SetupEventHandler(levelConfig);
 
-            InitSpawners(levelConfig);
+            await InitSpawners(levelConfig);
+
 
             InitDoors(levelConfig);
 
@@ -153,7 +158,7 @@ namespace Code.Infrastructure.States
             _levelEventHandler.ResetSpawnerCounter();
         }
 
-        private async void InitSpawners(LevelConfig levelConfig)
+        private async Task InitSpawners(LevelConfig levelConfig)
         {
             foreach (EnemySpawnerData spawnerData in levelConfig.EnemySpawners)
             {
@@ -166,18 +171,19 @@ namespace Code.Infrastructure.States
                 spawner.Construct(_enemyObjectPool, _particleObjectPool, _levelEventHandler);
             }
 
-            //foreach (WeaponPlatformSpawnerData weaponPlatform in levelConfig.WeaponPlatformSpawners)
-            //{
-            //    WeaponPlatformSpawner spawner = _itemFactory.CreateWeaponPlatformSpawner(
-            //        weaponPlatform.Position,
-            //        weaponPlatform.Id,
-            //        weaponPlatform.WeaponId
-            //    );
+            foreach (WeaponPlatformSpawnerData weaponPlatform in levelConfig.WeaponPlatformSpawners)
+            {
+                WeaponPlatformSpawner spawner = await _itemFactory.CreateWeaponPlatformSpawner(
+                    weaponPlatform.Position,
+                    weaponPlatform.Id,
+                    weaponPlatform.WeaponId
+                );
 
-            //    spawner.Construct(_itemFactory);
-            //}
+                spawner.Construct(_itemFactory);
+            }
         }
 
+      
         private async Task<GameObject> InitHero(LevelConfig levelConfig)
         {
             GameObject hero = await _heroFactory.CreateHero(levelConfig.HeroInitialPosition);

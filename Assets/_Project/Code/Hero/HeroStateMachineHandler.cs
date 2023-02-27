@@ -29,15 +29,14 @@ namespace Code.Hero
         void Update()
         {
             _stateMachine.OnLogic();
-    
         }
 
         void Start()
         {
-            
+
             var weaponSlot = _heroSkills.GetWeaponSkillSlot();
             var dodgeSlot = _heroSkills.GetDodgeSkillSlot();
-            
+
             _input = ServiceLocator.Container.Single<IInputService>();
 
             _stateMachine = new FiniteStateMachine();
@@ -169,6 +168,7 @@ namespace Code.Hero
                     dodgeSlot.Ability.IsActive() &&
                     dodgeSlot.Ability.StateMachineId.Equals(RollAbility)
                     ));
+
             _stateMachine.AddTransition(new Transition(
                 RollAbility,
                 HeroIdle,

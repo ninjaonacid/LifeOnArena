@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Code.Logic.LevelObjectsSpawners;
 using Code.Logic.ShelterWeapons;
 using Code.Services;
@@ -10,10 +11,12 @@ namespace Code.Infrastructure.Factory
     { 
         WeaponData LoadWeapon(WeaponId weaponId);
 
-        WeaponPlatformSpawner CreateWeaponPlatformSpawner(Vector3 point,
+        Task<WeaponPlatformSpawner> CreateWeaponPlatformSpawner(Vector3 point,
             string spawnerId,
             WeaponId weaponId);
 
-        WeaponPlatform CreateWeaponPlatform(WeaponId weaponId, Transform parent);
+        Task<GameObject> CreateWeaponPlatform(WeaponId weaponId, Transform parent);
+
+        Task InitAssets();
     }
 }

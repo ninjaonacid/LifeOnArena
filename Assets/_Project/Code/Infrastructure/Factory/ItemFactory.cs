@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Code.Infrastructure.AssetManagment;
 using Code.Logic.LevelObjectsSpawners;
 using Code.Logic.ShelterWeapons;
@@ -6,6 +7,7 @@ using Code.Services.PersistentProgress;
 using Code.Services.SaveLoad;
 using Code.StaticData;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using Vector3 = UnityEngine.Vector3;
 
 namespace Code.Infrastructure.Factory
@@ -27,33 +29,46 @@ namespace Code.Infrastructure.Factory
             _assetsProvider = assetsProvider;
             _progressService = progressService;
         }
+
+        public async Task InitAssets()
+        {
+            await _assetsProvider.Load<GameObject>(AssetAddress.WeaponPlatformSpawner);
+        }
         public WeaponData LoadWeapon(WeaponId weaponId) =>
             _staticData.ForWeapon(weaponId);
 
-        public WeaponPlatformSpawner CreateWeaponPlatformSpawner(Vector3 point,
+        public async Task<WeaponPlatformSpawner> CreateWeaponPlatformSpawner(Vector3 point,
             string spawnerId,
             WeaponId weaponId)
 
         {
-            var WeaponPlatformSpawner = InstantiateRegistered(AssetAddress.WeaponPlatform, point)
+            var prefab = await _assetsProvider.Load<GameObject>(AssetAddress.WeaponPlatformSpawner);
+
+            WeaponPlatformSpawner weaponPlatformSpawner = InstantiateRegistered(prefab, point)
                 .GetComponent<WeaponPlatformSpawner>();
 
-            WeaponPlatformSpawner.Id = spawnerId;
-            WeaponPlatformSpawner.WeaponId = weaponId;
-            return WeaponPlatformSpawner;
+            weaponPlatformSpawner.Id = spawnerId;
+            weaponPlatformSpawner.WeaponId = weaponId;
+       
+            return weaponPlatformSpawner;
         }
 
-        public WeaponPlatform CreateWeaponPlatform(WeaponId weaponId, Transform parent)
+        public async Task<GameObject> CreateWeaponPlatform(WeaponId weaponId, Transform parent)
         {
             var weaponPlatformData = _staticData.ForWeaponPlatforms(weaponId);
-            var weaponPlatform = Object.Instantiate(weaponPlatformData.Prefab, parent);
-            weaponPlatform.Construct(_progressService.Progress.WorldData.LootData);
+
+            var prefab = await _assetsProvider.Load<GameObject>(weaponPlatformData.PrefabReference);
+
+            var weaponPlatform = Object.Instantiate(prefab, parent);
+
+            weaponPlatform.GetComponent<WeaponPlatform>().Construct(_progressService.Progress.WorldData.LootData);
+
             return weaponPlatform;
 
         }
-        public GameObject InstantiateRegistered(string prefabPath, Vector3 position)
+        public GameObject InstantiateRegistered(GameObject prefab, Vector3 position)
         {
-            var go = _assetsProvider.Instantiate(prefabPath, position);
+            var go = Object.Instantiate(prefab, position, Quaternion.identity);
 
 
             _saveLoadService.RegisterProgressWatchers(go);

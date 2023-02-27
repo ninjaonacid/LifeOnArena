@@ -55,6 +55,7 @@ namespace Code.Infrastructure.Factory
 
             EnemySpawnPoint spawner = InstantiateRegistered(prefab, at)
                 .GetComponent<EnemySpawnPoint>();
+
             spawner.Id = spawnerDataId;
             spawner.MonsterTypeId = spawnerDataMonsterTypeId;
             spawner.RespawnCount = spawnerRespawnCount;

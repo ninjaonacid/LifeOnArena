@@ -4,7 +4,7 @@
     {
         public const string Hero = "Hero";
         public const string HudPath = "Hud/Hud";
-        public const string WeaponPlatform = "SceneAssets/WeaponPlatformSpawner";
+        public const string WeaponPlatformSpawner = "WeaponPlatformSpawner";
         public const string Loot = "Loot";
         public const string EnemySpawner = "EnemySpawnPoint";
         public const string UICore = "UI/CoreUI";
