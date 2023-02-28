@@ -9,6 +9,7 @@ using Code.Logic.EnemySpawners;
 using Code.Logic.LevelObjectsSpawners;
 using Code.Logic.LevelTransition;
 using Code.Services;
+using Code.Services.AudioService;
 using Code.Services.Input;
 using Code.Services.LevelTransitionService;
 using Code.Services.PersistentProgress;
@@ -44,6 +45,7 @@ namespace Code.Infrastructure.States
         private IItemFactory _itemFactory;
         private ILevelTransitionService _levelTransitionService;
         private IAssetsProvider _assetsProvider;
+        private IAudioService _audioService;
         private readonly IUIFactory _uiFactory;
 
         public LoadLevelState(GameStateMachine stateMachine, SceneLoader sceneLoader,
@@ -71,6 +73,7 @@ namespace Code.Infrastructure.States
             _itemFactory = _services.Single<IItemFactory>();
             _levelTransitionService = _services.Single<ILevelTransitionService>();
             _assetsProvider = _services.Single<IAssetsProvider>();
+            _audioService = _services.Single<IAudioService>();
 
             _curtain.Show();
 
@@ -82,6 +85,7 @@ namespace Code.Infrastructure.States
             _enemyFactory.InitAssets();
             _heroFactory.InitAssets();
             _itemFactory.InitAssets();
+            _audioService.InitAssets();
 
             _sceneLoader.Load(sceneName, OnLoaded);
         }
@@ -189,8 +193,9 @@ namespace Code.Infrastructure.States
 
             hero.GetComponent<HeroDeath>().Construct(_levelEventHandler);
             hero.GetComponent<HeroSkills>().Construct(_abilityFactory);
-            //hero.GetComponent<HeroStateMachine>().Construct(_inputService);
+            hero.GetComponent<HeroStateMachineHandler>().Construct(_inputService, _audioService);
             hero.GetComponent<HeroWeapon>().Construct(_itemFactory);
+            hero.GetComponent<HeroAttack>().Construct(_audioService);
             return hero;
         }
 

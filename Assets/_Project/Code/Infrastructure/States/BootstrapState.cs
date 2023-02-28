@@ -52,8 +52,12 @@ namespace Code.Infrastructure.States
             _services.RegisterSingle<IGameStateMachine>(_stateMachine);
             _services.RegisterSingle<IRandomService>(new RandomService());
             RegisterAssetProvider();
+
+            _services.RegisterSingle<IAudioService>(new AudioService(
+                _services.Single<IAssetsProvider>()));
+
             _services.RegisterSingle(InputService());
-            _services.RegisterSingle<IAudioService>(new AudioService());
+
             _services.RegisterSingle<IWindowService>(
                 new WindowsService(_services.Single<IUIFactory>()));
             _services.RegisterSingle<IProgressService>

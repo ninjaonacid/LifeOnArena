@@ -1,6 +1,7 @@
 using Code.Hero.HeroStates;
 using Code.Logic;
 using Code.Services;
+using Code.Services.AudioService;
 using Code.Services.Input;
 using Code.StateMachine;
 using UnityEngine;
@@ -19,12 +20,18 @@ namespace Code.Hero
         private const string HeroBaseAttack3 = "HeroBaseAttack3";
         private FiniteStateMachine _stateMachine;
         private IInputService _input;
-
+        private IAudioService _audioService;
         [SerializeField] private HeroAnimator _heroAnimator;
         [SerializeField] private HeroMovement _heroMovement;
         [SerializeField] private HeroRotation _heroRotation;
         [SerializeField] private HeroAttack _heroAttack;
         [SerializeField] private HeroSkills _heroSkills;
+
+        public void Construct(IInputService inputService, IAudioService audioService)
+        {
+            _input = inputService;
+            _audioService = audioService;
+        }
 
         void Update()
         {
@@ -36,8 +43,6 @@ namespace Code.Hero
 
             var weaponSlot = _heroSkills.GetWeaponSkillSlot();
             var dodgeSlot = _heroSkills.GetDodgeSkillSlot();
-
-            _input = ServiceLocator.Container.Single<IInputService>();
 
             _stateMachine = new FiniteStateMachine();
 

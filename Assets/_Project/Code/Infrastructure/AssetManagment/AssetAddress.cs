@@ -10,6 +10,6 @@
         public const string UICore = "UI/CoreUI";
         public const string LevelEventHandler = "Logic/LevelEventHandler";
         public const string DoorPath = "SceneAssets/HellDoorTiled";
-
+        public const string HeroSwordAttackSound = "263015__dermotte__sword_01";
     }
 }

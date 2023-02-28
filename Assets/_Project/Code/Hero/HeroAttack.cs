@@ -1,6 +1,7 @@
 using System;
 using Code.Data;
 using Code.Logic;
+using Code.Services.AudioService;
 using Code.Services.PersistentProgress;
 using Code.StaticData.Ability;
 using UnityEngine;
@@ -12,18 +13,26 @@ namespace Code.Hero
     {
         private static int _layerMask;
         private readonly Collider[] _hits = new Collider[2];
+
         private CharacterStats _characterStats;
         private AbilityTemplateBase _activeSkill;
 
         public HeroWeapon HeroWeapon;
-        public CharacterController CharacterController;
         public HeroAnimator HeroAnimator;
+        public CharacterController CharacterController;
+        [SerializeField] private AudioSource _heroAudioSource;
+        private IAudioService _audioService;
+
 
         public void LoadProgress(PlayerProgress progress)
         {
             _characterStats = progress.CharacterStats;
         }
 
+        public void Construct(IAudioService audioService)
+        {
+            _audioService = audioService;
+        }
         private void Awake()
         {
 
@@ -43,7 +52,8 @@ namespace Code.Hero
                 DoDamage(_characterStats.CalculateHeroDamage() +
                          HeroWeapon.GetEquippedWeapon().Damage,
                     HeroWeapon.GetEquippedWeapon().AttackRadius);
-            } 
+                _audioService.PlayHeroAttackSound(_heroAudioSource);
+            }
             else DoDamage(_characterStats.CalculateHeroDamage(), _characterStats.CalculateHeroAttackRadius());
         }
 
@@ -71,7 +81,7 @@ namespace Code.Hero
 
         private int Hit(float attackRadius)
         {
-            return Physics.OverlapSphereNonAlloc(StartPoint() + transform.forward * 2 ,
+            return Physics.OverlapSphereNonAlloc(StartPoint() + transform.forward * 2,
                 _characterStats.CalculateHeroAttackRadius(),
                 _hits,
                 _layerMask);
