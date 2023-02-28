@@ -7,7 +7,7 @@ namespace Code.StaticData.Ability
     {
         public override IAbility GetAbility()
         {
-            return new DodgeRoll();
+            return new DodgeRoll(ActiveTime);
         }
     }
 }

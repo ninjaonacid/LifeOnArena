@@ -23,7 +23,7 @@ namespace Code.Enemy
 
         private void Awake()
         {
-            _layerMask = 1 << LayerMask.NameToLayer("Player");
+            _layerMask = 1 << LayerMask.NameToLayer("PlayerHitBox");
         }
 
         private void OnEnable()
@@ -68,7 +68,7 @@ namespace Code.Enemy
         public void Attack()
         {
             _isAttacking = true;
-            if (Hit(out var hit)) hit.transform.GetComponent<IHealth>().TakeDamage(_config.Damage);
+            if (Hit(out var hit)) hit.transform.GetComponentInParent<IHealth>().TakeDamage(_config.Damage);
         }
 
         private bool Hit(out Collider hit)

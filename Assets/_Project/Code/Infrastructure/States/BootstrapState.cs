@@ -3,6 +3,7 @@ using Code.Infrastructure.Factory;
 using Code.Infrastructure.ObjectPool;
 using Code.Infrastructure.Services;
 using Code.Services;
+using Code.Services.AudioService;
 using Code.Services.Input;
 using Code.Services.LevelTransitionService;
 using Code.Services.PersistentProgress;
@@ -52,6 +53,7 @@ namespace Code.Infrastructure.States
             _services.RegisterSingle<IRandomService>(new RandomService());
             RegisterAssetProvider();
             _services.RegisterSingle(InputService());
+            _services.RegisterSingle<IAudioService>(new AudioService());
             _services.RegisterSingle<IWindowService>(
                 new WindowsService(_services.Single<IUIFactory>()));
             _services.RegisterSingle<IProgressService>

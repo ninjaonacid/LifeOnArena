@@ -4,6 +4,6 @@ namespace Code.StaticData.Ability
 {
     public interface IAbility
     {
-        void Use(GameObject target, GameObject caster);
+        void Use(GameObject caster, GameObject target);
     }
 }

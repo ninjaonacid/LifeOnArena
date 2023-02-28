@@ -23,7 +23,7 @@ namespace Code.Hero.HeroStates
         {
             base.OnEnter();
             HeroAnimator.PlayRoll();
-            _heroRotation.enabled = false;
+            //_heroRotation.enabled = false;
 
             Duration = 1f;
         }

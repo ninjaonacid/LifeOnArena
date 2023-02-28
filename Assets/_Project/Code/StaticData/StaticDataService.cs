@@ -19,7 +19,6 @@ namespace Code.StaticData
         private Dictionary<WeaponId, WeaponData> _weapons;
         private Dictionary<WeaponId, WeaponPlatformStaticData> _weaponPlatforms;
 
-
         public void Load()
         {
             _monsters = Resources

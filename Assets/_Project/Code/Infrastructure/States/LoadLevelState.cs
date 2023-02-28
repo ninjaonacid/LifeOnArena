@@ -123,7 +123,6 @@ namespace Code.Infrastructure.States
 
             await InitSpawners(levelConfig);
 
-
             InitDoors(levelConfig);
 
             var hero = await InitHero(levelConfig);

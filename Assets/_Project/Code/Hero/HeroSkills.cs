@@ -48,7 +48,7 @@ namespace Code.Hero
                 {
                     if (slot.Ability && slot.Ability.IsReady())
                     {
-                     //   slot.Ability.GetAbility().Use();
+                        slot.Ability.GetAbility().Use(this.gameObject, null);
                         slot.Ability.State = AbilityState.Active;
                         _heroCooldown.StartCooldown(slot.Ability);
                     }

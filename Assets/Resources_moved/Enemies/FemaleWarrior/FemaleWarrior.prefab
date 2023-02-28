@@ -1439,11 +1439,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 775673900821103436, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
       propertyPath: m_Radius
-      value: 10
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 841311589950536150, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
       propertyPath: m_Radius
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2838954472591199000, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
       propertyPath: Damage
@@ -1475,7 +1475,13 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: 5d71493b0d467664b89c966f633adc91, type: 2}
     - target: {fileID: 4504935661381153983, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
       propertyPath: m_WarningMessage
-      value: 
+      value: "\nBinding warning: Some generic clip(s) animate transforms that are
+        already bound by a Humanoid avatar. These transforms can only be changed
+        by Humanoid clips.\n\tTransform 'mixamorig:Hips'\n\tTransform 'mixamorig:LeftFoot'\n\tTransform
+        'mixamorig:Spine1'\n\tTransform 'mixamorig:LeftToeBase'\n\tTransform 'mixamorig:RightArm'\n\tTransform
+        'mixamorig:LeftLeg'\n\tTransform 'mixamorig:LeftShoulder'\n\tTransform 'mixamorig:RightFoot'\n\tTransform
+        'mixamorig:Head'\n\tTransform 'mixamorig:LeftUpLeg'\n\tand more ...\n\tFrom
+        animation clip 'GetHit'"
       objectReference: {fileID: 0}
     - target: {fileID: 5597161701875895212, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
       propertyPath: m_LocalPosition.y
