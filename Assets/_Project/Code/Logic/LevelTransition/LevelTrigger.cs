@@ -2,6 +2,7 @@ using Code.Infrastructure.Services;
 using Code.Infrastructure.States;
 using Code.Services.LevelTransitionService;
 using Code.StaticData.Levels;
+using Code.UI.Services;
 using UnityEngine;
 
 namespace Code.Logic.LevelTransition
@@ -9,17 +10,19 @@ namespace Code.Logic.LevelTransition
     public class LevelTrigger : MonoBehaviour
     {
         [SerializeField] private BoxCollider _collider;
-
-        private LevelConfig _nextLevelData;
+        [SerializeField] private LevelRewardIcon _levelRewardIcon;
+        [SerializeField] private LevelConfig _nextLevelData;
 
         private IGameStateMachine _gameStateMachine;
         private ILevelTransitionService _levelTransitionService;
+        private IUIFactory _uIFactory;
         private bool _isTriggered;
 
-        public void Construct(IGameStateMachine gameStateMachine, ILevelTransitionService levelTransition)
+        public void Construct(IGameStateMachine gameStateMachine, ILevelTransitionService levelTransition, IUIFactory uiFactory)
         {
             _gameStateMachine = gameStateMachine;
             _levelTransitionService = levelTransition;
+            _uIFactory = uiFactory;;
             InitializeNextLevel();
         }
 
@@ -34,10 +37,15 @@ namespace Code.Logic.LevelTransition
             }
         }
 
-        private void InitializeNextLevel()
+        private async void InitializeNextLevel()
         {
             _nextLevelData = _levelTransitionService.GetNextLevel();
+            
+            //var sprite = await _uIFactory.CreateSprite(_nextLevelData.LevelReward);
+            //_levelRewardIcon.GetComponent<SpriteRenderer>().sprite = sprite;
         }
+
+
 
         private void OnDrawGizmos()
         {

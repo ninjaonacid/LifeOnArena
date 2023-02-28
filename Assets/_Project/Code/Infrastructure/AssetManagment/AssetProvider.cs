@@ -19,6 +19,8 @@ namespace Code.Infrastructure.AssetManagment
         {
             Addressables.InitializeAsync();
         }
+
+ 
         public async Task<T> Load<T>(AssetReferenceGameObject assetReference) where T : class
         {
             if (_completedCache.TryGetValue(assetReference.AssetGUID, 
@@ -31,6 +33,20 @@ namespace Code.Infrastructure.AssetManagment
                 Addressables.LoadAssetAsync<T>(assetReference),
                 assetReference.AssetGUID);
         }
+
+        public async Task<T> Load<T>(AssetReferenceSprite spriteReference) where T : class
+        {
+            if (_completedCache.TryGetValue(spriteReference.AssetGUID,
+                    out AsyncOperationHandle completedHandle))
+            {
+                return completedHandle.Result as T;
+            }
+
+            return await LoadWithCache(
+                Addressables.LoadAssetAsync<T>(spriteReference),
+                spriteReference.AssetGUID);
+        }
+
 
         public async Task<T> Load<T>(string assetAddress) where T : class
         {

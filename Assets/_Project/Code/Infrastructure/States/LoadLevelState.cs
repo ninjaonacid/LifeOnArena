@@ -146,7 +146,7 @@ namespace Code.Infrastructure.States
                 door.Construct(_levelEventHandler);
 
                 var levelTrigger = door.GetComponentInChildren<LevelTrigger>();
-                levelTrigger.Construct(_stateMachine, _levelTransitionService);
+                levelTrigger.Construct(_stateMachine, _levelTransitionService, _uiFactory);
             }
         }
 

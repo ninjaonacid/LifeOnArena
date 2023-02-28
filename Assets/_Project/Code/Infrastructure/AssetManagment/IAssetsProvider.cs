@@ -14,6 +14,8 @@ namespace Code.Infrastructure.AssetManagment
 
         Task<T> Load<T>(AssetReferenceGameObject assetReference) where T : class;
 
+        Task<T> Load<T>(AssetReferenceSprite spriteReference) where T: class;
+
         Task<T> Load<T>(string assetAddress) where T : class;
 
         void Cleanup();

@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Code.Infrastructure.AssetManagment;
 using Code.Infrastructure.Factory;
 using Code.Services;
@@ -5,9 +6,9 @@ using Code.Services.PersistentProgress;
 using Code.Services.SaveLoad;
 using Code.StaticData.UIWindows;
 using Code.UI.Buttons;
-using Code.UI.MainMenu;
 using Code.UI.UpgradeMenu;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace Code.UI.Services
 {
@@ -33,6 +34,11 @@ namespace Code.UI.Services
             _staticData = staticDataService;
             _saveLoad = saveLoad;
             _progress = progress;
+        }
+
+        public void InitAssets()
+        {
+            
         }
 
         public WindowBase CreateSelectionMenu(IWindowService windowService)
@@ -61,10 +67,16 @@ namespace Code.UI.Services
             WindowConfig config = _staticData.ForWindow(UIWindowID.Weapon);
             Object.Instantiate(config.Prefab, _uiCoreTransform);
         }
-        
+
         public void CreateCore()
         {
             _uiCoreTransform = _assetsProvider.Instantiate(AssetAddress.UICore).transform;
+        }
+
+        public async Task<Sprite> CreateSprite(AssetReferenceSprite spriteReference)
+        {
+           var sprite = await _assetsProvider.Load<Sprite>(spriteReference);
+           return sprite;
         }
     }
 }

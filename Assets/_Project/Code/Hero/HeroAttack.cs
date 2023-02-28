@@ -52,7 +52,7 @@ namespace Code.Hero
                 DoDamage(_characterStats.CalculateHeroDamage() +
                          HeroWeapon.GetEquippedWeapon().Damage,
                     HeroWeapon.GetEquippedWeapon().AttackRadius);
-                _audioService.PlayHeroAttackSound(_heroAudioSource);
+               // _audioService.PlayHeroAttackSound(_heroAudioSource);
             }
             else DoDamage(_characterStats.CalculateHeroDamage(), _characterStats.CalculateHeroAttackRadius());
         }

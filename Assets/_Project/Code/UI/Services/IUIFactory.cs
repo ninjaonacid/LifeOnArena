@@ -1,4 +1,7 @@
+using System.Threading.Tasks;
 using Code.Services;
+using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace Code.UI.Services
 {
@@ -8,5 +11,8 @@ namespace Code.UI.Services
         WindowBase CreateSelectionMenu(IWindowService windowService);
         void CreateWeaponWindow();
         void CreateUpgradeMenu();
+        Task<Sprite> CreateSprite(AssetReferenceSprite spriteReference);
+
+        void InitAssets();
     }
 }
