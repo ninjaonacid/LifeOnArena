@@ -8,6 +8,7 @@ namespace Code.StaticData.Ability
     {
         public float Damage;
         public SpinningProjectile SwordPrefab;
+   
         public override IAbility GetAbility()
         {
             return new DancingSwords(SwordPrefab);

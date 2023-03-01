@@ -6,4 +6,5 @@ namespace Code.StaticData.Ability
     {
         void Use(GameObject caster, GameObject target);
     }
+
 }
