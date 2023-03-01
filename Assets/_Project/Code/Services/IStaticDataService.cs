@@ -11,12 +11,16 @@ namespace Code.Services
     {
         MonsterStaticData ForMonster(MonsterTypeId typeId);
         void Load();
+
+        LevelReward ForReward(LocationReward rewardId);
+
+        List<LevelReward> LoadRewards();
         ParticlesStaticData ForParticle(ParticleId id);
         LevelConfig ForLevel(string sceneKey);
         WindowConfig ForWindow(UIWindowID menuId);
         AbilityTemplateBase ForAbility(string heroAbilityId);
         WeaponData ForWeapon(WeaponId weaponId);
         WeaponPlatformStaticData ForWeaponPlatforms(WeaponId weaponId);
-        List<LevelConfig> GetAllLevels();
+        List<LevelConfig> LoadLevels();
     }
 }

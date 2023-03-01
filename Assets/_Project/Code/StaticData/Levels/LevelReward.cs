@@ -1,14 +1,17 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.AddressableAssets;
 
 namespace Code.StaticData.Levels
 {
-    [Serializable]
-    public class LevelReward
+    [CreateAssetMenu(fileName = "LevelReward", menuName = "StaticData/LevelReward")]
+    public class LevelReward : ScriptableObject
     {
-        public AssetReferenceSprite SpriteReference;
         public LocationReward LocationReward;
+        public AssetReferenceSprite SpriteReference;
+
     }
 }
+
 

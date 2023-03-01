@@ -1,7 +1,10 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Code.Services.RandomService;
 using Code.StaticData.Levels;
+using TMPro;
+
 
 namespace Code.Services.LevelTransitionService
 {
@@ -10,45 +13,61 @@ namespace Code.Services.LevelTransitionService
         private LevelConfig _currentLevel;
         private List<LevelConfig> _allLevels;
         private Dictionary<LocationType, List<LevelConfig>> _availableTransitions;
-        private LocationType CurrentLocationGroup;
+        private List<LevelReward> _allRewards;
+        private List<LevelReward> _availableRewards = new List<LevelReward>();
+
+        private LocationType _currentLocationGroup;
 
         private readonly IRandomService _randomService;
 
         public LevelTransitionService(IStaticDataService staticDataService, IRandomService random)
         {
-            SetLevels(staticDataService.GetAllLevels());
+            Init(staticDataService.LoadLevels(), staticDataService.LoadRewards());
+
             _randomService = random;
             SortLocations();
         }
 
-        public void SetLevels(List<LevelConfig> allLevels)
+        public void Init(List<LevelConfig> allLevels, List<LevelReward> allRewards)
         {
             _allLevels = allLevels;
+            _allRewards = allRewards;
         }
+
 
         public void SetCurrentLevel(LevelConfig levelData)
         {
             _currentLevel = levelData;
 
-            CurrentLocationGroup = levelData.LocationType;
+            _availableRewards = _allRewards.Select(x => x).ToList();
+
+            _currentLocationGroup = levelData.LocationType;
             RemoveCurrentLevelFromTransitions();
         }
+
+        public LevelReward GetReward()
+        {
+            var index = _randomService.GetRandomNumber(_availableRewards.Count);
+            var reward = _availableRewards[index];
+            _availableRewards.RemoveAt(index);
+            return reward;
+        }
+
         public LevelConfig GetNextLevel()
         {
             if (FindTransition(out var levelStaticData1)) return levelStaticData1;
 
-            NextLocationGroup(CurrentLocationGroup);
+            NextLocationGroup(_currentLocationGroup);
 
             if (FindTransition(out var levelStaticData2)) return levelStaticData2;
 
             return null;
-
         }
 
         private bool FindTransition(out LevelConfig levelStaticData1)
         {
-            if (_availableTransitions.TryGetValue(CurrentLocationGroup, out var levelTransitions) &&
-                _availableTransitions[CurrentLocationGroup].Count > 0)
+            if (_availableTransitions.TryGetValue(_currentLocationGroup, out var levelTransitions) &&
+                _availableTransitions[_currentLocationGroup].Count > 0)
             {
                 var nextLevelIndex = _randomService.GetRandomNumber(levelTransitions.Count);
                 var nextLevel = levelTransitions[nextLevelIndex];
@@ -64,8 +83,8 @@ namespace Code.Services.LevelTransitionService
 
         private void RemoveCurrentLevelFromTransitions()
         {
-            if (_availableTransitions[CurrentLocationGroup].Contains(_currentLevel))
-                _availableTransitions[CurrentLocationGroup].Remove(_currentLevel);
+            if (_availableTransitions[_currentLocationGroup].Contains(_currentLevel))
+                _availableTransitions[_currentLocationGroup].Remove(_currentLevel);
         }
 
         private void SortLocations()
@@ -80,10 +99,10 @@ namespace Code.Services.LevelTransitionService
             switch (location)
             {
                 case LocationType.Shelter:
-                    CurrentLocationGroup = LocationType.StoneDungeon;
+                    _currentLocationGroup = LocationType.StoneDungeon;
                     break;
                 case LocationType.StoneDungeon:
-                    CurrentLocationGroup = LocationType.Forest;
+                    _currentLocationGroup = LocationType.Forest;
                     break;
                 case LocationType.Forest:
                     break;

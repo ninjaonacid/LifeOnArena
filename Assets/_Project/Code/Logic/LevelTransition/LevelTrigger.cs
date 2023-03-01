@@ -1,8 +1,11 @@
+using System.Threading.Tasks;
 using Code.Infrastructure.Services;
 using Code.Infrastructure.States;
+using Code.Services;
 using Code.Services.LevelTransitionService;
 using Code.StaticData.Levels;
 using Code.UI.Services;
+using TMPro;
 using UnityEngine;
 
 namespace Code.Logic.LevelTransition
@@ -12,17 +15,26 @@ namespace Code.Logic.LevelTransition
         [SerializeField] private BoxCollider _collider;
         [SerializeField] private LevelRewardIcon _levelRewardIcon;
         [SerializeField] private LevelConfig _nextLevelData;
+        [SerializeField] private LevelReward _levelReward;
 
         private IGameStateMachine _gameStateMachine;
         private ILevelTransitionService _levelTransitionService;
+        private ILevelEventHandler _levelEventHandler;
         private IUIFactory _uIFactory;
         private bool _isTriggered;
 
-        public void Construct(IGameStateMachine gameStateMachine, ILevelTransitionService levelTransition, IUIFactory uiFactory)
+        public void Construct(
+            IGameStateMachine gameStateMachine, 
+            ILevelTransitionService levelTransition, 
+            ILevelEventHandler levelEventHandler,
+            IUIFactory uiFactory)
         {
             _gameStateMachine = gameStateMachine;
             _levelTransitionService = levelTransition;
-            _uIFactory = uiFactory;;
+            _uIFactory = uiFactory;
+            _levelEventHandler = levelEventHandler;
+
+            _levelEventHandler.MonsterSpawnersCleared += ShowRewardIcon;
             InitializeNextLevel();
         }
 
@@ -32,6 +44,7 @@ namespace Code.Logic.LevelTransition
 
             if (other.CompareTag("Player"))
             {
+      
                 _gameStateMachine.Enter<LoadLevelState, string>(_nextLevelData.LevelKey);
                 _isTriggered = true;
             }
@@ -40,12 +53,20 @@ namespace Code.Logic.LevelTransition
         private async void InitializeNextLevel()
         {
             _nextLevelData = _levelTransitionService.GetNextLevel();
-            
-            //var sprite = await _uIFactory.CreateSprite(_nextLevelData.LevelReward);
-            //_levelRewardIcon.GetComponent<SpriteRenderer>().sprite = sprite;
+            _levelReward = _levelTransitionService.GetReward();
+            _levelEventHandler.SetLevelReward(_levelReward);
+
+
+            var sprite = await _uIFactory.CreateSprite(_levelReward.SpriteReference);
+            _levelRewardIcon.GetComponent<SpriteRenderer>().sprite = sprite;
+            _levelRewardIcon.HideSprite();
         }
 
+        private void ShowRewardIcon()
+        {
+            _levelRewardIcon.ShowSprite();
 
+        }
 
         private void OnDrawGizmos()
         {

@@ -22,6 +22,20 @@ namespace Code.Logic
         public void Interact(HeroInteraction interactor)
         {
             _windowService.Open(UIWindowID.UpgradeMenu);
+            //_levelEventHandler.GetLevelReward();
+
+            //LocationReward reward = _levelEventHandler.GetLevelReward();
+            //switch (reward)
+            //{
+            //    case LocationReward.Heal:
+                    
+            //        break;
+
+            //    case LocationReward.Souls:
+            //        break;
+
+            //}
+
             Debug.Log("Interaction treasure");
         }
     }

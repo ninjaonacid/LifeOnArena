@@ -18,6 +18,7 @@ namespace Code.StaticData
         private Dictionary<ParticleId, ParticlesStaticData> _particles;
         private Dictionary<WeaponId, WeaponData> _weapons;
         private Dictionary<WeaponId, WeaponPlatformStaticData> _weaponPlatforms;
+        private Dictionary<LocationReward, LevelReward> _levelReward;
 
         public void Load()
         {
@@ -28,7 +29,11 @@ namespace Code.StaticData
             _levels = Resources
                 .LoadAll<LevelConfig>("StaticData/Levels")
                 .ToDictionary(x => x.LevelKey, x => x);
-            
+
+            _levelReward = Resources
+                .LoadAll<LevelReward>("StaticData/Levels/LevelReward")
+                .ToDictionary(x => x.LocationReward);
+
             _windowConfigs = Resources
                 .Load<WindowsStaticData>("StaticData/UIWindows/WindowsStaticData")
                 .Configs
@@ -68,6 +73,7 @@ namespace Code.StaticData
 
             return null;
         }
+
         public ParticlesStaticData ForParticle(ParticleId id)
         {
             if(_particles.TryGetValue(id, out var particlesStaticData))
@@ -92,8 +98,7 @@ namespace Code.StaticData
             return null;
         }
 
-        
-        
+
         public LevelConfig ForLevel(string sceneKey) =>
         
             _levels.TryGetValue(sceneKey, out LevelConfig staticData)
@@ -101,9 +106,19 @@ namespace Code.StaticData
                 : null;
 
 
-        public List<LevelConfig> GetAllLevels() =>
+        public List<LevelConfig> LoadLevels() =>
         _levels.Values.ToList();
+
+        public LevelReward ForReward(LocationReward rewardId)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public List<LevelReward> LoadRewards() =>
+        _levelReward.Values.ToList();
+            
         
+
 
         public WindowConfig ForWindow(UIWindowID menuId) =>
         

@@ -15,7 +15,6 @@ namespace Code.StaticData.Levels
     {
         Heal,
         Souls,
-        Skill,
         None
     }
 
@@ -24,15 +23,15 @@ namespace Code.StaticData.Levels
     {
         public string LevelKey;
         public LocationType LocationType;
-        public LocationReward LocationReward;
-        public List<LevelReward> LevelReward;
+
         public List<EnemySpawnerData> EnemySpawners;
         public List<WeaponPlatformSpawnerData> WeaponPlatformSpawners;
         public List<NextLevelDoorSpawnerData> NextLevelDoorSpawners;
-        public Vector3 HeroInitialPosition;
 
+        public Vector3 HeroInitialPosition;
         public Vector3 NextLevelDoorPosition;
         public Quaternion NextLevelDoorRotation;
 
+        
     }
 }

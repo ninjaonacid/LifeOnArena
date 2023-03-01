@@ -5,8 +5,9 @@ namespace Code.Services.LevelTransitionService
 {
     public interface ILevelTransitionService : IService
     {
-        void SetLevels(List<LevelConfig> allLevels);
+        void Init(List<LevelConfig> allLevels, List<LevelReward> allRewards);
         void SetCurrentLevel(LevelConfig levelData);
         LevelConfig GetNextLevel();
+        LevelReward GetReward();
     }
 }

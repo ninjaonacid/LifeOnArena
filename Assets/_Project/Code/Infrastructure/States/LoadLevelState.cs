@@ -19,7 +19,6 @@ using Code.StaticData.Spawners;
 using Code.UI.HUD;
 using Code.UI.HUD.Skills;
 using Code.UI.Services;
-using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -146,7 +145,11 @@ namespace Code.Infrastructure.States
                 door.Construct(_levelEventHandler);
 
                 var levelTrigger = door.GetComponentInChildren<LevelTrigger>();
-                levelTrigger.Construct(_stateMachine, _levelTransitionService, _uiFactory);
+                levelTrigger.Construct(
+                    _stateMachine, 
+                    _levelTransitionService, 
+                    _levelEventHandler, 
+                    _uiFactory);
             }
         }
 
@@ -158,6 +161,7 @@ namespace Code.Infrastructure.States
         private void SetupEventHandler(LevelConfig levelConfig)
         {
             _levelEventHandler.SetCurrentLevel(levelConfig);
+
             _levelEventHandler.ResetSpawnerCounter();
         }
 

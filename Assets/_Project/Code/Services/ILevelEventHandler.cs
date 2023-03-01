@@ -12,7 +12,8 @@ namespace Code.Services
         void HeroDeath();
 
         void ResetSpawnerCounter();
-        void SetCurrentLevel(LevelConfig levelData);
-       
+        void SetCurrentLevel(LevelConfig levelConfig);
+        void SetLevelReward(LevelReward levelReward);
+        LevelReward GetLevelReward();
     }
 }

@@ -11,6 +11,8 @@ namespace Code.Services
         public event Action PlayerDead;
 
         private LevelConfig _currentLevel;
+        private LevelReward _levelReward;
+
         private int _clearedSpawnersCount;
 
 
@@ -38,6 +40,11 @@ namespace Code.Services
             _currentLevel = levelConfig;
         }
 
-      
+        public void SetLevelReward(LevelReward levelReward)
+        {
+            _levelReward = levelReward;
+        }
+
+        public LevelReward GetLevelReward() => _levelReward;
     }
 }
