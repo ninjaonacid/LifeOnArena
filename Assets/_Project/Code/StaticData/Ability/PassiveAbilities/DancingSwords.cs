@@ -3,9 +3,9 @@ using Code.Logic.Abilities;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace Code.StaticData.Ability
+namespace Code.StaticData.Ability.PassiveAbilities
 {
-    public class DancingSwords : IAbility
+    public class DancingSwords : IPassiveAbility
     {
         private readonly SpinningProjectile _prefab;
         public DancingSwords(SpinningProjectile prefab)
@@ -29,6 +29,10 @@ namespace Code.StaticData.Ability
 
         }
 
-        
+
+        public void Apply(GameObject Hero)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

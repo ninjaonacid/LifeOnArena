@@ -1,7 +1,9 @@
+using UnityEngine;
+
 namespace Code.StaticData.Ability
 {
-    public interface IPassiveAbility : IAbility
+    public interface IPassiveAbility
     {
-    
+        void Apply(GameObject hero);
     }
 }

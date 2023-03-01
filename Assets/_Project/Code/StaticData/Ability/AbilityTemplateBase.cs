@@ -11,16 +11,14 @@ namespace Code.StaticData.Ability
         Cooldown
     }
 
-    public abstract class AbilityTemplateBase : ScriptableObject
+    public abstract class AbilityTemplateBase : AbilityBase
     {
-        [ScriptableObjectId]
-        public string Id;
         public string StateMachineId;
         public float Cooldown;
         public float CurrentCooldown;
         public float ActiveTime;
         public float CurrentActiveTime;
-        public Sprite Icon;
+   
         public AbilityState State;
         public AbilitySlotID AbilitySlot;
         public abstract IAbility GetAbility();
