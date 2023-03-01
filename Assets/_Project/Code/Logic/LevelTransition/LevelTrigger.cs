@@ -1,11 +1,9 @@
-using System.Threading.Tasks;
 using Code.Infrastructure.Services;
 using Code.Infrastructure.States;
 using Code.Services;
 using Code.Services.LevelTransitionService;
 using Code.StaticData.Levels;
 using Code.UI.Services;
-using TMPro;
 using UnityEngine;
 
 namespace Code.Logic.LevelTransition
@@ -44,7 +42,7 @@ namespace Code.Logic.LevelTransition
 
             if (other.CompareTag("Player"))
             {
-      
+                _levelEventHandler.NextLevelReward(_levelReward);
                 _gameStateMachine.Enter<LoadLevelState, string>(_nextLevelData.LevelKey);
                 _isTriggered = true;
             }
@@ -54,8 +52,6 @@ namespace Code.Logic.LevelTransition
         {
             _nextLevelData = _levelTransitionService.GetNextLevel();
             _levelReward = _levelTransitionService.GetReward();
-            _levelEventHandler.SetLevelReward(_levelReward);
-
 
             var sprite = await _uIFactory.CreateSprite(_levelReward.SpriteReference);
             _levelRewardIcon.GetComponent<SpriteRenderer>().sprite = sprite;

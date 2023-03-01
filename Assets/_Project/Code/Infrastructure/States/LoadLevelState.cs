@@ -160,9 +160,8 @@ namespace Code.Infrastructure.States
 
         private void SetupEventHandler(LevelConfig levelConfig)
         {
-            _levelEventHandler.SetCurrentLevel(levelConfig);
+            _levelEventHandler.InitCurrentLevel(levelConfig.EnemySpawners.Count);
 
-            _levelEventHandler.ResetSpawnerCounter();
         }
 
         private async Task InitSpawners(LevelConfig levelConfig)

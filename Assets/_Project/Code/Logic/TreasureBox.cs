@@ -10,7 +10,6 @@ namespace Code.Logic
     {
         private ILevelEventHandler _levelEventHandler;
         private IWindowService _windowService;
-        private bool _isActive = false;
         private void Awake()
         {
             _levelEventHandler = ServiceLocator.Container.Single<ILevelEventHandler>();

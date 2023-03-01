@@ -10,16 +10,24 @@ namespace Code.Services
         public event Action MonsterSpawnersCleared;
         public event Action PlayerDead;
 
-        private LevelConfig _currentLevel;
         private LevelReward _levelReward;
 
         private int _clearedSpawnersCount;
+        private int _enemySpawners;
 
 
-        public void ResetSpawnerCounter()
+        public void InitCurrentLevel(int enemySpawnersCount)
         {
             _clearedSpawnersCount = 0;
+            _enemySpawners = enemySpawnersCount;
+ 
         }
+
+        public void NextLevelReward(LevelReward levelReward)
+        {
+            _levelReward = levelReward;
+        }
+
         public void HeroDeath()
         {
             PlayerDead?.Invoke();
@@ -29,20 +37,10 @@ namespace Code.Services
         {
             _clearedSpawnersCount++;
 
-            if (_clearedSpawnersCount == _currentLevel.EnemySpawners.Count)
+            if (_clearedSpawnersCount == _enemySpawners)
             {
                 MonsterSpawnersCleared?.Invoke();
             }
-        }
-
-        public void SetCurrentLevel(LevelConfig levelConfig)
-        {
-            _currentLevel = levelConfig;
-        }
-
-        public void SetLevelReward(LevelReward levelReward)
-        {
-            _levelReward = levelReward;
         }
 
         public LevelReward GetLevelReward() => _levelReward;
