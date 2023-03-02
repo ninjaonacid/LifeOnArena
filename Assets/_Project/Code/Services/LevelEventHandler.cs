@@ -1,6 +1,9 @@
 using System;
 using Code.Logic.EnemySpawners;
 using Code.StaticData.Levels;
+using Code.UI;
+using Code.UI.Services;
+using Cysharp.Threading.Tasks;
 
 namespace Code.Services
 {
@@ -15,6 +18,12 @@ namespace Code.Services
         private int _clearedSpawnersCount;
         private int _enemySpawners;
 
+        private readonly IWindowService _windowService;
+
+        public LevelEventHandler(IWindowService windowService)
+        {
+            _windowService = windowService;
+        }
 
         public void InitCurrentLevel(int enemySpawnersCount)
         {
@@ -33,16 +42,23 @@ namespace Code.Services
             PlayerDead?.Invoke();
         }
 
-        public void MonsterSpawnerSlain(EnemySpawnPoint spawner)
+        public async void MonsterSpawnerSlain(EnemySpawnPoint spawner)
         {
             _clearedSpawnersCount++;
 
             if (_clearedSpawnersCount == _enemySpawners)
             {
                 MonsterSpawnersCleared?.Invoke();
+
+                await ShowUpgradeWindow();
             }
         }
 
+        public async UniTask ShowUpgradeWindow()
+        {
+            await UniTask.Delay(TimeSpan.FromSeconds(2.0));
+            _windowService.Open(UIWindowID.UpgradeMenu);
+        }
         public LevelReward GetLevelReward() => _levelReward;
     }
 }

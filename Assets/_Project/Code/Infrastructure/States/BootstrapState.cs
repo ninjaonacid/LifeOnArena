@@ -58,16 +58,12 @@ namespace Code.Infrastructure.States
 
             _services.RegisterSingle(InputService());
 
-            _services.RegisterSingle<IWindowService>(
-                new WindowsService(_services.Single<IUIFactory>()));
             _services.RegisterSingle<IProgressService>
                 (new ProgressService());
 
             _services.RegisterSingle<ISaveLoadService>
             (new SaveLoadService(
                 _services.Single<IProgressService>()));
-
-            _services.RegisterSingle<ILevelEventHandler>(new LevelEventHandler());
 
             _services.RegisterSingle<IAbilityFactory>(new AbilityFactory(
                 _services.Single<IStaticDataService>(),
@@ -81,8 +77,13 @@ namespace Code.Infrastructure.States
                 _services.Single<IProgressService>(),
                 _services.Single<IAbilityFactory>()));
 
-            _services.RegisterSingle<IWindowService>(new WindowsService(
-                _services.Single<IUIFactory>()));
+            _services.RegisterSingle<IWindowService>(
+                new WindowsService(_services.Single<IUIFactory>()));
+
+
+            _services.RegisterSingle<ILevelEventHandler>(new LevelEventHandler(
+                _services.Single<IWindowService>()));
+
 
             _services.RegisterSingle<IParticleObjectPool>(new ParticleObjectPool
                 (_services.Single<IStaticDataService>()));

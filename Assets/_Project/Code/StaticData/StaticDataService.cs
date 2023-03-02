@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Code.Services;
 using Code.StaticData.Ability;
+using Code.StaticData.Ability.PassiveAbilities;
 using Code.StaticData.Levels;
 using Code.StaticData.UIWindows;
 using Code.UI;
@@ -13,12 +14,13 @@ namespace Code.StaticData
     {
         private Dictionary<MonsterTypeId, MonsterStaticData> _monsters;
         private Dictionary<string, LevelConfig> _levels; 
+        private Dictionary<LocationReward, LevelReward> _levelReward;
         private Dictionary<UIWindowID, WindowConfig> _windowConfigs;
         private Dictionary<string, AbilityTemplateBase> _heroAbilities;
+        private Dictionary<string, PassiveAbilityTemplateBase> _heroPassives;
         private Dictionary<ParticleId, ParticlesStaticData> _particles;
         private Dictionary<WeaponId, WeaponData> _weapons;
         private Dictionary<WeaponId, WeaponPlatformStaticData> _weaponPlatforms;
-        private Dictionary<LocationReward, LevelReward> _levelReward;
 
         public void Load()
         {
@@ -42,6 +44,10 @@ namespace Code.StaticData
             _heroAbilities = Resources
                 .LoadAll<AbilityTemplateBase>("StaticData/HeroSkills")
                 .ToDictionary(x => x.Id, x => x);
+
+            _heroPassives = Resources
+                .LoadAll<PassiveAbilityTemplateBase>("StaticData/HeroSkills/PassiveSkills")
+                .ToDictionary(x => x.Id);
 
             _particles = Resources
                 .LoadAll<ParticlesStaticData>("StaticData/Particles")
@@ -98,6 +104,7 @@ namespace Code.StaticData
             return null;
         }
 
+        public List<PassiveAbilityTemplateBase> GetPassives() => _heroPassives.Values.ToList();
 
         public LevelConfig ForLevel(string sceneKey) =>
         
@@ -118,7 +125,6 @@ namespace Code.StaticData
         _levelReward.Values.ToList();
             
         
-
 
         public WindowConfig ForWindow(UIWindowID menuId) =>
         

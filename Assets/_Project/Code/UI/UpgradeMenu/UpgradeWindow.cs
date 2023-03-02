@@ -18,5 +18,10 @@ namespace Code.UI.UpgradeMenu
             }
         }
 
+        protected override void OnAwake()
+        {
+            base.OnAwake();
+        }
+
     }
 }

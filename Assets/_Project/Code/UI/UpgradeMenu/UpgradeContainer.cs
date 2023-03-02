@@ -1,5 +1,6 @@
 using Code.Data;
 using Code.Infrastructure.Factory;
+using Code.StaticData.Ability.PassiveAbilities;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -9,14 +10,14 @@ namespace Code.UI.UpgradeMenu
 {
     public class UpgradeContainer : MonoBehaviour, IPointerClickHandler
     {
-        [SerializeField] private Image UpgradeImage;
-        [SerializeField] private Image UpgradeRarityImage;
-        [SerializeField] private TextMeshProUGUI UpgradeText;
+        [SerializeField] private Image _upgradeImage;
+        [SerializeField] private Image _upgradeRarityImage;
+        [SerializeField] private TextMeshProUGUI _upgradeText;
 
-        //private PowerUp _powerUp;
 
         private IAbilityFactory _abilityFactory;
         private CharacterStats _characterStats;
+        private PassiveAbilityTemplateBase _passiveAbilityTemplate;
         public void Construct(IAbilityFactory abilityFactory, CharacterStats characterStats)
         {
             _abilityFactory = abilityFactory;
@@ -26,17 +27,15 @@ namespace Code.UI.UpgradeMenu
 
         private void SetContainer()
         {
-            //_powerUp = _abilityFactory.GetUpgrade();
-            //UpgradeImage.sprite = _powerUp.Icon;
-            //UpgradeRarityImage.sprite = _powerUp.PowerUpRarityIcon;
+            _passiveAbilityTemplate = _abilityFactory.GetRandomPassiveAbility();
+            _upgradeImage.sprite = _passiveAbilityTemplate.Icon;
+            _upgradeRarityImage.sprite = _passiveAbilityTemplate.RarityIcon;
+            _upgradeText.text = _passiveAbilityTemplate.Description;
         }
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            /*if (_powerUp is Stats statsUp)
-            {
-                _characterStats.ArmorModifier += statsUp.ArmorModifier;
-            }*/
+            //_passiveAbilityTemplate.GetAbility().Apply();
         }
     }
 }

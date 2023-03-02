@@ -1,3 +1,4 @@
+using System;
 using Code.Infrastructure.Services;
 using Code.Infrastructure.States;
 using Code.Services;
@@ -62,6 +63,11 @@ namespace Code.Logic.LevelTransition
         {
             _levelRewardIcon.ShowSprite();
 
+        }
+
+        private void OnDestroy()
+        {
+            _levelEventHandler.MonsterSpawnersCleared -= ShowRewardIcon;
         }
 
         private void OnDrawGizmos()
