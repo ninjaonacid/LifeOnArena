@@ -6,15 +6,23 @@ namespace Code.UI.UpgradeMenu
     public class UpgradeWindow : WindowBase
     {
         private IAbilityFactory _abilityFactory;
-        public void Construct(IAbilityFactory abilityFactory, IProgressService progress)
+        private IHeroFactory _heroFactory;
+        public void Construct(
+            IAbilityFactory abilityFactory,
+            IHeroFactory heroFactory,
+            IProgressService progress)
         {
             
             _abilityFactory = abilityFactory;
+            _heroFactory = heroFactory;
 
             var upgradeContainers = GetComponentsInChildren<UpgradeContainer>();
+
             foreach (var upgradeContainer in upgradeContainers)
             {
-                upgradeContainer.Construct(_abilityFactory, progress.Progress.CharacterStats);
+                upgradeContainer.Construct(
+                    _abilityFactory,
+                    _heroFactory);
             }
         }
 

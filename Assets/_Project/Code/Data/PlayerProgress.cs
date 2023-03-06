@@ -1,5 +1,6 @@
 using System;
 
+
 namespace Code.Data
 {
     [Serializable]
@@ -10,8 +11,9 @@ namespace Code.Data
         public KillData KillData;
         public WorldData WorldData;
         public SkillsData SkillsData;
+        public PassiveSkills PassiveSkills;
         public SkillHudData skillHudData;
-  
+        
         public PlayerProgress(string initialLevel)
         {
             WorldData = new WorldData(initialLevel);
@@ -20,6 +22,7 @@ namespace Code.Data
             KillData = new KillData();
             SkillsData = new SkillsData();
             skillHudData = new SkillHudData();
+            PassiveSkills = new PassiveSkills();
         }
     }
 }

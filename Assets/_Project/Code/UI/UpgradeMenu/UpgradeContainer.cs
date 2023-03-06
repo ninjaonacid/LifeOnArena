@@ -1,4 +1,4 @@
-using Code.Data;
+using Code.Hero;
 using Code.Infrastructure.Factory;
 using Code.StaticData.Ability.PassiveAbilities;
 using TMPro;
@@ -13,15 +13,20 @@ namespace Code.UI.UpgradeMenu
         [SerializeField] private Image _upgradeImage;
         [SerializeField] private Image _upgradeRarityImage;
         [SerializeField] private TextMeshProUGUI _upgradeText;
-
+        [SerializeField] private UpgradeWindow _upgradeWindow;
 
         private IAbilityFactory _abilityFactory;
-        private CharacterStats _characterStats;
+      
+
+        private GameObject _hero;
         private PassiveAbilityTemplateBase _passiveAbilityTemplate;
-        public void Construct(IAbilityFactory abilityFactory, CharacterStats characterStats)
+        public void Construct(IAbilityFactory abilityFactory, 
+            IHeroFactory heroFactory)
         {
             _abilityFactory = abilityFactory;
-            _characterStats = characterStats;
+
+            _hero = heroFactory.HeroGameObject;
+
             SetContainer();
         }
 
@@ -35,7 +40,9 @@ namespace Code.UI.UpgradeMenu
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            //_passiveAbilityTemplate.GetAbility().Apply();
+            _hero.GetComponent<HeroPassives>().AddPassive(_passiveAbilityTemplate);
+
+            _upgradeWindow.CloseButton.onClick.Invoke();
         }
     }
 }

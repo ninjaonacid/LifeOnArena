@@ -1280,6 +1280,7 @@ GameObject:
   - component: {fileID: -8125679809969938510}
   - component: {fileID: -4398335753682384271}
   - component: {fileID: -7543322082994891675}
+  - component: {fileID: 6331987856363381589}
   - component: {fileID: 7773590576850612865}
   - component: {fileID: 8173807624078759481}
   - component: {fileID: 3913474188381500253}
@@ -1486,6 +1487,19 @@ MonoBehaviour:
     Ability: {fileID: 0}
   - AbilitySlotID: 2
     Ability: {fileID: 11400000, guid: 7c2ada7c206f5684f8f7c66b6a82016e, type: 2}
+--- !u!114 &6331987856363381589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6031708160037518034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 038f77f71c9416a4eada08847a63fa6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _heroPassives: []
 --- !u!114 &7773590576850612865
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1539,7 +1553,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3fdaa05099bc0a42ba9ee2d0ef28e05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ability: {fileID: 11400000, guid: 8dd9ff36be4e16245bc901cf9abfe852, type: 2}
+  ability: {fileID: 0}
 --- !u!114 &4195340829786993569
 MonoBehaviour:
   m_ObjectHideFlags: 0

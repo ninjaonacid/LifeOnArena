@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using Code.Logic.EnemySpawners;
 using Code.StaticData.Levels;
 using Code.UI;
@@ -20,6 +21,8 @@ namespace Code.Services
 
         private readonly IWindowService _windowService;
 
+        private CancellationTokenSource _cancellationToken = new CancellationTokenSource();
+
         public LevelEventHandler(IWindowService windowService)
         {
             _windowService = windowService;
@@ -35,6 +38,7 @@ namespace Code.Services
         public void NextLevelReward(LevelReward levelReward)
         {
             _levelReward = levelReward;
+            
         }
 
         public void HeroDeath()
@@ -56,7 +60,12 @@ namespace Code.Services
 
         public async UniTask ShowUpgradeWindow()
         {
-            await UniTask.Delay(TimeSpan.FromSeconds(2.0));
+            
+            await UniTask.Delay(TimeSpan.FromSeconds(2.0), 
+                DelayType.DeltaTime, 
+                PlayerLoopTiming.Update,
+                _cancellationToken.Token);
+
             _windowService.Open(UIWindowID.UpgradeMenu);
         }
         public LevelReward GetLevelReward() => _levelReward;

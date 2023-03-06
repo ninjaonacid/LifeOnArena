@@ -18,7 +18,7 @@ namespace Code.UI.Services
         private readonly IStaticDataService _staticData;
         private readonly ISaveLoadService _saveLoad;
         private readonly IProgressService _progress;
-        
+        private readonly IHeroFactory _heroFactory;
 
         private Transform _uiCoreTransform;
         private readonly IAbilityFactory _abilityFactory;
@@ -27,10 +27,12 @@ namespace Code.UI.Services
             IStaticDataService staticDataService, 
             ISaveLoadService saveLoad,
             IProgressService progress,
-            IAbilityFactory abilityFactory)
+            IAbilityFactory abilityFactory,
+            IHeroFactory heroFactory)
         {
             _assetsProvider = assetsProvider;
             _abilityFactory = abilityFactory;
+            _heroFactory = heroFactory;
             _staticData = staticDataService;
             _saveLoad = saveLoad;
             _progress = progress;
@@ -58,7 +60,7 @@ namespace Code.UI.Services
         {
             WindowConfig config = _staticData.ForWindow(UIWindowID.UpgradeMenu);
             var window = Object.Instantiate(config.Prefab, _uiCoreTransform) as UpgradeWindow;
-            window.Construct(_abilityFactory, _progress);
+            window.Construct(_abilityFactory, _heroFactory, _progress);
 
         }
 
