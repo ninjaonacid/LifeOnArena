@@ -8,7 +8,7 @@ namespace Code.StaticData.Ability.PassiveAbilities
         [Range(0.0f, 1f)] public float AttackModifier;
         public override IPassiveAbility GetAbility()
         {
-            return new AttackUpPassive();
+            return new AttackUpPassive(AttackModifier);
         }
     }
 }
