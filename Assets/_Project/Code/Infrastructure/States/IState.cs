@@ -1,4 +1,6 @@
-﻿namespace Code.Infrastructure.States
+﻿using Code.Infrastructure.Services;
+
+namespace Code.Infrastructure.States
 {
     public interface IState : IExitableState
     {
@@ -12,6 +14,7 @@
 
     public interface IExitableState
     {
+        IGameStateMachine GameStateMachine { get; set; }
         void Exit();
     }
 }

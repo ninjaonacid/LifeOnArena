@@ -1,7 +1,7 @@
 using Code.Logic;
-using Code.Services;
 using Code.Services.Input;
 using UnityEngine;
+using VContainer;
 
 namespace Code.Hero
 {
@@ -11,9 +11,10 @@ namespace Code.Hero
         public float rotationSmooth;
         public float rotationSpeed;
 
-        private void Awake()
+        [Inject]
+        private void Constructor(IInputService input)
         {
-            _input = ServiceLocator.Container.Single<IInputService>();
+            _input = input;
         }
 
         private void Update()

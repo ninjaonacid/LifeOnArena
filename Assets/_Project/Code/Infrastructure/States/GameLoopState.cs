@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using Code.Infrastructure.Services;
 using Code.Services;
 using Cysharp.Threading.Tasks;
 
@@ -7,13 +8,14 @@ namespace Code.Infrastructure.States
 {
     public class GameLoopState : IState
     {
-        private readonly GameStateMachine _stateMachine;
+       
         private readonly SceneLoader _sceneLoader;
         private readonly ILevelEventHandler _levelEventHandler;
-        
-        public GameLoopState(GameStateMachine stateMachine, SceneLoader sceneLoader, ILevelEventHandler levelEventHandler)
+
+        public IGameStateMachine GameStateMachine { get; set; }
+
+        public GameLoopState(SceneLoader sceneLoader, ILevelEventHandler levelEventHandler)
         {
-            _stateMachine = stateMachine;
             _sceneLoader = sceneLoader;
             _levelEventHandler = levelEventHandler;
         }
@@ -28,10 +30,10 @@ namespace Code.Infrastructure.States
 
             var cts = new CancellationTokenSource();
             await UniTask.Delay(TimeSpan.FromSeconds(5), ignoreTimeScale: false, cancellationToken: cts.Token);
-            _stateMachine.Enter<LoadLevelState, string>("Shelter");
+            GameStateMachine.Enter<MainMenuState>();
         }
 
-        
+
         public void Exit()
         {
         }

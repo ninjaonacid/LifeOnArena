@@ -10,11 +10,6 @@ namespace Code.Hero
     {
         private IWindowService _windowService;
         private IInputService _inputService;
-        private void Awake()
-        {
-            _windowService = ServiceLocator.Container.Single<IWindowService>();
-            _inputService = ServiceLocator.Container.Single<IInputService>();
-        }
 
         private void Update()
         {

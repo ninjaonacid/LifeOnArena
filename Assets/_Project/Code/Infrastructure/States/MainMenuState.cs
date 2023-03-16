@@ -1,3 +1,4 @@
+using Code.Infrastructure.Services;
 using Code.Logic;
 using Code.Services;
 using Code.Services.PersistentProgress;
@@ -16,16 +17,21 @@ namespace Code.Infrastructure.States
         private IWindowService _windowService;
         private IUIFactory _uiFactory;
         private IProgressService _progress;
-        public MainMenuState(GameStateMachine gameStateMachine, 
-            SceneLoader sceneLoader, 
-            ServiceLocator services,
+        public IGameStateMachine GameStateMachine { get; set; }
+
+        public MainMenuState(IUIFactory uiFactory,
+            IWindowService windowService,
+            IProgressService progress,
+            SceneLoader sceneLoader,
             LoadingCurtain curtain)
         {
             _sceneLoader = sceneLoader;
-            _gameStateMachine = gameStateMachine;
             _curtain = curtain;
-            _services = services;
+            _uiFactory = uiFactory;
+            _windowService = windowService;
+            _progress = progress;
         }
+
         public void Exit()
         {
             ResetPlayerHp();
@@ -38,10 +44,6 @@ namespace Code.Infrastructure.States
 
         public void Enter()
         {
-            _progress = _services.Single<IProgressService>();
-            _windowService = _services.Single<IWindowService>();
-            _uiFactory = _services.Single<IUIFactory>();
-
             _curtain.Show();
             _sceneLoader.Load("MainMenu", InitMainMenu);
         }
@@ -51,13 +53,12 @@ namespace Code.Infrastructure.States
             _uiFactory.CreateCore();
            var menu = _uiFactory.CreateSelectionMenu(_windowService);
            menu.GetComponentInChildren<StartGameButton>().Button.onClick.AddListener(EnterLoadLevelState);
-            
-            _curtain.Hide();
+           _curtain.Hide();
         }
 
         private void EnterLoadLevelState()
         {
-            _gameStateMachine.Enter<LoadLevelState,string>(_progress.Progress.WorldData.PositionOnLevel.Level);
+            GameStateMachine.Enter<LoadLevelState,string>(_progress.Progress.WorldData.PositionOnLevel.Level);
         }
     }
 }

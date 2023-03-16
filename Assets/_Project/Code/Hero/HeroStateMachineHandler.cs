@@ -1,10 +1,10 @@
 using Code.Hero.HeroStates;
 using Code.Logic;
-using Code.Services;
 using Code.Services.AudioService;
 using Code.Services.Input;
 using Code.StateMachine;
 using UnityEngine;
+using VContainer;
 
 namespace Code.Hero
 {
@@ -27,6 +27,7 @@ namespace Code.Hero
         [SerializeField] private HeroAttack _heroAttack;
         [SerializeField] private HeroSkills _heroSkills;
 
+        [Inject]
         public void Construct(IInputService inputService, IAudioService audioService)
         {
             _input = inputService;

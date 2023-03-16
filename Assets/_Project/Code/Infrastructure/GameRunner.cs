@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿
+using UnityEngine;
 
 namespace Code.Infrastructure
 {
@@ -6,12 +7,5 @@ namespace Code.Infrastructure
     {
         public GameBootstrapper BootstrapperPrefab;
 
-        private void Awake()
-        {
-            var bootstrapper = FindObjectOfType<GameBootstrapper>();
-
-            if (bootstrapper == null)
-                Instantiate(BootstrapperPrefab);
-        }
     }
 }

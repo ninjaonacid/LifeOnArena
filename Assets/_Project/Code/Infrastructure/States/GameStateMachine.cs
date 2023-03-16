@@ -1,34 +1,27 @@
 using System;
 using System.Collections.Generic;
 using Code.Infrastructure.Services;
-using Code.Logic;
-using Code.Services;
-using Code.Services.PersistentProgress;
-using Code.Services.SaveLoad;
-using Code.UI.Services;
 using UnityEngine;
 
 namespace Code.Infrastructure.States
 {
     public class GameStateMachine : IGameStateMachine
     {
-        private readonly Dictionary<Type, IExitableState> _states;
+        private readonly Dictionary<Type, IExitableState> _states = new Dictionary<Type, IExitableState>();
         private IExitableState _activeState;
 
-        public GameStateMachine(SceneLoader sceneLoader, LoadingCurtain curtain,
-            ServiceLocator services)
+        public GameStateMachine(IEnumerable<IExitableState> states)
         {
-            _states = new Dictionary<Type, IExitableState>
+            foreach (var state in states)
             {
-                [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader, services),
-                [typeof(LoadProgressState)] = new LoadProgressState(this,
-                    services.Single<IProgressService>(),
-                    services.Single<ISaveLoadService>()),
-                [typeof(MainMenuState)] = new MainMenuState(this, sceneLoader, services, curtain),
-                [typeof(LoadLevelState)] = new LoadLevelState(this, sceneLoader,
-                    curtain, services, services.Single<IUIFactory>()),
-                [typeof(GameLoopState)] = new GameLoopState(this, sceneLoader, services.Single<ILevelEventHandler>()),
-            };
+                AddState(state);
+            }
+        }
+
+        private void AddState(IExitableState state)
+        {
+            state.GameStateMachine = this;
+            _states.Add(state.GetType(), state);
         }
 
         public void Enter<TState>() where TState : class, IState
@@ -43,6 +36,7 @@ namespace Code.Infrastructure.States
             class, IPayloadedState<TPayload>
         {
             var state = ChangeState<TState>();
+            Debug.Log(state.ToString());
             state.Enter(payload);
         }
 

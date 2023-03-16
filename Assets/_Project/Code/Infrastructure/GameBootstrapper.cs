@@ -1,20 +1,30 @@
+
+using Code.Infrastructure.Services;
 using Code.Infrastructure.States;
 using Code.Logic;
 using UnityEngine;
+using VContainer.Unity;
 
 namespace Code.Infrastructure
 {
-    public class GameBootstrapper : MonoBehaviour, ICoroutineRunner
+    public class GameBootstrapper : IInitializable
     {
         private Game _game;
-        public LoadingCurtain CurtainPrefab;
+        public LoadingCurtain _curtain;
 
-        private void Awake()
+        public IGameStateMachine _stateMachine;
+
+        public GameBootstrapper(IGameStateMachine stateMachine, LoadingCurtain curtain)
         {
-            _game = new Game(this, Instantiate(CurtainPrefab));
-            _game.StateMachine.Enter<BootstrapState>();
+            _stateMachine = stateMachine;
+            _curtain = curtain;
+        }
 
-            DontDestroyOnLoad(this);
+
+        public void Initialize()
+        {
+            _game = new Game(_stateMachine);
+            
         }
     }
 }

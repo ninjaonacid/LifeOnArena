@@ -5,6 +5,7 @@ using Code.Services.AudioService;
 using Code.Services.PersistentProgress;
 using Code.StaticData.Ability;
 using UnityEngine;
+using VContainer;
 
 namespace Code.Hero
 {
@@ -29,6 +30,7 @@ namespace Code.Hero
             _characterStats = progress.CharacterStats;
         }
 
+        [Inject]
         public void Construct(IAudioService audioService)
         {
             _audioService = audioService;
@@ -92,10 +94,10 @@ namespace Code.Hero
             return new Vector3(transform.position.x, CharacterController.center.y, transform.position.z);
         }
 
-        private void OnDrawGizmos()
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(StartPoint() + transform.forward * 2, _characterStats.CalculateHeroAttackRadius());
-        }
+        //private void OnDrawGizmos()
+        //{
+        //    Gizmos.color = Color.red;
+        //    Gizmos.DrawWireSphere(StartPoint() + transform.forward * 2, _characterStats.CalculateHeroAttackRadius());
+        //}
     }
 }

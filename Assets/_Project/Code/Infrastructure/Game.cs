@@ -1,4 +1,5 @@
-﻿using Code.Infrastructure.States;
+﻿using Code.Infrastructure.Services;
+using Code.Infrastructure.States;
 using Code.Logic;
 using Code.Services;
 
@@ -6,12 +7,13 @@ namespace Code.Infrastructure
 {
     public class Game
     {
-        public GameStateMachine StateMachine;
+        private IGameStateMachine _stateMachine;
 
-        public Game(ICoroutineRunner coroutineRunner, LoadingCurtain curtain)
+        
+        public Game(IGameStateMachine stateMachine)
         {
-            StateMachine = new GameStateMachine(new SceneLoader(coroutineRunner),
-                curtain, new ServiceLocator());
+            _stateMachine = stateMachine;
+            _stateMachine.Enter<BootstrapState>();
         }
     }
 }

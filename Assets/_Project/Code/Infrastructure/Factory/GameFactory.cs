@@ -6,6 +6,8 @@ using Code.UI.Buttons;
 using Code.UI.HUD;
 using Code.UI.Services;
 using UnityEngine;
+using VContainer;
+using VContainer.Unity;
 
 namespace Code.Infrastructure.Factory
 {
@@ -16,27 +18,24 @@ namespace Code.Infrastructure.Factory
         private readonly IProgressService _progressService;
         private readonly ISaveLoadService _saveLoadService;
         private readonly IWindowService _windowService;
-
+        private readonly IObjectResolver _objectResolver;
         public GameFactory(IAssetsProvider assetsProvider, IProgressService progressService,
-                            ISaveLoadService saveLoadService, IWindowService windowService)
+                            ISaveLoadService saveLoadService, IWindowService windowService, IObjectResolver objectResolver )
         {
             _assetsProvider = assetsProvider;
             _progressService = progressService;
             _saveLoadService = saveLoadService;
             _windowService = windowService;
+            _objectResolver = objectResolver;
         }
 
-        public GameObject CreateLevelDoor(Vector3 position)
+        public GameObject CreateLevelDoor(Vector3 position, Quaternion rotation)
         {
             GameObject levelDoor = _assetsProvider.Instantiate(AssetAddress.DoorPath, position);
+            levelDoor.transform.rotation = rotation;
 
+            _objectResolver.InjectGameObject(levelDoor);
             return levelDoor;
-        }
-        public GameObject CreateLevelEventHandler()
-        {
-            GameObject levelHandler = _assetsProvider.Instantiate(AssetAddress.LevelEventHandler);
-
-            return levelHandler;
         }
 
         public GameObject CreateHud()

@@ -6,6 +6,7 @@ using Code.Services.Input;
 using Code.StaticData.Ability;
 using Code.UI.HUD.Skills;
 using UnityEngine;
+using VContainer;
 
 namespace Code.Hero
 {
@@ -29,15 +30,11 @@ namespace Code.Hero
             public AbilityTemplateBase Ability;
         }
 
-
-        public void Construct(IAbilityFactory abilityFactory)
+        [Inject]
+        public void Construct(IAbilityFactory abilityFactory, IInputService input)
         {
             _abilityFactory = abilityFactory;
-        }
-
-        private void Awake()
-        {
-            _input = ServiceLocator.Container.Single<IInputService>();
+            _input = input;
         }
 
         private void Update()

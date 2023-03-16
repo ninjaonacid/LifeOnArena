@@ -2,6 +2,8 @@ using System.Threading.Tasks;
 using Code.Infrastructure.AssetManagment;
 using Code.Services.SaveLoad;
 using UnityEngine;
+using VContainer;
+using VContainer.Unity;
 
 namespace Code.Infrastructure.Factory
 {
@@ -9,11 +11,12 @@ namespace Code.Infrastructure.Factory
     {
         private readonly IAssetsProvider _assetsProvider;
         private readonly ISaveLoadService _saveLoadService;
-
-        public HeroFactory(IAssetsProvider assetsProvider, ISaveLoadService saveLoadService)
+        private readonly IObjectResolver _objectResolver;
+        public HeroFactory(IAssetsProvider assetsProvider, ISaveLoadService saveLoadService, IObjectResolver objectResolver)
         {
             _assetsProvider = assetsProvider;
             _saveLoadService = saveLoadService;
+            _objectResolver = objectResolver;
         }
         public GameObject HeroGameObject { get; set; }
 
@@ -25,6 +28,8 @@ namespace Code.Infrastructure.Factory
         {
             GameObject prefab = await _assetsProvider.Load<GameObject>(AssetAddress.Hero);
 
+            
+
             HeroGameObject = InstantiateRegistered(prefab,
                 initialPoint);
             
@@ -33,9 +38,10 @@ namespace Code.Infrastructure.Factory
 
         public GameObject InstantiateRegistered(GameObject prefab, Vector3 position)
         {
+            
             var go = Object.Instantiate(prefab, position, Quaternion.identity);
-
-
+            
+            _objectResolver.InjectGameObject(go);
             _saveLoadService.RegisterProgressWatchers(go);
             return go;
         }

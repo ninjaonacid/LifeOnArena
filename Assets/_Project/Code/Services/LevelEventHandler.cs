@@ -69,5 +69,6 @@ namespace Code.Services
             _windowService.Open(UIWindowID.UpgradeMenu);
         }
         public LevelReward GetLevelReward() => _levelReward;
+        
     }
 }

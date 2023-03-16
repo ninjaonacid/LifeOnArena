@@ -2,6 +2,7 @@ using Code.Logic;
 using Code.Services;
 using Code.Services.Input;
 using UnityEngine;
+using VContainer;
 
 namespace Code.Hero
 {
@@ -14,9 +15,10 @@ namespace Code.Hero
         private readonly Collider[] _interactableColliders = new Collider[2];
         private IInputService _input;
 
-        private void Awake()
+        [Inject]
+        private void Construct(IInputService input)
         {
-            _input = ServiceLocator.Container.Single<IInputService>();
+            _input = input;
         }
 
         private void Update()

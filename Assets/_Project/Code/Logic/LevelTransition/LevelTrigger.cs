@@ -6,6 +6,7 @@ using Code.Services.LevelTransitionService;
 using Code.StaticData.Levels;
 using Code.UI.Services;
 using UnityEngine;
+using VContainer;
 
 namespace Code.Logic.LevelTransition
 {
@@ -22,6 +23,7 @@ namespace Code.Logic.LevelTransition
         private IUIFactory _uIFactory;
         private bool _isTriggered;
 
+        [Inject]
         public void Construct(
             IGameStateMachine gameStateMachine, 
             ILevelTransitionService levelTransition, 

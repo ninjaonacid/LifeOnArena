@@ -1,5 +1,6 @@
 using Code.Services;
 using UnityEngine;
+using VContainer;
 
 namespace Code.Hero
 {
@@ -14,6 +15,8 @@ namespace Code.Hero
         public HeroMovement heroMovement;
 
         private ILevelEventHandler _levelEventHandler;
+
+        [Inject]
         public void Construct(ILevelEventHandler levelEventHandler)
         {
             _levelEventHandler = levelEventHandler;

@@ -4,6 +4,7 @@ using Code.Hero;
 using Code.Infrastructure.AssetManagment;
 using Code.Infrastructure.Factory;
 using Code.Infrastructure.ObjectPool;
+using Code.Infrastructure.Services;
 using Code.Logic;
 using Code.Logic.EnemySpawners;
 using Code.Logic.LevelObjectsSpawners;
@@ -28,8 +29,7 @@ namespace Code.Infrastructure.States
     {
         private readonly LoadingCurtain _curtain;
         private readonly SceneLoader _sceneLoader;
-        private readonly ServiceLocator _services;
-        private readonly GameStateMachine _stateMachine;
+
         private IEnemyFactory _enemyFactory;
         private IHeroFactory _heroFactory;
         private IGameFactory _gameFactory;
@@ -47,33 +47,49 @@ namespace Code.Infrastructure.States
         private IAudioService _audioService;
         private readonly IUIFactory _uiFactory;
 
-        public LoadLevelState(GameStateMachine stateMachine, SceneLoader sceneLoader,
-            LoadingCurtain curtain, ServiceLocator services, IUIFactory uiFactory)
+        public IGameStateMachine GameStateMachine { get; set; }
+
+        public LoadLevelState( IInputService input, 
+            IHeroFactory heroFactory,
+            IEnemyFactory enemyFactory,
+            IAbilityFactory abiltiyFactory,
+            IProgressService progressService,
+            IGameFactory gameFactory,
+            IEnemyObjectPool enemyObjectPool,
+            IStaticDataService staticData,
+            ISaveLoadService saveLoadService,
+            ILevelEventHandler levelEventHandler,
+            IItemFactory itemFactory,
+            IParticleObjectPool particleObjectPool,
+            ILevelTransitionService levelTransitionService,
+            IAssetsProvider assetsProvider,
+            IAudioService audioService,
+
+            SceneLoader sceneLoader,
+            LoadingCurtain curtain,IUIFactory uiFactory)
         {
-            _stateMachine = stateMachine;
             _sceneLoader = sceneLoader;
             _curtain = curtain;
-            _services = services;
             _uiFactory = uiFactory;
+            _heroFactory = heroFactory;
+            _enemyFactory = enemyFactory;
+            _gameFactory = gameFactory;
+            _audioService = audioService;
+            _assetsProvider = assetsProvider;
+            _enemyObjectPool = enemyObjectPool;
+            _staticData = staticData;
+            _saveLoadService = saveLoadService;
+            _levelEventHandler = levelEventHandler;
+            _itemFactory = itemFactory;
+            _particleObjectPool = particleObjectPool;
+            _levelTransitionService = levelTransitionService;
+            _progressService = progressService;
+
         }
+
         public void Enter(string sceneName)
         {
-            _inputService = _services.Single<IInputService>();
-            _progressService = _services.Single<IProgressService>();
-            _enemyFactory = _services.Single<IEnemyFactory>();
-            _heroFactory = _services.Single<IHeroFactory>();
-            _gameFactory = _services.Single<IGameFactory>();
-            _enemyObjectPool = _services.Single<IEnemyObjectPool>();
-            _particleObjectPool = _services.Single<IParticleObjectPool>();
-            _staticData = _services.Single<IStaticDataService>();
-            _saveLoadService = _services.Single<ISaveLoadService>();
-            _levelEventHandler = _services.Single<ILevelEventHandler>();
-            _abilityFactory = _services.Single<IAbilityFactory>();
-            _itemFactory = _services.Single<IItemFactory>();
-            _levelTransitionService = _services.Single<ILevelTransitionService>();
-            _assetsProvider = _services.Single<IAssetsProvider>();
-            _audioService = _services.Single<IAudioService>();
-
+            
             _curtain.Show();
 
             _enemyObjectPool.Cleanup();
@@ -101,7 +117,7 @@ namespace Code.Infrastructure.States
 
             InformProgressReaders();
 
-            _stateMachine.Enter<GameLoopState>();
+            GameStateMachine.Enter<GameLoopState>();
         }
 
         private void InformProgressReaders()
@@ -139,17 +155,8 @@ namespace Code.Infrastructure.States
         {
             foreach (var nextLevelDoorData in levelConfig.NextLevelDoorSpawners)
             {
-                NextLevelDoor door = _gameFactory.CreateLevelDoor(nextLevelDoorData.Position)
-                    .GetComponent<NextLevelDoor>();
-                door.transform.rotation = nextLevelDoorData.Rotation;
-                door.Construct(_levelEventHandler);
-
-                var levelTrigger = door.GetComponentInChildren<LevelTrigger>();
-                levelTrigger.Construct(
-                    _stateMachine, 
-                    _levelTransitionService, 
-                    _levelEventHandler, 
-                    _uiFactory);
+                GameObject door = _gameFactory
+                    .CreateLevelDoor(nextLevelDoorData.Position, nextLevelDoorData.Rotation);
             }
         }
 
@@ -194,11 +201,6 @@ namespace Code.Infrastructure.States
         {
             GameObject hero = await _heroFactory.CreateHero(levelConfig.HeroInitialPosition);
 
-            hero.GetComponent<HeroDeath>().Construct(_levelEventHandler);
-            hero.GetComponent<HeroSkills>().Construct(_abilityFactory);
-            hero.GetComponent<HeroStateMachineHandler>().Construct(_inputService, _audioService);
-            hero.GetComponent<HeroWeapon>().Construct(_itemFactory);
-            hero.GetComponent<HeroAttack>().Construct(_audioService);
             return hero;
         }
 

@@ -4,6 +4,7 @@ using Code.Infrastructure.Factory;
 using Code.Services.PersistentProgress;
 using Code.StaticData;
 using UnityEngine;
+using VContainer;
 
 namespace Code.Hero
 {
@@ -21,6 +22,8 @@ namespace Code.Hero
             public WeaponId WeaponId;
             public WeaponData WeaponData;
         }
+
+        [Inject]
         public void Construct(IItemFactory itemFactory)
         {
             _itemFactory = itemFactory;

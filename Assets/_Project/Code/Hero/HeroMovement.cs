@@ -5,6 +5,7 @@ using Code.Services.Input;
 using Code.Services.PersistentProgress;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using VContainer;
 
 namespace Code.Hero
 {
@@ -17,6 +18,11 @@ namespace Code.Hero
         private readonly float _movementSpeed = 10f;
         private readonly float _rollForce = 20f;
 
+        [Inject]
+        private void Construct(IInputService input)
+        {
+            _input = input;
+        }
         public void UpdateProgress(PlayerProgress progress)
         {
             progress.WorldData.PositionOnLevel = new PositionOnLevel(CurrentLevel(),
@@ -34,7 +40,6 @@ namespace Code.Hero
 
         private void Awake()
         {
-            _input = ServiceLocator.Container.Single<IInputService>();
             _characterController = GetComponent<CharacterController>();
         }
 

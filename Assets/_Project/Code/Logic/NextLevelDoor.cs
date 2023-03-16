@@ -1,6 +1,7 @@
 using Code.Services;
 using DG.Tweening;
 using UnityEngine;
+using VContainer;
 
 namespace Code.Logic
 {
@@ -9,6 +10,8 @@ namespace Code.Logic
         private ILevelEventHandler _levelEventHandler;
         [SerializeField] public GameObject RightDoor;
         [SerializeField] private GameObject LeftDoor;
+
+        [Inject]
         public void Construct(ILevelEventHandler levelEventHandler)
         {
             _levelEventHandler  = levelEventHandler;
