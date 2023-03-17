@@ -32,7 +32,6 @@ namespace Code.Infrastructure.Factory
 
             HeroGameObject = InstantiateRegistered(prefab,
                 initialPoint);
-            
             return HeroGameObject;
         }
 
