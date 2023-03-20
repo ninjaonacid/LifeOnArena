@@ -1,5 +1,6 @@
 using Code.Hero;
 using Code.Infrastructure.AssetManagment;
+using Code.Infrastructure.EventProvider;
 using Code.Infrastructure.Factory;
 using Code.Infrastructure.ObjectPool;
 using Code.Infrastructure.Services;
@@ -49,6 +50,7 @@ namespace Code.Infrastructure.Scopes
             builder.Register<IEnemyObjectPool, EnemyObjectPool>(Lifetime.Singleton);
             builder.Register<IParticleObjectPool, ParticleObjectPool>(Lifetime.Singleton);
             builder.Register<ILevelTransitionService, LevelTransitionService>(Lifetime.Singleton);
+            builder.Register<IEventService, EventService>(Lifetime.Singleton);
             builder.Register<IAudioService, AudioService>(Lifetime.Singleton);
             builder.Register<SceneLoader>(Lifetime.Singleton);
             

@@ -20,7 +20,7 @@ namespace Code.Enemy.CommonEnemy
         {
             base.OnEnter();
             _moveToPlayer.ShouldMove(true);
-            Debug.Log("CHASESSTATETETETETETETETE");
+            //Debug.Log("CHASESSTATETETETETETETETE");
         }
 
         public override void OnLogic()
@@ -35,7 +35,7 @@ namespace Code.Enemy.CommonEnemy
         {
             base.OnExit();
             _moveToPlayer.ShouldMove(false);
-            Debug.Log("ChaseStateExitEEEEEEEEEEEEEEEEEEEEEEXIIIIT");
+            //Debug.Log("ChaseStateExitEEEEEEEEEEEEEEEEEEEEEEXIIIIT");
         }
 
         public override void OnExitRequest()

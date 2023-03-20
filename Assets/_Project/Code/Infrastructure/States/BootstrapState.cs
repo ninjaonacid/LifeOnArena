@@ -1,7 +1,5 @@
 ﻿using Code.Infrastructure.Services;
 using Code.Services;
-using Code.Services.Input;
-using UnityEngine;
 
 namespace Code.Infrastructure.States
 {

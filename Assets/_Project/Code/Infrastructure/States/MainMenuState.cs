@@ -13,7 +13,6 @@ namespace Code.Infrastructure.States
         private readonly SceneLoader _sceneLoader;
         private readonly LoadingCurtain _curtain;
 
-        private readonly ServiceLocator _services;
         private IWindowService _windowService;
         private IUIFactory _uiFactory;
         private IProgressService _progress;

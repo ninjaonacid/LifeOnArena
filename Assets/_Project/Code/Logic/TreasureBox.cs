@@ -12,9 +12,6 @@ namespace Code.Logic
         private IWindowService _windowService;
         private void Awake()
         {
-            _levelEventHandler = ServiceLocator.Container.Single<ILevelEventHandler>();
-            _windowService = ServiceLocator.Container.Single<IWindowService>();
-
         }
 
         
