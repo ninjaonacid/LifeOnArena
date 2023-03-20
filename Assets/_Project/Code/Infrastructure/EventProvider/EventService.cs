@@ -7,31 +7,53 @@ namespace Code.Infrastructure.EventProvider
 {
     public class EventService : IEventService
     {
-        private readonly Dictionary<Type, List<ISubscription<IEvent>>> _subscriptions;
-        private Dictionary<Type, Action<IEvent>> _cachedTypes;
-
+        private readonly Dictionary<Type, SubscriptionsList<ISubscription<IEvent>>> _subscriptions;
+        private readonly Dictionary<object, Type> _cachedTypes;
         public EventService()
         {
-            _subscriptions = new Dictionary<Type, List<ISubscription<IEvent>>>();
+            _subscriptions = new Dictionary<Type, SubscriptionsList<ISubscription<IEvent>>>();
+            _cachedTypes = new Dictionary<object, Type>();
+
         }
         public void FireEvent<TEvent>(TEvent eventItem) where TEvent : IEvent
         {
             var type = eventItem.GetType();
 
-            var allSubscribers = new List<ISubscription<IEvent>>();
+            if (!_subscriptions.ContainsKey(type))
+            {
+                throw new ArgumentNullException("Cant invoke event, doesnt present in the subscriptions");
 
-            if (_subscriptions.ContainsKey(typeof(TEvent)))
-            {
-                allSubscribers = _subscriptions[typeof(TEvent)];
             }
-            foreach (var subscriber in allSubscribers)
+            var allSubscriptions = new SubscriptionsList<ISubscription<IEvent>>();
+
+            
+            if (_subscriptions.ContainsKey(type))
             {
-                subscriber.Publish(eventItem);
+                allSubscriptions = _subscriptions[type];
+                allSubscriptions.IsExecuting = true;
             }
+
+            foreach (var subscription in allSubscriptions)
+            {
+                try
+                {
+                    subscription.Publish(eventItem);
+                }
+                catch(Exception exception)
+                {
+                    throw new Exception("Invoke event exception");
+                }
+            }
+
+            allSubscriptions.IsExecuting = false;
+            allSubscriptions.Cleanup();
         }
 
         public void Subscribe<TEvent>(Action<TEvent> action) where TEvent : IEvent
         {
+
+            var type = typeof(TEvent);
+
             if (action == null)
             {
                 throw new ArgumentNullException(nameof(action));
@@ -39,30 +61,33 @@ namespace Code.Infrastructure.EventProvider
 
             if (!_subscriptions.ContainsKey(typeof(TEvent)))
             {
-                _subscriptions.Add(typeof(TEvent), new List<ISubscription<IEvent>>());
+                _subscriptions.Add(type, new SubscriptionsList<ISubscription<IEvent>>());
             }
 
-            //cachedTypes.Add(typeof(TEvent), action);
-
-            _subscriptions[typeof(TEvent)].Add((new Subscription<TEvent>(action)));
+            
+            _cachedTypes.Add(action, type);
+            _subscriptions[type].Add((new Subscription<TEvent>(action)));
 
         }
 
         public void Unsubscribe<TEvent>(Action<TEvent> action) where TEvent : IEvent
         {
-            var type = action.GetType();
+            var type = _cachedTypes[action];
+
 
             if (_subscriptions.ContainsKey(type))
             {
-                var allEventSubscriptions = _subscriptions[type];
-                var removeSubscription = allEventSubscriptions.FirstOrDefault(x => x.SubscriptionToken == action);
-                if (removeSubscription != null)
+                var allEventSubs = _subscriptions[type];
+                var subToRemove = allEventSubs.FirstOrDefault(x => x.SubscriptionToken.Equals(action));
+                if (subToRemove != null)
                 {
-                    _subscriptions[type].Remove(removeSubscription);
+                    _subscriptions[type].Remove(subToRemove);
                 }
             }
         }
     }
+   
+
 
     public interface IEventService
     {
@@ -74,23 +99,4 @@ namespace Code.Infrastructure.EventProvider
 
     }
 
-
-    public class TestEventClass : IDoorOpenEvent
-    {
-
-
-        public void OnEnable()
-        {
-           
-        }
-
-        public void OnThing(IDoorOpenEvent events)
-        {
-
-        }
-    }
-
-    public interface IDoorOpenEvent : IEvent
-    {
-    }
 }

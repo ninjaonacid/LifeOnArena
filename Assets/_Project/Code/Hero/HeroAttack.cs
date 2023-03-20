@@ -51,7 +51,7 @@ namespace Code.Hero
 
         public void BaseAttack()
         {
-            _eventService.FireEvent<DoorOpenEvent>(new DoorOpenEvent(10f));
+            _eventService.FireEvent(new DoorOpenEvent(10f));
             if (HeroWeapon.GetEquippedWeapon() != null)
             {
                 DoDamage(_characterStats.CalculateHeroDamage() +

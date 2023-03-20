@@ -21,6 +21,8 @@ namespace Code.Logic
         private void DoSomething(DoorOpenEvent eventData)
         {
             Debug.Log("KAKOGOHUYASUKA");
+            _eventService.Unsubscribe<DoorOpenEvent>(DoSomething);
+
         }
 
         private void OnEnable()
@@ -30,7 +32,7 @@ namespace Code.Logic
 
         private void OnDisable()
         {
-            _eventService.Unsubscribe<DoorOpenEvent>(DoSomething);
+            
         }
     }
 
