@@ -21,7 +21,7 @@ namespace Code.Infrastructure.EventProvider
 
             if (!_subscriptions.ContainsKey(type))
             {
-                throw new ArgumentNullException("Cant invoke event, doesnt present in the subscriptions");
+                throw new Exception("Cant invoke event, doesnt present in the subscriptions");
 
             }
             var allSubscriptions = new SubscriptionsList<ISubscription<IEvent>>();
@@ -30,7 +30,6 @@ namespace Code.Infrastructure.EventProvider
             if (_subscriptions.ContainsKey(type))
             {
                 allSubscriptions = _subscriptions[type];
-                allSubscriptions.IsExecuting = true;
             }
 
             foreach (var subscription in allSubscriptions)
@@ -45,7 +44,6 @@ namespace Code.Infrastructure.EventProvider
                 }
             }
 
-            allSubscriptions.IsExecuting = false;
             allSubscriptions.Cleanup();
         }
 
@@ -78,7 +76,10 @@ namespace Code.Infrastructure.EventProvider
             if (_subscriptions.ContainsKey(type))
             {
                 var allEventSubs = _subscriptions[type];
-                var subToRemove = allEventSubs.FirstOrDefault(x => x.SubscriptionToken.Equals(action));
+                var subToRemove = 
+                    allEventSubs.FirstOrDefault(x =>
+                    x.SubscriptionToken.Equals(action));
+
                 if (subToRemove != null)
                 {
                     _subscriptions[type].Remove(subToRemove);

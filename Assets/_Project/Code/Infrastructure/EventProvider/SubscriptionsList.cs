@@ -6,10 +6,14 @@ namespace Code.Infrastructure.EventProvider
 {
     public class SubscriptionsList<TSubscription> : IEnumerable<TSubscription> where TSubscription : class, ISubscription<IEvent>
     {
-        private readonly List<TSubscription> _subscriptions = new List<TSubscription>();
-        private readonly List<TSubscription> _subsToRemove = new List<TSubscription>();
-        public bool IsExecuting;
-        private bool _isForCleanup;
+        private readonly List<TSubscription> _subscriptions;
+        private readonly List<TSubscription> _subsToRemove;
+
+        public SubscriptionsList()
+        {
+            _subscriptions = new List<TSubscription>();
+            _subsToRemove = new List<TSubscription>();
+        }
         public void Add(TSubscription subscription)
         {
             _subscriptions.Add(subscription);
@@ -17,38 +21,16 @@ namespace Code.Infrastructure.EventProvider
 
         public void Remove(TSubscription subscription)
         {
-            if (IsExecuting)
-            {
-                var elementIndex = _subscriptions.IndexOf(subscription);
-
-                if (elementIndex != -1)
-                {
-                    _isForCleanup = true;
-                    _subsToRemove.Add(subscription);
-                }
-            }
-
-            else
-            {
-                _subscriptions.Remove(subscription);
-            }
+            _subsToRemove.Add(subscription);
         }
 
         public void Cleanup()
         {
-            if (!_isForCleanup)
+            foreach (var subToRemove in _subsToRemove)
             {
-                return;
+                _subscriptions.Remove(subToRemove);
             }
-
-            foreach (var remover in _subsToRemove)
-            {
-                _subscriptions.Remove(remover);
-            }
-
             _subsToRemove.Clear();
-
-            _isForCleanup = false;
         }
 
         public IEnumerator<TSubscription> GetEnumerator()
