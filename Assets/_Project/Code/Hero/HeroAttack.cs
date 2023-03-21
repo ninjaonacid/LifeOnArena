@@ -24,7 +24,6 @@ namespace Code.Hero
         public CharacterController CharacterController;
         [SerializeField] private AudioSource _heroAudioSource;
         private IAudioService _audioService;
-        private IEventService _eventService;
 
         public void LoadProgress(PlayerProgress progress)
         {
@@ -32,10 +31,9 @@ namespace Code.Hero
         }
 
         [Inject]
-        public void Construct(IAudioService audioService, IEventService eventService)
+        public void Construct(IAudioService audioService)
         {
             _audioService = audioService;
-            _eventService = eventService;
         }
         private void Awake()
         {
@@ -51,7 +49,6 @@ namespace Code.Hero
 
         public void BaseAttack()
         {
-            _eventService.FireEvent(new DoorOpenEvent(10f));
             if (HeroWeapon.GetEquippedWeapon() != null)
             {
                 DoDamage(_characterStats.CalculateHeroDamage() +

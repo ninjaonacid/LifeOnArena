@@ -5,11 +5,11 @@ using Code.CustomEvents;
 
 namespace Code.Infrastructure.EventProvider
 {
-    public class EventService : IEventService
+    public class EventSystem : IEventSystem
     {
         private readonly Dictionary<Type, SubscriptionsList<ISubscription<IEvent>>> _subscriptions;
         private readonly Dictionary<object, Type> _cachedTypes;
-        public EventService()
+        public EventSystem()
         {
             _subscriptions = new Dictionary<Type, SubscriptionsList<ISubscription<IEvent>>>();
             _cachedTypes = new Dictionary<object, Type>();
@@ -87,17 +87,4 @@ namespace Code.Infrastructure.EventProvider
             }
         }
     }
-   
-
-
-    public interface IEventService
-    {
-        void FireEvent<TEvent>(TEvent eventPublisher) where TEvent : IEvent;
-
-        void Subscribe<TEvent>(Action<TEvent> action) where TEvent : IEvent;
-
-        void Unsubscribe<TEvent>(Action<TEvent> action) where TEvent : IEvent;
-
-    }
-
 }

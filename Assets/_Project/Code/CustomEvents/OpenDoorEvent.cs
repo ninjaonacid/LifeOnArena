@@ -4,10 +4,10 @@ using UnityEngine;
 
 namespace Code.CustomEvents
 {
-    public class MyZalupaEvent
+    public class OpenDoorEvent : IEvent
     {
         public string Message;
-        public MyZalupaEvent(string message)
+        public OpenDoorEvent(string message)
         {
             Message = message;
         }

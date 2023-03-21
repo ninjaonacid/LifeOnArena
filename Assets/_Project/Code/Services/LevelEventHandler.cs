@@ -1,5 +1,8 @@
 using System;
 using System.Threading;
+using Code.CustomEvents;
+using Code.Infrastructure.EventProvider;
+using Code.Logic;
 using Code.Logic.EnemySpawners;
 using Code.StaticData.Levels;
 using Code.UI;
@@ -20,12 +23,14 @@ namespace Code.Services
         private int _enemySpawners;
 
         private readonly IWindowService _windowService;
+        private readonly IEventSystem _eventSystem;
 
         private CancellationTokenSource _cancellationToken = new CancellationTokenSource();
 
-        public LevelEventHandler(IWindowService windowService)
+        public LevelEventHandler(IWindowService windowService, IEventSystem eventSystem)
         {
             _windowService = windowService;
+            _eventSystem = eventSystem;
         }
 
         public void InitCurrentLevel(int enemySpawnersCount)
@@ -54,6 +59,7 @@ namespace Code.Services
             {
                 MonsterSpawnersCleared?.Invoke();
 
+                _eventSystem.FireEvent(new OpenDoorEvent("door opened"));
                 await ShowUpgradeWindow();
             }
         }

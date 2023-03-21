@@ -9,38 +9,16 @@ namespace Code.Logic
     public class TestEventLogic : MonoBehaviour
     {
         public string Message { get; set; }
-        IEventService _eventService;
+        IEventSystem _eventSystem;
 
         [Inject]
-        public void Construct(IEventService eventService)
+        public void Construct(IEventSystem eventSystem)
         {
-            _eventService = eventService;
+            _eventSystem = eventSystem;
             
         }
 
-        private void DoSomething(DoorOpenEvent eventData)
-        {
-            Debug.Log("KAKOGOHUYASUKA");
-        }
-
-        private void OnEnable()
-        {
-            _eventService.Subscribe<DoorOpenEvent>(DoSomething);
-        }
-
-        private void OnDisable()
-        {
-            
-        }
+        
     }
 
-
-    public class DoorOpenEvent : IEvent
-    {
-        public float DoorSpeed;
-        public DoorOpenEvent(float doorSpeed)
-        {
-            DoorSpeed = doorSpeed;
-        }
-    }
 }
