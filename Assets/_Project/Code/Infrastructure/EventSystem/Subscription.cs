@@ -1,8 +1,7 @@
 using System;
 using Code.CustomEvents;
-using UnityEngine;
 
-namespace Code.Infrastructure.EventProvider
+namespace Code.Infrastructure.EventSystem
 {
     public class Subscription<TEvent> : ISubscription<IEvent> 
     {

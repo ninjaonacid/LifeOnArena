@@ -1,7 +1,7 @@
 using System;
 using Code.CustomEvents;
 
-namespace Code.Infrastructure.EventProvider
+namespace Code.Infrastructure.EventSystem
 {
     public interface IEventSystem
     {

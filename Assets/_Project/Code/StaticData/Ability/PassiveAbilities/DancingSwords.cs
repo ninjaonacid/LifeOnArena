@@ -14,14 +14,6 @@ namespace Code.StaticData.Ability.PassiveAbilities
             _prefab = prefab;
         }
 
-
-        public void Use(GameObject target, GameObject caster)
-        {
-            
-
-        }
-
-
         public void Apply(GameObject hero, PlayerProgress heroProgress)
         {
             var pointOfRotation = hero.GetComponentInChildren<PointOfRotation>();

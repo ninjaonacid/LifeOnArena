@@ -1,7 +1,3 @@
-using System.Data.SqlTypes;
-using UnityEditor.VersionControl;
-using UnityEngine;
-
 namespace Code.CustomEvents
 {
     public class OpenDoorEvent : IEvent

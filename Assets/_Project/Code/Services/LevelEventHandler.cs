@@ -1,8 +1,7 @@
 using System;
 using System.Threading;
 using Code.CustomEvents;
-using Code.Infrastructure.EventProvider;
-using Code.Logic;
+using Code.Infrastructure.EventSystem;
 using Code.Logic.EnemySpawners;
 using Code.StaticData.Levels;
 using Code.UI;

@@ -1,6 +1,6 @@
-using System;
+using Code.CustomEvents;
 using Code.Data;
-using Code.Infrastructure.EventProvider;
+using Code.Infrastructure.EventSystem;
 using Code.Logic;
 using Code.Services.AudioService;
 using Code.Services.PersistentProgress;
@@ -24,6 +24,7 @@ namespace Code.Hero
         public CharacterController CharacterController;
         [SerializeField] private AudioSource _heroAudioSource;
         private IAudioService _audioService;
+        private IEventSystem _eventSystem;
 
         public void LoadProgress(PlayerProgress progress)
         {
@@ -31,8 +32,9 @@ namespace Code.Hero
         }
 
         [Inject]
-        public void Construct(IAudioService audioService)
+        public void Construct(IAudioService audioService, IEventSystem  eventSystem)
         {
+            _eventSystem = eventSystem;
             _audioService = audioService;
         }
         private void Awake()
@@ -49,6 +51,7 @@ namespace Code.Hero
 
         public void BaseAttack()
         {
+            _eventSystem.FireEvent(new OpenDoorEvent("zalupasosi"));
             if (HeroWeapon.GetEquippedWeapon() != null)
             {
                 DoDamage(_characterStats.CalculateHeroDamage() +

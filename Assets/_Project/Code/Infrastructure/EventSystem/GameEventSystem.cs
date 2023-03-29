@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using Code.CustomEvents;
 
-namespace Code.Infrastructure.EventProvider
+namespace Code.Infrastructure.EventSystem
 {
-    public class EventSystem : IEventSystem
+    public class GameEventSystem : IEventSystem
     {
         private readonly Dictionary<Type, SubscriptionsList<ISubscription<IEvent>>> _subscriptions;
         private readonly Dictionary<object, Type> _cachedTypes;
-        public EventSystem()
+        public GameEventSystem()
         {
             _subscriptions = new Dictionary<Type, SubscriptionsList<ISubscription<IEvent>>>();
             _cachedTypes = new Dictionary<object, Type>();
@@ -72,12 +72,13 @@ namespace Code.Infrastructure.EventProvider
         {
             var type = _cachedTypes[action];
 
+            SubscriptionsList<ISubscription<IEvent>> allSubscriptions = _subscriptions[type];
 
             if (_subscriptions.ContainsKey(type))
             {
-                var allEventSubs = _subscriptions[type];
-                var subToRemove = 
-                    allEventSubs.FirstOrDefault(x =>
+                
+                ISubscription<IEvent> subToRemove = 
+                    allSubscriptions.FirstOrDefault(x =>
                     x.SubscriptionToken.Equals(action));
 
                 if (subToRemove != null)
@@ -85,6 +86,8 @@ namespace Code.Infrastructure.EventProvider
                     _subscriptions[type].Remove(subToRemove);
                 }
             }
+
+            
         }
     }
 }

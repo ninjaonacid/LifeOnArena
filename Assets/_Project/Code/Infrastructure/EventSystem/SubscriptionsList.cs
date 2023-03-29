@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Code.CustomEvents;
 
-namespace Code.Infrastructure.EventProvider
+namespace Code.Infrastructure.EventSystem
 {
     public class SubscriptionsList<TSubscription> : IEnumerable<TSubscription> where TSubscription : class, ISubscription<IEvent>
     {

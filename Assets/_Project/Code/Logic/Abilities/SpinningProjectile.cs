@@ -10,7 +10,6 @@ namespace Code.Logic.Abilities
         private void Update()
         {
             ProjectileSpin();
-            
         }
 
         private void Awake()
