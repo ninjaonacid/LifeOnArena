@@ -1,6 +1,7 @@
 using Code.Services;
 using Code.Services.SaveLoad;
 using UnityEngine;
+using VContainer;
 
 namespace Code.Logic
 {
@@ -10,7 +11,11 @@ namespace Code.Logic
 
         [SerializeField] private BoxCollider _collider;
 
-
+        [Inject]
+        private void Construct(ISaveLoadService saveLoadService)
+        {
+            _saveLoadService = saveLoadService;
+        }
         private void OnTriggerEnter(Collider other)
         {
             _saveLoadService.SaveProgress();

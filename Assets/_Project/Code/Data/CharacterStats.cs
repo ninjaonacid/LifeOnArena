@@ -14,7 +14,7 @@ namespace Code.Data
         [SerializeField] private float _baseArmor;
 
         public float DamageModifier = 1;
-        public float AttackRadiusModifier = 2;
+        public float AttackRadiusModifier = 1;
         public float MaxHPModifier = 1;
         public float ArmorModifier = 1;
         

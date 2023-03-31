@@ -36,6 +36,8 @@ namespace Code.Infrastructure.Factory
         public AbilityTemplateBase CreateAbility(string heroAbilityId) =>
             _staticData.ForAbility(heroAbilityId);
 
+        public PassiveAbilityTemplateBase CreatePassive(string abilityId) =>
+            _staticData.ForPassiveAbility(abilityId);
 
         public PassiveAbilityTemplateBase GetRandomPassiveAbility()
         {

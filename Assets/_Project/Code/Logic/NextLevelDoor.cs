@@ -19,7 +19,6 @@ namespace Code.Logic
         {
             _eventSystem = eventSystem;
             _eventSystem.Subscribe<OpenDoorEvent>(OpenDoor);
-    
         }
 
         private async void OpenDoor(OpenDoorEvent eventData)

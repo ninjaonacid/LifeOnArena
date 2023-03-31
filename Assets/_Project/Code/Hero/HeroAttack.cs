@@ -24,7 +24,6 @@ namespace Code.Hero
         public CharacterController CharacterController;
         [SerializeField] private AudioSource _heroAudioSource;
         private IAudioService _audioService;
-        private IEventSystem _eventSystem;
 
         public void LoadProgress(PlayerProgress progress)
         {
@@ -34,7 +33,6 @@ namespace Code.Hero
         [Inject]
         public void Construct(IAudioService audioService, IEventSystem  eventSystem)
         {
-            _eventSystem = eventSystem;
             _audioService = audioService;
         }
         private void Awake()
@@ -51,7 +49,6 @@ namespace Code.Hero
 
         public void BaseAttack()
         {
-            _eventSystem.FireEvent(new OpenDoorEvent("zalupasosi"));
             if (HeroWeapon.GetEquippedWeapon() != null)
             {
                 DoDamage(_characterStats.CalculateHeroDamage() +
@@ -97,10 +94,10 @@ namespace Code.Hero
             return new Vector3(transform.position.x, CharacterController.center.y, transform.position.z);
         }
 
-        //private void OnDrawGizmos()
-        //{
-        //    Gizmos.color = Color.red;
-        //    Gizmos.DrawWireSphere(StartPoint() + transform.forward * 2, _characterStats.CalculateHeroAttackRadius());
-        //}
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(StartPoint() + transform.forward * 2, _characterStats.CalculateHeroAttackRadius());
+        }
     }
 }

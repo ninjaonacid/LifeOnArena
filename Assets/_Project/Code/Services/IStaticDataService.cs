@@ -24,5 +24,6 @@ namespace Code.Services
         WeaponPlatformStaticData ForWeaponPlatforms(WeaponId weaponId);
         List<LevelConfig> LoadLevels();
         List<PassiveAbilityTemplateBase> GetPassives();
+        PassiveAbilityTemplateBase ForPassiveAbility(string abilityId);
     }
 }

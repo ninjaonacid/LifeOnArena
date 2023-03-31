@@ -33,7 +33,10 @@ namespace Code.Logic.Abilities
         {
             if (collision.gameObject.layer == _layerMask)
             {
-                
+                if(collision.gameObject.TryGetComponent(out IHealth health))
+                {
+                    health.TakeDamage(20);
+                }
             }
         }
     }

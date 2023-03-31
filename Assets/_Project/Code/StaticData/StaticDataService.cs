@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using Code.Services;
 using Code.StaticData.Ability;
 using Code.StaticData.Ability.PassiveAbilities;
@@ -101,6 +102,15 @@ namespace Code.StaticData
             if (_heroAbilities.TryGetValue(heroAbilityId, out var heroAbility))
                 return heroAbility;
 
+            return null;
+        }
+
+        public PassiveAbilityTemplateBase ForPassiveAbility(string abilityId)
+        {
+            if (_heroPassives.TryGetValue(abilityId, out var ability))
+            {
+                return ability;
+            }
             return null;
         }
 
