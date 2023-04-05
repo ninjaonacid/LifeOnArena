@@ -4,6 +4,6 @@ namespace Code.StaticData
 {
     public enum ParticleId
     {
-        SpawnParticle,
+        SpawnParticle = 1,
     }
 }

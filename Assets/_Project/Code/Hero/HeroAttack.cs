@@ -1,4 +1,3 @@
-using Code.CustomEvents;
 using Code.Data;
 using Code.Infrastructure.EventSystem;
 using Code.Logic;
@@ -53,7 +52,7 @@ namespace Code.Hero
             {
                 DoDamage(_characterStats.CalculateHeroDamage() +
                          HeroWeapon.GetEquippedWeapon().Damage,
-                    HeroWeapon.GetEquippedWeapon().AttackRadius);
+                    _characterStats.CalculateHeroAttackRadius());
                // _audioService.PlayHeroAttackSound(_heroAudioSource);
             }
             else DoDamage(_characterStats.CalculateHeroDamage(), _characterStats.CalculateHeroAttackRadius());

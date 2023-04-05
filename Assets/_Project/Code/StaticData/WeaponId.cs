@@ -4,8 +4,8 @@ namespace Code.StaticData
 {
     public enum WeaponId 
     {
-        GreatSword,
-        RustySword,
-        Default
+        GreatSword = 1,
+        RustySword = 2,
+        Default = 3,
     }
 }
