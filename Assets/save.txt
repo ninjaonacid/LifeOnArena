@@ -2,28 +2,36 @@
   "CharacterStats": {
     "CurrentHP": 100.0,
     "BaseMaxHP": 100.0,
+    "BaseDamage": 30.0,
+    "BaseAttackRadius": 3.0,
+    "BaseArmor": 10.0,
     "DamageModifier": 1.0,
     "AttackRadiusModifier": 1.0,
     "MaxHPModifier": 1.0,
     "ArmorModifier": 1.0
   },
   "HeroEquipment": {
-    "HeroWeapon": 2
+    "HeroWeapon": 0
   },
   "KillData": {
-    "ClearedSpawners": []
+    "ClearedSpawners": [
+      "Shelter_2170b2c1-650a-4df6-84d6-499ea60bf4b6",
+      "_0702d4e2-cb82-46aa-80c3-7a3c4b588b61",
+      "Shelter_2170b2c1-650a-4df6-84d6-499ea60bf4b6",
+      "_0702d4e2-cb82-46aa-80c3-7a3c4b588b61"
+    ]
   },
   "WorldData": {
     "PositionOnLevel": {
       "Level": "Shelter",
       "Position": {
-        "X": 6.154271,
-        "Y": 1.3440845,
-        "Z": 71.72137
+        "X": 5.63717747,
+        "Y": 4.58,
+        "Z": 72.13392
       }
     },
     "LootData": {
-      "Collected": 100
+      "Collected": 102
     },
     "WeaponPurchaseData": {
       "PurchasedWeapons": []
@@ -42,7 +50,10 @@
     }
   },
   "PassiveSkills": {
-    "AbilitiesId": []
+    "AbilitiesId": [
+      "f1bd5de3-f04c-4992-b500-565089de7e2c",
+      "f1bd5de3-f04c-4992-b500-565089de7e2c"
+    ]
   },
   "skillHudData": {}
 }

@@ -25,6 +25,10 @@ namespace Code.UI.Services
                 case UIWindowID.UpgradeMenu:
                     _uiFactory.CreateUpgradeMenu();
                     break;
+
+                case UIWindowID.Skills:
+                    _uiFactory.CreateSkillsMenu();
+                    break;
             }
         }
     }

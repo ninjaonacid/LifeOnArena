@@ -64,6 +64,11 @@ namespace Code.UI.Services
 
         }
 
+        public void CreateSkillsMenu()
+        {
+            WindowConfig config = _staticData.ForWindow(UIWindowID.Skills);
+            var window = Object.Instantiate(config.Prefab, _uiCoreTransform);
+        }
         public void CreateWeaponWindow()
         {
             WindowConfig config = _staticData.ForWindow(UIWindowID.Weapon);

@@ -14,5 +14,6 @@ namespace Code.UI.Services
         Task<Sprite> CreateSprite(AssetReferenceSprite spriteReference);
 
         void InitAssets();
+        void CreateSkillsMenu();
     }
 }
