@@ -1,6 +1,5 @@
 using Code.Infrastructure.Services;
 using Code.Logic;
-using Code.Services;
 using Code.Services.PersistentProgress;
 using Code.UI.Buttons;
 using Code.UI.Services;
@@ -57,7 +56,7 @@ namespace Code.Infrastructure.States
 
         private void EnterLoadLevelState()
         {
-            GameStateMachine.Enter<LoadLevelState,string>(_progress.Progress.WorldData.PositionOnLevel.Level);
+            GameStateMachine.Enter<LoadLevelState,string>("StoneDungeon_1");
         }
     }
 }

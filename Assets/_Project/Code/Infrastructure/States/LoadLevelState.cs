@@ -3,16 +3,13 @@ using Code.CameraLogic;
 using Code.Hero;
 using Code.Infrastructure.AssetManagment;
 using Code.Infrastructure.Factory;
-using Code.Infrastructure.ObjectPool;
 using Code.Infrastructure.Services;
 using Code.Logic;
 using Code.Logic.EnemySpawners;
 using Code.Logic.LevelObjectsSpawners;
-using Code.Logic.LevelTransition;
 using Code.Services;
 using Code.Services.AudioService;
 using Code.Services.Input;
-using Code.Services.LevelTransitionService;
 using Code.Services.PersistentProgress;
 using Code.Services.SaveLoad;
 using Code.StaticData.Levels;
@@ -33,16 +30,13 @@ namespace Code.Infrastructure.States
         private IEnemyFactory _enemyFactory;
         private IHeroFactory _heroFactory;
         private IGameFactory _gameFactory;
-        private IAbilityFactory _abilityFactory;
         private IProgressService _progressService;
         private IInputService _inputService;
         private IStaticDataService _staticData;
         private ISaveLoadService _saveLoadService;
         private ILevelEventHandler _levelEventHandler;
-        private IEnemyObjectPool _enemyObjectPool;
-        private IParticleObjectPool _particleObjectPool;
+
         private IItemFactory _itemFactory;
-        private ILevelTransitionService _levelTransitionService;
         private IAssetsProvider _assetsProvider;
         private IAudioService _audioService;
         private readonly IUIFactory _uiFactory;
@@ -52,16 +46,12 @@ namespace Code.Infrastructure.States
         public LoadLevelState( IInputService input, 
             IHeroFactory heroFactory,
             IEnemyFactory enemyFactory,
-            IAbilityFactory abiltiyFactory,
             IProgressService progressService,
             IGameFactory gameFactory,
-            IEnemyObjectPool enemyObjectPool,
             IStaticDataService staticData,
             ISaveLoadService saveLoadService,
             ILevelEventHandler levelEventHandler,
             IItemFactory itemFactory,
-            IParticleObjectPool particleObjectPool,
-            ILevelTransitionService levelTransitionService,
             IAssetsProvider assetsProvider,
             IAudioService audioService,
 
@@ -76,13 +66,10 @@ namespace Code.Infrastructure.States
             _gameFactory = gameFactory;
             _audioService = audioService;
             _assetsProvider = assetsProvider;
-            _enemyObjectPool = enemyObjectPool;
             _staticData = staticData;
             _saveLoadService = saveLoadService;
             _levelEventHandler = levelEventHandler;
             _itemFactory = itemFactory;
-            _particleObjectPool = particleObjectPool;
-            _levelTransitionService = levelTransitionService;
             _progressService = progressService;
 
         }
@@ -92,8 +79,7 @@ namespace Code.Infrastructure.States
             
             _curtain.Show();
 
-            _enemyObjectPool.Cleanup();
-            _particleObjectPool.CleanUp();
+           
             _saveLoadService.Cleanup();
             _assetsProvider.Cleanup();
 
@@ -136,8 +122,6 @@ namespace Code.Infrastructure.States
 
             LevelConfig levelConfig = _staticData.ForLevel(sceneKey);
 
-            SetupLevelTransitionService(levelConfig);
-
             SetupEventHandler(levelConfig);
 
             await InitSpawners(levelConfig);
@@ -160,11 +144,6 @@ namespace Code.Infrastructure.States
             }
         }
 
-        private void SetupLevelTransitionService(LevelConfig levelConfig)
-        {
-            _levelTransitionService.SetCurrentLevel(levelConfig);
-        }
-
         private void SetupEventHandler(LevelConfig levelConfig)
         {
             _levelEventHandler.InitCurrentLevel(levelConfig.EnemySpawners.Count);
@@ -180,8 +159,6 @@ namespace Code.Infrastructure.States
                     spawnerData.Id,
                     spawnerData.MonsterTypeId,
                     spawnerData.RespawnCount);
-
-                spawner.Construct(_enemyObjectPool, _particleObjectPool, _levelEventHandler);
             }
 
             foreach (WeaponPlatformSpawnerData weaponPlatform in levelConfig.WeaponPlatformSpawners)

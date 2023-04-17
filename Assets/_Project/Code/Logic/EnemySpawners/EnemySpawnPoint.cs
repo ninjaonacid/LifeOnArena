@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Threading.Tasks;
 using Code.Data;
 using Code.Enemy;
 using Code.Infrastructure.ObjectPool;
@@ -7,6 +6,7 @@ using Code.Services;
 using Code.Services.PersistentProgress;
 using Code.StaticData;
 using UnityEngine;
+using VContainer;
 
 namespace Code.Logic.EnemySpawners
 {
@@ -27,6 +27,7 @@ namespace Code.Logic.EnemySpawners
         public ParticleId ParticleId = ParticleId.SpawnParticle;
         public bool Slain { get; private set; }
 
+        [Inject]
         public void Construct(IEnemyObjectPool enemyObjectPool,
             IParticleObjectPool particleObjectPool,
             ILevelEventHandler levelEventHandler

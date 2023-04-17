@@ -1,8 +1,7 @@
-using System;
+
 using Code.Infrastructure.Services;
 using Code.Infrastructure.States;
 using Code.Services;
-using Code.Services.LevelTransitionService;
 using Code.StaticData.Levels;
 using Code.UI.Services;
 using UnityEngine;
@@ -18,25 +17,20 @@ namespace Code.Logic.LevelTransition
         [SerializeField] private LevelReward _levelReward;
 
         private IGameStateMachine _gameStateMachine;
-        private ILevelTransitionService _levelTransitionService;
         private ILevelEventHandler _levelEventHandler;
-        private IUIFactory _uIFactory;
+    
         private bool _isTriggered;
 
         [Inject]
         public void Construct(
-            IGameStateMachine gameStateMachine, 
-            ILevelTransitionService levelTransition, 
+            IGameStateMachine gameStateMachine,
             ILevelEventHandler levelEventHandler,
             IUIFactory uiFactory)
         {
             _gameStateMachine = gameStateMachine;
-            _levelTransitionService = levelTransition;
-            _uIFactory = uiFactory;
             _levelEventHandler = levelEventHandler;
 
-            _levelEventHandler.MonsterSpawnersCleared += ShowRewardIcon;
-            InitializeNextLevel();
+       
         }
 
         private void OnTriggerEnter(Collider other)
@@ -51,15 +45,6 @@ namespace Code.Logic.LevelTransition
             }
         }
 
-        private async void InitializeNextLevel()
-        {
-            _nextLevelData = _levelTransitionService.GetNextLevel();
-            _levelReward = _levelTransitionService.GetReward();
-
-            var sprite = await _uIFactory.CreateSprite(_levelReward.SpriteReference);
-            _levelRewardIcon.GetComponent<SpriteRenderer>().sprite = sprite;
-            _levelRewardIcon.HideSprite();
-        }
 
         private void ShowRewardIcon()
         {

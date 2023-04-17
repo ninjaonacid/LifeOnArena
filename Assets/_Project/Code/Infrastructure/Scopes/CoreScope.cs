@@ -1,4 +1,3 @@
-using Code.Hero;
 using Code.Infrastructure.AssetManagment;
 using Code.Infrastructure.EventSystem;
 using Code.Infrastructure.Factory;
@@ -9,7 +8,6 @@ using Code.Logic;
 using Code.Services;
 using Code.Services.AudioService;
 using Code.Services.Input;
-using Code.Services.LevelTransitionService;
 using Code.Services.PersistentProgress;
 using Code.Services.RandomService;
 using Code.Services.SaveLoad;
@@ -28,12 +26,9 @@ namespace Code.Infrastructure.Scopes
         protected override void Configure(IContainerBuilder builder)
         {
             builder.RegisterEntryPoint<GameBootstrapper>();
-            builder.Register<IGameStateMachine, GameStateMachine>(Lifetime.Singleton);
-            builder.Register<IExitableState, BootstrapState>(Lifetime.Singleton);
-            builder.Register<IExitableState, GameLoopState>(Lifetime.Singleton);
-            builder.Register<IExitableState, LoadLevelState>(Lifetime.Singleton);
-            builder.Register<IExitableState, MainMenuState>(Lifetime.Singleton);
-            builder.Register<IExitableState, LoadProgressState>(Lifetime.Singleton);
+
+            InstallStateMachine(builder);
+
             builder.Register<IEnemyFactory, EnemyFactory>(Lifetime.Singleton);
             builder.Register<IHeroFactory, HeroFactory>(Lifetime.Singleton);
             builder.Register<IAbilityFactory, AbilityFactory>(Lifetime.Singleton);
@@ -47,9 +42,8 @@ namespace Code.Infrastructure.Scopes
             builder.Register<IAssetsProvider, AssetProvider>(Lifetime.Singleton);
             builder.Register<IProgressService,ProgressService>(Lifetime.Singleton);
             builder.Register<IRandomService, RandomService>(Lifetime.Singleton);
-            builder.Register<IEnemyObjectPool, EnemyObjectPool>(Lifetime.Singleton);
-            builder.Register<IParticleObjectPool, ParticleObjectPool>(Lifetime.Singleton);
-            builder.Register<ILevelTransitionService, LevelTransitionService>(Lifetime.Singleton);
+            builder.Register<IEnemyObjectPool, EnemyObjectPool>(Lifetime.Scoped);
+            builder.Register<IParticleObjectPool, ParticleObjectPool>(Lifetime.Scoped);
             builder.Register<IEventSystem, GameEventSystem>(Lifetime.Singleton);
             builder.Register<IAudioService, AudioService>(Lifetime.Singleton);
             builder.Register<SceneLoader>(Lifetime.Singleton);
@@ -68,6 +62,16 @@ namespace Code.Infrastructure.Scopes
             if (Application.isEditor)
                 return new StandaloneInputService();
             return new MobileInputService();
+        }
+
+        private void InstallStateMachine(IContainerBuilder builder)
+        {
+            builder.Register<IGameStateMachine, GameStateMachine>(Lifetime.Singleton);
+            builder.Register<IExitableState, BootstrapState>(Lifetime.Singleton);
+            builder.Register<IExitableState, GameLoopState>(Lifetime.Singleton);
+            builder.Register<IExitableState, LoadLevelState>(Lifetime.Singleton);
+            builder.Register<IExitableState, MainMenuState>(Lifetime.Singleton);
+            builder.Register<IExitableState, LoadProgressState>(Lifetime.Singleton);
         }
     }
 }

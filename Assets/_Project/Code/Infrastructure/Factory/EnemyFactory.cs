@@ -9,11 +9,10 @@ using Code.Services.RandomService;
 using Code.Services.SaveLoad;
 using Code.StaticData;
 using Code.UI.HUD;
-using Cysharp.Threading.Tasks.Triggers;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
 using UnityEngine.AI;
-using UnityEngine.ResourceManagement.AsyncOperations;
+using VContainer;
+using VContainer.Unity;
 using Object = UnityEngine.Object;
 
 namespace Code.Infrastructure.Factory
@@ -26,10 +25,10 @@ namespace Code.Infrastructure.Factory
         private readonly ISaveLoadService _saveLoadService;
         private readonly IProgressService _progressService;
         private readonly IRandomService _randomService;
-
+        private readonly IObjectResolver _objectResolver;
         public EnemyFactory(IHeroFactory heroFactory, IStaticDataService staticData, IAssetsProvider assetsProvider, 
             ISaveLoadService saveLoadService, IProgressService progressService,
-            IRandomService randomService)
+            IRandomService randomService, IObjectResolver objectResolver)
         {
     
             _heroFactory = heroFactory;
@@ -38,6 +37,7 @@ namespace Code.Infrastructure.Factory
             _saveLoadService = saveLoadService;
             _progressService = progressService;
             _randomService = randomService;
+            _objectResolver = objectResolver;
         }
 
         public async Task InitAssets()
@@ -59,6 +59,7 @@ namespace Code.Infrastructure.Factory
             spawner.Id = spawnerDataId;
             spawner.MonsterTypeId = spawnerDataMonsterTypeId;
             spawner.RespawnCount = spawnerRespawnCount;
+
             return spawner;
         }
 
@@ -109,7 +110,9 @@ namespace Code.Infrastructure.Factory
 
         public GameObject InstantiateRegistered(GameObject prefab, Vector3 position)
         {
-            var go = Object.Instantiate(prefab, position, Quaternion.identity);
+            var go = _objectResolver.Instantiate(prefab, position, Quaternion.identity);
+
+            //_objectResolver.InjectGameObject(go);
 
             _saveLoadService.RegisterProgressWatchers(go);
             return go;
