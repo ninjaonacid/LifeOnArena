@@ -25,12 +25,10 @@ namespace Code.Infrastructure.Scopes
         [SerializeField] private LoadingCurtain _curtain;
         protected override void Configure(IContainerBuilder builder)
         {
-            builder.RegisterEntryPoint<GameBootstrapper>();
-
             InstallStateMachine(builder);
 
-            builder.Register<IEnemyFactory, EnemyFactory>(Lifetime.Singleton);
             builder.Register<IEnemyObjectPool, EnemyObjectPool>(Lifetime.Singleton);
+            builder.Register<IEnemyFactory, EnemyFactory>(Lifetime.Singleton);
             builder.Register<IHeroFactory, HeroFactory>(Lifetime.Singleton);
             builder.Register<IAbilityFactory, AbilityFactory>(Lifetime.Singleton);
             builder.Register<IItemFactory, ItemFactory>(Lifetime.Singleton);

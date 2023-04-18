@@ -12,12 +12,12 @@ namespace Code.Hero
     {
         private const string HeroIdle = "HeroIdle";
         private const string HeroMovement = "HeroMovement";
-
         private const string SpinAttackAbility = "SpinAttackAbility";
         private const string RollAbility = "RollAbility";
         private const string HeroBaseAttack1 = "HeroBaseAttack1";
         private const string HeroBaseAttack2 = "HeroBaseAttack2";
         private const string HeroBaseAttack3 = "HeroBaseAttack3";
+
         private FiniteStateMachine _stateMachine;
         private IInputService _input;
         private IAudioService _audioService;
@@ -42,8 +42,8 @@ namespace Code.Hero
         void Start()
         {
 
-            var weaponSlot = _heroSkills.GetWeaponSkillSlot();
-            var dodgeSlot = _heroSkills.GetDodgeSkillSlot();
+            var firstSlot = _heroSkills.SkillSlots[0];
+            var secondSlot = _heroSkills.SkillSlots[1];
 
             _stateMachine = new FiniteStateMachine();
 
@@ -125,30 +125,30 @@ namespace Code.Hero
                 HeroBaseAttack1,
                 SpinAttackAbility,
                 (transition) =>
-                    _input.IsButtonPressed(weaponSlot.ButtonKey) &&
-                    weaponSlot.Ability != null &&
-                    weaponSlot.Ability.IsActive() &&
-                    weaponSlot.Ability.StateMachineId.Equals(SpinAttackAbility)
+                    _input.IsButtonPressed(firstSlot.ButtonKey) &&
+                    firstSlot.Ability != null &&
+                    firstSlot.Ability.IsActive() &&
+                    firstSlot.Ability.StateMachineId.Equals(SpinAttackAbility)
             ));
 
             _stateMachine.AddTransition(new Transition(
                 HeroBaseAttack2,
                 SpinAttackAbility,
                 (transition) =>
-                    _input.IsButtonPressed(weaponSlot.ButtonKey) &&
-                    weaponSlot.Ability != null &&
-                    weaponSlot.Ability.IsActive() &&
-                    weaponSlot.Ability.StateMachineId.Equals(SpinAttackAbility)
+                    _input.IsButtonPressed(firstSlot.ButtonKey) &&
+                    firstSlot.Ability != null &&
+                    firstSlot.Ability.IsActive() &&
+                    firstSlot.Ability.StateMachineId.Equals(SpinAttackAbility)
             ));
 
             _stateMachine.AddTransition(new Transition(
                 HeroBaseAttack3,
                 SpinAttackAbility,
                 (transition) =>
-                    _input.IsButtonPressed(weaponSlot.ButtonKey) &&
-                    weaponSlot.Ability != null &&
-                    weaponSlot.Ability.IsActive() &&
-                    weaponSlot.Ability.StateMachineId.Equals(SpinAttackAbility)
+                    _input.IsButtonPressed(firstSlot.ButtonKey) &&
+                    firstSlot.Ability != null &&
+                    firstSlot.Ability.IsActive() &&
+                    firstSlot.Ability.StateMachineId.Equals(SpinAttackAbility)
             ));
 
             _stateMachine.AddTransition(new Transition(
@@ -160,19 +160,19 @@ namespace Code.Hero
                 HeroIdle,
                 SpinAttackAbility,
                 (transition) =>
-                    _input.IsButtonPressed(weaponSlot.ButtonKey) &&
-                    weaponSlot.Ability != null &&
-                    weaponSlot.Ability.IsActive() &&
-                    weaponSlot.Ability.StateMachineId.Equals(SpinAttackAbility)));
+                    _input.IsButtonPressed(firstSlot.ButtonKey) &&
+                    firstSlot.Ability != null &&
+                    firstSlot.Ability.IsActive() &&
+                    firstSlot.Ability.StateMachineId.Equals(SpinAttackAbility)));
 
             _stateMachine.AddTransition(new Transition(
                 HeroIdle,
                 RollAbility,
                 (transition) =>
-                    _input.IsButtonPressed(dodgeSlot.ButtonKey) &&
-                    dodgeSlot.Ability != null &&
-                    dodgeSlot.Ability.IsActive() &&
-                    dodgeSlot.Ability.StateMachineId.Equals(RollAbility)
+                    _input.IsButtonPressed(secondSlot.ButtonKey) &&
+                    secondSlot.Ability != null &&
+                    secondSlot.Ability.IsActive() &&
+                    secondSlot.Ability.StateMachineId.Equals(RollAbility)
                     ));
 
             _stateMachine.AddTransition(new Transition(
@@ -185,10 +185,10 @@ namespace Code.Hero
                 HeroMovement,
                 RollAbility,
                 (transition) =>
-                        _input.IsButtonPressed(dodgeSlot.ButtonKey) &&
-                        dodgeSlot.Ability != null &&
-                        dodgeSlot.Ability.IsActive() &&
-                        dodgeSlot.Ability.StateMachineId.Equals(RollAbility)));
+                        _input.IsButtonPressed(secondSlot.ButtonKey) &&
+                        secondSlot.Ability != null &&
+                        secondSlot.Ability.IsActive() &&
+                        secondSlot.Ability.StateMachineId.Equals(RollAbility)));
 
             _stateMachine.InitStateMachine();
         }

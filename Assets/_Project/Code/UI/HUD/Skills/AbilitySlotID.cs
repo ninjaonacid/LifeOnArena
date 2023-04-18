@@ -4,8 +4,7 @@ namespace Code.UI.HUD.Skills
 {
     public enum AbilitySlotID
     {
-        WeaponSkillSlot,
-        Rage,
-        Dodge
+        First = 1, 
+        Second = 2
     }
 }

@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using Code.Services;
-using Code.Services.PersistentProgress;
 using Code.Services.RandomService;
 using Code.StaticData.Ability;
 using Code.StaticData.Ability.PassiveAbilities;
@@ -15,8 +14,7 @@ namespace Code.Infrastructure.Factory
         private List<PassiveAbilityTemplateBase> _passiveAbilities;
         private List<PassiveAbilityTemplateBase> _availablePassives;
         public AbilityFactory(
-            IStaticDataService staticData, 
-            IProgressService progress, 
+            IStaticDataService staticData,
             IRandomService random)
         {
             _staticData = staticData;
@@ -24,11 +22,6 @@ namespace Code.Infrastructure.Factory
 
             _passiveAbilities = new List<PassiveAbilityTemplateBase>();
             _availablePassives = new List<PassiveAbilityTemplateBase>();
-        }
-
-        public void InitFactory()
-        {
-            _passiveAbilities = _staticData.GetPassives();
         }
 
         public AbilityTemplateBase CreateAbility(string heroAbilityId) =>

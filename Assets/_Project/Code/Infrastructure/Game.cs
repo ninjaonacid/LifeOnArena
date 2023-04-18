@@ -1,5 +1,6 @@
 ﻿using Code.Infrastructure.Services;
 using Code.Infrastructure.States;
+using UnityEngine;
 
 namespace Code.Infrastructure
 {
@@ -15,6 +16,7 @@ namespace Code.Infrastructure
 
         public void StartGame()
         {
+            Debug.Log("GameStarted");
             _stateMachine.Enter<BootstrapState>();
         }
     }

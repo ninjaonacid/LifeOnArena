@@ -35,9 +35,6 @@ namespace Code.Infrastructure.States
         private IStaticDataService _staticData;
         private ISaveLoadService _saveLoadService;
         private ILevelEventHandler _levelEventHandler;
-        
-        private IAbilityFactory _abilityFactory;
-        private IItemFactory _itemFactory;
         private IAssetsProvider _assetsProvider;
         private IAudioService _audioService;
         private readonly IUIFactory _uiFactory;
@@ -52,10 +49,8 @@ namespace Code.Infrastructure.States
             IStaticDataService staticData,
             ISaveLoadService saveLoadService,
             ILevelEventHandler levelEventHandler,
-            IItemFactory itemFactory,
             IAssetsProvider assetsProvider,
             IAudioService audioService,
-            IAbilityFactory abilityFactory,
             SceneLoader sceneLoader,
             LoadingCurtain curtain,IUIFactory uiFactory)
         {
@@ -70,9 +65,7 @@ namespace Code.Infrastructure.States
             _staticData = staticData;
             _saveLoadService = saveLoadService;
             _levelEventHandler = levelEventHandler;
-            _itemFactory = itemFactory;
             _progressService = progressService;
-            _abilityFactory = abilityFactory;
 
         }
 
@@ -85,10 +78,8 @@ namespace Code.Infrastructure.States
             _saveLoadService.Cleanup();
             _assetsProvider.Cleanup();
 
-            _abilityFactory.InitFactory();
             _enemyFactory.InitAssets();
             _heroFactory.InitAssets();
-            _itemFactory.InitAssets();
             _audioService.InitAssets();
 
             _sceneLoader.Load(sceneName, OnLoaded);
@@ -162,17 +153,6 @@ namespace Code.Infrastructure.States
                     spawnerData.Id,
                     spawnerData.MonsterTypeId,
                     spawnerData.RespawnCount);
-            }
-
-            foreach (WeaponPlatformSpawnerData weaponPlatform in levelConfig.WeaponPlatformSpawners)
-            {
-                WeaponPlatformSpawner spawner = await _itemFactory.CreateWeaponPlatformSpawner(
-                    weaponPlatform.Position,
-                    weaponPlatform.Id,
-                    weaponPlatform.WeaponId
-                );
-
-                spawner.Construct(_itemFactory);
             }
         }
 

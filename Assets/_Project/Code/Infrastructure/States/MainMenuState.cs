@@ -55,7 +55,7 @@ namespace Code.Infrastructure.States
 
         private void EnterLoadLevelState()
         {
-            GameStateMachine.Enter<LoadLevelState,string>("StoneDungeon_1");
+            GameStateMachine.Enter<LoadLevelState,string>("StoneDungeon_Arena_1");
         }
     }
 }

@@ -1,13 +1,11 @@
 using System;
 using Code.Data;
 using Code.Infrastructure.Factory;
-using Code.Services;
 using Code.Services.Input;
 using Code.StaticData.Ability;
 using Code.UI.HUD.Skills;
 using UnityEngine;
 using VContainer;
-using Object = UnityEngine.Object;
 
 namespace Code.Hero
 {
@@ -68,30 +66,6 @@ namespace Code.Hero
             OnSkillChanged?.Invoke();
         }
 
-        public SkillSlot GetWeaponSkillSlot()
-        {
-            foreach (var slot in SkillSlots)
-            {
-                if (slot.AbilitySlotID == AbilitySlotID.WeaponSkillSlot)
-                {
-                    return slot;
-                }
-            }
-
-            return null;
-        }
-
-        public SkillSlot GetDodgeSkillSlot()
-        {
-            foreach (var slot in SkillSlots)
-            {
-                if (slot.AbilitySlotID == AbilitySlotID.Dodge)
-                {
-                    return slot;
-                }
-            }
-
-            return null;
-        }
+        
     }
 }

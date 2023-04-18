@@ -15,7 +15,6 @@ namespace Code.Infrastructure.States
         {
             _sceneLoader = sceneLoader;
             _staticData = staticData;
-            
         }
 
         public void Enter()
@@ -33,6 +32,5 @@ namespace Code.Infrastructure.States
             GameStateMachine.Enter<LoadProgressState>();
         }
 
-        
     }
 }
