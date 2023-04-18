@@ -794,7 +794,10 @@ PlayerSettings:
   webGLLinkerTarget: 1
   webGLThreadsSupport: 0
   webGLDecompressionFallback: 1
-  scriptingDefineSymbols: {}
+  scriptingDefineSymbols:
+    Android: VCONTAINER_UNITASK_INTEGRATION
+    Standalone: VCONTAINER_UNITASK_INTEGRATION
+    WebGL: VCONTAINER_UNITASK_INTEGRATION
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend:

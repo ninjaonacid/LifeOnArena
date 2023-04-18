@@ -1,7 +1,6 @@
 using Code.Infrastructure.AssetManagment;
 using Code.Infrastructure.EventSystem;
 using Code.Infrastructure.Factory;
-using Code.Infrastructure.ObjectPool;
 using Code.Infrastructure.Services;
 using Code.Infrastructure.States;
 using Code.Logic;
@@ -27,26 +26,24 @@ namespace Code.Infrastructure.Scopes
         {
             InstallStateMachine(builder);
 
-            builder.Register<IEnemyObjectPool, EnemyObjectPool>(Lifetime.Singleton);
-            builder.Register<IEnemyFactory, EnemyFactory>(Lifetime.Singleton);
-            builder.Register<IHeroFactory, HeroFactory>(Lifetime.Singleton);
             builder.Register<IAbilityFactory, AbilityFactory>(Lifetime.Singleton);
             builder.Register<IItemFactory, ItemFactory>(Lifetime.Singleton);
             builder.Register<IStaticDataService, StaticDataService>(Lifetime.Singleton);
             builder.Register<ISaveLoadService, SaveLoadService>(Lifetime.Singleton);
-            builder.Register<IGameFactory, GameFactory>(Lifetime.Singleton);
+           
             builder.Register<IUIFactory, UIFactory>(Lifetime.Singleton);
             builder.Register<IWindowService, WindowsService>(Lifetime.Singleton);
             builder.Register<ILevelEventHandler, LevelEventHandler>(Lifetime.Singleton);
             builder.Register<IAssetsProvider, AssetProvider>(Lifetime.Singleton);
             builder.Register<IProgressService,ProgressService>(Lifetime.Singleton);
             builder.Register<IRandomService, RandomService>(Lifetime.Singleton);
-            builder.Register<IParticleObjectPool, ParticleObjectPool>(Lifetime.Singleton);
+      
             builder.Register<IEventSystem, GameEventSystem>(Lifetime.Singleton);
             builder.Register<IAudioService, AudioService>(Lifetime.Singleton);
             builder.Register<SceneLoader>(Lifetime.Singleton);
             
             builder.RegisterComponentInNewPrefab(_curtain, Lifetime.Singleton);
+
             InstallInput(builder);
         }
 

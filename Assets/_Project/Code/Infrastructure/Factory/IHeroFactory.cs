@@ -1,6 +1,5 @@
-using System.Threading.Tasks;
-using Code.Hero;
 using Code.Services;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace Code.Infrastructure.Factory
@@ -8,7 +7,7 @@ namespace Code.Infrastructure.Factory
     public interface IHeroFactory : IService
     {
         GameObject HeroGameObject { get; set; }
-        Task<GameObject> CreateHero(Vector3 initialPoint);
-        void InitAssets();
+        UniTask<GameObject> CreateHero(Vector3 initialPoint);
+        UniTask InitAssets();
     }
 }

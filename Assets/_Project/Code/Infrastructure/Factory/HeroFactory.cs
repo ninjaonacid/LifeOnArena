@@ -1,6 +1,6 @@
-using System.Threading.Tasks;
 using Code.Infrastructure.AssetManagment;
 using Code.Services.SaveLoad;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -20,15 +20,14 @@ namespace Code.Infrastructure.Factory
         }
         public GameObject HeroGameObject { get; set; }
 
-        public void InitAssets()
+        public async UniTask InitAssets()
         {
-            _assetsProvider.Load<GameObject>(AssetAddress.Hero);
+            await _assetsProvider.Load<GameObject>(AssetAddress.Hero);
         }
-        public async Task<GameObject> CreateHero(Vector3 initialPoint)
+
+        public async UniTask<GameObject> CreateHero(Vector3 initialPoint)
         {
             GameObject prefab = await _assetsProvider.Load<GameObject>(AssetAddress.Hero);
-
-            
 
             HeroGameObject = InstantiateRegistered(prefab,
                 initialPoint);
@@ -41,6 +40,7 @@ namespace Code.Infrastructure.Factory
             var go = Object.Instantiate(prefab, position, Quaternion.identity);
             
             _objectResolver.InjectGameObject(go);
+
             _saveLoadService.RegisterProgressWatchers(go);
             return go;
         }

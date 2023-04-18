@@ -1,5 +1,4 @@
 ﻿using Code.Infrastructure.AssetManagment;
-using Code.Services;
 using Code.Services.PersistentProgress;
 using Code.Services.SaveLoad;
 using Code.UI.Buttons;
@@ -14,7 +13,6 @@ namespace Code.Infrastructure.Factory
     public class GameFactory : IGameFactory
     {
         private readonly IAssetsProvider _assetsProvider;
-        private readonly IStaticDataService _staticData;
         private readonly IProgressService _progressService;
         private readonly ISaveLoadService _saveLoadService;
         private readonly IWindowService _windowService;
@@ -49,6 +47,7 @@ namespace Code.Infrastructure.Factory
             {
                 openWindowButton.Construct(_windowService);
             }
+
             return hud;
         }
 

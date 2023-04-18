@@ -9,6 +9,7 @@ using Code.Services.RandomService;
 using Code.Services.SaveLoad;
 using Code.StaticData;
 using Code.UI.HUD;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AI;
 using VContainer;
@@ -40,7 +41,7 @@ namespace Code.Infrastructure.Factory
             _objectResolver = objectResolver;
         }
 
-        public async Task InitAssets()
+        public async UniTask InitAssets()
         {
             await _assetsProvider.Load<GameObject>(AssetAddress.EnemySpawner);
             await _assetsProvider.Load<GameObject>(AssetAddress.Loot);
