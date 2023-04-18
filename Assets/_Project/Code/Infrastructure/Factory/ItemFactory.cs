@@ -7,7 +7,6 @@ using Code.Services.PersistentProgress;
 using Code.Services.SaveLoad;
 using Code.StaticData;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
 using Vector3 = UnityEngine.Vector3;
 
 namespace Code.Infrastructure.Factory

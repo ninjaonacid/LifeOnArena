@@ -10,20 +10,18 @@ namespace Code.Infrastructure.States
         private readonly IStaticDataService _staticData;
         public IGameStateMachine GameStateMachine { get; set; }
 
-
         public BootstrapState(SceneLoader sceneLoader,
             IStaticDataService staticData)
         {
             _sceneLoader = sceneLoader;
             _staticData = staticData;
-            _staticData.Load();
-
+            
         }
 
         public void Enter()
         {
+            _staticData.Load();
             _sceneLoader.Load(InitialScene, EnterLoadLevel);
-            
         }
 
         public void Exit()

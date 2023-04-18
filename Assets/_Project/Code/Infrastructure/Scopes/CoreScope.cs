@@ -30,6 +30,7 @@ namespace Code.Infrastructure.Scopes
             InstallStateMachine(builder);
 
             builder.Register<IEnemyFactory, EnemyFactory>(Lifetime.Singleton);
+            builder.Register<IEnemyObjectPool, EnemyObjectPool>(Lifetime.Singleton);
             builder.Register<IHeroFactory, HeroFactory>(Lifetime.Singleton);
             builder.Register<IAbilityFactory, AbilityFactory>(Lifetime.Singleton);
             builder.Register<IItemFactory, ItemFactory>(Lifetime.Singleton);
@@ -42,8 +43,7 @@ namespace Code.Infrastructure.Scopes
             builder.Register<IAssetsProvider, AssetProvider>(Lifetime.Singleton);
             builder.Register<IProgressService,ProgressService>(Lifetime.Singleton);
             builder.Register<IRandomService, RandomService>(Lifetime.Singleton);
-            builder.Register<IEnemyObjectPool, EnemyObjectPool>(Lifetime.Scoped);
-            builder.Register<IParticleObjectPool, ParticleObjectPool>(Lifetime.Scoped);
+            builder.Register<IParticleObjectPool, ParticleObjectPool>(Lifetime.Singleton);
             builder.Register<IEventSystem, GameEventSystem>(Lifetime.Singleton);
             builder.Register<IAudioService, AudioService>(Lifetime.Singleton);
             builder.Register<SceneLoader>(Lifetime.Singleton);

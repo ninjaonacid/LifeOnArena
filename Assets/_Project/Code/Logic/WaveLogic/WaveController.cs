@@ -2,7 +2,6 @@ using Code.Services;
 using Code.StaticData.Levels;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using VContainer;
 
 namespace Code.Logic.WaveLogic
 {

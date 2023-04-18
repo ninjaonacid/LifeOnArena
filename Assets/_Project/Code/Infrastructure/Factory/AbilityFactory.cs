@@ -24,13 +24,11 @@ namespace Code.Infrastructure.Factory
 
             _passiveAbilities = new List<PassiveAbilityTemplateBase>();
             _availablePassives = new List<PassiveAbilityTemplateBase>();
-
-            _passiveAbilities = _staticData.GetPassives();
-            
         }
 
         public void InitFactory()
         {
+            _passiveAbilities = _staticData.GetPassives();
         }
 
         public AbilityTemplateBase CreateAbility(string heroAbilityId) =>

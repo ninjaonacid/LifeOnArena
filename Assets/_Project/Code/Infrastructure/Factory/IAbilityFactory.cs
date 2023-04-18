@@ -10,5 +10,6 @@ namespace Code.Infrastructure.Factory
         AbilityTemplateBase CreateAbility(string heroAbilityId);
         PassiveAbilityTemplateBase GetRandomPassiveAbility();
         PassiveAbilityTemplateBase CreatePassive(string abilityId);
+        void InitFactory();
     }
 }

@@ -2,7 +2,6 @@
 using Code.Infrastructure.Services;
 using Code.Services.PersistentProgress;
 using Code.Services.SaveLoad;
-using UnityEngine;
 
 namespace Code.Infrastructure.States
 {

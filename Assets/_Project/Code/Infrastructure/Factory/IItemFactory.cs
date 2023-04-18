@@ -1,6 +1,5 @@
 using System.Threading.Tasks;
 using Code.Logic.LevelObjectsSpawners;
-using Code.Logic.ShelterWeapons;
 using Code.Services;
 using Code.StaticData;
 using UnityEngine;

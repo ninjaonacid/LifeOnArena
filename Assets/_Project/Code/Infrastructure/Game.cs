@@ -1,18 +1,20 @@
 ﻿using Code.Infrastructure.Services;
 using Code.Infrastructure.States;
-using Code.Logic;
-using Code.Services;
 
 namespace Code.Infrastructure
 {
     public class Game
     {
-        private IGameStateMachine _stateMachine;
+        private readonly IGameStateMachine _stateMachine;
 
         
         public Game(IGameStateMachine stateMachine)
         {
             _stateMachine = stateMachine;
+        }
+
+        public void StartGame()
+        {
             _stateMachine.Enter<BootstrapState>();
         }
     }

@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using Code.CameraLogic;
+﻿using Code.CameraLogic;
 using Code.Hero;
 using Code.Infrastructure.AssetManagment;
 using Code.Infrastructure.Factory;
@@ -17,6 +16,7 @@ using Code.StaticData.Spawners;
 using Code.UI.HUD;
 using Code.UI.HUD.Skills;
 using Code.UI.Services;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -35,7 +35,8 @@ namespace Code.Infrastructure.States
         private IStaticDataService _staticData;
         private ISaveLoadService _saveLoadService;
         private ILevelEventHandler _levelEventHandler;
-
+        
+        private IAbilityFactory _abilityFactory;
         private IItemFactory _itemFactory;
         private IAssetsProvider _assetsProvider;
         private IAudioService _audioService;
@@ -54,7 +55,7 @@ namespace Code.Infrastructure.States
             IItemFactory itemFactory,
             IAssetsProvider assetsProvider,
             IAudioService audioService,
-
+            IAbilityFactory abilityFactory,
             SceneLoader sceneLoader,
             LoadingCurtain curtain,IUIFactory uiFactory)
         {
@@ -71,6 +72,7 @@ namespace Code.Infrastructure.States
             _levelEventHandler = levelEventHandler;
             _itemFactory = itemFactory;
             _progressService = progressService;
+            _abilityFactory = abilityFactory;
 
         }
 
@@ -79,10 +81,11 @@ namespace Code.Infrastructure.States
             
             _curtain.Show();
 
-           
+            
             _saveLoadService.Cleanup();
             _assetsProvider.Cleanup();
 
+            _abilityFactory.InitFactory();
             _enemyFactory.InitAssets();
             _heroFactory.InitAssets();
             _itemFactory.InitAssets();
@@ -116,7 +119,7 @@ namespace Code.Infrastructure.States
             _uiFactory.CreateCore();
         }
 
-        private async Task InitGameWorld()
+        private async UniTask InitGameWorld()
         {
             string sceneKey = SceneManager.GetActiveScene().name;
 
@@ -150,7 +153,7 @@ namespace Code.Infrastructure.States
 
         }
 
-        private async Task InitSpawners(LevelConfig levelConfig)
+        private async UniTask InitSpawners(LevelConfig levelConfig)
         {
             foreach (EnemySpawnerData spawnerData in levelConfig.EnemySpawners)
             {
@@ -173,8 +176,7 @@ namespace Code.Infrastructure.States
             }
         }
 
-      
-        private async Task<GameObject> InitHero(LevelConfig levelConfig)
+        private async UniTask<GameObject> InitHero(LevelConfig levelConfig)
         {
             GameObject hero = await _heroFactory.CreateHero(levelConfig.HeroInitialPosition);
 

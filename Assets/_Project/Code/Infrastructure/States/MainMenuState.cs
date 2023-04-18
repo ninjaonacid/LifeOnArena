@@ -8,13 +8,12 @@ namespace Code.Infrastructure.States
 {
     public class MainMenuState : IState
     {
-        private readonly GameStateMachine _gameStateMachine;
         private readonly SceneLoader _sceneLoader;
         private readonly LoadingCurtain _curtain;
 
-        private IWindowService _windowService;
-        private IUIFactory _uiFactory;
-        private IProgressService _progress;
+        private readonly IWindowService _windowService;
+        private readonly IUIFactory _uiFactory;
+        private readonly IProgressService _progress;
         public IGameStateMachine GameStateMachine { get; set; }
 
         public MainMenuState(IUIFactory uiFactory,
