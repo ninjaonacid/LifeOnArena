@@ -9,24 +9,14 @@ namespace Code.UI.HUD.Skills
         private HudSkillButton[] _skillButtons;
         private HeroSkills _heroSkills;
 
-        public void Construct(
-            HeroSkills heroSkills,
-            HeroAbilityCooldown heroAbilityCooldown,
-                IInputService input)
+        public void Construct(HeroSkills heroSkills)
         {
             _heroSkills = heroSkills;
 
-
             _skillButtons = GetComponentsInChildren<HudSkillButton>();
-
-            foreach (var button in _skillButtons)
-            {
-                button.Construct(input);
-            }
 
             _heroSkills.OnSkillChanged += SetSkillSlots;
 
-            
             LinkButtonKeys();
 
             SetSkillSlots();

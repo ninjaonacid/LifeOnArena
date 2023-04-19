@@ -1,5 +1,3 @@
-using Code.Hero;
-using Code.Services.Input;
 using Code.StaticData.Ability;
 using SimpleInputNamespace;
 using UnityEngine;
@@ -9,20 +7,12 @@ namespace Code.UI.HUD.Skills
     public class HudSkillButton : MonoBehaviour
     {
         public ButtonInputUI ButtonInput;
-        private IInputService _input;
 
         public AbilitySlotID abilitySlotID;
 
         public AbilityTemplateBase heroAbility;
 
-
         private HudSkillIcon _skillIcon;
-
-        public void Construct(IInputService input)
-        {
-            
-            _input = input;
-        }
 
 
         private void Awake()

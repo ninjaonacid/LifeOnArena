@@ -47,9 +47,9 @@ namespace Code.Infrastructure.Factory
             await _assetsProvider.Load<GameObject>(AssetAddress.Loot);
         }
 
-        public async Task<EnemySpawnPoint> CreateSpawner(Vector3 at, 
-            string spawnerDataId, 
-            MonsterTypeId spawnerDataMonsterTypeId, 
+        public async UniTask<EnemySpawnPoint> CreateSpawner(Vector3 at,
+            string spawnerDataId,
+            MonsterTypeId spawnerDataMonsterTypeId,
             int spawnerRespawnCount)
         {
             var prefab = await _assetsProvider.Load<GameObject>(AssetAddress.EnemySpawner);
@@ -64,7 +64,7 @@ namespace Code.Infrastructure.Factory
             return spawner;
         }
 
-        public async Task<GameObject> CreateMonster(MonsterTypeId monsterTypeId, Transform parent)
+        public async UniTask<GameObject> CreateMonster(MonsterTypeId monsterTypeId, Transform parent)
         {
             var monsterData = _staticData.ForMonster(monsterTypeId);
 
@@ -98,7 +98,7 @@ namespace Code.Infrastructure.Factory
         }
 
 
-        public async Task<LootPiece> CreateLoot()
+        public async UniTask<LootPiece> CreateLoot()
         {
             var prefab = await _assetsProvider.Load<GameObject>(AssetAddress.Loot);
 

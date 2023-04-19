@@ -1,5 +1,4 @@
-﻿using Code.CameraLogic;
-using Code.Infrastructure.AssetManagment;
+﻿using Code.Infrastructure.AssetManagment;
 using Code.Infrastructure.Services;
 using Code.Logic;
 using Code.Services;
@@ -8,7 +7,6 @@ using Code.Services.SaveLoad;
 using Code.StaticData.Levels;
 using Code.UI.Services;
 using Cysharp.Threading.Tasks;
-using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace Code.Infrastructure.States
@@ -18,12 +16,11 @@ namespace Code.Infrastructure.States
         private readonly LoadingCurtain _curtain;
         private readonly SceneLoader _sceneLoader;
 
-
-        private IStaticDataService _staticData;
+        private readonly IStaticDataService _staticData;
         private readonly ISaveLoadService _saveLoadService;
-        private ILevelEventHandler _levelEventHandler;
+        private readonly ILevelEventHandler _levelEventHandler;
         private readonly IAssetsProvider _assetsProvider;
-        private IAudioService _audioService;
+        private readonly IAudioService _audioService;
         private readonly IUIFactory _uiFactory;
 
         public IGameStateMachine GameStateMachine { get; set; }
@@ -52,7 +49,6 @@ namespace Code.Infrastructure.States
         public void Enter(string sceneName)
         {
             _curtain.Show();
-
             _saveLoadService.Cleanup();
             _assetsProvider.Cleanup();
 
@@ -64,7 +60,6 @@ namespace Code.Infrastructure.States
         public void Exit()
         {
             _curtain.Hide();
-
         }
 
         private async void OnLoaded()
@@ -72,7 +67,6 @@ namespace Code.Infrastructure.States
             InitUiCore();
             await InitGameWorld();
 
-            
             GameStateMachine.Enter<GameLoopState>();
         }
 

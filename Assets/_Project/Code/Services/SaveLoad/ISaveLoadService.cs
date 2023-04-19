@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using Code.Data;
 using Code.Services.PersistentProgress;
-using Code.UI;
 using UnityEngine;
 
 namespace Code.Services.SaveLoad
@@ -14,7 +13,7 @@ namespace Code.Services.SaveLoad
         List<ISave> ProgressWriters { get; }
         void Cleanup();
         void RegisterProgressWatchers(GameObject go);
-        void Register(ISaveReader progressReader);
+        void Register(ISaveReader progressLoader);
         void SaveProgressAtPath();
     }
 }

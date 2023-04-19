@@ -21,17 +21,16 @@ namespace Code.UI.Services
       
 
         private Transform _uiCoreTransform;
-        private readonly IAbilityFactory _abilityFactory;
+     
 
         public UIFactory(IAssetsProvider assetsProvider, 
             IStaticDataService staticDataService, 
             ISaveLoadService saveLoad,
-            IProgressService progress,
-            IAbilityFactory abilityFactory
-            )
+            IProgressService progress
+        )
         {
             _assetsProvider = assetsProvider;
-            _abilityFactory = abilityFactory;
+          
             //_heroFactory = heroFactory;
             _staticData = staticDataService;
             _saveLoad = saveLoad;

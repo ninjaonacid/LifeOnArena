@@ -18,7 +18,7 @@ using Code.Services.Input;
 
 namespace Code.Infrastructure.EntryPoints
 {
-    public class ArenaEntryPoint : IAsyncStartable
+    public class ArenaStarterPoint : IAsyncStartable
     {
         private readonly IEnemyFactory _enemyFactory;
         private readonly IStaticDataService _staticData;
@@ -27,7 +27,7 @@ namespace Code.Infrastructure.EntryPoints
         private readonly IHeroFactory _heroFactory;
         private readonly IGameFactory _gameFactory;
         private readonly IInputService _input;
-        public ArenaEntryPoint(IEnemyFactory enemyFactory,
+        public ArenaStarterPoint(IEnemyFactory enemyFactory,
             IStaticDataService staticData,
             ISaveLoadService saveLoad,
             IProgressService progress, IHeroFactory heroFactory,
@@ -45,7 +45,7 @@ namespace Code.Infrastructure.EntryPoints
 
         private void InformProgressReaders()
         {
-            foreach (var progressReader in _saveLoad.ProgressReaders)
+            foreach (ISaveReader progressReader in _saveLoad.ProgressReaders)
                 progressReader.LoadProgress(_progress.Progress);
         }
 
@@ -63,6 +63,7 @@ namespace Code.Infrastructure.EntryPoints
             CameraFollow(hero);
             InformProgressReaders();
         }
+
         private async UniTask<GameObject> InitHero(LevelConfig levelConfig)
         {
             GameObject hero = await _heroFactory.CreateHero(levelConfig.HeroInitialPosition);
@@ -85,10 +86,8 @@ namespace Code.Infrastructure.EntryPoints
             var hud = _gameFactory.CreateHud();
 
             hud.GetComponentInChildren<ActorUI>().Construct(hero.GetComponent<HeroHealth>());
-            hud.GetComponentInChildren<HudSkillContainer>().Construct(
-                hero.GetComponent<HeroSkills>(),
-                hero.GetComponent<HeroAbilityCooldown>(),
-                _input);
+            hud.GetComponentInChildren<HudSkillContainer>().Construct(hero.GetComponent<HeroSkills>());
+
         }
         private static void CameraFollow(GameObject hero)
         {

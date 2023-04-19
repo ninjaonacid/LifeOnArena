@@ -55,12 +55,12 @@ namespace Code.Services.SaveLoad
         }
 
 
-        public void Register(ISaveReader progressReader)
+        public void Register(ISaveReader progressLoader)
         {
-            if (progressReader is ISave progressWriter)
+            if (progressLoader is ISave progressWriter)
                 ProgressWriters.Add(progressWriter);
 
-            ProgressReaders.Add(progressReader);
+            ProgressReaders.Add(progressLoader);
         }
     }
 }
