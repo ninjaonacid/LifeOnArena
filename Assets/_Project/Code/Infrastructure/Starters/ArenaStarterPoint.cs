@@ -14,7 +14,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using VContainer.Unity;
 using Code.CameraLogic;
-using Code.Services.Input;
 
 namespace Code.Infrastructure.EntryPoints
 {
@@ -26,13 +25,12 @@ namespace Code.Infrastructure.EntryPoints
         private readonly IProgressService _progress;
         private readonly IHeroFactory _heroFactory;
         private readonly IGameFactory _gameFactory;
-        private readonly IInputService _input;
+
         public ArenaStarterPoint(IEnemyFactory enemyFactory,
             IStaticDataService staticData,
             ISaveLoadService saveLoad,
             IProgressService progress, IHeroFactory heroFactory,
-            IGameFactory gameFactory,
-            IInputService input)
+            IGameFactory gameFactory)
         {
             _enemyFactory = enemyFactory;
             _staticData = staticData;
@@ -40,7 +38,6 @@ namespace Code.Infrastructure.EntryPoints
             _progress = progress;
             _heroFactory = heroFactory;
             _gameFactory = gameFactory;
-            _input = input;
         }
 
         private void InformProgressReaders()
@@ -87,7 +84,6 @@ namespace Code.Infrastructure.EntryPoints
 
             hud.GetComponentInChildren<ActorUI>().Construct(hero.GetComponent<HeroHealth>());
             hud.GetComponentInChildren<HudSkillContainer>().Construct(hero.GetComponent<HeroSkills>());
-
         }
         private static void CameraFollow(GameObject hero)
         {

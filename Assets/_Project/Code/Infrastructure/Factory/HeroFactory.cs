@@ -31,15 +31,16 @@ namespace Code.Infrastructure.Factory
 
             HeroGameObject = InstantiateRegistered(prefab,
                 initialPoint);
+
             return HeroGameObject;
         }
 
         public GameObject InstantiateRegistered(GameObject prefab, Vector3 position)
         {
             
-            var go = Object.Instantiate(prefab, position, Quaternion.identity);
+            var go = _objectResolver.Instantiate(prefab, position, Quaternion.identity);
             
-            _objectResolver.InjectGameObject(go);
+            //_objectResolver.InjectGameObject(go);
 
             _saveLoadService.RegisterProgressWatchers(go);
             return go;

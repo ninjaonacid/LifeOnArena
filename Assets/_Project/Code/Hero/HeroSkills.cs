@@ -2,6 +2,7 @@ using System;
 using Code.Data;
 using Code.Infrastructure.Factory;
 using Code.Services.Input;
+using Code.Services.PersistentProgress;
 using Code.StaticData.Ability;
 using Code.UI.HUD.Skills;
 using UnityEngine;
@@ -9,7 +10,7 @@ using VContainer;
 
 namespace Code.Hero
 {
-    public class HeroSkills : MonoBehaviour
+    public class HeroSkills : MonoBehaviour, ISaveReader
     {
         public event Action OnSkillChanged;
 
@@ -17,7 +18,7 @@ namespace Code.Hero
         public HeroAttack HeroAttack;
         public SkillSlot[] SkillSlots;
 
-        private SkillHudData _skillHudData;
+        private SkillSlotsData _skillSlotsData;
         private IAbilityFactory _abilityFactory;
         private IInputService _input;
 
@@ -66,6 +67,16 @@ namespace Code.Hero
             OnSkillChanged?.Invoke();
         }
 
-        
+
+        public void LoadProgress(PlayerProgress progress)
+        {
+            var skillsData = progress.SkillSlotsData.SlotSkill;
+
+            foreach (var slot in SkillSlots)
+            {
+                if (skillsData[slot.AbilitySlotID] != null)
+                    slot.Ability = _abilityFactory.CreateAbility(skillsData[slot.AbilitySlotID]);
+            }
+        }
     }
 }

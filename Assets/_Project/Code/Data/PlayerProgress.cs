@@ -12,7 +12,7 @@ namespace Code.Data
         public WorldData WorldData;
         public SkillsData SkillsData;
         public PassiveSkills PassiveSkills;
-        public SkillHudData skillHudData;
+        public SkillSlotsData SkillSlotsData;
         
         public PlayerProgress(string initialLevel)
         {
@@ -21,7 +21,7 @@ namespace Code.Data
             CharacterStats = new CharacterStats();
             KillData = new KillData();
             SkillsData = new SkillsData();
-            skillHudData = new SkillHudData();
+            SkillSlotsData = new SkillSlotsData();
             PassiveSkills = new PassiveSkills();
         }
     }

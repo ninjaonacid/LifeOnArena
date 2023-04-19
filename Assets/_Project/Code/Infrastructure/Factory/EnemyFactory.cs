@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using Code.Enemy;
 using Code.Infrastructure.AssetManagment;
 using Code.Logic;
@@ -31,7 +30,6 @@ namespace Code.Infrastructure.Factory
             ISaveLoadService saveLoadService, IProgressService progressService,
             IRandomService randomService, IObjectResolver objectResolver)
         {
-    
             _heroFactory = heroFactory;
             _staticData = staticData;
             _assetsProvider = assetsProvider;
@@ -39,6 +37,7 @@ namespace Code.Infrastructure.Factory
             _progressService = progressService;
             _randomService = randomService;
             _objectResolver = objectResolver;
+
         }
 
         public async UniTask InitAssets()

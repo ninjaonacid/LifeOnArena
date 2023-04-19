@@ -5,18 +5,15 @@ using Code.UI.HUD.Skills;
 namespace Code.Data
 {
     [Serializable]
-    public class SkillHudData
+    public class SkillSlotsData
     {
-
- 
         public Dictionary<AbilitySlotID, string> SlotSkill;
 
-        public SkillHudData()
+        public SkillSlotsData()
         {
             SlotSkill = new Dictionary<AbilitySlotID, string>();
         }
-       
-    
+
     }
 
 }

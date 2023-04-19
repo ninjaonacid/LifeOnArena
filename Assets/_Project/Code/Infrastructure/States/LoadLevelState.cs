@@ -90,7 +90,6 @@ namespace Code.Infrastructure.States
         private void SetupEventHandler(LevelConfig levelConfig)
         {
             _levelEventHandler.InitCurrentLevel(levelConfig.EnemySpawners.Count);
-
         }
 
     }
