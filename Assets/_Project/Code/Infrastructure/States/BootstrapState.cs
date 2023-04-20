@@ -1,4 +1,5 @@
-﻿using Code.Infrastructure.Services;
+﻿using Code.Infrastructure.AssetManagment;
+using Code.Infrastructure.Services;
 using Code.Services;
 
 namespace Code.Infrastructure.States
@@ -8,17 +9,20 @@ namespace Code.Infrastructure.States
         private const string InitialScene = "Initialize";
         private readonly SceneLoader _sceneLoader;
         private readonly IStaticDataService _staticData;
+        private readonly IAssetsProvider _assetProvider;
         public IGameStateMachine GameStateMachine { get; set; }
 
         public BootstrapState(SceneLoader sceneLoader,
-            IStaticDataService staticData)
+            IStaticDataService staticData, IAssetsProvider assetProvider)
         {
             _sceneLoader = sceneLoader;
             _staticData = staticData;
+            _assetProvider = assetProvider;
         }
 
         public void Enter()
         {
+            _assetProvider.Initialize();
             _staticData.Load();
             _sceneLoader.Load(InitialScene, EnterLoadLevel);
         }

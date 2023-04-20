@@ -72,11 +72,11 @@ namespace Code.Hero
         {
             var skillsData = progress.SkillSlotsData.SlotSkill;
 
-            foreach (var slot in SkillSlots)
-            {
-                if (skillsData[slot.AbilitySlotID] != null)
-                    slot.Ability = _abilityFactory.CreateAbility(skillsData[slot.AbilitySlotID]);
-            }
+            //foreach (var slot in SkillSlots)
+            //{
+            //    if (skillsData[slot.AbilitySlotID] != null)
+            //        slot.Ability = _abilityFactory.CreateAbility(skillsData[slot.AbilitySlotID]);
+            //}
         }
     }
 }

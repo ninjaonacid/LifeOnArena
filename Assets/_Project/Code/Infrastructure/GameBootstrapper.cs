@@ -1,6 +1,5 @@
 using Code.Infrastructure.Services;
 using Code.Logic;
-using UnityEngine;
 using VContainer.Unity;
 
 namespace Code.Infrastructure

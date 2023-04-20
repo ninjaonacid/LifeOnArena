@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -9,10 +8,10 @@ namespace Code.Infrastructure.AssetManagment
 {
     public class AssetProvider : IAssetsProvider
     {
-        private Dictionary<string, AsyncOperationHandle> _completedCache =
+        private readonly Dictionary<string, AsyncOperationHandle> _completedCache =
             new Dictionary<string, AsyncOperationHandle>();
 
-        private Dictionary<string, List<AsyncOperationHandle>> _handles = 
+        private readonly Dictionary<string, List<AsyncOperationHandle>> _handles = 
             new Dictionary<string, List<AsyncOperationHandle>>();
 
         public void Initialize()

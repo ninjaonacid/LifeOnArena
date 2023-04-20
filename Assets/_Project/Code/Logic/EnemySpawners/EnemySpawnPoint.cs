@@ -40,12 +40,12 @@ namespace Code.Logic.EnemySpawners
 
         public void LoadProgress(PlayerProgress progress)
         {
-            if (progress.KillData.ClearedSpawners.Contains(Id))
-                Slain = true;
-            else
-                Spawn();
+            //if (progress.KillData.ClearedSpawners.Contains(Id))
+            //    Slain = true;
+            //else
+            //    Spawn();
 
-            StartCoroutine(ChangeSpawnTimer());
+            //StartCoroutine(ChangeSpawnTimer());
         }
 
         public void UpdateProgress(PlayerProgress progress)
@@ -54,7 +54,7 @@ namespace Code.Logic.EnemySpawners
                 progress.KillData.ClearedSpawners.Add(Id);
         }
 
-        private async void Spawn()
+        public async void Spawn()
         {
             var monster = await _enemyObjectPool.GetObject(MonsterTypeId, transform);
             _spawnParticle = _particleObjectPool.GetObject(ParticleId, transform);

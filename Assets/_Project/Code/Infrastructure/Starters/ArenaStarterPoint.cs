@@ -1,43 +1,43 @@
 using System.Threading;
+using Code.CameraLogic;
 using Code.Hero;
 using Code.Infrastructure.Factory;
-using Code.Logic.EnemySpawners;
+using Code.Logic;
+using Code.Logic.WaveLogic;
 using Code.Services;
 using Code.Services.PersistentProgress;
 using Code.Services.SaveLoad;
 using Code.StaticData.Levels;
-using Code.StaticData.Spawners;
-using Code.UI.HUD.Skills;
 using Code.UI.HUD;
+using Code.UI.HUD.Skills;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using VContainer.Unity;
-using Code.CameraLogic;
 
-namespace Code.Infrastructure.EntryPoints
+namespace Code.Infrastructure.Starters
 {
     public class ArenaStarterPoint : IAsyncStartable
     {
-        private readonly IEnemyFactory _enemyFactory;
         private readonly IStaticDataService _staticData;
         private readonly ISaveLoadService _saveLoad;
+        private readonly LoadingCurtain _curtain;
         private readonly IProgressService _progress;
         private readonly IHeroFactory _heroFactory;
         private readonly IGameFactory _gameFactory;
-
-        public ArenaStarterPoint(IEnemyFactory enemyFactory,
-            IStaticDataService staticData,
-            ISaveLoadService saveLoad,
+        private readonly SpawnController _spawnController;
+        public ArenaStarterPoint(IStaticDataService staticData, 
+            ISaveLoadService saveLoad, LoadingCurtain curtain,
             IProgressService progress, IHeroFactory heroFactory,
-            IGameFactory gameFactory)
+            IGameFactory gameFactory, SpawnController spawnController)
         {
-            _enemyFactory = enemyFactory;
             _staticData = staticData;
             _saveLoad = saveLoad;
+            _curtain = curtain;
             _progress = progress;
             _heroFactory = heroFactory;
             _gameFactory = gameFactory;
+            _spawnController = spawnController;
         }
 
         private void InformProgressReaders()
@@ -50,15 +50,15 @@ namespace Code.Infrastructure.EntryPoints
         {
             LevelConfig config = _staticData.ForLevel(SceneManager.GetActiveScene().name);
 
-            await _enemyFactory.InitAssets();
-
-            await InitSpawners(config);
+            await _spawnController.InitSpawners(config);
 
             var hero = await InitHero(config);
 
             InitHud(hero);
             CameraFollow(hero);
             InformProgressReaders();
+
+            _curtain.Hide();
         }
 
         private async UniTask<GameObject> InitHero(LevelConfig levelConfig)
@@ -67,17 +67,7 @@ namespace Code.Infrastructure.EntryPoints
 
             return hero;
         }
-        private async UniTask InitSpawners(LevelConfig levelConfig)
-        {
-            foreach (EnemySpawnerData spawnerData in levelConfig.EnemySpawners)
-            {
-                EnemySpawnPoint spawner = await _enemyFactory.CreateSpawner(
-                    spawnerData.Position,
-                    spawnerData.Id,
-                    spawnerData.MonsterTypeId,
-                    spawnerData.RespawnCount);
-            }
-        }
+
         private void InitHud(GameObject hero)
         {
             var hud = _gameFactory.CreateHud();
@@ -85,6 +75,7 @@ namespace Code.Infrastructure.EntryPoints
             hud.GetComponentInChildren<ActorUI>().Construct(hero.GetComponent<HeroHealth>());
             hud.GetComponentInChildren<HudSkillContainer>().Construct(hero.GetComponent<HeroSkills>());
         }
+
         private static void CameraFollow(GameObject hero)
         {
             Camera.main.GetComponent<CameraFollow>().Follow(hero);
