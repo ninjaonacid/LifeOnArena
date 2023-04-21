@@ -11,10 +11,7 @@ namespace Code.Infrastructure.States
     {
         private readonly LoadingCurtain _curtain;
         private readonly SceneLoader _sceneLoader;
-
-    
         private readonly ISaveLoadService _saveLoadService;
-
         private readonly IAssetsProvider _assetsProvider;
         private readonly IAudioService _audioService;
         private readonly IUIFactory _uiFactory;
@@ -35,7 +32,6 @@ namespace Code.Infrastructure.States
             _audioService = audioService;
             _assetsProvider = assetsProvider;
             _saveLoadService = saveLoadService;
-
         }
 
         public void Enter(string sceneName)

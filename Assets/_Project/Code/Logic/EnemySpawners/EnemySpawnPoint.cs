@@ -25,7 +25,7 @@ namespace Code.Logic.EnemySpawners
 
         public MonsterTypeId MonsterTypeId;
         public ParticleId ParticleId = ParticleId.SpawnParticle;
-        public bool Slain { get; private set; }
+        public bool Alive  { get; private set; }
 
         [Inject]
         public void Construct(IEnemyObjectPool enemyObjectPool,
@@ -41,7 +41,7 @@ namespace Code.Logic.EnemySpawners
         public void LoadProgress(PlayerProgress progress)
         {
             //if (progress.KillData.ClearedSpawners.Contains(Id))
-            //    Slain = true;
+            //    Alive = true;
             //else
             //    Spawn();
 
@@ -50,56 +50,31 @@ namespace Code.Logic.EnemySpawners
 
         public void UpdateProgress(PlayerProgress progress)
         {
-            if (Slain)
+            if (!Alive)
                 progress.KillData.ClearedSpawners.Add(Id);
         }
 
         public async void Spawn()
         {
+            Alive = true;
             var monster = await _enemyObjectPool.GetObject(MonsterTypeId, transform);
             _spawnParticle = _particleObjectPool.GetObject(ParticleId, transform);
 
             _enemyDeath = monster.GetComponent<EnemyDeath>();
             _enemyDeath.Happened += Slay;
+            
         }
 
         private void Slay()
         {
-
-            /* if (_enemyDeath != null)
-                  _enemyDeath.Happened -= Slay;*/
+            if (_enemyDeath != null)
+                  _enemyDeath.Happened -= Slay;
 
             _enemyObjectPool.ReturnObject(MonsterTypeId, _enemyDeath.gameObject);
             _particleObjectPool.ReturnObject(ParticleId, _spawnParticle);
 
-            if (RespawnCount > 0)
-                StartCoroutine(RespawnEnemy());
-
-            else
-            {
-                Slain = true;
-                _levelEventHandler.MonsterSpawnerSlain(this);
-            }
+            Alive = false;
         }
 
-        private IEnumerator RespawnEnemy()
-        {
-            RespawnCount--;
-            yield return new WaitForSeconds(3);
-
-            _enemyObjectPool.GetObject(MonsterTypeId, transform);
-            _particleObjectPool.GetObject(ParticleId, transform);
-        }
-
-        private IEnumerator ChangeSpawnTimer()
-        {
-            while (_enemyTimer > 0)
-            {
-                _enemyTimer -= Time.deltaTime; 
-                yield return null;
-            }
-            _enemyTimer = 30;
-            yield break;
-        }
     }
 }

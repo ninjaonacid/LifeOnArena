@@ -14,7 +14,6 @@ namespace Code.Services.SaveLoad
         public SaveLoadService(IProgressService progressService)
         {
             _progressService = progressService;
-            
         }
         public List<ISaveReader> ProgressReaders { get; } = new List<ISaveReader>();
 

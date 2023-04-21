@@ -19,9 +19,9 @@ namespace Code.Infrastructure.Starters
 {
     public class ArenaStarterPoint : IAsyncStartable
     {
+        private readonly LoadingCurtain _curtain;
         private readonly IStaticDataService _staticData;
         private readonly ISaveLoadService _saveLoad;
-        private readonly LoadingCurtain _curtain;
         private readonly IProgressService _progress;
         private readonly IHeroFactory _heroFactory;
         private readonly IGameFactory _gameFactory;
@@ -59,6 +59,9 @@ namespace Code.Infrastructure.Starters
             InformProgressReaders();
 
             _curtain.Hide();
+
+            _spawnController.SpawnTimer();
+            _spawnController.WaveSpawn();
         }
 
         private async UniTask<GameObject> InitHero(LevelConfig levelConfig)

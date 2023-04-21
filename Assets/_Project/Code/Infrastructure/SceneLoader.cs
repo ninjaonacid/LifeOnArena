@@ -1,17 +1,11 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
 using UnityEngine.SceneManagement;
-using VContainer.Unity;
 
 namespace Code.Infrastructure
 {
     public class SceneLoader
     {
-        private readonly LifetimeScope _currentScope;
-        public SceneLoader(LifetimeScope currentScope)
-        {
-            _currentScope = currentScope;
-        }
         public async void Load(string name, Action onLoaded = null)
         {
             await LoadScene(name, onLoaded);
@@ -24,10 +18,8 @@ namespace Code.Infrastructure
                 return;
             }
 
-
             await SceneManager.LoadSceneAsync(nextScene);
-           
-
+            
             onLoaded?.Invoke();
         }
     }
