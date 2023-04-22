@@ -1,3 +1,6 @@
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 using Code.Enemy;
 using Code.Infrastructure.AssetManagment;
 using Code.Logic;
@@ -8,6 +11,7 @@ using Code.Services.RandomService;
 using Code.Services.SaveLoad;
 using Code.StaticData;
 using Code.UI.HUD;
+using Code.Utils;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AI;
@@ -17,7 +21,7 @@ using Object = UnityEngine.Object;
 
 namespace Code.Infrastructure.Factory
 {
-    public class EnemyFactory : IEnemyFactory
+    public class EnemyFactory : IEnemyFactory, IDisposable
     {
         private readonly IHeroFactory _heroFactory;
         private readonly IStaticDataService _staticData;
@@ -26,6 +30,8 @@ namespace Code.Infrastructure.Factory
         private readonly IProgressService _progressService;
         private readonly IRandomService _randomService;
         private readonly IObjectResolver _objectResolver;
+
+        private CancellationTokenSource _cancellationTokenSource;
         public EnemyFactory(IHeroFactory heroFactory, IStaticDataService staticData, IAssetsProvider assetsProvider, 
             ISaveLoadService saveLoadService, IProgressService progressService,
             IRandomService randomService, IObjectResolver objectResolver)
@@ -37,7 +43,6 @@ namespace Code.Infrastructure.Factory
             _progressService = progressService;
             _randomService = randomService;
             _objectResolver = objectResolver;
-
         }
 
         public async UniTask InitAssets()
@@ -127,5 +132,10 @@ namespace Code.Infrastructure.Factory
             return go;
         }
 
+        public void Dispose()
+        {
+            _cancellationTokenSource?.Cancel();
+            _cancellationTokenSource?.Dispose();
+        }
     }
 }

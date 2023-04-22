@@ -63,24 +63,19 @@ namespace Code.Logic.WaveLogic
                 {
                     foreach (EnemySpawner spawner in _enemySpawnPoints)
                     {
-                        spawner.Spawn();
+                        spawner.Spawn(token);
                     }
                     _waveCounter++;
                     _timer.Reset();
                 }
 
                 await UniTask.Delay(1000, cancellationToken: token);
-
-                if (_cancellationTokenSource.IsCancellationRequested)
-                {
-                    break;
-                }
             }
         }
         public void Dispose()
         {
-            _cancellationTokenSource.Cancel();
-            _cancellationTokenSource.Dispose();
+           _cancellationTokenSource.Cancel();
+           _cancellationTokenSource.Dispose();
         }
 
         private bool IsSpawnTime()

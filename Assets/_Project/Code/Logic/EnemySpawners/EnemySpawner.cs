@@ -1,3 +1,4 @@
+using System.Threading;
 using Code.Data;
 using Code.Enemy;
 using Code.Infrastructure.ObjectPool;
@@ -53,7 +54,7 @@ namespace Code.Logic.EnemySpawners
                 progress.KillData.ClearedSpawners.Add(Id);
         }
 
-        public async void Spawn()
+        public async void Spawn(CancellationToken token)
         {
             Alive = true;
             var monster = await _enemyObjectPool.GetObject(MonsterTypeId, transform);
