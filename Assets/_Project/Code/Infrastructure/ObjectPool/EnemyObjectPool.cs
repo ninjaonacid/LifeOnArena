@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Code.Infrastructure.Factory;
 using Code.StaticData;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace Code.Infrastructure.ObjectPool
@@ -23,7 +24,7 @@ namespace Code.Infrastructure.ObjectPool
             _enemyObjectsStock.Clear();
         }
 
-        public async Task<GameObject> GetObject(MonsterTypeId monsterTypeId, Transform parent)
+        public async UniTask<GameObject> GetObject(MonsterTypeId monsterTypeId, Transform parent)
         {
             GameObject result = null;
 

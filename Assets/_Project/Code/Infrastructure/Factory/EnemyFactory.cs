@@ -46,15 +46,15 @@ namespace Code.Infrastructure.Factory
             await _assetsProvider.Load<GameObject>(AssetAddress.Loot);
         }
 
-        public async UniTask<EnemySpawnPoint> CreateSpawner(Vector3 at,
+        public async UniTask<EnemySpawner> CreateSpawner(Vector3 at,
             string spawnerDataId,
             MonsterTypeId spawnerDataMonsterTypeId,
             int spawnerRespawnCount)
         {
             var prefab = await _assetsProvider.Load<GameObject>(AssetAddress.EnemySpawner);
 
-            EnemySpawnPoint spawner = InstantiateRegistered(prefab, at)
-                .GetComponent<EnemySpawnPoint>();
+            EnemySpawner spawner = InstantiateRegistered(prefab, at)
+                .GetComponent<EnemySpawner>();
 
             spawner.Id = spawnerDataId;
             spawner.MonsterTypeId = spawnerDataMonsterTypeId;

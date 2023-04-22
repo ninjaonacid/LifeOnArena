@@ -15,7 +15,7 @@ namespace Code.Infrastructure.Scopes
             builder.RegisterEntryPoint<AssetInitializer>();
             builder.RegisterEntryPoint<ArenaStarterPoint>();
 
-            builder.Register<SpawnController>(Lifetime.Scoped);
+            builder.Register<SpawnerController>(Lifetime.Scoped);
             
 
             builder.Register<IItemFactory, ItemFactory>(Lifetime.Scoped);

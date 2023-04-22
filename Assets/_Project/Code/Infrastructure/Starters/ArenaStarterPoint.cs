@@ -25,11 +25,11 @@ namespace Code.Infrastructure.Starters
         private readonly IProgressService _progress;
         private readonly IHeroFactory _heroFactory;
         private readonly IGameFactory _gameFactory;
-        private readonly SpawnController _spawnController;
+        private readonly SpawnerController _spawnerController;
         public ArenaStarterPoint(IStaticDataService staticData, 
             ISaveLoadService saveLoad, LoadingCurtain curtain,
             IProgressService progress, IHeroFactory heroFactory,
-            IGameFactory gameFactory, SpawnController spawnController)
+            IGameFactory gameFactory, SpawnerController spawnerController)
         {
             _staticData = staticData;
             _saveLoad = saveLoad;
@@ -37,7 +37,7 @@ namespace Code.Infrastructure.Starters
             _progress = progress;
             _heroFactory = heroFactory;
             _gameFactory = gameFactory;
-            _spawnController = spawnController;
+            _spawnerController = spawnerController;
         }
 
         private void InformProgressReaders()
@@ -50,7 +50,7 @@ namespace Code.Infrastructure.Starters
         {
             LevelConfig config = _staticData.ForLevel(SceneManager.GetActiveScene().name);
 
-            await _spawnController.InitSpawners(config);
+            await _spawnerController.InitSpawners(config);
 
             var hero = await InitHero(config);
 
@@ -60,8 +60,8 @@ namespace Code.Infrastructure.Starters
 
             _curtain.Hide();
 
-            _spawnController.SpawnTimer();
-            _spawnController.WaveSpawn();
+            _spawnerController.SpawnTimer();
+            _spawnerController.RunSpawner();
         }
 
         private async UniTask<GameObject> InitHero(LevelConfig levelConfig)

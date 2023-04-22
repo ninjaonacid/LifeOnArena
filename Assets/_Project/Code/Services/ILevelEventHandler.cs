@@ -9,7 +9,7 @@ namespace Code.Services
         event Action PlayerDead;
         event Action MonsterSpawnersCleared;
         LevelReward GetLevelReward();
-        void MonsterSpawnerSlain(EnemySpawnPoint spawner);
+        void MonsterSpawnerSlain(EnemySpawner spawner);
         void HeroDeath();
         void NextLevelReward(LevelReward levelReward);
         void InitCurrentLevel(int enemySpawnersCount);

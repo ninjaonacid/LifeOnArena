@@ -9,7 +9,7 @@ namespace Code.Infrastructure.Factory
 {
     public interface IEnemyFactory : IService
     {
-        UniTask<EnemySpawnPoint> CreateSpawner(Vector3 at, string spawnerDataId, MonsterTypeId spawnerDataMonsterTypeId,
+        UniTask<EnemySpawner> CreateSpawner(Vector3 at, string spawnerDataId, MonsterTypeId spawnerDataMonsterTypeId,
             int RespawnCount);
         UniTask<GameObject> CreateMonster(MonsterTypeId monsterTypeId, Transform parent);
         UniTask<LootPiece> CreateLoot();

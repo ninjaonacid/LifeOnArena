@@ -1,4 +1,3 @@
-using System.Collections;
 using Code.Data;
 using Code.Enemy;
 using Code.Infrastructure.ObjectPool;
@@ -10,7 +9,7 @@ using VContainer;
 
 namespace Code.Logic.EnemySpawners
 {
-    public class EnemySpawnPoint : MonoBehaviour, ISave
+    public class EnemySpawner : MonoBehaviour, ISave
     {
         private EnemyDeath _enemyDeath;
         private IEnemyObjectPool _enemyObjectPool;
