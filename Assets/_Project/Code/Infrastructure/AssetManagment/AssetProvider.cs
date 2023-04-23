@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -20,7 +21,7 @@ namespace Code.Infrastructure.AssetManagment
         }
 
  
-        public async Task<T> Load<T>(AssetReferenceGameObject assetReference) where T : class
+        public async UniTask<T> Load<T>(AssetReferenceGameObject assetReference) where T : class
         {
             if (_completedCache.TryGetValue(assetReference.AssetGUID, 
                     out AsyncOperationHandle completedHandle))
@@ -33,7 +34,7 @@ namespace Code.Infrastructure.AssetManagment
                 assetReference.AssetGUID);
         }
 
-        public async Task<T> Load<T>(AssetReferenceSprite spriteReference) where T : class
+        public async UniTask<T> Load<T>(AssetReferenceSprite spriteReference) where T : class
         {
             if (_completedCache.TryGetValue(spriteReference.AssetGUID,
                     out AsyncOperationHandle completedHandle))
@@ -47,7 +48,7 @@ namespace Code.Infrastructure.AssetManagment
         }
 
 
-        public async Task<T> Load<T>(string assetAddress) where T : class
+        public async UniTask<T> Load<T>(string assetAddress) where T : class
         {
             if (_completedCache.TryGetValue(assetAddress,
                     out AsyncOperationHandle completedHandle))

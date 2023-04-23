@@ -1,6 +1,5 @@
 using System.Threading.Tasks;
 using Code.Infrastructure.AssetManagment;
-using Code.Infrastructure.Factory;
 using Code.Services;
 using Code.Services.PersistentProgress;
 using Code.Services.SaveLoad;
@@ -18,10 +17,8 @@ namespace Code.UI.Services
         private readonly IStaticDataService _staticData;
         private readonly ISaveLoadService _saveLoad;
         private readonly IProgressService _progress;
-      
-
+        
         private Transform _uiCoreTransform;
-     
 
         public UIFactory(IAssetsProvider assetsProvider, 
             IStaticDataService staticDataService, 

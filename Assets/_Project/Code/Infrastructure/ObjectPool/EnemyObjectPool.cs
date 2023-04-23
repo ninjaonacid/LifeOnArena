@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using System.Threading.Tasks;
+using System.Threading;
 using Code.Infrastructure.Factory;
 using Code.StaticData;
 using Cysharp.Threading.Tasks;
@@ -24,7 +24,8 @@ namespace Code.Infrastructure.ObjectPool
             _enemyObjectsStock.Clear();
         }
 
-        public async UniTask<GameObject> GetObject(MonsterTypeId monsterTypeId, Transform parent)
+        public async UniTask<GameObject> GetObject(MonsterTypeId monsterTypeId, Transform parent,
+                                                    CancellationToken token)
         {
             GameObject result = null;
 
@@ -38,7 +39,7 @@ namespace Code.Infrastructure.ObjectPool
                 if (!_enemyObjectsStock.ContainsKey(monsterTypeId))
                     _enemyObjectsStock.Add(monsterTypeId, new List<GameObject>());
 
-                result = await _enemyFactory.CreateMonster(monsterTypeId, parent);
+                result = await _enemyFactory.CreateMonster(monsterTypeId, parent, token);
             }
 
             result.transform.position = parent.position;

@@ -5,6 +5,7 @@ using Code.Infrastructure.ObjectPool;
 using Code.Services;
 using Code.Services.PersistentProgress;
 using Code.StaticData;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using VContainer;
 
@@ -54,15 +55,14 @@ namespace Code.Logic.EnemySpawners
                 progress.KillData.ClearedSpawners.Add(Id);
         }
 
-        public async void Spawn(CancellationToken token)
+        public async UniTaskVoid Spawn(CancellationToken token)
         {
             Alive = true;
-            var monster = await _enemyObjectPool.GetObject(MonsterTypeId, transform);
+            var monster = await _enemyObjectPool.GetObject(MonsterTypeId, transform, token);
             _spawnParticle = _particleObjectPool.GetObject(ParticleId, transform);
 
             _enemyDeath = monster.GetComponent<EnemyDeath>();
             _enemyDeath.Happened += Slay;
-            
         }
 
         private void Slay()

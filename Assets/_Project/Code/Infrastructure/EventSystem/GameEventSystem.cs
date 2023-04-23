@@ -86,8 +86,6 @@ namespace Code.Infrastructure.EventSystem
                     _subscriptions[type].Remove(subToRemove);
                 }
             }
-
-            
         }
     }
 }

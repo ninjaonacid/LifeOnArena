@@ -9,7 +9,6 @@ using Code.StaticData.Levels;
 using Code.StaticData.Spawners;
 using Code.Utils;
 using Cysharp.Threading.Tasks;
-using UnityEngine;
 
 namespace Code.Logic.WaveLogic
 {
@@ -21,6 +20,7 @@ namespace Code.Logic.WaveLogic
         private CancellationTokenSource _cancellationTokenSource;
         private List<EnemySpawner> _enemySpawnPoints = new List<EnemySpawner>();
         private int _waveCounter = 0;
+        private int _nextWaveDelay = 5;
 
         private Timer _timer;
         public SpawnerController(ILevelEventHandler levelEventHandler, IEnemyFactory enemyFactory)
@@ -29,7 +29,7 @@ namespace Code.Logic.WaveLogic
             _enemyFactory = enemyFactory;
         }
 
-        public async UniTask InitSpawners(LevelConfig levelConfig)
+        public async UniTask InitSpawners(LevelConfig levelConfig, CancellationToken token = default)
         {
             foreach (EnemySpawnerData spawnerData in levelConfig.EnemySpawners)
             {
@@ -37,7 +37,7 @@ namespace Code.Logic.WaveLogic
                     spawnerData.Position,
                     spawnerData.Id,
                     spawnerData.MonsterTypeId,
-                    spawnerData.RespawnCount);
+                    spawnerData.RespawnCount, token);
 
                 _enemySpawnPoints.Add(spawner);
             }
@@ -50,28 +50,33 @@ namespace Code.Logic.WaveLogic
 
         public void RunSpawner()
         {
-#pragma warning disable CS4014
-            WaveSpawn(TaskHelper.CreateToken(ref _cancellationTokenSource));
-#pragma warning restore CS4014
+            WaveSpawn(TaskHelper.CreateToken(ref _cancellationTokenSource)).Forget();
         }
 
         public async UniTaskVoid WaveSpawn(CancellationToken token)
         {
             while (true)
             {
-                if (IsSpawnTime() && SpawnersClear())
+                if (SpawnersClear())
                 {
+                    await UniTask.Delay(ConvertSeconds(_nextWaveDelay), cancellationToken: token);
                     foreach (EnemySpawner spawner in _enemySpawnPoints)
                     {
-                        spawner.Spawn(token);
+                        spawner.Spawn(token).Forget();
                     }
                     _waveCounter++;
                     _timer.Reset();
                 }
 
-                await UniTask.Delay(1000, cancellationToken: token);
+                await UniTask.Delay(200, cancellationToken: token);
+
+                if (token.IsCancellationRequested)
+                {
+                    return;
+                }
             }
         }
+
         public void Dispose()
         {
            _cancellationTokenSource.Cancel();
@@ -80,12 +85,17 @@ namespace Code.Logic.WaveLogic
 
         private bool IsSpawnTime()
         {
-            return _timer.Elapsed > 5f;
+            return _timer.Elapsed >= 5f;
         }
 
         private bool SpawnersClear()
         {
             return _enemySpawnPoints.All(x => !x.Alive);
+        }
+
+        private int ConvertSeconds(int seconds)
+        {
+            return seconds * 1000;
         }
     }
 }

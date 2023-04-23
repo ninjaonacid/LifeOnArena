@@ -50,7 +50,7 @@ namespace Code.Infrastructure.Starters
         {
             LevelConfig config = _staticData.ForLevel(SceneManager.GetActiveScene().name);
 
-            await _spawnerController.InitSpawners(config);
+            await _spawnerController.InitSpawners(config, cancellation);
 
             var hero = await InitHero(config);
 
