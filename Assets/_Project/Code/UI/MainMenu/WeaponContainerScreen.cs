@@ -1,6 +1,6 @@
 namespace Code.UI.MainMenu
 {
-    public class WeaponContainerWindow : WindowBase
+    public class WeaponContainerScreen : ScreenBase
     {
         
     }

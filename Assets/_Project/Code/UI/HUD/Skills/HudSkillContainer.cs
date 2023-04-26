@@ -1,24 +1,20 @@
 using Code.Hero;
-using Code.Services.Input;
 using UnityEngine;
 
 namespace Code.UI.HUD.Skills
 {
     public class HudSkillContainer : MonoBehaviour
     {
-        private HudSkillButton[] _skillButtons;
+        [SerializeField] private HudSkillButton[] _skillButtons;
+
         private HeroSkills _heroSkills;
 
         public void Construct(HeroSkills heroSkills)
         {
             _heroSkills = heroSkills;
-
-            _skillButtons = GetComponentsInChildren<HudSkillButton>();
-
             _heroSkills.OnSkillChanged += SetSkillSlots;
 
             LinkButtonKeys();
-
             SetSkillSlots();
         }
 

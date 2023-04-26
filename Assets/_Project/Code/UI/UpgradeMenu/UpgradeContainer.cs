@@ -13,7 +13,7 @@ namespace Code.UI.UpgradeMenu
         [SerializeField] private Image _upgradeImage;
         [SerializeField] private Image _upgradeRarityImage;
         [SerializeField] private TextMeshProUGUI _upgradeText;
-        [SerializeField] private UpgradeWindow _upgradeWindow;
+        [SerializeField] private UpgradeScreen UpgradeScreen;
 
         private IAbilityFactory _abilityFactory;
       
@@ -42,7 +42,7 @@ namespace Code.UI.UpgradeMenu
         {
             _hero.GetComponent<HeroPassives>().AddPassive(_passiveAbilityTemplate);
 
-            _upgradeWindow.CloseButton.onClick.Invoke();
+            UpgradeScreen.CloseButton.onClick.Invoke();
         }
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 
 namespace Code.UI.SkillsMenu
 {
-    public class UISkillSlot : MonoBehaviour, IPointerClickHandler
+    public class UISkillPanelSlot : MonoBehaviour, IPointerClickHandler
     {
         private IProgressService _progress;
         public void Construct(IProgressService progress)
@@ -15,6 +15,16 @@ namespace Code.UI.SkillsMenu
         public void OnPointerClick(PointerEventData eventData)
         {
             
+        }
+
+        public void SelectSlot()
+        {
+
+        }
+
+        public void DeselectSlot()
+        {
+
         }
     }
 }

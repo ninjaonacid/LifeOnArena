@@ -3,7 +3,7 @@ namespace Code.UI.Services
     public class WindowsService : IWindowService
     {
         private readonly IUIFactory _uiFactory;
-        private WindowBase _activeWindow;
+        private ScreenBase _activeScreen;
         public WindowsService(IUIFactory uiFactory)
         {
             _uiFactory = uiFactory;
@@ -14,8 +14,8 @@ namespace Code.UI.Services
             switch (windowId)
             {
                 case UIWindowID.SelectionMenu:
-                    _activeWindow?.CloseButton.onClick.Invoke();
-                    _activeWindow = _uiFactory.CreateSelectionMenu(this);
+                    _activeScreen?.CloseButton.onClick.Invoke();
+                    _activeScreen = _uiFactory.CreateSelectionMenu(this);
                     break;
 
                 case UIWindowID.Weapon:

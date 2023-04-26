@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace Code.UI
 {
-    public class WindowBase : MonoBehaviour
+    public class ScreenBase : MonoBehaviour
     {
         public Button CloseButton;
         protected IProgressService _progressService;

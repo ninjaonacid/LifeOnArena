@@ -3,7 +3,7 @@ using Code.Services.PersistentProgress;
 
 namespace Code.UI.UpgradeMenu
 {
-    public class UpgradeWindow : WindowBase
+    public class UpgradeScreen : ScreenBase
     {
         private IAbilityFactory _abilityFactory;
         private IHeroFactory _heroFactory;

@@ -7,6 +7,6 @@ namespace Code.StaticData.UIWindows
     public class WindowConfig
     {
         public UIWindowID WindowId;
-        public WindowBase Prefab;
+        public ScreenBase Prefab;
     }
 }

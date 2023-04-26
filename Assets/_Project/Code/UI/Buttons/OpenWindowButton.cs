@@ -17,7 +17,6 @@ namespace Code.UI.Buttons
         private void Awake() =>
             Button.onClick.AddListener(Open);
 
-
         private void Open()
         {
             _windowService.Open(WindowId);

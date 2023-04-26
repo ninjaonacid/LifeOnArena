@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 namespace Code.UI.MainMenu
 {
-    public class SelectionWindow : WindowBase
+    public class SelectionScreen : ScreenBase
     {
     }
 }

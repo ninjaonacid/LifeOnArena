@@ -5,9 +5,12 @@ using Code.Services.PersistentProgress;
 using Code.Services.SaveLoad;
 using Code.StaticData.UIWindows;
 using Code.UI.Buttons;
+using Code.UI.SkillsMenu;
 using Code.UI.UpgradeMenu;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using VContainer;
+using VContainer.Unity;
 
 namespace Code.UI.Services
 {
@@ -17,13 +20,15 @@ namespace Code.UI.Services
         private readonly IStaticDataService _staticData;
         private readonly ISaveLoadService _saveLoad;
         private readonly IProgressService _progress;
+        private readonly IObjectResolver _objectResolver;
         
         private Transform _uiCoreTransform;
 
         public UIFactory(IAssetsProvider assetsProvider, 
             IStaticDataService staticDataService, 
             ISaveLoadService saveLoad,
-            IProgressService progress
+            IProgressService progress,
+            IObjectResolver objectResolver
         )
         {
             _assetsProvider = assetsProvider;
@@ -32,6 +37,7 @@ namespace Code.UI.Services
             _staticData = staticDataService;
             _saveLoad = saveLoad;
             _progress = progress;
+            _objectResolver = objectResolver;
         }
 
         public void InitAssets()
@@ -39,7 +45,7 @@ namespace Code.UI.Services
             
         }
 
-        public WindowBase CreateSelectionMenu(IWindowService windowService)
+        public ScreenBase CreateSelectionMenu(IWindowService windowService)
         {
             WindowConfig config = _staticData.ForWindow(UIWindowID.SelectionMenu);
             var menu = Object.Instantiate(config.Prefab, _uiCoreTransform);
@@ -55,7 +61,7 @@ namespace Code.UI.Services
         public void CreateUpgradeMenu()
         {
             WindowConfig config = _staticData.ForWindow(UIWindowID.UpgradeMenu);
-            var window = Object.Instantiate(config.Prefab, _uiCoreTransform) as UpgradeWindow;
+            var window = Object.Instantiate(config.Prefab, _uiCoreTransform) as UpgradeScreen;
             //window.Construct(_abilityFactory, _heroFactory, _progress);
 
         }
@@ -63,7 +69,8 @@ namespace Code.UI.Services
         public void CreateSkillsMenu()
         {
             WindowConfig config = _staticData.ForWindow(UIWindowID.Skills);
-            var window = Object.Instantiate(config.Prefab, _uiCoreTransform);
+            var window = _objectResolver.Instantiate(config.Prefab, _uiCoreTransform) as SkillPanelMenu;
+            
         }
         public void CreateWeaponWindow()
         {

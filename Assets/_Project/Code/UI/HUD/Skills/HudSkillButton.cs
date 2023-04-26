@@ -12,12 +12,11 @@ namespace Code.UI.HUD.Skills
 
         public AbilityTemplateBase heroAbility;
 
-        private HudSkillIcon _skillIcon;
+        [SerializeField] private HudSkillIcon _skillIcon;
 
 
         private void Awake()
         {
-            _skillIcon = GetComponentInChildren<HudSkillIcon>();
             _skillIcon.Image.enabled = false;
         }
 
@@ -29,6 +28,5 @@ namespace Code.UI.HUD.Skills
                 _skillIcon.Image.enabled = true;
             }
         }
-
     }
 }
