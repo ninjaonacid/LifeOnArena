@@ -13,7 +13,6 @@ namespace Code.UI
         public void Construct(IProgressService progress)
         {
             _progressService = progress;
-
         }
         private void Awake()
         {

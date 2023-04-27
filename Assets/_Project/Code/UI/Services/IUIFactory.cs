@@ -12,7 +12,6 @@ namespace Code.UI.Services
         void CreateWeaponWindow();
         void CreateUpgradeMenu();
         Task<Sprite> CreateSprite(AssetReferenceSprite spriteReference);
-
         void InitAssets();
         void CreateSkillsMenu();
     }

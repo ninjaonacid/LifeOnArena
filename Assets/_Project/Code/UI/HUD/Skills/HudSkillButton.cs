@@ -14,7 +14,6 @@ namespace Code.UI.HUD.Skills
 
         [SerializeField] private HudSkillIcon _skillIcon;
 
-
         private void Awake()
         {
             _skillIcon.Image.enabled = false;
