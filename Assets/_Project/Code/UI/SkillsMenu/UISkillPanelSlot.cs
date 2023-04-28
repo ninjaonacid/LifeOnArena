@@ -11,14 +11,13 @@ namespace Code.UI.SkillsMenu
         [SerializeField] private Image _skillIcon;
         [SerializeField] private CanvasGroup _selectionFrame;
         [SerializeField] private AbilityTemplateBase _abilitySO;
-
+        public bool IsEquipped = false;
         private IProgressService _progress;
         private UISkillPanelContainer _container;
         public void Construct(IProgressService progress, UISkillPanelContainer container)
         {
             _progress = progress;
             _container = container;
-            
         }
 
         public void OnPointerClick(PointerEventData eventData)
@@ -38,6 +37,8 @@ namespace Code.UI.SkillsMenu
             }
         }
 
+        public AbilityTemplateBase GetAbility() =>
+            _abilitySO;
 
     }
 }
