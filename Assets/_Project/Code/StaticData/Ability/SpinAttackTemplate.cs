@@ -10,9 +10,7 @@ namespace Code.StaticData.Ability
         public override IAbility GetAbility()
         {
             return new SpinAttack(Damage);
-            
         }
-
     }
 
     public class SpinAttack : IAbility

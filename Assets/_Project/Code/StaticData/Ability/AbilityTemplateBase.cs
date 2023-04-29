@@ -17,9 +17,8 @@ namespace Code.StaticData.Ability
         public float CurrentCooldown;
         public float ActiveTime;
         public float CurrentActiveTime;
-   
         public AbilityState State;
-        public AbilitySlotID AbilitySlot;
+
         public abstract IAbility GetAbility();
 
         public virtual bool IsReady() =>

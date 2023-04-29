@@ -7,7 +7,6 @@ namespace Code.Hero.HeroStates
     {
         private readonly HeroRotation _heroRotation;
         
-
         public SpinAbilityState(
             HeroAnimator animator, 
             HeroAttack heroAttack, 
@@ -16,7 +15,6 @@ namespace Code.Hero.HeroStates
         {
             _heroRotation = heroRotation;
         }
-
 
         public override void OnEnter()
         {
@@ -51,8 +49,6 @@ namespace Code.Hero.HeroStates
         }
 
         public override bool IsStateOver() => Duration <= 0;
-
-
 
     }
 }

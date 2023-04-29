@@ -11,9 +11,35 @@ namespace Code.Data
 
         public SkillSlotsData()
         {
-            SlotSkill = new Dictionary<AbilitySlotID, string>();
+            SlotSkill = new Dictionary<AbilitySlotID, string>()
+            {
+                [AbilitySlotID.First] = "",
+                [AbilitySlotID.Second] = ""
+            };
         }
 
+        public void EquipSkill(string id)
+        {
+            var slot = FindSlot();
+
+        }
+
+        public void UnEquipSkill(string id)
+        {
+        }
+
+        public AbilitySlotID FindSlot()
+        {
+            foreach (var slot in SlotSkill)
+            {
+                if (slot.Value == null)
+                {
+                    return slot.Key;
+                }
+            }
+            
+            return AbilitySlotID.Second;
+        }
     }
 
 }

@@ -26,6 +26,7 @@ namespace Code.Hero
         [SerializeField] private HeroRotation _heroRotation;
         [SerializeField] private HeroAttack _heroAttack;
         [SerializeField] private HeroSkills _heroSkills;
+        
 
         [Inject]
         public void Construct(IInputService inputService, IAudioService audioService)
@@ -41,8 +42,7 @@ namespace Code.Hero
 
         void Start()
         {
-
-            var firstSlot = _heroSkills.SkillSlots[0];
+            //var _heroSkills.ActiveSkill = _heroSkills.SkillSlots[0];
             var secondSlot = _heroSkills.SkillSlots[1];
 
             _stateMachine = new FiniteStateMachine();
@@ -93,7 +93,7 @@ namespace Code.Hero
                 HeroBaseAttack1,
                 (transition) => _input.IsAttackButtonUp()));
 
-
+            
             _stateMachine.AddTransition(new Transition(
                 HeroBaseAttack1,
                 HeroBaseAttack2,
@@ -125,30 +125,30 @@ namespace Code.Hero
                 HeroBaseAttack1,
                 SpinAttackAbility,
                 (transition) =>
-                    _input.IsButtonPressed(firstSlot.ButtonKey) &&
-                    firstSlot.Ability != null &&
-                    firstSlot.Ability.IsActive() &&
-                    firstSlot.Ability.StateMachineId.Equals(SpinAttackAbility)
+                    //_input.IsButtonPressed(_heroSkills.ActiveSkill.ButtonKey) &&
+                    _heroSkills.ActiveSkill != null &&
+                    _heroSkills.ActiveSkill.IsActive() &&
+                    _heroSkills.ActiveSkill.StateMachineId.Equals(SpinAttackAbility)
             ));
 
             _stateMachine.AddTransition(new Transition(
                 HeroBaseAttack2,
                 SpinAttackAbility,
                 (transition) =>
-                    _input.IsButtonPressed(firstSlot.ButtonKey) &&
-                    firstSlot.Ability != null &&
-                    firstSlot.Ability.IsActive() &&
-                    firstSlot.Ability.StateMachineId.Equals(SpinAttackAbility)
+                    //_input.IsButtonPressed(_heroSkills.ActiveSkill.ButtonKey) &&
+                    _heroSkills.ActiveSkill != null &&
+                    _heroSkills.ActiveSkill.IsActive() &&
+                    _heroSkills.ActiveSkill.StateMachineId.Equals(SpinAttackAbility)
             ));
 
             _stateMachine.AddTransition(new Transition(
                 HeroBaseAttack3,
                 SpinAttackAbility,
                 (transition) =>
-                    _input.IsButtonPressed(firstSlot.ButtonKey) &&
-                    firstSlot.Ability != null &&
-                    firstSlot.Ability.IsActive() &&
-                    firstSlot.Ability.StateMachineId.Equals(SpinAttackAbility)
+                    //_input.IsButtonPressed(_heroSkills.ActiveSkill.ButtonKey) &&
+                    _heroSkills.ActiveSkill != null &&
+                    _heroSkills.ActiveSkill.IsActive() &&
+                    _heroSkills.ActiveSkill.StateMachineId.Equals(SpinAttackAbility)
             ));
 
             _stateMachine.AddTransition(new Transition(
@@ -160,10 +160,10 @@ namespace Code.Hero
                 HeroIdle,
                 SpinAttackAbility,
                 (transition) =>
-                    _input.IsButtonPressed(firstSlot.ButtonKey) &&
-                    firstSlot.Ability != null &&
-                    firstSlot.Ability.IsActive() &&
-                    firstSlot.Ability.StateMachineId.Equals(SpinAttackAbility)));
+                    //_input.IsButtonPressed(_heroSkills.ActiveSkill.ButtonKey) &&
+                    _heroSkills.ActiveSkill != null &&
+                    _heroSkills.ActiveSkill.IsActive() &&
+                    _heroSkills.ActiveSkill.StateMachineId.Equals(SpinAttackAbility)));
 
             _stateMachine.AddTransition(new Transition(
                 HeroIdle,

@@ -8,15 +8,15 @@ namespace Code.UI.SkillsMenu
         [SerializeField] private CanvasGroup _canvasGroup;
 
 
+        public void OnPointerDown(PointerEventData eventData)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public void ShowButton(bool value)
         {
             _canvasGroup.alpha = value ? 255 : 0;
             _canvasGroup.interactable = value;
-        }
-
-        public void OnPointerDown(PointerEventData eventData)
-        {
-            throw new System.NotImplementedException();
         }
     }
 }

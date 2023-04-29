@@ -1,4 +1,3 @@
-using Code.Logic.ShelterWeapons;
 using Code.Services.PersistentProgress;
 using Code.UI.HUD.Skills;
 using UnityEngine;
@@ -6,13 +5,12 @@ using VContainer;
 
 namespace Code.UI.SkillsMenu
 {
-    public class UISkillPanelContainer : MonoBehaviour
+    public class UISkillPanelController : MonoBehaviour
     {
         [SerializeField] private UISkillPanelSlot[] _slots;
         [SerializeField] private EquipSkillButton _equipButton;
         [SerializeField] private UnEquipSkillButton _unEquipButton;
         private UISkillPanelSlot _selectedSlot;
-
         private IProgressService _progress;
 
         [Inject]
@@ -23,8 +21,8 @@ namespace Code.UI.SkillsMenu
             {
                 slot.Construct(progress, this);
             }
+            _equipButton.Construct(this, _progress.Progress.SkillSlotsData);
         }
-
         public void SetSelectedSlot(UISkillPanelSlot slot)
         {
             if (_selectedSlot != null && _selectedSlot != slot)
@@ -60,9 +58,14 @@ namespace Code.UI.SkillsMenu
         {
             var hudSkills = _progress.Progress.SkillSlotsData.SlotSkill;
 
+            var slot = _progress.Progress.SkillSlotsData.FindSlot();
+            hudSkills[slot] = _selectedSlot.GetAbility().Id;
+            _selectedSlot.IsEquipped = true;
+            _selectedSlot.SetSlotNumber((int)(slot));
+
             if (hudSkills[AbilitySlotID.Second] != null)
             {
-                hudSkills[AbilitySlotID.First] = _selectedSlot.GetAbility().Id;
+               
             }
         }
     }
