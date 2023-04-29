@@ -15,7 +15,6 @@ namespace Code.Hero
         public event Action OnSkillChanged;
 
         [SerializeField] private HeroAbilityCooldown _heroCooldown;
-        [SerializeField] private HeroStateMachineHandler _heroStateMachine;
         public HeroAttack HeroAttack;
         public SkillSlot[] SkillSlots;
         public AbilityTemplateBase ActiveSkill => _activeSkill;
@@ -56,31 +55,6 @@ namespace Code.Hero
                 }
             }
         }
-
-        
-        public bool IsSkillButtonPressed()
-        {
-            foreach (var slot in SkillSlots)
-            {
-                return _input.IsButtonPressed(slot.ButtonKey);
-            }
-
-            return false;
-        }
-        //public void ChangeSkill(AbilityTemplateBase heroAbility)
-        //{
-        //    foreach (var slot in SkillSlots)
-        //    {
-        //        if (heroAbility.AbilitySlot == slot.AbilitySlotID)
-        //        {
-        //            slot.Ability = _abilityFactory.CreateAbility(heroAbility.Id);
-        //            HeroAttack.SetActiveSkill(heroAbility);
-        //        }
-        //    }
-
-        //    OnSkillChanged?.Invoke();
-        //}
-
 
         public void LoadProgress(PlayerProgress progress)
         {

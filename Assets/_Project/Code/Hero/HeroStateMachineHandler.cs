@@ -27,7 +27,6 @@ namespace Code.Hero
         [SerializeField] private HeroAttack _heroAttack;
         [SerializeField] private HeroSkills _heroSkills;
         
-
         [Inject]
         public void Construct(IInputService inputService, IAudioService audioService)
         {
@@ -42,9 +41,6 @@ namespace Code.Hero
 
         void Start()
         {
-            //var _heroSkills.ActiveSkill = _heroSkills.SkillSlots[0];
-            var secondSlot = _heroSkills.SkillSlots[1];
-
             _stateMachine = new FiniteStateMachine();
 
             _stateMachine.AddState(HeroIdle, new HeroIdleState(
@@ -125,7 +121,6 @@ namespace Code.Hero
                 HeroBaseAttack1,
                 SpinAttackAbility,
                 (transition) =>
-                    //_input.IsButtonPressed(_heroSkills.ActiveSkill.ButtonKey) &&
                     _heroSkills.ActiveSkill != null &&
                     _heroSkills.ActiveSkill.IsActive() &&
                     _heroSkills.ActiveSkill.StateMachineId.Equals(SpinAttackAbility)
@@ -135,7 +130,6 @@ namespace Code.Hero
                 HeroBaseAttack2,
                 SpinAttackAbility,
                 (transition) =>
-                    //_input.IsButtonPressed(_heroSkills.ActiveSkill.ButtonKey) &&
                     _heroSkills.ActiveSkill != null &&
                     _heroSkills.ActiveSkill.IsActive() &&
                     _heroSkills.ActiveSkill.StateMachineId.Equals(SpinAttackAbility)
@@ -145,7 +139,6 @@ namespace Code.Hero
                 HeroBaseAttack3,
                 SpinAttackAbility,
                 (transition) =>
-                    //_input.IsButtonPressed(_heroSkills.ActiveSkill.ButtonKey) &&
                     _heroSkills.ActiveSkill != null &&
                     _heroSkills.ActiveSkill.IsActive() &&
                     _heroSkills.ActiveSkill.StateMachineId.Equals(SpinAttackAbility)
@@ -157,10 +150,15 @@ namespace Code.Hero
                 (transition) => _stateMachine.ActiveState.IsStateOver()));
 
             _stateMachine.AddTransition(new Transition(
+                SpinAttackAbility,
+                HeroMovement,
+                (transition) => _stateMachine.ActiveState.IsStateOver() &&
+                                _input.Axis.sqrMagnitude > Constants.Epsilon));
+
+            _stateMachine.AddTransition(new Transition(
                 HeroIdle,
                 SpinAttackAbility,
                 (transition) =>
-                    //_input.IsButtonPressed(_heroSkills.ActiveSkill.ButtonKey) &&
                     _heroSkills.ActiveSkill != null &&
                     _heroSkills.ActiveSkill.IsActive() &&
                     _heroSkills.ActiveSkill.StateMachineId.Equals(SpinAttackAbility)));
@@ -169,10 +167,9 @@ namespace Code.Hero
                 HeroIdle,
                 RollAbility,
                 (transition) =>
-                    _input.IsButtonPressed(secondSlot.ButtonKey) &&
-                    secondSlot.Ability != null &&
-                    secondSlot.Ability.IsActive() &&
-                    secondSlot.Ability.StateMachineId.Equals(RollAbility)
+                    _heroSkills.ActiveSkill != null &&
+                    _heroSkills.ActiveSkill.IsActive() &&
+                    _heroSkills.ActiveSkill.StateMachineId.Equals(RollAbility)
                     ));
 
             _stateMachine.AddTransition(new Transition(
@@ -180,15 +177,13 @@ namespace Code.Hero
                 HeroIdle,
                 (transition) => _stateMachine.ActiveState.IsStateOver()));
 
-
             _stateMachine.AddTransition(new Transition(
                 HeroMovement,
                 RollAbility,
-                (transition) =>
-                        _input.IsButtonPressed(secondSlot.ButtonKey) &&
-                        secondSlot.Ability != null &&
-                        secondSlot.Ability.IsActive() &&
-                        secondSlot.Ability.StateMachineId.Equals(RollAbility)));
+                (transition) => 
+                        _heroSkills.ActiveSkill != null &&
+                        _heroSkills.ActiveSkill.IsActive() &&
+                        _heroSkills.ActiveSkill.StateMachineId.Equals(RollAbility)));
 
             _stateMachine.InitStateMachine();
         }

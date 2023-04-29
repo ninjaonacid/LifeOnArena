@@ -131,7 +131,6 @@ namespace Code.Hero
             _heroAnimator.SetTrigger(Die);
         }
 
-
         private AnimatorState StateFor(int stateHash)
         {
             AnimatorState state;
