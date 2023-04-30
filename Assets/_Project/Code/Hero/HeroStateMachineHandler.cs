@@ -12,6 +12,7 @@ namespace Code.Hero
     {
         private const string HeroIdle = "HeroIdle";
         private const string HeroMovement = "HeroMovement";
+        private const string AbilityCast = "AbilityCast";
         private const string SpinAttackAbility = "SpinAttackAbility";
         private const string RollAbility = "RollAbility";
         private const string HeroBaseAttack1 = "HeroBaseAttack1";

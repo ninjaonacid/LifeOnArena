@@ -1,7 +1,6 @@
-using Code.Hero.HeroStates;
 using UnityEngine;
 
-namespace Code.StaticData.Ability
+namespace Code.StaticData.Ability.ActiveAbilities
 {
     [CreateAssetMenu(fileName = "SpinAttackAbility", menuName = "AbilityData/Attack/SpinAttack")]
     public class SpinAttackTemplate : AbilityTemplate<SpinAttack>

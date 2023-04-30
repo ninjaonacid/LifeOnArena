@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29c26f4c329d07647b5ec1c743df8591, type: 3}
+  m_Name: Tornado
+  m_EditorClassIdentifier: 
+  Id: cd606014-b07f-4263-b462-985b2308c7f6
+  Icon: {fileID: 21300000, guid: b7028d96bb02a7742a98c5cdd94f3505, type: 3}
+  StateMachineId: AbilityCast
+  Cooldown: 1
+  CurrentCooldown: 0
+  ActiveTime: 0.3
+  CurrentActiveTime: 0
+  State: 0
+  TornadoVFX: {fileID: 7920405970537135533, guid: 9b71735aea89ebe4f844339780488c83, type: 3}

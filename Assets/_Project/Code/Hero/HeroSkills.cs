@@ -64,7 +64,7 @@ namespace Code.Hero
             {
                 var slot = SkillSlots[index];
 
-                if (skillsData.SkillIds != null)
+                if (skillsData.SkillIds != null && skillsData.SkillIds.Count >= 1)
                 {
                     slot.Ability = _abilityFactory.CreateAbility(skillsData.SkillIds.Dequeue());
                 }
