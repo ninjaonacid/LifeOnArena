@@ -28,8 +28,8 @@ namespace Code.Hero
         public class SkillSlot
         {
             public string ButtonKey { get; set; }
-            public AbilitySlotID AbilitySlotID;
             public AbilityTemplateBase Ability;
+            public AbilitySlotID AbilitySlotID;
         }
 
         [Inject]
