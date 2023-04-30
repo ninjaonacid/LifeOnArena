@@ -7,6 +7,7 @@ using Code.Services.PersistentProgress;
 using Code.StaticData;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using VContainer;
 
 namespace Code.Logic.EnemySpawners
@@ -25,7 +26,7 @@ namespace Code.Logic.EnemySpawners
         public int RespawnCount { get; set; }
 
         public MonsterTypeId MonsterTypeId;
-        public ParticleId ParticleId = ParticleId.SpawnParticle;
+        public AssetReference SpawnParticle;
         public bool Alive  { get; private set; }
 
         [Inject]
@@ -59,7 +60,7 @@ namespace Code.Logic.EnemySpawners
         {
             Alive = true;
             var monster = await _enemyObjectPool.GetObject(MonsterTypeId, transform, token);
-            _spawnParticle = _particleObjectPool.GetObject(ParticleId, transform);
+            _spawnParticle = await _particleObjectPool.GetObject(SpawnParticle, transform);
 
             _enemyDeath = monster.GetComponent<EnemyDeath>();
             _enemyDeath.Happened += Slay;
@@ -71,7 +72,7 @@ namespace Code.Logic.EnemySpawners
                   _enemyDeath.Happened -= Slay;
 
             _enemyObjectPool.ReturnObject(MonsterTypeId, _enemyDeath.gameObject);
-            _particleObjectPool.ReturnObject(ParticleId, _spawnParticle);
+            _particleObjectPool.ReturnObject(SpawnParticle, _spawnParticle);
 
             Alive = false;
         }

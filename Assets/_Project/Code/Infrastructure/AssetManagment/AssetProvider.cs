@@ -47,6 +47,19 @@ namespace Code.Infrastructure.AssetManagment
                 spriteReference.AssetGUID);
         }
 
+        public async UniTask<T> Load<T>(AssetReference assetReference) where T : class
+        {
+            if (_completedCache.TryGetValue(assetReference.AssetGUID,
+                    out AsyncOperationHandle completedHandle))
+            {
+                return completedHandle.Result as T;
+            }
+
+            return await LoadWithCache(
+                Addressables.LoadAssetAsync<T>(assetReference),
+                assetReference.AssetGUID);
+        }
+
 
         public async UniTask<T> Load<T>(string assetAddress) where T : class
         {

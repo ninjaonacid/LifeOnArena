@@ -2,7 +2,9 @@ using System.Collections.Generic;
 using Code.Infrastructure.AssetManagment;
 using Code.Services;
 using Code.StaticData;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace Code.Infrastructure.ObjectPool
 {
@@ -10,10 +12,10 @@ namespace Code.Infrastructure.ObjectPool
     {
         private readonly IStaticDataService _staticData;
         private readonly IAssetProvider _assetProvider;
-        public Dictionary<ParticleId, List<GameObject>> _particleStock;
+        public Dictionary<AssetReference, List<GameObject>> _particleStock;
         public ParticleObjectPool(IStaticDataService staticData, IAssetProvider assetProvider)
         {
-            _particleStock = new Dictionary<ParticleId, List<GameObject>>();
+            _particleStock = new Dictionary<AssetReference, List<GameObject>>();
             _staticData = staticData;
             _assetProvider = assetProvider;
         }
@@ -21,22 +23,22 @@ namespace Code.Infrastructure.ObjectPool
         {
             _particleStock.Clear();
         }
-        public GameObject GetObject(ParticleId particleId, Transform parent)
+        public async UniTask<GameObject> GetObject(AssetReference particleReference, Transform parent)
         {
             GameObject result = null;
-            if (CheckForExist(particleId))
+            if (CheckForExist(particleReference))
             {
-                result = _particleStock[particleId][0];
-                _particleStock[particleId].RemoveAt(0);
+                result = _particleStock[particleReference][0];
+                _particleStock[particleReference].RemoveAt(0);
             }
             else
             {
-                if (!_particleStock.ContainsKey(particleId))
-                    _particleStock.Add(particleId, new List<GameObject>());
+                if (!_particleStock.ContainsKey(particleReference))
+                    _particleStock.Add(particleReference, new List<GameObject>());
 
 
-                var particleData = _staticData.ForParticle(particleId);
-                result = Object.Instantiate(particleData.ParticlePrefab, parent);
+                var particle = await _assetProvider.Load<GameObject>(particleReference);
+                result = Object.Instantiate(particle, parent);
 
             }
             result.SetActive(true);
@@ -44,16 +46,40 @@ namespace Code.Infrastructure.ObjectPool
 
         }
 
-        public void ReturnObject(ParticleId particleId, GameObject obj)
+        public void ReturnObject(AssetReference particle, GameObject obj)
         {
-            _particleStock[particleId].Add(obj);
+            _particleStock[particle].Add(obj);
             obj.SetActive(false);
         }
 
-        private bool CheckForExist(ParticleId particleId)
+        private bool CheckForExist(AssetReference particleId)
         {
             return _particleStock.ContainsKey(particleId) && _particleStock[particleId].Count > 0;
 
         }
+
+
+        //public GameObject GetObject(ParticleId particleReference, Transform parent)
+        //{
+        //    GameObject result = null;
+        //    if (CheckForExist(particleReference))
+        //    {
+        //        result = _particleStock[particleReference][0];
+        //        _particleStock[particleReference].RemoveAt(0);
+        //    }
+        //    else
+        //    {
+        //        if (!_particleStock.ContainsKey(particleReference))
+        //            _particleStock.Add(particleReference, new List<GameObject>());
+
+
+        //        var particleData = _staticData.ForParticle(particleReference);
+        //        result = Object.Instantiate(particleData.ParticlePrefab, parent);
+
+        //    }
+        //    result.SetActive(true);
+        //    return result;
+
+        //}
     }
 }

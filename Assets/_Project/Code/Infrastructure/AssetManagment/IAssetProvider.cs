@@ -16,6 +16,7 @@ namespace Code.Infrastructure.AssetManagment
         UniTask<T> Load<T>(AssetReferenceGameObject assetReference) where T : class;
 
         UniTask<T> Load<T>(AssetReferenceSprite spriteReference) where T: class;
+        UniTask<T> Load<T>(AssetReference assetReference) where T: class;
 
         UniTask<T> Load<T>(string assetAddress) where T : class;
 
