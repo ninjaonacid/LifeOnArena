@@ -15,23 +15,23 @@ namespace Code.Infrastructure.Factory
     {
         private readonly IStaticDataService _staticData;
         private readonly ISaveLoadService _saveLoadService;
-        private readonly IAssetsProvider _assetsProvider;
+        private readonly IAssetProvider _assetProvider;
         private readonly IProgressService _progressService;
 
         public ItemFactory(IStaticDataService staticData, 
             ISaveLoadService saveLoadService, 
-            IAssetsProvider assetsProvider,
+            IAssetProvider assetProvider,
             IProgressService progressService)
         {
             _staticData = staticData;
             _saveLoadService = saveLoadService;
-            _assetsProvider = assetsProvider;
+            _assetProvider = assetProvider;
             _progressService = progressService;
         }
 
         public async Task InitAssets()
         {
-            await _assetsProvider.Load<GameObject>(AssetAddress.WeaponPlatformSpawner);
+            await _assetProvider.Load<GameObject>(AssetAddress.WeaponPlatformSpawner);
         }
         public WeaponData LoadWeapon(WeaponId weaponId) =>
             _staticData.ForWeapon(weaponId);
@@ -41,7 +41,7 @@ namespace Code.Infrastructure.Factory
             WeaponId weaponId)
 
         {
-            var prefab = await _assetsProvider.Load<GameObject>(AssetAddress.WeaponPlatformSpawner);
+            var prefab = await _assetProvider.Load<GameObject>(AssetAddress.WeaponPlatformSpawner);
 
             WeaponPlatformSpawner weaponPlatformSpawner = InstantiateRegistered(prefab, point)
                 .GetComponent<WeaponPlatformSpawner>();
@@ -56,7 +56,7 @@ namespace Code.Infrastructure.Factory
         {
             var weaponPlatformData = _staticData.ForWeaponPlatforms(weaponId);
 
-            var prefab = await _assetsProvider.Load<GameObject>(weaponPlatformData.PrefabReference);
+            var prefab = await _assetProvider.Load<GameObject>(weaponPlatformData.PrefabReference);
 
             var weaponPlatform = Object.Instantiate(prefab, parent);
 

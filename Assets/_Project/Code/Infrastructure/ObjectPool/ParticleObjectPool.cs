@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Code.Infrastructure.AssetManagment;
 using Code.Services;
 using Code.StaticData;
 using UnityEngine;
@@ -8,11 +9,13 @@ namespace Code.Infrastructure.ObjectPool
     public class ParticleObjectPool : IParticleObjectPool
     {
         private readonly IStaticDataService _staticData;
+        private readonly IAssetProvider _assetProvider;
         public Dictionary<ParticleId, List<GameObject>> _particleStock;
-        public ParticleObjectPool(IStaticDataService staticData)
+        public ParticleObjectPool(IStaticDataService staticData, IAssetProvider assetProvider)
         {
             _particleStock = new Dictionary<ParticleId, List<GameObject>>();
             _staticData = staticData;
+            _assetProvider = assetProvider;
         }
         public void CleanUp()
         {

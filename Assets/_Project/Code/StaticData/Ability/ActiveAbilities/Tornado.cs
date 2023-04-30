@@ -1,20 +1,24 @@
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace Code.StaticData.Ability.ActiveAbilities
 {
     public class Tornado : IAbility
     {
-        private GameObject _tornadoVfx;
+        private AssetReference _tornadoVfx;
         private float _duration;
-        public Tornado(GameObject tornadoVFX, float duration)
+        
+        public Tornado(AssetReference tornadoVfx, float duration)
         {
-            _tornadoVfx = tornadoVFX;
+            _tornadoVfx = tornadoVfx;
             _duration = duration;
         }
         public void Use(GameObject caster, GameObject target)
         {
-            var position = caster.transform.position;
-            Object.Instantiate(_tornadoVfx, position + new Vector3(0, 0, 3), Quaternion.identity);
+            var casterPosition = caster.transform.position;
+            var casterDirection = caster.transform.forward;
+            var castOffset = 3f;
+            //Object.Instantiate(_tornadoVfx, casterPosition + casterDirection * castOffset, Quaternion.identity);
 
         }
     }

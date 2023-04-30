@@ -25,20 +25,20 @@ namespace Code.Infrastructure.Factory
     {
         private readonly IHeroFactory _heroFactory;
         private readonly IStaticDataService _staticData;
-        private readonly IAssetsProvider _assetsProvider;
+        private readonly IAssetProvider _assetProvider;
         private readonly ISaveLoadService _saveLoadService;
         private readonly IProgressService _progressService;
         private readonly IRandomService _randomService;
         private readonly IObjectResolver _objectResolver;
 
         private CancellationTokenSource _cancellationTokenSource;
-        public EnemyFactory(IHeroFactory heroFactory, IStaticDataService staticData, IAssetsProvider assetsProvider, 
+        public EnemyFactory(IHeroFactory heroFactory, IStaticDataService staticData, IAssetProvider assetProvider, 
             ISaveLoadService saveLoadService, IProgressService progressService,
             IRandomService randomService, IObjectResolver objectResolver)
         {
             _heroFactory = heroFactory;
             _staticData = staticData;
-            _assetsProvider = assetsProvider;
+            _assetProvider = assetProvider;
             _saveLoadService = saveLoadService;
             _progressService = progressService;
             _randomService = randomService;
@@ -47,8 +47,8 @@ namespace Code.Infrastructure.Factory
 
         public async UniTask InitAssets()
         {
-            await _assetsProvider.Load<GameObject>(AssetAddress.EnemySpawner);
-            await _assetsProvider.Load<GameObject>(AssetAddress.Loot);
+            await _assetProvider.Load<GameObject>(AssetAddress.EnemySpawner);
+            await _assetProvider.Load<GameObject>(AssetAddress.Loot);
         }
 
         public async UniTask<EnemySpawner> CreateSpawner(Vector3 at,
@@ -56,7 +56,7 @@ namespace Code.Infrastructure.Factory
             MonsterTypeId spawnerDataMonsterTypeId,
             int spawnerRespawnCount, CancellationToken token)
         {
-            var prefab = await _assetsProvider.Load<GameObject>(AssetAddress.EnemySpawner);
+            var prefab = await _assetProvider.Load<GameObject>(AssetAddress.EnemySpawner);
 
             EnemySpawner spawner = InstantiateRegistered(prefab, at)
                 .GetComponent<EnemySpawner>();
@@ -72,7 +72,7 @@ namespace Code.Infrastructure.Factory
         {
             var monsterData = _staticData.ForMonster(monsterTypeId);
 
-            GameObject prefab = await _assetsProvider.Load<GameObject>(monsterData.PrefabReference);
+            GameObject prefab = await _assetProvider.Load<GameObject>(monsterData.PrefabReference);
             GameObject monster = Object.Instantiate<GameObject>(prefab,
                 parent.position, 
                 Quaternion.identity, parent);
@@ -104,7 +104,7 @@ namespace Code.Infrastructure.Factory
 
         public async UniTask<LootPiece> CreateLoot()
         {
-            var prefab = await _assetsProvider.Load<GameObject>(AssetAddress.Loot);
+            var prefab = await _assetProvider.Load<GameObject>(AssetAddress.Loot);
 
             var lootPiece = InstantiateRegistered(prefab)
                 .GetComponent<LootPiece>();

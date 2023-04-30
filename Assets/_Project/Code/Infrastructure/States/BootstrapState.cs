@@ -9,11 +9,11 @@ namespace Code.Infrastructure.States
         private const string InitialScene = "Initialize";
         private readonly SceneLoader _sceneLoader;
         private readonly IStaticDataService _staticData;
-        private readonly IAssetsProvider _assetProvider;
+        private readonly IAssetProvider _assetProvider;
         public IGameStateMachine GameStateMachine { get; set; }
 
         public BootstrapState(SceneLoader sceneLoader,
-            IStaticDataService staticData, IAssetsProvider assetProvider)
+            IStaticDataService staticData, IAssetProvider assetProvider)
         {
             _sceneLoader = sceneLoader;
             _staticData = staticData;

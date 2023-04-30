@@ -30,7 +30,7 @@ namespace Code.Infrastructure.Scopes
             builder.Register<IUIFactory, UIFactory>(Lifetime.Singleton);
             builder.Register<IWindowService, WindowsService>(Lifetime.Singleton);
             builder.Register<ILevelEventHandler, LevelEventHandler>(Lifetime.Singleton);
-            builder.Register<IAssetsProvider, AssetProvider>(Lifetime.Singleton);
+            builder.Register<IAssetProvider, AssetProvider>(Lifetime.Singleton);
             builder.Register<IProgressService,ProgressService>(Lifetime.Singleton);
             builder.Register<IRandomService, RandomService>(Lifetime.Singleton);
             builder.Register<IEventSystem, GameEventSystem>(Lifetime.Singleton);

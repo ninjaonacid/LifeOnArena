@@ -16,7 +16,7 @@ namespace Code.UI.Services
 {
     public class UIFactory : IUIFactory
     {
-        private readonly IAssetsProvider _assetsProvider;
+        private readonly IAssetProvider _assetProvider;
         private readonly IStaticDataService _staticData;
         private readonly ISaveLoadService _saveLoad;
         private readonly IProgressService _progress;
@@ -24,14 +24,14 @@ namespace Code.UI.Services
         
         private Transform _uiCoreTransform;
 
-        public UIFactory(IAssetsProvider assetsProvider, 
+        public UIFactory(IAssetProvider assetProvider, 
             IStaticDataService staticDataService, 
             ISaveLoadService saveLoad,
             IProgressService progress,
             IObjectResolver objectResolver
         )
         {
-            _assetsProvider = assetsProvider;
+            _assetProvider = assetProvider;
           
             //_heroFactory = heroFactory;
             _staticData = staticDataService;
@@ -80,12 +80,12 @@ namespace Code.UI.Services
 
         public void CreateCore()
         {
-            _uiCoreTransform = _assetsProvider.Instantiate(AssetAddress.UICore).transform;
+            _uiCoreTransform = _assetProvider.Instantiate(AssetAddress.UICore).transform;
         }
 
         public async Task<Sprite> CreateSprite(AssetReferenceSprite spriteReference)
         {
-           var sprite = await _assetsProvider.Load<Sprite>(spriteReference);
+           var sprite = await _assetProvider.Load<Sprite>(spriteReference);
            return sprite;
         }
     }

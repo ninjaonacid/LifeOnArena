@@ -5,16 +5,16 @@ namespace Code.Services.AudioService
 {
     public class AudioService : IAudioService
     {
-        private readonly IAssetsProvider _assetsProvider;
+        private readonly IAssetProvider _assetProvider;
 
-        public AudioService(IAssetsProvider assetsProvider)
+        public AudioService(IAssetProvider assetProvider)
         {
-            _assetsProvider = assetsProvider;
+            _assetProvider = assetProvider;
             
         }
         public void InitAssets()
         {
-            _assetsProvider.Load<AudioClip>(AssetAddress.HeroSwordAttackSound);
+            _assetProvider.Load<AudioClip>(AssetAddress.HeroSwordAttackSound);
         }
 
         public void PlaySound()
@@ -23,7 +23,7 @@ namespace Code.Services.AudioService
 
         public async void PlayHeroAttackSound(AudioSource audioSource)
         {
-            var sound = await _assetsProvider.Load<AudioClip>(AssetAddress.HeroSwordAttackSound);
+            var sound = await _assetProvider.Load<AudioClip>(AssetAddress.HeroSwordAttackSound);
             //GameObject soundGameObject = new GameObject();
             //AudioSource audioSource = soundGameObject.AddComponent<AudioSource>();
 

@@ -9,12 +9,12 @@ namespace Code.Infrastructure.Factory
 {
     public class HeroFactory : IHeroFactory
     {
-        private readonly IAssetsProvider _assetsProvider;
+        private readonly IAssetProvider _assetProvider;
         private readonly ISaveLoadService _saveLoadService;
         private readonly IObjectResolver _objectResolver;
-        public HeroFactory(IAssetsProvider assetsProvider, ISaveLoadService saveLoadService, IObjectResolver objectResolver)
+        public HeroFactory(IAssetProvider assetProvider, ISaveLoadService saveLoadService, IObjectResolver objectResolver)
         {
-            _assetsProvider = assetsProvider;
+            _assetProvider = assetProvider;
             _saveLoadService = saveLoadService;
             _objectResolver = objectResolver;
         }
@@ -22,12 +22,12 @@ namespace Code.Infrastructure.Factory
 
         public async UniTask InitAssets()
         {
-            await _assetsProvider.Load<GameObject>(AssetAddress.Hero);
+            await _assetProvider.Load<GameObject>(AssetAddress.Hero);
         }
 
         public async UniTask<GameObject> CreateHero(Vector3 initialPoint)
         {
-            GameObject prefab = await _assetsProvider.Load<GameObject>(AssetAddress.Hero);
+            GameObject prefab = await _assetProvider.Load<GameObject>(AssetAddress.Hero);
 
             HeroGameObject = InstantiateRegistered(prefab,
                 initialPoint);

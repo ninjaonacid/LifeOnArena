@@ -12,7 +12,7 @@ namespace Code.Infrastructure.States
         private readonly LoadingCurtain _curtain;
         private readonly SceneLoader _sceneLoader;
         private readonly ISaveLoadService _saveLoadService;
-        private readonly IAssetsProvider _assetsProvider;
+        private readonly IAssetProvider _assetProvider;
         private readonly IAudioService _audioService;
         private readonly IUIFactory _uiFactory;
 
@@ -21,7 +21,7 @@ namespace Code.Infrastructure.States
         public LoadLevelState(
          
             ISaveLoadService saveLoadService,
-            IAssetsProvider assetsProvider,
+            IAssetProvider assetProvider,
             IAudioService audioService,
             SceneLoader sceneLoader,
             LoadingCurtain curtain, IUIFactory uiFactory)
@@ -30,7 +30,7 @@ namespace Code.Infrastructure.States
             _curtain = curtain;
             _uiFactory = uiFactory;
             _audioService = audioService;
-            _assetsProvider = assetsProvider;
+            _assetProvider = assetProvider;
             _saveLoadService = saveLoadService;
         }
 
@@ -38,7 +38,7 @@ namespace Code.Infrastructure.States
         {
             _curtain.Show();
             _saveLoadService.Cleanup();
-            _assetsProvider.Cleanup();
+            _assetProvider.Cleanup();
             _audioService.InitAssets();
 
             _sceneLoader.Load(sceneName, OnLoaded);
