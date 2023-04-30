@@ -1,5 +1,6 @@
 using Code.Services.PersistentProgress;
 using Code.StaticData.Ability;
+using Code.UI.HUD.Skills;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -14,6 +15,7 @@ namespace Code.UI.SkillsMenu
         [SerializeField] private CanvasGroup _equippedFrame;
         [SerializeField] private AbilityTemplateBase _abilitySO;
         [SerializeField] private TextMeshProUGUI _slotNumber;
+
         public bool IsEquipped = false;
         private IProgressService _progress;
         private UISkillPanelController _controller;
@@ -21,6 +23,8 @@ namespace Code.UI.SkillsMenu
         {
             _progress = progress;
             _controller = controller;
+
+            SetIcon();
         }
 
         public void OnPointerClick(PointerEventData eventData)
@@ -28,21 +32,18 @@ namespace Code.UI.SkillsMenu
             _controller.SetSelectedSlot(this);
         }
 
+        private void SetIcon()
+        {
+            _skillIcon.sprite = _abilitySO?.Icon;
+        }
         public void ShowSelectionFrame(bool value)
         {
-            if (value)
-            {
-                _selectionFrame.alpha = 255;
-            }
-            else
-            {
-                _selectionFrame.alpha = 0;
-            }
+            _selectionFrame.alpha = value ? 255 : 0;
         }
 
-        public void SetSlotNumber(int value)
+        public void SetSlot(AbilitySlotID id)
         {
-            _slotNumber.text = value.ToString();
+            _slotNumber.text = ((int)id).ToString();
         }
 
         public AbilityTemplateBase GetAbility() =>

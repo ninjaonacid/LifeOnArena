@@ -58,13 +58,18 @@ namespace Code.Hero
 
         public void LoadProgress(PlayerProgress progress)
         {
-            var skillsData = progress.SkillSlotsData.SlotSkill;
+            var skillsData = progress.SkillSlotsData;
 
-            foreach (var slot in SkillSlots)
+            for (var index = 0; index <= skillsData.SkillIds.Count; index++)
             {
-                if (skillsData[slot.AbilitySlotID] != null)
-                    slot.Ability = _abilityFactory.CreateAbility(skillsData[slot.AbilitySlotID]);
+                var slot = SkillSlots[index];
+
+                if (skillsData.SkillIds != null)
+                {
+                    slot.Ability = _abilityFactory.CreateAbility(skillsData.SkillIds.Dequeue());
+                }
             }
+
             OnSkillChanged?. Invoke();
         }
     }

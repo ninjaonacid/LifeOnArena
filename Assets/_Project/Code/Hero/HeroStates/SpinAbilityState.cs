@@ -1,4 +1,3 @@
-using Code.Services.Input;
 using UnityEngine;
 
 namespace Code.Hero.HeroStates
@@ -22,7 +21,6 @@ namespace Code.Hero.HeroStates
             _heroRotation.enabled = false;
             HeroAnimator.PlayAttack(this);
             HeroAttack.SkillAttack();
-            Debug.Log("Enter spinAttack");
             Duration = 0.7f;
         }
 

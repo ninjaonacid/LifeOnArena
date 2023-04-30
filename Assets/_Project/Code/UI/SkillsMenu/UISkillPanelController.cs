@@ -1,5 +1,6 @@
+using System.Collections.Generic;
+using System.Linq;
 using Code.Services.PersistentProgress;
-using Code.UI.HUD.Skills;
 using UnityEngine;
 using VContainer;
 
@@ -10,7 +11,10 @@ namespace Code.UI.SkillsMenu
         [SerializeField] private UISkillPanelSlot[] _slots;
         [SerializeField] private EquipSkillButton _equipButton;
         [SerializeField] private UnEquipSkillButton _unEquipButton;
+
         private UISkillPanelSlot _selectedSlot;
+        private readonly Queue<UISkillPanelSlot> _equippedSlots = new Queue<UISkillPanelSlot>(2);
+
         private IProgressService _progress;
 
         [Inject]
@@ -56,16 +60,27 @@ namespace Code.UI.SkillsMenu
         
         public void EquipSkill()
         {
-            var hudSkills = _progress.Progress.SkillSlotsData.SlotSkill;
+            var hudSkills = _progress.Progress.SkillSlotsData;
 
-            var slot = _progress.Progress.SkillSlotsData.FindSlot();
-            hudSkills[slot] = _selectedSlot.GetAbility().Id;
-            _selectedSlot.IsEquipped = true;
-            _selectedSlot.SetSlotNumber((int)(slot));
-
-            if (hudSkills[AbilitySlotID.Second] != null)
+            if (!_equippedSlots.Contains(_selectedSlot) && _equippedSlots.Count < 2)
             {
-               
+                _equippedSlots.Enqueue(_selectedSlot);
+                _selectedSlot.IsEquipped = true;
+            }
+            else if (!_equippedSlots.Contains(_selectedSlot) && _equippedSlots.Count >= 2)
+            {
+                var firstSlot = _equippedSlots.Dequeue();
+                firstSlot.IsEquipped = false;
+                _equippedSlots.Enqueue(_selectedSlot);
+            }
+          
+
+            hudSkills.SkillIds.Clear();
+
+            foreach (var slot in _equippedSlots)
+            {
+                if(!hudSkills.SkillIds.Contains(slot.GetAbility().Id))
+                    hudSkills.SkillIds.Enqueue(slot.GetAbility().Id);
             }
         }
     }
