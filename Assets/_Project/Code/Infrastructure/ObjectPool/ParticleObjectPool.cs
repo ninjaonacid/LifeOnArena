@@ -9,13 +9,11 @@ namespace Code.Infrastructure.ObjectPool
 {
     public class ParticleObjectPool : IParticleObjectPool
     {
-        private readonly IStaticDataService _staticData;
         private readonly IAssetProvider _assetProvider;
         public Dictionary<AssetReference, List<GameObject>> _particleStock;
-        public ParticleObjectPool(IStaticDataService staticData, IAssetProvider assetProvider)
+        public ParticleObjectPool(IAssetProvider assetProvider)
         {
             _particleStock = new Dictionary<AssetReference, List<GameObject>>();
-            _staticData = staticData;
             _assetProvider = assetProvider;
         }
         public void CleanUp()
@@ -25,6 +23,7 @@ namespace Code.Infrastructure.ObjectPool
         public async UniTask<GameObject> GetObject(AssetReference particleReference, Transform parent)
         {
             GameObject result = null;
+
             if (CheckForExist(particleReference))
             {
                 result = _particleStock[particleReference][0];

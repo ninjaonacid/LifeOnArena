@@ -24,7 +24,7 @@ namespace Code.UI.HUD.Skills
             {
                 if (_skillButtons[i].abilitySlotID == _heroSkills.SkillSlots[i].AbilitySlotID)
                 {
-                    _skillButtons[i].heroAbility = _heroSkills.SkillSlots[i].Ability;
+                    _skillButtons[i].heroAbility = _heroSkills.SkillSlots[i].AbilityTemplate;
                     _skillButtons[i].UpdateSkillView();
                 }
             }

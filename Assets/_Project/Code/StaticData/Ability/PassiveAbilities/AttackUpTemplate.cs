@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Code.StaticData.Ability.PassiveAbilities
 {
-    [CreateAssetMenu(fileName = "AttackUp", menuName = "Ability/Passive/AttackUp")]
+    [CreateAssetMenu(fileName = "AttackUp", menuName = "AbilityTemplate/Passive/AttackUp")]
     public class AttackUpTemplate : PassiveAbilityTemplate<AttackUpPassive>
     {
         [Range(0.0f, 1f)] public float AttackModifier;

@@ -24,14 +24,8 @@ namespace Code.Infrastructure.Factory
             _availablePassives = new List<PassiveAbilityTemplateBase>();
         }
 
-        public void Warmup()
-        {
-
-        }
-
-        public AbilityTemplateBase CreateAbility(string heroAbilityId) =>
+        public AbilityTemplateBase CreateAbilityTemplate(string heroAbilityId) =>
            _staticData.ForAbility(heroAbilityId);
-        
         public PassiveAbilityTemplateBase CreatePassive(string abilityId) =>
             _staticData.ForPassiveAbility(abilityId);
 

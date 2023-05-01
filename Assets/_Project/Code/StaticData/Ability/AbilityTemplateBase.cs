@@ -16,6 +16,7 @@ namespace Code.StaticData.Ability
         public float CurrentActiveTime;
         public AbilityState State;
 
+
         public abstract IAbility GetAbility();
 
         public virtual bool IsReady() =>

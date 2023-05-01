@@ -15,12 +15,12 @@ namespace Code.Hero
         public event Action OnSkillChanged;
 
         [SerializeField] private HeroAbilityCooldown _heroCooldown;
-        public HeroAttack HeroAttack;
+      
         public SkillSlot[] SkillSlots;
-        public AbilityTemplateBase ActiveSkill => _activeSkill;
 
         private SkillSlotsData _skillSlotsData;
         private AbilityTemplateBase _activeSkill;
+        public AbilityTemplateBase ActiveSkill => _activeSkill;
         private IAbilityFactory _abilityFactory;
         private IInputService _input;
 
@@ -28,7 +28,8 @@ namespace Code.Hero
         public class SkillSlot
         {
             public string ButtonKey { get; set; }
-            public AbilityTemplateBase Ability;
+            public AbilityTemplateBase AbilityTemplate;
+            public IAbility Ability;
             public AbilitySlotID AbilitySlotID;
         }
 
@@ -45,12 +46,12 @@ namespace Code.Hero
             {
                 if (_input.IsButtonPressed(slot.ButtonKey))
                 {
-                    if (slot.Ability && slot.Ability.IsReady())
+                    if (slot.AbilityTemplate && slot.AbilityTemplate.IsReady())
                     {
-                        slot.Ability.GetAbility().Use(this.gameObject, null);
-                        slot.Ability.State = AbilityState.Active;
-                        _activeSkill = slot.Ability;
-                        _heroCooldown.StartCooldown(slot.Ability);
+                        slot.AbilityTemplate.GetAbility().Use(this.gameObject, null);
+                        slot.AbilityTemplate.State = AbilityState.Active;
+                        _activeSkill = slot.AbilityTemplate;
+                        _heroCooldown.StartCooldown(slot.AbilityTemplate);
                     }
                 }
             }
@@ -66,7 +67,7 @@ namespace Code.Hero
 
                 if (skillsData.SkillIds != null && skillsData.SkillIds.Count >= 1)
                 {
-                    slot.Ability = _abilityFactory.CreateAbility(skillsData.SkillIds.Dequeue());
+                    slot.AbilityTemplate = _abilityFactory.CreateAbilityTemplate(skillsData.SkillIds.Dequeue());
                 }
             }
 
