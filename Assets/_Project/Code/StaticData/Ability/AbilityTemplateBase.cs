@@ -1,5 +1,6 @@
 
 using Code.Infrastructure.ObjectPool;
+using Code.Services.BattleService;
 
 namespace Code.StaticData.Ability
 {
@@ -19,10 +20,12 @@ namespace Code.StaticData.Ability
         public AbilityState State;
 
         protected IParticleObjectPool ParticlePool;
+        protected IBattleService BattleService;
 
-        public void InitServices(IParticleObjectPool particlePool)
+        public void InitServices(IParticleObjectPool particlePool, IBattleService battleService)
         {
             ParticlePool = particlePool;
+            BattleService = battleService;
         }
 
         public abstract IAbility GetAbility();

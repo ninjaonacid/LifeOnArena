@@ -7,10 +7,19 @@ namespace Code.StaticData.Ability.ActiveAbilities
     public class TornadoTemplate : AbilityTemplate<Tornado>
     {
         public AssetReference TornadoVfx;
+        public float Damage;
+        public float AttackRadius;
         public float CastDistance;
+
+        private IAbility _abilityInstance;
         public override IAbility GetAbility()
         {
-            return new Tornado(ParticlePool, TornadoVfx, ActiveTime);
+            return _abilityInstance ??= new Tornado(ParticlePool,
+                BattleService,
+                TornadoVfx,
+                ActiveTime,
+                Damage,
+                AttackRadius);
         }
     }
 }

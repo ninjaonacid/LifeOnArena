@@ -12,15 +12,25 @@ namespace Code.StaticData.Ability.ActiveAbilities
         private readonly IParticleObjectPool _particlesPool;
         private readonly IBattleService _battleService;
         private readonly AssetReference _tornadoVfx;
-        private float _duration;
-        private LayerMask _layerMask = LayerMask.NameToLayer("Hittable");
-        public Tornado(IParticleObjectPool particlePool,
+        private readonly float _duration;
+        private readonly float _damage;
+        private readonly float _attackRadius;
 
-            AssetReference tornadoVfx, float duration)
+        private readonly LayerMask _layerMask = LayerMask.NameToLayer("Hittable");
+
+        public Tornado(IParticleObjectPool particlePool,
+            IBattleService battleService,
+            AssetReference tornadoVfx,
+            float duration,
+            float damage,
+            float attackRadius)
         {
             _particlesPool = particlePool;
+            _battleService = battleService;
             _tornadoVfx = tornadoVfx;
             _duration = duration;
+            _damage = damage;
+            _attackRadius = attackRadius;
         }
         public async void Use(GameObject caster, GameObject target)
         {
@@ -33,7 +43,7 @@ namespace Code.StaticData.Ability.ActiveAbilities
             var projectileTransform = tornadoProjectile.transform;
             projectileTransform.position = casterPosition + casterDirection * castOffset;
             projectileTransform.rotation = Quaternion.identity;
-
+            _battleService.AoeAttack(_damage, _attackRadius, 10,  projectileTransform.position, _layerMask);
 
             
 
