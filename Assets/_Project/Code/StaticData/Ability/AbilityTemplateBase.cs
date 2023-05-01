@@ -1,4 +1,3 @@
-
 using Code.Infrastructure.ObjectPool;
 using Code.Services.BattleService;
 
@@ -29,7 +28,6 @@ namespace Code.StaticData.Ability
         }
 
         public abstract IAbility GetAbility();
-
 
         public virtual bool IsReady() =>
             State == AbilityState.Ready;

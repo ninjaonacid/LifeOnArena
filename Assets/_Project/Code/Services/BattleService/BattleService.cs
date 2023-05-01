@@ -7,7 +7,7 @@ namespace Code.Services.BattleService
     {
         private Collider[] _hits;
 
-        private int Hit(Vector3 startPoint, float attackRadius, int hits, LayerMask mask)
+        private int FindTargets(Vector3 startPoint, float attackRadius, int hits, LayerMask mask)
         {
             _hits = new Collider[hits];
 
@@ -20,21 +20,15 @@ namespace Code.Services.BattleService
 
         public void AoeAttack(float damage, float radius, int maxTargets, Vector3 worldPoint, LayerMask mask)
         {
-            for (int i = 0; i < Hit(worldPoint, radius, maxTargets, mask); i++)
+            for (int i = 0; i < FindTargets(worldPoint, radius, maxTargets, mask); i++)
             {
-                ApplyDamage(damage);
-            }
-        }
-
-        private void ApplyDamage(float damage)
-        {
-            foreach (Collider collider in _hits)
-            {
-                if(collider.transform.TryGetComponent(out IHealth health))
+                if(_hits[i].transform.parent.TryGetComponent(out IHealth health))
                 {
+                    Debug.Log("Zalupa");
                     health.TakeDamage(damage);
                 }
             }
         }
+
     }
 }

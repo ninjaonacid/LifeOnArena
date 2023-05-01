@@ -14,7 +14,9 @@ namespace Code.StaticData.Ability.ActiveAbilities
         private IAbility _abilityInstance;
         public override IAbility GetAbility()
         {
-            return _abilityInstance ??= new Tornado(ParticlePool,
+            return _abilityInstance ??= 
+                new Tornado
+                (ParticlePool,
                 BattleService,
                 TornadoVfx,
                 ActiveTime,

@@ -1,5 +1,4 @@
 using Code.Data;
-using Code.Infrastructure.EventSystem;
 using Code.Logic;
 using Code.Services.AudioService;
 using Code.Services.PersistentProgress;
@@ -16,8 +15,7 @@ namespace Code.Hero
         private readonly Collider[] _hits = new Collider[2];
 
         private CharacterStats _characterStats;
-       
-
+        
         public HeroWeapon HeroWeapon;
         public HeroAnimator HeroAnimator;
         public CharacterController CharacterController;

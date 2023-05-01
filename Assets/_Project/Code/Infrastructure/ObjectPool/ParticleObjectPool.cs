@@ -9,7 +9,7 @@ namespace Code.Infrastructure.ObjectPool
     public class ParticleObjectPool : IParticleObjectPool
     {
         private readonly IAssetProvider _assetProvider;
-        public Dictionary<AssetReference, List<GameObject>> _particleStock;
+        private readonly Dictionary<AssetReference, List<GameObject>> _particleStock;
         public ParticleObjectPool(IAssetProvider assetProvider)
         {
             _particleStock = new Dictionary<AssetReference, List<GameObject>>();
@@ -19,7 +19,7 @@ namespace Code.Infrastructure.ObjectPool
         {
             _particleStock.Clear();
         }
-        public async UniTask<GameObject> GetObject(AssetReference particleReference, Transform parent = null)
+        public async UniTask<GameObject> GetObject(AssetReference particleReference, Transform parent)
         {
             GameObject result = null;
 

@@ -1,4 +1,3 @@
-using System.Data;
 using Code.Infrastructure.ObjectPool;
 using Code.Logic.Abilities;
 using Code.Services.BattleService;
@@ -16,7 +15,7 @@ namespace Code.StaticData.Ability.ActiveAbilities
         private readonly float _damage;
         private readonly float _attackRadius;
 
-        private readonly LayerMask _layerMask = LayerMask.NameToLayer("Hittable");
+        private readonly LayerMask _layerMask = 1 << LayerMask.NameToLayer("Hittable");
 
         public Tornado(IParticleObjectPool particlePool,
             IBattleService battleService,
@@ -43,11 +42,11 @@ namespace Code.StaticData.Ability.ActiveAbilities
             var projectileTransform = tornadoProjectile.transform;
             projectileTransform.position = casterPosition + casterDirection * castOffset;
             projectileTransform.rotation = Quaternion.identity;
+
             _battleService.AoeAttack(_damage, _attackRadius, 10,  projectileTransform.position, _layerMask);
 
             
-
-            //Object.Instantiate(_tornadoVfx, casterPosition + casterDirection * castOffset, Quaternion.identity);
         }
+
     }
 }
