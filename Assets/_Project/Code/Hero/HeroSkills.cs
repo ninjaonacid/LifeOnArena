@@ -17,8 +17,8 @@ namespace Code.Hero
         [SerializeField] private HeroAbilityCooldown _heroCooldown;
       
         public SkillSlot[] SkillSlots;
-
         private SkillSlotsData _skillSlotsData;
+
         private AbilityTemplateBase _activeSkill;
         public AbilityTemplateBase ActiveSkill => _activeSkill;
         private IAbilityFactory _abilityFactory;

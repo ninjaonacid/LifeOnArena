@@ -8,6 +8,7 @@ namespace Code.Infrastructure.ObjectPool
     public interface IParticleObjectPool : IService
     {
       public UniTask<GameObject> GetObject(AssetReference particleReference, Transform parent);
+      public UniTask<GameObject> GetObject(AssetReference particleReference);
       public void ReturnObject(AssetReference particle, GameObject obj);
       void CleanUp();
     }

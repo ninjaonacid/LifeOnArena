@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using Code.Infrastructure.AssetManagment;
-using Code.Services;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -20,7 +19,7 @@ namespace Code.Infrastructure.ObjectPool
         {
             _particleStock.Clear();
         }
-        public async UniTask<GameObject> GetObject(AssetReference particleReference, Transform parent)
+        public async UniTask<GameObject> GetObject(AssetReference particleReference, Transform parent = null)
         {
             GameObject result = null;
 
@@ -41,7 +40,29 @@ namespace Code.Infrastructure.ObjectPool
 
             result.SetActive(true);
             return result;
+        }
 
+        public async UniTask<GameObject> GetObject(AssetReference particleReference)
+        {
+            GameObject result = null;
+
+            if (CheckForExist(particleReference))
+            {
+                result = _particleStock[particleReference][0];
+                _particleStock[particleReference].RemoveAt(0);
+            }
+            else
+            {
+                if (!_particleStock.ContainsKey(particleReference))
+                    _particleStock.Add(particleReference, new List<GameObject>());
+
+
+                var particle = await _assetProvider.Load<GameObject>(particleReference);
+                result = Object.Instantiate(particle);
+            }
+
+            result.SetActive(true);
+            return result;
         }
 
         public void ReturnObject(AssetReference particle, GameObject obj)

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Code.Infrastructure.ObjectPool;
 using Code.Services;
 using Code.Services.RandomService;
 using Code.StaticData.Ability;
@@ -9,23 +10,31 @@ namespace Code.Infrastructure.Factory
     public class AbilityFactory : IAbilityFactory
     {
         private readonly IStaticDataService _staticData;
+        private readonly IParticleObjectPool _particlePool;
         private readonly IRandomService _random;
         private List<PassiveAbilityTemplateBase> _passiveAbilities;
         private List<PassiveAbilityTemplateBase> _availablePassives;
 
         public AbilityFactory(
             IStaticDataService staticData,
+            IParticleObjectPool particlePool,
             IRandomService random)
         {
             _staticData = staticData;
+            _particlePool = particlePool;
             _random = random;
 
             _passiveAbilities = new List<PassiveAbilityTemplateBase>();
             _availablePassives = new List<PassiveAbilityTemplateBase>();
         }
 
-        public AbilityTemplateBase CreateAbilityTemplate(string heroAbilityId) =>
-           _staticData.ForAbility(heroAbilityId);
+        public AbilityTemplateBase CreateAbilityTemplate(string heroAbilityId)
+        {
+            var abilityTemplate = _staticData.ForAbility(heroAbilityId);
+            abilityTemplate.InitServices(_particlePool);
+            return abilityTemplate;
+        }
+
         public PassiveAbilityTemplateBase CreatePassive(string abilityId) =>
             _staticData.ForPassiveAbility(abilityId);
 

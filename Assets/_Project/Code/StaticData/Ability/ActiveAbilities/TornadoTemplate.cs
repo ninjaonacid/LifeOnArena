@@ -10,7 +10,7 @@ namespace Code.StaticData.Ability.ActiveAbilities
         public float CastDistance;
         public override IAbility GetAbility()
         {
-            return new Tornado(TornadoVfx, ActiveTime);
+            return new Tornado(ParticlePool, TornadoVfx, ActiveTime);
         }
     }
 }

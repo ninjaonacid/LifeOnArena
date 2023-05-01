@@ -1,4 +1,6 @@
 
+using Code.Infrastructure.ObjectPool;
+
 namespace Code.StaticData.Ability
 {
     public enum AbilityState
@@ -16,8 +18,15 @@ namespace Code.StaticData.Ability
         public float CurrentActiveTime;
         public AbilityState State;
 
+        protected IParticleObjectPool ParticlePool;
+
+        public void InitServices(IParticleObjectPool particlePool)
+        {
+            ParticlePool = particlePool;
+        }
 
         public abstract IAbility GetAbility();
+
 
         public virtual bool IsReady() =>
             State == AbilityState.Ready;

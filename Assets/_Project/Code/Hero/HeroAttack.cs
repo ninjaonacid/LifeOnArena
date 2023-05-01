@@ -30,7 +30,7 @@ namespace Code.Hero
         }
 
         [Inject]
-        public void Construct(IAudioService audioService, IEventSystem  eventSystem)
+        public void Construct(IAudioService audioService)
         {
             _audioService = audioService;
         }

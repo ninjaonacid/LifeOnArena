@@ -1,4 +1,7 @@
+using System.Data;
 using Code.Infrastructure.ObjectPool;
+using Code.Logic.Abilities;
+using Code.Services.BattleService;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
@@ -6,21 +9,34 @@ namespace Code.StaticData.Ability.ActiveAbilities
 {
     public class Tornado : IAbility
     {
-        private AssetReference _tornadoVfx;
+        private readonly IParticleObjectPool _particlesPool;
+        private readonly IBattleService _battleService;
+        private readonly AssetReference _tornadoVfx;
         private float _duration;
-        private IParticleObjectPool _particlesPool;
-        public Tornado(AssetReference tornadoVfx, float duration)
+        private LayerMask _layerMask = LayerMask.NameToLayer("Hittable");
+        public Tornado(IParticleObjectPool particlePool,
+
+            AssetReference tornadoVfx, float duration)
         {
+            _particlesPool = particlePool;
             _tornadoVfx = tornadoVfx;
             _duration = duration;
         }
-        public void Use(GameObject caster, GameObject target)
+        public async void Use(GameObject caster, GameObject target)
         {
             var casterPosition = caster.transform.position;
             var casterDirection = caster.transform.forward;
             var castOffset = 3f;
 
-            _particlesPool.GetObject(_tornadoVfx, caster.transform);
+            var tornadoPrefab = await _particlesPool.GetObject(_tornadoVfx);
+            var tornadoProjectile = tornadoPrefab.GetComponent<TornadoProjectile>();
+            var projectileTransform = tornadoProjectile.transform;
+            projectileTransform.position = casterPosition + casterDirection * castOffset;
+            projectileTransform.rotation = Quaternion.identity;
+
+
+            
+
             //Object.Instantiate(_tornadoVfx, casterPosition + casterDirection * castOffset, Quaternion.identity);
         }
     }

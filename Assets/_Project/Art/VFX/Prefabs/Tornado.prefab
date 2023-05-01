@@ -23658,6 +23658,7 @@ GameObject:
   - component: {fileID: 7920405970550793419}
   - component: {fileID: 7920405970550889835}
   - component: {fileID: 7920405970537358401}
+  - component: {fileID: 7459079079510251384}
   m_Layer: 0
   m_Name: Tornado
   m_TagString: Untagged
@@ -28466,6 +28467,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7459079079510251384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7920405970537135533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 963918cf95199b742bde95f34e60e9b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _collider: {fileID: 0}
 --- !u!1 &7920405970537135535
 GameObject:
   m_ObjectHideFlags: 0
