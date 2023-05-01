@@ -38,8 +38,8 @@ namespace Code.Infrastructure.ObjectPool
 
                 var particle = await _assetProvider.Load<GameObject>(particleReference);
                 result = Object.Instantiate(particle, parent);
-
             }
+
             result.SetActive(true);
             return result;
 
@@ -54,7 +54,6 @@ namespace Code.Infrastructure.ObjectPool
         private bool CheckForExist(AssetReference particleId)
         {
             return _particleStock.ContainsKey(particleId) && _particleStock[particleId].Count > 0;
-
         }
 
 

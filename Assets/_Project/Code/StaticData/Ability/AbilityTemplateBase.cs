@@ -7,7 +7,6 @@ namespace Code.StaticData.Ability
         Active,
         Cooldown
     }
-
     public abstract class AbilityTemplateBase : AbilityBase
     {
         public string StateMachineId;

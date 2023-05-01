@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace Code
+namespace Code.Logic.Abilities
 {
     public class Projectile : MonoBehaviour
     {

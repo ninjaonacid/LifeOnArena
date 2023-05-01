@@ -1,6 +1,5 @@
 using System;
 using System.Threading;
-using System.Threading.Tasks;
 using Code.Enemy;
 using Code.Infrastructure.AssetManagment;
 using Code.Logic;
@@ -11,7 +10,6 @@ using Code.Services.RandomService;
 using Code.Services.SaveLoad;
 using Code.StaticData;
 using Code.UI.HUD;
-using Code.Utils;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AI;
@@ -31,7 +29,7 @@ namespace Code.Infrastructure.Factory
         private readonly IRandomService _randomService;
         private readonly IObjectResolver _objectResolver;
 
-        private CancellationTokenSource _cancellationTokenSource;
+        private readonly CancellationTokenSource _cancellationTokenSource = default;
         public EnemyFactory(IHeroFactory heroFactory, IStaticDataService staticData, IAssetProvider assetProvider, 
             ISaveLoadService saveLoadService, IProgressService progressService,
             IRandomService randomService, IObjectResolver objectResolver)

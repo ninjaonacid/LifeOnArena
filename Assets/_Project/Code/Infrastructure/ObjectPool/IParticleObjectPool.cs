@@ -1,5 +1,4 @@
 using Code.Services;
-using Code.StaticData;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;

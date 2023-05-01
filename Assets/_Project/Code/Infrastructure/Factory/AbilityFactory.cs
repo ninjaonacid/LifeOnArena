@@ -10,9 +10,9 @@ namespace Code.Infrastructure.Factory
     {
         private readonly IStaticDataService _staticData;
         private readonly IRandomService _random;
-
         private List<PassiveAbilityTemplateBase> _passiveAbilities;
         private List<PassiveAbilityTemplateBase> _availablePassives;
+
         public AbilityFactory(
             IStaticDataService staticData,
             IRandomService random)
@@ -32,10 +32,6 @@ namespace Code.Infrastructure.Factory
         public AbilityTemplateBase CreateAbility(string heroAbilityId) =>
            _staticData.ForAbility(heroAbilityId);
         
-        
-            
-        
-
         public PassiveAbilityTemplateBase CreatePassive(string abilityId) =>
             _staticData.ForPassiveAbility(abilityId);
 
