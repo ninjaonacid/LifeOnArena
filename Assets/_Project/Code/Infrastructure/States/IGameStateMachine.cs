@@ -1,7 +1,6 @@
-using Code.Infrastructure.States;
 using Code.Services;
 
-namespace Code.Infrastructure.Services
+namespace Code.Infrastructure.States
 {
     public interface IGameStateMachine : IService
     {

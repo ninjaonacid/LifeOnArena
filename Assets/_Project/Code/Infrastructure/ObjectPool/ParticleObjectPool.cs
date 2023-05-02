@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Code.Infrastructure.AssetManagment;
+using Code.Infrastructure.AssetManagement;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;

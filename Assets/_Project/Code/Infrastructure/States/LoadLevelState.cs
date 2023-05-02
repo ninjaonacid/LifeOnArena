@@ -1,6 +1,7 @@
-﻿using Code.Infrastructure.AssetManagment;
-using Code.Infrastructure.Services;
+﻿using Code.Infrastructure.AssetManagement;
+using Code.Infrastructure.SceneManagement;
 using Code.Logic;
+using Code.Services;
 using Code.Services.AudioService;
 using Code.Services.SaveLoad;
 using Code.UI.Services;
@@ -9,13 +10,12 @@ namespace Code.Infrastructure.States
 {
     public class LoadLevelState : IPayloadedState<string>
     {
-        private readonly LoadingCurtain _curtain;
+        private readonly ILoadingScreen _screen;
         private readonly SceneLoader _sceneLoader;
         private readonly ISaveLoadService _saveLoadService;
         private readonly IAssetProvider _assetProvider;
         private readonly IAudioService _audioService;
         private readonly IUIFactory _uiFactory;
-
         public IGameStateMachine GameStateMachine { get; set; }
 
         public LoadLevelState(
@@ -24,10 +24,10 @@ namespace Code.Infrastructure.States
             IAssetProvider assetProvider,
             IAudioService audioService,
             SceneLoader sceneLoader,
-            LoadingCurtain curtain, IUIFactory uiFactory)
+            ILoadingScreen screen, IUIFactory uiFactory)
         {
             _sceneLoader = sceneLoader;
-            _curtain = curtain;
+            _screen = screen;
             _uiFactory = uiFactory;
             _audioService = audioService;
             _assetProvider = assetProvider;
@@ -36,7 +36,6 @@ namespace Code.Infrastructure.States
 
         public void Enter(string sceneName)
         {
-            _curtain.Show();
             _saveLoadService.Cleanup();
             _assetProvider.Cleanup();
             _audioService.InitAssets();
@@ -59,16 +58,6 @@ namespace Code.Infrastructure.States
         {
             _uiFactory.CreateCore();
         }
-
-        //private async UniTask InitGameWorld()
-        //{
-        //    string sceneKey = SceneManager.GetActiveScene().name;
-
-        //    LevelConfig levelConfig = _staticData.ForLevel(sceneKey);
-
-
-        //}
-
 
     }
 }

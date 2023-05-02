@@ -1,5 +1,6 @@
-using Code.Infrastructure.Services;
+using Code.Infrastructure.SceneManagement;
 using Code.Logic;
+using Code.Services;
 using Code.Services.PersistentProgress;
 using Code.UI.Buttons;
 using Code.UI.Services;
@@ -9,7 +10,7 @@ namespace Code.Infrastructure.States
     public class MainMenuState : IState
     {
         private readonly SceneLoader _sceneLoader;
-        private readonly LoadingCurtain _curtain;
+        private readonly LoadingScreen _screen;
 
         private readonly IWindowService _windowService;
         private readonly IUIFactory _uiFactory;
@@ -19,11 +20,9 @@ namespace Code.Infrastructure.States
         public MainMenuState(IUIFactory uiFactory,
             IWindowService windowService,
             IProgressService progress,
-            SceneLoader sceneLoader,
-            LoadingCurtain curtain)
+            SceneLoader sceneLoader)
         {
             _sceneLoader = sceneLoader;
-            _curtain = curtain;
             _uiFactory = uiFactory;
             _windowService = windowService;
             _progress = progress;
@@ -41,7 +40,6 @@ namespace Code.Infrastructure.States
 
         public void Enter()
         {
-            _curtain.Show();
             _sceneLoader.Load("MainMenu", InitMainMenu);
         }
 
@@ -50,7 +48,6 @@ namespace Code.Infrastructure.States
             _uiFactory.CreateCore();
            var menu = _uiFactory.CreateSelectionMenu(_windowService);
            menu.GetComponentInChildren<StartGameButton>().Button.onClick.AddListener(EnterLoadLevelState);
-           _curtain.Hide();
         }
 
         private void EnterLoadLevelState()

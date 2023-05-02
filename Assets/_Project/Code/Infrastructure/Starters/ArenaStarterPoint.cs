@@ -2,6 +2,7 @@ using System.Threading;
 using Code.CameraLogic;
 using Code.Hero;
 using Code.Infrastructure.Factory;
+using Code.Infrastructure.SceneManagement;
 using Code.Logic;
 using Code.Logic.WaveLogic;
 using Code.Services;
@@ -19,7 +20,6 @@ namespace Code.Infrastructure.Starters
 {
     public class ArenaStarterPoint : IAsyncStartable
     {
-        private readonly LoadingCurtain _curtain;
         private readonly IStaticDataService _staticData;
         private readonly ISaveLoadService _saveLoad;
         private readonly IProgressService _progress;
@@ -27,13 +27,12 @@ namespace Code.Infrastructure.Starters
         private readonly IGameFactory _gameFactory;
         private readonly SpawnerController _spawnerController;
         public ArenaStarterPoint(IStaticDataService staticData, 
-            ISaveLoadService saveLoad, LoadingCurtain curtain,
-            IProgressService progress, IHeroFactory heroFactory,
-            IGameFactory gameFactory, SpawnerController spawnerController)
+            ISaveLoadService saveLoad, IProgressService progress, 
+            IHeroFactory heroFactory, IGameFactory gameFactory, 
+            SpawnerController spawnerController)
         {
             _staticData = staticData;
             _saveLoad = saveLoad;
-            _curtain = curtain;
             _progress = progress;
             _heroFactory = heroFactory;
             _gameFactory = gameFactory;
@@ -57,8 +56,6 @@ namespace Code.Infrastructure.Starters
             InitHud(hero);
             CameraFollow(hero);
             InformProgressReaders();
-
-            _curtain.Hide();
 
             _spawnerController.SpawnTimer();
             _spawnerController.RunSpawner();

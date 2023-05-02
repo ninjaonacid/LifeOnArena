@@ -1,5 +1,4 @@
-using Code.Infrastructure.Services;
-using Code.Logic;
+using Code.Infrastructure.States;
 using VContainer.Unity;
 
 namespace Code.Infrastructure
@@ -7,15 +6,11 @@ namespace Code.Infrastructure
     public class GameBootstrapper : IInitializable
     {
         private Game _game;
-
-        private LoadingCurtain _curtain;
-
         private readonly IGameStateMachine _stateMachine;
 
-        public GameBootstrapper(IGameStateMachine stateMachine, LoadingCurtain curtain)
+        public GameBootstrapper(IGameStateMachine stateMachine)
         {
             _stateMachine = stateMachine;
-            _curtain = curtain;
         }
 
         public void Initialize()

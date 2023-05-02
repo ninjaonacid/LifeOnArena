@@ -1,8 +1,7 @@
-using Code.Infrastructure.AssetManagment;
+using Code.Infrastructure.AssetManagement;
 using Code.Infrastructure.EventSystem;
-using Code.Infrastructure.Services;
+using Code.Infrastructure.SceneManagement;
 using Code.Infrastructure.States;
-using Code.Logic;
 using Code.Services;
 using Code.Services.AudioService;
 using Code.Services.Input;
@@ -20,7 +19,7 @@ namespace Code.Infrastructure.Scopes
     public class CoreScope : LifetimeScope
     {
 
-        [SerializeField] private LoadingCurtain _curtain;
+        [SerializeField] private LoadingScreen Screen;
         protected override void Configure(IContainerBuilder builder)
         {
             InstallStateMachine(builder);
@@ -36,8 +35,8 @@ namespace Code.Infrastructure.Scopes
             builder.Register<IEventSystem, GameEventSystem>(Lifetime.Singleton);
             builder.Register<IAudioService, AudioService>(Lifetime.Singleton);
             builder.Register<SceneLoader>(Lifetime.Singleton);
-            
-            builder.RegisterComponentInNewPrefab(_curtain, Lifetime.Singleton);
+
+            builder.RegisterComponentInNewPrefab(Screen, Lifetime.Singleton).AsImplementedInterfaces();
 
             InstallInput(builder);
         }

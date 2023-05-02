@@ -1,5 +1,5 @@
 using System.Threading.Tasks;
-using Code.Infrastructure.AssetManagment;
+using Code.Infrastructure.AssetManagement;
 using Code.Services;
 using Code.Services.PersistentProgress;
 using Code.Services.SaveLoad;

@@ -1,4 +1,4 @@
-﻿using Code.Infrastructure.AssetManagment;
+﻿using Code.Infrastructure.AssetManagement;
 using Code.Services.PersistentProgress;
 using Code.Services.SaveLoad;
 using Code.UI.Buttons;

@@ -1,10 +1,9 @@
-﻿using System.Threading;
-using Code.Services;
+﻿using Code.Services;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
-namespace Code.Infrastructure.AssetManagment
+namespace Code.Infrastructure.AssetManagement
 {
     public interface IAssetProvider : IService
     {

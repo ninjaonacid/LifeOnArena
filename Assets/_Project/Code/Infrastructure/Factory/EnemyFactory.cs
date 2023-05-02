@@ -1,7 +1,7 @@
 using System;
 using System.Threading;
 using Code.Enemy;
-using Code.Infrastructure.AssetManagment;
+using Code.Infrastructure.AssetManagement;
 using Code.Logic;
 using Code.Logic.EnemySpawners;
 using Code.Services;

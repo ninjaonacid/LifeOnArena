@@ -2,10 +2,16 @@
 using Cysharp.Threading.Tasks;
 using UnityEngine.SceneManagement;
 
-namespace Code.Infrastructure
+namespace Code.Infrastructure.SceneManagement
 {
     public class SceneLoader
     {
+        private readonly ILoadingScreen _loadingScreen;
+        
+        public SceneLoader(ILoadingScreen loadingScreen)
+        {
+            _loadingScreen = loadingScreen;
+        }
         public async void Load(string name, Action onLoaded = null)
         {
             await LoadScene(name, onLoaded);
@@ -18,9 +24,13 @@ namespace Code.Infrastructure
                 return;
             }
 
+            _loadingScreen.Show();
+
             await SceneManager.LoadSceneAsync(nextScene);
             
             onLoaded?.Invoke();
+
+            _loadingScreen.Hide();
         }
     }
 }

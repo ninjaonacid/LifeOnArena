@@ -1,5 +1,5 @@
 using System.Threading.Tasks;
-using Code.Infrastructure.AssetManagment;
+using Code.Infrastructure.AssetManagement;
 using Code.Logic.LevelObjectsSpawners;
 using Code.Logic.ShelterWeapons;
 using Code.Services;

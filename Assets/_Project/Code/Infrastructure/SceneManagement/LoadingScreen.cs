@@ -1,9 +1,9 @@
 using System.Collections;
 using UnityEngine;
 
-namespace Code.Logic
+namespace Code.Infrastructure.SceneManagement
 {
-    public class LoadingCurtain : MonoBehaviour
+    public class LoadingScreen : MonoBehaviour, ILoadingScreen
     {
         public CanvasGroup Curtain;
 

@@ -1,6 +1,4 @@
-﻿using Code.Infrastructure.Services;
-
-namespace Code.Infrastructure.States
+﻿namespace Code.Infrastructure.States
 {
     public interface IState : IExitableState
     {

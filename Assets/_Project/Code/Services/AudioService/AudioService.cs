@@ -1,4 +1,4 @@
-using Code.Infrastructure.AssetManagment;
+using Code.Infrastructure.AssetManagement;
 using UnityEngine;
 
 namespace Code.Services.AudioService

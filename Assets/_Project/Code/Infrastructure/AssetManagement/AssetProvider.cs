@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
-namespace Code.Infrastructure.AssetManagment
+namespace Code.Infrastructure.AssetManagement
 {
     public class AssetProvider : IAssetProvider
     {

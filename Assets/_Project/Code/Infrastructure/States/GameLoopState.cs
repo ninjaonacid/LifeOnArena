@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading;
-using Code.Infrastructure.Services;
+using Code.Infrastructure.SceneManagement;
 using Code.Services;
 using Cysharp.Threading.Tasks;
 
