@@ -32,7 +32,7 @@ namespace Code.UI.UpgradeMenu
 
         private void SetContainer()
         {
-            _passiveAbilityTemplate = _abilityFactory.GetRandomPassiveAbility();
+            //_passiveAbilityTemplate = _abilityFactory.GetRandomPassiveAbility();
             _upgradeImage.sprite = _passiveAbilityTemplate.Icon;
             _upgradeRarityImage.sprite = _passiveAbilityTemplate.RarityIcon;
             _upgradeText.text = _passiveAbilityTemplate.Description;

@@ -1,4 +1,4 @@
-using Code.StateMachine.Base;
+using Code.Logic.StateMachine.Base;
 using UnityEngine;
 
 namespace Code.Enemy.CommonEnemy

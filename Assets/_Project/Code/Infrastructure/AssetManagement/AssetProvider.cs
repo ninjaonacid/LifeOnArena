@@ -20,7 +20,6 @@ namespace Code.Infrastructure.AssetManagement
             Addressables.InitializeAsync();
         }
 
- 
         public async UniTask<T> Load<T>(AssetReferenceGameObject assetReference) where T : class
         {
             if (_completedCache.TryGetValue(assetReference.AssetGUID, 

@@ -1,7 +1,5 @@
 ﻿using Code.Infrastructure.AssetManagement;
 using Code.Infrastructure.SceneManagement;
-using Code.Logic;
-using Code.Services;
 using Code.Services.AudioService;
 using Code.Services.SaveLoad;
 using Code.UI.Services;
@@ -10,7 +8,6 @@ namespace Code.Infrastructure.States
 {
     public class LoadLevelState : IPayloadedState<string>
     {
-        private readonly ILoadingScreen _screen;
         private readonly SceneLoader _sceneLoader;
         private readonly ISaveLoadService _saveLoadService;
         private readonly IAssetProvider _assetProvider;
@@ -19,15 +16,13 @@ namespace Code.Infrastructure.States
         public IGameStateMachine GameStateMachine { get; set; }
 
         public LoadLevelState(
-         
             ISaveLoadService saveLoadService,
             IAssetProvider assetProvider,
             IAudioService audioService,
-            SceneLoader sceneLoader,
-            ILoadingScreen screen, IUIFactory uiFactory)
+            SceneLoader sceneLoader, 
+            IUIFactory uiFactory)
         {
             _sceneLoader = sceneLoader;
-            _screen = screen;
             _uiFactory = uiFactory;
             _audioService = audioService;
             _assetProvider = assetProvider;

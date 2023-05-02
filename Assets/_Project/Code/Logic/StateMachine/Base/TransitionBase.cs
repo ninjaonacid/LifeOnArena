@@ -1,6 +1,4 @@
-using System;
-
-namespace Code.StateMachine.Base
+namespace Code.Logic.StateMachine.Base
 {
     public abstract class TransitionBase<TState> 
     {

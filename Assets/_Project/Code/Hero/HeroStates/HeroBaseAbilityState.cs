@@ -1,5 +1,4 @@
 using Code.Services.Input;
-using Code.StateMachine.Base;
 
 namespace Code.Hero.HeroStates
 {

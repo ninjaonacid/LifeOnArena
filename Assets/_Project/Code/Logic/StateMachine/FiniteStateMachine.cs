@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
-using Code.StateMachine.Base;
-using Code.StateMachine.Transitions;
+using Code.Logic.StateMachine.Base;
+using Code.Logic.StateMachine.Transitions;
 using UnityEngine;
 
-namespace Code.StateMachine
+namespace Code.Logic.StateMachine
 {
     public class FiniteStateMachine<TState, TEvent> : IStateMachine<TState>, ITriggerable<TEvent>
     {

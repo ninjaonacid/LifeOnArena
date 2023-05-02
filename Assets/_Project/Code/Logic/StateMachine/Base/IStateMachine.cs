@@ -1,6 +1,4 @@
-using UnityEngine;
-
-namespace Code.StateMachine.Base
+namespace Code.Logic.StateMachine.Base
 {
     public interface IStateMachine<TState>
     {

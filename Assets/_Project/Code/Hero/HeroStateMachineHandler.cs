@@ -1,8 +1,8 @@
 using Code.Hero.HeroStates;
 using Code.Logic;
+using Code.Logic.StateMachine;
 using Code.Services.AudioService;
 using Code.Services.Input;
-using Code.StateMachine;
 using UnityEngine;
 using VContainer;
 

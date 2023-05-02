@@ -1,8 +1,7 @@
 using System;
-using Code.StateMachine.Base;
-using UnityEngine;
+using Code.Logic.StateMachine.Base;
 
-namespace Code.StateMachine
+namespace Code.Logic.StateMachine
 {
     public class Transition<TState> : TransitionBase<TState>
     {

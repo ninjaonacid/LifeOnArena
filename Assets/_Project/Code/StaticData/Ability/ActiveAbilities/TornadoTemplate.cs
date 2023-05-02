@@ -1,12 +1,10 @@
 using UnityEngine;
-using UnityEngine.AddressableAssets;
 
 namespace Code.StaticData.Ability.ActiveAbilities
 {
-    [CreateAssetMenu(fileName = "Tornado", menuName = "AbilityData/Cast/Tornado")]
-    public class TornadoTemplate : AbilityTemplate<Tornado>
+    [CreateAssetMenu(fileName = "TornadoAbility", menuName = "AbilityData/Cast/TornadoAbility")]
+    public class TornadoTemplate : AbilityTemplate<TornadoAbility>
     {
-        public AssetReference TornadoVfx;
         public float Damage;
         public float AttackRadius;
         public float CastDistance;
@@ -15,10 +13,10 @@ namespace Code.StaticData.Ability.ActiveAbilities
         public override IAbility GetAbility()
         {
             return _abilityInstance ??= 
-                new Tornado
+                new TornadoAbility
                 (ParticlePool,
                 BattleService,
-                TornadoVfx,
+                PrefabReference,
                 ActiveTime,
                 Damage,
                 AttackRadius);

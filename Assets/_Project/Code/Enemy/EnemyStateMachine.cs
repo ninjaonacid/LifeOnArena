@@ -1,6 +1,6 @@
 using Code.Enemy.CommonEnemy;
-using Code.StateMachine;
-using Code.StateMachine.Transitions;
+using Code.Logic.StateMachine;
+using Code.Logic.StateMachine.Transitions;
 using UnityEngine;
 
 namespace Code.Enemy

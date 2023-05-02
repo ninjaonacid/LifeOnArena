@@ -1,6 +1,4 @@
-using UnityEngine;
-
-namespace Code.StateMachine
+namespace Code.Logic.StateMachine
 {
     public interface ITriggerable<TEvent>
     {

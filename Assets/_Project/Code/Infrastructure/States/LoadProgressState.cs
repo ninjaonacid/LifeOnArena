@@ -6,7 +6,6 @@ namespace Code.Infrastructure.States
 {
     public class LoadProgressState : IState
     {
-
         private readonly IProgressService _progressService;
         private readonly ISaveLoadService _saveLoadService;
 
@@ -45,7 +44,6 @@ namespace Code.Infrastructure.States
         {
             var progress = new PlayerProgress("Shelter");
 
-            
             progress.CharacterStats.InitBaseStats(100, 10, 30, 3);
             progress.WorldData.LootData.Collected = 100;
             progress.CharacterStats.ResetHP();

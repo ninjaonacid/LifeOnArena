@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Code.StateMachine.Base
+namespace Code.Logic.StateMachine.Base
 {
     public class StateBase<TState>
     {

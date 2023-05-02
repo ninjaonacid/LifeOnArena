@@ -18,7 +18,6 @@ namespace Code.Infrastructure.Starters
 
         public void Initialize()
         {
-            
             _enemyFactory.InitAssets();
             _heroFactory.InitAssets();
         }

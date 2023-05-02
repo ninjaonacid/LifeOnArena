@@ -1,7 +1,6 @@
-using Code.StateMachine.Base;
-using UnityEngine;
+using Code.Logic.StateMachine.Base;
 
-namespace Code.StateMachine.Transitions
+namespace Code.Logic.StateMachine.Transitions
 {
     public class TransitionOnInput<TState> : TransitionBase<TState>
     {

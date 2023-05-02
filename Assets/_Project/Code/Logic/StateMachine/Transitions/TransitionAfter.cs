@@ -1,10 +1,8 @@
 using System;
-using System.Threading;
-using Code.Logic;
-using Code.StateMachine.Base;
+using Code.Logic.StateMachine.Base;
 using Timer = Code.Logic.Timer;
 
-namespace Code.StateMachine.Transitions
+namespace Code.Logic.StateMachine.Transitions
 {
     public class TransitionAfter<TStateId> : TransitionBase<TStateId>
     {

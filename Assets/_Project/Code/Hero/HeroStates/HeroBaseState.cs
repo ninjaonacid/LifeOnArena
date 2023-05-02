@@ -1,6 +1,5 @@
+using Code.Logic.StateMachine.Base;
 using Code.Services.Input;
-using Code.StateMachine;
-using Code.StateMachine.Base;
 
 namespace Code.Hero.HeroStates
 {

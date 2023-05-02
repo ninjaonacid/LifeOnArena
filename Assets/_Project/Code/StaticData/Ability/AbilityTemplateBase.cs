@@ -1,5 +1,6 @@
 using Code.Infrastructure.ObjectPool;
 using Code.Services.BattleService;
+using UnityEngine.AddressableAssets;
 
 namespace Code.StaticData.Ability
 {
@@ -17,17 +18,19 @@ namespace Code.StaticData.Ability
         public float ActiveTime;
         public float CurrentActiveTime;
         public AbilityState State;
+        public AssetReference PrefabReference;
 
         protected IParticleObjectPool ParticlePool;
         protected IBattleService BattleService;
+        public abstract IAbility GetAbility();
 
-        public void InitServices(IParticleObjectPool particlePool, IBattleService battleService)
+        public void InitServices(
+            IParticleObjectPool particlePool, 
+            IBattleService battleService)
         {
             ParticlePool = particlePool;
             BattleService = battleService;
         }
-
-        public abstract IAbility GetAbility();
 
         public virtual bool IsReady() =>
             State == AbilityState.Ready;

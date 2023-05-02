@@ -8,7 +8,6 @@ namespace Code.Hero
     {
         private readonly List<AbilityTemplateBase> _abilitiesOnCooldown = new List<AbilityTemplateBase>();
 
-
         private void Update()
         {
             for (int i = 0; i < _abilitiesOnCooldown.Count; i++)
