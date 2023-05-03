@@ -5,11 +5,11 @@ using VContainer;
 namespace Code.Hero
 {
     [RequireComponent(typeof(HeroHealth))]
+    [RequireComponent(typeof(HeroAnimator))]
     public class HeroDeath : MonoBehaviour
     {
         private bool _isDead;
         public HeroAnimator Animator;
-        public HeroAttack Attack;
         public HeroHealth Health;
 
         public HeroMovement heroMovement;
