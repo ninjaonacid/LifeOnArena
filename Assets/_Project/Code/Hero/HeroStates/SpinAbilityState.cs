@@ -5,7 +5,6 @@ namespace Code.Hero.HeroStates
     public class SpinAbilityState : HeroBaseAbilityState
     {
         private readonly HeroRotation _heroRotation;
-        
         public SpinAbilityState(
             HeroAnimator animator, 
             HeroAttack heroAttack, 

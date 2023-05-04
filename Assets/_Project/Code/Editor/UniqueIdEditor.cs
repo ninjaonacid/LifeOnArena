@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using Code.Logic;
+using Code.StaticData;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
@@ -27,14 +28,14 @@ namespace Code.Editor
             }
         }
 
-        private void Generate(UniqueId uniqueId)
+        private void Generate(UniqueId uniqueIdSo)
         {
-            uniqueId.Id = $"{uniqueId.gameObject.scene.name}_{Guid.NewGuid().ToString()}";
+            uniqueIdSo.Id = $"{uniqueIdSo.gameObject.scene.name}_{Guid.NewGuid().ToString()}";
 
             if (!Application.isPlaying)
             {
-                EditorUtility.SetDirty(uniqueId);
-                EditorSceneManager.MarkSceneDirty(uniqueId.gameObject.scene);
+                EditorUtility.SetDirty(uniqueIdSo);
+                EditorSceneManager.MarkSceneDirty(uniqueIdSo.gameObject.scene);
             }
         }
     }

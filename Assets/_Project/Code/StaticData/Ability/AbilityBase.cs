@@ -1,3 +1,4 @@
+using Code.Logic;
 using UnityEngine;
 
 namespace Code.StaticData.Ability
@@ -7,5 +8,6 @@ namespace Code.StaticData.Ability
         [ScriptableObjectId]
         public string Id;
         public Sprite Icon;
+        public UniqueIdSO UniqueIdSo;
     }
 }

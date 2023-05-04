@@ -1,6 +1,7 @@
 using Code.Data;
 using Code.Logic;
 using Code.Services.AudioService;
+using Code.Services.BattleService;
 using Code.Services.PersistentProgress;
 using Code.StaticData.Ability;
 using UnityEngine;
@@ -21,6 +22,7 @@ namespace Code.Hero
         public CharacterController CharacterController;
         [SerializeField] private AudioSource _heroAudioSource;
         private IAudioService _audioService;
+        private IBattleService _battleService;
 
         public void LoadProgress(PlayerProgress progress)
         {
@@ -28,9 +30,10 @@ namespace Code.Hero
         }
 
         [Inject]
-        public void Construct(IAudioService audioService)
+        public void Construct(IAudioService audioService, IBattleService battleService)
         {
             _audioService = audioService;
+            _battleService = battleService;
         }
         private void Awake()
         {
@@ -38,13 +41,9 @@ namespace Code.Hero
             _layerMask = 1 << LayerMask.NameToLayer("Hittable");
         }
 
-        public void SetActiveSkill(AbilityTemplateBase attackSkill)
-        {
-            //_activeSkill = attackSkill;
-        }
-
         public void BaseAttack()
         {
+            
             if (HeroWeapon.GetEquippedWeapon() != null)
             {
                 DoDamage(_characterStats.CalculateHeroDamage() +

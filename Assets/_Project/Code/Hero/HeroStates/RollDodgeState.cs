@@ -7,8 +7,6 @@ namespace Code.Hero.HeroStates
     {
         private readonly HeroMovement _heroMovement;
         private readonly HeroRotation _heroRotation;
-
-
         public RollDodgeState(HeroAnimator animator, 
             HeroAttack heroAttack,
             HeroMovement heroMovement,
