@@ -6,7 +6,7 @@ namespace Code.Infrastructure.Factory
 {
     public interface IAbilityFactory : IService
     {
-        AbilityTemplateBase CreateAbilityTemplate(string heroAbilityId);
+        AbilityTemplateBase CreateAbilityTemplate(int heroAbilityId);
         PassiveAbilityTemplateBase CreatePassive(string abilityId);
     }
 }

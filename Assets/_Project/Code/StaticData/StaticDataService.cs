@@ -16,7 +16,7 @@ namespace Code.StaticData
         private Dictionary<string, LevelConfig> _levels; 
         private Dictionary<LocationReward, LevelReward> _levelReward;
         private Dictionary<UIWindowID, WindowConfig> _windowConfigs;
-        private Dictionary<string, AbilityTemplateBase> _heroAbilities;
+        private Dictionary<int, AbilityTemplateBase> _heroAbilities;
         private Dictionary<string, PassiveAbilityTemplateBase> _heroPassives;
         private Dictionary<ParticleId, ParticlesStaticData> _particles;
         private Dictionary<WeaponId, WeaponData> _weapons;
@@ -43,11 +43,11 @@ namespace Code.StaticData
 
             _heroAbilities = Resources
                 .LoadAll<AbilityTemplateBase>("StaticData/HeroSkills")
-                .ToDictionary(x => x.Id, x => x);
+                .ToDictionary(x => x.Identifier.Id, x => x);
 
-            _heroPassives = Resources
-                .LoadAll<PassiveAbilityTemplateBase>("StaticData/HeroSkills/PassiveSkills")
-                .ToDictionary(x => x.Id);
+            //_heroPassives = Resources
+            //    .LoadAll<PassiveAbilityTemplateBase>("StaticData/HeroSkills/PassiveSkills")
+            //    .ToDictionary(x => x.Id);
 
             _particles = Resources
                 .LoadAll<ParticlesStaticData>("StaticData/Particles")
@@ -96,7 +96,7 @@ namespace Code.StaticData
             return null;
         }
 
-        public AbilityTemplateBase ForAbility(string heroAbilityId)    
+        public AbilityTemplateBase ForAbility(int heroAbilityId)    
         {
             if (_heroAbilities.TryGetValue(heroAbilityId, out var heroAbility))
                 return heroAbility;

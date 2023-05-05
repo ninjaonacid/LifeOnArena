@@ -32,7 +32,7 @@ namespace Code.Infrastructure.Factory
             _random = random;
         }
 
-        public AbilityTemplateBase CreateAbilityTemplate(string heroAbilityId)
+        public AbilityTemplateBase CreateAbilityTemplate(int heroAbilityId)
         {
             AbilityTemplateBase abilityTemplate = _staticData.ForAbility(heroAbilityId);
             abilityTemplate.InitServices(_particlePool, _battleService);

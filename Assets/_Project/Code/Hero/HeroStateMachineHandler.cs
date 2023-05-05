@@ -3,6 +3,7 @@ using Code.Logic;
 using Code.Logic.StateMachine;
 using Code.Services.AudioService;
 using Code.Services.Input;
+using Code.StaticData;
 using UnityEngine;
 using VContainer;
 
@@ -22,6 +23,11 @@ namespace Code.Hero
         private FiniteStateMachine _stateMachine;
         private IInputService _input;
         private IAudioService _audioService;
+
+        [SerializeField] private Identifier _spinAttackAbilityID;
+        [SerializeField] private Identifier _dodgeRollAbilityID;
+        [SerializeField] private Identifier _tornadoAbilityID;
+     
         [SerializeField] private HeroAnimator _heroAnimator;
         [SerializeField] private HeroMovement _heroMovement;
         [SerializeField] private HeroRotation _heroRotation;
@@ -125,7 +131,7 @@ namespace Code.Hero
                 (transition) =>
                     _heroSkills.ActiveSkill != null &&
                     _heroSkills.ActiveSkill.IsActive() &&
-                    _heroSkills.ActiveSkill.StateMachineId.Equals(SpinAttackAbility)
+                    _heroSkills.ActiveSkill.Identifier.Id.Equals(_spinAttackAbilityID.Id)
             ));
 
             _stateMachine.AddTransition(new Transition(
@@ -134,7 +140,7 @@ namespace Code.Hero
                 (transition) =>
                     _heroSkills.ActiveSkill != null &&
                     _heroSkills.ActiveSkill.IsActive() &&
-                    _heroSkills.ActiveSkill.StateMachineId.Equals(SpinAttackAbility)
+                    _heroSkills.ActiveSkill.Identifier.Id.Equals(_spinAttackAbilityID.Id)
             ));
 
             _stateMachine.AddTransition(new Transition(
@@ -143,7 +149,7 @@ namespace Code.Hero
                 (transition) =>
                     _heroSkills.ActiveSkill != null &&
                     _heroSkills.ActiveSkill.IsActive() &&
-                    _heroSkills.ActiveSkill.StateMachineId.Equals(SpinAttackAbility)
+                    _heroSkills.ActiveSkill.Identifier.Id.Equals(_spinAttackAbilityID.Id)
             ));
 
             _stateMachine.AddTransition(new Transition(
@@ -163,7 +169,7 @@ namespace Code.Hero
                 (transition) =>
                     _heroSkills.ActiveSkill != null &&
                     _heroSkills.ActiveSkill.IsActive() &&
-                    _heroSkills.ActiveSkill.StateMachineId.Equals(SpinAttackAbility)));
+                    _heroSkills.ActiveSkill.Identifier.Id.Equals(_spinAttackAbilityID.Id)));
 
             _stateMachine.AddTransition(new Transition(
                 HeroIdle,
@@ -171,7 +177,7 @@ namespace Code.Hero
                 (transition) =>
                     _heroSkills.ActiveSkill != null &&
                     _heroSkills.ActiveSkill.IsActive() &&
-                    _heroSkills.ActiveSkill.StateMachineId.Equals(RollAbility)
+                    _heroSkills.ActiveSkill.Identifier.Id.Equals(_dodgeRollAbilityID.Id)
                     ));
 
             _stateMachine.AddTransition(new Transition(
@@ -182,10 +188,10 @@ namespace Code.Hero
             _stateMachine.AddTransition(new Transition(
                 HeroMovement,
                 RollAbility,
-                (transition) => 
+                (transition) =>
                         _heroSkills.ActiveSkill != null &&
                         _heroSkills.ActiveSkill.IsActive() &&
-                        _heroSkills.ActiveSkill.StateMachineId.Equals(RollAbility)));
+                        _heroSkills.ActiveSkill.Identifier.Id.Equals(_dodgeRollAbilityID.Id)));
 
             _stateMachine.InitStateMachine();
         }

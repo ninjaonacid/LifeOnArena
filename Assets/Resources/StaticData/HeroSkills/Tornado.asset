@@ -12,19 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29c26f4c329d07647b5ec1c743df8591, type: 3}
   m_Name: Tornado
   m_EditorClassIdentifier: 
-  Id: cd606014-b07f-4263-b462-985b2308c7f6
+  Identifier: {fileID: 11400000, guid: 8d2ac0e4187bcd948931169d84000fcd, type: 2}
   Icon: {fileID: 21300000, guid: b7028d96bb02a7742a98c5cdd94f3505, type: 3}
-  StateMachineId: AbilityCast
   Cooldown: 1
-  CurrentCooldown: 0
+  CurrentCooldown: -0.0055122073
   ActiveTime: 0.3
-  CurrentActiveTime: 0
-  Prefab:
+  CurrentActiveTime: -0.705512
+  State: 0
+  PrefabReference:
     m_AssetGUID: 9b71735aea89ebe4f844339780488c83
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
-  State: 0
   Damage: 50
   AttackRadius: 10
   CastDistance: 0

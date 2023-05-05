@@ -44,10 +44,7 @@ namespace Code.Hero
 
         public void UpdateProgress(PlayerProgress progress)
         {
-            foreach (var ability in _heroPassives)
-            {
-                progress.PassiveSkills.AbilitiesId.Add(ability.Id);
-            }
+           
         }
     }
 }

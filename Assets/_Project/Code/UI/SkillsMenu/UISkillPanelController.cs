@@ -79,8 +79,8 @@ namespace Code.UI.SkillsMenu
 
             foreach (var slot in _equippedSlots)
             {
-                if(!hudSkills.SkillIds.Contains(slot.GetAbility().Id))
-                    hudSkills.SkillIds.Enqueue(slot.GetAbility().Id);
+                if(!hudSkills.SkillIds.Contains(slot.GetAbility().Identifier.Id))
+                    hudSkills.SkillIds.Enqueue(slot.GetAbility().Identifier.Id);
             }
         }
     }

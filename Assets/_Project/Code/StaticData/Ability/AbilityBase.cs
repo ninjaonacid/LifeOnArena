@@ -5,9 +5,7 @@ namespace Code.StaticData.Ability
 {
     public class AbilityBase : ScriptableObject
     {
-        [ScriptableObjectId]
-        public string Id;
+        public Identifier Identifier;
         public Sprite Icon;
-        public UniqueID UniqueID;
     }
 }

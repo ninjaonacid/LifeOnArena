@@ -4,22 +4,22 @@ using UnityEngine;
 
 namespace Code.Editor
 {
-    [CustomEditor(typeof(UniqueID))]
-    public class UniqueIDEditor : UnityEditor.Editor
+    [CustomEditor(typeof(Identifier))]
+    public class IdentifierEditor : UnityEditor.Editor
     {
         public override void OnInspectorGUI()
         {
             base.OnInspectorGUI();
 
-            UniqueID uniqueId = (UniqueID)target;
+            Identifier identifier = (Identifier)target;
 
-            uniqueId.Name = uniqueId.name;
+            identifier.Name = identifier.name;
 
-            uniqueId.ID = GenerateIntId(uniqueId.Name);
+            identifier.Id = GenerateIntId(identifier.Name);
 
             if (!Application.isPlaying)
             {
-                EditorUtility.SetDirty(uniqueId);
+                EditorUtility.SetDirty(identifier);
             }
 
         }
