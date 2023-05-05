@@ -1403,7 +1403,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Animator: {fileID: 7390316171520665867}
-  Attack: {fileID: 8881719371883239237}
   Health: {fileID: 7046878093413620408}
   heroMovement: {fileID: 7390316171520665878}
 --- !u!114 &8881719371883239237
@@ -1481,13 +1480,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _heroCooldown: {fileID: 7773590576850612865}
-  _heroStateMachine: {fileID: 4195340829786993569}
-  HeroAttack: {fileID: 8881719371883239237}
   SkillSlots:
-  - AbilitySlotID: 1
-    Ability: {fileID: 0}
-  - AbilitySlotID: 2
-    Ability: {fileID: 0}
+  - AbilityTemplate: {fileID: 0}
+    AbilitySlotID: 1
+  - AbilityTemplate: {fileID: 0}
+    AbilitySlotID: 2
 --- !u!114 &6331987856363381589
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1571,6 +1568,7 @@ MonoBehaviour:
   _heroRotation: {fileID: -8125679809969938510}
   _heroAttack: {fileID: 8881719371883239237}
   _heroSkills: {fileID: -7543322082994891675}
+  SpinState: {fileID: 11400000, guid: 8adf9f75becb6e14a8512764355cc21a, type: 2}
 --- !u!114 &-4749970168048390944
 MonoBehaviour:
   m_ObjectHideFlags: 0

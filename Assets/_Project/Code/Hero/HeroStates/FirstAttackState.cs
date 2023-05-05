@@ -13,14 +13,14 @@ namespace Code.Hero.HeroStates
         {
             base.OnEnter();
             HeroAnimator.PlayAttack(this);
-            HeroAttack.BaseAttack();
-            Duration = 0.6f;
+            _heroAttack.BaseAttack();
+            _duration = 0.6f;
         }
 
         public override void OnLogic()
         {
             base.OnLogic();
-            Duration -= Time.deltaTime;
+            _duration -= Time.deltaTime;
 
             if(IsStateOver()) fsm.StateCanExit(); 
 
@@ -41,7 +41,7 @@ namespace Code.Hero.HeroStates
             }
         }
 
-        public override bool IsStateOver() => Duration <= 0;
+        public override bool IsStateOver() => _duration <= 0;
 
 
 

@@ -8,6 +8,6 @@ namespace Code.StaticData.Ability
         [ScriptableObjectId]
         public string Id;
         public Sprite Icon;
-        public UniqueIdSO UniqueIdSo;
+        public UniqueID UniqueID;
     }
 }

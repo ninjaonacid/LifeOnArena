@@ -27,7 +27,8 @@ namespace Code.Hero
         [SerializeField] private HeroRotation _heroRotation;
         [SerializeField] private HeroAttack _heroAttack;
         [SerializeField] private HeroSkills _heroSkills;
-        
+
+
         [Inject]
         public void Construct(IInputService inputService, IAudioService audioService)
         {

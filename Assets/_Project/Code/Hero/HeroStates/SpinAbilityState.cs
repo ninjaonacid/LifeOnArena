@@ -19,13 +19,13 @@ namespace Code.Hero.HeroStates
             base.OnEnter();
             _heroRotation.enabled = false;
             HeroAnimator.PlayAttack(this);
-            HeroAttack.SkillAttack();
-            Duration = 0.7f;
+            _heroAttack.SkillAttack();
+            _duration = 0.7f;
         }
 
         public override void OnLogic()
         {
-            Duration -= Time.deltaTime;
+            _duration -= Time.deltaTime;
             if (IsStateOver())
             {
                 fsm.StateCanExit();
@@ -45,7 +45,7 @@ namespace Code.Hero.HeroStates
             }
         }
 
-        public override bool IsStateOver() => Duration <= 0;
+        public override bool IsStateOver() => _duration <= 0;
 
     }
 }

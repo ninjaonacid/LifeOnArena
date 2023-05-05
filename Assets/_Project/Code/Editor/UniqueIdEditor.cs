@@ -1,42 +1,38 @@
-using System;
-using System.Linq;
-using Code.Logic;
 using Code.StaticData;
 using UnityEditor;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 
 namespace Code.Editor
 {
-    [CustomEditor(typeof(UniqueId))]
-    public class UniqueIdEditor : UnityEditor.Editor
+    [CustomEditor(typeof(UniqueID))]
+    public class UniqueIDEditor : UnityEditor.Editor
     {
-        private void OnEnable()
+        public override void OnInspectorGUI()
         {
-            var uniqueId = (UniqueId)target;
+            base.OnInspectorGUI();
 
-            if (string.IsNullOrEmpty(uniqueId.Id))
-            {
-                Generate(uniqueId);
-            }
-            else
-            {
-                var uniqueIds = FindObjectsOfType<UniqueId>();
+            UniqueID uniqueId = (UniqueID)target;
 
-                if (uniqueIds.Any(other => 
-                        other != uniqueId && other.Id == uniqueId.Id)) Generate(uniqueId);
-            }
-        }
+            uniqueId.Name = uniqueId.name;
 
-        private void Generate(UniqueId uniqueIdSo)
-        {
-            uniqueIdSo.Id = $"{uniqueIdSo.gameObject.scene.name}_{Guid.NewGuid().ToString()}";
+            uniqueId.ID = GenerateIntId(uniqueId.Name);
 
             if (!Application.isPlaying)
             {
-                EditorUtility.SetDirty(uniqueIdSo);
-                EditorSceneManager.MarkSceneDirty(uniqueIdSo.gameObject.scene);
+                EditorUtility.SetDirty(uniqueId);
             }
+
+        }
+
+        private int GenerateIntId(string name)
+        {
+            int hash = 0;
+            for (int i = 0; i < name.Length; i++)
+            {
+                hash = (hash << 5) - hash + name[i];
+            }
+
+            return hash;
         }
     }
 }

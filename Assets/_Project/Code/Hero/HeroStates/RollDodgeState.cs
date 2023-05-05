@@ -15,6 +15,7 @@ namespace Code.Hero.HeroStates
         {
             _heroMovement = heroMovement;
             _heroRotation = heroRotation;
+            
         }
 
         public override void OnEnter()
@@ -22,14 +23,13 @@ namespace Code.Hero.HeroStates
             base.OnEnter();
             HeroAnimator.PlayRoll();
             //_heroRotation.enabled = false;
-
-            Duration = 1f;
+            _duration = 1f;
         }
 
         public override void OnLogic()
         {
             base.OnLogic();
-            Duration -= Time.deltaTime;
+            _duration -= Time.deltaTime;
             _heroMovement.ForceMove();
             if (IsStateOver())
             {
@@ -53,7 +53,7 @@ namespace Code.Hero.HeroStates
         }
 
         public override bool IsStateOver() =>
-            Duration <= 0;
+            _duration <= 0;
 
     }
 }
