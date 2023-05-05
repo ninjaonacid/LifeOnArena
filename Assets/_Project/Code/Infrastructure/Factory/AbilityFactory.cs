@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Code.Infrastructure.AssetManagement;
 using Code.Infrastructure.ObjectPool;
 using Code.Services;
@@ -43,7 +42,8 @@ namespace Code.Infrastructure.Factory
 
         private void InitAbilityAssets(AssetReference prefabReference)
         {
-            _assetProvider.Load<GameObject>(prefabReference);
+            if(prefabReference.RuntimeKeyIsValid()) 
+                _assetProvider.Load<GameObject>(prefabReference);
         }
 
         public PassiveAbilityTemplateBase CreatePassive(string abilityId) =>

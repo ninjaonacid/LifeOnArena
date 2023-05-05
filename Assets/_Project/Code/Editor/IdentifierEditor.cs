@@ -11,6 +11,8 @@ namespace Code.Editor
         {
             base.OnInspectorGUI();
 
+            GUI.enabled = false;
+
             Identifier identifier = (Identifier)target;
 
             identifier.Name = identifier.name;
@@ -22,6 +24,7 @@ namespace Code.Editor
                 EditorUtility.SetDirty(identifier);
             }
 
+            GUI.enabled = true;
         }
 
         private int GenerateIntId(string name)

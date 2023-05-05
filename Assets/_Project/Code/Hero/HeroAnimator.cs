@@ -6,6 +6,8 @@ using UnityEngine;
 
 namespace Code.Hero
 {
+    [RequireComponent(typeof(CharacterController))]
+    [RequireComponent(typeof(Animator))]
     public class HeroAnimator : MonoBehaviour, IAnimationStateReader
     {
         private static readonly int Die = Animator.StringToHash("Die");
@@ -24,7 +26,6 @@ namespace Code.Hero
         private readonly int _rollStateHash = Animator.StringToHash("Roll");
 
 
-        private HeroVFX _heroVFX;
         private CharacterController _characterController;
         private Animator _heroAnimator;
         private HeroAttack _heroAttack;
@@ -48,8 +49,7 @@ namespace Code.Hero
 
         private void Awake()
         {
-   
-            _heroVFX = GetComponent<HeroVFX>();
+            
             _heroAnimator = GetComponent<Animator>();
             _characterController = GetComponent<CharacterController>();
             _heroAttack = GetComponent<HeroAttack>();

@@ -12,11 +12,6 @@ namespace Code.Editor
         {
             GUI.enabled = false;
 
-            if (string.IsNullOrEmpty(property.stringValue))
-            {
-                property.stringValue = Guid.NewGuid().ToString();
-            }
-
             EditorGUI.PropertyField(position, property, label, true);
 
             GUI.enabled = true;

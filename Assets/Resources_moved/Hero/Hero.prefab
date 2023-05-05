@@ -1276,7 +1276,6 @@ GameObject:
   - component: {fileID: 7046878093413620408}
   - component: {fileID: 5306633349511518799}
   - component: {fileID: 8881719371883239237}
-  - component: {fileID: 3621045196253950929}
   - component: {fileID: -8125679809969938510}
   - component: {fileID: -4398335753682384271}
   - component: {fileID: -7543322082994891675}
@@ -1421,24 +1420,6 @@ MonoBehaviour:
   HeroAnimator: {fileID: 7390316171520665867}
   CharacterController: {fileID: 7390316171520665865}
   _heroAudioSource: {fileID: 2364857729011436083}
---- !u!114 &3621045196253950929
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6031708160037518034}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87418d504cd523647b9a63f6e2c6860e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SwordSlashes:
-  - SlashPrefabVFX: {fileID: 8334817180425113059, guid: ebdd01849332c7b4ba955b8c2f3e65aa, type: 3}
-    playDelay: 0.5
-  - SlashPrefabVFX: {fileID: 6201839233042492992, guid: 6610e51d35db0b94ba281bb3d4aa2ac1, type: 3}
-    playDelay: 1
-  vfxSlot: {fileID: 0}
 --- !u!114 &-8125679809969938510
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1563,9 +1544,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32b05c083ecadad44902758f69e9a44f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spinAttackAbilityID: {fileID: 11400000, guid: 630144b53aba86245b26160679af021d, type: 2}
-  _dodgeRollAbilityID: {fileID: 11400000, guid: af58b105cde401549afc208119b4f7d7, type: 2}
-  _tornadoAbilityID: {fileID: 11400000, guid: 8d2ac0e4187bcd948931169d84000fcd, type: 2}
+  _spinAttackAbilityId: {fileID: 11400000, guid: 630144b53aba86245b26160679af021d, type: 2}
+  _dodgeRollAbilityId: {fileID: 11400000, guid: af58b105cde401549afc208119b4f7d7, type: 2}
+  _tornadoAbilityId: {fileID: 11400000, guid: 8d2ac0e4187bcd948931169d84000fcd, type: 2}
   _heroAnimator: {fileID: 7390316171520665867}
   _heroMovement: {fileID: 7390316171520665878}
   _heroRotation: {fileID: -8125679809969938510}
