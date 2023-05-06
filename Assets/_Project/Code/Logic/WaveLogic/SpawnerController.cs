@@ -22,7 +22,7 @@ namespace Code.Logic.WaveLogic
         private int _waveCounter = 0;
         private int _nextWaveDelay = 5;
 
-        private Timer _timer;
+        private Timer.Timer _timer;
         public SpawnerController(ILevelEventHandler levelEventHandler, IEnemyFactory enemyFactory)
         {
             _levelEvent = levelEventHandler;
@@ -45,7 +45,7 @@ namespace Code.Logic.WaveLogic
 
         public void SpawnTimer()
         {
-            _timer = new Timer();
+            _timer = new Timer.Timer();
         }
 
         public void RunSpawner()

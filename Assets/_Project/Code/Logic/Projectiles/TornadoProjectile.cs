@@ -1,7 +1,6 @@
-using System;
 using UnityEngine;
 
-namespace Code.Logic.Abilities
+namespace Code.Logic.Projectiles
 {
     public class TornadoProjectile : MonoBehaviour {
     }

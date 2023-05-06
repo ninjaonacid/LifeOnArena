@@ -4,6 +4,7 @@ using Code.Enemy;
 using Code.Infrastructure.AssetManagement;
 using Code.Logic;
 using Code.Logic.EnemySpawners;
+using Code.Logic.EntitiesComponents;
 using Code.Services;
 using Code.Services.PersistentProgress;
 using Code.Services.RandomService;

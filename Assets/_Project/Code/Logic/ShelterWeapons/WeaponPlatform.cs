@@ -2,6 +2,7 @@ using System;
 using Code.Data;
 using Code.Enemy;
 using Code.Hero;
+using Code.Logic.EntitiesComponents;
 using Code.StaticData;
 using Code.UI.WeaponPlatform;
 using UnityEngine;

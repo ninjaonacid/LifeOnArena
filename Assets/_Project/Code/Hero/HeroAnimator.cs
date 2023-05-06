@@ -1,6 +1,7 @@
 using System;
 using Code.Hero.HeroStates;
 using Code.Logic;
+using Code.Logic.Animator;
 using Code.StaticData.Ability;
 using UnityEngine;
 

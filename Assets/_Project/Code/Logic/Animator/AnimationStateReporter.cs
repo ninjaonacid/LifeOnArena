@@ -1,12 +1,12 @@
 using UnityEngine;
 
-namespace Code.Logic
+namespace Code.Logic.Animator
 {
     public class AnimationStateReporter : StateMachineBehaviour
     {
         private IAnimationStateReader _stateReader;
 
-        public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+        public override void OnStateEnter(UnityEngine.Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             base.OnStateEnter(animator, stateInfo, layerIndex);
             FindReader(animator);
@@ -14,7 +14,7 @@ namespace Code.Logic
             _stateReader.EnteredState(stateInfo.shortNameHash);
         }
 
-        public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+        public override void OnStateExit(UnityEngine.Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             base.OnStateExit(animator, stateInfo, layerIndex);
             FindReader(animator);
@@ -22,7 +22,7 @@ namespace Code.Logic
             _stateReader.ExitedState(stateInfo.shortNameHash);
         }
 
-        private void FindReader(Animator animator)
+        private void FindReader(UnityEngine.Animator animator)
         {
             if (_stateReader != null)
                 return;

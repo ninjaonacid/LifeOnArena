@@ -1,4 +1,4 @@
-using Code.Logic.Abilities;
+using Code.Logic.Projectiles;
 using UnityEngine;
 
 namespace Code.StaticData.Ability.PassiveAbilities

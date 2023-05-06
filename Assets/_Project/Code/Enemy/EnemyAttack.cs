@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using Code.Logic;
+using Code.Logic.EntitiesComponents;
 using UnityEngine;
 
 namespace Code.Enemy

@@ -3,7 +3,7 @@ using UnityEngine;
 namespace Code.StaticData.Identifiers
 {
 
-    [CreateAssetMenu(fileName = "Identifier", menuName = "Custom/Identifier")]
+    [CreateAssetMenu(fileName = "Identifier", menuName = "StaticData/Identifier")]
     public class Identifier : ScriptableObject
     {
         [ScriptableObjectId]

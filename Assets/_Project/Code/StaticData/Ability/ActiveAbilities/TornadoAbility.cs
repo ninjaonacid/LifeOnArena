@@ -1,5 +1,5 @@
 using Code.Infrastructure.ObjectPool;
-using Code.Logic.Abilities;
+using Code.Logic.Projectiles;
 using Code.Services.BattleService;
 using UnityEngine;
 using UnityEngine.AddressableAssets;

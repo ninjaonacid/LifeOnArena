@@ -1,4 +1,5 @@
 using Code.Logic;
+using Code.Logic.EntitiesComponents;
 using UnityEngine;
 
 namespace Code.Services.BattleService

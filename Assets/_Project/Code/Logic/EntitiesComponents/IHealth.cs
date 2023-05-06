@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Code.Logic
+namespace Code.Logic.EntitiesComponents
 {
     public interface IHealth
     {

@@ -1,6 +1,7 @@
+using Code.Logic.EntitiesComponents;
 using UnityEngine;
 
-namespace Code.Logic.Abilities
+namespace Code.Logic.Projectiles
 {
     public class SpinningProjectile : MonoBehaviour
     {

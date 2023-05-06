@@ -1,5 +1,6 @@
 using Code.Data;
 using Code.Logic;
+using Code.Logic.EntitiesComponents;
 using Code.Services.AudioService;
 using Code.Services.BattleService;
 using Code.Services.PersistentProgress;

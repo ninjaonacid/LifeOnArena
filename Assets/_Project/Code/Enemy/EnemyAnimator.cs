@@ -1,5 +1,6 @@
 using System;
 using Code.Logic;
+using Code.Logic.Animator;
 using UnityEngine;
 
 namespace Code.Enemy

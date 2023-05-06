@@ -1,9 +1,9 @@
 using System.Threading;
-using Code.CameraLogic;
 using Code.Hero;
 using Code.Infrastructure.Factory;
 using Code.Infrastructure.SceneManagement;
 using Code.Logic;
+using Code.Logic.CameraLogic;
 using Code.Logic.WaveLogic;
 using Code.Services;
 using Code.Services.PersistentProgress;

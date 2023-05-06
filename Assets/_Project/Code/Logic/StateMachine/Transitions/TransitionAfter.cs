@@ -1,6 +1,7 @@
 using System;
 using Code.Logic.StateMachine.Base;
-using Timer = Code.Logic.Timer;
+using Code.Logic.Timer;
+using Timer = Code.Logic.Timer.Timer;
 
 namespace Code.Logic.StateMachine.Transitions
 {
@@ -19,7 +20,7 @@ namespace Code.Logic.StateMachine.Transitions
         {
             this.delay = delay;
             this.condition = condition;
-            this.timer = new Timer();
+            this.timer = new Timer.Timer();
         }
 
         public override void OnEnter()

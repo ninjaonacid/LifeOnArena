@@ -1,7 +1,6 @@
 using Code.Hero;
-using UnityEngine;
 
-namespace Code.Logic
+namespace Code.Logic.EntitiesComponents
 {
     public interface IInteractable
     {

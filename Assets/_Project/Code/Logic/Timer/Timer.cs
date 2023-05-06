@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Code.Logic
+namespace Code.Logic.Timer
 {
     public class Timer : ITimer
     {
