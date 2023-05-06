@@ -1,4 +1,4 @@
-namespace Code.StaticData
+namespace Code.StaticData.Identifiers
 {
     public enum ItemTypeId 
     {

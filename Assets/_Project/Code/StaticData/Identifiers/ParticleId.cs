@@ -1,6 +1,4 @@
-using UnityEngine;
-
-namespace Code.StaticData
+namespace Code.StaticData.Identifiers
 {
     public enum ParticleId
     {

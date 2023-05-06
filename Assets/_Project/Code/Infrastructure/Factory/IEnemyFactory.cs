@@ -3,6 +3,7 @@ using Code.Enemy;
 using Code.Logic.EnemySpawners;
 using Code.Services;
 using Code.StaticData;
+using Code.StaticData.Identifiers;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 

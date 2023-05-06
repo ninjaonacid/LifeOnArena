@@ -3,7 +3,6 @@ using UnityEngine;
 
 namespace Code.Logic.Abilities
 {
-    public class TornadoProjectile : MonoBehaviour
-    {
+    public class TornadoProjectile : MonoBehaviour {
     }
 }

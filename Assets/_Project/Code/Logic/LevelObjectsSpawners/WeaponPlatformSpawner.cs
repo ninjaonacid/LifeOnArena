@@ -5,6 +5,7 @@ using Code.Infrastructure.Factory;
 using Code.Logic.ShelterWeapons;
 using Code.Services.PersistentProgress;
 using Code.StaticData;
+using Code.StaticData.Identifiers;
 using UnityEngine;
 
 namespace Code.Logic.LevelObjectsSpawners

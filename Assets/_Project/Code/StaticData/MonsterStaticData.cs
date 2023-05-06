@@ -1,3 +1,4 @@
+using Code.StaticData.Identifiers;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 

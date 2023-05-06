@@ -33,13 +33,13 @@ namespace Code.StaticData.Ability.ActiveAbilities
         }
         public async void Use(GameObject caster, GameObject target)
         {
-            var casterPosition = caster.transform.position;
-            var casterDirection = caster.transform.forward;
-            var castOffset = 3f;
+            Vector3 casterPosition = caster.transform.position;
+            Vector3 casterDirection = caster.transform.forward;
+            float castOffset = 3f;
 
-            var tornadoPrefab = await _particlesPool.GetObject(_tornadoPrefab);
-            var tornadoProjectile = tornadoPrefab.GetComponent<TornadoProjectile>();
-            var projectileTransform = tornadoProjectile.transform;
+            GameObject tornadoPrefab = await _particlesPool.GetObject(_tornadoPrefab);
+            TornadoProjectile tornadoProjectile = tornadoPrefab.GetComponent<TornadoProjectile>();
+            Transform projectileTransform = tornadoProjectile.transform;
             projectileTransform.position = casterPosition + casterDirection * castOffset;
             projectileTransform.rotation = Quaternion.identity;
 

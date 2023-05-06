@@ -2,6 +2,7 @@ using System.Threading.Tasks;
 using Code.Logic.LevelObjectsSpawners;
 using Code.Services;
 using Code.StaticData;
+using Code.StaticData.Identifiers;
 using UnityEngine;
 
 namespace Code.Infrastructure.Factory
