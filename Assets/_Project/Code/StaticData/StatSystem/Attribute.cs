@@ -13,7 +13,6 @@ namespace Code.StaticData.StatSystem
         {
             _currentValue = Value;
         }
-
         public virtual void ApplyModifier(StatModifier modifier)
         {
             int newValue = _currentValue;
