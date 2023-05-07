@@ -7,8 +7,9 @@
             </uie:Toolbar>
             <ui:ListView focusable="true" style="flex-grow: 1; flex-shrink: 1;" />
         </ui:VisualElement>
-        <ui:VisualElement name="RightPanel" style="align-items: auto; justify-content: flex-start; flex-direction: column; width: 250px; left: auto; height: auto;">
-            <uie:PropertyField name="NameField" style="justify-content: flex-start;" />
+        <ui:VisualElement name="RightPanel" style="align-items: auto; justify-content: flex-end; flex-direction: column-reverse; width: 100%; left: auto; height: auto; flex-grow: 1;">
+            <uie:PropertyField name="NameField" style="justify-content: flex-start; align-items: auto; flex-grow: 1;" />
+            <Code.Editor.EditorWindows.CustomInspector />
         </ui:VisualElement>
     </Code.Editor.EditorWindows.SplitView>
 </ui:UXML>
