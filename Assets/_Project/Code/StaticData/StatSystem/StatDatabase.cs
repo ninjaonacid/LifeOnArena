@@ -7,6 +7,7 @@ namespace Code.StaticData.StatSystem
     public class StatDatabase : ScriptableObject
     {
         public List<StatDefinition> StatDefinitions = new List<StatDefinition>();
-        public List<Attribute> AttributeDefinitions = new List<Attribute>();
+        public List<StatDefinition> AttributeDefinitions = new List<StatDefinition>();
+        public List<StatDefinition> PrimaryStats = new List<StatDefinition>();
     }
 }

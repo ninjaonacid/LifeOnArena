@@ -1,0 +1,12 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <Code.Editor.EditorWindows.SplitView style="height: 315px; width: 248px;">
+        <ui:VisualElement name="LeftPanel" style="width: 110px; position: relative; visibility: visible; display: flex; overflow: visible;">
+            <uie:Toolbar>
+                <uie:ToolbarSearchField focusable="true" style="width: 94px;" />
+                <ui:Button text="Button" display-tooltip-when-elided="true" name="CreateButton" style="height: 22px; width: 52px; -unity-text-align: middle-center;" />
+            </uie:Toolbar>
+            <ui:ListView focusable="true" style="flex-grow: 1; flex-shrink: 1;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="RightPanel" style="align-items: auto; justify-content: center; flex-direction: column; width: 247px; left: auto; height: 440px;" />
+    </Code.Editor.EditorWindows.SplitView>
+</ui:UXML>

@@ -24,11 +24,13 @@ namespace Code.StaticData.StatSystem
         public void AddModifier(StatModifier modifier)
         {
             _modifiers.Add(modifier);
+            CalculateValue();
         }
 
         public void RemoveModifier(Object source)
         {
             _modifiers = _modifiers.Where(x => x.Source.GetInstanceID() != source.GetInstanceID()).ToList();
+            CalculateValue();
         }
 
         protected void CalculateValue()
