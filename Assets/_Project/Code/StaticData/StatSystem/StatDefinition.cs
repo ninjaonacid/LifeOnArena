@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Code.StaticData.StatSystem
 {
-    [CreateAssetMenu(fileName = "StatDefinition", menuName = "StatSystem")]
+    [CreateAssetMenu(fileName = "StatDefinition", menuName = "StatSystem/StatDefinition")]
     public class StatDefinition : ScriptableObject
     {
         [SerializeField] private int _baseValue;
@@ -10,7 +10,6 @@ namespace Code.StaticData.StatSystem
 
         public int BaseValue => _baseValue;
         public int Capacity => _capacity;
-
 
     }
 }

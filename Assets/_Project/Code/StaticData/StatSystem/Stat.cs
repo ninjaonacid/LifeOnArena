@@ -33,7 +33,7 @@ namespace Code.StaticData.StatSystem
 
         protected void CalculateValue()
         {
-            int finalValue = BaseValue;
+            int newValue = BaseValue;
 
             _modifiers.Sort();
 
@@ -43,23 +43,23 @@ namespace Code.StaticData.StatSystem
             {
                 if (modifier.OperationType == ModifierOperationType.Additive)
                 {
-                    finalValue += modifier.Magnitude;
+                    newValue += modifier.Magnitude;
                 }
 
                 else if (modifier.OperationType == ModifierOperationType.Multiplicative)
                 {
-                    finalValue *= modifier.Magnitude;
+                    newValue *= modifier.Magnitude;
                 }
             }
 
             if (_statDefinition.Capacity >= 0)
             {
-                finalValue = Mathf.Min(finalValue, _statDefinition.Capacity);
+                newValue = Mathf.Min(newValue, _statDefinition.Capacity);
             }
 
-            if (_value != finalValue)
+            if (_value != newValue)
             {
-                _value = finalValue;
+                _value = newValue;
                 ValueChanged?.Invoke();
             }
         }
