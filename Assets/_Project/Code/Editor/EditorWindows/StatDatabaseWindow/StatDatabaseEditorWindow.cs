@@ -14,8 +14,8 @@ namespace Code.Editor.EditorWindows.StatDatabaseWindow
         [MenuItem("Window/StatSystem/StatDatabase")]
         public static void ShowWindow()
         {
-            StatDatabaseEditorWindow window = CreateInstance<StatDatabaseEditorWindow>();
-            window.Show();
+            StatDatabaseEditorWindow window = GetWindow<StatDatabaseEditorWindow>();
+
             window.minSize = new Vector2(800, 600);
             window.titleContent = new GUIContent("StatDatabase");
         }
