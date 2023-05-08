@@ -7,7 +7,7 @@ namespace Code.Editor.EditorWindows
     {
         public new class UxmlFactory : UxmlFactory<CustomInspector, UxmlTraits>
         {
-
+        
         }
     }
 }
