@@ -1286,6 +1286,7 @@ GameObject:
   - component: {fileID: 4893598800002227442}
   - component: {fileID: 4195340829786993569}
   - component: {fileID: -4749970168048390944}
+  - component: {fileID: 3504133581908951107}
   - component: {fileID: 2628393833221347450}
   m_Layer: 12
   m_Name: Hero
@@ -1565,6 +1566,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _heroCollider: {fileID: 4098790718597460829}
+--- !u!114 &3504133581908951107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6031708160037518034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83af338313c235a4baec1c672265fef1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _StatDatabase: {fileID: 11400000, guid: 48c64eec499bb1a48be45553e6e939d7, type: 2}
 --- !u!65 &2628393833221347450
 BoxCollider:
   m_ObjectHideFlags: 0
