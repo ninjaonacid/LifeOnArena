@@ -5,6 +5,7 @@ using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Object = UnityEngine.Object;
 
 namespace Code.Editor.EditorWindows
 {
@@ -65,8 +66,9 @@ namespace Code.Editor.EditorWindows
 
                 }));
 
+                if (_filteredListView[index] == null) return;
                 SerializedObject serializedObject = new SerializedObject(_filteredListView[index]);
-                SerializedProperty serializedProperty = serializedObject.FindProperty("_name");
+                SerializedProperty serializedProperty = serializedObject.FindProperty("m_Name");
                 label.BindProperty(serializedProperty);
             };
 
@@ -151,7 +153,7 @@ namespace Code.Editor.EditorWindows
             if (EditorUtility.DisplayDialog("Delete item", "Are you sure you want to delete"
                                                            + item.name + "?", "Yes", "No"))
             {
-                ScriptableObject.DestroyImmediate(item, true);
+                Object.DestroyImmediate(item, true);
                 AssetDatabase.SaveAssets();
                 AssetDatabase.Refresh();
                 _items.Remove(item);

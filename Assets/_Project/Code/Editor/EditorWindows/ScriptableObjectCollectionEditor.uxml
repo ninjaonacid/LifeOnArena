@@ -9,7 +9,7 @@
         </ui:VisualElement>
         <ui:VisualElement name="RightPanel" style="align-items: auto; justify-content: flex-end; flex-direction: column-reverse; width: 100%; left: auto; height: auto; flex-grow: 1;">
             <uie:PropertyField name="NameField" style="justify-content: flex-start; align-items: auto; flex-grow: 1;" />
-            <Code.Editor.EditorWindows.CustomInspector />
+            <Code.Editor.EditorWindows.CustomInspector style="flex-grow: 1; flex-shrink: 0; width: 100%;" />
         </ui:VisualElement>
     </Code.Editor.EditorWindows.SplitView>
 </ui:UXML>

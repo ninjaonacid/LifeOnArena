@@ -1,9 +1,9 @@
-using UnityEditor.UIElements;
+using Code.StaticData.StatSystem;
 using UnityEngine.UIElements;
 
 namespace Code.Editor.EditorWindows.StatDatabaseWindow
 {
-    public class StatCollectionEditor : VisualElement
+    public class StatCollectionEditor : ScriptableObjectCollectionEditor<StatDefinition>
     {
         public new class UxmlFactory : UxmlFactory<StatCollectionEditor, UxmlTraits>
         {

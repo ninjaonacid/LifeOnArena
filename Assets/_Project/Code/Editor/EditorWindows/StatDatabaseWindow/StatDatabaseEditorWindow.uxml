@@ -1,2 +1,10 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <uie:Toolbar>
+        <uie:ToolbarButton text="Stats" display-tooltip-when-elided="true" name="stats-tab" style="-unity-text-align: upper-center; flex-grow: 1;" />
+        <uie:ToolbarButton text="PrimaryStats" display-tooltip-when-elided="true" name="PrimaryStatsTab" style="-unity-text-align: upper-center; flex-grow: 1;" />
+        <uie:ToolbarButton text="Attributes" display-tooltip-when-elided="true" name="AttributesTab" style="-unity-text-align: upper-center; flex-grow: 1;" />
+    </uie:Toolbar>
+    <Code.Editor.EditorWindows.StatDatabaseWindow.StatCollectionEditor name="primary-stats" style="flex-grow: 1; display: none;" />
+    <Code.Editor.EditorWindows.StatDatabaseWindow.StatCollectionEditor name="stats" style="flex-grow: 1; display: none; visibility: visible;" />
+    <Code.Editor.EditorWindows.StatDatabaseWindow.StatCollectionEditor name="attributes" style="flex-grow: 1; display: none;" />
 </ui:UXML>
