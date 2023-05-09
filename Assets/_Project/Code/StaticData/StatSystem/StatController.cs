@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using Code.Data;
+using Code.Services.PersistentProgress;
 using UnityEngine;
 
 namespace Code.StaticData.StatSystem
@@ -41,5 +43,6 @@ namespace Code.StaticData.StatSystem
                 _stats.Add(stat.name, new PrimaryStat(stat));
             }
         }
+        
     }
 }
