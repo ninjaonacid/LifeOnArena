@@ -1,15 +1,15 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
     <Code.Editor.EditorWindows.SplitView fixed-pane-initial-dimension="200" orientation="Horizontal" style="height: 315px; width: 100%;">
         <ui:VisualElement name="LeftPanel" style="width: 200px; position: relative; visibility: visible; display: flex; overflow: visible; flex-grow: 0; height: auto;">
-            <uie:Toolbar style="justify-content: flex-start;">
+            <uie:Toolbar style="justify-content: flex-start; height: auto;">
                 <uie:ToolbarSearchField focusable="true" style="width: 135px;" />
                 <ui:Button text="Create" display-tooltip-when-elided="true" name="CreateButton" style="height: 17px; width: 51px; -unity-text-align: middle-center;" />
             </uie:Toolbar>
             <ui:ListView focusable="true" style="flex-grow: 1; flex-shrink: 1;" />
         </ui:VisualElement>
-        <ui:VisualElement name="RightPanel" style="align-items: auto; justify-content: flex-end; flex-direction: column-reverse; width: 100%; left: auto; height: auto; flex-grow: 1;">
-            <uie:PropertyField name="NameField" style="justify-content: flex-start; align-items: auto; flex-grow: 1;" />
-            <Code.Editor.EditorWindows.CustomInspector style="flex-grow: 1; flex-shrink: 0; width: 100%;" />
+        <ui:VisualElement name="RightPanel" style="align-items: stretch; justify-content: flex-end; flex-direction: column; width: auto; left: auto; height: auto; flex-grow: 1; min-width: auto; min-height: auto;">
+            <uie:PropertyField name="NameField" binding-path="m_Name" style="justify-content: flex-start; align-items: stretch; flex-grow: 0; flex-direction: column; flex-wrap: nowrap;" />
+            <Code.Editor.EditorWindows.CustomInspector style="flex-grow: 1; flex-shrink: 1; width: auto;" />
         </ui:VisualElement>
     </Code.Editor.EditorWindows.SplitView>
 </ui:UXML>

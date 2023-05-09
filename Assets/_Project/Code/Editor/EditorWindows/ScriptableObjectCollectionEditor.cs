@@ -98,7 +98,7 @@ namespace Code.Editor.EditorWindows
             _listView.SetSelection(_items.Count - 1);
             EditorUtility.SetDirty(_target);
         }
-
+       
         private void Create()
         {
             Type[] types = AppDomain.CurrentDomain.GetAssemblies()
@@ -117,7 +117,7 @@ namespace Code.Editor.EditorWindows
                         CreateItem(type);
                     });
                 }
-
+                
                 menu.ShowAsContext();
             }
             else
