@@ -30,17 +30,17 @@ namespace Code.StaticData.StatSystem
         {
             foreach (StatDefinition stat in _StatDatabase.StatDefinitions)
             {
-                _stats.Add(stat.name, new Stat(stat));
+                _stats.Add(stat.name, new Stat(stat, this));
             }
 
             foreach (StatDefinition stat in _StatDatabase.AttributeDefinitions)
             {
-                _stats.Add(stat.name, new Attribute(stat));
+                _stats.Add(stat.name, new Attribute(stat, this));
             }
             
             foreach (StatDefinition stat in _StatDatabase.PrimaryStats)
             {
-                _stats.Add(stat.name, new PrimaryStat(stat));
+                _stats.Add(stat.name, new PrimaryStat(stat, this));
             }
         }
         

@@ -8,10 +8,16 @@ namespace Code.StaticData.StatSystem
         protected int _currentValue;
         public int CurrentValue => _currentValue;
         public event Action CurrentValueChanged;
+
         public event Action<StatModifier> AppliedModifier;
-        public Attribute(StatDefinition statDefinition) : base(statDefinition)
+
+        public Attribute(StatDefinition statDefinition, StatController statController) : base(statDefinition, statController)
         {
-            _currentValue = Value;
+        }
+
+        public void Initialize()
+        {
+            _currentValue = BaseValue;
         }
         public virtual void ApplyModifier(StatModifier modifier)
         {

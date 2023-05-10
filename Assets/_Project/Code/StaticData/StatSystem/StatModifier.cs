@@ -1,5 +1,6 @@
 
-using UnityEngine;
+using System;
+using Object = UnityEngine.Object;
 
 namespace Code.StaticData.StatSystem
 {
@@ -11,10 +12,11 @@ namespace Code.StaticData.StatSystem
         Override
     }
 
-    public class StatModifier : MonoBehaviour
+    public class StatModifier 
     {
         public Object Source {get; set; }
         public int Magnitude;
         public ModifierOperationType OperationType;
+    
     }
 }

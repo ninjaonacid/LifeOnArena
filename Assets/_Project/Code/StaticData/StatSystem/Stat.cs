@@ -9,18 +9,23 @@ namespace Code.StaticData.StatSystem
     public class Stat
     {
         protected StatDefinition _statDefinition;
+        protected StatController _statController;
         protected int _value;
         public int Value => _value;
         public virtual int BaseValue => _statDefinition.BaseValue;
         public event Action ValueChanged;
         protected List<StatModifier> _modifiers = new List<StatModifier>();
-
-
-        public Stat(StatDefinition statDefinition)
+        
+        public Stat(StatDefinition statDefinition, StatController statController)
         {
-            
+            _statDefinition = statDefinition;
+            _statController = statController;
         }
 
+        public virtual void Initialize(int value)
+        {
+            _value = value;
+        }
         public void AddModifier(StatModifier modifier)
         {
             _modifiers.Add(modifier);

@@ -22,11 +22,7 @@ namespace Code.Hero
             {
                 _inputService.DisableInput();
             }
-
-            if (Input.GetKeyDown(KeyCode.T))
-            {
-                _inputService.EnableInput();
-            }
+            
         }
     }
 }
