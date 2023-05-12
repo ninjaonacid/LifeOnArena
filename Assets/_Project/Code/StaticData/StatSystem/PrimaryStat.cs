@@ -1,3 +1,5 @@
+using Code.Data;
+using Code.Services.PersistentProgress;
 using UnityEngine;
 
 namespace Code.StaticData.StatSystem
@@ -11,10 +13,10 @@ namespace Code.StaticData.StatSystem
         {
         }
 
-        public override void Initialize(int value)
+        public override void Initialize()
         {
-            base.Initialize(value);
-            _baseValue = value;
+            base.Initialize();
+            _baseValue = Value;
         }
 
         public void Add(int amount)
@@ -29,5 +31,6 @@ namespace Code.StaticData.StatSystem
             _baseValue -= amount;
             CalculateValue();
         }
+        
     }
 }

@@ -1,18 +1,25 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Code.Data;
+using Code.Services.PersistentProgress;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
 namespace Code.StaticData.StatSystem
 {
-    public class Stat
+    public class Stat : ISave
     {
         protected StatDefinition _statDefinition;
         protected StatController _statController;
         protected int _value;
         public int Value => _value;
-        public virtual int BaseValue => _statDefinition.BaseValue;
+        public virtual int BaseValue
+        {
+            get => _statDefinition.BaseValue;
+            private set => _value = value;
+        }
+
         public event Action ValueChanged;
         protected List<StatModifier> _modifiers = new List<StatModifier>();
         
@@ -22,9 +29,9 @@ namespace Code.StaticData.StatSystem
             _statController = statController;
         }
 
-        public virtual void Initialize(int value)
+        public virtual void Initialize()
         {
-            _value = value;
+            CalculateValue();
         }
         
         public void AddModifier(StatModifier modifier)
@@ -67,6 +74,27 @@ namespace Code.StaticData.StatSystem
             {
                 _value = newValue;
                 ValueChanged?.Invoke();
+            }
+        }
+
+
+        public void LoadProgress(PlayerProgress progress)
+        {
+            if (progress.CharacterStatsData.StatsData.TryGetValue(_statDefinition.name, out var value))
+            {
+                BaseValue = value;
+            }
+        }
+
+        public void UpdateProgress(PlayerProgress progress)
+        {
+            if (progress.CharacterStatsData.StatsData.TryAdd(_statDefinition.name, _value))
+            {
+                
+            }
+            else
+            {
+                progress.CharacterStatsData.StatsData[_statDefinition.name] = _value;
             }
         }
     }

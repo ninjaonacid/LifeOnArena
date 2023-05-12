@@ -9,18 +9,6 @@ namespace Code.Hero
     public class HeroStats : StatController, ISave
     {
         private CharacterStatsData _characterStatsData;
-        public void LoadProgress(PlayerProgress progress)
-        {
-            _characterStatsData = progress.CharacterStatsData;
-
-            if (_characterStatsData.StatsData == null) return;
-            
-            foreach (var statData in _characterStatsData.StatsData)
-            {
-                Stat data = Stats[statData.Key];
-                data.Initialize(statData.Value);
-            }
-        }
 
         private void Update()
         {
@@ -36,19 +24,28 @@ namespace Code.Hero
             }
         }
 
+        public void LoadProgress(PlayerProgress progress)
+        {
+            _characterStatsData = progress.CharacterStatsData;
+
+            foreach (var stat in Stats.Values)
+            {
+                if (stat is ISave saveable)
+                {
+                    saveable.LoadProgress(progress);
+                    stat.Initialize();
+                }
+            }
+        }
+
         public void UpdateProgress(PlayerProgress progress)
         {
-            foreach (var stat in Stats)
+            foreach (var stat in Stats.Values)
             {
-                if (!_characterStatsData.StatsData.ContainsKey(stat.Key))
+                if (stat is ISave saveable)
                 {
-                    _characterStatsData.StatsData.Add(stat.Key, stat.Value.Value);
+                    saveable.UpdateProgress(progress);
                 }
-                else
-                {
-                    _characterStatsData.StatsData[stat.Key] = stat.Value.Value;
-                }
-                
             }
         }
     }

@@ -1,4 +1,6 @@
 using System;
+using Code.Data;
+using Code.Services.PersistentProgress;
 using UnityEngine;
 
 namespace Code.StaticData.StatSystem
@@ -14,10 +16,10 @@ namespace Code.StaticData.StatSystem
         {
         }
         
-        public override void Initialize(int value)
+        public override void Initialize()
         {
-            base.Initialize(value);
-            _currentValue = value;
+            base.Initialize();
+            _currentValue = Value;
         }
 
         public virtual void ApplyModifier(StatModifier modifier)
@@ -48,5 +50,6 @@ namespace Code.StaticData.StatSystem
                 AppliedModifier?.Invoke(modifier);
             }
         }
+        
     }
 }
