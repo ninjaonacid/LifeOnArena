@@ -13,10 +13,12 @@ namespace Code.Hero
         {
             _characterStatsData = progress.CharacterStatsData;
 
+            if (_characterStatsData.StatsData == null) return;
+            
             foreach (var statData in _characterStatsData.StatsData)
             {
-               Stat data = Stats[statData.Key];
-               data.Initialize(statData.Value);
+                Stat data = Stats[statData.Key];
+                data.Initialize(statData.Value);
             }
         }
 

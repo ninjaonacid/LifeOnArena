@@ -26,6 +26,7 @@ namespace Code.StaticData.StatSystem
         {
             _value = value;
         }
+        
         public void AddModifier(StatModifier modifier)
         {
             _modifiers.Add(modifier);
@@ -41,8 +42,6 @@ namespace Code.StaticData.StatSystem
         protected void CalculateValue()
         {
             int newValue = BaseValue;
-
-            _modifiers.Sort();
 
             _modifiers.Sort((x, y) => x.OperationType.CompareTo(y.OperationType));
 

@@ -6,9 +6,15 @@ namespace Code.StaticData.StatSystem
     {
         private int _baseValue;
         public override int BaseValue => _baseValue;
-        
+
         public PrimaryStat(StatDefinition statDefinition, StatController statController) : base(statDefinition, statController)
         {
+        }
+
+        public override void Initialize(int value)
+        {
+            base.Initialize(value);
+            _baseValue = value;
         }
 
         public void Add(int amount)

@@ -13,11 +13,13 @@ namespace Code.StaticData.StatSystem
         public Attribute(StatDefinition statDefinition, StatController statController) : base(statDefinition, statController)
         {
         }
-
-        public void Initialize()
+        
+        public override void Initialize(int value)
         {
-            _currentValue = BaseValue;
+            base.Initialize(value);
+            _currentValue = value;
         }
+
         public virtual void ApplyModifier(StatModifier modifier)
         {
             int newValue = _currentValue;
