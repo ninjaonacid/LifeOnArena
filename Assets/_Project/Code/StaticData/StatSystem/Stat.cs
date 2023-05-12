@@ -8,18 +8,13 @@ using Object = UnityEngine.Object;
 
 namespace Code.StaticData.StatSystem
 {
-    public class Stat : ISave
+    public class Stat
     {
         protected StatDefinition _statDefinition;
         protected StatController _statController;
         protected int _value;
         public int Value => _value;
-        public virtual int BaseValue
-        {
-            get => _statDefinition.BaseValue;
-            private set => _value = value;
-        }
-
+        public virtual int BaseValue => _statDefinition.BaseValue;
         public event Action ValueChanged;
         protected List<StatModifier> _modifiers = new List<StatModifier>();
         
@@ -76,26 +71,7 @@ namespace Code.StaticData.StatSystem
                 ValueChanged?.Invoke();
             }
         }
-
-
-        public void LoadProgress(PlayerProgress progress)
-        {
-            if (progress.CharacterStatsData.StatsData.TryGetValue(_statDefinition.name, out var value))
-            {
-                BaseValue = value;
-            }
-        }
-
-        public void UpdateProgress(PlayerProgress progress)
-        {
-            if (progress.CharacterStatsData.StatsData.TryAdd(_statDefinition.name, _value))
-            {
-                
-            }
-            else
-            {
-                progress.CharacterStatsData.StatsData[_statDefinition.name] = _value;
-            }
-        }
+        
+        
     }
 }

@@ -3,6 +3,7 @@ using Code.Data;
 using Code.Services.PersistentProgress;
 using Code.StaticData.StatSystem;
 using UnityEngine;
+using Attribute = Code.StaticData.StatSystem.Attribute;
 
 namespace Code.Hero
 {
@@ -14,13 +15,15 @@ namespace Code.Hero
         {
             if (Input.GetKeyDown(KeyCode.T))
             {
-                _stats["Attack"].AddModifier( new StatModifier
+                Attribute health = _stats["Health"] as Attribute;
+                health.ApplyModifier(new StatModifier()
                 {
-                    Magnitude = 20,
-                    OperationType = ModifierOperationType.Additive
+                    OperationType = ModifierOperationType.Additive,
+                    Source = this,
+                    
+                        
                 });
-
-                Debug.Log(_stats["Attack"].Value.ToString());
+                Debug.Log(health.BaseValue.ToString());
             }
         }
 

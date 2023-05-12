@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Code.StaticData.StatSystem
 {
-    public class PrimaryStat : Stat
+    public class PrimaryStat : Stat, ISave
     {
         private int _baseValue;
         public override int BaseValue => _baseValue;
@@ -23,7 +23,6 @@ namespace Code.StaticData.StatSystem
         {
             _baseValue += amount;
             CalculateValue();
-
         }
 
         public void Substract(int amount)
@@ -31,6 +30,25 @@ namespace Code.StaticData.StatSystem
             _baseValue -= amount;
             CalculateValue();
         }
-        
+
+        public void LoadProgress(PlayerProgress progress)
+        {
+            if (progress.CharacterStatsData.StatsData.TryGetValue(_statDefinition.name, out var value))
+            {
+                _baseValue = value;
+            }
+        }
+
+        public void UpdateProgress(PlayerProgress progress)
+        {
+            if (progress.CharacterStatsData.StatsData.TryAdd(_statDefinition.name, _baseValue))
+            {
+                
+            }
+            else
+            {
+                progress.CharacterStatsData.StatsData[_statDefinition.name] = _baseValue;
+            }
+        }
     }
 }

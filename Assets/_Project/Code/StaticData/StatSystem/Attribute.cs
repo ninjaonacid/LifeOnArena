@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Code.StaticData.StatSystem
 {
-    public class Attribute : Stat
+    public class Attribute : Stat, ISave
     {
         protected int _currentValue;
         public int CurrentValue => _currentValue;
@@ -48,6 +48,26 @@ namespace Code.StaticData.StatSystem
                 _currentValue = newValue;
                 CurrentValueChanged?.Invoke();
                 AppliedModifier?.Invoke(modifier);
+            }
+        }
+        
+        public void LoadProgress(PlayerProgress progress)
+        {
+            if (progress.CharacterStatsData.StatsData.TryGetValue(_statDefinition.name, out var value))
+            {
+                _currentValue = value;
+            }
+        }
+
+        public void UpdateProgress(PlayerProgress progress)
+        {
+            if (progress.CharacterStatsData.StatsData.TryAdd(_statDefinition.name, _currentValue))
+            {
+                
+            }
+            else
+            {
+                progress.CharacterStatsData.StatsData[_statDefinition.name] = _currentValue;
             }
         }
         
