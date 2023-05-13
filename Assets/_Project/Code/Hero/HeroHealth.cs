@@ -3,6 +3,7 @@ using Code.Data;
 using Code.Logic;
 using Code.Logic.EntitiesComponents;
 using Code.Services.PersistentProgress;
+using Code.StaticData.StatSystem;
 using UnityEngine;
 
 namespace Code.Hero
@@ -10,7 +11,7 @@ namespace Code.Hero
     public class HeroHealth : MonoBehaviour, ISave, IHealth
     {
         private CharacterStats _characterStats;
-
+        public Stat Health { get; set; }
         public event Action HealthChanged;
 
         public float Current

@@ -1,6 +1,7 @@
 using System;
 using Code.Logic;
 using Code.Logic.EntitiesComponents;
+using Code.StaticData.StatSystem;
 using UnityEngine;
 
 namespace Code.Enemy
@@ -8,10 +9,16 @@ namespace Code.Enemy
     [RequireComponent(typeof(EnemyAnimator))]
     public class EnemyHealth : MonoBehaviour, IHealth
     {
-        [SerializeField] private float _current;
+        private Stat _health;
+        
+        private float _current;
+        private float _max;
 
-        [SerializeField] private float _max;
-
+        public Stat Health
+        {
+            set => _health = value;
+        }
+        
         public EnemyAnimator Animator;
 
         public event Action HealthChanged;
@@ -29,7 +36,7 @@ namespace Code.Enemy
         }
         private void OnEnable()
         {
-            _current = _max;
+            _current = _health.Value;
             HealthChanged?.Invoke();
         }
 

@@ -11,6 +11,7 @@ using Code.Services.RandomService;
 using Code.Services.SaveLoad;
 using Code.StaticData;
 using Code.StaticData.Identifiers;
+using Code.StaticData.StatSystem;
 using Code.UI.HUD;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -77,10 +78,11 @@ namespace Code.Infrastructure.Factory
                 parent.position, 
                 Quaternion.identity, parent);
 
+            StatController monsterStats = monster.GetComponent<StatController>();
+            
             IHealth health = monster.GetComponent<IHealth>();
-            health.Current = monsterData.Hp;
-            health.Max = monsterData.Hp;
-
+            health.Health = monsterStats.Stats["Health"];
+            
             monster.GetComponent<ActorUI>().Construct(health);
             monster.GetComponent<AgentMoveToPlayer>().Construct(_heroFactory.HeroGameObject.transform);
             monster.GetComponent<NavMeshAgent>().speed = monsterData.MoveSpeed;
@@ -89,14 +91,7 @@ namespace Code.Infrastructure.Factory
             var lootSpawner = monster.GetComponentInChildren<LootSpawner>();
             lootSpawner.Construct(this, _randomService);
             lootSpawner.SetLoot(monsterData.MinLoot, monsterData.MaxLoot);
-
-            var enemyConfig = monster.GetComponent<EnemyConfig>();
-      
-            enemyConfig.Damage = monsterData.Damage;
-            enemyConfig.Cleavage = monsterData.Cleavage;
-            enemyConfig.EffectiveDistance = monsterData.EffectiveDistance;
-            enemyConfig.AttackDuration = monsterData.AttackDuration;
-            enemyConfig.HitStaggerDuration = monsterData.HitStaggerDuration;
+            
 
             return monster;
         }

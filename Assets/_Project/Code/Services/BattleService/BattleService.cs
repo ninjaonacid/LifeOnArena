@@ -1,5 +1,6 @@
 using Code.Logic;
 using Code.Logic.EntitiesComponents;
+using Code.StaticData.StatSystem;
 using UnityEngine;
 
 namespace Code.Services.BattleService
@@ -31,5 +32,13 @@ namespace Code.Services.BattleService
             }
         }
 
+        public void CreateAttack(GameObject attacker, GameObject target)
+        {
+            var attackerStats = attacker.GetComponent<StatController>();
+            var targetStats = target.GetComponent<StatController>();
+
+            var targetHealth = targetStats.Stats["Health"] as Attribute;
+            
+        }
     }
 }

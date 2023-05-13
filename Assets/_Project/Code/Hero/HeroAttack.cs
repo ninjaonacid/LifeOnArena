@@ -5,6 +5,7 @@ using Code.Services.AudioService;
 using Code.Services.BattleService;
 using Code.Services.PersistentProgress;
 using Code.StaticData.Ability;
+using Code.StaticData.StatSystem;
 using UnityEngine;
 using VContainer;
 
@@ -15,16 +16,15 @@ namespace Code.Hero
     {
         private static int _layerMask;
         private readonly Collider[] _hits = new Collider[2];
+        [SerializeField] private StatController _stats;
 
         private CharacterStats _characterStats;
-        
-        public HeroWeapon HeroWeapon;
         public HeroAnimator HeroAnimator;
         public CharacterController CharacterController;
         [SerializeField] private AudioSource _heroAudioSource;
         private IAudioService _audioService;
         private IBattleService _battleService;
-
+        
         public void LoadProgress(PlayerProgress progress)
         {
             _characterStats = progress.CharacterStats;
@@ -44,26 +44,11 @@ namespace Code.Hero
 
         public void BaseAttack()
         {
-            
-            if (HeroWeapon.GetEquippedWeapon() != null)
-            {
-                DoDamage(_characterStats.CalculateHeroDamage() +
-                         HeroWeapon.GetEquippedWeapon().Damage,
-                    _characterStats.CalculateHeroAttackRadius());
-               // _audioService.PlayHeroAttackSound(_heroAudioSource);
-            }
-            else DoDamage(_characterStats.CalculateHeroDamage(), _characterStats.CalculateHeroAttackRadius());
+      
         }
 
         public void SkillAttack()
         {
-            if (HeroWeapon.GetEquippedWeapon() != null)
-            {
-                DoDamage(//_activeSkill.Damage +
-                         HeroWeapon.GetEquippedWeapon().Damage,
-                    HeroWeapon.GetEquippedWeapon().AttackRadius);
-            }
-            else DoDamage(_characterStats.CalculateHeroDamage(), _characterStats.CalculateHeroAttackRadius());
         }
 
         public void DoDamage(float damage, float attackRadius)

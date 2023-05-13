@@ -20,8 +20,6 @@ namespace Code.Hero
                 {
                     OperationType = ModifierOperationType.Additive,
                     Source = this,
-                    
-                        
                 });
                 Debug.Log(health.BaseValue.ToString());
             }

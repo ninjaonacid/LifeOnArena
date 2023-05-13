@@ -1,4 +1,5 @@
 ﻿using System;
+using Code.StaticData.StatSystem;
 
 namespace Code.Logic.EntitiesComponents
 {
@@ -6,6 +7,7 @@ namespace Code.Logic.EntitiesComponents
     {
         float Current { get; set; }
         float Max { get; set; }
+        Stat Health { set; }
 
         event Action HealthChanged;
 

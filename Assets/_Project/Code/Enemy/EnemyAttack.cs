@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using Code.Logic;
 using Code.Logic.EntitiesComponents;
+using Code.StaticData.StatSystem;
 using UnityEngine;
 
 namespace Code.Enemy
@@ -10,7 +11,7 @@ namespace Code.Enemy
     public class EnemyAttack : MonoBehaviour
     {
 
-        [SerializeField] private EnemyConfig _config;
+        [SerializeField] private StatController _stats;
         private float _attackCooldown;
         private bool _attackIsActive;
 
@@ -57,7 +58,7 @@ namespace Code.Enemy
 
         public void AttackEnded()
         {
-            _attackCooldown = _config.AttackCooldown;
+            _attackCooldown = _stats.Stats["AttackSpeed"].Value;
             _isAttacking = false;
         }
 
@@ -69,7 +70,7 @@ namespace Code.Enemy
         public void Attack()
         {
             _isAttacking = true;
-            if (Hit(out var hit)) hit.transform.GetComponentInParent<IHealth>().TakeDamage(_config.Damage);
+            if (Hit(out var hit)) hit.transform.GetComponentInParent<IHealth>().TakeDamage(_stats.Stats["Attack"].Value);
         }
 
         private bool Hit(out Collider hit)
@@ -77,7 +78,7 @@ namespace Code.Enemy
             var startPoint = StartPoint();
 
             var hitscount = Physics.OverlapSphereNonAlloc(startPoint,
-                _config.Cleavage,
+                _stats.Stats["AttackRadius"].Value,
                 _hits,
                 _layerMask);
             hit = _hits.FirstOrDefault();
@@ -89,7 +90,7 @@ namespace Code.Enemy
         {
             return new Vector3(transform.position.x,
                 transform.position.y + 2f,
-                transform.position.z) + transform.forward * _config.EffectiveDistance;
+                transform.position.z) + transform.forward * _stats.Stats["AttackDistance"].Value;
         }
 
         private bool CoolDownIsUp()
