@@ -1445,6 +1445,10 @@ PrefabInstance:
       propertyPath: m_Radius
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 1944701036560346452, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
+      propertyPath: _enemyConfig
+      value: 
+      objectReference: {fileID: 4269215769864654578}
     - target: {fileID: 2838954472591199000, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
       propertyPath: Damage
       value: 20
@@ -1563,6 +1567,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8065430935379874950, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
+      propertyPath: _stats
+      value: 
+      objectReference: {fileID: 4452989207223125321}
+    - target: {fileID: 8065430935379874951, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
+      propertyPath: _stats
+      value: 
+      objectReference: {fileID: 4452989207223125321}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
 --- !u!4 &3761810806488398059 stripped
@@ -1575,6 +1587,24 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7147005237806593151, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
   m_PrefabInstance: {fileID: 6651870758917527086}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4269215769864654578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4575501451438531153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03c1baa6565754f4d946ab9df39cd532, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AttackCooldown: 0
+  AttackDuration: 0
+  Cleavage: 0
+  Damage: 0
+  EffectiveDistance: 0
+  HitStaggerDuration: 0
 --- !u!114 &4452989207223125321
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,16 +1,17 @@
 ﻿using System;
 using Code.StaticData.StatSystem;
+using Attribute = Code.StaticData.StatSystem.Attribute;
 
 namespace Code.Logic.EntitiesComponents
 {
     public interface IHealth
     {
         float Current { get; set; }
-        float Max { get; set; }
-        Stat Health { set; }
+        float Max { get; }
 
+        Attribute Health { get; set; }
         event Action HealthChanged;
 
-        void TakeDamage(float damage);
+        void TakeDamage(int damage);
     }
 }

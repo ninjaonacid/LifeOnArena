@@ -16,7 +16,7 @@ namespace Code.StaticData.StatSystem
         public override void Initialize()
         {
             base.Initialize();
-            _baseValue = Value;
+            _baseValue = _statDefinition.BaseValue;
         }
 
         public void Add(int amount)

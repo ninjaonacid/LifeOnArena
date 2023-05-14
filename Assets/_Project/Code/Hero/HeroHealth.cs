@@ -1,55 +1,56 @@
 using System;
-using Code.Data;
-using Code.Logic;
 using Code.Logic.EntitiesComponents;
-using Code.Services.PersistentProgress;
 using Code.StaticData.StatSystem;
 using UnityEngine;
+using Attribute = Code.StaticData.StatSystem.Attribute;
 
 namespace Code.Hero
 {
-    public class HeroHealth : MonoBehaviour, ISave, IHealth
+    public class HeroHealth : MonoBehaviour, IHealth
     {
-        private CharacterStats _characterStats;
-        public Stat Health { get; set; }
+        [SerializeField] private HeroStats _stats;
         public event Action HealthChanged;
+
+        public float Max { get; }
+        public Attribute Health
+        {
+            get => ((Attribute)_stats.Stats["Health"]);
+            set {} 
+        }
+
+        private float _currentHp;
+
 
         public float Current
         {
-            get => _characterStats.CurrentHP;
+            get => _currentHp;
             set
             {
-                if (_characterStats.CurrentHP != value)
+                if (_currentHp != value)
                 {
-                    _characterStats.CurrentHP = value;
+                   // _characterStats.CurrentHP = value;
                     HealthChanged?.Invoke();
                 }
             }
         }
-
-        public float Max
-        {
-            get => _characterStats.CalculateHeroHealth();
-            set => _characterStats.BaseMaxHP = value;
-        }
-
-        public void TakeDamage(float damage)
+        
+        public void TakeDamage(int damage)
         {
             if (Current <= 0)
                 return;
             Current -= damage;
-        }
 
-        public void LoadProgress(PlayerProgress progress)
-        {
-            _characterStats = progress.CharacterStats;
-            HealthChanged?.Invoke();
-        }
+            if (Health.CurrentValue <= 0)
+            {
+                return;
+            }
 
-        public void UpdateProgress(PlayerProgress progress)
-        {
-            progress.CharacterStats.CurrentHP = Current;
-            progress.CharacterStats.BaseMaxHP = Max;
+            Health.ApplyModifier(new StatModifier()
+            {
+                Magnitude = -1 * damage,
+                OperationType = ModifierOperationType.Additive
+            });
         }
+        
     }
 }

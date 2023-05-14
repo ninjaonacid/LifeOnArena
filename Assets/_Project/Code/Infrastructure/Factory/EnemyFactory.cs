@@ -18,6 +18,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using VContainer;
 using VContainer.Unity;
+using Attribute = Code.StaticData.StatSystem.Attribute;
 using Object = UnityEngine.Object;
 
 namespace Code.Infrastructure.Factory
@@ -81,8 +82,7 @@ namespace Code.Infrastructure.Factory
             StatController monsterStats = monster.GetComponent<StatController>();
             
             IHealth health = monster.GetComponent<IHealth>();
-            health.Health = monsterStats.Stats["Health"];
-            
+
             monster.GetComponent<ActorUI>().Construct(health);
             monster.GetComponent<AgentMoveToPlayer>().Construct(_heroFactory.HeroGameObject.transform);
             monster.GetComponent<NavMeshAgent>().speed = monsterData.MoveSpeed;
@@ -91,7 +91,11 @@ namespace Code.Infrastructure.Factory
             var lootSpawner = monster.GetComponentInChildren<LootSpawner>();
             lootSpawner.Construct(this, _randomService);
             lootSpawner.SetLoot(monsterData.MinLoot, monsterData.MaxLoot);
-            
+
+            var config = monster.GetComponent<EnemyConfig>();
+            config.AttackDuration = monsterData.AttackDuration;
+            config.HitStaggerDuration = monsterData.HitStaggerDuration;
+          
 
             return monster;
         }

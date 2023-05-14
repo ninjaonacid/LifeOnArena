@@ -27,7 +27,7 @@ namespace Code.Services.BattleService
                 if(_hits[i].transform.parent.TryGetComponent(out IHealth health))
                 {
                     Debug.Log("Zalupa");
-                    health.TakeDamage(damage);
+                    health.TakeDamage((int)damage);
                 }
             }
         }

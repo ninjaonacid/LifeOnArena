@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Code.Data;
-using Code.Services.PersistentProgress;
 using UnityEngine;
 using Object = UnityEngine.Object;
 

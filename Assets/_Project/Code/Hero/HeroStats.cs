@@ -37,6 +37,8 @@ namespace Code.Hero
                     stat.Initialize();
                 }
             }
+            
+            StatsLoaded();
         }
 
         public void UpdateProgress(PlayerProgress progress)

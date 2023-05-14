@@ -26,7 +26,12 @@ namespace Code.StaticData.StatSystem
             }
         }
 
-        private void Initialize()
+        private void OnDestroy()
+        {
+            Uninitiliazed?.Invoke();
+        }
+
+        public void Initialize()
         {
             foreach (StatDefinition stat in _StatDatabase.StatDefinitions)
             {
@@ -42,7 +47,19 @@ namespace Code.StaticData.StatSystem
             {
                 _stats.Add(stat.name, new PrimaryStat(stat, this));
             }
+
+            foreach (var stat in Stats.Values)
+            {
+                stat.Initialize();
+            }
+            
+            _isInitialized = true;
+            StatsLoaded();
         }
-        
+
+        protected void StatsLoaded()
+        {
+            Initialized?.Invoke();
+        }
     }
 }

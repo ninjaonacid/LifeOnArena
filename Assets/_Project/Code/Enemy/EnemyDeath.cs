@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Code.StaticData.StatSystem;
 using UnityEngine;
 
 namespace Code.Enemy
@@ -7,6 +8,7 @@ namespace Code.Enemy
     [RequireComponent(typeof(EnemyHealth), typeof(EnemyAnimator))]
     public class EnemyDeath : MonoBehaviour
     {
+        [SerializeField] private StatController _stats;
         public EnemyAnimator Animator;
         public EnemyHealth Health;
         public GameObject FracturedPrefab;
@@ -16,23 +18,29 @@ namespace Code.Enemy
 
         public void OnEnable()
         {
-            Health.HealthChanged += HealthChanged;
+            _stats.Initialized += OnStatsInitialized;
+
         }
 
+        private void OnStatsInitialized()
+        {
+            Health.Health.CurrentValueChanged += HealthChanged;
+        }
+        
         private void OnDisable()
         {
-            Health.HealthChanged -= HealthChanged;
+            Health.Health.CurrentValueChanged -= HealthChanged;
         }
 
 
         private void HealthChanged()
         {
-            if (Health.Current <= 0) Die();
+            if (Health.Health.CurrentValue <= 0) Die();
         }
 
         private void Die()
         {
-            Health.HealthChanged -= HealthChanged;
+            Health.Health.CurrentValueChanged -= HealthChanged;
             Animator.PlayDeath();
             //EnemyModel.SetActive(false);
            // FracturedPrefab.SetActive(true);

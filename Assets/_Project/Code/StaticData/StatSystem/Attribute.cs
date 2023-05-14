@@ -56,6 +56,7 @@ namespace Code.StaticData.StatSystem
             if (progress.CharacterStatsData.StatsData.TryGetValue(_statDefinition.name, out var value))
             {
                 _currentValue = value;
+                CurrentValueChanged?.Invoke();
             }
         }
 

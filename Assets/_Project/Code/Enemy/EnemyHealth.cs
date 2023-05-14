@@ -3,26 +3,25 @@ using Code.Logic;
 using Code.Logic.EntitiesComponents;
 using Code.StaticData.StatSystem;
 using UnityEngine;
+using Attribute = Code.StaticData.StatSystem.Attribute;
 
 namespace Code.Enemy
 {
     [RequireComponent(typeof(EnemyAnimator))]
     public class EnemyHealth : MonoBehaviour, IHealth
     {
-        private Stat _health;
-        
         private float _current;
         private float _max;
-
-        public Stat Health
+        [SerializeField] private StatController _stats;
+        public Attribute Health
         {
-            set => _health = value;
+            get => ((Attribute)_stats.Stats["Health"]);
+            set {} 
         }
-        
         public EnemyAnimator Animator;
 
         public event Action HealthChanged;
-
+        
         public float Current
         {
             get => _current;
@@ -34,16 +33,25 @@ namespace Code.Enemy
             get => _max;
             set => _max = value;
         }
+
+
         private void OnEnable()
         {
-            _current = _health.Value;
             HealthChanged?.Invoke();
         }
 
-        public void TakeDamage(float damage)
+        public void TakeDamage(int damage)
         {
-            Current -= damage;
-            HealthChanged?.Invoke();
+            if (Health.CurrentValue <= 0)
+            {
+                return;
+            }
+
+            Health.ApplyModifier(new StatModifier()
+            {
+                Magnitude = -1 * damage,
+                OperationType = ModifierOperationType.Additive
+            });
         }
     }
 }

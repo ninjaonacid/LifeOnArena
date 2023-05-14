@@ -14,17 +14,17 @@ namespace Code.UI.HUD
         {
             _health = health;
 
-            _health.HealthChanged += UpdateHpBar;
+            _health.Health.CurrentValueChanged += UpdateHpBar;
         }
 
         private void OnDestroy()
         {
-           _health.HealthChanged -= UpdateHpBar;
+           _health.Health.CurrentValueChanged -= UpdateHpBar;
         }
 
         private void UpdateHpBar()
         {
-            HpBar.SetValue(_health.Current, _health.Max);
+            HpBar.SetValue(_health.Health.CurrentValue, _health.Health.Value);
         }
     }
 }

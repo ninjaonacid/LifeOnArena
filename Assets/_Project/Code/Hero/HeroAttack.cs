@@ -44,20 +44,20 @@ namespace Code.Hero
 
         public void BaseAttack()
         {
-      
+            DoDamage(_stats.Stats["Attack"].Value, _stats.Stats["AttackRadius"].Value);
         }
 
         public void SkillAttack()
         {
         }
 
-        public void DoDamage(float damage, float attackRadius)
+        public void DoDamage(int damage, float attackRadius)
         {
             for (var i = 0; i < Hit(attackRadius); i++)
             {
-                _hits[i].transform.parent.GetComponent<IHealth>().TakeDamage(damage);
+                _hits[i].transform.parent.GetComponent<IHealth>().TakeDamage((int)damage);
 
-                Debug.Log("BaseDamage amount: " + _characterStats.CalculateHeroDamage());
+           
                 Debug.Log(_hits[i].ToString());
             }
         }
@@ -65,7 +65,7 @@ namespace Code.Hero
         private int Hit(float attackRadius)
         {
             return Physics.OverlapSphereNonAlloc(StartPoint() + transform.forward * 2,
-                _characterStats.CalculateHeroAttackRadius(),
+                attackRadius,
                 _hits,
                 _layerMask);
         }
