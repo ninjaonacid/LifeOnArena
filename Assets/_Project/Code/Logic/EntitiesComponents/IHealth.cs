@@ -6,12 +6,8 @@ namespace Code.Logic.EntitiesComponents
 {
     public interface IHealth
     {
-        float Current { get; set; }
-        float Max { get; }
-
         Attribute Health { get; set; }
         event Action HealthChanged;
-
         void TakeDamage(int damage);
     }
 }

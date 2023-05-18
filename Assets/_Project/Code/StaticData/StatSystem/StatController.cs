@@ -25,7 +25,7 @@ namespace Code.StaticData.StatSystem
                 Initialize();
             }
         }
-
+        
         private void OnDestroy()
         {
             Uninitiliazed?.Invoke();
