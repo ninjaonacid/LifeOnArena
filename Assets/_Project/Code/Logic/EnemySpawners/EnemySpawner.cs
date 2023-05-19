@@ -6,6 +6,7 @@ using Code.Services;
 using Code.Services.PersistentProgress;
 using Code.StaticData;
 using Code.StaticData.Identifiers;
+using Code.StaticData.StatSystem;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;

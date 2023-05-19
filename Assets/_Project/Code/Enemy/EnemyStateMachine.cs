@@ -2,6 +2,7 @@ using Code.Enemy.CommonEnemy;
 using Code.Logic.StateMachine;
 using Code.Logic.StateMachine.Transitions;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Code.Enemy
 {
@@ -15,7 +16,7 @@ namespace Code.Enemy
         [SerializeField] private EnemyAnimator _enemyAnimator;
         [SerializeField] private Aggression _aggression;
         [SerializeField] private EnemyTarget _enemyTarget;
-        [SerializeField] private EnemyHealth _enemyHealth;
+        [FormerlySerializedAs("EnemyDamageable")] [FormerlySerializedAs("_enemyHealth")] [SerializeField] private EnemyHealth EnemyHealth;
         [SerializeField] private EnemyConfig _enemyConfig;
 
         private const string ChaseState = "EnemyChaseState";
@@ -25,7 +26,7 @@ namespace Code.Enemy
 
         private void Start()
         {
-            _enemyHealth.HealthChanged += TriggerDamageState;
+            EnemyHealth.HealthChanged += TriggerDamageState;
 
             _fsm = new FiniteStateMachine();
 

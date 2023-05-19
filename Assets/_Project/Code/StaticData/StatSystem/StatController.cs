@@ -25,7 +25,7 @@ namespace Code.StaticData.StatSystem
                 Initialize();
             }
         }
-        
+
         private void OnDestroy()
         {
             Uninitiliazed?.Invoke();
@@ -40,7 +40,15 @@ namespace Code.StaticData.StatSystem
 
             foreach (StatDefinition stat in _StatDatabase.AttributeDefinitions)
             {
-                _stats.Add(stat.name, new Attribute(stat, this));
+                if(stat.name.Equals("Health", StringComparison.OrdinalIgnoreCase))
+                {
+                    _stats.Add(stat.name, new Health(stat, this));
+                }
+                else
+                {
+                    _stats.Add(stat.name, new Attribute(stat, this)); 
+                }
+                
             }
             
             foreach (StatDefinition stat in _StatDatabase.PrimaryStats)

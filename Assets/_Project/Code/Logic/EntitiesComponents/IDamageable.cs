@@ -4,10 +4,9 @@ using Attribute = Code.StaticData.StatSystem.Attribute;
 
 namespace Code.Logic.EntitiesComponents
 {
-    public interface IHealth
+    public interface IDamageable
     {
-        Attribute Health { get; set; }
-        event Action HealthChanged;
+        Health Health { get; set; }
         void TakeDamage(int damage);
     }
 }

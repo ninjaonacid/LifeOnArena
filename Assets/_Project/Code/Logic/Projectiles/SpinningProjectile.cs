@@ -34,7 +34,7 @@ namespace Code.Logic.Projectiles
         {
             if (collision.gameObject.layer == _layerMask)
             {
-                if(collision.gameObject.TryGetComponent(out IHealth health))
+                if(collision.gameObject.TryGetComponent(out IDamageable health))
                 {
                     health.TakeDamage(20);
                 }

@@ -50,7 +50,11 @@ namespace Code.StaticData.StatSystem
                 AppliedModifier?.Invoke(modifier);
             }
         }
-        
+
+        protected void HealthChanged()
+        {
+            CurrentValueChanged?.Invoke();
+        }
         public void LoadProgress(PlayerProgress progress)
         {
             if (progress.CharacterStatsData.StatsData.TryGetValue(_statDefinition.name, out var value))

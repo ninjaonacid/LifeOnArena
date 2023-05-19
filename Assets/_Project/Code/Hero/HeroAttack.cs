@@ -1,10 +1,8 @@
 using Code.Data;
-using Code.Logic;
 using Code.Logic.EntitiesComponents;
 using Code.Services.AudioService;
 using Code.Services.BattleService;
 using Code.Services.PersistentProgress;
-using Code.StaticData.Ability;
 using Code.StaticData.StatSystem;
 using UnityEngine;
 using VContainer;
@@ -55,7 +53,7 @@ namespace Code.Hero
         {
             for (var i = 0; i < Hit(attackRadius); i++)
             {
-                _hits[i].transform.parent.GetComponent<IHealth>().TakeDamage((int)damage);
+                _hits[i].transform.parent.GetComponent<IDamageable>().TakeDamage((int)damage);
 
            
                 Debug.Log(_hits[i].ToString());

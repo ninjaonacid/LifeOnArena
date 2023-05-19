@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using Code.StaticData.StatSystem;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Code.Enemy
 {
@@ -10,7 +11,7 @@ namespace Code.Enemy
     {
         [SerializeField] private StatController _stats;
         public EnemyAnimator Animator;
-        public EnemyHealth Health;
+        [FormerlySerializedAs("Damageable")] public EnemyHealth Health;
         public GameObject FracturedPrefab;
         public GameObject EnemyModel;
 
@@ -19,7 +20,6 @@ namespace Code.Enemy
         public void OnEnable()
         {
             _stats.Initialized += OnStatsInitialized;
-
         }
 
         private void OnStatsInitialized()

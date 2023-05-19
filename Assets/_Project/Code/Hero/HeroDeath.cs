@@ -1,5 +1,6 @@
 using Code.Services;
 using UnityEngine;
+using UnityEngine.Serialization;
 using VContainer;
 
 namespace Code.Hero
@@ -23,17 +24,17 @@ namespace Code.Hero
         }
         private void Start()
         {
-            Health.HealthChanged += HealthChanged;
+            Health.Health.CurrentValueChanged += HealthChanged;
         }
 
         private void OnDestroy()
         {
-            Health.HealthChanged -= HealthChanged;
+            Health.Health.CurrentValueChanged -= HealthChanged;
         }
 
         private void HealthChanged()
         {
-            if (!_isDead && Health.Current <= 0) Die();
+            if (!_isDead && Health.Health.CurrentValue <= 0) Die();
         }
 
         private void Die()

@@ -24,7 +24,7 @@ namespace Code.Services.BattleService
         {
             for (int i = 0; i < FindTargets(worldPoint, radius, maxTargets, mask); i++)
             {
-                if(_hits[i].transform.parent.TryGetComponent(out IHealth health))
+                if(_hits[i].transform.parent.TryGetComponent(out IDamageable health))
                 {
                     Debug.Log("Zalupa");
                     health.TakeDamage((int)damage);

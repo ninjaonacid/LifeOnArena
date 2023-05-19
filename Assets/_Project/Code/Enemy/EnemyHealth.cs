@@ -1,21 +1,19 @@
 using System;
-using Code.Logic;
 using Code.Logic.EntitiesComponents;
 using Code.StaticData.StatSystem;
 using UnityEngine;
-using Attribute = Code.StaticData.StatSystem.Attribute;
 
 namespace Code.Enemy
 {
     [RequireComponent(typeof(EnemyAnimator))]
-    public class EnemyHealth : MonoBehaviour, IHealth
+    public class EnemyHealth : MonoBehaviour, IDamageable
     {
         private float _current;
         private float _max;
         [SerializeField] private StatController _stats;
-        public Attribute Health
+        public Health Health
         {
-            get => ((Attribute)_stats.Stats["Health"]);
+            get => ((Health)_stats.Stats["Health"]);
             set {} 
         }
         public EnemyAnimator Animator;
@@ -34,6 +32,10 @@ namespace Code.Enemy
             set => _max = value;
         }
 
+        private void OnDisable()
+        {
+            Health.ResetHealth();
+        }
 
         private void OnEnable()
         {

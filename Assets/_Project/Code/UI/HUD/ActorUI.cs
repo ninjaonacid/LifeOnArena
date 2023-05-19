@@ -6,25 +6,24 @@ namespace Code.UI.HUD
 {
     public class ActorUI : MonoBehaviour
     {
-        private IHealth _health;
+        private IDamageable _damageable;
         public HpBar HpBar;
-
-
-        public void Construct(IHealth health)
+        
+        public void Construct(IDamageable damageable)
         {
-            _health = health;
+            _damageable = damageable;
 
-            _health.Health.CurrentValueChanged += UpdateHpBar;
+            _damageable.Health.CurrentValueChanged += UpdateHpBar;
         }
 
         private void OnDestroy()
         {
-           _health.Health.CurrentValueChanged -= UpdateHpBar;
+           _damageable.Health.CurrentValueChanged -= UpdateHpBar;
         }
 
         private void UpdateHpBar()
         {
-            HpBar.SetValue(_health.Health.CurrentValue, _health.Health.Value);
+            HpBar.SetValue(_damageable.Health.CurrentValue, _damageable.Health.Value);
         }
     }
 }
