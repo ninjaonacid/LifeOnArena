@@ -26,7 +26,7 @@ namespace Code.Enemy
 
         private void Start()
         {
-            EnemyHealth.HealthChanged += TriggerDamageState;
+            EnemyHealth.Health.CurrentValueChanged += TriggerDamageState;
 
             _fsm = new FiniteStateMachine();
 

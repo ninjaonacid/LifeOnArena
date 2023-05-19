@@ -10,7 +10,7 @@ namespace Code.Hero
         [SerializeField] private HeroStats _stats;
         public Health Health
         {
-            get => _stats.Stats["Health"] as Health;
+            get => ((Health)_stats.Stats["Health"]);
             set {} 
         }
         
@@ -25,6 +25,7 @@ namespace Code.Hero
             {
                 Magnitude = -1 * damage,
                 OperationType = ModifierOperationType.Additive
+                
             });
         }
         

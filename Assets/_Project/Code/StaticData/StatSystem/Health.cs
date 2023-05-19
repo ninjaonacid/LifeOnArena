@@ -8,8 +8,7 @@ namespace Code.StaticData.StatSystem
         public Health(StatDefinition statDefinition, StatController statController) : base(statDefinition, statController)
         {
         }
-
-
+        
         public void ResetHealth()
         {
             _currentValue = _value;
@@ -30,6 +29,8 @@ namespace Code.StaticData.StatSystem
             {
                 
             }
+            
+            base.ApplyModifier(modifier);
         }
 
         

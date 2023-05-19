@@ -8,8 +8,6 @@ namespace Code.Enemy
     [RequireComponent(typeof(EnemyAnimator))]
     public class EnemyHealth : MonoBehaviour, IDamageable
     {
-        private float _current;
-        private float _max;
         [SerializeField] private StatController _stats;
         public Health Health
         {
@@ -17,31 +15,13 @@ namespace Code.Enemy
             set {} 
         }
         public EnemyAnimator Animator;
-
-        public event Action HealthChanged;
         
-        public float Current
-        {
-            get => _current;
-            set => _current = value;
-        }
-
-        public float Max
-        {
-            get => _max;
-            set => _max = value;
-        }
-
+        
         private void OnDisable()
         {
             Health.ResetHealth();
         }
-
-        private void OnEnable()
-        {
-            HealthChanged?.Invoke();
-        }
-
+        
         public void TakeDamage(int damage)
         {
             if (Health.CurrentValue <= 0)
