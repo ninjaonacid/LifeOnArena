@@ -53,7 +53,7 @@ namespace Code.Logic.WaveLogic
             WaveSpawn(TaskHelper.CreateToken(ref _cancellationTokenSource)).Forget();
         }
 
-        public async UniTaskVoid WaveSpawn(CancellationToken token)
+        private async UniTaskVoid WaveSpawn(CancellationToken token)
         {
             while (true)
             {

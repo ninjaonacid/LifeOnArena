@@ -12,7 +12,6 @@ namespace Code.Hero
     public class HeroWeapon : MonoBehaviour, ISave
     {
         public Transform WeaponPosition;
-        public HeroSkills HeroSkills;
         private readonly WeaponSlot _weapon = new();
 
         private GameObject _currentWeapon;

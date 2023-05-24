@@ -10,14 +10,13 @@ namespace Code.Infrastructure.Scopes
 {
     public class ArenaSceneScope : LifetimeScope
     {
-        
+
         protected override void Configure(IContainerBuilder builder)
         {
             builder.RegisterEntryPoint<AssetInitializer>();
             builder.RegisterEntryPoint<ArenaStarterPoint>();
 
             builder.Register<SpawnerController>(Lifetime.Scoped);
-            
 
             builder.Register<IItemFactory, ItemFactory>(Lifetime.Scoped);
             builder.Register<IEnemyObjectPool, EnemyObjectPool>(Lifetime.Scoped);
