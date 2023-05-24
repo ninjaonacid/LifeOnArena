@@ -42,7 +42,7 @@ namespace Code.Hero
 
         public void BaseAttack()
         {
-            DoDamage(_stats.Stats["Attack"].Value, _stats.Stats["AttackRadius"].Value);
+            DoDamage(_stats.Stats["Attack"].Value, _stats.Stats["AttackRadius"].BaseValue);
         }
 
         public void SkillAttack()
@@ -76,7 +76,7 @@ namespace Code.Hero
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(StartPoint() + transform.forward * 2, _characterStats.CalculateHeroAttackRadius());
+            Gizmos.DrawWireSphere(StartPoint() + transform.forward * 2, _stats.Stats["AttackRadius"].BaseValue);
         }
     }
 }

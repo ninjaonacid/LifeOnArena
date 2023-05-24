@@ -31,7 +31,7 @@ namespace Code.StaticData.StatSystem
             Uninitiliazed?.Invoke();
         }
 
-        public void Initialize()
+        private void Initialize()
         {
             foreach (StatDefinition stat in _StatDatabase.StatDefinitions)
             {
@@ -48,7 +48,6 @@ namespace Code.StaticData.StatSystem
                 {
                     _stats.Add(stat.name, new Attribute(stat, this)); 
                 }
-                
             }
             
             foreach (StatDefinition stat in _StatDatabase.PrimaryStats)

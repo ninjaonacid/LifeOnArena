@@ -19,6 +19,7 @@ namespace Code.Hero
                 health.ApplyModifier(new StatModifier()
                 {
                     OperationType = ModifierOperationType.Additive,
+                    Magnitude = -10,
                     Source = this,
                 });
                 Debug.Log(health.BaseValue.ToString());
