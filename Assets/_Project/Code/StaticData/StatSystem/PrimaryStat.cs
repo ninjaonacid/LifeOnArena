@@ -14,9 +14,9 @@ namespace Code.StaticData.StatSystem
         }
 
         public override void Initialize()
-        {
-            base.Initialize();
+        { 
             _baseValue = _statDefinition.BaseValue;
+            base.Initialize();
         }
 
         public void Add(int amount)
@@ -37,6 +37,8 @@ namespace Code.StaticData.StatSystem
             {
                 _baseValue = value;
             }
+            
+            CalculateValue();
         }
 
         public void UpdateProgress(PlayerProgress progress)

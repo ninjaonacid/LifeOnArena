@@ -1,4 +1,3 @@
-using System;
 using Code.Data;
 using Code.Services.PersistentProgress;
 using Code.StaticData.StatSystem;
@@ -35,7 +34,6 @@ namespace Code.Hero
                 if (stat is ISave saveable)
                 {
                     saveable.LoadProgress(progress);
-                    stat.Initialize();
                 }
             }
             

@@ -70,7 +70,7 @@ namespace Code.Enemy
         public void Attack()
         {
             _isAttacking = true;
-            if (Hit(out var hit)) hit.transform.GetComponentInParent<IDamageable>().TakeDamage(_stats.Stats["Attack"].Value);
+            if (Hit(out var hit)) hit.transform.GetComponentInParent<IDamageable>().TakeDamage(_stats.Stats["Attack"].BaseValue);
         }
 
         private bool Hit(out Collider hit)

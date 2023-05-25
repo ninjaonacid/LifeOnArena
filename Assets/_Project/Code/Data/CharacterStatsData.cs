@@ -5,6 +5,6 @@ namespace Code.Data
 {
     public class CharacterStatsData
     {
-        public Dictionary<string, int> StatsData = new Dictionary<string, int>();
+        public readonly Dictionary<string, int> StatsData = new Dictionary<string, int>();
     }
 }
