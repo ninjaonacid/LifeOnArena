@@ -16,7 +16,7 @@ namespace Code.Infrastructure
         public void StartGame()
         {
             Debug.Log("GameStarted");
-            _stateMachine.Enter<BootstrapState>();
+            _stateMachine.Enter<BootstrapGameState>();
         }
     }
 }

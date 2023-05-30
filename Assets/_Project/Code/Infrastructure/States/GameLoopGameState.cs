@@ -6,7 +6,7 @@ using Cysharp.Threading.Tasks;
 
 namespace Code.Infrastructure.States
 {
-    public class GameLoopState : IState
+    public class GameLoopGameState : IGameState
     {
        
         private readonly SceneLoader _sceneLoader;
@@ -14,7 +14,7 @@ namespace Code.Infrastructure.States
 
         public IGameStateMachine GameStateMachine { get; set; }
 
-        public GameLoopState(SceneLoader sceneLoader, ILevelEventHandler levelEventHandler)
+        public GameLoopGameState(SceneLoader sceneLoader, ILevelEventHandler levelEventHandler)
         {
             _sceneLoader = sceneLoader;
             _levelEventHandler = levelEventHandler;
@@ -30,7 +30,7 @@ namespace Code.Infrastructure.States
 
             var cts = new CancellationTokenSource();
             await UniTask.Delay(TimeSpan.FromSeconds(5), ignoreTimeScale: false, cancellationToken: cts.Token);
-            GameStateMachine.Enter<MainMenuState>();
+            GameStateMachine.Enter<MainMenuGameState>();
         }
 
 

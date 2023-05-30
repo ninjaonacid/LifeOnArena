@@ -23,16 +23,16 @@ namespace Code.Infrastructure.States
             _states.Add(state.GetType(), state);
         }
 
-        public void Enter<TState>() where TState : class, IState
+        public void Enter<TState>() where TState : class, IGameState
         {
-            IState state = ChangeState<TState>();
-            state.Enter();
-            Debug.Log(state.ToString());
+            IGameState gameState = ChangeState<TState>();
+            gameState.Enter();
+            Debug.Log(gameState.ToString());
         }
 
 
         public void Enter<TState, TPayload>(TPayload payload) where TState :
-            class, IPayloadedState<TPayload>
+            class, IPayloadedGameState<TPayload>
         {
             var state = ChangeState<TState>();
             Debug.Log(state.ToString());

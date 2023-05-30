@@ -1,13 +1,11 @@
 using Code.Infrastructure.SceneManagement;
-using Code.Logic;
-using Code.Services;
 using Code.Services.PersistentProgress;
 using Code.UI.Buttons;
 using Code.UI.Services;
 
 namespace Code.Infrastructure.States
 {
-    public class MainMenuState : IState
+    public class MainMenuGameState : IGameState
     {
         private readonly SceneLoader _sceneLoader;
         private readonly LoadingScreen _screen;
@@ -17,7 +15,7 @@ namespace Code.Infrastructure.States
         private readonly IProgressService _progress;
         public IGameStateMachine GameStateMachine { get; set; }
 
-        public MainMenuState(IUIFactory uiFactory,
+        public MainMenuGameState(IUIFactory uiFactory,
             IWindowService windowService,
             IProgressService progress,
             SceneLoader sceneLoader)

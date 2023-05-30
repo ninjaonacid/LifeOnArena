@@ -4,14 +4,14 @@ using Code.Services.SaveLoad;
 
 namespace Code.Infrastructure.States
 {
-    public class LoadProgressState : IState
+    public class LoadProgressGameState : IGameState
     {
         private readonly IProgressService _progressService;
         private readonly ISaveLoadService _saveLoadService;
 
         public IGameStateMachine GameStateMachine { get; set; }
 
-        public LoadProgressState(
+        public LoadProgressGameState(
             IProgressService progressService,
             ISaveLoadService saveLoadService)
         {
@@ -25,7 +25,7 @@ namespace Code.Infrastructure.States
             LoadProgressOrInitNew();
             /*_gameStateMachine.Enter<LoadLevelState, string>(
                 _progressService.Progress.WorldData.PositionOnLevel.Level);*/
-            GameStateMachine.Enter<MainMenuState>();
+            GameStateMachine.Enter<MainMenuGameState>();
         }
 
         public void Exit()
@@ -43,7 +43,7 @@ namespace Code.Infrastructure.States
         private PlayerProgress NewProgress()
         {
             var progress = new PlayerProgress("Shelter");
-
+            
             progress.CharacterStats.InitBaseStats(100, 10, 30, 3);
             progress.WorldData.LootData.Collected = 100;
             progress.CharacterStats.ResetHP();

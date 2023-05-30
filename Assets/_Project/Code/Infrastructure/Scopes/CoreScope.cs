@@ -56,11 +56,11 @@ namespace Code.Infrastructure.Scopes
         private void InstallStateMachine(IContainerBuilder builder)
         {
             builder.Register<IGameStateMachine, GameStateMachine>(Lifetime.Singleton);
-            builder.Register<IExitableState, BootstrapState>(Lifetime.Singleton);
-            builder.Register<IExitableState, GameLoopState>(Lifetime.Singleton);
+            builder.Register<IExitableState, BootstrapGameState>(Lifetime.Singleton);
+            builder.Register<IExitableState, GameLoopGameState>(Lifetime.Singleton);
             builder.Register<IExitableState, LoadLevelState>(Lifetime.Singleton);
-            builder.Register<IExitableState, MainMenuState>(Lifetime.Singleton);
-            builder.Register<IExitableState, LoadProgressState>(Lifetime.Singleton);
+            builder.Register<IExitableState, MainMenuGameState>(Lifetime.Singleton);
+            builder.Register<IExitableState, LoadProgressGameState>(Lifetime.Singleton);
         }
     }
 }

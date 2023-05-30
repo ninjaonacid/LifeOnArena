@@ -1,11 +1,11 @@
 ﻿namespace Code.Infrastructure.States
 {
-    public interface IState : IExitableState
+    public interface IGameState : IExitableState
     {
         void Enter();
     }
 
-    public interface IPayloadedState<TPayLoad> : IExitableState
+    public interface IPayloadedGameState<TPayLoad> : IExitableState
     {
         void Enter(TPayLoad payload);
     }

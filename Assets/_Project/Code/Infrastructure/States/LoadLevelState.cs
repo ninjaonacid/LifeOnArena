@@ -6,7 +6,7 @@ using Code.UI.Services;
 
 namespace Code.Infrastructure.States
 {
-    public class LoadLevelState : IPayloadedState<string>
+    public class LoadLevelState : IPayloadedGameState<string>
     {
         private readonly SceneLoader _sceneLoader;
         private readonly ISaveLoadService _saveLoadService;
@@ -46,7 +46,7 @@ namespace Code.Infrastructure.States
         {
             InitUiCore();
 
-            GameStateMachine.Enter<GameLoopState>();
+            GameStateMachine.Enter<GameLoopGameState>();
         }
 
         private void InitUiCore()

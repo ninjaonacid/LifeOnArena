@@ -4,7 +4,7 @@ using Code.Services;
 
 namespace Code.Infrastructure.States
 {
-    public class BootstrapState : IState
+    public class BootstrapGameState : IGameState
     {
         private const string InitialScene = "Initialize";
         private readonly SceneLoader _sceneLoader;
@@ -12,7 +12,7 @@ namespace Code.Infrastructure.States
         private readonly IAssetProvider _assetProvider;
         public IGameStateMachine GameStateMachine { get; set; }
 
-        public BootstrapState(SceneLoader sceneLoader,
+        public BootstrapGameState(SceneLoader sceneLoader,
             IStaticDataService staticData, IAssetProvider assetProvider)
         {
             _sceneLoader = sceneLoader;
@@ -33,7 +33,7 @@ namespace Code.Infrastructure.States
 
         private void EnterLoadLevel()
         {
-            GameStateMachine.Enter<LoadProgressState>();
+            GameStateMachine.Enter<LoadProgressGameState>();
         }
 
     }
