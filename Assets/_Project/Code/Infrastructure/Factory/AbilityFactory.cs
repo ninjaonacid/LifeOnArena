@@ -4,7 +4,6 @@ using Code.Services;
 using Code.Services.BattleService;
 using Code.Services.RandomService;
 using Code.StaticData.Ability;
-using Code.StaticData.Ability.PassiveAbilities;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
@@ -45,9 +44,7 @@ namespace Code.Infrastructure.Factory
             if(prefabReference.RuntimeKeyIsValid()) 
                 _assetProvider.Load<GameObject>(prefabReference);
         }
-
-        public PassiveAbilityTemplateBase CreatePassive(string abilityId) =>
-            _staticData.ForPassiveAbility(abilityId);
+        
 
         //public PassiveAbilityTemplateBase GetRandomPassiveAbility()
         //{

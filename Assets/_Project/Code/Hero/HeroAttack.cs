@@ -15,17 +15,16 @@ namespace Code.Hero
         private static int _layerMask;
         private readonly Collider[] _hits = new Collider[2];
         [SerializeField] private StatController _stats;
-
-        private CharacterStats _characterStats;
+        [SerializeField] private AudioSource _heroAudioSource;
+        
         public HeroAnimator HeroAnimator;
         public CharacterController CharacterController;
-        [SerializeField] private AudioSource _heroAudioSource;
+        
         private IAudioService _audioService;
         private IBattleService _battleService;
         
         public void LoadProgress(PlayerProgress progress)
         {
-            _characterStats = progress.CharacterStats;
         }
 
         [Inject]

@@ -28,14 +28,8 @@ namespace Code.Infrastructure.States
 
         public void Exit()
         {
-            ResetPlayerHp();
         }
-
-        private void ResetPlayerHp()
-        {
-            _progress.Progress.CharacterStats.ResetHP();
-        }
-
+        
         public void Enter()
         {
             _sceneLoader.Load("MainMenu", InitMainMenu);

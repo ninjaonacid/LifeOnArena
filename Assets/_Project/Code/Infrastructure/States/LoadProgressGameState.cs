@@ -1,4 +1,5 @@
 ﻿using Code.Data;
+using Code.Services;
 using Code.Services.PersistentProgress;
 using Code.Services.SaveLoad;
 
@@ -8,16 +9,19 @@ namespace Code.Infrastructure.States
     {
         private readonly IProgressService _progressService;
         private readonly ISaveLoadService _saveLoadService;
+        private readonly IStaticDataService _staticData;
 
         public IGameStateMachine GameStateMachine { get; set; }
 
         public LoadProgressGameState(
             IProgressService progressService,
-            ISaveLoadService saveLoadService)
+            ISaveLoadService saveLoadService,
+            IStaticDataService staticData)
         {
           
             _progressService = progressService;
             _saveLoadService = saveLoadService;
+            _staticData = staticData;
         }
 
         public void Enter()
@@ -43,11 +47,13 @@ namespace Code.Infrastructure.States
         private PlayerProgress NewProgress()
         {
             var progress = new PlayerProgress("Shelter");
-            
-            progress.CharacterStats.InitBaseStats(100, 10, 30, 3);
-            progress.WorldData.LootData.Collected = 100;
-            progress.CharacterStats.ResetHP();
 
+            progress.WorldData.LootData.Collected = 100;
+
+            var characterStats = _staticData.ForCharacterStats();
+            
+            //stats initialization
+            
             return progress;
         }
     }

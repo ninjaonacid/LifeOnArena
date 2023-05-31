@@ -37,7 +37,7 @@ namespace Code.Hero
             _progress = progress;
             foreach (var id in _progress.PassiveSkills.AbilitiesId)
             {
-                AddPassive(_abilityFactory.CreatePassive(id));
+               // AddPassive(_abilityFactory.CreatePassive(id));
             }
             
         }

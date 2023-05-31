@@ -13,7 +13,7 @@ namespace Code.StaticData.Ability.PassiveAbilities
         }
         public void Apply(GameObject hero, PlayerProgress heroProgress)
         {
-            heroProgress.CharacterStats.DamageModifier += _attackModifier;
+    
         }
     }
 }

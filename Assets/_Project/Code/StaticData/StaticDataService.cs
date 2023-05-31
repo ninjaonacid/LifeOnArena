@@ -5,6 +5,7 @@ using Code.StaticData.Ability;
 using Code.StaticData.Ability.PassiveAbilities;
 using Code.StaticData.Identifiers;
 using Code.StaticData.Levels;
+using Code.StaticData.StatSystem;
 using Code.StaticData.UIWindows;
 using Code.UI;
 using UnityEngine;
@@ -18,17 +19,17 @@ namespace Code.StaticData
         private Dictionary<LocationReward, LevelReward> _levelReward;
         private Dictionary<UIWindowID, WindowConfig> _windowConfigs;
         private Dictionary<int, AbilityTemplateBase> _heroAbilities;
-        private Dictionary<string, PassiveAbilityTemplateBase> _heroPassives;
         private Dictionary<ParticleId, ParticlesStaticData> _particles;
         private Dictionary<WeaponId, WeaponData> _weapons;
         private Dictionary<WeaponId, WeaponPlatformStaticData> _weaponPlatforms;
+        private StatDatabase _characterStats;
 
         public void Load()
         {
             _monsters = Resources
                 .LoadAll<MonsterStaticData>("StaticData/Monsters")
                 .ToDictionary(x => x.MonsterTypeId, x => x);
-
+     
             _levels = Resources
                 .LoadAll<LevelConfig>("StaticData/Levels")
                 .ToDictionary(x => x.LevelKey, x => x);
@@ -46,9 +47,8 @@ namespace Code.StaticData
                 .LoadAll<AbilityTemplateBase>("StaticData/HeroSkills")
                 .ToDictionary(x => x.Identifier.Id, x => x);
 
-            //_heroPassives = Resources
-            //    .LoadAll<PassiveAbilityTemplateBase>("StaticData/HeroSkills/PassiveSkills")
-            //    .ToDictionary(x => x.Id);
+            _characterStats = Resources
+                .Load<StatDatabase>("StaticData/Hero/Stats");
 
             _particles = Resources
                 .LoadAll<ParticlesStaticData>("StaticData/Particles")
@@ -104,17 +104,7 @@ namespace Code.StaticData
 
             return null;
         }
-
-        public PassiveAbilityTemplateBase ForPassiveAbility(string abilityId)
-        {
-            if (_heroPassives.TryGetValue(abilityId, out var ability))
-            {
-                return ability;
-            }
-            return null;
-        }
-
-        public List<PassiveAbilityTemplateBase> GetPassives() => _heroPassives.Values.ToList();
+        
 
         public LevelConfig ForLevel(string sceneKey) =>
         
@@ -127,6 +117,11 @@ namespace Code.StaticData
         _levels.Values.ToList();
 
         public LevelReward ForReward(LocationReward rewardId)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public StatDatabase ForCharacterStats()
         {
             throw new System.NotImplementedException();
         }
