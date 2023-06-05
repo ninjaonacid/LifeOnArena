@@ -50,7 +50,7 @@ namespace Code.Infrastructure.States
 
             progress.WorldData.LootData.Collected = 100;
 
-            var characterStats = _staticData.ForCharacterStats();
+            //var characterStats = _staticData.ForCharacterStats();
             
             //stats initialization
             
