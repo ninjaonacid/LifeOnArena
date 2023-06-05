@@ -29,7 +29,6 @@ namespace Code.Hero
         {
             public string ButtonKey { get; set; }
             public AbilityTemplateBase AbilityTemplate;
-            public IAbility Ability;
             public AbilitySlotID AbilitySlotID;
         }
 

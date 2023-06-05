@@ -10,9 +10,9 @@ namespace Code.Infrastructure.Starters
 {
     public class MainMenuStarter : IAsyncStartable
     {
-        private IHeroFactory _heroFactory;
-        private IStaticDataService _staticData;
-
+        private readonly IHeroFactory _heroFactory;
+        private readonly IStaticDataService _staticData;
+        
         public MainMenuStarter(IHeroFactory heroFactory, IStaticDataService staticData)
         {
             _heroFactory = heroFactory;
@@ -23,7 +23,7 @@ namespace Code.Infrastructure.Starters
         {
             LevelConfig config = _staticData.ForLevel(SceneManager.GetActiveScene().name);
             
-            await _heroFactory.CreateHero(config.HeroInitialPosition);
+           // await _heroFactory.CreateHero(config.HeroInitialPosition);
         }
     }
 }
