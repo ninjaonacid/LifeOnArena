@@ -1,3 +1,4 @@
+using Code.Infrastructure.InputSystem;
 using Code.Logic;
 using Code.Services.Input;
 using UnityEngine;
@@ -7,12 +8,12 @@ namespace Code.Hero
 {
     public class HeroRotation : MonoBehaviour
     {
-        private IInputService _input;
+        private IInputSystem _input;
         public float rotationSmooth;
         public float rotationSpeed;
 
         [Inject]
-        private void Constructor(IInputService input)
+        private void Constructor(IInputSystem input)
         {
             _input = input;
         }

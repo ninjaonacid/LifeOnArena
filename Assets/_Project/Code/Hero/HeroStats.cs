@@ -10,20 +10,20 @@ namespace Code.Hero
     {
         private CharacterStatsData _characterStatsData;
 
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.T))
-            {
-                Attribute health = _stats["Health"] as Attribute;
-                health.ApplyModifier(new StatModifier()
-                {
-                    OperationType = ModifierOperationType.Additive,
-                    Magnitude = -10,
-                    Source = this,
-                });
-                Debug.Log(health.BaseValue.ToString());
-            }
-        }
+        // private void Update()
+        // {
+        //     if (Input.GetKeyDown(KeyCode.T))
+        //     {
+        //         Attribute health = _stats["Health"] as Attribute;
+        //         health.ApplyModifier(new StatModifier()
+        //         {
+        //             OperationType = ModifierOperationType.Additive,
+        //             Magnitude = -10,
+        //             Source = this,
+        //         });
+        //         Debug.Log(health.BaseValue.ToString());
+        //     }
+        // }
 
         public void LoadProgress(PlayerProgress progress)
         {

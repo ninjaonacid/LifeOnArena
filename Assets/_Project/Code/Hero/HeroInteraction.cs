@@ -1,3 +1,4 @@
+using Code.Infrastructure.InputSystem;
 using Code.Logic;
 using Code.Logic.EntitiesComponents;
 using Code.Services;
@@ -14,25 +15,25 @@ namespace Code.Hero
         [SerializeField] private LayerMask _interactMask;
 
         private readonly Collider[] _interactableColliders = new Collider[2];
-        private IInputService _input;
+        private IInputSystem _input;
 
         [Inject]
-        private void Construct(IInputService input)
+        private void Construct(IInputSystem input)
         {
             _input = input;
         }
 
-        private void Update()
-        {
-            if (_input.IsInteractButtonUp())
-            {
-                for (int i = 0; i < GetInteractables(); i++)
-                {
-                    _interactableColliders[i].GetComponent<IInteractable>().Interact(this);
-                    break;
-                }
-            }
-        }
+        // private void Update()
+        // {
+        //     if (_input.IsInteractButtonUp())
+        //     {
+        //         for (int i = 0; i < GetInteractables(); i++)
+        //         {
+        //             _interactableColliders[i].GetComponent<IInteractable>().Interact(this);
+        //             break;
+        //         }
+        //     }
+        // }
 
         private int GetInteractables()
         {

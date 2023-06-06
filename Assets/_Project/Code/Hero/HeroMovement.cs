@@ -1,4 +1,6 @@
+using System;
 using Code.Data;
+using Code.Infrastructure.InputSystem;
 using Code.Logic;
 using Code.Services;
 using Code.Services.Input;
@@ -13,13 +15,13 @@ namespace Code.Hero
     public class HeroMovement : MonoBehaviour, ISave
     {
         private CharacterController _characterController;
-        private IInputService _input;
+        private IInputSystem _input;
 
         private readonly float _movementSpeed = 10f;
         private readonly float _rollForce = 20f;
 
         [Inject]
-        private void Construct(IInputService input)
+        private void Construct(IInputSystem input)
         {
             _input = input;
         }
@@ -36,6 +38,16 @@ namespace Code.Hero
                 var savedPosition = progress.WorldData.PositionOnLevel.Position;
                 if (savedPosition != null) Warp(savedPosition);
             }
+        }
+
+        private void OnEnable()
+        {
+            _input.Controls.Enable();
+        }
+
+        private void OnDisable()
+        {
+            _input.Controls.Disable();
         }
 
         private void Awake()

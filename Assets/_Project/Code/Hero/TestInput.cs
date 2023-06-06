@@ -11,18 +11,18 @@ namespace Code.Hero
         private IWindowService _windowService;
         private IInputService _inputService;
 
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.Q))
-            {
-                _windowService.Open(UIWindowID.UpgradeMenu);
-            }
-
-            if (Input.GetKeyDown(KeyCode.R))
-            {
-                _inputService.DisableInput();
-            }
-            
-        }
+        // private void Update()
+        // {
+        //     if (Input.GetKeyDown(KeyCode.Q))
+        //     {
+        //         _windowService.Open(UIWindowID.UpgradeMenu);
+        //     }
+        //
+        //     if (Input.GetKeyDown(KeyCode.R))
+        //     {
+        //         _inputService.DisableInput();
+        //     }
+        //     
+        // }
     }
 }

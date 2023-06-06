@@ -1,6 +1,7 @@
 using System;
 using Code.Data;
 using Code.Infrastructure.Factory;
+using Code.Infrastructure.InputSystem;
 using Code.Services.Input;
 using Code.Services.PersistentProgress;
 using Code.StaticData.Ability;
@@ -23,7 +24,7 @@ namespace Code.Hero
         private AbilityTemplateBase _activeSkill;
         public AbilityTemplateBase ActiveSkill => _activeSkill;
         private IAbilityFactory _abilityFactory;
-        private IInputService _input;
+        private IInputSystem _input;
 
         [Serializable]
         public class SkillSlot
@@ -34,28 +35,28 @@ namespace Code.Hero
         }
 
         [Inject]
-        public void Construct(IAbilityFactory abilityFactory, IInputService input)
+        public void Construct(IAbilityFactory abilityFactory, IInputSystem input)
         {
             _abilityFactory = abilityFactory;
             _input = input;
         }
 
-        private void Update()
-        {
-            foreach (var slot in SkillSlots)
-            {
-                if (_input.IsButtonPressed(slot.Button.button.Key))
-                {
-                    if (slot.AbilityTemplate && slot.AbilityTemplate.IsReady())
-                    {
-                        slot.AbilityTemplate.GetAbility().Use(this.gameObject, null);
-                        slot.AbilityTemplate.State = AbilityState.Active;
-                        _activeSkill = slot.AbilityTemplate;
-                        _heroCooldown.StartCooldown(slot.AbilityTemplate);
-                    }
-                }
-            }
-        }
+        // private void Update()
+        // {
+        //     foreach (var slot in SkillSlots)
+        //     {
+        //         if (_input.IsButtonPressed(slot.Button.button.Key))
+        //         {
+        //             if (slot.AbilityTemplate && slot.AbilityTemplate.IsReady())
+        //             {
+        //                 slot.AbilityTemplate.GetAbility().Use(this.gameObject, null);
+        //                 slot.AbilityTemplate.State = AbilityState.Active;
+        //                 _activeSkill = slot.AbilityTemplate;
+        //                 _heroCooldown.StartCooldown(slot.AbilityTemplate);
+        //             }
+        //         }
+        //     }
+        // }
 
         public void LoadProgress(PlayerProgress progress)
         {

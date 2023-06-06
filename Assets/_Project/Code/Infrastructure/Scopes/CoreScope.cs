@@ -1,5 +1,6 @@
 using Code.Infrastructure.AssetManagement;
 using Code.Infrastructure.EventSystem;
+using Code.Infrastructure.InputSystem;
 using Code.Infrastructure.SceneManagement;
 using Code.Infrastructure.States;
 using Code.Services;
@@ -34,6 +35,7 @@ namespace Code.Infrastructure.Scopes
             builder.Register<IRandomService, RandomService>(Lifetime.Singleton);
             builder.Register<IEventSystem, GameEventSystem>(Lifetime.Singleton);
             builder.Register<IAudioService, AudioService>(Lifetime.Singleton);
+            builder.Register<PlayerControls>(Lifetime.Singleton).AsImplementedInterfaces();
             
             builder.Register<SceneLoader>(Lifetime.Singleton);
 
@@ -47,12 +49,12 @@ namespace Code.Infrastructure.Scopes
         //     var inputInstance = GetInput();
         //     builder.RegisterInstance(inputInstance);
         // }
-        private  IInputService GetInput()
-        {
-            if (Application.isEditor)
-                return new StandaloneInputService();
-            return new MobileInputService();
-        }
+        // private  IInputService GetInput()
+        // {
+        //     if (Application.isEditor)
+        //         return new StandaloneInputService();
+        //     return new MobileInputService();
+        // }
 
         private void InstallStateMachine(IContainerBuilder builder)
         {

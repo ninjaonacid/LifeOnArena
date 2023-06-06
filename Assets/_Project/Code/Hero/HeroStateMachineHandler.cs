@@ -1,4 +1,5 @@
 using Code.Hero.HeroStates;
+using Code.Infrastructure.InputSystem;
 using Code.Logic;
 using Code.Logic.StateMachine;
 using Code.Services.AudioService;
@@ -22,7 +23,7 @@ namespace Code.Hero
         private const string HeroBaseAttack3 = "HeroBaseAttack3";
 
         private FiniteStateMachine _stateMachine;
-        private IInputService _input;
+        private IInputSystem _input;
         private IAudioService _audioService;
 
         [SerializeField] private Identifier _spinAttackAbilityId;
@@ -37,7 +38,7 @@ namespace Code.Hero
 
 
         [Inject]
-        public void Construct(IInputService inputService, IAudioService audioService)
+        public void Construct(IInputSystem inputService, IAudioService audioService)
         {
             _input = inputService;
             _audioService = audioService;
@@ -88,22 +89,22 @@ namespace Code.Hero
                 (transition) => _input.Axis.sqrMagnitude > Constants.Epsilon,
                 true));
 
-            _stateMachine.AddTransition(new Transition(
-                HeroMovement,
-                HeroBaseAttack1,
-                (transition) => _input.IsAttackButtonUp()));
-
-            _stateMachine.AddTransition(new Transition(
-                HeroIdle,
-                HeroBaseAttack1,
-                (transition) => _input.IsAttackButtonUp()));
-
-            
-            _stateMachine.AddTransition(new Transition(
-                HeroBaseAttack1,
-                HeroBaseAttack2,
-                (transition) => _input.IsAttackButtonUp(),
-                false));
+            // _stateMachine.AddTransition(new Transition(
+            //     HeroMovement,
+            //     HeroBaseAttack1,
+            //     (transition) => _input.IsAttackButtonUp()));
+            //
+            // _stateMachine.AddTransition(new Transition(
+            //     HeroIdle,
+            //     HeroBaseAttack1,
+            //     (transition) => _input.IsAttackButtonUp()));
+            //
+            //
+            // _stateMachine.AddTransition(new Transition(
+            //     HeroBaseAttack1,
+            //     HeroBaseAttack2,
+            //     (transition) => _input.IsAttackButtonUp(),
+            //     false));
 
             _stateMachine.AddTransition(new Transition(
                 HeroBaseAttack1,
@@ -120,11 +121,11 @@ namespace Code.Hero
                 HeroIdle,
                 (transition) => _stateMachine.ActiveState.IsStateOver()));
 
-            _stateMachine.AddTransition(new Transition(
-                HeroBaseAttack2,
-                HeroBaseAttack3,
-                (transition) => _input.IsAttackButtonUp(),
-                false));
+            // _stateMachine.AddTransition(new Transition(
+            //     HeroBaseAttack2,
+            //     HeroBaseAttack3,
+            //     (transition) => _input.IsAttackButtonUp(),
+            //     false));
 
             _stateMachine.AddTransition(new Transition(
                 HeroBaseAttack1,
