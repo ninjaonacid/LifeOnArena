@@ -39,14 +39,14 @@ namespace Code.Infrastructure.Scopes
 
             builder.RegisterComponentInNewPrefab(Screen, Lifetime.Singleton).AsImplementedInterfaces();
 
-            InstallInput(builder);
+            //InstallInput(builder);
         }
 
-        private void InstallInput(IContainerBuilder builder)
-        {
-            var inputInstance = GetInput();
-            builder.RegisterInstance(inputInstance);
-        }
+        // private void InstallInput(IContainerBuilder builder)
+        // {
+        //     var inputInstance = GetInput();
+        //     builder.RegisterInstance(inputInstance);
+        // }
         private  IInputService GetInput()
         {
             if (Application.isEditor)

@@ -38,7 +38,7 @@ namespace Code.UI.HUD.Skills
                 {
                     if (skillSlot.AbilitySlotID == hudSkillSlot.abilitySlotID)
                     {
-                        skillSlot.ButtonKey = hudSkillSlot.ButtonInput.button.Key;
+                        skillSlot.Button.button.Key = hudSkillSlot.ButtonInput.button.Key;
                     }
                 }
             }

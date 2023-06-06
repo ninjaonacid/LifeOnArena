@@ -1288,6 +1288,7 @@ GameObject:
   - component: {fileID: -4749970168048390944}
   - component: {fileID: 2628393833221347450}
   - component: {fileID: 6287642891397871327}
+  - component: {fileID: 8287232461833603833}
   m_Layer: 12
   m_Name: Hero
   m_TagString: Player
@@ -1419,9 +1420,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _stats: {fileID: 6287642891397871327}
+  _heroAudioSource: {fileID: 2364857729011436083}
   HeroAnimator: {fileID: 7390316171520665867}
   CharacterController: {fileID: 7390316171520665865}
-  _heroAudioSource: {fileID: 2364857729011436083}
 --- !u!114 &-8125679809969938510
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1449,7 +1450,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   WeaponPosition: {fileID: 7935067807323840624}
-  HeroSkills: {fileID: -7543322082994891675}
 --- !u!114 &-7543322082994891675
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1464,9 +1464,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _heroCooldown: {fileID: 7773590576850612865}
   SkillSlots:
-  - AbilityTemplate: {fileID: 0}
+  - Button: {fileID: 7202479468229353429, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
+    AbilityTemplate: {fileID: 0}
     AbilitySlotID: 1
-  - AbilityTemplate: {fileID: 0}
+  - Button: {fileID: 7202479468229353429, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
+    AbilityTemplate: {fileID: 0}
     AbilitySlotID: 2
 --- !u!114 &6331987856363381589
 MonoBehaviour:
@@ -1593,6 +1595,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _StatDatabase: {fileID: 11400000, guid: 48c64eec499bb1a48be45553e6e939d7, type: 2}
+--- !u!114 &8287232461833603833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6031708160037518034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: cba9e060253f0f24fa079b4b3eab7a59, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &6102055456085068060
 GameObject:
   m_ObjectHideFlags: 0

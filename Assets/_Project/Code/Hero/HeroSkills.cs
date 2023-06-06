@@ -5,6 +5,7 @@ using Code.Services.Input;
 using Code.Services.PersistentProgress;
 using Code.StaticData.Ability;
 using Code.UI.HUD.Skills;
+using SimpleInputNamespace;
 using UnityEngine;
 using VContainer;
 
@@ -27,7 +28,7 @@ namespace Code.Hero
         [Serializable]
         public class SkillSlot
         {
-            public string ButtonKey { get; set; }
+            public ButtonInputUI Button;
             public AbilityTemplateBase AbilityTemplate;
             public AbilitySlotID AbilitySlotID;
         }
@@ -43,7 +44,7 @@ namespace Code.Hero
         {
             foreach (var slot in SkillSlots)
             {
-                if (_input.IsButtonPressed(slot.ButtonKey))
+                if (_input.IsButtonPressed(slot.Button.button.Key))
                 {
                     if (slot.AbilityTemplate && slot.AbilityTemplate.IsReady())
                     {
