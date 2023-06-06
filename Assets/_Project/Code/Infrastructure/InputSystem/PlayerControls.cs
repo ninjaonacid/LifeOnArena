@@ -261,7 +261,7 @@ public partial class @PlayerControls : IInputSystem, IInputActionCollection2, ID
         void OnAttack(InputAction.CallbackContext context);
     }
 
-    Vector2 IInputSystem.Axis => _axis;
+    public Vector2 Axis => _axis;
 
     public PlayerControls Controls => this;
 }

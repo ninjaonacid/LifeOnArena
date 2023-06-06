@@ -86,7 +86,7 @@ namespace Code.Hero
             _stateMachine.AddTwoWayTransition(new Transition(
                 HeroIdle,
                 HeroMovement,
-                (transition) => _input.Axis.sqrMagnitude > Constants.Epsilon,
+                (transition) => _input.Controls.Player.Movement.ReadValue<Vector2>().sqrMagnitude > Constants.Epsilon,
                 true));
 
             // _stateMachine.AddTransition(new Transition(

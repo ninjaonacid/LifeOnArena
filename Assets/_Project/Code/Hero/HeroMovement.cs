@@ -39,20 +39,21 @@ namespace Code.Hero
                 if (savedPosition != null) Warp(savedPosition);
             }
         }
-
-        private void OnEnable()
-        {
-            _input.Controls.Enable();
-        }
-
+        
         private void OnDisable()
         {
             _input.Controls.Disable();
         }
 
+        private void Start()
+        {
+            _input.Controls.Enable();
+        }
+
         private void Awake()
         {
             _characterController = GetComponent<CharacterController>();
+   
         }
 
         public void ForceMove()
@@ -76,9 +77,12 @@ namespace Code.Hero
         { 
             var movementVector = Vector3.zero;
 
-            if (_input.Axis.sqrMagnitude > Constants.Epsilon)
+            var moveAxis = _input.Controls.Player.Movement.ReadValue<Vector2>();
+            
+
+            if (moveAxis.sqrMagnitude > Constants.Epsilon)
             {
-                movementVector = Camera.main.transform.TransformDirection(_input.Axis);
+                movementVector = Camera.main.transform.TransformDirection(moveAxis);
                 movementVector.y = 0;
                 movementVector.Normalize();
             }
