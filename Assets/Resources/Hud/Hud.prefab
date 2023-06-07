@@ -902,6 +902,7 @@ GameObject:
   - component: {fileID: 3811231307152849639}
   - component: {fileID: 1323959556717596285}
   - component: {fileID: 4592415276422055292}
+  - component: {fileID: 1812712365002794633}
   m_Layer: 0
   m_Name: AttackButton
   m_TagString: Untagged
@@ -974,7 +975,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6847698000085143252}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 995f34434fbe45d46aacf4e120446279, type: 3}
   m_Name: 
@@ -982,6 +983,19 @@ MonoBehaviour:
   button:
     value: 0
     m_key: Attack
+--- !u!114 &1812712365002794633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6847698000085143252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d54531977ecb194c95e2d3aa7a5d72a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ControlPath: <Mouse>/leftButton
 --- !u!1 &7222476400989530162
 GameObject:
   m_ObjectHideFlags: 0
@@ -1195,6 +1209,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 819212837027285666, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
+      propertyPath: m_ControlPath
+      value: <Touchscreen>/Press
+      objectReference: {fileID: 0}
+    - target: {fileID: 819212837027285666, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
       propertyPath: SimpleInputButton
       value: 
       objectReference: {fileID: 6934804702240712335}
@@ -1343,6 +1361,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 819212837027285666, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
+      propertyPath: m_ControlPath
+      value: <Touchscreen>/Press
+      objectReference: {fileID: 0}
+    - target: {fileID: 819212837027285666, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
       propertyPath: SimpleInputButton
       value: 
       objectReference: {fileID: 8424210965047152176}
@@ -1438,6 +1460,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SkillButton (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7202479468229353429, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
+      propertyPath: button.m_key
+      value: Skill1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
 --- !u!114 &1701955810035707626 stripped
@@ -1488,6 +1514,10 @@ PrefabInstance:
     - target: {fileID: 1531213445540486, guid: e0815e227ed46e445b99930271e8942c, type: 3}
       propertyPath: m_Name
       value: Joystick
+      objectReference: {fileID: 0}
+    - target: {fileID: 114282555968907678, guid: e0815e227ed46e445b99930271e8942c, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114282555968907678, guid: e0815e227ed46e445b99930271e8942c, type: 3}
       propertyPath: isDynamicJoystick
@@ -1600,3 +1630,22 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 224977699150327530, guid: e0815e227ed46e445b99930271e8942c, type: 3}
   m_PrefabInstance: {fileID: 4885572156878908648}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &4884287234312849006 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1531213445540486, guid: e0815e227ed46e445b99930271e8942c, type: 3}
+  m_PrefabInstance: {fileID: 4885572156878908648}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4690700240904907764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4884287234312849006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9d677f1681015749b15c436eec6d880, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MovementRange: 50
+  m_ControlPath: <AndroidJoystick>/stick

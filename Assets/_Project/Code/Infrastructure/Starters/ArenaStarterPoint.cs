@@ -1,8 +1,6 @@
 using System.Threading;
 using Code.Hero;
 using Code.Infrastructure.Factory;
-using Code.Infrastructure.SceneManagement;
-using Code.Logic;
 using Code.Logic.CameraLogic;
 using Code.Logic.WaveLogic;
 using Code.Services;
@@ -26,6 +24,7 @@ namespace Code.Infrastructure.Starters
         private readonly IHeroFactory _heroFactory;
         private readonly IGameFactory _gameFactory;
         private readonly SpawnerController _spawnerController;
+        
         public ArenaStarterPoint(IStaticDataService staticData, 
             ISaveLoadService saveLoad, IProgressService progress, 
             IHeroFactory heroFactory, IGameFactory gameFactory, 

@@ -1,11 +1,9 @@
 using Code.Infrastructure.AssetManagement;
 using Code.Infrastructure.EventSystem;
-using Code.Infrastructure.InputSystem;
 using Code.Infrastructure.SceneManagement;
 using Code.Infrastructure.States;
 using Code.Services;
 using Code.Services.AudioService;
-using Code.Services.Input;
 using Code.Services.PersistentProgress;
 using Code.Services.RandomService;
 using Code.Services.SaveLoad;

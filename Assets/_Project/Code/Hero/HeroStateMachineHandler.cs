@@ -89,23 +89,29 @@ namespace Code.Hero
                 (transition) => _input.Controls.Player.Movement.ReadValue<Vector2>().sqrMagnitude > Constants.Epsilon,
                 true));
 
-            // _stateMachine.AddTransition(new Transition(
-            //     HeroMovement,
-            //     HeroBaseAttack1,
-            //     (transition) => _input.IsAttackButtonUp()));
-            //
-            // _stateMachine.AddTransition(new Transition(
-            //     HeroIdle,
-            //     HeroBaseAttack1,
-            //     (transition) => _input.IsAttackButtonUp()));
-            //
-            //
-            // _stateMachine.AddTransition(new Transition(
-            //     HeroBaseAttack1,
-            //     HeroBaseAttack2,
-            //     (transition) => _input.IsAttackButtonUp(),
-            //     false));
+            _stateMachine.AddTransition(new Transition(
+                HeroMovement,
+                HeroBaseAttack1,
+                (transition) => _input.Controls.Player.Attack.triggered));
+            
+            _stateMachine.AddTransition(new Transition(
+                HeroIdle,
+                HeroBaseAttack1,
+                (transition) => _input.Controls.Player.Attack.triggered));
+            
+            
+            _stateMachine.AddTransition(new Transition(
+                HeroBaseAttack1,
+                HeroBaseAttack2,
+                (transition) => _input.Controls.Player.Attack.triggered,
+                false));
 
+            _stateMachine.AddTransition(new Transition(
+                HeroBaseAttack2,
+                HeroBaseAttack3,
+                (transition) => _input.Controls.Player.Attack.triggered,
+                false));
+            
             _stateMachine.AddTransition(new Transition(
                 HeroBaseAttack1,
                 HeroIdle,
@@ -116,16 +122,12 @@ namespace Code.Hero
                 HeroIdle,
                 (transition) => _stateMachine.ActiveState.IsStateOver()));
 
+
             _stateMachine.AddTransition(new Transition(
                 HeroBaseAttack3,
                 HeroIdle,
                 (transition) => _stateMachine.ActiveState.IsStateOver()));
 
-            // _stateMachine.AddTransition(new Transition(
-            //     HeroBaseAttack2,
-            //     HeroBaseAttack3,
-            //     (transition) => _input.IsAttackButtonUp(),
-            //     false));
 
             _stateMachine.AddTransition(new Transition(
                 HeroBaseAttack1,
