@@ -40,6 +40,7 @@ namespace Code.Hero
         private void OnDisable()
         {
             _input.Disable();
+            
         }
 
         private void Start()
