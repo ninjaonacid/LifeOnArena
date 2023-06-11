@@ -3,8 +3,6 @@ using Code.Infrastructure.InputSystem;
 using Code.Logic;
 using Code.Logic.StateMachine;
 using Code.Services.AudioService;
-using Code.Services.Input;
-using Code.StaticData;
 using Code.StaticData.Identifiers;
 using UnityEngine;
 using VContainer;
@@ -86,30 +84,30 @@ namespace Code.Hero
             _stateMachine.AddTwoWayTransition(new Transition(
                 HeroIdle,
                 HeroMovement,
-                (transition) => _input.Controls.Player.Movement.ReadValue<Vector2>().sqrMagnitude > Constants.Epsilon,
+                (transition) => _input.Player.Movement.ReadValue<Vector2>().sqrMagnitude > Constants.Epsilon,
                 true));
 
             _stateMachine.AddTransition(new Transition(
                 HeroMovement,
                 HeroBaseAttack1,
-                (transition) => _input.Controls.Player.Attack.triggered));
+                (transition) => _input.Player.Attack.triggered));
             
             _stateMachine.AddTransition(new Transition(
                 HeroIdle,
                 HeroBaseAttack1,
-                (transition) => _input.Controls.Player.Attack.triggered));
+                (transition) => _input.Player.Attack.triggered));
             
             
             _stateMachine.AddTransition(new Transition(
                 HeroBaseAttack1,
                 HeroBaseAttack2,
-                (transition) => _input.Controls.Player.Attack.triggered,
+                (transition) => _input.Player.Attack.triggered,
                 false));
 
             _stateMachine.AddTransition(new Transition(
                 HeroBaseAttack2,
                 HeroBaseAttack3,
-                (transition) => _input.Controls.Player.Attack.triggered,
+                (transition) => _input.Player.Attack.triggered,
                 false));
             
             _stateMachine.AddTransition(new Transition(
@@ -165,7 +163,7 @@ namespace Code.Hero
                 SpinAttackAbility,
                 HeroMovement,
                 (transition) => _stateMachine.ActiveState.IsStateOver() &&
-                                _input.Axis.sqrMagnitude > Constants.Epsilon));
+                                _input.Player.Movement.ReadValue<Vector2>().sqrMagnitude > Constants.Epsilon));
 
             _stateMachine.AddTransition(new Transition(
                 HeroIdle,

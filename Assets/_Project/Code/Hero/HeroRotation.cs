@@ -25,10 +25,10 @@ namespace Code.Hero
         public void LookRotation()
         {
             
-            if (_input.Controls.Player.Movement.ReadValue<Vector2>().sqrMagnitude > Constants.Epsilon)
+            if (_input.Player.Movement.ReadValue<Vector2>().sqrMagnitude > Constants.Epsilon)
             {
                 var rotateFrom = transform.rotation;
-                var directionVector = Camera.main.transform.TransformDirection(_input.Controls.Player.Movement.ReadValue<Vector2>());
+                var directionVector = Camera.main.transform.TransformDirection(_input.Player.Movement.ReadValue<Vector2>());
                 directionVector.y = 0;
                 directionVector.Normalize();
                 var rotateTo = Quaternion.LookRotation(directionVector);

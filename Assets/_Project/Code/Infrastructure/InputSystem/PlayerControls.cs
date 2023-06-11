@@ -20,6 +20,7 @@ using UnityEngine.InputSystem.Utilities;
 public partial class @PlayerControls : IInputSystem, IInputActionCollection2, IDisposable
 {
     public InputActionAsset asset { get; }
+
     public @PlayerControls()
     {
         asset = InputActionAsset.FromJson(@"{
@@ -116,7 +117,7 @@ public partial class @PlayerControls : IInputSystem, IInputActionCollection2, ID
                 {
                     ""name"": """",
                     ""id"": ""7ecec5a9-7d44-4482-a1f0-4594fe53d467"",
-                    ""path"": """",
+                    ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -136,6 +137,34 @@ public partial class @PlayerControls : IInputSystem, IInputActionCollection2, ID
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""TestMap"",
+            ""id"": ""fe003851-54fb-42bb-8181-e36e691ce4ea"",
+            ""actions"": [
+                {
+                    ""name"": ""New action"",
+                    ""type"": ""Button"",
+                    ""id"": ""2fb91348-e0b8-4e1c-b066-9e0b700581df"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""1e534b4b-dcbc-4b88-a971-a5bc2eac9b27"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""New action"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -145,11 +174,15 @@ public partial class @PlayerControls : IInputSystem, IInputActionCollection2, ID
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
         m_Player_Skill1 = m_Player.FindAction("Skill1", throwIfNotFound: true);
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
+        // TestMap
+        m_TestMap = asset.FindActionMap("TestMap", throwIfNotFound: true);
+        m_TestMap_Newaction = m_TestMap.FindAction("New action", throwIfNotFound: true);
+        
     }
 
     public void Dispose()
     {
-        UnityEngine.Object.Destroy(asset);
+        UnityEngine.Object.DestroyImmediate(asset);
     }
 
     public InputBinding? bindingMask
@@ -165,6 +198,7 @@ public partial class @PlayerControls : IInputSystem, IInputActionCollection2, ID
     }
 
     public ReadOnlyArray<InputControlScheme> controlSchemes => asset.controlSchemes;
+
 
     public bool Contains(InputAction action)
     {
@@ -190,12 +224,15 @@ public partial class @PlayerControls : IInputSystem, IInputActionCollection2, ID
     {
         asset.Disable();
     }
+
     public IEnumerable<InputBinding> bindings => asset.bindings;
+
 
     public InputAction FindAction(string actionNameOrId, bool throwIfNotFound = false)
     {
         return asset.FindAction(actionNameOrId, throwIfNotFound);
     }
+
     public int FindBinding(InputBinding bindingMask, out InputAction action)
     {
         return asset.FindBinding(bindingMask, out action);
@@ -207,7 +244,6 @@ public partial class @PlayerControls : IInputSystem, IInputActionCollection2, ID
     private readonly InputAction m_Player_Movement;
     private readonly InputAction m_Player_Skill1;
     private readonly InputAction m_Player_Attack;
-    private Vector2 _axis;
 
     public struct PlayerActions
     {
@@ -251,17 +287,48 @@ public partial class @PlayerControls : IInputSystem, IInputActionCollection2, ID
         }
     }
 
-
     public PlayerActions @Player => new PlayerActions(this);
 
+    // TestMap
+    private readonly InputActionMap m_TestMap;
+    private ITestMapActions m_TestMapActionsCallbackInterface;
+    private readonly InputAction m_TestMap_Newaction;
+    public struct TestMapActions
+    {
+        private @PlayerControls m_Wrapper;
+        public TestMapActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Newaction => m_Wrapper.m_TestMap_Newaction;
+        public InputActionMap Get() { return m_Wrapper.m_TestMap; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(TestMapActions set) { return set.Get(); }
+        public void SetCallbacks(ITestMapActions instance)
+        {
+            if (m_Wrapper.m_TestMapActionsCallbackInterface != null)
+            {
+                @Newaction.started -= m_Wrapper.m_TestMapActionsCallbackInterface.OnNewaction;
+                @Newaction.performed -= m_Wrapper.m_TestMapActionsCallbackInterface.OnNewaction;
+                @Newaction.canceled -= m_Wrapper.m_TestMapActionsCallbackInterface.OnNewaction;
+            }
+            m_Wrapper.m_TestMapActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Newaction.started += instance.OnNewaction;
+                @Newaction.performed += instance.OnNewaction;
+                @Newaction.canceled += instance.OnNewaction;
+            }
+        }
+    }
+    public TestMapActions @TestMap => new TestMapActions(this);
     public interface IPlayerActions
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnSkill1(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
     }
-
-    public Vector2 Axis => _axis;
-
-    public PlayerControls Controls => this;
+    public interface ITestMapActions
+    {
+        void OnNewaction(InputAction.CallbackContext context);
+    }
 }

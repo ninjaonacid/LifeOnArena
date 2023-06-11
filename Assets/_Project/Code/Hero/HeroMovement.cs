@@ -1,9 +1,6 @@
-using System;
 using Code.Data;
 using Code.Infrastructure.InputSystem;
 using Code.Logic;
-using Code.Services;
-using Code.Services.Input;
 using Code.Services.PersistentProgress;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -42,12 +39,12 @@ namespace Code.Hero
         
         private void OnDisable()
         {
-            _input.Controls.Disable();
+            _input.Disable();
         }
 
         private void Start()
         {
-            _input.Controls.Enable();
+            _input.Enable();
         }
 
         private void Awake()
@@ -61,9 +58,9 @@ namespace Code.Hero
             bool isVectorFind;
             var movementVector = Vector3.zero;
 
-            if (_input.Axis.sqrMagnitude > Constants.Epsilon )
+            if (_input.Player.Movement.ReadValue<Vector2>().sqrMagnitude > Constants.Epsilon )
             {
-                movementVector = Camera.main.transform.TransformDirection(_input.Axis);
+                movementVector = Camera.main.transform.TransformDirection(_input.Player.Movement.ReadValue<Vector2>());
                 movementVector.y = 0;
                 movementVector.Normalize();
             }
@@ -77,7 +74,7 @@ namespace Code.Hero
         { 
             var movementVector = Vector3.zero;
 
-            var moveAxis = _input.Controls.Player.Movement.ReadValue<Vector2>();
+            var moveAxis = _input.Player.Movement.ReadValue<Vector2>();
             
 
             if (moveAxis.sqrMagnitude > Constants.Epsilon)

@@ -1,12 +1,15 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Code.Infrastructure.InputSystem
 {
     public interface IInputSystem
     {
-        Vector2 Axis { get; }
+        void Enable();
+        void Disable();
+        PlayerControls.PlayerActions Player { get; }
         
-        PlayerControls Controls { get; }
+        PlayerControls.TestMapActions TestMap { get; }
         
     }
 }
