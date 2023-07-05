@@ -1623,7 +1623,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114282555968907678, guid: e0815e227ed46e445b99930271e8942c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: e0815e227ed46e445b99930271e8942c, type: 3}
 --- !u!224 &4670868311564812802 stripped
 RectTransform:
@@ -1648,4 +1649,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_MovementRange: 50
-  m_ControlPath: <AndroidJoystick>/stick
+  m_ControlPath: <Gamepad>/leftStick

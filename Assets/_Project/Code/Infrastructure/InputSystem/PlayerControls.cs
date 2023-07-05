@@ -13,14 +13,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Code.Infrastructure.InputSystem;
-using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
 public partial class @PlayerControls : IInputSystem, IInputActionCollection2, IDisposable
 {
     public InputActionAsset asset { get; }
-
     public @PlayerControls()
     {
         asset = InputActionAsset.FromJson(@"{
@@ -115,6 +113,61 @@ public partial class @PlayerControls : IInputSystem, IInputActionCollection2, ID
                     ""isPartOfComposite"": true
                 },
                 {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""dc9439ab-f41c-4213-903f-6ef8803374b1"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""09e36d34-404f-40a5-9f71-9bb3710cec83"",
+                    ""path"": ""<Gamepad>/leftStick/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""2b28997a-c54e-4caa-9635-6eda9ee49aa0"",
+                    ""path"": ""<Gamepad>/leftStick/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""1d511d9b-9166-4fc9-bbe3-ead5a58096bf"",
+                    ""path"": ""<Gamepad>/leftStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""cb8ff796-33d7-4707-9376-c1ff3829161c"",
+                    ""path"": ""<Gamepad>/leftStick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
                     ""name"": """",
                     ""id"": ""7ecec5a9-7d44-4482-a1f0-4594fe53d467"",
                     ""path"": ""<Mouse>/rightButton"",
@@ -177,12 +230,11 @@ public partial class @PlayerControls : IInputSystem, IInputActionCollection2, ID
         // TestMap
         m_TestMap = asset.FindActionMap("TestMap", throwIfNotFound: true);
         m_TestMap_Newaction = m_TestMap.FindAction("New action", throwIfNotFound: true);
-        
     }
 
     public void Dispose()
     {
-        UnityEngine.Object.DestroyImmediate(asset);
+        UnityEngine.Object.Destroy(asset);
     }
 
     public InputBinding? bindingMask
@@ -198,7 +250,6 @@ public partial class @PlayerControls : IInputSystem, IInputActionCollection2, ID
     }
 
     public ReadOnlyArray<InputControlScheme> controlSchemes => asset.controlSchemes;
-
 
     public bool Contains(InputAction action)
     {
@@ -224,15 +275,12 @@ public partial class @PlayerControls : IInputSystem, IInputActionCollection2, ID
     {
         asset.Disable();
     }
-
     public IEnumerable<InputBinding> bindings => asset.bindings;
-
 
     public InputAction FindAction(string actionNameOrId, bool throwIfNotFound = false)
     {
         return asset.FindAction(actionNameOrId, throwIfNotFound);
     }
-
     public int FindBinding(InputBinding bindingMask, out InputAction action)
     {
         return asset.FindBinding(bindingMask, out action);
@@ -244,7 +292,6 @@ public partial class @PlayerControls : IInputSystem, IInputActionCollection2, ID
     private readonly InputAction m_Player_Movement;
     private readonly InputAction m_Player_Skill1;
     private readonly InputAction m_Player_Attack;
-
     public struct PlayerActions
     {
         private @PlayerControls m_Wrapper;
@@ -286,7 +333,6 @@ public partial class @PlayerControls : IInputSystem, IInputActionCollection2, ID
             }
         }
     }
-
     public PlayerActions @Player => new PlayerActions(this);
 
     // TestMap
