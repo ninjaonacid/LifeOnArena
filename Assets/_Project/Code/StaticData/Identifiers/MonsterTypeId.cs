@@ -4,5 +4,6 @@
     {
         FemaleWarrior = 0,
         Acolyte = 10,
+        Skeleton = 20,
     }
 }

@@ -234,7 +234,7 @@ public partial class @PlayerControls : IInputSystem, IInputActionCollection2, ID
 
     public void Dispose()
     {
-        UnityEngine.Object.Destroy(asset);
+        UnityEngine.Object.DestroyImmediate(asset);
     }
 
     public InputBinding? bindingMask
