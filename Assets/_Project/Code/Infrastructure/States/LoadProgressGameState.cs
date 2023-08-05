@@ -52,8 +52,6 @@ namespace Code.Infrastructure.States
 
             //var characterStats = _staticData.ForCharacterStats();
             
-            //stats initialization
-            
             return progress;
         }
     }

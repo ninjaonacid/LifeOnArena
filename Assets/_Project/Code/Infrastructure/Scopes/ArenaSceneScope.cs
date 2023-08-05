@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Code.Infrastructure.Factory;
 using Code.Infrastructure.ObjectPool;
 using Code.Infrastructure.Starters;
@@ -10,11 +11,11 @@ namespace Code.Infrastructure.Scopes
 {
     public class ArenaSceneScope : LifetimeScope
     {
-
         protected override void Configure(IContainerBuilder builder)
         {
             builder.RegisterEntryPoint<AssetInitializer>();
             builder.RegisterEntryPoint<ArenaStarterPoint>();
+            
 
             builder.Register<SpawnerController>(Lifetime.Scoped);
 
@@ -26,6 +27,7 @@ namespace Code.Infrastructure.Scopes
             builder.Register<IParticleObjectPool, ParticleObjectPool>(Lifetime.Scoped);
             builder.Register<IAbilityFactory, AbilityFactory>(Lifetime.Scoped);
             builder.Register<IBattleService, BattleService>(Lifetime.Scoped);
+            
 
         }
 

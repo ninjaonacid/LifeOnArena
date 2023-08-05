@@ -121,10 +121,11 @@ namespace Code.StaticData
             throw new System.NotImplementedException();
         }
 
-        public StatDatabase ForCharacterStats()
-        {
-            throw new System.NotImplementedException();
-        }
+        public StatDatabase ForCharacterStats() =>
+            _characterStats;
+        
+            
+        
 
         public List<LevelReward> LoadRewards() =>
         _levelReward.Values.ToList();

@@ -1,5 +1,6 @@
 using System.Threading;
 using Code.Infrastructure.Factory;
+using Code.Infrastructure.InputSystem;
 using Code.Services;
 using Code.StaticData.Levels;
 using Cysharp.Threading.Tasks;
@@ -12,18 +13,23 @@ namespace Code.Infrastructure.Starters
     {
         private readonly IHeroFactory _heroFactory;
         private readonly IStaticDataService _staticData;
+        private readonly IInputSystem _input;
         
-        public MainMenuStarter(IHeroFactory heroFactory, IStaticDataService staticData)
+        public MainMenuStarter(IHeroFactory heroFactory, IStaticDataService staticData, IInputSystem input)
         {
             _heroFactory = heroFactory;
             _staticData = staticData;
+            _input = input;
         }
         
         public async UniTask StartAsync(CancellationToken cancellation)
         {
             LevelConfig config = _staticData.ForLevel(SceneManager.GetActiveScene().name);
             
-           // await _heroFactory.CreateHero(config.HeroInitialPosition);
+            await _heroFactory.CreateHero(config.HeroInitialPosition);
+            
+            _input.Disable();
+            
         }
     }
 }

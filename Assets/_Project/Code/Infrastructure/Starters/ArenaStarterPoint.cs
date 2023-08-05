@@ -1,6 +1,7 @@
 using System.Threading;
 using Code.Hero;
 using Code.Infrastructure.Factory;
+using Code.Infrastructure.InputSystem;
 using Code.Logic.CameraLogic;
 using Code.Logic.WaveLogic;
 using Code.Services;
@@ -23,12 +24,13 @@ namespace Code.Infrastructure.Starters
         private readonly IProgressService _progress;
         private readonly IHeroFactory _heroFactory;
         private readonly IGameFactory _gameFactory;
+        private readonly IInputSystem _inputSystem;
         private readonly SpawnerController _spawnerController;
         
         public ArenaStarterPoint(IStaticDataService staticData, 
             ISaveLoadService saveLoad, IProgressService progress, 
-            IHeroFactory heroFactory, IGameFactory gameFactory, 
-            SpawnerController spawnerController)
+            IHeroFactory heroFactory, IGameFactory gameFactory,
+            IInputSystem inputSystem, SpawnerController spawnerController)
         {
             _staticData = staticData;
             _saveLoad = saveLoad;
@@ -36,6 +38,7 @@ namespace Code.Infrastructure.Starters
             _heroFactory = heroFactory;
             _gameFactory = gameFactory;
             _spawnerController = spawnerController;
+            _inputSystem = inputSystem;
         }
 
         private void InformProgressReaders()
@@ -53,6 +56,7 @@ namespace Code.Infrastructure.Starters
             var hero = await InitHero(config);
 
             InitHud(hero);
+            InitializeInput();
             CameraFollow(hero);
             InformProgressReaders();
 
@@ -78,6 +82,11 @@ namespace Code.Infrastructure.Starters
         private static void CameraFollow(GameObject hero)
         {
             Camera.main.GetComponent<CameraFollow>().Follow(hero);
+        }
+
+        private void InitializeInput()
+        {
+            _inputSystem.Enable();
         }
     }
 }
