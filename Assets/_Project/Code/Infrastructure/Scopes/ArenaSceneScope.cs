@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Code.Infrastructure.Factory;
 using Code.Infrastructure.ObjectPool;
 using Code.Infrastructure.Starters;

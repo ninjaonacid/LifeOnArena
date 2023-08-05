@@ -12,5 +12,10 @@ namespace Code.UI.MainMenu
         {
             
         }
+
+        private void SetSlot()
+        {
+            
+        }
     }
 }
