@@ -13,9 +13,10 @@ namespace Code.UI.MainMenu
             
         }
 
-        private void SetSlot()
+        public void SetSlot(string statName, int value)
         {
-            
+            _text.text = statName + value;
+
         }
     }
 }

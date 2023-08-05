@@ -40,13 +40,7 @@ namespace Code.Infrastructure.Starters
             _spawnerController = spawnerController;
             _inputSystem = inputSystem;
         }
-
-        private void InformProgressReaders()
-        {
-            foreach (ISaveReader progressReader in _saveLoad.ProgressReaders)
-                progressReader.LoadProgress(_progress.Progress);
-        }
-
+        
         public async UniTask StartAsync(CancellationToken cancellation)
         {
             LevelConfig config = _staticData.ForLevel(SceneManager.GetActiveScene().name);
@@ -58,7 +52,7 @@ namespace Code.Infrastructure.Starters
             InitHud(hero);
             InitializeInput();
             CameraFollow(hero);
-            InformProgressReaders();
+            _saveLoad.LoadSaveData();
 
             _spawnerController.SpawnTimer();
             _spawnerController.RunSpawner();

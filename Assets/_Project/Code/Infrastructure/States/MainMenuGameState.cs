@@ -37,9 +37,9 @@ namespace Code.Infrastructure.States
 
         public void InitMainMenu()
         {
-            _uiFactory.CreateCore();
-           var menu = _uiFactory.CreateSelectionMenu(_windowService);
-           menu.GetComponentInChildren<StartGameButton>().Button.onClick.AddListener(EnterLoadLevelState);
+            //_uiFactory.CreateCore();
+           // var menu = _uiFactory.CreateSelectionMenu(_windowService);
+           // menu.GetComponentInChildren<StartGameButton>().Button.onClick.AddListener(EnterLoadLevelState);
         }
 
         private void EnterLoadLevelState()

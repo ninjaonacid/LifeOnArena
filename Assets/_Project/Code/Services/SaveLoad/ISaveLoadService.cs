@@ -13,7 +13,8 @@ namespace Code.Services.SaveLoad
         List<ISave> ProgressWriters { get; }
         void Cleanup();
         void RegisterProgressWatchers(GameObject go);
-        void Register(ISaveReader progressLoader);
+        void Register(ISaveReader progressReader);
         void SaveProgressAtPath();
+        void LoadSaveData();
     }
 }

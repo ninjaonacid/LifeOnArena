@@ -40,6 +40,12 @@ namespace Code.Services.SaveLoad
             SaveProgressAtPath();
         }
 
+        public void LoadSaveData()
+        {
+            foreach (ISaveReader progressReader in ProgressReaders)
+                progressReader.LoadProgress(_progressService.Progress);
+        }
+
         public void SaveProgressAtPath()
         {
            string json = _progressService.Progress.ToJson();
@@ -54,12 +60,12 @@ namespace Code.Services.SaveLoad
         }
 
 
-        public void Register(ISaveReader progressLoader)
+        public void Register(ISaveReader progressReader)
         {
-            if (progressLoader is ISave progressWriter)
+            if (progressReader is ISave progressWriter)
                 ProgressWriters.Add(progressWriter);
 
-            ProgressReaders.Add(progressLoader);
+            ProgressReaders.Add(progressReader);
         }
     }
 }

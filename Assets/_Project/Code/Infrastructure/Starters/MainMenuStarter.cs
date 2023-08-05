@@ -1,11 +1,14 @@
 using System.Threading;
+using Code.Hero;
 using Code.Infrastructure.Factory;
 using Code.Infrastructure.InputSystem;
 using Code.Services;
 using Code.StaticData.Levels;
-using Code.StaticData.StatSystem;
+using Code.UI;
+using Code.UI.MainMenu;
 using Code.UI.Services;
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using VContainer.Unity;
 
@@ -36,11 +39,14 @@ namespace Code.Infrastructure.Starters
             
             _uiFactory.CreateCore();
 
-            var mainMenu = _uiFactory.CreateSelectionMenu(_windowService);
             
-            var hero = await _heroFactory.CreateHero(config.HeroInitialPosition);
+            GameObject hero = await _heroFactory.CreateHero(config.HeroInitialPosition);
          
-            var stats = hero.GetComponent<StatController>();
+            HeroStats stats = hero.GetComponent<HeroStats>();
+            
+            ScreenBase mainMenu = _uiFactory.CreateSelectionMenu(_windowService);
+            
+            mainMenu.GetComponentInChildren<UIStatContainer>().Construct(stats);
         }
 
         private void DisableInput()
