@@ -15,7 +15,7 @@ namespace Code.UI.Services
             {
                 case UIWindowID.SelectionMenu:
                     _activeScreen?.CloseButton.onClick.Invoke();
-                    _activeScreen = _uiFactory.CreateSelectionMenu(this);
+                    _activeScreen = _uiFactory.CreateMainMenu(this);
                     break;
 
                 case UIWindowID.Weapon:

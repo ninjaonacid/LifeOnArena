@@ -39,21 +39,8 @@ namespace Code.Infrastructure.Scopes
             builder.Register<SceneLoader>(Lifetime.Singleton);
 
             builder.RegisterComponentInNewPrefab(Screen, Lifetime.Singleton).AsImplementedInterfaces();
-
-            //InstallInput(builder);
+            
         }
-
-        // private void InstallInput(IContainerBuilder builder)
-        // {
-        //     var inputInstance = GetInput();
-        //     builder.RegisterInstance(inputInstance);
-        // }
-        // private  IInputService GetInput()
-        // {
-        //     if (Application.isEditor)
-        //         return new StandaloneInputService();
-        //     return new MobileInputService();
-        // }
 
         private void InstallStateMachine(IContainerBuilder builder)
         {
@@ -64,5 +51,7 @@ namespace Code.Infrastructure.Scopes
             builder.Register<IExitableState, MainMenuGameState>(Lifetime.Singleton);
             builder.Register<IExitableState, LoadProgressGameState>(Lifetime.Singleton);
         }
+        
+        
     }
 }

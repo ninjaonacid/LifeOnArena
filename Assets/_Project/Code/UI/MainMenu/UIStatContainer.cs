@@ -19,8 +19,6 @@ namespace Code.UI.MainMenu
         {
             var stats = GetComponentsInChildren<StatsUI>();
             _stats.AddRange(stats);
-
-            
         }
 
         private void Start()

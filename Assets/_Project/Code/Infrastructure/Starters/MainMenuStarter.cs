@@ -21,7 +21,7 @@ namespace Code.Infrastructure.Starters
         private readonly IInputSystem _input;
         private readonly IWindowService _windowService;
         private readonly IUIFactory _uiFactory;
-        
+
         public MainMenuStarter(IHeroFactory heroFactory, IUIFactory uiFactory, 
             IWindowService windowService,
             IStaticDataService staticData, IInputSystem input)
@@ -39,16 +39,15 @@ namespace Code.Infrastructure.Starters
             
             _uiFactory.CreateCore();
 
-            
             GameObject hero = await _heroFactory.CreateHero(config.HeroInitialPosition);
          
             HeroStats stats = hero.GetComponent<HeroStats>();
             
-            ScreenBase mainMenu = _uiFactory.CreateSelectionMenu(_windowService);
+            ScreenBase mainMenu = _uiFactory.CreateMainMenu(_windowService);
             
             mainMenu.GetComponentInChildren<UIStatContainer>().Construct(stats);
         }
-
+        
         private void DisableInput()
         {
             _input.Disable();

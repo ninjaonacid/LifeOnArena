@@ -1,10 +1,12 @@
 using System.Threading.Tasks;
 using Code.Infrastructure.AssetManagement;
+using Code.Infrastructure.SceneManagement;
 using Code.Services;
 using Code.Services.PersistentProgress;
 using Code.Services.SaveLoad;
 using Code.StaticData.UIWindows;
 using Code.UI.Buttons;
+using Code.UI.MainMenu;
 using Code.UI.SkillsMenu;
 using Code.UI.UpgradeMenu;
 using UnityEngine;
@@ -21,6 +23,7 @@ namespace Code.UI.Services
         private readonly ISaveLoadService _saveLoad;
         private readonly IProgressService _progress;
         private readonly IObjectResolver _objectResolver;
+        private readonly SceneLoader _sceneLoader;
         
         private Transform _uiCoreTransform;
 
@@ -28,16 +31,15 @@ namespace Code.UI.Services
             IStaticDataService staticDataService, 
             ISaveLoadService saveLoad,
             IProgressService progress,
-            IObjectResolver objectResolver
-        )
+            IObjectResolver objectResolver,
+            SceneLoader sceneLoader)
         {
             _assetProvider = assetProvider;
-          
-            //_heroFactory = heroFactory;
             _staticData = staticDataService;
             _saveLoad = saveLoad;
             _progress = progress;
             _objectResolver = objectResolver;
+            _sceneLoader = sceneLoader;
         }
 
         public void InitAssets()
@@ -45,11 +47,13 @@ namespace Code.UI.Services
             
         }
 
-        public ScreenBase CreateSelectionMenu(IWindowService windowService)
+        public ScreenBase CreateMainMenu(IWindowService windowService)
         {
             WindowConfig config = _staticData.ForWindow(UIWindowID.SelectionMenu);
-            var menu = Object.Instantiate(config.Prefab, _uiCoreTransform);
-
+            var menu = Object.Instantiate(config.Prefab, _uiCoreTransform) as MainMenuScreen;
+            
+            menu.Construct(_sceneLoader);
+            
             foreach (var openButton in menu.GetComponentsInChildren<OpenWindowButton>())
             {
                 openButton.Construct(windowService);
