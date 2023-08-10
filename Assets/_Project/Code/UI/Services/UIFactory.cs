@@ -13,6 +13,7 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using VContainer;
 using VContainer.Unity;
+using MainMenuScreen = Code.UI.MainMenu.MainMenuScreen;
 
 namespace Code.UI.Services
 {
@@ -50,10 +51,13 @@ namespace Code.UI.Services
         public ScreenBase CreateMainMenu(IWindowService windowService)
         {
             WindowConfig config = _staticData.ForWindow(UIWindowID.SelectionMenu);
-            var menu = Object.Instantiate(config.Prefab, _uiCoreTransform) as MainMenuScreen;
+            var screen = Object.Instantiate(config.Prefab, _uiCoreTransform);
+            screen.Construct(_progress);
+
+            var menu = screen as MainMenuScreen;
             
             menu.Construct(_sceneLoader);
-            
+
             foreach (var openButton in menu.GetComponentsInChildren<OpenWindowButton>())
             {
                 openButton.Construct(windowService);

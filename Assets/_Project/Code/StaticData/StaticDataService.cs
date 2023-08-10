@@ -48,7 +48,7 @@ namespace Code.StaticData
                 .ToDictionary(x => x.Identifier.Id, x => x);
 
             _characterStats = Resources
-                .Load<StatDatabase>("StaticData/Hero/Stats");
+                .Load<StatDatabase>("StaticData/Hero/Stats/HeroStatsData");
 
             _particles = Resources
                 .LoadAll<ParticlesStaticData>("StaticData/Particles")

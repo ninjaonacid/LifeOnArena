@@ -5,7 +5,6 @@ using Code.Infrastructure.InputSystem;
 using Code.Services;
 using Code.StaticData.Levels;
 using Code.UI;
-using Code.UI.MainMenu;
 using Code.UI.Services;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -45,7 +44,7 @@ namespace Code.Infrastructure.Starters
             
             ScreenBase mainMenu = _uiFactory.CreateMainMenu(_windowService);
             
-            mainMenu.GetComponentInChildren<UIStatContainer>().Construct(stats);
+            //mainMenu.GetComponentInChildren<UIStatContainer>().Construct(stats);
         }
         
         private void DisableInput()

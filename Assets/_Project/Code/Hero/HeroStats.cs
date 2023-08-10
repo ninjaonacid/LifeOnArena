@@ -1,8 +1,6 @@
 using Code.Data;
 using Code.Services.PersistentProgress;
 using Code.StaticData.StatSystem;
-using UnityEngine;
-using Attribute = Code.StaticData.StatSystem.Attribute;
 
 namespace Code.Hero
 {

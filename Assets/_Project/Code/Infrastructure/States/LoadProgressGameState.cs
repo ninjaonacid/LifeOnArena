@@ -57,6 +57,16 @@ namespace Code.Infrastructure.States
             {
                 progress.CharacterStatsData.StatsData.TryAdd(stat.name, stat.BaseValue);
             }
+
+            foreach (StatDefinition stat in characterStats.StatDefinitions)
+            {
+                progress.CharacterStatsData.StatsData.TryAdd(stat.name, stat.BaseValue);
+            }
+
+            foreach (StatDefinition stat in characterStats.AttributeDefinitions)
+            {
+                progress.CharacterStatsData.StatsData.TryAdd(stat.name, stat.BaseValue);
+            }
             
             return progress;
         }

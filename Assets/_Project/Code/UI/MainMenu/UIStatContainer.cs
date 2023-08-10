@@ -1,35 +1,31 @@
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using Code.Hero;
+using Code.Data;
 using UnityEngine;
 
 namespace Code.UI.MainMenu
 {
     public class UIStatContainer : MonoBehaviour
     {
-        private List<StatsUI> _stats = new List<StatsUI>();
-        private HeroStats _heroStats;
-        public void Construct(HeroStats heroStats)
+        [SerializeField] private List<StatsUI> StatSlots;
+            
+        private PlayerProgress _progress;
+        public void Construct(PlayerProgress progress)
         {
-            _heroStats = heroStats;
-        }
-        
-        private void Awake()
-        {
-            var stats = GetComponentsInChildren<StatsUI>();
-            _stats.AddRange(stats);
+            _progress = progress;
+            
+            InitializeStatsView();
         }
 
-        private void Start()
+        private void InitializeStatsView()
         {
-            var statName = _heroStats.Stats.Keys.ToList();
-            var statValue = _heroStats.Stats.Values.ToList();
+            var statsNames = new List<string>(_progress.CharacterStatsData.StatsData.Keys);
+            var statsValues = new List<int>(_progress.CharacterStatsData.StatsData.Values);
 
-            for (var index = 0; index < _stats.Count; index++)
+            for (var index = 0; index < StatSlots.Count; index++)
             {
-                var stat = _stats[index];
-                
-                stat.SetSlot(statName[index], statValue[index].Value);
+                var stat = StatSlots[index];
+                stat.SetSlot(statsNames[index], statsValues[index]);
             }
         }
     }

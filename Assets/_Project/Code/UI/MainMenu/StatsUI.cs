@@ -7,16 +7,10 @@ namespace Code.UI.MainMenu
     {
         [SerializeField] private TextMeshProUGUI _text;
         
-
-        private void Awake()
-        {
-            
-        }
-
+        
         public void SetSlot(string statName, int value)
         {
             _text.text = statName + value;
-
         }
     }
 }
