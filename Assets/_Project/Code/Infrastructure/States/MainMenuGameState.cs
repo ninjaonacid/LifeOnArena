@@ -1,6 +1,5 @@
 using Code.Infrastructure.SceneManagement;
 using Code.Services.PersistentProgress;
-using Code.UI.Buttons;
 using Code.UI.Services;
 
 namespace Code.Infrastructure.States

@@ -2,6 +2,7 @@
 using Code.Services;
 using Code.Services.PersistentProgress;
 using Code.Services.SaveLoad;
+using Code.StaticData.StatSystem;
 
 namespace Code.Infrastructure.States
 {
@@ -46,11 +47,16 @@ namespace Code.Infrastructure.States
 
         private PlayerProgress NewProgress()
         {
-            var progress = new PlayerProgress("Shelter");
+            PlayerProgress progress = new PlayerProgress("Shelter");
 
             progress.WorldData.LootData.Collected = 100;
 
-            //var characterStats = _staticData.ForCharacterStats();
+            StatDatabase characterStats = _staticData.ForCharacterStats();
+
+            foreach (StatDefinition stat in characterStats.PrimaryStats)
+            {
+                progress.CharacterStatsData.StatsData.TryAdd(stat.name, stat.BaseValue);
+            }
             
             return progress;
         }
