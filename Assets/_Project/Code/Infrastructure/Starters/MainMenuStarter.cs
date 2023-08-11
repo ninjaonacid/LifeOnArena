@@ -1,5 +1,4 @@
 using System.Threading;
-using Code.Hero;
 using Code.Infrastructure.Factory;
 using Code.Infrastructure.InputSystem;
 using Code.Services;
@@ -39,12 +38,9 @@ namespace Code.Infrastructure.Starters
             _uiFactory.CreateCore();
 
             GameObject hero = await _heroFactory.CreateHero(config.HeroInitialPosition);
-         
-            HeroStats stats = hero.GetComponent<HeroStats>();
-            
+
             ScreenBase mainMenu = _uiFactory.CreateMainMenu(_windowService);
             
-            //mainMenu.GetComponentInChildren<UIStatContainer>().Construct(stats);
         }
         
         private void DisableInput()

@@ -9,6 +9,7 @@ namespace Code.UI.MainMenu
         [SerializeField] private Button StartFightButton;
         [SerializeField] private UIStatContainer StatContainer;
         
+        
         private SceneLoader _sceneLoader;
         
         public void Construct(SceneLoader sceneLoader)
