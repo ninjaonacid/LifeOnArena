@@ -33,7 +33,9 @@ namespace Code.Infrastructure.Factory
         public AbilityTemplateBase CreateAbilityTemplate(int heroAbilityId)
         {
             AbilityTemplateBase abilityTemplate = _staticData.ForAbility(heroAbilityId);
+            
             abilityTemplate.InitServices(_particlePool, _battleService);
+            
             InitAbilityAssets(abilityTemplate.PrefabReference);
       
             return abilityTemplate;

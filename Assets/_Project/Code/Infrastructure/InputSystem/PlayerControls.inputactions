@@ -15,9 +15,18 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Skill1",
+                    "name": "SkillSlot1",
                     "type": "Button",
                     "id": "178ac7ca-5ceb-4a8f-abec-9c6203ed2673",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SkillSlot2",
+                    "type": "Button",
+                    "id": "41ed16e5-5eff-45b1-a286-11702fecc104",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -151,7 +160,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Skill1",
+                    "action": "SkillSlot1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d52a7c0b-5ec4-440c-a6c9-9d975c754639",
+                    "path": "<Touchscreen>/Press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SkillSlot1",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -165,15 +185,37 @@
                     "action": "Attack",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "83743a3d-d80b-4e7c-b8ff-df81ebd911e1",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SkillSlot2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1a1ac715-9f9e-4626-8917-13893e9e1e78",
+                    "path": "<Touchscreen>/Press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SkillSlot2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
         {
-            "name": "TestMap",
+            "name": "UI",
             "id": "fe003851-54fb-42bb-8181-e36e691ce4ea",
             "actions": [
                 {
-                    "name": "New action",
+                    "name": "Click",
                     "type": "Button",
                     "id": "2fb91348-e0b8-4e1c-b066-9e0b700581df",
                     "expectedControlType": "Button",
@@ -186,11 +228,22 @@
                 {
                     "name": "",
                     "id": "1e534b4b-dcbc-4b88-a971-a5bc2eac9b27",
-                    "path": "",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "New action",
+                    "action": "Click",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "eec8eddb-110d-47c8-a158-d839fef773ab",
+                    "path": "<Touchscreen>/Press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Click",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -41,7 +41,7 @@ namespace Code.Infrastructure.Factory
             GameObject hud = InstantiateRegistered(AssetAddress.HudPath);
 
             hud.GetComponentInChildren<LootCounter>()
-                .Construct(_gameDataService.Progress.WorldData);
+                .Construct(_gameDataService.PlayerData.WorldData);
 
             foreach (var openWindowButton in hud.GetComponentsInChildren<OpenWindowButton>())
             {

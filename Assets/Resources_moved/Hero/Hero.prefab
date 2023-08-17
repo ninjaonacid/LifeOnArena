@@ -1419,7 +1419,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stats: {fileID: 6287642891397871327}
   _heroAudioSource: {fileID: 2364857729011436083}
-  HeroAnimator: {fileID: 7390316171520665867}
   CharacterController: {fileID: 7390316171520665865}
 --- !u!114 &-8125679809969938510
 MonoBehaviour:
@@ -1462,11 +1461,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _heroCooldown: {fileID: 7773590576850612865}
   SkillSlots:
-  - Button: {fileID: 7202479468229353429, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
-    AbilityTemplate: {fileID: 0}
+  - AbilityTemplate: {fileID: 0}
     AbilitySlotID: 1
-  - Button: {fileID: 7202479468229353429, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
-    AbilityTemplate: {fileID: 0}
+  - AbilityTemplate: {fileID: 0}
     AbilitySlotID: 2
 --- !u!114 &6331987856363381589
 MonoBehaviour:

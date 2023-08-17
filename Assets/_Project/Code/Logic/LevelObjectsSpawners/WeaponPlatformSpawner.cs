@@ -34,9 +34,9 @@ namespace Code.Logic.LevelObjectsSpawners
             IsPurchased = true;
         }
 
-        public  void LoadProgress(PlayerProgress progress)
+        public  void LoadData(PlayerData data)
         {
-            if (progress.WorldData.WeaponPurchaseData.PurchasedWeapons.Contains(Id))
+            if (data.WorldData.WeaponPurchaseData.PurchasedWeapons.Contains(Id))
             {
                 IsPurchased = true;
                // var platform = await SpawnPlatform();
@@ -49,10 +49,10 @@ namespace Code.Logic.LevelObjectsSpawners
             }
         }
 
-        public void UpdateProgress(PlayerProgress progress)
+        public void UpdateData(PlayerData data)
         {
             if (IsPurchased)
-                progress.WorldData.WeaponPurchaseData.PurchasedWeapons.Add(Id);
+                data.WorldData.WeaponPurchaseData.PurchasedWeapons.Add(Id);
         }
     }
 }

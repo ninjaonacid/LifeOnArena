@@ -66,10 +66,10 @@ namespace Code.Hero
             return new Vector3(transform.position.x, CharacterController.center.y, transform.position.z);
         }
 
-        private void OnDrawGizmos()
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(StartPoint() + transform.forward * 2, _stats.Stats["AttackRadius"].Value);
-        }
+        // private void OnDrawGizmos()
+        // {
+        //     Gizmos.color = Color.red;
+        //     Gizmos.DrawWireSphere(StartPoint() + transform.forward * 2, _stats.Stats["AttackRadius"].Value);
+        // }
     }
 }

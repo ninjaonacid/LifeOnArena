@@ -8,18 +8,18 @@ namespace Code.UI.MainMenu
     {
         [SerializeField] private List<StatsUI> StatSlots;
             
-        private PlayerProgress _progress;
-        public void Construct(PlayerProgress progress)
+        private PlayerData _data;
+        public void Construct(PlayerData data)
         {
-            _progress = progress;
+            _data = data;
             
             InitializeStatsView();
         }
 
         private void InitializeStatsView()
         {
-            var statsNames = new List<string>(_progress.CharacterStatsData.StatsData.Keys);
-            var statsValues = new List<int>(_progress.CharacterStatsData.StatsData.Values);
+            var statsNames = new List<string>(_data.CharacterStatsData.StatsData.Keys);
+            var statsValues = new List<int>(_data.CharacterStatsData.StatsData.Values);
 
             for (var index = 0; index < StatSlots.Count; index++)
             {

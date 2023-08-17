@@ -10,7 +10,7 @@ namespace Code.Hero
 {
     public class HeroPassives : MonoBehaviour, ISave
     {
-        private PlayerProgress _progress;
+        private PlayerData _data;
         private List<PassiveAbilityTemplateBase> _heroPassives = new List<PassiveAbilityTemplateBase>();
         private IAbilityFactory _abilityFactory;
 
@@ -23,26 +23,26 @@ namespace Code.Hero
         {
             if (_heroPassives.Contains(passiveAbility))
             {
-                passiveAbility.GetAbility().Apply(gameObject, _progress);
+                passiveAbility.GetAbility().Apply(gameObject, _data);
             }
             else
             {
                 _heroPassives.Add(passiveAbility);
-                passiveAbility.GetAbility().Apply(gameObject, _progress);
+                passiveAbility.GetAbility().Apply(gameObject, _data);
             }
         }
 
-        public void LoadProgress(PlayerProgress progress)
+        public void LoadData(PlayerData data)
         {
-            _progress = progress;
-            foreach (var id in _progress.PassiveSkills.AbilitiesId)
+            _data = data;
+            foreach (var id in _data.PassiveSkills.AbilitiesId)
             {
                // AddPassive(_abilityFactory.CreatePassive(id));
             }
             
         }
 
-        public void UpdateProgress(PlayerProgress progress)
+        public void UpdateData(PlayerData data)
         {
            
         }

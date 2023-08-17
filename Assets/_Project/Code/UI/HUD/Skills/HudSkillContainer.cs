@@ -13,9 +13,8 @@ namespace Code.UI.HUD.Skills
         {
             _heroSkills = heroSkills;
             _heroSkills.OnSkillChanged += SetSkillSlots;
-
-            LinkButtonKeys();
-            SetSkillSlots();
+            
+            Debug.Log(_heroSkills.GetHashCode().ToString());
         }
 
         private void SetSkillSlots()
@@ -28,6 +27,9 @@ namespace Code.UI.HUD.Skills
                     _skillButtons[i].UpdateSkillView();
                 }
             }
+            
+            Debug.Log(_heroSkills.GetHashCode().ToString());
+            
         }
 
         private void LinkButtonKeys()
@@ -38,7 +40,7 @@ namespace Code.UI.HUD.Skills
                 {
                     if (skillSlot.AbilitySlotID == hudSkillSlot.abilitySlotID)
                     {
-                        skillSlot.Button.button.Key = hudSkillSlot.ButtonInput.button.Key;
+                        
                     }
                 }
             }

@@ -23,28 +23,28 @@ namespace Code.Hero
         //     }
         // }
 
-        public void LoadProgress(PlayerProgress progress)
+        public void LoadData(PlayerData data)
         {
-            _characterStatsData = progress.CharacterStatsData;
+            _characterStatsData = data.CharacterStatsData;
 
             foreach (var stat in Stats.Values)
             {
                 if (stat is ISave saveable)
                 {
-                    saveable.LoadProgress(progress);
+                    saveable.LoadData(data);
                 }
             }
             
             StatsLoaded();
         }
 
-        public void UpdateProgress(PlayerProgress progress)
+        public void UpdateData(PlayerData data)
         {
             foreach (var stat in Stats.Values)
             {
                 if (stat is ISave saveable)
                 {
-                    saveable.UpdateProgress(progress);
+                    saveable.UpdateData(data);
                 }
             }
         }

@@ -5,6 +5,6 @@ namespace Code.StaticData.Ability
 {
     public interface IPassiveAbility
     {
-        void Apply(GameObject hero, PlayerProgress heroProgress);
+        void Apply(GameObject hero, PlayerData heroData);
     }
 }

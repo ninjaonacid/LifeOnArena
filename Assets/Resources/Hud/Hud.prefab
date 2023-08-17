@@ -1210,7 +1210,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 819212837027285666, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
       propertyPath: m_ControlPath
-      value: <Touchscreen>/Press
+      value: <Keyboard>/space
       objectReference: {fileID: 0}
     - target: {fileID: 819212837027285666, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
       propertyPath: SimpleInputButton
@@ -1362,7 +1362,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 819212837027285666, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
       propertyPath: m_ControlPath
-      value: <Touchscreen>/Press
+      value: <Mouse>/rightButton
       objectReference: {fileID: 0}
     - target: {fileID: 819212837027285666, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
       propertyPath: SimpleInputButton
@@ -1461,6 +1461,10 @@ PrefabInstance:
       value: SkillButton (1)
       objectReference: {fileID: 0}
     - target: {fileID: 7202479468229353429, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7202479468229353429, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
       propertyPath: button.m_key
       value: Skill1
       objectReference: {fileID: 0}
@@ -1499,7 +1503,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 1665372912855339493}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 995f34434fbe45d46aacf4e120446279, type: 3}
   m_Name: 

@@ -8,7 +8,7 @@ namespace Code.Services.SaveLoad
     public interface ISaveLoadService : IService
     {
         void SaveProgress();
-        PlayerProgress LoadProgress();
+        PlayerData LoadProgress();
         List<ISaveReader> ProgressReaders { get; }
         List<ISave> ProgressWriters { get; }
         void Cleanup();

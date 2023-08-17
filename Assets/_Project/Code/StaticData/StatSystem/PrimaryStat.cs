@@ -31,9 +31,9 @@ namespace Code.StaticData.StatSystem
             CalculateValue();
         }
 
-        public void LoadProgress(PlayerProgress progress)
+        public void LoadData(PlayerData data)
         {
-            if (progress.CharacterStatsData.StatsData.TryGetValue(_statDefinition.name, out var value))
+            if (data.CharacterStatsData.StatsData.TryGetValue(_statDefinition.name, out var value))
             {
                 _baseValue = value;
             }
@@ -41,15 +41,15 @@ namespace Code.StaticData.StatSystem
             CalculateValue();
         }
 
-        public void UpdateProgress(PlayerProgress progress)
+        public void UpdateData(PlayerData data)
         {
-            if (progress.CharacterStatsData.StatsData.TryAdd(_statDefinition.name, _baseValue))
+            if (data.CharacterStatsData.StatsData.TryAdd(_statDefinition.name, _baseValue))
             {
                 
             }
             else
             {
-                progress.CharacterStatsData.StatsData[_statDefinition.name] = _baseValue;
+                data.CharacterStatsData.StatsData[_statDefinition.name] = _baseValue;
             }
         }
     }

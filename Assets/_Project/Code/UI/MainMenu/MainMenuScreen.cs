@@ -17,7 +17,7 @@ namespace Code.UI.MainMenu
             _sceneLoader = sceneLoader;
             
             StartFightButton.onClick.AddListener(LoadLevel);
-            StatContainer.Construct(Progress);
+            StatContainer.Construct(Data);
         }
 
         private void LoadLevel()

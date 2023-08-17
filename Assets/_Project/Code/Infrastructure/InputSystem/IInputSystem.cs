@@ -8,7 +8,7 @@ namespace Code.Infrastructure.InputSystem
         void Enable();
         void Disable();
         PlayerControls.PlayerActions Player { get; }
-        PlayerControls.TestMapActions TestMap { get; }
+        PlayerControls.UIActions UI { get; }
         
     }
 }

@@ -43,7 +43,7 @@ namespace Code.StaticData
                 .ToDictionary(x => x.WindowId, x => x);
 
             _heroAbilities = Resources
-                .LoadAll<AbilityTemplateBase>("StaticData/HeroSkills")
+                .LoadAll<AbilityTemplateBase>("StaticData/Hero/HeroSkills")
                 .ToDictionary(x => x.Identifier.Id, x => x);
 
             _characterStats = Resources
@@ -52,7 +52,7 @@ namespace Code.StaticData
             _particles = Resources
                 .LoadAll<ParticlesStaticData>("StaticData/Particles")
                 .ToDictionary(x => x.ParticleId, x => x);
-
+            
             _weapons = Resources
                 .LoadAll<WeaponData>("StaticData/Equipment/Weapons")
                 .ToDictionary(x => x.WeaponId, x => x);

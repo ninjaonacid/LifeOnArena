@@ -4,6 +4,6 @@ namespace Code.Services.PersistentProgress
 {
     public class GameDataService : IGameDataService
     {
-        public PlayerProgress Progress { get; set; }
+        public PlayerData PlayerData { get; set; }
     }
 }

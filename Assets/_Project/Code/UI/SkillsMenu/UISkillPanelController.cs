@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using Code.Services.PersistentProgress;
 using UnityEngine;
 using VContainer;
@@ -21,11 +20,13 @@ namespace Code.UI.SkillsMenu
         public void Construct(IGameDataService gameData)
         {
             _gameData  = gameData;
+            
             foreach (UISkillPanelSlot slot in _slots)
             {
                 slot.Construct(gameData, this);
             }
-            _equipButton.Construct(this, _gameData.Progress.SkillSlotsData);
+            
+            _equipButton.Construct(this, _gameData.PlayerData.SkillSlotsData);
         }
         public void SetSelectedSlot(UISkillPanelSlot slot)
         {
@@ -60,7 +61,7 @@ namespace Code.UI.SkillsMenu
         
         public void EquipSkill()
         {
-            var hudSkills = _gameData.Progress.SkillSlotsData;
+            var hudSkills = _gameData.PlayerData.SkillSlotsData;
 
             if (!_equippedSlots.Contains(_selectedSlot) && _equippedSlots.Count < 2)
             {
@@ -73,14 +74,12 @@ namespace Code.UI.SkillsMenu
                 firstSlot.IsEquipped = false;
                 _equippedSlots.Enqueue(_selectedSlot);
             }
-          
 
             hudSkills.SkillIds.Clear();
 
             foreach (var slot in _equippedSlots)
             {
-                if(!hudSkills.SkillIds.Contains(slot.GetAbility().Identifier.Id))
-                    hudSkills.SkillIds.Enqueue(slot.GetAbility().Identifier.Id);
+                hudSkills.SkillIds.Enqueue(slot.GetAbility().Identifier.Id);
             }
         }
     }

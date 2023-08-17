@@ -2,11 +2,9 @@ using System;
 using Code.Data;
 using Code.Infrastructure.Factory;
 using Code.Infrastructure.InputSystem;
-using Code.Services.Input;
 using Code.Services.PersistentProgress;
 using Code.StaticData.Ability;
 using Code.UI.HUD.Skills;
-using SimpleInputNamespace;
 using UnityEngine;
 using VContainer;
 
@@ -29,7 +27,6 @@ namespace Code.Hero
         [Serializable]
         public class SkillSlot
         {
-            public ButtonInputUI Button;
             public AbilityTemplateBase AbilityTemplate;
             public AbilitySlotID AbilitySlotID;
         }
@@ -41,38 +38,43 @@ namespace Code.Hero
             _input = input;
         }
 
-        // private void Update()
+        private void Update()
+        {
+            foreach (var slot in SkillSlots)
+            {
+                if (_input.Player.SkillSlot1.triggered || _input.Player.SkillSlot2.triggered)
+                {
+                    if (slot.AbilityTemplate && slot.AbilityTemplate.IsReady())
+                    {
+                        slot.AbilityTemplate.GetAbility().Use(this.gameObject, null);
+                        slot.AbilityTemplate.State = AbilityState.Active;
+                        _activeSkill = slot.AbilityTemplate;
+                        _heroCooldown.StartCooldown(slot.AbilityTemplate);
+                    }
+                }
+            }
+        }
+
+        // public void LoadData(PlayerData data)
         // {
-        //     foreach (var slot in SkillSlots)
-        //     {
-        //         if (_input.IsButtonPressed(slot.Button.button.Key))
-        //         {
-        //             if (slot.AbilityTemplate && slot.AbilityTemplate.IsReady())
-        //             {
-        //                 slot.AbilityTemplate.GetAbility().Use(this.gameObject, null);
-        //                 slot.AbilityTemplate.State = AbilityState.Active;
-        //                 _activeSkill = slot.AbilityTemplate;
-        //                 _heroCooldown.StartCooldown(slot.AbilityTemplate);
-        //             }
-        //         }
-        //     }
+        //     var tornadoId = -455526352;
+        //     SkillSlots[0].AbilityTemplate = _abilityFactory.CreateAbilityTemplate(tornadoId);
+        //     OnSkillChanged?.Invoke();
         // }
 
-        public void LoadProgress(PlayerProgress progress)
+        public void LoadData(PlayerData data)
         {
-            var skillsData = progress.SkillSlotsData;
-
+            var skillsData = data.SkillSlotsData;
+        
             for (var index = 0; index <= skillsData.SkillIds.Count; index++)
             {
                 var slot = SkillSlots[index];
-
-                if (skillsData.SkillIds != null && skillsData.SkillIds.Count >= 1)
-                {
-                    slot.AbilityTemplate = _abilityFactory.CreateAbilityTemplate(skillsData.SkillIds.Dequeue());
-                }
+                
+                slot.AbilityTemplate = _abilityFactory.CreateAbilityTemplate(skillsData.SkillIds.Dequeue());
+                
             }
-
-            OnSkillChanged?. Invoke();
+            Debug.Log(this.GetHashCode().ToString());
+            OnSkillChanged?.Invoke();
         }
     }
 }

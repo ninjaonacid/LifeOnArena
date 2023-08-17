@@ -60,9 +60,9 @@ namespace Code.Hero
             return null;
         }
 
-        public void LoadProgress(PlayerProgress progress)
+        public void LoadData(PlayerData data)
         {
-            _weapon.WeaponId = progress.HeroEquipment.HeroWeapon;
+            _weapon.WeaponId = data.HeroEquipment.HeroWeapon;
             if (_weapon != null)
             {
                 _weapon.WeaponData = _itemFactory.LoadWeapon(_weapon.WeaponId);
@@ -70,9 +70,9 @@ namespace Code.Hero
             }
         }
 
-        public void UpdateProgress(PlayerProgress progress)
+        public void UpdateData(PlayerData data)
         {
-            progress.HeroEquipment.HeroWeapon = _weapon.WeaponId;
+            data.HeroEquipment.HeroWeapon = _weapon.WeaponId;
         }
     }
 }

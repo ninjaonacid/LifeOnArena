@@ -8,6 +8,7 @@ namespace Code.Data
     public class SkillSlotsData
     {
         public Dictionary<AbilitySlotID, string> SlotSkill;
+        
         public Queue<int> SkillIds = new Queue<int>();
         public SkillSlotsData()
         {

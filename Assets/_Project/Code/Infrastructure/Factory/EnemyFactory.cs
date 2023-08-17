@@ -108,7 +108,7 @@ namespace Code.Infrastructure.Factory
             var lootPiece = InstantiateRegistered(prefab)
                 .GetComponent<LootPiece>();
 
-            lootPiece.Construct(_gameDataService.Progress.WorldData);
+            lootPiece.Construct(_gameDataService.PlayerData.WorldData);
             return lootPiece;
         }
 

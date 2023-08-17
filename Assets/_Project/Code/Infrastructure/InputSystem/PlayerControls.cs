@@ -38,9 +38,18 @@ public partial class @PlayerControls : IInputSystem, IInputActionCollection2, ID
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Skill1"",
+                    ""name"": ""SkillSlot1"",
                     ""type"": ""Button"",
                     ""id"": ""178ac7ca-5ceb-4a8f-abec-9c6203ed2673"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SkillSlot2"",
+                    ""type"": ""Button"",
+                    ""id"": ""41ed16e5-5eff-45b1-a286-11702fecc104"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -174,7 +183,18 @@ public partial class @PlayerControls : IInputSystem, IInputActionCollection2, ID
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Skill1"",
+                    ""action"": ""SkillSlot1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d52a7c0b-5ec4-440c-a6c9-9d975c754639"",
+                    ""path"": ""<Touchscreen>/Press"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SkillSlot1"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -188,15 +208,37 @@ public partial class @PlayerControls : IInputSystem, IInputActionCollection2, ID
                     ""action"": ""Attack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""83743a3d-d80b-4e7c-b8ff-df81ebd911e1"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SkillSlot2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1a1ac715-9f9e-4626-8917-13893e9e1e78"",
+                    ""path"": ""<Touchscreen>/Press"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SkillSlot2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
         {
-            ""name"": ""TestMap"",
+            ""name"": ""UI"",
             ""id"": ""fe003851-54fb-42bb-8181-e36e691ce4ea"",
             ""actions"": [
                 {
-                    ""name"": ""New action"",
+                    ""name"": ""Click"",
                     ""type"": ""Button"",
                     ""id"": ""2fb91348-e0b8-4e1c-b066-9e0b700581df"",
                     ""expectedControlType"": ""Button"",
@@ -209,11 +251,22 @@ public partial class @PlayerControls : IInputSystem, IInputActionCollection2, ID
                 {
                     ""name"": """",
                     ""id"": ""1e534b4b-dcbc-4b88-a971-a5bc2eac9b27"",
-                    ""path"": """",
+                    ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""New action"",
+                    ""action"": ""Click"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""eec8eddb-110d-47c8-a158-d839fef773ab"",
+                    ""path"": ""<Touchscreen>/Press"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Click"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -225,11 +278,12 @@ public partial class @PlayerControls : IInputSystem, IInputActionCollection2, ID
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
-        m_Player_Skill1 = m_Player.FindAction("Skill1", throwIfNotFound: true);
+        m_Player_SkillSlot1 = m_Player.FindAction("SkillSlot1", throwIfNotFound: true);
+        m_Player_SkillSlot2 = m_Player.FindAction("SkillSlot2", throwIfNotFound: true);
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
-        // TestMap
-        m_TestMap = asset.FindActionMap("TestMap", throwIfNotFound: true);
-        m_TestMap_Newaction = m_TestMap.FindAction("New action", throwIfNotFound: true);
+        // UI
+        m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
+        m_UI_Click = m_UI.FindAction("Click", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -290,14 +344,16 @@ public partial class @PlayerControls : IInputSystem, IInputActionCollection2, ID
     private readonly InputActionMap m_Player;
     private IPlayerActions m_PlayerActionsCallbackInterface;
     private readonly InputAction m_Player_Movement;
-    private readonly InputAction m_Player_Skill1;
+    private readonly InputAction m_Player_SkillSlot1;
+    private readonly InputAction m_Player_SkillSlot2;
     private readonly InputAction m_Player_Attack;
     public struct PlayerActions
     {
         private @PlayerControls m_Wrapper;
         public PlayerActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
-        public InputAction @Skill1 => m_Wrapper.m_Player_Skill1;
+        public InputAction @SkillSlot1 => m_Wrapper.m_Player_SkillSlot1;
+        public InputAction @SkillSlot2 => m_Wrapper.m_Player_SkillSlot2;
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
@@ -311,9 +367,12 @@ public partial class @PlayerControls : IInputSystem, IInputActionCollection2, ID
                 @Movement.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMovement;
                 @Movement.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMovement;
                 @Movement.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMovement;
-                @Skill1.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSkill1;
-                @Skill1.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSkill1;
-                @Skill1.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSkill1;
+                @SkillSlot1.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSkillSlot1;
+                @SkillSlot1.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSkillSlot1;
+                @SkillSlot1.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSkillSlot1;
+                @SkillSlot2.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSkillSlot2;
+                @SkillSlot2.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSkillSlot2;
+                @SkillSlot2.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSkillSlot2;
                 @Attack.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
                 @Attack.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
                 @Attack.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
@@ -324,9 +383,12 @@ public partial class @PlayerControls : IInputSystem, IInputActionCollection2, ID
                 @Movement.started += instance.OnMovement;
                 @Movement.performed += instance.OnMovement;
                 @Movement.canceled += instance.OnMovement;
-                @Skill1.started += instance.OnSkill1;
-                @Skill1.performed += instance.OnSkill1;
-                @Skill1.canceled += instance.OnSkill1;
+                @SkillSlot1.started += instance.OnSkillSlot1;
+                @SkillSlot1.performed += instance.OnSkillSlot1;
+                @SkillSlot1.canceled += instance.OnSkillSlot1;
+                @SkillSlot2.started += instance.OnSkillSlot2;
+                @SkillSlot2.performed += instance.OnSkillSlot2;
+                @SkillSlot2.canceled += instance.OnSkillSlot2;
                 @Attack.started += instance.OnAttack;
                 @Attack.performed += instance.OnAttack;
                 @Attack.canceled += instance.OnAttack;
@@ -335,46 +397,47 @@ public partial class @PlayerControls : IInputSystem, IInputActionCollection2, ID
     }
     public PlayerActions @Player => new PlayerActions(this);
 
-    // TestMap
-    private readonly InputActionMap m_TestMap;
-    private ITestMapActions m_TestMapActionsCallbackInterface;
-    private readonly InputAction m_TestMap_Newaction;
-    public struct TestMapActions
+    // UI
+    private readonly InputActionMap m_UI;
+    private IUIActions m_UIActionsCallbackInterface;
+    private readonly InputAction m_UI_Click;
+    public struct UIActions
     {
         private @PlayerControls m_Wrapper;
-        public TestMapActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Newaction => m_Wrapper.m_TestMap_Newaction;
-        public InputActionMap Get() { return m_Wrapper.m_TestMap; }
+        public UIActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Click => m_Wrapper.m_UI_Click;
+        public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(TestMapActions set) { return set.Get(); }
-        public void SetCallbacks(ITestMapActions instance)
+        public static implicit operator InputActionMap(UIActions set) { return set.Get(); }
+        public void SetCallbacks(IUIActions instance)
         {
-            if (m_Wrapper.m_TestMapActionsCallbackInterface != null)
+            if (m_Wrapper.m_UIActionsCallbackInterface != null)
             {
-                @Newaction.started -= m_Wrapper.m_TestMapActionsCallbackInterface.OnNewaction;
-                @Newaction.performed -= m_Wrapper.m_TestMapActionsCallbackInterface.OnNewaction;
-                @Newaction.canceled -= m_Wrapper.m_TestMapActionsCallbackInterface.OnNewaction;
+                @Click.started -= m_Wrapper.m_UIActionsCallbackInterface.OnClick;
+                @Click.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnClick;
+                @Click.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnClick;
             }
-            m_Wrapper.m_TestMapActionsCallbackInterface = instance;
+            m_Wrapper.m_UIActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @Newaction.started += instance.OnNewaction;
-                @Newaction.performed += instance.OnNewaction;
-                @Newaction.canceled += instance.OnNewaction;
+                @Click.started += instance.OnClick;
+                @Click.performed += instance.OnClick;
+                @Click.canceled += instance.OnClick;
             }
         }
     }
-    public TestMapActions @TestMap => new TestMapActions(this);
+    public UIActions @UI => new UIActions(this);
     public interface IPlayerActions
     {
         void OnMovement(InputAction.CallbackContext context);
-        void OnSkill1(InputAction.CallbackContext context);
+        void OnSkillSlot1(InputAction.CallbackContext context);
+        void OnSkillSlot2(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
     }
-    public interface ITestMapActions
+    public interface IUIActions
     {
-        void OnNewaction(InputAction.CallbackContext context);
+        void OnClick(InputAction.CallbackContext context);
     }
 }

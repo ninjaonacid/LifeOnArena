@@ -8,7 +8,7 @@ namespace Code.UI
     public class ScreenBase : MonoBehaviour
     {
         public Button CloseButton;
-        protected PlayerProgress Progress => _gameDataService.Progress;
+        protected PlayerData Data => _gameDataService.PlayerData;
         
         private IGameDataService _gameDataService;
         public void Construct(IGameDataService gameData)

@@ -8,7 +8,6 @@ namespace Code.UI.SkillsMenu
 {
     public class EquipSkillButton : MonoBehaviour, IPointerClickHandler
     {
-        public Button EquipButton;
         [SerializeField] private CanvasGroup _canvasGroup;
         private SkillSlotsData _slotsData;
         private UISkillPanelController _controller;

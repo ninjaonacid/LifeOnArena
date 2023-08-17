@@ -5,6 +5,6 @@ namespace Code.Services.PersistentProgress
     public interface 
         IGameDataService : IService
     {
-        PlayerProgress Progress { get; set; }
+        PlayerData PlayerData { get; set; }
     }
 }

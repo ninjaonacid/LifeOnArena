@@ -25,30 +25,30 @@ namespace Code.Services.SaveLoad
             ProgressReaders.Clear();
         }
 
-        public PlayerProgress LoadProgress()
+        public PlayerData LoadProgress()
         {
             return PlayerPrefs.GetString(ProgressKey)?
-                .ToDeserialized<PlayerProgress>();
+                .ToDeserialized<PlayerData>();
         }
 
         public void SaveProgress()
         {
             foreach (var progressWriter in ProgressWriters)
-                progressWriter.UpdateProgress(_gameDataService.Progress);
+                progressWriter.UpdateData(_gameDataService.PlayerData);
 
-            PlayerPrefs.SetString(ProgressKey, _gameDataService.Progress.ToJson());
+            PlayerPrefs.SetString(ProgressKey, _gameDataService.PlayerData.ToJson());
             SaveProgressAtPath();
         }
 
         public void LoadSaveData()
         {
             foreach (ISaveReader progressReader in ProgressReaders)
-                progressReader.LoadProgress(_gameDataService.Progress);
+                progressReader.LoadData(_gameDataService.PlayerData);
         }
 
         public void SaveProgressAtPath()
         {
-           string json = _gameDataService.Progress.ToJson();
+           string json = _gameDataService.PlayerData.ToJson();
            File.WriteAllText(Application.dataPath + "/save.txt", json);
         }
 

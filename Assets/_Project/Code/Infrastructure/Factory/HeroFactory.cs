@@ -45,6 +45,7 @@ namespace Code.Infrastructure.Factory
             //_objectResolver.InjectGameObject(go);
 
             _saveLoadService.RegisterProgressWatchers(go);
+            
             return go;
         }
 

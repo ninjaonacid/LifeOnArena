@@ -56,24 +56,24 @@ namespace Code.StaticData.StatSystem
             CurrentValueChanged?.Invoke();
         }
         
-        public void LoadProgress(PlayerProgress progress)
+        public void LoadData(PlayerData data)
         {
-            if (progress.CharacterStatsData.StatsData.TryGetValue(_statDefinition.name, out var value))
+            if (data.CharacterStatsData.StatsData.TryGetValue(_statDefinition.name, out var value))
             {
                 _currentValue = value;
                 CurrentValueChanged?.Invoke();
             }
         }
 
-        public void UpdateProgress(PlayerProgress progress)
+        public void UpdateData(PlayerData data)
         {
-            if (progress.CharacterStatsData.StatsData.TryAdd(_statDefinition.name, _currentValue))
+            if (data.CharacterStatsData.StatsData.TryAdd(_statDefinition.name, _currentValue))
             {
                 
             }
             else
             {
-                progress.CharacterStatsData.StatsData[_statDefinition.name] = _currentValue;
+                data.CharacterStatsData.StatsData[_statDefinition.name] = _currentValue;
             }
         }
         

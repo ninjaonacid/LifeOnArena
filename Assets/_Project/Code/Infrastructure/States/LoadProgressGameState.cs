@@ -39,36 +39,36 @@ namespace Code.Infrastructure.States
 
         private void LoadProgressOrInitNew()
         {
-            _gameDataService.Progress =
+            _gameDataService.PlayerData =
                 _saveLoadService.LoadProgress()
                 ?? NewProgress();
         }
 
 
-        private PlayerProgress NewProgress()
+        private PlayerData NewProgress()
         {
-            PlayerProgress progress = new PlayerProgress("Shelter");
+            PlayerData data = new PlayerData("Shelter");
 
-            progress.WorldData.LootData.Collected = 100;
+            data.WorldData.LootData.Collected = 100;
 
             StatDatabase characterStats = _staticData.ForCharacterStats();
 
             foreach (StatDefinition stat in characterStats.PrimaryStats)
             {
-                progress.CharacterStatsData.StatsData.TryAdd(stat.name, stat.BaseValue);
+                data.CharacterStatsData.StatsData.TryAdd(stat.name, stat.BaseValue);
             }
 
             foreach (StatDefinition stat in characterStats.StatDefinitions)
             {
-                progress.CharacterStatsData.StatsData.TryAdd(stat.name, stat.BaseValue);
+                data.CharacterStatsData.StatsData.TryAdd(stat.name, stat.BaseValue);
             }
 
             foreach (StatDefinition stat in characterStats.AttributeDefinitions)
             {
-                progress.CharacterStatsData.StatsData.TryAdd(stat.name, stat.BaseValue);
+                data.CharacterStatsData.StatsData.TryAdd(stat.name, stat.BaseValue);
             }
             
-            return progress;
+            return data;
         }
     }
 }

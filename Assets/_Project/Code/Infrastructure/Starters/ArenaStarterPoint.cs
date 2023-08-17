@@ -52,10 +52,12 @@ namespace Code.Infrastructure.Starters
             InitHud(hero);
             InitializeInput();
             CameraFollow(hero);
-            _saveLoad.LoadSaveData();
 
+            _saveLoad.LoadSaveData();
+            
             _spawnerController.SpawnTimer();
             _spawnerController.RunSpawner();
+            
         }
 
         private async UniTask<GameObject> InitHero(LevelConfig levelConfig)

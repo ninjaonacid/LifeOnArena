@@ -4,11 +4,11 @@ namespace Code.Services.PersistentProgress
 {
     public interface ISave : ISaveReader
     {
-        void UpdateProgress(PlayerProgress progress);
+        void UpdateData(PlayerData data);
     }
 
     public interface ISaveReader
     {
-        void LoadProgress(PlayerProgress progress);
+        void LoadData(PlayerData data);
     }
 }

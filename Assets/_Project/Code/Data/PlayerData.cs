@@ -3,7 +3,7 @@ using System;
 namespace Code.Data
 {
     [Serializable]
-    public class PlayerProgress
+    public class PlayerData
     {
         public HeroEquipment HeroEquipment;
         public KillData KillData;
@@ -11,7 +11,8 @@ namespace Code.Data
         public PassiveSkills PassiveSkills;
         public SkillSlotsData SkillSlotsData;
         public CharacterStatsData CharacterStatsData;
-        public PlayerProgress(string initialLevel)
+        
+        public PlayerData(string initialLevel)
         {
             WorldData = new WorldData(initialLevel);
             HeroEquipment = new HeroEquipment();

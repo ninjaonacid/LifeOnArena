@@ -22,17 +22,17 @@ namespace Code.Hero
         {
             _input = input;
         }
-        public void UpdateProgress(PlayerProgress progress)
+        public void UpdateData(PlayerData data)
         {
-            progress.WorldData.PositionOnLevel = new PositionOnLevel(CurrentLevel(),
+            data.WorldData.PositionOnLevel = new PositionOnLevel(CurrentLevel(),
                 transform.position.AsVectorData());
         }
 
-        public void LoadProgress(PlayerProgress progress)
+        public void LoadData(PlayerData data)
         {
-            if (CurrentLevel() == progress.WorldData.PositionOnLevel.Level)
+            if (CurrentLevel() == data.WorldData.PositionOnLevel.Level)
             {
-                var savedPosition = progress.WorldData.PositionOnLevel.Position;
+                var savedPosition = data.WorldData.PositionOnLevel.Position;
                 if (savedPosition != null) Warp(savedPosition);
             }
         }

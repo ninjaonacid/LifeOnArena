@@ -61,7 +61,7 @@ namespace Code.Infrastructure.Factory
 
             var weaponPlatform = Object.Instantiate(prefab, parent);
 
-            weaponPlatform.GetComponent<WeaponPlatform>().Construct(_gameDataService.Progress.WorldData.LootData);
+            weaponPlatform.GetComponent<WeaponPlatform>().Construct(_gameDataService.PlayerData.WorldData.LootData);
 
             return weaponPlatform;
 

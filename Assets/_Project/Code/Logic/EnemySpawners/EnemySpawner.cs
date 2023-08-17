@@ -42,7 +42,7 @@ namespace Code.Logic.EnemySpawners
             _levelEventHandler = levelEventHandler;
         }
 
-        public void LoadProgress(PlayerProgress progress)
+        public void LoadData(PlayerData data)
         {
             //if (progress.KillData.ClearedSpawners.Contains(Id))
             //    Alive = true;
@@ -52,10 +52,10 @@ namespace Code.Logic.EnemySpawners
             //StartCoroutine(ChangeSpawnTimer());
         }
 
-        public void UpdateProgress(PlayerProgress progress)
+        public void UpdateData(PlayerData data)
         {
             if (!Alive)
-                progress.KillData.ClearedSpawners.Add(Id);
+                data.KillData.ClearedSpawners.Add(Id);
         }
 
         public async UniTaskVoid Spawn(CancellationToken token)
