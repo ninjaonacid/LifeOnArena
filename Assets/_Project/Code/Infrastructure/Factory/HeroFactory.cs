@@ -1,7 +1,5 @@
 using Code.Infrastructure.AssetManagement;
-using Code.Logic.EntitiesComponents;
 using Code.Services.SaveLoad;
-using Code.StaticData.StatSystem;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using VContainer;
@@ -11,16 +9,18 @@ namespace Code.Infrastructure.Factory
 {
     public class HeroFactory : IHeroFactory
     {
+        public GameObject HeroGameObject { get; set; }
+        
         private readonly IAssetProvider _assetProvider;
         private readonly ISaveLoadService _saveLoadService;
         private readonly IObjectResolver _objectResolver;
+
         public HeroFactory(IAssetProvider assetProvider, ISaveLoadService saveLoadService, IObjectResolver objectResolver)
         {
             _assetProvider = assetProvider;
             _saveLoadService = saveLoadService;
             _objectResolver = objectResolver;
         }
-        public GameObject HeroGameObject { get; set; }
 
         public async UniTask InitAssets()
         {

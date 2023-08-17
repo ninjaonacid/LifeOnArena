@@ -22,7 +22,7 @@ namespace Code.UI.Services
         private readonly IAssetProvider _assetProvider;
         private readonly IStaticDataService _staticData;
         private readonly ISaveLoadService _saveLoad;
-        private readonly IProgressService _progress;
+        private readonly IGameDataService _gameData;
         private readonly IObjectResolver _objectResolver;
         private readonly SceneLoader _sceneLoader;
         
@@ -31,14 +31,14 @@ namespace Code.UI.Services
         public UIFactory(IAssetProvider assetProvider, 
             IStaticDataService staticDataService, 
             ISaveLoadService saveLoad,
-            IProgressService progress,
+            IGameDataService gameData,
             IObjectResolver objectResolver,
             SceneLoader sceneLoader)
         {
             _assetProvider = assetProvider;
             _staticData = staticDataService;
             _saveLoad = saveLoad;
-            _progress = progress;
+            _gameData = gameData;
             _objectResolver = objectResolver;
             _sceneLoader = sceneLoader;
         }
@@ -52,7 +52,7 @@ namespace Code.UI.Services
         {
             WindowConfig config = _staticData.ForWindow(UIWindowID.SelectionMenu);
             var screen = Object.Instantiate(config.Prefab, _uiCoreTransform);
-            screen.Construct(_progress);
+            screen.Construct(_gameData);
 
             var menu = screen as MainMenuScreen;
             

@@ -8,19 +8,19 @@ namespace Code.Infrastructure.States
 {
     public class LoadProgressGameState : IGameState
     {
-        private readonly IProgressService _progressService;
+        private readonly IGameDataService _gameDataService;
         private readonly ISaveLoadService _saveLoadService;
         private readonly IStaticDataService _staticData;
 
         public IGameStateMachine GameStateMachine { get; set; }
 
         public LoadProgressGameState(
-            IProgressService progressService,
+            IGameDataService gameDataService,
             ISaveLoadService saveLoadService,
             IStaticDataService staticData)
         {
           
-            _progressService = progressService;
+            _gameDataService = gameDataService;
             _saveLoadService = saveLoadService;
             _staticData = staticData;
         }
@@ -39,7 +39,7 @@ namespace Code.Infrastructure.States
 
         private void LoadProgressOrInitNew()
         {
-            _progressService.Progress =
+            _gameDataService.Progress =
                 _saveLoadService.LoadProgress()
                 ?? NewProgress();
         }

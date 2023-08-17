@@ -13,15 +13,15 @@ namespace Code.Infrastructure.Factory
     public class GameFactory : IGameFactory
     {
         private readonly IAssetProvider _assetProvider;
-        private readonly IProgressService _progressService;
+        private readonly IGameDataService _gameDataService;
         private readonly ISaveLoadService _saveLoadService;
         private readonly IWindowService _windowService;
         private readonly IObjectResolver _objectResolver;
-        public GameFactory(IAssetProvider assetProvider, IProgressService progressService,
+        public GameFactory(IAssetProvider assetProvider, IGameDataService gameDataService,
                             ISaveLoadService saveLoadService, IWindowService windowService, IObjectResolver objectResolver )
         {
             _assetProvider = assetProvider;
-            _progressService = progressService;
+            _gameDataService = gameDataService;
             _saveLoadService = saveLoadService;
             _windowService = windowService;
             _objectResolver = objectResolver;
@@ -41,7 +41,7 @@ namespace Code.Infrastructure.Factory
             GameObject hud = InstantiateRegistered(AssetAddress.HudPath);
 
             hud.GetComponentInChildren<LootCounter>()
-                .Construct(_progressService.Progress.WorldData);
+                .Construct(_gameDataService.Progress.WorldData);
 
             foreach (var openWindowButton in hud.GetComponentsInChildren<OpenWindowButton>())
             {

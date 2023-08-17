@@ -1,6 +1,5 @@
 using System;
 
-
 namespace Code.Data
 {
     [Serializable]

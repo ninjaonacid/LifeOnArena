@@ -15,17 +15,17 @@ namespace Code.UI.SkillsMenu
         private UISkillPanelSlot _selectedSlot;
         private readonly Queue<UISkillPanelSlot> _equippedSlots = new Queue<UISkillPanelSlot>(2);
 
-        private IProgressService _progress;
+        private IGameDataService _gameData;
 
         [Inject]
-        public void Construct(IProgressService progress)
+        public void Construct(IGameDataService gameData)
         {
-            _progress  = progress;
+            _gameData  = gameData;
             foreach (UISkillPanelSlot slot in _slots)
             {
-                slot.Construct(progress, this);
+                slot.Construct(gameData, this);
             }
-            _equipButton.Construct(this, _progress.Progress.SkillSlotsData);
+            _equipButton.Construct(this, _gameData.Progress.SkillSlotsData);
         }
         public void SetSelectedSlot(UISkillPanelSlot slot)
         {
@@ -60,7 +60,7 @@ namespace Code.UI.SkillsMenu
         
         public void EquipSkill()
         {
-            var hudSkills = _progress.Progress.SkillSlotsData;
+            var hudSkills = _gameData.Progress.SkillSlotsData;
 
             if (!_equippedSlots.Contains(_selectedSlot) && _equippedSlots.Count < 2)
             {

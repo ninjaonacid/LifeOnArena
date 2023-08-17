@@ -21,20 +21,20 @@ namespace Code.Infrastructure.Starters
     {
         private readonly IStaticDataService _staticData;
         private readonly ISaveLoadService _saveLoad;
-        private readonly IProgressService _progress;
+        private readonly IGameDataService _gameData;
         private readonly IHeroFactory _heroFactory;
         private readonly IGameFactory _gameFactory;
         private readonly IInputSystem _inputSystem;
         private readonly SpawnerController _spawnerController;
         
         public ArenaStarterPoint(IStaticDataService staticData, 
-            ISaveLoadService saveLoad, IProgressService progress, 
+            ISaveLoadService saveLoad, IGameDataService gameData, 
             IHeroFactory heroFactory, IGameFactory gameFactory,
             IInputSystem inputSystem, SpawnerController spawnerController)
         {
             _staticData = staticData;
             _saveLoad = saveLoad;
-            _progress = progress;
+            _gameData = gameData;
             _heroFactory = heroFactory;
             _gameFactory = gameFactory;
             _spawnerController = spawnerController;

@@ -29,20 +29,20 @@ namespace Code.Infrastructure.Factory
         private readonly IStaticDataService _staticData;
         private readonly IAssetProvider _assetProvider;
         private readonly ISaveLoadService _saveLoadService;
-        private readonly IProgressService _progressService;
+        private readonly IGameDataService _gameDataService;
         private readonly IRandomService _randomService;
         private readonly IObjectResolver _objectResolver;
 
         private readonly CancellationTokenSource _cancellationTokenSource = default;
         public EnemyFactory(IHeroFactory heroFactory, IStaticDataService staticData, IAssetProvider assetProvider, 
-            ISaveLoadService saveLoadService, IProgressService progressService,
+            ISaveLoadService saveLoadService, IGameDataService gameDataService,
             IRandomService randomService, IObjectResolver objectResolver)
         {
             _heroFactory = heroFactory;
             _staticData = staticData;
             _assetProvider = assetProvider;
             _saveLoadService = saveLoadService;
-            _progressService = progressService;
+            _gameDataService = gameDataService;
             _randomService = randomService;
             _objectResolver = objectResolver;
         }
@@ -108,7 +108,7 @@ namespace Code.Infrastructure.Factory
             var lootPiece = InstantiateRegistered(prefab)
                 .GetComponent<LootPiece>();
 
-            lootPiece.Construct(_progressService.Progress.WorldData);
+            lootPiece.Construct(_gameDataService.Progress.WorldData);
             return lootPiece;
         }
 

@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Code.Services;
 using Code.StaticData.Ability;
-using Code.StaticData.Ability.PassiveAbilities;
 using Code.StaticData.Identifiers;
 using Code.StaticData.Levels;
 using Code.StaticData.StatSystem;

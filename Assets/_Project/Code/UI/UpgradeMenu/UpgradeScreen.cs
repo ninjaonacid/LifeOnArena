@@ -10,7 +10,7 @@ namespace Code.UI.UpgradeMenu
         public void Construct(
             IAbilityFactory abilityFactory,
             IHeroFactory heroFactory,
-            IProgressService progress)
+            IGameDataService gameData)
         {
             
             _abilityFactory = abilityFactory;

@@ -17,11 +17,11 @@ namespace Code.UI.SkillsMenu
         [SerializeField] private TextMeshProUGUI _slotNumber;
 
         public bool IsEquipped = false;
-        private IProgressService _progress;
+        private IGameDataService _gameData;
         private UISkillPanelController _controller;
-        public void Construct(IProgressService progress, UISkillPanelController controller)
+        public void Construct(IGameDataService gameData, UISkillPanelController controller)
         {
-            _progress = progress;
+            _gameData = gameData;
             _controller = controller;
 
             SetIcon();

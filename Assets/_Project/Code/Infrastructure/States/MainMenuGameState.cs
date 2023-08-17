@@ -11,18 +11,18 @@ namespace Code.Infrastructure.States
 
         private readonly IWindowService _windowService;
         private readonly IUIFactory _uiFactory;
-        private readonly IProgressService _progress;
+        private readonly IGameDataService _gameData;
         public IGameStateMachine GameStateMachine { get; set; }
 
         public MainMenuGameState(IUIFactory uiFactory,
             IWindowService windowService,
-            IProgressService progress,
+            IGameDataService gameData,
             SceneLoader sceneLoader)
         {
             _sceneLoader = sceneLoader;
             _uiFactory = uiFactory;
             _windowService = windowService;
-            _progress = progress;
+            _gameData = gameData;
         }
 
         public void Exit()

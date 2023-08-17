@@ -1,4 +1,3 @@
-using UnityEditor.Search;
 using UnityEngine;
 
 namespace Code.UI.Screen
@@ -10,7 +9,6 @@ namespace Code.UI.Screen
         public abstract void Hide();
 
         public abstract void Close();
-
-        public abstract void Bind();
+        
     }
 }
