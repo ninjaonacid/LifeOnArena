@@ -51,6 +51,7 @@ namespace Code.Services.BattleService
             
             damageable.TakeDamage(damage);
         }
+        
         public void CreateAttack(GameObject attacker, GameObject target)
         {
             var attackerStats = attacker.GetComponent<StatController>();

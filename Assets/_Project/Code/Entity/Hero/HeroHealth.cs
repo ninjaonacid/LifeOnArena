@@ -1,6 +1,7 @@
 using Code.Logic.Damage;
 using Code.Logic.EntitiesComponents;
 using Code.StaticData.StatSystem;
+using Code.StaticData.StatSystem.StatModifiers;
 using UnityEngine;
 
 namespace Code.Entity.Hero
@@ -17,7 +18,7 @@ namespace Code.Entity.Hero
                 return;
             }
 
-            Health.ApplyModifier(new StatModifier()
+            Health.ApplyModifier(new HealthModifier
             {
                 Magnitude = -1 * damage.Magnitude,
                 OperationType = ModifierOperationType.Additive

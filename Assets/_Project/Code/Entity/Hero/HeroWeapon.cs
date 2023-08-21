@@ -10,12 +10,11 @@ namespace Code.Entity.Hero
 {
     public class HeroWeapon : EntityWeapon, ISave
     {
-        public Transform WeaponPosition;
         private readonly WeaponSlot _weapon = new();
 
         private GameObject _currentWeapon;
         private IItemFactory _itemFactory;
-
+        
         private class WeaponSlot
         {
             public WeaponId WeaponId;
@@ -38,7 +37,7 @@ namespace Code.Entity.Hero
             _weapon.WeaponData = weaponData;
             _weapon.WeaponId = weaponData.WeaponId;
 
-            _currentWeapon = Instantiate(weaponData.WeaponPrefab, WeaponPosition, false);
+            _currentWeapon = Instantiate(weaponData.WeaponPrefab, _weaponPosition, false);
             _currentWeapon.transform.localPosition = Vector3.zero;
 
             _currentWeapon.transform.localRotation = Quaternion.Euler(
