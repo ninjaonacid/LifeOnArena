@@ -1,21 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using System;
 
-namespace Code
+namespace Code.Logic.Damage
 {
-    public class IDamage : MonoBehaviour
+    public interface IDamage
     {
-        // Start is called before the first frame update
-        void Start()
-        {
-        
-        }
+        DamageType DamageType { get; }
+        bool IsCriticalHit { get; }
+        int Value { get; }
+        IDamageSource Source { get; }
 
-        // Update is called once per frame
-        void Update()
-        {
-        
-        }
     }
 }

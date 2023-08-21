@@ -63,7 +63,7 @@ namespace Code.Logic.EnemySpawners
             Alive = true;
             var monster = await _enemyObjectPool.GetObject(MonsterTypeId, transform, token);
             _spawnParticle = await _particleObjectPool.GetObject(SpawnParticle, transform);
-
+            
             _enemyDeath = monster.GetComponent<EnemyDeath>();
             _enemyDeath.Happened += Slay;
         }

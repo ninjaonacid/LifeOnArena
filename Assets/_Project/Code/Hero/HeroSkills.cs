@@ -76,14 +76,17 @@ namespace Code.Hero
         public void LoadData(PlayerData data)
         {
             var skillsData = data.SkillSlotsData;
-        
-            for (var index = 0; index <= skillsData.SkillIds.Count; index++)
+
+            if (skillsData.SkillIds.Count > 0)
             {
-                var slot = SkillSlots[index];
-                
-                slot.AbilityTemplate = _abilityFactory.CreateAbilityTemplate(skillsData.SkillIds.Dequeue());
-                
+                for (var index = 0; index <= skillsData.SkillIds.Count; index++)
+                {
+                    var slot = SkillSlots[index];
+
+                    slot.AbilityTemplate = _abilityFactory.CreateAbilityTemplate(skillsData.SkillIds.Dequeue());
+                }
             }
+
             Debug.Log(this.GetHashCode().ToString());
             OnSkillChanged?.Invoke();
         }

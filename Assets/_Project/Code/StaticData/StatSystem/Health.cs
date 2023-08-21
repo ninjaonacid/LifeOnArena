@@ -19,22 +19,18 @@ namespace Code.StaticData.StatSystem
         {
             base.ApplyModifier(modifier);
             
-            // var damageSource = modifier.Source as IDamageSource;
-            //
-            // if (damageSource == null) return;
-            //
-            // if (damageSource.DamageTypes.Contains(DamageType.Physical))
-            // {
-            //     modifier.Magnitude += _statController.Stats["Defense"].Value;
-            // } 
-            // else if (damageSource.DamageTypes.Contains(DamageType.Magical))
-            // {
-            //     
-            // }
+            var damageSource = modifier.Source as IDamageSource;
             
+            if (damageSource == null) return;
             
+            if (damageSource.DamageTypes.Contains(DamageType.Physical))
+            {
+                modifier.Magnitude += _statController.Stats["Defense"].Value;
+            } 
+            else if (damageSource.DamageTypes.Contains(DamageType.Magical))
+            {
+                
+            }
         }
-
-        
     }
 }

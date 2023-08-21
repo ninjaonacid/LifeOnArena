@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using Code.StaticData.StatSystem;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Code.Enemy
 {
@@ -11,27 +10,28 @@ namespace Code.Enemy
     {
         [SerializeField] private StatController _stats;
         public EnemyAnimator Animator;
-        [FormerlySerializedAs("Damageable")] public EnemyHealth Health;
+        public EnemyHealth Health;
         public GameObject FracturedPrefab;
         public GameObject EnemyModel;
 
         public event Action Happened;
 
-        public void OnEnable()
+        private void OnEnable()
         {
-            _stats.Initialized += OnStatsInitialized;
+            if (_stats.IsInitialized)
+            {
+                Health.Health.CurrentValueChanged += HealthChanged;
+            }
+            else
+            {
+                _stats.Initialized += () => ((Health)_stats.Stats["Health"]).CurrentValueChanged += HealthChanged;
+            }
         }
 
-        private void OnStatsInitialized()
-        {
-            Health.Health.CurrentValueChanged += HealthChanged;
-        }
-        
-        private void OnDisable()
+        private void OnDestroy()
         {
             Health.Health.CurrentValueChanged -= HealthChanged;
         }
-
 
         private void HealthChanged()
         {

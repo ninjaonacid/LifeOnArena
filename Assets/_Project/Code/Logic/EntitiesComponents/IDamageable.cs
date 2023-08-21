@@ -6,7 +6,7 @@ namespace Code.Logic.EntitiesComponents
 {
     public interface IDamageable
     {
-        Health Health { get; set; }
+        Health Health { get; }
         void TakeDamage(int damage);
     }
 }
