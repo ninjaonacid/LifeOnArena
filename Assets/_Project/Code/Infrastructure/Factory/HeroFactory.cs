@@ -37,6 +37,15 @@ namespace Code.Infrastructure.Factory
             return HeroGameObject;
         }
 
+        public async UniTask<GameObject> CreateHeroUnregistered(Vector3 initialPoint)
+        {
+            GameObject prefab = await _assetProvider.Load<GameObject>(AssetAddress.Hero);
+
+            HeroGameObject = _objectResolver.Instantiate(prefab, initialPoint, Quaternion.identity);
+
+            return prefab;
+        }
+
         public GameObject InstantiateRegistered(GameObject prefab, Vector3 position)
         {
             

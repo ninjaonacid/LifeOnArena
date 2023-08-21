@@ -6,6 +6,7 @@ using Code.Services.PersistentProgress;
 using Code.StaticData.Ability;
 using Code.UI.HUD.Skills;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using VContainer;
 
 namespace Code.Hero
@@ -17,12 +18,13 @@ namespace Code.Hero
         [SerializeField] private HeroAbilityCooldown _heroCooldown;
       
         public SkillSlot[] SkillSlots;
-        private SkillSlotsData _skillSlotsData;
-
-        private AbilityTemplateBase _activeSkill;
         public AbilityTemplateBase ActiveSkill => _activeSkill;
+        
+        private AbilityTemplateBase _activeSkill;
+        private SkillSlotsData _skillSlotsData;
         private IAbilityFactory _abilityFactory;
         private IInputSystem _input;
+
 
         [Serializable]
         public class SkillSlot
@@ -38,29 +40,38 @@ namespace Code.Hero
             _input = input;
         }
 
-        private void Update()
+        private void Start()
         {
-            foreach (var slot in SkillSlots)
-            {
-                if (_input.Player.SkillSlot1.triggered || _input.Player.SkillSlot2.triggered)
-                {
-                    if (slot.AbilityTemplate && slot.AbilityTemplate.IsReady())
-                    {
-                        slot.AbilityTemplate.GetAbility().Use(this.gameObject, null);
-                        slot.AbilityTemplate.State = AbilityState.Active;
-                        _activeSkill = slot.AbilityTemplate;
-                        _heroCooldown.StartCooldown(slot.AbilityTemplate);
-                    }
-                }
-            }
+            _input.Player.SkillSlot1.performed += OnSkillSlot1;
+            _input.Player.SkillSlot2.performed += OnSkillSlot2;
         }
 
-        // public void LoadData(PlayerData data)
-        // {
-        //     var tornadoId = -455526352;
-        //     SkillSlots[0].AbilityTemplate = _abilityFactory.CreateAbilityTemplate(tornadoId);
-        //     OnSkillChanged?.Invoke();
-        // }
+        private void OnDestroy()
+        {
+            _input.Player.SkillSlot1.performed -= OnSkillSlot1;
+            _input.Player.SkillSlot2.performed -= OnSkillSlot2;
+        }
+
+        private void OnSkillSlot1(InputAction.CallbackContext context)
+        {
+            if (SkillSlots[0].AbilityTemplate == null) return;
+            
+            SkillSlots[0].AbilityTemplate.GetAbility().Use(this.gameObject, null);
+            SkillSlots[0].AbilityTemplate.State = AbilityState.Active;
+            _activeSkill = SkillSlots[0].AbilityTemplate;
+            _heroCooldown.StartCooldown(SkillSlots[0].AbilityTemplate);
+        }
+
+        private void OnSkillSlot2(InputAction.CallbackContext context)
+        {
+            if (SkillSlots[1].AbilityTemplate == null) return;
+            
+            SkillSlots[1].AbilityTemplate.GetAbility().Use(this.gameObject, null);
+            SkillSlots[1].AbilityTemplate.State = AbilityState.Active;
+            _activeSkill = SkillSlots[1].AbilityTemplate;
+            _heroCooldown.StartCooldown(SkillSlots[1].AbilityTemplate);
+        }
+
 
         public void LoadData(PlayerData data)
         {

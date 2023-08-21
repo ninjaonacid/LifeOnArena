@@ -111,8 +111,7 @@ namespace Code.Logic.StateMachine
             {
                 TryDirectTransitions();
             }
-
-
+            
             _activeState.OnLogic();
         }
 

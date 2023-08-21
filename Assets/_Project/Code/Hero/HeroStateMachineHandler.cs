@@ -63,7 +63,7 @@ namespace Code.Hero
             _stateMachine.AddState(_dodgeRollAbilityId.Name, new RollDodgeState(
                 _heroAnimator, _heroAttack, _heroMovement, _heroRotation, true, false));
 
-            _stateMachine.AddState(_spinAttackAbilityId.Name, new SpinAbilityState(
+            _stateMachine.AddState(SpinAttackAbility, new SpinAbilityState(
                 _heroAnimator, _heroAttack, _heroRotation, true, false));
 
             _stateMachine.AddState(HeroBaseAttack1, new FirstAttackState(

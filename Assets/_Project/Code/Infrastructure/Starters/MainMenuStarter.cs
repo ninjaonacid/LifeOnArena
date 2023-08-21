@@ -37,7 +37,7 @@ namespace Code.Infrastructure.Starters
             
             _uiFactory.CreateCore();
 
-            GameObject hero = await _heroFactory.CreateHero(config.HeroInitialPosition);
+            GameObject hero = await _heroFactory.CreateHeroUnregistered(config.HeroInitialPosition);
 
             ScreenBase mainMenu = _uiFactory.CreateMainMenu(_windowService);
             
