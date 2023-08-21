@@ -1,5 +1,5 @@
 using System.Threading;
-using Code.Enemy;
+using Code.Entity.Enemy;
 using Code.Logic.EnemySpawners;
 using Code.Services;
 using Code.StaticData;

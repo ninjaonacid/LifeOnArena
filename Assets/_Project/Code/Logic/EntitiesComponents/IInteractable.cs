@@ -1,4 +1,4 @@
-using Code.Hero;
+using Code.Entity.Hero;
 
 namespace Code.Logic.EntitiesComponents
 {

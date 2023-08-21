@@ -1,6 +1,6 @@
 using System.Threading;
 using Code.Data;
-using Code.Enemy;
+using Code.Entity.Enemy;
 using Code.Infrastructure.ObjectPool;
 using Code.Services;
 using Code.Services.PersistentProgress;

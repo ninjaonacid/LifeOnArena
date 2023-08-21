@@ -1,5 +1,5 @@
 using Code.Data;
-using Code.Hero;
+using Code.Entity.Hero;
 using Code.Logic.Projectiles;
 using UnityEngine;
 using Object = UnityEngine.Object;

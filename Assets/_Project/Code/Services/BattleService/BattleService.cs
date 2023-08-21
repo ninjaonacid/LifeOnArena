@@ -1,6 +1,8 @@
-using Code.Logic;
+using Code.Entity.Hero;
+using Code.Logic.Damage;
 using Code.Logic.EntitiesComponents;
 using Code.StaticData.StatSystem;
+using Code.StaticData.StatSystem.StatModifiers;
 using UnityEngine;
 
 namespace Code.Services.BattleService
@@ -27,11 +29,28 @@ namespace Code.Services.BattleService
                 if(_hits[i].transform.parent.TryGetComponent(out IDamageable health))
                 {
                     Debug.Log("Zalupa");
-                    health.TakeDamage((int)damage);
+                    health.TakeDamage(new HealthModifier()
+                    {
+                        
+                    });
                 }
             }
         }
 
+        public void ApplyDamage(GameObject attacker, GameObject target)
+        {
+            var damageable = target.GetComponent<IDamageable>();
+            IDamage damage = new HealthModifier
+            {
+                Attacker = attacker,
+                IsCriticalHit = false,
+                Magnitude = attacker.GetComponent<StatController>().Stats["Attack"].Value,
+                OperationType = ModifierOperationType.Additive,
+                Source = attacker.GetComponent<HeroWeapon>().GetEquippedWeapon()
+            };
+            
+            damageable.TakeDamage(damage);
+        }
         public void CreateAttack(GameObject attacker, GameObject target)
         {
             var attackerStats = attacker.GetComponent<StatController>();

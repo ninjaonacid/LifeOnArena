@@ -1,4 +1,4 @@
-using Code.Hero;
+using Code.Entity.Hero;
 using UnityEngine;
 
 namespace Code.StaticData.Ability.ActiveAbilities

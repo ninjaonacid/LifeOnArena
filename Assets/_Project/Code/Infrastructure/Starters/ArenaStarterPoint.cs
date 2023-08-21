@@ -1,5 +1,5 @@
 using System.Threading;
-using Code.Hero;
+using Code.Entity.Hero;
 using Code.Infrastructure.Factory;
 using Code.Infrastructure.InputSystem;
 using Code.Logic.CameraLogic;

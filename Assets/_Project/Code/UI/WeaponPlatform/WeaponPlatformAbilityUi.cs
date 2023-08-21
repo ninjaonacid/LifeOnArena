@@ -14,7 +14,6 @@ namespace Code.UI.WeaponPlatform
             _platformWeapon = platformWeapon;
 
             var image = GetComponent<Image>();
-            image.sprite = _platformWeapon.abilityData.Icon;
         }
      
     }

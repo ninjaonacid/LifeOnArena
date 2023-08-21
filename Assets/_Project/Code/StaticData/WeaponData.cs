@@ -13,7 +13,6 @@ namespace Code.StaticData
         public IReadOnlyList<DamageType> DamageTypes => DamageType;
 
         public List<DamageType> DamageType;
-        public AbilityTemplateBase abilityData;
         public GameObject WeaponPrefab;
         public WeaponId WeaponId;
         public int Price;

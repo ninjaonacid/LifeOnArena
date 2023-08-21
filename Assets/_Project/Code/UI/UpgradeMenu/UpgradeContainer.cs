@@ -1,4 +1,4 @@
-using Code.Hero;
+using Code.Entity.Hero;
 using Code.Infrastructure.Factory;
 using Code.StaticData.Ability.PassiveAbilities;
 using TMPro;

@@ -1,4 +1,3 @@
-using Code.Hero;
 using UnityEngine;
 
 namespace Code.Logic.Inventory

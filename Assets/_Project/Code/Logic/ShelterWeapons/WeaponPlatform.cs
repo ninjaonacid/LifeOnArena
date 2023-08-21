@@ -1,7 +1,7 @@
 using System;
 using Code.Data;
-using Code.Enemy;
-using Code.Hero;
+using Code.Entity.Enemy;
+using Code.Entity.Hero;
 using Code.Logic.EntitiesComponents;
 using Code.StaticData;
 using Code.UI.WeaponPlatform;

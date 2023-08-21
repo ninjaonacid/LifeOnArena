@@ -1,4 +1,4 @@
-using Code.Hero;
+using Code.Entity.Hero;
 using Code.Logic.EntitiesComponents;
 using Code.Services;
 using Code.UI;

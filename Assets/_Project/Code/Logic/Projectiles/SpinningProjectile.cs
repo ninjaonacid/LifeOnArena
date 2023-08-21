@@ -36,7 +36,7 @@ namespace Code.Logic.Projectiles
             {
                 if(collision.gameObject.TryGetComponent(out IDamageable health))
                 {
-                    health.TakeDamage(20);
+                    //health.TakeDamage();
                 }
             }
         }

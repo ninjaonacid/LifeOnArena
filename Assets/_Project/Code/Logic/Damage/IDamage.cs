@@ -1,13 +1,12 @@
-using System;
+using UnityEngine;
 
 namespace Code.Logic.Damage
 {
     public interface IDamage
     {
-        DamageType DamageType { get; }
+        GameObject Attacker { get; }
         bool IsCriticalHit { get; }
-        int Value { get; }
+        int Magnitude { get; }
         IDamageSource Source { get; }
-
     }
 }
