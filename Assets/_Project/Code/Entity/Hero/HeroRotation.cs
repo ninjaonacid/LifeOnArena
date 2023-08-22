@@ -1,4 +1,3 @@
-using Code.Infrastructure.InputSystem;
 using Code.Logic;
 using UnityEngine;
 using VContainer;
@@ -7,14 +6,14 @@ namespace Code.Entity.Hero
 {
     public class HeroRotation : MonoBehaviour
     {
-        private IInputSystem _input;
+        private PlayerControls _controls;
         public float rotationSmooth;
         public float rotationSpeed;
 
         [Inject]
-        private void Constructor(IInputSystem input)
+        private void Constructor(PlayerControls controls)
         {
-            _input = input;
+            _controls = controls;
         }
 
         private void Update()
@@ -25,10 +24,10 @@ namespace Code.Entity.Hero
         public void LookRotation()
         {
             
-            if (_input.Player.Movement.ReadValue<Vector2>().sqrMagnitude > Constants.Epsilon)
+            if (_controls.Player.Movement.ReadValue<Vector2>().sqrMagnitude > Constants.Epsilon)
             {
                 var rotateFrom = transform.rotation;
-                var directionVector = Camera.main.transform.TransformDirection(_input.Player.Movement.ReadValue<Vector2>());
+                var directionVector = Camera.main.transform.TransformDirection(_controls.Player.Movement.ReadValue<Vector2>());
                 directionVector.y = 0;
                 directionVector.Normalize();
                 var rotateTo = Quaternion.LookRotation(directionVector);

@@ -1,4 +1,3 @@
-using Code.Services.Input;
 using Code.UI.Services;
 using UnityEngine;
 
@@ -7,7 +6,6 @@ namespace Code.Entity.Hero
     public class TestInput : MonoBehaviour
     {
         private IWindowService _windowService;
-        private IInputService _inputService;
 
         // private void Update()
         // {

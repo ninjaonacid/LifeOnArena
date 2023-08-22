@@ -1,7 +1,6 @@
 using System.Threading;
 using Code.Entity.Hero;
 using Code.Infrastructure.Factory;
-using Code.Infrastructure.InputSystem;
 using Code.Logic.CameraLogic;
 using Code.Logic.WaveLogic;
 using Code.Services;
@@ -24,13 +23,13 @@ namespace Code.Infrastructure.Starters
         private readonly IGameDataService _gameData;
         private readonly IHeroFactory _heroFactory;
         private readonly IGameFactory _gameFactory;
-        private readonly IInputSystem _inputSystem;
+        private readonly PlayerControls _controls;
         private readonly SpawnerController _spawnerController;
         
         public ArenaStarterPoint(IStaticDataService staticData, 
             ISaveLoadService saveLoad, IGameDataService gameData, 
             IHeroFactory heroFactory, IGameFactory gameFactory,
-            IInputSystem inputSystem, SpawnerController spawnerController)
+            PlayerControls controls, SpawnerController spawnerController)
         {
             _staticData = staticData;
             _saveLoad = saveLoad;
@@ -38,7 +37,7 @@ namespace Code.Infrastructure.Starters
             _heroFactory = heroFactory;
             _gameFactory = gameFactory;
             _spawnerController = spawnerController;
-            _inputSystem = inputSystem;
+            _controls = controls;
         }
         
         public async UniTask StartAsync(CancellationToken cancellation)
@@ -82,7 +81,7 @@ namespace Code.Infrastructure.Starters
 
         private void InitializeInput()
         {
-            _inputSystem.Enable();
+            _controls.Enable();
         }
     }
 }

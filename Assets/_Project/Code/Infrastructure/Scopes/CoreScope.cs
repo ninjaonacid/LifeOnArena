@@ -33,8 +33,8 @@ namespace Code.Infrastructure.Scopes
             builder.Register<IRandomService, RandomService>(Lifetime.Singleton);
             builder.Register<IEventSystem, GameEventSystem>(Lifetime.Singleton);
             builder.Register<IAudioService, AudioService>(Lifetime.Singleton);
-            
-            builder.Register<PlayerControls>(Lifetime.Singleton).AsImplementedInterfaces();
+
+            builder.Register<PlayerControls>(Lifetime.Singleton).AsSelf();
             
             builder.Register<SceneLoader>(Lifetime.Singleton);
 

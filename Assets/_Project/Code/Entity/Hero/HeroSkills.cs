@@ -1,7 +1,6 @@
 using System;
 using Code.Data;
 using Code.Infrastructure.Factory;
-using Code.Infrastructure.InputSystem;
 using Code.Services.PersistentProgress;
 using Code.StaticData.Ability;
 using Code.UI.HUD.Skills;
@@ -23,7 +22,7 @@ namespace Code.Entity.Hero
         private AbilityTemplateBase _activeSkill;
         private SkillSlotsData _skillSlotsData;
         private IAbilityFactory _abilityFactory;
-        private IInputSystem _input;
+        private PlayerControls _controls;
 
 
         [Serializable]
@@ -34,22 +33,22 @@ namespace Code.Entity.Hero
         }
 
         [Inject]
-        public void Construct(IAbilityFactory abilityFactory, IInputSystem input)
+        public void Construct(IAbilityFactory abilityFactory, PlayerControls controls)
         {
             _abilityFactory = abilityFactory;
-            _input = input;
+            _controls = controls;
         }
 
         private void Start()
         {
-            _input.Player.SkillSlot1.performed += OnSkillSlot1;
-            _input.Player.SkillSlot2.performed += OnSkillSlot2;
+            _controls.Player.SkillSlot1.performed += OnSkillSlot1;
+            _controls.Player.SkillSlot2.performed += OnSkillSlot2;
         }
 
         private void OnDestroy()
         {
-            _input.Player.SkillSlot1.performed -= OnSkillSlot1;
-            _input.Player.SkillSlot2.performed -= OnSkillSlot2;
+            _controls.Player.SkillSlot1.performed -= OnSkillSlot1;
+            _controls.Player.SkillSlot2.performed -= OnSkillSlot2;
         }
 
         private void OnSkillSlot1(InputAction.CallbackContext context)

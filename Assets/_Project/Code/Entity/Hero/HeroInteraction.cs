@@ -1,4 +1,3 @@
-using Code.Infrastructure.InputSystem;
 using UnityEngine;
 using VContainer;
 
@@ -11,12 +10,12 @@ namespace Code.Entity.Hero
         [SerializeField] private LayerMask _interactMask;
 
         private readonly Collider[] _interactableColliders = new Collider[2];
-        private IInputSystem _input;
+        private PlayerControls _controls;
 
         [Inject]
-        private void Construct(IInputSystem input)
+        private void Construct(PlayerControls controls)
         {
-            _input = input;
+            _controls = controls;
         }
 
         // private void Update()

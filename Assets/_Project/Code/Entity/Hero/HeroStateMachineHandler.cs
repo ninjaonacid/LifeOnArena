@@ -1,5 +1,4 @@
 using Code.Entity.Hero.HeroStates;
-using Code.Infrastructure.InputSystem;
 using Code.Logic;
 using Code.Logic.StateMachine;
 using Code.Services.AudioService;
@@ -21,7 +20,7 @@ namespace Code.Entity.Hero
         private const string HeroBaseAttack3 = "HeroBaseAttack3";
 
         private FiniteStateMachine _stateMachine;
-        private IInputSystem _input;
+        private PlayerControls _controls;
         private IAudioService _audioService;
 
         [SerializeField] private Identifier _spinAttackAbilityId;
@@ -36,9 +35,9 @@ namespace Code.Entity.Hero
 
 
         [Inject]
-        public void Construct(IInputSystem inputService, IAudioService audioService)
+        public void Construct(PlayerControls controls, IAudioService audioService)
         {
-            _input = inputService;
+            _controls = controls;
             _audioService = audioService;
         }
 
@@ -87,30 +86,30 @@ namespace Code.Entity.Hero
             _stateMachine.AddTwoWayTransition(new Transition(
                 HeroIdle,
                 HeroMovement,
-                (transition) => _input.Player.Movement.ReadValue<Vector2>().sqrMagnitude > Constants.Epsilon,
+                (transition) => _controls.Player.Movement.ReadValue<Vector2>().sqrMagnitude > Constants.Epsilon,
                 true));
 
             _stateMachine.AddTransition(new Transition(
                 HeroMovement,
                 HeroBaseAttack1,
-                (transition) => _input.Player.Attack.triggered));
+                (transition) => _controls.Player.Attack.triggered));
             
             _stateMachine.AddTransition(new Transition(
                 HeroIdle,
                 HeroBaseAttack1,
-                (transition) => _input.Player.Attack.triggered));
+                (transition) => _controls.Player.Attack.triggered));
             
             
             _stateMachine.AddTransition(new Transition(
                 HeroBaseAttack1,
                 HeroBaseAttack2,
-                (transition) => _input.Player.Attack.triggered,
+                (transition) => _controls.Player.Attack.triggered,
                 false));
 
             _stateMachine.AddTransition(new Transition(
                 HeroBaseAttack2,
                 HeroBaseAttack3,
-                (transition) => _input.Player.Attack.triggered,
+                (transition) => _controls.Player.Attack.triggered,
                 false));
             
             _stateMachine.AddTransition(new Transition(
@@ -166,7 +165,7 @@ namespace Code.Entity.Hero
                 SpinAttackAbility,
                 HeroMovement,
                 (transition) => _stateMachine.ActiveState.IsStateOver() &&
-                                _input.Player.Movement.ReadValue<Vector2>().sqrMagnitude > Constants.Epsilon));
+                                _controls.Player.Movement.ReadValue<Vector2>().sqrMagnitude > Constants.Epsilon));
 
             _stateMachine.AddTransition(new Transition(
                 HeroIdle,

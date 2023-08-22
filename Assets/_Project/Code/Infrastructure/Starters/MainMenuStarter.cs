@@ -1,6 +1,5 @@
 using System.Threading;
 using Code.Infrastructure.Factory;
-using Code.Infrastructure.InputSystem;
 using Code.Services;
 using Code.StaticData.Levels;
 using Code.UI;
@@ -16,19 +15,19 @@ namespace Code.Infrastructure.Starters
     {
         private readonly IHeroFactory _heroFactory;
         private readonly IStaticDataService _staticData;
-        private readonly IInputSystem _input;
         private readonly IWindowService _windowService;
         private readonly IUIFactory _uiFactory;
+        private readonly PlayerControls _controls;
 
         public MainMenuStarter(IHeroFactory heroFactory, IUIFactory uiFactory, 
             IWindowService windowService,
-            IStaticDataService staticData, IInputSystem input)
+            IStaticDataService staticData, PlayerControls controls)
         {
             _heroFactory = heroFactory;
             _staticData = staticData;
-            _input = input;
             _uiFactory = uiFactory;
             _windowService = windowService;
+            _controls = controls;
         }
         
         public async UniTask StartAsync(CancellationToken cancellation)
@@ -45,7 +44,7 @@ namespace Code.Infrastructure.Starters
         
         private void DisableInput()
         {
-            _input.Disable();
+            _controls.Disable();
         }
     }
 }

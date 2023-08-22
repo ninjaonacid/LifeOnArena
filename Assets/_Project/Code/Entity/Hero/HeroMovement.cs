@@ -1,5 +1,4 @@
 using Code.Data;
-using Code.Infrastructure.InputSystem;
 using Code.Logic;
 using Code.Services.PersistentProgress;
 using UnityEngine;
@@ -12,15 +11,15 @@ namespace Code.Entity.Hero
     public class HeroMovement : MonoBehaviour, ISave
     {
         private CharacterController _characterController;
-        private IInputSystem _input;
+        private PlayerControls _controls;
 
         private readonly float _movementSpeed = 10f;
         private readonly float _rollForce = 20f;
 
         [Inject]
-        private void Construct(IInputSystem input)
+        private void Construct(PlayerControls controls)
         {
-            _input = input;
+            _controls = controls;
         }
         public void UpdateData(PlayerData data)
         {
@@ -49,9 +48,9 @@ namespace Code.Entity.Hero
             bool isVectorFind;
             var movementVector = Vector3.zero;
 
-            if (_input.Player.Movement.ReadValue<Vector2>().sqrMagnitude > Constants.Epsilon )
+            if (_controls.Player.Movement.ReadValue<Vector2>().sqrMagnitude > Constants.Epsilon )
             {
-                movementVector = Camera.main.transform.TransformDirection(_input.Player.Movement.ReadValue<Vector2>());
+                movementVector = Camera.main.transform.TransformDirection(_controls.Player.Movement.ReadValue<Vector2>());
                 movementVector.y = 0;
                 movementVector.Normalize();
             }
@@ -65,7 +64,7 @@ namespace Code.Entity.Hero
         { 
             var movementVector = Vector3.zero;
 
-            var moveAxis = _input.Player.Movement.ReadValue<Vector2>();
+            var moveAxis = _controls.Player.Movement.ReadValue<Vector2>();
             
 
             if (moveAxis.sqrMagnitude > Constants.Epsilon)
