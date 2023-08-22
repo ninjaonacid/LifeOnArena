@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Code.Services.BattleService
 {
-    public abstract class BattleService : IBattleService
+    public class BattleService : IBattleService
     {
         private const int MaxTargets = 10;
         private readonly Collider[] _hits = new Collider[MaxTargets];
@@ -50,13 +50,13 @@ namespace Code.Services.BattleService
 
         private void ApplyDamage(StatController attacker, GameObject target)
         {
-            var damageable = target.GetComponent<IDamageable>();
+            var damageable = target.GetComponentInParent<IDamageable>();
             
             IDamage damage = new HealthModifier
             {
                 Attacker = attacker.gameObject,
                 IsCriticalHit = false,
-                Magnitude = attacker.Stats["Attack"].Value,
+                Magnitude = attacker.Stats["Attack"].Value * -1,
                 OperationType = ModifierOperationType.Additive,
                 Source = attacker.GetComponent<EntityWeapon>().GetEquippedWeapon()
             };

@@ -17,20 +17,22 @@ namespace Code.StaticData.StatSystem
         
         public override void ApplyModifier(StatModifier modifier)
         {
-            var damageSource = modifier.Source as IDamageSource;
-
-            if (damageSource == null) return;
-
-            if (damageSource.DamageTypes.Contains(DamageType.Physical))
-            {
-                modifier.Magnitude += _statController.Stats["Defense"].Value;
-            } 
-            else if (damageSource.DamageTypes.Contains(DamageType.Magical))
-            {
-                
-            }
-
             base.ApplyModifier(modifier);
+            
+            // var damageSource = modifier.Source as IDamageSource;
+            //
+            // if (damageSource == null) return;
+            //
+            // if (damageSource.DamageTypes.Contains(DamageType.Physical))
+            // {
+            //     modifier.Magnitude += _statController.Stats["Defense"].Value;
+            // } 
+            // else if (damageSource.DamageTypes.Contains(DamageType.Magical))
+            // {
+            //     
+            // }
+
+            
         }
     }
 }

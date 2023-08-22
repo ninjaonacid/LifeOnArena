@@ -26,11 +26,14 @@ namespace Code.Entity.Enemy
             {
                 return;
             }
-
+            
             Health.ApplyModifier(new HealthModifier
             {
-                Magnitude = -1 * damage.Magnitude,
-                OperationType = ModifierOperationType.Additive
+                Magnitude = damage.Magnitude,
+                OperationType = ModifierOperationType.Additive,
+                Source = damage.Source,
+                Attacker = damage.Attacker,
+                IsCriticalHit = damage.IsCriticalHit
             });
         }
     }

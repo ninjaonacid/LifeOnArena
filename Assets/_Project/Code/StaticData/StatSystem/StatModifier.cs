@@ -12,8 +12,9 @@ namespace Code.StaticData.StatSystem
     }
     public class StatModifier 
     {
-        public Object Source {get; set; }
-        public int Magnitude;
+        public Object Source { get; set; }
+        public int Magnitude { get; set; }
+        
         public ModifierOperationType OperationType;
     
     }

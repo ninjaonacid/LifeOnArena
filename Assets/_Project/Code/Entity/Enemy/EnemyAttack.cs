@@ -1,6 +1,8 @@
 using System.Linq;
+using Code.Services.BattleService;
 using Code.StaticData.StatSystem;
 using UnityEngine;
+using VContainer;
 
 namespace Code.Entity.Enemy
 {
@@ -19,7 +21,13 @@ namespace Code.Entity.Enemy
 
         private int _layerMask;
 
-
+        private IBattleService _battleService;
+        
+        [Inject]
+        public void Construct(IBattleService battleService)
+        {
+            _battleService = battleService;
+        }
         private void Awake()
         {
             _layerMask = 1 << LayerMask.NameToLayer("PlayerHitBox");

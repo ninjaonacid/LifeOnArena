@@ -1,3 +1,4 @@
+using Code.StaticData.StatSystem;
 using UnityEngine;
 
 namespace Code.Services.BattleService
@@ -5,8 +6,7 @@ namespace Code.Services.BattleService
     public interface IBattleService : IService
     {
         void AoeAttack(float damage, float radius, int maxTargets, Vector3 worldPoint, LayerMask mask);
-
-    
-
+        
+        void CreateAttack(StatController attackerStats, Vector3 attackPoint, LayerMask mask);
     }
 }

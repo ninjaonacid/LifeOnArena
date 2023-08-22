@@ -35,33 +35,13 @@ namespace Code.Entity.Hero
 
         public void BaseAttack()
         {
-            
-            
-            DoDamage(_stats.Stats["Attack"].Value, _stats.Stats["AttackRadius"].Value);
+            _battleService.CreateAttack(_stats, StartPoint(), _layerMask);
         }
 
         public void SkillAttack()
         {
         }
-
-        public void DoDamage(int damage, float attackRadius)
-        {
-            for (var i = 0; i < Hit(attackRadius); i++)
-            {
-                //_hits[i].transform.parent.GetComponent<IDamageable>().TakeDamage((int)damage);
-
-           
-                Debug.Log(_hits[i].ToString());
-            }
-        }
-
-        private int Hit(float attackRadius)
-        {
-            return Physics.OverlapSphereNonAlloc(StartPoint() + transform.forward * 2,
-                attackRadius,
-                _hits,
-                _layerMask);
-        }
+        
 
         private Vector3 StartPoint()
         {
