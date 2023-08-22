@@ -75,7 +75,7 @@ namespace Code.Infrastructure.Factory
             var monsterData = _staticData.ForMonster(monsterTypeId);
 
             GameObject prefab = await _assetProvider.Load<GameObject>(monsterData.PrefabReference);
-            GameObject monster = Object.Instantiate<GameObject>(prefab,
+            GameObject monster = _objectResolver.Instantiate<GameObject>(prefab,
                 parent.position, 
                 Quaternion.identity, parent);
 

@@ -1,18 +1,10 @@
-using Code.Logic.Damage;
-using Code.Logic.EntitiesComponents;
-using Code.StaticData.StatSystem;
-using Code.StaticData.StatSystem.StatModifiers;
 using UnityEngine;
 
 namespace Code.Entity.Enemy
 {
     [RequireComponent(typeof(EnemyAnimator))]
-    public class EnemyHealth : MonoBehaviour, IDamageable
+    public class EnemyHealth : EntityHealth
     {
-        [SerializeField] private StatController _stats;
-        public Health Health => ((Health)_stats.Stats["Health"]);
-      
-
         public EnemyAnimator Animator;
         
         private void OnDisable()
@@ -20,21 +12,5 @@ namespace Code.Entity.Enemy
             Health.ResetHealth();
         }
         
-        public void TakeDamage(IDamage damage)
-        {
-            if (Health.CurrentValue <= 0)
-            {
-                return;
-            }
-            
-            Health.ApplyModifier(new HealthModifier
-            {
-                Magnitude = damage.Magnitude,
-                OperationType = ModifierOperationType.Additive,
-                Source = damage.Source,
-                Attacker = damage.Attacker,
-                IsCriticalHit = damage.IsCriticalHit
-            });
-        }
     }
 }
