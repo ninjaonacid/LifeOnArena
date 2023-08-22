@@ -1,3 +1,4 @@
+using Code.Entity;
 using Code.Entity.Hero;
 using Code.Logic.Damage;
 using Code.Logic.EntitiesComponents;
@@ -7,12 +8,12 @@ using UnityEngine;
 
 namespace Code.Services.BattleService
 {
-    public class BattleService : IBattleService
+    public abstract class BattleService : IBattleService
     {
         private const int MaxTargets = 10;
         private readonly Collider[] _hits = new Collider[MaxTargets];
 
-        private int FindTargets(Vector3 startPoint, float attackRadius, int hits, LayerMask mask)
+        private int FindTargets(Vector3 startPoint, float attackRadius, LayerMask mask, int hits = 10)
         {
             return Physics.OverlapSphereNonAlloc(
                 startPoint,
@@ -23,7 +24,7 @@ namespace Code.Services.BattleService
         
         public void AoeAttack(float damage, float radius, int maxTargets, Vector3 worldPoint, LayerMask mask)
         {
-            for (int i = 0; i < FindTargets(worldPoint, radius, maxTargets, mask); i++)
+            for (int i = 0; i < FindTargets(worldPoint, radius, mask); i++)
             {
                 if(_hits[i].transform.parent.TryGetComponent(out IDamageable health))
                 {
@@ -31,22 +32,33 @@ namespace Code.Services.BattleService
                 }
             }
         }
-
-        public void Attack()
-        {
-            //for(int i = 0; i < FindTargets())
-        }
         
-        public void CreateAttack(GameObject attacker, GameObject target)
+        public void CreateAttack(StatController attackerStats, Vector3 attackPoint, LayerMask mask)
+        {
+            var attackRadius = attackerStats.Stats["AttackRadius"].Value;
+            
+            for (int i = 0; i < FindTargets(attackPoint, attackRadius, mask); i++)
+            {
+                var target = _hits[i].gameObject;
+                
+                if(target)
+                {
+                    ApplyDamage(attackerStats, target);
+                }
+            }
+        }
+
+        private void ApplyDamage(StatController attacker, GameObject target)
         {
             var damageable = target.GetComponent<IDamageable>();
+            
             IDamage damage = new HealthModifier
             {
-                Attacker = attacker,
+                Attacker = attacker.gameObject,
                 IsCriticalHit = false,
-                Magnitude = attacker.GetComponent<StatController>().Stats["Attack"].Value,
+                Magnitude = attacker.Stats["Attack"].Value,
                 OperationType = ModifierOperationType.Additive,
-                Source = attacker.GetComponent<HeroWeapon>().GetEquippedWeapon()
+                Source = attacker.GetComponent<EntityWeapon>().GetEquippedWeapon()
             };
             
             damageable.TakeDamage(damage);
