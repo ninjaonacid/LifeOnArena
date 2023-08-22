@@ -8,6 +8,11 @@ namespace Code.Entity
         [SerializeField] protected Transform _weaponPosition;
         [SerializeField] private WeaponData _weaponData;
 
-        protected WeaponData EquippedWeapon => _weaponData;
+        private WeaponData EquippedWeapon => _weaponData;
+
+        public WeaponData GetEquippedWeapon()
+        {
+            return EquippedWeapon;
+        }
     }
 }

@@ -44,18 +44,8 @@ namespace Code.Entity.Hero
                 weaponData.Rotation.x,
                 weaponData.Rotation.y, 
                 weaponData.Rotation.z);
-            
         }
-
-        public WeaponData GetEquippedWeapon()
-        {
-            if (_weapon != null)
-            {
-                return _weapon.WeaponData;
-            }
-
-            return null;
-        }
+        
 
         public void LoadData(PlayerData data)
         {

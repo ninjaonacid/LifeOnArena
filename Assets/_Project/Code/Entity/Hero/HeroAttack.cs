@@ -36,6 +36,7 @@ namespace Code.Entity.Hero
         public void BaseAttack()
         {
             
+            
             DoDamage(_stats.Stats["Attack"].Value, _stats.Stats["AttackRadius"].Value);
         }
 

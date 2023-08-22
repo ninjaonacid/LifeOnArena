@@ -18,12 +18,7 @@ namespace Code.Entity.Hero
                 return;
             }
 
-            Health.ApplyModifier(new HealthModifier
-            {
-                Magnitude = -1 * damage.Magnitude,
-                OperationType = ModifierOperationType.Additive
-                
-            });
+            Health.ApplyModifier(damage as StatModifier);
         }
         
     }

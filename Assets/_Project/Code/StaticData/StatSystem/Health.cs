@@ -17,12 +17,10 @@ namespace Code.StaticData.StatSystem
         
         public override void ApplyModifier(StatModifier modifier)
         {
-            base.ApplyModifier(modifier);
-            
             var damageSource = modifier.Source as IDamageSource;
-            
+
             if (damageSource == null) return;
-            
+
             if (damageSource.DamageTypes.Contains(DamageType.Physical))
             {
                 modifier.Magnitude += _statController.Stats["Defense"].Value;
@@ -31,6 +29,8 @@ namespace Code.StaticData.StatSystem
             {
                 
             }
+
+            base.ApplyModifier(modifier);
         }
     }
 }
