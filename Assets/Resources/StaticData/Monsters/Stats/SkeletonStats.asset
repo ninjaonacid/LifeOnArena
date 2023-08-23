@@ -54,7 +54,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98250235709fef84b9f07a21852eb067, type: 3}
   m_Name: AttackSpeed
   m_EditorClassIdentifier: 
-  _baseValue: 1
+  _baseValue: 2
   _capacity: 0
 --- !u!114 &11400000
 MonoBehaviour:
@@ -77,6 +77,7 @@ MonoBehaviour:
   - {fileID: -974959048072143401}
   - {fileID: -6254114424431537057}
   - {fileID: -8531978930270708772}
+  - {fileID: 7836724662511910568}
 --- !u!114 &397683349264247204
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -91,6 +92,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _baseValue: 100
   _capacity: 500
+--- !u!114 &7836724662511910568
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98250235709fef84b9f07a21852eb067, type: 3}
+  m_Name: MoveSpeed
+  m_EditorClassIdentifier: 
+  _baseValue: 10
+  _capacity: 100
 --- !u!114 &8800271895548670577
 MonoBehaviour:
   m_ObjectHideFlags: 1

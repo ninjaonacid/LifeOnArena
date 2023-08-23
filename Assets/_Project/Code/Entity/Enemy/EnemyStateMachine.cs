@@ -1,6 +1,8 @@
 using Code.Entity.Enemy.CommonEnemy;
 using Code.Logic.StateMachine;
 using Code.Logic.StateMachine.Transitions;
+using Code.StaticData;
+using Code.StaticData.Configs;
 using UnityEngine;
 
 namespace Code.Entity.Enemy
@@ -8,21 +10,25 @@ namespace Code.Entity.Enemy
     public class EnemyStateMachine : MonoBehaviour
     {
         private FiniteStateMachine _fsm;
-
-
+        
         [SerializeField] private AgentMoveToPlayer _agentMoveToPlayer;
         [SerializeField] private EnemyAttack _enemyAttack;
         [SerializeField] private EnemyAnimator _enemyAnimator;
         [SerializeField] private Aggression _aggression;
         [SerializeField] private EnemyTarget _enemyTarget;
         [SerializeField] private EnemyHealth _enemyHealth;
-        [SerializeField] private EnemyConfig _enemyConfig;
+
+        private StateMachineConfig _enemyConfig;
 
         private const string ChaseState = "EnemyChaseState";
         private const string AttackState = "EnemyAttackState";
         private const string IdleState = "EnemyIdleState";
         private const string HitStaggerState = "EnemyHitStagger";
 
+        public void Construct(StateMachineConfig config)
+        {
+            _enemyConfig = config;
+        }
         private void Start()
         {
             _enemyHealth.Health.CurrentValueChanged += TriggerDamageState;

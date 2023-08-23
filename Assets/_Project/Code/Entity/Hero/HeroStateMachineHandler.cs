@@ -48,9 +48,6 @@ namespace Code.Entity.Hero
 
         void Start()
         {
-            Debug.Log(nameof(HeroIdleState));
-            Debug.Log(nameof(HeroIdleState));
-            Debug.Log(nameof(HeroIdleState));
             _stateMachine = new FiniteStateMachine();
 
             _stateMachine.AddState(HeroIdle, new HeroIdleState(

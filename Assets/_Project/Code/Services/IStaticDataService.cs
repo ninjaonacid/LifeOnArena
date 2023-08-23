@@ -11,7 +11,7 @@ namespace Code.Services
 {
     public interface IStaticDataService : IService
     {
-        MonsterStaticData ForMonster(MonsterTypeId typeId);
+        EnemyDataConfig ForMonster(MonsterTypeId typeId);
         void Load();
         LevelReward ForReward(LocationReward rewardId);
         StatDatabase ForCharacterStats();

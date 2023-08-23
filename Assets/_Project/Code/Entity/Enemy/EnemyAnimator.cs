@@ -26,8 +26,7 @@ namespace Code.Entity.Enemy
         {
             throw new NotImplementedException();
         }
-
-
+        
         private void Awake()
         {
             _enemyAnimator = GetComponent<Animator>();

@@ -13,7 +13,7 @@ namespace Code.StaticData
 {
     public class StaticDataService : IStaticDataService
     {
-        private Dictionary<MonsterTypeId, MonsterStaticData> _monsters;
+        private Dictionary<MonsterTypeId, EnemyDataConfig> _monsters;
         private Dictionary<string, LevelConfig> _levels; 
         private Dictionary<LocationReward, LevelReward> _levelReward;
         private Dictionary<UIWindowID, WindowConfig> _windowConfigs;
@@ -26,7 +26,7 @@ namespace Code.StaticData
         public void Load()
         {
             _monsters = Resources
-                .LoadAll<MonsterStaticData>("StaticData/Monsters")
+                .LoadAll<EnemyDataConfig>("StaticData/Monsters")
                 .ToDictionary(x => x.MonsterTypeId, x => x);
      
             _levels = Resources
@@ -88,7 +88,7 @@ namespace Code.StaticData
             return null;
         }
 
-        public MonsterStaticData ForMonster(MonsterTypeId typeId)
+        public EnemyDataConfig ForMonster(MonsterTypeId typeId)
         {
             if (_monsters.TryGetValue(typeId, out var monsterStaticData))
                 return monsterStaticData;

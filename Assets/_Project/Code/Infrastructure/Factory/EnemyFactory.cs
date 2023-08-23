@@ -2,14 +2,12 @@ using System;
 using System.Threading;
 using Code.Entity.Enemy;
 using Code.Infrastructure.AssetManagement;
-using Code.Logic;
 using Code.Logic.EnemySpawners;
 using Code.Logic.EntitiesComponents;
 using Code.Services;
 using Code.Services.PersistentProgress;
 using Code.Services.RandomService;
 using Code.Services.SaveLoad;
-using Code.StaticData;
 using Code.StaticData.Identifiers;
 using Code.StaticData.StatSystem;
 using Code.UI.HUD;
@@ -18,7 +16,6 @@ using UnityEngine;
 using UnityEngine.AI;
 using VContainer;
 using VContainer.Unity;
-using Attribute = Code.StaticData.StatSystem.Attribute;
 using Object = UnityEngine.Object;
 
 namespace Code.Infrastructure.Factory
@@ -92,9 +89,8 @@ namespace Code.Infrastructure.Factory
             lootSpawner.Construct(this, _randomService);
             lootSpawner.SetLoot(monsterData.MinLoot, monsterData.MaxLoot);
 
-            var config = monster.GetComponent<EnemyConfig>();
-            config.AttackDuration = monsterData.AttackDuration;
-            config.HitStaggerDuration = monsterData.HitStaggerDuration;
+            var fsm = monster.GetComponent<EnemyStateMachine>();
+            fsm.Construct(monsterData.EnemyStateMachineConfig);
           
 
             return monster;
