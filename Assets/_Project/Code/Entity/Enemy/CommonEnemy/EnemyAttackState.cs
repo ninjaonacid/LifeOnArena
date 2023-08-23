@@ -21,6 +21,7 @@ namespace Code.Entity.Enemy.CommonEnemy
         public override void OnEnter()
         {
             base.OnEnter();
+            
             _enemyAttack.Attack();
             _enemyAnimator.PlayAttack();
             _agentMoveToPlayer.ShouldMove(false);

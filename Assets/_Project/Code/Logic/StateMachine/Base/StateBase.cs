@@ -23,7 +23,7 @@ namespace Code.Logic.StateMachine.Base
 
         public virtual void OnEnter()
         {
-           // Debug.Log("active state" + name.ToString());
+           Debug.Log("active state" + name.ToString());
         }
 
         public virtual void OnLogic()

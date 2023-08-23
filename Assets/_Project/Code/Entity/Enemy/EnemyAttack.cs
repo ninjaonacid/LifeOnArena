@@ -76,7 +76,6 @@ namespace Code.Entity.Enemy
         {
             _isAttacking = true;
             _battleService.CreateAttack(_stats, StartPoint(), _layerMask);
-            //if (Hit(out var hit)) hit.transform.GetComponentInParent<IDamageable>().TakeDamage(_stats.Stats["Attack"].BaseValue);
         }
 
         private bool Hit(out Collider hit)
