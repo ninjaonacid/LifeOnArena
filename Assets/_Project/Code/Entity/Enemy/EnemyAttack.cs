@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using Code.Services.BattleService;
 using Code.StaticData.StatSystem;
@@ -31,6 +32,11 @@ namespace Code.Entity.Enemy
         private void Awake()
         {
             _layerMask = 1 << LayerMask.NameToLayer("PlayerHitBox");
+        }
+
+        private void OnDisable()
+        {
+            _attackIsActive = false;
         }
 
         private void OnEnable()

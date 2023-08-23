@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Code.Entity.Enemy
@@ -33,6 +34,9 @@ namespace Code.Entity.Enemy
             }
         }
 
-       
+        private void OnDisable()
+        {
+            _hasTarget = false;
+        }
     }
 }
