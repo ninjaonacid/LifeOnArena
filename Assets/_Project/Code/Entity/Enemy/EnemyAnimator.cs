@@ -9,8 +9,11 @@ namespace Code.Entity.Enemy
         private static readonly int Die = Animator.StringToHash("Die");
         private static readonly int Speed = Animator.StringToHash("Speed");
         private static readonly int IsMoving = Animator.StringToHash("IsMoving");
-        private static readonly int Attack = Animator.StringToHash("Attack");
         private static readonly int GetHit = Animator.StringToHash("GetHit");
+
+        private static readonly int Hit = Animator.StringToHash("Hit");
+        private static readonly int Run = Animator.StringToHash("Run");
+        private static readonly int Attack = Animator.StringToHash("Attack01");
         private static readonly int Idle = Animator.StringToHash("Idle");
 
         private Animator _enemyAnimator;
@@ -39,7 +42,7 @@ namespace Code.Entity.Enemy
 
         public void PlayHit()
         {
-            _enemyAnimator.SetTrigger(GetHit);
+            _enemyAnimator.CrossFade(Hit, 0.1f);
         }
 
         public void PlayIdle()
@@ -48,8 +51,8 @@ namespace Code.Entity.Enemy
         }
         public void Move(float speed)
         {
-            _enemyAnimator.SetFloat(Speed, speed);
-            _enemyAnimator.SetBool(IsMoving, true);
+            _enemyAnimator.CrossFade(Run, 0.1f);
+            
         }
 
         public void StopMoving()
@@ -59,7 +62,7 @@ namespace Code.Entity.Enemy
 
         public void PlayAttack()
         {
-            _enemyAnimator.SetTrigger(Attack);
+            _enemyAnimator.CrossFade(Attack, 0.5f);
         }
     }
 }

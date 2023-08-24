@@ -24,7 +24,7 @@ namespace Code.Entity.Enemy.CommonEnemy
         public override void OnLogic()
         {
             base.OnLogic();
-
+            
             _moveToPlayer.SetDestination();
             
         }
