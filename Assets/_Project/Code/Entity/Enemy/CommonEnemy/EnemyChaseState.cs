@@ -19,7 +19,6 @@ namespace Code.Entity.Enemy.CommonEnemy
             base.OnEnter();
             _enemyAnimator.Move();
             _moveToPlayer.ShouldMove(true);
-            //Debug.Log("CHASESSTATETETETETETETETE");
         }
 
         public override void OnLogic()
@@ -34,7 +33,6 @@ namespace Code.Entity.Enemy.CommonEnemy
         {
             base.OnExit();
             _moveToPlayer.ShouldMove(false);
-            //Debug.Log("ChaseStateExitEEEEEEEEEEEEEEEEEEEEEEXIIIIT");
         }
 
         public override void OnExitRequest()
