@@ -17,6 +17,7 @@ namespace Code.Entity.Enemy.CommonEnemy
         public override void OnEnter()
         {
             base.OnEnter();
+            _enemyAnimator.Move();
             _moveToPlayer.ShouldMove(true);
             //Debug.Log("CHASESSTATETETETETETETETE");
         }

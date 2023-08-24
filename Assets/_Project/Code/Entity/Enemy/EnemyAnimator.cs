@@ -49,7 +49,7 @@ namespace Code.Entity.Enemy
         {
             _enemyAnimator.CrossFade(Idle, 0.5f);
         }
-        public void Move(float speed)
+        public void Move()
         {
             _enemyAnimator.CrossFade(Run, 0.1f);
             

@@ -14,10 +14,10 @@ namespace Code.Entity.Enemy
 
         private void Update()
         {
-            if (ShouldMove())
-                EnemyAnimator.Move(Agent.velocity.magnitude);
-            else
-                EnemyAnimator.StopMoving();
+            // if (ShouldMove())
+            //     EnemyAnimator.Move(Agent.velocity.magnitude);
+            // else
+            //     EnemyAnimator.StopMoving();
         }
 
         private bool ShouldMove()
