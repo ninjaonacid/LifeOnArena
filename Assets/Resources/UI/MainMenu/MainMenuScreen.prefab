@@ -811,6 +811,7 @@ GameObject:
   - component: {fileID: 6988947647594651741}
   - component: {fileID: 6988947647594651743}
   - component: {fileID: 4150463922890832468}
+  - component: {fileID: 3798632805351860031}
   m_Layer: 0
   m_Name: MainMenuScreen
   m_TagString: Untagged
@@ -867,6 +868,18 @@ MonoBehaviour:
   CloseButton: {fileID: 3037794195194844363}
   StartFightButton: {fileID: 6739599391148669925}
   StatContainer: {fileID: 3556345832726125250}
+--- !u!114 &3798632805351860031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6988947647594651740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa1a0e9649ffd474eb887b23e8b41ae5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7740490989050971935
 GameObject:
   m_ObjectHideFlags: 0
