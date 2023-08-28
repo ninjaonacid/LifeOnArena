@@ -58,7 +58,7 @@ namespace Code.StaticData.StatSystem
         
         public void LoadData(PlayerData data)
         {
-            if (data.CharacterStatsData.StatsData.TryGetValue(_statDefinition.name, out var value))
+            if (data.StatsData.Stats.TryGetValue(_statDefinition.name, out var value))
             {
                 _currentValue = value;
                 CurrentValueChanged?.Invoke();
@@ -67,13 +67,13 @@ namespace Code.StaticData.StatSystem
 
         public void UpdateData(PlayerData data)
         {
-            if (data.CharacterStatsData.StatsData.TryAdd(_statDefinition.name, _currentValue))
+            if (data.StatsData.Stats.TryAdd(_statDefinition.name, _currentValue))
             {
                 
             }
             else
             {
-                data.CharacterStatsData.StatsData[_statDefinition.name] = _currentValue;
+                data.StatsData.Stats[_statDefinition.name] = _currentValue;
             }
         }
         

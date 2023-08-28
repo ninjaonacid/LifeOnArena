@@ -55,17 +55,17 @@ namespace Code.Infrastructure.States
 
             foreach (StatDefinition stat in characterStats.PrimaryStats)
             {
-                data.CharacterStatsData.StatsData.TryAdd(stat.name, stat.BaseValue);
+                data.StatsData.Stats.TryAdd(stat.name, stat.BaseValue);
             }
 
             foreach (StatDefinition stat in characterStats.StatDefinitions)
             {
-                data.CharacterStatsData.StatsData.TryAdd(stat.name, stat.BaseValue);
+                data.StatsData.Stats.TryAdd(stat.name, stat.BaseValue);
             }
 
             foreach (StatDefinition stat in characterStats.AttributeDefinitions)
             {
-                data.CharacterStatsData.StatsData.TryAdd(stat.name, stat.BaseValue);
+                data.StatsData.Stats.TryAdd(stat.name, stat.BaseValue);
             }
             
             return data;

@@ -8,7 +8,7 @@ namespace Code.UI.View
     public class MainMenuView : MonoBehaviour, IScreenView
     {
         [SerializeField] private Button StartFightButton;
-        [SerializeField] private UIStatContainer StatContainer;
+        public UIStatContainer StatContainer;
 
         private SceneLoader _sceneLoader;
 

@@ -33,7 +33,7 @@ namespace Code.StaticData.StatSystem
 
         public void LoadData(PlayerData data)
         {
-            if (data.CharacterStatsData.StatsData.TryGetValue(_statDefinition.name, out var value))
+            if (data.StatsData.Stats.TryGetValue(_statDefinition.name, out var value))
             {
                 _baseValue = value;
             }
@@ -43,13 +43,13 @@ namespace Code.StaticData.StatSystem
 
         public void UpdateData(PlayerData data)
         {
-            if (data.CharacterStatsData.StatsData.TryAdd(_statDefinition.name, _baseValue))
+            if (data.StatsData.Stats.TryAdd(_statDefinition.name, _baseValue))
             {
                 
             }
             else
             {
-                data.CharacterStatsData.StatsData[_statDefinition.name] = _baseValue;
+                data.StatsData.Stats[_statDefinition.name] = _baseValue;
             }
         }
     }

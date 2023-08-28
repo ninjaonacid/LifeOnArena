@@ -6,7 +6,7 @@ namespace Code.Entity.Hero
 {
     public class HeroStats : StatController, ISave
     {
-        private CharacterStatsData _characterStatsData;
+        private StatsData _statsData;
 
         // private void Update()
         // {
@@ -25,7 +25,7 @@ namespace Code.Entity.Hero
 
         public void LoadData(PlayerData data)
         {
-            _characterStatsData = data.CharacterStatsData;
+            _statsData = data.StatsData;
 
             foreach (var stat in Stats.Values)
             {
