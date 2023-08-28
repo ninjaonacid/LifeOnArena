@@ -10,19 +10,19 @@ namespace Code.Infrastructure.States
     {
         private readonly IGameDataService _gameDataService;
         private readonly ISaveLoadService _saveLoadService;
-        private readonly IStaticDataService _staticData;
+        private readonly IConfigDataProvider _configData;
 
         public IGameStateMachine GameStateMachine { get; set; }
 
         public LoadProgressGameState(
             IGameDataService gameDataService,
             ISaveLoadService saveLoadService,
-            IStaticDataService staticData)
+            IConfigDataProvider configData)
         {
           
             _gameDataService = gameDataService;
             _saveLoadService = saveLoadService;
-            _staticData = staticData;
+            _configData = configData;
         }
 
         public void Enter()
@@ -51,7 +51,7 @@ namespace Code.Infrastructure.States
 
             data.WorldData.LootData.Collected = 100;
 
-            StatDatabase characterStats = _staticData.ForCharacterStats();
+            StatDatabase characterStats = _configData.ForCharacterStats();
 
             foreach (StatDefinition stat in characterStats.PrimaryStats)
             {

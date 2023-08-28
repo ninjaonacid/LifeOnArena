@@ -15,15 +15,15 @@ namespace Code.Infrastructure.Factory
         private readonly IAssetProvider _assetProvider;
         private readonly IGameDataService _gameDataService;
         private readonly ISaveLoadService _saveLoadService;
-        private readonly IWindowService _windowService;
+        private readonly IScreenViewService _screenViewService;
         private readonly IObjectResolver _objectResolver;
         public GameFactory(IAssetProvider assetProvider, IGameDataService gameDataService,
-                            ISaveLoadService saveLoadService, IWindowService windowService, IObjectResolver objectResolver )
+                            ISaveLoadService saveLoadService, IScreenViewService screenViewService, IObjectResolver objectResolver )
         {
             _assetProvider = assetProvider;
             _gameDataService = gameDataService;
             _saveLoadService = saveLoadService;
-            _windowService = windowService;
+            _screenViewService = screenViewService;
             _objectResolver = objectResolver;
         }
 
@@ -45,7 +45,7 @@ namespace Code.Infrastructure.Factory
 
             foreach (var openWindowButton in hud.GetComponentsInChildren<OpenWindowButton>())
             {
-                openWindowButton.Construct(_windowService);
+                openWindowButton.Construct(_screenViewService);
             }
 
             return hud;

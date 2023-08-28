@@ -1,6 +1,6 @@
 namespace Code.UI
 {
-    public enum UIWindowID
+    public enum ScreenID
     {
         Default,
         Shop,
@@ -8,6 +8,5 @@ namespace Code.UI
         Skills,
         UpgradeMenu,
         SelectionMenu
-
     }
 }

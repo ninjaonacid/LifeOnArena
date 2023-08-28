@@ -9,6 +9,7 @@ using Code.UI.Buttons;
 using Code.UI.MainMenu;
 using Code.UI.SkillsMenu;
 using Code.UI.UpgradeMenu;
+using Code.UI.View;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using VContainer;
@@ -20,7 +21,7 @@ namespace Code.UI.Services
     public class UIFactory : IUIFactory
     {
         private readonly IAssetProvider _assetProvider;
-        private readonly IStaticDataService _staticData;
+        private readonly IConfigDataProvider _configData;
         private readonly ISaveLoadService _saveLoad;
         private readonly IGameDataService _gameData;
         private readonly IObjectResolver _objectResolver;
@@ -29,14 +30,14 @@ namespace Code.UI.Services
         private Transform _uiCoreTransform;
 
         public UIFactory(IAssetProvider assetProvider, 
-            IStaticDataService staticDataService, 
+            IConfigDataProvider configDataProvider, 
             ISaveLoadService saveLoad,
             IGameDataService gameData,
             IObjectResolver objectResolver,
             SceneLoader sceneLoader)
         {
             _assetProvider = assetProvider;
-            _staticData = staticDataService;
+            _configData = configDataProvider;
             _saveLoad = saveLoad;
             _gameData = gameData;
             _objectResolver = objectResolver;
@@ -48,9 +49,16 @@ namespace Code.UI.Services
             
         }
 
-        public ScreenBase CreateMainMenu(IWindowService windowService)
+
+        public IScreenView CreateScreenView(ScreenID windowId)
         {
-            WindowConfig config = _staticData.ForWindow(UIWindowID.SelectionMenu);
+            return null;
+        }
+        
+        
+        public ScreenBase CreateMainMenu(IScreenViewService screenViewService)
+        {
+            WindowConfig config = _configData.ForWindow(ScreenID.SelectionMenu);
             var screen = Object.Instantiate(config.Prefab, _uiCoreTransform);
             screen.Construct(_gameData);
 
@@ -60,7 +68,7 @@ namespace Code.UI.Services
 
             foreach (var openButton in menu.GetComponentsInChildren<OpenWindowButton>())
             {
-                openButton.Construct(windowService);
+                openButton.Construct(screenViewService);
             }
 
             return menu;
@@ -68,7 +76,7 @@ namespace Code.UI.Services
 
         public void CreateUpgradeMenu()
         {
-            WindowConfig config = _staticData.ForWindow(UIWindowID.UpgradeMenu);
+            WindowConfig config = _configData.ForWindow(ScreenID.UpgradeMenu);
             var window = Object.Instantiate(config.Prefab, _uiCoreTransform) as UpgradeScreen;
             //window.Construct(_abilityFactory, _heroFactory, _progress);
 
@@ -76,13 +84,13 @@ namespace Code.UI.Services
 
         public void CreateSkillsMenu()
         {
-            WindowConfig config = _staticData.ForWindow(UIWindowID.Skills);
+            WindowConfig config = _configData.ForWindow(ScreenID.Skills);
             var window = _objectResolver.Instantiate(config.Prefab, _uiCoreTransform) as SkillPanelMenu;
             
         }
         public void CreateWeaponWindow()
         {
-            WindowConfig config = _staticData.ForWindow(UIWindowID.Weapon);
+            WindowConfig config = _configData.ForWindow(ScreenID.Weapon);
             Object.Instantiate(config.Prefab, _uiCoreTransform);
         }
 

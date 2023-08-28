@@ -8,7 +8,7 @@ namespace Code.UI.Services
     public interface IUIFactory : IService
     {
         public void CreateCore();
-        ScreenBase CreateMainMenu(IWindowService windowService);
+        ScreenBase CreateMainMenu(IScreenViewService screenViewService);
         void CreateWeaponWindow();
         void CreateUpgradeMenu();
         Task<Sprite> CreateSprite(AssetReferenceSprite spriteReference);

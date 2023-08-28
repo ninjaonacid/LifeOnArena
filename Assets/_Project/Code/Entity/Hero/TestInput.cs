@@ -5,7 +5,7 @@ namespace Code.Entity.Hero
 {
     public class TestInput : MonoBehaviour
     {
-        private IWindowService _windowService;
+        private IScreenViewService _screenViewService;
 
         // private void Update()
         // {

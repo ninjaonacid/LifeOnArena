@@ -3,7 +3,6 @@ using Code.Services.PersistentProgress;
 using Code.UI.Model;
 using Code.UI.View;
 using UniRx;
-using UnityEngine;
 
 namespace Code.UI.Controller
 {
@@ -12,7 +11,7 @@ namespace Code.UI.Controller
         private MainMenuModel _model;
         private MainMenuView _view;
         private GameDataService _gameData;
-        private IStaticDataService _staticData;
+        private IConfigDataProvider _configData;
         
         public MainMenuController(MainMenuModel model, MainMenuView view, GameDataService gameData)
         {

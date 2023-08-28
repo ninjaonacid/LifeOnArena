@@ -14,7 +14,7 @@ namespace Code.Logic.WaveLogic
 {
     public class SpawnerController : IService, IDisposable
     {
-        private readonly IStaticDataService _staticData;
+        private readonly IConfigDataProvider _configData;
         private readonly ILevelEventHandler _levelEvent;
         private readonly IEnemyFactory _enemyFactory;
         private CancellationTokenSource _cancellationTokenSource;

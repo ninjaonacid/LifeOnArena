@@ -9,7 +9,7 @@ using Code.UI;
 
 namespace Code.Services
 {
-    public interface IStaticDataService : IService
+    public interface IConfigDataProvider : IService
     {
         EnemyDataConfig ForMonster(MonsterTypeId typeId);
         void Load();
@@ -18,7 +18,7 @@ namespace Code.Services
         List<LevelReward> LoadRewards();
         ParticlesStaticData ForParticle(ParticleId id);
         LevelConfig ForLevel(string sceneKey);
-        WindowConfig ForWindow(UIWindowID menuId);
+        WindowConfig ForWindow(ScreenID menuId);
         AbilityTemplateBase ForAbility(int heroAbilityId);
         WeaponData ForWeapon(WeaponId weaponId);
         WeaponPlatformStaticData ForWeaponPlatforms(WeaponId weaponId);

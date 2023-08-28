@@ -23,10 +23,10 @@ namespace Code.Infrastructure.Scopes
         {
             InstallStateMachine(builder);
             
-            builder.Register<IStaticDataService, StaticDataService>(Lifetime.Singleton);
+            builder.Register<IConfigDataProvider, ConfigDataProvider>(Lifetime.Singleton);
             builder.Register<ISaveLoadService, SaveLoadService>(Lifetime.Singleton);
             builder.Register<IUIFactory, UIFactory>(Lifetime.Singleton);
-            builder.Register<IWindowService, WindowService>(Lifetime.Singleton);
+            builder.Register<IScreenViewService, ScreenViewService>(Lifetime.Singleton);
             builder.Register<ILevelEventHandler, LevelEventHandler>(Lifetime.Singleton);
             builder.Register<IAssetProvider, AssetProvider>(Lifetime.Singleton);
             builder.Register<IGameDataService, GameDataService>(Lifetime.Singleton);

@@ -18,7 +18,7 @@ namespace Code.Infrastructure.Starters
 {
     public class ArenaStarterPoint : IAsyncStartable
     {
-        private readonly IStaticDataService _staticData;
+        private readonly IConfigDataProvider _configData;
         private readonly ISaveLoadService _saveLoad;
         private readonly IGameDataService _gameData;
         private readonly IHeroFactory _heroFactory;
@@ -26,12 +26,12 @@ namespace Code.Infrastructure.Starters
         private readonly PlayerControls _controls;
         private readonly SpawnerController _spawnerController;
         
-        public ArenaStarterPoint(IStaticDataService staticData, 
+        public ArenaStarterPoint(IConfigDataProvider configData, 
             ISaveLoadService saveLoad, IGameDataService gameData, 
             IHeroFactory heroFactory, IGameFactory gameFactory,
             PlayerControls controls, SpawnerController spawnerController)
         {
-            _staticData = staticData;
+            _configData = configData;
             _saveLoad = saveLoad;
             _gameData = gameData;
             _heroFactory = heroFactory;
@@ -42,7 +42,7 @@ namespace Code.Infrastructure.Starters
         
         public async UniTask StartAsync(CancellationToken cancellation)
         {
-            LevelConfig config = _staticData.ForLevel(SceneManager.GetActiveScene().name);
+            LevelConfig config = _configData.ForLevel(SceneManager.GetActiveScene().name);
 
             await _spawnerController.InitSpawners(config, cancellation);
 

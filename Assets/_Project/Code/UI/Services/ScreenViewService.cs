@@ -2,37 +2,38 @@ using Code.UI.View;
 
 namespace Code.UI.Services
 {
-    public class WindowService : IWindowService
+    public class ScreenViewService : IScreenViewService
     {
         private readonly IUIFactory _uiFactory;
         private ScreenBase _activeScreen;
-        public WindowService(IUIFactory uiFactory)
+        public ScreenViewService(IUIFactory uiFactory)
         {
             _uiFactory = uiFactory;
         }
         
-        public void Show<TScreen>() where TScreen : IScreenView {
+        public void Show<TScreen>(ScreenID screenID) where TScreen : IScreenView 
+        {
             
         }
         
-        public void Open(UIWindowID windowId)
+        public void Open(ScreenID windowId)
         {
             switch (windowId)
             {
-                case UIWindowID.SelectionMenu:
+                case ScreenID.SelectionMenu:
                     _activeScreen?.CloseButton.onClick.Invoke();
                     _activeScreen = _uiFactory.CreateMainMenu(this);
                     break;
 
-                case UIWindowID.Weapon:
+                case ScreenID.Weapon:
                     _uiFactory.CreateWeaponWindow();
                     break;
 
-                case UIWindowID.UpgradeMenu:
+                case ScreenID.UpgradeMenu:
                     _uiFactory.CreateUpgradeMenu();
                     break;
 
-                case UIWindowID.Skills:
+                case ScreenID.Skills:
                     _uiFactory.CreateSkillsMenu();
                     break;
             }

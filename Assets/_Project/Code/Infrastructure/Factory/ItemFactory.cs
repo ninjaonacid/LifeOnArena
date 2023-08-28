@@ -14,17 +14,17 @@ namespace Code.Infrastructure.Factory
 {
     public class ItemFactory : IItemFactory
     {
-        private readonly IStaticDataService _staticData;
+        private readonly IConfigDataProvider _configData;
         private readonly ISaveLoadService _saveLoadService;
         private readonly IAssetProvider _assetProvider;
         private readonly IGameDataService _gameDataService;
 
-        public ItemFactory(IStaticDataService staticData, 
+        public ItemFactory(IConfigDataProvider configData, 
             ISaveLoadService saveLoadService, 
             IAssetProvider assetProvider,
             IGameDataService gameDataService)
         {
-            _staticData = staticData;
+            _configData = configData;
             _saveLoadService = saveLoadService;
             _assetProvider = assetProvider;
             _gameDataService = gameDataService;
@@ -35,7 +35,7 @@ namespace Code.Infrastructure.Factory
             await _assetProvider.Load<GameObject>(AssetAddress.WeaponPlatformSpawner);
         }
         public WeaponData LoadWeapon(WeaponId weaponId) =>
-            _staticData.ForWeapon(weaponId);
+            _configData.ForWeapon(weaponId);
 
         public async Task<WeaponPlatformSpawner> CreateWeaponPlatformSpawner(Vector3 point,
             string spawnerId,
@@ -55,7 +55,7 @@ namespace Code.Infrastructure.Factory
 
         public async Task<GameObject> CreateWeaponPlatform(WeaponId weaponId, Transform parent)
         {
-            var weaponPlatformData = _staticData.ForWeaponPlatforms(weaponId);
+            var weaponPlatformData = _configData.ForWeaponPlatforms(weaponId);
 
             var prefab = await _assetProvider.Load<GameObject>(weaponPlatformData.PrefabReference);
 

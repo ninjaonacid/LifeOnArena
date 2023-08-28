@@ -11,12 +11,12 @@ using UnityEngine;
 
 namespace Code.StaticData
 {
-    public class StaticDataService : IStaticDataService
+    public class ConfigDataProvider : IConfigDataProvider
     {
         private Dictionary<MonsterTypeId, EnemyDataConfig> _monsters;
         private Dictionary<string, LevelConfig> _levels; 
         private Dictionary<LocationReward, LevelReward> _levelReward;
-        private Dictionary<UIWindowID, WindowConfig> _windowConfigs;
+        private Dictionary<ScreenID, WindowConfig> _windowConfigs;
         private Dictionary<int, AbilityTemplateBase> _heroAbilities;
         private Dictionary<ParticleId, ParticlesStaticData> _particles;
         private Dictionary<WeaponId, WeaponData> _weapons;
@@ -40,7 +40,7 @@ namespace Code.StaticData
             _windowConfigs = Resources
                 .Load<WindowsStaticData>("StaticData/UIWindows/WindowsStaticData")
                 .Configs
-                .ToDictionary(x => x.WindowId, x => x);
+                .ToDictionary(x => x.ScreenID, x => x);
 
             _heroAbilities = Resources
                 .LoadAll<AbilityTemplateBase>("StaticData/Hero/HeroSkills")
@@ -122,16 +122,11 @@ namespace Code.StaticData
 
         public StatDatabase ForCharacterStats() =>
             _characterStats;
-        
-            
-        
 
         public List<LevelReward> LoadRewards() =>
         _levelReward.Values.ToList();
-            
         
-
-        public WindowConfig ForWindow(UIWindowID menuId) =>
+        public WindowConfig ForWindow(ScreenID menuId) =>
         
             _windowConfigs.TryGetValue(menuId, out WindowConfig windowConfig)
                 ? windowConfig

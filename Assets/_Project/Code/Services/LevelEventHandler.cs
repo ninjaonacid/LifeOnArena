@@ -21,14 +21,14 @@ namespace Code.Services
         private int _clearedSpawnersCount;
         private int _enemySpawners;
 
-        private readonly IWindowService _windowService;
+        private readonly IScreenViewService _screenViewService;
         private readonly IEventSystem _eventSystem;
 
         private CancellationTokenSource _cancellationToken = new CancellationTokenSource();
 
-        public LevelEventHandler(IWindowService windowService, IEventSystem eventSystem)
+        public LevelEventHandler(IScreenViewService screenViewService, IEventSystem eventSystem)
         {
-            _windowService = windowService;
+            _screenViewService = screenViewService;
             _eventSystem = eventSystem;
         }
 
@@ -71,7 +71,7 @@ namespace Code.Services
                 PlayerLoopTiming.Update,
                 _cancellationToken.Token);
 
-            _windowService.Open(UIWindowID.UpgradeMenu);
+            _screenViewService.Open(ScreenID.UpgradeMenu);
         }
         public LevelReward GetLevelReward() => _levelReward;
         

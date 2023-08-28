@@ -7,19 +7,19 @@ namespace Code.UI.Buttons
     public class OpenWindowButton : MonoBehaviour
     {
         public Button Button;
-        public UIWindowID WindowId;
-        private IWindowService _windowService;
+        public ScreenID WindowId;
+        private IScreenViewService _screenViewService;
 
-        public void Construct(IWindowService windowService)
+        public void Construct(IScreenViewService screenViewService)
         {
-            _windowService = windowService;
+            _screenViewService = screenViewService;
         }
         private void Awake() =>
             Button.onClick.AddListener(Open);
 
         private void Open()
         {
-            _windowService.Open(WindowId);
+            _screenViewService.Open(WindowId);
             Debug.Log("Clicked" + gameObject.name);
         }
     }
