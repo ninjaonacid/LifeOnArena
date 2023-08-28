@@ -1,14 +1,20 @@
+using Code.UI.View;
+
 namespace Code.UI.Services
 {
-    public class WindowsService : IWindowService
+    public class WindowService : IWindowService
     {
         private readonly IUIFactory _uiFactory;
         private ScreenBase _activeScreen;
-        public WindowsService(IUIFactory uiFactory)
+        public WindowService(IUIFactory uiFactory)
         {
             _uiFactory = uiFactory;
         }
-
+        
+        public void Show<TScreen>() where TScreen : IScreenView {
+            
+        }
+        
         public void Open(UIWindowID windowId)
         {
             switch (windowId)

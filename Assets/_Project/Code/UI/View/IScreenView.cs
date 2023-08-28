@@ -1,6 +1,3 @@
-using UnityEditor.Search;
-using UnityEngine;
-
 namespace Code.UI.View
 {
     public interface IScreenView

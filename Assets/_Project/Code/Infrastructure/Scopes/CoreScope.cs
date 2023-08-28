@@ -26,7 +26,7 @@ namespace Code.Infrastructure.Scopes
             builder.Register<IStaticDataService, StaticDataService>(Lifetime.Singleton);
             builder.Register<ISaveLoadService, SaveLoadService>(Lifetime.Singleton);
             builder.Register<IUIFactory, UIFactory>(Lifetime.Singleton);
-            builder.Register<IWindowService, WindowsService>(Lifetime.Singleton);
+            builder.Register<IWindowService, WindowService>(Lifetime.Singleton);
             builder.Register<ILevelEventHandler, LevelEventHandler>(Lifetime.Singleton);
             builder.Register<IAssetProvider, AssetProvider>(Lifetime.Singleton);
             builder.Register<IGameDataService, GameDataService>(Lifetime.Singleton);

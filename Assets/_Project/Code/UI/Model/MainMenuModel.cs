@@ -5,11 +5,16 @@ namespace Code.UI.Model
 {
     public class MainMenuModel : IScreenModel
     {
-        public ReactiveProperty<Stat> Health;
-        public ReactiveProperty<Stat> Attack;
-        public ReactiveProperty<Stat> Defense;
-        public ReactiveProperty<Stat> AttackSpeed;
-        public ReactiveProperty<Stat> AttackRadius;
+        public ReactiveProperty<int> Health = new ReactiveProperty<int>();
+        public ReactiveProperty<int> Attack = new ReactiveProperty<int>();
+        public ReactiveProperty<int> Defense = new ReactiveProperty<int>();
 
+        public MainMenuModel(int health, int attack, int defense)
+        {
+            Health.Value = health;
+            Attack.Value = attack;
+            Defense.Value = defense;
+        }
+        
     }
 }
