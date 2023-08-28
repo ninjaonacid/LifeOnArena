@@ -1,6 +1,7 @@
 using Code.Infrastructure.ObjectPool;
 using Code.Logic.Projectiles;
 using Code.Services.BattleService;
+using Code.StaticData.StatSystem;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
@@ -43,7 +44,9 @@ namespace Code.StaticData.Ability.ActiveAbilities
             projectileTransform.position = casterPosition + casterDirection * castOffset;
             projectileTransform.rotation = Quaternion.identity;
 
-            _battleService.AoeAttack(_damage, _attackRadius, 10,  projectileTransform.position, _layerMask);
+            var casterStats = caster.GetComponent<StatController>();
+
+            _battleService.CreateAttack(casterStats, projectileTransform.position, _layerMask );
         }
 
     }

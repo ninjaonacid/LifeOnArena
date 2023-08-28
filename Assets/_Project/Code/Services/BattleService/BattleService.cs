@@ -21,18 +21,7 @@ namespace Code.Services.BattleService
                 _hits,
                 mask);
         }
-        
-        public void AoeAttack(float damage, float radius, int maxTargets, Vector3 worldPoint, LayerMask mask)
-        {
-            for (int i = 0; i < FindTargets(worldPoint, radius, mask); i++)
-            {
-                if(_hits[i].transform.parent.TryGetComponent(out IDamageable health))
-                {
-                    
-                }
-            }
-        }
-        
+
         public void CreateAttack(StatController attackerStats, Vector3 attackPoint, LayerMask mask)
         {
             var attackRadius = attackerStats.Stats["AttackRadius"].Value;
