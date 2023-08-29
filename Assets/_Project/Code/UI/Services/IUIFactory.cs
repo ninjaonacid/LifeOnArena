@@ -8,11 +8,8 @@ namespace Code.UI.Services
     public interface IUIFactory : IService
     {
         public void CreateCore();
-        ScreenBase CreateMainMenu(IScreenViewService screenViewService);
-        void CreateWeaponWindow();
-        void CreateUpgradeMenu();
+  
         Task<Sprite> CreateSprite(AssetReferenceSprite spriteReference);
         void InitAssets();
-        void CreateSkillsMenu();
     }
 }

@@ -20,22 +20,22 @@ namespace Code.UI.Services
         {
             switch (windowId)
             {
-                case ScreenID.SelectionMenu:
-                    _activeScreen?.CloseButton.onClick.Invoke();
-                    _activeScreen = _uiFactory.CreateMainMenu(this);
-                    break;
-
-                case ScreenID.Weapon:
-                    _uiFactory.CreateWeaponWindow();
-                    break;
-
-                case ScreenID.UpgradeMenu:
-                    _uiFactory.CreateUpgradeMenu();
-                    break;
-
-                case ScreenID.Skills:
-                    _uiFactory.CreateSkillsMenu();
-                    break;
+                // case ScreenID.SelectionMenu:
+                //     _activeScreen?.CloseButton.onClick.Invoke();
+                //     _activeScreen = _uiFactory.CreateMainMenu(this);
+                //     break;
+                //
+                // case ScreenID.Weapon:
+                //     _uiFactory.CreateWeaponWindow();
+                //     break;
+                //
+                // case ScreenID.UpgradeMenu:
+                //     _uiFactory.CreateUpgradeMenu();
+                //     break;
+                //
+                // case ScreenID.Skills:
+                //     _uiFactory.CreateSkillsMenu();
+                //     break;
             }
         }
     }

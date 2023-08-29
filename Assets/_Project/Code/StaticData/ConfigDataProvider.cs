@@ -16,7 +16,7 @@ namespace Code.StaticData
         private Dictionary<MonsterTypeId, EnemyDataConfig> _monsters;
         private Dictionary<string, LevelConfig> _levels; 
         private Dictionary<LocationReward, LevelReward> _levelReward;
-        private Dictionary<ScreenID, WindowConfig> _windowConfigs;
+        private Dictionary<ScreenID, ScreenConfig> _windowConfigs;
         private Dictionary<int, AbilityTemplateBase> _heroAbilities;
         private Dictionary<ParticleId, ParticlesStaticData> _particles;
         private Dictionary<WeaponId, WeaponData> _weapons;
@@ -126,9 +126,9 @@ namespace Code.StaticData
         public List<LevelReward> LoadRewards() =>
         _levelReward.Values.ToList();
         
-        public WindowConfig ForWindow(ScreenID menuId) =>
+        public ScreenConfig ForWindow(ScreenID menuId) =>
         
-            _windowConfigs.TryGetValue(menuId, out WindowConfig windowConfig)
+            _windowConfigs.TryGetValue(menuId, out ScreenConfig windowConfig)
                 ? windowConfig
                 : null;
         

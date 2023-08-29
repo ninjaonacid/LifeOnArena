@@ -1,12 +1,13 @@
 ﻿using System;
 using Code.UI;
+using Code.UI.View;
 
 namespace Code.StaticData.UIWindows
 {
     [Serializable]
-    public class WindowConfig
+    public class ScreenConfig
     { 
         public ScreenID ScreenID;
-        public ScreenBase Prefab;
+        public BaseView ViewPrefab;
     }
 }

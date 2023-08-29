@@ -8,9 +8,9 @@ namespace Code.UI.Controller
 {
     public class MainMenuController : IScreenController
     {
-        private MainMenuModel _model;
-        private MainMenuView _view;
-        private GameDataService _gameData;
+        private readonly MainMenuModel _model;
+        private readonly MainMenuView _view;
+        private readonly GameDataService _gameData;
         private IConfigDataProvider _configData;
         
         public MainMenuController(MainMenuModel model, MainMenuView view, GameDataService gameData)

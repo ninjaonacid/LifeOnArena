@@ -1,17 +1,26 @@
 using System;
-using UnityEditor.Search;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Code.UI.View
 {
-    public abstract class BaseView : MonoBehaviour, IDisposable
+    public abstract class BaseView : MonoBehaviour, IScreenView, IDisposable
     {
+        public Button CloseButton;
+        public virtual void Show()
+        {
+            gameObject.SetActive(true);
+        }
 
-        public abstract void Show();
-        
-        public abstract void Close();
+        public virtual void Hide()
+        {
+            gameObject.SetActive(false);
+        }
 
-        public abstract void Hide();
+        public virtual void Close()
+        {
+            Destroy(gameObject);
+        }
 
         public void Dispose()
         {
