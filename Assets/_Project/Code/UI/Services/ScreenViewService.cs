@@ -1,3 +1,4 @@
+using Code.UI.Model;
 using Code.UI.View;
 
 namespace Code.UI.Services
@@ -5,15 +6,18 @@ namespace Code.UI.Services
     public class ScreenViewService : IScreenViewService
     {
         private readonly IUIFactory _uiFactory;
+        private readonly IScreenModelFactory _screenModelFactory;
         private ScreenBase _activeScreen;
-        public ScreenViewService(IUIFactory uiFactory)
+        public ScreenViewService(IUIFactory uiFactory, IScreenModelFactory screenModelFactory)
         {
             _uiFactory = uiFactory;
+            _screenModelFactory = screenModelFactory;
         }
         
-        public void Show<TScreen>(ScreenID screenID) where TScreen : IScreenView 
+        public void Show(ScreenID screenID)
         {
-            
+            var view = _uiFactory.CreateScreenView(screenID);
+            var model = _screenModelFactory.CreateModel(screenID);
         }
         
         public void Open(ScreenID windowId)

@@ -14,10 +14,10 @@ namespace Code.UI.SkillsMenu
         private UISkillPanelSlot _selectedSlot;
         private readonly Queue<UISkillPanelSlot> _equippedSlots = new Queue<UISkillPanelSlot>(2);
 
-        private IGameDataService _gameData;
+        private IGameDataContainer _gameData;
 
         [Inject]
-        public void Construct(IGameDataService gameData)
+        public void Construct(IGameDataContainer gameData)
         {
             _gameData  = gameData;
             

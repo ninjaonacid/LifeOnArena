@@ -23,8 +23,9 @@ namespace Code.UI.Services
         private readonly IAssetProvider _assetProvider;
         private readonly IConfigDataProvider _configData;
         private readonly ISaveLoadService _saveLoad;
-        private readonly IGameDataService _gameData;
+        private readonly IGameDataContainer _gameData;
         private readonly IObjectResolver _objectResolver;
+        private readonly IScreenModelFactory _modelFactory;
         private readonly SceneLoader _sceneLoader;
         
         private Transform _uiCoreTransform;
@@ -32,8 +33,9 @@ namespace Code.UI.Services
         public UIFactory(IAssetProvider assetProvider, 
             IConfigDataProvider configDataProvider, 
             ISaveLoadService saveLoad,
-            IGameDataService gameData,
+            IGameDataContainer gameData,
             IObjectResolver objectResolver,
+            IScreenModelFactory modelFactory,
             SceneLoader sceneLoader)
         {
             _assetProvider = assetProvider;
@@ -41,6 +43,7 @@ namespace Code.UI.Services
             _saveLoad = saveLoad;
             _gameData = gameData;
             _objectResolver = objectResolver;
+            _modelFactory = modelFactory;
             _sceneLoader = sceneLoader;
         }
 
@@ -50,11 +53,12 @@ namespace Code.UI.Services
         }
 
 
-        public IScreenView CreateScreenView(ScreenID screenId)
+        public BaseView CreateScreenView(ScreenID screenId)
         {
             BaseView view = _configData.ForWindow(screenId).ViewPrefab;
             _objectResolver.Instantiate(view, _uiCoreTransform);
             view.Hide();
+            //modelFactory.CreateModel(screenId);
             return view;
         }
         

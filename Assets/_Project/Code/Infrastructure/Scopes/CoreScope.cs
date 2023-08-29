@@ -29,7 +29,7 @@ namespace Code.Infrastructure.Scopes
             builder.Register<IScreenViewService, ScreenViewService>(Lifetime.Singleton);
             builder.Register<ILevelEventHandler, LevelEventHandler>(Lifetime.Singleton);
             builder.Register<IAssetProvider, AssetProvider>(Lifetime.Singleton);
-            builder.Register<IGameDataService, GameDataService>(Lifetime.Singleton);
+            builder.Register<IGameDataContainer, GameDataContainer>(Lifetime.Singleton);
             builder.Register<IRandomService, RandomService>(Lifetime.Singleton);
             builder.Register<IEventSystem, GameEventSystem>(Lifetime.Singleton);
             builder.Register<IAudioService, AudioService>(Lifetime.Singleton);

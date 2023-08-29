@@ -9,11 +9,11 @@ namespace Code.Services.SaveLoad
     public class SaveLoadService : ISaveLoadService
     {
         private const string ProgressKey = "Progress";
-        private readonly IGameDataService _gameDataService;
+        private readonly IGameDataContainer _gameDataContainer;
 
-        public SaveLoadService(IGameDataService gameDataService)
+        public SaveLoadService(IGameDataContainer gameDataContainer)
         {
-            _gameDataService = gameDataService;
+            _gameDataContainer = gameDataContainer;
         }
         public List<ISaveReader> ProgressReaders { get; } = new List<ISaveReader>();
 
@@ -34,21 +34,21 @@ namespace Code.Services.SaveLoad
         public void SaveProgress()
         {
             foreach (var progressWriter in ProgressWriters)
-                progressWriter.UpdateData(_gameDataService.PlayerData);
+                progressWriter.UpdateData(_gameDataContainer.PlayerData);
 
-            PlayerPrefs.SetString(ProgressKey, _gameDataService.PlayerData.ToJson());
+            PlayerPrefs.SetString(ProgressKey, _gameDataContainer.PlayerData.ToJson());
             SaveProgressAtPath();
         }
 
         public void LoadSaveData()
         {
             foreach (ISaveReader progressReader in ProgressReaders)
-                progressReader.LoadData(_gameDataService.PlayerData);
+                progressReader.LoadData(_gameDataContainer.PlayerData);
         }
 
         public void SaveProgressAtPath()
         {
-           string json = _gameDataService.PlayerData.ToJson();
+           string json = _gameDataContainer.PlayerData.ToJson();
            File.WriteAllText(Application.dataPath + "/save.txt", json);
         }
 

@@ -17,9 +17,9 @@ namespace Code.UI.SkillsMenu
         [SerializeField] private TextMeshProUGUI _slotNumber;
 
         public bool IsEquipped = false;
-        private IGameDataService _gameData;
+        private IGameDataContainer _gameData;
         private UISkillPanelController _controller;
-        public void Construct(IGameDataService gameData, UISkillPanelController controller)
+        public void Construct(IGameDataContainer gameData, UISkillPanelController controller)
         {
             _gameData = gameData;
             _controller = controller;

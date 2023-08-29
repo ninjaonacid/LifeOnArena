@@ -10,10 +10,10 @@ namespace Code.UI.Controller
     {
         private readonly MainMenuModel _model;
         private readonly MainMenuView _view;
-        private readonly GameDataService _gameData;
+        private readonly GameDataContainer _gameData;
         private IConfigDataProvider _configData;
         
-        public MainMenuController(MainMenuModel model, MainMenuView view, GameDataService gameData)
+        public MainMenuController(MainMenuModel model, MainMenuView view, GameDataContainer gameData)
         {
             _model = model;
             _view = view;
@@ -22,9 +22,7 @@ namespace Code.UI.Controller
         
         public void InitController()
         {
-            _model.Attack.Value = _gameData.PlayerData.StatsData.Stats["Attack"];
-            _model.Health.Value = _gameData.PlayerData.StatsData.Stats["Health"];
-            
+
             _model.Attack.Subscribe(x =>
             {
                 _view.StatContainer.SetAttack(nameof(_model.Attack), _model.Attack.Value);

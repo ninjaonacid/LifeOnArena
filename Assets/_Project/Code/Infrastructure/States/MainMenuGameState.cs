@@ -11,12 +11,12 @@ namespace Code.Infrastructure.States
 
         private readonly IScreenViewService _screenViewService;
         private readonly IUIFactory _uiFactory;
-        private readonly IGameDataService _gameData;
+        private readonly IGameDataContainer _gameData;
         public IGameStateMachine GameStateMachine { get; set; }
 
         public MainMenuGameState(IUIFactory uiFactory,
             IScreenViewService screenViewService,
-            IGameDataService gameData,
+            IGameDataContainer gameData,
             SceneLoader sceneLoader)
         {
             _sceneLoader = sceneLoader;

@@ -5,9 +5,9 @@ namespace Code.UI.Model
 {
     public class MainMenuModel : IScreenModel
     {
-        public readonly ReactiveProperty<int> Health = new ReactiveProperty<int>();
-        public readonly ReactiveProperty<int> Attack = new ReactiveProperty<int>();
-        public readonly ReactiveProperty<int> Defense = new ReactiveProperty<int>();
+        public ReactiveProperty<int> Health { get; } = new(); 
+        public ReactiveProperty<int> Attack { get; } = new();
+        public ReactiveProperty<int> Defense { get; } = new();
 
         public MainMenuModel(int health, int attack, int defense)
         {

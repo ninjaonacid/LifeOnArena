@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace Code.UI.View
 {
-    public class MainMenuView : BaseView
+    public class MainMenuView : AbstractView<MainMenuModel>
     {
         [SerializeField] private Button StartFightButton;
         public UIStatContainer StatContainer;

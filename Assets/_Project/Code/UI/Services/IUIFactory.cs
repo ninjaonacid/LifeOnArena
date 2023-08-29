@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using Code.Services;
+using Code.UI.View;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
@@ -11,5 +12,6 @@ namespace Code.UI.Services
   
         Task<Sprite> CreateSprite(AssetReferenceSprite spriteReference);
         void InitAssets();
+        BaseView CreateScreenView(ScreenID screenId);
     }
 }

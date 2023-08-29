@@ -8,12 +8,12 @@ namespace Code.UI
     public class ScreenBase : MonoBehaviour
     {
         public Button CloseButton;
-        protected PlayerData Data => _gameDataService.PlayerData;
+        protected PlayerData Data => _gameDataContainer.PlayerData;
         
-        private IGameDataService _gameDataService;
-        public void Construct(IGameDataService gameData)
+        private IGameDataContainer _gameDataContainer;
+        public void Construct(IGameDataContainer gameData)
         {
-            _gameDataService = gameData;
+            _gameDataContainer = gameData;
         }
         private void Awake()
         {

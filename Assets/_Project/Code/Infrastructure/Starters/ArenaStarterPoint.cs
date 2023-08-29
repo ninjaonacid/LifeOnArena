@@ -20,14 +20,14 @@ namespace Code.Infrastructure.Starters
     {
         private readonly IConfigDataProvider _configData;
         private readonly ISaveLoadService _saveLoad;
-        private readonly IGameDataService _gameData;
+        private readonly IGameDataContainer _gameData;
         private readonly IHeroFactory _heroFactory;
         private readonly IGameFactory _gameFactory;
         private readonly PlayerControls _controls;
         private readonly SpawnerController _spawnerController;
         
         public ArenaStarterPoint(IConfigDataProvider configData, 
-            ISaveLoadService saveLoad, IGameDataService gameData, 
+            ISaveLoadService saveLoad, IGameDataContainer gameData, 
             IHeroFactory heroFactory, IGameFactory gameFactory,
             PlayerControls controls, SpawnerController spawnerController)
         {

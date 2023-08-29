@@ -17,17 +17,17 @@ namespace Code.Infrastructure.Factory
         private readonly IConfigDataProvider _configData;
         private readonly ISaveLoadService _saveLoadService;
         private readonly IAssetProvider _assetProvider;
-        private readonly IGameDataService _gameDataService;
+        private readonly IGameDataContainer _gameDataContainer;
 
         public ItemFactory(IConfigDataProvider configData, 
             ISaveLoadService saveLoadService, 
             IAssetProvider assetProvider,
-            IGameDataService gameDataService)
+            IGameDataContainer gameDataContainer)
         {
             _configData = configData;
             _saveLoadService = saveLoadService;
             _assetProvider = assetProvider;
-            _gameDataService = gameDataService;
+            _gameDataContainer = gameDataContainer;
         }
 
         public async Task InitAssets()
@@ -61,7 +61,7 @@ namespace Code.Infrastructure.Factory
 
             var weaponPlatform = Object.Instantiate(prefab, parent);
 
-            weaponPlatform.GetComponent<WeaponPlatform>().Construct(_gameDataService.PlayerData.WorldData.LootData);
+            weaponPlatform.GetComponent<WeaponPlatform>().Construct(_gameDataContainer.PlayerData.WorldData.LootData);
 
             return weaponPlatform;
 
