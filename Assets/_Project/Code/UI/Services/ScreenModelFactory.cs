@@ -24,7 +24,7 @@ namespace Code.UI.Services
 
         public IScreenModel CreateModel(Type model)
         {
-            
+            return null;
         }
     }
 }

@@ -17,7 +17,7 @@ namespace Code.UI.Services
         public void Show(ScreenID screenID)
         {
             var view = _uiFactory.CreateScreenView(screenID);
-            var model = _screenModelFactory.CreateModel(screenID);
+            //var model = _screenModelFactory.CreateModel(screenID);
         }
         
         public void Open(ScreenID windowId)
