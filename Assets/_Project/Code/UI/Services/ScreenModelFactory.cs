@@ -7,18 +7,28 @@ namespace Code.UI.Services
 {
     public class ScreenModelFactory : IScreenModelFactory
     {
-        private Dictionary<Type, IScreenModel> _modelMap = new();
+        private Dictionary<Type, Func<IScreenModel>> _modelMap = new();
 
-        private GameDataContainer _gameDataContainer;
+        private IGameDataContainer _gameData;
 
-        public ScreenModelFactory()
+        public ScreenModelFactory(IGameDataContainer gameData)
         {
-            _modelMap.Add(typeof(MainMenuModel), new MainMenuModel());
+            _gameData = gameData;
+            
+            
+            _modelMap.Add(typeof(MainMenuModel), () => new MainMenuModel(_gameData.PlayerData.StatsData));
         }
-
-        public IScreenModel CreateModel<TModel>(ScreenID screenId)
+        
+        public TModel CreateModel<TModel>() where TModel : IScreenModel
         {
-            return _modelMap[typeof(TModel)];
+            if (_modelMap.TryGetValue(typeof(TModel), out var model))
+            {
+                var modelInstance = (TModel)model.Invoke();
+                modelInstance.Initialize();
+                return modelInstance;
+            }
+
+            return default;
         }
 
         public IScreenModel CreateModel(Type model)

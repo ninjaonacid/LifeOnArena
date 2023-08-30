@@ -6,7 +6,7 @@ namespace Code.UI.Services
 {
     public interface IScreenModelFactory
     {
-        IScreenModel CreateModel<TModel>(ScreenID screenId);
+        TModel CreateModel<TModel>() where TModel : IScreenModel;
         IScreenModel CreateModel(Type model);
     }
 }

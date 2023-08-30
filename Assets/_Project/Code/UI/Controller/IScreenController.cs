@@ -7,7 +7,6 @@ namespace Code.UI.Controller
         where TModel : IScreenModel 
         where TView : BaseView
     {
-        void InitController();
         void InitController(TModel model, TView view);
     }
 }

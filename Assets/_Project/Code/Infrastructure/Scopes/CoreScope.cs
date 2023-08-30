@@ -29,7 +29,7 @@ namespace Code.Infrastructure.Scopes
             
             builder.Register<IUIFactory, UIFactory>(Lifetime.Singleton);
             builder.Register<IScreenModelFactory, ScreenModelFactory>(Lifetime.Singleton);
-            builder.Register<MainMenuController>(Lifetime.Singleton).AsSelf();
+            builder.Register<MainMenuController>(Lifetime.Scoped).AsSelf();
             
             builder.Register<IScreenViewService, ScreenViewService>(Lifetime.Singleton);
             builder.Register<ILevelEventHandler, LevelEventHandler>(Lifetime.Singleton);
@@ -40,7 +40,6 @@ namespace Code.Infrastructure.Scopes
             builder.Register<IAudioService, AudioService>(Lifetime.Singleton);
 
             builder.Register<PlayerControls>(Lifetime.Singleton).AsSelf();
-            
             builder.Register<SceneLoader>(Lifetime.Singleton);
 
             builder.RegisterComponentInNewPrefab(Screen, Lifetime.Singleton).AsImplementedInterfaces();

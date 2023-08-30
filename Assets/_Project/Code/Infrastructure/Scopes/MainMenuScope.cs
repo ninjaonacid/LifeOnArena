@@ -12,7 +12,7 @@ namespace Code.Infrastructure.Scopes
         protected override void Configure(IContainerBuilder builder)
         {
             builder.RegisterEntryPoint<MainMenuStarter>();
-            
+
             builder.Register<IHeroFactory, HeroFactory>(Lifetime.Scoped);
             builder.Register<IItemFactory, ItemFactory>(Lifetime.Scoped);
             builder.Register<IBattleService, BattleService>(Lifetime.Scoped);

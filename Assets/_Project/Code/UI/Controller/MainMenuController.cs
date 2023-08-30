@@ -40,9 +40,5 @@ namespace Code.UI.Controller
 
         }
 
-        public void InitController()
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }

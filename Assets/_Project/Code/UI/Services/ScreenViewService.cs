@@ -9,12 +9,16 @@ namespace Code.UI.Services
     {
         private readonly IUIFactory _uiFactory;
         private readonly IScreenModelFactory _screenModelFactory;
+        private readonly IScreenControllerFactory _controllerFactory;
         private IObjectResolver _container;
         private ScreenBase _activeScreen;
-        public ScreenViewService(IUIFactory uiFactory, IScreenModelFactory screenModelFactory, IObjectResolver container)
+        public ScreenViewService(IUIFactory uiFactory, IScreenModelFactory screenModelFactory, 
+            IScreenControllerFactory controllerFactory,
+            IObjectResolver container)
         {
             _uiFactory = uiFactory;
             _screenModelFactory = screenModelFactory;
+            _controllerFactory = controllerFactory;
             _container = container;
         }
         
@@ -24,8 +28,8 @@ namespace Code.UI.Services
             where TView : BaseView
         {
             var view = _uiFactory.CreateScreenView(screenID);
-            var model = _screenModelFactory.CreateModel<TModel>(screenID);
-            var controller = _container.Resolve<TController>();
+            var model = _screenModelFactory.CreateModel<TModel>();
+            var controller = _controllerFactory.CreateController<TModel, TView, TController>();
             controller.InitController((TModel)model, (TView)view);
         }
         
