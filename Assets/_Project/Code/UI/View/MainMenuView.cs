@@ -1,3 +1,4 @@
+using System;
 using Code.Infrastructure.SceneManagement;
 using Code.UI.MainMenu;
 using Code.UI.Model;
@@ -6,7 +7,7 @@ using UnityEngine.UI;
 
 namespace Code.UI.View
 {
-    public class MainMenuView : AbstractView<MainMenuModel>
+    public class MainMenuView : BaseView
     {
         [SerializeField] private Button StartFightButton;
         public UIStatContainer StatContainer;
@@ -19,7 +20,5 @@ namespace Code.UI.View
             _sceneLoader = sceneLoader;
         }
         
-        
-     
     }
 }

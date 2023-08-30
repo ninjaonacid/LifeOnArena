@@ -6,8 +6,7 @@ namespace Code.UI.View
 {
     public abstract class BaseView : MonoBehaviour, IScreenView, IDisposable
     {
-        public abstract Type ModelType { get; }
-        
+
         public Button CloseButton;
         public virtual void Show()
         {

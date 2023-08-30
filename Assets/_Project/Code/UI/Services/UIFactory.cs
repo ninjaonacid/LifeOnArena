@@ -57,7 +57,6 @@ namespace Code.UI.Services
         {
             BaseView view = _configData.ForWindow(screenId).ViewPrefab;
             _objectResolver.Instantiate(view, _uiCoreTransform);
-            view.Hide();
             //modelFactory.CreateModel(screenId);
             return view;
         }

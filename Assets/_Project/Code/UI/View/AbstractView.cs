@@ -6,7 +6,6 @@ namespace Code.UI.View
 {
     public class AbstractView<TModel> : BaseView where TModel : IScreenModel
     {
-        public override Type ModelType => typeof(TModel);
 
     }
 }

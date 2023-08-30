@@ -8,6 +8,7 @@ using Code.Services.PersistentProgress;
 using Code.Services.RandomService;
 using Code.Services.SaveLoad;
 using Code.StaticData;
+using Code.UI.Controller;
 using Code.UI.Services;
 using UnityEngine;
 using VContainer;
@@ -25,7 +26,11 @@ namespace Code.Infrastructure.Scopes
             
             builder.Register<IConfigDataProvider, ConfigDataProvider>(Lifetime.Singleton);
             builder.Register<ISaveLoadService, SaveLoadService>(Lifetime.Singleton);
+            
             builder.Register<IUIFactory, UIFactory>(Lifetime.Singleton);
+            builder.Register<IScreenModelFactory, ScreenModelFactory>(Lifetime.Singleton);
+            builder.Register<MainMenuController>(Lifetime.Singleton).AsSelf();
+            
             builder.Register<IScreenViewService, ScreenViewService>(Lifetime.Singleton);
             builder.Register<ILevelEventHandler, LevelEventHandler>(Lifetime.Singleton);
             builder.Register<IAssetProvider, AssetProvider>(Lifetime.Singleton);

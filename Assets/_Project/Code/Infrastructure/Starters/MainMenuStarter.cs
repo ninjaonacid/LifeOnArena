@@ -3,7 +3,10 @@ using Code.Infrastructure.Factory;
 using Code.Services;
 using Code.StaticData.Levels;
 using Code.UI;
+using Code.UI.Controller;
+using Code.UI.Model;
 using Code.UI.Services;
+using Code.UI.View;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -39,7 +42,9 @@ namespace Code.Infrastructure.Starters
             GameObject hero = await _heroFactory.CreateHeroUnregistered(config.HeroInitialPosition);
 
            // ScreenBase mainMenu = _uiFactory.CreateMainMenu(_screenViewService);
-            
+
+           _screenViewService.Show<MainMenuModel, MainMenuView, MainMenuController>(ScreenID.SelectionMenu);
+
         }
         
         private void DisableInput()
