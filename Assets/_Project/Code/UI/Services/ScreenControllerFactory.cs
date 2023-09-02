@@ -16,10 +16,14 @@ namespace Code.UI.Services
         {
             _gameData = gameData;
             
-            _screenControllers.Add(typeof(MainMenuController), () => new MainMenuController(_gameData));
+            //_screenControllers.Add(typeof(MainMenuController), () => new MainMenuController(_gameData));
         }
-            
-        
+
+
+        // private TController CreateMainMenuController()
+        // {
+        //     
+        // }
         public TController CreateController<TController>()
         {
             throw new System.NotImplementedException();

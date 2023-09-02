@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using Code.UI.Controller;
 using Code.UI.Model;
 using Code.UI.View;
@@ -7,6 +9,7 @@ namespace Code.UI.Services
 {
     public class ScreenViewService : IScreenViewService
     {
+        private Dictionary<ScreenID, Type[]> _screenMap = new();
         private readonly IUIFactory _uiFactory;
         private readonly IScreenModelFactory _screenModelFactory;
         private readonly IScreenControllerFactory _controllerFactory;
@@ -20,6 +23,9 @@ namespace Code.UI.Services
             _screenModelFactory = screenModelFactory;
             _controllerFactory = controllerFactory;
             _container = container;
+
+            _screenMap.Add(ScreenID.MainMenu,
+                new Type[] { typeof(MainMenuModel), typeof(MainMenuView), typeof(MainMenuController) });
         }
         
         public void Show<TModel, TView, TController>(ScreenID screenID) 
@@ -33,28 +39,16 @@ namespace Code.UI.Services
             controller.InitController((TModel)model, (TView)view);
         }
         
-        public void Open(ScreenID windowId)
+        public void Open(ScreenID screenId)
         {
-
-            switch (windowId)
+            if (_screenMap.TryGetValue(screenId, out var mvc))
             {
-                // case ScreenID.SelectionMenu:
-                //     _activeScreen?.CloseButton.onClick.Invoke();
-                //     _activeScreen = _uiFactory.CreateMainMenu(this);
-                //     break;
-                //
-                // case ScreenID.Weapon:
-                //     _uiFactory.CreateWeaponWindow();
-                //     break;
-                //
-                // case ScreenID.UpgradeMenu:
-                //     _uiFactory.CreateUpgradeMenu();
-                //     break;
-                //
-                // case ScreenID.Skills:
-                //     _uiFactory.CreateSkillsMenu();
-                //     break;
-            }
+                var model = mvc[0];
+                var view = mvc[1];
+                var controller = mvc[2];
+                
+                
+            }  
         }
     }
 }

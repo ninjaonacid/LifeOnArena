@@ -43,7 +43,7 @@ namespace Code.Infrastructure.Starters
 
            // ScreenBase mainMenu = _uiFactory.CreateMainMenu(_screenViewService);
 
-           _screenViewService.Show<MainMenuModel, MainMenuView, MainMenuController>(ScreenID.SelectionMenu);
+           //_screenViewService.Show<MainMenuModel, MainMenuView, MainMenuController>(ScreenID.SelectionMenu);
 
         }
         

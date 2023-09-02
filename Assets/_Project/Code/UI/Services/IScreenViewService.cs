@@ -7,7 +7,7 @@ namespace Code.UI.Services
 {
     public interface IScreenViewService : IService
     {
-        void Open(ScreenID windowId);
+        void Open(ScreenID screenId);
 
         void Show<TModel, TView, TController>(ScreenID screenID) 
             where TController : IScreenController<TModel, TView>
