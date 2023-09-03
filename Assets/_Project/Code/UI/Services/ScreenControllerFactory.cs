@@ -2,41 +2,37 @@ using System;
 using System.Collections.Generic;
 using Code.Services.PersistentProgress;
 using Code.UI.Controller;
-using Code.UI.Model;
-using Code.UI.View;
 
 namespace Code.UI.Services
 {
     public class ScreenControllerFactory : IScreenControllerFactory
     {
-        private readonly Dictionary<Type, Func<IScreenController<IScreenModel, BaseView>>> _screenControllers = new();
+        private readonly Dictionary<Type, Func<IScreenController>> _screenControllers = new();
         private readonly IGameDataContainer _gameData;
         
         public ScreenControllerFactory(IGameDataContainer gameData)
         {
             _gameData = gameData;
-            
-            //_screenControllers.Add(typeof(MainMenuController), () => new MainMenuController(_gameData));
+            var mainMenuController = new MainMenuController(_gameData);
+
+            _screenControllers.Add(typeof(MainMenuController), CreateMainMenuController);
         }
-
-
-        // private TController CreateMainMenuController()
-        // {
-        //     
-        // }
-        public TController CreateController<TController>()
+        
+        private IScreenController CreateMainMenuController()
         {
-            throw new System.NotImplementedException();
+            return new MainMenuController(_gameData);
         }
 
-        public IScreenController<IScreenModel, BaseView> CreateController()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public TController CreateController<TModel, TView, TController>()
+        public IScreenController CreateController<TModel, TView, TController>()
         {
             throw new NotImplementedException();
         }
+
+        public IScreenController CreateController(Type controller)
+        {
+            return _screenControllers[controller].Invoke();
+        }
+        
+        
     }
 }

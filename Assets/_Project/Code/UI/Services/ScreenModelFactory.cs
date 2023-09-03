@@ -33,7 +33,9 @@ namespace Code.UI.Services
 
         public IScreenModel CreateModel(Type model)
         {
-            return null;
+            var modelInstance = _modelMap[model].Invoke();
+            modelInstance.Initialize();
+            return modelInstance;
         }
     }
 }

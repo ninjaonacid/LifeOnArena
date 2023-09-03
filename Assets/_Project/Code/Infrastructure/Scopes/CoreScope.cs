@@ -29,6 +29,7 @@ namespace Code.Infrastructure.Scopes
             
             builder.Register<IUIFactory, UIFactory>(Lifetime.Singleton);
             builder.Register<IScreenModelFactory, ScreenModelFactory>(Lifetime.Singleton);
+            builder.Register<IScreenControllerFactory, ScreenControllerFactory>(Lifetime.Singleton);
             builder.Register<MainMenuController>(Lifetime.Scoped).AsSelf();
             
             builder.Register<IScreenViewService, ScreenViewService>(Lifetime.Singleton);

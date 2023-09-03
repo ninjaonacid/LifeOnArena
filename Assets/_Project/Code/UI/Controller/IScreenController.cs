@@ -3,10 +3,8 @@ using Code.UI.View;
 
 namespace Code.UI.Controller
 {
-    public interface IScreenController<TModel, TView> 
-        where TModel : IScreenModel 
-        where TView : BaseView
+    public interface IScreenController
     {
-        void InitController(TModel model, TView view);
+        void InitController(IScreenModel model, BaseView view);
     }
 }
