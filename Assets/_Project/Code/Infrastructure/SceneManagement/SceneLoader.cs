@@ -1,4 +1,6 @@
 ﻿using System;
+using Code.UI.Services;
+using Code.UI.View;
 using Cysharp.Threading.Tasks;
 using UnityEngine.SceneManagement;
 
@@ -7,16 +9,19 @@ namespace Code.Infrastructure.SceneManagement
     public class SceneLoader
     {
         private readonly ILoadingScreen _loadingScreen;
-        
-        public SceneLoader(ILoadingScreen loadingScreen)
+        private readonly IScreenViewService _screenService;
+
+        public SceneLoader(ILoadingScreen loadingScreen, IScreenViewService screenService)
         {
             _loadingScreen = loadingScreen;
+            _screenService = screenService;
         }
         public async void Load(string name, Action onLoaded = null)
         {
             await LoadScene(name, onLoaded);
         }
-        public async UniTask LoadScene(string nextScene, Action onLoaded = null)
+
+        private async UniTask LoadScene(string nextScene, Action onLoaded = null)
         {
             if (SceneManager.GetActiveScene().name == nextScene)
             {
@@ -25,6 +30,8 @@ namespace Code.Infrastructure.SceneManagement
             }
 
             _loadingScreen.Show();
+            
+            _screenService.Cleanup();
 
             await SceneManager.LoadSceneAsync(nextScene);
             

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Code.UI.Controller;
 using Code.UI.Model;
 using Code.UI.View;
+using UnityEngine;
 
 namespace Code.UI.Services
 {
@@ -13,7 +14,6 @@ namespace Code.UI.Services
         private readonly IUIFactory _uiFactory;
         private readonly IScreenModelFactory _screenModelFactory;
         private readonly IScreenControllerFactory _controllerFactory;
-        private BaseView _activeView;
         public ScreenViewService(IUIFactory uiFactory, 
             IScreenModelFactory screenModelFactory, 
             IScreenControllerFactory controllerFactory)
@@ -27,6 +27,7 @@ namespace Code.UI.Services
 
         public void Open(ScreenID screenId)
         {
+        
             if (_screenMap.TryGetValue(screenId, out var mc))
             {
                 BaseView view = _uiFactory.CreateScreenView(screenId);
@@ -44,13 +45,30 @@ namespace Code.UI.Services
         {
             if (_activeViews.TryGetValue(screenID, out var activeView))
             {
-                activeView.view.Close();
-
                 if (activeView.controller is IDisposable controller)
                 {
                     controller.Dispose();
                 }
+
+                activeView.view.Close();
+
+                _activeViews.Remove(screenID);
             }
+        }
+
+        public void Cleanup()
+        {
+            foreach (var activeView in _activeViews.Values)
+            {
+                if (activeView.controller is IDisposable controller)
+                {
+                    controller.Dispose();
+                }
+                
+                activeView.view.Close();
+            }
+            
+            _activeViews.Clear();
         }
     }
 }
