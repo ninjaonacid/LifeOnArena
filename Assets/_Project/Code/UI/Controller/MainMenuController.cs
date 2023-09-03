@@ -41,7 +41,7 @@ namespace Code.UI.Controller
 
         public void Dispose()
         {
-            
+            _disposables.Dispose();
         }
     }
 }

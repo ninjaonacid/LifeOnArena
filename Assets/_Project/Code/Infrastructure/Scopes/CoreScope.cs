@@ -22,6 +22,9 @@ namespace Code.Infrastructure.Scopes
         [SerializeField] private LoadingScreen Screen;
         protected override void Configure(IContainerBuilder builder)
         {
+            
+            new ServiceInstaller().Install(builder);
+            
             InstallStateMachine(builder);
             
             builder.Register<IConfigDataProvider, ConfigDataProvider>(Lifetime.Singleton);

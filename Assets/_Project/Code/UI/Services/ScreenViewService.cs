@@ -8,7 +8,8 @@ namespace Code.UI.Services
 {
     public class ScreenViewService : IScreenViewService
     {
-        private readonly Dictionary<ScreenID, (Type, Type)> _screenMap = new();
+        private readonly Dictionary<ScreenID, (Type model, Type controller)> _screenMap = new();
+        private readonly Dictionary<ScreenID, (BaseView view, IScreenController controller)> _activeViews = new();
         private readonly IUIFactory _uiFactory;
         private readonly IScreenModelFactory _screenModelFactory;
         private readonly IScreenControllerFactory _controllerFactory;
@@ -29,21 +30,26 @@ namespace Code.UI.Services
             if (_screenMap.TryGetValue(screenId, out var mc))
             {
                 BaseView view = _uiFactory.CreateScreenView(screenId);
-                IScreenModel model = _screenModelFactory.CreateModel(mc.Item1);
-                IScreenController controller = _controllerFactory.CreateController(mc.Item2);
+                IScreenModel model = _screenModelFactory.CreateModel(mc.model);
+                IScreenController controller = _controllerFactory.CreateController(mc.controller);
                 controller.InitController(model, view);
                 
                 view.Show();
-                _activeView = view;
                 
+                _activeViews.Add(screenId, (view, controller));
             }  
         }
 
         public void Close(ScreenID screenID)
         {
-            if (_screenMap.TryGetValue(screenID, out var mc))
+            if (_activeViews.TryGetValue(screenID, out var activeView))
             {
-                
+                activeView.view.Close();
+
+                if (activeView.controller is IDisposable controller)
+                {
+                    controller.Dispose();
+                }
             }
         }
     }
