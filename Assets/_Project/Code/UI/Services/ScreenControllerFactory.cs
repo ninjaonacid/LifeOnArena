@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Code.Infrastructure.SceneManagement;
 using Code.Services.PersistentProgress;
 using Code.UI.Controller;
 
@@ -10,19 +11,15 @@ namespace Code.UI.Services
         private readonly Dictionary<Type, Func<IScreenController>> _screenControllers = new();
         private readonly IGameDataContainer _gameData;
         
-        public ScreenControllerFactory(IGameDataContainer gameData)
+        public ScreenControllerFactory(IGameDataContainer gameData, SceneLoader sceneLoader)
         {
             _gameData = gameData;
             var mainMenuController = new MainMenuController(_gameData);
 
-            _screenControllers.Add(typeof(MainMenuController), CreateMainMenuController);
+            _screenControllers.Add(typeof(MainMenuController), () => new MainMenuController(_gameData));
+            _screenControllers.Add(typeof(ShopMenuController), () => new ShopMenuController(sceneLoader));
         }
         
-        private IScreenController CreateMainMenuController()
-        {
-            return new MainMenuController(_gameData);
-        }
-
         public IScreenController CreateController<TModel, TView, TController>()
         {
             throw new NotImplementedException();

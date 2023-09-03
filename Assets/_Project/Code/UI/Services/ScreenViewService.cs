@@ -22,11 +22,11 @@ namespace Code.UI.Services
             _controllerFactory = controllerFactory;
 
             _screenMap.Add(ScreenID.MainMenu, (typeof(MainMenuModel), typeof(MainMenuController)));
+            _screenMap.Add(ScreenID.Shop, (typeof(ShopMenuModel), typeof(ShopMenuController)));
         }
 
         public void Open(ScreenID screenId)
         {
-        
             if (_screenMap.TryGetValue(screenId, out var mc))
             {
                 BaseView view = _uiFactory.CreateScreenView(screenId);
