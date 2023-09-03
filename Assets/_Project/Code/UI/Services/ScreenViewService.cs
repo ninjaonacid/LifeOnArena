@@ -12,7 +12,7 @@ namespace Code.UI.Services
         private readonly IUIFactory _uiFactory;
         private readonly IScreenModelFactory _screenModelFactory;
         private readonly IScreenControllerFactory _controllerFactory;
-        private ScreenBase _activeScreen;
+        private BaseView _activeView;
         public ScreenViewService(IUIFactory uiFactory, 
             IScreenModelFactory screenModelFactory, 
             IScreenControllerFactory controllerFactory)
@@ -33,7 +33,18 @@ namespace Code.UI.Services
                 IScreenController controller = _controllerFactory.CreateController(mc.Item2);
                 controller.InitController(model, view);
                 
+                view.Show();
+                _activeView = view;
+                
             }  
+        }
+
+        public void Close(ScreenID screenID)
+        {
+            if (_screenMap.TryGetValue(screenID, out var mc))
+            {
+                
+            }
         }
     }
 }
