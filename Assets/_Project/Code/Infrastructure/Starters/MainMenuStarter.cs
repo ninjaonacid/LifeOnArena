@@ -33,8 +33,6 @@ namespace Code.Infrastructure.Starters
         public async UniTask StartAsync(CancellationToken cancellation)
         {
             LevelConfig config = _configData.ForLevel(SceneManager.GetActiveScene().name);
-            
-            _uiFactory.CreateCore();
 
             GameObject hero = await _heroFactory.CreateHeroUnregistered(config.HeroInitialPosition);
 

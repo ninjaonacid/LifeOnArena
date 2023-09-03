@@ -44,15 +44,10 @@ namespace Code.Infrastructure.States
 
         private void OnLoaded()
         {
-            InitUiCore();
 
             GameStateMachine.Enter<GameLoopGameState>();
         }
-
-        private void InitUiCore()
-        {
-            _uiFactory.CreateCore();
-        }
+        
 
     }
 }

@@ -37,6 +37,9 @@ namespace Code.UI.Controller
                 _view.StatContainer.SetHealth(nameof(_model.Health), _model.Health.Value);
                 _gameData.PlayerData.StatsData.Stats["Health"] = _model.Health.Value;
             }).AddTo(_disposables);
+
+            view.CloseButton.OnClickAsObservable().Subscribe( x => view.Close());
+
         }
 
         public void Dispose()

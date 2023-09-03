@@ -8,10 +8,9 @@ namespace Code.UI.Services
 {
     public interface IUIFactory : IService
     {
-        public void CreateCore();
-  
         Task<Sprite> CreateSprite(AssetReferenceSprite spriteReference);
         void InitAssets();
         BaseView CreateScreenView(ScreenID screenId);
+        void CreateCore();
     }
 }
