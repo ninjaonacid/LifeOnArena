@@ -11,7 +11,7 @@ namespace Code.UI.Controller
         private  MainMenuModel _model;
         private  MainMenuView _view;
         private readonly IGameDataContainer _gameData;
-        private CompositeDisposable _disposables = new CompositeDisposable();
+        private readonly CompositeDisposable _disposables = new CompositeDisposable();
 
         public MainMenuController(IGameDataContainer gameData)
         {
