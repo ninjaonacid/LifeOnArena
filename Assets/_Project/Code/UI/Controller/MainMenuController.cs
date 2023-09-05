@@ -2,7 +2,9 @@ using System;
 using Code.Services.PersistentProgress;
 using Code.UI.Model;
 using Code.UI.View;
+using Code.UI.View.MainMenu;
 using UniRx;
+using UnityEngine;
 
 namespace Code.UI.Controller
 {
@@ -38,7 +40,9 @@ namespace Code.UI.Controller
                 _gameData.PlayerData.StatsData.Stats["Health"] = _model.Health.Value;
             }).AddTo(_disposables);
 
-            view.CloseButton.OnClickAsObservable().Subscribe( x => view.Close());
+            _view.CloseButton
+                .OnClickAsObservable()
+                .Subscribe(x => Debug.Log("Button pressed"));
 
         }
 

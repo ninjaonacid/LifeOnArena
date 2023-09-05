@@ -1,11 +1,10 @@
-using System;
 using Code.Infrastructure.SceneManagement;
 using Code.UI.MainMenu;
 using Code.UI.Model;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Code.UI.View
+namespace Code.UI.View.MainMenu
 {
     public class MainMenuView : BaseView
     {

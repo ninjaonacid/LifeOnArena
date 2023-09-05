@@ -7,7 +7,6 @@ namespace Code.UI.Controller
 {
     public class ShopMenuController : IScreenController
     {
-
         private ShopMenuModel _model;
         private ShopMenuView _view;
         private SceneLoader _sceneLoader;

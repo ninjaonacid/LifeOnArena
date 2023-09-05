@@ -6,7 +6,6 @@ namespace Code.UI.View
 {
     public abstract class BaseView : MonoBehaviour, IScreenView, IDisposable
     {
-
         public Button CloseButton;
         public virtual void Show()
         {
@@ -20,6 +19,7 @@ namespace Code.UI.View
 
         public virtual void Close()
         {
+            Debug.Log("Close Called");
             Destroy(gameObject);
         }
 
