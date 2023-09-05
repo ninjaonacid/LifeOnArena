@@ -4,7 +4,7 @@ using Code.UI.Model;
 using Code.UI.View;
 using Code.UI.View.MainMenu;
 using UniRx;
-using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 namespace Code.UI.Controller
 {
@@ -38,11 +38,15 @@ namespace Code.UI.Controller
             {
                 _view.StatContainer.SetHealth(nameof(_model.Health), _model.Health.Value);
                 _gameData.PlayerData.StatsData.Stats["Health"] = _model.Health.Value;
-            }).AddTo(_disposables);
+            }).AddTo(_view);
 
-            _view.CloseButton
-                .OnClickAsObservable()
-                .Subscribe(x => Debug.Log("Button pressed"));
+            // _view.CloseButton
+            //     .OnClickAsObservable()
+            //     .Subscribe(x => Debug.Log("Button pressed"));
+            
+            _view.CloseButton.onClick.AddListener(() => Debug.Log("ButtonPressed"));
+            
+            Debug.Log("CloseButton", _view.CloseButton);
 
         }
 

@@ -8,7 +8,6 @@ using Code.Services.PersistentProgress;
 using Code.Services.RandomService;
 using Code.Services.SaveLoad;
 using Code.StaticData;
-using Code.UI.Controller;
 using Code.UI.Services;
 using UnityEngine;
 using VContainer;

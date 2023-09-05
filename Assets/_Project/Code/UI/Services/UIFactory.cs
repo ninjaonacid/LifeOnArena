@@ -42,8 +42,8 @@ namespace Code.UI.Services
             }
             
             BaseView view = _configData.ForWindow(screenId).ViewPrefab;
-            _objectResolver.Instantiate(view, _uiCoreTransform);
-            return view;
+            var viewInstance = _objectResolver.Instantiate(view, _uiCoreTransform);
+            return viewInstance;
         }
 
         public void CreateCore()
