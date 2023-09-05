@@ -1,5 +1,6 @@
 using Code.Infrastructure.SceneManagement;
 using Code.UI.Model;
+using Code.UI.Services;
 using Code.UI.View;
 using UniRx;
 
@@ -20,6 +21,11 @@ namespace Code.UI.Controller
             _view = view as ShopMenuView;
 
             _view.NextSceneButton.OnClickAsObservable().Subscribe(x => _sceneLoader.Load("StoneDungeon_2"));
+        }
+
+        public void InjectScreenService(IScreenViewService screenService)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

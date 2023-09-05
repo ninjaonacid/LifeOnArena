@@ -12,8 +12,9 @@ namespace Code.UI.Services
 
         public ScreenControllerFactory(IGameDataContainer gameData, SceneLoader sceneLoader)
         {
-            _screenControllers.Add(typeof(MainMenuController), () => new MainMenuController(gameData));
+            _screenControllers.Add(typeof(MainMenuController), () => new MainMenuController(gameData, sceneLoader));
             _screenControllers.Add(typeof(ShopMenuController), () => new ShopMenuController(sceneLoader));
+            _screenControllers.Add(typeof(AbilityMenuController), () => new AbilityMenuController());
         }
 
         public IScreenController CreateController(Type controller)

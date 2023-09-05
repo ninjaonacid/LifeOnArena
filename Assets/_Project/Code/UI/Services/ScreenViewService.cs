@@ -23,6 +23,7 @@ namespace Code.UI.Services
 
             _screenMap.Add(ScreenID.MainMenu, (typeof(MainMenuModel), typeof(MainMenuController)));
             _screenMap.Add(ScreenID.Shop, (typeof(ShopMenuModel), typeof(ShopMenuController)));
+            _screenMap.Add(ScreenID.Skills, (typeof(AbilityMenuModel), typeof(AbilityMenuController)));
         }
 
         public void Open(ScreenID screenId)
@@ -32,6 +33,7 @@ namespace Code.UI.Services
                 BaseView view = _uiFactory.CreateScreenView(screenId);
                 IScreenModel model = _screenModelFactory.CreateModel(mc.model);
                 IScreenController controller = _controllerFactory.CreateController(mc.controller);
+                controller.InjectScreenService(this);
                 controller.InitController(model, view);
                 
                 view.Show();

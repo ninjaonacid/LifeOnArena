@@ -1,6 +1,8 @@
 using System;
+using Code.Infrastructure.SceneManagement;
 using Code.Services.PersistentProgress;
 using Code.UI.Model;
+using Code.UI.Services;
 using Code.UI.View;
 using Code.UI.View.MainMenu;
 using UniRx;
@@ -13,11 +15,14 @@ namespace Code.UI.Controller
         private  MainMenuModel _model;
         private  MainMenuView _view;
         private readonly IGameDataContainer _gameData;
+        private IScreenViewService _screenService;
+        private readonly SceneLoader _sceneLoader;
         private readonly CompositeDisposable _disposables = new CompositeDisposable();
 
-        public MainMenuController(IGameDataContainer gameData)
+        public MainMenuController(IGameDataContainer gameData, SceneLoader sceneLoader)
         {
             _gameData = gameData;
+            _sceneLoader = sceneLoader;
         }
         
         public void InitController(IScreenModel model, BaseView view)
@@ -41,6 +46,18 @@ namespace Code.UI.Controller
                 .OnClickAsObservable()
                 .Subscribe(x => Debug.Log("Button pressed")).AddTo(_view);
 
+            _view.StartFightButton
+                .OnClickAsObservable()
+                .Subscribe(x => _sceneLoader.Load("StoneDungeon_Arena_1"));
+
+            _view.SkillMenu.Button
+                .OnClickAsObservable()
+                .Subscribe(x => _screenService.Open(_view.SkillMenu.WindowId));
+        }
+
+        public void InjectScreenService(IScreenViewService screenService)
+        {
+            _screenService = screenService;
         }
 
         public void Dispose()

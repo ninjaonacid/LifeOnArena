@@ -1,12 +1,12 @@
-using Code.UI.MainMenu;
-using UnityEngine;
+using Code.UI.Buttons;
 using UnityEngine.UI;
 
 namespace Code.UI.View.MainMenu
 {
     public class MainMenuView : BaseView
     {
-        [SerializeField] private Button StartFightButton;
+        public Button StartFightButton;
+        public OpenWindowButton SkillMenu;
         public UIStatContainer StatContainer;
         
     }

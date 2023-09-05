@@ -18,6 +18,7 @@ namespace Code.UI.Services
             
             _modelMap.Add(typeof(MainMenuModel), () => new MainMenuModel(_gameData.PlayerData.StatsData));
             _modelMap.Add(typeof(ShopMenuModel), () => new ShopMenuModel());
+            _modelMap.Add(typeof(AbilityMenuModel), () => new AbilityMenuModel());
         }
         
         public TModel CreateModel<TModel>() where TModel : IScreenModel

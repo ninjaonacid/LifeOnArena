@@ -1,6 +1,7 @@
 using Code.UI.Services;
 using UnityEngine;
 using UnityEngine.UI;
+using VContainer;
 
 namespace Code.UI.Buttons
 {
@@ -9,13 +10,11 @@ namespace Code.UI.Buttons
         public Button Button;
         public ScreenID WindowId;
         private IScreenViewService _screenViewService;
-
+        
         public void Construct(IScreenViewService screenViewService)
         {
             _screenViewService = screenViewService;
         }
-        private void Awake() =>
-            Button.onClick.AddListener(Open);
 
         private void Open()
         {
