@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using Code.Data;
+using Code.UI.MainMenu;
 using UnityEngine;
 
-namespace Code.UI.MainMenu
+namespace Code.UI.View.MainMenu
 {
     public class UIStatContainer : MonoBehaviour
     {

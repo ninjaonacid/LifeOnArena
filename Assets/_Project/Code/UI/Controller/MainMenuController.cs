@@ -24,29 +24,22 @@ namespace Code.UI.Controller
         {
             _model = model as MainMenuModel;
             _view = view as MainMenuView;
-
-            _model.Attack.Value = _gameData.PlayerData.StatsData.Stats["Attack"];
-            _model.Health.Value = _gameData.PlayerData.StatsData.Stats["Health"];
-
+            
             _model.Attack.Subscribe(x =>
             {
-                _view.StatContainer.SetAttack(nameof(_model.Attack), _model.Attack.Value);
+                _view.StatContainer.SetAttack(nameof(_model.Attack) + " ", _model.Attack.Value);
                 _gameData.PlayerData.StatsData.Stats["Attack"] = _model.Attack.Value;
-            }).AddTo(_disposables);
+            }).AddTo(_view);
 
             _model.Health.Subscribe(x =>
             {
-                _view.StatContainer.SetHealth(nameof(_model.Health), _model.Health.Value);
+                _view.StatContainer.SetHealth(nameof(_model.Health) + " ", _model.Health.Value);
                 _gameData.PlayerData.StatsData.Stats["Health"] = _model.Health.Value;
             }).AddTo(_view);
 
-            // _view.CloseButton
-            //     .OnClickAsObservable()
-            //     .Subscribe(x => Debug.Log("Button pressed"));
-            
-            _view.CloseButton.onClick.AddListener(() => Debug.Log("ButtonPressed"));
-            
-            Debug.Log("CloseButton", _view.CloseButton);
+            _view.CloseButton
+                .OnClickAsObservable()
+                .Subscribe(x => Debug.Log("Button pressed")).AddTo(_view);
 
         }
 
