@@ -9,6 +9,6 @@ namespace Code.Infrastructure.Factory
         GameObject HeroGameObject { get; set; }
         UniTask<GameObject> CreateHero(Vector3 initialPoint);
         UniTask InitAssets();
-        UniTask<GameObject> CreateHeroUnregistered(Vector3 initialPoint);
+        UniTask<GameObject> CreateHeroUnregistered(Vector3 initialPoint, Quaternion rotation);
     }
 }

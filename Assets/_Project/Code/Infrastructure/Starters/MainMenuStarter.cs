@@ -34,7 +34,8 @@ namespace Code.Infrastructure.Starters
         {
             LevelConfig config = _configData.ForLevel(SceneManager.GetActiveScene().name);
 
-            GameObject hero = await _heroFactory.CreateHeroUnregistered(config.HeroInitialPosition);
+            GameObject hero = await _heroFactory.CreateHeroUnregistered(config.HeroInitialPosition, config.HeroInitialRotation);
+            
 
             _screenService.Open(ScreenID.MainMenu);
 

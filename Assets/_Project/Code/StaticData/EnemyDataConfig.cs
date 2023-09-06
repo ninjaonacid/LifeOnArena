@@ -18,5 +18,6 @@ namespace Code.StaticData
         public float MoveSpeed;
 
         public AssetReferenceGameObject PrefabReference;
+        
     }
 }

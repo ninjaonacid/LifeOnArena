@@ -18,7 +18,6 @@ namespace Code.Editor.EditorUtils
         {
             EditorApplication.playModeStateChanged += OnPlayModeStateChanged;
             _startingSceneName = EditorPrefs.GetString(editorPrefsKey);
-            Debug.Log(_startingSceneName);
         }
 
         private static void OnPlayModeStateChanged(PlayModeStateChange state)
@@ -27,16 +26,13 @@ namespace Code.Editor.EditorUtils
             {
                 _currentSceneName = SceneManager.GetActiveScene().name;
                 EditorPrefs.SetString(editorCurrentSceneKey, _currentSceneName);
-                Debug.Log(" current scene name : " + _currentSceneName);
                 EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo();
                 EditorSceneManager.OpenScene("Assets/Scenes/" + _startingSceneName + ".unity"); 
             }
             else if (state == PlayModeStateChange.EnteredEditMode)
             {
-                Debug.Log(_currentSceneName);
                 _currentSceneName = EditorPrefs.GetString(editorCurrentSceneKey);
                 EditorSceneManager.OpenScene("Assets/Scenes/" + _currentSceneName + ".unity");
-                Debug.Log("else if currentscenename :" + _currentSceneName);
             }
         }
 
