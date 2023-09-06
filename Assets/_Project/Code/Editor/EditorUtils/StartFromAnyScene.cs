@@ -12,6 +12,7 @@ namespace Code.Editor.EditorUtils
         private static string _startingSceneName;
         private static string _currentSceneName;
         private static readonly string editorPrefsKey = "StartingScene";
+        private static readonly string editorCurrentSceneKey = "CurrentSceneKey";
 
         static StartFromAnyScene()
         {
@@ -25,6 +26,7 @@ namespace Code.Editor.EditorUtils
             if (state == PlayModeStateChange.ExitingEditMode)
             {
                 _currentSceneName = SceneManager.GetActiveScene().name;
+                EditorPrefs.SetString(editorCurrentSceneKey, _currentSceneName);
                 Debug.Log(" current scene name : " + _currentSceneName);
                 EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo();
                 EditorSceneManager.OpenScene("Assets/Scenes/" + _startingSceneName + ".unity"); 
@@ -32,6 +34,7 @@ namespace Code.Editor.EditorUtils
             else if (state == PlayModeStateChange.EnteredEditMode)
             {
                 Debug.Log(_currentSceneName);
+                _currentSceneName = EditorPrefs.GetString(editorCurrentSceneKey);
                 EditorSceneManager.OpenScene("Assets/Scenes/" + _currentSceneName + ".unity");
                 Debug.Log("else if currentscenename :" + _currentSceneName);
             }
