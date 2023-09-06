@@ -43,11 +43,6 @@ namespace Code.Infrastructure.Factory
             hud.GetComponentInChildren<LootCounter>()
                 .Construct(_gameDataContainer.PlayerData.WorldData);
 
-            foreach (var openWindowButton in hud.GetComponentsInChildren<OpenWindowButton>())
-            {
-                openWindowButton.Construct(_screenService);
-            }
-
             return hud;
         }
 

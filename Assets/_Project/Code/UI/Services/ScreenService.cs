@@ -46,12 +46,12 @@ namespace Code.UI.Services
         {
             if (_activeViews.TryGetValue(screenID, out var activeView))
             {
+                activeView.view.Close();
+                
                 if (activeView.controller is IDisposable controller)
                 {
                     controller.Dispose();
                 }
-
-                activeView.view.Close();
 
                 _activeViews.Remove(screenID);
             }

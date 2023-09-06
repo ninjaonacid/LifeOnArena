@@ -19,7 +19,7 @@ namespace Code.UI.Controller
             _view = view as AbilityMenuView;
             _screenService = screenService;
 
-            _view.CloseButton.OnClickAsObservable().Subscribe(x => _screenService.Close(ScreenID.AbilityMenu));
+            _view.CloseButton.OnClickAsObservable().Subscribe(x => _screenService.Close(_view.ScreenId));
         }
     }
 }
