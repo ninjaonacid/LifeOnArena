@@ -1,6 +1,3 @@
-using System.Linq;
-using Code.Logic.Damage;
-
 namespace Code.StaticData.StatSystem
 {
     public class Health : Attribute
