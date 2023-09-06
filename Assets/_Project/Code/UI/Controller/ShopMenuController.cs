@@ -15,17 +15,13 @@ namespace Code.UI.Controller
         {
             _sceneLoader = sceneLoader;
         }
-        public void InitController(IScreenModel model, BaseView view)
+        
+        public void InitController(IScreenModel model, BaseView view, IScreenService screenService)
         {
             _model = model as ShopMenuModel;
             _view = view as ShopMenuView;
 
             _view.NextSceneButton.OnClickAsObservable().Subscribe(x => _sceneLoader.Load("StoneDungeon_2"));
-        }
-
-        public void InjectScreenService(IScreenViewService screenService)
-        {
-            throw new System.NotImplementedException();
         }
     }
 }

@@ -11,19 +11,15 @@ namespace Code.UI.Controller
     {
         private AbilityMenuModel _model;
         private AbilityMenuView _view;
-        private IScreenViewService _screenService;
-        public void InitController(IScreenModel model, BaseView view)
+        private IScreenService _screenService;
+
+        public void InitController(IScreenModel model, BaseView view, IScreenService screenService)
         {
             _model = model as AbilityMenuModel;
             _view = view as AbilityMenuView;
-
-            _view.CloseButton.OnClickAsObservable().Subscribe(x => _screenService.Close(ScreenID.Skills));
-
-        }
-
-        public void InjectScreenService(IScreenViewService screenService)
-        {
             _screenService = screenService;
+
+            _view.CloseButton.OnClickAsObservable().Subscribe(x => _screenService.Close(ScreenID.AbilityMenu));
         }
     }
 }

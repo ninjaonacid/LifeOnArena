@@ -61,7 +61,6 @@ namespace Code.StaticData
                 .LoadAll<WeaponPlatformStaticData>("StaticData/WeaponPlatforms")
                 .ToDictionary(x => x.WeaponPlatformId, x => x);
 
-     
         }
 
         public WeaponData ForWeapon(WeaponId weaponId)

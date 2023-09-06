@@ -15,18 +15,18 @@ namespace Code.Infrastructure.Starters
     {
         private readonly IHeroFactory _heroFactory;
         private readonly IConfigDataProvider _configData;
-        private readonly IScreenViewService _screenViewService;
+        private readonly IScreenService _screenService;
         private readonly IUIFactory _uiFactory;
         private readonly PlayerControls _controls;
 
         public MainMenuStarter(IHeroFactory heroFactory, IUIFactory uiFactory, 
-            IScreenViewService screenViewService,
+            IScreenService screenService,
             IConfigDataProvider configData, PlayerControls controls)
         {
             _heroFactory = heroFactory;
             _configData = configData;
             _uiFactory = uiFactory;
-            _screenViewService = screenViewService;
+            _screenService = screenService;
             _controls = controls;
         }
         
@@ -36,7 +36,7 @@ namespace Code.Infrastructure.Starters
 
             GameObject hero = await _heroFactory.CreateHeroUnregistered(config.HeroInitialPosition);
 
-            _screenViewService.Open(ScreenID.MainMenu);
+            _screenService.Open(ScreenID.MainMenu);
 
         }
         

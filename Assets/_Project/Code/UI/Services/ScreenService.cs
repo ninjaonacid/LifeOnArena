@@ -6,14 +6,15 @@ using Code.UI.View;
 
 namespace Code.UI.Services
 {
-    public class ScreenViewService : IScreenViewService
+    public class ScreenService : IScreenService
     {
         private readonly Dictionary<ScreenID, (Type model, Type controller)> _screenMap = new();
         private readonly Dictionary<ScreenID, (BaseView view, IScreenController controller)> _activeViews = new();
         private readonly IUIFactory _uiFactory;
         private readonly IScreenModelFactory _screenModelFactory;
         private readonly IScreenControllerFactory _controllerFactory;
-        public ScreenViewService(IUIFactory uiFactory, 
+        
+        public ScreenService(IUIFactory uiFactory, 
             IScreenModelFactory screenModelFactory, 
             IScreenControllerFactory controllerFactory)
         {
@@ -23,7 +24,7 @@ namespace Code.UI.Services
 
             _screenMap.Add(ScreenID.MainMenu, (typeof(MainMenuModel), typeof(MainMenuController)));
             _screenMap.Add(ScreenID.Shop, (typeof(ShopMenuModel), typeof(ShopMenuController)));
-            _screenMap.Add(ScreenID.Skills, (typeof(AbilityMenuModel), typeof(AbilityMenuController)));
+            _screenMap.Add(ScreenID.AbilityMenu, (typeof(AbilityMenuModel), typeof(AbilityMenuController)));
         }
 
         public void Open(ScreenID screenId)
@@ -33,8 +34,7 @@ namespace Code.UI.Services
                 BaseView view = _uiFactory.CreateScreenView(screenId);
                 IScreenModel model = _screenModelFactory.CreateModel(mc.model);
                 IScreenController controller = _controllerFactory.CreateController(mc.controller);
-                controller.InjectScreenService(this);
-                controller.InitController(model, view);
+                controller.InitController(model, view, this);
                 
                 view.Show();
                 

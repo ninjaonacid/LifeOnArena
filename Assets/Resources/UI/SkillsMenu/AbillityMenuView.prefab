@@ -652,7 +652,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d907fd558a172a6459440bd1eb3e7e49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EquipButton: {fileID: 0}
   _canvasGroup: {fileID: 4193779030750046459}
 --- !u!225 &4193779030750046459
 CanvasGroup:
@@ -994,7 +993,7 @@ GameObject:
   - component: {fileID: 5140079698764887446}
   - component: {fileID: -3180106011899794447}
   m_Layer: 5
-  m_Name: SkillPanel
+  m_Name: AbillityMenuView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1076,6 +1075,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 078d167784e2f1b4faea7d4db37264f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ScreenId: 3
   CloseButton: {fileID: 8892638678852005990}
 --- !u!1001 &326435023941431862
 PrefabInstance:

@@ -10,7 +10,7 @@ namespace Code.Logic
     public class TreasureBox : MonoBehaviour, IInteractable
     {
         private ILevelEventHandler _levelEventHandler;
-        private IScreenViewService _screenViewService;
+        private IScreenService _screenService;
         private void Awake()
         {
         }
@@ -18,7 +18,7 @@ namespace Code.Logic
         
         public void Interact(HeroInteraction interactor)
         {
-            _screenViewService.Open(ScreenID.UpgradeMenu);
+            _screenService.Open(ScreenID.UpgradeMenu);
             //_levelEventHandler.GetLevelReward();
 
             //LocationReward reward = _levelEventHandler.GetLevelReward();

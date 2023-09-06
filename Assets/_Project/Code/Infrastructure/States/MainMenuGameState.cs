@@ -9,19 +9,19 @@ namespace Code.Infrastructure.States
         private readonly SceneLoader _sceneLoader;
         private readonly LoadingScreen _screen;
 
-        private readonly IScreenViewService _screenViewService;
+        private readonly IScreenService _screenService;
         private readonly IUIFactory _uiFactory;
         private readonly IGameDataContainer _gameData;
         public IGameStateMachine GameStateMachine { get; set; }
 
         public MainMenuGameState(IUIFactory uiFactory,
-            IScreenViewService screenViewService,
+            IScreenService screenService,
             IGameDataContainer gameData,
             SceneLoader sceneLoader)
         {
             _sceneLoader = sceneLoader;
             _uiFactory = uiFactory;
-            _screenViewService = screenViewService;
+            _screenService = screenService;
             _gameData = gameData;
         }
 

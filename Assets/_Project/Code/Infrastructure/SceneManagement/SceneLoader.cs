@@ -8,7 +8,7 @@ namespace Code.Infrastructure.SceneManagement
     public class SceneLoader
     {
         private readonly ILoadingScreen _loadingScreen;
-        private readonly IScreenViewService _screenService;
+        private readonly IScreenService _screenService;
 
         public SceneLoader(ILoadingScreen loadingScreen)
         {

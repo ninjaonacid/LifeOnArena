@@ -9,16 +9,16 @@ namespace Code.UI.Buttons
     {
         public Button Button;
         public ScreenID WindowId;
-        private IScreenViewService _screenViewService;
+        private IScreenService _screenService;
         
-        public void Construct(IScreenViewService screenViewService)
+        public void Construct(IScreenService screenService)
         {
-            _screenViewService = screenViewService;
+            _screenService = screenService;
         }
 
         private void Open()
         {
-            _screenViewService.Open(WindowId);
+            _screenService.Open(WindowId);
             Debug.Log("Clicked" + gameObject.name);
         }
     }

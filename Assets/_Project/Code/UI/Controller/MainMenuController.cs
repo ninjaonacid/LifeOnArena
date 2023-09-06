@@ -14,8 +14,8 @@ namespace Code.UI.Controller
     {
         private  MainMenuModel _model;
         private  MainMenuView _view;
+        private IScreenService _screenService;
         private readonly IGameDataContainer _gameData;
-        private IScreenViewService _screenService;
         private readonly SceneLoader _sceneLoader;
         private readonly CompositeDisposable _disposables = new CompositeDisposable();
 
@@ -25,10 +25,11 @@ namespace Code.UI.Controller
             _sceneLoader = sceneLoader;
         }
         
-        public void InitController(IScreenModel model, BaseView view)
+        public void InitController(IScreenModel model, BaseView view, IScreenService screenService)
         {
             _model = model as MainMenuModel;
             _view = view as MainMenuView;
+            _screenService = screenService;
             
             _model.Attack.Subscribe(x =>
             {
@@ -40,11 +41,11 @@ namespace Code.UI.Controller
             {
                 _view.StatContainer.SetHealth(nameof(_model.Health) + " ", _model.Health.Value);
                 _gameData.PlayerData.StatsData.Stats["Health"] = _model.Health.Value;
-            }).AddTo(_view);
+            }).AddTo(_disposables, _view);
 
             _view.CloseButton
                 .OnClickAsObservable()
-                .Subscribe(x => Debug.Log("Button pressed")).AddTo(_view);
+                .Subscribe(x => Debug.Log("Button Pressed")).AddTo(_view);
 
             _view.StartFightButton
                 .OnClickAsObservable()
@@ -54,11 +55,7 @@ namespace Code.UI.Controller
                 .OnClickAsObservable()
                 .Subscribe(x => _screenService.Open(_view.SkillMenu.WindowId));
         }
-
-        public void InjectScreenService(IScreenViewService screenService)
-        {
-            _screenService = screenService;
-        }
+        
 
         public void Dispose()
         {
