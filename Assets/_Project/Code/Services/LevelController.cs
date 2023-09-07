@@ -1,5 +1,6 @@
 using System;
 using System.Threading;
+using System.Threading.Tasks;
 using Code.CustomEvents;
 using Code.Infrastructure.EventSystem;
 using Code.Infrastructure.SceneManagement;
@@ -43,8 +44,10 @@ namespace Code.Services
 
         }
 
-        private void SpawnersClear(SpawnersClearEvent obj)
+        private async void SpawnersClear(SpawnersClearEvent obj)
         {
+            await ShowUpgradeWindow();
+            
             _eventSystem.FireEvent(new OpenDoorEvent("open door"));
         }
 
@@ -71,20 +74,7 @@ namespace Code.Services
         }
         
 
-        public async void MonsterSpawnerSlain(EnemySpawner spawner)
-        {
-            _clearedSpawnersCount++;
-
-            if (_clearedSpawnersCount == _enemySpawners)
-            {
-                //MonsterSpawnersCleared?.Invoke();
-
-                _eventSystem.FireEvent(new OpenDoorEvent("door opened"));
-                await ShowUpgradeWindow();
-            }
-        }
-
-        public async UniTask ShowUpgradeWindow()
+        private async UniTask ShowUpgradeWindow()
         {
             
             await UniTask.Delay(TimeSpan.FromSeconds(2.0), 

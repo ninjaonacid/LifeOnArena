@@ -2,7 +2,6 @@
 using Code.Services.PersistentProgress;
 using Code.Services.SaveLoad;
 using Code.UI.HUD;
-using Code.UI.Services;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -14,15 +13,13 @@ namespace Code.Infrastructure.Factory
         private readonly IAssetProvider _assetProvider;
         private readonly IGameDataContainer _gameDataContainer;
         private readonly ISaveLoadService _saveLoadService;
-        private readonly IScreenService _screenService;
         private readonly IObjectResolver _objectResolver;
         public GameFactory(IAssetProvider assetProvider, IGameDataContainer gameDataContainer,
-                            ISaveLoadService saveLoadService, IScreenService screenService, IObjectResolver objectResolver )
+                            ISaveLoadService saveLoadService, IObjectResolver objectResolver )
         {
             _assetProvider = assetProvider;
             _gameDataContainer = gameDataContainer;
             _saveLoadService = saveLoadService;
-            _screenService = screenService;
             _objectResolver = objectResolver;
         }
 

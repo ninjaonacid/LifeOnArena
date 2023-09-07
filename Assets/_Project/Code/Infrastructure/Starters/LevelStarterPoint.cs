@@ -55,6 +55,7 @@ namespace Code.Infrastructure.Starters
             _saveLoad.LoadSaveData();
             
             _levelController.Subscribe();
+            
             _enemySpawnerController.SpawnTimer();
             _enemySpawnerController.RunSpawner();
             

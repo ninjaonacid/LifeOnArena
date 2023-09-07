@@ -9,7 +9,6 @@ namespace Code.Logic
 {
     public class TreasureBox : MonoBehaviour, IInteractable
     {
-        private ILevelEventHandler _levelEventHandler;
         private IScreenService _screenService;
         private void Awake()
         {

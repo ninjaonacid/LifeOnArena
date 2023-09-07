@@ -19,7 +19,6 @@ namespace Code.Logic.EnemySpawners
         private EnemyDeath _enemyDeath;
         private IEnemyObjectPool _enemyObjectPool;
         private IParticleObjectPool _particleObjectPool;
-        private ILevelEventHandler _levelEventHandler;
 
         private float _enemyTimer = 15;
 
@@ -33,13 +32,10 @@ namespace Code.Logic.EnemySpawners
 
         [Inject]
         public void Construct(IEnemyObjectPool enemyObjectPool,
-            IParticleObjectPool particleObjectPool,
-            ILevelEventHandler levelEventHandler
-        )
+            IParticleObjectPool particleObjectPool)
         {
             _enemyObjectPool = enemyObjectPool;
             _particleObjectPool = particleObjectPool;
-            _levelEventHandler = levelEventHandler;
         }
 
         public void LoadData(PlayerData data)

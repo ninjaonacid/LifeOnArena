@@ -10,14 +10,13 @@ namespace Code.Infrastructure.States
     {
        
         private readonly SceneLoader _sceneLoader;
-        private readonly ILevelEventHandler _levelEventHandler;
+      
 
         public IGameStateMachine GameStateMachine { get; set; }
 
-        public GameLoopGameState(SceneLoader sceneLoader, ILevelEventHandler levelEventHandler)
+        public GameLoopGameState(SceneLoader sceneLoader)
         {
             _sceneLoader = sceneLoader;
-            _levelEventHandler = levelEventHandler;
         }
 
         public void Enter()
