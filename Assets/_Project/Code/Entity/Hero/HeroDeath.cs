@@ -1,3 +1,5 @@
+using Code.CustomEvents;
+using Code.Infrastructure.EventSystem;
 using Code.Services;
 using UnityEngine;
 using VContainer;
@@ -15,11 +17,12 @@ namespace Code.Entity.Hero
         public HeroMovement heroMovement;
 
         private ILevelEventHandler _levelEventHandler;
+        private IEventSystem _eventSystem;
 
         [Inject]
-        public void Construct(ILevelEventHandler levelEventHandler)
+        public void Construct(IEventSystem eventSystem)
         {
-            _levelEventHandler = levelEventHandler;
+            _eventSystem = eventSystem;
         }
         private void Start()
         {
@@ -39,7 +42,7 @@ namespace Code.Entity.Hero
         private void Die()
         {
             _isDead = true;
-            _levelEventHandler.HeroDeath();
+            _eventSystem.FireEvent(new HeroDeadEvent());
             heroMovement.enabled = false;
             Animator.PlayDeath();
         }

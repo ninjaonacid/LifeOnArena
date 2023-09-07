@@ -23,9 +23,8 @@ namespace Code.Logic
 
         private async void OpenDoor(OpenDoorEvent eventData)
         {
-            _eventSystem.Unsubscribe<OpenDoorEvent>(OpenDoor);
-            Debug.Log(eventData.Message);
             await UniTask.Delay(1000);
+            
             RightDoor.transform.DOLocalRotate(new Vector3(RightDoor.transform.rotation.x, 60, RightDoor.transform.rotation.z), 2f);
             LeftDoor.transform.DOLocalRotate(new Vector3(LeftDoor.transform.rotation.x, -60, LeftDoor.transform.rotation.z), 2f);
             

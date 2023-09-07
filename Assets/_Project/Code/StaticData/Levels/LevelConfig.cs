@@ -26,6 +26,9 @@ namespace Code.StaticData.Levels
         [Title("Location Type")]
         [EnumToggleButtons]
         public LocationType LocationType;
+
+
+        public int WavesToSpawn;
         
         [BoxGroup("Spawners")]
         [LabelWidth(100)]

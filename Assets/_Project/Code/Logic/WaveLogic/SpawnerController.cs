@@ -17,10 +17,10 @@ namespace Code.Logic.WaveLogic
         private readonly IConfigDataProvider _configData;
         private readonly ILevelEventHandler _levelEvent;
         private readonly IEnemyFactory _enemyFactory;
+        private readonly List<EnemySpawner> _enemySpawnPoints = new List<EnemySpawner>();
         private CancellationTokenSource _cancellationTokenSource;
-        private List<EnemySpawner> _enemySpawnPoints = new List<EnemySpawner>();
         private int _waveCounter = 0;
-        private int _nextWaveDelay = 5;
+        private readonly int _nextWaveDelay = 5;
 
         private Timer.Timer _timer;
         public SpawnerController(ILevelEventHandler levelEventHandler, IEnemyFactory enemyFactory)
@@ -67,7 +67,7 @@ namespace Code.Logic.WaveLogic
                     _waveCounter++;
                     _timer.Reset();
                 }
-
+                
                 await UniTask.Delay(200, cancellationToken: token);
 
                 if (token.IsCancellationRequested)

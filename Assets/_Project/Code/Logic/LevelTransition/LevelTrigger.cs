@@ -1,5 +1,4 @@
-using Code.Infrastructure.States;
-using Code.Services;
+using Code.Infrastructure.EventSystem;
 using Code.StaticData.Levels;
 using Code.UI.Services;
 using UnityEngine;
@@ -14,18 +13,16 @@ namespace Code.Logic.LevelTransition
         [SerializeField] private LevelConfig _nextLevelData;
         [SerializeField] private LevelReward _levelReward;
 
-        private IGameStateMachine _gameStateMachine;
-        private ILevelEventHandler _levelEventHandler;
-    
+        private IEventSystem _eventSystem;
+
         private bool _isTriggered;
 
         [Inject]
         public void Construct(
-            ILevelEventHandler levelEventHandler,
+            IEventSystem eventSystem,
             IUIFactory uiFactory)
         {
-      
-            _levelEventHandler = levelEventHandler;
+            _eventSystem = eventSystem;
         }
 
         private void OnTriggerEnter(Collider other)
@@ -34,7 +31,7 @@ namespace Code.Logic.LevelTransition
 
             if (other.CompareTag("Player"))
             {
-                _levelEventHandler.NextLevelReward(_levelReward);
+               // _levelEventHandler.NextLevelReward(_levelReward);
                 _isTriggered = true;
             }
         }
@@ -47,7 +44,7 @@ namespace Code.Logic.LevelTransition
 
         private void OnDestroy()
         {
-            _levelEventHandler.MonsterSpawnersCleared -= ShowRewardIcon;
+           // _levelEventHandler.MonsterSpawnersCleared -= ShowRewardIcon;
         }
 
         private void OnDrawGizmos()

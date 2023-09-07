@@ -22,7 +22,7 @@ namespace Code.Infrastructure.States
 
         public void Enter()
         {
-            _levelEventHandler.PlayerDead += ReturnToMainMenu;
+            
         }
 
         private async void ReturnToMainMenu()

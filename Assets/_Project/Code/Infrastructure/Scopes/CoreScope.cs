@@ -30,8 +30,7 @@ namespace Code.Infrastructure.Scopes
             builder.Register<IScreenModelFactory, ScreenModelFactory>(Lifetime.Singleton);
             builder.Register<IScreenControllerFactory, ScreenControllerFactory>(Lifetime.Singleton);
             builder.Register<IScreenService, ScreenService>(Lifetime.Singleton);
-
-            builder.Register<ILevelEventHandler, LevelEventHandler>(Lifetime.Singleton);
+            
             builder.Register<IAssetProvider, AssetProvider>(Lifetime.Singleton);
             builder.Register<IGameDataContainer, GameDataContainer>(Lifetime.Singleton);
             builder.Register<IRandomService, RandomService>(Lifetime.Singleton);

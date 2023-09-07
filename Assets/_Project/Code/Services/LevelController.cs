@@ -2,6 +2,7 @@ using System;
 using System.Threading;
 using Code.CustomEvents;
 using Code.Infrastructure.EventSystem;
+using Code.Infrastructure.SceneManagement;
 using Code.Logic.EnemySpawners;
 using Code.StaticData.Levels;
 using Code.UI;
@@ -10,11 +11,8 @@ using Cysharp.Threading.Tasks;
 
 namespace Code.Services
 {
-    public class LevelEventHandler : ILevelEventHandler
+    public class LevelController : IDisposable
     {
-        public event Action MonsterSpawnersCleared;
-        public event Action PlayerDead;
-
         private LevelReward _levelReward;
 
         private int _clearedSpawnersCount;
@@ -22,31 +20,42 @@ namespace Code.Services
 
         private readonly IScreenService _screenService;
         private readonly IEventSystem _eventSystem;
+        private readonly SceneLoader _sceneLoader;
+        private readonly PlayerControls _controls;
 
         private readonly CancellationTokenSource _cancellationToken = new CancellationTokenSource();
 
-        public LevelEventHandler(IScreenService screenService, IEventSystem eventSystem)
+        public LevelController(IScreenService screenService, IEventSystem eventSystem, PlayerControls controls)
         {
             _screenService = screenService;
             _eventSystem = eventSystem;
+            _controls = controls;
+            
+            _eventSystem.Subscribe<HeroDeadEvent>(HeroDead);
         }
+
+        private async void HeroDead(HeroDeadEvent obj)
+        {
+            _controls.Player.Disable();
+
+            await UniTask.Delay(TimeSpan.FromSeconds(2),
+                DelayType.DeltaTime,
+                PlayerLoopTiming.Update, _cancellationToken.Token);
+        }
+
 
         public void InitCurrentLevel(int enemySpawnersCount)
         {
             _clearedSpawnersCount = 0;
             _enemySpawners = enemySpawnersCount;
- 
+
         }
 
         public void NextLevelReward(LevelReward levelReward)
         {
             _levelReward = levelReward;
         }
-
-        public void HeroDeath()
-        {
-            PlayerDead?.Invoke();
-        }
+        
 
         public async void MonsterSpawnerSlain(EnemySpawner spawner)
         {
@@ -54,7 +63,7 @@ namespace Code.Services
 
             if (_clearedSpawnersCount == _enemySpawners)
             {
-                MonsterSpawnersCleared?.Invoke();
+                //MonsterSpawnersCleared?.Invoke();
 
                 _eventSystem.FireEvent(new OpenDoorEvent("door opened"));
                 await ShowUpgradeWindow();
@@ -72,6 +81,12 @@ namespace Code.Services
             _screenService.Open(ScreenID.UpgradeMenu);
         }
         public LevelReward GetLevelReward() => _levelReward;
-        
+
+        public void Dispose()
+        {
+            _cancellationToken?.Dispose();
+            
+            _eventSystem.Unsubscribe<HeroDeadEvent>(HeroDead);
+        }
     }
 }
