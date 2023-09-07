@@ -12,10 +12,9 @@ using Cysharp.Threading.Tasks;
 
 namespace Code.Logic.WaveLogic
 {
-    public class SpawnerController : IService, IDisposable
+    public class EnemySpawnerController : IService, IDisposable
     {
         private readonly IConfigDataProvider _configData;
-        private readonly ILevelEventHandler _levelEvent;
         private readonly IEnemyFactory _enemyFactory;
         private readonly List<EnemySpawner> _enemySpawnPoints = new List<EnemySpawner>();
         private CancellationTokenSource _cancellationTokenSource;
@@ -23,9 +22,8 @@ namespace Code.Logic.WaveLogic
         private readonly int _nextWaveDelay = 5;
 
         private Timer.Timer _timer;
-        public SpawnerController(ILevelEventHandler levelEventHandler, IEnemyFactory enemyFactory)
+        public EnemySpawnerController(IEnemyFactory enemyFactory)
         {
-            _levelEvent = levelEventHandler;
             _enemyFactory = enemyFactory;
         }
 

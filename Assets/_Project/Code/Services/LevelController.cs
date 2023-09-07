@@ -25,13 +25,27 @@ namespace Code.Services
 
         private readonly CancellationTokenSource _cancellationToken = new CancellationTokenSource();
 
-        public LevelController(IScreenService screenService, IEventSystem eventSystem, PlayerControls controls)
+        public LevelController(IScreenService screenService,
+            IEventSystem eventSystem, PlayerControls controls,
+            SceneLoader sceneLoader)
         {
             _screenService = screenService;
             _eventSystem = eventSystem;
             _controls = controls;
-            
+            _sceneLoader = sceneLoader;
+
+        }
+
+        public void Subscribe()
+        {
             _eventSystem.Subscribe<HeroDeadEvent>(HeroDead);
+            _eventSystem.Subscribe<SpawnersClearEvent>(SpawnersClear);
+
+        }
+
+        private void SpawnersClear(SpawnersClearEvent obj)
+        {
+            _eventSystem.FireEvent(new OpenDoorEvent("open door"));
         }
 
         private async void HeroDead(HeroDeadEvent obj)

@@ -16,35 +16,35 @@ using VContainer.Unity;
 
 namespace Code.Infrastructure.Starters
 {
-    public class ArenaStarterPoint : IAsyncStartable
+    public class LevelStarterPoint : IAsyncStartable
     {
         private readonly IConfigDataProvider _configData;
         private readonly ISaveLoadService _saveLoad;
-        private readonly IGameDataContainer _gameData;
         private readonly IHeroFactory _heroFactory;
         private readonly IGameFactory _gameFactory;
         private readonly PlayerControls _controls;
-        private readonly SpawnerController _spawnerController;
+        private readonly EnemySpawnerController _enemySpawnerController;
+        private readonly LevelController _levelController;
         
-        public ArenaStarterPoint(IConfigDataProvider configData, 
-            ISaveLoadService saveLoad, IGameDataContainer gameData, 
-            IHeroFactory heroFactory, IGameFactory gameFactory,
-            PlayerControls controls, SpawnerController spawnerController)
+        public LevelStarterPoint(IConfigDataProvider configData, 
+            ISaveLoadService saveLoad, IHeroFactory heroFactory, IGameFactory gameFactory,
+            PlayerControls controls, EnemySpawnerController enemySpawnerController,
+            LevelController controller)
         {
             _configData = configData;
             _saveLoad = saveLoad;
-            _gameData = gameData;
             _heroFactory = heroFactory;
             _gameFactory = gameFactory;
-            _spawnerController = spawnerController;
+            _enemySpawnerController = enemySpawnerController;
             _controls = controls;
+            _levelController = controller;
         }
         
         public async UniTask StartAsync(CancellationToken cancellation)
         {
             LevelConfig config = _configData.ForLevel(SceneManager.GetActiveScene().name);
 
-            await _spawnerController.InitSpawners(config, cancellation);
+            await _enemySpawnerController.InitSpawners(config, cancellation);
 
             var hero = await InitHero(config);
 
@@ -54,8 +54,9 @@ namespace Code.Infrastructure.Starters
 
             _saveLoad.LoadSaveData();
             
-            _spawnerController.SpawnTimer();
-            _spawnerController.RunSpawner();
+            _levelController.Subscribe();
+            _enemySpawnerController.SpawnTimer();
+            _enemySpawnerController.RunSpawner();
             
         }
 
