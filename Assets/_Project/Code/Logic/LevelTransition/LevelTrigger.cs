@@ -21,14 +21,11 @@ namespace Code.Logic.LevelTransition
 
         [Inject]
         public void Construct(
-            IGameStateMachine gameStateMachine,
             ILevelEventHandler levelEventHandler,
             IUIFactory uiFactory)
         {
-            _gameStateMachine = gameStateMachine;
+      
             _levelEventHandler = levelEventHandler;
-
-       
         }
 
         private void OnTriggerEnter(Collider other)
@@ -38,12 +35,10 @@ namespace Code.Logic.LevelTransition
             if (other.CompareTag("Player"))
             {
                 _levelEventHandler.NextLevelReward(_levelReward);
-                _gameStateMachine.Enter<LoadLevelState, string>(_nextLevelData.LevelKey);
                 _isTriggered = true;
             }
         }
-
-
+        
         private void ShowRewardIcon()
         {
             _levelRewardIcon.ShowSprite();

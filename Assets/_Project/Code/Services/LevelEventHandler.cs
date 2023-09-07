@@ -12,7 +12,6 @@ namespace Code.Services
 {
     public class LevelEventHandler : ILevelEventHandler
     {
-
         public event Action MonsterSpawnersCleared;
         public event Action PlayerDead;
 
@@ -24,7 +23,7 @@ namespace Code.Services
         private readonly IScreenService _screenService;
         private readonly IEventSystem _eventSystem;
 
-        private CancellationTokenSource _cancellationToken = new CancellationTokenSource();
+        private readonly CancellationTokenSource _cancellationToken = new CancellationTokenSource();
 
         public LevelEventHandler(IScreenService screenService, IEventSystem eventSystem)
         {
@@ -42,7 +41,6 @@ namespace Code.Services
         public void NextLevelReward(LevelReward levelReward)
         {
             _levelReward = levelReward;
-            
         }
 
         public void HeroDeath()
