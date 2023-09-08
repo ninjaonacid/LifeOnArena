@@ -4,7 +4,6 @@ using Code.Infrastructure.Factory;
 using Code.Logic.CameraLogic;
 using Code.Logic.WaveLogic;
 using Code.Services;
-using Code.Services.PersistentProgress;
 using Code.Services.SaveLoad;
 using Code.StaticData.Levels;
 using Code.UI.HUD;
