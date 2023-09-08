@@ -16,7 +16,6 @@ namespace Code.Infrastructure.Starters
         private readonly IHeroFactory _heroFactory;
         private readonly IConfigDataProvider _configData;
         private readonly IScreenService _screenService;
-        private readonly IUIFactory _uiFactory;
         private readonly PlayerControls _controls;
 
         public MainMenuStarter(IHeroFactory heroFactory, IUIFactory uiFactory, 
@@ -25,7 +24,6 @@ namespace Code.Infrastructure.Starters
         {
             _heroFactory = heroFactory;
             _configData = configData;
-            _uiFactory = uiFactory;
             _screenService = screenService;
             _controls = controls;
         }
