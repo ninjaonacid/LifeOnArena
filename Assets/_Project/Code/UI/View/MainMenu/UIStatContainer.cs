@@ -21,6 +21,13 @@ namespace Code.UI.View.MainMenu
         {
             Attack.SetSlot(statName, value);
         }
+
+        public void SetDefense(string statName, int value)
+        {
+            Defense.SetSlot(statName, value);
+        }
+        
+        
       
     }
 }

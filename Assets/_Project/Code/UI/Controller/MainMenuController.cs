@@ -30,18 +30,25 @@ namespace Code.UI.Controller
             _model = model as MainMenuModel;
             _view = view as MainMenuView;
             _screenService = screenService;
-            
-            _model.Attack.Subscribe(x =>
-            {
-                _view.StatContainer.SetAttack(nameof(_model.Attack) + " ", _model.Attack.Value);
-                _gameData.PlayerData.StatsData.Stats["Attack"] = _model.Attack.Value;
-            }).AddTo(_view);
 
             _model.Health.Subscribe(x =>
             {
                 _view.StatContainer.SetHealth(nameof(_model.Health) + " ", _model.Health.Value);
                 _gameData.PlayerData.StatsData.Stats["Health"] = _model.Health.Value;
-            }).AddTo(_disposables, _view);
+            }).AddTo(_disposables);
+            
+            _model.Attack.Subscribe(x =>
+            {
+                _view.StatContainer.SetAttack(nameof(_model.Attack) + " ", _model.Attack.Value);
+                _gameData.PlayerData.StatsData.Stats["Attack"] = _model.Attack.Value;
+            }).AddTo(_disposables);
+
+
+            _model.Defense.Subscribe(x =>
+            {
+                _view.StatContainer.SetDefense(nameof(_model.Defense) + " ", _model.Defense.Value);
+                _gameData.PlayerData.StatsData.Stats["Defense"] = _model.Defense.Value;
+            }).AddTo(_disposables);
 
             _view.CloseButton
                 .OnClickAsObservable()
