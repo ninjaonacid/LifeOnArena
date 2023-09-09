@@ -54,7 +54,7 @@ namespace Code.Entity.Hero
         private void OnSkillSlot1(InputAction.CallbackContext context)
         {
             if (SkillSlots[0].AbilityTemplate == null) return;
-            
+
             SkillSlots[0].AbilityTemplate.GetAbility().Use(this.gameObject, null);
             SkillSlots[0].AbilityTemplate.State = AbilityState.Active;
             _activeSkill = SkillSlots[0].AbilityTemplate;

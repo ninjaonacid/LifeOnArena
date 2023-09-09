@@ -5,7 +5,6 @@ using Code.StaticData.Levels;
 using Code.UI;
 using Code.UI.Services;
 using Cysharp.Threading.Tasks;
-using UnityEngine;
 using UnityEngine.SceneManagement;
 using VContainer.Unity;
 
