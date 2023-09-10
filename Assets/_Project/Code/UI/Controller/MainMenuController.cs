@@ -56,7 +56,7 @@ namespace Code.UI.Controller
 
             _view.StartFightButton
                 .OnClickAsObservable()
-                .Subscribe(x => _sceneLoader.Load("StoneDungeon_Arena_1"));
+                .Subscribe(x => _sceneLoader.Load("StoneDungeon_Arena_3"));
 
             _view.SkillMenu.Button
                 .OnClickAsObservable()
