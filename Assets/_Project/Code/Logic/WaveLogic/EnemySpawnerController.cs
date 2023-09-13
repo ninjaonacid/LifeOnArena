@@ -34,7 +34,7 @@ namespace Code.Logic.WaveLogic
                 EnemySpawner spawner = await _enemyFactory.CreateSpawner(
                     spawnerData.Position,
                     spawnerData.Id,
-                    spawnerData.MonsterTypeId,
+                    spawnerData.MobId,
                     spawnerData.RespawnCount, token);
 
                 _enemySpawnPoints.Add(spawner);

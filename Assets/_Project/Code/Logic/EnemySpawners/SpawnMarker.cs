@@ -1,12 +1,13 @@
 using Code.StaticData;
 using Code.StaticData.Identifiers;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Code.Logic.EnemySpawners
 {
     public class SpawnMarker : MonoBehaviour
     {
         public int RespawnCount;
-        public MonsterTypeId MonsterTypeId;
+        [FormerlySerializedAs("MonsterTypeId")] public MobId MobId;
     }
 }

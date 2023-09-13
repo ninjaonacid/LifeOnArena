@@ -9,8 +9,8 @@ namespace Code.Infrastructure.ObjectPool
 {
     public interface IEnemyObjectPool :  IService
     {
-        public UniTask<GameObject> GetObject(MonsterTypeId monsterTypeId, Transform parent, CancellationToken token);
-        public void ReturnObject(MonsterTypeId monsterTypeId, GameObject obj);
+        public UniTask<GameObject> GetObject(MobId mobId, Transform parent, CancellationToken token);
+        public void ReturnObject(MobId mobId, GameObject obj);
 
         void Cleanup();
     }

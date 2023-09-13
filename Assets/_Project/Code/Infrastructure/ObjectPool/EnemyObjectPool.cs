@@ -11,12 +11,12 @@ namespace Code.Infrastructure.ObjectPool
     public class EnemyObjectPool : IEnemyObjectPool
     {
 
-        public Dictionary<MonsterTypeId, List<GameObject>> _enemyObjectsStock;
+        public Dictionary<MobId, List<GameObject>> _enemyObjectsStock;
 
         private readonly IEnemyFactory _enemyFactory;
         public EnemyObjectPool(IEnemyFactory enemyFactory)
         {
-            _enemyObjectsStock = new Dictionary<MonsterTypeId, List<GameObject>>();
+            _enemyObjectsStock = new Dictionary<MobId, List<GameObject>>();
             _enemyFactory = enemyFactory;
         }
 
@@ -25,22 +25,22 @@ namespace Code.Infrastructure.ObjectPool
             _enemyObjectsStock.Clear();
         }
 
-        public async UniTask<GameObject> GetObject(MonsterTypeId monsterTypeId, Transform parent,
+        public async UniTask<GameObject> GetObject(MobId mobId, Transform parent,
                                                     CancellationToken token)
         {
             GameObject result = null;
 
-            if (CheckForExist(monsterTypeId))
+            if (CheckForExist(mobId))
             {
-                result = _enemyObjectsStock[monsterTypeId][0];
-                _enemyObjectsStock[monsterTypeId].RemoveAt(0);
+                result = _enemyObjectsStock[mobId][0];
+                _enemyObjectsStock[mobId].RemoveAt(0);
             }
             else
             {
-                if (!_enemyObjectsStock.ContainsKey(monsterTypeId))
-                    _enemyObjectsStock.Add(monsterTypeId, new List<GameObject>());
+                if (!_enemyObjectsStock.ContainsKey(mobId))
+                    _enemyObjectsStock.Add(mobId, new List<GameObject>());
 
-                result = await _enemyFactory.CreateMonster(monsterTypeId, parent, token);
+                result = await _enemyFactory.CreateMonster(mobId, parent, token);
             }
 
             result.transform.position = parent.position;
@@ -48,15 +48,15 @@ namespace Code.Infrastructure.ObjectPool
             return result;
         }
 
-        public void ReturnObject(MonsterTypeId monsterTypeId, GameObject obj)
+        public void ReturnObject(MobId mobId, GameObject obj)
         {
-            _enemyObjectsStock[monsterTypeId].Add(obj);
+            _enemyObjectsStock[mobId].Add(obj);
 
         }
 
-        private bool CheckForExist(MonsterTypeId monsterTypeId)
+        private bool CheckForExist(MobId mobId)
         {
-            return _enemyObjectsStock.ContainsKey(monsterTypeId) && _enemyObjectsStock[monsterTypeId].Count > 0;
+            return _enemyObjectsStock.ContainsKey(mobId) && _enemyObjectsStock[mobId].Count > 0;
         }
 
         

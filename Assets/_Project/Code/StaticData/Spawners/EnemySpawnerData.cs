@@ -1,6 +1,7 @@
 ﻿using System;
 using Code.StaticData.Identifiers;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Code.StaticData.Spawners
 {
@@ -9,13 +10,13 @@ namespace Code.StaticData.Spawners
     {
         public string Id;
         public int RespawnCount;
-        public MonsterTypeId MonsterTypeId;
+        [FormerlySerializedAs("MonsterTypeId")] public MobId MobId;
         public Vector3 Position;
 
-        public EnemySpawnerData(string id, MonsterTypeId monsterTypeId, Vector3 position, int respawnCount)
+        public EnemySpawnerData(string id, MobId mobId, Vector3 position, int respawnCount)
         {
             Id = id;
-            MonsterTypeId = monsterTypeId;
+            MobId = mobId;
             Position = position;
             RespawnCount = respawnCount;
         }

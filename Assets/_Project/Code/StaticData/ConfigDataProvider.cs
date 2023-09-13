@@ -13,7 +13,7 @@ namespace Code.StaticData
 {
     public class ConfigDataProvider : IConfigDataProvider
     {
-        private Dictionary<MonsterTypeId, EnemyDataConfig> _monsters;
+        private Dictionary<MobId, EnemyDataConfig> _monsters;
         private Dictionary<string, LevelConfig> _levels; 
         private Dictionary<LocationReward, LevelReward> _levelReward;
         private Dictionary<ScreenID, ScreenConfig> _windowConfigs;
@@ -27,7 +27,7 @@ namespace Code.StaticData
         {
             _monsters = Resources
                 .LoadAll<EnemyDataConfig>("StaticData/Monsters")
-                .ToDictionary(x => x.MonsterTypeId, x => x);
+                .ToDictionary(x => x.MobId, x => x);
      
             _levels = Resources
                 .LoadAll<LevelConfig>("StaticData/Levels")
@@ -87,7 +87,7 @@ namespace Code.StaticData
             return null;
         }
 
-        public EnemyDataConfig ForMonster(MonsterTypeId typeId)
+        public EnemyDataConfig ForMonster(MobId typeId)
         {
             if (_monsters.TryGetValue(typeId, out var monsterStaticData))
                 return monsterStaticData;

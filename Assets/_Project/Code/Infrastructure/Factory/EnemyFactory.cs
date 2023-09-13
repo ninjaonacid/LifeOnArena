@@ -52,7 +52,7 @@ namespace Code.Infrastructure.Factory
 
         public async UniTask<EnemySpawner> CreateSpawner(Vector3 at,
             string spawnerDataId,
-            MonsterTypeId spawnerDataMonsterTypeId,
+            MobId spawnerDataMobId,
             int spawnerRespawnCount, CancellationToken token)
         {
             var prefab = await _assetProvider.Load<GameObject>(AssetAddress.EnemySpawner);
@@ -61,15 +61,15 @@ namespace Code.Infrastructure.Factory
                 .GetComponent<EnemySpawner>();
 
             spawner.Id = spawnerDataId;
-            spawner.MonsterTypeId = spawnerDataMonsterTypeId;
+            spawner.MobId = spawnerDataMobId;
             spawner.RespawnCount = spawnerRespawnCount;
 
             return spawner;
         }
 
-        public async UniTask<GameObject> CreateMonster(MonsterTypeId monsterTypeId, Transform parent, CancellationToken token)
+        public async UniTask<GameObject> CreateMonster(MobId mobId, Transform parent, CancellationToken token)
         {
-            var monsterData = _configData.ForMonster(monsterTypeId);
+            var monsterData = _configData.ForMonster(mobId);
 
             GameObject prefab = await _assetProvider.Load<GameObject>(monsterData.PrefabReference);
             GameObject monster = _objectResolver.Instantiate<GameObject>(prefab,

@@ -11,9 +11,9 @@ namespace Code.Infrastructure.Factory
 {
     public interface IEnemyFactory : IService
     {
-        UniTask<EnemySpawner> CreateSpawner(Vector3 at, string spawnerDataId, MonsterTypeId spawnerDataMonsterTypeId,
+        UniTask<EnemySpawner> CreateSpawner(Vector3 at, string spawnerDataId, MobId spawnerDataMobId,
             int RespawnCount, CancellationToken token);
-        UniTask<GameObject> CreateMonster(MonsterTypeId monsterTypeId, Transform parent, CancellationToken token);
+        UniTask<GameObject> CreateMonster(MobId mobId, Transform parent, CancellationToken token);
         UniTask<LootPiece> CreateLoot();
         UniTask InitAssets();
     }

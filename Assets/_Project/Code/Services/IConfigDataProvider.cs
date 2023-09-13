@@ -11,7 +11,7 @@ namespace Code.Services
 {
     public interface IConfigDataProvider : IService
     {
-        EnemyDataConfig ForMonster(MonsterTypeId typeId);
+        EnemyDataConfig ForMonster(MobId typeId);
         void Load();
         LevelReward ForReward(LocationReward rewardId);
         StatDatabase ForCharacterStats();

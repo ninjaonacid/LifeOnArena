@@ -10,6 +10,7 @@ using Code.StaticData.StatSystem;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using UnityEngine.Serialization;
 using VContainer;
 
 namespace Code.Logic.EnemySpawners
@@ -26,7 +27,7 @@ namespace Code.Logic.EnemySpawners
         public string Id { get; set; }
         public int RespawnCount { get; set; }
 
-        public MonsterTypeId MonsterTypeId;
+        [FormerlySerializedAs("MonsterTypeId")] public MobId MobId;
         public AssetReference SpawnParticle;
         public bool Alive  { get; private set; }
 
@@ -57,7 +58,7 @@ namespace Code.Logic.EnemySpawners
         public async UniTaskVoid Spawn(CancellationToken token)
         {
             Alive = true;
-            var monster = await _enemyObjectPool.GetObject(MonsterTypeId, transform, token);
+            var monster = await _enemyObjectPool.GetObject(MobId, transform, token);
             _spawnParticle = await _particleObjectPool.GetObject(SpawnParticle, transform);
             
             _enemyDeath = monster.GetComponent<EnemyDeath>();
@@ -69,7 +70,7 @@ namespace Code.Logic.EnemySpawners
             if (_enemyDeath != null)
                   _enemyDeath.Happened -= Slay;
 
-            _enemyObjectPool.ReturnObject(MonsterTypeId, _enemyDeath.gameObject);
+            _enemyObjectPool.ReturnObject(MobId, _enemyDeath.gameObject);
             _particleObjectPool.ReturnObject(SpawnParticle, _spawnParticle);
 
             Alive = false;

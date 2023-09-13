@@ -2,6 +2,7 @@ using Code.StaticData.Configs;
 using Code.StaticData.Identifiers;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using UnityEngine.Serialization;
 
 namespace Code.StaticData
 {
@@ -13,7 +14,7 @@ namespace Code.StaticData
         public int MaxLoot;
         public int MinLoot;
 
-        public MonsterTypeId MonsterTypeId;
+        [FormerlySerializedAs("MonsterTypeId")] public MobId MobId;
 
         public float MoveSpeed;
 

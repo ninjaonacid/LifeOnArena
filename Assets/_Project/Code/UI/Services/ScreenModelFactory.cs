@@ -9,14 +9,9 @@ namespace Code.UI.Services
     {
         private Dictionary<Type, Func<IScreenModel>> _modelMap = new();
 
-        private IGameDataContainer _gameData;
-
         public ScreenModelFactory(IGameDataContainer gameData)
         {
-            _gameData = gameData;
-            
-            
-            _modelMap.Add(typeof(MainMenuModel), () => new MainMenuModel(_gameData.PlayerData.StatsData));
+            _modelMap.Add(typeof(MainMenuModel), () => new MainMenuModel(gameData.PlayerData.StatsData));
             _modelMap.Add(typeof(ShopMenuModel), () => new ShopMenuModel());
             _modelMap.Add(typeof(AbilityMenuModel), () => new AbilityMenuModel());
         }
