@@ -949,11 +949,19 @@ PrefabInstance:
     - target: {fileID: 2085898622953279013, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
       propertyPath: _StatDatabase
       value: 
-      objectReference: {fileID: 11400000, guid: 757a93190135e094ca31878fbac91143, type: 2}
+      objectReference: {fileID: 11400000, guid: a78542a7921aa474c81cc2f19b9c0ecf, type: 2}
     - target: {fileID: 2658416580451336931, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
       propertyPath: m_Name
       value: DarkKnight
       objectReference: {fileID: 0}
+    - target: {fileID: 2892997724190106138, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
+      propertyPath: _stats
+      value: 
+      objectReference: {fileID: 8602693101875569675}
+    - target: {fileID: 2892997724190106139, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
+      propertyPath: _stats
+      value: 
+      objectReference: {fileID: 8602693101875569675}
     - target: {fileID: 3436043548892321881, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -1014,6 +1022,10 @@ PrefabInstance:
       propertyPath: _enemyHealth
       value: 
       objectReference: {fileID: 4878946959185479732}
+    - target: {fileID: 6966552553589898628, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
+      propertyPath: _stats
+      value: 
+      objectReference: {fileID: 8602693101875569675}
     - target: {fileID: 8741323820859785763, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
       propertyPath: m_Avatar
       value: 
@@ -1044,3 +1056,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3436043548892321881, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
   m_PrefabInstance: {fileID: 7750833990728444462}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8602693101875569675 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2085898622953279013, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
+  m_PrefabInstance: {fileID: 7750833990728444462}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83af338313c235a4baec1c672265fef1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
