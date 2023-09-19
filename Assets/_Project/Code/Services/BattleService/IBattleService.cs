@@ -5,6 +5,6 @@ namespace Code.Services.BattleService
 {
     public interface IBattleService : IService
     {
-        void CreateAttack(StatController attackerStats, Vector3 attackPoint, LayerMask mask);
+        int CreateAttack(StatController attackerStats, Vector3 attackPoint, LayerMask mask);
     }
 }

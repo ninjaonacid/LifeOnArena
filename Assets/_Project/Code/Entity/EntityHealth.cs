@@ -21,6 +21,7 @@ namespace Code.Entity
                 Attacker = damage.Attacker,
                 IsCriticalHit = damage.IsCriticalHit
             });
+            
         }
     }
 }

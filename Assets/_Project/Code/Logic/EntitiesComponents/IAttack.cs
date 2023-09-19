@@ -1,3 +1,5 @@
+using System;
+
 namespace Code.Logic.EntitiesComponents
 {
     public interface IAttack

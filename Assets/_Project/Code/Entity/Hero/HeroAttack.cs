@@ -1,3 +1,4 @@
+using System;
 using Code.Logic.EntitiesComponents;
 using Code.Services.AudioService;
 using Code.Services.BattleService;
@@ -11,11 +12,11 @@ namespace Code.Entity.Hero
     public class HeroAttack : MonoBehaviour, IAttack
     {
         private static int _layerMask;
-        private readonly Collider[] _hits = new Collider[2];
+        public event Action<int> OnHit;
         
         [SerializeField] private StatController _stats;
         [SerializeField] private AudioSource _heroAudioSource;
-        
+
         public CharacterController CharacterController;
         
         private IAudioService _audioService;
@@ -33,9 +34,11 @@ namespace Code.Entity.Hero
             _layerMask = 1 << LayerMask.NameToLayer("Hittable");
         }
 
+
         public void BaseAttack()
         {
-            _battleService.CreateAttack(_stats, StartPoint(), _layerMask);
+            var hits = _battleService.CreateAttack(_stats, StartPoint(), _layerMask);
+            OnHit?.Invoke(hits);
         }
 
         public void SkillAttack()

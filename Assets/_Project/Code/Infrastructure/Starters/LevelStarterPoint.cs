@@ -71,8 +71,13 @@ namespace Code.Infrastructure.Starters
         {
             var hud = _gameFactory.CreateHud();
 
-            hud.GetComponentInChildren<ActorUI>().Construct(hero.GetComponent<HeroHealth>());
-            hud.GetComponentInChildren<HudSkillContainer>().Construct(hero.GetComponent<HeroSkills>());
+            var heroHealth = hero.GetComponent<HeroHealth>();
+            var heroSkills = hero.GetComponent<HeroSkills>();
+            var heroAttack = hero.GetComponent<HeroAttack>();
+
+            hud.GetComponentInChildren<ActorUI>().Construct(heroHealth);
+            hud.GetComponentInChildren<HudSkillContainer>().Construct(heroSkills);
+            hud.GetComponentInChildren<ComboCounter>().Construct(heroAttack, heroHealth);
         }
 
         private static void CameraFollow(GameObject hero)

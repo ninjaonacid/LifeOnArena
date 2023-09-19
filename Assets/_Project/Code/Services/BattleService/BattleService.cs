@@ -22,11 +22,13 @@ namespace Code.Services.BattleService
                 mask);
         }
 
-        public void CreateAttack(StatController attackerStats, Vector3 attackPoint, LayerMask mask)
+        public int CreateAttack(StatController attackerStats, Vector3 attackPoint, LayerMask mask)
         {
             var attackRadius = attackerStats.Stats["AttackRadius"].Value;
+
+            var hits = FindTargets(attackPoint, attackRadius, mask);
             
-            for (int i = 0; i < FindTargets(attackPoint, attackRadius, mask); i++)
+            for (int i = 0; i < hits; i++)
             {
                 var target = _hits[i].gameObject;
                 
@@ -35,12 +37,18 @@ namespace Code.Services.BattleService
                     ApplyDamage(attackerStats, target);
                 }
             }
+
+            return hits;
         }
 
         private void ApplyDamage(StatController attacker, GameObject target)
         {
             var damageable = target.GetComponentInParent<IDamageable>();
-            
+            if (attacker.gameObject.TryGetComponent<IAttack>(out var attack))
+            {
+                
+            }
+                        
             IDamage damage = new HealthModifier
             {
                 Attacker = attacker.gameObject,
