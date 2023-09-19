@@ -20,6 +20,7 @@ namespace Code.Infrastructure.Scopes
     {
 
         [SerializeField] private LoadingScreen Screen;
+        
         protected override void Configure(IContainerBuilder builder)
         {
 

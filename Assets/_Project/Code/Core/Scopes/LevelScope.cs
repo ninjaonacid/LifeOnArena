@@ -7,13 +7,12 @@ using Code.Services.BattleService;
 using VContainer;
 using VContainer.Unity;
 
-namespace Code.Infrastructure.Scopes
+namespace Code.Core.Scopes
 {
     public class LevelScope : LifetimeScope
     {
         protected override void Configure(IContainerBuilder builder)
         {
-            builder.RegisterEntryPoint<AssetInitializer>();
             builder.RegisterEntryPoint<LevelStarterPoint>();
             
             builder.Register<EnemySpawnerController>(Lifetime.Scoped);
@@ -28,7 +27,21 @@ namespace Code.Infrastructure.Scopes
             builder.Register<IAbilityFactory, AbilityFactory>(Lifetime.Scoped);
             builder.Register<IBattleService, BattleService>(Lifetime.Scoped);
             
+            InitializeServices(builder);
+        }
 
+        private void InitializeServices(IContainerBuilder builder)
+        {
+            builder.RegisterBuildCallback(container =>
+            {
+                var enemyFactory = container.Resolve<IEnemyFactory>();
+                var itemFactory = container.Resolve<IItemFactory>();
+                var heroFactory = container.Resolve<IHeroFactory>();
+
+                enemyFactory.InitAssets();
+                itemFactory.InitAssets();
+                heroFactory.InitAssets();
+            });
         }
 
     }
