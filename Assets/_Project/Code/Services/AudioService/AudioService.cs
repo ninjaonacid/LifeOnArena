@@ -30,8 +30,12 @@ namespace Code.Services.AudioService
                 source.PlayOneShot(sound);
             }
         }
-        
 
+        public void CleanUp()
+        {
+            _sounds.Clear();
+        }
+        
         public void PlaySound()
         {
             throw new System.NotImplementedException();

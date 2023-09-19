@@ -1,14 +1,11 @@
-using Code.Core.EntryPoints.GameEntry;
 using Code.Infrastructure;
 using Code.Infrastructure.SceneManagement;
-using Code.Services;
 using VContainer.Unity;
 
-namespace Code.Core
+namespace Code.Core.EntryPoints.GameEntry
 {
     public class GameEntryPoint : IInitializable
     {
-        private Game _game;
         private GameStateInitialize _gameState;
         private readonly SceneLoader _sceneLoader;
         private const string MainMenuScene = "MainMenu";
@@ -22,6 +19,7 @@ namespace Code.Core
         public void Initialize()
         {
             _gameState.LoadProgressOrInitNew();
+            
             _sceneLoader.Load(MainMenuScene);
         }
     }

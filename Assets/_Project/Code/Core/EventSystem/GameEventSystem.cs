@@ -2,8 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Code.CustomEvents;
+using Code.Infrastructure.EventSystem;
 
-namespace Code.Infrastructure.EventSystem
+namespace Code.Core.EventSystem
 {
     public class GameEventSystem : IEventSystem
     {
