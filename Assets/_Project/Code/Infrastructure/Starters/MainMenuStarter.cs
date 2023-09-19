@@ -13,23 +13,23 @@ namespace Code.Infrastructure.Starters
     public class MainMenuStarter : IAsyncStartable
     {
         private readonly IHeroFactory _heroFactory;
-        private readonly IConfigDataProvider _configData;
+        private readonly IConfigProvider _config;
         private readonly IScreenService _screenService;
         private readonly PlayerControls _controls;
 
         public MainMenuStarter(IHeroFactory heroFactory, IUIFactory uiFactory, 
             IScreenService screenService,
-            IConfigDataProvider configData, PlayerControls controls)
+            IConfigProvider config, PlayerControls controls)
         {
             _heroFactory = heroFactory;
-            _configData = configData;
+            _config = config;
             _screenService = screenService;
             _controls = controls;
         }
         
         public async UniTask StartAsync(CancellationToken cancellation)
         {
-            LevelConfig config = _configData.ForLevel(SceneManager.GetActiveScene().name);
+            LevelConfig config = _config.ForLevel(SceneManager.GetActiveScene().name);
 
             //GameObject hero = await _heroFactory.CreateHeroUnregistered
               //  (config.HeroInitialPosition, config.HeroInitialRotation);

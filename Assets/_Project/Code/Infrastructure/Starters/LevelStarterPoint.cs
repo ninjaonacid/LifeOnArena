@@ -17,7 +17,7 @@ namespace Code.Infrastructure.Starters
 {
     public class LevelStarterPoint : IAsyncStartable
     {
-        private readonly IConfigDataProvider _configData;
+        private readonly IConfigProvider _config;
         private readonly ISaveLoadService _saveLoad;
         private readonly IHeroFactory _heroFactory;
         private readonly IGameFactory _gameFactory;
@@ -25,12 +25,12 @@ namespace Code.Infrastructure.Starters
         private readonly EnemySpawnerController _enemySpawnerController;
         private readonly LevelController _levelController;
         
-        public LevelStarterPoint(IConfigDataProvider configData, 
+        public LevelStarterPoint(IConfigProvider config, 
             ISaveLoadService saveLoad, IHeroFactory heroFactory, IGameFactory gameFactory,
             PlayerControls controls, EnemySpawnerController enemySpawnerController,
             LevelController controller)
         {
-            _configData = configData;
+            _config = config;
             _saveLoad = saveLoad;
             _heroFactory = heroFactory;
             _gameFactory = gameFactory;
@@ -41,7 +41,7 @@ namespace Code.Infrastructure.Starters
         
         public async UniTask StartAsync(CancellationToken cancellation)
         {
-            LevelConfig config = _configData.ForLevel(SceneManager.GetActiveScene().name);
+            LevelConfig config = _config.ForLevel(SceneManager.GetActiveScene().name);
 
             await _enemySpawnerController.InitSpawners(config, cancellation);
 

@@ -1,6 +1,6 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using Code.Services;
+using Code.StaticData;
 using Code.StaticData.Ability;
 using Code.StaticData.Identifiers;
 using Code.StaticData.Levels;
@@ -9,9 +9,9 @@ using Code.StaticData.UIWindows;
 using Code.UI;
 using UnityEngine;
 
-namespace Code.StaticData
+namespace Code.Services.ConfigData
 {
-    public class ConfigDataProvider : IConfigDataProvider
+    public class ConfigProvider : IConfigProvider
     {
         private Dictionary<MobId, EnemyDataConfig> _monsters;
         private Dictionary<string, LevelConfig> _levels; 
@@ -26,39 +26,39 @@ namespace Code.StaticData
         public void Load()
         {
             _monsters = Resources
-                .LoadAll<EnemyDataConfig>("StaticData/Monsters")
+                .LoadAll<EnemyDataConfig>("ConfigData/Monsters")
                 .ToDictionary(x => x.MobId, x => x);
      
             _levels = Resources
-                .LoadAll<LevelConfig>("StaticData/Levels")
+                .LoadAll<LevelConfig>("ConfigData/Levels")
                 .ToDictionary(x => x.LevelKey, x => x);
 
             _levelReward = Resources
-                .LoadAll<LevelReward>("StaticData/Levels/LevelReward")
+                .LoadAll<LevelReward>("ConfigData/Levels/LevelReward")
                 .ToDictionary(x => x.LocationReward);
 
             _windowConfigs = Resources
-                .Load<WindowsStaticData>("StaticData/UIWindows/WindowsStaticData")
+                .Load<WindowsStaticData>("ConfigData/UIWindows/WindowsStaticData")
                 .Configs
                 .ToDictionary(x => x.ScreenID, x => x);
 
             _heroAbilities = Resources
-                .LoadAll<AbilityTemplateBase>("StaticData/Hero/HeroSkills")
+                .LoadAll<AbilityTemplateBase>("ConfigData/Hero/HeroSkills")
                 .ToDictionary(x => x.Identifier.Id, x => x);
 
             _characterStats = Resources
-                .Load<StatDatabase>("StaticData/Hero/Stats/HeroStatsData");
+                .Load<StatDatabase>("ConfigData/Hero/Stats/HeroStatsData");
 
             _particles = Resources
-                .LoadAll<ParticlesStaticData>("StaticData/Particles")
+                .LoadAll<ParticlesStaticData>("ConfigData/Particles")
                 .ToDictionary(x => x.ParticleId, x => x);
             
             _weapons = Resources
-                .LoadAll<WeaponData>("StaticData/Equipment/Weapons")
+                .LoadAll<WeaponData>("ConfigData/Equipment/Weapons")
                 .ToDictionary(x => x.WeaponId, x => x);
 
             _weaponPlatforms = Resources
-                .LoadAll<WeaponPlatformStaticData>("StaticData/WeaponPlatforms")
+                .LoadAll<WeaponPlatformStaticData>("ConfigData/WeaponPlatforms")
                 .ToDictionary(x => x.WeaponPlatformId, x => x);
 
         }

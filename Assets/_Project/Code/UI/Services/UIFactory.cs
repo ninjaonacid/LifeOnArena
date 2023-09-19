@@ -15,17 +15,17 @@ namespace Code.UI.Services
     public class UIFactory : IUIFactory
     {
         private readonly IAssetProvider _assetProvider;
-        private readonly IConfigDataProvider _configData;
+        private readonly IConfigProvider _config;
         private readonly IObjectResolver _objectResolver;
 
         private Transform _uiCoreTransform;
 
         public UIFactory(IAssetProvider assetProvider, 
-            IConfigDataProvider configDataProvider,
+            IConfigProvider configProvider,
             IObjectResolver objectResolver)
         {
             _assetProvider = assetProvider;
-            _configData = configDataProvider;
+            _config = configProvider;
             _objectResolver = objectResolver;
         }
 
@@ -41,7 +41,7 @@ namespace Code.UI.Services
                 CreateCore();
             }
             
-            BaseView view = _configData.ForWindow(screenId).ViewPrefab;
+            BaseView view = _config.ForWindow(screenId).ViewPrefab;
             var viewInstance = _objectResolver.Instantiate(view, _uiCoreTransform);
             return viewInstance;
         }

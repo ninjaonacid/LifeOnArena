@@ -1,3 +1,4 @@
+using Code.ConfigData.Audio;
 using UnityEngine;
 
 namespace Code.Services.AudioService
@@ -6,6 +7,6 @@ namespace Code.Services.AudioService
     {
         void PlaySound();
         void PlayHeroAttackSound(AudioSource audioSource);
-        void InitAssets();
+        void InitAssets(AudioLibrary audioLibrary);
     }
 }

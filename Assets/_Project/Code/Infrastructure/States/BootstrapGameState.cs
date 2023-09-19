@@ -8,22 +8,22 @@ namespace Code.Infrastructure.States
     {
         private const string InitialScene = "Initialize";
         private readonly SceneLoader _sceneLoader;
-        private readonly IConfigDataProvider _configData;
+        private readonly IConfigProvider _config;
         private readonly IAssetProvider _assetProvider;
         public IGameStateMachine GameStateMachine { get; set; }
 
         public BootstrapGameState(SceneLoader sceneLoader,
-            IConfigDataProvider configData, IAssetProvider assetProvider)
+            IConfigProvider config, IAssetProvider assetProvider)
         {
             _sceneLoader = sceneLoader;
-            _configData = configData;
+            _config = config;
             _assetProvider = assetProvider;
         }
 
         public void Enter()
         {
             _assetProvider.Initialize();
-            _configData.Load();
+            _config.Load();
             _sceneLoader.Load(InitialScene, EnterLoadLevel);
         }
 

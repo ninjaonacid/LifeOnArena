@@ -38,7 +38,12 @@ namespace Code.Entity.Hero
         public void BaseAttack()
         {
             var hits = _battleService.CreateAttack(_stats, StartPoint(), _layerMask);
-            OnHit?.Invoke(hits);
+            if (hits > 0)
+            { 
+                OnHit?.Invoke(hits);
+                _audioService.PlayHeroAttackSound(_heroAudioSource);
+            }
+            
         }
 
         public void SkillAttack()

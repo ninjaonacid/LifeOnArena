@@ -23,7 +23,7 @@ namespace Code.Infrastructure.Factory
     public class EnemyFactory : IEnemyFactory, IDisposable
     {
         private readonly IHeroFactory _heroFactory;
-        private readonly IConfigDataProvider _configData;
+        private readonly IConfigProvider _config;
         private readonly IAssetProvider _assetProvider;
         private readonly ISaveLoadService _saveLoadService;
         private readonly IGameDataContainer _gameDataContainer;
@@ -31,12 +31,12 @@ namespace Code.Infrastructure.Factory
         private readonly IObjectResolver _objectResolver;
 
         private readonly CancellationTokenSource _cancellationTokenSource = default;
-        public EnemyFactory(IHeroFactory heroFactory, IConfigDataProvider configData, IAssetProvider assetProvider, 
+        public EnemyFactory(IHeroFactory heroFactory, IConfigProvider config, IAssetProvider assetProvider, 
             ISaveLoadService saveLoadService, IGameDataContainer gameDataContainer,
             IRandomService randomService, IObjectResolver objectResolver)
         {
             _heroFactory = heroFactory;
-            _configData = configData;
+            _config = config;
             _assetProvider = assetProvider;
             _saveLoadService = saveLoadService;
             _gameDataContainer = gameDataContainer;
@@ -69,7 +69,7 @@ namespace Code.Infrastructure.Factory
 
         public async UniTask<GameObject> CreateMonster(MobId mobId, Transform parent, CancellationToken token)
         {
-            var monsterData = _configData.ForMonster(mobId);
+            var monsterData = _config.ForMonster(mobId);
 
             GameObject prefab = await _assetProvider.Load<GameObject>(monsterData.PrefabReference);
             GameObject monster = _objectResolver.Instantiate<GameObject>(prefab,

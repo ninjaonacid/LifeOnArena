@@ -9,7 +9,7 @@ using Code.UI;
 
 namespace Code.Services
 {
-    public interface IConfigDataProvider : IService
+    public interface IConfigProvider : IService
     {
         EnemyDataConfig ForMonster(MobId typeId);
         void Load();

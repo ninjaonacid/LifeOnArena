@@ -4,6 +4,7 @@ using Code.Infrastructure.SceneManagement;
 using Code.Infrastructure.States;
 using Code.Services;
 using Code.Services.AudioService;
+using Code.Services.ConfigData;
 using Code.Services.PersistentProgress;
 using Code.Services.RandomService;
 using Code.Services.SaveLoad;
@@ -23,7 +24,7 @@ namespace Code.Infrastructure.Scopes
         {
             InstallStateMachine(builder);
             
-            builder.Register<IConfigDataProvider, ConfigDataProvider>(Lifetime.Singleton);
+            builder.Register<IConfigProvider, ConfigProvider>(Lifetime.Singleton);
             builder.Register<ISaveLoadService, SaveLoadService>(Lifetime.Singleton);
             
             builder.Register<IUIFactory, UIFactory>(Lifetime.Singleton);

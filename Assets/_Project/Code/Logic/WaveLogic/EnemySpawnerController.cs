@@ -14,7 +14,7 @@ namespace Code.Logic.WaveLogic
 {
     public class EnemySpawnerController : IService, IDisposable
     {
-        private readonly IConfigDataProvider _configData;
+        private readonly IConfigProvider _config;
         private readonly IEnemyFactory _enemyFactory;
         private readonly List<EnemySpawner> _enemySpawnPoints = new List<EnemySpawner>();
         private CancellationTokenSource _cancellationTokenSource;

@@ -11,20 +11,20 @@ namespace Code.Infrastructure.Factory
 {
     public class AbilityFactory : IAbilityFactory
     {
-        private readonly IConfigDataProvider _configData;
+        private readonly IConfigProvider _config;
         private readonly IParticleObjectPool _particlePool;
         private readonly IBattleService _battleService;
         private readonly IRandomService _random;
         private readonly IAssetProvider _assetProvider;
         public AbilityFactory(
             IAssetProvider assetProvider,
-            IConfigDataProvider configData,
+            IConfigProvider config,
             IParticleObjectPool particlePool,
             IBattleService battleService,
             IRandomService random)
         {
             _assetProvider = assetProvider;
-            _configData = configData;
+            _config = config;
             _particlePool = particlePool;
             _battleService = battleService;
             _random = random;
@@ -32,7 +32,7 @@ namespace Code.Infrastructure.Factory
 
         public AbilityTemplateBase CreateAbilityTemplate(int heroAbilityId)
         {
-            AbilityTemplateBase abilityTemplate = _configData.ForAbility(heroAbilityId);
+            AbilityTemplateBase abilityTemplate = _config.ForAbility(heroAbilityId);
             
             abilityTemplate.InitServices(_particlePool, _battleService);
             
