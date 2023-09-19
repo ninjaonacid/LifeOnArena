@@ -33,7 +33,6 @@ namespace Code.Infrastructure.States
         {
             _saveLoadService.Cleanup();
             _assetProvider.Cleanup();
-            _audioService.InitAssets();
 
             _sceneLoader.Load(sceneName, OnLoaded);
         }

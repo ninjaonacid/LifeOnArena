@@ -12,6 +12,6 @@ namespace Code.ConfigData.Audio
     public class Sound
     {
         public AssetReference SoundRef;
-        public SoundId SoundId;
+        public string Id;
     }
 }

@@ -22,8 +22,7 @@ namespace Code.Infrastructure.Scopes
         [SerializeField] private LoadingScreen Screen;
         protected override void Configure(IContainerBuilder builder)
         {
-            InstallStateMachine(builder);
-            
+
             builder.Register<IConfigProvider, ConfigProvider>(Lifetime.Singleton);
             builder.Register<ISaveLoadService, SaveLoadService>(Lifetime.Singleton);
             
@@ -45,16 +44,5 @@ namespace Code.Infrastructure.Scopes
             
         }
 
-        private void InstallStateMachine(IContainerBuilder builder)
-        {
-            builder.Register<IGameStateMachine, GameStateMachine>(Lifetime.Singleton);
-            builder.Register<IExitableState, BootstrapGameState>(Lifetime.Singleton);
-            builder.Register<IExitableState, GameLoopGameState>(Lifetime.Singleton);
-            builder.Register<IExitableState, LoadLevelState>(Lifetime.Singleton);
-            builder.Register<IExitableState, MainMenuGameState>(Lifetime.Singleton);
-            builder.Register<IExitableState, LoadProgressGameState>(Lifetime.Singleton);
-        }
-        
-        
     }
 }

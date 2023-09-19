@@ -1,4 +1,5 @@
-using Code.Infrastructure.States;
+using Code.Infrastructure.SceneManagement;
+using Code.Services.ConfigData;
 using VContainer.Unity;
 
 namespace Code.Infrastructure
@@ -6,17 +7,22 @@ namespace Code.Infrastructure
     public class GameBootstrapper : IInitializable
     {
         private Game _game;
-        private readonly IGameStateMachine _stateMachine;
+        private readonly SceneLoader _sceneLoader;
+        private ConfigProvider _configProvider;
+        private const string MainMenuScene = "MainMenu";
 
-        public GameBootstrapper(IGameStateMachine stateMachine)
+        public GameBootstrapper(SceneLoader sceneLoader, ConfigProvider configProvider)
         {
-            _stateMachine = stateMachine;
+            _sceneLoader = sceneLoader;
+            _configProvider = configProvider;
         }
-
+        
         public void Initialize()
         {
-            _game = new Game(_stateMachine);
+            _game = new Game();
             _game.StartGame();
+            _configProvider.Load();
+            _sceneLoader.Load("MainMenu");
         }
     }
 }

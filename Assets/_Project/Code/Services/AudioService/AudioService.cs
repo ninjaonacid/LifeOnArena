@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Code.ConfigData.Audio;
 using Code.Infrastructure.AssetManagement;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace Code.Services.AudioService
@@ -8,23 +9,32 @@ namespace Code.Services.AudioService
     public class AudioService : IAudioService
     {
         private readonly IAssetProvider _assetProvider;
-        private Dictionary<SoundId, Sound> _sounds = new();
+        private readonly Dictionary<string, AudioClip> _sounds = new();
         public AudioService(IAssetProvider assetProvider)
         {
             _assetProvider = assetProvider;
         }
-        public void InitAssets(AudioLibrary audioLibrary)
+        public async UniTaskVoid InitAssets(AudioLibrary audioLibrary)
         {
             foreach (var sound in audioLibrary.Sounds)
             {
-                _assetProvider.Load<AudioClip>(sound.SoundRef);
-                _sounds.Add();
+                var audioClip = await _assetProvider.Load<AudioClip>(sound.SoundRef);
+                _sounds.Add(sound.Id, audioClip);
             }
-           // _assetProvider.Load<AudioClip>(AssetAddress.HeroSwordAttackSound);
         }
+
+        public void PlaySound(string soundName, AudioSource source)
+        {
+            if (_sounds.TryGetValue(soundName, out var sound))
+            {
+                source.PlayOneShot(sound);
+            }
+        }
+        
 
         public void PlaySound()
         {
+            throw new System.NotImplementedException();
         }
 
         public async void PlayHeroAttackSound(AudioSource audioSource)
