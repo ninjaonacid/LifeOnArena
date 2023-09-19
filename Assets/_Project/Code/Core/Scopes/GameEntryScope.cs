@@ -11,8 +11,6 @@ namespace Code.Core.Scopes
             builder.RegisterEntryPoint<GameEntryPoint>();
 
             builder.Register<GameStateInitialize>(Lifetime.Scoped);
-       
-
         }
     }
 }

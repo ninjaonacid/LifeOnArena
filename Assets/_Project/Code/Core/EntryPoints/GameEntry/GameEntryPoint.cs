@@ -6,8 +6,9 @@ namespace Code.Core.EntryPoints.GameEntry
 {
     public class GameEntryPoint : IInitializable
     {
-        private GameStateInitialize _gameState;
+        private readonly GameStateInitialize _gameState;
         private readonly SceneLoader _sceneLoader;
+        
         private const string MainMenuScene = "MainMenu";
 
         public GameEntryPoint(GameStateInitialize gameState, SceneLoader sceneLoader)
