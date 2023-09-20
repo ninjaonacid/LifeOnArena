@@ -43,6 +43,7 @@ namespace Code.Core.Scopes
             builder.Register<SceneLoader>(Lifetime.Singleton);
 
             builder.RegisterComponentInNewPrefab(Screen, Lifetime.Singleton).AsImplementedInterfaces();
+            builder.RegisterComponentInNewPrefab(GameAudioPlayer, Lifetime.Singleton).DontDestroyOnLoad();
 
         }
 

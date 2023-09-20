@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Code.ConfigData.Audio;
 using Code.Core.AssetManagement;
+using Code.Core.Audio;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -15,16 +16,17 @@ namespace Code.Services.AudioService
         private readonly Dictionary<string, Sound> _sfx = new();
         private readonly Dictionary<string, Sound> _bgm = new();
 
-        private Transform _gameAudioSource;
-        public AudioService(IAssetProvider assetProvider)
+        private GameAudioPlayer _gameAudioPlayer;
+        public AudioService(IAssetProvider assetProvider, GameAudioPlayer gameAudioPlayer)
         {
             _assetProvider = assetProvider;
+            _gameAudioPlayer = gameAudioPlayer;
         }
         public async UniTaskVoid InitializeAudio(AudioLibrary audioLibrary)
         {
-            if (!_gameAudioSource)
+            if (!_gameAudioPlayer.TryGetComponent<AudioSource>(out var source))
             {
-                _assetProvider.InstantiateSync(AssetAddress.GameAudioSource);
+                source = _gameAudioPlayer.gameObject.AddComponent<AudioSource>();
             }
             
             foreach (var sound in audioLibrary.Sounds)
@@ -44,6 +46,11 @@ namespace Code.Services.AudioService
         {
             if (_bgm.TryGetValue(musicName, out var music))
             {
+                if(_gameAudioPlayer.TryGetComponent<AudioSource>(out var source))
+                {
+                    music.Source = source;
+                    music.Volume = volume;
+                }
                 music.Play();
             }
         
@@ -86,11 +93,11 @@ namespace Code.Services.AudioService
 
         public async void PlayHeroAttackSound(AudioSource audioSource)
         {
-            var sound = await _assetProvider.Load<AudioClip>(AssetAddress.HeroSwordAttackSound);
+            //var sound = await _assetProvider.Load<AudioClip>(AssetAddress.HeroSwordAttackSound);
             //GameObject soundGameObject = new GameObject();
             //AudioSource audioSource = soundGameObject.AddComponent<AudioSource>();
 
-            audioSource.PlayOneShot(sound);
+            //audioSource.PlayOneShot(sound);
         }
     }
 }
