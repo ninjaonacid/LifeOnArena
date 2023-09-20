@@ -1,18 +1,21 @@
-using Code.Core.AssetManagement;
-using Code.Services;
-using Code.Services.ConfigData;
+using Code.Core.Factory;
+using VContainer.Unity;
 
 namespace Code.Core.EntryPoints.GameEntry
 {
-    public class AssetWarmUp
+    public class AssetWarmUp : IInitializable
     {
-        private readonly IAssetProvider _assetProvider;
-        private readonly IConfigProvider _configProvider;
+        private readonly IHeroFactory _heroFactory;
 
-        public AssetWarmUp(IAssetProvider assetProvider, IConfigProvider configProvider)
+        public AssetWarmUp(IHeroFactory heroFactory)
         {
-            _assetProvider = assetProvider;
-            _configProvider = configProvider;
+            _heroFactory = heroFactory;
+        }
+
+
+        public void Initialize()
+        {
+            _heroFactory.InitAssets();
         }
     }
 }

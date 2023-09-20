@@ -32,7 +32,7 @@ namespace Code.Services.ConfigData
                 .ToDictionary(x => x.MobId, x => x);
 
             _audioLibrary = Resources
-                .Load<AudioLibrary>("ConfigData/Audio/LevelAudioConfig");
+                .Load<AudioLibrary>("ConfigData/Audio/AudioLibrary");
 
             _levels = Resources
                 .LoadAll<LevelConfig>("ConfigData/Levels")

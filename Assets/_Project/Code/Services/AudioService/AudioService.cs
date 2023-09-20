@@ -28,34 +28,27 @@ namespace Code.Services.AudioService
             _gameAudioPlayer = gameAudioPlayer;
         }
 
-        public void InitializeAudio(AudioLibrary audioLibrary)
+        public void InitializeAudio ()
         {
-            if (!_gameAudioPlayer.TryGetComponent<AudioSource>(out var source))
-            {
-                source = _gameAudioPlayer.gameObject.AddComponent<AudioSource>();
-            }
-            
-            foreach (var sound in audioLibrary.Sounds)
+            var library = _configProvider.GetLibrary();
+
+            foreach (var sound in library.Sounds)
             {
                 _sfx.Add(sound.Id, sound);
             }
 
-            foreach (var music in audioLibrary.Music)
+            foreach (var music in library.Music)
             {
                 _bgm.Add(music.Id, music);
             }
-
-            
         }
 
-        public void PlayBackgroundMusic(string musicName, float volume)
+        public void PlayBackgroundMusic(string musicName, float volume, bool isLoop)
         {
             if (_bgm.TryGetValue(musicName, out var music))
             {
-                if(_gameAudioPlayer.TryGetComponent<AudioSource>(out var source))
-                {
-                
-                }
+                music.Setup(_gameAudioPlayer.GetAudioSource(), volume, isLoop);
+               
                 music.Play();
             }
             else

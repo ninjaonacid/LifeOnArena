@@ -1,8 +1,6 @@
-using System.Threading;
 using Code.Core.AssetManagement;
 using Code.Services.AudioService;
 using Code.Services.ConfigData;
-using Cysharp.Threading.Tasks;
 using VContainer.Unity;
 
 namespace Code.Core.EntryPoints
@@ -26,6 +24,7 @@ namespace Code.Core.EntryPoints
         {
             _configProvider.Load();
             _assetProvider.Initialize();
+            _audioService.InitializeAudio();
         }
         
     }

@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -113,7 +112,7 @@ namespace Code.Core.AssetManagement
             _loadingAssets.Clear();
         }
 
-        private async Task<T> LoadWithCache<T>(AsyncOperationHandle<T> handle, string cacheKey) where T : class
+        private async UniTask<T> LoadWithCache<T>(AsyncOperationHandle<T> handle, string cacheKey) where T : class
         {
             handle.Completed += operation => { _loadedAssets[cacheKey] = operation; };
 
