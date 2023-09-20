@@ -9,7 +9,7 @@ using Object = UnityEngine.Object;
 
 namespace Code.Services.AudioService
 {
-    public class AudioService : IAudioService
+    public class AudioService 
     {
         private readonly IAssetProvider _assetProvider;
         
@@ -22,24 +22,32 @@ namespace Code.Services.AudioService
             _assetProvider = assetProvider;
             _gameAudioPlayer = gameAudioPlayer;
         }
-        public async UniTaskVoid InitializeAudio(AudioLibrary audioLibrary)
+        public async UniTask InitializeAudio(AudioLibrary audioLibrary)
         {
             if (!_gameAudioPlayer.TryGetComponent<AudioSource>(out var source))
             {
                 source = _gameAudioPlayer.gameObject.AddComponent<AudioSource>();
             }
+
+
+            List<UniTask<AudioClip>> tasks = new List<UniTask<AudioClip>>();
             
             foreach (var sound in audioLibrary.Sounds)
             {
-                await _assetProvider.Load<AudioClip>(sound.SoundRef);
-                _sfx.Add(sound.Id, sound);
+               var task = _assetProvider.Load<AudioClip>(sound.SoundRef);
+               tasks.Add(task);
+               _sfx.Add(sound.Id, sound);
             }
 
             foreach (var music in audioLibrary.Music)
             {
-                await _assetProvider.Load<AudioClip>(music.SoundRef);
+                
+                var task =  _assetProvider.Load<AudioClip>(music.SoundRef);
+                tasks.Add(task);
                 _bgm.Add(music.Id, music);
             }
+
+            await UniTask.WhenAll(tasks);
         }
 
         public void PlayBackgroundMusic(string musicName, float volume)

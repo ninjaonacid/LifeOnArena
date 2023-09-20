@@ -19,11 +19,11 @@ namespace Code.Entity.Hero
 
         public CharacterController CharacterController;
         
-        private IAudioService _audioService;
+        private AudioService _audioService;
         private IBattleService _battleService;
         
         [Inject]
-        public void Construct(IAudioService audioService, IBattleService battleService)
+        public void Construct(AudioService audioService, IBattleService battleService)
         {
             _audioService = audioService;
             _battleService = battleService;

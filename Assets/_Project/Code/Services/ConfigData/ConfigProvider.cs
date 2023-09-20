@@ -2,6 +2,7 @@
 using System.Linq;
 using Code.ConfigData;
 using Code.ConfigData.Ability;
+using Code.ConfigData.Audio;
 using Code.ConfigData.Identifiers;
 using Code.ConfigData.Levels;
 using Code.ConfigData.StatSystem;
@@ -21,6 +22,7 @@ namespace Code.Services.ConfigData
         private Dictionary<ParticleId, ParticlesStaticData> _particles;
         private Dictionary<WeaponId, WeaponData> _weapons;
         private Dictionary<WeaponId, WeaponPlatformStaticData> _weaponPlatforms;
+        private AudioLibrary _audioLibrary;
         private StatDatabase _characterStats;
 
         public void Load()
@@ -28,7 +30,10 @@ namespace Code.Services.ConfigData
             _monsters = Resources
                 .LoadAll<EnemyDataConfig>("ConfigData/Monsters")
                 .ToDictionary(x => x.MobId, x => x);
-     
+
+            _audioLibrary = Resources
+                .Load<AudioLibrary>("ConfigData/Audio/LevelAudioConfig");
+
             _levels = Resources
                 .LoadAll<LevelConfig>("ConfigData/Levels")
                 .ToDictionary(x => x.LevelKey, x => x);
@@ -71,6 +76,8 @@ namespace Code.Services.ConfigData
             return null;
         }
 
+        public AudioLibrary GetLibrary() => _audioLibrary;
+     
         public WeaponPlatformStaticData ForWeaponPlatforms(WeaponId weaponId)
         {
             if(_weaponPlatforms.TryGetValue(weaponId, out var weaponPlatformStaticData ))

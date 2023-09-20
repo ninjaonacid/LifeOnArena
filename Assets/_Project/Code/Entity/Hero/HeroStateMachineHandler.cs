@@ -21,7 +21,7 @@ namespace Code.Entity.Hero
 
         private FiniteStateMachine _stateMachine;
         private PlayerControls _controls;
-        private IAudioService _audioService;
+        private AudioService _audioService;
 
         [SerializeField] private Identifier _spinAttackAbilityId;
         [SerializeField] private Identifier _dodgeRollAbilityId;
@@ -35,7 +35,7 @@ namespace Code.Entity.Hero
 
 
         [Inject]
-        public void Construct(PlayerControls controls, IAudioService audioService)
+        public void Construct(PlayerControls controls, AudioService audioService)
         {
             _controls = controls;
             _audioService = audioService;

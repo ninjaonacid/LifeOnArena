@@ -1,6 +1,7 @@
 using System.Threading;
 using Code.ConfigData.Levels;
 using Code.Core.Factory;
+using Code.Services.AudioService;
 using Code.Services.ConfigData;
 using Code.UI;
 using Code.UI.Services;
@@ -15,16 +16,19 @@ namespace Code.Core.EntryPoints
         private readonly IHeroFactory _heroFactory;
         private readonly IConfigProvider _config;
         private readonly IScreenService _screenService;
+        private readonly AudioService _audioService;
         private readonly PlayerControls _controls;
 
         public MainMenuStarter(IHeroFactory heroFactory, IUIFactory uiFactory, 
             IScreenService screenService,
-            IConfigProvider config, PlayerControls controls)
+            IConfigProvider config, PlayerControls controls,
+            AudioService audioService)
         {
             _heroFactory = heroFactory;
             _config = config;
             _screenService = screenService;
             _controls = controls;
+            _audioService = audioService;
         }
         
         public async UniTask StartAsync(CancellationToken cancellation)
@@ -33,6 +37,8 @@ namespace Code.Core.EntryPoints
 
             //GameObject hero = await _heroFactory.CreateHeroUnregistered
               //  (config.HeroInitialPosition, config.HeroInitialRotation);
+              
+              _audioService.PlayBackgroundMusic("TalkShowBack", volume: 1);
 
             _screenService.Open(ScreenID.MainMenu);
         }

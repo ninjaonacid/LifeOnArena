@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Code.ConfigData;
 using Code.ConfigData.Ability;
+using Code.ConfigData.Audio;
 using Code.ConfigData.Identifiers;
 using Code.ConfigData.Levels;
 using Code.ConfigData.StatSystem;
@@ -23,6 +24,7 @@ namespace Code.Services.ConfigData
         WeaponData ForWeapon(WeaponId weaponId);
         WeaponPlatformStaticData ForWeaponPlatforms(WeaponId weaponId);
         List<LevelConfig> LoadLevels();
-        
+
+        AudioLibrary GetLibrary();
     }
 }
