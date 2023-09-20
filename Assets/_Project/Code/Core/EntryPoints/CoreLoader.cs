@@ -7,14 +7,14 @@ using VContainer.Unity;
 
 namespace Code.Core.EntryPoints
 {
-    public class CoreEntryPoint : IAsyncStartable
+    public class CoreLoader : IInitializable
     {
         private readonly IConfigProvider _configProvider;
         private readonly IAssetProvider _assetProvider;
         private readonly AudioService _audioService;
    
 
-        public CoreEntryPoint(IConfigProvider configProvider, IAssetProvider assetProvider,
+        public CoreLoader(IConfigProvider configProvider, IAssetProvider assetProvider,
             AudioService audioService)
         {
             _configProvider = configProvider;
@@ -26,14 +26,7 @@ namespace Code.Core.EntryPoints
         {
             _configProvider.Load();
             _assetProvider.Initialize();
-            _audioService.InitializeAudio(_configProvider.GetLibrary()).Forget();
         }
-
-        public async UniTask StartAsync(CancellationToken cancellation)
-        {
-            _configProvider.Load();
-            _assetProvider.Initialize();
-            await _audioService.InitializeAudio(_configProvider.GetLibrary());
-        }
+        
     }
 }

@@ -38,7 +38,7 @@ namespace Code.Core.EntryPoints
             //GameObject hero = await _heroFactory.CreateHeroUnregistered
               //  (config.HeroInitialPosition, config.HeroInitialRotation);
               
-              _audioService.PlayBackgroundMusic("TalkShowBack", volume: 1);
+            //_audioService.PlayBackgroundMusic("TalkShowBack", volume: 1);
 
             _screenService.Open(ScreenID.MainMenu);
         }

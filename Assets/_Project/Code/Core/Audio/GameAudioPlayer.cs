@@ -6,9 +6,8 @@ namespace Code.Core.Audio
     [RequireComponent(typeof(AudioSource))]
     public class GameAudioPlayer : MonoBehaviour
     {
-        private void Awake()
-        {
-            
-        }
+        [SerializeField] private AudioSource _gameAudioSource;
+        
+        public AudioSource GetAudioSource() => _gameAudioSource;
     }
 }

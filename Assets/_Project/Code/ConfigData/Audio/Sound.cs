@@ -1,4 +1,5 @@
 using System;
+using Sirenix.Utilities.Editor;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
@@ -14,18 +15,39 @@ namespace Code.ConfigData.Audio
         public string Id;
         public AssetReference SoundRef;
         public AudioSource Source;
-        public Transform SourceTransform;
-        public bool NeedUnload;
-        public bool IsPlaying;
-        public bool Paused;
-        public bool Stopped;
-        public float Volume;
-        public bool isLoopSound;
+        public Transform SourceTransform { get; private set; }
+        public bool IsPlaying { get; private set; }
+        public bool IsPaused { get; private set; }
+        public bool IsStopped { get; private set; }
+        public float Volume { get; set; }
 
+        public AudioClip Clip { get; set; }
+        
+        public bool IsLoopSound;
+
+        public void Initialize(AudioClip clip, AudioSource source, float volume, bool isLoop)
+        {
+            Clip = clip;
+            Volume = volume;
+            IsLoopSound = isLoop;
+        }
 
         public void Play()
         {
             Source.Play();
+            IsPlaying = true;
+            IsPaused = false;
+        }
+        public void Pause()
+        {
+            Source.Pause();
+            IsPaused = true;
+        }
+
+        public void Stop()
+        {
+            Source.Stop();
+            IsStopped = true;
         }
     }
 }

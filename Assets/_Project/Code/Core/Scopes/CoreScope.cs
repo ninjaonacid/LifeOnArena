@@ -1,4 +1,3 @@
-using Code.ConfigData.Audio;
 using Code.Core.AssetManagement;
 using Code.Core.Audio;
 using Code.Core.EntryPoints;
@@ -25,7 +24,7 @@ namespace Code.Core.Scopes
         
         protected override void Configure(IContainerBuilder builder)
         {
-            builder.RegisterEntryPoint<CoreEntryPoint>();
+            builder.RegisterEntryPoint<CoreLoader>();
             
             builder.Register<IConfigProvider, ConfigProvider>(Lifetime.Singleton);
             builder.Register<ISaveLoadService, SaveLoadService>(Lifetime.Singleton);
@@ -39,13 +38,15 @@ namespace Code.Core.Scopes
             builder.Register<IGameDataContainer, GameDataContainer>(Lifetime.Singleton);
             builder.Register<IRandomService, RandomService>(Lifetime.Singleton);
             builder.Register<IEventSystem, GameEventSystem>(Lifetime.Singleton);
-            builder.Register<AudioService>(Lifetime.Singleton);
+
+            builder.Register<AudioService>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
 
             builder.Register<PlayerControls>(Lifetime.Singleton).AsSelf();
             builder.Register<SceneLoader>(Lifetime.Singleton);
 
             builder.RegisterComponentInNewPrefab(Screen, Lifetime.Singleton).AsImplementedInterfaces();
             builder.RegisterComponentInNewPrefab(GameAudioPlayer, Lifetime.Singleton).DontDestroyOnLoad();
+            
         }
 
     }
