@@ -9,12 +9,10 @@ namespace Code.Core.AssetManagement
 {
     public class AssetProvider : IAssetProvider
     {
-        private readonly Dictionary<string, AsyncOperationHandle> _completedCache =
-            new Dictionary<string, AsyncOperationHandle>();
-
-        private readonly Dictionary<string, List<AsyncOperationHandle>> _handles = 
-            new Dictionary<string, List<AsyncOperationHandle>>();
-
+        private readonly Dictionary<string, AsyncOperationHandle> _loadedAssets = new();
+    
+        private readonly Dictionary<string, List<AsyncOperationHandle>> _loadingAssets = new();
+        
         public void Initialize()
         {
             Addressables.InitializeAsync();
@@ -22,7 +20,7 @@ namespace Code.Core.AssetManagement
 
         public async UniTask<T> Load<T>(AssetReferenceGameObject assetReference) where T : class
         {
-            if (_completedCache.TryGetValue(assetReference.AssetGUID, 
+            if (_loadedAssets.TryGetValue(assetReference.AssetGUID, 
                     out AsyncOperationHandle completedHandle))
             {
                 return completedHandle.Result as T;
@@ -35,7 +33,7 @@ namespace Code.Core.AssetManagement
 
         public async UniTask<T> Load<T>(AssetReferenceSprite spriteReference) where T : class
         {
-            if (_completedCache.TryGetValue(spriteReference.AssetGUID,
+            if (_loadedAssets.TryGetValue(spriteReference.AssetGUID,
                     out AsyncOperationHandle completedHandle))
             {
                 return completedHandle.Result as T;
@@ -48,51 +46,62 @@ namespace Code.Core.AssetManagement
 
         public async UniTask<T> Load<T>(AssetReference assetReference) where T : class
         {
-            if (_completedCache.TryGetValue(assetReference.AssetGUID,
+            if (_loadedAssets.TryGetValue(assetReference.AssetGUID,
                     out AsyncOperationHandle completedHandle))
             {
                 return completedHandle.Result as T;
             }
-
+            
             return await LoadWithCache(
                 Addressables.LoadAssetAsync<T>(assetReference),
                 assetReference.AssetGUID);
         }
 
+        
         public async UniTask<T> Load<T>(string assetAddress) where T : class
         {
-            if (_completedCache.TryGetValue(assetAddress,
+            if (_loadedAssets.TryGetValue(assetAddress,
                     out AsyncOperationHandle completedHandle))
             {
                 return completedHandle.Result as T;
             }
-
+            
             return await LoadWithCache(
                 Addressables.LoadAssetAsync<T>(assetAddress),
                 assetAddress);
         }
+
+        public void Unload(AssetReference assetReference) 
+        {
+            if(_loadedAssets.TryGetValue(assetReference.AssetGUID, out var handle))
+            {
+                _loadedAssets.Remove(assetReference.AssetGUID);
+                Addressables.Release(handle);
+            }
+        }
         
-        public GameObject Instantiate(string path)
+        
+        public GameObject InstantiateSync(string path)
         {
             var prefab = Resources.Load<GameObject>(path);
             return Object.Instantiate(prefab);
         }
 
-        public GameObject Instantiate(string path, Vector3 point)
+        public GameObject InstantiateSync(string path, Vector3 point)
         {
             var prefab = Resources.Load<GameObject>(path);
             return Object.Instantiate(prefab, point, Quaternion.identity);
         }
 
-        public GameObject Instantiate(string path, Transform parent)
+        public GameObject InstantiateSync(string path, Transform parent)
         {
             var prefab = Resources.Load<GameObject>(path);
             return Object.Instantiate(prefab, parent);
         }
 
-        public void Cleanup()
+        public void UnloadAll()
         {
-            foreach (List<AsyncOperationHandle> resourceHandles in _handles.Values)
+            foreach (List<AsyncOperationHandle> resourceHandles in _loadingAssets.Values)
             {
                 foreach (AsyncOperationHandle handle in resourceHandles)
                 {
@@ -100,13 +109,13 @@ namespace Code.Core.AssetManagement
                 }
             }
 
-            _completedCache.Clear();
-            _handles.Clear();
+            _loadedAssets.Clear();
+            _loadingAssets.Clear();
         }
 
         private async Task<T> LoadWithCache<T>(AsyncOperationHandle<T> handle, string cacheKey) where T : class
         {
-            handle.Completed += operation => { _completedCache[cacheKey] = operation; };
+            handle.Completed += operation => { _loadedAssets[cacheKey] = operation; };
 
             AddHandleOperation(handle, cacheKey);
 
@@ -115,10 +124,10 @@ namespace Code.Core.AssetManagement
 
         private void AddHandleOperation<T>(AsyncOperationHandle<T> handle, string cacheKey) where T : class
         {
-            if (!_handles.TryGetValue(cacheKey, out List<AsyncOperationHandle> resourcesHandles))
+            if (!_loadingAssets.TryGetValue(cacheKey, out List<AsyncOperationHandle> resourcesHandles))
             {
                 resourcesHandles = new List<AsyncOperationHandle>();
-                _handles[cacheKey] = resourcesHandles;
+                _loadingAssets[cacheKey] = resourcesHandles;
             }
 
             resourcesHandles.Add(handle);

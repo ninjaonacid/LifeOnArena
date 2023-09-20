@@ -14,9 +14,17 @@ namespace Code.ConfigData.Audio
         public string Id;
         public AssetReference SoundRef;
         public AudioSource Source;
+        public Transform SourceTransform;
+        public bool UnloadSound;
         public bool IsPlaying;
         public bool Paused;
         public bool Stopped;
         public float Volume;
+
+
+        public void Play()
+        {
+            Source.Play();
+        }
     }
 }

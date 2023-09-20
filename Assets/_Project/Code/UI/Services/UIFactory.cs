@@ -48,7 +48,7 @@ namespace Code.UI.Services
 
         public void CreateCore()
         {
-            _uiCoreTransform = _assetProvider.Instantiate(AssetAddress.UICore).transform;
+            _uiCoreTransform = _assetProvider.InstantiateSync(AssetAddress.UICore).transform;
         }
 
         public async Task<Sprite> CreateSprite(AssetReferenceSprite spriteReference)

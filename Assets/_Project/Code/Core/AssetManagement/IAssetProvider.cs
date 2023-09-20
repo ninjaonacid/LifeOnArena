@@ -7,9 +7,9 @@ namespace Code.Core.AssetManagement
 {
     public interface IAssetProvider : IService
     {
-        GameObject Instantiate(string path);
-        GameObject Instantiate(string path, Vector3 point);
-        GameObject Instantiate(string path, Transform parent);
+        GameObject InstantiateSync(string path);
+        GameObject InstantiateSync(string path, Vector3 point);
+        GameObject InstantiateSync(string path, Transform parent);
         void Initialize();
 
         UniTask<T> Load<T>(AssetReferenceGameObject assetReference) where T : class;
@@ -19,6 +19,6 @@ namespace Code.Core.AssetManagement
 
         UniTask<T> Load<T>(string assetAddress) where T : class;
 
-        void Cleanup();
+        void UnloadAll();
     }
 }

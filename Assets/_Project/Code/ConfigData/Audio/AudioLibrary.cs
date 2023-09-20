@@ -7,5 +7,7 @@ namespace Code.ConfigData.Audio
     public class AudioLibrary : ScriptableObject
     {
         public List<Sound> Sounds;
+        public List<Sound> Music;
+
     }
 }

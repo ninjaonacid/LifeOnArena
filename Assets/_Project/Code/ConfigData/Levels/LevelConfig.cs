@@ -29,15 +29,19 @@ namespace Code.ConfigData.Levels
 
 
         public int WavesToSpawn;
-        
+  
         [BoxGroup("Spawners")]
         [LabelWidth(100)]
         public List<EnemySpawnerData> EnemySpawners;
-        public List<WeaponPlatformSpawnerData> WeaponPlatformSpawners;
+        [BoxGroup("Spawners")]
         public List<NextLevelDoorSpawnerData> NextLevelDoorSpawners;
-
+        
+       
+        [BoxGroup("Hero")]
         public Vector3 HeroInitialPosition;
+        [BoxGroup("Hero")]
         public Quaternion HeroInitialRotation;
+        
         public Vector3 NextLevelDoorPosition;
         public Quaternion NextLevelDoorRotation;
 

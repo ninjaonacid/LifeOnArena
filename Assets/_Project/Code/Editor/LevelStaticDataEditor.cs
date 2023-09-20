@@ -29,11 +29,6 @@ namespace Code.Editor
                             x.MobId, x.transform.position, x.RespawnCount))
                         .ToList();
 
-                levelData.WeaponPlatformSpawners =
-                    FindObjectsOfType<WeaponPlatformMarker>()
-                        .Select(x => new WeaponPlatformSpawnerData(x.GetComponent<UniqueId>().Id,
-                            x.WeaponId, x.transform.position))
-                        .ToList();
                 levelData.NextLevelDoorSpawners =
                     FindObjectsOfType<NextLevelDoorMarker>()
                         .Select(x => new NextLevelDoorSpawnerData(x.transform.position, x.transform.rotation))

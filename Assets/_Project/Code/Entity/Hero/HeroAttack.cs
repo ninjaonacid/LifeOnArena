@@ -41,7 +41,7 @@ namespace Code.Entity.Hero
             if (hits > 0)
             { 
                 OnHit?.Invoke(hits);
-                _audioService.PlayHeroAttackSound(_heroAudioSource);
+                //_audioService.PlayHeroAttackSound(_heroAudioSource);
             }
             
         }

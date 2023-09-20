@@ -7,7 +7,5 @@ namespace Code.Core.Factory
     {
         GameObject CreateHud();
         GameObject InstantiateRegistered(string prefabPath);
-
-        GameObject CreateLevelDoor(Vector3 position, Quaternion rotation);
     }
 }

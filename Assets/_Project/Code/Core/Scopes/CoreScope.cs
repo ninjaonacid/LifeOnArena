@@ -1,4 +1,5 @@
 using Code.Core.AssetManagement;
+using Code.Core.Audio;
 using Code.Core.EntryPoints;
 using Code.Core.EventSystem;
 using Code.Core.SceneManagement;
@@ -18,6 +19,7 @@ namespace Code.Core.Scopes
     {
 
         [SerializeField] private LoadingScreen Screen;
+        [SerializeField] private GameAudioPlayer GameAudioPlayer;
         
         protected override void Configure(IContainerBuilder builder)
         {

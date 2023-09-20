@@ -23,14 +23,14 @@ namespace Code.Core.Factory
             _objectResolver = objectResolver;
         }
 
-        public GameObject CreateLevelDoor(Vector3 position, Quaternion rotation)
-        {
-            GameObject levelDoor = _assetProvider.Instantiate(AssetAddress.DoorPath, position);
-            levelDoor.transform.rotation = rotation;
-
-            _objectResolver.InjectGameObject(levelDoor);
-            return levelDoor;
-        }
+        // public GameObject CreateLevelDoor(Vector3 position, Quaternion rotation)
+        // {
+        //     GameObject levelDoor = _assetProvider.InstantiateSync(, position);
+        //     levelDoor.transform.rotation = rotation;
+        //
+        //     _objectResolver.InjectGameObject(levelDoor);
+        //     return levelDoor;
+        // }
 
         public GameObject CreateHud()
         {
@@ -44,7 +44,7 @@ namespace Code.Core.Factory
 
         public GameObject InstantiateRegistered(string prefabPath)
         {
-            var go = _assetProvider.Instantiate(prefabPath);
+            var go = _assetProvider.InstantiateSync(prefabPath);
 
 
             _saveLoadService.RegisterProgressWatchers(go);
@@ -54,7 +54,7 @@ namespace Code.Core.Factory
 
         public GameObject InstantiateRegistered(string prefabPath, Transform parent)
         {
-            var go = _assetProvider.Instantiate(prefabPath, parent);
+            var go = _assetProvider.InstantiateSync(prefabPath, parent);
 
             _saveLoadService.RegisterProgressWatchers(go);
             return go;

@@ -6,10 +6,10 @@ namespace Code.Services.AudioService
 {
     public interface IAudioService : IService
     {
-        void PlaySound();
-        void PlayHeroAttackSound(AudioSource audioSource);
-
-        UniTaskVoid InitAssets(AudioLibrary audioLibrary);
-        void PlaySound(string soundName, AudioSource source);
+        // void PlaySound();
+        // void PlayHeroAttackSound(AudioSource audioSource);
+        //
+        // UniTaskVoid InitAssets(AudioLibrary audioLibrary);
+        // void PlaySound(string soundName, AudioSource source);
     }
 }
