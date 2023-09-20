@@ -1,7 +1,6 @@
-using Code.Infrastructure.ObjectPool;
 using UnityEngine;
 
-namespace Code.StaticData.Ability.ActiveAbilities
+namespace Code.ConfigData.Ability.ActiveAbilities
 {
     [CreateAssetMenu(fileName = "SpinAttackAbility", menuName = "AbilityData/Attack/SpinAttack")]
     public class SpinAttackTemplate : AbilityTemplate<SpinAttack>

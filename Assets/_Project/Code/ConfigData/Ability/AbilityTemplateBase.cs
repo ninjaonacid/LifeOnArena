@@ -1,8 +1,8 @@
-using Code.Infrastructure.ObjectPool;
+using Code.Core.ObjectPool;
 using Code.Services.BattleService;
 using UnityEngine.AddressableAssets;
 
-namespace Code.StaticData.Ability
+namespace Code.ConfigData.Ability
 {
     public enum AbilityState
     {

@@ -1,11 +1,11 @@
-using Code.Infrastructure.ObjectPool;
+using Code.ConfigData.StatSystem;
+using Code.Core.ObjectPool;
 using Code.Logic.Projectiles;
 using Code.Services.BattleService;
-using Code.StaticData.StatSystem;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
-namespace Code.StaticData.Ability.ActiveAbilities
+namespace Code.ConfigData.Ability.ActiveAbilities
 {
     public class TornadoAbility : IAbility
     {

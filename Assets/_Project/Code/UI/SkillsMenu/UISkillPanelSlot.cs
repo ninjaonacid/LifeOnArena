@@ -1,5 +1,5 @@
+using Code.ConfigData.Ability;
 using Code.Services.PersistentProgress;
-using Code.StaticData.Ability;
 using Code.UI.HUD.Skills;
 using TMPro;
 using UnityEngine;

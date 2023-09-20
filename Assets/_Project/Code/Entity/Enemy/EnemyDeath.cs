@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-using Code.StaticData.StatSystem;
+using Code.ConfigData.StatSystem;
 using UnityEngine;
 
 namespace Code.Entity.Enemy

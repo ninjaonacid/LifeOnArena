@@ -1,13 +1,13 @@
-using Code.Infrastructure.AssetManagement;
-using Code.Infrastructure.ObjectPool;
-using Code.Services;
+using Code.ConfigData.Ability;
+using Code.Core.AssetManagement;
+using Code.Core.ObjectPool;
 using Code.Services.BattleService;
+using Code.Services.ConfigData;
 using Code.Services.RandomService;
-using Code.StaticData.Ability;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
-namespace Code.Infrastructure.Factory
+namespace Code.Core.Factory
 {
     public class AbilityFactory : IAbilityFactory
     {

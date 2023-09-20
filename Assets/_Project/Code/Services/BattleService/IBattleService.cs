@@ -1,4 +1,4 @@
-using Code.StaticData.StatSystem;
+using Code.ConfigData.StatSystem;
 using UnityEngine;
 
 namespace Code.Services.BattleService

@@ -1,7 +1,7 @@
 using Code.Logic.Projectiles;
 using UnityEngine;
 
-namespace Code.StaticData.Ability.PassiveAbilities
+namespace Code.ConfigData.Ability.PassiveAbilities
 {
     [CreateAssetMenu(menuName = "AbilityData/Cast/DancingSwords" , fileName = "DancingSwords")]
     public class DancingSwordsTemplate : PassiveAbilityTemplate<DancingSwords>

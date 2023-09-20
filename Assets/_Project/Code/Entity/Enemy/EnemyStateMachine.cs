@@ -1,8 +1,7 @@
+using Code.ConfigData.Configs;
 using Code.Entity.Enemy.CommonEnemy;
 using Code.Logic.StateMachine;
 using Code.Logic.StateMachine.Transitions;
-using Code.StaticData;
-using Code.StaticData.Configs;
 using UnityEngine;
 
 namespace Code.Entity.Enemy

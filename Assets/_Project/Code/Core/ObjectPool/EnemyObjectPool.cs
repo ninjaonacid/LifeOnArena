@@ -1,12 +1,11 @@
 using System.Collections.Generic;
 using System.Threading;
-using Code.Infrastructure.Factory;
-using Code.StaticData;
-using Code.StaticData.Identifiers;
+using Code.ConfigData.Identifiers;
+using Code.Core.Factory;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-namespace Code.Infrastructure.ObjectPool
+namespace Code.Core.ObjectPool
 {
     public class EnemyObjectPool : IEnemyObjectPool
     {

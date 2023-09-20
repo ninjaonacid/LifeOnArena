@@ -1,8 +1,8 @@
 using System;
+using Code.ConfigData.Ability;
+using Code.Core.Factory;
 using Code.Data;
-using Code.Infrastructure.Factory;
 using Code.Services.PersistentProgress;
-using Code.StaticData.Ability;
 using Code.UI.HUD.Skills;
 using UnityEngine;
 using UnityEngine.InputSystem;

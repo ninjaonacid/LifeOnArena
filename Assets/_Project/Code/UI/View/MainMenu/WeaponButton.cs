@@ -1,6 +1,6 @@
 using UnityEngine.EventSystems;
 
-namespace Code.UI.MainMenu
+namespace Code.UI.View.MainMenu
 {
     public class WeaponButton : BaseButtonUI
     {

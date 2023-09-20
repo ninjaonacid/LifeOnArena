@@ -1,7 +1,7 @@
 using Code.Data;
 using UnityEngine;
 
-namespace Code.StaticData.Ability.PassiveAbilities
+namespace Code.ConfigData.Ability.PassiveAbilities
 {
     public class AttackUpPassive : IPassiveAbility
     {

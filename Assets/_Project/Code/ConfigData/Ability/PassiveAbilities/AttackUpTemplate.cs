@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Code.StaticData.Ability.PassiveAbilities
+namespace Code.ConfigData.Ability.PassiveAbilities
 {
     [CreateAssetMenu(fileName = "AttackUp", menuName = "AbilityTemplate/Passive/AttackUp")]
     public class AttackUpTemplate : PassiveAbilityTemplate<AttackUpPassive>

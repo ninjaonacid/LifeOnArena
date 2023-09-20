@@ -1,4 +1,4 @@
-namespace Code.Infrastructure.SceneManagement
+namespace Code.Core.SceneManagement
 {
     public interface ILoadingScreen
     {

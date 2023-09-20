@@ -1,4 +1,4 @@
-﻿namespace Code.StaticData.Identifiers
+﻿namespace Code.ConfigData.Identifiers
 {
     public enum MobId
     {

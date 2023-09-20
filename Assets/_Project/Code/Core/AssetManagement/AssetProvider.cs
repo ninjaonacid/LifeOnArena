@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Code.Infrastructure.AssetManagement;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -60,7 +59,6 @@ namespace Code.Core.AssetManagement
                 assetReference.AssetGUID);
         }
 
-
         public async UniTask<T> Load<T>(string assetAddress) where T : class
         {
             if (_completedCache.TryGetValue(assetAddress,
@@ -73,8 +71,7 @@ namespace Code.Core.AssetManagement
                 Addressables.LoadAssetAsync<T>(assetAddress),
                 assetAddress);
         }
-
-
+        
         public GameObject Instantiate(string path)
         {
             var prefab = Resources.Load<GameObject>(path);

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Code.StaticData.Identifiers
+namespace Code.ConfigData.Identifiers
 {
 
     [CreateAssetMenu(fileName = "Identifier", menuName = "StaticData/Identifier")]

@@ -1,16 +1,18 @@
 using System.Threading.Tasks;
-using Code.Infrastructure.AssetManagement;
+using Code.ConfigData;
+using Code.ConfigData.Identifiers;
+using Code.Core.AssetManagement;
 using Code.Logic.LevelObjectsSpawners;
 using Code.Logic.ShelterWeapons;
 using Code.Services;
+using Code.Services.ConfigData;
 using Code.Services.PersistentProgress;
 using Code.Services.SaveLoad;
-using Code.StaticData;
-using Code.StaticData.Identifiers;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Vector3 = UnityEngine.Vector3;
 
-namespace Code.Infrastructure.Factory
+namespace Code.Core.Factory
 {
     public class ItemFactory : IItemFactory
     {
@@ -30,10 +32,11 @@ namespace Code.Infrastructure.Factory
             _gameDataContainer = gameDataContainer;
         }
 
-        public async Task InitAssets()
+        public async UniTaskVoid InitAssets()
         {
             await _assetProvider.Load<GameObject>(AssetAddress.WeaponPlatformSpawner);
         }
+        
         public WeaponData LoadWeapon(WeaponId weaponId) =>
             _config.ForWeapon(weaponId);
 

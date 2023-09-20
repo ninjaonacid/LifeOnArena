@@ -2,11 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-using Code.Infrastructure.Factory;
+using Code.ConfigData.Levels;
+using Code.ConfigData.Spawners;
+using Code.Core.Factory;
 using Code.Logic.EnemySpawners;
 using Code.Services;
-using Code.StaticData.Levels;
-using Code.StaticData.Spawners;
+using Code.Services.ConfigData;
 using Code.Utils;
 using Cysharp.Threading.Tasks;
 

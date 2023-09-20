@@ -1,4 +1,4 @@
-using Code.StaticData;
+using Code.ConfigData;
 using UnityEngine;
 using UnityEngine.UI;
 

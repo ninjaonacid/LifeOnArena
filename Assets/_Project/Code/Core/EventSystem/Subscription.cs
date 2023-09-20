@@ -1,7 +1,7 @@
 using System;
 using Code.CustomEvents;
 
-namespace Code.Infrastructure.EventSystem
+namespace Code.Core.EventSystem
 {
     public class Subscription<TEvent> : ISubscription<IEvent> 
     {

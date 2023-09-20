@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Code.StaticData.StatSystem
+namespace Code.ConfigData.StatSystem
 {
     [CreateAssetMenu(fileName = "StatDefinition", menuName = "StatSystem/StatDefinition")]
     public class StatDefinition : ScriptableObject

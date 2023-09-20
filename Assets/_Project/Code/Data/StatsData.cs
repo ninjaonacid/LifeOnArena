@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Code.StaticData.StatSystem;
 
 namespace Code.Data
 {

@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace Code.StaticData.StatSystem
+namespace Code.ConfigData.StatSystem
 {
     public class Stat
     {

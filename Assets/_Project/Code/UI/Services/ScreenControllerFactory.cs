@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Code.Infrastructure.SceneManagement;
+using Code.Core.SceneManagement;
 using Code.Services.PersistentProgress;
 using Code.UI.Controller;
 

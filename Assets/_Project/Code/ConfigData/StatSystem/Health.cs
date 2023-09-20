@@ -1,4 +1,4 @@
-namespace Code.StaticData.StatSystem
+namespace Code.ConfigData.StatSystem
 {
     public class Health : Attribute
     {

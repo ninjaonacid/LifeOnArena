@@ -11,7 +11,12 @@ namespace Code.ConfigData.Audio
     [Serializable]
     public class Sound
     {
-        public AssetReference SoundRef;
         public string Id;
+        public AssetReference SoundRef;
+        public AudioSource Source;
+        public bool IsPlaying;
+        public bool Paused;
+        public bool Stopped;
+        public float Volume;
     }
 }

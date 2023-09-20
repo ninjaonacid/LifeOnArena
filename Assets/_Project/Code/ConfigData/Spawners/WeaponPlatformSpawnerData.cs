@@ -1,8 +1,8 @@
 using System;
-using Code.StaticData.Identifiers;
+using Code.ConfigData.Identifiers;
 using UnityEngine;
 
-namespace Code.StaticData.Spawners
+namespace Code.ConfigData.Spawners
 {
     [Serializable]
     public class WeaponPlatformSpawnerData

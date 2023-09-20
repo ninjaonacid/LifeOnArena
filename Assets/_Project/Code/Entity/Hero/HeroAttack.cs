@@ -1,8 +1,8 @@
 using System;
+using Code.ConfigData.StatSystem;
 using Code.Logic.EntitiesComponents;
 using Code.Services.AudioService;
 using Code.Services.BattleService;
-using Code.StaticData.StatSystem;
 using UnityEngine;
 using VContainer;
 

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Code.StaticData.StatSystem
+namespace Code.ConfigData.StatSystem
 {
     public class StatController : MonoBehaviour
     {

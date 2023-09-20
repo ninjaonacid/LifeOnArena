@@ -4,7 +4,7 @@ using Code.Logic.Projectiles;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace Code.StaticData.Ability.PassiveAbilities
+namespace Code.ConfigData.Ability.PassiveAbilities
 {
     public class DancingSwords : IPassiveAbility
     {

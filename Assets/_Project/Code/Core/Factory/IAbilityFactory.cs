@@ -1,7 +1,7 @@
+using Code.ConfigData.Ability;
 using Code.Services;
-using Code.StaticData.Ability;
 
-namespace Code.Infrastructure.Factory
+namespace Code.Core.Factory
 {
     public interface IAbilityFactory : IService
     {

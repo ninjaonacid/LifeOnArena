@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
-using Code.Infrastructure.AssetManagement;
-using Code.Infrastructure.SceneManagement;
+using Code.Core.AssetManagement;
 using Code.Services;
+using Code.Services.ConfigData;
 using Code.Services.PersistentProgress;
 using Code.Services.SaveLoad;
 using Code.UI.View;

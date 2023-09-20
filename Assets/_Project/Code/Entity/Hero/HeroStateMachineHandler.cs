@@ -1,8 +1,8 @@
+using Code.ConfigData.Identifiers;
 using Code.Entity.Hero.HeroStates;
 using Code.Logic;
 using Code.Logic.StateMachine;
 using Code.Services.AudioService;
-using Code.StaticData.Identifiers;
 using UnityEngine;
 using VContainer;
 

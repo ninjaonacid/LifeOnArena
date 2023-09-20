@@ -1,4 +1,4 @@
-﻿namespace Code.Infrastructure.AssetManagement
+﻿namespace Code.Core.AssetManagement
 {
     public static class AssetAddress
     {

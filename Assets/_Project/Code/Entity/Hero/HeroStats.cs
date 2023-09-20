@@ -1,6 +1,6 @@
+using Code.ConfigData.StatSystem;
 using Code.Data;
 using Code.Services.PersistentProgress;
-using Code.StaticData.StatSystem;
 
 namespace Code.Entity.Hero
 {

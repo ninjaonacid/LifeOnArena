@@ -1,8 +1,8 @@
-using Code.StaticData.Identifiers;
+using Code.ConfigData.Identifiers;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
-namespace Code.StaticData
+namespace Code.ConfigData
 {
     [CreateAssetMenu(fileName = "WeaponPlatform", menuName = "StaticData/WeaponPlatform")]
     

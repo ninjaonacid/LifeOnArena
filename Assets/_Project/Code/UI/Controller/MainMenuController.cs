@@ -1,5 +1,5 @@
 using System;
-using Code.Infrastructure.SceneManagement;
+using Code.Core.SceneManagement;
 using Code.Services.PersistentProgress;
 using Code.UI.Model;
 using Code.UI.Services;

@@ -1,11 +1,12 @@
 using System.Threading;
+using Code.ConfigData.Levels;
+using Code.Core.Factory;
 using Code.Entity.Hero;
-using Code.Infrastructure.Factory;
 using Code.Logic.CameraLogic;
 using Code.Logic.WaveLogic;
 using Code.Services;
+using Code.Services.ConfigData;
 using Code.Services.SaveLoad;
-using Code.StaticData.Levels;
 using Code.UI.HUD;
 using Code.UI.HUD.Skills;
 using Cysharp.Threading.Tasks;
@@ -13,7 +14,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using VContainer.Unity;
 
-namespace Code.Infrastructure.Starters
+namespace Code.Core.EntryPoints
 {
     public class LevelStarterPoint : IAsyncStartable
     {

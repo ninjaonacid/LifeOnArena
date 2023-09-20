@@ -1,10 +1,7 @@
 using Code.Core.AssetManagement;
 using Code.Core.EntryPoints;
 using Code.Core.EventSystem;
-using Code.Infrastructure.AssetManagement;
-using Code.Infrastructure.EventSystem;
-using Code.Infrastructure.SceneManagement;
-using Code.Services;
+using Code.Core.SceneManagement;
 using Code.Services.AudioService;
 using Code.Services.ConfigData;
 using Code.Services.PersistentProgress;
@@ -24,7 +21,7 @@ namespace Code.Core.Scopes
         
         protected override void Configure(IContainerBuilder builder)
         {
-            builder.RegisterEntryPoint<CoreServicesInitialize>();
+            builder.RegisterEntryPoint<CoreEntryPoint>();
             
             builder.Register<IConfigProvider, ConfigProvider>(Lifetime.Singleton);
             builder.Register<ISaveLoadService, SaveLoadService>(Lifetime.Singleton);
@@ -44,7 +41,7 @@ namespace Code.Core.Scopes
             builder.Register<SceneLoader>(Lifetime.Singleton);
 
             builder.RegisterComponentInNewPrefab(Screen, Lifetime.Singleton).AsImplementedInterfaces();
-            
+
         }
 
     }

@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Code.StaticData.Spawners
+namespace Code.ConfigData.Spawners
 {
     [Serializable]
     public class NextLevelDoorSpawnerData

@@ -1,7 +1,7 @@
 using Code.Data;
 using UnityEngine;
 
-namespace Code.StaticData.Ability
+namespace Code.ConfigData.Ability
 {
     public interface IPassiveAbility
     {

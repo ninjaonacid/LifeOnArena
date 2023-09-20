@@ -1,7 +1,7 @@
 ﻿using System;
+using Code.ConfigData.StatSystem;
 using Code.Logic.Damage;
-using Code.StaticData.StatSystem;
-using Attribute = Code.StaticData.StatSystem.Attribute;
+using Attribute = Code.ConfigData.StatSystem.Attribute;
 
 namespace Code.Logic.EntitiesComponents
 {

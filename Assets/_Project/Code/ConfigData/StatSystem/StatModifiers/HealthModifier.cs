@@ -1,7 +1,7 @@
 using Code.Logic.Damage;
 using UnityEngine;
 
-namespace Code.StaticData.StatSystem.StatModifiers
+namespace Code.ConfigData.StatSystem.StatModifiers
 {
     public class HealthModifier : StatModifier, IDamage
     {

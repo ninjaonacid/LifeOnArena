@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using Code.Data;
-using Code.UI.MainMenu;
 using UnityEngine;
 
 namespace Code.UI.View.MainMenu

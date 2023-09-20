@@ -1,11 +1,10 @@
 using System.Collections.Generic;
+using Code.ConfigData.Identifiers;
 using Code.Logic.Damage;
-using Code.StaticData.Ability;
-using Code.StaticData.Identifiers;
 using UnityEngine;
 using Vector3 = UnityEngine.Vector3;
 
-namespace Code.StaticData
+namespace Code.ConfigData
 {
     [CreateAssetMenu(menuName = "StaticData/Weapon", fileName = "NewWeapon")]
     public class WeaponData : ScriptableObject, IDamageSource

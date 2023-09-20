@@ -1,12 +1,10 @@
 using System.Threading;
+using Code.ConfigData.Identifiers;
+using Code.Core.ObjectPool;
 using Code.Data;
 using Code.Entity.Enemy;
-using Code.Infrastructure.ObjectPool;
 using Code.Services;
 using Code.Services.PersistentProgress;
-using Code.StaticData;
-using Code.StaticData.Identifiers;
-using Code.StaticData.StatSystem;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;

@@ -1,8 +1,6 @@
-
-using System;
 using Object = UnityEngine.Object;
 
-namespace Code.StaticData.StatSystem
+namespace Code.ConfigData.StatSystem
 {
     public enum ModifierOperationType
     {

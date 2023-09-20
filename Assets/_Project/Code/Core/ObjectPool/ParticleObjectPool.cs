@@ -1,10 +1,10 @@
 using System.Collections.Generic;
-using Code.Infrastructure.AssetManagement;
+using Code.Core.AssetManagement;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
-namespace Code.Infrastructure.ObjectPool
+namespace Code.Core.ObjectPool
 {
     public class ParticleObjectPool : IParticleObjectPool
     {

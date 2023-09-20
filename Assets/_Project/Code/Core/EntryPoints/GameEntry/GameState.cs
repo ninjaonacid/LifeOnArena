@@ -1,19 +1,18 @@
+using Code.ConfigData.StatSystem;
 using Code.Data;
-using Code.Services;
+using Code.Services.ConfigData;
 using Code.Services.PersistentProgress;
 using Code.Services.SaveLoad;
-using Code.StaticData.StatSystem;
-using UnityEngine;
 
 namespace Code.Core.EntryPoints.GameEntry
 {
-    public class GameStateInitialize
+    public class InitializeGameState
     {
         private readonly IConfigProvider _configProvider;
         private readonly ISaveLoadService _saveLoadService;
         private readonly IGameDataContainer _gameDataContainer;
         
-        public GameStateInitialize(
+        public InitializeGameState(
             IConfigProvider configProvider, 
             IGameDataContainer dataContainer,
             ISaveLoadService saveLoad)
@@ -21,17 +20,15 @@ namespace Code.Core.EntryPoints.GameEntry
             _configProvider = configProvider;
             _saveLoadService = saveLoad;
             _gameDataContainer = dataContainer;
-        } 
-        
-        
+        }
+
         public void LoadProgressOrInitNew()
         {
             _gameDataContainer.PlayerData =
                 _saveLoadService.LoadProgress()
                 ?? NewProgress();
         }
-
-
+        
         private PlayerData NewProgress()
         {
             PlayerData data = new PlayerData("Shelter");

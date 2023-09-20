@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-namespace Code.Infrastructure.SceneManagement
+namespace Code.Core.SceneManagement
 {
     public class LoadingScreen : MonoBehaviour, ILoadingScreen
     {

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Code.StaticData
+namespace Code.ConfigData
 {
     public class ScriptableObjectIdAttribute : PropertyAttribute
     {

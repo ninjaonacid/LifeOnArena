@@ -1,5 +1,6 @@
-using Code.Infrastructure.AssetManagement;
+using Code.Core.AssetManagement;
 using Code.Services;
+using Code.Services.ConfigData;
 
 namespace Code.Core.EntryPoints.GameEntry
 {

@@ -3,7 +3,7 @@ using Code.Data;
 using Code.Services.PersistentProgress;
 using UnityEngine;
 
-namespace Code.StaticData.StatSystem
+namespace Code.ConfigData.StatSystem
 {
     public class Attribute : Stat, ISave
     {

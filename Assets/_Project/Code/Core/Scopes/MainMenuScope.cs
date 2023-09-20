@@ -1,11 +1,11 @@
-using Code.Infrastructure.Factory;
-using Code.Infrastructure.ObjectPool;
-using Code.Infrastructure.Starters;
+using Code.Core.EntryPoints;
+using Code.Core.Factory;
+using Code.Core.ObjectPool;
 using Code.Services.BattleService;
 using VContainer;
 using VContainer.Unity;
 
-namespace Code.Infrastructure.Scopes
+namespace Code.Core.Scopes
 {
     public class MainMenuScope : LifetimeScope
     {

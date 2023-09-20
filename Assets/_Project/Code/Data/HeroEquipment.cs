@@ -1,5 +1,4 @@
-using Code.StaticData;
-using Code.StaticData.Identifiers;
+using Code.ConfigData.Identifiers;
 
 namespace Code.Data
 {

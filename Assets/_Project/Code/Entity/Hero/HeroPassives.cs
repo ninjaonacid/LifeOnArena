@@ -1,8 +1,8 @@
 using System.Collections.Generic;
+using Code.ConfigData.Ability.PassiveAbilities;
+using Code.Core.Factory;
 using Code.Data;
-using Code.Infrastructure.Factory;
 using Code.Services.PersistentProgress;
-using Code.StaticData.Ability.PassiveAbilities;
 using UnityEngine;
 using VContainer;
 

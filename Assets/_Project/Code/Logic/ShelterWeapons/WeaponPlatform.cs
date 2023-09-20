@@ -1,9 +1,9 @@
 using System;
+using Code.ConfigData;
 using Code.Data;
 using Code.Entity.Enemy;
 using Code.Entity.Hero;
 using Code.Logic.EntitiesComponents;
-using Code.StaticData;
 using Code.UI.WeaponPlatform;
 using UnityEngine;
 

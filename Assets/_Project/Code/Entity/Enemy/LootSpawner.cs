@@ -1,5 +1,5 @@
+using Code.Core.Factory;
 using Code.Data;
-using Code.Infrastructure.Factory;
 using Code.Services.RandomService;
 using UnityEngine;
 

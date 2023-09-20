@@ -1,5 +1,5 @@
-using Code.Infrastructure.EventSystem;
-using Code.StaticData.Levels;
+using Code.ConfigData.Levels;
+using Code.Core.EventSystem;
 using Code.UI.Services;
 using UnityEngine;
 using VContainer;

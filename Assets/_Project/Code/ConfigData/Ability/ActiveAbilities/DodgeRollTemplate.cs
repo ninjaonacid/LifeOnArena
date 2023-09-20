@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Code.StaticData.Ability.ActiveAbilities
+namespace Code.ConfigData.Ability.ActiveAbilities
 {
     [CreateAssetMenu(fileName = "DodgeRoll", menuName = "AbilityData/Dodge/DodgeRoll")]
     public class DodgeRollTemplate : AbilityTemplate<DodgeRoll>

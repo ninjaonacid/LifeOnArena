@@ -1,8 +1,8 @@
+using Code.ConfigData;
+using Code.ConfigData.Identifiers;
+using Code.Core.Factory;
 using Code.Data;
-using Code.Infrastructure.Factory;
 using Code.Services.PersistentProgress;
-using Code.StaticData;
-using Code.StaticData.Identifiers;
 using UnityEngine;
 using VContainer;
 

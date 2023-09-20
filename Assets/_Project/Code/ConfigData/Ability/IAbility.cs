@@ -1,7 +1,6 @@
-using Code.Infrastructure.ObjectPool;
 using UnityEngine;
 
-namespace Code.StaticData.Ability
+namespace Code.ConfigData.Ability
 {
     public interface IAbility
     {

@@ -1,5 +1,5 @@
+using Code.ConfigData.Levels;
 using Code.Logic.EnemySpawners;
-using Code.StaticData.Levels;
 
 namespace Code.Services
 {

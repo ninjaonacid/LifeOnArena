@@ -1,13 +1,12 @@
 using System.Threading;
+using Code.ConfigData.Identifiers;
 using Code.Entity.Enemy;
 using Code.Logic.EnemySpawners;
 using Code.Services;
-using Code.StaticData;
-using Code.StaticData.Identifiers;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-namespace Code.Infrastructure.Factory
+namespace Code.Core.Factory
 {
     public interface IEnemyFactory : IService
     {

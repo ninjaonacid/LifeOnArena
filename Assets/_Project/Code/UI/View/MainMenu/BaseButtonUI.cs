@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace Code.UI.MainMenu
+namespace Code.UI.View.MainMenu
 {
     public abstract class BaseButtonUI : MonoBehaviour, IPointerClickHandler
     {

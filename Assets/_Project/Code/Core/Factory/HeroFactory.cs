@@ -1,11 +1,11 @@
-using Code.Infrastructure.AssetManagement;
+using Code.Core.AssetManagement;
 using Code.Services.SaveLoad;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-namespace Code.Infrastructure.Factory
+namespace Code.Core.Factory
 {
     public class HeroFactory : IHeroFactory
     {
@@ -22,7 +22,7 @@ namespace Code.Infrastructure.Factory
             _objectResolver = objectResolver;
         }
 
-        public async UniTask InitAssets()
+        public async UniTaskVoid InitAssets()
         {
             await _assetProvider.Load<GameObject>(AssetAddress.Hero);
         }

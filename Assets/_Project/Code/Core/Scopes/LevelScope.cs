@@ -1,6 +1,6 @@
-using Code.Infrastructure.Factory;
-using Code.Infrastructure.ObjectPool;
-using Code.Infrastructure.Starters;
+using Code.Core.EntryPoints;
+using Code.Core.Factory;
+using Code.Core.ObjectPool;
 using Code.Logic.WaveLogic;
 using Code.Services;
 using Code.Services.BattleService;

@@ -1,11 +1,10 @@
 using System;
 using System.Threading.Tasks;
+using Code.ConfigData.Identifiers;
+using Code.Core.Factory;
 using Code.Data;
-using Code.Infrastructure.Factory;
 using Code.Logic.ShelterWeapons;
 using Code.Services.PersistentProgress;
-using Code.StaticData;
-using Code.StaticData.Identifiers;
 using UnityEngine;
 
 namespace Code.Logic.LevelObjectsSpawners

@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using Code.StaticData.Spawners;
+using Code.ConfigData.Spawners;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Code.StaticData.Levels
+namespace Code.ConfigData.Levels
 {
     public enum LocationType
     {

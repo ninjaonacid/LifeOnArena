@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Code.StaticData.Ability.ActiveAbilities
+namespace Code.ConfigData.Ability.ActiveAbilities
 {
     [CreateAssetMenu(fileName = "TornadoAbility", menuName = "AbilityData/Cast/TornadoAbility")]
     public class TornadoTemplate : AbilityTemplate<TornadoAbility>

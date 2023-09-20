@@ -1,11 +1,11 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Code.ConfigData.Levels;
+using Code.Core.EventSystem;
+using Code.Core.SceneManagement;
 using Code.CustomEvents;
-using Code.Infrastructure.EventSystem;
-using Code.Infrastructure.SceneManagement;
 using Code.Logic.EnemySpawners;
-using Code.StaticData.Levels;
 using Code.UI;
 using Code.UI.Services;
 using Cysharp.Threading.Tasks;

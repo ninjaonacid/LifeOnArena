@@ -1,5 +1,5 @@
 using System;
-using Code.StaticData;
+using Code.ConfigData;
 using UnityEditor;
 using UnityEngine;
 

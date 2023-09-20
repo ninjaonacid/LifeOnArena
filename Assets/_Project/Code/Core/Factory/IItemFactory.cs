@@ -1,11 +1,12 @@
 using System.Threading.Tasks;
+using Code.ConfigData;
+using Code.ConfigData.Identifiers;
 using Code.Logic.LevelObjectsSpawners;
 using Code.Services;
-using Code.StaticData;
-using Code.StaticData.Identifiers;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-namespace Code.Infrastructure.Factory
+namespace Code.Core.Factory
 {
     public interface IItemFactory : IService
     { 
@@ -17,6 +18,6 @@ namespace Code.Infrastructure.Factory
 
         Task<GameObject> CreateWeaponPlatform(WeaponId weaponId, Transform parent);
 
-        Task InitAssets();
+        UniTaskVoid InitAssets();
     }
 }

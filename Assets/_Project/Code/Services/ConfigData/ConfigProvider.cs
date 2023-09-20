@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Code.StaticData;
-using Code.StaticData.Ability;
-using Code.StaticData.Identifiers;
-using Code.StaticData.Levels;
-using Code.StaticData.StatSystem;
-using Code.StaticData.UIWindows;
+using Code.ConfigData;
+using Code.ConfigData.Ability;
+using Code.ConfigData.Identifiers;
+using Code.ConfigData.Levels;
+using Code.ConfigData.StatSystem;
+using Code.ConfigData.UIWindows;
 using Code.UI;
 using UnityEngine;
 

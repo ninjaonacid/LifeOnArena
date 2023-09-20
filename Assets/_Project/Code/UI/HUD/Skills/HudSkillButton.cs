@@ -1,4 +1,4 @@
-using Code.StaticData.Ability;
+using Code.ConfigData.Ability;
 using UnityEngine;
 using UnityEngine.InputSystem.OnScreen;
 

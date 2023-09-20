@@ -1,14 +1,14 @@
 using System.Threading;
-using Code.Infrastructure.Factory;
-using Code.Services;
-using Code.StaticData.Levels;
+using Code.ConfigData.Levels;
+using Code.Core.Factory;
+using Code.Services.ConfigData;
 using Code.UI;
 using Code.UI.Services;
 using Cysharp.Threading.Tasks;
 using UnityEngine.SceneManagement;
 using VContainer.Unity;
 
-namespace Code.Infrastructure.Starters
+namespace Code.Core.EntryPoints
 {
     public class MainMenuStarter : IAsyncStartable
     {

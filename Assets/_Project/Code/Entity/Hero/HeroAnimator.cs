@@ -1,7 +1,7 @@
 using System;
+using Code.ConfigData.Ability;
 using Code.Entity.Hero.HeroStates;
 using Code.Logic.Animator;
-using Code.StaticData.Ability;
 using UnityEngine;
 
 namespace Code.Entity.Hero

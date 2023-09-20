@@ -1,8 +1,7 @@
-using Code.Logic;
-using Code.StaticData.Identifiers;
+using Code.ConfigData.Identifiers;
 using UnityEngine;
 
-namespace Code.StaticData.Ability
+namespace Code.ConfigData.Ability
 {
     public class AbilityBase : ScriptableObject
     {

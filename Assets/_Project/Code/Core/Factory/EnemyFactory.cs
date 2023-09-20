@@ -1,15 +1,15 @@
 using System;
 using System.Threading;
+using Code.ConfigData.Identifiers;
+using Code.ConfigData.StatSystem;
+using Code.Core.AssetManagement;
 using Code.Entity.Enemy;
-using Code.Infrastructure.AssetManagement;
 using Code.Logic.EnemySpawners;
 using Code.Logic.EntitiesComponents;
-using Code.Services;
+using Code.Services.ConfigData;
 using Code.Services.PersistentProgress;
 using Code.Services.RandomService;
 using Code.Services.SaveLoad;
-using Code.StaticData.Identifiers;
-using Code.StaticData.StatSystem;
 using Code.UI.HUD;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -18,7 +18,7 @@ using VContainer;
 using VContainer.Unity;
 using Object = UnityEngine.Object;
 
-namespace Code.Infrastructure.Factory
+namespace Code.Core.Factory
 {
     public class EnemyFactory : IEnemyFactory, IDisposable
     {

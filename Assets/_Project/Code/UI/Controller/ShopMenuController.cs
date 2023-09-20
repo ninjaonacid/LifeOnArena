@@ -1,4 +1,4 @@
-using Code.Infrastructure.SceneManagement;
+using Code.Core.SceneManagement;
 using Code.UI.Model;
 using Code.UI.Services;
 using Code.UI.View;

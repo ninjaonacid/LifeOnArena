@@ -1,11 +1,10 @@
 using System.Threading;
+using Code.ConfigData.Identifiers;
 using Code.Services;
-using Code.StaticData;
-using Code.StaticData.Identifiers;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-namespace Code.Infrastructure.ObjectPool
+namespace Code.Core.ObjectPool
 {
     public interface IEnemyObjectPool :  IService
     {

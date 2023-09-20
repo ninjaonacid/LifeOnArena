@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using Code.ConfigData.Audio;
-using Code.Infrastructure.AssetManagement;
+using Code.Core.AssetManagement;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 

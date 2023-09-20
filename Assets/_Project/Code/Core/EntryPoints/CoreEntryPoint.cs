@@ -1,15 +1,15 @@
-using Code.Infrastructure.AssetManagement;
-using Code.Services;
+using Code.Core.AssetManagement;
+using Code.Services.ConfigData;
 using VContainer.Unity;
 
 namespace Code.Core.EntryPoints
 {
-    public class CoreServicesInitialize : IInitializable
+    public class CoreEntryPoint : IInitializable
     {
         private readonly IConfigProvider _configProvider;
         private readonly IAssetProvider _assetProvider;
 
-        public CoreServicesInitialize(IConfigProvider configProvider, IAssetProvider assetProvider)
+        public CoreEntryPoint(IConfigProvider configProvider, IAssetProvider assetProvider)
         {
             _configProvider = configProvider;
             _assetProvider = assetProvider;

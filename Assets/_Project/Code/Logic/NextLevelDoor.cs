@@ -1,5 +1,5 @@
+using Code.Core.EventSystem;
 using Code.CustomEvents;
-using Code.Infrastructure.EventSystem;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;

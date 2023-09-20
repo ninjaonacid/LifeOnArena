@@ -1,7 +1,7 @@
 using Code.Entity.Hero;
 using UnityEngine;
 
-namespace Code.StaticData.Ability.ActiveAbilities
+namespace Code.ConfigData.Ability.ActiveAbilities
 {
     public class DodgeRoll : IAbility
     {

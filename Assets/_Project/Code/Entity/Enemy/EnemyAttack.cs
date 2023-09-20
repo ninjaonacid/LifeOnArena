@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
+using Code.ConfigData.StatSystem;
 using Code.Services.BattleService;
-using Code.StaticData.StatSystem;
 using UnityEngine;
 using VContainer;
 

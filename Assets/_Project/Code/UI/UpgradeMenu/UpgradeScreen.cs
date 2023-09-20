@@ -1,4 +1,4 @@
-using Code.Infrastructure.Factory;
+using Code.Core.Factory;
 using Code.Services.PersistentProgress;
 
 namespace Code.UI.UpgradeMenu

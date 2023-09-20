@@ -1,10 +1,10 @@
-using Code.StaticData.Configs;
-using Code.StaticData.Identifiers;
+using Code.ConfigData.Configs;
+using Code.ConfigData.Identifiers;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.Serialization;
 
-namespace Code.StaticData
+namespace Code.ConfigData
 {
     [CreateAssetMenu(fileName = "EnemyData", menuName = "StaticData/Monster")]
     public class EnemyDataConfig : ScriptableObject

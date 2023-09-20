@@ -1,6 +1,4 @@
-using UnityEngine;
-
-namespace Code.Infrastructure.Factory
+namespace Code.Core.Factory
 {
     public interface IParticleFactory
     {

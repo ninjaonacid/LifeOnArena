@@ -1,4 +1,4 @@
-﻿using Code.Infrastructure.AssetManagement;
+﻿using Code.Core.AssetManagement;
 using Code.Services.PersistentProgress;
 using Code.Services.SaveLoad;
 using Code.UI.HUD;
@@ -6,7 +6,7 @@ using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-namespace Code.Infrastructure.Factory
+namespace Code.Core.Factory
 {
     public class GameFactory : IGameFactory
     {

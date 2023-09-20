@@ -1,9 +1,9 @@
+using Code.ConfigData.StatSystem;
+using Code.ConfigData.StatSystem.StatModifiers;
 using Code.Entity;
 using Code.Entity.Hero;
 using Code.Logic.Damage;
 using Code.Logic.EntitiesComponents;
-using Code.StaticData.StatSystem;
-using Code.StaticData.StatSystem.StatModifiers;
 using UnityEngine;
 
 namespace Code.Services.BattleService
