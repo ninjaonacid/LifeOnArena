@@ -14,31 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Sounds:
   - Id: Sword_Hit
-    SoundRef:
-      m_AssetGUID: cdc99484a0327d74cb59b294dd611764
-      m_SubObjectName: 
-      m_SubObjectType: 
-      m_EditorAssetChanged: 0
+    Clip: {fileID: 8300000, guid: cdc99484a0327d74cb59b294dd611764, type: 3}
     Source: {fileID: 0}
-    SourceTransform: {fileID: 0}
-    NeedUnload: 0
-    IsPlaying: 0
-    Paused: 0
-    Stopped: 0
-    Volume: 0
-    isLoopSound: 0
+    IsLoopSound: 0
   Music:
   - Id: TalkShowBack
-    SoundRef:
-      m_AssetGUID: d8f51c6838f53a2468d3088e601ff76b
-      m_SubObjectName: 
-      m_SubObjectType: 
-      m_EditorAssetChanged: 0
+    Clip: {fileID: 8300000, guid: d8f51c6838f53a2468d3088e601ff76b, type: 3}
     Source: {fileID: 0}
-    SourceTransform: {fileID: 0}
-    NeedUnload: 0
-    IsPlaying: 0
-    Paused: 0
-    Stopped: 0
-    Volume: 0
-    isLoopSound: 1
+    IsLoopSound: 1

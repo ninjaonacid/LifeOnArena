@@ -43,7 +43,7 @@ namespace Code.Services.AudioService
             }
         }
 
-        public void PlayBackgroundMusic(string musicName, float volume, bool isLoop)
+        public void PlayBackgroundMusic(string musicName, float volume = 1, bool isLoop = false)
         {
             if (_bgm.TryGetValue(musicName, out var music))
             {
@@ -72,16 +72,17 @@ namespace Code.Services.AudioService
 
         public void PlaySound3D(string soundName, Transform soundTransform, float volume)
         {
+            if (!_sfx.TryGetValue(soundName, out var sound)) return;
             
-            if (_sfx.TryGetValue(soundName, out var sound))
+            if(!soundTransform.gameObject.TryGetComponent(out AudioSource soundSource))
             {
-                var source = soundTransform.gameObject.AddComponent<AudioSource>();
-                sound.Source = source;
-                sound.Volume = volume;
-                sound.Play();
-                //PrepareSound(sound);
-                //source.PlayOneShot(sound);
+                soundSource = soundTransform.gameObject.AddComponent<AudioSource>();
             }
+            
+            sound.Setup(soundSource, volume, false);
+            sound.Play();
+            //PrepareSound(sound);
+            //source.PlayOneShot(sound);
         }
 
         private void PreloadSound(string name)
