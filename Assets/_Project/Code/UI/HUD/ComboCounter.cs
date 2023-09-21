@@ -37,7 +37,7 @@ namespace Code.UI.HUD
             {
                 _hitCount++;
                 _textMesh.text = $"Combo {_hitCount}";
-                await UniTask.Delay(3);
+                await UniTask.Delay(10);
             }
         }
 

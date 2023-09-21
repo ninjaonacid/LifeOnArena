@@ -1,11 +1,14 @@
+using Code.Services.AudioService;
 using UnityEngine;
 
 namespace Code.Entity.Hero.HeroStates
 {
     public class FirstAttackState : HeroBaseAbilityState
     {
-        public FirstAttackState(HeroAnimator animator, HeroAttack heroAttack, bool needExitTime, bool isGhostState) : base(animator, heroAttack, needExitTime, isGhostState)
+        private AudioService _audioService;
+        public FirstAttackState(HeroAnimator animator, HeroAttack heroAttack, AudioService audioService, bool needExitTime, bool isGhostState) : base(animator, heroAttack, needExitTime, isGhostState)
         {
+            _audioService = audioService;
         }
 
         public override void OnEnter()
@@ -13,6 +16,7 @@ namespace Code.Entity.Hero.HeroStates
             base.OnEnter();
             HeroAnimator.PlayAttack(this);
             _heroAttack.BaseAttack();
+            _audioService.PlaySound3D("Melee_1", HeroAnimator.gameObject.transform, 1f );
             _duration = 0.6f;
         }
 

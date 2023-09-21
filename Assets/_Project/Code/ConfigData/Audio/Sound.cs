@@ -3,9 +3,10 @@ using UnityEngine;
 
 namespace Code.ConfigData.Audio
 {
-    public enum SoundId
+    public enum SoundStatus
     {
-        SwordSlash = 1,
+        Playing,
+        Stop,
     }
     [Serializable]
     public class Sound
@@ -13,10 +14,15 @@ namespace Code.ConfigData.Audio
         public string Id;
         public AudioClip Clip;
         public AudioSource Source;
+
+        public SoundStatus SoundStatus;
+        
         public Transform SourceTransform { get; private set; }
         public bool IsPlaying { get; private set; }
         public bool IsPaused { get; private set; }
         public bool IsStopped { get; private set; }
+
+        public bool IsActivated;
         public float Volume { get; set; }
         
         
@@ -37,6 +43,7 @@ namespace Code.ConfigData.Audio
         public void Play()
         {
             Source.Play();
+            SoundStatus = SoundStatus.Playing;
             IsPlaying = true;
             IsPaused = false;
         }
@@ -49,6 +56,7 @@ namespace Code.ConfigData.Audio
         public void Stop()
         {
             Source.Stop();
+            SoundStatus = SoundStatus.Stop;
             IsStopped = true;
         }
     }

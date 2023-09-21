@@ -1,13 +1,10 @@
 using System;
 using System.Collections.Generic;
-using System.Threading;
 using Code.ConfigData.Audio;
 using Code.Core.AssetManagement;
 using Code.Core.Audio;
 using Code.Services.ConfigData;
-using Cysharp.Threading.Tasks;
 using UnityEngine;
-using VContainer.Unity;
 
 namespace Code.Services.AudioService
 {
@@ -19,7 +16,7 @@ namespace Code.Services.AudioService
         private readonly Dictionary<string, Sound> _bgm = new();
         private readonly IConfigProvider _configProvider;
 
-        private GameAudioPlayer _gameAudioPlayer;
+        private readonly GameAudioPlayer _gameAudioPlayer;
 
         public AudioService(IAssetProvider assetProvider, IConfigProvider configProvider, GameAudioPlayer gameAudioPlayer)
         {
@@ -61,7 +58,6 @@ namespace Code.Services.AudioService
         {
             if (_sfx.TryGetValue(soundName, out var sound))
             {
-
                 sound.Source = _gameAudioPlayer.GetAudioSource();
                 sound.Volume = volume;
                 sound.Play();
@@ -73,8 +69,15 @@ namespace Code.Services.AudioService
         public void PlaySound3D(string soundName, Transform soundTransform, float volume)
         {
             if (!_sfx.TryGetValue(soundName, out var sound)) return;
-            
-            if(!soundTransform.gameObject.TryGetComponent(out AudioSource soundSource))
+
+            AudioSource soundSource = null;
+
+            if (sound.Source != null)
+            {
+                sound.Play();
+                return;
+            }
+            else
             {
                 soundSource = soundTransform.gameObject.AddComponent<AudioSource>();
             }

@@ -65,6 +65,7 @@ namespace Code.Entity.Hero
             _stateMachine.AddState(HeroBaseAttack1, new FirstAttackState(
                 _heroAnimator,
                 _heroAttack,
+                _audioService,
                 needExitTime: true,
                 isGhostState: false));
 
