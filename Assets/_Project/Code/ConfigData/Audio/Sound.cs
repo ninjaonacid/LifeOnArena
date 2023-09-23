@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace Code.ConfigData.Audio
 {
@@ -13,10 +14,20 @@ namespace Code.ConfigData.Audio
     {
         public string Id;
         public AudioClip Clip;
-        public AudioSource Source;
+        public AssetReference SoundRef;
 
         public SoundStatus SoundStatus;
-        
+
+        public Sound(AudioClip clip, AudioSource source, Transform sourceTransform, float volume)
+        {
+            Clip = clip;
+            Source = source;
+            SourceTransform = sourceTransform;
+            Volume = volume;
+        }
+
+        public AudioSource Source { get; private set; }
+
         public Transform SourceTransform { get; private set; }
         public bool IsPlaying { get; private set; }
         public bool IsPaused { get; private set; }
@@ -27,18 +38,7 @@ namespace Code.ConfigData.Audio
         
         
         public bool IsLoopSound;
-
-        public void Setup(AudioSource source, float volume, bool isLoop)
-        {
-            Source = source;
-            Volume = volume;
-            IsLoopSound = isLoop;
-            
-            
-            Source.clip = Clip;
-            Source.volume = volume;
-            Source.loop = isLoop;
-        }
+        
 
         public void Play()
         {

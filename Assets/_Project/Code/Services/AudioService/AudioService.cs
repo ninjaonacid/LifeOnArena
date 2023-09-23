@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Code.ConfigData.Audio;
 using Code.Core.AssetManagement;
 using Code.Core.Audio;
 using Code.Services.ConfigData;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace Code.Services.AudioService
@@ -14,6 +16,9 @@ namespace Code.Services.AudioService
         
         private readonly Dictionary<string, Sound> _sfx = new();
         private readonly Dictionary<string, Sound> _bgm = new();
+        private List<AudioSource> _sourcePool = new();
+        private AudioLibrary _audioLibrary;
+        
         private readonly IConfigProvider _configProvider;
 
         private readonly GameAudioPlayer _gameAudioPlayer;
@@ -27,25 +32,24 @@ namespace Code.Services.AudioService
 
         public void InitializeAudio ()
         {
-            var library = _configProvider.GetLibrary();
+            _audioLibrary = _configProvider.GetLibrary();
 
-            foreach (var sound in library.Sounds)
-            {
-                _sfx.Add(sound.Id, sound);
-            }
-
-            foreach (var music in library.Music)
-            {
-                _bgm.Add(music.Id, music);
-            }
+            // foreach (var sound in library.Sounds)
+            // {
+            //     _sfx.Add(sound.Id, sound);
+            // }
+            //
+            // foreach (var music in library.Music)
+            // {
+            //     _bgm.Add(music.Id, music);
+            // }
         }
 
         public void PlayBackgroundMusic(string musicName, float volume = 1, bool isLoop = false)
         {
             if (_bgm.TryGetValue(musicName, out var music))
             {
-                music.Setup(_gameAudioPlayer.GetAudioSource(), volume, isLoop);
-               
+
                 music.Play();
             }
             else
@@ -56,11 +60,12 @@ namespace Code.Services.AudioService
 
         public void PlaySound(string soundName, float volume)
         {
-            if (_sfx.TryGetValue(soundName, out var sound))
+            if (_audioLibrary.Sounds.Any(x => x.Id == soundName))
             {
-                sound.Source = _gameAudioPlayer.GetAudioSource();
-                sound.Volume = volume;
-                sound.Play();
+                // sound.Clip = await _assetProvider.Load<AudioClip>(sound.SoundRef);
+                // sound.Source = _gameAudioPlayer.GetAudioSource();
+                // sound.Volume = volume;
+                // sound.Play();
                 //PrepareSound(sound);
                 //source.PlayOneShot(sound);
             }
@@ -70,20 +75,10 @@ namespace Code.Services.AudioService
         {
             if (!_sfx.TryGetValue(soundName, out var sound)) return;
 
-            AudioSource soundSource = null;
+ 
+           // mySound.Clip = await _assetProvider.Load<AudioClip>(sound.SoundRef);
 
-            if (sound.Source != null)
-            {
-                sound.Play();
-                return;
-            }
-            else
-            {
-                soundSource = soundTransform.gameObject.AddComponent<AudioSource>();
-            }
-            
-            sound.Setup(soundSource, volume, false);
-            sound.Play();
+            //sound.Play();
             //PrepareSound(sound);
             //source.PlayOneShot(sound);
         }
@@ -98,7 +93,7 @@ namespace Code.Services.AudioService
         private void PrepareSound(Sound sound, Transform soundTransform, float volume)
         {
             //sound.SourceTransform = soundTransform;
-            sound.Source = soundTransform.gameObject.AddComponent<AudioSource>();
+           // sound.Source = soundTransform.gameObject.AddComponent<AudioSource>();
             sound.Volume = volume;
         }
 
