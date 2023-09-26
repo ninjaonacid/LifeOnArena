@@ -6,8 +6,7 @@ namespace Code.ConfigData.Audio
     [CreateAssetMenu(menuName = "ConfigData", fileName = "AudioLibrary")]
     public class AudioLibrary : ScriptableObject
     {
-        public List<BaseAudioFile> Sounds;
-        public List<BaseAudioFile> Music;
-
+        public List<SoundAudioFile> Sounds;
+        public List<MusicAudioFile> Music;
     }
 }

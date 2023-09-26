@@ -5,7 +5,6 @@ using Code.ConfigData.Audio;
 using Code.Core.AssetManagement;
 using Code.Core.Audio;
 using Code.Services.ConfigData;
-using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace Code.Services.AudioService
@@ -16,8 +15,9 @@ namespace Code.Services.AudioService
         
         private readonly Dictionary<string, BaseAudioFile> _sfx = new();
         private readonly Dictionary<string, BaseAudioFile> _bgm = new();
-        //private List<> _soundChannels;
-        
+        private List<SoundAudioChannel> _soundChannels;
+        private List<MusicAudioChannel> _musicChannels;
+
         private AudioLibrary _audioLibrary;
         
         private readonly IConfigProvider _configProvider;
@@ -50,8 +50,7 @@ namespace Code.Services.AudioService
         {
             if (_bgm.TryGetValue(musicName, out var music))
             {
-
-                music.Play();
+                
             }
             else
             {
@@ -61,27 +60,40 @@ namespace Code.Services.AudioService
 
         public void PlaySound(string soundName, float volume)
         {
-            if (_audioLibrary.Sounds.Any(x => x.Id == soundName))
+            var sound = _audioLibrary.Sounds.FirstOrDefault(x => x.Id == soundName);
+            if (sound == null)
             {
-                // sound.Clip = await _assetProvider.Load<AudioClip>(sound.SoundRef);
-                // sound.Source = _gameAudioPlayer.GetAudioSource();
-                // sound.Volume = volume;
-                // sound.Play();
-                //PrepareSound(sound);
-                //source.PlayOneShot(sound);
+                Debug.LogError("No sound in library with name " + soundName);
+                return;
             }
+            
+          
+            SoundAudioChannel soundChannel = FindFreeSoundChannel();
+
+            if (soundChannel)
+            {
+                soundChannel.Play(sound);
+            }
+            
         }
 
         public void PlaySound3D(string soundName, Transform soundTransform, float volume)
         {
-            if (!_sfx.TryGetValue(soundName, out var sound)) return;
+            var sound = _audioLibrary.Sounds.FirstOrDefault(x => x.Id == soundName);
+            if (sound == null)
+            {
+                Debug.LogError("No sound in library with name " + soundName);
+                return;
+            }
+            
+          
+            SoundAudioChannel soundChannel = FindFreeSoundChannel();
 
- 
-           // mySound.Clip = await _assetProvider.Load<AudioClip>(sound.SoundRef);
-
-            //sound.Play();
-            //PrepareSound(sound);
-            //source.PlayOneShot(sound);
+            if (soundChannel)
+            {
+                soundChannel.SetSoundTransform(soundTransform);
+                soundChannel.Play(sound);
+            }
         }
 
         private void PreloadSound(string name)
@@ -98,9 +110,17 @@ namespace Code.Services.AudioService
             baseAudioFile.Volume = volume;
         }
 
-        private void FindFreeChannel()
+        private SoundAudioChannel FindFreeSoundChannel()
         {
-            
+            foreach (var channel in _soundChannels)
+            {
+                if (channel.IsFree)
+                {
+                    return channel;
+                }
+            }
+
+            return null;
         }
 
 

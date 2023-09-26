@@ -11,37 +11,55 @@ namespace Code.Core.Audio
         public AudioSource AudioSource { get; private set; }
         public AudioMixerGroup MixerGroup;
 
-        private TAudio _baseAudioFile;
-        public bool IsFree = true;
+        private TAudio _audioFile;
+        public bool IsFree;
 
-        public Transform SoundTransform { get; set; }
-
+        public Transform SoundTransformTarget { get; set; }
+        public Transform MainTransformParent { get; set; }
 
         public void SetSoundTransform(Transform targetTransform)
         {
             transform.position = targetTransform.position;
+            transform.SetParent(targetTransform);
         }
 
-
-        public virtual void Play(TAudio baseAudioFile)
+        public void InitializeChannel()
         {
-            _baseAudioFile = baseAudioFile;
-            IsFree = false;
-        }
+            AudioSource = GetComponent<AudioSource>();
+            IsFree = true;
+            MainTransformParent = transform.parent;
 
+        }
+        public virtual void Play(TAudio audioFile)
+        {
+            _audioFile = audioFile;
+            
+            if (!SetAudioClip())
+            {
+                return;
+            }
+            
+            IsFree = false;
+
+            AudioSource.outputAudioMixerGroup = _audioFile.AudioMixerGroup;
+            AudioSource.loop = _audioFile.IsLoopSound;
+            AudioSource.Play();
+        }
+        
         public virtual void Update()
         {
             if (!AudioSource.isPlaying)
             {
                 IsFree = true;
+                transform.SetParent(MainTransformParent);
             }
         }
         private bool SetAudioClip()
         {
-            if (_baseAudioFile.AudioFiles.Count > 1)
+            if (_audioFile.AudioFiles.Count > 1)
             {
-                int index = Random.Range(0, _baseAudioFile.AudioFiles.Count);
-                AudioSource.clip = _baseAudioFile.AudioFiles[index];
+                int index = Random.Range(0, _audioFile.AudioFiles.Count);
+                AudioSource.clip = _audioFile.AudioFiles[index];
                 if (AudioSource.clip == null)
                 {
                     throw new Exception("Missing audio clip at index " + index);
@@ -49,9 +67,9 @@ namespace Code.Core.Audio
 
                 return true;
             }
-            else if (_baseAudioFile.AudioFiles.Count == 1)
+            else if (_audioFile.AudioFiles.Count == 1)
             {
-                AudioSource.clip = _baseAudioFile.AudioFiles[0];
+                AudioSource.clip = _audioFile.AudioFiles[0];
                 return true;
             }
 
