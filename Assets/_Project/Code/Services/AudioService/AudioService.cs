@@ -14,9 +14,10 @@ namespace Code.Services.AudioService
     {
         private readonly IAssetProvider _assetProvider;
         
-        private readonly Dictionary<string, Sound> _sfx = new();
-        private readonly Dictionary<string, Sound> _bgm = new();
-        private List<AudioSource> _sourcePool = new();
+        private readonly Dictionary<string, BaseAudioFile> _sfx = new();
+        private readonly Dictionary<string, BaseAudioFile> _bgm = new();
+        //private List<> _soundChannels;
+        
         private AudioLibrary _audioLibrary;
         
         private readonly IConfigProvider _configProvider;
@@ -90,11 +91,16 @@ namespace Code.Services.AudioService
                 
             }
         }
-        private void PrepareSound(Sound sound, Transform soundTransform, float volume)
+        private void PrepareSound(BaseAudioFile baseAudioFile, Transform soundTransform, float volume)
         {
             //sound.SourceTransform = soundTransform;
            // sound.Source = soundTransform.gameObject.AddComponent<AudioSource>();
-            sound.Volume = volume;
+            baseAudioFile.Volume = volume;
+        }
+
+        private void FindFreeChannel()
+        {
+            
         }
 
 

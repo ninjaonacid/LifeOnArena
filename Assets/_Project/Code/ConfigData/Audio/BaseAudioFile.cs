@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
 
 namespace Code.ConfigData.Audio
 {
@@ -11,7 +10,7 @@ namespace Code.ConfigData.Audio
         Stop,
     }
     [Serializable]
-    public class Sound
+    public class BaseAudioFile
     {
         public string Id;
         public List<AudioClip> AudioFiles;
