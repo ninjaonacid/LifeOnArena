@@ -44,6 +44,8 @@ namespace Code.Services.AudioService
             // {
             //     _bgm.Add(music.Id, music);
             // }
+            
+            
         }
 
         public void PlayBackgroundMusic(string musicName, float volume = 1, bool isLoop = false)
@@ -120,6 +122,16 @@ namespace Code.Services.AudioService
                 }
             }
 
+            return null;
+        }
+
+        private MusicAudioChannel CreateMusicChannel()
+        {
+            return null;
+        }
+
+        private SoundAudioChannel CreateSoundChannel()
+        {
             return null;
         }
 
