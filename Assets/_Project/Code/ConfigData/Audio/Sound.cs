@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
@@ -13,19 +14,10 @@ namespace Code.ConfigData.Audio
     public class Sound
     {
         public string Id;
-        public AudioClip Clip;
-        public AssetReference SoundRef;
+        public List<AudioClip> AudioFiles;
 
         public SoundStatus SoundStatus;
-
-        public Sound(AudioClip clip, AudioSource source, Transform sourceTransform, float volume)
-        {
-            Clip = clip;
-            Source = source;
-            SourceTransform = sourceTransform;
-            Volume = volume;
-        }
-
+    
         public AudioSource Source { get; private set; }
 
         public Transform SourceTransform { get; private set; }
