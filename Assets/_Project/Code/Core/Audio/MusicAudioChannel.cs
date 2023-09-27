@@ -3,7 +3,8 @@ using UnityEngine;
 
 namespace Code.Core.Audio
 {
-    public class MusicAudioChannel : BaseAudioChannel<SoundAudioFile>
+    [RequireComponent(typeof(AudioSource))]
+    public class MusicAudioChannel : BaseAudioChannel<MusicAudioFile>
     {
         
     }

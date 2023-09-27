@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Code.ConfigData.Audio;
@@ -7,7 +6,6 @@ using Code.Core.AssetManagement;
 using Code.Core.Audio;
 using Code.Services.ConfigData;
 using UnityEngine;
-using UnityEngine.Audio;
 using VContainer;
 
 namespace Code.Services.AudioService
@@ -19,8 +17,8 @@ namespace Code.Services.AudioService
         
         private readonly Dictionary<string, BaseAudioFile> _sfx = new();
         private readonly Dictionary<string, BaseAudioFile> _bgm = new();
-        private List<SoundAudioChannel> _soundChannelsPool;
-        private List<MusicAudioChannel> _musicChannelsPool;
+        private List<SoundAudioChannel> _soundChannelsPool = new();
+        private List<MusicAudioChannel> _musicChannelsPool = new();
 
         private MusicAudioChannel _mainMusicChannel;
         
@@ -65,13 +63,22 @@ namespace Code.Services.AudioService
 
         public void PlayBackgroundMusic(string musicName, float volume = 1, bool isLoop = false)
         {
-            if (_bgm.TryGetValue(musicName, out var music))
+            var music = _audioLibrary.Music.FirstOrDefault(x => x.Id == musicName);
+
+            if (music == null)
             {
-                
+                Debug.LogError("No music in library with name " + musicName);
+            }
+
+            MusicAudioChannel musicChannel = FindFreeMusicChannel();
+
+            if (musicChannel)
+            {
+                musicChannel.Play(music);
             }
             else
             {
-                throw new Exception($"No music sound in library with name : {musicName}");
+                Debug.LogError("No music channel");
             }
         }
 
@@ -171,7 +178,7 @@ namespace Code.Services.AudioService
             var obj = new GameObject();
             obj.transform.SetParent(_soundChannels);
             var channel = gameObject.AddComponent<SoundAudioChannel>();
-            //channel.InitializeChannel(transform, );
+            channel.InitializeChannel(transform, _audioSettings.SfxMixerGroup);
             return channel;
         }
 

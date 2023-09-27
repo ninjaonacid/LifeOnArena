@@ -41,7 +41,7 @@ namespace Code.Entity.Hero
             if (hits > 0)
             { 
                 OnHit?.Invoke(hits);
-                _audioService.PlaySound3D("Sword_Hit", transform, 1f);
+                _audioService.PlaySound3D("SwordSlash", transform, 1f);
             }
             
         }

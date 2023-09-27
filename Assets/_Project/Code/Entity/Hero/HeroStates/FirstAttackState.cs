@@ -16,7 +16,7 @@ namespace Code.Entity.Hero.HeroStates
             base.OnEnter();
             HeroAnimator.PlayAttack(this);
             _heroAttack.BaseAttack();
-            _audioService.PlaySound3D("Melee_1", HeroAnimator.gameObject.transform, 1f );
+            _audioService.PlaySound3D("SwordSlash", HeroAnimator.gameObject.transform, 1f );
             _duration = 0.6f;
         }
 
