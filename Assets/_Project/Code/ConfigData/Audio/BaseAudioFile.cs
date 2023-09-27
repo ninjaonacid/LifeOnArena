@@ -17,6 +17,8 @@ namespace Code.ConfigData.Audio
         public List<AudioClip> AudioFiles;
 
         public AudioMixerGroup AudioMixerGroup;
+        public bool IsMixerGroupOverriden => AudioMixerGroup != null;
+        
         public SoundStatus SoundStatus;
 
         public bool IsActivated;

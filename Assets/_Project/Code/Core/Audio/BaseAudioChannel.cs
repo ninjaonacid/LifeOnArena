@@ -9,7 +9,7 @@ namespace Code.Core.Audio
     public abstract class BaseAudioChannel<TAudio> : MonoBehaviour where TAudio : BaseAudioFile
     {
         public AudioSource AudioSource { get; private set; }
-        public AudioMixerGroup MixerGroup;
+        public AudioMixerGroup DefaultMixerGroup;
 
         private TAudio _audioFile;
         public bool IsFree;
@@ -17,19 +17,20 @@ namespace Code.Core.Audio
         public Transform SoundTransformTarget { get; set; }
         public Transform MainTransformParent { get; set; }
 
-        public void SetSoundTransform(Transform targetTransform)
+        public void SetChannelTransform(Transform targetTransform)
         {
             transform.position = targetTransform.position;
             transform.SetParent(targetTransform);
         }
 
-        public void InitializeChannel()
+        public void InitializeChannel(Transform parent)
         {
             AudioSource = GetComponent<AudioSource>();
             IsFree = true;
-            MainTransformParent = transform.parent;
-
+            MainTransformParent = parent.transform;
+            transform.SetParent(parent);
         }
+        
         public virtual void Play(TAudio audioFile)
         {
             _audioFile = audioFile;
@@ -41,7 +42,9 @@ namespace Code.Core.Audio
             
             IsFree = false;
 
-            AudioSource.outputAudioMixerGroup = _audioFile.AudioMixerGroup;
+            AudioSource.outputAudioMixerGroup =
+                _audioFile.IsMixerGroupOverriden ? _audioFile.AudioMixerGroup : DefaultMixerGroup;
+            
             AudioSource.loop = _audioFile.IsLoopSound;
             AudioSource.Play();
         }

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4299000647825714190
+--- !u!1 &8704135775493321825
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,46 +8,41 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4299000647825714188}
-  - component: {fileID: 4299000647825714191}
+  - component: {fileID: 3204297222640639905}
+  - component: {fileID: 7838254032459455494}
   m_Layer: 0
-  m_Name: CoreScope
+  m_Name: SoundChannel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4299000647825714188
+--- !u!4 &3204297222640639905
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4299000647825714190}
+  m_GameObject: {fileID: 8704135775493321825}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13.993898, y: -7.121031, z: 20.13354}
+  m_LocalPosition: {x: 10.558875, y: 9.619995, z: -15.473476}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4299000647825714191
+--- !u!114 &7838254032459455494
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4299000647825714190}
+  m_GameObject: {fileID: 8704135775493321825}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69d014ad3cda951438ffb0b2f95cdbb6, type: 3}
+  m_Script: {fileID: 11500000, guid: 44dc9d8a726dc6f4aaec78244563d765, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parentReference:
-    TypeName: 
-  autoRun: 1
-  autoInjectGameObjects: []
-  Screen: {fileID: 6302355859556549473, guid: 9999f750a9cb62f4e95f2b25c7f6aec2, type: 3}
-  GameAudioPlayer: {fileID: 2495535941074173598, guid: 0396d30f2fac1eb4392cc0fff3722355, type: 3}
-  AudioService: {fileID: 5052630700316882186, guid: b4eaed32af7599341bd0d5147c9b1d30, type: 3}
+  MixerGroup: {fileID: 0}
+  IsFree: 0

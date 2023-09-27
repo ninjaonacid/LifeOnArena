@@ -20,6 +20,7 @@ namespace Code.Core.Scopes
 
         [SerializeField] private LoadingScreen Screen;
         [SerializeField] private GameAudioPlayer GameAudioPlayer;
+        [SerializeField] private AudioService AudioService;
 
         
         protected override void Configure(IContainerBuilder builder)
@@ -44,6 +45,7 @@ namespace Code.Core.Scopes
             builder.Register<PlayerControls>(Lifetime.Singleton).AsSelf();
             builder.Register<SceneLoader>(Lifetime.Singleton);
 
+            builder.RegisterComponentInNewPrefab(AudioService, Lifetime.Singleton).DontDestroyOnLoad();
             builder.RegisterComponentInNewPrefab(Screen, Lifetime.Singleton).AsImplementedInterfaces();
             builder.RegisterComponentInNewPrefab(GameAudioPlayer, Lifetime.Singleton).DontDestroyOnLoad();
             
