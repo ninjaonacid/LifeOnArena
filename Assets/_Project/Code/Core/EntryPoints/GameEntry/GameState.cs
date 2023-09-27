@@ -35,7 +35,7 @@ namespace Code.Core.EntryPoints.GameEntry
 
             data.WorldData.LootData.Collected = 100;
 
-            StatDatabase characterStats = _configProvider.ForCharacterStats();
+            StatDatabase characterStats = _configProvider.CharacterStats();
 
             foreach (StatDefinition stat in characterStats.PrimaryStats)
             {

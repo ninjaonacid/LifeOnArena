@@ -17,8 +17,9 @@ namespace Code.ConfigData.Settings
         public MusicAudioChannel MusicChannelPrefab;
 
         public AudioMixer Mixer;
-        public AudioMixerGroup DefaultMixerGroup;
+        public AudioMixerGroup MasterMixerGroup;
         public AudioMixerGroup MusicMixerGroup;
+        public AudioMixerGroup SfxMixerGroup;
 
     }
 }

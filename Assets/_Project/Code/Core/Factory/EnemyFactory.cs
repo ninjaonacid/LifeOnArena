@@ -69,7 +69,7 @@ namespace Code.Core.Factory
 
         public async UniTask<GameObject> CreateMonster(MobId mobId, Transform parent, CancellationToken token)
         {
-            var monsterData = _config.ForMonster(mobId);
+            var monsterData = _config.Monster(mobId);
 
             GameObject prefab = await _assetProvider.Load<GameObject>(monsterData.PrefabReference);
             GameObject monster = _objectResolver.Instantiate<GameObject>(prefab,

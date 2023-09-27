@@ -32,7 +32,7 @@ namespace Code.Core.Factory
 
         public AbilityTemplateBase CreateAbilityTemplate(int heroAbilityId)
         {
-            AbilityTemplateBase abilityTemplate = _config.ForAbility(heroAbilityId);
+            AbilityTemplateBase abilityTemplate = _config.Ability(heroAbilityId);
             
             abilityTemplate.InitServices(_particlePool, _battleService);
             

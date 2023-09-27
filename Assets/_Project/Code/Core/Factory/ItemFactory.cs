@@ -38,7 +38,7 @@ namespace Code.Core.Factory
         }
         
         public WeaponData LoadWeapon(WeaponId weaponId) =>
-            _config.ForWeapon(weaponId);
+            _config.Weapon(weaponId);
 
         public async Task<WeaponPlatformSpawner> CreateWeaponPlatformSpawner(Vector3 point,
             string spawnerId,
@@ -58,7 +58,7 @@ namespace Code.Core.Factory
 
         public async Task<GameObject> CreateWeaponPlatform(WeaponId weaponId, Transform parent)
         {
-            var weaponPlatformData = _config.ForWeaponPlatforms(weaponId);
+            var weaponPlatformData = _config.WeaponPlatforms(weaponId);
 
             var prefab = await _assetProvider.Load<GameObject>(weaponPlatformData.PrefabReference);
 

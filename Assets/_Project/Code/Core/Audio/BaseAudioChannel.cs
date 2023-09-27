@@ -2,6 +2,7 @@ using System;
 using Code.ConfigData.Audio;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 namespace Code.Core.Audio
@@ -9,13 +10,13 @@ namespace Code.Core.Audio
     public abstract class BaseAudioChannel<TAudio> : MonoBehaviour where TAudio : BaseAudioFile
     {
         public AudioSource AudioSource { get; private set; }
-        public AudioMixerGroup DefaultMixerGroup;
+        private AudioMixerGroup _mixerGroup;
 
         private TAudio _audioFile;
         public bool IsFree;
 
-        public Transform SoundTransformTarget { get; set; }
-        public Transform MainTransformParent { get; set; }
+        public Transform SoundTransformTarget { get; private set; }
+        public Transform MainTransformParent { get; private set; }
 
         public void SetChannelTransform(Transform targetTransform)
         {
@@ -23,7 +24,7 @@ namespace Code.Core.Audio
             transform.SetParent(targetTransform);
         }
 
-        public void InitializeChannel(Transform parent)
+        public void InitializeChannel(Transform parent, AudioMixerGroup mixerGroup)
         {
             AudioSource = GetComponent<AudioSource>();
             IsFree = true;
@@ -43,7 +44,7 @@ namespace Code.Core.Audio
             IsFree = false;
 
             AudioSource.outputAudioMixerGroup =
-                _audioFile.IsMixerGroupOverriden ? _audioFile.AudioMixerGroup : DefaultMixerGroup;
+                _audioFile.IsMixerGroupOverriden ? _audioFile.AudioMixerGroup : _mixerGroup;
             
             AudioSource.loop = _audioFile.IsLoopSound;
             AudioSource.Play();

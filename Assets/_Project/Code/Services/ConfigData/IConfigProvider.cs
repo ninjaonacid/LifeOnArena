@@ -4,6 +4,7 @@ using Code.ConfigData.Ability;
 using Code.ConfigData.Audio;
 using Code.ConfigData.Identifiers;
 using Code.ConfigData.Levels;
+using Code.ConfigData.Settings;
 using Code.ConfigData.StatSystem;
 using Code.ConfigData.UIWindows;
 using Code.UI;
@@ -12,19 +13,20 @@ namespace Code.Services.ConfigData
 {
     public interface IConfigProvider : IService
     {
-        EnemyDataConfig ForMonster(MobId typeId);
+        EnemyDataConfig Monster(MobId typeId);
         void Load();
-        LevelReward ForReward(LocationReward rewardId);
-        StatDatabase ForCharacterStats();
+        LevelReward Reward(LocationReward rewardId);
+        StatDatabase CharacterStats();
         List<LevelReward> LoadRewards();
-        ParticlesStaticData ForParticle(ParticleId id);
-        LevelConfig ForLevel(string sceneKey);
+        ParticlesStaticData Particle(ParticleId id);
+        LevelConfig Level(string sceneKey);
         ScreenConfig ForWindow(ScreenID menuId);
-        AbilityTemplateBase ForAbility(int heroAbilityId);
-        WeaponData ForWeapon(WeaponId weaponId);
-        WeaponPlatformStaticData ForWeaponPlatforms(WeaponId weaponId);
+        AbilityTemplateBase Ability(int heroAbilityId);
+        WeaponData Weapon(WeaponId weaponId);
+        WeaponPlatformStaticData WeaponPlatforms(WeaponId weaponId);
         List<LevelConfig> LoadLevels();
 
-        AudioLibrary GetLibrary();
+        AudioLibrary AudioLibrary();
+        AudioServiceSettings AudioServiceSettings();
     }
 }

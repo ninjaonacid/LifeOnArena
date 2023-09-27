@@ -5,6 +5,7 @@ using Code.ConfigData.Ability;
 using Code.ConfigData.Audio;
 using Code.ConfigData.Identifiers;
 using Code.ConfigData.Levels;
+using Code.ConfigData.Settings;
 using Code.ConfigData.StatSystem;
 using Code.ConfigData.UIWindows;
 using Code.UI;
@@ -24,6 +25,7 @@ namespace Code.Services.ConfigData
         private Dictionary<WeaponId, WeaponData> _weapons;
         private Dictionary<WeaponId, WeaponPlatformStaticData> _weaponPlatforms;
         private AudioLibrary _audioLibrary;
+        private AudioServiceSettings _audioServiceSettings;
         private StatDatabase _characterStats;
 
         public void Load()
@@ -34,6 +36,9 @@ namespace Code.Services.ConfigData
 
             _audioLibrary = Resources
                 .Load<AudioLibrary>($"{ConfigFolder}/Audio/AudioLibrary");
+            
+            _audioServiceSettings = Resources
+                .Load<AudioServiceSettings>($"{ConfigFolder}/Audio/AudioServiceSettings");
 
             _levels = Resources
                 .LoadAll<LevelConfig>($"{ConfigFolder}/Levels")
@@ -69,7 +74,7 @@ namespace Code.Services.ConfigData
 
         }
 
-        public WeaponData ForWeapon(WeaponId weaponId)
+        public WeaponData Weapon(WeaponId weaponId)
         {
             if(_weapons.TryGetValue(weaponId, out var weaponStaticData))
                 return weaponStaticData;
@@ -77,9 +82,10 @@ namespace Code.Services.ConfigData
             return null;
         }
 
-        public AudioLibrary GetLibrary() => _audioLibrary;
+        public AudioServiceSettings AudioServiceSettings() => _audioServiceSettings;
+        public AudioLibrary AudioLibrary() => _audioLibrary;
      
-        public WeaponPlatformStaticData ForWeaponPlatforms(WeaponId weaponId)
+        public WeaponPlatformStaticData WeaponPlatforms(WeaponId weaponId)
         {
             if(_weaponPlatforms.TryGetValue(weaponId, out var weaponPlatformStaticData ))
                 return weaponPlatformStaticData;
@@ -87,15 +93,15 @@ namespace Code.Services.ConfigData
             return null;
         }
 
-        public ParticlesStaticData ForParticle(ParticleId id)
+        public ParticlesStaticData Particle(ParticleId id)
         {
             if(_particles.TryGetValue(id, out var particlesStaticData))
                 return particlesStaticData;
 
             return null;
         }
-
-        public EnemyDataConfig ForMonster(MobId typeId)
+        
+        public EnemyDataConfig Monster(MobId typeId)
         {
             if (_monsters.TryGetValue(typeId, out var monsterStaticData))
                 return monsterStaticData;
@@ -103,7 +109,7 @@ namespace Code.Services.ConfigData
             return null;
         }
 
-        public AbilityTemplateBase ForAbility(int heroAbilityId)    
+        public AbilityTemplateBase Ability(int heroAbilityId)    
         {
             if (_heroAbilities.TryGetValue(heroAbilityId, out var heroAbility))
                 return heroAbility;
@@ -112,7 +118,7 @@ namespace Code.Services.ConfigData
         }
         
 
-        public LevelConfig ForLevel(string sceneKey) =>
+        public LevelConfig Level(string sceneKey) =>
         
             _levels.TryGetValue(sceneKey, out LevelConfig staticData)
                 ? staticData
@@ -122,12 +128,12 @@ namespace Code.Services.ConfigData
         public List<LevelConfig> LoadLevels() =>
         _levels.Values.ToList();
 
-        public LevelReward ForReward(LocationReward rewardId)
+        public LevelReward Reward(LocationReward rewardId)
         {
             throw new System.NotImplementedException();
         }
 
-        public StatDatabase ForCharacterStats() =>
+        public StatDatabase CharacterStats() =>
             _characterStats;
 
         public List<LevelReward> LoadRewards() =>

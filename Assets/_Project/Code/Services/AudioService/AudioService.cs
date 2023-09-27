@@ -2,10 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Code.ConfigData.Audio;
+using Code.ConfigData.Settings;
 using Code.Core.AssetManagement;
 using Code.Core.Audio;
 using Code.Services.ConfigData;
 using UnityEngine;
+using UnityEngine.Audio;
 using VContainer;
 
 namespace Code.Services.AudioService
@@ -19,10 +21,14 @@ namespace Code.Services.AudioService
         private readonly Dictionary<string, BaseAudioFile> _bgm = new();
         private List<SoundAudioChannel> _soundChannelsPool;
         private List<MusicAudioChannel> _musicChannelsPool;
+
+        private MusicAudioChannel _mainMusicChannel;
         
         private AudioLibrary _audioLibrary;
+        private AudioServiceSettings _audioSettings;
         private Transform _soundChannels;
         private Transform _musicChannels;
+        
         
         
         [Inject]
@@ -31,22 +37,30 @@ namespace Code.Services.AudioService
             _assetProvider = assetProvider;
             _configProvider = configProvider;
         }
-        public void InitializeAudio ()
+        public void InitializeAudio()
         {
-            _audioLibrary = _configProvider.GetLibrary();
+            _audioLibrary = _configProvider.AudioLibrary();
+            _audioSettings = _configProvider.AudioServiceSettings();
+            
+            
 
+            for (int i = 0; i < _audioSettings.SoundChannelsPoolSize; i++)
+            {
+                SoundAudioChannel channel = CreateSoundChannel();
+                _soundChannelsPool.Add(channel);
+            } 
+            
+            for (int i = 0; i < _audioSettings.MusicChannelsPoolSize; i++)
+            {
+                MusicAudioChannel channel = CreateMusicChannel();
+                _musicChannelsPool.Add(channel);
+            }
 
-            // foreach (var sound in library.Sounds)
-            // {
-            //     _sfx.Add(sound.Id, sound);
-            // }
-            //
-            // foreach (var music in library.Music)
-            // {
-            //     _bgm.Add(music.Id, music);
-            // }
-
-
+            if (_musicChannelsPool.Count > 0)
+            {
+                _mainMusicChannel = _musicChannelsPool[0];
+            }
+            
         }
 
         public void PlayBackgroundMusic(string musicName, float volume = 1, bool isLoop = false)
@@ -76,6 +90,10 @@ namespace Code.Services.AudioService
             if (soundChannel)
             {
                 soundChannel.Play(sound);
+            }
+            else
+            {
+                Debug.LogError("Noasd");
             }
             
         }
@@ -123,7 +141,20 @@ namespace Code.Services.AudioService
                 }
             }
 
-            return null;
+            return CreateSoundChannel();
+        }
+
+        private MusicAudioChannel FindFreeMusicChannel()
+        {
+            foreach (var channel in _musicChannelsPool)
+            {
+                if (channel.IsFree)
+                {
+                    return channel;
+                }
+            }
+
+            return CreateMusicChannel();
         }
 
         private MusicAudioChannel CreateMusicChannel()
@@ -131,7 +162,7 @@ namespace Code.Services.AudioService
             var obj = new GameObject();
             obj.transform.SetParent(_musicChannels);
             var channel = gameObject.AddComponent<MusicAudioChannel>();
-            channel.InitializeChannel(transform);
+            channel.InitializeChannel(transform, _audioSettings.MusicMixerGroup);
             return channel;
         }
 
@@ -140,7 +171,7 @@ namespace Code.Services.AudioService
             var obj = new GameObject();
             obj.transform.SetParent(_soundChannels);
             var channel = gameObject.AddComponent<SoundAudioChannel>();
-            channel.InitializeChannel(transform);
+            //channel.InitializeChannel(transform, );
             return channel;
         }
 
