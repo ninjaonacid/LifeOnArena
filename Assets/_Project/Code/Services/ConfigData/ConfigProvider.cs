@@ -35,7 +35,7 @@ namespace Code.Services.ConfigData
                 .ToDictionary(x => x.MobId, x => x);
 
             _audioLibrary = Resources
-                .Load<AudioLibrary>($"{ConfigFolder}/Audio/AudioLibrary");
+                .Load<AudioLibrary>("Sounds/AudioLibrary");
             
             _audioServiceSettings = Resources
                 .Load<AudioServiceSettings>($"{ConfigFolder}/Audio/AudioServiceSettings");

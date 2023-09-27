@@ -2,7 +2,6 @@ using System;
 using Code.ConfigData.Audio;
 using UnityEngine;
 using UnityEngine.Audio;
-using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 namespace Code.Core.Audio
@@ -13,10 +12,11 @@ namespace Code.Core.Audio
         private AudioMixerGroup _mixerGroup;
 
         private TAudio _audioFile;
-        public bool IsFree;
 
         public Transform SoundTransformTarget { get; private set; }
-        public Transform MainTransformParent { get; private set; }
+        public bool IsFree { get; private set; }
+
+        private Transform _channelHolder;
 
         public void SetChannelTransform(Transform targetTransform)
         {
@@ -28,7 +28,7 @@ namespace Code.Core.Audio
         {
             AudioSource = GetComponent<AudioSource>();
             IsFree = true;
-            MainTransformParent = parent.transform;
+            _channelHolder = parent.transform;
             transform.SetParent(parent);
         }
         
@@ -55,7 +55,7 @@ namespace Code.Core.Audio
             if (!AudioSource.isPlaying)
             {
                 IsFree = true;
-                transform.SetParent(MainTransformParent);
+                transform.SetParent(_channelHolder);
             }
         }
         private bool SetAudioClip()

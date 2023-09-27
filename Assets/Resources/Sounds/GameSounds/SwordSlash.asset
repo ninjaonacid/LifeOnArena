@@ -10,11 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: afc60dc9d846edb488ba07146f64a86d, type: 3}
-  m_Name: Sword_Hit
+  m_Name: SwordSlash
   m_EditorClassIdentifier: 
-  Id: 
-  AudioFiles: []
-  AudioMixerGroup: {fileID: 0}
+  Id: SwordSlash
+  AudioFiles:
+  - {fileID: 8300000, guid: f1b63e71ac71b0e4fb5faa9df558cad1, type: 3}
+  - {fileID: 8300000, guid: c09669cc8aac6544cbf76b8bb506dee9, type: 3}
+  - {fileID: 8300000, guid: 2d12215b7c5394f44b813b319c086afb, type: 3}
+  AudioMixerGroup: {fileID: -3088967912887985024, guid: a25edeac5313f404396df563c38396e9, type: 2}
   SoundStatus: 0
   IsActivated: 0
   IsLoopSound: 0

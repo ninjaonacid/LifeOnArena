@@ -24,11 +24,9 @@ namespace Code.Services.AudioService
         
         private AudioLibrary _audioLibrary;
         private AudioServiceSettings _audioSettings;
-        private Transform _soundChannels;
-        private Transform _musicChannels;
-        
-        
-        
+        [SerializeField] private Transform _soundChannels;
+        [SerializeField] private Transform _musicChannels;
+
         [Inject]
         public void Construct(IAssetProvider assetProvider, IConfigProvider configProvider)
         {
@@ -166,20 +164,38 @@ namespace Code.Services.AudioService
 
         private MusicAudioChannel CreateMusicChannel()
         {
-            var obj = new GameObject();
-            obj.transform.SetParent(_musicChannels);
-            var channel = gameObject.AddComponent<MusicAudioChannel>();
-            channel.InitializeChannel(transform, _audioSettings.MusicMixerGroup);
-            return channel;
+            MusicAudioChannel musicChannel;
+            
+            if (_audioSettings.MusicChannelPrefab)
+            {
+                musicChannel = Instantiate(_audioSettings.MusicChannelPrefab, _musicChannels);
+            }
+            else
+            {
+                var obj = new GameObject("Music Channel");
+                musicChannel = obj.AddComponent<MusicAudioChannel>();
+            }
+            
+            musicChannel.InitializeChannel(_musicChannels, _audioSettings.MusicMixerGroup);
+            return musicChannel;
         }
 
         private SoundAudioChannel CreateSoundChannel()
         {
-            var obj = new GameObject();
-            obj.transform.SetParent(_soundChannels);
-            var channel = gameObject.AddComponent<SoundAudioChannel>();
-            channel.InitializeChannel(transform, _audioSettings.SfxMixerGroup);
-            return channel;
+            SoundAudioChannel soundChannel;
+            
+            if (_audioSettings.SoundChannelPrefab)
+            {
+                soundChannel = Instantiate(_audioSettings.SoundChannelPrefab, _musicChannels);
+            }
+            else
+            {
+                var obj = new GameObject("Sound Channel");
+                soundChannel = obj.AddComponent<SoundAudioChannel>();
+            }
+            
+            soundChannel.InitializeChannel(_soundChannels, _audioSettings.SfxMixerGroup);
+            return soundChannel;
         }
 
 
