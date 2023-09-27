@@ -17,6 +17,7 @@ namespace Code.Services.AudioService
         
         private readonly Dictionary<string, BaseAudioFile> _sfx = new();
         private readonly Dictionary<string, BaseAudioFile> _bgm = new();
+        
         private List<SoundAudioChannel> _soundChannelsPool = new();
         private List<MusicAudioChannel> _musicChannelsPool = new();
 
