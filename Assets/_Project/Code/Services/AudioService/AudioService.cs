@@ -6,43 +6,35 @@ using Code.Core.AssetManagement;
 using Code.Core.Audio;
 using Code.Services.ConfigData;
 using UnityEngine;
+using VContainer;
 
 namespace Code.Services.AudioService
 {
     public class AudioService : MonoBehaviour
     {
-        private readonly IAssetProvider _assetProvider;
-        private readonly IConfigProvider _configProvider;
+        private  IAssetProvider _assetProvider;
+        private  IConfigProvider _configProvider;
         
         private readonly Dictionary<string, BaseAudioFile> _sfx = new();
         private readonly Dictionary<string, BaseAudioFile> _bgm = new();
         private List<SoundAudioChannel> _soundChannelsPool;
         private List<MusicAudioChannel> _musicChannelsPool;
         
-
         private AudioLibrary _audioLibrary;
         private Transform _soundChannels;
         private Transform _musicChannels;
         
-        private readonly GameAudioPlayer _gameAudioPlayer;
-
-        public AudioService(IAssetProvider assetProvider, IConfigProvider configProvider, GameAudioPlayer gameAudioPlayer)
+        
+        [Inject]
+        public void Construct(IAssetProvider assetProvider, IConfigProvider configProvider)
         {
             _assetProvider = assetProvider;
             _configProvider = configProvider;
-            _gameAudioPlayer = gameAudioPlayer;
         }
-        
         public void InitializeAudio ()
         {
             _audioLibrary = _configProvider.GetLibrary();
 
-            _soundChannels = new GameObject("Sound Channels").transform;
-            _soundChannels.SetParent(transform);
-            
-            _musicChannels = new GameObject("Music Channels").transform;
-            _musicChannels.SetParent(transform);
-            
 
             // foreach (var sound in library.Sounds)
             // {

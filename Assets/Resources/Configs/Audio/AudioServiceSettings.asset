@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebb3fb53843f9a14091a4a05b2d55e10, type: 3}
+  m_Name: AudioServiceSettings
+  m_EditorClassIdentifier: 
+  _soundChannelsPoolSize: 10
+  _musicChannelsPoolSize: 2
+  SoundChannelPrefab: {fileID: 7838254032459455494, guid: 5f4460a385c9a894f88d0ad36959643a, type: 3}
+  MusicChannelPrefab: {fileID: 2337961419030440783, guid: 7995ab9db69d8fb44b7c6eb5935b0890, type: 3}
+  Mixer: {fileID: 24100000, guid: a25edeac5313f404396df563c38396e9, type: 2}
+  DefaultMixerGroup: {fileID: 24300002, guid: a25edeac5313f404396df563c38396e9, type: 2}
+  MusicMixerGroup: {fileID: 4786669566203204276, guid: a25edeac5313f404396df563c38396e9, type: 2}

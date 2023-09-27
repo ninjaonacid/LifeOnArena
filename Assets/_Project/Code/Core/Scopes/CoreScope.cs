@@ -39,16 +39,14 @@ namespace Code.Core.Scopes
             builder.Register<IGameDataContainer, GameDataContainer>(Lifetime.Singleton);
             builder.Register<IRandomService, RandomService>(Lifetime.Singleton);
             builder.Register<IEventSystem, GameEventSystem>(Lifetime.Singleton);
-
-            builder.Register<AudioService>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
+            
 
             builder.Register<PlayerControls>(Lifetime.Singleton).AsSelf();
             builder.Register<SceneLoader>(Lifetime.Singleton);
 
-            builder.RegisterComponentInNewPrefab(AudioService, Lifetime.Singleton).DontDestroyOnLoad();
+            builder.RegisterComponentInNewPrefab(AudioService, Lifetime.Singleton).DontDestroyOnLoad().AsSelf();
             builder.RegisterComponentInNewPrefab(Screen, Lifetime.Singleton).AsImplementedInterfaces();
-            builder.RegisterComponentInNewPrefab(GameAudioPlayer, Lifetime.Singleton).DontDestroyOnLoad();
-            
+
         }
 
     }

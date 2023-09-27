@@ -17,7 +17,8 @@ namespace Code.Core.Scopes
             
             builder.Register<EnemySpawnerController>(Lifetime.Scoped);
             builder.Register<LevelController>(Lifetime.Scoped);
-
+            
+            
             builder.Register<IItemFactory, ItemFactory>(Lifetime.Scoped);
             builder.Register<IEnemyObjectPool, EnemyObjectPool>(Lifetime.Scoped);
             builder.Register<IEnemyFactory, EnemyFactory>(Lifetime.Scoped);
