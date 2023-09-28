@@ -45,7 +45,6 @@ namespace Code.Entity.Hero
 
         public void ForceMove()
         {
-            bool isVectorFind;
             var movementVector = Vector3.zero;
 
             if (_controls.Player.Movement.ReadValue<Vector2>().sqrMagnitude > Constants.Epsilon )

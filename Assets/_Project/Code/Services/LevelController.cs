@@ -15,8 +15,7 @@ namespace Code.Services
     public class LevelController : IDisposable
     {
         private LevelReward _levelReward;
-
-        private int _clearedSpawnersCount;
+        
         private int _enemySpawners;
 
         private readonly IScreenService _screenService;
@@ -34,14 +33,12 @@ namespace Code.Services
             _eventSystem = eventSystem;
             _controls = controls;
             _sceneLoader = sceneLoader;
-
         }
 
         public void Subscribe()
         {
             _eventSystem.Subscribe<HeroDeadEvent>(HeroDead);
             _eventSystem.Subscribe<SpawnersClearEvent>(SpawnersClear);
-
         }
 
         private async void SpawnersClear(SpawnersClearEvent obj)
@@ -60,18 +57,6 @@ namespace Code.Services
                 PlayerLoopTiming.Update, _cancellationToken.Token);
         }
 
-
-        public void InitCurrentLevel(int enemySpawnersCount)
-        {
-            _clearedSpawnersCount = 0;
-            _enemySpawners = enemySpawnersCount;
-
-        }
-
-        public void NextLevelReward(LevelReward levelReward)
-        {
-            _levelReward = levelReward;
-        }
         
 
         private async UniTask ShowUpgradeWindow()

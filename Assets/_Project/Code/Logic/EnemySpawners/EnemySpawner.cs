@@ -13,14 +13,12 @@ using VContainer;
 
 namespace Code.Logic.EnemySpawners
 {
-    public class EnemySpawner : MonoBehaviour, ISave
+    public class EnemySpawner : MonoBehaviour
     {
         private EnemyDeath _enemyDeath;
         private IEnemyObjectPool _enemyObjectPool;
         private IParticleObjectPool _particleObjectPool;
-
-        private float _enemyTimer = 15;
-
+        
         private GameObject _spawnParticle;
         public string Id { get; set; }
         public int RespawnCount { get; set; }
@@ -35,22 +33,6 @@ namespace Code.Logic.EnemySpawners
         {
             _enemyObjectPool = enemyObjectPool;
             _particleObjectPool = particleObjectPool;
-        }
-
-        public void LoadData(PlayerData data)
-        {
-            //if (progress.KillData.ClearedSpawners.Contains(Id))
-            //    Alive = true;
-            //else
-            //    Spawn();
-
-            //StartCoroutine(ChangeSpawnTimer());
-        }
-
-        public void UpdateData(PlayerData data)
-        {
-            if (!Alive)
-                data.KillData.ClearedSpawners.Add(Id);
         }
 
         public async UniTaskVoid Spawn(CancellationToken token)
