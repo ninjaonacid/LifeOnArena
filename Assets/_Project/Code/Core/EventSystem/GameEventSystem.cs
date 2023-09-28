@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Code.CustomEvents;
+using UnityEngine;
 
 namespace Code.Core.EventSystem
 {
@@ -27,20 +28,20 @@ namespace Code.Core.EventSystem
             var allSubscriptions = new SubscriptionsList<ISubscription<IEvent>>();
 
             
-            if (_subscriptions.ContainsKey(type))
+            if (_subscriptions.TryGetValue(type, out var subscriptions))
             {
-                allSubscriptions = _subscriptions[type];
+                allSubscriptions = subscriptions;
             }
 
-            foreach (var subscription in allSubscriptions)
+            foreach (var sub in allSubscriptions)
             {
                 try
                 {
-                    subscription.Publish(eventItem);
+                    sub.Publish(eventItem);
                 }
                 catch(Exception exception)
                 {
-                    throw new Exception("Invoke event exception");
+                    Debug.LogException(exception);
                 }
             }
 

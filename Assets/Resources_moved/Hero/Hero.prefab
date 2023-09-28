@@ -1377,6 +1377,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09c6296a1b471c24385eb90fabe315b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _characterController: {fileID: 7390316171520665865}
+  _heroAnimator: {fileID: 1017552816170990098}
 --- !u!114 &7046878093413620408
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1447,7 +1449,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _weaponPosition: {fileID: 7935067807323840624}
-  _weaponData: {fileID: 0}
+  _weaponData: {fileID: 11400000, guid: cf39cfdcac6cebb418e41811a04f8381, type: 2}
 --- !u!114 &-7543322082994891675
 MonoBehaviour:
   m_ObjectHideFlags: 0

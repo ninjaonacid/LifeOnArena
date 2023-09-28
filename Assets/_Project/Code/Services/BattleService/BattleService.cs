@@ -44,6 +44,7 @@ namespace Code.Services.BattleService
         private void ApplyDamage(StatController attacker, GameObject target)
         {
             var damageable = target.GetComponentInParent<IDamageable>();
+            
             if (attacker.gameObject.TryGetComponent<IAttack>(out var attack))
             {
                 

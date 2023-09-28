@@ -6,6 +6,7 @@ using Code.Core.AssetManagement;
 using Code.Core.Audio;
 using Code.Services.ConfigData;
 using UnityEngine;
+using UnityEngine.Assertions;
 using VContainer;
 
 namespace Code.Services.AudioService
@@ -184,6 +185,7 @@ namespace Code.Services.AudioService
         private SoundAudioChannel CreateSoundChannel()
         {
             SoundAudioChannel soundChannel;
+         
             
             if (_audioSettings.SoundChannelPrefab)
             {
@@ -196,6 +198,7 @@ namespace Code.Services.AudioService
             }
             
             soundChannel.InitializeChannel(_soundChannels, _audioSettings.SfxMixerGroup);
+
             return soundChannel;
         }
 

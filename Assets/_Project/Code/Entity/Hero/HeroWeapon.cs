@@ -1,3 +1,4 @@
+using System;
 using Code.ConfigData;
 using Code.ConfigData.Identifiers;
 using Code.Core.Factory;
@@ -15,7 +16,8 @@ namespace Code.Entity.Hero
         private GameObject _currentWeapon;
         private IItemFactory _itemFactory;
         
-        private class WeaponSlot
+        [Serializable]
+        public class WeaponSlot
         {
             public WeaponId WeaponId;
             public WeaponData WeaponData;
@@ -25,6 +27,10 @@ namespace Code.Entity.Hero
         public void Construct(IItemFactory itemFactory)
         {
             _itemFactory = itemFactory;
+        }
+
+        private void Awake()
+        {
         }
 
         public void EquipWeapon(WeaponData weaponData)

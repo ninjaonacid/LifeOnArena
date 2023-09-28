@@ -24,21 +24,19 @@ namespace Code.Entity.Hero
         private readonly int _idleStateHash = Animator.StringToHash("IDLE");
         private readonly int _runStateHash = Animator.StringToHash("WALKING");
         private readonly int _rollStateHash = Animator.StringToHash("Roll");
-
-
-        private CharacterController _characterController;
-        private Animator _heroAnimator;
-        private HeroAttack _heroAttack;
-
+        
+        [SerializeField] private CharacterController _characterController;
+        [SerializeField] private Animator _heroAnimator;
+        
         public AnimatorState State { get; private set; }
-   
+        
         public void EnteredState(int stateHash)
         {
             State = StateFor(stateHash);
             
             StateEntered?.Invoke(StateFor(stateHash));
         }
-
+        
         public void ExitedState(int stateHash)
         {
             StateExited?.Invoke(StateFor(stateHash));
@@ -46,15 +44,7 @@ namespace Code.Entity.Hero
 
         public event Action<AnimatorState> StateEntered;
         public event Action<AnimatorState> StateExited;
-
-        private void Awake()
-        {
-            
-            _heroAnimator = GetComponent<Animator>();
-            _characterController = GetComponent<CharacterController>();
-            _heroAttack = GetComponent<HeroAttack>();
-        }
-
+        
         public void PlayRoll()
         {
             _heroAnimator.CrossFade(_rollStateHash, 0.1f);
@@ -95,30 +85,20 @@ namespace Code.Entity.Hero
 
         public void PlayAttack(HeroBaseAbilityState state)
         {
-            if (state is FirstAttackState)
+            switch (state)
             {
-                //_heroAnimator.SetTrigger(DoDamage);
-                _heroAnimator.CrossFade(_attackStateHash, 0.1f);
-               // _heroVFX.PlaySwordSlash(AnimatorState.DoDamage);
-                //Debug.Log("Attack1");
-            } 
-            else if (state is SecondAttackState)
-            {
-                //_heroAnimator.SetTrigger(Attack2);
-                _heroAnimator.CrossFade(_attackStateHash2, 0.1f);
-                //_heroVFX.PlaySwordSlash(AnimatorState.Attack2);
-                //Debug.Log("Attack2");
-            }
-            else if (state is ThirdAttackState)
-            {
-                _heroAnimator.CrossFade(_attackStateHash3, 0.1f);
-                // _heroAnimator.SetTrigger(Attack3);
-                //_heroVFX.PlaySwordSlash(AnimatorState.Attack2);
-                //Debug.Log("Attack3");
-            }
-            else if (state is SpinAbilityState)
-            {
-                PlaySpinAttackSkill();
+                case FirstAttackState:
+                    _heroAnimator.CrossFade(_attackStateHash, 0.1f);
+                    break;
+                case SecondAttackState:
+                    _heroAnimator.CrossFade(_attackStateHash2, 0.1f);
+                    break;
+                case ThirdAttackState:
+                    _heroAnimator.CrossFade(_attackStateHash3, 0.1f);
+                    break;
+                case SpinAbilityState:
+                    PlaySpinAttackSkill();
+                    break;
             }
         }
 
