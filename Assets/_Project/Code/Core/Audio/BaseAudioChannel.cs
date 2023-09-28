@@ -15,6 +15,7 @@ namespace Code.Core.Audio
 
         public Transform SoundTransformTarget { get; private set; }
         public bool IsFree { get; private set; }
+        public bool IsPlaying => AudioSource.isPlaying;
 
         private Transform _channelHolder;
 
@@ -32,7 +33,7 @@ namespace Code.Core.Audio
             transform.SetParent(parent);
         }
         
-        public virtual void Play(TAudio audioFile)
+        public void Play(TAudio audioFile)
         {
             _audioFile = audioFile;
             
@@ -48,6 +49,11 @@ namespace Code.Core.Audio
             
             AudioSource.loop = _audioFile.IsLoopSound;
             AudioSource.Play();
+        }
+
+        public void Stop()
+        {
+            AudioSource.Stop();
         }
         
         public virtual void Update()

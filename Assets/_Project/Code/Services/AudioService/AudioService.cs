@@ -25,6 +25,7 @@ namespace Code.Services.AudioService
         
         private AudioLibrary _audioLibrary;
         private AudioServiceSettings _audioSettings;
+        
         [SerializeField] private Transform _soundChannels;
         [SerializeField] private Transform _musicChannels;
 
@@ -38,7 +39,6 @@ namespace Code.Services.AudioService
         {
             _audioLibrary = _configProvider.AudioLibrary();
             _audioSettings = _configProvider.AudioServiceSettings();
-            
             
 
             for (int i = 0; i < _audioSettings.SoundChannelsPoolSize; i++)
@@ -199,6 +199,25 @@ namespace Code.Services.AudioService
             return soundChannel;
         }
 
+        private void StopMusic()
+        {
+            if (!_mainMusicChannel.IsFree)
+            {
+                _mainMusicChannel.Stop();
+            }
+        }
+
+        private void StopAllSounds()
+        {
+            foreach (var channel in _soundChannelsPool)
+            {
+                if (!channel.IsFree)
+                {
+                    channel.Stop();
+                }
+            }
+        }
+        
 
         public void CleanUp()
         {

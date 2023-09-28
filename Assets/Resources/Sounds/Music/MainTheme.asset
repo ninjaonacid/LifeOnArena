@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1e59f2fb04819f4a8fb521347a036f8, type: 3}
   m_Name: MainTheme
   m_EditorClassIdentifier: 
-  Id: 
-  AudioFiles: []
-  AudioMixerGroup: {fileID: 0}
+  Id: MainTheme
+  AudioFiles:
+  - {fileID: 8300000, guid: d8f51c6838f53a2468d3088e601ff76b, type: 3}
+  AudioMixerGroup: {fileID: 4786669566203204276, guid: a25edeac5313f404396df563c38396e9, type: 2}
   SoundStatus: 0
   IsActivated: 0
-  IsLoopSound: 0
+  IsLoopSound: 1

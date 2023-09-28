@@ -38,6 +38,9 @@ namespace Code.Entity.Hero
         public void BaseAttack()
         {
             var hits = _battleService.CreateAttack(_stats, StartPoint(), _layerMask);
+            
+            _audioService.PlaySound3D("SwordSlash", transform, 1f);
+            
             if (hits > 0)
             { 
                 OnHit?.Invoke(hits);
