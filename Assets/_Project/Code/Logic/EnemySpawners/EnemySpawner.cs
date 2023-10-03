@@ -23,7 +23,7 @@ namespace Code.Logic.EnemySpawners
         public string Id { get; set; }
         public int RespawnCount { get; set; }
 
-        [FormerlySerializedAs("MonsterTypeId")] public MobId MobId;
+        public MobId MobId;
         public AssetReference SpawnParticle;
         public bool Alive  { get; private set; }
 

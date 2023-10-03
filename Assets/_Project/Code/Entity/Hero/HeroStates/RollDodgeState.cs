@@ -30,6 +30,7 @@ namespace Code.Entity.Hero.HeroStates
             base.OnLogic();
             _duration -= Time.deltaTime;
             _heroMovement.ForceMove();
+            
             if (IsStateOver())
             {
                 fsm.StateCanExit();
