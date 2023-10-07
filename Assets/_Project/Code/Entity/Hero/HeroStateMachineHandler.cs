@@ -61,6 +61,9 @@ namespace Code.Entity.Hero
 
             _stateMachine.AddState(SpinAttackAbility, new SpinAbilityState(
                 _heroAnimator, _heroAttack, _heroRotation, true, false));
+            
+            _stateMachine.AddState(AbilityCast, new AbilityCastState(
+                _heroAnimator, _heroAttack, true, true));
 
             _stateMachine.AddState(HeroBaseAttack1, new FirstAttackState(
                 _heroAnimator,

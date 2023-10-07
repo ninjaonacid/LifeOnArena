@@ -1090,7 +1090,6 @@ GameObject:
   - component: {fileID: 5184074618343877803}
   - component: {fileID: 3811231307152849639}
   - component: {fileID: 1323959556717596285}
-  - component: {fileID: 4592415276422055292}
   - component: {fileID: 1812712365002794633}
   m_Layer: 0
   m_Name: AttackButton
@@ -1157,21 +1156,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &4592415276422055292
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6847698000085143252}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 995f34434fbe45d46aacf4e120446279, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  button:
-    value: 0
-    m_key: Attack
 --- !u!114 &1812712365002794633
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1540,11 +1524,11 @@ PrefabInstance:
     - target: {fileID: 819212837027285666, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
       propertyPath: button
       value: 
-      objectReference: {fileID: 8424210965047152176}
+      objectReference: {fileID: 0}
     - target: {fileID: 819212837027285666, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
       propertyPath: ButtonInput
       value: 
-      objectReference: {fileID: 8424210965047152176}
+      objectReference: {fileID: 0}
     - target: {fileID: 819212837027285666, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
       propertyPath: abilitySlotID
       value: 1
@@ -1556,7 +1540,7 @@ PrefabInstance:
     - target: {fileID: 819212837027285666, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
       propertyPath: SimpleInputButton
       value: 
-      objectReference: {fileID: 8424210965047152176}
+      objectReference: {fileID: 0}
     - target: {fileID: 1952344347578689738, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
       propertyPath: Image
       value: 
@@ -1657,7 +1641,8 @@ PrefabInstance:
       propertyPath: button.m_key
       value: Skill1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7202479468229353429, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
 --- !u!114 &1701955810035707626 stripped
 MonoBehaviour:
@@ -1686,17 +1671,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2624927343658051704, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
   m_PrefabInstance: {fileID: 1665372912855339493}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8424210965047152176 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7202479468229353429, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
-  m_PrefabInstance: {fileID: 1665372912855339493}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 995f34434fbe45d46aacf4e120446279, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &4885572156878908648
 PrefabInstance:
   m_ObjectHideFlags: 0

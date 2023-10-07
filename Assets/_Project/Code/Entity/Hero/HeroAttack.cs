@@ -16,6 +16,7 @@ namespace Code.Entity.Hero
         
         [SerializeField] private StatController _stats;
         [SerializeField] private AudioSource _heroAudioSource;
+        [SerializeField] private HeroHitBox _hitBox;
 
         public CharacterController CharacterController;
         
@@ -34,10 +35,9 @@ namespace Code.Entity.Hero
             _layerMask = 1 << LayerMask.NameToLayer("Hittable");
         }
 
-
         public void BaseAttack()
         {
-            var hits = _battleService.CreateAttack(_stats, StartPoint(), _layerMask);
+            var hits = _battleService.CreateAttack(_stats, _hitBox.StartPoint(), _layerMask);
             
             _audioService.PlaySound3D("SwordSlash", transform, 0.5f);
             
@@ -54,9 +54,10 @@ namespace Code.Entity.Hero
         }
         
 
-        private Vector3 StartPoint()
+        public Vector3 StartPoint()
         {
-            return new Vector3(transform.position.x, CharacterController.center.y, transform.position.z);
+            var position = transform.position;
+            return new Vector3(position.x, CharacterController.center.y, position.z);
         }
 
         // private void OnDrawGizmos()

@@ -1,3 +1,4 @@
+using System;
 using Code.ConfigData;
 using Code.ConfigData.Identifiers;
 using Code.Core.Factory;
@@ -25,7 +26,7 @@ namespace Code.Entity.Hero
 
             if (_currentWeapon != null)
                 Destroy(_currentWeapon.gameObject);
-
+            
             _weaponSlot.WeaponData = weaponData;
             _weaponSlot.WeaponId = weaponData.WeaponId;
 
@@ -47,6 +48,13 @@ namespace Code.Entity.Hero
             {
                 WeaponData weapon = _itemFactory.LoadWeapon(_weaponSlot.WeaponId);
                 EquipWeapon(weapon);
+            }
+            else
+            {
+                if (_weaponSlot.WeaponData)
+                {
+                    EquipWeapon(_weaponSlot.WeaponData);
+                }
             }
         }
 

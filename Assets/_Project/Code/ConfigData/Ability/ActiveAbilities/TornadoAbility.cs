@@ -1,6 +1,5 @@
 using Code.ConfigData.StatSystem;
 using Code.Core.ObjectPool;
-using Code.Entity.Hero;
 using Code.Logic.Projectiles;
 using Code.Services.BattleService;
 using UnityEngine;
@@ -48,6 +47,8 @@ namespace Code.ConfigData.Ability.ActiveAbilities
             var casterStats = caster.GetComponent<StatController>();
 
             _battleService.CreateAttack(casterStats, projectileTransform.position, _layerMask );
+
+          
         }
 
     }

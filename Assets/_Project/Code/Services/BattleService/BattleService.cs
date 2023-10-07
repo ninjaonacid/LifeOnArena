@@ -1,7 +1,6 @@
 using Code.ConfigData.StatSystem;
 using Code.ConfigData.StatSystem.StatModifiers;
 using Code.Entity;
-using Code.Entity.Hero;
 using Code.Logic.Damage;
 using Code.Logic.EntitiesComponents;
 using UnityEngine;
@@ -40,6 +39,7 @@ namespace Code.Services.BattleService
 
             return hits;
         }
+        
 
         private void ApplyDamage(StatController attacker, GameObject target)
         {
