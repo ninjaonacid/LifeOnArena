@@ -6,6 +6,7 @@ using Code.Services.ConfigData;
 using Code.UI;
 using Code.UI.Services;
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using VContainer.Unity;
 
@@ -35,8 +36,10 @@ namespace Code.Core.EntryPoints
         {
             LevelConfig config = _config.Level(SceneManager.GetActiveScene().name);
 
-            //GameObject hero = await _heroFactory.CreateHeroUnregistered
-              //  (config.HeroInitialPosition, config.HeroInitialRotation);
+            GameObject hero = await _heroFactory.CreateHeroUnregistered
+               (config.HeroInitialPosition, config.HeroInitialRotation);
+            
+            DisableInput();
               
             _audioService.PlayBackgroundMusic("MainTheme", volume: 1, true);
 
