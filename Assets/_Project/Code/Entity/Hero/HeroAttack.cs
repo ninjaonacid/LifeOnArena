@@ -39,12 +39,12 @@ namespace Code.Entity.Hero
         {
             var hits = _battleService.CreateAttack(_stats, StartPoint(), _layerMask);
             
-            _audioService.PlaySound3D("SwordSlash", transform, 1f);
+            _audioService.PlaySound3D("SwordSlash", transform, 0.5f);
             
             if (hits > 0)
             { 
                 OnHit?.Invoke(hits);
-                _audioService.PlaySound3D("Hit", transform, 1f);
+                _audioService.PlaySound3D("Hit", transform, 0.5f);
             }
             
         }

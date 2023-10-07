@@ -105,7 +105,7 @@ namespace Code.Services.AudioService
             
         }
 
-        public void PlaySound3D(string soundName, Transform soundTransform, float volume)
+        public void PlaySound3D(string soundName, Transform soundTransform, float volume = 1f)
         {
             var sound = _audioLibrary.Sounds.FirstOrDefault(x => x.Id == soundName);
             if (sound == null)
@@ -120,6 +120,7 @@ namespace Code.Services.AudioService
             if (soundChannel)
             {
                 soundChannel.SetChannelTransform(soundTransform);
+                soundChannel.AudioSource.volume = volume;
                 soundChannel.Play(sound);
             }
         }
