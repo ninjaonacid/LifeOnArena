@@ -72,11 +72,10 @@ namespace Code.Core.Factory
             var monsterData = _config.Monster(mobId);
 
             GameObject prefab = await _assetProvider.Load<GameObject>(monsterData.PrefabReference);
-            GameObject monster = _objectResolver.Instantiate<GameObject>(prefab,
+            GameObject monster = _objectResolver.Instantiate(prefab,
                 parent.position, 
                 Quaternion.identity, parent);
-
-            StatController monsterStats = monster.GetComponent<StatController>();
+            
             
             IDamageable damageable = monster.GetComponent<IDamageable>();
 
@@ -89,6 +88,9 @@ namespace Code.Core.Factory
             lootSpawner.Construct(this, _randomService);
             lootSpawner.SetLoot(monsterData.MinLoot, monsterData.MaxLoot);
 
+            var expDrop = monster.GetComponentInChildren<ExpDrop>();
+            expDrop.Construct(_randomService, _gameDataContainer.PlayerData.HeroExp);
+            expDrop.SetExperienceGain(monsterData.MinExp, monsterData.MaxExp);
             var fsm = monster.GetComponent<EnemyStateMachine>();
             fsm.Construct(monsterData.EnemyStateMachineConfig);
           

@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 namespace Code.Logic.EntitiesComponents
 {
@@ -6,6 +7,6 @@ namespace Code.Logic.EntitiesComponents
     {
         void BaseAttack();
 
-        void SkillAttack();
+        void SkillAttack(Vector3 castPoint);
     }
 }

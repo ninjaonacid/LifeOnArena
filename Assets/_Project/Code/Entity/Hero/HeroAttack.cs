@@ -49,6 +49,18 @@ namespace Code.Entity.Hero
             
         }
 
+        public void SkillAttack(Vector3 castPoint)
+        {
+            var hits = _battleService.CreateAttack(_stats, castPoint, _layerMask);
+
+            if (hits > 0)
+            {
+                OnHit?.Invoke(hits);
+            }
+            
+            
+        }
+
         public void SkillAttack()
         {
         }

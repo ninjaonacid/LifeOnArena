@@ -6,6 +6,7 @@ namespace Code.Data
     public class PlayerData
     {
         public HeroEquipment HeroEquipment;
+        public HeroExp HeroExp;
         public KillData KillData;
         public WorldData WorldData;
         public PassiveSkills PassiveSkills;
@@ -20,6 +21,7 @@ namespace Code.Data
             SkillSlotsData = new SkillSlotsData();
             PassiveSkills = new PassiveSkills();
             StatsData = new StatsData();
+            HeroExp = new HeroExp();
         }
     }
 }

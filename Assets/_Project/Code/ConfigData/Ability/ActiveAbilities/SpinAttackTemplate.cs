@@ -1,5 +1,4 @@
-using Code.ConfigData.StatSystem;
-using Code.Entity;
+using Code.Logic.EntitiesComponents;
 using Code.Services.BattleService;
 using UnityEngine;
 
@@ -30,10 +29,9 @@ namespace Code.ConfigData.Ability.ActiveAbilities
 
         public void Use(GameObject caster, GameObject target)
         {
-            var stats = caster.GetComponent<StatController>();
-            var entityHitBox = caster.GetComponent<EntityHitBox>();
-
-            _battleService.CreateAttack(stats, entityHitBox.StartPoint(), _layerMask);
+            var attack = caster.GetComponent<IAttack>();
+            
+            attack.BaseAttack();
         }
     }
 }

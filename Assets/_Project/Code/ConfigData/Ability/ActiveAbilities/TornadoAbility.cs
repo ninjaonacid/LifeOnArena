@@ -1,5 +1,6 @@
 using Code.ConfigData.StatSystem;
 using Code.Core.ObjectPool;
+using Code.Logic.EntitiesComponents;
 using Code.Logic.Projectiles;
 using Code.Services.BattleService;
 using UnityEngine;
@@ -15,8 +16,7 @@ namespace Code.ConfigData.Ability.ActiveAbilities
         private readonly float _duration;
         private readonly float _damage;
         private readonly float _attackRadius;
-
-        private readonly LayerMask _layerMask = 1 << LayerMask.NameToLayer("Hittable");
+        
 
         public TornadoAbility(IParticleObjectPool particlePool,
             IBattleService battleService,
@@ -46,7 +46,10 @@ namespace Code.ConfigData.Ability.ActiveAbilities
 
             var casterStats = caster.GetComponent<StatController>();
 
-            _battleService.CreateAttack(casterStats, projectileTransform.position, _layerMask );
+            var entityAttack = caster.GetComponent<IAttack>();
+            
+            entityAttack.SkillAttack(projectileTransform.position);
+            
 
           
         }

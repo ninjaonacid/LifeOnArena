@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Code.Core.SceneManagement;
+using Code.Services.AudioService;
 using Code.Services.PersistentProgress;
 using Code.UI.Controller;
 
@@ -10,9 +11,9 @@ namespace Code.UI.Services
     {
         private readonly Dictionary<Type, Func<IScreenController>> _screenControllers = new();
 
-        public ScreenControllerFactory(IGameDataContainer gameData, SceneLoader sceneLoader)
+        public ScreenControllerFactory(IGameDataContainer gameData, AudioService audioService, SceneLoader sceneLoader)
         {
-            _screenControllers.Add(typeof(MainMenuController), () => new MainMenuController(gameData, sceneLoader));
+            _screenControllers.Add(typeof(MainMenuController), () => new MainMenuController(gameData, audioService, sceneLoader));
             _screenControllers.Add(typeof(ShopMenuController), () => new ShopMenuController(sceneLoader));
             _screenControllers.Add(typeof(AbilityMenuController), () => new AbilityMenuController());
         }

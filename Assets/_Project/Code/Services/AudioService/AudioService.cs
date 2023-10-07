@@ -7,6 +7,7 @@ using Code.Core.Audio;
 using Code.Services.ConfigData;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.Audio;
 using VContainer;
 
 namespace Code.Services.AudioService
@@ -26,6 +27,11 @@ namespace Code.Services.AudioService
         
         private AudioLibrary _audioLibrary;
         private AudioServiceSettings _audioSettings;
+
+        private AudioMixerGroup _masterMixer;
+        private AudioMixerGroup _musicMixer;
+        private AudioMixerGroup _sfxMixer;
+      
         
         [SerializeField] private Transform _soundChannels;
         [SerializeField] private Transform _musicChannels;
@@ -40,8 +46,10 @@ namespace Code.Services.AudioService
         {
             _audioLibrary = _configProvider.AudioLibrary();
             _audioSettings = _configProvider.AudioServiceSettings();
+            _musicMixer = _audioSettings.MusicMixerGroup;
+            _masterMixer = _audioSettings.MasterMixerGroup;
+            _sfxMixer = _audioSettings.SfxMixerGroup;
             
-
             for (int i = 0; i < _audioSettings.SoundChannelsPoolSize; i++)
             {
                 SoundAudioChannel channel = CreateSoundChannel();
@@ -59,6 +67,11 @@ namespace Code.Services.AudioService
                 _mainMusicChannel = _musicChannelsPool[0];
             }
             
+        }
+
+        public void MuteMusic()
+        {
+            _musicMixer.audioMixer.SetFloat("Volume", 0f);
         }
 
         public void PlayBackgroundMusic(string musicName, float volume = 1, bool isLoop = false)
@@ -210,6 +223,8 @@ namespace Code.Services.AudioService
                 _mainMusicChannel.Stop();
             }
         }
+        
+        
 
         private void StopAllSounds()
         {

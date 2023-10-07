@@ -143,6 +143,7 @@ GameObject:
   - component: {fileID: 3027789663709577760}
   - component: {fileID: 2085898622953279013}
   - component: {fileID: 8293864989913983261}
+  - component: {fileID: 4845501457382912920}
   m_Layer: 16
   m_Name: BaseEnemy
   m_TagString: Untagged
@@ -391,8 +392,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1193d293b5931b48b8e90d7f46f7890, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _weaponSlot:
+    WeaponId: 0
+    WeaponData: {fileID: 0}
   _weaponPosition: {fileID: 0}
-  _weaponData: {fileID: 0}
+--- !u!114 &4845501457382912920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2658416580451336931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d6c3eb3a6f1c9e4da4b3755e4923b72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyDeath: {fileID: 2892997724190106139}
 --- !u!1 &3762135731228810403
 GameObject:
   m_ObjectHideFlags: 0

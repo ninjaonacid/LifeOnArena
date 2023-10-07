@@ -2,7 +2,6 @@ using Code.ConfigData.Configs;
 using Code.ConfigData.Identifiers;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
-using UnityEngine.Serialization;
 
 namespace Code.ConfigData
 {
@@ -14,7 +13,10 @@ namespace Code.ConfigData
         public int MaxLoot;
         public int MinLoot;
 
-        [FormerlySerializedAs("MonsterTypeId")] public MobId MobId;
+        public int MinExp;
+        public int MaxExp;
+        
+        public MobId MobId;
 
         public float MoveSpeed;
 

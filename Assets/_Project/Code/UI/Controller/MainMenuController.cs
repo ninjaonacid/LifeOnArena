@@ -1,5 +1,6 @@
 using System;
 using Code.Core.SceneManagement;
+using Code.Services.AudioService;
 using Code.Services.PersistentProgress;
 using Code.UI.Model;
 using Code.UI.Services;
@@ -14,15 +15,18 @@ namespace Code.UI.Controller
     {
         private  MainMenuModel _model;
         private  MainMenuView _view;
+        
         private IScreenService _screenService;
         private readonly IGameDataContainer _gameData;
         private readonly SceneLoader _sceneLoader;
+        private readonly AudioService _audioService; 
         private readonly CompositeDisposable _disposables = new CompositeDisposable();
 
-        public MainMenuController(IGameDataContainer gameData, SceneLoader sceneLoader)
+        public MainMenuController(IGameDataContainer gameData, AudioService audioService, SceneLoader sceneLoader)
         {
             _gameData = gameData;
             _sceneLoader = sceneLoader;
+            _audioService = audioService;
         }
         
         public void InitController(IScreenModel model, BaseView view, IScreenService screenService)
@@ -61,6 +65,10 @@ namespace Code.UI.Controller
             _view.SkillMenu.Button
                 .OnClickAsObservable()
                 .Subscribe(x => _screenService.Open(_view.SkillMenu.WindowId));
+
+            _view.MusicButton.Button
+                .OnClickAsObservable()
+                .Subscribe(x => _audioService.MuteMusic());
         }
         
 
