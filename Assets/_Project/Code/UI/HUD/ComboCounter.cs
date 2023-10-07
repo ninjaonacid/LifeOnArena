@@ -1,4 +1,7 @@
+using System;
+using System.Threading;
 using Code.Entity.Hero;
+using Code.Utils;
 using Cysharp.Threading.Tasks;
 using TMPro;
 using UnityEngine;
@@ -13,8 +16,9 @@ namespace Code.UI.HUD
         private int _hitCount = 0;
         private const int CoolComboCap = 5;
         private const int BrutalComboCap = 8;
-        
-        
+        private const int ResetCounterTimeInSeconds = 5;
+
+        private CancellationTokenSource _cts;
         public void Construct(HeroAttack heroAttack, HeroHealth heroHealth)
         {
             _heroAttack = heroAttack;
@@ -31,10 +35,10 @@ namespace Code.UI.HUD
 
         private void IncreaseHitCounter(int hits)
         {
-            IncreaseHitCounterAsync(hits).Forget();
+            IncreaseHitCounterAsync(hits, TaskHelper.CreateToken(ref _cts)).Forget();
         }
 
-        private async UniTaskVoid IncreaseHitCounterAsync(int hits)
+        private async UniTaskVoid IncreaseHitCounterAsync(int hits, CancellationToken token)
         {
             for (int i = 0; hits > i; i++)
             {
@@ -55,8 +59,16 @@ namespace Code.UI.HUD
                     _textMesh.color = new Color(0.5f, 0.1f, 0.2f);
               
                 }
-                await UniTask.Delay(10);
+                await UniTask.Delay(10, cancellationToken: token);
             }
+            
+            ResetTimer(token).Forget();
+        }
+
+        private async UniTaskVoid ResetTimer(CancellationToken token)
+        {
+            await UniTask.Delay(TimeSpan.FromSeconds(ResetCounterTimeInSeconds), cancellationToken: token);
+            ResetHitCounter();
         }
 
         private void OnDisable()
