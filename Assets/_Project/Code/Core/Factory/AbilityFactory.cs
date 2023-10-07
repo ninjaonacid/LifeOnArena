@@ -33,12 +33,18 @@ namespace Code.Core.Factory
         public AbilityTemplateBase CreateAbilityTemplate(int heroAbilityId)
         {
             AbilityTemplateBase abilityTemplate = _config.Ability(heroAbilityId);
-            
-            abilityTemplate.InitServices(_particlePool, _battleService);
-            
-            InitAbilityAssets(abilityTemplate.PrefabReference);
+
+            InitializeAbilityTemplate(abilityTemplate);
       
             return abilityTemplate;
+        }
+
+        public AbilityTemplateBase InitializeAbilityTemplate(AbilityTemplateBase ability)
+        {
+            ability.InitServices(_particlePool, _battleService);
+            InitAbilityAssets(ability.PrefabReference);
+            
+            return ability;
         }
 
         private void InitAbilityAssets(AssetReference prefabReference)

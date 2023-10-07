@@ -10,10 +10,12 @@ namespace Code.Entity.Hero
     [RequireComponent(typeof(CharacterController))]
     public class HeroMovement : MonoBehaviour, ISave
     {
+        [SerializeField] private HeroStats _stats;
         private CharacterController _characterController;
         private PlayerControls _controls;
 
-        private readonly float _movementSpeed = 10f;
+        private float MovementSpeed => _stats.Stats["MoveSpeed"].Value;
+        
         private readonly float _rollForce = 20f;
 
         [Inject]
@@ -35,12 +37,10 @@ namespace Code.Entity.Hero
                 if (savedPosition != null) Warp(savedPosition);
             }
         }
-        
 
         private void Awake()
         {
             _characterController = GetComponent<CharacterController>();
-   
         }
 
         public void ForceMove()
@@ -74,8 +74,8 @@ namespace Code.Entity.Hero
             }
 
             movementVector += Physics.gravity;
-
-            _characterController.Move(movementVector * _movementSpeed * Time.deltaTime);
+            
+            _characterController.Move(movementVector * MovementSpeed * Time.deltaTime);
         }
 
         private void Warp(Vector3Data to)

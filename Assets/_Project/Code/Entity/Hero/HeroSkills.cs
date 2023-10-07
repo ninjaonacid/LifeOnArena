@@ -15,8 +15,10 @@ namespace Code.Entity.Hero
         public event Action OnSkillChanged;
 
         [SerializeField] private HeroAbilityCooldown _heroCooldown;
-      
-        public SkillSlot[] SkillSlots;
+
+        public SkillSlot[] SkillSlots => _skillSlots;
+        
+        [SerializeField] private SkillSlot[] _skillSlots;
         public AbilityTemplateBase ActiveSkill => _activeSkill;
         
         private AbilityTemplateBase _activeSkill;
@@ -43,6 +45,14 @@ namespace Code.Entity.Hero
         {
             _controls.Player.SkillSlot1.performed += OnSkillSlot1;
             _controls.Player.SkillSlot2.performed += OnSkillSlot2;
+
+            foreach (var slot in _skillSlots)
+            {
+                if (slot.AbilityTemplate)
+                {
+                    slot.AbilityTemplate = _abilityFactory.InitializeAbilityTemplate(slot.AbilityTemplate);
+                }
+            }
         }
 
         private void OnDestroy()
@@ -53,22 +63,22 @@ namespace Code.Entity.Hero
 
         private void OnSkillSlot1(InputAction.CallbackContext context)
         {
-            if (SkillSlots[0].AbilityTemplate == null) return;
+            if (_skillSlots[0].AbilityTemplate == null) return;
 
-            SkillSlots[0].AbilityTemplate.GetAbility().Use(this.gameObject, null);
-            SkillSlots[0].AbilityTemplate.State = AbilityState.Active;
-            _activeSkill = SkillSlots[0].AbilityTemplate;
-            _heroCooldown.StartCooldown(SkillSlots[0].AbilityTemplate);
+            _skillSlots[0].AbilityTemplate.GetAbility().Use(this.gameObject, null);
+            _skillSlots[0].AbilityTemplate.State = AbilityState.Active;
+            _activeSkill = _skillSlots[0].AbilityTemplate;
+            _heroCooldown.StartCooldown(_skillSlots[0].AbilityTemplate);
         }
 
         private void OnSkillSlot2(InputAction.CallbackContext context)
         {
-            if (SkillSlots[1].AbilityTemplate == null) return;
+            if (_skillSlots[1].AbilityTemplate == null) return;
             
-            SkillSlots[1].AbilityTemplate.GetAbility().Use(this.gameObject, null);
-            SkillSlots[1].AbilityTemplate.State = AbilityState.Active;
-            _activeSkill = SkillSlots[1].AbilityTemplate;
-            _heroCooldown.StartCooldown(SkillSlots[1].AbilityTemplate);
+            _skillSlots[1].AbilityTemplate.GetAbility().Use(this.gameObject, null);
+            _skillSlots[1].AbilityTemplate.State = AbilityState.Active;
+            _activeSkill = _skillSlots[1].AbilityTemplate;
+            _heroCooldown.StartCooldown(_skillSlots[1].AbilityTemplate);
         }
 
 
@@ -80,7 +90,7 @@ namespace Code.Entity.Hero
             {
                 for (var index = 0; index <= skillsData.SkillIds.Count; index++)
                 {
-                    var slot = SkillSlots[index];
+                    var slot = _skillSlots[index];
 
                     slot.AbilityTemplate = _abilityFactory.CreateAbilityTemplate(skillsData.SkillIds.Dequeue());
                 }

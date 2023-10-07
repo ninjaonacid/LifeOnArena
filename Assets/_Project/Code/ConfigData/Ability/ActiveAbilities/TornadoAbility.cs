@@ -1,5 +1,6 @@
 using Code.ConfigData.StatSystem;
 using Code.Core.ObjectPool;
+using Code.Entity.Hero;
 using Code.Logic.Projectiles;
 using Code.Services.BattleService;
 using UnityEngine;
@@ -37,7 +38,7 @@ namespace Code.ConfigData.Ability.ActiveAbilities
             Vector3 casterPosition = caster.transform.position;
             Vector3 casterDirection = caster.transform.forward;
             float castOffset = 3f;
-
+            
             GameObject tornadoPrefab = await _particlesPool.GetObject(_tornadoPrefab);
             TornadoProjectile tornadoProjectile = tornadoPrefab.GetComponent<TornadoProjectile>();
             Transform projectileTransform = tornadoProjectile.transform;

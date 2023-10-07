@@ -1,4 +1,3 @@
-using System;
 using Code.ConfigData;
 using Code.ConfigData.Identifiers;
 using Code.Core.Factory;
@@ -11,28 +10,15 @@ namespace Code.Entity.Hero
 {
     public class HeroWeapon : EntityWeapon, ISave
     {
-        private readonly WeaponSlot _weapon = new();
-
         private GameObject _currentWeapon;
         private IItemFactory _itemFactory;
-        
-        [Serializable]
-        public class WeaponSlot
-        {
-            public WeaponId WeaponId;
-            public WeaponData WeaponData;
-        }
 
         [Inject]
         public void Construct(IItemFactory itemFactory)
         {
             _itemFactory = itemFactory;
         }
-
-        private void Awake()
-        {
-        }
-
+        
         public void EquipWeapon(WeaponData weaponData)
         {
             if (weaponData == null) return;
@@ -40,8 +26,8 @@ namespace Code.Entity.Hero
             if (_currentWeapon != null)
                 Destroy(_currentWeapon.gameObject);
 
-            _weapon.WeaponData = weaponData;
-            _weapon.WeaponId = weaponData.WeaponId;
+            _weaponSlot.WeaponData = weaponData;
+            _weaponSlot.WeaponId = weaponData.WeaponId;
 
             _currentWeapon = Instantiate(weaponData.WeaponPrefab, _weaponPosition, false);
             _currentWeapon.transform.localPosition = Vector3.zero;
@@ -55,17 +41,18 @@ namespace Code.Entity.Hero
 
         public void LoadData(PlayerData data)
         {
-            _weapon.WeaponId = data.HeroEquipment.HeroWeapon;
-            if (_weapon != null)
+            WeaponId savedId = data.HeroEquipment.HeroWeapon;
+            
+            if (savedId != WeaponId.Default)
             {
-                _weapon.WeaponData = _itemFactory.LoadWeapon(_weapon.WeaponId);
-                EquipWeapon(_weapon.WeaponData);
+                WeaponData weapon = _itemFactory.LoadWeapon(_weaponSlot.WeaponId);
+                EquipWeapon(weapon);
             }
         }
 
         public void UpdateData(PlayerData data)
         {
-            data.HeroEquipment.HeroWeapon = _weapon.WeaponId;
+            data.HeroEquipment.HeroWeapon = _weaponSlot.WeaponId;
         }
     }
 }

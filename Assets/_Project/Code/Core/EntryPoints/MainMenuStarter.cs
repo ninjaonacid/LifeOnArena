@@ -36,8 +36,7 @@ namespace Code.Core.EntryPoints
         {
             LevelConfig config = _config.Level(SceneManager.GetActiveScene().name);
 
-            GameObject hero = await _heroFactory.CreateHeroUnregistered
-               (config.HeroInitialPosition, config.HeroInitialRotation);
+            GameObject hero = await _heroFactory.CreateHero(config.HeroInitialPosition, config.HeroInitialRotation);
             
             DisableInput();
               
