@@ -1,8 +1,9 @@
 using Code.Data;
+using Code.Data.PlayerData;
 using TMPro;
 using UnityEngine;
 
-namespace Code.UI.HUD
+namespace Code.UI.View.HUD
 {
     public class LootCounter : MonoBehaviour
     {
@@ -13,7 +14,7 @@ namespace Code.UI.HUD
         public void Construct(WorldData worldData)
         {
             _worldData = worldData;
-            //_worldData.LootData.CountChanged += UpdateCounter;
+            _worldData.LootData.CountChanged += UpdateCounter;
         }
 
         private void Start()
@@ -23,7 +24,7 @@ namespace Code.UI.HUD
 
         public void UpdateCounter()
         {
-            //Counter.text = $"{_worldData.LootData.Collected}";
+            Counter.text = $"{_worldData.LootData.Collected}";
         }
 
     }

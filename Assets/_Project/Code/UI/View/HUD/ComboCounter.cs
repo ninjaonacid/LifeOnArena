@@ -13,8 +13,10 @@ namespace Code.UI.HUD
     public class ComboCounter : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI _textMesh;
-        [SerializeField] private HeroAttack _heroAttack;
-        [SerializeField] private HeroHealth _heroHealth;
+        
+        private HeroAttack _heroAttack;
+        private HeroHealth _heroHealth;
+        
         private int _hitCount = 0;
         private const int CoolComboCap = 5;
         private const int BrutalComboCap = 8;

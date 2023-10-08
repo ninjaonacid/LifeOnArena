@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Code.Data
+namespace Code.Data.PlayerData
 {
     [Serializable]
     public class WorldData

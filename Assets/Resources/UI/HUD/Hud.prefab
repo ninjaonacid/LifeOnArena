@@ -609,8 +609,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _textMesh: {fileID: 5117574067245154521}
-  _heroAttack: {fileID: 0}
-  _heroHealth: {fileID: 0}
 --- !u!1 &4972449078436024616
 GameObject:
   m_ObjectHideFlags: 0
@@ -884,6 +882,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ScreenId: 6
   CloseButton: {fileID: 0}
+  HudSkillContainer: {fileID: 1206263350690194180}
+  ComboCounter: {fileID: 8563922067352946964}
+  LootCounter: {fileID: 120957555637822899}
 --- !u!1 &5950391029520475796
 GameObject:
   m_ObjectHideFlags: 0

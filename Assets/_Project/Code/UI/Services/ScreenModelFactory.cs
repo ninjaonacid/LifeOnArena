@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Code.Core.Factory;
 using Code.Services.PersistentProgress;
 using Code.UI.Model;
 
@@ -10,12 +9,12 @@ namespace Code.UI.Services
     {
         private Dictionary<Type, Func<IScreenModel>> _modelMap = new();
 
-        public ScreenModelFactory(IGameDataContainer gameData, IHeroFactory heroFactory)
+        public ScreenModelFactory(IGameDataContainer gameData)
         {
             _modelMap.Add(typeof(MainMenuModel), () => new MainMenuModel(gameData));
             _modelMap.Add(typeof(ShopMenuModel), () => new ShopMenuModel());
             _modelMap.Add(typeof(AbilityMenuModel), () => new AbilityMenuModel());
-            _modelMap.Add(typeof(HudModel), () => new HudModel(heroFactory));
+            _modelMap.Add(typeof(HudModel), () => new HudModel());
         }
         
         public TModel CreateModel<TModel>() where TModel : IScreenModel

@@ -1,8 +1,11 @@
+using Code.Core.Factory;
+using Code.Entity.Hero;
+using Code.Services.PersistentProgress;
 using Code.UI.Model;
 using Code.UI.Services;
 using Code.UI.View;
 using Code.UI.View.HUD;
-using UnityEngine;
+using UnityEngine.Assertions;
 
 namespace Code.UI.Controller
 {
@@ -10,12 +13,37 @@ namespace Code.UI.Controller
     {
         private HudModel _model;
         private HudView _view;
+
+        private readonly IGameDataContainer _gameData;
+        private readonly IHeroFactory _heroFactory;
+        
+        public HudController(IGameDataContainer gameData, IHeroFactory heroFactory)
+        {
+            _gameData = gameData;
+            _heroFactory = heroFactory;
+        }
+
         public void InitController(IScreenModel model, BaseView view, IScreenService screenService)
         {
             _model = model as HudModel;
             _view = view as HudView;
+
+            Assert.IsNotNull(_view);
+            Assert.IsNotNull(_model);
             
-           
+            HeroAttack heroAttack;
+            HeroSkills heroSkills;
+            HeroHealth heroHealth;
+            
+            if (_heroFactory.HeroGameObject.TryGetComponent(out heroAttack));
+            if (_heroFactory.HeroGameObject.TryGetComponent(out heroSkills));
+            if (_heroFactory.HeroGameObject.TryGetComponent(out heroHealth));
+            
+            _view.ComboCounter.Construct(heroAttack, heroHealth);
+            _view.LootCounter.Construct(_gameData.PlayerData.WorldData);
+            _view.HudSkillContainer.Construct(heroSkills);
+            
+            
             
         }
     }
