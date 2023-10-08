@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Code.ConfigData.Identifiers;
 using Code.Core.Factory;
 using Code.Data;
+using Code.Data.PlayerData;
 using Code.Logic.ShelterWeapons;
 using Code.Services.PersistentProgress;
 using UnityEngine;

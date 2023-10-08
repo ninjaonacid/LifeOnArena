@@ -1,4 +1,5 @@
 ﻿using Code.Data;
+using Code.Data.PlayerData;
 
 namespace Code.Services.PersistentProgress
 {

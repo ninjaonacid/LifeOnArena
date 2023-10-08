@@ -29,7 +29,7 @@ namespace Code.UI.Model
             Health.Value = _gameData.PlayerData.StatsData.Stats["Health"];
             Attack.Value = _gameData.PlayerData.StatsData.Stats["Attack"];
             Defense.Value = _gameData.PlayerData.StatsData.Stats["Defense"];
-            IsMusicMuted = _gameData.GameData.AudioData.isMusicMuted;
+            IsMusicMuted = _gameData.AudioData.isMusicMuted;
         }
     }
 }

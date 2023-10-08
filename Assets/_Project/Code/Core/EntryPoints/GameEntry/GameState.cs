@@ -1,5 +1,6 @@
 using Code.ConfigData.StatSystem;
 using Code.Data;
+using Code.Data.PlayerData;
 using Code.Services.ConfigData;
 using Code.Services.PersistentProgress;
 using Code.Services.SaveLoad;
@@ -25,11 +26,14 @@ namespace Code.Core.EntryPoints.GameEntry
         public void LoadProgressOrInitNew()
         {
             _gameDataContainer.PlayerData =
-                _saveLoadService.LoadProgress()
-                ?? NewProgress();
+                _saveLoadService.LoadPlayerData()
+                ?? NewPlayerData();
+
+            _gameDataContainer.AudioData = _saveLoadService.LoadAudioData() ?? NewAudioData();
+
         }
-        
-        private PlayerData NewProgress()
+
+        private PlayerData NewPlayerData()
         {
             PlayerData data = new PlayerData("Shelter");
 
@@ -53,6 +57,17 @@ namespace Code.Core.EntryPoints.GameEntry
             }
             
             return data;
+        }
+
+        private AudioData NewAudioData()
+        {
+            AudioData audioData = new AudioData
+            {
+                isMusicMuted = false,
+                isSoundMuted = false
+            };
+
+            return audioData;
         }
     }
 }

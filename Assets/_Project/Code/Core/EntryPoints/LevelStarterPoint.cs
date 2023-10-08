@@ -52,7 +52,7 @@ namespace Code.Core.EntryPoints
             InitializeInput();
             CameraFollow(hero);
 
-            _saveLoad.LoadSaveData();
+            _saveLoad.LoadData();
             
             _levelController.Subscribe();
             

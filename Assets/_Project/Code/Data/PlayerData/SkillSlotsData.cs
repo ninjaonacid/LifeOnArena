@@ -1,16 +1,12 @@
 using System;
 using System.Collections.Generic;
-using Code.UI.HUD.Skills;
 
-namespace Code.Data
+namespace Code.Data.PlayerData
 {
     [Serializable]
     public class SkillSlotsData
     {
         public Queue<int> SkillIds = new Queue<int>();
-        public SkillSlotsData()
-        {
-        }
         
     }
 

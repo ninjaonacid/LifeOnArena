@@ -1,7 +1,7 @@
 using System;
 using Code.ConfigData.Ability;
 using Code.Core.Factory;
-using Code.Data;
+using Code.Data.PlayerData;
 using Code.Services.PersistentProgress;
 using Code.UI.HUD.Skills;
 using UnityEngine;
@@ -95,8 +95,7 @@ namespace Code.Entity.Hero
                     slot.AbilityTemplate = _abilityFactory.CreateAbilityTemplate(skillsData.SkillIds.Dequeue());
                 }
             }
-
-            Debug.Log(this.GetHashCode().ToString());
+            
             OnSkillChanged?.Invoke();
         }
     }

@@ -16,6 +16,7 @@ namespace Code.UI.Services
             _screenControllers.Add(typeof(MainMenuController), () => new MainMenuController(gameData, audioService, sceneLoader));
             _screenControllers.Add(typeof(ShopMenuController), () => new ShopMenuController(sceneLoader));
             _screenControllers.Add(typeof(AbilityMenuController), () => new AbilityMenuController());
+            _screenControllers.Add(typeof(HudController), () => new HudController());
         }
 
         public IScreenController CreateController(Type controller)
