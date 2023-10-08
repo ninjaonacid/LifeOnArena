@@ -11,7 +11,7 @@ namespace Code.UI.Services
 
         public ScreenModelFactory(IGameDataContainer gameData)
         {
-            _modelMap.Add(typeof(MainMenuModel), () => new MainMenuModel(gameData.PlayerData.StatsData));
+            _modelMap.Add(typeof(MainMenuModel), () => new MainMenuModel(gameData));
             _modelMap.Add(typeof(ShopMenuModel), () => new ShopMenuModel());
             _modelMap.Add(typeof(AbilityMenuModel), () => new AbilityMenuModel());
         }

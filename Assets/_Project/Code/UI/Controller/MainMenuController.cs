@@ -34,6 +34,8 @@ namespace Code.UI.Controller
             _model = model as MainMenuModel;
             _view = view as MainMenuView;
             _screenService = screenService;
+            
+            _view.MusicButton.SetButton(_model.IsMusicMuted);
 
             _model.Health.Subscribe(x =>
             {
@@ -68,7 +70,12 @@ namespace Code.UI.Controller
 
             _view.MusicButton.Button
                 .OnClickAsObservable()
-                .Subscribe(x => _audioService.MuteMusic());
+                .Subscribe(x =>
+                {
+                    _model.ChangeMusicButtonState();
+                    _view.MusicButton.SetButton(_model.IsMusicMuted);
+                });
+
         }
         
 

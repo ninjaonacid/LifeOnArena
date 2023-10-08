@@ -6,5 +6,6 @@ namespace Code.Services.PersistentProgress
         IGameDataContainer : IService
     {
         PlayerData PlayerData { get; set; }
+    
     }
 }

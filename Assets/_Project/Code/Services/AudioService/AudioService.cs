@@ -71,7 +71,7 @@ namespace Code.Services.AudioService
 
         public void MuteMusic()
         {
-            _musicMixer.audioMixer.SetFloat("Volume", 0f);
+            _musicMixer.audioMixer.SetFloat("Volume", -80f);
         }
 
         public void PlayBackgroundMusic(string musicName, float volume = 1, bool isLoop = false)
