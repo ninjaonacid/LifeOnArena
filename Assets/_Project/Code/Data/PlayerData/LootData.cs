@@ -1,4 +1,5 @@
 ﻿using System;
+using Code.Data.PlayerData;
 using Newtonsoft.Json;
 
 namespace Code.Data

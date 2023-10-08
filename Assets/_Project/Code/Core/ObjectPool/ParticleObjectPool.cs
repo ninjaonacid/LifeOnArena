@@ -75,29 +75,6 @@ namespace Code.Core.ObjectPool
         {
             return _particleStock.ContainsKey(particleId) && _particleStock[particleId].Count > 0;
         }
-
-
-        //public GameObject GetObject(ParticleId particleReference, Transform parent)
-        //{
-        //    GameObject result = null;
-        //    if (CheckForExist(particleReference))
-        //    {
-        //        result = _particleStock[particleReference][0];
-        //        _particleStock[particleReference].RemoveAt(0);
-        //    }
-        //    else
-        //    {
-        //        if (!_particleStock.ContainsKey(particleReference))
-        //            _particleStock.Add(particleReference, new List<GameObject>());
-
-
-        //        var particleData = _staticData.ForParticle(particleReference);
-        //        result = Object.Instantiate(particleData.ParticlePrefab, parent);
-
-        //    }
-        //    result.SetActive(true);
-        //    return result;
-
-        //}
+        
     }
 }

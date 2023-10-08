@@ -42,6 +42,8 @@ namespace Code.Core.EntryPoints
         
         public async UniTask StartAsync(CancellationToken cancellation)
         {
+            _saveLoad.Cleanup();
+            
             LevelConfig config = _config.Level(SceneManager.GetActiveScene().name);
 
             await _enemySpawnerController.InitSpawners(config, cancellation);

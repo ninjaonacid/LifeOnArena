@@ -16,7 +16,7 @@ namespace Code.UI.View.HUD
             _damageable.Health.CurrentValueChanged += UpdateHpBar;
         }
 
-        private void OnDestroy()
+        private void OnDisable()
         {
            _damageable.Health.CurrentValueChanged -= UpdateHpBar;
         }
