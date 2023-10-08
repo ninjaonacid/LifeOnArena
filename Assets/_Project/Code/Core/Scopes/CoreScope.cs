@@ -2,8 +2,11 @@ using Code.Core.AssetManagement;
 using Code.Core.Audio;
 using Code.Core.EntryPoints;
 using Code.Core.EventSystem;
+using Code.Core.Factory;
+using Code.Core.ObjectPool;
 using Code.Core.SceneManagement;
 using Code.Services.AudioService;
+using Code.Services.BattleService;
 using Code.Services.ConfigData;
 using Code.Services.PersistentProgress;
 using Code.Services.RandomService;
@@ -39,8 +42,12 @@ namespace Code.Core.Scopes
             builder.Register<IGameDataContainer, GameDataContainer>(Lifetime.Singleton);
             builder.Register<IRandomService, RandomService>(Lifetime.Singleton);
             builder.Register<IEventSystem, GameEventSystem>(Lifetime.Singleton);
-            
 
+            builder.Register<IHeroFactory, HeroFactory>(Lifetime.Singleton);
+            builder.Register<IBattleService, BattleService>(Lifetime.Singleton);
+            builder.Register<IItemFactory, ItemFactory>(Lifetime.Singleton);
+            builder.Register<IAbilityFactory, AbilityFactory>(Lifetime.Singleton);
+            builder.Register<IParticleObjectPool, ParticleObjectPool>(Lifetime.Singleton);
             builder.Register<PlayerControls>(Lifetime.Singleton).AsSelf();
             builder.Register<SceneLoader>(Lifetime.Singleton);
 

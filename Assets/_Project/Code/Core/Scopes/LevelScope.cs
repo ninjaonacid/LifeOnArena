@@ -22,12 +22,9 @@ namespace Code.Core.Scopes
             builder.Register<IItemFactory, ItemFactory>(Lifetime.Scoped);
             builder.Register<IEnemyObjectPool, EnemyObjectPool>(Lifetime.Scoped);
             builder.Register<IEnemyFactory, EnemyFactory>(Lifetime.Scoped);
-            builder.Register<IHeroFactory, HeroFactory>(Lifetime.Scoped);
-            builder.Register<IGameFactory, GameFactory>(Lifetime.Scoped);
-            builder.Register<IParticleObjectPool, ParticleObjectPool>(Lifetime.Scoped);
+   
             builder.Register<IAbilityFactory, AbilityFactory>(Lifetime.Scoped);
-            builder.Register<IBattleService, BattleService>(Lifetime.Scoped);
-            
+
             InitializeServices(builder);
         }
 
@@ -37,11 +34,9 @@ namespace Code.Core.Scopes
             {
                 var enemyFactory = container.Resolve<IEnemyFactory>();
                 var itemFactory = container.Resolve<IItemFactory>();
-                var heroFactory = container.Resolve<IHeroFactory>();
 
                 enemyFactory.InitAssets();
                 itemFactory.InitAssets();
-                heroFactory.InitAssets();
             });
         }
 

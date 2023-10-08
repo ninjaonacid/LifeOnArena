@@ -9,7 +9,7 @@ namespace Code.UI.Model
 
         public HeroHealth HeroHealth;
         public HeroSkills HeroSkills;
-        
+        public HeroAttack HeroAttack;
 
         public HudModel(IHeroFactory heroFactory)
         {
@@ -20,6 +20,7 @@ namespace Code.UI.Model
         {
             HeroHealth = _heroFactory.HeroGameObject.GetComponent<HeroHealth>();
             HeroSkills = _heroFactory.HeroGameObject.GetComponent<HeroSkills>();
+            HeroAttack = _heroFactory.HeroGameObject.GetComponent<HeroAttack>();
         }
     }
 }

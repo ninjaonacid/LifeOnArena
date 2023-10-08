@@ -51,7 +51,9 @@ namespace Code.Core.Factory
         {
             GameObject prefab = await _assetProvider.Load<GameObject>(AssetAddress.Hero);
 
-            HeroGameObject = _objectResolver.Instantiate(prefab, initialPoint, rotation);
+            HeroGameObject = Object.Instantiate(prefab, initialPoint, rotation);
+            
+            _objectResolver.InjectGameObject(HeroGameObject);
             
 
             return prefab;
@@ -60,9 +62,9 @@ namespace Code.Core.Factory
         private GameObject InstantiateRegistered(GameObject prefab, Vector3 position, Quaternion rotation)
         {
             
-            var go = _objectResolver.Instantiate(prefab, position, rotation);
+            var go = Object.Instantiate(prefab, position, rotation);
             
-            //_objectResolver.InjectGameObject(go);
+            _objectResolver.InjectGameObject(go);
 
             _saveLoadService.RegisterProgressWatchers(go);
             
@@ -72,9 +74,9 @@ namespace Code.Core.Factory
         private GameObject InstantiateRegistered(GameObject prefab, Vector3 position)
         {
             
-            var go = _objectResolver.Instantiate(prefab, position, Quaternion.identity);
+            var go = Object.Instantiate(prefab, position, Quaternion.identity);
             
-            //_objectResolver.InjectGameObject(go);
+            _objectResolver.InjectGameObject(go);
 
             _saveLoadService.RegisterProgressWatchers(go);
             

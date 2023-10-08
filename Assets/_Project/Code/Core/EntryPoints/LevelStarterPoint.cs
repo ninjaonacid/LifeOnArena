@@ -7,8 +7,8 @@ using Code.Logic.WaveLogic;
 using Code.Services;
 using Code.Services.ConfigData;
 using Code.Services.SaveLoad;
-using Code.UI.HUD;
-using Code.UI.HUD.Skills;
+using Code.UI;
+using Code.UI.Services;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -21,20 +21,20 @@ namespace Code.Core.EntryPoints
         private readonly IConfigProvider _config;
         private readonly ISaveLoadService _saveLoad;
         private readonly IHeroFactory _heroFactory;
-        private readonly IGameFactory _gameFactory;
+        private readonly IScreenService _screenService;
         private readonly PlayerControls _controls;
         private readonly EnemySpawnerController _enemySpawnerController;
         private readonly LevelController _levelController;
         
         public LevelStarterPoint(IConfigProvider config, 
-            ISaveLoadService saveLoad, IHeroFactory heroFactory, IGameFactory gameFactory,
+            ISaveLoadService saveLoad, IHeroFactory heroFactory, IScreenService screenService,
             PlayerControls controls, EnemySpawnerController enemySpawnerController,
             LevelController controller)
         {
             _config = config;
             _saveLoad = saveLoad;
             _heroFactory = heroFactory;
-            _gameFactory = gameFactory;
+            _screenService = screenService;
             _enemySpawnerController = enemySpawnerController;
             _controls = controls;
             _levelController = controller;
@@ -70,15 +70,15 @@ namespace Code.Core.EntryPoints
 
         private void InitHud(GameObject hero)
         {
-            var hud = _gameFactory.CreateHud();
+            _screenService.Open(ScreenID.HUD);
 
             var heroHealth = hero.GetComponent<HeroHealth>();
             var heroSkills = hero.GetComponent<HeroSkills>();
             var heroAttack = hero.GetComponent<HeroAttack>();
 
-            hud.GetComponentInChildren<ActorUI>().Construct(heroHealth);
-            hud.GetComponentInChildren<HudSkillContainer>().Construct(heroSkills);
-            hud.GetComponentInChildren<ComboCounter>().Construct(heroAttack, heroHealth);
+            // hud.GetComponentInChildren<ActorUI>().Construct(heroHealth);
+            // hud.GetComponentInChildren<HudSkillContainer>().Construct(heroSkills);
+            // hud.GetComponentInChildren<ComboCounter>().Construct(heroAttack, heroHealth);
         }
 
         private static void CameraFollow(GameObject hero)

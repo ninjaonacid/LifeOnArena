@@ -21,6 +21,7 @@ namespace Code.UI.HUD
         private const int ResetCounterTimeInSeconds = 5;
 
         private CancellationTokenSource _cts;
+        
         public void Construct(HeroAttack heroAttack, HeroHealth heroHealth)
         {
             _heroAttack = heroAttack;

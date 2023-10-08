@@ -13,7 +13,7 @@ namespace Code.UI.HUD
         public void Construct(WorldData worldData)
         {
             _worldData = worldData;
-            _worldData.LootData.CountChanged += UpdateCounter;
+            //_worldData.LootData.CountChanged += UpdateCounter;
         }
 
         private void Start()
@@ -23,7 +23,7 @@ namespace Code.UI.HUD
 
         public void UpdateCounter()
         {
-            Counter.text = $"{_worldData.LootData.Collected}";
+            //Counter.text = $"{_worldData.LootData.Collected}";
         }
 
     }
