@@ -19,7 +19,8 @@ namespace Code.ConfigData.Ability.ActiveAbilities
                 PrefabReference,
                 ActiveTime,
                 Damage,
-                AttackRadius);
+                AttackRadius,
+                CastDistance);
         }
     }
 }

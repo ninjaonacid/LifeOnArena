@@ -16,14 +16,15 @@ namespace Code.ConfigData.Ability.ActiveAbilities
         private readonly float _duration;
         private readonly float _damage;
         private readonly float _attackRadius;
+        private readonly float _castDistance;
         
-
         public TornadoAbility(IParticleObjectPool particlePool,
             IBattleService battleService,
             AssetReference tornadoPrefab,
             float duration,
             float damage,
-            float attackRadius)
+            float attackRadius,
+            float castDistance)
         {
             _particlesPool = particlePool;
             _battleService = battleService;
@@ -31,17 +32,18 @@ namespace Code.ConfigData.Ability.ActiveAbilities
             _duration = duration;
             _damage = damage;
             _attackRadius = attackRadius;
+            _castDistance = castDistance;
         }
         public async void Use(GameObject caster, GameObject target)
         {
             Vector3 casterPosition = caster.transform.position;
             Vector3 casterDirection = caster.transform.forward;
-            float castOffset = 3f;
+            
             
             GameObject tornadoPrefab = await _particlesPool.GetObject(_tornadoPrefab);
             TornadoProjectile tornadoProjectile = tornadoPrefab.GetComponent<TornadoProjectile>();
             Transform projectileTransform = tornadoProjectile.transform;
-            projectileTransform.position = casterPosition + casterDirection * castOffset;
+            projectileTransform.position = casterPosition + casterDirection * _castDistance;
             projectileTransform.rotation = Quaternion.identity;
 
             var casterStats = caster.GetComponent<StatController>();

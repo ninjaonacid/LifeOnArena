@@ -6,11 +6,13 @@ using Code.Core.AssetManagement;
 using Code.Entity.Enemy;
 using Code.Logic.EnemySpawners;
 using Code.Logic.EntitiesComponents;
+using Code.Logic.Particles;
 using Code.Services.ConfigData;
 using Code.Services.PersistentProgress;
 using Code.Services.RandomService;
 using Code.Services.SaveLoad;
 using Code.UI.HUD;
+using Code.UI.View.HUD;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AI;
@@ -47,7 +49,7 @@ namespace Code.Core.Factory
         public async UniTask InitAssets()
         {
             await _assetProvider.Load<GameObject>(AssetAddress.EnemySpawner);
-            await _assetProvider.Load<GameObject>(AssetAddress.Loot);
+            await _assetProvider.Load<GameObject>(AssetAddress.Soul);
         }
 
         public async UniTask<EnemySpawner> CreateSpawner(Vector3 at,
@@ -99,14 +101,15 @@ namespace Code.Core.Factory
         }
 
 
-        public async UniTask<LootPiece> CreateLoot()
+        public async UniTask<SoulParticle> CreateLoot()
         {
-            var prefab = await _assetProvider.Load<GameObject>(AssetAddress.Loot);
+            var prefab = await _assetProvider.Load<GameObject>(AssetAddress.Soul);
 
             var lootPiece = InstantiateRegistered(prefab)
-                .GetComponent<LootPiece>();
+                .GetComponent<SoulParticle>();
 
-            lootPiece.Construct(_gameDataContainer.PlayerData.WorldData);
+            lootPiece.Initialize(_heroFactory.HeroGameObject.transform);
+            
             return lootPiece;
         }
 

@@ -1,7 +1,8 @@
 ﻿using Code.Logic.EntitiesComponents;
+using Code.UI.HUD;
 using UnityEngine;
 
-namespace Code.UI.HUD
+namespace Code.UI.View.HUD
 {
     public class ActorUI : MonoBehaviour
     {

@@ -1,5 +1,6 @@
 using Code.Core.Factory;
 using Code.Data;
+using Code.Logic.Particles;
 using Code.Services.RandomService;
 using UnityEngine;
 
@@ -26,7 +27,7 @@ namespace Code.Entity.Enemy
 
         private async void SpawnLoot()
         {
-            LootPiece loot = await _enemyFactory.CreateLoot();
+            SoulParticle loot = await _enemyFactory.CreateLoot();
 
             loot.transform.position = transform.position;
 
@@ -35,7 +36,7 @@ namespace Code.Entity.Enemy
                 Value = _randomService.RandomizeValue(_lootMin, _lootMax)
             };
 
-            loot.Init(lootItem);
+            //loot.Init(lootItem);
         }
 
         public void SetLoot(int min, int max)

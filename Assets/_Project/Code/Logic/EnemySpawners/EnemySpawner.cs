@@ -1,14 +1,10 @@
 using System.Threading;
 using Code.ConfigData.Identifiers;
 using Code.Core.ObjectPool;
-using Code.Data;
 using Code.Entity.Enemy;
-using Code.Services;
-using Code.Services.PersistentProgress;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
-using UnityEngine.Serialization;
 using VContainer;
 
 namespace Code.Logic.EnemySpawners
@@ -39,7 +35,7 @@ namespace Code.Logic.EnemySpawners
         {
             Alive = true;
             var monster = await _enemyObjectPool.GetObject(MobId, transform, token);
-            _spawnParticle = await _particleObjectPool.GetObject(SpawnParticle, transform);
+           _spawnParticle = await _particleObjectPool.GetObject(SpawnParticle, transform);
             
             _enemyDeath = monster.GetComponent<EnemyDeath>();
             _enemyDeath.Happened += Slay;

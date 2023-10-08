@@ -43,7 +43,7 @@ namespace Code.UI.Controller
             _view.LootCounter.Construct(_gameData.PlayerData.WorldData);
             _view.HudSkillContainer.Construct(heroSkills);
             
-            
+           
             
         }
     }
