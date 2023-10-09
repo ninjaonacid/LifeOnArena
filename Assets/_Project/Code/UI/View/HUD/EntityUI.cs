@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Code.UI.View.HUD
 {
-    public class ActorUI : MonoBehaviour
+    public class EntityUI : MonoBehaviour
     {
         private IDamageable _damageable;
         public HpBar HpBar;
@@ -16,7 +16,7 @@ namespace Code.UI.View.HUD
             _damageable.Health.CurrentValueChanged += UpdateHpBar;
         }
 
-        private void OnDisable()
+        private void OnDestroy()
         {
            _damageable.Health.CurrentValueChanged -= UpdateHpBar;
         }

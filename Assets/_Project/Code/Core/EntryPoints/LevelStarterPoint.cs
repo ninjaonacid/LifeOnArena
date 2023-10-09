@@ -1,7 +1,6 @@
 using System.Threading;
 using Code.ConfigData.Levels;
 using Code.Core.Factory;
-using Code.Entity.Hero;
 using Code.Logic.CameraLogic;
 using Code.Logic.WaveLogic;
 using Code.Services;
@@ -50,7 +49,7 @@ namespace Code.Core.EntryPoints
 
             var hero = await InitHero(config);
 
-            InitHud(hero);
+            InitHud();
             InitializeInput();
             CameraFollow(hero);
 
@@ -70,17 +69,9 @@ namespace Code.Core.EntryPoints
             return hero;
         }
 
-        private void InitHud(GameObject hero)
+        private void InitHud()
         {
             _screenService.Open(ScreenID.HUD);
-
-            var heroHealth = hero.GetComponent<HeroHealth>();
-            var heroSkills = hero.GetComponent<HeroSkills>();
-            var heroAttack = hero.GetComponent<HeroAttack>();
-
-            // hud.GetComponentInChildren<ActorUI>().Construct(heroHealth);
-            // hud.GetComponentInChildren<HudSkillContainer>().Construct(heroSkills);
-            // hud.GetComponentInChildren<ComboCounter>().Construct(heroAttack, heroHealth);
         }
 
         private static void CameraFollow(GameObject hero)

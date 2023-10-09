@@ -5,11 +5,11 @@ using Vector3 = UnityEngine.Vector3;
 
 namespace Code.Logic.Particles
 {
-    public class SoulParticle : MonoBehaviour
+    public class ExpLoot : MonoBehaviour
     {
         [SerializeField] private ParticleSystem _soulParticle;
 
-        private ParticleSystem.Particle[] _particles = new ParticleSystem.Particle[100];
+        private readonly ParticleSystem.Particle[] _particles = new ParticleSystem.Particle[100];
 
         private Transform _transform;
         private Transform _targetTransform;
@@ -38,7 +38,6 @@ namespace Code.Logic.Particles
             }
 
             _soulParticle.SetParticles(_particles, particlesCount);
-            
             
         }
 

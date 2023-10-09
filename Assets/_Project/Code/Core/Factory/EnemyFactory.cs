@@ -81,12 +81,13 @@ namespace Code.Core.Factory
             
             IDamageable damageable = monster.GetComponent<IDamageable>();
 
-            monster.GetComponent<ActorUI>().Construct(damageable);
+            monster.GetComponent<EntityUI>().Construct(damageable);
             monster.GetComponent<AgentMoveToPlayer>().Construct(_heroFactory.HeroGameObject.transform);
             monster.GetComponent<NavMeshAgent>().speed = monsterData.MoveSpeed;
             monster.GetComponent<EnemyTarget>().Construct(_heroFactory.HeroGameObject.transform);
 
             var lootSpawner = monster.GetComponentInChildren<LootSpawner>();
+            
             lootSpawner.Construct(this, _randomService);
             lootSpawner.SetLoot(monsterData.MinLoot, monsterData.MaxLoot);
 
@@ -101,12 +102,12 @@ namespace Code.Core.Factory
         }
 
 
-        public async UniTask<SoulParticle> CreateLoot()
+        public async UniTask<ExpLoot> CreateExp()
         {
             var prefab = await _assetProvider.Load<GameObject>(AssetAddress.Soul);
 
             var lootPiece = InstantiateRegistered(prefab)
-                .GetComponent<SoulParticle>();
+                .GetComponent<ExpLoot>();
 
             lootPiece.Initialize(_heroFactory.HeroGameObject.transform);
             

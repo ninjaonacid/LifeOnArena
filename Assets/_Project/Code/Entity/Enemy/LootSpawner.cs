@@ -28,14 +28,15 @@ namespace Code.Entity.Enemy
 
         private async void SpawnLoot()
         {
-            SoulParticle loot = await _enemyFactory.CreateLoot();
+            ExpLoot loot = await _enemyFactory.CreateExp();
 
-            loot.transform.position = transform.position + new Vector3(0, 1, 0);
+            loot.transform.position = transform.position + new Vector3(0, 2, 0);
 
             var lootItem = new Loot()
             {
                 Value = _randomService.RandomizeValue(_lootMin, _lootMax)
             };
+            
             //loot.Init(lootItem);
         }
 
