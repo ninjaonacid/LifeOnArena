@@ -1,6 +1,7 @@
 using Code.Core.ObjectPool;
 using Code.Services.BattleService;
 using UnityEngine.AddressableAssets;
+using UnityEngine.Serialization;
 
 namespace Code.ConfigData.Ability
 {
@@ -17,14 +18,14 @@ namespace Code.ConfigData.Ability
         public float ActiveTime;
         public float CurrentActiveTime;
         public AbilityState State;
-        public AssetReference PrefabReference;
+        public ParticleData ParticleData;
 
-        protected IParticleObjectPool ParticlePool;
+        protected ParticleObjectPool ParticlePool;
         protected IBattleService BattleService;
         public abstract IAbility GetAbility();
 
         public void InitServices(
-            IParticleObjectPool particlePool, 
+            ParticleObjectPool particlePool, 
             IBattleService battleService)
         {
             ParticlePool = particlePool;

@@ -18,7 +18,7 @@ namespace Code.Services.ConfigData
         LevelReward Reward(LocationReward rewardId);
         StatDatabase CharacterStats();
         List<LevelReward> LoadRewards();
-        ParticlesStaticData Particle(ParticleId id);
+        ParticleData Particle(int id);
         LevelConfig Level(string sceneKey);
         ScreenConfig ForWindow(ScreenID menuId);
         AbilityTemplateBase Ability(int heroAbilityId);

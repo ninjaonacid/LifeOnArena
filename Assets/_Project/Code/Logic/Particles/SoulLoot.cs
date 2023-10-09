@@ -1,12 +1,13 @@
 using System;
 using System.Numerics;
+using Code.Core.ObjectPool;
 using Code.Data.PlayerData;
 using UnityEngine;
 using Vector3 = UnityEngine.Vector3;
 
 namespace Code.Logic.Particles
 {
-    public class SoulLoot : MonoBehaviour
+    public class SoulLoot : MonoBehaviour, IPoolable
     {
         [SerializeField] private ParticleSystem _soulParticle;
 
@@ -36,16 +37,20 @@ namespace Code.Logic.Particles
             {
                 time += Time.deltaTime;
                 _particles[particle].position =
-                    Vector3.Lerp(_particles[particle].position, _targetTransform.position, time / 2);
+                    Vector3.Lerp(_particles[particle].position, _targetTransform.position, time * 2);
 
-                if (Vector3.Distance(_particles[particle].position, _targetTransform.position) < 10)
+                if (Vector3.Distance(_particles[particle].position, _targetTransform.position) < 5)
                 {
-                    _particles[particle].remainingLifetime = 0;
-
-                    _loot.Value /= particlesCount;
-                    _playerData.WorldData.LootData.Collect(_loot);
+                    _particles[particle].remainingLifetime = -1;
                 }
+
+                if (!_soulParticle.isPlaying)
+                {
+                    gameObject.SetActive(false);
+                }
+                
             }
+            
 
             _soulParticle.SetParticles(_particles, particlesCount);
         }
@@ -53,6 +58,10 @@ namespace Code.Logic.Particles
         public void Initialize(Loot loot)
         {
             _loot = loot;
+            Return?.Invoke();
         }
+
+
+        public event Action Return;
     }
 }

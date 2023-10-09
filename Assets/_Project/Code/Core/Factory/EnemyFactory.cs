@@ -102,7 +102,7 @@ namespace Code.Core.Factory
         }
 
 
-        public async UniTask<SoulLoot> CreateExp()
+        public async UniTask<SoulLoot> CreateSoulLoot()
         {
             var prefab = await _assetProvider.Load<GameObject>(AssetAddress.Soul);
 

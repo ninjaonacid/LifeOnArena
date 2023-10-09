@@ -10,17 +10,17 @@ namespace Code.ConfigData.Ability.ActiveAbilities
 {
     public class TornadoAbility : IAbility
     {
-        private readonly IParticleObjectPool _particlesPool;
+        private readonly ParticleObjectPool _particlesPool;
         private readonly IBattleService _battleService;
-        private readonly AssetReference _tornadoPrefab;
+        private readonly ParticleData _particleData;
         private readonly float _duration;
         private readonly float _damage;
         private readonly float _attackRadius;
         private readonly float _castDistance;
         
-        public TornadoAbility(IParticleObjectPool particlePool,
+        public TornadoAbility(ParticleObjectPool particlePool,
             IBattleService battleService,
-            AssetReference tornadoPrefab,
+            ParticleData particleData,
             float duration,
             float damage,
             float attackRadius,
@@ -28,7 +28,7 @@ namespace Code.ConfigData.Ability.ActiveAbilities
         {
             _particlesPool = particlePool;
             _battleService = battleService;
-            _tornadoPrefab = tornadoPrefab;
+            _particleData = particleData;
             _duration = duration;
             _damage = damage;
             _attackRadius = attackRadius;
@@ -40,7 +40,7 @@ namespace Code.ConfigData.Ability.ActiveAbilities
             Vector3 casterDirection = caster.transform.forward;
             
             
-            GameObject tornadoPrefab = await _particlesPool.GetObject(_tornadoPrefab);
+            GameObject tornadoPrefab = await _particlesPool.GetObject(_particleData.Identifier);
             TornadoProjectile tornadoProjectile = tornadoPrefab.GetComponent<TornadoProjectile>();
             Transform projectileTransform = tornadoProjectile.transform;
             projectileTransform.position = casterPosition + casterDirection * _castDistance;

@@ -20,7 +20,7 @@ namespace Code.Core.Scopes
             
             
             builder.Register<IItemFactory, ItemFactory>(Lifetime.Scoped);
-            builder.Register<IEnemyObjectPool, EnemyObjectPool>(Lifetime.Scoped);
+            builder.Register<EnemyObjectPool>(Lifetime.Scoped);
             builder.Register<IEnemyFactory, EnemyFactory>(Lifetime.Scoped);
    
             builder.Register<IAbilityFactory, AbilityFactory>(Lifetime.Scoped);

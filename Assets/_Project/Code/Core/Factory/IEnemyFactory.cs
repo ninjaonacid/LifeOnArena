@@ -14,7 +14,7 @@ namespace Code.Core.Factory
         UniTask<EnemySpawner> CreateSpawner(Vector3 at, string spawnerDataId, MobId spawnerDataMobId,
             int RespawnCount, CancellationToken token);
         UniTask<GameObject> CreateMonster(MobId mobId, Transform parent, CancellationToken token);
-        UniTask<SoulLoot> CreateExp();
+        UniTask<SoulLoot> CreateSoulLoot();
         UniTask InitAssets();
     }
 }

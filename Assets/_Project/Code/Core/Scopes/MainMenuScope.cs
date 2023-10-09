@@ -1,7 +1,5 @@
 using Code.Core.EntryPoints;
-using Code.Core.Factory;
 using Code.Core.ObjectPool;
-using Code.Services.BattleService;
 using VContainer;
 using VContainer.Unity;
 
@@ -13,8 +11,8 @@ namespace Code.Core.Scopes
         {
             builder.RegisterEntryPoint<MainMenuStarter>();
             
+            builder.Register<ParticleObjectPool>(Lifetime.Scoped);
           
-            builder.Register<IParticleObjectPool, ParticleObjectPool>(Lifetime.Scoped);
         }
     }
 }

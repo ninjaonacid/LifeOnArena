@@ -12,14 +12,14 @@ namespace Code.Core.Factory
     public class AbilityFactory : IAbilityFactory
     {
         private readonly IConfigProvider _config;
-        private readonly IParticleObjectPool _particlePool;
+        private readonly ParticleObjectPool _particlePool;
         private readonly IBattleService _battleService;
         private readonly IRandomService _random;
         private readonly IAssetProvider _assetProvider;
         public AbilityFactory(
             IAssetProvider assetProvider,
             IConfigProvider config,
-            IParticleObjectPool particlePool,
+            ParticleObjectPool particlePool,
             IBattleService battleService,
             IRandomService random)
         {
@@ -42,7 +42,7 @@ namespace Code.Core.Factory
         public AbilityTemplateBase InitializeAbilityTemplate(AbilityTemplateBase ability)
         {
             ability.InitServices(_particlePool, _battleService);
-            InitAbilityAssets(ability.PrefabReference);
+            InitAbilityAssets(ability.ParticleData.ParticleReference);
             
             return ability;
         }

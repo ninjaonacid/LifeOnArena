@@ -17,5 +17,11 @@ namespace Code.Data.PlayerData
             Collected += loot.Value;
             CountChanged?.Invoke();
         }
+
+        public void Collect(int value)
+        {
+            Collected += value;
+            CountChanged?.Invoke();
+        }
     }
 }

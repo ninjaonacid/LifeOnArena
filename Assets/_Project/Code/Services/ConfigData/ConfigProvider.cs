@@ -21,7 +21,7 @@ namespace Code.Services.ConfigData
         private Dictionary<LocationReward, LevelReward> _levelReward;
         private Dictionary<ScreenID, ScreenConfig> _windowConfigs;
         private Dictionary<int, AbilityTemplateBase> _heroAbilities;
-        private Dictionary<ParticleId, ParticlesStaticData> _particles;
+        private Dictionary<int, ParticleData> _particles;
         private Dictionary<WeaponId, WeaponData> _weapons;
         private Dictionary<WeaponId, WeaponPlatformStaticData> _weaponPlatforms;
         private AudioLibrary _audioLibrary;
@@ -61,8 +61,8 @@ namespace Code.Services.ConfigData
                 .Load<StatDatabase>($"{ConfigFolder}/Hero/Stats/HeroStatsData");
 
             _particles = Resources
-                .LoadAll<ParticlesStaticData>($"{ConfigFolder}/Particles")
-                .ToDictionary(x => x.ParticleId, x => x);
+                .LoadAll<ParticleData>($"{ConfigFolder}/Particles")
+                .ToDictionary(x => x.Identifier.Id, x => x);
             
             _weapons = Resources
                 .LoadAll<WeaponData>($"{ConfigFolder}/Equipment/Weapons")
@@ -93,7 +93,7 @@ namespace Code.Services.ConfigData
             return null;
         }
 
-        public ParticlesStaticData Particle(ParticleId id)
+        public ParticleData Particle(int id)
         {
             if(_particles.TryGetValue(id, out var particlesStaticData))
                 return particlesStaticData;

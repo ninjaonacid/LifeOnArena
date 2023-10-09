@@ -16,7 +16,7 @@ namespace Code.ConfigData.Ability.ActiveAbilities
                 new TornadoAbility
                 (ParticlePool,
                 BattleService,
-                PrefabReference,
+                ParticleData,
                 ActiveTime,
                 Damage,
                 AttackRadius,

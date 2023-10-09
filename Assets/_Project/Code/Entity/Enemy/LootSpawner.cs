@@ -1,5 +1,4 @@
 using Code.Core.Factory;
-using Code.Data;
 using Code.Data.PlayerData;
 using Code.Logic.Particles;
 using Code.Services.RandomService;
@@ -28,7 +27,7 @@ namespace Code.Entity.Enemy
 
         private async void SpawnLoot()
         {
-            SoulLoot loot = await _enemyFactory.CreateExp();
+            SoulLoot loot = await _enemyFactory.CreateSoulLoot();
 
             loot.transform.position = transform.position + new Vector3(0, 2, 0);
 
