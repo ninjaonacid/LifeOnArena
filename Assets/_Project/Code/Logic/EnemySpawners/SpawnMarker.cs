@@ -7,6 +7,6 @@ namespace Code.Logic.EnemySpawners
     public class SpawnMarker : MonoBehaviour
     {
         public int RespawnCount;
-        [FormerlySerializedAs("MonsterTypeId")] public MobId MobId;
+        public MobIdentifier MobId;
     }
 }
