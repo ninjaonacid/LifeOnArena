@@ -42,7 +42,11 @@ namespace Code.Core.Factory
         public AbilityTemplateBase InitializeAbilityTemplate(AbilityTemplateBase ability)
         {
             ability.InitServices(_particlePool, _battleService);
-            InitAbilityAssets(ability.ParticleData.ParticleReference);
+            
+            if (ability.ParticleData)
+            {
+                InitAbilityAssets(ability.ParticleData.ParticleReference);
+            }
             
             return ability;
         }

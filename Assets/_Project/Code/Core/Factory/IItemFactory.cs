@@ -10,13 +10,13 @@ namespace Code.Core.Factory
 {
     public interface IItemFactory : IService
     { 
-        WeaponData LoadWeapon(WeaponId weaponId);
+        WeaponData LoadWeapon(int weaponId);
 
         Task<WeaponPlatformSpawner> CreateWeaponPlatformSpawner(Vector3 point,
             string spawnerId,
             WeaponId weaponId);
 
-        Task<GameObject> CreateWeaponPlatform(WeaponId weaponId, Transform parent);
+       // Task<GameObject> CreateWeaponPlatform(WeaponId weaponId, Transform parent);
 
         UniTaskVoid InitAssets();
     }

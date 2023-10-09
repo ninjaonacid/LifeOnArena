@@ -1,9 +1,10 @@
 using Code.ConfigData.Identifiers;
 
-namespace Code.Data
+namespace Code.Data.PlayerData
 {
     public class HeroEquipment
     {
-        public WeaponId HeroWeapon = WeaponId.Default;
+        public string WeaponStringId;
+        public int WeaponIntId;
     }
 }

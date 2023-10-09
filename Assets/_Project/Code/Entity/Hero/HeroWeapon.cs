@@ -43,11 +43,11 @@ namespace Code.Entity.Hero
 
         public void LoadData(PlayerData data)
         {
-            WeaponId savedId = data.HeroEquipment.HeroWeapon;
+            var weaponId = data.HeroEquipment.WeaponIntId;
             
-            if (savedId != WeaponId.Default)
+            if (weaponId != 0)
             {
-                WeaponData weapon = _itemFactory.LoadWeapon(_weaponSlot.WeaponId);
+                WeaponData weapon = _itemFactory.LoadWeapon(_weaponSlot.WeaponId.Id);
                 EquipWeapon(weapon);
             }
             else
@@ -61,7 +61,8 @@ namespace Code.Entity.Hero
 
         public void UpdateData(PlayerData data)
         {
-            data.HeroEquipment.HeroWeapon = _weaponSlot.WeaponId;
+            data.HeroEquipment.WeaponStringId = _weaponSlot.WeaponId.Name;
+            data.HeroEquipment.WeaponIntId = _weaponSlot.WeaponId.Id;
         }
     }
 }

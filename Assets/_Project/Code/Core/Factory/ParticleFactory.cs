@@ -8,9 +8,15 @@ namespace Code.Core.Factory
 {
     public class ParticleFactory : MonoBehaviour
     {
-        private AssetProvider _assetProvider;
-        private IConfigProvider _configProvider;
-        
+        private readonly IAssetProvider _assetProvider;
+        private readonly IConfigProvider _configProvider;
+
+        public ParticleFactory(IAssetProvider assetProvider, IConfigProvider configProvider)
+        {
+            _assetProvider = assetProvider;
+            _configProvider = configProvider;
+        }
+
         public async Task<GameObject> CreateParticle(Identifier id)
         {
             var particle = _configProvider.Particle(id.Id);

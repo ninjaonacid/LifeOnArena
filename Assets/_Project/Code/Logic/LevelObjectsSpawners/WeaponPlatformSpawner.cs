@@ -20,13 +20,13 @@ namespace Code.Logic.LevelObjectsSpawners
         public void Construct(IItemFactory itemFactory)
         {
             _itemFactory = itemFactory;
-            SpawnPlatform();
+            //SpawnPlatform();
         }
 
       
 
-        private async void SpawnPlatform() =>
-             await _itemFactory.CreateWeaponPlatform(WeaponId, transform);
+        // private async void SpawnPlatform() =>
+        //      await _itemFactory.CreateWeaponPlatform(WeaponId, transform);
 
 
         private void WeaponPurchased() 

@@ -13,7 +13,7 @@ namespace Code.Services.ConfigData
 {
     public interface IConfigProvider : IService
     {
-        EnemyDataConfig Monster(MobId typeId);
+        EnemyDataConfig Monster(int monsterId);
         void Load();
         LevelReward Reward(LocationReward rewardId);
         StatDatabase CharacterStats();
@@ -22,8 +22,7 @@ namespace Code.Services.ConfigData
         LevelConfig Level(string sceneKey);
         ScreenConfig ForWindow(ScreenID menuId);
         AbilityTemplateBase Ability(int heroAbilityId);
-        WeaponData Weapon(WeaponId weaponId);
-        WeaponPlatformStaticData WeaponPlatforms(WeaponId weaponId);
+        WeaponData Weapon(int weaponId);
         List<LevelConfig> LoadLevels();
 
         AudioLibrary AudioLibrary();

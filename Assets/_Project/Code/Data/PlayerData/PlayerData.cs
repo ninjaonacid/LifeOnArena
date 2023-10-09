@@ -6,7 +6,7 @@ namespace Code.Data.PlayerData
     [Serializable]
     public class PlayerData
     {
-        [FormerlySerializedAs("HeroExp")] public PlayerExp PlayerExp;
+        public PlayerExp PlayerExp;
         public KillData KillData;
         public WorldData WorldData;
         public SkillSlotsData SkillSlotsData;

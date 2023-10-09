@@ -15,8 +15,8 @@ namespace Code.ConfigData
 
         public int MinExp;
         public int MaxExp;
-        
-        public MobId MobId;
+
+        public MobIdentifier MobId;
 
         public float MoveSpeed;
 

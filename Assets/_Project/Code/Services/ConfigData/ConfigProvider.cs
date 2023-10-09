@@ -16,14 +16,13 @@ namespace Code.Services.ConfigData
     public class ConfigProvider : IConfigProvider
     {
         private const string ConfigFolder = "Configs";
-        private Dictionary<MobId, EnemyDataConfig> _monsters;
+        private Dictionary<int, EnemyDataConfig> _monsters;
         private Dictionary<string, LevelConfig> _levels; 
         private Dictionary<LocationReward, LevelReward> _levelReward;
         private Dictionary<ScreenID, ScreenConfig> _windowConfigs;
         private Dictionary<int, AbilityTemplateBase> _heroAbilities;
         private Dictionary<int, ParticleData> _particles;
-        private Dictionary<WeaponId, WeaponData> _weapons;
-        private Dictionary<WeaponId, WeaponPlatformStaticData> _weaponPlatforms;
+        private Dictionary<int, WeaponData> _weapons;
         private AudioLibrary _audioLibrary;
         private AudioServiceSettings _audioServiceSettings;
         private StatDatabase _characterStats;
@@ -32,7 +31,7 @@ namespace Code.Services.ConfigData
         {
             _monsters = Resources
                 .LoadAll<EnemyDataConfig>($"{ConfigFolder}/Monsters")
-                .ToDictionary(x => x.MobId, x => x);
+                .ToDictionary(x => x.MobId.Id, x => x);
 
             _audioLibrary = Resources
                 .Load<AudioLibrary>("Sounds/AudioLibrary");
@@ -66,15 +65,11 @@ namespace Code.Services.ConfigData
             
             _weapons = Resources
                 .LoadAll<WeaponData>($"{ConfigFolder}/Equipment/Weapons")
-                .ToDictionary(x => x.WeaponId, x => x);
-
-            _weaponPlatforms = Resources
-                .LoadAll<WeaponPlatformStaticData>($"{ConfigFolder}/WeaponPlatforms")
-                .ToDictionary(x => x.WeaponPlatformId, x => x);
+                .ToDictionary(x => x.WeaponId.Id, x => x);
 
         }
 
-        public WeaponData Weapon(WeaponId weaponId)
+        public WeaponData Weapon(int weaponId)
         {
             if(_weapons.TryGetValue(weaponId, out var weaponStaticData))
                 return weaponStaticData;
@@ -84,14 +79,6 @@ namespace Code.Services.ConfigData
 
         public AudioServiceSettings AudioServiceSettings() => _audioServiceSettings;
         public AudioLibrary AudioLibrary() => _audioLibrary;
-     
-        public WeaponPlatformStaticData WeaponPlatforms(WeaponId weaponId)
-        {
-            if(_weaponPlatforms.TryGetValue(weaponId, out var weaponPlatformStaticData ))
-                return weaponPlatformStaticData;
-
-            return null;
-        }
 
         public ParticleData Particle(int id)
         {
@@ -101,9 +88,9 @@ namespace Code.Services.ConfigData
             return null;
         }
         
-        public EnemyDataConfig Monster(MobId typeId)
+        public EnemyDataConfig Monster(int id)
         {
-            if (_monsters.TryGetValue(typeId, out var monsterStaticData))
+            if (_monsters.TryGetValue(id, out var monsterStaticData))
                 return monsterStaticData;
 
             return null;

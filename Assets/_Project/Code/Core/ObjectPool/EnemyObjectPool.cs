@@ -9,13 +9,12 @@ namespace Code.Core.ObjectPool
 {
     public class EnemyObjectPool
     {
-
-        public Dictionary<MobId, List<GameObject>> _enemyObjectsStock;
+        public Dictionary<int, List<GameObject>> _enemyObjectsStock;
 
         private readonly IEnemyFactory _enemyFactory;
         public EnemyObjectPool(IEnemyFactory enemyFactory)
         {
-            _enemyObjectsStock = new Dictionary<MobId, List<GameObject>>();
+            _enemyObjectsStock = new Dictionary<int, List<GameObject>>();
             _enemyFactory = enemyFactory;
         }
 
@@ -24,7 +23,7 @@ namespace Code.Core.ObjectPool
             _enemyObjectsStock.Clear();
         }
 
-        public async UniTask<GameObject> GetObject(MobId mobId, Transform parent,
+        public async UniTask<GameObject> GetObject(int mobId, Transform parent,
                                                     CancellationToken token)
         {
             GameObject result = null;
@@ -47,13 +46,13 @@ namespace Code.Core.ObjectPool
             return result;
         }
 
-        public void ReturnObject(MobId mobId, GameObject obj)
+        public void ReturnObject(int mobId, GameObject obj)
         {
             _enemyObjectsStock[mobId].Add(obj);
 
         }
 
-        private bool CheckForExist(MobId mobId)
+        private bool CheckForExist(int mobId)
         {
             return _enemyObjectsStock.ContainsKey(mobId) && _enemyObjectsStock[mobId].Count > 0;
         }

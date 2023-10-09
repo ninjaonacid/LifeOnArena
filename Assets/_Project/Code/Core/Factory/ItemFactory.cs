@@ -37,7 +37,7 @@ namespace Code.Core.Factory
             await _assetProvider.Load<GameObject>(AssetAddress.WeaponPlatformSpawner);
         }
         
-        public WeaponData LoadWeapon(WeaponId weaponId) =>
+        public WeaponData LoadWeapon(int weaponId) =>
             _config.Weapon(weaponId);
 
         public async Task<WeaponPlatformSpawner> CreateWeaponPlatformSpawner(Vector3 point,
@@ -55,20 +55,20 @@ namespace Code.Core.Factory
        
             return weaponPlatformSpawner;
         }
-
-        public async Task<GameObject> CreateWeaponPlatform(WeaponId weaponId, Transform parent)
-        {
-            var weaponPlatformData = _config.WeaponPlatforms(weaponId);
-
-            var prefab = await _assetProvider.Load<GameObject>(weaponPlatformData.PrefabReference);
-
-            var weaponPlatform = Object.Instantiate(prefab, parent);
-
-            weaponPlatform.GetComponent<WeaponPlatform>().Construct(_gameDataContainer.PlayerData.WorldData.LootData);
-
-            return weaponPlatform;
-
-        }
+        //
+        // public async Task<GameObject> CreateWeaponPlatform(WeaponId weaponId, Transform parent)
+        // {
+        //     var weaponPlatformData = _config.WeaponPlatforms(weaponId);
+        //
+        //     var prefab = await _assetProvider.Load<GameObject>(weaponPlatformData.PrefabReference);
+        //
+        //     var weaponPlatform = Object.Instantiate(prefab, parent);
+        //
+        //     weaponPlatform.GetComponent<WeaponPlatform>().Construct(_gameDataContainer.PlayerData.WorldData.LootData);
+        //
+        //     return weaponPlatform;
+        //
+        // }
         public GameObject InstantiateRegistered(GameObject prefab, Vector3 position)
         {
             var go = Object.Instantiate(prefab, position, Quaternion.identity);
