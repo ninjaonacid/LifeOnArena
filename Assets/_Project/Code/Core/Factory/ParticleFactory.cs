@@ -1,5 +1,4 @@
 using System.Threading.Tasks;
-using Code.ConfigData.Identifiers;
 using Code.Core.AssetManagement;
 using Code.Services.ConfigData;
 using UnityEngine;
@@ -17,9 +16,9 @@ namespace Code.Core.Factory
             _configProvider = configProvider;
         }
 
-        public async Task<GameObject> CreateParticle(Identifier id)
+        public async Task<GameObject> CreateParticle(int id)
         {
-            var particle = _configProvider.Particle(id.Id);
+            var particle = _configProvider.Particle(id);
 
             var prefab = await _assetProvider.Load<GameObject>(particle.ParticleReference);
 

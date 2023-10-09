@@ -40,7 +40,7 @@ namespace Code.ConfigData.Ability.ActiveAbilities
             Vector3 casterDirection = caster.transform.forward;
             
             
-            GameObject tornadoPrefab = await _particlesPool.GetObject(_particleData.Identifier);
+            GameObject tornadoPrefab = await _particlesPool.GetObject(_particleData.Identifier.Id);
             TornadoProjectile tornadoProjectile = tornadoPrefab.GetComponent<TornadoProjectile>();
             Transform projectileTransform = tornadoProjectile.transform;
             projectileTransform.position = casterPosition + casterDirection * _castDistance;

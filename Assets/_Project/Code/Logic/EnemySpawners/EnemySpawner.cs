@@ -34,7 +34,7 @@ namespace Code.Logic.EnemySpawners
         {
             Alive = true;
             var monster = await _enemyObjectPool.GetObject(MobId.Id, transform, token);
-           _spawnParticle = await _particleObjectPool.GetObject(ParticleIdentifier, transform);
+           _spawnParticle = await _particleObjectPool.GetObject(ParticleIdentifier.Id, transform);
             
             _enemyDeath = monster.GetComponent<EnemyDeath>();
             _enemyDeath.Happened += Slay;
@@ -46,7 +46,7 @@ namespace Code.Logic.EnemySpawners
                   _enemyDeath.Happened -= Slay;
 
             _enemyObjectPool.ReturnObject(MobId.Id, _enemyDeath.gameObject);
-            _particleObjectPool.ReturnObject(ParticleIdentifier, _spawnParticle);
+            _particleObjectPool.ReturnObject(ParticleIdentifier.Id, _spawnParticle);
 
             Alive = false;
         }

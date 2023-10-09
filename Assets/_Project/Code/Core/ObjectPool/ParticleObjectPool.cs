@@ -12,10 +12,10 @@ namespace Code.Core.ObjectPool
     {
         private readonly IAssetProvider _assetProvider;
         private readonly ParticleFactory _particleFactory;
-        private readonly Dictionary<Identifier, List<GameObject>> _particleStock;
+        private readonly Dictionary<int, List<GameObject>> _particleStock;
         public ParticleObjectPool(IAssetProvider assetProvider, ParticleFactory particleFactory)
         {
-            _particleStock = new Dictionary<Identifier, List<GameObject>>();
+            _particleStock = new Dictionary<int, List<GameObject>>();
             _assetProvider = assetProvider;
             _particleFactory = particleFactory;
         }
@@ -23,7 +23,7 @@ namespace Code.Core.ObjectPool
         {
             _particleStock.Clear();
         }
-        public async UniTask<GameObject> GetObject(Identifier id, Transform parent)
+        public async UniTask<GameObject> GetObject(int id, Transform parent)
         {
             GameObject result = null;
 
@@ -50,7 +50,7 @@ namespace Code.Core.ObjectPool
         }
         
 
-        public async UniTask<GameObject> GetObject(Identifier id)
+        public async UniTask<GameObject> GetObject(int id)
         {
             GameObject result = null;
 
@@ -73,7 +73,7 @@ namespace Code.Core.ObjectPool
             return result;
         }
 
-        public void ReturnObject(Identifier id, GameObject obj)
+        public void ReturnObject(int id, GameObject obj)
         {
             _particleStock[id].Add(obj);
             obj.SetActive(false);
@@ -81,7 +81,7 @@ namespace Code.Core.ObjectPool
         
      
 
-        private bool CheckForExist(Identifier particleId)
+        private bool CheckForExist(int particleId)
         {
             return _particleStock.ContainsKey(particleId) && _particleStock[particleId].Count > 0;
         }
