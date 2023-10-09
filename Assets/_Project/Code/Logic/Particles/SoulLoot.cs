@@ -1,22 +1,29 @@
 using System;
 using System.Numerics;
+using Code.Data.PlayerData;
 using UnityEngine;
 using Vector3 = UnityEngine.Vector3;
 
 namespace Code.Logic.Particles
 {
-    public class ExpLoot : MonoBehaviour
+    public class SoulLoot : MonoBehaviour
     {
         [SerializeField] private ParticleSystem _soulParticle;
 
         private readonly ParticleSystem.Particle[] _particles = new ParticleSystem.Particle[100];
-
-        private Transform _transform;
+        
         private Transform _targetTransform;
+        private PlayerData _playerData;
+        private Loot _loot;
 
+        public void Construct(PlayerData playerData, Transform heroTransform)
+        {
+            _targetTransform = heroTransform;
+            _playerData = playerData;
+        }
+        
         private void Awake()
         {
-            _transform = transform;
             _soulParticle = GetComponent<ParticleSystem>();
         }
 
@@ -34,16 +41,18 @@ namespace Code.Logic.Particles
                 if (Vector3.Distance(_particles[particle].position, _targetTransform.position) < 10)
                 {
                     _particles[particle].remainingLifetime = 0;
+
+                    _loot.Value /= particlesCount;
+                    _playerData.WorldData.LootData.Collect(_loot);
                 }
             }
 
             _soulParticle.SetParticles(_particles, particlesCount);
-            
         }
 
-        public void Initialize(Transform targetTransform)
+        public void Initialize(Loot loot)
         {
-            _targetTransform = targetTransform;
+            _loot = loot;
         }
     }
 }

@@ -92,7 +92,7 @@ namespace Code.Core.Factory
             lootSpawner.SetLoot(monsterData.MinLoot, monsterData.MaxLoot);
 
             var expDrop = monster.GetComponentInChildren<ExpDrop>();
-            expDrop.Construct(_randomService, _gameDataContainer.PlayerData.HeroExp);
+            expDrop.Construct(_randomService, _gameDataContainer.PlayerData.PlayerExp);
             expDrop.SetExperienceGain(monsterData.MinExp, monsterData.MaxExp);
             var fsm = monster.GetComponent<EnemyStateMachine>();
             fsm.Construct(monsterData.EnemyStateMachineConfig);
@@ -102,14 +102,14 @@ namespace Code.Core.Factory
         }
 
 
-        public async UniTask<ExpLoot> CreateExp()
+        public async UniTask<SoulLoot> CreateExp()
         {
             var prefab = await _assetProvider.Load<GameObject>(AssetAddress.Soul);
 
             var lootPiece = InstantiateRegistered(prefab)
-                .GetComponent<ExpLoot>();
+                .GetComponent<SoulLoot>();
 
-            lootPiece.Initialize(_heroFactory.HeroGameObject.transform);
+            lootPiece.Construct(_gameDataContainer.PlayerData, _heroFactory.HeroGameObject.transform);
             
             return lootPiece;
         }

@@ -1,6 +1,7 @@
 using System;
 using Code.ConfigData;
 using Code.Data;
+using Code.Data.PlayerData;
 using Code.Entity.Enemy;
 using Code.Entity.Hero;
 using Code.Logic.EntitiesComponents;

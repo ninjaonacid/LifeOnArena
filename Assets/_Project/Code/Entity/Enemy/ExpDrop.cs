@@ -11,13 +11,13 @@ namespace Code.Entity.Enemy
         
         private int _minExp;
         private int _maxExp;
-        private HeroExp _heroExp;
+        private PlayerExp _playerExp;
 
         private IRandomService _random;
-        public void Construct(IRandomService randomService, HeroExp heroExp)
+        public void Construct(IRandomService randomService, PlayerExp playerExp)
         {
             _random = randomService;
-            _heroExp = heroExp;
+            _playerExp = playerExp;
         }
 
         private void Start()
@@ -27,13 +27,13 @@ namespace Code.Entity.Enemy
 
         private void AddExperienceToPlayer()
         {
-            var minExpResult = _minExp * _heroExp.Level;
+            var minExpResult = _minExp * _playerExp.Level;
 
-            var maxExpResult = _maxExp * _heroExp.Level;
+            var maxExpResult = _maxExp * _playerExp.Level;
 
             var randomExpResult = _random.RandomizeValue(minExpResult, maxExpResult);
             
-            _heroExp.AddExperience(randomExpResult);
+            _playerExp.AddExperience(randomExpResult);
         }
 
         public void SetExperienceGain(int minExp, int maxExp)

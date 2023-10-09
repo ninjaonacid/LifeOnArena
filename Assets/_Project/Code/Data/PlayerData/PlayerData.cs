@@ -1,11 +1,12 @@
 using System;
+using UnityEngine.Serialization;
 
 namespace Code.Data.PlayerData
 {
     [Serializable]
     public class PlayerData
     {
-        public HeroExp HeroExp;
+        [FormerlySerializedAs("HeroExp")] public PlayerExp PlayerExp;
         public KillData KillData;
         public WorldData WorldData;
         public SkillSlotsData SkillSlotsData;
@@ -21,7 +22,7 @@ namespace Code.Data.PlayerData
         SkillSlotsData = new SkillSlotsData();
         PassiveSkills = new PassiveSkills();
         StatsData = new StatsData();
-        HeroExp = new HeroExp();
+        PlayerExp = new PlayerExp();
     }
     }
 }

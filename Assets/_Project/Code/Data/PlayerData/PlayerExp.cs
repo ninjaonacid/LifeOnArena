@@ -3,14 +3,14 @@ using System;
 namespace Code.Data.PlayerData
 {
     [Serializable]
-    public class HeroExp
+    public class PlayerExp
     {
         public event Action OnExpChanged;
         public int Experience;
         public int Level;
         public int ExperienceToNextLevel;
 
-        public HeroExp()
+        public PlayerExp()
         {
             Level = 0;
             Experience = 0;

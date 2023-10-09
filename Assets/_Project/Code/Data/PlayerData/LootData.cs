@@ -1,8 +1,7 @@
 ﻿using System;
-using Code.Data.PlayerData;
 using Newtonsoft.Json;
 
-namespace Code.Data
+namespace Code.Data.PlayerData
 {
     [Serializable]
     public class LootData
