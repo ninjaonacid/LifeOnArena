@@ -4,7 +4,7 @@ namespace Code.Data.PlayerData
 {
     public class HeroEquipment
     {
-        public string WeaponStringId;
+        public string WeaponStringId = "";
         public int WeaponIntId;
     }
 }

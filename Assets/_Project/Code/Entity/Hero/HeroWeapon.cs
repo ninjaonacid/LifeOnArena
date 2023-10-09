@@ -47,7 +47,7 @@ namespace Code.Entity.Hero
             
             if (weaponId != 0)
             {
-                WeaponData weapon = _itemFactory.LoadWeapon(_weaponSlot.WeaponId.Id);
+                WeaponData weapon = _itemFactory.LoadWeapon(weaponId);
                 EquipWeapon(weapon);
             }
             else
