@@ -88,7 +88,7 @@ namespace Code.Core.Factory
 
             var lootSpawner = monster.GetComponentInChildren<LootSpawner>();
             
-            lootSpawner.Construct(this, _randomService);
+           // lootSpawner.Construct(this, _randomService);
             lootSpawner.SetLoot(monsterData.MinLoot, monsterData.MaxLoot);
 
             var expDrop = monster.GetComponentInChildren<ExpDrop>();

@@ -5,7 +5,7 @@ namespace Code.ConfigData.Ability
 {
     public class AbilityBase : ScriptableObject
     {
-        public Identifier Identifier;
+        public AbilityIdentifier Identifier;
         public Sprite Icon;
     }
 }

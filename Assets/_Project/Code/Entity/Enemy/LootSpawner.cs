@@ -32,7 +32,7 @@ namespace Code.Entity.Enemy
 
         private async void SpawnLoot()
         {
-            GameObject loot = await _viewObjectPool.GetObject();
+            GameObject loot = await _viewObjectPool.GetObject(12);
 
             loot.transform.position = transform.position + new Vector3(0, 2, 0);
 

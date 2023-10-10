@@ -23,9 +23,9 @@ namespace Code.Entity.Hero
         private PlayerControls _controls;
         private AudioService _audioService;
 
-        [SerializeField] private Identifier _spinAttackAbilityId;
-        [SerializeField] private Identifier _dodgeRollAbilityId;
-        [SerializeField] private Identifier _tornadoAbilityId;
+        [SerializeField] private AbilityIdentifier _spinAttackAbilityId;
+        [SerializeField] private AbilityIdentifier _dodgeRollAbilityId;
+        [SerializeField] private AbilityIdentifier _tornadoAbilityId;
      
         [SerializeField] private HeroAnimator _heroAnimator;
         [SerializeField] private HeroMovement _heroMovement;
