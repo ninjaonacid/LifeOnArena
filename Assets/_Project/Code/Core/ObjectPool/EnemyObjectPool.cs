@@ -9,7 +9,7 @@ namespace Code.Core.ObjectPool
 {
     public class EnemyObjectPool
     {
-        public Dictionary<int, List<GameObject>> _enemyObjectsStock;
+        private readonly Dictionary<int, List<GameObject>> _enemyObjectsStock;
 
         private readonly IEnemyFactory _enemyFactory;
         public EnemyObjectPool(IEnemyFactory enemyFactory)

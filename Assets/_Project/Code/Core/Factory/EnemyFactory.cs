@@ -1,17 +1,14 @@
 using System;
 using System.Threading;
 using Code.ConfigData.Identifiers;
-using Code.ConfigData.StatSystem;
 using Code.Core.AssetManagement;
 using Code.Entity.Enemy;
 using Code.Logic.EnemySpawners;
 using Code.Logic.EntitiesComponents;
-using Code.Logic.Particles;
 using Code.Services.ConfigData;
 using Code.Services.PersistentProgress;
 using Code.Services.RandomService;
 using Code.Services.SaveLoad;
-using Code.UI.HUD;
 using Code.UI.View.HUD;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -87,8 +84,6 @@ namespace Code.Core.Factory
             monster.GetComponent<EnemyTarget>().Construct(_heroFactory.HeroGameObject.transform);
 
             var lootSpawner = monster.GetComponentInChildren<LootSpawner>();
-            
-           // lootSpawner.Construct(this, _randomService);
             lootSpawner.SetLoot(monsterData.MinLoot, monsterData.MaxLoot);
 
             var expDrop = monster.GetComponentInChildren<ExpDrop>();

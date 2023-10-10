@@ -6,9 +6,8 @@ using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
-namespace Code.UI.HUD
+namespace Code.UI.View.HUD
 {
     public class ComboCounter : MonoBehaviour
     {

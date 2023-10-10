@@ -17,6 +17,8 @@ namespace Code.Logic.Particles
 
         private Transform _targetTransform;
 
+        private readonly float _speed = 2;
+
 
         [Inject]
         public void Construct(IHeroFactory heroFactory)
@@ -38,18 +40,12 @@ namespace Code.Logic.Particles
             {
                 time += Time.deltaTime;
                 _particles[particle].position =
-                    Vector3.Lerp(_particles[particle].position, _targetTransform.position, time * 2);
+                    Vector3.Lerp(_particles[particle].position, _targetTransform.position, time * _speed);
 
-                if (Vector3.Distance(_particles[particle].position, _targetTransform.position) < 5)
+                if (Vector3.Distance(_particles[particle].position, _targetTransform.position) < 3)
                 {
                     _particles[particle].remainingLifetime = -1;
                 }
-
-                if (!_soulParticle.isPlaying)
-                {
-                    gameObject.SetActive(false);
-                }
-                
             }
 
             _soulParticle.SetParticles(_particles, particlesCount);

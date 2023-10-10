@@ -1,9 +1,11 @@
+using System;
 using Code.ConfigData.Identifiers;
 using Code.Core.Factory;
 using Code.Core.ObjectPool;
 using Code.Data.PlayerData;
 using Code.Services.PersistentProgress;
 using Code.Services.RandomService;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using VContainer;
 
@@ -17,6 +19,7 @@ namespace Code.Entity.Enemy
         private ParticleObjectPool _particleObjectPool;
         public EnemyDeath EnemyDeath;
         [SerializeField] private ParticleIdentifier _souls;
+        private ParticleSystem _lootParticle;
         private int _lootMin;
         private int _lootMax;
         
@@ -31,14 +34,19 @@ namespace Code.Entity.Enemy
 
         private void Start()
         {
-            EnemyDeath.Happened += SpawnLoot;
+            EnemyDeath.Happened += SpawnLootTask;
         }
 
-        private async void SpawnLoot()
+        private async void SpawnLootTask()
         {
-            var loot = await _particleObjectPool.GetObject(_souls.Id);
+            SpawnLoot().Forget();
+            LootTimer().Forget();
+        }
+        private async UniTask SpawnLoot()
+        {
+            _lootParticle = await _particleObjectPool.GetObject(_souls.Id);
 
-            loot.transform.position = transform.position + new Vector3(0, 2, 0);
+            _lootParticle.transform.position = transform.position + new Vector3(0, 2, 0);
 
             var lootItem = new Loot()
             {
@@ -46,6 +54,17 @@ namespace Code.Entity.Enemy
             };
             
             _dataContainer.PlayerData.WorldData.LootData.Collect(lootItem);
+
+        }
+
+        private async UniTask LootTimer()
+        {
+            while (_lootParticle.isPlaying)
+            {
+                await UniTask.Delay(TimeSpan.FromSeconds(1));
+            }
+            
+            _particleObjectPool.ReturnObject(_souls.Id, _lootParticle);
         }
 
         public void SetLoot(int min, int max)

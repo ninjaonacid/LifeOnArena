@@ -38,8 +38,6 @@ namespace Code.Core.ObjectPool
                 result = await _particleFactory.CreateParticle(id);
 
                 var poolable = result.GetComponent<IPoolable>();
-                
-             
             }
             
             result.gameObject.SetActive(true);
