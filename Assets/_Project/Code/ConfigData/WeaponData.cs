@@ -18,6 +18,7 @@ namespace Code.ConfigData
         public float AttackRadius;
         public float AttackSpeed;
         public float Damage;
+        public AnimatorOverrideController OverrideController;
         public Vector3 Rotation;
     }
 }

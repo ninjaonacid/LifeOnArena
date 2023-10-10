@@ -13,6 +13,7 @@ namespace Code.Entity.Hero
     public class HeroWeapon : EntityWeapon, ISave
     {
         private GameObject _currentWeapon;
+        [SerializeField] private HeroAnimator _heroAnimator;
         private IItemFactory _itemFactory;
 
         [Inject]
@@ -30,6 +31,8 @@ namespace Code.Entity.Hero
             
             _weaponSlot.WeaponData = weaponData;
             _weaponSlot.WeaponId = weaponData.WeaponId;
+            
+            _heroAnimator.OverrideController(weaponData.OverrideController);
 
             _currentWeapon = Instantiate(weaponData.WeaponPrefab, _weaponPosition, false);
             _currentWeapon.transform.localPosition = Vector3.zero;

@@ -1,9 +1,11 @@
+using System.Threading;
 using Code.ConfigData.Identifiers;
 using Code.Core.Factory;
 using Code.Core.ObjectPool;
 using Code.Data.PlayerData;
 using Code.Services.PersistentProgress;
 using Code.Services.RandomService;
+using Code.Utils;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using VContainer;
@@ -20,6 +22,8 @@ namespace Code.Entity.Enemy
         [SerializeField] private ParticleIdentifier _souls;
         private int _lootMin;
         private int _lootMax;
+
+        private CancellationTokenSource _cts;
         
         [Inject]
         public void Construct(IItemFactory factory, IRandomService randomService, IGameDataContainer dataContainer, ParticleObjectPool particleObjectPool)
@@ -37,9 +41,9 @@ namespace Code.Entity.Enemy
 
         private async void SpawnLootTask()
         {
-            SpawnLoot().Forget();
+            SpawnLoot(TaskHelper.CreateToken(ref _cts)).Forget();
         }
-        private async UniTask SpawnLoot()
+        private async UniTask SpawnLoot(CancellationToken token)
         {
             var lootParticle = await _particleObjectPool.GetObject(_souls.Id);
 
@@ -52,7 +56,7 @@ namespace Code.Entity.Enemy
             
             _dataContainer.PlayerData.WorldData.LootData.Collect(lootItem);
 
-            await UniTask.WaitUntil(() => !lootParticle.isPlaying);
+            await UniTask.WaitUntil(() => !lootParticle.isPlaying, cancellationToken: token);
             
             _particleObjectPool.ReturnObject(_souls.Id, lootParticle);
 

@@ -21,6 +21,7 @@ namespace Code.Entity.Enemy
         public void ShouldMove(bool context)
         {
             Agent.isStopped = !context;
+      
         }
     }
 }

@@ -7,19 +7,16 @@ using Vector3 = UnityEngine.Vector3;
 
 namespace Code.Logic.Particles
 {
-    public class SoulLootVfx : MonoBehaviour, IPoolable
+    public class SoulLootParticle : MonoBehaviour
     {
-        public event Action<GameObject> ReturnToPool;
-        
         [SerializeField] private ParticleSystem _soulParticle;
 
         private ParticleSystem.Particle[] _particles = new ParticleSystem.Particle[100];
 
         private Transform _targetTransform;
 
-        private readonly float _speed = 2;
-
-
+        private readonly float _speed = 3;
+        
         [Inject]
         public void Construct(IHeroFactory heroFactory)
         {
@@ -42,7 +39,7 @@ namespace Code.Logic.Particles
                 _particles[particle].position =
                     Vector3.Lerp(_particles[particle].position, _targetTransform.position, time * _speed);
 
-                if (Vector3.Distance(_particles[particle].position, _targetTransform.position) < 3)
+                if (Vector3.Distance(_particles[particle].position, _targetTransform.position) <= 4)
                 {
                     _particles[particle].remainingLifetime = -1;
                 }

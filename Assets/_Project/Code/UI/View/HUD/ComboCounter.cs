@@ -22,7 +22,7 @@ namespace Code.UI.View.HUD
         private int _hitCount = 0;
         private const int CoolComboCap = 5;
         private const int BrutalComboCap = 8;
-        private float _resetCounterTimeInSeconds = 5;
+        private readonly float _resetCounterTimeInSeconds = 10;
         private Tween _comboTween;
         private Tween _resetComboTween;
         private Timer _resetTimer;
@@ -43,7 +43,7 @@ namespace Code.UI.View.HUD
             _textMesh.text = $"Combo {_hitCount}";
             _textMesh.color = Color.white;
         }
-
+        
         private void Start()
         {
             _resetTimer = new Timer();

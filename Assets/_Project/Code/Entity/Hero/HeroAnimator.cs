@@ -102,6 +102,10 @@ namespace Code.Entity.Hero
             }
         }
 
+        public void OverrideController(AnimatorOverrideController controller)
+        {
+            _heroAnimator.runtimeAnimatorController = controller;
+        }
         public void PlayAbilityAnimation(IAbility ability)
         {
 
