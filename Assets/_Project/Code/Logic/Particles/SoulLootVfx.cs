@@ -1,25 +1,22 @@
-using System;
-using Code.Core.ObjectPool;
-using Code.Data.PlayerData;
+using Code.Core.Factory;
 using UnityEngine;
+using VContainer;
 using Vector3 = UnityEngine.Vector3;
 
 namespace Code.Logic.Particles
 {
-    public class SoulLoot : MonoBehaviour, IPoolable
+    public class SoulLootVfx : MonoBehaviour
     {
         [SerializeField] private ParticleSystem _soulParticle;
 
         private readonly ParticleSystem.Particle[] _particles = new ParticleSystem.Particle[100];
         
         private Transform _targetTransform;
-        private PlayerData _playerData;
-        private Loot _loot;
 
-        public void Construct(PlayerData playerData, Transform heroTransform)
+        [Inject]
+        public void Construct(IHeroFactory heroFactory)
         {
-            _targetTransform = heroTransform;
-            _playerData = playerData;
+            _targetTransform = heroFactory.HeroGameObject.transform;
         }
         
         private void Awake()
@@ -49,18 +46,10 @@ namespace Code.Logic.Particles
                 }
                 
             }
-            
 
             _soulParticle.SetParticles(_particles, particlesCount);
         }
-
-        public void Initialize(Loot loot)
-        {
-            _loot = loot;
-            Return?.Invoke();
-        }
-
-
-        public event Action Return;
+        
+        
     }
 }

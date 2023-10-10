@@ -11,9 +11,9 @@ namespace Code.ConfigData.Ability.ActiveAbilities
 {
     public class TornadoAbility : IAbility
     {
-        private readonly ParticleObjectPool _particlesPool;
+        private readonly ViewObjectPool _viewsPool;
         private readonly IBattleService _battleService;
-        private readonly ParticleData _particleData;
+        private readonly ViewObjectData _viewObjectData;
         private readonly float _duration;
         private readonly float _damage;
         private readonly float _attackRadius;
@@ -21,17 +21,17 @@ namespace Code.ConfigData.Ability.ActiveAbilities
 
         private GameObject _tornadoPrefab;
         
-        public TornadoAbility(ParticleObjectPool particlePool,
+        public TornadoAbility(ViewObjectPool viewPool,
             IBattleService battleService,
-            ParticleData particleData,
+            ViewObjectData viewObjectData,
             float duration,
             float damage,
             float attackRadius,
             float castDistance)
         {
-            _particlesPool = particlePool;
+            _viewsPool = viewPool;
             _battleService = battleService;
-            _particleData = particleData;
+            _viewObjectData = viewObjectData;
             _duration = duration;
             _damage = damage;
             _attackRadius = attackRadius;
@@ -43,7 +43,7 @@ namespace Code.ConfigData.Ability.ActiveAbilities
             Vector3 casterDirection = caster.transform.forward;
             
             
-            _tornadoPrefab = await _particlesPool.GetObject(_particleData.Identifier.Id);
+            _tornadoPrefab = await _viewsPool.GetObject(_viewObjectData.Identifier.Id);
             TornadoProjectile tornadoProjectile = _tornadoPrefab.GetComponent<TornadoProjectile>();
             Transform projectileTransform = tornadoProjectile.transform;
             projectileTransform.position = casterPosition + casterDirection * _castDistance;
@@ -62,7 +62,7 @@ namespace Code.ConfigData.Ability.ActiveAbilities
         private async UniTask AbilityTimer()
         {
             await UniTask.Delay(TimeSpan.FromSeconds(_duration));
-            _particlesPool.ReturnObject(_particleData.Identifier.Id, _tornadoPrefab);
+            _viewsPool.ReturnObject(_viewObjectData.Identifier.Id, _tornadoPrefab);
         }
 
     }

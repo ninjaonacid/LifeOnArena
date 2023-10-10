@@ -18,17 +18,17 @@ namespace Code.ConfigData.Ability
         public float ActiveTime;
         public float CurrentActiveTime;
         public AbilityState State;
-        public ParticleData ParticleData;
+        public ViewObjectData ViewObjectData;
 
-        protected ParticleObjectPool ParticlePool;
+        protected ViewObjectPool ViewPool;
         protected IBattleService BattleService;
         public abstract IAbility GetAbility();
 
         public void InitServices(
-            ParticleObjectPool particlePool, 
+            ViewObjectPool viewPool, 
             IBattleService battleService)
         {
-            ParticlePool = particlePool;
+            ViewPool = viewPool;
             BattleService = battleService;
         }
 

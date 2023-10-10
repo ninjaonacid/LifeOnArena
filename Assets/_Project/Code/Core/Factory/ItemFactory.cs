@@ -11,6 +11,8 @@ using Code.Services.PersistentProgress;
 using Code.Services.SaveLoad;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using VContainer;
+using VContainer.Unity;
 using Vector3 = UnityEngine.Vector3;
 
 namespace Code.Core.Factory
@@ -20,20 +22,17 @@ namespace Code.Core.Factory
         private readonly IConfigProvider _config;
         private readonly ISaveLoadService _saveLoadService;
         private readonly IAssetProvider _assetProvider;
-        private readonly IGameDataContainer _gameDataContainer;
-        private readonly IHeroFactory _heroFactory;
+        private readonly IObjectResolver _objectResolver;
 
         public ItemFactory(IConfigProvider config, 
             ISaveLoadService saveLoadService, 
             IAssetProvider assetProvider,
-            IGameDataContainer gameDataContainer,
-            IHeroFactory heroFactory)
+            IObjectResolver objectResolver)
         {
             _config = config;
             _saveLoadService = saveLoadService;
             _assetProvider = assetProvider;
-            _gameDataContainer = gameDataContainer;
-            _heroFactory = heroFactory;
+            _objectResolver = objectResolver;
         }
 
         public async UniTaskVoid InitAssets()
@@ -59,7 +58,18 @@ namespace Code.Core.Factory
        
             return weaponPlatformSpawner;
         }
-        
+
+        public async UniTask<GameObject> CreateLoot(int id)
+        {
+            
+            var prefab = await _assetProvider.Load<GameObject>(AssetAddress.Soul);
+
+            var go = Object.Instantiate(prefab);
+            
+            _objectResolver.InjectGameObject(go);
+
+            return go;
+        }
         // public async UniTask<GameObject> CreateLootSpawner()
         // {
         //     var prefab = await _assetProvider.Load<GameObject>(AssetAddress.Soul);

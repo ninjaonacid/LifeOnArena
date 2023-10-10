@@ -1,6 +1,7 @@
 using Code.Core.Factory;
+using Code.Core.ObjectPool;
 using Code.Data.PlayerData;
-using Code.Logic.Particles;
+using Code.Services.PersistentProgress;
 using Code.Services.RandomService;
 using UnityEngine;
 
@@ -9,15 +10,19 @@ namespace Code.Entity.Enemy
     public class LootSpawner : MonoBehaviour
     {
         private IRandomService _randomService;
-        private IEnemyFactory _enemyFactory;
+        private IItemFactory _itemFactory;
+        private IGameDataContainer _dataContainer;
+        private ViewObjectPool _viewObjectPool;
         public EnemyDeath EnemyDeath;
         private int _lootMin;
         private int _lootMax;
 
-        public void Construct(IEnemyFactory factory, IRandomService randomService)
+        public void Construct(IItemFactory factory, IRandomService randomService, IGameDataContainer dataContainer, ViewObjectPool viewObjectPool)
         {
-            _enemyFactory = factory;
+            _itemFactory = factory;
             _randomService = randomService;
+            _dataContainer = dataContainer;
+            _viewObjectPool = viewObjectPool;
         }
 
         private void Start()
@@ -27,7 +32,7 @@ namespace Code.Entity.Enemy
 
         private async void SpawnLoot()
         {
-            SoulLoot loot = await _enemyFactory.CreateSoulLoot();
+            GameObject loot = await _viewObjectPool.GetObject();
 
             loot.transform.position = transform.position + new Vector3(0, 2, 0);
 
@@ -36,7 +41,7 @@ namespace Code.Entity.Enemy
                 Value = _randomService.RandomizeValue(_lootMin, _lootMax)
             };
             
-            loot.Initialize(lootItem);
+            _dataContainer.PlayerData.WorldData.LootData.Collect(lootItem);
         }
 
         public void SetLoot(int min, int max)

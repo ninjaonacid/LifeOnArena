@@ -6,16 +6,16 @@ using UnityEngine;
 
 namespace Code.Core.ObjectPool
 {
-    public class ParticleObjectPool
+    public class ViewObjectPool
     {
         private readonly IAssetProvider _assetProvider;
-        private readonly ParticleFactory _particleFactory;
+        private readonly ViewFactory _viewFactory;
         private readonly Dictionary<int, List<GameObject>> _particleStock;
-        public ParticleObjectPool(IAssetProvider assetProvider, ParticleFactory particleFactory)
+        public ViewObjectPool(IAssetProvider assetProvider, ViewFactory viewFactory)
         {
             _particleStock = new Dictionary<int, List<GameObject>>();
             _assetProvider = assetProvider;
-            _particleFactory = particleFactory;
+            _viewFactory = viewFactory;
         }
         public void CleanUp()
         {
@@ -36,7 +36,7 @@ namespace Code.Core.ObjectPool
                     _particleStock.Add(id, new List<GameObject>());
 
 
-                var particle = await _particleFactory.CreateParticle(id);
+                var particle = await _viewFactory.CreateVfx(id);
 
                 var poolable = particle.GetComponent<IPoolable>();
 
@@ -63,7 +63,7 @@ namespace Code.Core.ObjectPool
                     _particleStock.Add(id, new List<GameObject>());
 
 
-                var particle = await _particleFactory.CreateParticle(id);
+                var particle = await _viewFactory.CreateVfx(id);
                 result = Object.Instantiate(particle);
             }
 

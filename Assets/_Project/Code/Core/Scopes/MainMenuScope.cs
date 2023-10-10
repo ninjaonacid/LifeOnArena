@@ -11,7 +11,7 @@ namespace Code.Core.Scopes
         {
             builder.RegisterEntryPoint<MainMenuStarter>();
             
-            builder.Register<ParticleObjectPool>(Lifetime.Scoped);
+            builder.Register<ViewObjectPool>(Lifetime.Scoped);
           
         }
     }

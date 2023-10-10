@@ -18,6 +18,10 @@ namespace Code.Core.Factory
 
        // Task<GameObject> CreateWeaponPlatform(WeaponId weaponId, Transform parent);
 
+
+       UniTask<GameObject> CreateLoot(int id);
+      
+
         UniTaskVoid InitAssets();
     }
 }

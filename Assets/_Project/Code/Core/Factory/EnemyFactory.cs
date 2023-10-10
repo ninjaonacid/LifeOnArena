@@ -101,19 +101,6 @@ namespace Code.Core.Factory
             return monster;
         }
 
-
-        public async UniTask<SoulLoot> CreateSoulLoot()
-        {
-            var prefab = await _assetProvider.Load<GameObject>(AssetAddress.Soul);
-
-            var lootPiece = InstantiateRegistered(prefab)
-                .GetComponent<SoulLoot>();
-
-            lootPiece.Construct(_gameDataContainer.PlayerData, _heroFactory.HeroGameObject.transform);
-            
-            return lootPiece;
-        }
-
         public GameObject InstantiateRegistered(GameObject prefab, Vector3 position)
         {
             var go = _objectResolver.Instantiate(prefab, position, Quaternion.identity);
