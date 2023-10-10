@@ -25,7 +25,7 @@ namespace Code.UI.View.HUD
 
         private void UpdateCounter(int value)
         {
-            int collected = _worldData.LootData.Collected;
+            int collected = _worldData.LootData.Collected - value;
 
             _counterTween = DOTween
                 .To(() => collected, x => collected = x, collected + value, 1)

@@ -4,16 +4,16 @@ namespace Code.Logic.Timer
 {
     public class Timer : ITimer
     {
-        public float startTime;
-        public float Elapsed => Time.time - startTime;
+        private float _startTime;
+        public float Elapsed => Time.time - _startTime;
 
         public Timer()
         {
-            startTime = Time.time;
+            _startTime = Time.time;
         }
         public void Reset()
         {
-            startTime = Time.time;
+            _startTime = Time.time;
         }
     }
 }
