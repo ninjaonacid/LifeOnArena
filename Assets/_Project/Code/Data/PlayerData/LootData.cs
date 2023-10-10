@@ -9,19 +9,19 @@ namespace Code.Data.PlayerData
         public int Collected;
 
         [JsonIgnore]
-        public Action CountChanged;
+        public Action<int> CountChanged;
 
         
         public void Collect(Loot loot)
         {
             Collected += loot.Value;
-            CountChanged?.Invoke();
+            CountChanged?.Invoke(loot.Value);
         }
 
         public void Collect(int value)
         {
             Collected += value;
-            CountChanged?.Invoke();
+            CountChanged?.Invoke(value);
         }
     }
 }

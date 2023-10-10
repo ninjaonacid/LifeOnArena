@@ -50,7 +50,7 @@ namespace Code.Logic.ShelterWeapons
            if (_lootData.Collected >= WeaponData.Price)
            {
                _lootData.Collected -= WeaponData.Price;
-               _lootData.CountChanged?.Invoke();
+               //_lootData.CountChanged?.Invoke();
 
                OnWeaponPurchase?.Invoke();
 
