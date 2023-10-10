@@ -2,7 +2,6 @@
 using Code.ConfigData;
 using Code.ConfigData.Ability;
 using Code.ConfigData.Audio;
-using Code.ConfigData.Identifiers;
 using Code.ConfigData.Levels;
 using Code.ConfigData.Settings;
 using Code.ConfigData.StatSystem;
@@ -18,7 +17,7 @@ namespace Code.Services.ConfigData
         LevelReward Reward(LocationReward rewardId);
         StatDatabase CharacterStats();
         List<LevelReward> LoadRewards();
-        ViewObjectData Vfx(int id);
+        ParticleObjectData Particle(int id);
         LevelConfig Level(string sceneKey);
         ScreenConfig ForWindow(ScreenID menuId);
         AbilityTemplateBase Ability(int heroAbilityId);

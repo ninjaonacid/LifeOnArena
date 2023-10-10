@@ -1,9 +1,11 @@
+using Code.ConfigData.Identifiers;
 using Code.Core.Factory;
 using Code.Core.ObjectPool;
 using Code.Data.PlayerData;
 using Code.Services.PersistentProgress;
 using Code.Services.RandomService;
 using UnityEngine;
+using VContainer;
 
 namespace Code.Entity.Enemy
 {
@@ -12,17 +14,19 @@ namespace Code.Entity.Enemy
         private IRandomService _randomService;
         private IItemFactory _itemFactory;
         private IGameDataContainer _dataContainer;
-        private ViewObjectPool _viewObjectPool;
+        private ParticleObjectPool _particleObjectPool;
         public EnemyDeath EnemyDeath;
+        [SerializeField] private ParticleIdentifier _souls;
         private int _lootMin;
         private int _lootMax;
-
-        public void Construct(IItemFactory factory, IRandomService randomService, IGameDataContainer dataContainer, ViewObjectPool viewObjectPool)
+        
+        [Inject]
+        public void Construct(IItemFactory factory, IRandomService randomService, IGameDataContainer dataContainer, ParticleObjectPool particleObjectPool)
         {
             _itemFactory = factory;
             _randomService = randomService;
             _dataContainer = dataContainer;
-            _viewObjectPool = viewObjectPool;
+            _particleObjectPool = particleObjectPool;
         }
 
         private void Start()
@@ -32,7 +36,7 @@ namespace Code.Entity.Enemy
 
         private async void SpawnLoot()
         {
-            GameObject loot = await _viewObjectPool.GetObject(12);
+            var loot = await _particleObjectPool.GetObject(_souls.Id);
 
             loot.transform.position = transform.position + new Vector3(0, 2, 0);
 

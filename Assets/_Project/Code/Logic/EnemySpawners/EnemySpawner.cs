@@ -12,9 +12,9 @@ namespace Code.Logic.EnemySpawners
     {
         private EnemyDeath _enemyDeath;
         private EnemyObjectPool _enemyObjectPool;
-        private ViewObjectPool _viewObjectPool;
+        private ParticleObjectPool _particleObjectPool;
         
-        private GameObject _spawnParticle;
+        private ParticleSystem _spawnParticle;
         public string Id { get; set; }
         public int RespawnCount { get; set; }
 
@@ -24,17 +24,17 @@ namespace Code.Logic.EnemySpawners
 
         [Inject]
         public void Construct(EnemyObjectPool enemyObjectPool,
-            ViewObjectPool viewObjectPool)
+            ParticleObjectPool particleObjectPool)
         {
             _enemyObjectPool = enemyObjectPool;
-            _viewObjectPool = viewObjectPool;
+            _particleObjectPool = particleObjectPool;
         }
 
         public async UniTaskVoid Spawn(CancellationToken token)
         {
             Alive = true;
             var monster = await _enemyObjectPool.GetObject(MobId.Id, transform, token);
-           _spawnParticle = await _viewObjectPool.GetObject(ParticleIdentifier.Id, transform);
+           _spawnParticle = await _particleObjectPool.GetObject(ParticleIdentifier.Id, transform);
             
             _enemyDeath = monster.GetComponent<EnemyDeath>();
             _enemyDeath.Happened += Slay;
@@ -46,7 +46,7 @@ namespace Code.Logic.EnemySpawners
                   _enemyDeath.Happened -= Slay;
 
             _enemyObjectPool.ReturnObject(MobId.Id, _enemyDeath.gameObject);
-            _viewObjectPool.ReturnObject(ParticleIdentifier.Id, _spawnParticle);
+            _particleObjectPool.ReturnObject(ParticleIdentifier.Id, _spawnParticle);
 
             Alive = false;
         }

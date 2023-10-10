@@ -3,12 +3,10 @@ using System.Linq;
 using Code.ConfigData;
 using Code.ConfigData.Ability;
 using Code.ConfigData.Audio;
-using Code.ConfigData.Identifiers;
 using Code.ConfigData.Levels;
 using Code.ConfigData.Settings;
 using Code.ConfigData.StatSystem;
 using Code.ConfigData.UIWindows;
-using Code.Data.PlayerData;
 using Code.UI;
 using UnityEngine;
 
@@ -22,7 +20,7 @@ namespace Code.Services.ConfigData
         private Dictionary<LocationReward, LevelReward> _levelReward;
         private Dictionary<ScreenID, ScreenConfig> _windowConfigs;
         private Dictionary<int, AbilityTemplateBase> _heroAbilities;
-        private Dictionary<int, ViewObjectData> _particles;
+        private Dictionary<int, ParticleObjectData> _particles;
         private Dictionary<int, WeaponData> _weapons;
         private AudioLibrary _audioLibrary;
         private AudioServiceSettings _audioServiceSettings;
@@ -61,7 +59,7 @@ namespace Code.Services.ConfigData
                 .Load<StatDatabase>($"{ConfigFolder}/Hero/Stats/HeroStatsData");
 
             _particles = Resources
-                .LoadAll<ViewObjectData>($"{ConfigFolder}/Particles")
+                .LoadAll<ParticleObjectData>($"{ConfigFolder}/Particles")
                 .ToDictionary(x => x.Identifier.Id, x => x);
             
             _weapons = Resources
@@ -81,7 +79,7 @@ namespace Code.Services.ConfigData
         public AudioServiceSettings AudioServiceSettings() => _audioServiceSettings;
         public AudioLibrary AudioLibrary() => _audioLibrary;
 
-        public ViewObjectData Vfx(int id)
+        public ParticleObjectData Particle(int id)
         {
             if(_particles.TryGetValue(id, out var particlesStaticData))
                 return particlesStaticData;
@@ -105,7 +103,6 @@ namespace Code.Services.ConfigData
             return null;
         }
         
-
         public LevelConfig Level(string sceneKey) =>
         
             _levels.TryGetValue(sceneKey, out LevelConfig staticData)

@@ -11,27 +11,27 @@ namespace Code.ConfigData.Ability.ActiveAbilities
 {
     public class TornadoAbility : IAbility
     {
-        private readonly ViewObjectPool _viewsPool;
+        private readonly ParticleObjectPool _particleObjectPool;
         private readonly IBattleService _battleService;
-        private readonly ViewObjectData _viewObjectData;
+        private readonly ParticleObjectData _particleObjectData;
         private readonly float _duration;
         private readonly float _damage;
         private readonly float _attackRadius;
         private readonly float _castDistance;
 
-        private GameObject _tornadoPrefab;
+        private ParticleSystem _tornadoParticle;
         
-        public TornadoAbility(ViewObjectPool viewPool,
+        public TornadoAbility(ParticleObjectPool particleObjectPool,
             IBattleService battleService,
-            ViewObjectData viewObjectData,
+            ParticleObjectData particleObjectData,
             float duration,
             float damage,
             float attackRadius,
             float castDistance)
         {
-            _viewsPool = viewPool;
+            _particleObjectPool = particleObjectPool;
             _battleService = battleService;
-            _viewObjectData = viewObjectData;
+            _particleObjectData = particleObjectData;
             _duration = duration;
             _damage = damage;
             _attackRadius = attackRadius;
@@ -43,8 +43,8 @@ namespace Code.ConfigData.Ability.ActiveAbilities
             Vector3 casterDirection = caster.transform.forward;
             
             
-            _tornadoPrefab = await _viewsPool.GetObject(_viewObjectData.Identifier.Id);
-            TornadoProjectile tornadoProjectile = _tornadoPrefab.GetComponent<TornadoProjectile>();
+            _tornadoParticle = await _particleObjectPool.GetObject(_particleObjectData.Identifier.Id);
+            TornadoProjectile tornadoProjectile = _tornadoParticle.gameObject.GetComponent<TornadoProjectile>();
             Transform projectileTransform = tornadoProjectile.transform;
             projectileTransform.position = casterPosition + casterDirection * _castDistance;
             projectileTransform.rotation = Quaternion.identity;
@@ -62,7 +62,7 @@ namespace Code.ConfigData.Ability.ActiveAbilities
         private async UniTask AbilityTimer()
         {
             await UniTask.Delay(TimeSpan.FromSeconds(_duration));
-            _viewsPool.ReturnObject(_viewObjectData.Identifier.Id, _tornadoPrefab);
+            _particleObjectPool.ReturnObject(_particleObjectData.Identifier.Id, _tornadoParticle);
         }
 
     }

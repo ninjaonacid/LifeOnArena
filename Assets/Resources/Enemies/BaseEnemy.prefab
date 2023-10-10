@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyDeath: {fileID: 2892997724190106139}
+  _souls: {fileID: 11400000, guid: 2b613d09568c554488bdbc63732d708e, type: 2}
 --- !u!1 &2091178329331578730
 GameObject:
   m_ObjectHideFlags: 0
@@ -393,7 +394,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _weaponSlot:
-    WeaponId: 0
+    WeaponId: {fileID: 0}
     WeaponData: {fileID: 0}
   _weaponPosition: {fileID: 0}
 --- !u!114 &4845501457382912920

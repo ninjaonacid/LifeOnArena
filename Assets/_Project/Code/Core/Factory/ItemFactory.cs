@@ -3,16 +3,11 @@ using Code.ConfigData;
 using Code.ConfigData.Identifiers;
 using Code.Core.AssetManagement;
 using Code.Logic.LevelObjectsSpawners;
-using Code.Logic.Particles;
-using Code.Logic.ShelterWeapons;
-using Code.Services;
 using Code.Services.ConfigData;
-using Code.Services.PersistentProgress;
 using Code.Services.SaveLoad;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using VContainer;
-using VContainer.Unity;
 using Vector3 = UnityEngine.Vector3;
 
 namespace Code.Core.Factory
@@ -58,18 +53,8 @@ namespace Code.Core.Factory
        
             return weaponPlatformSpawner;
         }
-
-        public async UniTask<GameObject> CreateLoot(int id)
-        {
-            
-            var prefab = await _assetProvider.Load<GameObject>(AssetAddress.Soul);
-
-            var go = Object.Instantiate(prefab);
-            
-            _objectResolver.InjectGameObject(go);
-
-            return go;
-        }
+        
+        
         // public async UniTask<GameObject> CreateLootSpawner()
         // {
         //     var prefab = await _assetProvider.Load<GameObject>(AssetAddress.Soul);

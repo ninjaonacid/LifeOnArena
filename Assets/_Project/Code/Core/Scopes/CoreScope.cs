@@ -48,8 +48,8 @@ namespace Code.Core.Scopes
             builder.Register<IItemFactory, ItemFactory>(Lifetime.Singleton);
             builder.Register<IAbilityFactory, AbilityFactory>(Lifetime.Singleton);
             
-            builder.Register<ViewFactory>(Lifetime.Singleton);
-            builder.Register<ViewObjectPool>(Lifetime.Singleton);
+            builder.Register<ParticleFactory>(Lifetime.Singleton);
+            builder.Register<ParticleObjectPool>(Lifetime.Singleton);
             builder.Register<PlayerControls>(Lifetime.Singleton).AsSelf();
             builder.Register<SceneLoader>(Lifetime.Singleton);
 

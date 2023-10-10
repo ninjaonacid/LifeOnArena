@@ -5,6 +5,6 @@ namespace Code.Core.ObjectPool
 {
     public interface IPoolable
     {
-        public event Action Return;
+        public event Action<GameObject> ReturnToPool;
     }
 }
