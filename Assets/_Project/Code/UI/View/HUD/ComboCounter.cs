@@ -2,6 +2,7 @@ using System;
 using System.Threading;
 using Code.Entity.Hero;
 using Code.Logic.Timer;
+using Code.Utils;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using TMPro;
@@ -21,9 +22,10 @@ namespace Code.UI.View.HUD
         private int _hitCount = 0;
         private const int CoolComboCap = 5;
         private const int BrutalComboCap = 8;
-        private int _resetCounterTimeInSeconds = 5;
+        private float _resetCounterTimeInSeconds = 5;
         private Tween _comboTween;
         private Tween _resetComboTween;
+        private Timer _resetTimer;
         private CancellationTokenSource _cts;
         
         public void Construct(HeroAttack heroAttack, HeroHealth heroHealth)
@@ -33,6 +35,7 @@ namespace Code.UI.View.HUD
             _heroAttack.OnHit += IncreaseHitCounter;
             _heroHealth.Health.CurrentValueChanged += ResetHitCounter;
         }
+        
 
         private void ResetHitCounter()
         {
@@ -41,8 +44,15 @@ namespace Code.UI.View.HUD
             _textMesh.color = Color.white;
         }
 
+        private void Start()
+        {
+            _resetTimer = new Timer();
+        }
+
         private void IncreaseHitCounter(int hits)
         {
+            _resetTimer.Reset();
+            
             _comboTween = DOTween
                 .To(() => _hitCount, x => _hitCount = x, _hitCount + hits, 1f)
                 .OnUpdate(() =>
@@ -62,58 +72,30 @@ namespace Code.UI.View.HUD
                         _textMesh.text = $"BRUTAL! Combo {_hitCount}";
                         _textMesh.color = new Color(0.7f, 0.1f, 0.2f);
                     }
-                });
+                }).SetLink(gameObject);
 
-            var timer = new Timer();
-            
-           
-            if (timer.Elapsed > _resetCounterTimeInSeconds)
-            {
-                
-            }
 
-            DOTween.Kill(_resetComboTween);
-            
-            
-            _textMesh.transform.DOShakePosition(0.5f, 2f * _hitCount);
+            var shake = _textMesh.transform.DOShakePosition(0.5f, 2f * _hitCount)
+                .SetLink(gameObject);
+
+            ResetTimer(TaskHelper.CreateToken(ref _cts)).Forget();
+
         }
         
-        private async UniTaskVoid IncreaseHitCounterAsync(int hits, CancellationToken token)
-        {
-            for (int i = 0; hits > i; i++)
-            {
-                _hitCount++;
-                if (_hitCount < CoolComboCap)
-                {
-                    _textMesh.text = $"Combo {_hitCount}";
-                }
-                else if (_hitCount >= CoolComboCap && _hitCount < BrutalComboCap)
-                {
-                    _textMesh.text = $"COOL! Combo {_hitCount}";
-                    _textMesh.color = new Color(0.1f, 0.8f, 0.1f);
-                }
-                
-                else if (_hitCount >= BrutalComboCap)
-                {
-                    _textMesh.text = $"BRUTAL! Combo {_hitCount}";
-                    _textMesh.color = new Color(0.7f, 0.1f, 0.2f);
-              
-                }
-                await UniTask.Delay(10, cancellationToken: token);
-            }
-            
-            ResetTimer(token).Forget();
-        }
-
         private async UniTaskVoid ResetTimer(CancellationToken token)
         {
-            await UniTask.Delay(TimeSpan.FromSeconds(_resetCounterTimeInSeconds), cancellationToken: token);
+            while (_resetTimer.Elapsed < _resetCounterTimeInSeconds)
+            {
+                await UniTask.Yield();
+            }
+            
             ResetHitCounter();
         }
 
         private void OnDisable()
         {
             _heroAttack.OnHit -= IncreaseHitCounter;
+            _heroHealth.Health.CurrentValueChanged -= ResetHitCounter;
         }
     }
 }
