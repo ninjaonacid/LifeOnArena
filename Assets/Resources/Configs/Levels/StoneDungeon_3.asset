@@ -14,33 +14,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LevelKey: StoneDungeon_3
   LocationType: 1
-  WaveCounter: 0
+  WavesToSpawn: 0
   EnemySpawners:
   - Id: Level2_0768ea83-1619-4467-9d93-85905e649ce2
     RespawnCount: 0
-    MonsterTypeId: 10
+    MobId: {fileID: 0}
     Position: {x: -4.3, y: 0.05506897, z: 28.5}
   - Id: Level2_f2390f0f-82b2-4326-86ad-5764d708d7f1
     RespawnCount: 0
-    MonsterTypeId: 10
+    MobId: {fileID: 0}
     Position: {x: 15.76, y: 0.05506897, z: 27.8}
   - Id: MainScene_0c63200f-e0e1-42c2-a63b-d8cabd23224c
     RespawnCount: 0
-    MonsterTypeId: 10
+    MobId: {fileID: 0}
     Position: {x: -4.3, y: 0.05506897, z: 41.2}
   - Id: MainScene_78bc97f4-c0a4-4825-a960-efb032b60f57
     RespawnCount: 0
-    MonsterTypeId: 0
+    MobId: {fileID: 0}
     Position: {x: 32, y: 0.05506897, z: 33.6}
   - Id: MainScene_6d37bdf6-01d1-4859-976f-5f36b6d44c8f
     RespawnCount: 0
-    MonsterTypeId: 10
+    MobId: {fileID: 0}
     Position: {x: 15.76, y: 0.05506897, z: 41.2}
   - Id: MainScene_3643eddb-4bc4-4761-9f86-7da8b1720421
     RespawnCount: 0
-    MonsterTypeId: 0
+    MobId: {fileID: 0}
     Position: {x: -24.4, y: 0.05506897, z: 34.5}
-  WeaponPlatformSpawners: []
   NextLevelDoorSpawners:
   - Position: {x: -40.85, y: 0, z: 101.1}
     Rotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}

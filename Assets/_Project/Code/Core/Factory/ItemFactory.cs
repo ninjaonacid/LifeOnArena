@@ -3,6 +3,7 @@ using Code.ConfigData;
 using Code.ConfigData.Identifiers;
 using Code.Core.AssetManagement;
 using Code.Logic.LevelObjectsSpawners;
+using Code.Logic.Particles;
 using Code.Logic.ShelterWeapons;
 using Code.Services;
 using Code.Services.ConfigData;
@@ -20,16 +21,19 @@ namespace Code.Core.Factory
         private readonly ISaveLoadService _saveLoadService;
         private readonly IAssetProvider _assetProvider;
         private readonly IGameDataContainer _gameDataContainer;
+        private readonly IHeroFactory _heroFactory;
 
         public ItemFactory(IConfigProvider config, 
             ISaveLoadService saveLoadService, 
             IAssetProvider assetProvider,
-            IGameDataContainer gameDataContainer)
+            IGameDataContainer gameDataContainer,
+            IHeroFactory heroFactory)
         {
             _config = config;
             _saveLoadService = saveLoadService;
             _assetProvider = assetProvider;
             _gameDataContainer = gameDataContainer;
+            _heroFactory = heroFactory;
         }
 
         public async UniTaskVoid InitAssets()
@@ -55,6 +59,18 @@ namespace Code.Core.Factory
        
             return weaponPlatformSpawner;
         }
+        
+        // public async UniTask<GameObject> CreateLootSpawner()
+        // {
+        //     var prefab = await _assetProvider.Load<GameObject>(AssetAddress.Soul);
+        //
+        //     var lootPiece = InstantiateRegistered(prefab)
+        //         .GetComponent<SoulLoot>();
+        //
+        //     lootPiece.Construct(_gameDataContainer.PlayerData, _heroFactory.HeroGameObject.transform);
+        //     
+        //     return lootPiece;
+        // }
         //
         // public async Task<GameObject> CreateWeaponPlatform(WeaponId weaponId, Transform parent)
         // {

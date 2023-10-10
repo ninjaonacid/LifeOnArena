@@ -9,6 +9,7 @@
         public const string EnemySpawner = "EnemySpawner";
         public const string UICore = "UI/CoreUI";
         public const string GameAudioSource = "Sounds/GameAudioSource";
+        public const string LootSpawner = "LootSpawner";
 
 
     }

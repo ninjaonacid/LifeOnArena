@@ -1,10 +1,11 @@
+using System;
 using Code.ConfigData.StatSystem;
 using Code.Core.ObjectPool;
 using Code.Logic.EntitiesComponents;
 using Code.Logic.Projectiles;
 using Code.Services.BattleService;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
 
 namespace Code.ConfigData.Ability.ActiveAbilities
 {
@@ -17,6 +18,8 @@ namespace Code.ConfigData.Ability.ActiveAbilities
         private readonly float _damage;
         private readonly float _attackRadius;
         private readonly float _castDistance;
+
+        private GameObject _tornadoPrefab;
         
         public TornadoAbility(ParticleObjectPool particlePool,
             IBattleService battleService,
@@ -40,8 +43,8 @@ namespace Code.ConfigData.Ability.ActiveAbilities
             Vector3 casterDirection = caster.transform.forward;
             
             
-            GameObject tornadoPrefab = await _particlesPool.GetObject(_particleData.Identifier.Id);
-            TornadoProjectile tornadoProjectile = tornadoPrefab.GetComponent<TornadoProjectile>();
+            _tornadoPrefab = await _particlesPool.GetObject(_particleData.Identifier.Id);
+            TornadoProjectile tornadoProjectile = _tornadoPrefab.GetComponent<TornadoProjectile>();
             Transform projectileTransform = tornadoProjectile.transform;
             projectileTransform.position = casterPosition + casterDirection * _castDistance;
             projectileTransform.rotation = Quaternion.identity;
@@ -51,9 +54,15 @@ namespace Code.ConfigData.Ability.ActiveAbilities
             var entityAttack = caster.GetComponent<IAttack>();
             
             entityAttack.SkillAttack(projectileTransform.position);
-            
 
-          
+             AbilityTimer().Forget();
+
+        }
+
+        private async UniTask AbilityTimer()
+        {
+            await UniTask.Delay(TimeSpan.FromSeconds(_duration));
+            _particlesPool.ReturnObject(_particleData.Identifier.Id, _tornadoPrefab);
         }
 
     }
