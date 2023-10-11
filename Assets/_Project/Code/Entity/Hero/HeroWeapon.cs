@@ -37,7 +37,7 @@ namespace Code.Entity.Hero
             _currentWeapon = Instantiate(weaponData.WeaponPrefab, _weaponPosition, false);
             _currentWeapon.transform.localPosition = Vector3.zero;
 
-            _currentWeapon.transform.localRotation = Quaternion.Euler(
+            _weaponPosition.transform.localRotation = Quaternion.Euler(
                 weaponData.Rotation.x,
                 weaponData.Rotation.y, 
                 weaponData.Rotation.z);
