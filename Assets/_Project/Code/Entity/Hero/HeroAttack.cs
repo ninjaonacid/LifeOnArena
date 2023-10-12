@@ -17,7 +17,7 @@ namespace Code.Entity.Hero
         [SerializeField] private StatController _stats;
         [SerializeField] private AudioSource _heroAudioSource;
         [SerializeField] private HeroHitBox _hitBox;
-
+        [SerializeField] private HeroWeapon _heroWeapon;
         public CharacterController CharacterController;
         
         private AudioService _audioService;
@@ -34,7 +34,7 @@ namespace Code.Entity.Hero
 
             _layerMask = 1 << LayerMask.NameToLayer("Hittable");
         }
-
+        
         public void BaseAttack()
         {
             var hits = _battleService.CreateAttack(_stats, _hitBox.StartPoint(), _layerMask);

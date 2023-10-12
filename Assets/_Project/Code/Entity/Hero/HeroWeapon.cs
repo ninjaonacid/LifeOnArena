@@ -1,9 +1,7 @@
-using System;
 using Code.ConfigData;
-using Code.ConfigData.Identifiers;
 using Code.Core.Factory;
-using Code.Data;
 using Code.Data.PlayerData;
+using Code.Logic.Weapon;
 using Code.Services.PersistentProgress;
 using UnityEngine;
 using VContainer;
@@ -12,7 +10,7 @@ namespace Code.Entity.Hero
 {
     public class HeroWeapon : EntityWeapon, ISave
     {
-        private GameObject _currentWeapon;
+        private MeleeWeapon _currentWeapon;
         [SerializeField] private HeroAnimator _heroAnimator;
         [SerializeField] private HeroStateMachineHandler _stateMachine;
         private IItemFactory _itemFactory;
@@ -32,11 +30,10 @@ namespace Code.Entity.Hero
             
             _weaponSlot.WeaponData = weaponData;
             _weaponSlot.WeaponId = weaponData.WeaponId;
-            
             _heroAnimator.OverrideController(weaponData.OverrideController);
             _stateMachine.ChangeConfig(weaponData.FsmConfig);
 
-                _currentWeapon = Instantiate(weaponData.WeaponPrefab, _weaponPosition, false);
+            _currentWeapon = Instantiate(weaponData.WeaponPrefab, _weaponPosition, false).GetComponent<MeleeWeapon>();
             _currentWeapon.transform.localPosition = Vector3.zero;
 
             _currentWeapon.transform.localRotation = Quaternion.Euler(
@@ -45,7 +42,6 @@ namespace Code.Entity.Hero
                 weaponData.Rotation.z);
         }
         
-
         public void LoadData(PlayerData data)
         {
             var weaponId = data.HeroEquipment.WeaponIntId;
@@ -63,7 +59,6 @@ namespace Code.Entity.Hero
                 }
             }
         }
-
         public void UpdateData(PlayerData data)
         {
             data.HeroEquipment.WeaponStringId = _weaponSlot.WeaponId.Name;
