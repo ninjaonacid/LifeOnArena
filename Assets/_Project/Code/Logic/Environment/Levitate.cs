@@ -12,7 +12,15 @@ namespace Code.Logic.Environment
 
         private void Start()
         {
-            transform.DOMoveY(Random.Range(0, capY), 5).SetLoops(-1, LoopType.Yoyo).SetLink(gameObject);
+            transform
+                .DOMoveY(Random.Range(0, capY), 5)
+                .SetLoops(-1, LoopType.Yoyo)
+                .SetLink(gameObject);
+            
+            transform
+                .DORotate(new Vector3(0, 0, 180), 4, RotateMode.Fast)
+                .SetLoops(-1, LoopType.Yoyo)
+                .SetLink(gameObject);
         }
     }
 }
