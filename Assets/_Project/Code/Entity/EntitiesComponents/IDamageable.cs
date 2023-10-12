@@ -1,9 +1,7 @@
-﻿using System;
-using Code.ConfigData.StatSystem;
+﻿using Code.ConfigData.StatSystem;
 using Code.Logic.Damage;
-using Attribute = Code.ConfigData.StatSystem.Attribute;
 
-namespace Code.Logic.EntitiesComponents
+namespace Code.Entity.EntitiesComponents
 {
     public interface IDamageable
     {

@@ -3,6 +3,7 @@ using System.Threading;
 using Code.ConfigData.Identifiers;
 using Code.Core.AssetManagement;
 using Code.Entity.Enemy;
+using Code.Entity.EntitiesComponents;
 using Code.Logic.EnemySpawners;
 using Code.Logic.EntitiesComponents;
 using Code.Services.ConfigData;
