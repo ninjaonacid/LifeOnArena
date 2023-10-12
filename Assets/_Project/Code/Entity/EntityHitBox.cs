@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Code.Entity
@@ -12,7 +13,7 @@ namespace Code.Entity
         {
             return _hitBoxCollider.center;
         }
-
+        
         public Vector3 StartPoint()
         {
             var colliderCenter = _hitBoxCollider.center;

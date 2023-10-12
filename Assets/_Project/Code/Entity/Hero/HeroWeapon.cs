@@ -46,9 +46,9 @@ namespace Code.Entity.Hero
             CurrentWeapon.gameObject.transform.localPosition = Vector3.zero;
     
             CurrentWeapon.gameObject.transform.localRotation = Quaternion.Euler(
-                weaponData.Rotation.x,
-                weaponData.Rotation.y, 
-                weaponData.Rotation.z);
+                weaponData.LocalRotation.x,
+                weaponData.LocalRotation.y, 
+                weaponData.LocalRotation.z);
 
             OnWeaponChange?.Invoke(CurrentWeapon);
         }

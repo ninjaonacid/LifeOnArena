@@ -22,7 +22,8 @@ namespace Code.ConfigData
         public float Damage;
         public AnimatorOverrideController OverrideController;
         public HeroFsmConfig FsmConfig;
-        public Vector3 Rotation;
+        public Vector3 LocalRotation;
+        public Vector3 LocalPosition;
         public SoundAudioFile WeaponSound;
 
     }

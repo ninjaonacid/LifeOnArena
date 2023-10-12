@@ -1739,8 +1739,12 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: fd4f34d485b638e47aca4432eac0fbf8, type: 2}
     - target: {fileID: 2192902159981610960, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
       propertyPath: m_IsTrigger
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2500014843645060732, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
+      propertyPath: _hitBoxCollider
+      value: 
+      objectReference: {fileID: 4048868504055413890}
     - target: {fileID: 2658416580451336931, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
       propertyPath: m_Name
       value: Skeleton
@@ -1855,6 +1859,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4d656a13cfa1d84d94341642ae53936, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &4048868504055413890 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 2192902159981610960, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
+  m_PrefabInstance: {fileID: 2764850178834398034}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &4227790607017457015 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2085898622953279013, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}

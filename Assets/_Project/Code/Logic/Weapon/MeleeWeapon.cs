@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Code.Logic.Weapon
 {
+    [RequireComponent(typeof(Collider))]
     public class MeleeWeapon : MonoBehaviour
     {
         [SerializeField] private Collider _collider;
