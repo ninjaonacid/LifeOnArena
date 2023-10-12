@@ -1,7 +1,5 @@
-using System.Collections;
 using System.Threading;
 using UnityEngine;
-using Timer = Code.Logic.Timer.Timer;
 
 namespace Code.Entity.Enemy
 {
@@ -9,13 +7,13 @@ namespace Code.Entity.Enemy
     {
         private bool _isInvincible = false;
         private LayerMask _playerWeaponLayer;
-        private Timer _hitBoxTimer;
-        private float _hitBoxCooldown = 0.5f;
+        private float _hitBoxTimer;
+        private readonly float _hitBoxCooldown = 0.8f;
         private CancellationTokenSource _cts;
         private Vector3 _boxColliderSize;
         private void Awake()
         {
-            _hitBoxTimer = new Timer();
+            _hitBoxTimer = _hitBoxCooldown;
             _boxColliderSize = _hitBoxCollider.size;
             _playerWeaponLayer = LayerMask.NameToLayer("PlayerWeapon");
         }
@@ -26,22 +24,21 @@ namespace Code.Entity.Enemy
             {
                 _isInvincible = true;
                 _hitBoxCollider.size = new Vector3(0, 0, 0);
-                _hitBoxTimer.Reset();
-                StartCoroutine(Cooldown());
+                
             }
         }
 
-
-        private IEnumerator Cooldown()
+        private void Update()
         {
-            while (_hitBoxTimer.Elapsed < _hitBoxCooldown)
+            _hitBoxTimer -= Time.deltaTime;
+            if (_hitBoxTimer < 0 && _isInvincible)
             {
-                yield return null;
+                _isInvincible = false;
+                _hitBoxTimer = _hitBoxCooldown;
+                _hitBoxCollider.size = _boxColliderSize;
             }
-            _hitBoxCollider.size = _boxColliderSize;
-            _isInvincible = false;
-            
-            
         }
+
+        
     }
 }
