@@ -52,30 +52,34 @@ namespace Code.UI.View.HUD
         private void IncreaseHitCounter(int hits)
         {
             _resetTimer.Reset();
+
+            _hitCount += hits;
             
-            _comboTween = DOTween
-                .To(() => _hitCount, x => _hitCount = x, _hitCount + hits, 1f)
-                .OnUpdate(() =>
-                {
-                    if (_hitCount < CoolComboCap)
-                    {
-                        _textMesh.text = $"Combo {_hitCount}";
-                    }
-                    else if (_hitCount >= CoolComboCap && _hitCount < BrutalComboCap)
-                    {
-                        _textMesh.text = $"COOL! Combo {_hitCount}";
-                        _textMesh.color = new Color(0.1f, 0.8f, 0.1f);
-                    }
+            if (_hitCount < CoolComboCap)
+            {
+                _textMesh.text = $"Combo {_hitCount}";
+            }
+            else if (_hitCount >= CoolComboCap && _hitCount < BrutalComboCap)
+            {
+                _textMesh.text = $"COOL! Combo {_hitCount}";
+                _textMesh.color = new Color(0.1f, 0.8f, 0.1f);
+            }
 
-                    else if (_hitCount >= BrutalComboCap)
-                    {
-                        _textMesh.text = $"BRUTAL! Combo {_hitCount}";
-                        _textMesh.color = new Color(0.7f, 0.1f, 0.2f);
-                    }
-                }).SetLink(gameObject);
+            else if (_hitCount >= BrutalComboCap)
+            {
+                _textMesh.text = $"BRUTAL! Combo {_hitCount}";
+                _textMesh.color = new Color(0.7f, 0.1f, 0.2f);
+            }
+            
+            // _comboTween = DOTween
+            //     .To(() => _hitCount, x => _hitCount = x, _hitCount + hits, 1f)
+            //     .OnUpdate(() =>
+            //     {
+            //         
+            //     }).SetLink(gameObject);
 
 
-            var shake = _textMesh.transform.DOShakePosition(0.5f, 2f * _hitCount)
+            _textMesh.transform.DOShakePosition(0.5f, 2f * _hitCount)
                 .SetLink(gameObject);
 
             ResetTimer(TaskHelper.CreateToken(ref _cts)).Forget();

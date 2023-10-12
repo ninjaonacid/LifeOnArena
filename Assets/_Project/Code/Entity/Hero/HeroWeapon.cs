@@ -12,7 +12,7 @@ namespace Code.Entity.Hero
 {
     public class HeroWeapon : EntityWeapon, ISave
     {
-        private MeleeWeapon _currentWeapon;
+        public MeleeWeapon CurrentWeapon { get; private set; }
         [SerializeField] private HeroAnimator _heroAnimator;
         [SerializeField] private HeroStateMachineHandler _stateMachine;
 
@@ -31,9 +31,9 @@ namespace Code.Entity.Hero
         {
             if (weaponData == null) return;
 
-            if (_currentWeapon != null)
+            if (CurrentWeapon != null)
             {
-                Destroy(_currentWeapon.gameObject);
+                Destroy(CurrentWeapon.gameObject);
             }
             
             _weaponSlot.WeaponData = weaponData;
@@ -41,16 +41,16 @@ namespace Code.Entity.Hero
             _heroAnimator.OverrideController(weaponData.OverrideController);
             _stateMachine.ChangeConfig(weaponData.FsmConfig);
 
-            _currentWeapon = Instantiate(weaponData.WeaponPrefab, _weaponPosition, false).GetComponent<MeleeWeapon>();
+            CurrentWeapon = Instantiate(weaponData.WeaponPrefab, _weaponPosition, false).GetComponent<MeleeWeapon>();
             
-            _currentWeapon.gameObject.transform.localPosition = Vector3.zero;
+            CurrentWeapon.gameObject.transform.localPosition = Vector3.zero;
     
-            _currentWeapon.gameObject.transform.localRotation = Quaternion.Euler(
+            CurrentWeapon.gameObject.transform.localRotation = Quaternion.Euler(
                 weaponData.Rotation.x,
                 weaponData.Rotation.y, 
                 weaponData.Rotation.z);
 
-            OnWeaponChange?.Invoke(_currentWeapon);
+            OnWeaponChange?.Invoke(CurrentWeapon);
         }
 
         public void LoadData(PlayerData data)

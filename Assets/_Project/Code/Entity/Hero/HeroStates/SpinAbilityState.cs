@@ -19,6 +19,7 @@ namespace Code.Entity.Hero.HeroStates
             base.OnEnter();
             _heroRotation.enabled = false;
             HeroAnimator.PlayAttack(this);
+            _heroAttack.SetCollisionOn();
             _duration = 0.7f;
         }
 
@@ -34,6 +35,7 @@ namespace Code.Entity.Hero.HeroStates
         public override void OnExit()
         {
             _heroRotation.enabled = true;
+            _heroAttack.SetCollisionOff();
         }
 
         public override void OnExitRequest()

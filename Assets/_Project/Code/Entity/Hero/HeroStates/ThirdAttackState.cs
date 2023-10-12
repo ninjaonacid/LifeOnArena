@@ -16,7 +16,7 @@ namespace Code.Entity.Hero.HeroStates
             base.OnEnter();
             _duration = _fsmConfig.ThirdAttackStateDuration;
             HeroAnimator.PlayAttack(this);
-            //_heroAttack.BaseAttack();
+            _heroAttack.SetCollisionOn();
         
         }
 
@@ -32,6 +32,7 @@ namespace Code.Entity.Hero.HeroStates
         public override void OnExit()
         {
             base.OnExit();
+            _heroAttack.SetCollisionOff();
         }
 
         public override void OnExitRequest()

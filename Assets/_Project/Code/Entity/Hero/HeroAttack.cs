@@ -17,11 +17,9 @@ namespace Code.Entity.Hero
         public event Action<int> OnHit;
         
         [SerializeField] private StatController _stats;
-        [SerializeField] private AudioSource _heroAudioSource;
         [SerializeField] private HeroHitBox _hitBox;
         [SerializeField] private HeroWeapon _heroWeapon;
-        public CharacterController CharacterController;
-        
+
         private AudioService _audioService;
         private IBattleService _battleService;
         
@@ -36,12 +34,21 @@ namespace Code.Entity.Hero
             _layerMask = 1 << LayerMask.NameToLayer("Hittable");
             _heroWeapon.OnWeaponChange += ChangeWeapon;
         }
-
+        
         private void ChangeWeapon(MeleeWeapon weapon)
         {
             weapon.Hit += BaseAttack;
         }
 
+        public void SetCollisionOff()
+        {
+            _heroWeapon.CurrentWeapon.SetCollider(false);
+        }
+
+        public void SetCollisionOn()
+        {
+            _heroWeapon.CurrentWeapon.SetCollider(true);
+        }
         private void BaseAttack(CollisionData collision)
         {
             _battleService.ApplyDamage(_stats, collision.Target);
@@ -75,16 +82,5 @@ namespace Code.Entity.Hero
         {
         }
         
-        public Vector3 StartPoint()
-        {
-            var position = transform.position;
-            return new Vector3(position.x, CharacterController.center.y, position.z);
-        }
-
-        // private void OnDrawGizmos()
-        // {
-        //     Gizmos.color = Color.red;
-        //     Gizmos.DrawWireSphere(StartPoint() + transform.forward * 2, _stats.Stats["AttackRadius"].Value);
-        // }
     }
 }

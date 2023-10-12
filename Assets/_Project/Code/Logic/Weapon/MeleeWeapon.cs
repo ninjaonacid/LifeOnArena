@@ -6,6 +6,7 @@ namespace Code.Logic.Weapon
 {
     public class MeleeWeapon : MonoBehaviour
     {
+        [SerializeField] private Collider _collider;
         public event Action<CollisionData> Hit;
         private LayerMask _mask;
 
@@ -23,6 +24,11 @@ namespace Code.Logic.Weapon
                     Target = other.gameObject
                 });
             }
+        }
+
+        public void SetCollider(bool value)
+        {
+            _collider.enabled = value;
         }
     }
 }
