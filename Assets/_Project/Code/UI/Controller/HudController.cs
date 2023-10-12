@@ -38,9 +38,11 @@ namespace Code.UI.Controller
             _view.ComboCounter.Construct(heroAttack, heroHealth);
             _view.LootCounter.Construct(_gameData.PlayerData.WorldData);
             _view.HudSkillContainer.Construct(heroSkills);
-            
+            _view.GetComponent<EntityUI>().Construct(heroHealth);
            
-            
+
+
+
         }
     }
 }

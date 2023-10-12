@@ -1,5 +1,4 @@
 ﻿using Code.Logic.EntitiesComponents;
-using Code.UI.HUD;
 using UnityEngine;
 
 namespace Code.UI.View.HUD

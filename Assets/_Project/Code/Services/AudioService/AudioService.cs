@@ -111,11 +111,21 @@ namespace Code.Services.AudioService
             {
                 soundChannel.Play(sound);
             }
-            else
+           
+            Assert.IsNull(soundChannel);
+            
+        }
+
+        public void PlaySound(SoundAudioFile sound)
+        {
+            SoundAudioChannel soundChannel = FindFreeSoundChannel();
+
+            if (soundChannel)
             {
-                Debug.LogError("Noasd");
+                soundChannel.Play(sound);
             }
             
+            Assert.IsNull(soundChannel);
         }
 
         public void PlaySound3D(string soundName, Transform soundTransform, float volume = 1f)

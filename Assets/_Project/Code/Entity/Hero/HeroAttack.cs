@@ -1,6 +1,8 @@
 using System;
 using Code.ConfigData.StatSystem;
+using Code.Logic.Collision;
 using Code.Logic.EntitiesComponents;
+using Code.Logic.Weapon;
 using Code.Services.AudioService;
 using Code.Services.BattleService;
 using UnityEngine;
@@ -31,10 +33,21 @@ namespace Code.Entity.Hero
         }
         private void Awake()
         {
-
             _layerMask = 1 << LayerMask.NameToLayer("Hittable");
+            _heroWeapon.OnWeaponChange += ChangeWeapon;
         }
-        
+
+        private void ChangeWeapon(MeleeWeapon weapon)
+        {
+            weapon.Hit += BaseAttack;
+        }
+
+        private void BaseAttack(CollisionData collision)
+        {
+            _battleService.ApplyDamage(_stats, collision.Target);
+            OnHit?.Invoke(1);
+        }
+
         public void BaseAttack()
         {
             var hits = _battleService.CreateAttack(_stats, _hitBox.StartPoint(), _layerMask);
@@ -46,7 +59,6 @@ namespace Code.Entity.Hero
                 OnHit?.Invoke(hits);
                 _audioService.PlaySound3D("Hit", transform, 0.5f);
             }
-            
         }
 
         public void SkillAttack(Vector3 castPoint)
@@ -57,15 +69,12 @@ namespace Code.Entity.Hero
             {
                 OnHit?.Invoke(hits);
             }
-            
-            
         }
 
         public void SkillAttack()
         {
         }
         
-
         public Vector3 StartPoint()
         {
             var position = transform.position;

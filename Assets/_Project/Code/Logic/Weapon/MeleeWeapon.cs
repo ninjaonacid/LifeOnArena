@@ -6,14 +6,23 @@ namespace Code.Logic.Weapon
 {
     public class MeleeWeapon : MonoBehaviour
     {
-        public event Action<CollisionData> Hit; 
+        public event Action<CollisionData> Hit;
+        private LayerMask _mask;
+
+        private void Awake()
+        {
+            _mask = LayerMask.NameToLayer("Hittable");
+        }
 
         private void OnTriggerEnter(Collider other)
         {
-            Hit?.Invoke(new CollisionData()
+            if (_mask.value == other.gameObject.layer)
             {
-                Target = other.gameObject
-            });
+                Hit?.Invoke(new CollisionData()
+                {
+                    Target = other.gameObject
+                });
+            }
         }
     }
 }

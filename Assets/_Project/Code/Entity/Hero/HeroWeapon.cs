@@ -1,7 +1,9 @@
+using System;
 using Code.ConfigData;
 using Code.Core.Factory;
 using Code.Data.PlayerData;
 using Code.Logic.Weapon;
+using Code.Services.BattleService;
 using Code.Services.PersistentProgress;
 using UnityEngine;
 using VContainer;
@@ -13,20 +15,26 @@ namespace Code.Entity.Hero
         private MeleeWeapon _currentWeapon;
         [SerializeField] private HeroAnimator _heroAnimator;
         [SerializeField] private HeroStateMachineHandler _stateMachine;
+
+        public event Action<MeleeWeapon> OnWeaponChange;
         private IItemFactory _itemFactory;
+        private IBattleService _battleService;
 
         [Inject]
-        public void Construct(IItemFactory itemFactory)
+        public void Construct(IItemFactory itemFactory, IBattleService battleService)
         {
             _itemFactory = itemFactory;
+            _battleService = battleService;
         }
-        
+
         public void EquipWeapon(WeaponData weaponData)
         {
             if (weaponData == null) return;
 
             if (_currentWeapon != null)
+            {
                 Destroy(_currentWeapon.gameObject);
+            }
             
             _weaponSlot.WeaponData = weaponData;
             _weaponSlot.WeaponId = weaponData.WeaponId;
@@ -34,14 +42,17 @@ namespace Code.Entity.Hero
             _stateMachine.ChangeConfig(weaponData.FsmConfig);
 
             _currentWeapon = Instantiate(weaponData.WeaponPrefab, _weaponPosition, false).GetComponent<MeleeWeapon>();
-            _currentWeapon.transform.localPosition = Vector3.zero;
-
-            _currentWeapon.transform.localRotation = Quaternion.Euler(
+            
+            _currentWeapon.gameObject.transform.localPosition = Vector3.zero;
+    
+            _currentWeapon.gameObject.transform.localRotation = Quaternion.Euler(
                 weaponData.Rotation.x,
                 weaponData.Rotation.y, 
                 weaponData.Rotation.z);
+
+            OnWeaponChange?.Invoke(_currentWeapon);
         }
-        
+
         public void LoadData(PlayerData data)
         {
             var weaponId = data.HeroEquipment.WeaponIntId;

@@ -31,7 +31,7 @@ namespace Code.ConfigData.Ability.ActiveAbilities
         {
             var attack = caster.GetComponent<IAttack>();
             
-            attack.BaseAttack();
+            
         }
     }
 }

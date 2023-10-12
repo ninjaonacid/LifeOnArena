@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Code.ConfigData.Audio;
 using Code.ConfigData.Configs;
 using Code.ConfigData.Identifiers;
 using Code.Logic.Damage;
@@ -22,6 +23,7 @@ namespace Code.ConfigData
         public AnimatorOverrideController OverrideController;
         public HeroFsmConfig FsmConfig;
         public Vector3 Rotation;
-     
+        public SoundAudioFile WeaponSound;
+
     }
 }

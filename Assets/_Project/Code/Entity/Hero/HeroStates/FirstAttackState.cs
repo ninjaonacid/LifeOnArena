@@ -18,7 +18,7 @@ namespace Code.Entity.Hero.HeroStates
         {
             base.OnEnter();
             HeroAnimator.PlayAttack(this);
-            _heroAttack.BaseAttack();
+           // _heroAttack.BaseAttack();
             _duration = _fsmConfig.FirstAttackStateDuration;
         }
 
