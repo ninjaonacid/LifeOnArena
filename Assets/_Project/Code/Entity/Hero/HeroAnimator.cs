@@ -77,11 +77,7 @@ namespace Code.Entity.Hero
         {
             _heroAnimator.SetTrigger(Hit);
         }
-
-        public void GetAnimationLenght()
-        {
-            _heroAnimator.animat
-        }
+        
 
         public void PlaySpinAttackSkill()
         {

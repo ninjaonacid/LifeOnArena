@@ -14,6 +14,7 @@ namespace Code.Entity.Hero
     {
         private GameObject _currentWeapon;
         [SerializeField] private HeroAnimator _heroAnimator;
+        [SerializeField] private HeroStateMachineHandler _stateMachine;
         private IItemFactory _itemFactory;
 
         [Inject]
@@ -33,11 +34,12 @@ namespace Code.Entity.Hero
             _weaponSlot.WeaponId = weaponData.WeaponId;
             
             _heroAnimator.OverrideController(weaponData.OverrideController);
+            _stateMachine.ChangeConfig(weaponData.FsmConfig);
 
-            _currentWeapon = Instantiate(weaponData.WeaponPrefab, _weaponPosition, false);
+                _currentWeapon = Instantiate(weaponData.WeaponPrefab, _weaponPosition, false);
             _currentWeapon.transform.localPosition = Vector3.zero;
 
-            _weaponPosition.transform.localRotation = Quaternion.Euler(
+            _currentWeapon.transform.localRotation = Quaternion.Euler(
                 weaponData.Rotation.x,
                 weaponData.Rotation.y, 
                 weaponData.Rotation.z);

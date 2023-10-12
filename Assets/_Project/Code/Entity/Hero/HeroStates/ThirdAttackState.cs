@@ -1,19 +1,23 @@
+using Code.ConfigData.Configs;
 using UnityEngine;
 
 namespace Code.Entity.Hero.HeroStates
 {
     public class ThirdAttackState : HeroBaseAbilityState
     {
-        public ThirdAttackState(HeroAnimator animator, HeroAttack heroAttack, bool needExitTime, bool isGhostState) : base(animator, heroAttack, needExitTime : true, isGhostState)
+        private HeroFsmConfig _fsmConfig;
+        public ThirdAttackState(HeroAnimator animator, HeroFsmConfig config, HeroAttack heroAttack, bool needExitTime, bool isGhostState) : base(animator, heroAttack, needExitTime : true, isGhostState)
         {
+            _fsmConfig = config;
         }
 
         public override void OnEnter()
         {
             base.OnEnter();
-            _duration = 0.6f;
+            _duration = _fsmConfig.ThirdAttackStateDuration;
             HeroAnimator.PlayAttack(this);
             _heroAttack.BaseAttack();
+        
         }
 
         public override void OnLogic()

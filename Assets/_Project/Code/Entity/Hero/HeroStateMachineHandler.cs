@@ -1,3 +1,4 @@
+using Code.ConfigData.Configs;
 using Code.ConfigData.Identifiers;
 using Code.Entity.Hero.HeroStates;
 using Code.Logic;
@@ -22,11 +23,12 @@ namespace Code.Entity.Hero
         private FiniteStateMachine _stateMachine;
         private PlayerControls _controls;
         private AudioService _audioService;
-
+        
         [SerializeField] private AbilityIdentifier _spinAttackAbilityId;
         [SerializeField] private AbilityIdentifier _dodgeRollAbilityId;
         [SerializeField] private AbilityIdentifier _tornadoAbilityId;
      
+        [SerializeField] private HeroFsmConfig _fsmConfig;
         [SerializeField] private HeroAnimator _heroAnimator;
         [SerializeField] private HeroMovement _heroMovement;
         [SerializeField] private HeroRotation _heroRotation;
@@ -41,11 +43,16 @@ namespace Code.Entity.Hero
             _audioService = audioService;
         }
 
+        public void ChangeConfig(HeroFsmConfig config)
+        {
+            _fsmConfig = config;
+        }
+        
         void Update()
         {
             _stateMachine.OnLogic();
         }
-
+            
         void Start()
         {
             _stateMachine = new FiniteStateMachine();
@@ -67,6 +74,7 @@ namespace Code.Entity.Hero
 
             _stateMachine.AddState(HeroBaseAttack1, new FirstAttackState(
                 _heroAnimator,
+                _fsmConfig,
                 _heroAttack,
                 _audioService,
                 needExitTime: true,
@@ -74,12 +82,14 @@ namespace Code.Entity.Hero
 
             _stateMachine.AddState(HeroBaseAttack2, new SecondAttackState(
                 _heroAnimator,
+                _fsmConfig,
                 _heroAttack,
                 needExitTime: true,
                 isGhostState: false));
 
             _stateMachine.AddState(HeroBaseAttack3, new ThirdAttackState(
                 _heroAnimator,
+                _fsmConfig,
                 _heroAttack,
                 needExitTime: true,
                 isGhostState: false));

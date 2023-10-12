@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Code.ConfigData.Configs;
 using Code.ConfigData.Identifiers;
 using Code.Logic.Damage;
 using UnityEngine;
@@ -19,6 +20,8 @@ namespace Code.ConfigData
         public float AttackSpeed;
         public float Damage;
         public AnimatorOverrideController OverrideController;
+        public HeroFsmConfig FsmConfig;
         public Vector3 Rotation;
+     
     }
 }

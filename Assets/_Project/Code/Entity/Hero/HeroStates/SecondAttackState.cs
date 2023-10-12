@@ -1,12 +1,14 @@
+using Code.ConfigData.Configs;
 using UnityEngine;
 
 namespace Code.Entity.Hero.HeroStates
 {
     public class SecondAttackState : HeroBaseAbilityState
     {
-        public SecondAttackState(HeroAnimator animator, HeroAttack heroAttack, bool needExitTime, bool isGhostState) : base(animator, heroAttack, needExitTime:true, isGhostState)
+        private readonly HeroFsmConfig _fsmConfig;
+        public SecondAttackState(HeroAnimator animator, HeroFsmConfig config, HeroAttack heroAttack, bool needExitTime, bool isGhostState) : base(animator, heroAttack, needExitTime:true, isGhostState)
         {
-
+            _fsmConfig = config;
         }
 
         public override void Init()
@@ -19,7 +21,7 @@ namespace Code.Entity.Hero.HeroStates
             base.OnEnter();
             HeroAnimator.PlayAttack(this);
             _heroAttack.BaseAttack();
-            _duration = 0.8f;
+            _duration = _fsmConfig.SecondAttackStateDuration;
         }
 
         public override void OnLogic()
