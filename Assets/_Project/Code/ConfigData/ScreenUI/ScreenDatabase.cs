@@ -3,8 +3,8 @@ using UnityEngine;
 
 namespace Code.ConfigData.UIWindows
 {
-    [CreateAssetMenu(menuName = "StaticData/WindowData", fileName = "WindowStaticData")]
-    public class WindowsStaticData : ScriptableObject
+    [CreateAssetMenu(menuName = "Config/Screen/ScreenDatabase", fileName = "ScreenDatabase")]
+    public class ScreenDatabase : ScriptableObject
     {
         public List<ScreenConfig> Configs;
     }

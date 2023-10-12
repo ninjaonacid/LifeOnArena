@@ -47,7 +47,7 @@ namespace Code.Services.ConfigData
                 .ToDictionary(x => x.LocationReward);
 
             _windowConfigs = Resources
-                .Load<WindowsStaticData>($"{ConfigFolder}/UIWindows/WindowsStaticData")
+                .Load<ScreenDatabase>($"{ConfigFolder}/ScreenUI/ScreenDatabase")
                 .Configs
                 .ToDictionary(x => x.ScreenID, x => x);
 
