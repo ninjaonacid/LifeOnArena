@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -7,9 +8,10 @@ namespace Code.UI.SkillsMenu
     {
         [SerializeField] private CanvasGroup _canvasGroup;
 
+        public event Action OnUnEquipButtonPressed;
         public void OnPointerClick(PointerEventData eventData)
         {
-            throw new System.NotImplementedException();
+            OnUnEquipButtonPressed?.Invoke();
         }
 
         public void ShowButton(bool value)

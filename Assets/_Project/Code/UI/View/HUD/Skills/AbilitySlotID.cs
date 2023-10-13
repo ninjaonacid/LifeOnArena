@@ -1,6 +1,4 @@
-using UnityEngine;
-
-namespace Code.UI.HUD.Skills
+namespace Code.UI.View.HUD.Skills
 {
     public enum AbilitySlotID
     {

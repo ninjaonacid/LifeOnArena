@@ -4,6 +4,7 @@ using Code.Core.Factory;
 using Code.Data.PlayerData;
 using Code.Services.PersistentProgress;
 using Code.UI.HUD.Skills;
+using Code.UI.View.HUD.Skills;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using VContainer;

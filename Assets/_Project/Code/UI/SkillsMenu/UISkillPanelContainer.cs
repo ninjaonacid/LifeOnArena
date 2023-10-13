@@ -26,7 +26,7 @@ namespace Code.UI.SkillsMenu
                 slot.Construct(gameData, this);
             }
             
-            EquipButton.Construct(this, _gameData.PlayerData.SkillSlotsData);
+           // EquipButton.Construct(this, _gameData.PlayerData.SkillSlotsData);
         }
         public void SetSelectedSlot(UISkillPanelSlot slot)
         {

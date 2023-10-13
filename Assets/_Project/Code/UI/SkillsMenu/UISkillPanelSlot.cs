@@ -1,6 +1,7 @@
 using Code.ConfigData.Ability;
 using Code.Services.PersistentProgress;
 using Code.UI.HUD.Skills;
+using Code.UI.View.HUD.Skills;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;

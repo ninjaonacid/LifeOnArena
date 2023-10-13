@@ -1,14 +1,16 @@
+using System;
 using System.Collections.Generic;
 using Code.Services.ConfigData;
 using Code.Services.PersistentProgress;
 
 namespace Code.UI.Model.AbilityMenu
 {
+    [Serializable]
     public class AbilityMenuModel : IScreenModel
     {
         private readonly IGameDataContainer _gameData;
         private readonly IConfigProvider _configProvider;
-        public List<UIAbilitySlotModel> _abilitySlots;
+        private List<UIAbilitySlotModel> _abilitySlots;
 
         public AbilityMenuModel(IGameDataContainer gameData, IConfigProvider configProvider)
         {
@@ -24,7 +26,10 @@ namespace Code.UI.Model.AbilityMenu
 
             foreach (var ability in allAbilities)
             {
-                var abilitySlotModel = new UIAbilitySlotModel(ability.Identifier.Name);
+                var abilitySlotModel = new UIAbilitySlotModel(ability.Identifier.Name)
+                {
+                    Ability = ability
+                };
                 _abilitySlots.Add(abilitySlotModel);
             }
 
@@ -37,5 +42,25 @@ namespace Code.UI.Model.AbilityMenu
                 }
             }
         }
+
+        public UIAbilitySlotModel GetSlotByIndex(int index)
+        {
+            return _abilitySlots[index];
+        }
+
+        public void UnEquipAbility(int slotIndex)
+        {
+            _abilitySlots[slotIndex].IsEquipped = false;
+        }
+
+        public void EquipAbility(int slotIndex)
+        {
+            _abilitySlots[slotIndex].IsEquipped = true;
+        }
+        public List<UIAbilitySlotModel> GetSlots()
+        {
+            return _abilitySlots;
+        }
+        
     }
 }

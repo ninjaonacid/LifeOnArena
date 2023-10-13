@@ -1,4 +1,4 @@
-using Code.Data.PlayerData;
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -7,21 +7,11 @@ namespace Code.UI.SkillsMenu
     public class EquipSkillButton : MonoBehaviour, IPointerClickHandler
     {
         [SerializeField] private CanvasGroup _canvasGroup;
-        private SkillSlotsData _slotsData;
-        private UISkillPanelContainer _container;
-        public void Construct(UISkillPanelContainer container, SkillSlotsData slotsData)
-        {
-            _slotsData = slotsData;
-            _container = container;
-        }
+
+        public event Action OnEquipButtonPressed;
         public void OnPointerClick(PointerEventData eventData)
         {
-            _container.EquipSkill();
-        }
-
-        public void ButtonClicked()
-        {
-            
+            OnEquipButtonPressed?.Invoke();
         }
 
         public void ShowButton(bool value)

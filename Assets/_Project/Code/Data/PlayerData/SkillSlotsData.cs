@@ -7,7 +7,7 @@ namespace Code.Data.PlayerData
     [Serializable]
     public class SkillSlotsData
     {
-        public List<UIAbilitySlotModel> AbilitySlots;
+        public List<UIAbilitySlotModel> AbilitySlots = new();
         public Queue<int> SkillIds = new Queue<int>();
         
     }
