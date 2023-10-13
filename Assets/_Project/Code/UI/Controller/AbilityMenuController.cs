@@ -1,8 +1,8 @@
 using Code.UI.Model;
 using Code.UI.Model.AbilityMenu;
 using Code.UI.Services;
-using Code.UI.SkillsMenu;
 using Code.UI.View;
+using Code.UI.View.AbilityMenu;
 using UniRx;
 using UnityEngine.Assertions;
 
@@ -23,6 +23,7 @@ namespace Code.UI.Controller
             Assert.IsNotNull(_model);
             Assert.IsNotNull(_view);
             
+            _view.AbilityContainer.InitializeAbilityContainer();
             
             
 

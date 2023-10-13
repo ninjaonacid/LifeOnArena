@@ -15,11 +15,7 @@ namespace Code.UI.Model.AbilityMenu
 
         public void Initialize()
         {
-            for (var index = 0; index < _gameData.PlayerData.SkillSlotsData.AbilitySlots.Count; index++)
-            {
-                var slot = _gameData.PlayerData.SkillSlotsData.AbilitySlots[index];
-                
-            }
+       
         }
     }
 }

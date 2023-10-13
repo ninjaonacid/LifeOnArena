@@ -1,0 +1,9 @@
+using Code.UI.SkillsMenu;
+
+namespace Code.UI.View.AbilityMenu
+{
+    public class AbilityMenuView : BaseView
+    {
+        public AbilityContainer AbilityContainer;
+    }
+}

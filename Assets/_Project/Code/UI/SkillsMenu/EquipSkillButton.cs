@@ -1,4 +1,3 @@
-using Code.Data;
 using Code.Data.PlayerData;
 using UnityEngine;
 using UnityEngine.EventSystems;

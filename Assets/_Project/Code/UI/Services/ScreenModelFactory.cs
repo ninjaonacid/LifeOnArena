@@ -14,7 +14,7 @@ namespace Code.UI.Services
         {
             _modelMap.Add(typeof(MainMenuModel), () => new MainMenuModel(gameData));
             _modelMap.Add(typeof(ShopMenuModel), () => new ShopMenuModel());
-            _modelMap.Add(typeof(AbilityMenuModel), () => new AbilityMenuModel());
+            _modelMap.Add(typeof(AbilityMenuModel), () => new AbilityMenuModel(gameData));
             _modelMap.Add(typeof(HudModel), () => new HudModel());
         }
         
