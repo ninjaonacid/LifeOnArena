@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Code.UI.View.AbilityMenu
@@ -10,7 +9,7 @@ namespace Code.UI.View.AbilityMenu
     {
         [SerializeField] private Image _abilityIcon;
         [SerializeField] private Image _selectionFrame;
-
+        
         public event Action<AbilityItemView> OnAbilityItemClick;
 
         public void OnPointerClick(PointerEventData eventData)

@@ -6,5 +6,11 @@ namespace Code.UI.Model.AbilityMenu
     {
         public bool IsEquipped;
         public int AbilityId;
+
+        public AbilitySlotModel(bool isEquipped, int abilityId)
+        {
+            IsEquipped = isEquipped;
+            AbilityId = abilityId;
+        }
     }
 }

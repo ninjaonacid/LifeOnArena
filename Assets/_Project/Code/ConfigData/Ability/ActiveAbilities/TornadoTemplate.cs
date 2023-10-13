@@ -14,7 +14,7 @@ namespace Code.ConfigData.Ability.ActiveAbilities
         {
             return _abilityInstance ??= 
                 new TornadoAbility
-                (ViewObjectPool,
+                (ParticleObjectPool,
                 BattleService,
                 ParticleObjectData,
                 ActiveTime,

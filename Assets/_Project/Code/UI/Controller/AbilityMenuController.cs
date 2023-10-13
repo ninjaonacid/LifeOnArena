@@ -26,10 +26,11 @@ namespace Code.UI.Controller
             _view.AbilityContainer.InitializeAbilityContainer();
             
             
-
             _view.CloseButton
                 .OnClickAsObservable()
                 .Subscribe(x => _screenService.Close(_view.ScreenId));
+            
+            
             
             
         }

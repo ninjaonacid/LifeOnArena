@@ -1,17 +1,20 @@
-using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Code.UI.View.AbilityMenu
 {
     public class AbilityContainer : MonoBehaviour
     {
-        public List<AbilityItemView> AbilityItem;
-        
+        private List<AbilityItemView> _abilityItems;
 
+        public AbilityItemView SelectedItem;
         public void InitializeAbilityContainer()
         {
-            foreach (var ability in AbilityItem)
+
+            _abilityItems = GetComponentsInChildren<AbilityItemView>().ToList();
+            
+            foreach (var ability in _abilityItems)
             {
                 ability.OnAbilityItemClick += HandleAbilitySelection;
             }
@@ -19,7 +22,15 @@ namespace Code.UI.View.AbilityMenu
 
         private void HandleAbilitySelection(AbilityItemView obj)
         {
-            throw new NotImplementedException();
+            if (SelectedItem && SelectedItem != obj)
+            {
+                SelectedItem.Deselect();
+            }
+
+            SelectedItem = obj;
+            SelectedItem.Select();
+            
+            Debug.Log("Zalupa");
         }
 
         

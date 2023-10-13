@@ -15,7 +15,7 @@ namespace Code.UI.Model.AbilityMenu
 
         public void Initialize()
         {
-       
+            
         }
     }
 }

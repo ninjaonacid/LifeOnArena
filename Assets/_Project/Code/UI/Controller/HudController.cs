@@ -31,9 +31,9 @@ namespace Code.UI.Controller
             Assert.IsNotNull(_view);
             Assert.IsNotNull(_model);
 
-            if (_heroFactory.HeroGameObject.TryGetComponent(out HeroAttack heroAttack));
-            if (_heroFactory.HeroGameObject.TryGetComponent(out HeroSkills heroSkills));
-            if (_heroFactory.HeroGameObject.TryGetComponent(out HeroHealth heroHealth));
+            _heroFactory.HeroGameObject.TryGetComponent(out HeroAttack heroAttack);
+            _heroFactory.HeroGameObject.TryGetComponent(out HeroSkills heroSkills);
+            _heroFactory.HeroGameObject.TryGetComponent(out HeroHealth heroHealth);
             
             _view.ComboCounter.Construct(heroAttack, heroHealth);
             _view.LootCounter.Construct(_gameData.PlayerData.WorldData);

@@ -1,8 +1,9 @@
 using Code.ConfigData.Ability;
+using Code.UI.HUD.Skills;
 using UnityEngine;
 using UnityEngine.InputSystem.OnScreen;
 
-namespace Code.UI.HUD.Skills
+namespace Code.UI.View.HUD.Skills
 {
     public class HudSkillButton : OnScreenButton
     {

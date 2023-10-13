@@ -18,9 +18,9 @@ namespace Code.ConfigData.Ability
         public float ActiveTime;
         public float CurrentActiveTime;
         public AbilityState State;
-        [FormerlySerializedAs("ViewObjectData")] public ParticleObjectData ParticleObjectData;
+        public ParticleObjectData ParticleObjectData;
 
-        protected ParticleObjectPool ViewObjectPool;
+        protected ParticleObjectPool ParticleObjectPool;
         protected IBattleService BattleService;
         public abstract IAbility GetAbility();
 
@@ -28,7 +28,7 @@ namespace Code.ConfigData.Ability
             ParticleObjectPool viewObjectPool, 
             IBattleService battleService)
         {
-            ViewObjectPool = viewObjectPool;
+            ParticleObjectPool = viewObjectPool;
             BattleService = battleService;
         }
 
