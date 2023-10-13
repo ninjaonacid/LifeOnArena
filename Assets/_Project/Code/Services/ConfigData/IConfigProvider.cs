@@ -26,5 +26,6 @@ namespace Code.Services.ConfigData
 
         AudioLibrary AudioLibrary();
         AudioServiceSettings AudioServiceSettings();
+        List<AbilityTemplateBase> AllAbilities();
     }
 }

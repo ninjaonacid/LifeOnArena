@@ -102,6 +102,16 @@ namespace Code.Services.ConfigData
 
             return null;
         }
+
+        public List<AbilityTemplateBase> AllAbilities()
+        {
+            if (_heroAbilities.Count > 0)
+            {
+                return _heroAbilities.Values.ToList();
+            }
+
+            return null;
+        }
         
         public LevelConfig Level(string sceneKey) =>
         

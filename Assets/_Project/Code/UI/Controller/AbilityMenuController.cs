@@ -24,14 +24,16 @@ namespace Code.UI.Controller
             Assert.IsNotNull(_view);
             
             _view.AbilityContainer.InitializeAbilityContainer();
-            
-            
+
             _view.CloseButton
                 .OnClickAsObservable()
                 .Subscribe(x => _screenService.Close(_view.ScreenId));
             
-            
-            
+        }
+
+
+        public void Equip()
+        {
             
         }
     }
