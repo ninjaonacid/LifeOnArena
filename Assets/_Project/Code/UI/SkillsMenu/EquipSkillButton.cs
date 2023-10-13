@@ -9,15 +9,20 @@ namespace Code.UI.SkillsMenu
     {
         [SerializeField] private CanvasGroup _canvasGroup;
         private SkillSlotsData _slotsData;
-        private UISkillPanelController _controller;
-        public void Construct(UISkillPanelController controller, SkillSlotsData slotsData)
+        private UISkillPanelContainer _container;
+        public void Construct(UISkillPanelContainer container, SkillSlotsData slotsData)
         {
             _slotsData = slotsData;
-            _controller = controller;
+            _container = container;
         }
         public void OnPointerClick(PointerEventData eventData)
         {
-            _controller.EquipSkill();
+            _container.EquipSkill();
+        }
+
+        public void ButtonClicked()
+        {
+            
         }
 
         public void ShowButton(bool value)

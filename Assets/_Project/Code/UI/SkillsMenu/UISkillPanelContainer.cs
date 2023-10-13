@@ -5,10 +5,10 @@ using VContainer;
 
 namespace Code.UI.SkillsMenu
 {
-    public class UISkillPanelController : MonoBehaviour
+    public class UISkillPanelContainer : MonoBehaviour
     {
         [SerializeField] private UISkillPanelSlot[] _slots;
-        [SerializeField] private EquipSkillButton _equipButton;
+        public EquipSkillButton EquipButton;
         [SerializeField] private UnEquipSkillButton _unEquipButton;
 
         private UISkillPanelSlot _selectedSlot;
@@ -26,37 +26,24 @@ namespace Code.UI.SkillsMenu
                 slot.Construct(gameData, this);
             }
             
-            _equipButton.Construct(this, _gameData.PlayerData.SkillSlotsData);
+            EquipButton.Construct(this, _gameData.PlayerData.SkillSlotsData);
         }
         public void SetSelectedSlot(UISkillPanelSlot slot)
         {
-            if (_selectedSlot != null && _selectedSlot != slot)
+            if (_selectedSlot != null)
             {
                 _selectedSlot.ShowSelectionFrame(false);
-                _selectedSlot = slot;
-                _selectedSlot.ShowSelectionFrame(true);
-                ShowInteractButton(slot);
             }
-            else
-            {
-                _selectedSlot = slot;
-                _selectedSlot.ShowSelectionFrame(true);
-                ShowInteractButton(slot);
-            }
+
+            _selectedSlot = slot;
+            _selectedSlot.ShowSelectionFrame(true);
+            ShowInteractButton(slot);
         }
 
         private void ShowInteractButton(UISkillPanelSlot slot)
         {
-            if (slot.IsEquipped)
-            {
-                _equipButton.ShowButton(false);
-                _unEquipButton.ShowButton(true);
-            }
-            else
-            {
-                _equipButton.ShowButton(true);
-                _unEquipButton.ShowButton(false);
-            }
+            EquipButton.ShowButton(!slot.IsEquipped);
+            _unEquipButton.ShowButton(slot.IsEquipped);
         }
         
         public void EquipSkill()
@@ -67,11 +54,13 @@ namespace Code.UI.SkillsMenu
             {
                 _equippedSlots.Enqueue(_selectedSlot);
                 _selectedSlot.IsEquipped = true;
+                ShowInteractButton(_selectedSlot);
             }
             else if (!_equippedSlots.Contains(_selectedSlot) && _equippedSlots.Count >= 2)
             {
                 var firstSlot = _equippedSlots.Dequeue();
                 firstSlot.IsEquipped = false;
+                ShowInteractButton(firstSlot);
                 _equippedSlots.Enqueue(_selectedSlot);
             }
 

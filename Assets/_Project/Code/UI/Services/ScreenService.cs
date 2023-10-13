@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Code.UI.Controller;
 using Code.UI.Model;
+using Code.UI.Model.AbilityMenu;
 using Code.UI.View;
 using UnityEngine;
 using UnityEngine.Assertions;

@@ -1,7 +1,8 @@
 using Code.Entity.Hero;
+using Code.UI.HUD.Skills;
 using UnityEngine;
 
-namespace Code.UI.HUD.Skills
+namespace Code.UI.View.HUD.Skills
 {
     public class HudSkillContainer : MonoBehaviour
     {

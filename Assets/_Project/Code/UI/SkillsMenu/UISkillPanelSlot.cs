@@ -18,18 +18,18 @@ namespace Code.UI.SkillsMenu
 
         public bool IsEquipped = false;
         private IGameDataContainer _gameData;
-        private UISkillPanelController _controller;
-        public void Construct(IGameDataContainer gameData, UISkillPanelController controller)
+        private UISkillPanelContainer _container;
+        public void Construct(IGameDataContainer gameData, UISkillPanelContainer container)
         {
             _gameData = gameData;
-            _controller = controller;
+            _container = container;
 
             SetIcon();
         }
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            _controller.SetSelectedSlot(this);
+            _container.SetSelectedSlot(this);
         }
 
         private void SetIcon()

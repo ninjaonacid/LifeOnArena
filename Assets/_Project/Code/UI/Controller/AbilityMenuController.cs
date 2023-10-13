@@ -1,9 +1,9 @@
 using Code.UI.Model;
+using Code.UI.Model.AbilityMenu;
 using Code.UI.Services;
 using Code.UI.SkillsMenu;
 using Code.UI.View;
 using UniRx;
-using UnityEngine;
 using UnityEngine.Assertions;
 
 namespace Code.UI.Controller
@@ -19,12 +19,18 @@ namespace Code.UI.Controller
             _model = model as AbilityMenuModel;
             _view = view as AbilityMenuView;
             _screenService = screenService;
-            
+
             Assert.IsNotNull(_model);
             Assert.IsNotNull(_view);
             
+            
+            
 
-            _view.CloseButton.OnClickAsObservable().Subscribe(x => _screenService.Close(_view.ScreenId));
+            _view.CloseButton
+                .OnClickAsObservable()
+                .Subscribe(x => _screenService.Close(_view.ScreenId));
+            
+            
         }
     }
 }

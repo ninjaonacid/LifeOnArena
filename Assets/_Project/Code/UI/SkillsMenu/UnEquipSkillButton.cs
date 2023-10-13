@@ -3,12 +3,11 @@ using UnityEngine.EventSystems;
 
 namespace Code.UI.SkillsMenu
 {
-    public class UnEquipSkillButton : MonoBehaviour, IPointerDownHandler
+    public class UnEquipSkillButton : MonoBehaviour, IPointerClickHandler
     {
         [SerializeField] private CanvasGroup _canvasGroup;
 
-
-        public void OnPointerDown(PointerEventData eventData)
+        public void OnPointerClick(PointerEventData eventData)
         {
             throw new System.NotImplementedException();
         }
