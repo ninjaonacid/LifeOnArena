@@ -28,7 +28,6 @@ namespace Code.Core.ObjectPool
             if (CheckForExist(id))
             {
                 result = _particleStock[id].Pop();
-
             }
             else
             {
@@ -36,8 +35,6 @@ namespace Code.Core.ObjectPool
                     _particleStock.Add(id, new Stack<ParticleSystem>());
                 
                 result = await _particleFactory.CreateParticle(id);
-
-                var poolable = result.GetComponent<IPoolable>();
             }
             
             result.gameObject.SetActive(true);
@@ -53,18 +50,15 @@ namespace Code.Core.ObjectPool
             if (CheckForExist(id))
             {
                 result = _particleStock[id].Pop();
-
             }
             else
             {
                 if (!_particleStock.ContainsKey(id))
                     _particleStock.Add(id, new Stack<ParticleSystem>());
-
-
-                result = await _particleFactory.CreateParticle(id);
                 
+                result = await _particleFactory.CreateParticle(id);
             }
-
+            
             result.gameObject.SetActive(true);
             result.Play();
             return result;

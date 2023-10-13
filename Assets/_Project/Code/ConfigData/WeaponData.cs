@@ -17,7 +17,6 @@ namespace Code.ConfigData
         public GameObject WeaponPrefab;
         public WeaponId WeaponId;
         public int Price;
-        public float AttackRadius;
         public float AttackSpeed;
         public float Damage;
         public AnimatorOverrideController OverrideController;

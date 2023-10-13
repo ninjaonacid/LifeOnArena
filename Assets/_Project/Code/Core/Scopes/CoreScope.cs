@@ -20,12 +20,9 @@ namespace Code.Core.Scopes
 {
     public class CoreScope : LifetimeScope
     {
-
         [SerializeField] private LoadingScreen Screen;
         [SerializeField] private GameAudioPlayer GameAudioPlayer;
         [SerializeField] private AudioService AudioService;
-
-        
         protected override void Configure(IContainerBuilder builder)
         {
             builder.RegisterEntryPoint<CoreLoader>();

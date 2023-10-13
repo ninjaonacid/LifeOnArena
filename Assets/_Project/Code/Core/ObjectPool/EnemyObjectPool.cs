@@ -9,12 +9,12 @@ namespace Code.Core.ObjectPool
 {
     public class EnemyObjectPool
     {
-        private readonly Dictionary<int, List<GameObject>> _enemyObjectsStock;
+        private readonly Dictionary<int, Stack<GameObject>> _enemyObjectsStock;
 
         private readonly IEnemyFactory _enemyFactory;
         public EnemyObjectPool(IEnemyFactory enemyFactory)
         {
-            _enemyObjectsStock = new Dictionary<int, List<GameObject>>();
+            _enemyObjectsStock = new Dictionary<int, Stack<GameObject>>();
             _enemyFactory = enemyFactory;
         }
 
@@ -30,13 +30,13 @@ namespace Code.Core.ObjectPool
 
             if (CheckForExist(mobId))
             {
-                result = _enemyObjectsStock[mobId][0];
-                _enemyObjectsStock[mobId].RemoveAt(0);
+                result = _enemyObjectsStock[mobId].Pop();
+
             }
             else
             {
                 if (!_enemyObjectsStock.ContainsKey(mobId))
-                    _enemyObjectsStock.Add(mobId, new List<GameObject>());
+                    _enemyObjectsStock.Add(mobId, new Stack<GameObject>());
 
                 result = await _enemyFactory.CreateMonster(mobId, parent, token);
             }
@@ -48,7 +48,7 @@ namespace Code.Core.ObjectPool
 
         public void ReturnObject(int mobId, GameObject obj)
         {
-            _enemyObjectsStock[mobId].Add(obj);
+            _enemyObjectsStock[mobId].Push(obj);
 
         }
 

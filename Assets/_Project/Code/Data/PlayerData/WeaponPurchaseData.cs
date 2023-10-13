@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 
-namespace Code.Data
+namespace Code.Data.PlayerData
 {
     public class WeaponPurchaseData
     {
-        public List<string> PurchasedWeapons = new();
+        public readonly List<string> PurchasedWeapons = new();
     }
 }
