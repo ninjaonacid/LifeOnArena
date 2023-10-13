@@ -56,6 +56,8 @@ namespace Code.UI.Model.AbilityMenu
         public void EquipAbility(int slotIndex)
         {
             _abilitySlots[slotIndex].IsEquipped = true;
+            
+            _gameData.PlayerData.SkillSlotsData.SkillIds.Enqueue(_abilitySlots[slotIndex].Ability.Identifier.Id);
         }
         public List<UIAbilitySlotModel> GetSlots()
         {
