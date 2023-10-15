@@ -11,6 +11,7 @@ namespace Code.UI.Model.AbilityMenu
         private readonly IGameDataContainer _gameData;
         private readonly IConfigProvider _configProvider;
         private List<UIAbilitySlotModel> _abilitySlots;
+        private Queue<UIAbilitySlotModel> _equippedAbilities;
 
         public AbilityMenuModel(IGameDataContainer gameData, IConfigProvider configProvider)
         {
@@ -30,16 +31,15 @@ namespace Code.UI.Model.AbilityMenu
                 {
                     Ability = ability
                 };
+                
                 _abilitySlots.Add(abilitySlotModel);
             }
 
-            if (_gameData.PlayerData.SkillSlotsData.AbilitySlots.Count > 0)
+            if (_gameData.PlayerData.SkillSlotsData.AbilitySlots.Count <= 0) return;
+            for (var index = 0; index < _abilitySlots.Count; index++)
             {
-                for (var index = 0; index < _abilitySlots.Count; index++)
-                {
-                    var abilitySlot = _abilitySlots[index];
-                    abilitySlot.IsEquipped = _gameData.PlayerData.SkillSlotsData.AbilitySlots[index].IsEquipped;
-                }
+                var abilitySlot = _abilitySlots[index];
+                abilitySlot.IsEquipped = _gameData.PlayerData.SkillSlotsData.AbilitySlots[index].IsEquipped;
             }
         }
 
@@ -56,7 +56,17 @@ namespace Code.UI.Model.AbilityMenu
         public void EquipAbility(int slotIndex)
         {
             _abilitySlots[slotIndex].IsEquipped = true;
+            if (_equippedAbilities.Count < 2)
+            {
+                _equippedAbilities.Enqueue(_abilitySlots[slotIndex]);
+            }
+            else
+            {
+                _equippedAbilities.Dequeue();
+                _equippedAbilities.Enqueue(_abilitySlots[slotIndex]);
+            }
             
+
             _gameData.PlayerData.SkillSlotsData.SkillIds.Enqueue(_abilitySlots[slotIndex].Ability.Identifier.Id);
         }
         public List<UIAbilitySlotModel> GetSlots()

@@ -33,17 +33,17 @@ namespace Code.UI.Controller
             _view.AbilityContainer.OnAbilitySelected += AbilitySelected;
             _view.EquipButton.OnEquipButtonPressed += Equip;
             _view.UnEquipButton.OnUnEquipButtonPressed += UnEquip;
-
+            
           UpdateData();
         }
 
         private void UpdateData()
         {
-            var list = _model.GetSlots();
+            var abilityList = _model.GetSlots();
             
-            for (var index = 0; index < list.Count; index++)
+            for (var index = 0; index < abilityList.Count; index++)
             {
-                var ability = list[index];
+                var ability = abilityList[index];
                 _view.AbilityContainer.UpdateData(index, ability.Ability.Icon);
             }
         }
