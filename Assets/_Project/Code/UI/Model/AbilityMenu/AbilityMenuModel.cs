@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Code.Services.ConfigData;
 using Code.Services.PersistentProgress;
+using Code.Utils;
 
 namespace Code.UI.Model.AbilityMenu
 {
@@ -11,7 +12,7 @@ namespace Code.UI.Model.AbilityMenu
         private readonly IGameDataContainer _gameData;
         private readonly IConfigProvider _configProvider;
         private List<UIAbilitySlotModel> _abilitySlots;
-        private Queue<UIAbilitySlotModel> _equippedAbilities;
+        private Queue<UIAbilitySlotModel> _equippedSlots = new Queue<UIAbilitySlotModel>();
 
         public AbilityMenuModel(IGameDataContainer gameData, IConfigProvider configProvider)
         {
@@ -43,32 +44,47 @@ namespace Code.UI.Model.AbilityMenu
             }
         }
 
+        public int GetEquippedSlotIndex(UIAbilitySlotModel slot)
+        {
+            return _equippedSlots.IndexOf(slot) + 1;
+        }
+        
+
         public UIAbilitySlotModel GetSlotByIndex(int index)
         {
             return _abilitySlots[index];
         }
 
+        public bool IsSlotEquipped(int index)
+        {
+            return _abilitySlots[index].IsEquipped;
+        }
+
         public void UnEquipAbility(int slotIndex)
         {
             _abilitySlots[slotIndex].IsEquipped = false;
+
+            _equippedSlots.Dequeue();
         }
 
         public void EquipAbility(int slotIndex)
         {
             _abilitySlots[slotIndex].IsEquipped = true;
-            if (_equippedAbilities.Count < 2)
+            if (_equippedSlots.Count < 2)
             {
-                _equippedAbilities.Enqueue(_abilitySlots[slotIndex]);
+                _equippedSlots.Enqueue(_abilitySlots[slotIndex]);
             }
             else
             {
-                _equippedAbilities.Dequeue();
-                _equippedAbilities.Enqueue(_abilitySlots[slotIndex]);
+                var deletedAbility = _equippedSlots.Dequeue();
+                deletedAbility.IsEquipped = false;
+                _equippedSlots.Enqueue(_abilitySlots[slotIndex]);
             }
-            
 
             _gameData.PlayerData.SkillSlotsData.SkillIds.Enqueue(_abilitySlots[slotIndex].Ability.Identifier.Id);
         }
+        
+        
         public List<UIAbilitySlotModel> GetSlots()
         {
             return _abilitySlots;

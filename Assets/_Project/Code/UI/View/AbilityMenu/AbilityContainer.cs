@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Code.UI.Model.AbilityMenu;
 using UnityEngine;
 
 namespace Code.UI.View.AbilityMenu
@@ -36,9 +35,9 @@ namespace Code.UI.View.AbilityMenu
         {
             return _abilityViews.IndexOf(_selectedItem);
         }
-        public void UpdateData(int abilityIndex, Sprite abilityIcon)
+        public void UpdateData(int abilityIndex, int equippedIndex, Sprite abilityIcon)
         {
-            _abilityViews[abilityIndex].SetData(abilityIcon);
+            _abilityViews[abilityIndex].SetData(abilityIcon, equippedIndex);
         }
 
         private void HandleAbilitySelection(AbilityItemView obj)

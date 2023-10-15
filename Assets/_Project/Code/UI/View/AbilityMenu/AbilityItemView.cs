@@ -1,5 +1,5 @@
 using System;
-using Code.UI.Model.AbilityMenu;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -10,6 +10,7 @@ namespace Code.UI.View.AbilityMenu
     {
         [SerializeField] private Image _abilityIcon;
         [SerializeField] private Image _selectionFrame;
+        [SerializeField] private TextMeshProUGUI _equippedSlotIndex; 
 
         public event Action<AbilityItemView> OnAbilityItemClick;
 
@@ -18,9 +19,19 @@ namespace Code.UI.View.AbilityMenu
             OnAbilityItemClick?.Invoke(this);
         }
 
-        public void SetData(Sprite icon)
+        public void SetData(Sprite icon, int equippedSlotIndex = 0)
         {
             _abilityIcon.sprite = icon;
+
+            if (equippedSlotIndex == 0)
+            {
+                _equippedSlotIndex.gameObject.SetActive(false);
+            }
+            else
+            {
+                _equippedSlotIndex.gameObject.SetActive(true);
+                _equippedSlotIndex.text = equippedSlotIndex.ToString();
+            }
         }
 
         public void Select()

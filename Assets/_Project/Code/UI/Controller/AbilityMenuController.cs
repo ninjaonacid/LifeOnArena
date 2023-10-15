@@ -44,22 +44,21 @@ namespace Code.UI.Controller
             for (var index = 0; index < abilityList.Count; index++)
             {
                 var ability = abilityList[index];
-                _view.AbilityContainer.UpdateData(index, ability.Ability.Icon);
+                int equippedIndex = 0;
+                if (ability.IsEquipped)
+                {
+                    equippedIndex = _model.GetEquippedSlotIndex(ability);
+                }
+                _view.AbilityContainer.UpdateData(index,  equippedIndex, ability.Ability.Icon);
             }
         }
 
         private void AbilitySelected(int abilityIndex)
         {
-            var slotModel = _model.GetSlots();
+            var isEquipped = _model.IsSlotEquipped(abilityIndex);
             
-            if (slotModel[abilityIndex].IsEquipped)
-            {
-                _view.EquipButton.gameObject.SetActive(true);
-            }
-            else
-            {
-                _view.UnEquipButton.gameObject.SetActive(false);
-            }
+            _view.EquipButton.gameObject.SetActive(!isEquipped);
+            _view.UnEquipButton.gameObject.SetActive(isEquipped);
         }
 
         private void UnEquip()
@@ -67,7 +66,9 @@ namespace Code.UI.Controller
             var abilityIndex = _view.AbilityContainer.GetSelectedSlotIndex();
             
             _model.UnEquipAbility(abilityIndex);
+            AbilitySelected(abilityIndex);
             
+            UpdateData();
         }
 
         private void Equip()
@@ -75,6 +76,10 @@ namespace Code.UI.Controller
             var abilityIndex = _view.AbilityContainer.GetSelectedSlotIndex();
             
             _model.EquipAbility(abilityIndex);
+            
+            AbilitySelected(abilityIndex);
+            
+            UpdateData();
         }
 
         public void Dispose()
