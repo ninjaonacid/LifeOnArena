@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Code.Data.DataStructures;
 using Code.Services.ConfigData;
 using Code.Services.PersistentProgress;
 using Code.Utils;
@@ -12,8 +13,7 @@ namespace Code.UI.Model.AbilityMenu
         private readonly IGameDataContainer _gameData;
         private readonly IConfigProvider _configProvider;
         private List<UIAbilitySlotModel> _abilitySlots;
-        private Queue<UIAbilitySlotModel> _equippedSlots = new Queue<UIAbilitySlotModel>();
-
+        private IndexedQueue<UIAbilitySlotModel> _equippedSlots;
         public AbilityMenuModel(IGameDataContainer gameData, IConfigProvider configProvider)
         {
             _gameData = gameData;
@@ -23,6 +23,7 @@ namespace Code.UI.Model.AbilityMenu
         public void Initialize()
         {
             _abilitySlots = new List<UIAbilitySlotModel>();
+            _equippedSlots = new IndexedQueue<UIAbilitySlotModel>();
 
             var allAbilities = _configProvider.AllAbilities();
 
@@ -37,9 +38,11 @@ namespace Code.UI.Model.AbilityMenu
             }
 
             if (_gameData.PlayerData.SkillSlotsData.AbilitySlots.Count <= 0) return;
+            
             for (var index = 0; index < _abilitySlots.Count; index++)
             {
                 var abilitySlot = _abilitySlots[index];
+                
                 abilitySlot.IsEquipped = _gameData.PlayerData.SkillSlotsData.AbilitySlots[index].IsEquipped;
             }
         }
@@ -49,7 +52,6 @@ namespace Code.UI.Model.AbilityMenu
             return _equippedSlots.IndexOf(slot) + 1;
         }
         
-
         public UIAbilitySlotModel GetSlotByIndex(int index)
         {
             return _abilitySlots[index];
@@ -62,29 +64,30 @@ namespace Code.UI.Model.AbilityMenu
 
         public void UnEquipAbility(int slotIndex)
         {
-            _abilitySlots[slotIndex].IsEquipped = false;
+            var ability = _abilitySlots[slotIndex];
+            ability.IsEquipped = false;
 
-            _equippedSlots.Dequeue();
+            _equippedSlots.Remove(ability);
         }
 
         public void EquipAbility(int slotIndex)
         {
-            _abilitySlots[slotIndex].IsEquipped = true;
+            var ability = _abilitySlots[slotIndex];
+
+            ability.IsEquipped = true;
+            
             if (_equippedSlots.Count < 2)
             {
-                _equippedSlots.Enqueue(_abilitySlots[slotIndex]);
+                _equippedSlots.Enqueue(ability);
             }
             else
             {
                 var deletedAbility = _equippedSlots.Dequeue();
                 deletedAbility.IsEquipped = false;
-                _equippedSlots.Enqueue(_abilitySlots[slotIndex]);
+                _equippedSlots.Enqueue(ability);
             }
-
-            _gameData.PlayerData.SkillSlotsData.SkillIds.Enqueue(_abilitySlots[slotIndex].Ability.Identifier.Id);
         }
-        
-        
+
         public List<UIAbilitySlotModel> GetSlots()
         {
             return _abilitySlots;

@@ -89,7 +89,7 @@ namespace Code.Entity.Hero
 
             if (skillsData.SkillIds.Count > 0)
             {
-                for (var index = 0; index <= skillsData.SkillIds.Count; index++)
+                for (var index = 0; index < skillsData.SkillIds.Count; index++)
                 {
                     var slot = _skillSlots[index];
 

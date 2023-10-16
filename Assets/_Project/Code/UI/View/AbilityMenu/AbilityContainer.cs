@@ -7,11 +7,8 @@ namespace Code.UI.View.AbilityMenu
     public class AbilityContainer : MonoBehaviour
     {
         [SerializeField] private AbilityItemView _abilityItem;
-        
         private List<AbilityItemView> _abilityViews;
         private AbilityItemView _selectedItem;
-
-
         public event Action<int> OnAbilitySelected;
         public void InitializeAbilityContainer(int abilitiesCount)
         {
@@ -35,6 +32,7 @@ namespace Code.UI.View.AbilityMenu
         {
             return _abilityViews.IndexOf(_selectedItem);
         }
+        
         public void UpdateData(int abilityIndex, int equippedIndex, Sprite abilityIcon)
         {
             _abilityViews[abilityIndex].SetData(abilityIcon, equippedIndex);

@@ -3,7 +3,6 @@ using Code.Core.Factory;
 using Code.Core.ObjectPool;
 using Code.Logic.WaveLogic;
 using Code.Services;
-using Code.Services.BattleService;
 using VContainer;
 using VContainer.Unity;
 
@@ -17,8 +16,7 @@ namespace Code.Core.Scopes
             
             builder.Register<EnemySpawnerController>(Lifetime.Scoped);
             builder.Register<LevelController>(Lifetime.Scoped);
-            
-            
+
             builder.Register<IItemFactory, ItemFactory>(Lifetime.Scoped);
             builder.Register<EnemyObjectPool>(Lifetime.Scoped);
             builder.Register<IEnemyFactory, EnemyFactory>(Lifetime.Scoped);

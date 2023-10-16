@@ -19,6 +19,11 @@ namespace Code.UI.View.AbilityMenu
             OnAbilityItemClick?.Invoke(this);
         }
 
+        private void Awake()
+        {
+            _equippedSlotIndex.color = new Color(1, 1, 0);
+        }
+
         public void SetData(Sprite icon, int equippedSlotIndex = 0)
         {
             _abilityIcon.sprite = icon;
@@ -31,6 +36,7 @@ namespace Code.UI.View.AbilityMenu
             {
                 _equippedSlotIndex.gameObject.SetActive(true);
                 _equippedSlotIndex.text = equippedSlotIndex.ToString();
+                
             }
         }
 

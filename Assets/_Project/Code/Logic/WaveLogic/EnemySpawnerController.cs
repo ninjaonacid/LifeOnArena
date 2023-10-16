@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading;
 using Code.ConfigData.Levels;
 using Code.ConfigData.Spawners;
+using Code.Core.EntryPoints;
 using Code.Core.Factory;
 using Code.Logic.EnemySpawners;
 using Code.Services;
