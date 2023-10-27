@@ -1,14 +1,14 @@
 using System;
 using System.Collections.Generic;
 using Code.Data.DataStructures;
+using Code.Data.PlayerData;
 using Code.Services.ConfigData;
 using Code.Services.PersistentProgress;
-using Code.Utils;
 
 namespace Code.UI.Model.AbilityMenu
 {
     [Serializable]
-    public class AbilityMenuModel : IScreenModel
+    public class AbilityMenuModel : IScreenModel, ISave
     {
         private readonly IGameDataContainer _gameData;
         private readonly IConfigProvider _configProvider;
@@ -45,6 +45,7 @@ namespace Code.UI.Model.AbilityMenu
                 
                 abilitySlot.IsEquipped = _gameData.PlayerData.SkillSlotsData.AbilitySlots[index].IsEquipped;
             }
+            
         }
 
         public int GetEquippedSlotIndex(UIAbilitySlotModel slot)
@@ -92,6 +93,15 @@ namespace Code.UI.Model.AbilityMenu
         {
             return _abilitySlots;
         }
-        
+
+        public void LoadData(PlayerData data)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateData(PlayerData data)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

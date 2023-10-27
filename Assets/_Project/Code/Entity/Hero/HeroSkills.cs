@@ -11,7 +11,7 @@ using VContainer;
 
 namespace Code.Entity.Hero
 {
-    public class HeroSkills : MonoBehaviour, ISaveReader
+    public class HeroSkills : MonoBehaviour, ISaveLoader
     {
         public event Action OnSkillChanged;
 

@@ -8,6 +8,7 @@ namespace Code.Data.PlayerData
     public class SkillSlotsData
     {
         public List<UIAbilitySlotModel> AbilitySlots = new();
+        public Queue<UIAbilitySlotModel> EquippedSlots = new();
         public Queue<int> SkillIds = new Queue<int>();
         
     }

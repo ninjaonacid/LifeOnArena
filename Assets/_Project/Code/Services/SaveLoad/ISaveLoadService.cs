@@ -10,11 +10,11 @@ namespace Code.Services.SaveLoad
     {
         void SaveData();
         PlayerData LoadPlayerData();
-        List<ISaveReader> ProgressReaders { get; }
+        List<ISaveLoader> ProgressReaders { get; }
         List<ISave> ProgressWriters { get; }
         void Cleanup();
         void RegisterProgressWatchers(GameObject go);
-        void Register(ISaveReader progressReader);
+        void Register(ISaveLoader progressLoader);
         void SaveProgressAtPath();
         void LoadData();
         AudioData LoadAudioData();

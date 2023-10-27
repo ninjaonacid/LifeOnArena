@@ -18,7 +18,7 @@ namespace Code.Services.SaveLoad
             _gameDataContainer = gameDataContainer;
         }
 
-        public List<ISaveReader> ProgressReaders { get; } = new List<ISaveReader>();
+        public List<ISaveLoader> ProgressReaders { get; } = new List<ISaveLoader>();
 
         public List<ISave> ProgressWriters { get; } = new List<ISave>();
 
@@ -53,7 +53,7 @@ namespace Code.Services.SaveLoad
 
         public void LoadData()
         {
-            foreach (ISaveReader progressReader in ProgressReaders)
+            foreach (ISaveLoader progressReader in ProgressReaders)
                 progressReader.LoadData(_gameDataContainer.PlayerData);
         }
 
@@ -66,17 +66,17 @@ namespace Code.Services.SaveLoad
         public void RegisterProgressWatchers(GameObject go)
         {
             foreach (var progressReader in
-                     go.GetComponentsInChildren<ISaveReader>())
+                     go.GetComponentsInChildren<ISaveLoader>())
                 Register(progressReader);
         }
 
 
-        public void Register(ISaveReader progressReader)
+        public void Register(ISaveLoader progressLoader)
         {
-            if (progressReader is ISave progressWriter)
+            if (progressLoader is ISave progressWriter)
                 ProgressWriters.Add(progressWriter);
 
-            ProgressReaders.Add(progressReader);
+            ProgressReaders.Add(progressLoader);
         }
     }
 }
