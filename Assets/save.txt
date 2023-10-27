@@ -9,29 +9,35 @@
   },
   "WorldData": {
     "PositionOnLevel": {
-      "Level": "StoneDungeon_Arena_1",
-      "Position": {
-        "X": -11.8513651,
-        "Y": -0.00161957741,
-        "Z": -18.8406448
-      }
+      "Level": "Shelter",
+      "Position": null
     },
     "LootData": {
-      "Collected": 385
+      "Collected": 100
     },
     "WeaponPurchaseData": {
       "PurchasedWeapons": []
     }
   },
-  "SkillSlotsData": {
+  "AbilityData": {
     "AbilitySlots": [],
-    "SkillIds": [
-      116093297
-    ]
+    "EquippedSlots": [
+      {
+        "IsEquipped": true,
+        "AbilityName": "DodgeRollAbilityId",
+        "AbilityId": 116093297
+      },
+      {
+        "IsEquipped": true,
+        "AbilityName": "SpinAttackAbilityId",
+        "AbilityId": 1622972859
+      }
+    ],
+    "SkillIds": []
   },
   "HeroEquipment": {
-    "WeaponStringId": "BayonettaSword",
-    "WeaponIntId": -131257144
+    "WeaponStringId": "",
+    "WeaponIntId": 0
   },
   "PassiveSkills": {
     "AbilitiesId": []
@@ -43,7 +49,7 @@
       "AttackSpeed": 1,
       "AttackRadius": 5,
       "MoveSpeed": 20,
-      "Health": 80
+      "Health": 100
     }
   }
 }

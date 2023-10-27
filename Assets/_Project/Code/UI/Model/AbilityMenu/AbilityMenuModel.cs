@@ -1,14 +1,13 @@
 using System;
 using System.Collections.Generic;
 using Code.Data.DataStructures;
-using Code.Data.PlayerData;
 using Code.Services.ConfigData;
 using Code.Services.PersistentProgress;
 
 namespace Code.UI.Model.AbilityMenu
 {
     [Serializable]
-    public class AbilityMenuModel : IScreenModel, ISave
+    public class AbilityMenuModel : IScreenModel
     {
         private readonly IGameDataContainer _gameData;
         private readonly IConfigProvider _configProvider;
@@ -29,23 +28,15 @@ namespace Code.UI.Model.AbilityMenu
 
             foreach (var ability in allAbilities)
             {
-                var abilitySlotModel = new UIAbilitySlotModel(ability.Identifier.Name)
+                var abilitySlotModel = new UIAbilitySlotModel()
                 {
-                    Ability = ability
+                    Ability = ability,
+                    AbilityName = ability.Identifier.Name,
+                    AbilityId = ability.Identifier.Id
                 };
                 
                 _abilitySlots.Add(abilitySlotModel);
             }
-
-            if (_gameData.PlayerData.SkillSlotsData.AbilitySlots.Count <= 0) return;
-            
-            for (var index = 0; index < _abilitySlots.Count; index++)
-            {
-                var abilitySlot = _abilitySlots[index];
-                
-                abilitySlot.IsEquipped = _gameData.PlayerData.SkillSlotsData.AbilitySlots[index].IsEquipped;
-            }
-            
         }
 
         public int GetEquippedSlotIndex(UIAbilitySlotModel slot)
@@ -94,14 +85,29 @@ namespace Code.UI.Model.AbilityMenu
             return _abilitySlots;
         }
 
-        public void LoadData(PlayerData data)
+        public void LoadData()
         {
-            throw new NotImplementedException();
+            if (_gameData.PlayerData.AbilityData.AbilitySlots.Count <= 0) return;
+            
+            for (var index = 0; index < _abilitySlots.Count; index++)
+            {
+                var abilitySlot = _abilitySlots[index];
+                
+                abilitySlot.IsEquipped = _gameData.PlayerData.AbilityData.AbilitySlots[index].IsEquipped;
+            }
+
+            _equippedSlots = new IndexedQueue<UIAbilitySlotModel>(_gameData.PlayerData.AbilityData.EquippedSlots);
         }
 
-        public void UpdateData(PlayerData data)
+        public void SaveModelData()
         {
-            throw new NotImplementedException();
+            for (int i = 0; _abilitySlots.Count > i; i++)
+            {
+                var abilitySlot = _abilitySlots[i];
+                _gameData.PlayerData.AbilityData.AbilitySlots.Add(abilitySlot);
+            }
+            
+            _gameData.PlayerData.AbilityData.EquippedSlots = new Queue<UIAbilitySlotModel>(_equippedSlots);
         }
     }
 }

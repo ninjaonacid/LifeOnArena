@@ -1,4 +1,5 @@
 using System;
+using Code.Services.SaveLoad;
 using Code.UI.Model;
 using Code.UI.Model.AbilityMenu;
 using Code.UI.Services;
@@ -14,6 +15,12 @@ namespace Code.UI.Controller
         private AbilityMenuModel _model;
         private AbilityMenuView _view;
         private IScreenService _screenService;
+        private readonly ISaveLoadService _saveLoad;
+
+        public AbilityMenuController(ISaveLoadService saveLoad)
+        {
+            _saveLoad = saveLoad;
+        }
 
         public void InitController(IScreenModel model, BaseView view, IScreenService screenService)
         {
@@ -24,11 +31,17 @@ namespace Code.UI.Controller
             Assert.IsNotNull(_model);
             Assert.IsNotNull(_view);
             
+            _model.LoadData();
+            
             _view.AbilityContainer.InitializeAbilityContainer(_model.GetSlots().Count);
 
             _view.CloseButton
                 .OnClickAsObservable()
-                .Subscribe(x => _screenService.Close(_view.ScreenId));
+                .Subscribe(x =>
+                {
+                    _model.SaveModelData();
+                    _screenService.Close(_view.ScreenId);
+                });
 
             _view.AbilityContainer.OnAbilitySelected += AbilitySelected;
             _view.EquipButton.OnEquipButtonPressed += Equip;

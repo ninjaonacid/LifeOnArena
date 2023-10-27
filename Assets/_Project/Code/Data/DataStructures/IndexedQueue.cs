@@ -1,10 +1,19 @@
 using System;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 
 namespace Code.Data.DataStructures
 {
     public class IndexedQueue<T> : List<T>
     {
+        public IndexedQueue([NotNull] IEnumerable<T> collection) : base(collection)
+        {
+        }
+
+        public IndexedQueue()
+        {
+        }
+
         public new void Add(T item) { throw new NotSupportedException(); }
         public new void AddRange(IEnumerable<T> collection) { throw new NotSupportedException(); }
         public new void Insert(int index, T item) { throw new NotSupportedException(); }

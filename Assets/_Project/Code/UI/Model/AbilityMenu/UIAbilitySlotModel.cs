@@ -1,6 +1,7 @@
 using System;
 using Code.ConfigData.Ability;
 using Newtonsoft.Json;
+using UnityEngine.Serialization;
 
 namespace Code.UI.Model.AbilityMenu
 {
@@ -8,14 +9,11 @@ namespace Code.UI.Model.AbilityMenu
     public class UIAbilitySlotModel
     {
         public bool IsEquipped;
-        public string AbilityId;
+        public string AbilityName;
+        public int AbilityId;
         
         [JsonIgnore]
         public AbilityTemplateBase Ability;
-
-        public UIAbilitySlotModel(string abilityId)
-        {
-            AbilityId = abilityId;
-        }
+        
     }
 }

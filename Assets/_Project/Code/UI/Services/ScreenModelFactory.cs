@@ -28,24 +28,6 @@ namespace Code.UI.Services
             _modelMap.Add(typeof(HudModel), () => new HudModel());
         }
 
-        public TModel CreateModel<TModel>() where TModel : IScreenModel
-        {
-            if (_modelMap.TryGetValue(typeof(TModel), out var model))
-            {
-                var modelInstance = (TModel)model.Invoke();
-                modelInstance.Initialize();
-                
-                if (modelInstance is ISave saveableModel)
-                {
-                    _saveLoad.Register(saveableModel);
-                }
-                
-                return modelInstance;
-            }
-
-            return default;
-        }
-
         public IScreenModel CreateModel(Type model)
         {
             var modelInstance = _modelMap[model].Invoke();

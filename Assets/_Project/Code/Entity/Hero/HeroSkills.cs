@@ -3,7 +3,6 @@ using Code.ConfigData.Ability;
 using Code.Core.Factory;
 using Code.Data.PlayerData;
 using Code.Services.PersistentProgress;
-using Code.UI.HUD.Skills;
 using Code.UI.View.HUD.Skills;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -23,7 +22,7 @@ namespace Code.Entity.Hero
         public AbilityTemplateBase ActiveSkill => _activeSkill;
         
         private AbilityTemplateBase _activeSkill;
-        private SkillSlotsData _skillSlotsData;
+        private AbilityData _abilityData;
         private IAbilityFactory _abilityFactory;
         private PlayerControls _controls;
 
@@ -85,15 +84,15 @@ namespace Code.Entity.Hero
 
         public void LoadData(PlayerData data)
         {
-            var skillsData = data.SkillSlotsData;
+            var skillsData = data.AbilityData;
 
-            if (skillsData.SkillIds.Count > 0)
+            if (skillsData.EquippedSlots.Count > 0)
             {
                 for (var index = 0; index < skillsData.SkillIds.Count; index++)
                 {
                     var slot = _skillSlots[index];
 
-                    slot.AbilityTemplate = _abilityFactory.CreateAbilityTemplate(skillsData.SkillIds.Dequeue());
+                    slot.AbilityTemplate = _abilityFactory.CreateAbilityTemplate(skillsData.EquippedSlots.Dequeue().AbilityId);
                 }
             }
             

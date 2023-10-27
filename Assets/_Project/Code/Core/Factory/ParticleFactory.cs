@@ -9,7 +9,7 @@ using Object = UnityEngine.Object;
 
 namespace Code.Core.Factory
 {
-    public class ParticleFactory : MonoBehaviour
+    public class ParticleFactory
     {
         private readonly IAssetProvider _assetProvider;
         private readonly IConfigProvider _configProvider;

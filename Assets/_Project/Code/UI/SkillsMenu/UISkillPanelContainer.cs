@@ -48,7 +48,7 @@ namespace Code.UI.SkillsMenu
         
         public void EquipSkill()
         {
-            var hudSkills = _gameData.PlayerData.SkillSlotsData;
+            var hudSkills = _gameData.PlayerData.AbilityData;
 
             if (!_equippedSlots.Contains(_selectedSlot) && _equippedSlots.Count < 2)
             {

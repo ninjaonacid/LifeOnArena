@@ -5,7 +5,7 @@ using Code.UI.Model.AbilityMenu;
 namespace Code.Data.PlayerData
 {
     [Serializable]
-    public class SkillSlotsData
+    public class AbilityData
     {
         public List<UIAbilitySlotModel> AbilitySlots = new();
         public Queue<UIAbilitySlotModel> EquippedSlots = new();
