@@ -9,8 +9,12 @@
   },
   "WorldData": {
     "PositionOnLevel": {
-      "Level": "Shelter",
-      "Position": null
+      "Level": "StoneDungeon_Arena_1",
+      "Position": {
+        "X": -14.87199,
+        "Y": -0.00161981583,
+        "Z": -17.6942711
+      }
     },
     "LootData": {
       "Collected": 100
@@ -20,12 +24,28 @@
     }
   },
   "AbilityData": {
-    "AbilitySlots": [],
+    "AbilitySlots": [
+      {
+        "IsEquipped": false,
+        "AbilityName": "DodgeRollAbilityId",
+        "AbilityId": 116093297
+      },
+      {
+        "IsEquipped": true,
+        "AbilityName": "SpinAttackAbilityId",
+        "AbilityId": 1622972859
+      },
+      {
+        "IsEquipped": true,
+        "AbilityName": "TornadoAbilityId",
+        "AbilityId": -455526352
+      }
+    ],
     "EquippedSlots": [
       {
         "IsEquipped": true,
-        "AbilityName": "DodgeRollAbilityId",
-        "AbilityId": 116093297
+        "AbilityName": "TornadoAbilityId",
+        "AbilityId": -455526352
       },
       {
         "IsEquipped": true,
@@ -36,8 +56,8 @@
     "SkillIds": []
   },
   "HeroEquipment": {
-    "WeaponStringId": "",
-    "WeaponIntId": 0
+    "WeaponStringId": "BayonettaSword",
+    "WeaponIntId": -131257144
   },
   "PassiveSkills": {
     "AbilitiesId": []

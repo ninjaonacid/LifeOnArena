@@ -101,13 +101,8 @@ namespace Code.UI.Model.AbilityMenu
 
         public void SaveModelData()
         {
-            for (int i = 0; _abilitySlots.Count > i; i++)
-            {
-                var abilitySlot = _abilitySlots[i];
-                _gameData.PlayerData.AbilityData.AbilitySlots.Add(abilitySlot);
-            }
-            
-            _gameData.PlayerData.AbilityData.EquippedSlots = new Queue<UIAbilitySlotModel>(_equippedSlots);
+            _gameData.PlayerData.AbilityData.AbilitySlots = new List<UIAbilitySlotModel>(_abilitySlots);
+            _gameData.PlayerData.AbilityData.EquippedSlots = new List<UIAbilitySlotModel>(_equippedSlots);
         }
     }
 }

@@ -88,11 +88,11 @@ namespace Code.Entity.Hero
 
             if (skillsData.EquippedSlots.Count > 0)
             {
-                for (var index = 0; index < skillsData.SkillIds.Count; index++)
+                for (var index = 0; index < skillsData.EquippedSlots.Count; index++)
                 {
                     var slot = _skillSlots[index];
 
-                    slot.AbilityTemplate = _abilityFactory.CreateAbilityTemplate(skillsData.EquippedSlots.Dequeue().AbilityId);
+                    slot.AbilityTemplate = _abilityFactory.CreateAbilityTemplate(skillsData.EquippedSlots[index].AbilityId);
                 }
             }
             

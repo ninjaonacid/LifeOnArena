@@ -1,7 +1,6 @@
 using System;
 using Code.ConfigData.Ability;
 using Newtonsoft.Json;
-using UnityEngine.Serialization;
 
 namespace Code.UI.Model.AbilityMenu
 {
