@@ -44,8 +44,8 @@ namespace Code.UI.Controller
                 });
 
             _view.AbilityContainer.OnAbilitySelected += AbilitySelected;
-            _view.EquipButton.OnEquipButtonPressed += Equip;
-            _view.UnEquipButton.OnUnEquipButtonPressed += UnEquip;
+            _view.EquipButton.OnButtonPressed += Equip;
+            _view.UnEquipButton.OnButtonPressed += UnEquip;
             
           UpdateData();
         }
@@ -68,10 +68,12 @@ namespace Code.UI.Controller
 
         private void AbilitySelected(int abilityIndex)
         {
-            var isEquipped = _model.IsSlotEquipped(abilityIndex);
+            var isEquipped = _model.IsAbilityEquipped(abilityIndex);
+            var isUnlocked = _model.IsAbilityUnlocked(abilityIndex);
             
-            _view.EquipButton.gameObject.SetActive(!isEquipped);
-            _view.UnEquipButton.gameObject.SetActive(isEquipped);
+            _view.EquipButton.ShowButton(!isEquipped && isUnlocked);
+            _view.UnEquipButton.ShowButton(isEquipped && isUnlocked);
+            _view.UnlockButton.ShowButton(!isEquipped && !isUnlocked);
         }
 
         private void UnEquip()
@@ -98,8 +100,8 @@ namespace Code.UI.Controller
         public void Dispose()
         {
             _view.AbilityContainer.OnAbilitySelected -= AbilitySelected;
-            _view.EquipButton.OnEquipButtonPressed -= Equip;
-            _view.UnEquipButton.OnUnEquipButtonPressed -= UnEquip;
+            _view.EquipButton.OnButtonPressed -= Equip;
+            _view.UnEquipButton.OnButtonPressed -= UnEquip;
         }
     }
 }

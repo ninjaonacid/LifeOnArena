@@ -1,3 +1,4 @@
+using Code.UI.AbilityMenu;
 using Code.UI.SkillsMenu;
 
 namespace Code.UI.View.AbilityMenu
@@ -7,5 +8,7 @@ namespace Code.UI.View.AbilityMenu
         public AbilityContainer AbilityContainer;
         public EquipSkillButton EquipButton;
         public UnEquipSkillButton UnEquipButton;
+        public UnlockButton UnlockButton;
+
     }
 }

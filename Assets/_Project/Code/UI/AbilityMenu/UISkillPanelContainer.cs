@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Code.Services.PersistentProgress;
+using Code.UI.AbilityMenu;
 using UnityEngine;
 using VContainer;
 
@@ -19,15 +20,16 @@ namespace Code.UI.SkillsMenu
         [Inject]
         public void Construct(IGameDataContainer gameData)
         {
-            _gameData  = gameData;
-            
+            _gameData = gameData;
+
             foreach (UISkillPanelSlot slot in _slots)
             {
                 slot.Construct(gameData, this);
             }
-            
-           // EquipButton.Construct(this, _gameData.PlayerData.SkillSlotsData);
+
+            // EquipButton.Construct(this, _gameData.PlayerData.SkillSlotsData);
         }
+
         public void SetSelectedSlot(UISkillPanelSlot slot)
         {
             if (_selectedSlot != null)
@@ -45,7 +47,7 @@ namespace Code.UI.SkillsMenu
             EquipButton.ShowButton(!slot.IsEquipped);
             _unEquipButton.ShowButton(slot.IsEquipped);
         }
-        
+
         public void EquipSkill()
         {
             var hudSkills = _gameData.PlayerData.AbilityData;

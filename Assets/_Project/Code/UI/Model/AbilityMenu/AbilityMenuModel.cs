@@ -57,9 +57,14 @@ namespace Code.UI.Model.AbilityMenu
             return _abilitySlots[index];
         }
 
-        public bool IsSlotEquipped(int index)
+        public bool IsAbilityEquipped(int index)
         {
             return _abilitySlots[index].IsEquipped;
+        }
+
+        public bool IsAbilityUnlocked(int index)
+        {
+            return _abilitySlots[index].IsUnlocked;
         }
 
         public void UnEquipAbility(int slotIndex)

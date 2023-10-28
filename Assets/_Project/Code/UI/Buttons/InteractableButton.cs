@@ -1,23 +1,25 @@
-using System;
+﻿using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace Code.UI.SkillsMenu
+namespace Code.UI.Buttons
 {
-    public class UnEquipSkillButton : MonoBehaviour, IPointerClickHandler
+    public abstract class InteractableButton : MonoBehaviour, IPointerClickHandler
     {
+        public event Action OnButtonPressed;
+        
         [SerializeField] private CanvasGroup _canvasGroup;
 
-        public event Action OnUnEquipButtonPressed;
         public void OnPointerClick(PointerEventData eventData)
         {
-            OnUnEquipButtonPressed?.Invoke();
+            OnButtonPressed?.Invoke();
         }
 
         public void ShowButton(bool value)
         {
             _canvasGroup.alpha = value ? 255 : 0;
             _canvasGroup.interactable = value;
+            _canvasGroup.blocksRaycasts = value;
         }
     }
 }
