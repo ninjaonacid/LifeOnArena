@@ -17,6 +17,7 @@ namespace Code.ConfigData.Ability
         public float CurrentCooldown;
         public float ActiveTime;
         public float CurrentActiveTime;
+        public int Price;
         public AbilityState State;
         public ParticleObjectData ParticleObjectData;
 

@@ -8,7 +8,9 @@ namespace Code.UI.Model.AbilityMenu
     public class UIAbilitySlotModel
     {
         public bool IsEquipped;
+        public bool IsUnlocked;
         public string AbilityName;
+        public int Price;
         public int AbilityId;
         
         [JsonIgnore]

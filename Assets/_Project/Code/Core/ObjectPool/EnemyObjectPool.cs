@@ -1,37 +1,37 @@
+using System;
 using System.Collections.Generic;
 using System.Threading;
-using Code.ConfigData.Identifiers;
 using Code.Core.Factory;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace Code.Core.ObjectPool
 {
-    public class EnemyObjectPool 
+    public class EnemyObjectPool : IDisposable
+
     {
+        private readonly IEnemyFactory _enemyFactory;
         private readonly Dictionary<int, Stack<GameObject>> _enemyObjectsStock;
 
-        private readonly IEnemyFactory _enemyFactory;
         public EnemyObjectPool(IEnemyFactory enemyFactory)
         {
             _enemyObjectsStock = new Dictionary<int, Stack<GameObject>>();
             _enemyFactory = enemyFactory;
         }
 
-        public void Cleanup()
+        public void Dispose()
         {
-            _enemyObjectsStock.Clear();
+            Cleanup();
         }
 
         public async UniTask<GameObject> GetObject(int mobId, Transform parent,
-                                                    CancellationToken token)
+            CancellationToken token)
         {
             GameObject result = null;
 
             if (CheckForExist(mobId))
             {
                 result = _enemyObjectsStock[mobId].Pop();
-
             }
             else
             {
@@ -49,7 +49,6 @@ namespace Code.Core.ObjectPool
         public void ReturnObject(int mobId, GameObject obj)
         {
             _enemyObjectsStock[mobId].Push(obj);
-
         }
 
         private bool CheckForExist(int mobId)
@@ -57,6 +56,9 @@ namespace Code.Core.ObjectPool
             return _enemyObjectsStock.ContainsKey(mobId) && _enemyObjectsStock[mobId].Count > 0;
         }
 
-        
+        private void Cleanup()
+        {
+            _enemyObjectsStock.Clear();
+        }
     }
 }

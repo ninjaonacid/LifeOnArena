@@ -24,9 +24,10 @@ namespace Code.Entity.Enemy
         private int _lootMax;
 
         private CancellationTokenSource _cts;
-        
+
         [Inject]
-        public void Construct(IItemFactory factory, IRandomService randomService, IGameDataContainer dataContainer, ParticleObjectPool particleObjectPool)
+        public void Construct(IItemFactory factory, IRandomService randomService, IGameDataContainer dataContainer,
+            ParticleObjectPool particleObjectPool)
         {
             _itemFactory = factory;
             _randomService = randomService;
@@ -43,6 +44,7 @@ namespace Code.Entity.Enemy
         {
             SpawnLoot(TaskHelper.CreateToken(ref _cts)).Forget();
         }
+
         private async UniTask SpawnLoot(CancellationToken token)
         {
             var lootParticle = await _particleObjectPool.GetObject(_souls.Id);
@@ -53,15 +55,14 @@ namespace Code.Entity.Enemy
             {
                 Value = _randomService.RandomizeValue(_lootMin, _lootMax)
             };
-            
+
             _dataContainer.PlayerData.WorldData.LootData.Collect(lootItem);
 
             await UniTask.WaitUntil(() => !lootParticle.isPlaying, cancellationToken: token);
-            
-            _particleObjectPool.ReturnObject(_souls.Id, lootParticle);
 
+            _particleObjectPool.ReturnObject(_souls.Id, lootParticle);
         }
-        
+
 
         public void SetLoot(int min, int max)
         {

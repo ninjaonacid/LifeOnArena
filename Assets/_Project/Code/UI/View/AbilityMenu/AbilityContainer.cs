@@ -33,9 +33,9 @@ namespace Code.UI.View.AbilityMenu
             return _abilityViews.IndexOf(_selectedItem);
         }
         
-        public void UpdateData(int abilityIndex, int equippedIndex, Sprite abilityIcon)
+        public void UpdateData(int abilityIndex, int equippedIndex, Sprite abilityIcon, bool isUnlocked)
         {
-            _abilityViews[abilityIndex].SetData(abilityIcon, equippedIndex);
+            _abilityViews[abilityIndex].SetData(abilityIcon, isUnlocked, equippedIndex);
         }
 
         private void HandleAbilitySelection(AbilityItemView obj)

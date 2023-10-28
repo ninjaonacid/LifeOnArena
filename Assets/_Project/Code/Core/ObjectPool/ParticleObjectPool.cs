@@ -7,11 +7,12 @@ using UnityEngine;
 
 namespace Code.Core.ObjectPool
 {
-    public class ParticleObjectPool 
+    public class ParticleObjectPool : IDisposable
     {
         private readonly IAssetProvider _assetProvider;
         private readonly ParticleFactory _particleFactory;
         private readonly Dictionary<int, Stack<ParticleSystem>> _particleStock;
+
         public ParticleObjectPool(IAssetProvider assetProvider, ParticleFactory particleFactory)
         {
             _particleStock = new Dictionary<int, Stack<ParticleSystem>>();
@@ -31,10 +32,10 @@ namespace Code.Core.ObjectPool
             {
                 if (!_particleStock.ContainsKey(id))
                     _particleStock.Add(id, new Stack<ParticleSystem>());
-                
+
                 result = await _particleFactory.CreateParticle(id);
             }
-            
+
             result.gameObject.SetActive(true);
             result.Play();
             return result;
@@ -53,10 +54,10 @@ namespace Code.Core.ObjectPool
             {
                 if (!_particleStock.ContainsKey(id))
                     _particleStock.Add(id, new Stack<ParticleSystem>());
-                
+
                 result = await _particleFactory.CreateParticle(id);
             }
-            
+
             result.gameObject.SetActive(true);
             result.Play();
             return result;
@@ -65,7 +66,7 @@ namespace Code.Core.ObjectPool
         public void ReturnObject(int id, ParticleSystem particle)
         {
             _particleStock[id].Push(particle);
-            
+
             particle.gameObject.SetActive(false);
         }
 
@@ -78,6 +79,11 @@ namespace Code.Core.ObjectPool
         private void CleanUp()
         {
             _particleStock.Clear();
+        }
+
+        public void Dispose()
+        {
+            CleanUp();
         }
     }
 }

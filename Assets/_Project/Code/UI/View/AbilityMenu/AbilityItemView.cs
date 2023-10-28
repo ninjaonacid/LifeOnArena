@@ -10,7 +10,8 @@ namespace Code.UI.View.AbilityMenu
     {
         [SerializeField] private Image _abilityIcon;
         [SerializeField] private Image _selectionFrame;
-        [SerializeField] private TextMeshProUGUI _equippedSlotIndex; 
+        [SerializeField] private Image _lockIcon;
+        [SerializeField] private TextMeshProUGUI _equippedSlotIndex;
 
         public event Action<AbilityItemView> OnAbilityItemClick;
 
@@ -24,7 +25,7 @@ namespace Code.UI.View.AbilityMenu
             _equippedSlotIndex.color = new Color(1, 1, 0);
         }
 
-        public void SetData(Sprite icon, int equippedSlotIndex = 0)
+        public void SetData(Sprite icon, bool isUnlocked, int equippedSlotIndex = 0)
         {
             _abilityIcon.sprite = icon;
 
@@ -36,7 +37,15 @@ namespace Code.UI.View.AbilityMenu
             {
                 _equippedSlotIndex.gameObject.SetActive(true);
                 _equippedSlotIndex.text = equippedSlotIndex.ToString();
-                
+            }
+
+            if (!isUnlocked)
+            {
+                _lockIcon.gameObject.SetActive(true);
+            }
+            else
+            {
+                _lockIcon.gameObject.SetActive(false);
             }
         }
 

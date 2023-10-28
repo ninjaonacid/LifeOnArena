@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Code.Data.DataStructures;
 using Code.Services.ConfigData;
 using Code.Services.PersistentProgress;
@@ -14,6 +13,7 @@ namespace Code.UI.Model.AbilityMenu
         private readonly IConfigProvider _configProvider;
         private List<UIAbilitySlotModel> _abilitySlots;
         private IndexedQueue<UIAbilitySlotModel> _equippedSlots;
+
         public AbilityMenuModel(IGameDataContainer gameData, IConfigProvider configProvider)
         {
             _gameData = gameData;
@@ -33,19 +33,25 @@ namespace Code.UI.Model.AbilityMenu
                 {
                     Ability = ability,
                     AbilityName = ability.Identifier.Name,
-                    AbilityId = ability.Identifier.Id
+                    AbilityId = ability.Identifier.Id,
+                    Price = ability.Price
                 };
-                
+
+                if (abilitySlotModel.Price == 0)
+                {
+                    abilitySlotModel.IsUnlocked = true;
+                }
+
                 _abilitySlots.Add(abilitySlotModel);
             }
         }
 
         public int GetEquippedSlotIndex(UIAbilitySlotModel slot)
         {
-            return _equippedSlots.FindIndex(0, 
+            return _equippedSlots.FindIndex(0,
                 _equippedSlots.Count, x => x.AbilityId == slot.AbilityId) + 1;
         }
-        
+
         public UIAbilitySlotModel GetSlotByIndex(int index)
         {
             return _abilitySlots[index];
@@ -68,8 +74,10 @@ namespace Code.UI.Model.AbilityMenu
         {
             var ability = _abilitySlots[slotIndex];
 
+            if (!ability.IsUnlocked) return;
+
             ability.IsEquipped = true;
-            
+
             if (_equippedSlots.Count < 2)
             {
                 _equippedSlots.Enqueue(ability);
@@ -90,11 +98,11 @@ namespace Code.UI.Model.AbilityMenu
         public void LoadData()
         {
             if (_gameData.PlayerData.AbilityData.AbilitySlots.Count <= 0) return;
-            
+
             for (var index = 0; index < _abilitySlots.Count; index++)
             {
                 var abilitySlot = _abilitySlots[index];
-                
+
                 abilitySlot.IsEquipped = _gameData.PlayerData.AbilityData.AbilitySlots[index].IsEquipped;
             }
 
