@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Code.Core.AssetManagement;
 using Code.Core.Factory;
@@ -6,7 +7,7 @@ using UnityEngine;
 
 namespace Code.Core.ObjectPool
 {
-    public class ParticleObjectPool
+    public class ParticleObjectPool 
     {
         private readonly IAssetProvider _assetProvider;
         private readonly ParticleFactory _particleFactory;
@@ -17,10 +18,7 @@ namespace Code.Core.ObjectPool
             _assetProvider = assetProvider;
             _particleFactory = particleFactory;
         }
-        public void CleanUp()
-        {
-            _particleStock.Clear();
-        }
+
         public async UniTask<ParticleSystem> GetObject(int id, Transform parent)
         {
             ParticleSystem result = null;
@@ -70,12 +68,16 @@ namespace Code.Core.ObjectPool
             
             particle.gameObject.SetActive(false);
         }
-        
-        
+
+
         private bool CheckForExist(int particleId)
         {
             return _particleStock.ContainsKey(particleId) && _particleStock[particleId].Count > 0;
         }
-        
+
+        private void CleanUp()
+        {
+            _particleStock.Clear();
+        }
     }
 }

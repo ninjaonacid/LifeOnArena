@@ -1,5 +1,6 @@
 using Code.Core.EntryPoints;
 using Code.Core.Factory;
+using Code.Core.Installers;
 using Code.Core.ObjectPool;
 using Code.Logic.WaveLogic;
 using Code.Services;
@@ -21,6 +22,13 @@ namespace Code.Core.Scopes
             builder.Register<EnemyObjectPool>(Lifetime.Scoped);
             builder.Register<IEnemyFactory, EnemyFactory>(Lifetime.Scoped);
             builder.Register<IAbilityFactory, AbilityFactory>(Lifetime.Scoped);
+            builder.Register<IHeroFactory, HeroFactory>(Lifetime.Scoped);
+
+            IInstaller screenServiceInstaller = new ScreenServiceInstaller();
+            screenServiceInstaller.Install(builder);
+            
+            builder.Register<ParticleFactory>(Lifetime.Scoped);
+            builder.Register<ParticleObjectPool>(Lifetime.Scoped);
 
             InitializeServices(builder);
         }

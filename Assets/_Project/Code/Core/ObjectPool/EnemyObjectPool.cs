@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Code.Core.ObjectPool
 {
-    public class EnemyObjectPool
+    public class EnemyObjectPool 
     {
         private readonly Dictionary<int, Stack<GameObject>> _enemyObjectsStock;
 

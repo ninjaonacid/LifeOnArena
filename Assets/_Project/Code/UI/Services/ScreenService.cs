@@ -5,11 +5,10 @@ using Code.UI.Model;
 using Code.UI.Model.AbilityMenu;
 using Code.UI.View;
 using UnityEngine;
-using UnityEngine.Assertions;
 
 namespace Code.UI.Services
 {
-    public class ScreenService : IScreenService
+    public class ScreenService : IScreenService, IDisposable
     {
         private readonly Dictionary<ScreenID, (Type model, Type controller)> _screenMap = new();
         private readonly Dictionary<ScreenID, (BaseView view, IScreenController controller)> _activeViews = new();
@@ -73,11 +72,16 @@ namespace Code.UI.Services
                 {
                     controller.Dispose();
                 }
-                
-                activeView.view.Close();
+                if(activeView.view)
+                    activeView.view.Close();
             }
             
             _activeViews.Clear();
+        }
+
+        public void Dispose()
+        {
+            Cleanup();
         }
     }
 }

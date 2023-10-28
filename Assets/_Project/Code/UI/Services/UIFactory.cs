@@ -28,12 +28,7 @@ namespace Code.UI.Services
             _config = configProvider;
             _objectResolver = objectResolver;
         }
-
-        public void InitAssets()
-        {
-            
-        }
-
+        
         public BaseView CreateScreenView(ScreenID screenId)
         {
             if (!_uiCoreTransform)

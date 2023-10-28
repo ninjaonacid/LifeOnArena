@@ -2,8 +2,6 @@ using Code.Core.AssetManagement;
 using Code.Core.Audio;
 using Code.Core.EntryPoints;
 using Code.Core.EventSystem;
-using Code.Core.Factory;
-using Code.Core.ObjectPool;
 using Code.Core.SceneManagement;
 using Code.Services.AudioService;
 using Code.Services.BattleService;
@@ -31,22 +29,14 @@ namespace Code.Core.Scopes
             builder.Register<ISaveLoadService, SaveLoadService>(Lifetime.Singleton);
             
             builder.Register<IUIFactory, UIFactory>(Lifetime.Singleton);
-            builder.Register<IScreenModelFactory, ScreenModelFactory>(Lifetime.Singleton);
-            builder.Register<IScreenControllerFactory, ScreenControllerFactory>(Lifetime.Singleton);
-            builder.Register<IScreenService, ScreenService>(Lifetime.Singleton);
-            
+
             builder.Register<IAssetProvider, AssetProvider>(Lifetime.Singleton);
             builder.Register<IGameDataContainer, GameDataContainer>(Lifetime.Singleton);
             builder.Register<IRandomService, RandomService>(Lifetime.Singleton);
             builder.Register<IEventSystem, GameEventSystem>(Lifetime.Singleton);
-
-            builder.Register<IHeroFactory, HeroFactory>(Lifetime.Singleton);
-            builder.Register<IBattleService, BattleService>(Lifetime.Singleton);
-            builder.Register<IItemFactory, ItemFactory>(Lifetime.Singleton);
-            builder.Register<IAbilityFactory, AbilityFactory>(Lifetime.Singleton);
             
-            builder.Register<ParticleFactory>(Lifetime.Singleton);
-            builder.Register<ParticleObjectPool>(Lifetime.Singleton);
+            builder.Register<IBattleService, BattleService>(Lifetime.Singleton);
+            
             builder.Register<PlayerControls>(Lifetime.Singleton).AsSelf();
             builder.Register<SceneLoader>(Lifetime.Singleton);
 
