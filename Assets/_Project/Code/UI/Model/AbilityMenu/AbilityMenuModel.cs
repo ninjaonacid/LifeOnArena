@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Code.Data.DataStructures;
 using Code.Services.ConfigData;
 using Code.Services.PersistentProgress;
@@ -41,7 +42,8 @@ namespace Code.UI.Model.AbilityMenu
 
         public int GetEquippedSlotIndex(UIAbilitySlotModel slot)
         {
-            return _equippedSlots.IndexOf(slot) + 1;
+            return _equippedSlots.FindIndex(0, 
+                _equippedSlots.Count, x => x.AbilityId == slot.AbilityId) + 1;
         }
         
         public UIAbilitySlotModel GetSlotByIndex(int index)

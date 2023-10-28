@@ -35,5 +35,7 @@ namespace Code.Core.SceneManagement
 
             _loadingScreen.Hide();
         }
+        
+        
     }
 }

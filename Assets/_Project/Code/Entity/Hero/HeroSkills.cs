@@ -2,6 +2,8 @@ using System;
 using Code.ConfigData.Ability;
 using Code.Core.Factory;
 using Code.Data.PlayerData;
+using Code.Logic.WaveLogic;
+using Code.Services.AudioService;
 using Code.Services.PersistentProgress;
 using Code.UI.View.HUD.Skills;
 using UnityEngine;
@@ -25,7 +27,7 @@ namespace Code.Entity.Hero
         private AbilityData _abilityData;
         private IAbilityFactory _abilityFactory;
         private PlayerControls _controls;
-
+        private EnemySpawnerController _controller;
 
         [Serializable]
         public class SkillSlot
@@ -40,7 +42,6 @@ namespace Code.Entity.Hero
             _abilityFactory = abilityFactory;
             _controls = controls;
         }
-
         private void Start()
         {
             _controls.Player.SkillSlot1.performed += OnSkillSlot1;

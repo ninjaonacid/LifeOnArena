@@ -4,13 +4,14 @@ using System.Linq;
 using System.Threading;
 using Code.ConfigData.Levels;
 using Code.ConfigData.Spawners;
-using Code.Core.EntryPoints;
 using Code.Core.Factory;
+using Code.Core.SceneManagement;
 using Code.Logic.EnemySpawners;
 using Code.Services;
 using Code.Services.ConfigData;
 using Code.Utils;
 using Cysharp.Threading.Tasks;
+using UnityEngine.InputSystem;
 
 namespace Code.Logic.WaveLogic
 {
@@ -22,13 +23,14 @@ namespace Code.Logic.WaveLogic
         private CancellationTokenSource _cancellationTokenSource;
         private int _waveCounter = 0;
         private readonly int _nextWaveDelay = 5;
-
+        
         private Timer.Timer _timer;
-        public EnemySpawnerController(IEnemyFactory enemyFactory)
+        public EnemySpawnerController(IEnemyFactory enemyFactory, PlayerControls controls, SceneLoader sceneLoader)
         {
             _enemyFactory = enemyFactory;
         }
-
+        
+        
         public async UniTask InitSpawners(LevelConfig levelConfig, CancellationToken token = default)
         {
             foreach (EnemySpawnerData spawnerData in levelConfig.EnemySpawners)

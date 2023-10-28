@@ -45,6 +45,7 @@ namespace Code.ConfigData.Ability.ActiveAbilities
             
             _tornadoParticle = await _particleObjectPool.GetObject(_particleObjectData.Identifier.Id);
             TornadoProjectile tornadoProjectile = _tornadoParticle.gameObject.GetComponent<TornadoProjectile>();
+            tornadoProjectile.Initialize(_particleObjectPool, _particleObjectData, _duration);
             Transform projectileTransform = tornadoProjectile.transform;
             projectileTransform.position = casterPosition + casterDirection * _castDistance;
             projectileTransform.rotation = Quaternion.identity;
@@ -54,15 +55,7 @@ namespace Code.ConfigData.Ability.ActiveAbilities
             var entityAttack = caster.GetComponent<IAttack>();
             
             entityAttack.SkillAttack(projectileTransform.position);
-
-             AbilityTimer().Forget();
-
-        }
-
-        private async UniTask AbilityTimer()
-        {
-            await UniTask.Delay(TimeSpan.FromSeconds(_duration));
-            _particleObjectPool.ReturnObject(_particleObjectData.Identifier.Id, _tornadoParticle);
+            
         }
 
     }

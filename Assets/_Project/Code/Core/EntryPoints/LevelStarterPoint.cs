@@ -1,6 +1,7 @@
 using System.Threading;
 using Code.ConfigData.Levels;
 using Code.Core.Factory;
+using Code.Core.ObjectPool;
 using Code.Logic.CameraLogic;
 using Code.Logic.WaveLogic;
 using Code.Services;
@@ -24,11 +25,12 @@ namespace Code.Core.EntryPoints
         private readonly PlayerControls _controls;
         private readonly EnemySpawnerController _enemySpawnerController;
         private readonly LevelController _levelController;
+        private readonly ParticleObjectPool _particlePool;
         
         public LevelStarterPoint(IConfigProvider config, 
             ISaveLoadService saveLoad, IHeroFactory heroFactory, IScreenService screenService,
             PlayerControls controls, EnemySpawnerController enemySpawnerController,
-            LevelController controller)
+            LevelController controller, ParticleObjectPool particlePool)
         {
             _config = config;
             _saveLoad = saveLoad;
@@ -37,11 +39,13 @@ namespace Code.Core.EntryPoints
             _enemySpawnerController = enemySpawnerController;
             _controls = controls;
             _levelController = controller;
+            _particlePool = particlePool;
         }
         
         public async UniTask StartAsync(CancellationToken cancellation)
         {
             _saveLoad.Cleanup();
+            _particlePool.CleanUp();
             
             LevelConfig config = _config.Level(SceneManager.GetActiveScene().name);
 
@@ -57,8 +61,8 @@ namespace Code.Core.EntryPoints
             
             _levelController.Subscribe();
             
-            _enemySpawnerController.SpawnTimer();
-            _enemySpawnerController.RunSpawner();
+            //_enemySpawnerController.SpawnTimer();
+            //_enemySpawnerController.RunSpawner();
             
         }
 

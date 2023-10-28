@@ -1,9 +1,11 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Code.ConfigData.Audio;
 using Code.ConfigData.Settings;
 using Code.Core.AssetManagement;
 using Code.Core.Audio;
+using Code.Core.SceneManagement;
 using Code.Services.ConfigData;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -31,7 +33,7 @@ namespace Code.Services.AudioService
         private AudioMixerGroup _masterMixer;
         private AudioMixerGroup _musicMixer;
         private AudioMixerGroup _sfxMixer;
-      
+        
         
         [SerializeField] private Transform _soundChannels;
         [SerializeField] private Transform _musicChannels;
@@ -42,6 +44,8 @@ namespace Code.Services.AudioService
             _assetProvider = assetProvider;
             _configProvider = configProvider;
         }
+        
+
         public void InitializeAudio()
         {
             _audioLibrary = _configProvider.AudioLibrary();
