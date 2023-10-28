@@ -1,5 +1,6 @@
 using System;
 using Code.Services.SaveLoad;
+using Code.UI.AbilityMenu;
 using Code.UI.Model;
 using Code.UI.Model.AbilityMenu;
 using Code.UI.Services;
@@ -46,6 +47,7 @@ namespace Code.UI.Controller
             _view.AbilityContainer.OnAbilitySelected += AbilitySelected;
             _view.EquipButton.OnButtonPressed += Equip;
             _view.UnEquipButton.OnButtonPressed += UnEquip;
+            _view.UnlockButton.OnButtonPressed += Unlock;
             
           UpdateData();
         }
@@ -74,6 +76,15 @@ namespace Code.UI.Controller
             _view.EquipButton.ShowButton(!isEquipped && isUnlocked);
             _view.UnEquipButton.ShowButton(isEquipped && isUnlocked);
             _view.UnlockButton.ShowButton(!isEquipped && !isUnlocked);
+        }
+
+        private void Unlock()
+        {
+            var abilityIndex = _view.AbilityContainer.GetSelectedSlotIndex();
+            _model.UnlockAbility(abilityIndex);
+            
+            AbilitySelected(abilityIndex);
+            UpdateData();
         }
 
         private void UnEquip()

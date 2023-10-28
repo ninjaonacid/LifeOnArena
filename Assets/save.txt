@@ -11,13 +11,13 @@
     "PositionOnLevel": {
       "Level": "StoneDungeon_Arena_1",
       "Position": {
-        "X": -12.3635092,
-        "Y": -0.001619339,
-        "Z": -15.9672222
+        "X": -15.4179344,
+        "Y": -0.00161981583,
+        "Z": -15.1570444
       }
     },
     "LootData": {
-      "Collected": 675
+      "Collected": 100
     },
     "WeaponPurchaseData": {
       "PurchasedWeapons": []
@@ -27,29 +27,39 @@
     "AbilitySlots": [
       {
         "IsEquipped": false,
+        "IsUnlocked": true,
         "AbilityName": "DodgeRollAbilityId",
+        "Price": 100,
         "AbilityId": 116093297
       },
       {
         "IsEquipped": true,
+        "IsUnlocked": true,
         "AbilityName": "SpinAttackAbilityId",
+        "Price": 0,
         "AbilityId": 1622972859
       },
       {
         "IsEquipped": true,
+        "IsUnlocked": true,
         "AbilityName": "TornadoAbilityId",
+        "Price": 0,
         "AbilityId": -455526352
       }
     ],
     "EquippedSlots": [
       {
         "IsEquipped": true,
+        "IsUnlocked": true,
         "AbilityName": "TornadoAbilityId",
+        "Price": 0,
         "AbilityId": -455526352
       },
       {
         "IsEquipped": true,
+        "IsUnlocked": true,
         "AbilityName": "SpinAttackAbilityId",
+        "Price": 0,
         "AbilityId": 1622972859
       }
     ],
@@ -69,7 +79,7 @@
       "AttackSpeed": 1,
       "AttackRadius": 5,
       "MoveSpeed": 20,
-      "Health": 60
+      "Health": 100
     }
   }
 }

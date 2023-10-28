@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Code.Data.DataStructures;
 using Code.Services.ConfigData;
 using Code.Services.PersistentProgress;
@@ -67,6 +68,16 @@ namespace Code.UI.Model.AbilityMenu
             return _abilitySlots[index].IsUnlocked;
         }
 
+        public void UnlockAbility(int index)
+        {
+            var ability = _abilitySlots[index];
+
+            if (_gameData.PlayerData.WorldData.LootData.Collected >= ability.Price)
+            {
+                ability.IsUnlocked = true;
+            }
+        }
+
         public void UnEquipAbility(int slotIndex)
         {
             var ability = _abilitySlots[slotIndex];
@@ -78,8 +89,6 @@ namespace Code.UI.Model.AbilityMenu
         public void EquipAbility(int slotIndex)
         {
             var ability = _abilitySlots[slotIndex];
-
-            if (!ability.IsUnlocked) return;
 
             ability.IsEquipped = true;
 
@@ -109,9 +118,15 @@ namespace Code.UI.Model.AbilityMenu
                 var abilitySlot = _abilitySlots[index];
 
                 abilitySlot.IsEquipped = _gameData.PlayerData.AbilityData.AbilitySlots[index].IsEquipped;
+                abilitySlot.IsUnlocked = _gameData.PlayerData.AbilityData.AbilitySlots[index].IsUnlocked;
             }
 
-            _equippedSlots = new IndexedQueue<UIAbilitySlotModel>(_gameData.PlayerData.AbilityData.EquippedSlots);
+            foreach (var slot in _gameData.PlayerData.AbilityData.EquippedSlots)
+            {
+                var ability = _abilitySlots.FirstOrDefault(x => x.AbilityId == slot.AbilityId);
+                _equippedSlots.Enqueue(ability);
+            }
+            
         }
 
         public void SaveModelData()
