@@ -56,9 +56,10 @@ namespace Code.UI.Controller
                 _gameData.PlayerData.StatsData.Stats["Defense"] = _model.Defense.Value;
             }).AddTo(_disposables);
 
-            _view.CloseButton
-                .OnClickAsObservable()
-                .Subscribe(x => Debug.Log("Button Pressed")).AddTo(_view);
+            // _view.CloseButton
+            //     .OnClickAsObservable()
+            //     .Subscribe(x => Debug.Log("Button Pressed")).AddTo(_view);
+            
 
             _view.StartFightButton
                 .OnClickAsObservable()

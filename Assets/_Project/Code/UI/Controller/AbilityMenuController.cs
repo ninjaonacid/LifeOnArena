@@ -1,6 +1,5 @@
 using System;
 using Code.Services.SaveLoad;
-using Code.UI.AbilityMenu;
 using Code.UI.Model;
 using Code.UI.Model.AbilityMenu;
 using Code.UI.Services;
@@ -43,6 +42,11 @@ namespace Code.UI.Controller
                     _model.SaveModelData();
                     _screenService.Close(_view.ScreenId);
                 });
+            
+           
+            
+            var source = Observable.Empty<bool>();
+            source.Subscribe(x => UpdateData());
 
             _view.AbilityContainer.OnAbilitySelected += AbilitySelected;
             _view.EquipButton.OnButtonPressed += Equip;

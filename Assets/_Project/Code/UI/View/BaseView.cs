@@ -1,4 +1,5 @@
 using System;
+using Code.UI.Buttons;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +9,7 @@ namespace Code.UI.View
     {
         public ScreenID ScreenId;
         public Button CloseButton;
+        public CloseButton TestCloseButton;
         public void Show()
         {
             gameObject.SetActive(true);
