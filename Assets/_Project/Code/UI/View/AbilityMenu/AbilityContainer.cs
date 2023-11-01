@@ -10,7 +10,7 @@ namespace Code.UI.View.AbilityMenu
         [SerializeField] private AbilityItemView _abilityItem;
         private List<AbilityItemView> _abilityViews;
         private AbilityItemView _selectedItem;
-        private Subject<int> _subject;
+        public event Action<int> OnAbilitySelected;
         
         public void InitializeAbilityContainer(int abilitiesCount)
         {
@@ -40,6 +40,13 @@ namespace Code.UI.View.AbilityMenu
             _abilityViews[abilityIndex].SetData(abilityIcon, isUnlocked, equippedIndex);
         }
 
+        public IObservable<int> OnAbilitySelectedAsObservable()
+        {
+            return Observable
+                .FromEvent<int>(x => OnAbilitySelected += x, 
+                    x => OnAbilitySelected -= x);
+        }
+
         private void HandleAbilitySelection(AbilityItemView obj)
         {
             if (_selectedItem && _selectedItem != obj)
@@ -50,14 +57,9 @@ namespace Code.UI.View.AbilityMenu
             _selectedItem = obj;
             _selectedItem.Select();
             
-            _subject.OnNext(_abilityViews.IndexOf(obj));
+            OnAbilitySelected?.Invoke(_abilityViews.IndexOf(obj));
         }
-
-        public IObservable<int> OnSelectionAsObservable()
-        {
-            return _subject ??= (_subject = new Subject<int>());
-        }
-
+        
 
     }
 }

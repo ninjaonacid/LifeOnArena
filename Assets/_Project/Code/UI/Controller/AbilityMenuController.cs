@@ -48,11 +48,27 @@ namespace Code.UI.Controller
             var source = Observable.Empty<bool>();
             source.Subscribe(x => UpdateData());
 
-            _view.AbilityContainer.OnSelectionAsObservable().Subscribe(AbilitySelected).AddTo(_disposable);
+        
+            _view.AbilityContainer
+                .OnAbilitySelectedAsObservable()
+                .Subscribe(AbilitySelected)
+                .AddTo(_disposable);
 
-            _view.EquipButton.OnClickAsObservable().Subscribe(x => Equip()).AddTo(_disposable);
-            _view.UnEquipButton.OnClickAsObservable().Subscribe(x => UnEquip()).AddTo(_disposable);
-            _view.UnlockButton.OnClickAsObservable().Subscribe(x => Unlock()).AddTo(_disposable);
+            _view.EquipButton
+                .OnClickAsObservable()
+                .Subscribe(x => Equip())
+                .AddTo(_disposable);
+            
+            _view.UnEquipButton
+                .OnClickAsObservable()
+                .Subscribe(x => UnEquip())
+                .AddTo(_disposable);
+            
+            _view.UnlockButton
+                .OnClickAsObservable()
+                .Subscribe(x => Unlock())
+                .AddTo(_disposable);
+            
             
           UpdateData();
         }
