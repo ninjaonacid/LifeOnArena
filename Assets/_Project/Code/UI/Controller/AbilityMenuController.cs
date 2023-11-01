@@ -5,6 +5,7 @@ using Code.UI.Model.AbilityMenu;
 using Code.UI.Services;
 using Code.UI.View;
 using Code.UI.View.AbilityMenu;
+using Cysharp.Threading.Tasks;
 using UniRx;
 using UnityEngine.Assertions;
 
@@ -16,7 +17,7 @@ namespace Code.UI.Controller
         private AbilityMenuView _view;
         private IScreenService _screenService;
         private readonly ISaveLoadService _saveLoad;
-
+        private readonly CompositeDisposable _disposable = new CompositeDisposable();
         public AbilityMenuController(ISaveLoadService saveLoad)
         {
             _saveLoad = saveLoad;
@@ -43,15 +44,15 @@ namespace Code.UI.Controller
                     _screenService.Close(_view.ScreenId);
                 });
             
-           
             
             var source = Observable.Empty<bool>();
             source.Subscribe(x => UpdateData());
 
-            _view.AbilityContainer.OnAbilitySelected += AbilitySelected;
-            _view.EquipButton.OnButtonPressed += Equip;
-            _view.UnEquipButton.OnButtonPressed += UnEquip;
-            _view.UnlockButton.OnButtonPressed += Unlock;
+            _view.AbilityContainer.OnSelectionAsObservable().Subscribe(AbilitySelected).AddTo(_disposable);
+
+            _view.EquipButton.OnClickAsObservable().Subscribe(x => Equip()).AddTo(_disposable);
+            _view.UnEquipButton.OnClickAsObservable().Subscribe(x => UnEquip()).AddTo(_disposable);
+            _view.UnlockButton.OnClickAsObservable().Subscribe(x => Unlock()).AddTo(_disposable);
             
           UpdateData();
         }
@@ -114,9 +115,7 @@ namespace Code.UI.Controller
 
         public void Dispose()
         {
-            _view.AbilityContainer.OnAbilitySelected -= AbilitySelected;
-            _view.EquipButton.OnButtonPressed -= Equip;
-            _view.UnEquipButton.OnButtonPressed -= UnEquip;
+            _disposable.Dispose();
         }
     }
 }

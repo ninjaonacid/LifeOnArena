@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UniRx;
 using UnityEngine;
 
 namespace Code.UI.View.AbilityMenu
@@ -9,7 +10,8 @@ namespace Code.UI.View.AbilityMenu
         [SerializeField] private AbilityItemView _abilityItem;
         private List<AbilityItemView> _abilityViews;
         private AbilityItemView _selectedItem;
-        public event Action<int> OnAbilitySelected;
+        private Subject<int> _subject;
+        
         public void InitializeAbilityContainer(int abilitiesCount)
         {
             _abilityViews = new List<AbilityItemView>();
@@ -48,9 +50,14 @@ namespace Code.UI.View.AbilityMenu
             _selectedItem = obj;
             _selectedItem.Select();
             
-            OnAbilitySelected?.Invoke(_abilityViews.IndexOf(obj));
+            _subject.OnNext(_abilityViews.IndexOf(obj));
         }
-        
-        
+
+        public IObservable<int> OnSelectionAsObservable()
+        {
+            return _subject ??= (_subject = new Subject<int>());
+        }
+
+
     }
 }
