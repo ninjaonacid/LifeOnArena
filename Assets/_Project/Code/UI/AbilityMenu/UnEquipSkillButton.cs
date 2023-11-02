@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 namespace Code.UI.AbilityMenu
 {
-    public class UnEquipSkillButton : InteractableButton
+    public class UnEquipSkillButton : BaseButton
     {
 
     }

@@ -22,11 +22,13 @@ namespace Code.Logic.Projectiles
             
         }
 
-        public async UniTask DestroyObjectTask(float lifeTime)
+        private async UniTask DestroyObjectTask(float lifeTime)
         {
             await UniTask.Delay(TimeSpan.FromSeconds(lifeTime));
             _pool.ReturnObject(_particleData.Identifier.Id, _tornadoParticle);
         }
+
+        
         public IEnumerator DestroyObjectCoroutine(float timeToDestroy)
         {
             yield return new WaitForSeconds(timeToDestroy);

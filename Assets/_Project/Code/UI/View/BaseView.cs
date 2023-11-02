@@ -8,8 +8,7 @@ namespace Code.UI.View
     public abstract class BaseView : MonoBehaviour, IDisposable
     {
         public ScreenID ScreenId;
-        public Button CloseButton;
-        public CloseButton TestCloseButton;
+        public CloseButton CloseButton;
         public void Show()
         {
             gameObject.SetActive(true);

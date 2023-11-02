@@ -7,6 +7,7 @@ using Code.UI.Services;
 using Code.UI.View;
 using Code.UI.View.MainMenu;
 using UniRx;
+using UnityEngine.Assertions;
 using Debug = UnityEngine.Debug;
 
 namespace Code.UI.Controller
@@ -35,6 +36,9 @@ namespace Code.UI.Controller
             _view = view as MainMenuView;
             _screenService = screenService;
             
+            Assert.IsNotNull(_model);
+            Assert.IsNotNull(_view);
+            
             _view.MusicButton.SetButton(_model.IsMusicMuted);
 
             _model.Health.Subscribe(x =>
@@ -56,10 +60,10 @@ namespace Code.UI.Controller
                 _gameData.PlayerData.StatsData.Stats["Defense"] = _model.Defense.Value;
             }).AddTo(_disposables);
 
-            // _view.CloseButton
-            //     .OnClickAsObservable()
-            //     .Subscribe(x => Debug.Log("Button Pressed")).AddTo(_view);
-            
+      
+            _view.CloseButton
+                .OnClickAsObservable()
+                .Subscribe(x => _screenService.Close(_view.ScreenId));
 
             _view.StartFightButton
                 .OnClickAsObservable()
@@ -69,7 +73,7 @@ namespace Code.UI.Controller
                 .OnClickAsObservable()
                 .Subscribe(x => _screenService.Open(_view.SkillMenu.WindowId));
 
-            _view.MusicButton.Button
+            _view.MusicButton
                 .OnClickAsObservable()
                 .Subscribe(x =>
                 {

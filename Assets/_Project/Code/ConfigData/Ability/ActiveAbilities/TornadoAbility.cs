@@ -42,7 +42,6 @@ namespace Code.ConfigData.Ability.ActiveAbilities
             Vector3 casterPosition = caster.transform.position;
             Vector3 casterDirection = caster.transform.forward;
             
-            
             _tornadoParticle = await _particleObjectPool.GetObject(_particleObjectData.Identifier.Id);
             TornadoProjectile tornadoProjectile = _tornadoParticle.gameObject.GetComponent<TornadoProjectile>();
             tornadoProjectile.Initialize(_particleObjectPool, _particleObjectData, _duration);
@@ -50,13 +49,13 @@ namespace Code.ConfigData.Ability.ActiveAbilities
             projectileTransform.position = casterPosition + casterDirection * _castDistance;
             projectileTransform.rotation = Quaternion.identity;
 
-            var casterStats = caster.GetComponent<StatController>();
-
             var entityAttack = caster.GetComponent<IAttack>();
             
             entityAttack.SkillAttack(projectileTransform.position);
             
         }
+        
+       
 
     }
 }

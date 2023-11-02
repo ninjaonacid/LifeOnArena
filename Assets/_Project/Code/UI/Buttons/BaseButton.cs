@@ -5,13 +5,13 @@ using UnityEngine.EventSystems;
 
 namespace Code.UI.Buttons
 {
-    public abstract class InteractableButton : MonoBehaviour, IPointerClickHandler
+    public abstract class BaseButton : MonoBehaviour, IPointerClickHandler
     {
         private Subject<PointerEventData> _subject;
 
         [SerializeField] private CanvasGroup _canvasGroup;
 
-        public void OnPointerClick(PointerEventData eventData)
+        public virtual void OnPointerClick(PointerEventData eventData)
         {
             _subject?.OnNext(eventData);
         }

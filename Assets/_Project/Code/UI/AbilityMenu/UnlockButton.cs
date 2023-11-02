@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 namespace Code.UI.AbilityMenu
 {
-    public class UnlockButton : InteractableButton
+    public class UnlockButton : BaseButton
     {
     }
 }

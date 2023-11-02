@@ -5,7 +5,6 @@ using Code.UI.Model.AbilityMenu;
 using Code.UI.Services;
 using Code.UI.View;
 using Code.UI.View.AbilityMenu;
-using Cysharp.Threading.Tasks;
 using UniRx;
 using UnityEngine.Assertions;
 
@@ -53,6 +52,8 @@ namespace Code.UI.Controller
                 .OnAbilitySelectedAsObservable()
                 .Subscribe(AbilitySelected)
                 .AddTo(_disposable);
+            
+            
 
             _view.EquipButton
                 .OnClickAsObservable()

@@ -1061,8 +1061,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScreenId: 3
-  CloseButton: {fileID: 8892638678852005990}
-  TestCloseButton: {fileID: 0}
+  CloseButton: {fileID: 5055993854623001759}
   AbilityContainer: {fileID: 6210723960454148728}
   EquipButton: {fileID: 1218686987910664831}
   UnEquipButton: {fileID: 667156685757849063}
@@ -1243,11 +1242,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7935893264977102040, guid: 06b22f0c19364fa46ad72cbd9218ba66, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 100
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 7935893264977102040, guid: 06b22f0c19364fa46ad72cbd9218ba66, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 100
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 7935893264977102040, guid: 06b22f0c19364fa46ad72cbd9218ba66, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1309,6 +1308,18 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2104390169682768250, guid: 06b22f0c19364fa46ad72cbd9218ba66, type: 3}
   m_PrefabInstance: {fileID: 4930093775767241373}
   m_PrefabAsset: {fileID: 0}
+--- !u!225 &6815388818378122617
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6440004112426431463}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!114 &5055993854623001759
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1322,15 +1333,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canvasGroup: {fileID: 6815388818378122617}
---- !u!225 &6815388818378122617
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6440004112426431463}
-  m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
-  m_IgnoreParentGroups: 0
