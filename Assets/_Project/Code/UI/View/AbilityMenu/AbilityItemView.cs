@@ -14,11 +14,11 @@ namespace Code.UI.View.AbilityMenu
         [SerializeField] private Image _lockIcon;
         [SerializeField] private TextMeshProUGUI _equippedSlotIndex;
 
-        private Subject<AbilityItemView> _abilityClickSubject;
+        private Subject<AbilityItemView> _abilityClick;
         
         public void OnPointerClick(PointerEventData eventData)
         {
-           _abilityClickSubject?.OnNext(this);
+           _abilityClick?.OnNext(this);
         }
 
         private void Awake()
@@ -52,7 +52,7 @@ namespace Code.UI.View.AbilityMenu
 
         public IObservable<AbilityItemView> OnAbilityItemClickAsObservable()
         {
-            return _abilityClickSubject ??= (_abilityClickSubject = new Subject<AbilityItemView>());
+            return _abilityClick ??= (_abilityClick = new Subject<AbilityItemView>());
         }
 
         public void Select()

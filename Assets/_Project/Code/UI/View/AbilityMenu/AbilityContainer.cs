@@ -8,10 +8,11 @@ namespace Code.UI.View.AbilityMenu
     public class AbilityContainer : MonoBehaviour
     {
         [SerializeField] private AbilityItemView _abilityItem;
+        
         private List<AbilityItemView> _abilityViews;
         private AbilityItemView _selectedItem;
 
-        private Subject<int> _onAbilitySelected;
+        private Subject<int> _abilitySelected;
         
         public void InitializeAbilityContainer(int abilitiesCount)
         {
@@ -27,7 +28,7 @@ namespace Code.UI.View.AbilityMenu
 
             foreach (var ability in _abilityViews)
             {
-                ability.OnAbilityItemClickAsObservable().Subscribe(HandleAbilitySelection);
+                ability.OnAbilityItemClickAsObservable().Subscribe(HandleAbilitySelection).AddTo(gameObject);
             }
         }
 
@@ -43,7 +44,7 @@ namespace Code.UI.View.AbilityMenu
 
         public IObservable<int> OnAbilitySelectedAsObservable()
         {
-            return _onAbilitySelected ??= (_onAbilitySelected = new Subject<int>());
+            return _abilitySelected ??= (_abilitySelected = new Subject<int>());
         }
 
         private void HandleAbilitySelection(AbilityItemView obj)
@@ -56,7 +57,7 @@ namespace Code.UI.View.AbilityMenu
             _selectedItem = obj;
             _selectedItem.Select();
             
-            _onAbilitySelected?.OnNext(_abilityViews.IndexOf(obj));
+            _abilitySelected?.OnNext(_abilityViews.IndexOf(obj));
         }
         
         

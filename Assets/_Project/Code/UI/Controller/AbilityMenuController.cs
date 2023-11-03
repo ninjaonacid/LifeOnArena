@@ -43,11 +43,6 @@ namespace Code.UI.Controller
                     _screenService.Close(_view.ScreenId);
                 });
             
-            
-            var source = Observable.Empty<bool>();
-            source.Subscribe(x => UpdateData());
-
-        
             _view.AbilityContainer
                 .OnAbilitySelectedAsObservable()
                 .Subscribe(AbilitySelected)
@@ -131,6 +126,7 @@ namespace Code.UI.Controller
         public void Dispose()
         {
             _disposable.Dispose();
+            
         }
     }
 }

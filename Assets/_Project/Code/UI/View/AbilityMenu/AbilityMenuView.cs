@@ -1,5 +1,4 @@
 using Code.UI.AbilityMenu;
-using Code.UI.SkillsMenu;
 
 namespace Code.UI.View.AbilityMenu
 {
