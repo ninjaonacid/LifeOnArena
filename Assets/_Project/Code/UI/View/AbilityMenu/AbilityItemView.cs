@@ -1,5 +1,6 @@
 using System;
 using TMPro;
+using UniRx;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -13,11 +14,11 @@ namespace Code.UI.View.AbilityMenu
         [SerializeField] private Image _lockIcon;
         [SerializeField] private TextMeshProUGUI _equippedSlotIndex;
 
-        public event Action<AbilityItemView> OnAbilityItemClick;
-
+        private Subject<AbilityItemView> _abilityClickSubject;
+        
         public void OnPointerClick(PointerEventData eventData)
         {
-            OnAbilityItemClick?.Invoke(this);
+           _abilityClickSubject?.OnNext(this);
         }
 
         private void Awake()
@@ -47,6 +48,11 @@ namespace Code.UI.View.AbilityMenu
             {
                 _lockIcon.gameObject.SetActive(false);
             }
+        }
+
+        public IObservable<AbilityItemView> OnAbilityItemClickAsObservable()
+        {
+            return _abilityClickSubject ??= (_abilityClickSubject = new Subject<AbilityItemView>());
         }
 
         public void Select()

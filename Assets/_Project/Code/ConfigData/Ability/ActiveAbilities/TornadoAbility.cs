@@ -1,10 +1,7 @@
-using System;
-using Code.ConfigData.StatSystem;
 using Code.Core.ObjectPool;
 using Code.Logic.EntitiesComponents;
 using Code.Logic.Projectiles;
 using Code.Services.BattleService;
-using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace Code.ConfigData.Ability.ActiveAbilities
@@ -53,9 +50,9 @@ namespace Code.ConfigData.Ability.ActiveAbilities
             
             entityAttack.SkillAttack(projectileTransform.position);
             
+
         }
         
-       
 
     }
 }

@@ -10,7 +10,8 @@ namespace Code.UI.View.AbilityMenu
         [SerializeField] private AbilityItemView _abilityItem;
         private List<AbilityItemView> _abilityViews;
         private AbilityItemView _selectedItem;
-        public event Action<int> OnAbilitySelected;
+
+        private Subject<int> _onAbilitySelected;
         
         public void InitializeAbilityContainer(int abilitiesCount)
         {
@@ -26,7 +27,7 @@ namespace Code.UI.View.AbilityMenu
 
             foreach (var ability in _abilityViews)
             {
-                ability.OnAbilityItemClick += HandleAbilitySelection;
+                ability.OnAbilityItemClickAsObservable().Subscribe(HandleAbilitySelection);
             }
         }
 
@@ -42,9 +43,7 @@ namespace Code.UI.View.AbilityMenu
 
         public IObservable<int> OnAbilitySelectedAsObservable()
         {
-            return Observable
-                .FromEvent<int>(x => OnAbilitySelected += x, 
-                    x => OnAbilitySelected -= x);
+            return _onAbilitySelected ??= (_onAbilitySelected = new Subject<int>());
         }
 
         private void HandleAbilitySelection(AbilityItemView obj)
@@ -57,9 +56,9 @@ namespace Code.UI.View.AbilityMenu
             _selectedItem = obj;
             _selectedItem.Select();
             
-            OnAbilitySelected?.Invoke(_abilityViews.IndexOf(obj));
+            _onAbilitySelected?.OnNext(_abilityViews.IndexOf(obj));
         }
         
-
+        
     }
 }

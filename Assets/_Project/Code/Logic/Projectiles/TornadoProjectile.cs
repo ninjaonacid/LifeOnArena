@@ -18,11 +18,11 @@ namespace Code.Logic.Projectiles
             _particleData = data;
             
             //StartCoroutine(DestroyObjectCoroutine(lifeTime));
-            DestroyObjectTask(lifeTime).Forget();
+            ReturnToPoolTask(lifeTime).Forget();
             
         }
 
-        private async UniTask DestroyObjectTask(float lifeTime)
+        private async UniTask ReturnToPoolTask(float lifeTime)
         {
             await UniTask.Delay(TimeSpan.FromSeconds(lifeTime));
             _pool.ReturnObject(_particleData.Identifier.Id, _tornadoParticle);

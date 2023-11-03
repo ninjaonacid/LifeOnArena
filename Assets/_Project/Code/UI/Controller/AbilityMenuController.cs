@@ -53,8 +53,6 @@ namespace Code.UI.Controller
                 .Subscribe(AbilitySelected)
                 .AddTo(_disposable);
             
-            
-
             _view.EquipButton
                 .OnClickAsObservable()
                 .Subscribe(x => Equip())
