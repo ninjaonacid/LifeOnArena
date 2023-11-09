@@ -40,7 +40,7 @@ namespace Code.Entity.Enemy
             EnemyDeath.Happened += SpawnLootTask;
         }
 
-        private async void SpawnLootTask()
+        private void SpawnLootTask()
         {
             SpawnLoot(TaskHelper.CreateToken(ref _cts)).Forget();
         }
@@ -58,7 +58,13 @@ namespace Code.Entity.Enemy
 
             _dataContainer.PlayerData.WorldData.LootData.Collect(lootItem);
 
-            await UniTask.WaitUntil(() => !lootParticle.isPlaying, cancellationToken: token);
+            
+            await UniTask.WaitUntil(() =>
+            {
+                if (!lootParticle) _cts.Cancel();
+                token.ThrowIfCancellationRequested();
+                return !lootParticle.isPlaying;
+            }, cancellationToken: token);
 
             _particleObjectPool.ReturnObject(_souls.Id, lootParticle);
         }

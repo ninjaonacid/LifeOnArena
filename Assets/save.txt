@@ -11,13 +11,13 @@
     "PositionOnLevel": {
       "Level": "StoneDungeon_Arena_1",
       "Position": {
-        "X": -11.1485739,
-        "Y": -0.001619339,
-        "Z": -21.7631855
+        "X": -14.9719305,
+        "Y": -0.00161981583,
+        "Z": -17.497076
       }
     },
     "LootData": {
-      "Collected": 731
+      "Collected": 798
     },
     "WeaponPurchaseData": {
       "PurchasedWeapons": []
@@ -26,14 +26,14 @@
   "AbilityData": {
     "AbilitySlots": [
       {
-        "IsEquipped": false,
+        "IsEquipped": true,
         "IsUnlocked": true,
         "AbilityName": "DodgeRollAbilityId",
         "Price": 100,
         "AbilityId": 116093297
       },
       {
-        "IsEquipped": true,
+        "IsEquipped": false,
         "IsUnlocked": true,
         "AbilityName": "SpinAttackAbilityId",
         "Price": 0,
@@ -58,9 +58,9 @@
       {
         "IsEquipped": true,
         "IsUnlocked": true,
-        "AbilityName": "SpinAttackAbilityId",
-        "Price": 0,
-        "AbilityId": 1622972859
+        "AbilityName": "DodgeRollAbilityId",
+        "Price": 100,
+        "AbilityId": 116093297
       }
     ],
     "SkillIds": []
@@ -79,7 +79,7 @@
       "AttackSpeed": 1,
       "AttackRadius": 5,
       "MoveSpeed": 20,
-      "Health": 40
+      "Health": 30
     }
   }
 }
