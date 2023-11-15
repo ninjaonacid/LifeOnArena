@@ -8,7 +8,7 @@ namespace Code.ConfigData
     [CreateAssetMenu(fileName = "EnemyData", menuName = "StaticData/Monster")]
     public class EnemyDataConfig : ScriptableObject
     {
-        public StateMachineConfig EnemyStateMachineConfig;
+        public EnemyStateMachineConfig EnemyStateMachineConfig;
         
         public int MaxLoot;
         public int MinLoot;

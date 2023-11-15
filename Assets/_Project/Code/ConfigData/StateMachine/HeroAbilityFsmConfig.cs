@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Code.ConfigData.StateMachine
@@ -5,7 +6,6 @@ namespace Code.ConfigData.StateMachine
     [CreateAssetMenu(menuName = "Config/StateMachine", fileName = "AbilityFsmConfig")]
     public class HeroAbilityFsmConfig : ScriptableObject
     {
-        public float SpinAttackDuration;
-        public float DodgeRollDuration;
+        public List<AbilityFsmConfig> AbilityFsmConfigs;
     }
 }

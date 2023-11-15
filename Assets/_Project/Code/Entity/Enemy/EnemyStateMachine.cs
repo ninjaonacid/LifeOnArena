@@ -17,14 +17,14 @@ namespace Code.Entity.Enemy
         [SerializeField] private EnemyTarget _enemyTarget;
         [SerializeField] private EnemyHealth _enemyHealth;
 
-        private StateMachineConfig _enemyConfig;
+        private EnemyStateMachineConfig _enemyConfig;
 
         private const string ChaseState = "EnemyChaseState";
         private const string AttackState = "EnemyAttackState";
         private const string IdleState = "EnemyIdleState";
         private const string HitStaggerState = "EnemyHitStagger";
 
-        public void Construct(StateMachineConfig config)
+        public void Construct(EnemyStateMachineConfig config)
         {
             _enemyConfig = config;
         }

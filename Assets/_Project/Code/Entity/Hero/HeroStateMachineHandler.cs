@@ -2,6 +2,7 @@ using Code.ConfigData.Identifiers;
 using Code.Entity.Hero.HeroStates;
 using Code.Logic;
 using Code.Logic.StateMachine;
+using Code.Logic.Weapon;
 using Code.Services.AudioService;
 using UnityEngine;
 using VContainer;
@@ -41,8 +42,10 @@ namespace Code.Entity.Hero
             _controls = controls;
             _audioService = audioService;
         }
-        
-        
+
+     
+
+
         void Update()
         {
             _stateMachine.OnLogic();
