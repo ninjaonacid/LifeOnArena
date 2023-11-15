@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Code.ConfigData.Configs
+namespace Code.ConfigData.StateMachine
 {
     [CreateAssetMenu(fileName = "StateMachineConfig", menuName = "StaticData/StateMachineConfig")]
     public class StateMachineConfig : ScriptableObject

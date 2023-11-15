@@ -1,5 +1,5 @@
-using Code.ConfigData.Configs;
 using Code.ConfigData.Identifiers;
+using Code.ConfigData.StateMachine;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 

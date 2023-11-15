@@ -1,4 +1,4 @@
-using Code.ConfigData.Configs;
+using Code.ConfigData.StateMachine;
 using Code.Entity.Enemy.CommonEnemy;
 using Code.Logic.StateMachine;
 using Code.Logic.StateMachine.Transitions;

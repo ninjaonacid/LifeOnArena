@@ -1,11 +1,10 @@
-using Code.ConfigData.Configs;
 using UnityEngine;
 
 namespace Code.Entity.Hero.HeroStates
 {
     public class SecondAttackState : HeroBaseAttackState
     {
-        public SecondAttackState(HeroAnimator animator, HeroAttack heroAttack, HeroWeapon heroWeapon, bool needExitTime, bool isGhostState) : base(animator, heroAttack, heroWeapon, needExitTime, isGhostState)
+        public SecondAttackState(HeroAttack heroAttack, HeroWeapon heroWeapon, HeroAnimator heroAnimator, HeroMovement heroMovement, HeroRotation heroRotation, bool needsExitTime, bool isGhostState = false) : base(heroAttack, heroWeapon, heroAnimator, heroMovement, heroRotation, needsExitTime, isGhostState)
         {
         }
 

@@ -63,8 +63,10 @@ namespace Code.Entity.Hero
 
         private void OnSkillSlot1(InputAction.CallbackContext context)
         {
-            if (_skillSlots[0].AbilityTemplate == null) return;
-
+            var abilityTemplate = _skillSlots[0].AbilityTemplate;
+            if (abilityTemplate == null) return;
+            if (abilityTemplate.State == AbilityState.Cooldown) return;
+            
             _skillSlots[0].AbilityTemplate.GetAbility().Use(this.gameObject, null);
             _skillSlots[0].AbilityTemplate.State = AbilityState.Active;
             _activeSkill = _skillSlots[0].AbilityTemplate;
@@ -73,7 +75,9 @@ namespace Code.Entity.Hero
 
         private void OnSkillSlot2(InputAction.CallbackContext context)
         {
-            if (_skillSlots[1].AbilityTemplate == null) return;
+            var abilityTemplate = _skillSlots[1].AbilityTemplate;
+            if (abilityTemplate == null) return;
+            if (abilityTemplate.State == AbilityState.Cooldown) return;
             
             _skillSlots[1].AbilityTemplate.GetAbility().Use(this.gameObject, null);
             _skillSlots[1].AbilityTemplate.State = AbilityState.Active;

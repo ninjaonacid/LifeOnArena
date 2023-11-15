@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Code.ConfigData.Audio;
-using Code.ConfigData.Configs;
 using Code.ConfigData.Identifiers;
+using Code.ConfigData.StateMachine;
 using Code.Logic.Damage;
 using UnityEngine;
 using Vector3 = UnityEngine.Vector3;

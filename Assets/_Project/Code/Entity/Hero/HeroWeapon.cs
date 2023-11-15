@@ -1,6 +1,6 @@
 using System;
 using Code.ConfigData;
-using Code.ConfigData.Configs;
+using Code.ConfigData.StateMachine;
 using Code.Core.Factory;
 using Code.Data.PlayerData;
 using Code.Logic.Weapon;

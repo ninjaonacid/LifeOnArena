@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace Code.ConfigData.Configs
+namespace Code.ConfigData.StateMachine
 {
-    [CreateAssetMenu(menuName = "Config/StateMachine", fileName = "HeroFsm")]
+    [CreateAssetMenu(menuName = "Config/StateMachine", fileName = "WeaponFsmConfig")]
     public class WeaponFsmConfig : ScriptableObject
     {
         public float FirstAttackStateDuration;

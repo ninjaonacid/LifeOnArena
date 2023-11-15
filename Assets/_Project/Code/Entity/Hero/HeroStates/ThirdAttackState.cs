@@ -1,15 +1,13 @@
-using Code.ConfigData.Configs;
 using UnityEngine;
 
 namespace Code.Entity.Hero.HeroStates
 {
     public class ThirdAttackState : HeroBaseAttackState
     {
-        public ThirdAttackState(HeroAnimator animator, HeroAttack heroAttack, HeroWeapon heroWeapon, bool needExitTime, bool isGhostState) : base(animator, heroAttack, heroWeapon, needExitTime, isGhostState)
+        public ThirdAttackState(HeroAttack heroAttack, HeroWeapon heroWeapon, HeroAnimator heroAnimator, HeroMovement heroMovement, HeroRotation heroRotation, bool needsExitTime, bool isGhostState = false) : base(heroAttack, heroWeapon, heroAnimator, heroMovement, heroRotation, needsExitTime, isGhostState)
         {
         }
 
-     
         public override void OnEnter()
         {
             base.OnEnter();

@@ -2,13 +2,10 @@ using UnityEngine;
 
 namespace Code.Entity.Hero.HeroStates
 {
-    public class SpinAbilityState : HeroBaseAttackState
+    public class SpinAbilityState : HeroBaseAbilityState
     {
-        private readonly HeroRotation _heroRotation;
-
-        public SpinAbilityState(HeroAnimator animator, HeroAttack heroAttack, HeroRotation heroRotation, HeroWeapon heroWeapon, bool needExitTime, bool isGhostState) : base(animator, heroAttack, heroWeapon, needExitTime, isGhostState)
+        public SpinAbilityState(HeroWeapon heroWeapon, HeroAnimator heroAnimator, HeroMovement heroMovement, HeroRotation heroRotation, bool needsExitTime, bool isGhostState = false) : base(heroWeapon, heroAnimator, heroMovement, heroRotation, needsExitTime, isGhostState)
         {
-            _heroRotation = heroRotation;
         }
 
         public override void OnEnter()

@@ -1,4 +1,3 @@
-using Code.ConfigData.Configs;
 using Code.ConfigData.Identifiers;
 using Code.Entity.Hero.HeroStates;
 using Code.Logic;
@@ -54,39 +53,45 @@ namespace Code.Entity.Hero
             _stateMachine = new FiniteStateMachine();
 
             _stateMachine.AddState(HeroIdle, new HeroIdleState(
-                _heroAnimator, false, true));
+                _heroAnimator, _heroMovement, _heroRotation, false, true));
 
             _stateMachine.AddState(HeroMovement, new HeroMovementState(
-                _heroAnimator, _heroMovement, false, false));
+                _heroAnimator, _heroMovement, _heroRotation, false, false));
 
             _stateMachine.AddState(_dodgeRollAbilityId.Name, new RollDodgeState(
-                _heroAnimator, _heroAttack, _heroWeapon,_heroMovement, _heroRotation, true, false));
+                _heroWeapon, _heroAnimator, _heroMovement, _heroRotation,  true, false));
 
             _stateMachine.AddState(SpinAttackAbility, new SpinAbilityState(
-                _heroAnimator, _heroAttack, _heroRotation, _heroWeapon, true, false));
+                _heroWeapon, _heroAnimator, _heroMovement, _heroRotation,  true, false));
             
-            _stateMachine.AddState(AbilityCast, new AttackCastState(
-                _heroAnimator, _heroAttack, _heroWeapon, true, true));
+            _stateMachine.AddState(AbilityCast, new AbilityCastState(
+                _heroWeapon, _heroAnimator,  _heroMovement, _heroRotation,  true, true));
 
             _stateMachine.AddState(HeroBaseAttack1, new FirstAttackState(
-                _heroAnimator,
                 _heroAttack,
                 _heroWeapon,
-                needExitTime: true,
+                _heroAnimator,
+                _heroMovement,
+                _heroRotation,
+                needsExitTime: true,
                 isGhostState: false));
 
             _stateMachine.AddState(HeroBaseAttack2, new SecondAttackState(
-                _heroAnimator,
                 _heroAttack,
                 _heroWeapon,
-                needExitTime: true,
+                _heroAnimator,
+                _heroMovement,
+                _heroRotation,
+                needsExitTime: true,
                 isGhostState: false));
 
             _stateMachine.AddState(HeroBaseAttack3, new ThirdAttackState(
-                _heroAnimator,
                 _heroAttack,
                 _heroWeapon,
-                needExitTime: true,
+                _heroAnimator,
+                _heroMovement,
+                _heroRotation,
+                needsExitTime: true,
                 isGhostState: false));
 
             _stateMachine.AddTwoWayTransition(new Transition(

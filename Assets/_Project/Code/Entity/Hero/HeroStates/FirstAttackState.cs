@@ -1,4 +1,3 @@
-using Code.ConfigData.Configs;
 using Code.Services.AudioService;
 using UnityEngine;
 
@@ -6,7 +5,7 @@ namespace Code.Entity.Hero.HeroStates
 {
     public class FirstAttackState : HeroBaseAttackState
     {
-        public FirstAttackState(HeroAnimator animator, HeroAttack heroAttack, HeroWeapon heroWeapon, bool needExitTime, bool isGhostState) : base(animator, heroAttack, heroWeapon, needExitTime, isGhostState)
+        public FirstAttackState(HeroAttack heroAttack, HeroWeapon heroWeapon, HeroAnimator heroAnimator, HeroMovement heroMovement, HeroRotation heroRotation, bool needsExitTime, bool isGhostState = false) : base(heroAttack, heroWeapon, heroAnimator, heroMovement, heroRotation, needsExitTime, isGhostState)
         {
         }
 
