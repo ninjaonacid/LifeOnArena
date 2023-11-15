@@ -37,6 +37,10 @@ namespace Code.Logic.Weapon
         {
             var slashTrailEmission = _slashTrail.emission;
             slashTrailEmission.enabled = value;
+            
+            if (value) _slashTrail.Play();
+            else _slashTrail.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+
         }
     }
 }
