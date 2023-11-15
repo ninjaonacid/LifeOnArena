@@ -14,7 +14,7 @@ namespace Code.Entity.Hero.HeroStates
         public override void OnEnter()
         {
             base.OnEnter();
-            HeroAnimator.PlayRun();
+            _heroAnimator.PlayRun();
         }
 
         public override void OnLogic()

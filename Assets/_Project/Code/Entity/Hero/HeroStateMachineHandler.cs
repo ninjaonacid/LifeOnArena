@@ -27,13 +27,13 @@ namespace Code.Entity.Hero
         [SerializeField] private AbilityIdentifier _spinAttackAbilityId;
         [SerializeField] private AbilityIdentifier _dodgeRollAbilityId;
         [SerializeField] private AbilityIdentifier _tornadoAbilityId;
-     
-        [SerializeField] private HeroFsmConfig _fsmConfig;
+        
         [SerializeField] private HeroAnimator _heroAnimator;
         [SerializeField] private HeroMovement _heroMovement;
         [SerializeField] private HeroRotation _heroRotation;
         [SerializeField] private HeroAttack _heroAttack;
         [SerializeField] private HeroSkills _heroSkills;
+        [SerializeField] private HeroWeapon _heroWeapon;
 
 
         [Inject]
@@ -42,11 +42,7 @@ namespace Code.Entity.Hero
             _controls = controls;
             _audioService = audioService;
         }
-
-        public void ChangeConfig(HeroFsmConfig config)
-        {
-            _fsmConfig = config;
-        }
+        
         
         void Update()
         {
@@ -64,33 +60,32 @@ namespace Code.Entity.Hero
                 _heroAnimator, _heroMovement, false, false));
 
             _stateMachine.AddState(_dodgeRollAbilityId.Name, new RollDodgeState(
-                _heroAnimator, _heroAttack, _heroMovement, _heroRotation, true, false));
+                _heroAnimator, _heroAttack, _heroWeapon,_heroMovement, _heroRotation, true, false));
 
             _stateMachine.AddState(SpinAttackAbility, new SpinAbilityState(
-                _heroAnimator, _heroAttack, _heroRotation, true, false));
+                _heroAnimator, _heroAttack, _heroRotation, _heroWeapon, true, false));
             
-            _stateMachine.AddState(AbilityCast, new AbilityCastState(
-                _heroAnimator, _heroAttack, true, true));
+            _stateMachine.AddState(AbilityCast, new AttackCastState(
+                _heroAnimator, _heroAttack, _heroWeapon, true, true));
 
             _stateMachine.AddState(HeroBaseAttack1, new FirstAttackState(
                 _heroAnimator,
-                _fsmConfig,
                 _heroAttack,
-                _audioService,
+                _heroWeapon,
                 needExitTime: true,
                 isGhostState: false));
 
             _stateMachine.AddState(HeroBaseAttack2, new SecondAttackState(
                 _heroAnimator,
-                _fsmConfig,
                 _heroAttack,
+                _heroWeapon,
                 needExitTime: true,
                 isGhostState: false));
 
             _stateMachine.AddState(HeroBaseAttack3, new ThirdAttackState(
                 _heroAnimator,
-                _fsmConfig,
                 _heroAttack,
+                _heroWeapon,
                 needExitTime: true,
                 isGhostState: false));
 

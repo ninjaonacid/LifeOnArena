@@ -9,7 +9,7 @@ namespace Code.Entity.Hero.HeroStates
         public override void OnEnter()
         {
             base.OnEnter();
-            HeroAnimator.ToIdleState();
+            _heroAnimator.ToIdleState();
         }
 
         public override void OnLogic()

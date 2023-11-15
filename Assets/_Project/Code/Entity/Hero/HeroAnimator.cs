@@ -84,7 +84,7 @@ namespace Code.Entity.Hero
             _heroAnimator.CrossFade(_spinAttackStateHash, 0.1f);
         }
 
-        public void PlayAttack(HeroBaseAbilityState state)
+        public void PlayAttack(HeroBaseAttackState state)
         {
             switch (state)
             {

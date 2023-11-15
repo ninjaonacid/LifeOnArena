@@ -40,15 +40,6 @@ namespace Code.Entity.Hero
             weapon.Hit += BaseAttack;
         }
 
-        public void SetCollisionOff()
-        {
-            _heroWeapon.CurrentWeapon.SetCollider(false);
-        }
-
-        public void SetCollisionOn()
-        {
-            _heroWeapon.CurrentWeapon.SetCollider(true);
-        }
         private void BaseAttack(CollisionData collision)
         {
             _battleService.ApplyDamage(_stats, collision.Target);

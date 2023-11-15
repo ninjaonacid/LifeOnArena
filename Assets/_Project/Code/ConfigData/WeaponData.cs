@@ -20,7 +20,7 @@ namespace Code.ConfigData
         public float AttackSpeed;
         public float Damage;
         public AnimatorOverrideController OverrideController;
-        public HeroFsmConfig FsmConfig;
+        public WeaponFsmConfig FsmConfig;
         public Vector3 LocalRotation;
         public Vector3 LocalPosition;
         public SoundAudioFile WeaponSound;

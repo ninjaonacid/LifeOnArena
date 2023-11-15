@@ -2,14 +2,11 @@ using UnityEngine;
 
 namespace Code.Entity.Hero.HeroStates
 {
-    public class SpinAbilityState : HeroBaseAbilityState
+    public class SpinAbilityState : HeroBaseAttackState
     {
         private readonly HeroRotation _heroRotation;
-        public SpinAbilityState(
-            HeroAnimator animator, 
-            HeroAttack heroAttack, 
-            HeroRotation heroRotation, 
-            bool needExitTime, bool isGhostState) : base(animator, heroAttack, needExitTime : true, isGhostState)
+
+        public SpinAbilityState(HeroAnimator animator, HeroAttack heroAttack, HeroRotation heroRotation, HeroWeapon heroWeapon, bool needExitTime, bool isGhostState) : base(animator, heroAttack, heroWeapon, needExitTime, isGhostState)
         {
             _heroRotation = heroRotation;
         }
@@ -18,8 +15,8 @@ namespace Code.Entity.Hero.HeroStates
         {
             base.OnEnter();
             _heroRotation.enabled = false;
-            HeroAnimator.PlayAttack(this);
-            _heroAttack.SetCollisionOn();
+            _heroWeapon.EnableWeapon(true);
+            _heroAnimator.PlayAttack(this);
             _duration = 0.7f;
         }
 
@@ -35,7 +32,7 @@ namespace Code.Entity.Hero.HeroStates
         public override void OnExit()
         {
             _heroRotation.enabled = true;
-            _heroAttack.SetCollisionOff();
+            _heroWeapon.EnableWeapon(false);
         }
 
         public override void OnExitRequest()

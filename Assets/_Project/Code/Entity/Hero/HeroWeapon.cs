@@ -1,5 +1,6 @@
 using System;
 using Code.ConfigData;
+using Code.ConfigData.Configs;
 using Code.Core.Factory;
 using Code.Data.PlayerData;
 using Code.Logic.Weapon;
@@ -12,19 +13,18 @@ namespace Code.Entity.Hero
 {
     public class HeroWeapon : EntityWeapon, ISave
     {
-        public MeleeWeapon CurrentWeapon { get; private set; }
+        private MeleeWeapon CurrentWeapon { get; set; }
+        public WeaponFsmConfig WeaponStateMachineConfig { get; private set; }
         [SerializeField] private HeroAnimator _heroAnimator;
         [SerializeField] private HeroStateMachineHandler _stateMachine;
 
         public event Action<MeleeWeapon> OnWeaponChange;
         private IItemFactory _itemFactory;
-        private IBattleService _battleService;
 
         [Inject]
-        public void Construct(IItemFactory itemFactory, IBattleService battleService)
+        public void Construct(IItemFactory itemFactory)
         {
             _itemFactory = itemFactory;
-            _battleService = battleService;
         }
 
         public void EquipWeapon(WeaponData weaponData)
@@ -38,8 +38,9 @@ namespace Code.Entity.Hero
             
             _weaponSlot.WeaponData = weaponData;
             _weaponSlot.WeaponId = weaponData.WeaponId;
+            WeaponStateMachineConfig = weaponData.FsmConfig;
+
             _heroAnimator.OverrideController(weaponData.OverrideController);
-            _stateMachine.ChangeConfig(weaponData.FsmConfig);
 
             CurrentWeapon = Instantiate(weaponData.WeaponPrefab, _weaponPosition, false).GetComponent<MeleeWeapon>();
             
@@ -51,6 +52,12 @@ namespace Code.Entity.Hero
                 weaponData.LocalRotation.z);
 
             OnWeaponChange?.Invoke(CurrentWeapon);
+        }
+        
+        public void EnableWeapon(bool value)
+        {
+            CurrentWeapon.EnableCollider(value);
+            CurrentWeapon.EnableTrail(value);
         }
 
         public void LoadData(PlayerData data)

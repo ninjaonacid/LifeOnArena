@@ -3,12 +3,10 @@ using UnityEngine;
 
 namespace Code.Entity.Hero.HeroStates
 {
-    public class SecondAttackState : HeroBaseAbilityState
+    public class SecondAttackState : HeroBaseAttackState
     {
-        private readonly HeroFsmConfig _fsmConfig;
-        public SecondAttackState(HeroAnimator animator, HeroFsmConfig config, HeroAttack heroAttack, bool needExitTime, bool isGhostState) : base(animator, heroAttack, needExitTime:true, isGhostState)
+        public SecondAttackState(HeroAnimator animator, HeroAttack heroAttack, HeroWeapon heroWeapon, bool needExitTime, bool isGhostState) : base(animator, heroAttack, heroWeapon, needExitTime, isGhostState)
         {
-            _fsmConfig = config;
         }
 
         public override void Init()
@@ -19,9 +17,9 @@ namespace Code.Entity.Hero.HeroStates
         public override void OnEnter()
         {
             base.OnEnter();
-            HeroAnimator.PlayAttack(this);
-            _heroAttack.SetCollisionOn();
-            _duration = _fsmConfig.SecondAttackStateDuration;
+            _heroAnimator.PlayAttack(this);
+            _heroWeapon.EnableWeapon(true);
+            _duration = _heroWeapon.WeaponStateMachineConfig.SecondAttackStateDuration;
         }
 
         public override void OnLogic()
@@ -39,7 +37,7 @@ namespace Code.Entity.Hero.HeroStates
         public override void OnExit()
         {
             base.OnExit();
-            _heroAttack.SetCollisionOff();
+            _heroWeapon.EnableWeapon(false);
         }
 
         public override void OnExitRequest()

@@ -8,6 +8,7 @@ namespace Code.Logic.Weapon
     public class MeleeWeapon : MonoBehaviour
     {
         [SerializeField] private Collider _collider;
+        [SerializeField] private ParticleSystem _slashTrail;
         public event Action<CollisionData> Hit;
         private LayerMask _mask;
 
@@ -27,9 +28,15 @@ namespace Code.Logic.Weapon
             }
         }
 
-        public void SetCollider(bool value)
+        public void EnableCollider(bool value)
         {
             _collider.enabled = value;
+        }
+
+        public void EnableTrail(bool value)
+        {
+            var slashTrailEmission = _slashTrail.emission;
+            slashTrailEmission.enabled = value;
         }
     }
 }

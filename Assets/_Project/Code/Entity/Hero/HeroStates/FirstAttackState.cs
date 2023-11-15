@@ -4,22 +4,18 @@ using UnityEngine;
 
 namespace Code.Entity.Hero.HeroStates
 {
-    public class FirstAttackState : HeroBaseAbilityState
+    public class FirstAttackState : HeroBaseAttackState
     {
-        private AudioService _audioService;
-        private HeroFsmConfig _fsmConfig;
-        public FirstAttackState(HeroAnimator animator, HeroFsmConfig config, HeroAttack heroAttack, AudioService audioService, bool needExitTime, bool isGhostState) : base(animator, heroAttack, needExitTime, isGhostState)
+        public FirstAttackState(HeroAnimator animator, HeroAttack heroAttack, HeroWeapon heroWeapon, bool needExitTime, bool isGhostState) : base(animator, heroAttack, heroWeapon, needExitTime, isGhostState)
         {
-            _audioService = audioService;
-            _fsmConfig = config;
         }
 
         public override void OnEnter()
         {
             base.OnEnter();
-            HeroAnimator.PlayAttack(this);
-            _heroAttack.SetCollisionOn();
-            _duration = _fsmConfig.FirstAttackStateDuration;
+            _heroWeapon.EnableWeapon(true);
+            _heroAnimator.PlayAttack(this);
+            _duration = _heroWeapon.WeaponStateMachineConfig.FirstAttackStateDuration;
         }
 
         public override void OnLogic()
@@ -34,7 +30,7 @@ namespace Code.Entity.Hero.HeroStates
         public override void OnExit()
         {
             base.OnExit();
-            _heroAttack.SetCollisionOff();
+            _heroWeapon.EnableWeapon(false);
         }
 
         public override void OnExitRequest()
