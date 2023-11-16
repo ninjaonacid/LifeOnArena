@@ -18,8 +18,8 @@ namespace Code.ConfigData
         public int Price;
         public float AttackSpeed;
         public float Damage;
+        public WeaponFsmConfig WeaponFsmConfig;
         public AnimatorOverrideController OverrideController;
-        public WeaponFsmConfig FsmConfig;
         public Vector3 LocalRotation;
         public Vector3 LocalPosition;
         public SoundAudioFile WeaponSound;

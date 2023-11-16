@@ -32,7 +32,7 @@ namespace Code.ConfigData.Ability
             ParticleObjectPool = viewObjectPool;
             BattleService = battleService;
         }
-
+        
         public virtual bool IsReady() =>
             State == AbilityState.Ready;
         

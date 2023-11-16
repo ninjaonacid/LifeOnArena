@@ -1,5 +1,6 @@
 using System;
 using Code.ConfigData;
+using Code.ConfigData.Identifiers;
 using Code.ConfigData.StateMachine;
 using Code.Core.Factory;
 using Code.Data.PlayerData;
@@ -15,8 +16,8 @@ namespace Code.Entity.Hero
         private MeleeWeapon CurrentWeapon { get; set; }
 
         [SerializeField] private HeroAnimator _heroAnimator;
-        public event Action<MeleeWeapon> OnWeaponChange;
-        
+        public event Action<MeleeWeapon, WeaponId> OnWeaponChange;
+
         private IItemFactory _itemFactory;
 
         [Inject]
@@ -48,7 +49,7 @@ namespace Code.Entity.Hero
                 weaponData.LocalRotation.y, 
                 weaponData.LocalRotation.z);
 
-            OnWeaponChange?.Invoke(CurrentWeapon);
+            OnWeaponChange?.Invoke(CurrentWeapon, _weaponSlot.WeaponId);
         }
         
         public void EnableWeapon(bool value)

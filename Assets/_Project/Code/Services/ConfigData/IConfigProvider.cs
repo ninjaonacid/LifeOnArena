@@ -5,6 +5,7 @@ using Code.ConfigData.Audio;
 using Code.ConfigData.Levels;
 using Code.ConfigData.ScreenUI;
 using Code.ConfigData.Settings;
+using Code.ConfigData.StateMachine;
 using Code.ConfigData.StatSystem;
 using Code.ConfigData.UIWindows;
 using Code.UI;
@@ -28,5 +29,6 @@ namespace Code.Services.ConfigData
         AudioLibrary AudioLibrary();
         AudioServiceSettings AudioServiceSettings();
         List<AbilityTemplateBase> AllAbilities();
+        WeaponStateMachineDatabase GetWeaponFsmDatabase();
     }
 }

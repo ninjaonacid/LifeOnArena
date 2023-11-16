@@ -16,9 +16,13 @@ MonoBehaviour:
   WeaponPrefab: {fileID: 7053281041097936720, guid: f5e154f2103eb1847b7106b702a86613, type: 3}
   WeaponId: {fileID: 11400000, guid: 2bb90049b182d3e4e862dce85ce642cd, type: 2}
   Price: 30
-  AttackRadius: 0
   AttackSpeed: 0
   Damage: 0
+  WeaponFsmConfig:
+    FirstAttackStateDuration: 1
+    SecondAttackStateDuration: 1
+    ThirdAttackStateDuration: 1
   OverrideController: {fileID: 22100000, guid: 50885c06293ec8044b3694729dc71f10, type: 2}
-  FsmConfig: {fileID: 11400000, guid: e617a90e11b91f54684a2f219224c511, type: 2}
-  Rotation: {x: 42.95347, y: 35.0364, z: 100.98701}
+  LocalRotation: {x: 0, y: 0, z: 0}
+  LocalPosition: {x: 0, y: 0, z: 0}
+  WeaponSound: {fileID: 0}

@@ -1,4 +1,4 @@
-using Code.Services.AudioService;
+using Code.ConfigData.StateMachine;
 using UnityEngine;
 
 namespace Code.Entity.Hero.HeroStates
@@ -14,7 +14,7 @@ namespace Code.Entity.Hero.HeroStates
             base.OnEnter();
             _heroWeapon.EnableWeapon(true);
             _heroAnimator.PlayAttack(this);
-            _duration = _heroWeapon.WeaponStateMachineConfig.FirstAttackStateDuration;
+            _duration = _heroWeapon.GetEquippedWeapon().WeaponFsmConfig.FirstAttackStateDuration;
         }
 
         public override void OnLogic()

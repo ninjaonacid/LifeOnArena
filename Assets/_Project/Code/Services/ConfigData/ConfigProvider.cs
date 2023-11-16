@@ -25,7 +25,8 @@ namespace Code.Services.ConfigData
         private Dictionary<int, AbilityTemplateBase> _heroAbilities;
         private Dictionary<int, ParticleObjectData> _particles;
         private Dictionary<int, WeaponData> _weapons;
-        
+
+        private WeaponStateMachineDatabase _weaponFsmDatabase;
         private AudioLibrary _audioLibrary;
         private AudioServiceSettings _audioServiceSettings;
         private StatDatabase _characterStats;
@@ -69,6 +70,9 @@ namespace Code.Services.ConfigData
             _weapons = Resources
                 .LoadAll<WeaponData>($"{ConfigFolder}/Equipment/Weapons")
                 .ToDictionary(x => x.WeaponId.Id, x => x);
+
+            _weaponFsmDatabase = Resources
+                .Load<WeaponStateMachineDatabase>($"{ConfigFolder}/StateMachine/WeaponFsmConfigDatabase");
 
         }
 
@@ -143,6 +147,9 @@ namespace Code.Services.ConfigData
             _windowConfigs.TryGetValue(menuId, out ScreenConfig windowConfig)
                 ? windowConfig
                 : null;
-        
+
+        public WeaponStateMachineDatabase GetWeaponFsmDatabase() => _weaponFsmDatabase;
+
+
     }
 }

@@ -36,7 +36,7 @@ namespace Code.Entity.Hero
         [SerializeField] private HeroAttack _heroAttack;
         [SerializeField] private HeroSkills _heroSkills;
         [SerializeField] private HeroWeapon _heroWeapon;
-
+        
 
         [Inject]
         public void Construct(PlayerControls controls, AudioService audioService, IConfigProvider configProvider)
@@ -53,6 +53,7 @@ namespace Code.Entity.Hero
             
         void Start()
         {
+
             _stateMachine = new FiniteStateMachine();
 
             _stateMachine.AddState(HeroIdle, new HeroIdleState(
@@ -213,5 +214,7 @@ namespace Code.Entity.Hero
 
             _stateMachine.InitStateMachine();
         }
+
+        
     }
 }

@@ -1,3 +1,4 @@
+using Code.ConfigData.StateMachine;
 using Code.Logic.StateMachine.Base;
 
 namespace Code.Entity.Hero.HeroStates
@@ -7,7 +8,7 @@ namespace Code.Entity.Hero.HeroStates
         protected readonly HeroAnimator _heroAnimator;
         protected readonly HeroMovement _heroMovement;
         protected readonly HeroRotation _heroRotation;
-
+       
         protected HeroBaseState(HeroAnimator heroAnimator, HeroMovement heroMovement, HeroRotation heroRotation, bool needsExitTime, bool isGhostState = false) : base(needsExitTime, isGhostState)
         {
             _heroAnimator = heroAnimator;

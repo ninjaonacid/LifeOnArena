@@ -1,4 +1,5 @@
 using System;
+using Code.ConfigData.Identifiers;
 using Code.ConfigData.StatSystem;
 using Code.Logic.Collision;
 using Code.Logic.EntitiesComponents;
@@ -35,7 +36,7 @@ namespace Code.Entity.Hero
             _heroWeapon.OnWeaponChange += ChangeWeapon;
         }
         
-        private void ChangeWeapon(MeleeWeapon weapon)
+        private void ChangeWeapon(MeleeWeapon weapon, WeaponId weaponId)
         {
             weapon.Hit += BaseAttack;
         }

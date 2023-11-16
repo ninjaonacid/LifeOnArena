@@ -65,7 +65,7 @@ namespace Code.Entity.Hero
         {
             var abilityTemplate = _skillSlots[0].AbilityTemplate;
             if (abilityTemplate == null) return;
-            if (abilityTemplate.State == AbilityState.Cooldown) return;
+            if (abilityTemplate.State is AbilityState.Cooldown or AbilityState.Active) return;
             
             _skillSlots[0].AbilityTemplate.GetAbility().Use(this.gameObject, null);
             _skillSlots[0].AbilityTemplate.State = AbilityState.Active;
@@ -77,7 +77,7 @@ namespace Code.Entity.Hero
         {
             var abilityTemplate = _skillSlots[1].AbilityTemplate;
             if (abilityTemplate == null) return;
-            if (abilityTemplate.State == AbilityState.Cooldown) return;
+            if (abilityTemplate.State is AbilityState.Cooldown or AbilityState.Active) return;
             
             _skillSlots[1].AbilityTemplate.GetAbility().Use(this.gameObject, null);
             _skillSlots[1].AbilityTemplate.State = AbilityState.Active;

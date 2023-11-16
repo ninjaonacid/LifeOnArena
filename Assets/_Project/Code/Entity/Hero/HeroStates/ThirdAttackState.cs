@@ -1,3 +1,4 @@
+using Code.ConfigData.StateMachine;
 using UnityEngine;
 
 namespace Code.Entity.Hero.HeroStates
@@ -11,10 +12,9 @@ namespace Code.Entity.Hero.HeroStates
         public override void OnEnter()
         {
             base.OnEnter();
-            _duration = _heroWeapon.WeaponStateMachineConfig.ThirdAttackStateDuration;
             _heroAnimator.PlayAttack(this);
             _heroWeapon.EnableWeapon(true);
-        
+            _duration = _heroWeapon.GetEquippedWeapon().WeaponFsmConfig.SecondAttackStateDuration;
         }
 
         public override void OnLogic()

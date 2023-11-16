@@ -1,3 +1,5 @@
+using Code.ConfigData.StateMachine;
+
 namespace Code.Entity.Hero.HeroStates
 {
     public abstract class HeroBaseAttackState : HeroBaseState

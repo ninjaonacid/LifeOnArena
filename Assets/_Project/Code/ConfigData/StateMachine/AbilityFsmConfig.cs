@@ -1,6 +1,5 @@
 using System;
 using Code.ConfigData.Identifiers;
-using UnityEngine;
 
 namespace Code.ConfigData.StateMachine
 {
