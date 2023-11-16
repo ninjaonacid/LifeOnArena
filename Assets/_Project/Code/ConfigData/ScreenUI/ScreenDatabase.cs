@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Code.ConfigData.ScreenUI;
 using UnityEngine;
 
 namespace Code.ConfigData.UIWindows

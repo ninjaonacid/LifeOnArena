@@ -12,7 +12,6 @@ namespace Code.ConfigData
     public class WeaponData : ScriptableObject, IDamageSource
     {
         public IReadOnlyList<DamageType> DamageTypes => DamageType;
-
         public List<DamageType> DamageType;
         public GameObject WeaponPrefab;
         public WeaponId WeaponId;

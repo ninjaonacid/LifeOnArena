@@ -2,7 +2,7 @@
 using Code.UI;
 using Code.UI.View;
 
-namespace Code.ConfigData.UIWindows
+namespace Code.ConfigData.ScreenUI
 {
     [Serializable]
     public class ScreenConfig

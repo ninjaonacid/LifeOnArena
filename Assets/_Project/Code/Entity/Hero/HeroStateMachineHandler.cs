@@ -2,8 +2,8 @@ using Code.ConfigData.Identifiers;
 using Code.Entity.Hero.HeroStates;
 using Code.Logic;
 using Code.Logic.StateMachine;
-using Code.Logic.Weapon;
 using Code.Services.AudioService;
+using Code.Services.ConfigData;
 using UnityEngine;
 using VContainer;
 
@@ -11,6 +11,8 @@ namespace Code.Entity.Hero
 {
     public class HeroStateMachineHandler : MonoBehaviour
     {
+        private IConfigProvider _configProvider;
+        
         private const string HeroIdle = "HeroIdle";
         private const string HeroMovement = "HeroMovement";
         private const string AbilityCast = "AbilityCast";
@@ -37,15 +39,13 @@ namespace Code.Entity.Hero
 
 
         [Inject]
-        public void Construct(PlayerControls controls, AudioService audioService)
+        public void Construct(PlayerControls controls, AudioService audioService, IConfigProvider configProvider)
         {
             _controls = controls;
             _audioService = audioService;
+            _configProvider = configProvider;
         }
-
-     
-
-
+        
         void Update()
         {
             _stateMachine.OnLogic();

@@ -4,7 +4,6 @@ using Code.ConfigData.StateMachine;
 using Code.Core.Factory;
 using Code.Data.PlayerData;
 using Code.Logic.Weapon;
-using Code.Services.BattleService;
 using Code.Services.PersistentProgress;
 using UnityEngine;
 using VContainer;
@@ -14,11 +13,10 @@ namespace Code.Entity.Hero
     public class HeroWeapon : EntityWeapon, ISave
     {
         private MeleeWeapon CurrentWeapon { get; set; }
-        public WeaponFsmConfig WeaponStateMachineConfig { get; private set; }
-        [SerializeField] private HeroAnimator _heroAnimator;
-        [SerializeField] private HeroStateMachineHandler _stateMachine;
 
+        [SerializeField] private HeroAnimator _heroAnimator;
         public event Action<MeleeWeapon> OnWeaponChange;
+        
         private IItemFactory _itemFactory;
 
         [Inject]
@@ -38,7 +36,6 @@ namespace Code.Entity.Hero
             
             _weaponSlot.WeaponData = weaponData;
             _weaponSlot.WeaponId = weaponData.WeaponId;
-            WeaponStateMachineConfig = weaponData.FsmConfig;
 
             _heroAnimator.OverrideController(weaponData.OverrideController);
 
