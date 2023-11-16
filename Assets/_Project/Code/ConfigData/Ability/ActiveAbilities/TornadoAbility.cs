@@ -50,9 +50,7 @@ namespace Code.ConfigData.Ability.ActiveAbilities
             
             entityAttack.SkillAttack(projectileTransform.position);
             
-
         }
         
-
     }
 }

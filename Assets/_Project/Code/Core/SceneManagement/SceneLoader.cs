@@ -21,11 +21,11 @@ namespace Code.Core.SceneManagement
 
         private async UniTask LoadScene(string nextScene, Action onLoaded = null)
         {
-            if (SceneManager.GetActiveScene().name == nextScene)
-            {
-                onLoaded?.Invoke();
-                return;
-            }
+            // if (SceneManager.GetActiveScene().name == nextScene)
+            // {
+            //     onLoaded?.Invoke();
+            //     return;
+            // }
 
             _loadingScreen.Show();
 

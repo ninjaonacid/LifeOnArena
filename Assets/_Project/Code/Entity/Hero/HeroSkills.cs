@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using Code.ConfigData.Ability;
 using Code.Core.Factory;
+using Code.Core.SceneManagement;
 using Code.Data.PlayerData;
 using Code.Logic.WaveLogic;
 using Code.Services.PersistentProgress;
@@ -26,7 +28,10 @@ namespace Code.Entity.Hero
         private AbilityData _abilityData;
         private IAbilityFactory _abilityFactory;
         private PlayerControls _controls;
-        private EnemySpawnerController _controller;
+
+        private readonly List<InputAction> _skillActions = new();
+
+        private readonly List<Action<InputAction.CallbackContext>> _hashedDelegates = new();
 
         [Serializable]
         public class SkillSlot
@@ -36,56 +41,60 @@ namespace Code.Entity.Hero
         }
 
         [Inject]
-        public void Construct(IAbilityFactory abilityFactory, PlayerControls controls)
+        public void Construct(IAbilityFactory abilityFactory, PlayerControls controls, SceneLoader sceneLoader)
         {
             _abilityFactory = abilityFactory;
             _controls = controls;
+
+            _controls.Player.RestartScene.performed += (ctx) => sceneLoader.Load("StoneDungeon_Arena_1");
         }
         private void Start()
         {
-            _controls.Player.SkillSlot1.performed += OnSkillSlot1;
-            _controls.Player.SkillSlot2.performed += OnSkillSlot2;
+            _skillActions.Add(_controls.Player.SkillSlot1);
+            _skillActions.Add(_controls.Player.SkillSlot2);
+            
+           foreach (var slot in _skillSlots)
+           {
+               if (slot.AbilityTemplate)
+               {
+                   slot.AbilityTemplate = _abilityFactory.InitializeAbilityTemplate(slot.AbilityTemplate);
+               }
+           }
 
-            foreach (var slot in _skillSlots)
-            {
-                if (slot.AbilityTemplate)
-                {
-                    slot.AbilityTemplate = _abilityFactory.InitializeAbilityTemplate(slot.AbilityTemplate);
-                }
-            }
+           for (var index = 0; index < _skillActions.Count; index++)
+           {
+               var index1 = index;
+
+               Action<InputAction.CallbackContext> delegateSubscribe = 
+                   delegate(InputAction.CallbackContext context) { OnSkillSlot(context, index1); };
+               
+               _hashedDelegates.Add(delegateSubscribe);
+               
+               _skillActions[index].performed += delegateSubscribe;
+           }
         }
 
         private void OnDestroy()
         {
-            _controls.Player.SkillSlot1.performed -= OnSkillSlot1;
-            _controls.Player.SkillSlot2.performed -= OnSkillSlot2;
+            for (int index = 0; index < _skillActions.Count; index++)
+            {
+                var index1 = index;
+                _skillActions[index].performed -= _hashedDelegates[index1];
+            }
         }
 
-        private void OnSkillSlot1(InputAction.CallbackContext context)
+        private void OnSkillSlot(InputAction.CallbackContext ctx, int index)
         {
-            var abilityTemplate = _skillSlots[0].AbilityTemplate;
+            var abilityTemplate = _skillSlots[index].AbilityTemplate;
             if (abilityTemplate == null) return;
             if (abilityTemplate.State is AbilityState.Cooldown or AbilityState.Active) return;
             
-            _skillSlots[0].AbilityTemplate.GetAbility().Use(this.gameObject, null);
-            _skillSlots[0].AbilityTemplate.State = AbilityState.Active;
-            _activeSkill = _skillSlots[0].AbilityTemplate;
-            _heroCooldown.StartCooldown(_skillSlots[0].AbilityTemplate);
+            _skillSlots[index].AbilityTemplate.GetAbility().Use(this.gameObject, null);
+            _skillSlots[index].AbilityTemplate.State = AbilityState.Active;
+            _activeSkill = _skillSlots[index].AbilityTemplate;
+            _heroCooldown.StartCooldown(_skillSlots[index].AbilityTemplate);
         }
-
-        private void OnSkillSlot2(InputAction.CallbackContext context)
-        {
-            var abilityTemplate = _skillSlots[1].AbilityTemplate;
-            if (abilityTemplate == null) return;
-            if (abilityTemplate.State is AbilityState.Cooldown or AbilityState.Active) return;
-            
-            _skillSlots[1].AbilityTemplate.GetAbility().Use(this.gameObject, null);
-            _skillSlots[1].AbilityTemplate.State = AbilityState.Active;
-            _activeSkill = _skillSlots[1].AbilityTemplate;
-            _heroCooldown.StartCooldown(_skillSlots[1].AbilityTemplate);
-        }
-
-
+        
         public void LoadData(PlayerData data)
         {
             var skillsData = data.AbilityData;
@@ -97,6 +106,7 @@ namespace Code.Entity.Hero
                     var slot = _skillSlots[index];
 
                     slot.AbilityTemplate = _abilityFactory.CreateAbilityTemplate(skillsData.EquippedSlots[index].AbilityId);
+
                 }
             }
             

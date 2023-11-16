@@ -53,7 +53,6 @@ namespace Code.Entity.Hero
             
         void Start()
         {
-
             _stateMachine = new FiniteStateMachine();
 
             _stateMachine.AddState(HeroIdle, new HeroIdleState(
