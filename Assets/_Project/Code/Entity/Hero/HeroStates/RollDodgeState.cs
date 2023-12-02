@@ -15,7 +15,6 @@ namespace Code.Entity.Hero.HeroStates
             _heroAnimator.PlayRoll();
             _heroRotation.enabled = false;
             _duration = _heroSkills.ActiveSkill.ActiveTime;
-            _heroMovement.ForceMoveTask();
         }
 
         public override void OnLogic()

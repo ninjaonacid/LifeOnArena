@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using Code.ConfigData.StatSystem;
 using Code.Services.BattleService;
@@ -10,11 +9,9 @@ namespace Code.Entity.Enemy
     [RequireComponent(typeof(EnemyAnimator))]
     public class EnemyAttack : MonoBehaviour
     {
-
         [SerializeField] private StatController _stats;
         private float _attackCooldown;
         private bool _attackIsActive;
-
         public bool TargetInAttackRange => _attackIsActive;
         private readonly Collider[] _hits = new Collider[1];
 

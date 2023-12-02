@@ -47,7 +47,7 @@ namespace Code.Entity.Hero
             _characterController = GetComponent<CharacterController>();
         }
 
-        public void ForceMoveTask()
+        public void DashTask(float dashTime, float dashSpeed)
         {
             var movementVector =
                 _camera.transform.TransformDirection(_controls.Player.Movement.ReadValue<Vector2>());
@@ -59,20 +59,20 @@ namespace Code.Entity.Hero
             movementVector.Normalize();
 
             transform.forward = movementVector;
+            
 
-            ForceMove(movementVector).Forget();
+            Dash(movementVector, dashTime, dashSpeed).Forget();
         }
 
-        private async UniTaskVoid ForceMove(Vector3 movementVector)
+        private async UniTaskVoid Dash(Vector3 movementVector, float dashTime, float dashSpeed)
         {
-            float dashTime = 0.3f;
-            float dashSpeed = 30f;
             float startTime = Time.time;
 
             while (Time.time < startTime + dashTime)
             {
                 _characterController.Move(movementVector * dashSpeed * Time.deltaTime);
-
+                movementVector.y = 0;
+                movementVector += Physics.gravity;
                 await UniTask.Yield();
             }
         }
@@ -86,7 +86,7 @@ namespace Code.Entity.Hero
 
             if (moveAxis.sqrMagnitude > Constants.Epsilon)
             {
-                movementVector = Camera.main.transform.TransformDirection(moveAxis);
+                movementVector = _camera.transform.TransformDirection(moveAxis);
                 movementVector.y = 0;
                 movementVector.Normalize();
             }
