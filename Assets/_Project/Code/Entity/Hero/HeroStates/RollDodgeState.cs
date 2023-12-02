@@ -4,7 +4,8 @@ namespace Code.Entity.Hero.HeroStates
 {
     public class RollDodgeState : HeroBaseAbilityState
     {
-        public RollDodgeState(HeroWeapon heroWeapon, HeroAnimator heroAnimator, HeroMovement heroMovement, HeroRotation heroRotation, bool needsExitTime, bool isGhostState = false) : base(heroWeapon, heroAnimator, heroMovement, heroRotation, needsExitTime, isGhostState)
+        public RollDodgeState(HeroWeapon heroWeapon, HeroSkills heroSkills, HeroAnimator heroAnimator, HeroMovement heroMovement, HeroRotation heroRotation, bool needsExitTime, bool isGhostState = false) 
+            : base(heroWeapon, heroSkills, heroAnimator, heroMovement, heroRotation, needsExitTime, isGhostState)
         {
         }
 
@@ -13,8 +14,7 @@ namespace Code.Entity.Hero.HeroStates
             base.OnEnter();
             _heroAnimator.PlayRoll();
             _heroRotation.enabled = false;
-            _heroMovement.enabled = false;
-            _duration = 1f;
+            _duration = _heroSkills.ActiveSkill.ActiveTime;
             _heroMovement.ForceMoveTask();
         }
 
@@ -33,7 +33,6 @@ namespace Code.Entity.Hero.HeroStates
         {
             base.OnExit();
             _heroRotation.enabled = true;
-            _heroMovement.enabled = true;
         }
 
         public override void OnExitRequest()
@@ -47,6 +46,5 @@ namespace Code.Entity.Hero.HeroStates
 
         public override bool IsStateOver() =>
             _duration <= 0;
-
     }
 }

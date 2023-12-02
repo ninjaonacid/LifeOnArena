@@ -77,7 +77,7 @@ namespace Code.Entity.Enemy
             _fsm.AddTriggerTransitionFromAny("OnDamage", new CycleTransition(
                     " ", 
                     HitStaggerState,
-            false, true
+            true, true
             ));
             
             _fsm.AddTransition(new TransitionAfter(

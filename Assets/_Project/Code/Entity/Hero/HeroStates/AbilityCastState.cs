@@ -4,7 +4,7 @@ namespace Code.Entity.Hero.HeroStates
 {
     public class AbilityCastState : HeroBaseAbilityState
     {
-        public AbilityCastState(HeroWeapon heroWeapon, HeroAnimator heroAnimator, HeroMovement heroMovement, HeroRotation heroRotation, bool needsExitTime, bool isGhostState = false) : base(heroWeapon, heroAnimator, heroMovement, heroRotation, needsExitTime, isGhostState)
+        public AbilityCastState(HeroWeapon heroWeapon, HeroSkills heroSkills, HeroAnimator heroAnimator, HeroMovement heroMovement, HeroRotation heroRotation, bool needsExitTime, bool isGhostState = false) : base(heroWeapon, heroSkills, heroAnimator, heroMovement, heroRotation, needsExitTime, isGhostState)
         {
         }
 

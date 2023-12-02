@@ -4,7 +4,7 @@ namespace Code.Entity.Hero.HeroStates
 {
     public class SpinAbilityState : HeroBaseAbilityState
     {
-        public SpinAbilityState(HeroWeapon heroWeapon, HeroAnimator heroAnimator, HeroMovement heroMovement, HeroRotation heroRotation, bool needsExitTime, bool isGhostState = false) : base(heroWeapon, heroAnimator, heroMovement, heroRotation, needsExitTime, isGhostState)
+        public SpinAbilityState(HeroWeapon heroWeapon, HeroSkills heroSkills, HeroAnimator heroAnimator, HeroMovement heroMovement, HeroRotation heroRotation, bool needsExitTime, bool isGhostState = false) : base(heroWeapon, heroSkills, heroAnimator, heroMovement, heroRotation, needsExitTime, isGhostState)
         {
         }
 
@@ -14,7 +14,7 @@ namespace Code.Entity.Hero.HeroStates
             _heroRotation.enabled = false;
             _heroWeapon.EnableWeapon(true);
             _heroAnimator.PlayAttack(this);
-            _duration = 0.7f;
+            _duration = _heroSkills.ActiveSkill.ActiveTime;
         }
 
         public override void OnLogic()
@@ -41,6 +41,5 @@ namespace Code.Entity.Hero.HeroStates
         }
 
         public override bool IsStateOver() => _duration <= 0;
-
     }
 }

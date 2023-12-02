@@ -18,7 +18,8 @@ namespace Code.Entity.Hero
 
         private float MovementSpeed => _stats.Stats["MoveSpeed"].Value;
         
-        private readonly float _rollForce = 20f;
+        private readonly float _rollForce = 1000f;
+        private Camera _camera;
 
         [Inject]
         private void Construct(PlayerControls controls)
@@ -42,28 +43,38 @@ namespace Code.Entity.Hero
 
         private void Awake()
         {
+            _camera = Camera.main;
             _characterController = GetComponent<CharacterController>();
         }
 
         public void ForceMoveTask()
         {
             var movementVector =
-                Camera.main.transform.TransformDirection(_controls.Player.Movement.ReadValue<Vector2>());
+                _camera.transform.TransformDirection(_controls.Player.Movement.ReadValue<Vector2>());
+            if (movementVector.sqrMagnitude < Constants.Epsilon)
+            {
+                movementVector = transform.forward;
+            }
             movementVector.y = 0;
             movementVector.Normalize();
-            
+
+            transform.forward = movementVector;
+
             ForceMove(movementVector).Forget();
         }
 
-        public async UniTaskVoid ForceMove(Vector3 movementVector)
+        private async UniTaskVoid ForceMove(Vector3 movementVector)
         {
-            float movementDistance = 20f;
-            
-            movementVector += Physics.gravity;
-            
-            _characterController.Move(movementVector * _rollForce * Time.deltaTime);
+            float dashTime = 0.3f;
+            float dashSpeed = 30f;
+            float startTime = Time.time;
 
-            await UniTask.Yield();
+            while (Time.time < startTime + dashTime)
+            {
+                _characterController.Move(movementVector * dashSpeed * Time.deltaTime);
+
+                await UniTask.Yield();
+            }
         }
 
         public void Movement(bool isForced = false)

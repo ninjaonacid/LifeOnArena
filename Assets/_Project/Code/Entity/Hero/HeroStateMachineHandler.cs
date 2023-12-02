@@ -62,13 +62,13 @@ namespace Code.Entity.Hero
                 _heroAnimator, _heroMovement, _heroRotation, false, false));
 
             _stateMachine.AddState(RollAbility, new RollDodgeState(
-                _heroWeapon, _heroAnimator, _heroMovement, _heroRotation,  true, false));
+                _heroWeapon, _heroSkills, _heroAnimator, _heroMovement, _heroRotation,  true, false));
 
             _stateMachine.AddState(SpinAttackAbility, new SpinAbilityState(
-                _heroWeapon, _heroAnimator, _heroMovement, _heroRotation,  true, false));
+                _heroWeapon, _heroSkills, _heroAnimator, _heroMovement, _heroRotation,  true, false));
             
             _stateMachine.AddState(AbilityCast, new AbilityCastState(
-                _heroWeapon, _heroAnimator,  _heroMovement, _heroRotation,  true, true));
+                _heroWeapon, _heroSkills, _heroAnimator,  _heroMovement, _heroRotation,  true, true));
 
             _stateMachine.AddState(HeroBaseAttack1, new FirstAttackState(
                 _heroAttack,
