@@ -2,6 +2,7 @@ using Code.Data;
 using Code.Data.PlayerData;
 using Code.Logic;
 using Code.Services.PersistentProgress;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using VContainer;
@@ -44,20 +45,25 @@ namespace Code.Entity.Hero
             _characterController = GetComponent<CharacterController>();
         }
 
-        public void ForceMove()
+        public void ForceMoveTask()
         {
-            var movementVector = Vector3.zero;
+            var movementVector =
+                Camera.main.transform.TransformDirection(_controls.Player.Movement.ReadValue<Vector2>());
+            movementVector.y = 0;
+            movementVector.Normalize();
+            
+            ForceMove(movementVector).Forget();
+        }
 
-            if (_controls.Player.Movement.ReadValue<Vector2>().sqrMagnitude > Constants.Epsilon )
-            {
-                movementVector = Camera.main.transform.TransformDirection(_controls.Player.Movement.ReadValue<Vector2>());
-                movementVector.y = 0;
-                movementVector.Normalize();
-            }
-
+        public async UniTaskVoid ForceMove(Vector3 movementVector)
+        {
+            float movementDistance = 20f;
+            
             movementVector += Physics.gravity;
-
+            
             _characterController.Move(movementVector * _rollForce * Time.deltaTime);
+
+            await UniTask.Yield();
         }
 
         public void Movement(bool isForced = false)

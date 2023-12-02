@@ -12,6 +12,7 @@ using Code.Services.RandomService;
 using Code.Services.SaveLoad;
 using Code.UI.View.HUD;
 using Cysharp.Threading.Tasks;
+using Sirenix.OdinInspector.Editor;
 using UnityEngine;
 using UnityEngine.AI;
 using VContainer;
@@ -48,6 +49,15 @@ namespace Code.Core.Factory
         {
             await _assetProvider.Load<GameObject>(AssetAddress.EnemySpawner);
             await _assetProvider.Load<GameObject>(AssetAddress.Soul);
+            
+            
+        }
+        
+        public TState Create<TState>() where TState : IRecursiveOnChildStateChangedNotification
+        {
+            var instance = Activator.CreateInstance<TState>();
+            _objectResolver.Inject(instance);
+            return instance;
         }
 
         public async UniTask<EnemySpawner> CreateSpawner(Vector3 at,

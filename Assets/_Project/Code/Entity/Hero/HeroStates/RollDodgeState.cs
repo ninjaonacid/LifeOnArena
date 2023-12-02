@@ -13,14 +13,15 @@ namespace Code.Entity.Hero.HeroStates
             base.OnEnter();
             _heroAnimator.PlayRoll();
             _heroRotation.enabled = false;
+            _heroMovement.enabled = false;
             _duration = 1f;
+            _heroMovement.ForceMoveTask();
         }
 
         public override void OnLogic()
         {
             base.OnLogic();
             _duration -= Time.deltaTime;
-            _heroMovement.ForceMove();
             
             if (IsStateOver())
             {
@@ -32,6 +33,7 @@ namespace Code.Entity.Hero.HeroStates
         {
             base.OnExit();
             _heroRotation.enabled = true;
+            _heroMovement.enabled = true;
         }
 
         public override void OnExitRequest()
