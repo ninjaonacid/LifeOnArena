@@ -2,6 +2,8 @@ using Code.Core.AssetManagement;
 using Code.Core.Audio;
 using Code.Core.EntryPoints;
 using Code.Core.EventSystem;
+using Code.Core.Factory;
+using Code.Core.ObjectPool;
 using Code.Core.SceneManagement;
 using Code.Services.AudioService;
 using Code.Services.BattleService;
@@ -35,7 +37,6 @@ namespace Code.Core.Scopes
             builder.Register<IGameDataContainer, GameDataContainer>(Lifetime.Singleton);
             builder.Register<IRandomService, RandomService>(Lifetime.Singleton);
             builder.Register<IEventSystem, GameEventSystem>(Lifetime.Singleton);
-
             builder.Register<IBattleService, BattleService>(Lifetime.Singleton);
 
             builder.Register<PlayerControls>(Lifetime.Singleton).AsSelf();

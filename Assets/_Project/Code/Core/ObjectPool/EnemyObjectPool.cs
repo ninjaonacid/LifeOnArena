@@ -8,7 +8,6 @@ using UnityEngine;
 namespace Code.Core.ObjectPool
 {
     public class EnemyObjectPool : IDisposable
-
     {
         private readonly IEnemyFactory _enemyFactory;
         private readonly Dictionary<int, Stack<GameObject>> _enemyObjectsStock;

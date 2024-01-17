@@ -1,43 +1,47 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using Code.Core.Factory;
 using UnityEngine;
 using VContainer;
+using VContainer.Unity;
 
 namespace Code.Core.ObjectPool
 {
-    public class ObjectPoolProvider
+    public class ObjectPoolProvider : IInitializable
     {
         private IObjectResolver _resolver;
-        private Dictionary<int, ObjectPool> _poolMap;
+        private Dictionary<int, ObjectPool<GameObject>> _identifierToPoolMap;
+        private Dictionary<string, ObjectPool<GameObject>> _prefabToPoolMap;
 
+        private IEnemyFactory _enemyFactory;
+        private ParticleFactory _particleFactory;
         public ObjectPoolProvider(IObjectResolver resolver)
         {
             _resolver = resolver;
         }
-        
-        public GameObject Spawn(GameObject go, Transform parent)
+
+        public void Initialize()
         {
-            ObjectPool pool = null;
-            
-            if (!_poolMap.TryGetValue(go.GetInstanceID(), out pool))
+        }
+
+        public GameObject Spawn(int id, GameObject prefab, Vector3 position)
+        {
+            ObjectPool<GameObject> objectPool = null;
+
+            if (!_identifierToPoolMap.TryGetValue(id, out objectPool))
             {
-                pool = CreatePool(go);
+                objectPool = new ObjectPool<GameObject>(() => Instantiate(prefab));
+                
             }
 
-            GameObject spawnedObject = pool.Spawn(parent);
-            
-            return null;
+            return objectPool.Get();
         }
 
-        public GameObject Despawn(GameObject go)
+        private GameObject Instantiate(GameObject prefab)
         {
-            
-            return null;
+            var go = _resolver.Instantiate(prefab);
+            return go;
         }
 
-        private ObjectPool CreatePool(GameObject go)
-        {
-            var pool = new ObjectPool(_resolver, go);
-            return pool;
-        }
     }
 }

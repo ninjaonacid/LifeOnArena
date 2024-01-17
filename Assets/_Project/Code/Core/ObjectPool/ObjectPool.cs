@@ -1,32 +1,48 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using VContainer;
+using Object = UnityEngine.Object;
 
 namespace Code.Core.ObjectPool
 {
-    public class ObjectPool
+    public class ObjectPool<T>
     {
-        private IObjectResolver _resolver;
-        private GameObject _pooledObject;
         private GameObject _poolRoot;
 
-        private Queue<GameObject> _objectsStock;
-        public ObjectPool(IObjectResolver resolver, GameObject pooledObject)
+        private readonly Func<T> _factory;
+        private Stack<PooledObjectContainer<T>> _objectsStock;
+        
+        public ObjectPool(Func<T> factory)
         {
-            _resolver = resolver;
-            _pooledObject = pooledObject;
+            _factory = factory;
         }
         
-        public void Initialize()
+        public T Get()
         {
-            _poolRoot = new GameObject($"{_pooledObject.name} pool");
-            Object.DontDestroyOnLoad(_poolRoot);
+            T obj = default(T);
+            if (_objectsStock.Count > 0)
+            {
+                obj = _objectsStock.Pop().Object;
+            }
+            else
+            {
+                var container = CreateContainer();
+                _objectsStock.Push(container);
+            }
+
+            return obj;
         }
 
-        public GameObject Spawn(Transform parent)
+        private PooledObjectContainer<T> CreateContainer()
         {
-           //if(_pooledObject.)
-           return null;
+            PooledObjectContainer<T> container = new PooledObjectContainer<T>
+            {
+                Object = _factory()
+            };
+
+            return container;
         }
+        
     }
 }

@@ -2,17 +2,16 @@ using System;
 using System.Threading;
 using Code.ConfigData.Identifiers;
 using Code.Core.AssetManagement;
+using Code.Core.ObjectPool;
 using Code.Entity.Enemy;
 using Code.Entity.EntitiesComponents;
 using Code.Logic.EnemySpawners;
-using Code.Logic.EntitiesComponents;
 using Code.Services.ConfigData;
 using Code.Services.PersistentProgress;
 using Code.Services.RandomService;
 using Code.Services.SaveLoad;
 using Code.UI.View.HUD;
 using Cysharp.Threading.Tasks;
-using Sirenix.OdinInspector.Editor;
 using UnityEngine;
 using UnityEngine.AI;
 using VContainer;
@@ -30,6 +29,7 @@ namespace Code.Core.Factory
         private readonly IGameDataContainer _gameDataContainer;
         private readonly IRandomService _randomService;
         private readonly IObjectResolver _objectResolver;
+        private readonly ObjectPoolProvider _objectPoolProvider;
 
         private readonly CancellationTokenSource _cancellationTokenSource = default;
         public EnemyFactory(IHeroFactory heroFactory, IConfigProvider config, IAssetProvider assetProvider, 
@@ -49,15 +49,6 @@ namespace Code.Core.Factory
         {
             await _assetProvider.Load<GameObject>(AssetAddress.EnemySpawner);
             await _assetProvider.Load<GameObject>(AssetAddress.Soul);
-            
-            
-        }
-        
-        public TState Create<TState>() where TState : IRecursiveOnChildStateChangedNotification
-        {
-            var instance = Activator.CreateInstance<TState>();
-            _objectResolver.Inject(instance);
-            return instance;
         }
 
         public async UniTask<EnemySpawner> CreateSpawner(Vector3 at,
@@ -85,7 +76,7 @@ namespace Code.Core.Factory
             GameObject monster = _objectResolver.Instantiate(prefab,
                 parent.position, 
                 Quaternion.identity, parent);
-            
+
             
             IDamageable damageable = monster.GetComponent<IDamageable>();
 
@@ -131,5 +122,6 @@ namespace Code.Core.Factory
             _cancellationTokenSource?.Cancel();
             _cancellationTokenSource?.Dispose();
         }
+        
     }
 }
