@@ -22,6 +22,8 @@ namespace Code.Core.ObjectPool
 
         public void Initialize()
         {
+            _identifierToPoolMap = new Dictionary<int, ObjectPool<GameObject>>();
+            _prefabToPoolMap = new Dictionary<string, ObjectPool<GameObject>>();
         }
 
         public GameObject Spawn(int id, GameObject prefab, Vector3 position)
@@ -31,10 +33,15 @@ namespace Code.Core.ObjectPool
             if (!_identifierToPoolMap.TryGetValue(id, out objectPool))
             {
                 objectPool = new ObjectPool<GameObject>(() => Instantiate(prefab));
-                
             }
 
             return objectPool.Get();
+        }
+
+        public TComponent Spawn<TComponent>(int id, GameObject prefab, Vector3 position)
+        {
+           var go =  Spawn(id, prefab, position);
+           return go.GetComponent<TComponent>();
         }
 
         private GameObject Instantiate(GameObject prefab)

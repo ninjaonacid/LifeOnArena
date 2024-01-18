@@ -20,7 +20,8 @@ namespace Code.Core.ObjectPool
         
         public T Get()
         {
-            T obj = default(T);
+            T obj = default;
+            
             if (_objectsStock.Count > 0)
             {
                 obj = _objectsStock.Pop().Object;
@@ -28,7 +29,7 @@ namespace Code.Core.ObjectPool
             else
             {
                 var container = CreateContainer();
-                _objectsStock.Push(container);
+                obj = container.Object;
             }
 
             return obj;
@@ -38,8 +39,11 @@ namespace Code.Core.ObjectPool
         {
             PooledObjectContainer<T> container = new PooledObjectContainer<T>
             {
-                Object = _factory()
+                Object = _factory(),
             };
+
+            var obj = _factory();
+
 
             return container;
         }
