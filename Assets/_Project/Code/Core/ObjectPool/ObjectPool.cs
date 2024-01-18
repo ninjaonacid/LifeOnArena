@@ -1,12 +1,10 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using VContainer;
-using Object = UnityEngine.Object;
 
 namespace Code.Core.ObjectPool
 {
-    public class ObjectPool<T>
+    public class ObjectPool<T> where T : Component, IPoolable
     {
         private GameObject _poolRoot;
 
@@ -35,7 +33,7 @@ namespace Code.Core.ObjectPool
             return obj;
         }
 
-        private PooledObjectContainer<T> CreateContainer()
+        private PooledObjectContainer<T> CreateContainer() 
         {
             PooledObjectContainer<T> container = new PooledObjectContainer<T>
             {
@@ -43,9 +41,19 @@ namespace Code.Core.ObjectPool
             };
 
             var obj = _factory();
-
+            obj.ReturnToPool += Return;
 
             return container;
+        }
+
+        private void Return(GameObject obj)
+        {
+            
+        }
+
+        private void Return()
+        {
+            
         }
         
     }

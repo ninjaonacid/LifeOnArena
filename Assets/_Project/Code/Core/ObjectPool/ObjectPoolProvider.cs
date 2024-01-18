@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Code.Core.Factory;
 using UnityEngine;
+using UnityEngine.Pool;
 using VContainer;
 using VContainer.Unity;
 
@@ -10,8 +11,8 @@ namespace Code.Core.ObjectPool
     public class ObjectPoolProvider : IInitializable
     {
         private IObjectResolver _resolver;
-        private Dictionary<int, ObjectPool<GameObject>> _identifierToPoolMap;
-        private Dictionary<string, ObjectPool<GameObject>> _prefabToPoolMap;
+        private Dictionary<int, ObjectPool<PooledObject>> _identifierToPoolMap;
+        private Dictionary<string, ObjectPool<PooledObject>> _prefabToPoolMap;
 
         private IEnemyFactory _enemyFactory;
         private ParticleFactory _particleFactory;
@@ -22,20 +23,20 @@ namespace Code.Core.ObjectPool
 
         public void Initialize()
         {
-            _identifierToPoolMap = new Dictionary<int, ObjectPool<GameObject>>();
-            _prefabToPoolMap = new Dictionary<string, ObjectPool<GameObject>>();
+            _identifierToPoolMap = new Dictionary<int, ObjectPool<PooledObject>>();
+            _prefabToPoolMap = new Dictionary<string, ObjectPool<PooledObject>>();
         }
 
         public GameObject Spawn(int id, GameObject prefab, Vector3 position)
         {
-            ObjectPool<GameObject> objectPool = null;
+            ObjectPool<PooledObject> objectPool = null;
 
             if (!_identifierToPoolMap.TryGetValue(id, out objectPool))
             {
-                objectPool = new ObjectPool<GameObject>(() => Instantiate(prefab));
+                objectPool = new ObjectPool<PooledObject>(() => Instantiate(prefab));
             }
 
-            return objectPool.Get();
+            return objectPool.Get().gameObject;
         }
 
         public TComponent Spawn<TComponent>(int id, GameObject prefab, Vector3 position)
@@ -43,11 +44,11 @@ namespace Code.Core.ObjectPool
            var go =  Spawn(id, prefab, position);
            return go.GetComponent<TComponent>();
         }
-
-        private GameObject Instantiate(GameObject prefab)
+        
+        private PooledObject Instantiate(GameObject prefab)
         {
             var go = _resolver.Instantiate(prefab);
-            return go;
+            return go.GetComponent<PooledObject>();
         }
 
     }
