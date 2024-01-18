@@ -9,6 +9,12 @@ namespace Code.Entity.Hero
         private PlayerControls _controls;
         public float rotationSmooth;
         public float rotationSpeed;
+        private Camera _camera;
+
+        private void Awake()
+        {
+            _camera = Camera.main;
+        }
 
         [Inject]
         private void Constructor(PlayerControls controls)
@@ -21,13 +27,12 @@ namespace Code.Entity.Hero
             LookRotation();
         }
 
-        public void LookRotation()
+        private void LookRotation()
         {
-            
             if (_controls.Player.Movement.ReadValue<Vector2>().sqrMagnitude > Constants.Epsilon)
             {
                 var rotateFrom = transform.rotation;
-                var directionVector = Camera.main.transform.TransformDirection(_controls.Player.Movement.ReadValue<Vector2>());
+                var directionVector = _camera.transform.TransformDirection(_controls.Player.Movement.ReadValue<Vector2>());
                 directionVector.y = 0;
                 directionVector.Normalize();
                 var rotateTo = Quaternion.LookRotation(directionVector);

@@ -22,10 +22,8 @@ namespace Code.Entity.Enemy.CommonEnemy
         {
             base.OnEnter();
             
-            _enemyAttack.Attack();
             _enemyAnimator.PlayAttack();
             _agentMoveToPlayer.ShouldMove(false);
-
         }
 
         public override void OnLogic()
@@ -39,8 +37,8 @@ namespace Code.Entity.Enemy.CommonEnemy
         public override void OnExit()
         {
             base.OnExit();
+            _enemyAttack.Attack();
             _enemyAttack.AttackEnded();
-
         }
 
         public override void OnExitRequest()

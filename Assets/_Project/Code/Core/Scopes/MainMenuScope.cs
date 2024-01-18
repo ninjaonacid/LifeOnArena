@@ -1,7 +1,7 @@
 using Code.Core.EntryPoints;
 using Code.Core.Factory;
+using Code.Core.Installers;
 using Code.Core.ObjectPool;
-using Code.Services.BattleService;
 using VContainer;
 using VContainer.Unity;
 
@@ -12,12 +12,17 @@ namespace Code.Core.Scopes
         protected override void Configure(IContainerBuilder builder)
         {
             builder.RegisterEntryPoint<MainMenuStarter>();
-
-            builder.Register<IHeroFactory, HeroFactory>(Lifetime.Scoped);
+            
+            
             builder.Register<IItemFactory, ItemFactory>(Lifetime.Scoped);
-            builder.Register<IBattleService, BattleService>(Lifetime.Scoped);
             builder.Register<IAbilityFactory, AbilityFactory>(Lifetime.Scoped);
-            builder.Register<IParticleObjectPool, ParticleObjectPool>(Lifetime.Scoped);
+            builder.Register<IHeroFactory, HeroFactory>(Lifetime.Scoped);
+            
+            builder.Register<ParticleFactory>(Lifetime.Scoped);
+            builder.Register<ParticleObjectPool>(Lifetime.Scoped);
+
+            IInstaller screenServiceInstaller = new ScreenServiceInstaller();
+            screenServiceInstaller.Install(builder);
         }
     }
 }

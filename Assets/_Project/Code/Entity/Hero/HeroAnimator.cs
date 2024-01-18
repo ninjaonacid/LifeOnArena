@@ -77,13 +77,14 @@ namespace Code.Entity.Hero
         {
             _heroAnimator.SetTrigger(Hit);
         }
+        
 
         public void PlaySpinAttackSkill()
         {
             _heroAnimator.CrossFade(_spinAttackStateHash, 0.1f);
         }
 
-        public void PlayAttack(HeroBaseAbilityState state)
+        public void PlayAttack(HeroBaseState state)
         {
             switch (state)
             {
@@ -102,6 +103,10 @@ namespace Code.Entity.Hero
             }
         }
 
+        public void OverrideController(AnimatorOverrideController controller)
+        {
+            _heroAnimator.runtimeAnimatorController = controller;
+        }
         public void PlayAbilityAnimation(IAbility ability)
         {
 

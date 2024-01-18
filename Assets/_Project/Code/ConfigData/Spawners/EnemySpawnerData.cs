@@ -10,10 +10,10 @@ namespace Code.ConfigData.Spawners
     {
         public string Id;
         public int RespawnCount;
-        [FormerlySerializedAs("MonsterTypeId")] public MobId MobId;
+        public MobIdentifier MobId;
         public Vector3 Position;
 
-        public EnemySpawnerData(string id, MobId mobId, Vector3 position, int respawnCount)
+        public EnemySpawnerData(string id, MobIdentifier mobId, Vector3 position, int respawnCount)
         {
             Id = id;
             MobId = mobId;

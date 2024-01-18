@@ -19,7 +19,7 @@ namespace Code.ConfigData.Levels
         None
     }
 
-    [CreateAssetMenu(fileName = "LevelData", menuName = "StaticData/Level")]
+    [CreateAssetMenu(fileName = "LevelData", menuName = "Config/Level")]
     public class LevelConfig : ScriptableObject
     {
         public string LevelKey;

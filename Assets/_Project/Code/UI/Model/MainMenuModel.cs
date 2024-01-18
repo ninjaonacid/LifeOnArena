@@ -1,25 +1,35 @@
 using Code.Data;
+using Code.Services.PersistentProgress;
 using UniRx;
 
 namespace Code.UI.Model
 {
     public class MainMenuModel : IScreenModel
     {
-        private readonly StatsData _playerStats;
+        private readonly IGameDataContainer _gameData;
+        
         public ReactiveProperty<int> Health { get; } = new(); 
         public ReactiveProperty<int> Attack { get; } = new();
         public ReactiveProperty<int> Defense { get; } = new();
 
-        public MainMenuModel(StatsData playerStats)
+        public bool IsMusicMuted;
+
+        public void ChangeMusicButtonState()
         {
-            _playerStats = playerStats;
+            IsMusicMuted = !IsMusicMuted;
+        }
+
+        public MainMenuModel(IGameDataContainer gameData)
+        {
+            _gameData = gameData;
         }
         
         public void Initialize()
         {
-            Health.Value = _playerStats.Stats["Health"];
-            Attack.Value = _playerStats.Stats["Attack"];
-            Defense.Value = _playerStats.Stats["Defense"];
+            Health.Value = _gameData.PlayerData.StatsData.Stats["Health"];
+            Attack.Value = _gameData.PlayerData.StatsData.Stats["Attack"];
+            Defense.Value = _gameData.PlayerData.StatsData.Stats["Defense"];
+            IsMusicMuted = _gameData.AudioData.isMusicMuted;
         }
     }
 }

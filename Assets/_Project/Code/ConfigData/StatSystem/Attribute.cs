@@ -1,5 +1,6 @@
 using System;
 using Code.Data;
+using Code.Data.PlayerData;
 using Code.Services.PersistentProgress;
 using UnityEngine;
 

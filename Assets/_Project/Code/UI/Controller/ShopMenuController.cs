@@ -3,6 +3,7 @@ using Code.UI.Model;
 using Code.UI.Services;
 using Code.UI.View;
 using UniRx;
+using UnityEngine.Assertions;
 
 namespace Code.UI.Controller
 {
@@ -10,7 +11,7 @@ namespace Code.UI.Controller
     {
         private ShopMenuModel _model;
         private ShopMenuView _view;
-        private SceneLoader _sceneLoader;
+        private readonly SceneLoader _sceneLoader;
         public ShopMenuController(SceneLoader sceneLoader)
         {
             _sceneLoader = sceneLoader;
@@ -20,6 +21,9 @@ namespace Code.UI.Controller
         {
             _model = model as ShopMenuModel;
             _view = view as ShopMenuView;
+            
+            Assert.IsNotNull(_model);
+            Assert.IsNotNull(_view);
 
             _view.NextSceneButton.OnClickAsObservable().Subscribe(x => _sceneLoader.Load("StoneDungeon_2"));
         }

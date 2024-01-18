@@ -5,7 +5,9 @@ using Code.ConfigData.Ability;
 using Code.ConfigData.Audio;
 using Code.ConfigData.Identifiers;
 using Code.ConfigData.Levels;
+using Code.ConfigData.ScreenUI;
 using Code.ConfigData.Settings;
+using Code.ConfigData.StateMachine;
 using Code.ConfigData.StatSystem;
 using Code.ConfigData.UIWindows;
 using Code.UI;
@@ -16,14 +18,15 @@ namespace Code.Services.ConfigData
     public class ConfigProvider : IConfigProvider
     {
         private const string ConfigFolder = "Configs";
-        private Dictionary<MobId, EnemyDataConfig> _monsters;
+        private Dictionary<int, EnemyDataConfig> _monsters;
         private Dictionary<string, LevelConfig> _levels; 
         private Dictionary<LocationReward, LevelReward> _levelReward;
         private Dictionary<ScreenID, ScreenConfig> _windowConfigs;
         private Dictionary<int, AbilityTemplateBase> _heroAbilities;
-        private Dictionary<ParticleId, ParticlesStaticData> _particles;
-        private Dictionary<WeaponId, WeaponData> _weapons;
-        private Dictionary<WeaponId, WeaponPlatformStaticData> _weaponPlatforms;
+        private Dictionary<int, ParticleObjectData> _particles;
+        private Dictionary<int, WeaponData> _weapons;
+
+        private WeaponStateMachineDatabase _weaponFsmDatabase;
         private AudioLibrary _audioLibrary;
         private AudioServiceSettings _audioServiceSettings;
         private StatDatabase _characterStats;
@@ -32,7 +35,7 @@ namespace Code.Services.ConfigData
         {
             _monsters = Resources
                 .LoadAll<EnemyDataConfig>($"{ConfigFolder}/Monsters")
-                .ToDictionary(x => x.MobId, x => x);
+                .ToDictionary(x => x.MobId.Id, x => x);
 
             _audioLibrary = Resources
                 .Load<AudioLibrary>("Sounds/AudioLibrary");
@@ -49,7 +52,7 @@ namespace Code.Services.ConfigData
                 .ToDictionary(x => x.LocationReward);
 
             _windowConfigs = Resources
-                .Load<WindowsStaticData>($"{ConfigFolder}/UIWindows/WindowsStaticData")
+                .Load<ScreenDatabase>($"{ConfigFolder}/ScreenUI/ScreenDatabase")
                 .Configs
                 .ToDictionary(x => x.ScreenID, x => x);
 
@@ -61,20 +64,19 @@ namespace Code.Services.ConfigData
                 .Load<StatDatabase>($"{ConfigFolder}/Hero/Stats/HeroStatsData");
 
             _particles = Resources
-                .LoadAll<ParticlesStaticData>($"{ConfigFolder}/Particles")
-                .ToDictionary(x => x.ParticleId, x => x);
+                .LoadAll<ParticleObjectData>($"{ConfigFolder}/Particles")
+                .ToDictionary(x => x.Identifier.Id, x => x);
             
             _weapons = Resources
                 .LoadAll<WeaponData>($"{ConfigFolder}/Equipment/Weapons")
-                .ToDictionary(x => x.WeaponId, x => x);
+                .ToDictionary(x => x.WeaponId.Id, x => x);
 
-            _weaponPlatforms = Resources
-                .LoadAll<WeaponPlatformStaticData>($"{ConfigFolder}/WeaponPlatforms")
-                .ToDictionary(x => x.WeaponPlatformId, x => x);
+            _weaponFsmDatabase = Resources
+                .Load<WeaponStateMachineDatabase>($"{ConfigFolder}/StateMachine/WeaponFsmConfigDatabase");
 
         }
 
-        public WeaponData Weapon(WeaponId weaponId)
+        public WeaponData Weapon(int weaponId)
         {
             if(_weapons.TryGetValue(weaponId, out var weaponStaticData))
                 return weaponStaticData;
@@ -84,16 +86,8 @@ namespace Code.Services.ConfigData
 
         public AudioServiceSettings AudioServiceSettings() => _audioServiceSettings;
         public AudioLibrary AudioLibrary() => _audioLibrary;
-     
-        public WeaponPlatformStaticData WeaponPlatforms(WeaponId weaponId)
-        {
-            if(_weaponPlatforms.TryGetValue(weaponId, out var weaponPlatformStaticData ))
-                return weaponPlatformStaticData;
 
-            return null;
-        }
-
-        public ParticlesStaticData Particle(ParticleId id)
+        public ParticleObjectData Particle(int id)
         {
             if(_particles.TryGetValue(id, out var particlesStaticData))
                 return particlesStaticData;
@@ -101,9 +95,9 @@ namespace Code.Services.ConfigData
             return null;
         }
         
-        public EnemyDataConfig Monster(MobId typeId)
+        public EnemyDataConfig Monster(int id)
         {
-            if (_monsters.TryGetValue(typeId, out var monsterStaticData))
+            if (_monsters.TryGetValue(id, out var monsterStaticData))
                 return monsterStaticData;
 
             return null;
@@ -116,8 +110,17 @@ namespace Code.Services.ConfigData
 
             return null;
         }
-        
 
+        public List<AbilityTemplateBase> AllAbilities()
+        {
+            if (_heroAbilities.Count > 0)
+            {
+                return _heroAbilities.Values.ToList();
+            }
+
+            return null;
+        }
+        
         public LevelConfig Level(string sceneKey) =>
         
             _levels.TryGetValue(sceneKey, out LevelConfig staticData)
@@ -144,6 +147,9 @@ namespace Code.Services.ConfigData
             _windowConfigs.TryGetValue(menuId, out ScreenConfig windowConfig)
                 ? windowConfig
                 : null;
-        
+
+        public WeaponStateMachineDatabase GetWeaponFsmDatabase() => _weaponFsmDatabase;
+
+
     }
 }

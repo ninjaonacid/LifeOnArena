@@ -2,19 +2,14 @@ namespace Code.Entity.Hero.HeroStates
 {
     public class HeroMovementState : HeroBaseState
     {
-        private readonly HeroMovement _heroMovement;
-
-
-        public HeroMovementState(HeroAnimator animator, HeroMovement heroMovement, bool needExitTime, bool isGhostState) : base(animator, needExitTime, isGhostState)
+        public HeroMovementState(HeroAnimator heroAnimator, HeroMovement heroMovement, HeroRotation heroRotation, bool needsExitTime, bool isGhostState = false) : base(heroAnimator, heroMovement, heroRotation, needsExitTime, isGhostState)
         {
-            _heroMovement = heroMovement;
         }
-
 
         public override void OnEnter()
         {
             base.OnEnter();
-            HeroAnimator.PlayRun();
+            _heroAnimator.PlayRun();
         }
 
         public override void OnLogic()

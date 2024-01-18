@@ -1,53 +1,56 @@
-using Code.ConfigData.StatSystem;
 using Code.Core.ObjectPool;
+using Code.Logic.EntitiesComponents;
 using Code.Logic.Projectiles;
 using Code.Services.BattleService;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
 
 namespace Code.ConfigData.Ability.ActiveAbilities
 {
     public class TornadoAbility : IAbility
     {
-        private readonly IParticleObjectPool _particlesPool;
+        private readonly ParticleObjectPool _particleObjectPool;
         private readonly IBattleService _battleService;
-        private readonly AssetReference _tornadoPrefab;
+        private readonly ParticleObjectData _particleObjectData;
         private readonly float _duration;
         private readonly float _damage;
         private readonly float _attackRadius;
+        private readonly float _castDistance;
 
-        private readonly LayerMask _layerMask = 1 << LayerMask.NameToLayer("Hittable");
-
-        public TornadoAbility(IParticleObjectPool particlePool,
+        private ParticleSystem _tornadoParticle;
+        
+        public TornadoAbility(ParticleObjectPool particleObjectPool,
             IBattleService battleService,
-            AssetReference tornadoPrefab,
+            ParticleObjectData particleObjectData,
             float duration,
             float damage,
-            float attackRadius)
+            float attackRadius,
+            float castDistance)
         {
-            _particlesPool = particlePool;
+            _particleObjectPool = particleObjectPool;
             _battleService = battleService;
-            _tornadoPrefab = tornadoPrefab;
+            _particleObjectData = particleObjectData;
             _duration = duration;
             _damage = damage;
             _attackRadius = attackRadius;
+            _castDistance = castDistance;
         }
         public async void Use(GameObject caster, GameObject target)
         {
             Vector3 casterPosition = caster.transform.position;
             Vector3 casterDirection = caster.transform.forward;
-            float castOffset = 3f;
-
-            GameObject tornadoPrefab = await _particlesPool.GetObject(_tornadoPrefab);
-            TornadoProjectile tornadoProjectile = tornadoPrefab.GetComponent<TornadoProjectile>();
+            
+            _tornadoParticle = await _particleObjectPool.GetObject(_particleObjectData.Identifier.Id);
+            TornadoProjectile tornadoProjectile = _tornadoParticle.gameObject.GetComponent<TornadoProjectile>();
+            tornadoProjectile.Initialize(_particleObjectPool, _particleObjectData, _duration);
             Transform projectileTransform = tornadoProjectile.transform;
-            projectileTransform.position = casterPosition + casterDirection * castOffset;
+            projectileTransform.position = casterPosition + casterDirection * _castDistance;
             projectileTransform.rotation = Quaternion.identity;
 
-            var casterStats = caster.GetComponent<StatController>();
-
-            _battleService.CreateAttack(casterStats, projectileTransform.position, _layerMask );
+            var entityAttack = caster.GetComponent<IAttack>();
+            
+            entityAttack.SkillAttack(projectileTransform.position);
+            
         }
-
+        
     }
 }

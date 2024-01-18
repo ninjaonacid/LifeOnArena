@@ -1,20 +1,22 @@
-using Code.ConfigData.Configs;
 using Code.ConfigData.Identifiers;
+using Code.ConfigData.StateMachine;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
-using UnityEngine.Serialization;
 
 namespace Code.ConfigData
 {
     [CreateAssetMenu(fileName = "EnemyData", menuName = "StaticData/Monster")]
     public class EnemyDataConfig : ScriptableObject
     {
-        public StateMachineConfig EnemyStateMachineConfig;
+        public EnemyStateMachineConfig EnemyStateMachineConfig;
         
         public int MaxLoot;
         public int MinLoot;
 
-        [FormerlySerializedAs("MonsterTypeId")] public MobId MobId;
+        public int MinExp;
+        public int MaxExp;
+
+        public MobIdentifier MobId;
 
         public float MoveSpeed;
 

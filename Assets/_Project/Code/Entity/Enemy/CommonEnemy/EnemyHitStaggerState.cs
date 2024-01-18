@@ -8,8 +8,6 @@ namespace Code.Entity.Enemy.CommonEnemy
         {
 
         }
-
-
         public override void OnEnter()
         {
             base.OnEnter();

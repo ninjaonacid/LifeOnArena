@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Code.ConfigData.Ability.PassiveAbilities;
 using Code.Core.Factory;
 using Code.Data;
+using Code.Data.PlayerData;
 using Code.Services.PersistentProgress;
 using UnityEngine;
 using VContainer;

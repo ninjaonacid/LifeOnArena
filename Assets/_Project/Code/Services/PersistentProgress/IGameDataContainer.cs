@@ -1,4 +1,5 @@
 ﻿using Code.Data;
+using Code.Data.PlayerData;
 
 namespace Code.Services.PersistentProgress
 {
@@ -6,5 +7,6 @@ namespace Code.Services.PersistentProgress
         IGameDataContainer : IService
     {
         PlayerData PlayerData { get; set; }
+        AudioData AudioData { get; set; }
     }
 }

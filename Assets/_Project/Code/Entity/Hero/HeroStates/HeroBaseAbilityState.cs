@@ -1,13 +1,16 @@
+using UnityEngine;
+
 namespace Code.Entity.Hero.HeroStates
 {
     public abstract class HeroBaseAbilityState : HeroBaseState
     {
+        protected readonly HeroWeapon _heroWeapon;
+        protected readonly HeroSkills _heroSkills;
         protected float _duration;
-        protected HeroAttack _heroAttack;
-
-        protected HeroBaseAbilityState(HeroAnimator animator, HeroAttack heroAttack, bool needExitTime, bool isGhostState) : base(animator, needExitTime : true, isGhostState)
+        protected HeroBaseAbilityState(HeroWeapon heroWeapon, HeroSkills heroSkills, HeroAnimator heroAnimator, HeroMovement heroMovement, HeroRotation heroRotation, bool needsExitTime, bool isGhostState = false) : base(heroAnimator, heroMovement, heroRotation, needsExitTime, isGhostState)
         {
-            _heroAttack = heroAttack;
+            _heroWeapon = heroWeapon;
+            _heroSkills = heroSkills;
         }
     }
 }

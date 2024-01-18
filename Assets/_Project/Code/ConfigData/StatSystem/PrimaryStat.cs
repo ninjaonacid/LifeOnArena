@@ -1,4 +1,5 @@
 using Code.Data;
+using Code.Data.PlayerData;
 using Code.Services.PersistentProgress;
 
 namespace Code.ConfigData.StatSystem

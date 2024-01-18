@@ -1,16 +1,19 @@
+using Code.ConfigData.StateMachine;
 using Code.Logic.StateMachine.Base;
 
 namespace Code.Entity.Hero.HeroStates
 {
     public abstract class HeroBaseState : StateBase
     {
-
-        protected HeroAnimator HeroAnimator;
-
-
-        protected HeroBaseState(HeroAnimator animator, bool needExitTime, bool isGhostState) : base(needExitTime, isGhostState)
+        protected readonly HeroAnimator _heroAnimator;
+        protected readonly HeroMovement _heroMovement;
+        protected readonly HeroRotation _heroRotation;
+       
+        protected HeroBaseState(HeroAnimator heroAnimator, HeroMovement heroMovement, HeroRotation heroRotation, bool needsExitTime, bool isGhostState = false) : base(needsExitTime, isGhostState)
         {
-            HeroAnimator = animator;
+            _heroAnimator = heroAnimator;
+            _heroMovement = heroMovement;
+            _heroRotation = heroRotation;
         }
     }
 }

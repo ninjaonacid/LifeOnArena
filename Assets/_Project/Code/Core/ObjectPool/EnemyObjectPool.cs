@@ -1,43 +1,41 @@
+using System;
 using System.Collections.Generic;
 using System.Threading;
-using Code.ConfigData.Identifiers;
 using Code.Core.Factory;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace Code.Core.ObjectPool
 {
-    public class EnemyObjectPool : IEnemyObjectPool
+    public class EnemyObjectPool : IDisposable
     {
-
-        public Dictionary<MobId, List<GameObject>> _enemyObjectsStock;
-
         private readonly IEnemyFactory _enemyFactory;
+        private readonly Dictionary<int, Stack<GameObject>> _enemyObjectsStock;
+
         public EnemyObjectPool(IEnemyFactory enemyFactory)
         {
-            _enemyObjectsStock = new Dictionary<MobId, List<GameObject>>();
+            _enemyObjectsStock = new Dictionary<int, Stack<GameObject>>();
             _enemyFactory = enemyFactory;
         }
 
-        public void Cleanup()
+        public void Dispose()
         {
-            _enemyObjectsStock.Clear();
+            Cleanup();
         }
 
-        public async UniTask<GameObject> GetObject(MobId mobId, Transform parent,
-                                                    CancellationToken token)
+        public async UniTask<GameObject> GetObject(int mobId, Transform parent,
+            CancellationToken token)
         {
             GameObject result = null;
 
             if (CheckForExist(mobId))
             {
-                result = _enemyObjectsStock[mobId][0];
-                _enemyObjectsStock[mobId].RemoveAt(0);
+                result = _enemyObjectsStock[mobId].Pop();
             }
             else
             {
                 if (!_enemyObjectsStock.ContainsKey(mobId))
-                    _enemyObjectsStock.Add(mobId, new List<GameObject>());
+                    _enemyObjectsStock.Add(mobId, new Stack<GameObject>());
 
                 result = await _enemyFactory.CreateMonster(mobId, parent, token);
             }
@@ -47,17 +45,19 @@ namespace Code.Core.ObjectPool
             return result;
         }
 
-        public void ReturnObject(MobId mobId, GameObject obj)
+        public void ReturnObject(int mobId, GameObject obj)
         {
-            _enemyObjectsStock[mobId].Add(obj);
-
+            _enemyObjectsStock[mobId].Push(obj);
         }
 
-        private bool CheckForExist(MobId mobId)
+        private bool CheckForExist(int mobId)
         {
             return _enemyObjectsStock.ContainsKey(mobId) && _enemyObjectsStock[mobId].Count > 0;
         }
 
-        
+        private void Cleanup()
+        {
+            _enemyObjectsStock.Clear();
+        }
     }
 }

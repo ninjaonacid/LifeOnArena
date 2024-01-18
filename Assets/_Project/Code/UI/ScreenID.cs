@@ -7,6 +7,7 @@ namespace Code.UI
         Weapon = 2,
         AbilityMenu = 3,
         UpgradeMenu = 4,
-        MainMenu = 5
+        MainMenu = 5,
+        HUD = 6,
     }
 }

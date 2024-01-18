@@ -3,6 +3,7 @@ using Code.Entity.Hero.HeroStates;
 using Code.Logic;
 using Code.Logic.StateMachine;
 using Code.Services.AudioService;
+using Code.Services.ConfigData;
 using UnityEngine;
 using VContainer;
 
@@ -10,6 +11,8 @@ namespace Code.Entity.Hero
 {
     public class HeroStateMachineHandler : MonoBehaviour
     {
+        private IConfigProvider _configProvider;
+        
         private const string HeroIdle = "HeroIdle";
         private const string HeroMovement = "HeroMovement";
         private const string AbilityCast = "AbilityCast";
@@ -22,63 +25,76 @@ namespace Code.Entity.Hero
         private FiniteStateMachine _stateMachine;
         private PlayerControls _controls;
         private AudioService _audioService;
-
-        [SerializeField] private Identifier _spinAttackAbilityId;
-        [SerializeField] private Identifier _dodgeRollAbilityId;
-        [SerializeField] private Identifier _tornadoAbilityId;
-     
+        
+        [SerializeField] private AbilityIdentifier _spinAttackAbilityId;
+        [SerializeField] private AbilityIdentifier _dodgeRollAbilityId;
+        [SerializeField] private AbilityIdentifier _tornadoAbilityId;
+        
         [SerializeField] private HeroAnimator _heroAnimator;
         [SerializeField] private HeroMovement _heroMovement;
         [SerializeField] private HeroRotation _heroRotation;
         [SerializeField] private HeroAttack _heroAttack;
         [SerializeField] private HeroSkills _heroSkills;
-
+        [SerializeField] private HeroWeapon _heroWeapon;
+        
 
         [Inject]
-        public void Construct(PlayerControls controls, AudioService audioService)
+        public void Construct(PlayerControls controls, AudioService audioService, IConfigProvider configProvider)
         {
             _controls = controls;
             _audioService = audioService;
+            _configProvider = configProvider;
         }
-
+        
         void Update()
         {
             _stateMachine.OnLogic();
         }
-
+            
         void Start()
         {
             _stateMachine = new FiniteStateMachine();
 
             _stateMachine.AddState(HeroIdle, new HeroIdleState(
-                _heroAnimator, false, true));
+                _heroAnimator, _heroMovement, _heroRotation, false, true));
 
             _stateMachine.AddState(HeroMovement, new HeroMovementState(
-                _heroAnimator, _heroMovement, false, false));
+                _heroAnimator, _heroMovement, _heroRotation, false, false));
 
-            _stateMachine.AddState(_dodgeRollAbilityId.Name, new RollDodgeState(
-                _heroAnimator, _heroAttack, _heroMovement, _heroRotation, true, false));
+            _stateMachine.AddState(RollAbility, new RollDodgeState(
+                _heroWeapon, _heroSkills, _heroAnimator, _heroMovement, _heroRotation,  true, false));
 
             _stateMachine.AddState(SpinAttackAbility, new SpinAbilityState(
-                _heroAnimator, _heroAttack, _heroRotation, true, false));
+                _heroWeapon, _heroSkills, _heroAnimator, _heroMovement, _heroRotation,  true, false));
+            
+            _stateMachine.AddState(AbilityCast, new AbilityCastState(
+                _heroWeapon, _heroSkills, _heroAnimator,  _heroMovement, _heroRotation,  true, true));
 
             _stateMachine.AddState(HeroBaseAttack1, new FirstAttackState(
-                _heroAnimator,
                 _heroAttack,
-                _audioService,
-                needExitTime: true,
+                _heroWeapon,
+                _heroAnimator,
+                _heroMovement,
+                _heroRotation,
+                needsExitTime: true,
                 isGhostState: false));
 
             _stateMachine.AddState(HeroBaseAttack2, new SecondAttackState(
-                _heroAnimator,
                 _heroAttack,
-                needExitTime: true,
+                _heroWeapon,
+                _heroAnimator,
+                _heroMovement,
+                _heroRotation,
+                needsExitTime: true,
                 isGhostState: false));
 
             _stateMachine.AddState(HeroBaseAttack3, new ThirdAttackState(
-                _heroAnimator,
                 _heroAttack,
-                needExitTime: true,
+                _heroWeapon,
+                _heroAnimator,
+                _heroMovement,
+                _heroRotation,
+                needsExitTime: true,
                 isGhostState: false));
 
             _stateMachine.AddTwoWayTransition(new Transition(
@@ -197,5 +213,7 @@ namespace Code.Entity.Hero
 
             _stateMachine.InitStateMachine();
         }
+
+        
     }
 }

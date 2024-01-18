@@ -3,9 +3,11 @@ using Code.ConfigData.Levels;
 using Code.Core.Factory;
 using Code.Services.AudioService;
 using Code.Services.ConfigData;
+using Code.Services.SaveLoad;
 using Code.UI;
 using Code.UI.Services;
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using VContainer.Unity;
 
@@ -18,10 +20,11 @@ namespace Code.Core.EntryPoints
         private readonly IScreenService _screenService;
         private readonly AudioService _audioService;
         private readonly PlayerControls _controls;
+        private readonly ISaveLoadService _saveLoad;
 
         public MainMenuStarter(IHeroFactory heroFactory, IUIFactory uiFactory, 
             IScreenService screenService,
-            IConfigProvider config, PlayerControls controls,
+            IConfigProvider config, ISaveLoadService saveLoad, PlayerControls controls,
             AudioService audioService)
         {
             _heroFactory = heroFactory;
@@ -29,14 +32,18 @@ namespace Code.Core.EntryPoints
             _screenService = screenService;
             _controls = controls;
             _audioService = audioService;
+            _saveLoad = saveLoad;
         }
         
         public async UniTask StartAsync(CancellationToken cancellation)
         {
+            _saveLoad.Cleanup();
+            
             LevelConfig config = _config.Level(SceneManager.GetActiveScene().name);
 
-            //GameObject hero = await _heroFactory.CreateHeroUnregistered
-              //  (config.HeroInitialPosition, config.HeroInitialRotation);
+            GameObject hero = await _heroFactory.CreateHeroUnregistered(config.HeroInitialPosition, config.HeroInitialRotation);
+            
+            DisableInput();
               
             _audioService.PlayBackgroundMusic("MainTheme", volume: 1, true);
 

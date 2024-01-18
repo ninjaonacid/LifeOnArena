@@ -1,3 +1,4 @@
+using Code.Entity.EntitiesComponents;
 using Code.Logic.EntitiesComponents;
 using UnityEngine;
 
@@ -30,7 +31,7 @@ namespace Code.Logic.Projectiles
                 _rotationSpeed * Time.deltaTime);
         }
 
-        private void OnCollisionEnter(Collision collision)
+        private void OnCollisionEnter(UnityEngine.Collision collision)
         {
             if (collision.gameObject.layer == _layerMask)
             {

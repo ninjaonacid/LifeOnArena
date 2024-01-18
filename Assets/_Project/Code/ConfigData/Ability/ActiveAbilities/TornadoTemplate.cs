@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Code.ConfigData.Ability.ActiveAbilities
 {
-    [CreateAssetMenu(fileName = "TornadoAbility", menuName = "AbilityData/Cast/TornadoAbility")]
+    [CreateAssetMenu(fileName = "TornadoAbility", menuName = "Config/AbilityData/Cast/TornadoAbility")]
     public class TornadoTemplate : AbilityTemplate<TornadoAbility>
     {
         public float Damage;
@@ -14,12 +14,13 @@ namespace Code.ConfigData.Ability.ActiveAbilities
         {
             return _abilityInstance ??= 
                 new TornadoAbility
-                (ParticlePool,
+                (ParticleObjectPool,
                 BattleService,
-                PrefabReference,
+                ParticleObjectData,
                 ActiveTime,
                 Damage,
-                AttackRadius);
+                AttackRadius,
+                CastDistance);
         }
     }
 }

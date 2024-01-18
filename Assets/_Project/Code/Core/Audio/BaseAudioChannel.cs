@@ -9,12 +9,13 @@ namespace Code.Core.Audio
     public abstract class BaseAudioChannel<TAudio> : MonoBehaviour where TAudio : BaseAudioFile
     {
         public AudioSource AudioSource { get; private set; }
+        public Transform SoundTransformTarget { get; private set; }
+        public bool IsFree { get; private set; }
+        
         private AudioMixerGroup _mixerGroup;
 
         private TAudio _audioFile;
 
-        public Transform SoundTransformTarget { get; private set; }
-        public bool IsFree { get; private set; }
         public bool IsPlaying => AudioSource.isPlaying;
 
         private Transform _channelHolder;
@@ -46,6 +47,7 @@ namespace Code.Core.Audio
 
             AudioSource.outputAudioMixerGroup =
                 _audioFile.IsMixerGroupOverriden ? _audioFile.AudioMixerGroup : _mixerGroup;
+
             
             AudioSource.loop = _audioFile.IsLoopSound;
             AudioSource.Play();

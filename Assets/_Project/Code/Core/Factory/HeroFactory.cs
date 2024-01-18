@@ -22,11 +22,6 @@ namespace Code.Core.Factory
             _objectResolver = objectResolver;
         }
 
-        public async UniTaskVoid InitAssets()
-        {
-            await _assetProvider.Load<GameObject>(AssetAddress.Hero);
-        }
-
         public async UniTask<GameObject> CreateHero(Vector3 initialPoint)
         {
             GameObject prefab = await _assetProvider.Load<GameObject>(AssetAddress.Hero);
@@ -37,22 +32,51 @@ namespace Code.Core.Factory
             return HeroGameObject;
         }
 
+        public async UniTaskVoid InitAssets()
+        {
+            await _assetProvider.Load<GameObject>(AssetAddress.Hero);
+        }
+
+        public async UniTask<GameObject> CreateHero(Vector3 initialPoint,  Quaternion rotation)
+        {
+            GameObject prefab = await _assetProvider.Load<GameObject>(AssetAddress.Hero);
+
+            HeroGameObject = InstantiateRegistered(prefab,
+                initialPoint, rotation);
+
+            return HeroGameObject;
+        }
+
         public async UniTask<GameObject> CreateHeroUnregistered(Vector3 initialPoint, Quaternion rotation)
         {
             GameObject prefab = await _assetProvider.Load<GameObject>(AssetAddress.Hero);
 
-            HeroGameObject = _objectResolver.Instantiate(prefab, initialPoint, rotation);
+            HeroGameObject = Object.Instantiate(prefab, initialPoint, rotation);
+            
+            _objectResolver.InjectGameObject(HeroGameObject);
             
 
             return prefab;
         }
 
-        public GameObject InstantiateRegistered(GameObject prefab, Vector3 position)
+        private GameObject InstantiateRegistered(GameObject prefab, Vector3 position, Quaternion rotation)
         {
             
-            var go = _objectResolver.Instantiate(prefab, position, Quaternion.identity);
+            var go = Object.Instantiate(prefab, position, rotation);
             
-            //_objectResolver.InjectGameObject(go);
+            _objectResolver.InjectGameObject(go);
+
+            _saveLoadService.RegisterProgressWatchers(go);
+            
+            return go;
+        }
+
+        private GameObject InstantiateRegistered(GameObject prefab, Vector3 position)
+        {
+            
+            var go = Object.Instantiate(prefab, position, Quaternion.identity);
+            
+            _objectResolver.InjectGameObject(go);
 
             _saveLoadService.RegisterProgressWatchers(go);
             

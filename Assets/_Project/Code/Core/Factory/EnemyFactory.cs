@@ -1,16 +1,16 @@
 using System;
 using System.Threading;
 using Code.ConfigData.Identifiers;
-using Code.ConfigData.StatSystem;
 using Code.Core.AssetManagement;
+using Code.Core.ObjectPool;
 using Code.Entity.Enemy;
+using Code.Entity.EntitiesComponents;
 using Code.Logic.EnemySpawners;
-using Code.Logic.EntitiesComponents;
 using Code.Services.ConfigData;
 using Code.Services.PersistentProgress;
 using Code.Services.RandomService;
 using Code.Services.SaveLoad;
-using Code.UI.HUD;
+using Code.UI.View.HUD;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AI;
@@ -29,6 +29,7 @@ namespace Code.Core.Factory
         private readonly IGameDataContainer _gameDataContainer;
         private readonly IRandomService _randomService;
         private readonly IObjectResolver _objectResolver;
+        private readonly ObjectPoolProvider _objectPoolProvider;
 
         private readonly CancellationTokenSource _cancellationTokenSource = default;
         public EnemyFactory(IHeroFactory heroFactory, IConfigProvider config, IAssetProvider assetProvider, 
@@ -47,12 +48,12 @@ namespace Code.Core.Factory
         public async UniTask InitAssets()
         {
             await _assetProvider.Load<GameObject>(AssetAddress.EnemySpawner);
-            await _assetProvider.Load<GameObject>(AssetAddress.Loot);
+            await _assetProvider.Load<GameObject>(AssetAddress.Soul);
         }
 
         public async UniTask<EnemySpawner> CreateSpawner(Vector3 at,
             string spawnerDataId,
-            MobId spawnerDataMobId,
+            MobIdentifier spawnerDataMobId,
             int spawnerRespawnCount, CancellationToken token)
         {
             var prefab = await _assetProvider.Load<GameObject>(AssetAddress.EnemySpawner);
@@ -67,45 +68,34 @@ namespace Code.Core.Factory
             return spawner;
         }
 
-        public async UniTask<GameObject> CreateMonster(MobId mobId, Transform parent, CancellationToken token)
+        public async UniTask<GameObject> CreateMonster(int mobId, Transform parent, CancellationToken token)
         {
             var monsterData = _config.Monster(mobId);
 
             GameObject prefab = await _assetProvider.Load<GameObject>(monsterData.PrefabReference);
-            GameObject monster = _objectResolver.Instantiate<GameObject>(prefab,
+            GameObject monster = _objectResolver.Instantiate(prefab,
                 parent.position, 
                 Quaternion.identity, parent);
 
-            StatController monsterStats = monster.GetComponent<StatController>();
             
             IDamageable damageable = monster.GetComponent<IDamageable>();
 
-            monster.GetComponent<ActorUI>().Construct(damageable);
+            monster.GetComponent<EntityUI>().Construct(damageable);
             monster.GetComponent<AgentMoveToPlayer>().Construct(_heroFactory.HeroGameObject.transform);
             monster.GetComponent<NavMeshAgent>().speed = monsterData.MoveSpeed;
             monster.GetComponent<EnemyTarget>().Construct(_heroFactory.HeroGameObject.transform);
 
             var lootSpawner = monster.GetComponentInChildren<LootSpawner>();
-            lootSpawner.Construct(this, _randomService);
             lootSpawner.SetLoot(monsterData.MinLoot, monsterData.MaxLoot);
 
+            var expDrop = monster.GetComponentInChildren<ExpDrop>();
+            expDrop.Construct(_randomService, _gameDataContainer.PlayerData.PlayerExp);
+            expDrop.SetExperienceGain(monsterData.MinExp, monsterData.MaxExp);
             var fsm = monster.GetComponent<EnemyStateMachine>();
             fsm.Construct(monsterData.EnemyStateMachineConfig);
           
 
             return monster;
-        }
-
-
-        public async UniTask<LootPiece> CreateLoot()
-        {
-            var prefab = await _assetProvider.Load<GameObject>(AssetAddress.Loot);
-
-            var lootPiece = InstantiateRegistered(prefab)
-                .GetComponent<LootPiece>();
-
-            lootPiece.Construct(_gameDataContainer.PlayerData.WorldData);
-            return lootPiece;
         }
 
         public GameObject InstantiateRegistered(GameObject prefab, Vector3 position)
@@ -132,5 +122,6 @@ namespace Code.Core.Factory
             _cancellationTokenSource?.Cancel();
             _cancellationTokenSource?.Dispose();
         }
+        
     }
 }

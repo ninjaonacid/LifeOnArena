@@ -1,11 +1,12 @@
 using Code.ConfigData.Identifiers;
+using Sirenix.OdinInspector.Editor;
 using UnityEditor;
 using UnityEngine;
 
 namespace Code.Editor
 {
-    [CustomEditor(typeof(Identifier))]
-    public class IdentifierEditor : UnityEditor.Editor
+    [CustomEditor(typeof(Identifier), true)]
+    public class IdentifierEditor : OdinEditor
     {
         public override void OnInspectorGUI()
         {

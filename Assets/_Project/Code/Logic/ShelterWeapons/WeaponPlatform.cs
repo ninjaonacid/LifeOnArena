@@ -1,6 +1,7 @@
 using System;
 using Code.ConfigData;
 using Code.Data;
+using Code.Data.PlayerData;
 using Code.Entity.Enemy;
 using Code.Entity.Hero;
 using Code.Logic.EntitiesComponents;
@@ -49,7 +50,7 @@ namespace Code.Logic.ShelterWeapons
            if (_lootData.Collected >= WeaponData.Price)
            {
                _lootData.Collected -= WeaponData.Price;
-               _lootData.CountChanged?.Invoke();
+               //_lootData.CountChanged?.Invoke();
 
                OnWeaponPurchase?.Invoke();
 

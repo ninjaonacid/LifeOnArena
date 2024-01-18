@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Code.ConfigData.Identifiers;
 using Code.Core.Factory;
 using Code.Data;
+using Code.Data.PlayerData;
 using Code.Logic.ShelterWeapons;
 using Code.Services.PersistentProgress;
 using UnityEngine;
@@ -19,13 +20,13 @@ namespace Code.Logic.LevelObjectsSpawners
         public void Construct(IItemFactory itemFactory)
         {
             _itemFactory = itemFactory;
-            SpawnPlatform();
+            //SpawnPlatform();
         }
 
       
 
-        private async void SpawnPlatform() =>
-             await _itemFactory.CreateWeaponPlatform(WeaponId, transform);
+        // private async void SpawnPlatform() =>
+        //      await _itemFactory.CreateWeaponPlatform(WeaponId, transform);
 
 
         private void WeaponPurchased() 

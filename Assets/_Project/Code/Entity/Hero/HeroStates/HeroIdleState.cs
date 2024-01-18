@@ -2,14 +2,14 @@ namespace Code.Entity.Hero.HeroStates
 {
     public class HeroIdleState : HeroBaseState
     {
-        public HeroIdleState(HeroAnimator animator, bool needExitTime, bool isGhostState) : base(animator, needExitTime : false, isGhostState)
+        public HeroIdleState(HeroAnimator heroAnimator, HeroMovement heroMovement, HeroRotation heroRotation, bool needsExitTime, bool isGhostState = false) : base(heroAnimator, heroMovement, heroRotation, needsExitTime, isGhostState)
         {
         }
 
         public override void OnEnter()
         {
             base.OnEnter();
-            HeroAnimator.ToIdleState();
+            _heroAnimator.ToIdleState();
         }
 
         public override void OnLogic()

@@ -1,19 +1,20 @@
+using Code.ConfigData.StateMachine;
 using UnityEngine;
 
 namespace Code.Entity.Hero.HeroStates
 {
-    public class ThirdAttackState : HeroBaseAbilityState
+    public class ThirdAttackState : HeroBaseAttackState
     {
-        public ThirdAttackState(HeroAnimator animator, HeroAttack heroAttack, bool needExitTime, bool isGhostState) : base(animator, heroAttack, needExitTime : true, isGhostState)
+        public ThirdAttackState(HeroAttack heroAttack, HeroWeapon heroWeapon, HeroAnimator heroAnimator, HeroMovement heroMovement, HeroRotation heroRotation, bool needsExitTime, bool isGhostState = false) : base(heroAttack, heroWeapon, heroAnimator, heroMovement, heroRotation, needsExitTime, isGhostState)
         {
         }
 
         public override void OnEnter()
         {
             base.OnEnter();
-            _duration = 0.6f;
-            HeroAnimator.PlayAttack(this);
-            _heroAttack.BaseAttack();
+            _heroAnimator.PlayAttack(this);
+            _heroWeapon.EnableWeapon(true);
+            _duration = _heroWeapon.GetEquippedWeapon().WeaponFsmConfig.SecondAttackStateDuration;
         }
 
         public override void OnLogic()
@@ -28,6 +29,7 @@ namespace Code.Entity.Hero.HeroStates
         public override void OnExit()
         {
             base.OnExit();
+            _heroWeapon.EnableWeapon(false);
         }
 
         public override void OnExitRequest()

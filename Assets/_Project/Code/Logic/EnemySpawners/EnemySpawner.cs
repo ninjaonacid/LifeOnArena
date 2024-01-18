@@ -1,14 +1,9 @@
 using System.Threading;
 using Code.ConfigData.Identifiers;
 using Code.Core.ObjectPool;
-using Code.Data;
 using Code.Entity.Enemy;
-using Code.Services;
-using Code.Services.PersistentProgress;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
-using UnityEngine.Serialization;
 using VContainer;
 
 namespace Code.Logic.EnemySpawners
@@ -16,20 +11,20 @@ namespace Code.Logic.EnemySpawners
     public class EnemySpawner : MonoBehaviour
     {
         private EnemyDeath _enemyDeath;
-        private IEnemyObjectPool _enemyObjectPool;
-        private IParticleObjectPool _particleObjectPool;
+        private EnemyObjectPool _enemyObjectPool;
+        private ParticleObjectPool _particleObjectPool;
         
-        private GameObject _spawnParticle;
+        private ParticleSystem _spawnParticle;
         public string Id { get; set; }
         public int RespawnCount { get; set; }
 
-        [FormerlySerializedAs("MonsterTypeId")] public MobId MobId;
-        public AssetReference SpawnParticle;
+        public MobIdentifier MobId;
+        public Identifier ParticleIdentifier;
         public bool Alive  { get; private set; }
 
         [Inject]
-        public void Construct(IEnemyObjectPool enemyObjectPool,
-            IParticleObjectPool particleObjectPool)
+        public void Construct(EnemyObjectPool enemyObjectPool,
+            ParticleObjectPool particleObjectPool)
         {
             _enemyObjectPool = enemyObjectPool;
             _particleObjectPool = particleObjectPool;
@@ -38,8 +33,8 @@ namespace Code.Logic.EnemySpawners
         public async UniTaskVoid Spawn(CancellationToken token)
         {
             Alive = true;
-            var monster = await _enemyObjectPool.GetObject(MobId, transform, token);
-            _spawnParticle = await _particleObjectPool.GetObject(SpawnParticle, transform);
+            var monster = await _enemyObjectPool.GetObject(MobId.Id, transform, token);
+           _spawnParticle = await _particleObjectPool.GetObject(ParticleIdentifier.Id, transform);
             
             _enemyDeath = monster.GetComponent<EnemyDeath>();
             _enemyDeath.Happened += Slay;
@@ -50,8 +45,8 @@ namespace Code.Logic.EnemySpawners
             if (_enemyDeath != null)
                   _enemyDeath.Happened -= Slay;
 
-            _enemyObjectPool.ReturnObject(MobId, _enemyDeath.gameObject);
-            _particleObjectPool.ReturnObject(SpawnParticle, _spawnParticle);
+            _enemyObjectPool.ReturnObject(MobId.Id, _enemyDeath.gameObject);
+            _particleObjectPool.ReturnObject(ParticleIdentifier.Id, _spawnParticle);
 
             Alive = false;
         }

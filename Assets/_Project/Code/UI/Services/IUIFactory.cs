@@ -9,7 +9,6 @@ namespace Code.UI.Services
     public interface IUIFactory : IService
     {
         Task<Sprite> CreateSprite(AssetReferenceSprite spriteReference);
-        void InitAssets();
         BaseView CreateScreenView(ScreenID screenId);
         void CreateCore();
     }

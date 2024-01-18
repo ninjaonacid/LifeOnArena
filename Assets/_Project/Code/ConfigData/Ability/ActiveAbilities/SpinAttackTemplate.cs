@@ -1,3 +1,5 @@
+using Code.Logic.EntitiesComponents;
+using Code.Services.BattleService;
 using UnityEngine;
 
 namespace Code.ConfigData.Ability.ActiveAbilities
@@ -8,24 +10,28 @@ namespace Code.ConfigData.Ability.ActiveAbilities
         public float Damage;
         public override IAbility GetAbility()
         {
-            return new SpinAttack(Damage);
+            return new SpinAttack(Damage, BattleService);
         }
     }
 
     public class SpinAttack : IAbility
     {
         private float _damage;
+        private readonly IBattleService _battleService;
+        private readonly LayerMask _layerMask = 1 << LayerMask.NameToLayer("Hittable");
 
-
-        public SpinAttack(float damage)
+        public SpinAttack(float damage, IBattleService battleService)
         {
             _damage = damage;
+            _battleService = battleService;
         }
 
-        public void Use(GameObject target, GameObject caster)
+
+        public void Use(GameObject caster, GameObject target)
         {
-           
+            var attack = caster.GetComponent<IAttack>();
+            
+            
         }
-
     }
 }

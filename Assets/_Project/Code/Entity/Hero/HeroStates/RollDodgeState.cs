@@ -4,32 +4,24 @@ namespace Code.Entity.Hero.HeroStates
 {
     public class RollDodgeState : HeroBaseAbilityState
     {
-        private readonly HeroMovement _heroMovement;
-        private readonly HeroRotation _heroRotation;
-        public RollDodgeState(HeroAnimator animator, 
-            HeroAttack heroAttack,
-            HeroMovement heroMovement,
-            HeroRotation heroRotation,
-            bool needExitTime, bool isGhostState) : base(animator, heroAttack, needExitTime, isGhostState)
+        public RollDodgeState(HeroWeapon heroWeapon, HeroSkills heroSkills, HeroAnimator heroAnimator, HeroMovement heroMovement, HeroRotation heroRotation, bool needsExitTime, bool isGhostState = false) 
+            : base(heroWeapon, heroSkills, heroAnimator, heroMovement, heroRotation, needsExitTime, isGhostState)
         {
-            _heroMovement = heroMovement;
-            _heroRotation = heroRotation;
-            
         }
 
         public override void OnEnter()
         {
             base.OnEnter();
-            HeroAnimator.PlayRoll();
-            //_heroRotation.enabled = false;
-            _duration = 1f;
+            _heroAnimator.PlayRoll();
+            _heroRotation.enabled = false;
+            _duration = _heroSkills.ActiveSkill.ActiveTime;
         }
 
         public override void OnLogic()
         {
             base.OnLogic();
             _duration -= Time.deltaTime;
-            _heroMovement.ForceMove();
+            
             if (IsStateOver())
             {
                 fsm.StateCanExit();
@@ -53,6 +45,5 @@ namespace Code.Entity.Hero.HeroStates
 
         public override bool IsStateOver() =>
             _duration <= 0;
-
     }
 }

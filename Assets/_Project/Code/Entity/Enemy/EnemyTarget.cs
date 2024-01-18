@@ -15,7 +15,9 @@ namespace Code.Entity.Enemy
 
         public void RotationToTarget()
         {
-            transform.LookAt(_heroTransform);
+            Vector3 targetVector = _heroTransform.position - transform.position;
+            targetVector.y = 0;
+            transform.rotation = Quaternion.LookRotation(targetVector);
         }
     }
 }

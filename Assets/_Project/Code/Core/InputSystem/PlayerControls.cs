@@ -62,6 +62,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RestartScene"",
+                    ""type"": ""Button"",
+                    ""id"": ""10a5d64d-5175-4a35-8974-1dba8d05a7a8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -229,6 +238,17 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""SkillSlot2"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""70f0b1ff-0b76-49c2-b103-a64aa76b7b01"",
+                    ""path"": ""<Keyboard>/l"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RestartScene"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -280,6 +300,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_Player_SkillSlot1 = m_Player.FindAction("SkillSlot1", throwIfNotFound: true);
         m_Player_SkillSlot2 = m_Player.FindAction("SkillSlot2", throwIfNotFound: true);
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
+        m_Player_RestartScene = m_Player.FindAction("RestartScene", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Click = m_UI.FindAction("Click", throwIfNotFound: true);
@@ -346,6 +367,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_SkillSlot1;
     private readonly InputAction m_Player_SkillSlot2;
     private readonly InputAction m_Player_Attack;
+    private readonly InputAction m_Player_RestartScene;
     public struct PlayerActions
     {
         private @PlayerControls m_Wrapper;
@@ -354,6 +376,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @SkillSlot1 => m_Wrapper.m_Player_SkillSlot1;
         public InputAction @SkillSlot2 => m_Wrapper.m_Player_SkillSlot2;
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
+        public InputAction @RestartScene => m_Wrapper.m_Player_RestartScene;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -375,6 +398,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Attack.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
                 @Attack.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
                 @Attack.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
+                @RestartScene.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRestartScene;
+                @RestartScene.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRestartScene;
+                @RestartScene.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRestartScene;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -391,6 +417,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Attack.started += instance.OnAttack;
                 @Attack.performed += instance.OnAttack;
                 @Attack.canceled += instance.OnAttack;
+                @RestartScene.started += instance.OnRestartScene;
+                @RestartScene.performed += instance.OnRestartScene;
+                @RestartScene.canceled += instance.OnRestartScene;
             }
         }
     }
@@ -434,6 +463,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnSkillSlot1(InputAction.CallbackContext context);
         void OnSkillSlot2(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
+        void OnRestartScene(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

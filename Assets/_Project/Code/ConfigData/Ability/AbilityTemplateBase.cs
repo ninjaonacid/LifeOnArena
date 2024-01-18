@@ -1,6 +1,7 @@
 using Code.Core.ObjectPool;
 using Code.Services.BattleService;
 using UnityEngine.AddressableAssets;
+using UnityEngine.Serialization;
 
 namespace Code.ConfigData.Ability
 {
@@ -16,21 +17,22 @@ namespace Code.ConfigData.Ability
         public float CurrentCooldown;
         public float ActiveTime;
         public float CurrentActiveTime;
+        public int Price;
         public AbilityState State;
-        public AssetReference PrefabReference;
+        public ParticleObjectData ParticleObjectData;
 
-        protected IParticleObjectPool ParticlePool;
+        protected ParticleObjectPool ParticleObjectPool;
         protected IBattleService BattleService;
         public abstract IAbility GetAbility();
 
         public void InitServices(
-            IParticleObjectPool particlePool, 
+            ParticleObjectPool viewObjectPool, 
             IBattleService battleService)
         {
-            ParticlePool = particlePool;
+            ParticleObjectPool = viewObjectPool;
             BattleService = battleService;
         }
-
+        
         public virtual bool IsReady() =>
             State == AbilityState.Ready;
         

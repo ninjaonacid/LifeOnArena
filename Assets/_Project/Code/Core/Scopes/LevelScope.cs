@@ -1,9 +1,10 @@
 using Code.Core.EntryPoints;
 using Code.Core.Factory;
+using Code.Core.Installers;
 using Code.Core.ObjectPool;
 using Code.Logic.WaveLogic;
 using Code.Services;
-using Code.Services.BattleService;
+using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
@@ -17,17 +18,19 @@ namespace Code.Core.Scopes
             
             builder.Register<EnemySpawnerController>(Lifetime.Scoped);
             builder.Register<LevelController>(Lifetime.Scoped);
-            
-            
+
             builder.Register<IItemFactory, ItemFactory>(Lifetime.Scoped);
-            builder.Register<IEnemyObjectPool, EnemyObjectPool>(Lifetime.Scoped);
+            builder.Register<EnemyObjectPool>(Lifetime.Scoped);
             builder.Register<IEnemyFactory, EnemyFactory>(Lifetime.Scoped);
-            builder.Register<IHeroFactory, HeroFactory>(Lifetime.Scoped);
-            builder.Register<IGameFactory, GameFactory>(Lifetime.Scoped);
-            builder.Register<IParticleObjectPool, ParticleObjectPool>(Lifetime.Scoped);
             builder.Register<IAbilityFactory, AbilityFactory>(Lifetime.Scoped);
-            builder.Register<IBattleService, BattleService>(Lifetime.Scoped);
+            builder.Register<IHeroFactory, HeroFactory>(Lifetime.Scoped);
+
+            IInstaller screenServiceInstaller = new ScreenServiceInstaller();
+            screenServiceInstaller.Install(builder);
             
+            builder.Register<ParticleFactory>(Lifetime.Scoped);
+            builder.Register<ParticleObjectPool>(Lifetime.Scoped);
+
             InitializeServices(builder);
         }
 
@@ -37,11 +40,9 @@ namespace Code.Core.Scopes
             {
                 var enemyFactory = container.Resolve<IEnemyFactory>();
                 var itemFactory = container.Resolve<IItemFactory>();
-                var heroFactory = container.Resolve<IHeroFactory>();
 
                 enemyFactory.InitAssets();
                 itemFactory.InitAssets();
-                heroFactory.InitAssets();
             });
         }
 

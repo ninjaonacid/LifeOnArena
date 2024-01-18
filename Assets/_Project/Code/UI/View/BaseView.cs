@@ -1,4 +1,5 @@
 using System;
+using Code.UI.Buttons;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,7 +8,7 @@ namespace Code.UI.View
     public abstract class BaseView : MonoBehaviour, IDisposable
     {
         public ScreenID ScreenId;
-        public Button CloseButton;
+        public CloseButton CloseButton;
         public void Show()
         {
             gameObject.SetActive(true);

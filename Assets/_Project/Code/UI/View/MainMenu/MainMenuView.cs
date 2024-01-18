@@ -8,6 +8,7 @@ namespace Code.UI.View.MainMenu
         public Button StartFightButton;
         public OpenWindowButton SkillMenu;
         public UIStatContainer StatContainer;
-        
+        public MusicButton MusicButton;
+        public SoundButton SoundButton;
     }
 }

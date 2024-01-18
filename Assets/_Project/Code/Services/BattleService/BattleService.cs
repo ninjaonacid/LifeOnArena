@@ -1,7 +1,7 @@
 using Code.ConfigData.StatSystem;
 using Code.ConfigData.StatSystem.StatModifiers;
 using Code.Entity;
-using Code.Entity.Hero;
+using Code.Entity.EntitiesComponents;
 using Code.Logic.Damage;
 using Code.Logic.EntitiesComponents;
 using UnityEngine;
@@ -40,16 +40,11 @@ namespace Code.Services.BattleService
 
             return hits;
         }
-
-        private void ApplyDamage(StatController attacker, GameObject target)
+        
+        public void ApplyDamage(StatController attacker, GameObject target)
         {
             var damageable = target.GetComponentInParent<IDamageable>();
             
-            if (attacker.gameObject.TryGetComponent<IAttack>(out var attack))
-            {
-                
-            }
-                        
             IDamage damage = new HealthModifier
             {
                 Attacker = attacker.gameObject,

@@ -2,11 +2,13 @@ using System;
 using System.Collections.Generic;
 using Code.UI.Controller;
 using Code.UI.Model;
+using Code.UI.Model.AbilityMenu;
 using Code.UI.View;
+using UnityEngine;
 
 namespace Code.UI.Services
 {
-    public class ScreenService : IScreenService
+    public class ScreenService : IScreenService, IDisposable
     {
         private readonly Dictionary<ScreenID, (Type model, Type controller)> _screenMap = new();
         private readonly Dictionary<ScreenID, (BaseView view, IScreenController controller)> _activeViews = new();
@@ -25,6 +27,7 @@ namespace Code.UI.Services
             _screenMap.Add(ScreenID.MainMenu, (typeof(MainMenuModel), typeof(MainMenuController)));
             _screenMap.Add(ScreenID.Shop, (typeof(ShopMenuModel), typeof(ShopMenuController)));
             _screenMap.Add(ScreenID.AbilityMenu, (typeof(AbilityMenuModel), typeof(AbilityMenuController)));
+            _screenMap.Add(ScreenID.HUD, (typeof(HudModel), (typeof(HudController))));
         }
 
         public void Open(ScreenID screenId)
@@ -39,7 +42,11 @@ namespace Code.UI.Services
                 view.Show();
                 
                 _activeViews.Add(screenId, (view, controller));
-            }  
+            }
+            else
+            {
+                Debug.LogError($"{screenId} doesnt present in the dictionary");
+            }
         }
 
         public void Close(ScreenID screenID)
@@ -65,11 +72,16 @@ namespace Code.UI.Services
                 {
                     controller.Dispose();
                 }
-                
-                activeView.view.Close();
+                if(activeView.view)
+                    activeView.view.Close();
             }
             
             _activeViews.Clear();
+        }
+
+        public void Dispose()
+        {
+            Cleanup();
         }
     }
 }

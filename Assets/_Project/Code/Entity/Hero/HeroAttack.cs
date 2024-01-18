@@ -1,6 +1,9 @@
 using System;
+using Code.ConfigData.Identifiers;
 using Code.ConfigData.StatSystem;
+using Code.Logic.Collision;
 using Code.Logic.EntitiesComponents;
+using Code.Logic.Weapon;
 using Code.Services.AudioService;
 using Code.Services.BattleService;
 using UnityEngine;
@@ -15,10 +18,9 @@ namespace Code.Entity.Hero
         public event Action<int> OnHit;
         
         [SerializeField] private StatController _stats;
-        [SerializeField] private AudioSource _heroAudioSource;
+        [SerializeField] private HeroHitBox _hitBox;
+        [SerializeField] private HeroWeapon _heroWeapon;
 
-        public CharacterController CharacterController;
-        
         private AudioService _audioService;
         private IBattleService _battleService;
         
@@ -30,39 +32,47 @@ namespace Code.Entity.Hero
         }
         private void Awake()
         {
-
             _layerMask = 1 << LayerMask.NameToLayer("Hittable");
+            _heroWeapon.OnWeaponChange += ChangeWeapon;
+        }
+        
+        private void ChangeWeapon(MeleeWeapon weapon, WeaponId weaponId)
+        {
+            weapon.Hit += BaseAttack;
         }
 
+        private void BaseAttack(CollisionData collision)
+        {
+            _battleService.ApplyDamage(_stats, collision.Target);
+            OnHit?.Invoke(1);
+        }
 
         public void BaseAttack()
         {
-            var hits = _battleService.CreateAttack(_stats, StartPoint(), _layerMask);
+            var hits = _battleService.CreateAttack(_stats, _hitBox.StartPoint(), _layerMask);
             
-            _audioService.PlaySound3D("SwordSlash", transform, 1f);
+            _audioService.PlaySound3D("SwordSlash", transform, 0.5f);
             
             if (hits > 0)
             { 
                 OnHit?.Invoke(hits);
-                _audioService.PlaySound3D("Hit", transform, 1f);
+                _audioService.PlaySound3D("Hit", transform, 0.5f);
             }
-            
+        }
+
+        public void SkillAttack(Vector3 castPoint)
+        {
+            var hits = _battleService.CreateAttack(_stats, castPoint, _layerMask);
+
+            if (hits > 0)
+            {
+                OnHit?.Invoke(hits);
+            }
         }
 
         public void SkillAttack()
         {
         }
         
-
-        private Vector3 StartPoint()
-        {
-            return new Vector3(transform.position.x, CharacterController.center.y, transform.position.z);
-        }
-
-        // private void OnDrawGizmos()
-        // {
-        //     Gizmos.color = Color.red;
-        //     Gizmos.DrawWireSphere(StartPoint() + transform.forward * 2, _stats.Stats["AttackRadius"].Value);
-        // }
     }
 }

@@ -1,12 +1,15 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Code.ConfigData.Audio;
 using Code.ConfigData.Settings;
 using Code.Core.AssetManagement;
 using Code.Core.Audio;
+using Code.Core.SceneManagement;
 using Code.Services.ConfigData;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.Audio;
 using VContainer;
 
 namespace Code.Services.AudioService
@@ -26,6 +29,11 @@ namespace Code.Services.AudioService
         
         private AudioLibrary _audioLibrary;
         private AudioServiceSettings _audioSettings;
+
+        private AudioMixerGroup _masterMixer;
+        private AudioMixerGroup _musicMixer;
+        private AudioMixerGroup _sfxMixer;
+        
         
         [SerializeField] private Transform _soundChannels;
         [SerializeField] private Transform _musicChannels;
@@ -36,12 +44,16 @@ namespace Code.Services.AudioService
             _assetProvider = assetProvider;
             _configProvider = configProvider;
         }
+        
+
         public void InitializeAudio()
         {
             _audioLibrary = _configProvider.AudioLibrary();
             _audioSettings = _configProvider.AudioServiceSettings();
+            _musicMixer = _audioSettings.MusicMixerGroup;
+            _masterMixer = _audioSettings.MasterMixerGroup;
+            _sfxMixer = _audioSettings.SfxMixerGroup;
             
-
             for (int i = 0; i < _audioSettings.SoundChannelsPoolSize; i++)
             {
                 SoundAudioChannel channel = CreateSoundChannel();
@@ -59,6 +71,11 @@ namespace Code.Services.AudioService
                 _mainMusicChannel = _musicChannelsPool[0];
             }
             
+        }
+
+        public void MuteMusic()
+        {
+            _musicMixer.audioMixer.SetFloat("Volume", -80f);
         }
 
         public void PlayBackgroundMusic(string musicName, float volume = 1, bool isLoop = false)
@@ -98,14 +115,24 @@ namespace Code.Services.AudioService
             {
                 soundChannel.Play(sound);
             }
-            else
-            {
-                Debug.LogError("Noasd");
-            }
+           
+            Assert.IsNull(soundChannel);
             
         }
 
-        public void PlaySound3D(string soundName, Transform soundTransform, float volume)
+        public void PlaySound(SoundAudioFile sound)
+        {
+            SoundAudioChannel soundChannel = FindFreeSoundChannel();
+
+            if (soundChannel)
+            {
+                soundChannel.Play(sound);
+            }
+            
+            Assert.IsNull(soundChannel);
+        }
+
+        public void PlaySound3D(string soundName, Transform soundTransform, float volume = 1f)
         {
             var sound = _audioLibrary.Sounds.FirstOrDefault(x => x.Id == soundName);
             if (sound == null)
@@ -120,6 +147,7 @@ namespace Code.Services.AudioService
             if (soundChannel)
             {
                 soundChannel.SetChannelTransform(soundTransform);
+                soundChannel.AudioSource.volume = volume;
                 soundChannel.Play(sound);
             }
         }
@@ -209,6 +237,8 @@ namespace Code.Services.AudioService
                 _mainMusicChannel.Stop();
             }
         }
+        
+        
 
         private void StopAllSounds()
         {

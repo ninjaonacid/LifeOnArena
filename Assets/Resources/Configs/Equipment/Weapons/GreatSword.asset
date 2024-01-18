@@ -14,9 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DamageType: 01000000
   WeaponPrefab: {fileID: 7053281041097936720, guid: f5e154f2103eb1847b7106b702a86613, type: 3}
-  WeaponId: 1
+  WeaponId: {fileID: 11400000, guid: 2bb90049b182d3e4e862dce85ce642cd, type: 2}
   Price: 30
-  AttackRadius: 0
   AttackSpeed: 0
   Damage: 0
-  Rotation: {x: 287.83942, y: 21.037731, z: 37.631863}
+  WeaponFsmConfig:
+    FirstAttackStateDuration: 1
+    SecondAttackStateDuration: 1
+    ThirdAttackStateDuration: 1
+  OverrideController: {fileID: 22100000, guid: 50885c06293ec8044b3694729dc71f10, type: 2}
+  LocalRotation: {x: 0, y: 0, z: 0}
+  LocalPosition: {x: 0, y: 0, z: 0}
+  WeaponSound: {fileID: 0}

@@ -1,9 +1,10 @@
+using UnityEngine;
+
 namespace Code.ConfigData.Identifiers
 {
-    public enum WeaponId 
+    [CreateAssetMenu(menuName = "Config/Identifier/WeaponIdentifier", fileName = "WeaponId")]
+    public class WeaponId : Identifier
     {
-        GreatSword = 1,
-        RustySword = 2,
-        Default = 3,
+        
     }
 }

@@ -1,23 +1,20 @@
-using Code.Services.AudioService;
+using Code.ConfigData.StateMachine;
 using UnityEngine;
 
 namespace Code.Entity.Hero.HeroStates
 {
-    public class FirstAttackState : HeroBaseAbilityState
+    public class FirstAttackState : HeroBaseAttackState
     {
-        private AudioService _audioService;
-        public FirstAttackState(HeroAnimator animator, HeroAttack heroAttack, AudioService audioService, bool needExitTime, bool isGhostState) : base(animator, heroAttack, needExitTime, isGhostState)
+        public FirstAttackState(HeroAttack heroAttack, HeroWeapon heroWeapon, HeroAnimator heroAnimator, HeroMovement heroMovement, HeroRotation heroRotation, bool needsExitTime, bool isGhostState = false) : base(heroAttack, heroWeapon, heroAnimator, heroMovement, heroRotation, needsExitTime, isGhostState)
         {
-            _audioService = audioService;
         }
 
         public override void OnEnter()
         {
             base.OnEnter();
-            HeroAnimator.PlayAttack(this);
-            _heroAttack.BaseAttack();
-            //_audioService.PlaySound3D("SwordSlash", HeroAnimator.gameObject.transform, 1f );
-            _duration = 0.6f;
+            _heroWeapon.EnableWeapon(true);
+            _heroAnimator.PlayAttack(this);
+            _duration = _heroWeapon.GetEquippedWeapon().WeaponFsmConfig.FirstAttackStateDuration;
         }
 
         public override void OnLogic()
@@ -32,6 +29,7 @@ namespace Code.Entity.Hero.HeroStates
         public override void OnExit()
         {
             base.OnExit();
+            _heroWeapon.EnableWeapon(false);
         }
 
         public override void OnExitRequest()

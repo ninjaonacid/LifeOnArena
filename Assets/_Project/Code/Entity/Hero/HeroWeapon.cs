@@ -1,8 +1,10 @@
 using System;
 using Code.ConfigData;
 using Code.ConfigData.Identifiers;
+using Code.ConfigData.StateMachine;
 using Code.Core.Factory;
-using Code.Data;
+using Code.Data.PlayerData;
+using Code.Logic.Weapon;
 using Code.Services.PersistentProgress;
 using UnityEngine;
 using VContainer;
@@ -11,17 +13,12 @@ namespace Code.Entity.Hero
 {
     public class HeroWeapon : EntityWeapon, ISave
     {
-        private readonly WeaponSlot _weapon = new();
+        private MeleeWeapon CurrentWeapon { get; set; }
 
-        private GameObject _currentWeapon;
+        [SerializeField] private HeroAnimator _heroAnimator;
+        public event Action<MeleeWeapon, WeaponId> OnWeaponChange;
+
         private IItemFactory _itemFactory;
-        
-        [Serializable]
-        public class WeaponSlot
-        {
-            public WeaponId WeaponId;
-            public WeaponData WeaponData;
-        }
 
         [Inject]
         public void Construct(IItemFactory itemFactory)
@@ -29,43 +26,59 @@ namespace Code.Entity.Hero
             _itemFactory = itemFactory;
         }
 
-        private void Awake()
-        {
-        }
-
         public void EquipWeapon(WeaponData weaponData)
         {
             if (weaponData == null) return;
 
-            if (_currentWeapon != null)
-                Destroy(_currentWeapon.gameObject);
+            if (CurrentWeapon != null)
+            {
+                Destroy(CurrentWeapon.gameObject);
+            }
+            
+            _weaponSlot.WeaponData = weaponData;
+            _weaponSlot.WeaponId = weaponData.WeaponId;
 
-            _weapon.WeaponData = weaponData;
-            _weapon.WeaponId = weaponData.WeaponId;
+            _heroAnimator.OverrideController(weaponData.OverrideController);
 
-            _currentWeapon = Instantiate(weaponData.WeaponPrefab, _weaponPosition, false);
-            _currentWeapon.transform.localPosition = Vector3.zero;
+            CurrentWeapon = Instantiate(weaponData.WeaponPrefab, _weaponPosition, false).GetComponent<MeleeWeapon>();
+            
+            CurrentWeapon.gameObject.transform.localPosition = Vector3.zero;
+    
+            CurrentWeapon.gameObject.transform.localRotation = Quaternion.Euler(
+                weaponData.LocalRotation.x,
+                weaponData.LocalRotation.y, 
+                weaponData.LocalRotation.z);
 
-            _currentWeapon.transform.localRotation = Quaternion.Euler(
-                weaponData.Rotation.x,
-                weaponData.Rotation.y, 
-                weaponData.Rotation.z);
+            OnWeaponChange?.Invoke(CurrentWeapon, _weaponSlot.WeaponId);
         }
         
+        public void EnableWeapon(bool value)
+        {
+            CurrentWeapon.EnableCollider(value);
+            CurrentWeapon.EnableTrail(value);
+        }
 
         public void LoadData(PlayerData data)
         {
-            _weapon.WeaponId = data.HeroEquipment.HeroWeapon;
-            if (_weapon != null)
+            var weaponId = data.HeroEquipment.WeaponIntId;
+            
+            if (weaponId != 0)
             {
-                _weapon.WeaponData = _itemFactory.LoadWeapon(_weapon.WeaponId);
-                EquipWeapon(_weapon.WeaponData);
+                WeaponData weapon = _itemFactory.LoadWeapon(weaponId);
+                EquipWeapon(weapon);
+            }
+            else
+            {
+                if (_weaponSlot.WeaponData)
+                {
+                    EquipWeapon(_weaponSlot.WeaponData);
+                }
             }
         }
-
         public void UpdateData(PlayerData data)
         {
-            data.HeroEquipment.HeroWeapon = _weapon.WeaponId;
+            data.HeroEquipment.WeaponStringId = _weaponSlot.WeaponId.Name;
+            data.HeroEquipment.WeaponIntId = _weaponSlot.WeaponId.Id;
         }
     }
 }

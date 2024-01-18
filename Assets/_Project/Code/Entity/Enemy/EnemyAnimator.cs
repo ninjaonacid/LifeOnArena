@@ -42,7 +42,7 @@ namespace Code.Entity.Enemy
 
         public void PlayHit()
         {
-            _enemyAnimator.CrossFade(Hit, 0.1f);
+            _enemyAnimator.CrossFade(GetHit, 0.1f);
         }
 
         public void PlayIdle()
