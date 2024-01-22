@@ -1,4 +1,3 @@
-using System;
 using System.Threading.Tasks;
 using Code.Core.AssetManagement;
 using Code.Services.ConfigData;
@@ -34,5 +33,6 @@ namespace Code.Core.Factory
             
             return particleSystem;
         }
+        
     }
 }

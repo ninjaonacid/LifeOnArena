@@ -15,11 +15,7 @@ namespace Code.Entity.Hero
         private List<PassiveAbilityTemplateBase> _heroPassives = new List<PassiveAbilityTemplateBase>();
         private IAbilityFactory _abilityFactory;
 
-        [Inject]
-        private void Construct(IAbilityFactory abilityFactory)
-        {
-            _abilityFactory = abilityFactory;
-        }
+       
         public void AddPassive(PassiveAbilityTemplateBase passiveAbility)
         {
             if (_heroPassives.Contains(passiveAbility))

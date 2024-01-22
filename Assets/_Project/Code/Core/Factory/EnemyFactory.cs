@@ -110,8 +110,7 @@ namespace Code.Core.Factory
         public GameObject InstantiateRegistered(GameObject prefab)
         {
             var go = Object.Instantiate(prefab);
-
-
+            
             _saveLoadService.RegisterProgressWatchers(go);
             return go;
         }

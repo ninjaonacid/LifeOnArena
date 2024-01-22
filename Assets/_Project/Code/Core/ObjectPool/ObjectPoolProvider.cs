@@ -6,22 +6,20 @@ using VContainer.Unity;
 
 namespace Code.Core.ObjectPool
 {
-    public class ObjectPoolProvider : IInitializable, IDisposable
+    public class ObjectPoolProvider : IDisposable
     {
-        private IObjectResolver _resolver;
+        private readonly IObjectResolver _resolver;
         private Dictionary<int, ObjectPool<PooledObject>> _identifierToPoolMap;
         private Dictionary<string, ObjectPool<PooledObject>> _prefabToPoolMap;
-        
+
         public ObjectPoolProvider(IObjectResolver resolver)
         {
             _resolver = resolver;
-        }
-
-        public void Initialize()
-        {
+            
             _identifierToPoolMap = new Dictionary<int, ObjectPool<PooledObject>>();
             _prefabToPoolMap = new Dictionary<string, ObjectPool<PooledObject>>();
         }
+
 
         public GameObject Spawn(int id, GameObject prefab, Vector3 position, Quaternion rotation, Transform parent)
         {
@@ -31,6 +29,8 @@ namespace Code.Core.ObjectPool
             {
                 objectPool = new ObjectPool<PooledObject>(() => 
                     Instantiate(prefab, position, rotation, parent), prefab);
+                
+                _identifierToPoolMap.Add(id, objectPool);
                 
                 objectPool.Initialize();
             }

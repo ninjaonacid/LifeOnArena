@@ -10,12 +10,13 @@ namespace Code.Core.ObjectPool
 
         private GameObject _prefab;
         private readonly Func<T> _factory;
-        private Stack<T> _objectsStock;
+        private readonly Stack<T> _objectsStock;
 
         public ObjectPool(Func<T> factory, GameObject prefab)
         {
             _factory = factory;
             _prefab = prefab;
+            _objectsStock = new Stack<T>();
         }
 
         public void Initialize()
@@ -59,7 +60,6 @@ namespace Code.Core.ObjectPool
         {
             _objectsStock.Push(obj as T);
             obj.gameObject.SetActive(false);
-            
         }
 
     }

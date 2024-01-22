@@ -1,18 +1,20 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.Pool;
 
 namespace Code.Core.ObjectPool
 {
     public class PooledObject : MonoBehaviour, IPoolable
     {
+        private Action<PooledObject> _returnToPool;
         public void Initialize(Action<PooledObject> returnToPool)
         {
-            throw new NotImplementedException();
+            _returnToPool = returnToPool;
         }
 
         void IPoolable.ReturnToPool()
         {
-            throw new NotImplementedException();
+           _returnToPool.Invoke(this);
         }
     }
 

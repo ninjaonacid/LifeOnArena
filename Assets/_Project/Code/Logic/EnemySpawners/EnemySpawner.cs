@@ -1,5 +1,6 @@
 using System.Threading;
 using Code.ConfigData.Identifiers;
+using Code.Core.Factory;
 using Code.Core.ObjectPool;
 using Code.Entity.Enemy;
 using Cysharp.Threading.Tasks;
@@ -11,9 +12,10 @@ namespace Code.Logic.EnemySpawners
     public class EnemySpawner : MonoBehaviour
     {
         private EnemyDeath _enemyDeath;
-        private EnemyObjectPool _enemyObjectPool;
+        private IPoolable _pooledObject;
         private ParticleObjectPool _particleObjectPool;
-        
+        private ObjectPoolProvider _objectPoolProvider;
+        private IEnemyFactory _factory;
         private ParticleSystem _spawnParticle;
         public string Id { get; set; }
         public int RespawnCount { get; set; }
@@ -23,17 +25,17 @@ namespace Code.Logic.EnemySpawners
         public bool Alive  { get; private set; }
 
         [Inject]
-        public void Construct(EnemyObjectPool enemyObjectPool,
+        public void Construct(IEnemyFactory enemyFactory,
             ParticleObjectPool particleObjectPool)
         {
-            _enemyObjectPool = enemyObjectPool;
+            _factory = enemyFactory;
             _particleObjectPool = particleObjectPool;
         }
 
         public async UniTaskVoid Spawn(CancellationToken token)
         {
             Alive = true;
-            var monster = await _enemyObjectPool.GetObject(MobId.Id, transform, token);
+            var monster = await _factory.CreateMonster(MobId.Id, transform, token);
            _spawnParticle = await _particleObjectPool.GetObject(ParticleIdentifier.Id, transform);
             
             _enemyDeath = monster.GetComponent<EnemyDeath>();
@@ -44,9 +46,11 @@ namespace Code.Logic.EnemySpawners
         {
             if (_enemyDeath != null)
                   _enemyDeath.Happened -= Slay;
-            
+
+            _pooledObject ??= _enemyDeath.GetComponent<IPoolable>();
+            _pooledObject.ReturnToPool();
            
-            _enemyObjectPool.ReturnObject(MobId.Id, _enemyDeath.gameObject);
+            //_enemyObjectPool.ReturnObject(MobId.Id, _enemyDeath.gameObject);
             _particleObjectPool.ReturnObject(ParticleIdentifier.Id, _spawnParticle);
 
             Alive = false;

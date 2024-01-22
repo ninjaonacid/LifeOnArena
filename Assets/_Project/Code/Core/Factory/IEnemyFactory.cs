@@ -1,8 +1,6 @@
 using System.Threading;
 using Code.ConfigData.Identifiers;
-using Code.Entity.Enemy;
 using Code.Logic.EnemySpawners;
-using Code.Logic.Particles;
 using Code.Services;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
