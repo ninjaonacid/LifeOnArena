@@ -34,7 +34,7 @@ namespace Code.Core.Factory
         private readonly CancellationTokenSource _cancellationTokenSource = default;
         public EnemyFactory(IHeroFactory heroFactory, IConfigProvider config, IAssetProvider assetProvider, 
             ISaveLoadService saveLoadService, IGameDataContainer gameDataContainer,
-            IRandomService randomService, IObjectResolver objectResolver)
+            IRandomService randomService, IObjectResolver objectResolver, ObjectPoolProvider poolProvider)
         {
             _heroFactory = heroFactory;
             _config = config;
@@ -43,6 +43,7 @@ namespace Code.Core.Factory
             _gameDataContainer = gameDataContainer;
             _randomService = randomService;
             _objectResolver = objectResolver;
+            _objectPoolProvider = poolProvider;
         }
 
         public async UniTask InitAssets()
@@ -73,10 +74,8 @@ namespace Code.Core.Factory
             var monsterData = _config.Monster(mobId);
 
             GameObject prefab = await _assetProvider.Load<GameObject>(monsterData.PrefabReference);
-            GameObject monster = _objectResolver.Instantiate(prefab,
-                parent.position, 
-                Quaternion.identity, parent);
-
+            
+            GameObject monster = _objectPoolProvider.Spawn(mobId, prefab, parent.position, Quaternion.identity, parent);
             
             IDamageable damageable = monster.GetComponent<IDamageable>();
 

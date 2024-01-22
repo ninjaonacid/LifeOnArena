@@ -5,6 +5,16 @@ namespace Code.Core.ObjectPool
 {
     public class PooledObject : MonoBehaviour, IPoolable
     {
-        public event Action<GameObject> ReturnToPool;
+        public void Initialize(Action<PooledObject> returnToPool)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IPoolable.ReturnToPool()
+        {
+            throw new NotImplementedException();
+        }
     }
+
+    
 }

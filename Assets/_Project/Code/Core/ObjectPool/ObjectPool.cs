@@ -8,53 +8,59 @@ namespace Code.Core.ObjectPool
     {
         private GameObject _poolRoot;
 
+        private GameObject _prefab;
         private readonly Func<T> _factory;
-        private Stack<PooledObjectContainer<T>> _objectsStock;
-        
-        public ObjectPool(Func<T> factory)
+        private Stack<T> _objectsStock;
+
+        public ObjectPool(Func<T> factory, GameObject prefab)
         {
             _factory = factory;
+            _prefab = prefab;
         }
-        
+
+        public void Initialize()
+        {
+            if (_poolRoot is null)
+            {
+                _poolRoot = new GameObject($"_pooledObject.gameObject.name + Pool");
+            }
+        }
         public T Get()
         {
             T obj = default;
             
             if (_objectsStock.Count > 0)
             {
-                obj = _objectsStock.Pop().Object;
+                obj = _objectsStock.Pop();
             }
             else
             {
-                var container = CreateContainer();
-                obj = container.Object;
+                obj = CreateObject();
             }
 
             return obj;
         }
 
-        private PooledObjectContainer<T> CreateContainer() 
+        private T CreateObject() 
         {
-            PooledObjectContainer<T> container = new PooledObjectContainer<T>
-            {
-                Object = _factory(),
-            };
-
             var obj = _factory();
-            obj.ReturnToPool += Return;
 
-            return container;
+            obj.Initialize(Return);
+
+            return obj;
         }
 
-        private void Return(GameObject obj)
+        public void Release()
         {
             
         }
 
-        private void Return()
+        private void Return(PooledObject obj)
         {
+            _objectsStock.Push(obj as T);
+            obj.gameObject.SetActive(false);
             
         }
-        
+
     }
 }

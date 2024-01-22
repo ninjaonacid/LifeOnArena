@@ -44,7 +44,8 @@ namespace Code.Logic.EnemySpawners
         {
             if (_enemyDeath != null)
                   _enemyDeath.Happened -= Slay;
-
+            
+           
             _enemyObjectPool.ReturnObject(MobId.Id, _enemyDeath.gameObject);
             _particleObjectPool.ReturnObject(ParticleIdentifier.Id, _spawnParticle);
 

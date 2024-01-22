@@ -1,10 +1,12 @@
 using System;
 using UnityEngine;
+using UnityEngine.Pool;
 
 namespace Code.Core.ObjectPool
 {
     public interface IPoolable
     {
-        public event Action<GameObject> ReturnToPool;
+        public void Initialize(Action<PooledObject> returnToPool);
+        public void ReturnToPool();
     }
 }
