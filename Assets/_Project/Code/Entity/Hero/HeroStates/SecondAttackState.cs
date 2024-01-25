@@ -19,7 +19,7 @@ namespace Code.Entity.Hero.HeroStates
             base.OnEnter();
             _heroAnimator.PlayAttack(this);
             _heroWeapon.EnableWeapon(true);
-            _duration = _heroWeapon.GetEquippedWeapon().WeaponFsmConfig.SecondAttackStateDuration;
+            _duration = _heroWeapon.GetEquippedWeaponData().WeaponFsmConfig.SecondAttackStateDuration;
         }
 
         public override void OnLogic()

@@ -51,7 +51,7 @@ namespace Code.Services.BattleService
                 IsCriticalHit = false,
                 Magnitude = attacker.Stats["Attack"].Value * -1,
                 OperationType = ModifierOperationType.Additive,
-                Source = attacker.GetComponent<EntityWeapon>().GetEquippedWeapon()
+                Source = attacker.GetComponent<EntityWeapon>().GetEquippedWeaponData()
             };
             
             damageable.TakeDamage(damage);

@@ -25,12 +25,11 @@ namespace Code.Core.EntryPoints
         private readonly PlayerControls _controls;
         private readonly EnemySpawnerController _enemySpawnerController;
         private readonly LevelController _levelController;
-        private readonly ParticleObjectPool _particlePool;
-        
+
         public LevelStarterPoint(IConfigProvider config, 
             ISaveLoadService saveLoad, IHeroFactory heroFactory, IScreenService screenService,
             PlayerControls controls, EnemySpawnerController enemySpawnerController,
-            LevelController controller, ParticleObjectPool particlePool)
+            LevelController controller)
         {
             _config = config;
             _saveLoad = saveLoad;
@@ -39,7 +38,6 @@ namespace Code.Core.EntryPoints
             _enemySpawnerController = enemySpawnerController;
             _controls = controls;
             _levelController = controller;
-            _particlePool = particlePool;
         }
         
         public async UniTask StartAsync(CancellationToken cancellation)

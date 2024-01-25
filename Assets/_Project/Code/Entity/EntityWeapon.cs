@@ -10,8 +10,7 @@ namespace Code.Entity
         [SerializeField] protected WeaponSlot _weaponSlot = new();
         [SerializeField] protected Transform _weaponPosition;
         private WeaponData EquippedWeapon => _weaponSlot.WeaponData;
-        
-        
+
         [Serializable]
         protected class WeaponSlot
         {
@@ -19,7 +18,7 @@ namespace Code.Entity
             public WeaponData WeaponData;
         }
         
-        public WeaponData GetEquippedWeapon() => _weaponSlot.WeaponData;
+        public WeaponData GetEquippedWeaponData() => _weaponSlot.WeaponData;
         public WeaponId GetEquippedWeaponId() => _weaponSlot.WeaponId;
     }
 }

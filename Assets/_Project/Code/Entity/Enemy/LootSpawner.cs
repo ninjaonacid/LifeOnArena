@@ -16,8 +16,8 @@ namespace Code.Entity.Enemy
     {
         private IRandomService _randomService;
         private IItemFactory _itemFactory;
+        private ParticleFactory _particleFactory;
         private IGameDataContainer _dataContainer;
-        private ParticleObjectPool _particleObjectPool;
         public EnemyDeath EnemyDeath;
         [SerializeField] private ParticleIdentifier _souls;
         private int _lootMin;
@@ -26,13 +26,12 @@ namespace Code.Entity.Enemy
         private CancellationTokenSource _cts;
 
         [Inject]
-        public void Construct(IItemFactory factory, IRandomService randomService, IGameDataContainer dataContainer,
-            ParticleObjectPool particleObjectPool)
+        public void Construct(IItemFactory factory, ParticleFactory particleFactory, IRandomService randomService, IGameDataContainer dataContainer)
         {
             _itemFactory = factory;
             _randomService = randomService;
+            _particleFactory = particleFactory;
             _dataContainer = dataContainer;
-            _particleObjectPool = particleObjectPool;
         }
 
         private void Start()
@@ -47,7 +46,7 @@ namespace Code.Entity.Enemy
 
         private async UniTask SpawnLoot(CancellationToken token)
         {
-            var lootParticle = await _particleObjectPool.GetObject(_souls.Id);
+            var lootParticle = await _particleFactory.CreateParticle(_souls.Id);
 
             lootParticle.transform.position = transform.position + new Vector3(0, 2, 0);
 
@@ -66,7 +65,7 @@ namespace Code.Entity.Enemy
                 return !lootParticle.isPlaying;
             }, cancellationToken: token);
 
-            _particleObjectPool.ReturnObject(_souls.Id, lootParticle);
+            lootParticle.gameObject.SetActive(false);
         }
 
 

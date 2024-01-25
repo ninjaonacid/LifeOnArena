@@ -51,6 +51,11 @@ namespace Code.Entity.Hero
 
             OnWeaponChange?.Invoke(CurrentWeapon, _weaponSlot.WeaponId);
         }
+
+        public MeleeWeapon GetMeleeWeapon()
+        {
+            return CurrentWeapon;
+        }
         
         public void EnableWeapon(bool value)
         {

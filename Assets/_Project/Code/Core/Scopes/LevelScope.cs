@@ -21,7 +21,6 @@ namespace Code.Core.Scopes
             builder.Register<ObjectPoolProvider>(Lifetime.Singleton);
             
             builder.Register<IItemFactory, ItemFactory>(Lifetime.Scoped);
-            builder.Register<EnemyObjectPool>(Lifetime.Scoped);
             builder.Register<IEnemyFactory, EnemyFactory>(Lifetime.Scoped);
             builder.Register<IAbilityFactory, AbilityFactory>(Lifetime.Scoped);
             builder.Register<IHeroFactory, HeroFactory>(Lifetime.Scoped);
@@ -30,7 +29,6 @@ namespace Code.Core.Scopes
             screenServiceInstaller.Install(builder);
             
             builder.Register<ParticleFactory>(Lifetime.Scoped);
-            builder.Register<ParticleObjectPool>(Lifetime.Scoped);
 
             InitializeServices(builder);
         }

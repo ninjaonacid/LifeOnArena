@@ -8,7 +8,7 @@ namespace Code.Core.ObjectPool
     {
         private GameObject _poolRoot;
 
-        private GameObject _prefab;
+        private readonly GameObject _prefab;
         private readonly Func<T> _factory;
         private readonly Stack<T> _objectsStock;
 
@@ -19,13 +19,23 @@ namespace Code.Core.ObjectPool
             _objectsStock = new Stack<T>();
         }
 
-        public void Initialize()
+        public void Initialize(int size = 1)
         {
             if (_poolRoot is null)
             {
                 _poolRoot = new GameObject($"{_prefab.gameObject.name} Pool");
             }
         }
+
+        public void Warm(int size)
+        {
+            for (int i = 0; i < size; i++)
+            {
+                var obj = CreateObject();
+                _objectsStock.Push(obj);
+            }
+        }
+        
         public T Get(Transform parent = null)
         {
             T obj = default;

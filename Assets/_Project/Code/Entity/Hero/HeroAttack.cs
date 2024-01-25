@@ -1,6 +1,7 @@
 using System;
 using Code.ConfigData.Identifiers;
 using Code.ConfigData.StatSystem;
+using Code.Core.Factory;
 using Code.Logic.Collision;
 using Code.Logic.EntitiesComponents;
 using Code.Logic.Weapon;
@@ -23,7 +24,7 @@ namespace Code.Entity.Hero
 
         private AudioService _audioService;
         private IBattleService _battleService;
-        
+
         [Inject]
         public void Construct(AudioService audioService, IBattleService battleService)
         {

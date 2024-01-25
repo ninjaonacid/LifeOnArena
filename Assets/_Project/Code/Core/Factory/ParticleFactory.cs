@@ -50,7 +50,20 @@ namespace Code.Core.Factory
             (transform = particle.transform).SetParent(parent);
             transform.position = position;
             return particle;
+        }
 
+        public async UniTaskVoid PrewarmParticlePool(int id, int size)
+        {
+            var particle = _configProvider.Particle(id);
+
+            var prefab = await _assetProvider.Load<GameObject>(particle.ViewReference);
+
+            _poolProvider.WarmPool(prefab, size);
+        }
+
+        public void PrewarmParticlePool(GameObject prefab, int size)
+        {
+            _poolProvider.WarmPool(prefab, size);
         }
         
     }

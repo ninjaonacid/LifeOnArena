@@ -14,7 +14,7 @@ namespace Code.Entity.Hero.HeroStates
             base.OnEnter();
             _heroWeapon.EnableWeapon(true);
             _heroAnimator.PlayAttack(this);
-            _duration = _heroWeapon.GetEquippedWeapon().WeaponFsmConfig.FirstAttackStateDuration;
+            _duration = _heroWeapon.GetEquippedWeaponData().WeaponFsmConfig.FirstAttackStateDuration;
         }
 
         public override void OnLogic()

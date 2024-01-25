@@ -7,21 +7,20 @@ namespace Code.Core.ObjectPool
 {
     public class ObjectPoolProvider : IDisposable
     {
-        private Dictionary<int, ObjectPool<PooledObject>> _identifierToPoolMap;
-        private Dictionary<string, ObjectPool<PooledObject>> _prefabToPoolMap;
+        private readonly Dictionary<int, ObjectPool<PooledObject>> _identifierToPoolMap;
+        private readonly Dictionary<int, ObjectPool<PooledObject>> _prefabToPoolMap;
 
         public ObjectPoolProvider()
         {
             _identifierToPoolMap = new Dictionary<int, ObjectPool<PooledObject>>();
-            _prefabToPoolMap = new Dictionary<string, ObjectPool<PooledObject>>();
+            _prefabToPoolMap = new Dictionary<int, ObjectPool<PooledObject>>();
         }
 
         public GameObject Pull(int id, GameObject prefab, Transform parent)
         {
             if (!_identifierToPoolMap.TryGetValue(id, out var objectPool))
             {
-                objectPool = new ObjectPool<PooledObject>(() => 
-                    Instantiate(prefab, parent), prefab);
+                objectPool = CreatePool(prefab);
                 
                 _identifierToPoolMap.Add(id, objectPool);
                 
@@ -36,13 +35,73 @@ namespace Code.Core.ObjectPool
         {
             if (!_identifierToPoolMap.TryGetValue(id, out var objectPool))
             {
-                objectPool = new ObjectPool<PooledObject>(() => Instantiate(prefab), prefab);
+                objectPool = CreatePool(prefab);
                 
                 _identifierToPoolMap.Add(id, objectPool);
+                
                 objectPool.Initialize();
             }
       
             return objectPool.Get().gameObject;
+        }
+
+        public GameObject Pull(GameObject prefab)
+        {
+            int prefabInstanceId = prefab.GetInstanceID();
+            if (!_prefabToPoolMap.TryGetValue(prefabInstanceId, out var objectPool))
+            {
+                objectPool = CreatePool(prefab);
+                
+                _prefabToPoolMap.Add(prefabInstanceId, objectPool);
+                
+                objectPool.Initialize();
+            }
+
+            return objectPool.Get().gameObject;
+        }
+
+        public void WarmPool(GameObject prefab, int size)
+        {
+            int prefabInstanceId = prefab.GetInstanceID();
+            
+            if (!_prefabToPoolMap.TryGetValue(prefabInstanceId, out var objectPool))
+            {
+                objectPool = CreatePool(prefab);
+                
+                _prefabToPoolMap.Add(prefabInstanceId, objectPool);
+                
+                objectPool.Initialize();
+                objectPool.Warm(size);
+            }
+            else
+            {
+                objectPool.Warm(size);
+            }
+
+            
+        }
+
+        public void WarmPool(int id, GameObject prefab, int size)
+        {
+            if (!_identifierToPoolMap.TryGetValue(id, out var objectPool))
+            {
+                objectPool = CreatePool(prefab);
+                
+                _identifierToPoolMap.Add(id, objectPool);
+                
+                objectPool.Initialize();
+                objectPool.Warm(size);
+            }
+            else
+            {
+                objectPool.Warm(size);
+            }
+
+        }
+
+        private ObjectPool<PooledObject> CreatePool(GameObject prefab)
+        {
+            return new ObjectPool<PooledObject>(() => Instantiate(prefab), prefab);
         }
 
         public void Release(int id)
