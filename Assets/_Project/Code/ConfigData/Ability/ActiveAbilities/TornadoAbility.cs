@@ -1,3 +1,4 @@
+using Code.Core.Factory;
 using Code.Core.ObjectPool;
 using Code.Logic.EntitiesComponents;
 using Code.Logic.Projectiles;
@@ -8,7 +9,7 @@ namespace Code.ConfigData.Ability.ActiveAbilities
 {
     public class TornadoAbility : IAbility
     {
-        private readonly ParticleObjectPool _particleObjectPool;
+        private readonly ParticleFactory _particleFactory;
         private readonly IBattleService _battleService;
         private readonly ParticleObjectData _particleObjectData;
         private readonly float _duration;
@@ -18,7 +19,7 @@ namespace Code.ConfigData.Ability.ActiveAbilities
 
         private ParticleSystem _tornadoParticle;
         
-        public TornadoAbility(ParticleObjectPool particleObjectPool,
+        public TornadoAbility(ParticleFactory particleFactory,
             IBattleService battleService,
             ParticleObjectData particleObjectData,
             float duration,
@@ -26,7 +27,7 @@ namespace Code.ConfigData.Ability.ActiveAbilities
             float attackRadius,
             float castDistance)
         {
-            _particleObjectPool = particleObjectPool;
+            _particleFactory = particleFactory;
             _battleService = battleService;
             _particleObjectData = particleObjectData;
             _duration = duration;
@@ -38,10 +39,10 @@ namespace Code.ConfigData.Ability.ActiveAbilities
         {
             Vector3 casterPosition = caster.transform.position;
             Vector3 casterDirection = caster.transform.forward;
-            
-            _tornadoParticle = await _particleObjectPool.GetObject(_particleObjectData.Identifier.Id);
+
+            _tornadoParticle = await _particleFactory.CreateParticle(_particleObjectData.Identifier.Id);
             TornadoProjectile tornadoProjectile = _tornadoParticle.gameObject.GetComponent<TornadoProjectile>();
-            tornadoProjectile.Initialize(_particleObjectPool, _particleObjectData, _duration);
+            tornadoProjectile.Initialize(_particleObjectData, _duration);
             Transform projectileTransform = tornadoProjectile.transform;
             projectileTransform.position = casterPosition + casterDirection * _castDistance;
             projectileTransform.rotation = Quaternion.identity;

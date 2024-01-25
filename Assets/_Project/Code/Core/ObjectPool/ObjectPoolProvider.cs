@@ -1,51 +1,44 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
-using VContainer;
-using VContainer.Unity;
+using Object = UnityEngine.Object;
 
 namespace Code.Core.ObjectPool
 {
     public class ObjectPoolProvider : IDisposable
     {
-        private readonly IObjectResolver _resolver;
         private Dictionary<int, ObjectPool<PooledObject>> _identifierToPoolMap;
         private Dictionary<string, ObjectPool<PooledObject>> _prefabToPoolMap;
 
-        public ObjectPoolProvider(IObjectResolver resolver)
+        public ObjectPoolProvider()
         {
-            _resolver = resolver;
-            
             _identifierToPoolMap = new Dictionary<int, ObjectPool<PooledObject>>();
             _prefabToPoolMap = new Dictionary<string, ObjectPool<PooledObject>>();
         }
 
-
-        public GameObject Spawn(int id, GameObject prefab, Vector3 position, Quaternion rotation, Transform parent)
+        public GameObject Pull(int id, GameObject prefab, Transform parent)
         {
-            ObjectPool<PooledObject> objectPool = null;
-
-            if (!_identifierToPoolMap.TryGetValue(id, out objectPool))
+            if (!_identifierToPoolMap.TryGetValue(id, out var objectPool))
             {
                 objectPool = new ObjectPool<PooledObject>(() => 
-                    Instantiate(prefab, position, rotation, parent), prefab);
+                    Instantiate(prefab, parent), prefab);
                 
                 _identifierToPoolMap.Add(id, objectPool);
                 
                 objectPool.Initialize();
             }
       
-            return objectPool.Get().gameObject;
+            return objectPool.Get(parent).gameObject;
         }
         
 
-        public GameObject Spawn(int id, GameObject prefab)
+        public GameObject Pull(int id, GameObject prefab)
         {
-            ObjectPool<PooledObject> objectPool = null;
-
-            if (!_identifierToPoolMap.TryGetValue(id, out objectPool))
+            if (!_identifierToPoolMap.TryGetValue(id, out var objectPool))
             {
                 objectPool = new ObjectPool<PooledObject>(() => Instantiate(prefab), prefab);
+                
+                _identifierToPoolMap.Add(id, objectPool);
                 objectPool.Initialize();
             }
       
@@ -62,21 +55,21 @@ namespace Code.Core.ObjectPool
             }
         }
 
-        public TComponent Spawn<TComponent>(int id, GameObject prefab)
+        public TComponent Pull<TComponent>(int id, GameObject prefab)
         {
-           var go =  Spawn(id, prefab);
+           var go =  Pull(id, prefab);
            return go.GetComponent<TComponent>();
         }
         
         private PooledObject Instantiate(GameObject prefab)  
         {
-            var go = _resolver.Instantiate(prefab);
+            var go = Object.Instantiate(prefab);
             return go.GetComponent<PooledObject>();
         }
         
-        private PooledObject Instantiate(GameObject prefab, Vector3 position, Quaternion rotation, Transform parent)   
+        private PooledObject Instantiate(GameObject prefab, Transform parent)   
         {
-            var go = _resolver.Instantiate(prefab, position, rotation, parent);
+            var go = Object.Instantiate(prefab, parent);
             return go.GetComponent<PooledObject>();
         }
 

@@ -1,15 +1,16 @@
-using System;
 using Code.Core.Factory;
 using Code.Core.ObjectPool;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using VContainer;
 using Vector3 = UnityEngine.Vector3;
 
 namespace Code.Logic.Particles
 {
-    public class SoulLootParticle : MonoBehaviour
+    public class SoulLootParticle : SerializedMonoBehaviour
     {
         [SerializeField] private ParticleSystem _soulParticle;
+        [SerializeField] private IPoolable _poolable;
 
         private ParticleSystem.Particle[] _particles = new ParticleSystem.Particle[100];
 
@@ -21,11 +22,6 @@ namespace Code.Logic.Particles
         public void Construct(IHeroFactory heroFactory)
         {
             _targetTransform = heroFactory.HeroGameObject.transform;
-        }
-
-        private void Awake()
-        {
-            _soulParticle = GetComponent<ParticleSystem>();
         }
 
         private void LateUpdate()

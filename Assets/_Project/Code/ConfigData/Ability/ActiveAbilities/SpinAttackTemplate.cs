@@ -10,7 +10,7 @@ namespace Code.ConfigData.Ability.ActiveAbilities
         public float Damage;
         public override IAbility GetAbility()
         {
-            return new SpinAttack(Damage, BattleService);
+            return new SpinAttack(Damage, _battleService);
         }
     }
 

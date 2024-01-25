@@ -1,6 +1,5 @@
 using Code.ConfigData.Ability;
 using Code.Core.AssetManagement;
-using Code.Core.ObjectPool;
 using Code.Services.BattleService;
 using Code.Services.ConfigData;
 using Code.Services.RandomService;
@@ -12,20 +11,20 @@ namespace Code.Core.Factory
     public class AbilityFactory : IAbilityFactory
     {
         private readonly IConfigProvider _config;
-        private readonly ParticleObjectPool _viewObjectPool;
         private readonly IBattleService _battleService;
         private readonly IRandomService _random;
         private readonly IAssetProvider _assetProvider;
+        private readonly ParticleFactory _particleFactory;
         public AbilityFactory(
             IAssetProvider assetProvider,
             IConfigProvider config,
-            ParticleObjectPool viewObjectPool,
+            ParticleFactory particleFactory,
             IBattleService battleService,
             IRandomService random)
         {
             _assetProvider = assetProvider;
             _config = config;
-            _viewObjectPool = viewObjectPool;
+            _particleFactory = particleFactory;
             _battleService = battleService;
             _random = random;
         }
@@ -41,7 +40,7 @@ namespace Code.Core.Factory
 
         public AbilityTemplateBase InitializeAbilityTemplate(AbilityTemplateBase ability)
         {
-            ability.InitServices(_viewObjectPool, _battleService);
+            ability.InitServices(_particleFactory, _battleService);
             
             if (ability.ParticleObjectData)
             {

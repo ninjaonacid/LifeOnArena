@@ -23,10 +23,10 @@ namespace Code.Core.ObjectPool
         {
             if (_poolRoot is null)
             {
-                _poolRoot = new GameObject($"_pooledObject.gameObject.name + Pool");
+                _poolRoot = new GameObject($"{_prefab.gameObject.name} Pool");
             }
         }
-        public T Get()
+        public T Get(Transform parent = null)
         {
             T obj = default;
             
@@ -38,6 +38,13 @@ namespace Code.Core.ObjectPool
             {
                 obj = CreateObject();
             }
+
+            if (!parent)
+            {
+                obj.transform.SetParent(_poolRoot.transform);
+            }
+            
+            obj.gameObject.SetActive(true);
 
             return obj;
         }

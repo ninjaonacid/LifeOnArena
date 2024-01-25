@@ -13,9 +13,8 @@ namespace Code.Logic.EnemySpawners
     {
         private EnemyDeath _enemyDeath;
         private IPoolable _pooledObject;
-        private ParticleObjectPool _particleObjectPool;
-        private ObjectPoolProvider _objectPoolProvider;
         private IEnemyFactory _factory;
+        private ParticleFactory _particleFactory;
         private ParticleSystem _spawnParticle;
         public string Id { get; set; }
         public int RespawnCount { get; set; }
@@ -26,17 +25,21 @@ namespace Code.Logic.EnemySpawners
 
         [Inject]
         public void Construct(IEnemyFactory enemyFactory,
-            ParticleObjectPool particleObjectPool)
+            ParticleFactory particleFactory)
         {
             _factory = enemyFactory;
-            _particleObjectPool = particleObjectPool;
+            _particleFactory = particleFactory;
         }
 
         public async UniTaskVoid Spawn(CancellationToken token)
         {
             Alive = true;
             var monster = await _factory.CreateMonster(MobId.Id, transform, token);
-           _spawnParticle = await _particleObjectPool.GetObject(ParticleIdentifier.Id, transform);
+
+            var position = transform.position;
+            monster.transform.position = position;
+
+            _spawnParticle = await _particleFactory.CreateParticle(ParticleIdentifier.Id, position);
             
             _enemyDeath = monster.GetComponent<EnemyDeath>();
             _enemyDeath.Happened += Slay;
@@ -46,12 +49,6 @@ namespace Code.Logic.EnemySpawners
         {
             if (_enemyDeath != null)
                   _enemyDeath.Happened -= Slay;
-
-            _pooledObject ??= _enemyDeath.GetComponent<IPoolable>();
-            _pooledObject.ReturnToPool();
-           
-            //_enemyObjectPool.ReturnObject(MobId.Id, _enemyDeath.gameObject);
-            _particleObjectPool.ReturnObject(ParticleIdentifier.Id, _spawnParticle);
 
             Alive = false;
         }

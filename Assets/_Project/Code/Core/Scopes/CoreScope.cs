@@ -28,9 +28,7 @@ namespace Code.Core.Scopes
 
             builder.Register<IConfigProvider, ConfigProvider>(Lifetime.Singleton);
             builder.Register<ISaveLoadService, SaveLoadService>(Lifetime.Singleton);
-            
-            
-           
+
             builder.Register<IUIFactory, UIFactory>(Lifetime.Singleton);
             builder.Register<IAssetProvider, AssetProvider>(Lifetime.Singleton);
             builder.Register<IGameDataContainer, GameDataContainer>(Lifetime.Singleton);

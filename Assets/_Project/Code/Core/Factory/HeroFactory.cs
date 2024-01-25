@@ -55,7 +55,6 @@ namespace Code.Core.Factory
             
             _objectResolver.InjectGameObject(HeroGameObject);
             
-
             return prefab;
         }
 

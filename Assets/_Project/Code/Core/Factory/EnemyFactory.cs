@@ -75,7 +75,9 @@ namespace Code.Core.Factory
 
             GameObject prefab = await _assetProvider.Load<GameObject>(monsterData.PrefabReference);
             
-            GameObject monster = _objectPoolProvider.Spawn(mobId, prefab, parent.position, Quaternion.identity, parent);
+            GameObject monster = _objectPoolProvider.Pull(mobId, prefab, parent);
+            
+            _objectResolver.InjectGameObject(monster);
             
             IDamageable damageable = monster.GetComponent<IDamageable>();
 
@@ -92,7 +94,6 @@ namespace Code.Core.Factory
             expDrop.SetExperienceGain(monsterData.MinExp, monsterData.MaxExp);
             var fsm = monster.GetComponent<EnemyStateMachine>();
             fsm.Construct(monsterData.EnemyStateMachineConfig);
-          
 
             return monster;
         }

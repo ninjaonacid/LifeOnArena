@@ -1,3 +1,4 @@
+using Code.Core.Factory;
 using Code.Core.ObjectPool;
 using Code.Services.BattleService;
 using UnityEngine.AddressableAssets;
@@ -21,16 +22,16 @@ namespace Code.ConfigData.Ability
         public AbilityState State;
         public ParticleObjectData ParticleObjectData;
 
-        protected ParticleObjectPool ParticleObjectPool;
-        protected IBattleService BattleService;
+        protected ParticleFactory _particleFactory;
+        protected IBattleService _battleService;
         public abstract IAbility GetAbility();
 
         public void InitServices(
-            ParticleObjectPool viewObjectPool, 
+            ParticleFactory particleFactory,
             IBattleService battleService)
         {
-            ParticleObjectPool = viewObjectPool;
-            BattleService = battleService;
+            _particleFactory = particleFactory;
+            _battleService = battleService;
         }
         
         public virtual bool IsReady() =>

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4983898725059260790}
   - component: {fileID: 2892580405908794993}
   - component: {fileID: 3252872158134855533}
+  - component: {fileID: 2305392242654182954}
   m_Layer: 0
   m_Name: SoulParticle
   m_TagString: Untagged
@@ -4825,4 +4826,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6759a2d7d4c661a43a0bd546e635ad00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 2305392242654182954}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: _poolable
+      Entry: 10
+      Data: 0
   _soulParticle: {fileID: 4983898725059260790}
+--- !u!114 &2305392242654182954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5167915636252690774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 859d65b6ff2a410da68cc3e1ed9dcb9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
