@@ -39,11 +39,12 @@ namespace Code.Logic.Weapon
                 Hit?.Invoke(new CollisionData()
                 {
                     Target = other.gameObject
-                });
+                }); 
                 
                 var vfx = await HitVfx();
                var hitbox = other.gameObject.GetComponent<EnemyHitBox>();
-               vfx.transform.position = hitbox.GetHitBoxCenter();
+               vfx.gameObject.transform.position = other.transform.position + hitbox.GetHitBoxCenter();
+               vfx.Play();
             }
         }
 

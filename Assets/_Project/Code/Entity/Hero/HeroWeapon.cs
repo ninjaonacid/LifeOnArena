@@ -40,7 +40,7 @@ namespace Code.Entity.Hero
 
             _heroAnimator.OverrideController(weaponData.OverrideController);
 
-            CurrentWeapon = Instantiate(weaponData.WeaponPrefab, _weaponPosition, false).GetComponent<MeleeWeapon>();
+            CurrentWeapon = _itemFactory.CreateMeleeWeapon(weaponData.WeaponPrefab, _weaponPosition);
             
             CurrentWeapon.gameObject.transform.localPosition = Vector3.zero;
     

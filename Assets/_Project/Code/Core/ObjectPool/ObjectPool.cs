@@ -32,6 +32,7 @@ namespace Code.Core.ObjectPool
             for (int i = 0; i < size; i++)
             {
                 var obj = CreateObject();
+                obj.transform.SetParent(_poolRoot.transform);
                 _objectsStock.Push(obj);
             }
         }

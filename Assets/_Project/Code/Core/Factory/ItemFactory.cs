@@ -4,11 +4,13 @@ using Code.ConfigData.Identifiers;
 using Code.Core.AssetManagement;
 using Code.Core.ObjectPool;
 using Code.Logic.LevelObjectsSpawners;
+using Code.Logic.Weapon;
 using Code.Services.ConfigData;
 using Code.Services.SaveLoad;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using VContainer;
+using VContainer.Unity;
 using Vector3 = UnityEngine.Vector3;
 
 namespace Code.Core.Factory
@@ -38,6 +40,12 @@ namespace Code.Core.Factory
         
         public WeaponData LoadWeapon(int weaponId) =>
             _config.Weapon(weaponId);
+
+        public MeleeWeapon CreateMeleeWeapon(GameObject prefab, Transform position)
+        {
+            var weapon = _objectResolver.Instantiate(prefab, position);
+            return weapon.GetComponent<MeleeWeapon>();
+        }
 
         public async Task<WeaponPlatformSpawner> CreateWeaponPlatformSpawner(Vector3 point,
             string spawnerId,
