@@ -45,9 +45,10 @@ namespace Code.Core.Factory
            return particle;
         }
 
-        public async UniTask<ParticleSystem> CreateParticleWithTimer(int id)
+        public async UniTask<ParticleSystem> CreateParticleWithTimer(int id, float time)
         {
             var particle = await CreateParticle(id);
+            _poolProvider.ReturnWithTimer(id, particle.GetComponent<PooledObject>(), time).Forget();
             return particle;
         }
 

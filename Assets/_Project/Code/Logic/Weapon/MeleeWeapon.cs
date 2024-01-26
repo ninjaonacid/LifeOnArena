@@ -50,7 +50,7 @@ namespace Code.Logic.Weapon
 
         private async UniTask<ParticleSystem> HitVfx()
         {
-          var vfx = await _particleFactory.CreateParticle(_hitVfx.Id);
+          var vfx = await _particleFactory.CreateParticleWithTimer(_hitVfx.Id, 1);
           return vfx;
         }
 

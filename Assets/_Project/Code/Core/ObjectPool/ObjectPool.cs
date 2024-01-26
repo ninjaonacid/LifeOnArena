@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Code.Core.ObjectPool
@@ -68,13 +69,9 @@ namespace Code.Core.ObjectPool
 
             return obj;
         }
+        
 
-        public void Release()
-        {
-            
-        }
-
-        private void Return(PooledObject obj)
+        public void Return(PooledObject obj)
         {
             _objectsStock.Push(obj as T);
             obj.gameObject.SetActive(false);

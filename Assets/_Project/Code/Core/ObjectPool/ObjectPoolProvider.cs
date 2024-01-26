@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -77,8 +78,6 @@ namespace Code.Core.ObjectPool
             {
                 objectPool.Warm(size);
             }
-
-            
         }
 
         public void WarmPool(int id, GameObject prefab, int size)
@@ -96,22 +95,24 @@ namespace Code.Core.ObjectPool
             {
                 objectPool.Warm(size);
             }
+        }
 
+        public async UniTaskVoid ReturnWithTimer(int id, PooledObject obj, float time)
+        {
+            if(_identifierToPoolMap.TryGetValue(id, out var objectPool))
+            {
+                await UniTask.Delay(TimeSpan.FromSeconds(time));
+                objectPool.Return(obj);
+            }
+            else
+            {
+                Debug.Log("NO OBJECT IN POOL");
+            }
         }
 
         private ObjectPool<PooledObject> CreatePool(GameObject prefab)
         {
             return new ObjectPool<PooledObject>(() => Instantiate(prefab), prefab);
-        }
-
-        public void Release(int id)
-        {
-            ObjectPool<PooledObject> objectPool = null;
-            
-            if(_identifierToPoolMap.TryGetValue(id, out objectPool))
-            {
-                
-            }
         }
 
         public TComponent Pull<TComponent>(int id, GameObject prefab)
