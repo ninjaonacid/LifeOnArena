@@ -11,8 +11,8 @@ namespace Code.Logic.Projectiles
     {
         [SerializeField] private ParticleSystem _tornadoParticle;
         [SerializeField] private IPoolable _poolable;
-        private ParticleObjectData _particleData;
-        public void Initialize(ParticleObjectData data, float lifeTime)
+        private VfxData _particleData;
+        public void Initialize(VfxData data, float lifeTime)
         {
             _particleData = data;
             

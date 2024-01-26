@@ -11,7 +11,7 @@ namespace Code.ConfigData.Ability.ActiveAbilities
     {
         private readonly ParticleFactory _particleFactory;
         private readonly IBattleService _battleService;
-        private readonly ParticleObjectData _particleObjectData;
+        private readonly VfxData _vfxData;
         private readonly float _duration;
         private readonly float _damage;
         private readonly float _attackRadius;
@@ -21,7 +21,7 @@ namespace Code.ConfigData.Ability.ActiveAbilities
         
         public TornadoAbility(ParticleFactory particleFactory,
             IBattleService battleService,
-            ParticleObjectData particleObjectData,
+            VfxData vfxData,
             float duration,
             float damage,
             float attackRadius,
@@ -29,7 +29,7 @@ namespace Code.ConfigData.Ability.ActiveAbilities
         {
             _particleFactory = particleFactory;
             _battleService = battleService;
-            _particleObjectData = particleObjectData;
+            _vfxData = vfxData;
             _duration = duration;
             _damage = damage;
             _attackRadius = attackRadius;
@@ -40,9 +40,9 @@ namespace Code.ConfigData.Ability.ActiveAbilities
             Vector3 casterPosition = caster.transform.position;
             Vector3 casterDirection = caster.transform.forward;
 
-            _tornadoParticle = await _particleFactory.CreateParticle(_particleObjectData.Identifier.Id);
+            _tornadoParticle = await _particleFactory.CreateParticle(_vfxData.Identifier.Id);
             TornadoProjectile tornadoProjectile = _tornadoParticle.gameObject.GetComponent<TornadoProjectile>();
-            tornadoProjectile.Initialize(_particleObjectData, _duration);
+            tornadoProjectile.Initialize(_vfxData, _duration);
             Transform projectileTransform = tornadoProjectile.transform;
             projectileTransform.position = casterPosition + casterDirection * _castDistance;
             projectileTransform.rotation = Quaternion.identity;

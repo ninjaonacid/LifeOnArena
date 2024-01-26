@@ -27,9 +27,11 @@ namespace Code.Core.Factory
         {
             var particle = _configProvider.Particle(id);
 
-            var prefab = await _assetProvider.Load<GameObject>(particle.ViewReference);
-
+            var prefab = await _assetProvider.Load<GameObject>(particle.PrefabReference);
+            
             var particleSystem = _poolProvider.Pull<ParticleSystem>(id, prefab);
+
+            Debug.Log(prefab.GetInstanceID());
             
             _objectResolver.InjectGameObject(particleSystem.gameObject);
             
@@ -41,6 +43,12 @@ namespace Code.Core.Factory
            var particle =  await CreateParticle(id);
            particle.transform.position = position;
            return particle;
+        }
+
+        public async UniTask<ParticleSystem> CreateParticleWithTimer(int id)
+        {
+            var particle = await CreateParticle(id);
+            return particle;
         }
 
         public async UniTask<ParticleSystem> CreateParticle(int id, Vector3 position, Transform parent)
@@ -56,7 +64,7 @@ namespace Code.Core.Factory
         {
             var particle = _configProvider.Particle(id);
 
-            var prefab = await _assetProvider.Load<GameObject>(particle.ViewReference);
+            var prefab = await _assetProvider.Load<GameObject>(particle.PrefabReference);
 
             _poolProvider.WarmPool(prefab, size);
         }

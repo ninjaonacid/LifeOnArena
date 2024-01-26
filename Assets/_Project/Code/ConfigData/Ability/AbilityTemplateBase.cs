@@ -20,7 +20,7 @@ namespace Code.ConfigData.Ability
         public float CurrentActiveTime;
         public int Price;
         public AbilityState State;
-        public ParticleObjectData ParticleObjectData;
+        [FormerlySerializedAs("ParticleObjectData")] public VfxData VfxData;
 
         protected ParticleFactory _particleFactory;
         protected IBattleService _battleService;

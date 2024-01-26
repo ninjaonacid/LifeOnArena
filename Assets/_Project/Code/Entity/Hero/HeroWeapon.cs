@@ -6,6 +6,7 @@ using Code.Core.Factory;
 using Code.Data.PlayerData;
 using Code.Logic.Weapon;
 using Code.Services.PersistentProgress;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using VContainer;
 
@@ -52,11 +53,6 @@ namespace Code.Entity.Hero
             OnWeaponChange?.Invoke(CurrentWeapon, _weaponSlot.WeaponId);
         }
 
-        public MeleeWeapon GetMeleeWeapon()
-        {
-            return CurrentWeapon;
-        }
-        
         public void EnableWeapon(bool value)
         {
             CurrentWeapon.EnableCollider(value);
@@ -69,7 +65,7 @@ namespace Code.Entity.Hero
             
             if (weaponId != 0)
             {
-                WeaponData weapon = _itemFactory.LoadWeapon(weaponId);
+                WeaponData weapon =  _itemFactory.LoadWeapon(weaponId);
                 EquipWeapon(weapon);
             }
             else

@@ -18,10 +18,7 @@ namespace Code.Core.Factory
             WeaponId weaponId);
 
         MeleeWeapon CreateMeleeWeapon(GameObject prefab, Transform position);
-
-       // Task<GameObject> CreateWeaponPlatform(WeaponId weaponId, Transform parent);
-
-
-       UniTaskVoid InitAssets();
+        
+        UniTaskVoid InitAssets();
     }
 }

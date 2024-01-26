@@ -15,6 +15,7 @@ namespace Code.ConfigData
         public List<DamageType> DamageType;
         public GameObject WeaponPrefab;
         public WeaponId WeaponId;
+        public VfxData HitVfx;
         public int Price;
         public float AttackSpeed;
         public float Damage;

@@ -2,6 +2,7 @@ using System;
 using Code.Data;
 using Code.Data.PlayerData;
 using Code.Services.PersistentProgress;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace Code.ConfigData.StatSystem
@@ -57,7 +58,7 @@ namespace Code.ConfigData.StatSystem
             CurrentValueChanged?.Invoke();
         }
         
-        public void LoadData(PlayerData data)
+        public  void LoadData(PlayerData data)
         {
             if (data.StatsData.Stats.TryGetValue(_statDefinition.name, out var value))
             {

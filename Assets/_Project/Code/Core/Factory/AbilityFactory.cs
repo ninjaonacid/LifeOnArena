@@ -3,6 +3,7 @@ using Code.Core.AssetManagement;
 using Code.Services.BattleService;
 using Code.Services.ConfigData;
 using Code.Services.RandomService;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
@@ -42,18 +43,18 @@ namespace Code.Core.Factory
         {
             ability.InitServices(_particleFactory, _battleService);
             
-            if (ability.ParticleObjectData)
+            if (ability.VfxData)
             {
-                InitAbilityAssets(ability.ParticleObjectData.ViewReference);
+                InitAbilityAssets(ability.VfxData.PrefabReference).Forget();
             }
             
             return ability;
         }
 
-        private void InitAbilityAssets(AssetReference prefabReference)
+        private async UniTaskVoid InitAbilityAssets(AssetReference prefabReference)
         {
             if(prefabReference.RuntimeKeyIsValid()) 
-                _assetProvider.Load<GameObject>(prefabReference);
+                await _assetProvider.Load<GameObject>(prefabReference);
         }
         
 

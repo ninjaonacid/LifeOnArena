@@ -16,7 +16,7 @@ namespace Code.ConfigData.Ability.ActiveAbilities
                 new TornadoAbility
                 (_particleFactory,
                 _battleService,
-                ParticleObjectData,
+                VfxData,
                 ActiveTime,
                 Damage,
                 AttackRadius,

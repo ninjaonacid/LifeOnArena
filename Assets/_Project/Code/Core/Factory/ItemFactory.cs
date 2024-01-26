@@ -9,6 +9,7 @@ using Code.Services.ConfigData;
 using Code.Services.SaveLoad;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using VContainer;
 using VContainer.Unity;
 using Vector3 = UnityEngine.Vector3;
@@ -21,26 +22,42 @@ namespace Code.Core.Factory
         private readonly ISaveLoadService _saveLoadService;
         private readonly IAssetProvider _assetProvider;
         private readonly IObjectResolver _objectResolver;
+        private readonly ObjectPoolProvider _poolProvider;
 
         public ItemFactory(IConfigProvider config, 
             ISaveLoadService saveLoadService, 
             IAssetProvider assetProvider,
-            IObjectResolver objectResolver)
+            IObjectResolver objectResolver,
+            ObjectPoolProvider poolProvider)
         {
             _config = config;
             _saveLoadService = saveLoadService;
             _assetProvider = assetProvider;
             _objectResolver = objectResolver;
+            _poolProvider = poolProvider;
         }
 
         public async UniTaskVoid InitAssets()
         {
             await _assetProvider.Load<GameObject>(AssetAddress.WeaponPlatformSpawner);
         }
-        
-        public WeaponData LoadWeapon(int weaponId) =>
-            _config.Weapon(weaponId);
 
+        public WeaponData LoadWeapon(int weaponId)
+        {
+            WeaponData weaponData = _config.Weapon(weaponId);
+            
+            WarmAssets(weaponData.HitVfx.Identifier.Id, weaponData.HitVfx.PrefabReference).Forget();
+            
+            return weaponData;
+        }
+
+        private async UniTaskVoid WarmAssets(int id, AssetReference assetReference)
+        {
+            var hitVfx = await _assetProvider.Load<GameObject>(assetReference);
+            _poolProvider.WarmPool(id, hitVfx, 5);
+            Debug.Log(hitVfx.GetInstanceID());
+        }
+        
         public MeleeWeapon CreateMeleeWeapon(GameObject prefab, Transform position)
         {
             var weapon = _objectResolver.Instantiate(prefab, position);

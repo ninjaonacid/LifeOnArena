@@ -24,7 +24,6 @@ namespace Code.Logic.Weapon
         public void Construct(ParticleFactory particleFactory)
         {
             _particleFactory = particleFactory;
-            _particleFactory.PrewarmParticlePool(_hitVfx.Id, 5).Forget();
         }
 
         private void Awake()
@@ -39,12 +38,13 @@ namespace Code.Logic.Weapon
                 Hit?.Invoke(new CollisionData()
                 {
                     Target = other.gameObject
-                }); 
+                });
                 
                 var vfx = await HitVfx();
                var hitbox = other.gameObject.GetComponent<EnemyHitBox>();
                vfx.gameObject.transform.position = other.transform.position + hitbox.GetHitBoxCenter();
                vfx.Play();
+               
             }
         }
 
