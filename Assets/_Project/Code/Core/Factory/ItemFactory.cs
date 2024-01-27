@@ -55,7 +55,6 @@ namespace Code.Core.Factory
         {
             var hitVfx = await _assetProvider.Load<GameObject>(assetReference);
             _poolProvider.WarmPool(id, hitVfx, 5);
-            Debug.Log(hitVfx.GetInstanceID());
         }
         
         public MeleeWeapon CreateMeleeWeapon(GameObject prefab, Transform position)

@@ -39,7 +39,7 @@ namespace Code.Logic.EnemySpawners
             var position = transform.position;
             monster.transform.position = position;
 
-            _spawnParticle = await _particleFactory.CreateParticle(ParticleIdentifier.Id, position);
+            _spawnParticle = await _particleFactory.CreateParticleWithTimer(ParticleIdentifier.Id, position, 2);
             
             _enemyDeath = monster.GetComponent<EnemyDeath>();
             _enemyDeath.Happened += Slay;

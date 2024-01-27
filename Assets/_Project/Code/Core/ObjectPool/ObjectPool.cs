@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace Code.Core.ObjectPool
@@ -33,12 +32,15 @@ namespace Code.Core.ObjectPool
             for (int i = 0; i < size; i++)
             {
                 var obj = CreateObject();
-                obj.transform.SetParent(_poolRoot.transform);
+                Transform transform;
+                (transform = obj.transform).SetParent(_poolRoot.transform);
+                transform.position = _poolRoot.transform.position;
+                obj.gameObject.SetActive(false);
                 _objectsStock.Push(obj);
             }
         }
         
-        public T Get(Transform parent = null)
+        public T Get()
         {
             T obj = default;
             
@@ -49,11 +51,6 @@ namespace Code.Core.ObjectPool
             else
             {
                 obj = CreateObject();
-            }
-
-            if (!parent)
-            {
-                obj.transform.SetParent(_poolRoot.transform);
             }
             
             obj.gameObject.SetActive(true);
@@ -66,6 +63,8 @@ namespace Code.Core.ObjectPool
             var obj = _factory();
 
             obj.Initialize(Return);
+            
+            obj.transform.SetParent(_poolRoot.transform);
 
             return obj;
         }

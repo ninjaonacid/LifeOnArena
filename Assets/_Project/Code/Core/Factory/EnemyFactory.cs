@@ -75,10 +75,10 @@ namespace Code.Core.Factory
 
             GameObject prefab = await _assetProvider.Load<GameObject>(monsterData.PrefabReference);
             
-            GameObject monster = _objectPoolProvider.Pull(mobId, prefab, parent);
+            GameObject monster = _objectPoolProvider.Spawn(mobId, prefab);
             
-            _objectResolver.InjectGameObject(monster);
-            
+            monster.transform.SetParent(parent);
+
             IDamageable damageable = monster.GetComponent<IDamageable>();
 
             monster.GetComponent<EntityUI>().Construct(damageable);
@@ -98,7 +98,7 @@ namespace Code.Core.Factory
             return monster;
         }
 
-        public GameObject InstantiateRegistered(GameObject prefab, Vector3 position)
+        private GameObject InstantiateRegistered(GameObject prefab, Vector3 position)
         {
             var go = _objectResolver.Instantiate(prefab, position, Quaternion.identity);
 
@@ -108,7 +108,7 @@ namespace Code.Core.Factory
             return go;
         }
 
-        public GameObject InstantiateRegistered(GameObject prefab)
+        private GameObject InstantiateRegistered(GameObject prefab)
         {
             var go = Object.Instantiate(prefab);
             
