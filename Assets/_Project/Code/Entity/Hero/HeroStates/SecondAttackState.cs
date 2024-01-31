@@ -31,7 +31,6 @@ namespace Code.Entity.Hero.HeroStates
             {
                 fsm.StateCanExit();
             }
-
         }
 
         public override void OnExit()

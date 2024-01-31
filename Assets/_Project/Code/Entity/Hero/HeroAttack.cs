@@ -70,10 +70,7 @@ namespace Code.Entity.Hero
                 OnHit?.Invoke(hits);
             }
         }
-
-        public void SkillAttack()
-        {
-        }
+        
         
     }
 }
