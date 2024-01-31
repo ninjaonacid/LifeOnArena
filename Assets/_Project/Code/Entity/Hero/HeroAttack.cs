@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Code.ConfigData.Identifiers;
 using Code.ConfigData.StatSystem;
 using Code.Core.Factory;
@@ -22,6 +23,8 @@ namespace Code.Entity.Hero
         [SerializeField] private HeroHitBox _hitBox;
         [SerializeField] private HeroWeapon _heroWeapon;
 
+        private List<CollisionData> _collidedData;
+
         private AudioService _audioService;
         private IBattleService _battleService;
 
@@ -33,6 +36,7 @@ namespace Code.Entity.Hero
         }
         private void Awake()
         {
+            _collidedData = new List<CollisionData>();
             _layerMask = 1 << LayerMask.NameToLayer("Hittable");
             _heroWeapon.OnWeaponChange += ChangeWeapon;
         }
@@ -44,8 +48,18 @@ namespace Code.Entity.Hero
 
         private void BaseAttack(CollisionData collision)
         {
+            if(_collidedData.Contains(collision))
+            {
+                return;
+            }
             _battleService.ApplyDamage(_stats, collision.Target);
+            _collidedData.Add(collision);
             OnHit?.Invoke(1);
+        }
+
+        public void ClearCollisionData()
+        {
+            _collidedData.Clear();
         }
 
         public void BaseAttack()

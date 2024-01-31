@@ -1,5 +1,4 @@
 using System;
-using System.Threading.Tasks;
 using Code.ConfigData.Identifiers;
 using Code.Core.Factory;
 using Code.Entity.Enemy;
@@ -13,10 +12,12 @@ namespace Code.Logic.Weapon
     [RequireComponent(typeof(Collider))]
     public class MeleeWeapon : MonoBehaviour
     {
+        public event Action<CollisionData> Hit;
+        
         [SerializeField] private Collider _collider;
         [SerializeField] private ParticleSystem _slashTrail;
         [SerializeField] private ParticleIdentifier _hitVfx;
-        public event Action<CollisionData> Hit;
+        
         private LayerMask _mask;
         private ParticleFactory _particleFactory;
 

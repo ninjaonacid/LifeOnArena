@@ -36,6 +36,7 @@ namespace Code.Entity.Hero.HeroStates
         public override void OnExit()
         {
             base.OnExit();
+            _heroAttack.ClearCollisionData();
             _heroWeapon.EnableWeapon(false);
         }
 
