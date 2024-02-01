@@ -16,6 +16,7 @@ namespace Code.Entity.Hero
     public class HeroSkills : MonoBehaviour, ISaveLoader
     {
         public event Action OnSkillChanged;
+        public event Action OnAbilityUse;
 
         [SerializeField] private HeroAbilityCooldown _heroCooldown;
         [SerializeField] private SkillSlot[] _skillSlots;
@@ -90,6 +91,7 @@ namespace Code.Entity.Hero
             _skillSlots[index].AbilityTemplate.State = AbilityState.Active;
             _activeSkill = _skillSlots[index].AbilityTemplate;
             _heroCooldown.StartCooldown(_skillSlots[index].AbilityTemplate);
+            OnAbilityUse?.Invoke();
         }
         
         public void LoadData(PlayerData data)

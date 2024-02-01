@@ -36,5 +36,10 @@ namespace Code.Entity.Hero
                 _abilitiesOnCooldown.Add(ability);
             }
         }
+
+        public bool IsOnCooldown(AbilityTemplateBase ability)
+        {
+            return _abilitiesOnCooldown.Contains(ability);
+        }
     }
 }

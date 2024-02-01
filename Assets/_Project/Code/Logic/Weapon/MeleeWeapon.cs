@@ -1,10 +1,6 @@
 using System;
-using Code.ConfigData.Identifiers;
-using Code.Core.Factory;
 using Code.Logic.Collision;
-using Cysharp.Threading.Tasks;
 using UnityEngine;
-using VContainer;
 
 namespace Code.Logic.Weapon
 {

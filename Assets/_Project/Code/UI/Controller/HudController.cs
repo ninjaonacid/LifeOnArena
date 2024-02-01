@@ -34,10 +34,11 @@ namespace Code.UI.Controller
             _heroFactory.HeroGameObject.TryGetComponent(out HeroAttack heroAttack);
             _heroFactory.HeroGameObject.TryGetComponent(out HeroSkills heroSkills);
             _heroFactory.HeroGameObject.TryGetComponent(out HeroHealth heroHealth);
+            _heroFactory.HeroGameObject.TryGetComponent(out HeroAbilityCooldown heroCooldown);
             
             _view.ComboCounter.Construct(heroAttack, heroHealth);
             _view.LootCounter.Construct(_gameData.PlayerData.WorldData);
-            _view.HudSkillContainer.Construct(heroSkills);
+            _view.HudSkillContainer.Construct(heroSkills, heroCooldown);
             _view.GetComponent<EntityUI>().Construct(heroHealth);
             
 

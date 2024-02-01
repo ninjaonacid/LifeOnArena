@@ -1279,7 +1279,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -37, y: 10.094971}
+  m_AnchoredPosition: {x: -39, y: 20.19}
   m_SizeDelta: {x: 434.4591, y: 429.81}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &1206263350690194180
@@ -1305,32 +1305,8 @@ PrefabInstance:
     m_TransformParent: {fileID: 1029952865140048372}
     m_Modifications:
     - target: {fileID: 819212837027285666, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
-      propertyPath: Button
-      value: Skill2
-      objectReference: {fileID: 0}
-    - target: {fileID: 819212837027285666, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
-      propertyPath: button
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 819212837027285666, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
-      propertyPath: ButtonInput
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 819212837027285666, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
-      propertyPath: SkillSlotID
+      propertyPath: _abilitySlotID
       value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 819212837027285666, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
-      propertyPath: abilitySlotID
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 819212837027285666, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
-      propertyPath: m_ControlPath
-      value: <Keyboard>/space
-      objectReference: {fileID: 0}
-    - target: {fileID: 819212837027285666, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
-      propertyPath: SimpleInputButton
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 2624927343658051704, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
       propertyPath: m_Pivot.x
@@ -1420,12 +1396,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: SkillButton (2)
       objectReference: {fileID: 0}
-    - target: {fileID: 7202479468229353429, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
-      propertyPath: button.m_key
-      value: Skill2
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 7202479468229353429, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
 --- !u!114 &619057431303779320 stripped
 MonoBehaviour:
@@ -1451,33 +1422,9 @@ PrefabInstance:
     m_TransformParent: {fileID: 1029952865140048372}
     m_Modifications:
     - target: {fileID: 819212837027285666, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
-      propertyPath: Button
-      value: Skill1
-      objectReference: {fileID: 0}
-    - target: {fileID: 819212837027285666, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
-      propertyPath: button
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 819212837027285666, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
-      propertyPath: ButtonInput
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 819212837027285666, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
-      propertyPath: abilitySlotID
+      propertyPath: _abilitySlotID
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 819212837027285666, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
-      propertyPath: m_ControlPath
-      value: <Mouse>/rightButton
-      objectReference: {fileID: 0}
-    - target: {fileID: 819212837027285666, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
-      propertyPath: SimpleInputButton
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1952344347578689738, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
-      propertyPath: Image
-      value: 
-      objectReference: {fileID: 1701955810035707626}
     - target: {fileID: 2624927343658051704, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1566,28 +1513,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: SkillButton (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 7202479468229353429, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7202479468229353429, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
-      propertyPath: button.m_key
-      value: Skill1
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 7202479468229353429, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
---- !u!114 &1701955810035707626 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 36618261984182031, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
-  m_PrefabInstance: {fileID: 1665372912855339493}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &2036465319450467143 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 819212837027285666, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
