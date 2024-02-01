@@ -1,5 +1,4 @@
-﻿using System.Globalization;
-using Code.ConfigData.Ability;
+﻿using Code.ConfigData.Ability;
 using Cysharp.Threading.Tasks;
 using TMPro;
 using UnityEngine;
