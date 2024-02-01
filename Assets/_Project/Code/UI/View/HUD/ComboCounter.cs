@@ -71,14 +71,6 @@ namespace Code.UI.View.HUD
                 _textMesh.color = new Color(0.7f, 0.1f, 0.2f);
             }
             
-            // _comboTween = DOTween
-            //     .To(() => _hitCount, x => _hitCount = x, _hitCount + hits, 1f)
-            //     .OnUpdate(() =>
-            //     {
-            //         
-            //     }).SetLink(gameObject);
-
-
             _textMesh.transform.DOShakePosition(0.5f, 2f * _hitCount)
                 .SetLink(gameObject);
 

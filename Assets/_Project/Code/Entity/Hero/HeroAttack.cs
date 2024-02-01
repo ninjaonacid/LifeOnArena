@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using Code.ConfigData.Identifiers;
 using Code.ConfigData.StatSystem;
 using Code.Core.Factory;
+using Code.Entity.Enemy;
 using Code.Logic.Collision;
 using Code.Logic.EntitiesComponents;
 using Code.Logic.Weapon;
 using Code.Services.AudioService;
 using Code.Services.BattleService;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using VContainer;
 
@@ -27,12 +29,14 @@ namespace Code.Entity.Hero
 
         private AudioService _audioService;
         private IBattleService _battleService;
+        private ParticleFactory _particleFactory;
 
         [Inject]
-        public void Construct(AudioService audioService, IBattleService battleService)
+        public void Construct(AudioService audioService, IBattleService battleService, ParticleFactory particleFactory)
         {
             _audioService = audioService;
             _battleService = battleService;
+            _particleFactory = particleFactory;
         }
         private void Awake()
         {
@@ -52,9 +56,25 @@ namespace Code.Entity.Hero
             {
                 return;
             }
+
+            var hitBox = collision.Target.GetComponent<EnemyHitBox>().GetHitBoxCenter();
+            
+            HitVfx(hitBox + collision.Target.transform.position).Forget();
+
             _battleService.ApplyDamage(_stats, collision.Target);
             _collidedData.Add(collision);
             OnHit?.Invoke(1);
+        }
+
+        private async UniTaskVoid HitVfx(Vector3 position)
+        {
+            int particleId = _heroWeapon.GetEquippedWeaponData().HitVfx.Identifier.Id;
+            
+            var particle =
+                await _particleFactory.CreateParticleWithTimer(particleId, 1);
+
+            particle.transform.position = position;
+            particle.Play();
         }
 
         public void ClearCollisionData()

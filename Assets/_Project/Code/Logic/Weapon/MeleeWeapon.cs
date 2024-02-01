@@ -1,7 +1,6 @@
 using System;
 using Code.ConfigData.Identifiers;
 using Code.Core.Factory;
-using Code.Entity.Enemy;
 using Code.Logic.Collision;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -16,16 +15,8 @@ namespace Code.Logic.Weapon
         
         [SerializeField] private Collider _collider;
         [SerializeField] private ParticleSystem _slashTrail;
-        [SerializeField] private ParticleIdentifier _hitVfx;
-        
-        private LayerMask _mask;
-        private ParticleFactory _particleFactory;
 
-        [Inject]
-        public void Construct(ParticleFactory particleFactory)
-        {
-            _particleFactory = particleFactory;
-        }
+        private LayerMask _mask;
 
         private void Awake()
         {
@@ -41,25 +32,9 @@ namespace Code.Logic.Weapon
                     Target = other.gameObject
                 });
                 
-                var vfx = await HitVfx();
-               var hitbox = other.gameObject.GetComponent<EnemyHitBox>();
-               vfx.gameObject.transform.position = other.transform.position + hitbox.GetHitBoxCenter();
-               vfx.Play();
-               
             }
         }
-
-        private async UniTask<ParticleSystem> HitVfx()
-        {
-          var vfx = await _particleFactory.CreateParticleWithTimer(_hitVfx.Id, 1);
-          return vfx;
-        }
-
-        public ParticleIdentifier GetHitVfx()
-        {
-            return _hitVfx;
-        }
-
+        
         public void EnableCollider(bool value)
         {
             _collider.enabled = value;

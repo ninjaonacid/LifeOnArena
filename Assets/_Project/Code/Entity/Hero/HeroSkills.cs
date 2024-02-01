@@ -18,10 +18,8 @@ namespace Code.Entity.Hero
         public event Action OnSkillChanged;
 
         [SerializeField] private HeroAbilityCooldown _heroCooldown;
-
-        public SkillSlot[] SkillSlots => _skillSlots;
-        
         [SerializeField] private SkillSlot[] _skillSlots;
+        public SkillSlot[] SkillSlots => _skillSlots;
         public AbilityTemplateBase ActiveSkill => _activeSkill;
         
         private AbilityTemplateBase _activeSkill;
@@ -30,7 +28,6 @@ namespace Code.Entity.Hero
         private PlayerControls _controls;
 
         private readonly List<InputAction> _skillActions = new();
-
         private readonly List<Action<InputAction.CallbackContext>> _hashedDelegates = new();
 
         [Serializable]

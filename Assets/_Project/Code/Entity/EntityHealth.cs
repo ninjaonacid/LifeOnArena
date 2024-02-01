@@ -2,7 +2,6 @@ using Code.ConfigData.StatSystem;
 using Code.ConfigData.StatSystem.StatModifiers;
 using Code.Entity.EntitiesComponents;
 using Code.Logic.Damage;
-using Code.Logic.EntitiesComponents;
 using UnityEngine;
 
 namespace Code.Entity
