@@ -22,7 +22,7 @@ namespace Code.Services.BattleService
                 mask);
         }
 
-        public int CreateAttack(StatController attackerStats, Vector3 attackPoint, LayerMask mask)
+        public int CreateAoeAttack(StatController attackerStats, Vector3 attackPoint, LayerMask mask)
         {
             var attackRadius = attackerStats.Stats["AttackRadius"].Value;
 
@@ -56,6 +56,7 @@ namespace Code.Services.BattleService
             
             damageable.TakeDamage(damage);
         }
+
         
     }
 }

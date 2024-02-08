@@ -1,7 +1,6 @@
-using System;
 using UnityEngine;
 
-namespace Code.Logic.EntitiesComponents
+namespace Code.Entity.EntitiesComponents
 {
     public interface IAttack
     {

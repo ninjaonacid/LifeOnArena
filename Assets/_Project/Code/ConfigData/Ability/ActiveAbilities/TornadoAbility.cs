@@ -1,6 +1,5 @@
 using Code.Core.Factory;
-using Code.Core.ObjectPool;
-using Code.Logic.EntitiesComponents;
+using Code.Entity.EntitiesComponents;
 using Code.Logic.Projectiles;
 using Code.Services.BattleService;
 using UnityEngine;
@@ -41,9 +40,9 @@ namespace Code.ConfigData.Ability.ActiveAbilities
             Vector3 casterDirection = caster.transform.forward;
 
             _tornadoParticle = await _particleFactory.CreateParticle(_vfxData.Identifier.Id);
-            TornadoProjectile tornadoProjectile = _tornadoParticle.gameObject.GetComponent<TornadoProjectile>();
-            tornadoProjectile.Initialize(_vfxData, _duration);
-            Transform projectileTransform = tornadoProjectile.transform;
+            TornadoAoe tornadoAoe = _tornadoParticle.gameObject.GetComponent<TornadoAoe>();
+            tornadoAoe.Initialize(_battleService, _damage, _duration);
+            Transform projectileTransform = tornadoAoe.transform;
             projectileTransform.position = casterPosition + casterDirection * _castDistance;
             projectileTransform.rotation = Quaternion.identity;
 

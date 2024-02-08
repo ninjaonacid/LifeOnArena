@@ -4,6 +4,7 @@ using Code.ConfigData.Identifiers;
 using Code.ConfigData.StatSystem;
 using Code.Core.Factory;
 using Code.Entity.Enemy;
+using Code.Entity.EntitiesComponents;
 using Code.Logic.Collision;
 using Code.Logic.EntitiesComponents;
 using Code.Logic.Weapon;
@@ -84,7 +85,7 @@ namespace Code.Entity.Hero
 
         public void BaseAttack()
         {
-            var hits = _battleService.CreateAttack(_stats, _hitBox.StartPoint(), _layerMask);
+            var hits = _battleService.CreateAoeAttack(_stats, _hitBox.StartPoint(), _layerMask);
             
             _audioService.PlaySound3D("SwordSlash", transform, 0.5f);
             
@@ -97,7 +98,7 @@ namespace Code.Entity.Hero
 
         public void SkillAttack(Vector3 castPoint)
         {
-            var hits = _battleService.CreateAttack(_stats, castPoint, _layerMask);
+            var hits = _battleService.CreateAoeAttack(_stats, castPoint, _layerMask);
 
             if (hits > 0)
             {
