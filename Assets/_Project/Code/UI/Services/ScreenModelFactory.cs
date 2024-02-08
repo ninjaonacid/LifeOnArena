@@ -23,7 +23,7 @@ namespace Code.UI.Services
         private void InitializeModelMap(IGameDataContainer gameData, IConfigProvider config)
         {
             _modelMap.Add(typeof(MainMenuModel), () => new MainMenuModel(gameData));
-            _modelMap.Add(typeof(ShopMenuModel), () => new ShopMenuModel());
+            _modelMap.Add(typeof(WeaponShopMenuModel), () => new WeaponShopMenuModel());
             _modelMap.Add(typeof(AbilityMenuModel), () => new AbilityMenuModel(gameData, config));
             _modelMap.Add(typeof(HudModel), () => new HudModel());
         }

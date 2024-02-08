@@ -26,7 +26,8 @@ namespace Code.UI.Model.AbilityMenu
             _abilitySlots = new List<UIAbilitySlotModel>();
             _equippedSlots = new IndexedQueue<UIAbilitySlotModel>();
 
-            var allAbilities = _configProvider.AllAbilities();
+            var allAbilities = _configProvider.AllAbilities().OrderBy(x => x.Price);
+            
 
             foreach (var ability in allAbilities)
             {

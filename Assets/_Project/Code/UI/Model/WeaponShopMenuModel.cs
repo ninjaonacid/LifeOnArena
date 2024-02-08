@@ -1,6 +1,6 @@
 namespace Code.UI.Model
 {
-    public class ShopMenuModel : IScreenModel
+    public class WeaponShopMenuModel : IScreenModel
     {
         public void Initialize()
         {

@@ -25,7 +25,7 @@ namespace Code.UI.Services
             _controllerFactory = controllerFactory;
 
             _screenMap.Add(ScreenID.MainMenu, (typeof(MainMenuModel), typeof(MainMenuController)));
-            _screenMap.Add(ScreenID.Shop, (typeof(ShopMenuModel), typeof(ShopMenuController)));
+            _screenMap.Add(ScreenID.Shop, (typeof(WeaponShopMenuModel), typeof(ShopMenuController)));
             _screenMap.Add(ScreenID.AbilityMenu, (typeof(AbilityMenuModel), typeof(AbilityMenuController)));
             _screenMap.Add(ScreenID.HUD, (typeof(HudModel), (typeof(HudController))));
         }

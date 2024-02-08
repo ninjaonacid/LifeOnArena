@@ -9,7 +9,7 @@ namespace Code.UI.Controller
 {
     public class ShopMenuController : IScreenController
     {
-        private ShopMenuModel _model;
+        private WeaponShopMenuModel _model;
         private ShopMenuView _view;
         private readonly SceneLoader _sceneLoader;
         public ShopMenuController(SceneLoader sceneLoader)
@@ -19,7 +19,7 @@ namespace Code.UI.Controller
         
         public void InitController(IScreenModel model, BaseView view, IScreenService screenService)
         {
-            _model = model as ShopMenuModel;
+            _model = model as WeaponShopMenuModel;
             _view = view as ShopMenuView;
             
             Assert.IsNotNull(_model);
