@@ -21,8 +21,13 @@ namespace Code.Entity.Enemy
         public void Construct(EnemyStateMachineConfig config)
         {
             _enemyConfig = config;
+        }
+
+        private void Awake()
+        {
             _fsm = new FiniteStateMachine();
         }
+
         private void Update()
         {
             _fsm.OnLogic();

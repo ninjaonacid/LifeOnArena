@@ -202,6 +202,13 @@ namespace Code.Entity.Hero
                 (transition) => _heroSkills.ActiveSkill != null &&
                                 _heroSkills.ActiveSkill.IsActive() &&
                                 _heroSkills.ActiveSkill.IsCastAbility, true));
+            
+            _stateMachine.AddTransition(new Transition(
+                HeroBaseAttack3, 
+                AbilityCast,
+                (transition) => _heroSkills.ActiveSkill != null &&
+                                _heroSkills.ActiveSkill.IsActive() &&
+                                _heroSkills.ActiveSkill.IsCastAbility, true));
 
             _stateMachine.AddTransition(new Transition(
                 HeroIdle,
