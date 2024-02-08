@@ -13,7 +13,7 @@ namespace Code.Entity.Hero.HeroStates
             base.OnEnter();
             _heroRotation.enabled = false;
             _heroWeapon.EnableWeapon(true);
-            _heroAnimator.PlayAttack(this);
+            _heroAnimator.PlaySpinAttackSkill();
             _duration = _heroSkills.ActiveSkill.ActiveTime;
         }
 

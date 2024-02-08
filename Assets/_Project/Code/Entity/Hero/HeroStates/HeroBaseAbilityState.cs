@@ -12,5 +12,24 @@ namespace Code.Entity.Hero.HeroStates
             _heroWeapon = heroWeapon;
             _heroSkills = heroSkills;
         }
+        
+        public override void OnLogic()
+        {
+            _duration -= Time.deltaTime;
+
+            if(IsStateOver()) fsm.StateCanExit(); 
+        }
+
+        public override bool IsStateOver() => _duration <= 0;
+        
+        public override void OnExitRequest()
+        {
+            base.OnExitRequest();
+
+            if (IsStateOver())
+            {
+                fsm.StateCanExit();
+            }
+        }
     }
 }

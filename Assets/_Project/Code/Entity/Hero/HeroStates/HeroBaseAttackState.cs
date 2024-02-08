@@ -1,4 +1,5 @@
 using Code.ConfigData.StateMachine;
+using UnityEngine;
 
 namespace Code.Entity.Hero.HeroStates
 {
@@ -14,5 +15,26 @@ namespace Code.Entity.Hero.HeroStates
             _heroAttack = heroAttack;
             _heroWeapon = heroWeapon;
         }
+
+        public override void OnLogic()
+        {
+            _duration -= Time.deltaTime;
+
+            if(IsStateOver()) fsm.StateCanExit(); 
+        }
+
+        public override bool IsStateOver() => _duration <= 0;
+        
+        public override void OnExitRequest()
+        {
+            base.OnExitRequest();
+
+            if (IsStateOver())
+            {
+                fsm.StateCanExit();
+            }
+        }
+
+
     }
 }

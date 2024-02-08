@@ -7,6 +7,6 @@ namespace Code.ConfigData.StatSystem.StatModifiers
     {
         public GameObject Attacker { get; set; }
         public bool IsCriticalHit { get; set; }
-        public IDamageSource Source { get; set; }
+        public new IDamageSource Source { get; set; }
     }
 }

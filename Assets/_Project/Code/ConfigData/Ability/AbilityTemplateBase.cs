@@ -1,8 +1,5 @@
 using Code.Core.Factory;
-using Code.Core.ObjectPool;
 using Code.Services.BattleService;
-using UnityEngine.AddressableAssets;
-using UnityEngine.Serialization;
 
 namespace Code.ConfigData.Ability
 {
@@ -20,7 +17,8 @@ namespace Code.ConfigData.Ability
         public float CurrentActiveTime;
         public int Price;
         public AbilityState State;
-        [FormerlySerializedAs("ParticleObjectData")] public VfxData VfxData;
+        public bool IsCastAbility; 
+        public VfxData VfxData;
 
         protected ParticleFactory _particleFactory;
         protected IBattleService _battleService;

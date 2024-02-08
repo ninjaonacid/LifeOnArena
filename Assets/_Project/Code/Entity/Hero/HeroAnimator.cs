@@ -19,7 +19,8 @@ namespace Code.Entity.Hero
         private readonly int _attackStateHash3 = Animator.StringToHash("Attack03");
 
         private readonly int _spinAttackStateHash = Animator.StringToHash("SPIN_ATTACK");
-
+        private readonly int _abilityCast = Animator.StringToHash("AbilityCast");
+        
         private readonly int _dieStateHash = Animator.StringToHash("Dying");
         private readonly int _idleStateHash = Animator.StringToHash("IDLE");
         private readonly int _runStateHash = Animator.StringToHash("WALKING");
@@ -84,6 +85,12 @@ namespace Code.Entity.Hero
             _heroAnimator.CrossFade(_spinAttackStateHash, 0.1f);
         }
 
+        public void PlayAbilityCast()
+        {
+            _heroAnimator.CrossFade(_abilityCast, 0.1f);
+        }
+        
+
         public void PlayAttack(HeroBaseState state)
         {
             switch (state)
@@ -97,19 +104,12 @@ namespace Code.Entity.Hero
                 case ThirdAttackState:
                     _heroAnimator.CrossFade(_attackStateHash3, 0.1f);
                     break;
-                case SpinAbilityState:
-                    PlaySpinAttackSkill();
-                    break;
             }
         }
 
         public void OverrideController(AnimatorOverrideController controller)
         {
             _heroAnimator.runtimeAnimatorController = controller;
-        }
-        public void PlayAbilityAnimation(IAbility ability)
-        {
-
         }
         public void PlayDeath()
         {

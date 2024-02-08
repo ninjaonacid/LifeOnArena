@@ -1,5 +1,3 @@
-using UnityEngine;
-
 namespace Code.Entity.Hero.HeroStates
 {
     public class AbilityCastState : HeroBaseAbilityState
@@ -11,7 +9,9 @@ namespace Code.Entity.Hero.HeroStates
         public override void OnEnter()
         {
             base.OnEnter();
-            
+            _heroAnimator.PlayAbilityCast();
+            _duration = _heroSkills.ActiveSkill.ActiveTime;
         }
+        
     }
 }

@@ -26,22 +26,5 @@ namespace Code.Entity.Hero.HeroStates
             }
         }
 
-        public override void OnExit()
-        {
-            base.OnExit();
-            _heroAttack.ClearCollisionData();
-            _heroWeapon.EnableWeapon(false);
-        }
-
-        public override void OnExitRequest()
-        {
-            if (IsStateOver())
-            {
-                fsm.StateCanExit();
-            }
-        }
-
-        public override bool IsStateOver() => _duration <= 0;
-
     }
 }

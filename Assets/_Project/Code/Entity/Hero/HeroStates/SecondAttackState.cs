@@ -8,12 +8,7 @@ namespace Code.Entity.Hero.HeroStates
         public SecondAttackState(HeroAttack heroAttack, HeroWeapon heroWeapon, HeroAnimator heroAnimator, HeroMovement heroMovement, HeroRotation heroRotation, bool needsExitTime, bool isGhostState = false) : base(heroAttack, heroWeapon, heroAnimator, heroMovement, heroRotation, needsExitTime, isGhostState)
         {
         }
-
-        public override void Init()
-        {
-            base.Init();
-        }
-
+        
         public override void OnEnter()
         {
             base.OnEnter();
@@ -21,36 +16,13 @@ namespace Code.Entity.Hero.HeroStates
             _heroWeapon.EnableWeapon(true);
             _duration = _heroWeapon.GetEquippedWeaponData().WeaponFsmConfig.SecondAttackStateDuration;
         }
-
-        public override void OnLogic()
-        {
-            base.OnLogic();
-            _duration -= Time.deltaTime;
-
-            if (IsStateOver())
-            {
-                fsm.StateCanExit();
-            }
-        }
-
+        
         public override void OnExit()
         {
             base.OnExit();
             _heroAttack.ClearCollisionData();
             _heroWeapon.EnableWeapon(false);
         }
-
-        public override void OnExitRequest()
-        {
-            if (IsStateOver())
-            {
-                fsm.StateCanExit();
-            }
-        }
-
-        public override bool IsStateOver() => _duration <= 0;
-
-
-
+        
     }
 }

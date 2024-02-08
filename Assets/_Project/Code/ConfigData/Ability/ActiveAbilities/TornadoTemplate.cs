@@ -8,6 +8,7 @@ namespace Code.ConfigData.Ability.ActiveAbilities
         public float Damage;
         public float AttackRadius;
         public float CastDistance;
+        public float ProjectileLifetime;
 
         private IAbility _abilityInstance;
         public override IAbility GetAbility()
@@ -17,7 +18,7 @@ namespace Code.ConfigData.Ability.ActiveAbilities
                 (_particleFactory,
                 _battleService,
                 VfxData,
-                ActiveTime,
+                ProjectileLifetime,
                 Damage,
                 AttackRadius,
                 CastDistance);

@@ -16,15 +16,7 @@ namespace Code.Entity.Hero.HeroStates
             _heroAnimator.PlayAttack(this);
             _duration = _heroWeapon.GetEquippedWeaponData().WeaponFsmConfig.FirstAttackStateDuration;
         }
-
-        public override void OnLogic()
-        {
-            base.OnLogic();
-            _duration -= Time.deltaTime;
-
-            if(IsStateOver()) fsm.StateCanExit(); 
-
-        }
+        
 
         public override void OnExit()
         {
@@ -32,20 +24,6 @@ namespace Code.Entity.Hero.HeroStates
             _heroAttack.ClearCollisionData();
             _heroWeapon.EnableWeapon(false);
         }
-
-        public override void OnExitRequest()
-        {
-            base.OnExitRequest();
-
-            if (IsStateOver())
-            {
-                fsm.StateCanExit();
-            }
-        }
-
-        public override bool IsStateOver() => _duration <= 0;
-
-
 
     }
 }
