@@ -12,6 +12,7 @@ using Code.Services.AudioService;
 using Code.Services.BattleService;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Serialization;
 using VContainer;
 
 namespace Code.Entity.Hero
@@ -23,7 +24,7 @@ namespace Code.Entity.Hero
         public event Action<int> OnHit;
         
         [SerializeField] private StatController _stats;
-        [SerializeField] private HeroHitBox _hitBox;
+        [FormerlySerializedAs("_hitBox")] [SerializeField] private HeroHurtBox HurtBox;
         [SerializeField] private HeroWeapon _heroWeapon;
 
         private List<CollisionData> _collidedData;
@@ -58,7 +59,7 @@ namespace Code.Entity.Hero
                 return;
             }
 
-            var hitBox = collision.Target.GetComponent<EnemyHitBox>().GetHitBoxCenter();
+            var hitBox = collision.Target.GetComponent<EnemyHurtBox>().GetHitBoxCenter();
             
             HitVfx(hitBox + collision.Target.transform.position).Forget();
 
@@ -85,7 +86,7 @@ namespace Code.Entity.Hero
 
         public void BaseAttack()
         {
-            var hits = _battleService.CreateAoeAttack(_stats, _hitBox.StartPoint(), _layerMask);
+            var hits = _battleService.CreateAoeAttack(_stats, HurtBox.StartPoint(), _layerMask);
             
             _audioService.PlaySound3D("SwordSlash", transform, 0.5f);
             

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Code.Entity.Hero
 {
-    public class HeroHitBox : EntityHitBox
+    public class HeroHurtBox : EntityHurtBox
     {
         
         public void DisableHitBox(float time)

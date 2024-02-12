@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Code.Entity.Enemy
 {
-    public class EnemyHitBox : EntityHitBox
+    public class EnemyHurtBox : EntityHurtBox
     {
         private bool _isInvincible = false;
         private LayerMask _playerWeaponLayer;

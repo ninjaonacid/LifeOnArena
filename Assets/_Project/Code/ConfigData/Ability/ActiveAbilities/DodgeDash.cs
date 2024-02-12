@@ -14,7 +14,7 @@ namespace Code.ConfigData.Ability.ActiveAbilities
         }
         public void Use(GameObject caster, GameObject target)
         {
-            var heroCollider = caster.GetComponent<HeroHitBox>();
+            var heroCollider = caster.GetComponent<HeroHurtBox>();
             var heroMovement = caster.GetComponent<HeroMovement>();
             heroCollider.DisableHitBox(_activeTime);
             heroMovement.DashTask(_activeTime, _dashSpeed);

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Code.Entity
 {
-    public class EntityHitBox : MonoBehaviour
+    public class EntityHurtBox : MonoBehaviour
     {
         [SerializeField] protected BoxCollider _hitBoxCollider;
 

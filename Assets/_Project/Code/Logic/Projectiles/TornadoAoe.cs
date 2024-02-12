@@ -10,7 +10,7 @@ namespace Code.Logic.Projectiles
 {
     public class TornadoAoe : SerializedMonoBehaviour
     {
-        public event Action DamageEvent;
+        
         private IBattleService _battleService;
         private float _damage;
         
