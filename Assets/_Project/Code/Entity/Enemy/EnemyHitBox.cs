@@ -38,7 +38,5 @@ namespace Code.Entity.Enemy
                 _hitBoxCollider.size = _boxColliderSize;
             }
         }
-
-        
     }
 }

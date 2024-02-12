@@ -1,5 +1,5 @@
 using System;
-using Code.ConfigData;
+using System.Collections.Generic;
 using Code.Core.ObjectPool;
 using Code.Services.BattleService;
 using Cysharp.Threading.Tasks;
@@ -10,11 +10,14 @@ namespace Code.Logic.Projectiles
 {
     public class TornadoAoe : SerializedMonoBehaviour
     {
+        public event Action DamageEvent;
         private IBattleService _battleService;
         private float _damage;
         
         [SerializeField] private ParticleSystem _tornadoParticle;
         [SerializeField] private IPoolable _poolable;
+
+        private List<Collider> _collidersInRadius;
         private LayerMask _hittable;
         
         public void Initialize(IBattleService battleService, float damage, float lifeTime)
@@ -30,11 +33,19 @@ namespace Code.Logic.Projectiles
             _hittable = LayerMask.NameToLayer("Hittable");
         }
 
-        public void OnCollisionStay(UnityEngine.Collision other)
+        public void OnTriggerEnter(Collider other)
         {
             if (other.gameObject.layer == _hittable)
             {
-                
+                _collidersInRadius.Add(other);
+            }
+        }
+
+        public void OnTriggerExit(Collider other)
+        {
+            if (other.gameObject.layer == _hittable)
+            {
+                _collidersInRadius.Remove(other);
             }
         }
 
@@ -44,6 +55,14 @@ namespace Code.Logic.Projectiles
             _poolable.ReturnToPool();
         }
 
-        
+        private async UniTask DamageOverTimeTask(float damage, float timer)
+        {
+            foreach (var collider in _collidersInRadius)
+            {
+                
+            }
+        }
+
+
     }
 }
