@@ -1,3 +1,5 @@
+using Code.ConfigData.StatusEffect;
+using Code.Entity.StatusEffects;
 using UnityEngine;
 
 namespace Code.ConfigData.Ability.ActiveAbilities
@@ -9,6 +11,8 @@ namespace Code.ConfigData.Ability.ActiveAbilities
         public float AttackRadius;
         public float CastDistance;
         public float ProjectileLifetime;
+        
+        public StatusEffectTemplate<IStatusEffect> statusEffect;
 
         private IAbility _abilityInstance;
         public override IAbility GetAbility()

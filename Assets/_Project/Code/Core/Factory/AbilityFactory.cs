@@ -1,5 +1,7 @@
 using Code.ConfigData.Ability;
+using Code.ConfigData.StatusEffect;
 using Code.Core.AssetManagement;
+using Code.Entity.StatusEffects;
 using Code.Services.BattleService;
 using Code.Services.ConfigData;
 using Code.Services.RandomService;
@@ -38,7 +40,7 @@ namespace Code.Core.Factory
       
             return abilityTemplate;
         }
-
+        
         public AbilityTemplateBase InitializeAbilityTemplate(AbilityTemplateBase ability)
         {
             ability.InitServices(_particleFactory, _battleService);

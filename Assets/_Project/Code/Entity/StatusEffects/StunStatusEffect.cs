@@ -2,12 +2,11 @@
 
 namespace Code.Entity.StatusEffects
 {
-    public class BaseStatusEffect
+    public class StunStatusEffect : IStatusEffect
     {
         public void Apply(GameObject target)
         {
             
         }
-
     }
 }
