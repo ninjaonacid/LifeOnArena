@@ -1,5 +1,7 @@
+using System.Collections.Generic;
 using Code.Core.Factory;
 using Code.Entity.EntitiesComponents;
+using Code.Entity.StatusEffects;
 using Code.Logic.Projectiles;
 using Code.Services.BattleService;
 using UnityEngine;
@@ -15,12 +17,14 @@ namespace Code.ConfigData.Ability.ActiveAbilities
         private readonly float _damage;
         private readonly float _attackRadius;
         private readonly float _castDistance;
+        private readonly IReadOnlyList<IStatusEffect> _statusEffects;
 
         private ParticleSystem _tornadoParticle;
         
         public TornadoAbility(ParticleFactory particleFactory,
             IBattleService battleService,
             VfxData vfxData,
+            IReadOnlyList<IStatusEffect> statusEffects,
             float duration,
             float damage,
             float attackRadius,
@@ -29,6 +33,7 @@ namespace Code.ConfigData.Ability.ActiveAbilities
             _particleFactory = particleFactory;
             _battleService = battleService;
             _vfxData = vfxData;
+            _statusEffects = statusEffects;
             _duration = duration;
             _damage = damage;
             _attackRadius = attackRadius;
@@ -46,6 +51,11 @@ namespace Code.ConfigData.Ability.ActiveAbilities
             projectileTransform.position = casterPosition + casterDirection * _castDistance;
             projectileTransform.rotation = Quaternion.identity;
 
+            foreach (var statusEffect in _statusEffects)
+            {
+                statusEffect.Apply(target);
+            }
+
             var entityAttack = caster.GetComponent<IAttack>();
             
             entityAttack.SkillAttack(projectileTransform.position);
@@ -53,4 +63,5 @@ namespace Code.ConfigData.Ability.ActiveAbilities
         }
         
     }
+    
 }

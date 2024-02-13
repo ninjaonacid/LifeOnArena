@@ -6,7 +6,8 @@ namespace Code.Entity.StatusEffects
     {
         public void Apply(GameObject target)
         {
-            
+            var statusController = target.GetComponent<StatusEffectController>();
+            statusController.AddEffect(this);
         }
     }
 }

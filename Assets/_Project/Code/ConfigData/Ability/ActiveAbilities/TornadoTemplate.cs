@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Code.ConfigData.StatusEffect;
 using Code.Entity.StatusEffects;
 using UnityEngine;
@@ -13,7 +14,9 @@ namespace Code.ConfigData.Ability.ActiveAbilities
         public float CastDistance;
         public float ProjectileLifetime;
 
-        public List<StatusEffectTemplateBase> StatusEffects;
+        [SerializeField] private List<StatusEffectTemplateBase> _statusEffects;
+
+        private IReadOnlyList<IStatusEffect> StatusEffects => _statusEffects.Select(x => x.GetStatusEffect()).ToList();
 
         private IAbility _abilityInstance;
         public override IAbility GetAbility()
@@ -23,10 +26,12 @@ namespace Code.ConfigData.Ability.ActiveAbilities
                 (_particleFactory,
                 _battleService,
                 VfxData,
+                StatusEffects,
                 ProjectileLifetime,
                 Damage,
                 AttackRadius,
                 CastDistance);
         }
+        
     }
 }
