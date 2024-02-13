@@ -1,7 +1,9 @@
 using Code.Entity.StatusEffects;
+using UnityEngine;
 
 namespace Code.ConfigData.StatusEffect
 {
+    [CreateAssetMenu(fileName = "StunStatusEffect", menuName = "Config/StatusEffect/StunStatusEffect")]
     public class StunStatusEffectTemplate : StatusEffectTemplate<StunStatusEffect>
     {
         private IStatusEffect _statusEffect;

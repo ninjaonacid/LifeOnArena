@@ -1,16 +1,9 @@
-﻿using Code.ConfigData.Identifiers;
-using Code.Entity.StatusEffects;
-using UnityEngine;
+﻿using Code.Entity.StatusEffects;
 
 namespace Code.ConfigData.StatusEffect
 {
-    public abstract class StatusEffectTemplate<T> : ScriptableObject where T : IStatusEffect
+    public abstract class StatusEffectTemplate<T> : StatusEffectTemplateBase where T : IStatusEffect
     {
-        public string Name;
-        public string Description;
-        public StatusEffectId StatusEffectId;
-        public float Duration;
-
-        public abstract IStatusEffect GetStatusEffect();
+        
     }
 }
