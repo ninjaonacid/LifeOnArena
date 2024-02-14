@@ -21,6 +21,7 @@ namespace Code.Entity.Enemy.CommonEnemy
 
             _fsm.AddState(HitStaggerState, new EnemyHitStaggerState(
                 _enemyAnimator,
+                _statusController,
                 false,
                 true));
             

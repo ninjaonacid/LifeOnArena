@@ -24,5 +24,18 @@ namespace Code.Entity
                 _statusEffects.Remove(effect);
             }
         }
+
+        public bool IsDisabled()
+        {
+            foreach (var status in _statusEffects)
+            {
+                if (status is StunStatusEffect stun)
+                {
+                    
+                }
+            }
+
+            return false;
+        }
     }
 }

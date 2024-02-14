@@ -6,12 +6,11 @@ namespace Code.ConfigData.StatusEffect
     [CreateAssetMenu(fileName = "StunStatusEffect", menuName = "Config/StatusEffect/StunStatusEffect")]
     public class StunStatusEffectTemplate : StatusEffectTemplate<StunStatusEffect>
     {
-        
         private IStatusEffect _statusEffect;
         
         public override IStatusEffect GetStatusEffect()
         {
-            _statusEffect ??= new StunStatusEffect();
+            _statusEffect ??= new StunStatusEffect(Duration);
             return _statusEffect;
         }
     }

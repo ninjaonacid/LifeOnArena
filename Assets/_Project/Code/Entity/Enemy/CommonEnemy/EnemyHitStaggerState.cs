@@ -2,8 +2,10 @@ namespace Code.Entity.Enemy.CommonEnemy
 {
     public class EnemyHitStaggerState : CommonEnemyState
     {
+        public float DisableDuration;
         public EnemyHitStaggerState(
-            EnemyAnimator enemyAnimator, 
+            EnemyAnimator enemyAnimator,
+            StatusEffectController statusController,
             bool needsExitTime, bool isGhostState = false) : base(enemyAnimator, needsExitTime, isGhostState)
         {
 

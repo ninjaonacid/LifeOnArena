@@ -15,6 +15,7 @@ namespace Code.Entity.Enemy
         [SerializeField] protected Aggression _aggression;
         [SerializeField] protected EnemyTarget _enemyTarget;
         [SerializeField] protected EnemyHealth _enemyHealth;
+        [SerializeField] protected StatusEffectController _statusController;
 
         protected EnemyStateMachineConfig _enemyConfig;
 

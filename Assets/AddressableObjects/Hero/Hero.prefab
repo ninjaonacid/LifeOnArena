@@ -2010,6 +2010,7 @@ GameObject:
   - component: {fileID: -4749970168048390944}
   - component: {fileID: 6287642891397871327}
   - component: {fileID: 8287232461833603833}
+  - component: {fileID: 6959288946234994809}
   m_Layer: 12
   m_Name: Hero
   m_TagString: Player
@@ -2144,7 +2145,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _stats: {fileID: 6287642891397871327}
-  _hitBox: {fileID: -4749970168048390944}
+  HurtBox: {fileID: -4749970168048390944}
   _heroWeapon: {fileID: -4398335753682384271}
 --- !u!114 &-8125679809969938510
 MonoBehaviour:
@@ -2313,6 +2314,18 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &6959288946234994809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6031708160037518034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbad346b6efc4506b420a0217a79a87c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6496497783292776582
 GameObject:
   m_ObjectHideFlags: 0
