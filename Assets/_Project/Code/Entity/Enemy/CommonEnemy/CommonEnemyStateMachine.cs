@@ -12,6 +12,7 @@ namespace Code.Entity.Enemy.CommonEnemy
         private void Start()
         {
             _enemyHealth.Health.CurrentValueChanged += TriggerDamageState;
+            
 
             _fsm.AddState(ChaseState, new EnemyChaseState(
                 _enemyAnimator, 
@@ -19,13 +20,12 @@ namespace Code.Entity.Enemy.CommonEnemy
                 false, 
                 false));
 
-            _fsm.AddState(HitStaggerState, new EnemyHitStaggerState(
+            _fsm.AddState(HitStaggerState, new EnemyStaggerState(
                 _enemyAnimator,
                 _statusController,
                 false,
                 true));
             
-
             _fsm.AddState(AttackState, new EnemyAttackState(
                 _enemyAnimator,
                 _enemyAttack,
