@@ -16,7 +16,7 @@ namespace Code.Entity
         
         private List<StatusEffect> _statusEffects;
 
-        public void AddEffect(StatusEffect effect)
+        public void ApplyEffectToSelf(StatusEffect effect)
         {
             if (_statusEffects.Contains(effect))
             {
@@ -34,8 +34,6 @@ namespace Code.Entity
             {
                 
             }
-
-                
         }
 
         private void Update()
