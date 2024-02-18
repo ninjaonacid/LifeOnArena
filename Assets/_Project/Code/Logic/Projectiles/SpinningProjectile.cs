@@ -1,5 +1,4 @@
 using Code.Entity.EntitiesComponents;
-using Code.Logic.EntitiesComponents;
 using UnityEngine;
 
 namespace Code.Logic.Projectiles

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Code.UI.HUD.Skills
+namespace Code.UI.View.HUD.Skills
 {
     [RequireComponent(typeof(Image))]
     public class HudSkillIcon : MonoBehaviour

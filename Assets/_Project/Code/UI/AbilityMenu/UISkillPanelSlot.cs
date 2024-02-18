@@ -1,13 +1,12 @@
 using Code.ConfigData.Ability;
 using Code.Services.PersistentProgress;
-using Code.UI.HUD.Skills;
 using Code.UI.View.HUD.Skills;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Image = UnityEngine.UI.Image;
 
-namespace Code.UI.SkillsMenu
+namespace Code.UI.AbilityMenu
 {
     public class UISkillPanelSlot : MonoBehaviour, IPointerClickHandler
     {

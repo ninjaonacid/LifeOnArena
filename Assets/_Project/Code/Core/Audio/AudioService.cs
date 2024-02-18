@@ -1,18 +1,15 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Code.ConfigData.Audio;
 using Code.ConfigData.Settings;
 using Code.Core.AssetManagement;
-using Code.Core.Audio;
-using Code.Core.SceneManagement;
 using Code.Services.ConfigData;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.Audio;
 using VContainer;
 
-namespace Code.Services.AudioService
+namespace Code.Core.Audio
 {
     public class AudioService : MonoBehaviour
     {

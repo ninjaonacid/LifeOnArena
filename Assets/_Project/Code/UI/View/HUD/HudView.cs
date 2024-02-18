@@ -1,7 +1,5 @@
 using Code.Entity.Hero;
 using Code.UI.Buttons;
-using Code.UI.HUD;
-using Code.UI.HUD.Skills;
 using Code.UI.View.HUD.Skills;
 
 namespace Code.UI.View.HUD

@@ -1,6 +1,5 @@
+using Code.Entity.EntitiesComponents;
 using Code.Entity.Hero;
-using Code.Logic.EntitiesComponents;
-using Code.Services;
 using Code.UI;
 using Code.UI.Services;
 using UnityEngine;

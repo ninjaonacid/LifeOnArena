@@ -1,7 +1,6 @@
-using System;
 using UnityEngine;
 
-namespace Code.UI.HUD
+namespace Code.UI.View.HUD
 {
     public class WorldCanvasSetter : MonoBehaviour
     {

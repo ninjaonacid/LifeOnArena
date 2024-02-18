@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Code.Data
+namespace Code.Data.PlayerData
 {
     public class StatsData
     {

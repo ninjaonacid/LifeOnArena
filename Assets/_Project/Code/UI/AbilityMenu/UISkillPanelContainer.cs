@@ -1,10 +1,9 @@
 using System.Collections.Generic;
 using Code.Services.PersistentProgress;
-using Code.UI.AbilityMenu;
 using UnityEngine;
 using VContainer;
 
-namespace Code.UI.SkillsMenu
+namespace Code.UI.AbilityMenu
 {
     public class UISkillPanelContainer : MonoBehaviour
     {

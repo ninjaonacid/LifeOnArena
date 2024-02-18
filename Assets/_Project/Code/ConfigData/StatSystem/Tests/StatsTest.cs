@@ -2,7 +2,7 @@ using System.Collections;
 using NUnit.Framework;
 using UnityEngine.TestTools;
 
-namespace _Project.Code.ConfigData.StatSystem.Tests
+namespace Code.ConfigData.StatSystem.Tests
 {
     public class StatsTest
     {

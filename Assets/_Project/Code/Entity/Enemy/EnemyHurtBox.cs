@@ -18,15 +18,14 @@ namespace Code.Entity.Enemy
             _playerWeaponLayer = LayerMask.NameToLayer("PlayerWeapon");
         }
 
-        private void OnTriggerEnter(Collider other)
-        {
-            if (other.gameObject.layer == _playerWeaponLayer.value && !_isInvincible)
-            {
-                _isInvincible = true;
-                _hitBoxCollider.size = new Vector3(0, 0, 0);
-                
-            }
-        }
+        // private void OnTriggerEnter(Collider other)
+        // {
+        //     if (other.gameObject.layer == _playerWeaponLayer.value && !_isInvincible)
+        //     {
+        //         _isInvincible = true;
+        //         _hitBoxCollider.size = new Vector3(0, 0, 0);
+        //     }
+        // }
 
         private void Update()
         {

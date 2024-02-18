@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Code.Data
+namespace Code.Data.PlayerData
 {
     [Serializable]
     public class KillData

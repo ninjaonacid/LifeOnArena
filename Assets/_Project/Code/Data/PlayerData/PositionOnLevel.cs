@@ -1,7 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-namespace Code.Data
+namespace Code.Data.PlayerData
 {
     [Serializable]
     public class PositionOnLevel

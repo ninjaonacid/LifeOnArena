@@ -1,19 +1,22 @@
 ﻿using UnityEngine;
 
-public class Rotator : MonoBehaviour {
+namespace Code.Magic_Spells_and_Popup_effects.Particles
+{
+	public class Rotator : MonoBehaviour {
 	
-	public AnimationCurve curve;
-	public float speed;
+		public AnimationCurve curve;
+		public float speed;
 	
-	private float time = 0f;
+		private float time = 0f;
 	
-	void Update () 
-	{
-		time += Time.deltaTime;
+		void Update () 
+		{
+			time += Time.deltaTime;
 		
-		float temp = curve.Evaluate(time);
+			float temp = curve.Evaluate(time);
 		
-		transform.rotation = Quaternion.Euler(new Vector3(0,transform.rotation.eulerAngles.y + temp * speed,0));
+			transform.rotation = Quaternion.Euler(new Vector3(0,transform.rotation.eulerAngles.y + temp * speed,0));
 		
+		}
 	}
 }

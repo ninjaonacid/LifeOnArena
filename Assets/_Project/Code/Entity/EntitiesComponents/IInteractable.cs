@@ -1,6 +1,6 @@
 using Code.Entity.Hero;
 
-namespace Code.Logic.EntitiesComponents
+namespace Code.Entity.EntitiesComponents
 {
     public interface IInteractable
     {

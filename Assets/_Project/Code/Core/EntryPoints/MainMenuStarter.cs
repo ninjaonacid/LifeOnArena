@@ -1,7 +1,6 @@
 using System.Threading;
 using Code.ConfigData.Levels;
 using Code.Core.Factory;
-using Code.Services.AudioService;
 using Code.Services.ConfigData;
 using Code.Services.SaveLoad;
 using Code.UI;
@@ -10,6 +9,7 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using VContainer.Unity;
+using Code.Core.Audio;
 
 namespace Code.Core.EntryPoints
 {
@@ -18,14 +18,14 @@ namespace Code.Core.EntryPoints
         private readonly IHeroFactory _heroFactory;
         private readonly IConfigProvider _config;
         private readonly IScreenService _screenService;
-        private readonly AudioService _audioService;
+        private readonly Audio.AudioService _audioService;
         private readonly PlayerControls _controls;
         private readonly ISaveLoadService _saveLoad;
 
         public MainMenuStarter(IHeroFactory heroFactory, IUIFactory uiFactory, 
             IScreenService screenService,
             IConfigProvider config, ISaveLoadService saveLoad, PlayerControls controls,
-            AudioService audioService)
+            Audio.AudioService audioService)
         {
             _heroFactory = heroFactory;
             _config = config;

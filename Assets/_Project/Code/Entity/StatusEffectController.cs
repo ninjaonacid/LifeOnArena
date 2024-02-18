@@ -29,7 +29,13 @@ namespace Code.Entity
             {
                 _isDisabled = true;
                 _disableDuration += disablingEffect.Duration;
+            } 
+            else if (effect is DamageOverTimeEffect)
+            {
+                
             }
+
+                
         }
 
         private void Update()
