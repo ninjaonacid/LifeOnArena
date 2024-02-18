@@ -1,14 +1,14 @@
 using Code.Entity.StatusEffects;
 using UnityEngine;
 
-namespace Code.ConfigData.StatusEffect
+namespace Code.ConfigData.StatusEffects
 {
     [CreateAssetMenu(fileName = "StunStatusEffect", menuName = "Config/StatusEffect/StunStatusEffect")]
     public class StunStatusEffectTemplate : StatusEffectTemplate<StunStatusEffect>
     {
-        private IStatusEffect _statusEffect;
+        private StatusEffect _statusEffect;
         
-        public override IStatusEffect GetStatusEffect()
+        public override StatusEffect GetStatusEffect()
         {
             _statusEffect ??= new StunStatusEffect(Duration);
             return _statusEffect;

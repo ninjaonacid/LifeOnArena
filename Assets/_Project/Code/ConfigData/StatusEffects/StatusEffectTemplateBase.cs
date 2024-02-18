@@ -1,8 +1,7 @@
 ﻿using Code.ConfigData.Identifiers;
-using Code.Entity.StatusEffects;
 using UnityEngine;
 
-namespace Code.ConfigData.StatusEffect
+namespace Code.ConfigData.StatusEffects
 {
     public enum EffectDuration
     {
@@ -17,6 +16,6 @@ namespace Code.ConfigData.StatusEffect
         public EffectDuration EffectDuration;
         public float Duration;
 
-        public abstract IStatusEffect GetStatusEffect();
+        public abstract Entity.StatusEffects.StatusEffect GetStatusEffect();
     }
 }

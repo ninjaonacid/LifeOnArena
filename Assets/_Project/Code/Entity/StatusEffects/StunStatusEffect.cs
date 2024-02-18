@@ -2,14 +2,13 @@
 
 namespace Code.Entity.StatusEffects
 {
-    public class StunStatusEffect : IStatusEffect
+    public class StunStatusEffect : DisablingStatusEffect
     {
-        private readonly float _duration;
-        public StunStatusEffect(float duration)
+        public StunStatusEffect(float duration) : base(duration)
         {
-            _duration = duration;
         }
-        public void Apply(GameObject target)
+
+        public override void Apply(GameObject target)
         {
             var statusController = target.GetComponent<StatusEffectController>();
             statusController.AddEffect(this);

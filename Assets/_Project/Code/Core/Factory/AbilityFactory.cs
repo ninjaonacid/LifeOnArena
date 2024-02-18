@@ -1,5 +1,4 @@
 using Code.ConfigData.Ability;
-using Code.ConfigData.StatusEffect;
 using Code.Core.AssetManagement;
 using Code.Entity.StatusEffects;
 using Code.Services.BattleService;

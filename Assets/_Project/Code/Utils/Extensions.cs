@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 
+using Object = UnityEngine.Object;
 namespace Code.Utils
 {
     public static class Extensions
@@ -20,10 +22,5 @@ namespace Code.Utils
 
             return -1;
         }
-        
-      
-            
-            
-        
     }
 }
