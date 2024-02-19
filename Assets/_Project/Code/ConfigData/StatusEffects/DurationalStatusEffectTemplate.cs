@@ -6,5 +6,6 @@ namespace Code.ConfigData.StatusEffects
     {
         public float Duration;
         public float TickRate;
+        public bool IsDisablingMovement;
     }
 }

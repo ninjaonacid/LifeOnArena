@@ -1,15 +1,18 @@
 using System.Collections.Generic;
 using Code.ConfigData.StatSystem;
+using Code.ConfigData.StatusEffects;
 using UnityEngine;
 
 namespace Code.Entity.StatusEffects
 {
     public abstract class StatusEffect
     {
+        public EffectDurationType Type { get; private set; }
         public List<StatModifier> Modifiers { get; private set; }
 
-        protected StatusEffect(List<StatModifier> modifiers)
+        protected StatusEffect(List<StatModifier> modifiers, EffectDurationType type)
         {
+            this.Type = type;
             Modifiers = modifiers;
         }
         
