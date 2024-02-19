@@ -24,16 +24,7 @@ namespace Code.Entity
             }
             
             _statusEffects.Add(effect);
-
-            if (effect is DisablingStatusEffect disablingEffect)
-            {
-                _isDisabled = true;
-                _disableDuration += disablingEffect.Duration;
-            } 
-            else if (effect is DamageOverTimeEffect)
-            {
-                
-            }
+            
         }
 
         private void Update()

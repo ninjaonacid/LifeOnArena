@@ -1,9 +1,11 @@
-﻿using Code.ConfigData.Identifiers;
+﻿using System.Collections.Generic;
+using Code.ConfigData.Identifiers;
+using Code.Entity.StatusEffects;
 using UnityEngine;
 
 namespace Code.ConfigData.StatusEffects
 {
-    public enum EffectDuration
+    public enum EffectDurationType
     {
         Instant = 1,
         HasDuration = 2
@@ -13,9 +15,9 @@ namespace Code.ConfigData.StatusEffects
         public string Name;
         public string Description;
         public StatusEffectId StatusEffectId;
-        public EffectDuration EffectDuration;
-        public float Duration;
+        public EffectDurationType EffectDurationType;
+        public List<StatModifierTemplate> Modifiers;
 
-        public abstract Entity.StatusEffects.StatusEffect GetStatusEffect();
+        public abstract StatusEffect GetStatusEffect();
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using Object = UnityEngine.Object;
 
 namespace Code.ConfigData.StatSystem
@@ -8,6 +9,7 @@ namespace Code.ConfigData.StatSystem
         Multiplicative,
         Override
     }
+    
     public class StatModifier 
     {
         public Object Source { get; set; }

@@ -10,8 +10,9 @@ namespace Code.ConfigData.StatusEffects
         
         public override StatusEffect GetStatusEffect()
         {
-            _statusEffect ??= new StunStatusEffect(Duration);
-            return _statusEffect;
+            // _statusEffect ??= new StunStatusEffect(Duration);
+            // return _statusEffect;
+            return null;
         }
     }
 }
