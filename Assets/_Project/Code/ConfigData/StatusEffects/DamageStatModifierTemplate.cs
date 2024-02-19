@@ -6,7 +6,11 @@ namespace Code.ConfigData.StatusEffects
     [CreateAssetMenu(menuName = "Config/StatModifiers/DamageModifier", fileName = "DamageModifier")]
     public class DamageStatModifierTemplate : StatModifierTemplate
     {
-        public override string StatName => "Health";
-        public override ModifierOperationType Type => ModifierOperationType.Additive;
+        [SerializeField] private string _statName;
+        [SerializeField] private ModifierOperationType _operationType;
+        [SerializeField] private int _magnitude;
+        public override string StatName => _statName;
+        public override ModifierOperationType Type => _operationType;
+        public override int Magnitude => _magnitude;
     }
 }

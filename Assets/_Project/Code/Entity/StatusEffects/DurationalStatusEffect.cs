@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Code.ConfigData.StatSystem;
 using Code.ConfigData.StatusEffects;
 
 namespace Code.Entity.StatusEffects
@@ -11,7 +10,7 @@ namespace Code.Entity.StatusEffects
         public float TickRate;
 
 
-        protected DurationalStatusEffect(List<StatModifier> modifiers, EffectDurationType type, float duration, float remainingDuration, float tickRate) : base(modifiers, type)
+        protected DurationalStatusEffect(List<StatModifierTemplate> modifiers, EffectDurationType type, float duration, float remainingDuration, float tickRate) : base(modifiers, type)
         {
             Duration = duration;
             RemainingDuration = remainingDuration;

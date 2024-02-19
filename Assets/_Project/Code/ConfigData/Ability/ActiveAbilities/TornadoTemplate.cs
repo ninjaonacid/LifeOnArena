@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Code.ConfigData.StatusEffects;
+using Code.Entity.StatusEffects;
 using UnityEngine;
 
 namespace Code.ConfigData.Ability.ActiveAbilities
@@ -15,7 +16,7 @@ namespace Code.ConfigData.Ability.ActiveAbilities
 
         [SerializeField] private List<StatusEffectTemplateBase> _statusEffects;
 
-        private IReadOnlyList<Entity.StatusEffects.StatusEffect> StatusEffects => _statusEffects.Select(x => x.GetStatusEffect()).ToList();
+        private IReadOnlyList<StatusEffect> StatusEffects => _statusEffects.Select(x => x.GetStatusEffect()).ToList();
 
         private IAbility _abilityInstance;
         public override IAbility GetAbility()

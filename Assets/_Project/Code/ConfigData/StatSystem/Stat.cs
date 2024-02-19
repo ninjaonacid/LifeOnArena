@@ -35,8 +35,12 @@ namespace Code.ConfigData.StatSystem
 
         public void RemoveModifier(Object source)
         {
-            _modifiers = _modifiers.Where(x => x.Source.GetInstanceID() != source.GetInstanceID()).ToList();
-            CalculateValue();
+            int num = _modifiers.RemoveAll(x => x.Source == source);
+
+            if (num > 0)
+            {
+                CalculateValue();
+            }
         }
 
         protected void CalculateValue()

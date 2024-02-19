@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Code.Entity.StatusEffects;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Code.Entity
 {
@@ -22,7 +20,11 @@ namespace Code.Entity
             {
                 return;
             }
-            
+
+            foreach (var modifier in effect.Modifiers)
+            {
+                
+            }
             _statusEffects.Add(effect);
             
         }

@@ -7,7 +7,7 @@ namespace Code.Entity.StatusEffects
 {
     public class StunStatusEffect : DurationalStatusEffect
     {
-        public StunStatusEffect(List<StatModifier> modifiers, EffectDurationType type, float duration, float remainingDuration, float tickRate) : base(modifiers, type, duration, remainingDuration, tickRate)
+        public StunStatusEffect(List<StatModifierTemplate> modifiers, EffectDurationType type, float duration, float remainingDuration, float tickRate) : base(modifiers, type, duration, remainingDuration, tickRate)
         {
         }
 

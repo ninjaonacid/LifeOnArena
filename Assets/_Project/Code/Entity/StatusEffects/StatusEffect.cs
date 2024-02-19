@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Code.ConfigData.StatSystem;
+using Code.ConfigData.StatSystem.StatModifiers;
 using Code.ConfigData.StatusEffects;
 using UnityEngine;
 
@@ -8,12 +10,39 @@ namespace Code.Entity.StatusEffects
     public abstract class StatusEffect
     {
         public EffectDurationType Type { get; private set; }
-        public List<StatModifier> Modifiers { get; private set; }
 
-        protected StatusEffect(List<StatModifier> modifiers, EffectDurationType type)
+        private readonly List<StatModifier> _statModifiers = new List<StatModifier>();
+        public ReadOnlyCollection<StatModifier> Modifiers => _statModifiers.AsReadOnly();
+
+        protected StatusEffect(List<StatModifierTemplate> modifiers, EffectDurationType type)
         {
-            this.Type = type;
-            Modifiers = modifiers;
+            Type = type;
+
+            StatModifier statModifier;
+
+            foreach (var modifier in modifiers)
+            {
+                if (modifier is DamageStatModifierTemplate)
+                {
+                    var healthModifier = new HealthModifier
+                    {
+                        Magnitude = modifier.Magnitude,
+                        OperationType = modifier.Type
+                    };
+
+                    statModifier = healthModifier;
+                }
+                else
+                {
+                    statModifier = new StatModifier()
+                    {
+                        Magnitude = modifier.Magnitude
+                    };
+                }
+
+                statModifier.Source = this;
+                _statModifiers.Add(statModifier);
+            }
         }
         
         public abstract void Apply(GameObject target);

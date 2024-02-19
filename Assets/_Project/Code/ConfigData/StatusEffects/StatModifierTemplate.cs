@@ -7,5 +7,7 @@ namespace Code.ConfigData.StatusEffects
     {
         public abstract string StatName { get; }
         public abstract ModifierOperationType Type { get; }
+        
+        public abstract int Magnitude { get; }
     }
 }

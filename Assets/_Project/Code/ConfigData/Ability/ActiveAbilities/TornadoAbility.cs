@@ -17,14 +17,14 @@ namespace Code.ConfigData.Ability.ActiveAbilities
         private readonly float _damage;
         private readonly float _attackRadius;
         private readonly float _castDistance;
-        private readonly IReadOnlyList<Entity.StatusEffects.StatusEffect> _statusEffects;
+        private readonly IReadOnlyList<StatusEffect> _statusEffects;
 
         private ParticleSystem _tornadoParticle;
         
         public TornadoAbility(ParticleFactory particleFactory,
             IBattleService battleService,
             VfxData vfxData,
-            IReadOnlyList<Entity.StatusEffects.StatusEffect> statusEffects,
+            IReadOnlyList<StatusEffect> statusEffects,
             float duration,
             float damage,
             float attackRadius,
