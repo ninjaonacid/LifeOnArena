@@ -6,6 +6,7 @@ using Code.Core.Audio;
 using Code.Core.Factory;
 using Code.Entity.Enemy;
 using Code.Entity.EntitiesComponents;
+using Code.Entity.StatusEffects;
 using Code.Logic.Collision;
 using Code.Logic.Weapon;
 using Code.Services.BattleService;
@@ -44,32 +45,21 @@ namespace Code.Entity.Hero
             _layerMask = 1 << LayerMask.NameToLayer("Hittable");
             _heroWeapon.OnWeaponChange += ChangeWeapon;
         }
-
-        public void BaseAttack()
-        {
-            var hits = _battleService.CreateAoeAbility(_stats, HurtBox.StartPoint(), _layerMask);
-            
-            _audioService.PlaySound3D("SwordSlash", transform, 0.5f);
-            
-            if (hits > 0)
-            { 
-                OnHit?.Invoke(hits);
-                _audioService.PlaySound3D("Hit", transform, 0.5f);
-            }
-        }
-
+        
         public void InvokeHit(int hitCount)
         {
             OnHit?.Invoke(hitCount);
         }
-        public void AoeAttack(Vector3 castPoint)
-        {
-            var hits = _battleService.CreateAoeAbility(_stats, castPoint, _layerMask);
+        
 
-            if (hits > 0)
-            {
-                OnHit?.Invoke(hits);
-            }
+        public void AoeAbilityAttack(Vector3 castPoint, IReadOnlyList<StatusEffect> statusEffects)
+        {
+            // var hits = _battleService.CreateAoeAbility(_stats, statusEffects,  castPoint, _layerMask);
+            //
+            // if (hits > 0)
+            // {
+            //     OnHit?.Invoke(hits);
+            // }
         }
 
         public void ClearCollisionData()

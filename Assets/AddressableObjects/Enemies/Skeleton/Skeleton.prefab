@@ -1766,6 +1766,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1713337227256712141, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
+      propertyPath: _statController
+      value: 
+      objectReference: {fileID: 4227790607017457015}
     - target: {fileID: 2085898622953279013, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
       propertyPath: _StatDatabase
       value: 
@@ -1908,6 +1912,7 @@ MonoBehaviour:
   _aggression: {fileID: 6563093468807338341}
   _enemyTarget: {fileID: 890136297104685426}
   _enemyHealth: {fileID: 1043505308070320456}
+  _statusController: {fileID: 0}
 --- !u!4 &716635229013844747 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3436043548892321881, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}

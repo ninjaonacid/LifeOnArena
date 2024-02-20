@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Code.ConfigData.StatSystem;
 using Code.Entity.StatusEffects;
 using UnityEngine;
 
@@ -6,6 +7,7 @@ namespace Code.Entity
 {
     public class StatusEffectController : MonoBehaviour
     {
+        [SerializeField] private StatController _statController;
         private bool _isDisabled;
         public bool IsDisabled => _isDisabled;
         
@@ -21,10 +23,21 @@ namespace Code.Entity
                 return;
             }
 
-            foreach (var modifier in effect.Modifiers)
+            for (var i = 0; i < effect.ModifierTemplates.Count; i++)
+            {
+                var modifierTemplate = effect.ModifierTemplates[i];
+                if (_statController.Stats.TryGetValue(modifierTemplate.StatName, out var stat))
+                {
+                    stat.AddModifier(effect.Modifiers[i]);
+                }
+            }
+
+            if (effect is DurationalStatusEffect)
             {
                 
             }
+            
+
             _statusEffects.Add(effect);
             
         }

@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using Code.ConfigData.StatSystem;
 using Code.ConfigData.StatSystem.StatModifiers;
 using Code.Entity;
@@ -11,58 +13,68 @@ namespace Code.Services.BattleService
     public class BattleService
     {
         private const int MaxTargets = 10;
-        private readonly Collider[] _hits = new Collider[MaxTargets];
+        private readonly Collider[] _overlapBuffer = new Collider[MaxTargets];
+        private readonly Collider[] _targets = new Collider[MaxTargets];
 
-        private int FindTargets(Vector3 startPoint, float attackRadius, LayerMask mask, int hits = 10)
+        private int FindTargets(Vector3 startPoint, float radius, LayerMask mask, int hits = 10)
         {
             return Physics.OverlapSphereNonAlloc(
                 startPoint,
-                attackRadius,
-                _hits,
+                radius,
+                _overlapBuffer,
                 mask);
         }
+
         
-        public Collider[] FindTargets(Vector3 startPoint, float attackRadius, LayerMask mask)
+        public Collider[] GetTargetsInRadius(Vector3 startPoint, float radius, LayerMask mask)
         {
-             int targets = Physics.OverlapSphereNonAlloc(
-                startPoint,
-                attackRadius,
-                _hits,
-                mask);
+            int hits = FindTargets(startPoint, radius, mask);
 
-             if (targets > 0)
-             {
-                 return _hits;
-             }
-
-             return null;
-        }
-        public int CreateAoeAbility(StatController attackerStats, Vector3 castPoint, LayerMask mask)
-        {
-            var attackRadius = attackerStats.Stats["AttackRadius"].Value;
-
-            var hits = FindTargets(castPoint, attackRadius, mask);
-            
-            for (int i = 0; i < hits.Length; i++)
+            if (hits > 0)
             {
-                var target = _hits[i].gameObject;
-                
-                if(target)
-                {
+                return _overlapBuffer;
+            }
 
+            return null;
+        }
+
+        public void CreateOverlapAttack(StatController attackerStats, Vector3 startPoint,  LayerMask mask)
+        {
+            int hits = 0;
+            if (attackerStats.Stats.TryGetValue("AttackRadius", out var attackRadius))
+            {
+
+                hits = FindTargets(startPoint, attackRadius.Value, mask);
+            }
+
+            if (hits > 0)
+            {
+                foreach (var hit in _overlapBuffer)
+                {
+                    CreateWeaponAttack(attackerStats, hit.gameObject);
+                }
+            }
+        }
+        public int CreateAoeAbility(StatController attackerStats, IReadOnlyList<StatusEffect> effects,  Vector3 castPoint, float radius, LayerMask mask)
+        {
+
+            var hits = FindTargets(castPoint, radius, mask);
+            
+            for (int i = 0; i < hits; i++)
+            {
+                var target = _overlapBuffer[i].gameObject;
+                var effectController = target.GetComponent<StatusEffectController>();
+                
+                foreach (var effect in effects)
+                {
+                    effectController.ApplyEffectToSelf(effect);
                 }
             }
 
-            return hits.Length;
+            return hits;
         }
 
-        public void CreateAbilityAttack(StatController caster, StatusEffect effect, GameObject target)
-        {
-            var targetController = target.GetComponent<StatController>();
-            
-           
-        }
-        
+
         public void CreateWeaponAttack(StatController attacker, GameObject target)
         {
             var damageable = target.GetComponentInParent<IDamageable>();

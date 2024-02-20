@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Linq;
+using Code.ConfigData.StatSystem;
 using Code.Core.Factory;
 using Code.Entity;
 using Code.Entity.EntitiesComponents;
@@ -53,24 +55,13 @@ namespace Code.ConfigData.Ability.ActiveAbilities
             projectileTransform.rotation = Quaternion.identity;
 
             LayerMask mask = 1 << LayerMask.NameToLayer("Hittable");
-            var targets = _battleService.FindTargets(projectileTransform.position, _attackRadius, mask);
 
-            if (targets.Length > 0)
-            {
-                foreach (var targetCollider in targets)
-                {
-                    foreach (var effect in _statusEffects)
-                    {
-                        targetCollider.GetComponent<StatusEffectController>().ApplyEffectToSelf(effect);
-                    }
-                }
-            }
+            var stats = caster.GetComponent<StatController>();
 
+            int hits = _battleService.CreateAoeAbility(stats, _statusEffects, projectileTransform.position, _attackRadius, mask);
+            
             var entityAttack = caster.GetComponent<IAttack>();
-            entityAttack.InvokeHit(targets.Length);
-            
-            
-            //entityAttack.AoeAttack(projectileTransform.position);
+            entityAttack.InvokeHit(hits);
             
         }
         

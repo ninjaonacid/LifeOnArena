@@ -78,7 +78,7 @@ namespace Code.Entity.Enemy
         public void Attack()
         {
             _isAttacking = true;
-            _battleService.CreateAoeAbility(_stats, StartPoint(), _layerMask);
+            _battleService.CreateOverlapAttack(_stats, StartPoint(), _layerMask);
         }
 
         private bool Hit(out Collider hit)
