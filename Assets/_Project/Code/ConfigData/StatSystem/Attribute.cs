@@ -53,7 +53,7 @@ namespace Code.ConfigData.StatSystem
             }
         }
 
-        protected void HealthChanged()
+        protected void AttributeValueChanged()
         {
             CurrentValueChanged?.Invoke();
         }

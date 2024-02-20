@@ -49,8 +49,9 @@ namespace Code.Services.BattleService
 
             if (hits > 0)
             {
-                foreach (var hit in _overlapBuffer)
+                for (var i = 0; i < hits; i++)
                 {
+                    var hit = _overlapBuffer[i];
                     CreateWeaponAttack(attackerStats, hit.gameObject);
                 }
             }
@@ -63,7 +64,7 @@ namespace Code.Services.BattleService
             for (int i = 0; i < hits; i++)
             {
                 var target = _overlapBuffer[i].gameObject;
-                var effectController = target.GetComponent<StatusEffectController>();
+                var effectController = target.GetComponentInParent<StatusEffectController>();
                 
                 foreach (var effect in effects)
                 {

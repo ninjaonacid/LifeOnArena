@@ -13,8 +13,8 @@ namespace Code.Entity
         
         private float _disableDuration;
         public float DisableDuration => _disableDuration;
-        
-        private List<StatusEffect> _statusEffects;
+
+        private List<StatusEffect> _statusEffects = new List<StatusEffect>();
 
         public void ApplyEffectToSelf(StatusEffect effect)
         {
@@ -28,7 +28,11 @@ namespace Code.Entity
                 var modifierTemplate = effect.ModifierTemplates[i];
                 if (_statController.Stats.TryGetValue(modifierTemplate.StatName, out var stat))
                 {
-                    stat.AddModifier(effect.Modifiers[i]);
+                    if (stat is Attribute attribute)
+                    {
+                        attribute.ApplyModifier(effect.Modifiers[i]);
+                    }
+                    
                 }
             }
 

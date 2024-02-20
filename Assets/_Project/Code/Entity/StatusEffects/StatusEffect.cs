@@ -27,7 +27,7 @@ namespace Code.Entity.StatusEffects
                 {
                     var healthModifier = new HealthModifier
                     {
-                        Magnitude = modifier.Magnitude,
+                        Magnitude = modifier.Magnitude * -1,
                         OperationType = modifier.Type
                     };
 

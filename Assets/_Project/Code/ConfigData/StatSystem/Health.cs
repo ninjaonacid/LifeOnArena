@@ -12,7 +12,7 @@ namespace Code.ConfigData.StatSystem
         public void ResetHealth()
         {
             _currentValue = _value;
-            HealthChanged();
+            AttributeValueChanged();
         }
         
         public override void ApplyModifier(StatModifier modifier)
