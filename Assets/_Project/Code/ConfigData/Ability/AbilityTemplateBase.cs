@@ -21,12 +21,12 @@ namespace Code.ConfigData.Ability
         public VfxData VfxData;
 
         protected ParticleFactory _particleFactory;
-        protected IBattleService _battleService;
+        protected BattleService _battleService;
         public abstract IAbility GetAbility();
 
         public void InitServices(
             ParticleFactory particleFactory,
-            IBattleService battleService)
+            BattleService battleService)
         {
             _particleFactory = particleFactory;
             _battleService = battleService;

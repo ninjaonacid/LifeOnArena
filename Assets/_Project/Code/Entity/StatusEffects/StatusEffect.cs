@@ -13,11 +13,12 @@ namespace Code.Entity.StatusEffects
 
         private readonly List<StatModifier> _statModifiers = new List<StatModifier>();
         public ReadOnlyCollection<StatModifier> Modifiers => _statModifiers.AsReadOnly();
+        public List<StatModifierTemplate> ModifierTemplates;
 
         protected StatusEffect(List<StatModifierTemplate> modifiers, EffectDurationType type)
         {
             Type = type;
-
+            ModifierTemplates = modifiers;
             StatModifier statModifier;
 
             foreach (var modifier in modifiers)

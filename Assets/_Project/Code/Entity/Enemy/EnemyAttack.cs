@@ -19,10 +19,10 @@ namespace Code.Entity.Enemy
 
         private int _layerMask;
 
-        private IBattleService _battleService;
+        private BattleService _battleService;
         
         [Inject]
-        public void Construct(IBattleService battleService)
+        public void Construct(BattleService battleService)
         {
             _battleService = battleService;
         }
@@ -78,7 +78,7 @@ namespace Code.Entity.Enemy
         public void Attack()
         {
             _isAttacking = true;
-            _battleService.CreateAoeAttack(_stats, StartPoint(), _layerMask);
+            _battleService.CreateAoeAbility(_stats, StartPoint(), _layerMask);
         }
 
         private bool Hit(out Collider hit)

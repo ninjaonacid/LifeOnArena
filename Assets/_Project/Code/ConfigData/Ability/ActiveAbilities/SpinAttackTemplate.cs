@@ -17,10 +17,10 @@ namespace Code.ConfigData.Ability.ActiveAbilities
     public class SpinAttack : IAbility
     {
         private float _damage;
-        private readonly IBattleService _battleService;
+        private readonly BattleService _battleService;
         private readonly LayerMask _layerMask = 1 << LayerMask.NameToLayer("Hittable");
 
-        public SpinAttack(float damage, IBattleService battleService)
+        public SpinAttack(float damage, BattleService battleService)
         {
             _damage = damage;
             _battleService = battleService;

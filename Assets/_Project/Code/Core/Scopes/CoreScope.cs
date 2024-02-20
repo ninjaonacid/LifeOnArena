@@ -33,7 +33,7 @@ namespace Code.Core.Scopes
             builder.Register<IGameDataContainer, GameDataContainer>(Lifetime.Singleton);
             builder.Register<IRandomService, RandomService>(Lifetime.Singleton);
             builder.Register<IEventSystem, GameEventSystem>(Lifetime.Singleton);
-            builder.Register<IBattleService, BattleService>(Lifetime.Singleton);
+            builder.Register<BattleService>(Lifetime.Singleton).AsSelf();
 
             builder.Register<PlayerControls>(Lifetime.Singleton).AsSelf();
             builder.Register<SceneLoader>(Lifetime.Singleton);

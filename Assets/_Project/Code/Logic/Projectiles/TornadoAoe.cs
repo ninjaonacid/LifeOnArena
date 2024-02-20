@@ -11,7 +11,7 @@ namespace Code.Logic.Projectiles
     public class TornadoAoe : SerializedMonoBehaviour
     {
         
-        private IBattleService _battleService;
+        private BattleService _battleService;
         private float _damage;
         
         [SerializeField] private ParticleSystem _tornadoParticle;
@@ -20,7 +20,7 @@ namespace Code.Logic.Projectiles
         private List<Collider> _collidersInRadius;
         private LayerMask _hittable;
         
-        public void Initialize(IBattleService battleService, float damage, float lifeTime)
+        public void Initialize(BattleService battleService, float damage, float lifeTime)
         {
             _battleService = battleService;
             _damage = damage;

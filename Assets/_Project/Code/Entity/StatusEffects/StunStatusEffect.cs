@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Code.ConfigData.StatSystem;
 using Code.ConfigData.StatusEffects;
 using UnityEngine;
 

@@ -11,7 +11,6 @@ using Code.Logic.Weapon;
 using Code.Services.BattleService;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.Serialization;
 using VContainer;
 
 namespace Code.Entity.Hero
@@ -23,17 +22,17 @@ namespace Code.Entity.Hero
         public event Action<int> OnHit;
         
         [SerializeField] private StatController _stats;
-        [FormerlySerializedAs("_hitBox")] [SerializeField] private HeroHurtBox HurtBox;
+        [SerializeField] private HeroHurtBox HurtBox;
         [SerializeField] private HeroWeapon _heroWeapon;
 
         private List<CollisionData> _collidedData;
 
         private AudioService _audioService;
-        private IBattleService _battleService;
+        private BattleService _battleService;
         private ParticleFactory _particleFactory;
 
         [Inject]
-        public void Construct(AudioService audioService, IBattleService battleService, ParticleFactory particleFactory)
+        public void Construct(AudioService audioService, BattleService battleService, ParticleFactory particleFactory)
         {
             _audioService = audioService;
             _battleService = battleService;
@@ -45,7 +44,39 @@ namespace Code.Entity.Hero
             _layerMask = 1 << LayerMask.NameToLayer("Hittable");
             _heroWeapon.OnWeaponChange += ChangeWeapon;
         }
-        
+
+        public void BaseAttack()
+        {
+            var hits = _battleService.CreateAoeAbility(_stats, HurtBox.StartPoint(), _layerMask);
+            
+            _audioService.PlaySound3D("SwordSlash", transform, 0.5f);
+            
+            if (hits > 0)
+            { 
+                OnHit?.Invoke(hits);
+                _audioService.PlaySound3D("Hit", transform, 0.5f);
+            }
+        }
+
+        public void InvokeHit(int hitCount)
+        {
+            OnHit?.Invoke(hitCount);
+        }
+        public void AoeAttack(Vector3 castPoint)
+        {
+            var hits = _battleService.CreateAoeAbility(_stats, castPoint, _layerMask);
+
+            if (hits > 0)
+            {
+                OnHit?.Invoke(hits);
+            }
+        }
+
+        public void ClearCollisionData()
+        {
+            _collidedData.Clear();
+        }
+
         private void ChangeWeapon(MeleeWeapon weapon, WeaponId weaponId)
         {
             weapon.Hit += BaseAttack;
@@ -62,7 +93,7 @@ namespace Code.Entity.Hero
             
             HitVfx(hitBox + collision.Target.transform.position).Forget();
 
-            _battleService.ApplyDamage(_stats, collision.Target);
+            _battleService.CreateWeaponAttack(_stats, collision.Target);
             _collidedData.Add(collision);
             OnHit?.Invoke(1);
         }
@@ -77,35 +108,5 @@ namespace Code.Entity.Hero
             particle.transform.position = position;
             particle.Play();
         }
-
-        public void ClearCollisionData()
-        {
-            _collidedData.Clear();
-        }
-
-        public void BaseAttack()
-        {
-            var hits = _battleService.CreateAoeAttack(_stats, HurtBox.StartPoint(), _layerMask);
-            
-            _audioService.PlaySound3D("SwordSlash", transform, 0.5f);
-            
-            if (hits > 0)
-            { 
-                OnHit?.Invoke(hits);
-                _audioService.PlaySound3D("Hit", transform, 0.5f);
-            }
-        }
-
-        public void SkillAttack(Vector3 castPoint)
-        {
-            var hits = _battleService.CreateAoeAttack(_stats, castPoint, _layerMask);
-
-            if (hits > 0)
-            {
-                OnHit?.Invoke(hits);
-            }
-        }
-        
-        
     }
 }

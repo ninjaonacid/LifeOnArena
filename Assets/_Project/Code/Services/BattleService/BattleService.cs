@@ -2,12 +2,13 @@ using Code.ConfigData.StatSystem;
 using Code.ConfigData.StatSystem.StatModifiers;
 using Code.Entity;
 using Code.Entity.EntitiesComponents;
+using Code.Entity.StatusEffects;
 using Code.Logic.Damage;
 using UnityEngine;
 
 namespace Code.Services.BattleService
 {
-    public class BattleService : IBattleService
+    public class BattleService
     {
         private const int MaxTargets = 10;
         private readonly Collider[] _hits = new Collider[MaxTargets];
@@ -20,27 +21,49 @@ namespace Code.Services.BattleService
                 _hits,
                 mask);
         }
+        
+        public Collider[] FindTargets(Vector3 startPoint, float attackRadius, LayerMask mask)
+        {
+             int targets = Physics.OverlapSphereNonAlloc(
+                startPoint,
+                attackRadius,
+                _hits,
+                mask);
 
-        public int CreateAoeAttack(StatController attackerStats, Vector3 attackPoint, LayerMask mask)
+             if (targets > 0)
+             {
+                 return _hits;
+             }
+
+             return null;
+        }
+        public int CreateAoeAbility(StatController attackerStats, Vector3 castPoint, LayerMask mask)
         {
             var attackRadius = attackerStats.Stats["AttackRadius"].Value;
 
-            var hits = FindTargets(attackPoint, attackRadius, mask);
+            var hits = FindTargets(castPoint, attackRadius, mask);
             
-            for (int i = 0; i < hits; i++)
+            for (int i = 0; i < hits.Length; i++)
             {
                 var target = _hits[i].gameObject;
                 
                 if(target)
                 {
-                    ApplyDamage(attackerStats, target);
+
                 }
             }
 
-            return hits;
+            return hits.Length;
+        }
+
+        public void CreateAbilityAttack(StatController caster, StatusEffect effect, GameObject target)
+        {
+            var targetController = target.GetComponent<StatController>();
+            
+           
         }
         
-        public void ApplyDamage(StatController attacker, GameObject target)
+        public void CreateWeaponAttack(StatController attacker, GameObject target)
         {
             var damageable = target.GetComponentInParent<IDamageable>();
             

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Code.Core.Factory;
+using Code.Entity;
 using Code.Entity.EntitiesComponents;
 using Code.Entity.StatusEffects;
 using Code.Logic.Projectiles;
@@ -11,7 +12,7 @@ namespace Code.ConfigData.Ability.ActiveAbilities
     public class TornadoAbility : IAbility
     {
         private readonly ParticleFactory _particleFactory;
-        private readonly IBattleService _battleService;
+        private readonly BattleService _battleService;
         private readonly VfxData _vfxData;
         private readonly float _duration;
         private readonly float _damage;
@@ -22,7 +23,7 @@ namespace Code.ConfigData.Ability.ActiveAbilities
         private ParticleSystem _tornadoParticle;
         
         public TornadoAbility(ParticleFactory particleFactory,
-            IBattleService battleService,
+            BattleService battleService,
             VfxData vfxData,
             IReadOnlyList<StatusEffect> statusEffects,
             float duration,
@@ -51,14 +52,25 @@ namespace Code.ConfigData.Ability.ActiveAbilities
             projectileTransform.position = casterPosition + casterDirection * _castDistance;
             projectileTransform.rotation = Quaternion.identity;
 
-            foreach (var statusEffect in _statusEffects)
+            LayerMask mask = 1 << LayerMask.NameToLayer("Hittable");
+            var targets = _battleService.FindTargets(projectileTransform.position, _attackRadius, mask);
+
+            if (targets.Length > 0)
             {
-                statusEffect.Apply(target);
+                foreach (var targetCollider in targets)
+                {
+                    foreach (var effect in _statusEffects)
+                    {
+                        targetCollider.GetComponent<StatusEffectController>().ApplyEffectToSelf(effect);
+                    }
+                }
             }
 
             var entityAttack = caster.GetComponent<IAttack>();
+            entityAttack.InvokeHit(targets.Length);
             
-            entityAttack.SkillAttack(projectileTransform.position);
+            
+            //entityAttack.AoeAttack(projectileTransform.position);
             
         }
         

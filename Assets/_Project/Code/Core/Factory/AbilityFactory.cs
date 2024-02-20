@@ -13,7 +13,7 @@ namespace Code.Core.Factory
     public class AbilityFactory : IAbilityFactory
     {
         private readonly IConfigProvider _config;
-        private readonly IBattleService _battleService;
+        private readonly BattleService _battleService;
         private readonly IRandomService _random;
         private readonly IAssetProvider _assetProvider;
         private readonly ParticleFactory _particleFactory;
@@ -21,7 +21,7 @@ namespace Code.Core.Factory
             IAssetProvider assetProvider,
             IConfigProvider config,
             ParticleFactory particleFactory,
-            IBattleService battleService,
+            BattleService battleService,
             IRandomService random)
         {
             _assetProvider = assetProvider;

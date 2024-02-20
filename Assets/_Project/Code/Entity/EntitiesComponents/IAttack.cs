@@ -6,6 +6,7 @@ namespace Code.Entity.EntitiesComponents
     {
         void BaseAttack();
 
-        void SkillAttack(Vector3 castPoint);
+        void AoeAttack(Vector3 castPoint);
+        void InvokeHit(int hitCount);
     }
 }
