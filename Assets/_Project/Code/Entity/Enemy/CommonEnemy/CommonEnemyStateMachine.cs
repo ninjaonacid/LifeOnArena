@@ -5,82 +5,55 @@ namespace Code.Entity.Enemy.CommonEnemy
 {
     public class CommonEnemyStateMachine : EnemyStateMachine
     {
-        private const string ChaseState = "EnemyChaseState";
-        private const string AttackState = "EnemyAttackState";
-        private const string IdleState = "EnemyIdleState";
-        private const string HitStaggerState = "EnemyHitStagger";
         private void Start()
         {
             _enemyHealth.Health.CurrentValueChanged += TriggerDamageState;
             
 
-            _fsm.AddState(ChaseState, new EnemyChaseState(
-                _enemyAnimator, 
-                _agentMoveToPlayer, 
-                false, 
-                false));
-
-            _fsm.AddState(HitStaggerState, new EnemyStaggerState(
-                _enemyAnimator,
-                _statusController,
-                false,
-                true));
-            
-            _fsm.AddState(AttackState, new EnemyAttackState(
-                _enemyAnimator,
-                _enemyAttack,
-                _enemyTarget,
-                _agentMoveToPlayer, false, false));
-
-            _fsm.AddState(IdleState, new EnemyIdleState(
-                _enemyAnimator,
-                _enemyTarget, 
-                _aggression, false, false));
-
             _fsm.AddTransition(new Transition(
-                IdleState,
-                ChaseState,
+                nameof(EnemyIdleState),
+                nameof(EnemyChaseState),
                 (transition) => _aggression.HasTarget && !_enemyAttack.TargetInAttackRange));
 
             _fsm.AddTransition(new TransitionAfter(
-                AttackState,
-                ChaseState,
+                nameof(EnemyAttackState),
+                nameof(EnemyChaseState),
                 _enemyConfig.AttackDuration,
                 (transition) => _aggression.HasTarget && !_enemyAttack.TargetInAttackRange));
                 
             _fsm.AddTransition(new TransitionAfter(
-                ChaseState,
-                IdleState,
+                nameof(EnemyChaseState),
+                nameof(EnemyIdleState),
                 _aggression.Cooldown,
                 (transition) => !_aggression.HasTarget));
 
-            _fsm.AddTriggerTransitionFromAny("OnDamage", new CycleTransition(
+            _fsm.AddTriggerTransitionFromAny("OnDamage", new Transition(
                     " ", 
-                    HitStaggerState,
-            true, true
+                    nameof(EnemyStaggerState)
+             
             ));
             
             _fsm.AddTransition(new TransitionAfter(
-                HitStaggerState,
-                IdleState,
+                nameof(EnemyStaggerState),
+                nameof(EnemyIdleState),
                 _enemyConfig.HitStaggerDuration
             ));
 
             _fsm.AddTransition(new Transition(
-                ChaseState,
-                AttackState,
+                nameof(EnemyChaseState),
+                nameof(EnemyAttackState),
                 (transition) => _enemyAttack.CanAttack()));
 
             _fsm.AddTransition(new TransitionAfter(
-                AttackState,
-                IdleState,
+                nameof(EnemyAttackState),
+                nameof(EnemyIdleState),
                 _enemyConfig.AttackDuration
                 ));
 
             
             _fsm.AddTransition(new Transition(
-                IdleState,
-                AttackState,
+                nameof(EnemyIdleState),
+                nameof(EnemyAttackState),
                 (transition) => _enemyAttack.CanAttack(),
                 true));
 

@@ -4,7 +4,7 @@ namespace Code.Logic.StateMachine.Transitions
 {
     public class CycleTransition<TState> : TransitionBase<TState>
     {
-        public CycleTransition(TState from, TState to, bool isForceTransition = false, bool isRepeatableTransition = false) : base(from, to, isForceTransition, isRepeatableTransition)
+        public CycleTransition(TState from, TState to, bool isForceTransition = false) : base(from, to, isForceTransition)
         {
         }
 
@@ -28,7 +28,7 @@ namespace Code.Logic.StateMachine.Transitions
 
     public class CycleTransition : CycleTransition<string>
     {
-        public CycleTransition(string from, string to, bool isForceTransition = false, bool isRepeatableTransition = false) : base(from, to, isForceTransition, isRepeatableTransition)
+        public CycleTransition(string from, string to, bool isForceTransition = false) : base(from, to, isForceTransition)
         {
         }
     }

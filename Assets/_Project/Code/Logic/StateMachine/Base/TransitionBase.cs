@@ -6,14 +6,12 @@ namespace Code.Logic.StateMachine.Base
         public TState ToState { get; private set; }
 
         public bool IsForceTransition;
-
-        public bool IsRepeatableTransition;
-        protected TransitionBase(TState from, TState to, bool isForceTransition = false, bool isRepeatableTransition = false)
+        
+        protected TransitionBase(TState from, TState to, bool isForceTransition = false)
         {
             FromState = from;
             ToState = to;
             IsForceTransition = isForceTransition;
-            IsRepeatableTransition = isRepeatableTransition;
         }
 
         public virtual void Init()

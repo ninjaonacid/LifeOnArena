@@ -14,7 +14,7 @@ namespace Code.Entity
         private float _disableDuration;
         public float DisableDuration => _disableDuration;
 
-        private List<StatusEffect> _statusEffects = new List<StatusEffect>();
+        private readonly List<StatusEffect> _statusEffects = new List<StatusEffect>();
 
         public void ApplyEffectToSelf(StatusEffect effect)
         {
@@ -41,7 +41,6 @@ namespace Code.Entity
                 
             }
             
-
             _statusEffects.Add(effect);
             
         }

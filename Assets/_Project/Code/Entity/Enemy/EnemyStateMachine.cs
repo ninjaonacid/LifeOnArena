@@ -1,5 +1,5 @@
-using System;
 using Code.ConfigData.StateMachine;
+using Code.Entity.Enemy.CommonEnemy;
 using Code.Logic.StateMachine;
 using UnityEngine;
 
@@ -27,6 +27,29 @@ namespace Code.Entity.Enemy
         private void Awake()
         {
             _fsm = new FiniteStateMachine();
+            
+            _fsm.AddState(nameof(EnemyChaseState), new EnemyChaseState(
+                _enemyAnimator, 
+                _agentMoveToPlayer, 
+                false, 
+                false));
+
+            _fsm.AddState(nameof(EnemyStaggerState), new EnemyStaggerState(
+                _enemyAnimator,
+                _statusController,
+                false,
+                true));
+            
+            _fsm.AddState(nameof(EnemyAttackState), new EnemyAttackState(
+                _enemyAnimator,
+                _enemyAttack,
+                _enemyTarget,
+                _agentMoveToPlayer, false, false));
+
+            _fsm.AddState(nameof(EnemyIdleState), new EnemyIdleState(
+                _enemyAnimator,
+                _enemyTarget, 
+                _aggression, false, false));
         }
 
         private void Update()
