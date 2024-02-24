@@ -1,17 +1,16 @@
 using System.Collections.Generic;
 using Code.ConfigData.StatusEffects;
 using UnityEngine;
-using UnityEngine.ProBuilder;
 
 namespace Code.Entity.StatusEffects
 {
     public abstract class DurationalStatusEffect : StatusEffect
     {
-        public float RemainingDuration { get; set; }
-        public float RemainingToExecute { get; set; }
+        private float _remainingDuration;
+        private float _remainingToExecute;
 
         private readonly float _duration;
-        private float _executeRate;
+        private readonly float _executeRate;
         
         public bool IsDisablingEffect { get; private set; }
 
@@ -21,27 +20,27 @@ namespace Code.Entity.StatusEffects
             _duration = duration;
             _executeRate = executeRate;
             IsDisablingEffect = isDisablingEffect;
-            RemainingDuration = remainingDuration;
+            _remainingDuration = remainingDuration;
         }
         
         public DurationalStatusEffect TickEffect(float deltaTime)
         {
-            RemainingDuration = Mathf.Max(RemainingToExecute - deltaTime, 0f);
-            RemainingToExecute = Mathf.Max(RemainingToExecute - deltaTime, 0f);
+            _remainingDuration = Mathf.Max(_remainingToExecute - deltaTime, 0f);
+            _remainingToExecute = Mathf.Max(_remainingToExecute - deltaTime, 0f);
             
             return this;
         }
 
         public void ResetExecutionTime()
         {
-            RemainingToExecute = _executeRate;
+            _remainingToExecute = _executeRate;
         }
 
         public void ResetRemainingDuration()
         {
-            RemainingDuration = _duration;
+            _remainingDuration = _duration;
         }
-        public bool IsExecuteTime() => Mathf.Approximately(RemainingToExecute, 0f);
-        public bool IsDurationEnd() => Mathf.Approximately(RemainingDuration, 0f);
+        public bool IsExecuteTime() => Mathf.Approximately(_remainingToExecute, 0f);
+        public bool IsDurationEnd() => Mathf.Approximately(_remainingDuration, 0f);
     }
 }

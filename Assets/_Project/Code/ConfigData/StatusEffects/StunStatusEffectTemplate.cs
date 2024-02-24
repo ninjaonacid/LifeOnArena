@@ -10,7 +10,7 @@ namespace Code.ConfigData.StatusEffects
         
         public override StatusEffect GetStatusEffect()
         {
-            _statusEffect ??= new StunStatusEffect(Modifiers, EffectDurationType, Duration, Duration, TickRate);
+            _statusEffect ??= new StunStatusEffect(Modifiers, EffectDurationType, Duration,Duration,TickRate, true);
             return _statusEffect;
             
         }
