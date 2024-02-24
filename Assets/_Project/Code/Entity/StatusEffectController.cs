@@ -1,21 +1,23 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Code.ConfigData.StatSystem;
 using Code.ConfigData.StatusEffects;
 using Code.Entity.StatusEffects;
 using UnityEngine;
+using Attribute = Code.ConfigData.StatSystem.Attribute;
 
 namespace Code.Entity
 {
     public class StatusEffectController : MonoBehaviour
     {
         [SerializeField] private StatController _statController;
-        private bool _isDisabled;
-        public bool IsDisabled => _isDisabled;
-        
-        private float _disableDuration;
-        public float DisableDuration => _disableDuration;
 
         private readonly List<DurationalStatusEffect> _activeEffects = new List<DurationalStatusEffect>();
+
+        private void Update()
+        {
+            HandleDuration();
+        }
 
         public void ApplyEffectToSelf(StatusEffect effect)
         {
@@ -36,10 +38,7 @@ namespace Code.Entity
         {
             foreach (var status in _activeEffects)
             {
-                if (status is StunStatusEffect)
-                {
-                    return true;
-                }
+                if (status.IsDisablingEffect) return true;
             }
 
             return false;
@@ -89,17 +88,5 @@ namespace Code.Entity
                 }
             }
         }
-
-        private void Update()
-        {
-            _disableDuration -= Time.deltaTime;
-
-            if (_disableDuration <= 0)
-            {
-                _isDisabled = false;
-            }
-        }
-
-       
     }
 }
