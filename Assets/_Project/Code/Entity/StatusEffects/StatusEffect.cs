@@ -48,16 +48,6 @@ namespace Code.Entity.StatusEffects
         
         public abstract void Apply(GameObject target);
 
-        // public StatusEffect TickEffect(float deltaTime)
-        // {
-        //     RemainingDuration -= deltaTime;
-        //
-        //     if (RemainingDuration <= 0)
-        //     {
-        //         
-        //     }
-        //
-        //     return this;
-        // }
+      
     }
 }

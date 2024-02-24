@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Code.ConfigData.StatSystem;
+using Code.ConfigData.StatusEffects;
 using Code.Entity.StatusEffects;
 using UnityEngine;
 
@@ -14,15 +15,68 @@ namespace Code.Entity
         private float _disableDuration;
         public float DisableDuration => _disableDuration;
 
-        private readonly List<StatusEffect> _statusEffects = new List<StatusEffect>();
+        private readonly List<DurationalStatusEffect> _activeEffects = new List<DurationalStatusEffect>();
 
         public void ApplyEffectToSelf(StatusEffect effect)
         {
-            if (_statusEffects.Contains(effect))
+            if (effect.Type == EffectDurationType.Instant)
             {
-                return;
+                ExecuteEffect(effect);
             }
 
+            if (effect is DurationalStatusEffect durationalEffect)
+            {
+                if (_activeEffects.Contains(durationalEffect)) return;
+                _activeEffects.Add(durationalEffect);
+            }
+            
+        }
+        
+        public bool IsEntityDisabled()
+        {
+            foreach (var status in _activeEffects)
+            {
+                if (status is StunStatusEffect)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private void HandleDuration()
+        {
+            foreach (var activeEffect in _activeEffects)
+            {
+                activeEffect.TickEffect(Time.deltaTime);
+
+                if (activeEffect.IsExecuteTime())
+                {
+                    ExecuteEffect(activeEffect);
+                    
+                    activeEffect.ResetExecutionTime();
+                }
+
+                if (activeEffect.IsDurationEnd())
+                {
+                    RemoveEffect(activeEffect);
+                    
+                    activeEffect.ResetRemainingDuration();
+                }
+            }
+        }
+
+        private void RemoveEffect(DurationalStatusEffect effect)
+        {
+            if (_activeEffects.Contains(effect))
+            {
+                _activeEffects.Remove(effect);
+            }
+        }
+
+        private void ExecuteEffect(StatusEffect effect)
+        {
             for (var i = 0; i < effect.ModifierTemplates.Count; i++)
             {
                 var modifierTemplate = effect.ModifierTemplates[i];
@@ -32,17 +86,8 @@ namespace Code.Entity
                     {
                         attribute.ApplyModifier(effect.Modifiers[i]);
                     }
-                    
                 }
             }
-
-            if (effect is DurationalStatusEffect)
-            {
-                
-            }
-            
-            _statusEffects.Add(effect);
-            
         }
 
         private void Update()
@@ -55,12 +100,6 @@ namespace Code.Entity
             }
         }
 
-        public void RemoveEffect(StatusEffect effect)
-        {
-            if (_statusEffects.Contains(effect))
-            {
-                _statusEffects.Remove(effect);
-            }
-        }
+       
     }
 }
