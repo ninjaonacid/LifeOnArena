@@ -1,7 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
-using Code.ConfigData.StatusEffects;
-using Code.Entity.StatusEffects;
 using UnityEngine;
 
 namespace Code.ConfigData.Ability.ActiveAbilities
@@ -10,13 +6,9 @@ namespace Code.ConfigData.Ability.ActiveAbilities
     public class TornadoTemplate : AbilityTemplate<TornadoAbility>
     {
         public float Damage;
-        public float AttackRadius;
+        public float Radius;
         public float CastDistance;
         public float ProjectileLifetime;
-
-        [SerializeField] private List<StatusEffectTemplateBase> _statusEffects;
-
-        private IReadOnlyList<StatusEffect> StatusEffects => _statusEffects.Select(x => x.GetStatusEffect()).ToList();
 
         private IAbility _abilityInstance;
         public override IAbility GetAbility()
@@ -29,7 +21,7 @@ namespace Code.ConfigData.Ability.ActiveAbilities
                 StatusEffects,
                 ProjectileLifetime,
                 Damage,
-                AttackRadius,
+                Radius,
                 CastDistance);
         }
         

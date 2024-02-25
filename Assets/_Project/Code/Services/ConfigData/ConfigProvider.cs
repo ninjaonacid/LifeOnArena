@@ -55,7 +55,7 @@ namespace Code.Services.ConfigData
                 .ToDictionary(x => x.ScreenID, x => x);
 
             _heroAbilities = Resources
-                .LoadAll<AbilityTemplateBase>($"{ConfigFolder}/Hero/HeroSkills")
+                .LoadAll<AbilityTemplateBase>($"{ConfigFolder}/Abilities")
                 .ToDictionary(x => x.Identifier.Id, x => x);
 
             _characterStats = Resources

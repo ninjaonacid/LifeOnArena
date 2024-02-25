@@ -1,5 +1,11 @@
+using System.Collections.Generic;
+using System.Linq;
+using Code.ConfigData.StatusEffects;
 using Code.Core.Factory;
+using Code.Entity.StatusEffects;
 using Code.Services.BattleService;
+using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Code.ConfigData.Ability
 {
@@ -19,6 +25,10 @@ namespace Code.ConfigData.Ability
         public AbilityState State;
         public bool IsCastAbility; 
         public VfxData VfxData;
+        
+        [SerializeField] private List<StatusEffectTemplateBase> _statusTemplates;
+
+        protected IReadOnlyList<StatusEffect> StatusEffects => _statusTemplates.Select(x => x.GetStatusEffect()).ToList();
 
         protected ParticleFactory _particleFactory;
         protected BattleService _battleService;

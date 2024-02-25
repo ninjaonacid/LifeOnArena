@@ -1,8 +1,6 @@
 using System.Collections.Generic;
-using System.Linq;
 using Code.ConfigData.StatSystem;
 using Code.Core.Factory;
-using Code.Entity;
 using Code.Entity.EntitiesComponents;
 using Code.Entity.StatusEffects;
 using Code.Logic.Projectiles;
