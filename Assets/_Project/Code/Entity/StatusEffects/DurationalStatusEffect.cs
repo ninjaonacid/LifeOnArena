@@ -11,10 +11,7 @@ namespace Code.Entity.StatusEffects
 
         private readonly float _duration;
         private readonly float _executeRate;
-        
         public bool IsDisablingEffect { get; private set; }
-
-
         protected DurationalStatusEffect(List<StatModifierTemplate> modifiers, EffectDurationType type, float duration, float remainingDuration, float executeRate, bool isDisablingEffect) : base(modifiers, type)
         {
             _duration = duration;

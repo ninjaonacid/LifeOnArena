@@ -11,8 +11,6 @@ namespace Code.ConfigData.StatusEffects
     }
     public abstract class StatusEffectTemplateBase : ScriptableObject
     {
-        public string Name;
-        public string Description;
         public EffectDurationType EffectDurationType;
         public List<StatModifierTemplate> Modifiers;
 
