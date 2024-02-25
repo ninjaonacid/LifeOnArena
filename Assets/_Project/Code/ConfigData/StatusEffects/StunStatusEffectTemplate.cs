@@ -12,7 +12,6 @@ namespace Code.ConfigData.StatusEffects
         {
             _statusEffect ??= new StunStatusEffect(Modifiers, EffectDurationType, Duration,Duration,TickRate, true);
             return _statusEffect;
-            
         }
     }
 }

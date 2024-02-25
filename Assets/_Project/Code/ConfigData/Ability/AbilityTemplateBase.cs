@@ -5,7 +5,6 @@ using Code.Core.Factory;
 using Code.Entity.StatusEffects;
 using Code.Services.BattleService;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Code.ConfigData.Ability
 {

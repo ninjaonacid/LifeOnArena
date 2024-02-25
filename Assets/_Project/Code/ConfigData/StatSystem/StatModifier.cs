@@ -1,5 +1,3 @@
-using System;
-
 namespace Code.ConfigData.StatSystem
 {
     public enum ModifierOperationType

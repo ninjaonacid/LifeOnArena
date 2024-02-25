@@ -12,8 +12,7 @@ namespace Code.Entity.StatusEffects
 
         public override void Apply(GameObject target)
         {
-            var statusController = target.GetComponent<StatusEffectController>();
-            statusController.ApplyEffectToSelf(this);
+            
         }
     }
 }

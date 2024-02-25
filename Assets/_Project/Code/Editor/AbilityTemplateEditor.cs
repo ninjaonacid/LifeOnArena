@@ -15,6 +15,7 @@ namespace Code.Editor
             var root = new VisualElement();
             
             root.Add(CreatePropertyFields());
+            root.Add(CreateStatusEffectCollection());
             return root;
         }
 
@@ -37,20 +38,23 @@ namespace Code.Editor
             return root;
         }
 
-        // protected virtual VisualElement CreateStatusEffectCollection()
-        // {
-        //     var root = new VisualElement();
-        //     
-        //     ListView modifiers = new ListView
-        //     {
-        //         bindingPath = "_statusEffects",
-        //         virtualizationMethod = CollectionVirtualizationMethod.DynamicHeight,
-        //         reorderable = true,
-        //         showFoldoutHeader = true,
-        //         showAddRemoveFooter = true,
-        //         headerTitle = "Modifiers"
-        //     }
-        // }
+        protected virtual VisualElement CreateStatusEffectCollection()
+        {
+            var root = new VisualElement();
+
+            ListView modifiers = new ListView
+            {
+                bindingPath = "_statusEffects",
+                virtualizationMethod = CollectionVirtualizationMethod.DynamicHeight,
+                reorderable = true,
+                showFoldoutHeader = true,
+                showAddRemoveFooter = true,
+                headerTitle = "Modifiers"
+            };
+            modifiers.Bind(serializedObject);
+            root.Add(modifiers);
+            return root;
+        }
         
         
     }
