@@ -7,14 +7,14 @@ using VContainer;
 
 namespace Code.Runtime.Core.Factory
 {
-    public class ParticleFactory
+    public class VisualEffectFactory
     {
         private readonly IAssetProvider _assetProvider;
         private readonly IConfigProvider _configProvider;
         private readonly IObjectResolver _objectResolver;
         private readonly ObjectPoolProvider _poolProvider;
     
-        public ParticleFactory(IAssetProvider assetProvider, ObjectPoolProvider poolProvider, IConfigProvider configProvider, IObjectResolver objectResolver)
+        public VisualEffectFactory(IAssetProvider assetProvider, ObjectPoolProvider poolProvider, IConfigProvider configProvider, IObjectResolver objectResolver)
         {
             _assetProvider = assetProvider;
             _configProvider = configProvider;
@@ -22,7 +22,7 @@ namespace Code.Runtime.Core.Factory
             _poolProvider = poolProvider;
         }
 
-        public async UniTask<ParticleSystem> CreateParticle(int id)
+        public async UniTask<ParticleSystem> CreateVisualEffect(int id)
         {
             var particle = _configProvider.Particle(id);
 
@@ -33,31 +33,31 @@ namespace Code.Runtime.Core.Factory
             return particleSystem;
         }
         
-        public async UniTask<ParticleSystem> CreateParticle(int id, Vector3 position)
+        public async UniTask<ParticleSystem> CreateVisualEffect(int id, Vector3 position)
         {
-           var particle =  await CreateParticle(id);
+           var particle =  await CreateVisualEffect(id);
            particle.transform.position = position;
            return particle;
         }
 
         public async UniTask<ParticleSystem> CreateParticleWithTimer(int id, float time)
         {
-            var particle = await CreateParticle(id);
+            var particle = await CreateVisualEffect(id);
             _poolProvider.ReturnWithTimer(id, particle.GetComponent<PooledObject>(), time).Forget();
             return particle;
         }
 
         public async UniTask<ParticleSystem> CreateParticleWithTimer(int id, Vector3 position, float time)
         {
-            var particle = await CreateParticle(id);
+            var particle = await CreateVisualEffect(id);
             _poolProvider.ReturnWithTimer(id, particle.GetComponent<PooledObject>(), time).Forget();
             particle.transform.position = position;
             return particle;
         }
 
-        public async UniTask<ParticleSystem> CreateParticle(int id, Vector3 position, Transform parent)
+        public async UniTask<ParticleSystem> CreateVisualEffect(int id, Vector3 position, Transform parent)
         {
-            var particle = await CreateParticle(id);
+            var particle = await CreateVisualEffect(id);
             Transform transform;
             (transform = particle.transform).SetParent(parent);
             transform.position = position;

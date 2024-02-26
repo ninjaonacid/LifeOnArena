@@ -47,7 +47,7 @@ namespace Code.Runtime.Core.Factory
         {
             WeaponData weaponData = _config.Weapon(weaponId);
             
-            WarmAssets(weaponData.HitVfx.Identifier.Id, weaponData.HitVfx.PrefabReference).Forget();
+            WarmAssets(weaponData.HitVisualEffect.Identifier.Id, weaponData.HitVisualEffect.PrefabReference).Forget();
             
             return weaponData;
         }

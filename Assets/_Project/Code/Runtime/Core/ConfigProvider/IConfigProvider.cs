@@ -19,7 +19,7 @@ namespace Code.Runtime.Core.ConfigProvider
         LevelReward Reward(LocationReward rewardId);
         StatDatabase CharacterStats();
         List<LevelReward> LoadRewards();
-        VfxData Particle(int id);
+        VisualEffectData Particle(int id);
         LevelConfig Level(string sceneKey);
         ScreenConfig ForWindow(ScreenID menuId);
         AbilityTemplateBase Ability(int heroAbilityId);

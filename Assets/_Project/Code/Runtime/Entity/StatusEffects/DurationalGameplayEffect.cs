@@ -11,13 +11,11 @@ namespace Code.Runtime.Entity.StatusEffects
 
         private readonly float _duration;
         private readonly float _executeRate;
-        public bool IsDisablingEffect { get; private set; }
 
-        public DurationalGameplayEffect(List<StatModifierTemplate> modifiers, EffectDurationType type, float duration, float remainingDuration, float executeRate, bool isDisablingEffect) : base(modifiers, type)
+        public DurationalGameplayEffect(List<StatModifierTemplate> modifiers, EffectDurationType type, float duration, float remainingDuration, float executeRate) : base(modifiers, type)
         {
             _duration = duration;
             _executeRate = executeRate;
-            IsDisablingEffect = isDisablingEffect;
             _remainingDuration = remainingDuration;
         }
         

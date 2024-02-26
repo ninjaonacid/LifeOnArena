@@ -33,16 +33,6 @@ namespace Code.Runtime.Entity
             
         }
         
-        public bool IsEntityDisabled()
-        {
-            foreach (var status in _activeEffects)
-            {
-                if (status.IsDisablingEffect) return true;
-            }
-
-            return false;
-        }
-
         private void HandleDuration()
         {
             foreach (var activeEffect in _activeEffects)

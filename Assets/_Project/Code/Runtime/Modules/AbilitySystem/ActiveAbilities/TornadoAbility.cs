@@ -12,9 +12,9 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
 {
     public class TornadoAbility : IAbility
     {
-        private readonly ParticleFactory _particleFactory;
+        private readonly VisualEffectFactory _visualEffectFactory;
         private readonly BattleService _battleService;
-        private readonly VfxData _vfxData;
+        private readonly VisualEffectData _visualEffectData;
         private readonly float _duration;
         private readonly float _damage;
         private readonly float _attackRadius;
@@ -23,18 +23,18 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
 
         private ParticleSystem _tornadoParticle;
         
-        public TornadoAbility(ParticleFactory particleFactory,
+        public TornadoAbility(VisualEffectFactory visualEffectFactory,
             BattleService battleService,
-            VfxData vfxData,
+            VisualEffectData visualEffectData,
             IReadOnlyList<GameplayEffect> statusEffects,
             float duration,
             float damage,
             float attackRadius,
             float castDistance)
         {
-            _particleFactory = particleFactory;
+            _visualEffectFactory = visualEffectFactory;
             _battleService = battleService;
-            _vfxData = vfxData;
+            _visualEffectData = visualEffectData;
             _statusEffects = statusEffects;
             _duration = duration;
             _damage = damage;
@@ -46,7 +46,7 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
             Vector3 casterPosition = caster.transform.position;
             Vector3 casterDirection = caster.transform.forward;
 
-            _tornadoParticle = await _particleFactory.CreateParticle(_vfxData.Identifier.Id);
+            _tornadoParticle = await _visualEffectFactory.CreateVisualEffect(_visualEffectData.Identifier.Id);
             TornadoAoe tornadoAoe = _tornadoParticle.gameObject.GetComponent<TornadoAoe>();
             tornadoAoe.Initialize(_battleService, _damage, _duration);
             Transform projectileTransform = tornadoAoe.transform;

@@ -15,9 +15,9 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
         {
             return _abilityInstance ??= 
                 new TornadoAbility
-                (_particleFactory,
+                (VisualEffectFactory,
                 _battleService,
-                VfxData,
+                VisualEffectData,
                 StatusEffects,
                 ProjectileLifetime,
                 Damage,

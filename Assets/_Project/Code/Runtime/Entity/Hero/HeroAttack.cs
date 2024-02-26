@@ -30,14 +30,14 @@ namespace Code.Runtime.Entity.Hero
 
         private AudioService _audioService;
         private BattleService _battleService;
-        private ParticleFactory _particleFactory;
+        private VisualEffectFactory _visualEffectFactory;
 
         [Inject]
-        public void Construct(AudioService audioService, BattleService battleService, ParticleFactory particleFactory)
+        public void Construct(AudioService audioService, BattleService battleService, VisualEffectFactory visualEffectFactory)
         {
             _audioService = audioService;
             _battleService = battleService;
-            _particleFactory = particleFactory;
+            _visualEffectFactory = visualEffectFactory;
         }
         private void Awake()
         {
@@ -90,10 +90,10 @@ namespace Code.Runtime.Entity.Hero
 
         private async UniTaskVoid HitVfx(Vector3 position)
         {
-            int particleId = _heroWeapon.GetEquippedWeaponData().HitVfx.Identifier.Id;
+            int particleId = _heroWeapon.GetEquippedWeaponData().HitVisualEffect.Identifier.Id;
             
             var particle =
-                await _particleFactory.CreateParticleWithTimer(particleId, 1);
+                await _visualEffectFactory.CreateParticleWithTimer(particleId, 1);
 
             particle.transform.position = position;
             particle.Play();

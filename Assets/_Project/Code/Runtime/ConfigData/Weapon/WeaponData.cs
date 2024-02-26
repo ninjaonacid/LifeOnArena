@@ -4,6 +4,7 @@ using Code.Runtime.ConfigData.Identifiers;
 using Code.Runtime.ConfigData.StateMachine;
 using Code.Runtime.Logic.Damage;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Vector3 = UnityEngine.Vector3;
 
 namespace Code.Runtime.ConfigData.Weapon
@@ -15,7 +16,7 @@ namespace Code.Runtime.ConfigData.Weapon
         public List<DamageType> DamageType;
         public GameObject WeaponPrefab;
         public WeaponId WeaponId;
-        public VfxData HitVfx;
+        [FormerlySerializedAs("HitVfx")] public VisualEffectData HitVisualEffect;
         public int Price;
         public float AttackSpeed;
         public float Damage;

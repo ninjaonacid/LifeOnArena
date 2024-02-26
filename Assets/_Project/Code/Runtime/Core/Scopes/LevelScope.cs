@@ -32,7 +32,7 @@ namespace Code.Runtime.Core.Scopes
             IInstaller screenServiceInstaller = new ScreenServiceInstaller();
             screenServiceInstaller.Install(builder);
             
-            builder.Register<ParticleFactory>(Lifetime.Scoped);
+            builder.Register<VisualEffectFactory>(Lifetime.Scoped);
 
             InitializeServices(builder);
         }

@@ -18,7 +18,7 @@ namespace Code.Runtime.Core.Scopes
             builder.Register<IAbilityFactory, AbilityFactory>(Lifetime.Scoped);
             builder.Register<IHeroFactory, HeroFactory>(Lifetime.Scoped);
             
-            builder.Register<ParticleFactory>(Lifetime.Scoped);
+            builder.Register<VisualEffectFactory>(Lifetime.Scoped);
             builder.Register<ObjectPoolProvider>(Lifetime.Scoped);
 
             IInstaller screenServiceInstaller = new ScreenServiceInstaller();

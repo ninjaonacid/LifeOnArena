@@ -16,7 +16,7 @@ namespace Code.Runtime.Core.ObjectPool
             _returnToPool?.Invoke(this);
         }
 
-        void IPoolable.ReturnToPool()
+        public void ReturnToPool()
         {
            _returnToPool?.Invoke(this);
         }

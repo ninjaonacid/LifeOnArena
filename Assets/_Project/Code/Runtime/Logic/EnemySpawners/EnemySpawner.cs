@@ -14,7 +14,7 @@ namespace Code.Runtime.Logic.EnemySpawners
         private EnemyDeath _enemyDeath;
         private IPoolable _pooledObject;
         private IEnemyFactory _factory;
-        private ParticleFactory _particleFactory;
+        private VisualEffectFactory _visualEffectFactory;
         private ParticleSystem _spawnParticle;
         public string Id { get; set; }
         public int RespawnCount { get; set; }
@@ -25,10 +25,10 @@ namespace Code.Runtime.Logic.EnemySpawners
 
         [Inject]
         public void Construct(IEnemyFactory enemyFactory,
-            ParticleFactory particleFactory)
+            VisualEffectFactory visualEffectFactory)
         {
             _factory = enemyFactory;
-            _particleFactory = particleFactory;
+            _visualEffectFactory = visualEffectFactory;
         }
 
         public async UniTaskVoid Spawn(CancellationToken token)
@@ -39,7 +39,7 @@ namespace Code.Runtime.Logic.EnemySpawners
             var position = transform.position;
             monster.transform.position = position;
 
-            _spawnParticle = await _particleFactory.CreateParticleWithTimer(ParticleIdentifier.Id, position, 2);
+            _spawnParticle = await _visualEffectFactory.CreateParticleWithTimer(ParticleIdentifier.Id, position, 2);
             
             _enemyDeath = monster.GetComponent<EnemyDeath>();
             _enemyDeath.Happened += Slay;

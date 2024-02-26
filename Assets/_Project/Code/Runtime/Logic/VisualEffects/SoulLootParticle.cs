@@ -5,7 +5,7 @@ using UnityEngine;
 using VContainer;
 using Vector3 = UnityEngine.Vector3;
 
-namespace Code.Runtime.Logic.Particles
+namespace Code.Runtime.Logic.VisualEffects
 {
     public class SoulLootParticle : SerializedMonoBehaviour
     {

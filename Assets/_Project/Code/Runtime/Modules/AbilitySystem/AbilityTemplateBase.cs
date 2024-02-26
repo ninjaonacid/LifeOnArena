@@ -6,6 +6,7 @@ using Code.Runtime.Entity.StatusEffects;
 using Code.Runtime.Modules.AbilitySystem.GameplayEffects;
 using Code.Runtime.Services.BattleService;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Code.Runtime.Modules.AbilitySystem
 {
@@ -24,21 +25,21 @@ namespace Code.Runtime.Modules.AbilitySystem
         public int Price;
         public AbilityState State;
         public bool IsCastAbility; 
-        public VfxData VfxData;
+        [FormerlySerializedAs("VfxData")] public VisualEffectData VisualEffectData;
         
         [SerializeField] private List<GameplayEffectBlueprint> _statusTemplates;
 
         protected IReadOnlyList<GameplayEffect> StatusEffects => _statusTemplates.Select(x => x.GetGameplayEffect()).ToList();
 
-        protected ParticleFactory _particleFactory;
+        protected VisualEffectFactory VisualEffectFactory;
         protected BattleService _battleService;
         public abstract IAbility GetAbility();
 
         public void InitServices(
-            ParticleFactory particleFactory,
+            VisualEffectFactory visualEffectFactory,
             BattleService battleService)
         {
-            _particleFactory = particleFactory;
+            VisualEffectFactory = visualEffectFactory;
             _battleService = battleService;
         }
         

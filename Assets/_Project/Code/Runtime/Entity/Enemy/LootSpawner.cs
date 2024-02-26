@@ -15,7 +15,7 @@ namespace Code.Runtime.Entity.Enemy
     {
         private IRandomService _randomService;
         private IItemFactory _itemFactory;
-        private ParticleFactory _particleFactory;
+        private VisualEffectFactory _visualEffectFactory;
         private IGameDataContainer _dataContainer;
         public EnemyDeath EnemyDeath;
         [SerializeField] private ParticleIdentifier _souls;
@@ -25,11 +25,11 @@ namespace Code.Runtime.Entity.Enemy
         private CancellationTokenSource _cts;
 
         [Inject]
-        public void Construct(IItemFactory factory, ParticleFactory particleFactory, IRandomService randomService, IGameDataContainer dataContainer)
+        public void Construct(IItemFactory factory, VisualEffectFactory visualEffectFactory, IRandomService randomService, IGameDataContainer dataContainer)
         {
             _itemFactory = factory;
             _randomService = randomService;
-            _particleFactory = particleFactory;
+            _visualEffectFactory = visualEffectFactory;
             _dataContainer = dataContainer;
         }
 
@@ -45,7 +45,7 @@ namespace Code.Runtime.Entity.Enemy
 
         private async UniTask SpawnLoot(CancellationToken token)
         {
-            var lootParticle = await _particleFactory.CreateParticle(_souls.Id);
+            var lootParticle = await _visualEffectFactory.CreateVisualEffect(_souls.Id);
 
             lootParticle.transform.position = transform.position + new Vector3(0, 2, 0);
 

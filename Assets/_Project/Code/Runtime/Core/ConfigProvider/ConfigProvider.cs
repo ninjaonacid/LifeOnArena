@@ -22,7 +22,7 @@ namespace Code.Runtime.Core.ConfigProvider
         private Dictionary<LocationReward, LevelReward> _levelReward;
         private Dictionary<ScreenID, ScreenConfig> _windowConfigs;
         private Dictionary<int, AbilityTemplateBase> _heroAbilities;
-        private Dictionary<int, VfxData> _particles;
+        private Dictionary<int, VisualEffectData> _particles;
         private Dictionary<int, WeaponData> _weapons;
 
         private WeaponStateMachineDatabase _weaponFsmDatabase;
@@ -63,7 +63,7 @@ namespace Code.Runtime.Core.ConfigProvider
                 .Load<StatDatabase>($"{ConfigFolder}/Hero/Stats/HeroStatsData");
 
             _particles = Resources
-                .LoadAll<VfxData>($"{ConfigFolder}/Particles")
+                .LoadAll<VisualEffectData>($"{ConfigFolder}/Particles")
                 .ToDictionary(x => x.Identifier.Id, x => x);
             
             _weapons = Resources
@@ -86,7 +86,7 @@ namespace Code.Runtime.Core.ConfigProvider
         public AudioServiceSettings AudioServiceSettings() => _audioServiceSettings;
         public AudioLibrary AudioLibrary() => _audioLibrary;
 
-        public VfxData Particle(int id)
+        public VisualEffectData Particle(int id)
         {
             if(_particles.TryGetValue(id, out var particlesStaticData))
                 return particlesStaticData;

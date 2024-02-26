@@ -11,8 +11,7 @@ namespace Code.Runtime.Modules.AbilitySystem.GameplayEffects
         public bool IsDisablingMovement;
         public override GameplayEffect GetGameplayEffect()
         {
-            return new DurationalGameplayEffect(Modifiers, EffectDurationType, Duration, Duration, TickRate,
-                IsDisablingMovement);
+            return new DurationalGameplayEffect(Modifiers, EffectDurationType, Duration, Duration, TickRate);
         }
     }
 }

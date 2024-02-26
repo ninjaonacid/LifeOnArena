@@ -15,17 +15,17 @@ namespace Code.Runtime.Core.Factory
         private readonly BattleService _battleService;
         private readonly IRandomService _random;
         private readonly IAssetProvider _assetProvider;
-        private readonly ParticleFactory _particleFactory;
+        private readonly VisualEffectFactory _visualEffectFactory;
         public AbilityFactory(
             IAssetProvider assetProvider,
             IConfigProvider config,
-            ParticleFactory particleFactory,
+            VisualEffectFactory visualEffectFactory,
             BattleService battleService,
             IRandomService random)
         {
             _assetProvider = assetProvider;
             _config = config;
-            _particleFactory = particleFactory;
+            _visualEffectFactory = visualEffectFactory;
             _battleService = battleService;
             _random = random;
         }
@@ -41,11 +41,11 @@ namespace Code.Runtime.Core.Factory
         
         public AbilityTemplateBase InitializeAbilityTemplate(AbilityTemplateBase ability)
         {
-            ability.InitServices(_particleFactory, _battleService);
+            ability.InitServices(_visualEffectFactory, _battleService);
             
-            if (ability.VfxData)
+            if (ability.VisualEffectData)
             {
-                InitAbilityAssets(ability.VfxData.PrefabReference).Forget();
+                InitAbilityAssets(ability.VisualEffectData.PrefabReference).Forget();
             }
             
             return ability;

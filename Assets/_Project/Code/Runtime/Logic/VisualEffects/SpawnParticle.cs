@@ -2,7 +2,7 @@ using System;
 using Code.Runtime.Core.ObjectPool;
 using UnityEngine;
 
-namespace Code.Runtime.Logic.Particles
+namespace Code.Runtime.Logic.VisualEffects
 {
     public class SpawnParticle : MonoBehaviour, IPoolable
     {
