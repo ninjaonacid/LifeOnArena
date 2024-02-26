@@ -4816,7 +4816,7 @@ GameObject:
   - component: {fileID: 880529848043316106}
   - component: {fileID: 880529848043412010}
   - component: {fileID: 880529848057144074}
-  - component: {fileID: -5397742989747158491}
+  - component: {fileID: 902248780696879121}
   m_Layer: 0
   m_Name: Hit_effect
   m_TagString: Untagged
@@ -9716,7 +9716,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &-5397742989747158491
+--- !u!114 &902248780696879121
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9725,6 +9725,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 880529848063212266}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 859d65b6ff2a410da68cc3e1ed9dcb9b, type: 3}
+  m_Script: {fileID: 11500000, guid: f7cb44888f4bd564abb5c6b6eb27a935, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _particleSystem: {fileID: 880529848043316106}

@@ -9447,7 +9447,6 @@ GameObject:
   - component: {fileID: 7920405970536636813}
   - component: {fileID: 7459079079510251384}
   - component: {fileID: 7920405970550889835}
-  - component: {fileID: -7911018167946084564}
   - component: {fileID: 7920405970550793419}
   - component: {fileID: 7920405970537358401}
   m_Layer: 0
@@ -9486,20 +9485,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 963918cf95199b742bde95f34e60e9b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  serializationData:
-    SerializedFormat: 2
-    SerializedBytes: 
-    ReferencedUnityObjects:
-    - {fileID: -7911018167946084564}
-    SerializedBytesString: 
-    Prefab: {fileID: 0}
-    PrefabModificationsReferencedUnityObjects: []
-    PrefabModifications: []
-    SerializationNodes:
-    - Name: _poolable
-      Entry: 10
-      Data: 0
-  _tornadoParticle: {fileID: 7920405970550793419}
+  _particleSystem: {fileID: 7920405970550793419}
 --- !u!199 &7920405970550889835
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -9572,18 +9558,6 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!114 &-7911018167946084564
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7920405970537135533}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 859d65b6ff2a410da68cc3e1ed9dcb9b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!198 &7920405970550793419
 ParticleSystem:
   m_ObjectHideFlags: 0

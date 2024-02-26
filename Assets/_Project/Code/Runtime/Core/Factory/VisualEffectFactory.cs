@@ -1,6 +1,8 @@
+using System.Collections.Generic;
 using Code.Runtime.Core.AssetManagement;
 using Code.Runtime.Core.ConfigProvider;
 using Code.Runtime.Core.ObjectPool;
+using Code.Runtime.Logic.VisualEffects;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using VContainer;
@@ -13,7 +15,7 @@ namespace Code.Runtime.Core.Factory
         private readonly IConfigProvider _configProvider;
         private readonly IObjectResolver _objectResolver;
         private readonly ObjectPoolProvider _poolProvider;
-    
+
         public VisualEffectFactory(IAssetProvider assetProvider, ObjectPoolProvider poolProvider, IConfigProvider configProvider, IObjectResolver objectResolver)
         {
             _assetProvider = assetProvider;
@@ -22,46 +24,46 @@ namespace Code.Runtime.Core.Factory
             _poolProvider = poolProvider;
         }
 
-        public async UniTask<ParticleSystem> CreateVisualEffect(int id)
+        public async UniTask<VisualEffect> CreateVisualEffect(int id)
         {
             var particle = _configProvider.Particle(id);
 
             var prefab = await _assetProvider.Load<GameObject>(particle.PrefabReference);
             
-            var particleSystem = _poolProvider.Spawn<ParticleSystem>(id, prefab);
+            var particleSystem = _poolProvider.Spawn<VisualEffect>(id, prefab);
 
             return particleSystem;
         }
         
-        public async UniTask<ParticleSystem> CreateVisualEffect(int id, Vector3 position)
+        public async UniTask<VisualEffect> CreateVisualEffect(int id, Vector3 position)
         {
-           var particle =  await CreateVisualEffect(id);
-           particle.transform.position = position;
-           return particle;
+           var visualEffect =  await CreateVisualEffect(id);
+           visualEffect.transform.position = position;
+           return visualEffect;
         }
 
-        public async UniTask<ParticleSystem> CreateParticleWithTimer(int id, float time)
+        public async UniTask<VisualEffect> CreateVisualEffectWithTimer(int id, float time)
         {
-            var particle = await CreateVisualEffect(id);
-            _poolProvider.ReturnWithTimer(id, particle.GetComponent<PooledObject>(), time).Forget();
-            return particle;
+            var visualEffect = await CreateVisualEffect(id);
+            _poolProvider.ReturnWithTimer(id, visualEffect, time).Forget();
+            return visualEffect;
         }
 
-        public async UniTask<ParticleSystem> CreateParticleWithTimer(int id, Vector3 position, float time)
+        public async UniTask<VisualEffect> CreateVisualEffectWithTimer(int id, Vector3 position, float time)
         {
-            var particle = await CreateVisualEffect(id);
-            _poolProvider.ReturnWithTimer(id, particle.GetComponent<PooledObject>(), time).Forget();
-            particle.transform.position = position;
-            return particle;
+            var visualEffect = await CreateVisualEffect(id);
+            _poolProvider.ReturnWithTimer(id, visualEffect, time).Forget();
+            visualEffect.transform.position = position;
+            return visualEffect;
         }
 
-        public async UniTask<ParticleSystem> CreateVisualEffect(int id, Vector3 position, Transform parent)
+        public async UniTask<VisualEffect> CreateVisualEffect(int id, Vector3 position, Transform parent)
         {
-            var particle = await CreateVisualEffect(id);
+            var visualEffect = await CreateVisualEffect(id);
             Transform transform;
-            (transform = particle.transform).SetParent(parent);
+            (transform = visualEffect.transform).SetParent(parent);
             transform.position = position;
-            return particle;
+            return visualEffect;
         }
 
         public async UniTaskVoid PrewarmParticlePool(int id, int size)

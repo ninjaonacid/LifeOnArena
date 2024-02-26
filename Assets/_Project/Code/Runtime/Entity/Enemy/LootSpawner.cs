@@ -13,12 +13,13 @@ namespace Code.Runtime.Entity.Enemy
 {
     public class LootSpawner : MonoBehaviour
     {
+        [SerializeField] private ParticleIdentifier _souls;
+        
         private IRandomService _randomService;
         private IItemFactory _itemFactory;
         private VisualEffectFactory _visualEffectFactory;
         private IGameDataContainer _dataContainer;
         public EnemyDeath EnemyDeath;
-        [SerializeField] private ParticleIdentifier _souls;
         private int _lootMin;
         private int _lootMax;
 
@@ -45,9 +46,9 @@ namespace Code.Runtime.Entity.Enemy
 
         private async UniTask SpawnLoot(CancellationToken token)
         {
-            var lootParticle = await _visualEffectFactory.CreateVisualEffect(_souls.Id);
+            var lootVisualEffect = await _visualEffectFactory.CreateVisualEffect(_souls.Id);
 
-            lootParticle.transform.position = transform.position + new Vector3(0, 2, 0);
+            lootVisualEffect.transform.position = transform.position + new Vector3(0, 2, 0);
 
             var lootItem = new Loot()
             {
@@ -55,17 +56,10 @@ namespace Code.Runtime.Entity.Enemy
             };
 
             _dataContainer.PlayerData.WorldData.LootData.Collect(lootItem);
-
             
-            await UniTask.WaitUntil(() =>
-            {
-                if (!lootParticle) _cts.Cancel();
-                token.ThrowIfCancellationRequested();
-                return !lootParticle.isPlaying;
-            }, cancellationToken: token);
-
-            lootParticle.gameObject.SetActive(false);
         }
+
+        
 
 
         public void SetLoot(int min, int max)

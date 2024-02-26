@@ -3,6 +3,7 @@ using Code.Runtime.ConfigData.Identifiers;
 using Code.Runtime.Core.Factory;
 using Code.Runtime.Core.ObjectPool;
 using Code.Runtime.Entity.Enemy;
+using Code.Runtime.Logic.VisualEffects;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using VContainer;
@@ -15,7 +16,7 @@ namespace Code.Runtime.Logic.EnemySpawners
         private IPoolable _pooledObject;
         private IEnemyFactory _factory;
         private VisualEffectFactory _visualEffectFactory;
-        private ParticleSystem _spawnParticle;
+        private VisualEffect _spawnVfx;
         public string Id { get; set; }
         public int RespawnCount { get; set; }
 
@@ -39,7 +40,7 @@ namespace Code.Runtime.Logic.EnemySpawners
             var position = transform.position;
             monster.transform.position = position;
 
-            _spawnParticle = await _visualEffectFactory.CreateParticleWithTimer(ParticleIdentifier.Id, position, 2);
+            _spawnVfx = await _visualEffectFactory.CreateVisualEffectWithTimer(ParticleIdentifier.Id, position, 2);
             
             _enemyDeath = monster.GetComponent<EnemyDeath>();
             _enemyDeath.Happened += Slay;

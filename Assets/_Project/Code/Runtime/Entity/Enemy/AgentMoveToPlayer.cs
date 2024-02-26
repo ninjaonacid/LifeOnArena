@@ -20,8 +20,8 @@ namespace Code.Runtime.Entity.Enemy
 
         public void ShouldMove(bool context)
         {
-            Agent.isStopped = !context;
-      
+            if(gameObject.activeSelf)
+                Agent.isStopped = !context;
         }
     }
 }

@@ -25,6 +25,5 @@ namespace Code.Runtime.ConfigData.Weapon
         public Vector3 LocalRotation;
         public Vector3 LocalPosition;
         public SoundAudioFile WeaponSound;
-
     }
 }

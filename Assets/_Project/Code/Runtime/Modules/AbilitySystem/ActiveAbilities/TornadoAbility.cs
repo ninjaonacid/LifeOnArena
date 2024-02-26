@@ -4,6 +4,7 @@ using Code.Runtime.Core.Factory;
 using Code.Runtime.Entity.EntitiesComponents;
 using Code.Runtime.Entity.StatusEffects;
 using Code.Runtime.Logic.Projectiles;
+using Code.Runtime.Logic.VisualEffects;
 using Code.Runtime.Modules.StatSystem;
 using Code.Runtime.Services.BattleService;
 using UnityEngine;
@@ -13,15 +14,15 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
     public class TornadoAbility : IAbility
     {
         private readonly VisualEffectFactory _visualEffectFactory;
-        private readonly BattleService _battleService;
         private readonly VisualEffectData _visualEffectData;
+        private readonly BattleService _battleService;
         private readonly float _duration;
         private readonly float _damage;
         private readonly float _attackRadius;
         private readonly float _castDistance;
         private readonly IReadOnlyList<GameplayEffect> _statusEffects;
 
-        private ParticleSystem _tornadoParticle;
+        private TornadoVisualEffect _tornadoVisual;
         
         public TornadoAbility(VisualEffectFactory visualEffectFactory,
             BattleService battleService,
@@ -46,10 +47,11 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
             Vector3 casterPosition = caster.transform.position;
             Vector3 casterDirection = caster.transform.forward;
 
-            _tornadoParticle = await _visualEffectFactory.CreateVisualEffect(_visualEffectData.Identifier.Id);
-            TornadoAoe tornadoAoe = _tornadoParticle.gameObject.GetComponent<TornadoAoe>();
-            tornadoAoe.Initialize(_battleService, _damage, _duration);
-            Transform projectileTransform = tornadoAoe.transform;
+            _tornadoVisual =
+                await _visualEffectFactory.CreateVisualEffect(_visualEffectData.Identifier.Id) 
+                    as TornadoVisualEffect;
+            
+            Transform projectileTransform = _tornadoVisual.transform;
             projectileTransform.position = casterPosition + casterDirection * _castDistance;
             projectileTransform.rotation = Quaternion.identity;
 

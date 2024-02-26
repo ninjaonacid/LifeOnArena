@@ -9,7 +9,7 @@ namespace Code.Runtime.Logic.VisualEffects
 {
     public class VisualEffect : PooledObject
     {
-        [SerializeField] private ParticleSystem _particleSystem;
+        [SerializeField] protected ParticleSystem _particleSystem;
         public event Action<VisualEffect> Finished;
         private CancellationTokenSource _cts;
 
@@ -23,6 +23,8 @@ namespace Code.Runtime.Logic.VisualEffects
             }
         }
 
+        public bool IsPlaying() => _particleSystem.particleCount != 0;
+
         public void Stop()
         {
             _particleSystem.Stop();
@@ -30,7 +32,10 @@ namespace Code.Runtime.Logic.VisualEffects
             {
                 _cts.Token.ThrowIfCancellationRequested();
             }
+            
+            Finished?.Invoke(this);
         }
+        
         private async UniTask WaitForDurationEnd(CancellationToken token)
         {
             await UniTask.Delay(TimeSpan.FromSeconds(_particleSystem.main.duration), cancellationToken: token);

@@ -35,7 +35,7 @@ namespace Code.Runtime.Core.Factory
             AbilityTemplateBase abilityTemplate = _config.Ability(heroAbilityId);
 
             InitializeAbilityTemplate(abilityTemplate);
-      
+
             return abilityTemplate;
         }
         
