@@ -52,7 +52,7 @@ namespace Code.Entity.Hero
         }
         
 
-        public void AoeAbilityAttack(Vector3 castPoint, IReadOnlyList<StatusEffect> statusEffects)
+        public void AoeAbilityAttack(Vector3 castPoint, IReadOnlyList<GameplayEffect> statusEffects)
         {
             // var hits = _battleService.CreateAoeAbility(_stats, statusEffects,  castPoint, _layerMask);
             //

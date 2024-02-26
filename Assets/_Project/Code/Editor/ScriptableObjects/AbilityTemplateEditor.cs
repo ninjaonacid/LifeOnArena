@@ -4,7 +4,7 @@ using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine.UIElements;
 
-namespace Code.Editor
+namespace Code.Editor.ScriptableObjects
 {
     [CustomEditor(typeof(AbilityBase), true)]
     public class AbilityTemplateEditor : OdinEditor

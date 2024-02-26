@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Code.Entity.StatusEffects
 {
-    public abstract class DurationalStatusEffect : StatusEffect
+    public class DurationalGameplayEffect : GameplayEffect
     {
         private float _remainingDuration;
         private float _remainingToExecute;
@@ -12,7 +12,8 @@ namespace Code.Entity.StatusEffects
         private readonly float _duration;
         private readonly float _executeRate;
         public bool IsDisablingEffect { get; private set; }
-        protected DurationalStatusEffect(List<StatModifierTemplate> modifiers, EffectDurationType type, float duration, float remainingDuration, float executeRate, bool isDisablingEffect) : base(modifiers, type)
+
+        public DurationalGameplayEffect(List<StatModifierTemplate> modifiers, EffectDurationType type, float duration, float remainingDuration, float executeRate, bool isDisablingEffect) : base(modifiers, type)
         {
             _duration = duration;
             _executeRate = executeRate;
@@ -20,7 +21,7 @@ namespace Code.Entity.StatusEffects
             _remainingDuration = remainingDuration;
         }
         
-        public DurationalStatusEffect TickEffect(float deltaTime)
+        public DurationalGameplayEffect TickEffect(float deltaTime)
         {
             _remainingDuration = Mathf.Max(_remainingToExecute - deltaTime, 0f);
             _remainingToExecute = Mathf.Max(_remainingToExecute - deltaTime, 0f);

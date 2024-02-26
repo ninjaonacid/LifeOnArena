@@ -3,11 +3,10 @@ using System.Collections.ObjectModel;
 using Code.ConfigData.StatSystem;
 using Code.ConfigData.StatSystem.StatModifiers;
 using Code.ConfigData.StatusEffects;
-using UnityEngine;
 
 namespace Code.Entity.StatusEffects
 {
-    public abstract class StatusEffect
+    public class GameplayEffect
     {
         public EffectDurationType Type { get; private set; }
 
@@ -15,7 +14,7 @@ namespace Code.Entity.StatusEffects
         public ReadOnlyCollection<StatModifier> Modifiers => _statModifiers.AsReadOnly();
         public List<StatModifierTemplate> ModifierTemplates;
 
-        protected StatusEffect(List<StatModifierTemplate> modifiers, EffectDurationType type)
+        public GameplayEffect(List<StatModifierTemplate> modifiers, EffectDurationType type)
         {
             Type = type;
             ModifierTemplates = modifiers;
@@ -45,9 +44,6 @@ namespace Code.Entity.StatusEffects
                 _statModifiers.Add(statModifier);
             }
         }
-        
-        public abstract void Apply(GameObject target);
 
-      
     }
 }

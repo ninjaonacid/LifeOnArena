@@ -56,7 +56,7 @@ namespace Code.Services.BattleService
                 }
             }
         }
-        public int CreateAoeAbility(StatController attackerStats, IReadOnlyList<StatusEffect> effects,  Vector3 castPoint, float radius, LayerMask mask)
+        public int CreateAoeAbility(StatController attackerStats, IReadOnlyList<GameplayEffect> effects,  Vector3 castPoint, float radius, LayerMask mask)
         {
 
             var hits = FindTargets(castPoint, radius, mask);

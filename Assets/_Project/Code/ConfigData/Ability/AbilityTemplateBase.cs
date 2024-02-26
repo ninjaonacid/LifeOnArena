@@ -25,9 +25,9 @@ namespace Code.ConfigData.Ability
         public bool IsCastAbility; 
         public VfxData VfxData;
         
-        [SerializeField] private List<StatusEffectTemplateBase> _statusTemplates;
+        [SerializeField] private List<GameplayEffectBlueprint> _statusTemplates;
 
-        protected IReadOnlyList<StatusEffect> StatusEffects => _statusTemplates.Select(x => x.GetStatusEffect()).ToList();
+        protected IReadOnlyList<GameplayEffect> StatusEffects => _statusTemplates.Select(x => x.GetGameplayEffect()).ToList();
 
         protected ParticleFactory _particleFactory;
         protected BattleService _battleService;

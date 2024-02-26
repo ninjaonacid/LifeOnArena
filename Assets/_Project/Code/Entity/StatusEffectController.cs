@@ -12,21 +12,21 @@ namespace Code.Entity
     {
         [SerializeField] private StatController _statController;
 
-        private readonly List<DurationalStatusEffect> _activeEffects = new List<DurationalStatusEffect>();
+        private readonly List<DurationalGameplayEffect> _activeEffects = new List<DurationalGameplayEffect>();
 
         private void Update()
         {
             HandleDuration();
         }
 
-        public void ApplyEffectToSelf(StatusEffect effect)
+        public void ApplyEffectToSelf(GameplayEffect effect)
         {
             if (effect.Type == EffectDurationType.Instant)
             {
                 ExecuteEffect(effect);
             }
 
-            if (effect is DurationalStatusEffect durationalEffect)
+            if (effect is DurationalGameplayEffect durationalEffect)
             {
                 if (_activeEffects.Contains(durationalEffect)) return;
                 _activeEffects.Add(durationalEffect);
@@ -66,7 +66,7 @@ namespace Code.Entity
             }
         }
 
-        private void RemoveEffect(DurationalStatusEffect effect)
+        private void RemoveEffect(DurationalGameplayEffect effect)
         {
             if (_activeEffects.Contains(effect))
             {
@@ -74,7 +74,7 @@ namespace Code.Entity
             }
         }
 
-        private void ExecuteEffect(StatusEffect effect)
+        private void ExecuteEffect(GameplayEffect effect)
         {
             for (var i = 0; i < effect.ModifierTemplates.Count; i++)
             {

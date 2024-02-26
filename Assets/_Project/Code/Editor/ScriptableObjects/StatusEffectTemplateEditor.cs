@@ -6,7 +6,7 @@ using UnityEngine.UIElements;
 
 namespace Code.Editor.ScriptableObjects
 {
-    [CustomEditor(typeof(StatusEffectTemplateBase), true)]
+    [CustomEditor(typeof(GameplayEffectBlueprint), true)]
     public class StatusEffectTemplateEditor : OdinEditor
     {
         public override VisualElement CreateInspectorGUI()

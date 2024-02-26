@@ -9,11 +9,16 @@ namespace Code.ConfigData.StatusEffects
         Instant = 1,
         HasDuration = 2
     }
-    public abstract class StatusEffectTemplateBase : ScriptableObject
+    [CreateAssetMenu(menuName = "AbilitySystem/GameplayEffect/GameplayEffect", fileName = "GameplayEffect")]
+    public class GameplayEffectBlueprint : ScriptableObject
     {
         public EffectDurationType EffectDurationType;
         public List<StatModifierTemplate> Modifiers;
-
-        public abstract StatusEffect GetStatusEffect();
+        
+        public virtual GameplayEffect GetGameplayEffect()
+        {
+            return new GameplayEffect(Modifiers, EffectDurationType);
+        }
+        
     }
 }
