@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Code.Runtime.ConfigData.StatusEffects;
+using Code.Runtime.Modules.AbilitySystem.GameplayEffects;
 using UnityEngine;
 
 namespace Code.Runtime.Entity.StatusEffects

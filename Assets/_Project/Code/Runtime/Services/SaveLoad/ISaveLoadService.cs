@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Code.Runtime.Services.SaveLoad
 {
-    public interface ISaveLoadService : IService
+    public interface ISaveLoadService
     {
         void SaveData();
         PlayerData LoadPlayerData();

@@ -1,4 +1,4 @@
-using Code.Runtime.ConfigData.StatSystem;
+using Code.Runtime.Modules.StatSystem;
 using UnityEngine.UIElements;
 
 namespace Code.Editor.EditorWindows.StatDatabaseWindow

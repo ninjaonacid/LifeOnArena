@@ -1,5 +1,5 @@
-﻿using Code.Runtime.ConfigData.StatSystem;
-using Code.Runtime.Logic.Damage;
+﻿using Code.Runtime.Logic.Damage;
+using Code.Runtime.Modules.StatSystem;
 
 namespace Code.Runtime.Entity.EntitiesComponents
 {

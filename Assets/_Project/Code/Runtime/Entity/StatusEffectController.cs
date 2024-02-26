@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using Code.Runtime.ConfigData.StatSystem;
-using Code.Runtime.ConfigData.StatusEffects;
 using Code.Runtime.Entity.StatusEffects;
+using Code.Runtime.Modules.AbilitySystem.GameplayEffects;
+using Code.Runtime.Modules.StatSystem;
 using UnityEngine;
-using Attribute = Code.Runtime.ConfigData.StatSystem.Attribute;
+using Attribute = Code.Runtime.Modules.StatSystem.Attribute;
 
 namespace Code.Runtime.Entity
 {

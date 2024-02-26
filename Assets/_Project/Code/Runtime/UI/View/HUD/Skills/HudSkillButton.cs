@@ -1,4 +1,4 @@
-using Code.Runtime.ConfigData.Ability;
+using Code.Runtime.Modules.AbilitySystem;
 using UnityEngine;
 using UnityEngine.InputSystem.OnScreen;
 

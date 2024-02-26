@@ -1,5 +1,5 @@
-using Code.Runtime.Logic.StateMachine;
-using Code.Runtime.Logic.StateMachine.Transitions;
+using Code.Runtime.Modules.StateMachine;
+using Code.Runtime.Modules.StateMachine.Transitions;
 
 namespace Code.Runtime.Entity.Enemy.CommonEnemy
 {

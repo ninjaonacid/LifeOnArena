@@ -1,4 +1,5 @@
 using Code.Runtime.ConfigData;
+using Code.Runtime.ConfigData.Weapon;
 using UnityEngine;
 using UnityEngine.UI;
 

@@ -1,5 +1,5 @@
-using Code.Runtime.ConfigData.StatSystem;
 using Code.Runtime.Data.PlayerData;
+using Code.Runtime.Modules.StatSystem;
 using Code.Runtime.Services.PersistentProgress;
 
 namespace Code.Runtime.Entity.Hero

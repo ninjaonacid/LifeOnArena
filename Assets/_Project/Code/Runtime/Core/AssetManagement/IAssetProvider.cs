@@ -1,11 +1,10 @@
-﻿using Code.Runtime.Services;
-using Cysharp.Threading.Tasks;
+﻿using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
 namespace Code.Runtime.Core.AssetManagement
 {
-    public interface IAssetProvider : IService
+    public interface IAssetProvider
     {
         GameObject InstantiateSync(string path);
         GameObject InstantiateSync(string path, Vector3 point);

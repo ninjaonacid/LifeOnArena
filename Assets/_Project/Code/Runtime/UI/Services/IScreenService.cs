@@ -1,8 +1,6 @@
-using Code.Runtime.Services;
-
 namespace Code.Runtime.UI.Services
 {
-    public interface IScreenService : IService
+    public interface IScreenService
     {
         void Open(ScreenID screenId);
         void Close(ScreenID screenID);

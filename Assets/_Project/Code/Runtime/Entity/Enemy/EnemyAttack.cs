@@ -1,5 +1,5 @@
 using System.Linq;
-using Code.Runtime.ConfigData.StatSystem;
+using Code.Runtime.Modules.StatSystem;
 using Code.Runtime.Services.BattleService;
 using UnityEngine;
 using VContainer;

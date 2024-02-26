@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using Code.Runtime.ConfigData;
 using Code.Runtime.ConfigData.Identifiers;
+using Code.Runtime.ConfigData.Weapon;
 using Code.Runtime.Core.AssetManagement;
 using Code.Runtime.Core.ConfigProvider;
 using Code.Runtime.Core.ObjectPool;

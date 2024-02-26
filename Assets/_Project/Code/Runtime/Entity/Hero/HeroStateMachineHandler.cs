@@ -3,7 +3,7 @@ using Code.Runtime.Core.Audio;
 using Code.Runtime.Core.ConfigProvider;
 using Code.Runtime.Entity.Hero.HeroStates;
 using Code.Runtime.Logic;
-using Code.Runtime.Logic.StateMachine;
+using Code.Runtime.Modules.StateMachine;
 using UnityEngine;
 using VContainer;
 

@@ -1,13 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Code.Runtime.ConfigData;
-using Code.Runtime.ConfigData.Ability;
 using Code.Runtime.ConfigData.Audio;
 using Code.Runtime.ConfigData.Levels;
 using Code.Runtime.ConfigData.ScreenUI;
 using Code.Runtime.ConfigData.Settings;
 using Code.Runtime.ConfigData.StateMachine;
-using Code.Runtime.ConfigData.StatSystem;
+using Code.Runtime.ConfigData.Weapon;
+using Code.Runtime.Modules.AbilitySystem;
+using Code.Runtime.Modules.StatSystem;
 using Code.Runtime.UI;
 using UnityEngine;
 

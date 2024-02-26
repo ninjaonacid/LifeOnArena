@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using Code.Runtime.ConfigData.StatSystem;
-using Code.Runtime.ConfigData.StatSystem.StatModifiers;
-using Code.Runtime.ConfigData.StatusEffects;
+using Code.Runtime.Modules.AbilitySystem.GameplayEffects;
+using Code.Runtime.Modules.StatSystem;
+using Code.Runtime.Modules.StatSystem.StatModifiers;
 
 namespace Code.Runtime.Entity.StatusEffects
 {

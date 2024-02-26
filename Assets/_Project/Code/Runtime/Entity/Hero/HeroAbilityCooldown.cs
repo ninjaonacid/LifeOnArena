@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Code.Runtime.ConfigData.Ability;
+using Code.Runtime.Modules.AbilitySystem;
 using UnityEngine;
 
 namespace Code.Runtime.Entity.Hero

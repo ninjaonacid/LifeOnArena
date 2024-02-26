@@ -1,4 +1,4 @@
-﻿using Code.Runtime.ConfigData.Ability;
+﻿using Code.Runtime.Modules.AbilitySystem;
 using Sirenix.OdinInspector.Editor;
 using UnityEditor;
 using UnityEditor.UIElements;

@@ -1,4 +1,4 @@
-using Code.Runtime.ConfigData.StatusEffects;
+using Code.Runtime.Modules.AbilitySystem.GameplayEffects;
 using Sirenix.OdinInspector.Editor;
 using UnityEditor;
 using UnityEditor.UIElements;

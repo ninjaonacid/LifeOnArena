@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using Code.Runtime.ConfigData.Ability.PassiveAbilities;
 using Code.Runtime.Core.Factory;
 using Code.Runtime.Data.PlayerData;
+using Code.Runtime.Modules.AbilitySystem.PassiveAbilities;
 using Code.Runtime.Services.PersistentProgress;
 using UnityEngine;
 

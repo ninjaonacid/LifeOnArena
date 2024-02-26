@@ -1,6 +1,6 @@
-using Code.Runtime.ConfigData.Ability.PassiveAbilities;
 using Code.Runtime.Core.Factory;
 using Code.Runtime.Entity.Hero;
+using Code.Runtime.Modules.AbilitySystem.PassiveAbilities;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;

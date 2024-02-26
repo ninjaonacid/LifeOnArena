@@ -1,4 +1,4 @@
-using Code.Runtime.ConfigData.Ability;
+using Code.Runtime.Modules.AbilitySystem;
 using Code.Runtime.Services.PersistentProgress;
 using Code.Runtime.UI.View.HUD.Skills;
 using TMPro;

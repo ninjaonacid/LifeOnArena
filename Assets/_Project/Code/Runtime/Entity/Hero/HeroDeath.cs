@@ -1,22 +1,22 @@
 using Code.Runtime.Core.EventSystem;
 using Code.Runtime.CustomEvents;
-using Code.Runtime.Services;
 using UnityEngine;
+using UnityEngine.Serialization;
 using VContainer;
 
 namespace Code.Runtime.Entity.Hero
 {
     [RequireComponent(typeof(HeroHealth))]
     [RequireComponent(typeof(HeroAnimator))]
+    [RequireComponent(typeof(HeroMovement))]
     public class HeroDeath : MonoBehaviour
     {
+        [SerializeField] private HeroAnimator _animator;
+        [SerializeField] private HeroHealth _health;
+        [SerializeField] private HeroMovement _heroMovement;
+        
         private bool _isDead;
-        public HeroAnimator Animator;
-        public HeroHealth Health;
-
-        public HeroMovement heroMovement;
-
-        private ILevelEventHandler _levelEventHandler;
+        
         private IEventSystem _eventSystem;
 
         [Inject]
@@ -26,25 +26,25 @@ namespace Code.Runtime.Entity.Hero
         }
         private void Start()
         {
-            Health.Health.CurrentValueChanged += HealthChanged;
+            _health.Health.CurrentValueChanged += HealthChanged;
         }
 
         private void OnDestroy()
         {
-            Health.Health.CurrentValueChanged -= HealthChanged;
+            _health.Health.CurrentValueChanged -= HealthChanged;
         }
 
         private void HealthChanged()
         {
-            if (!_isDead && Health.Health.CurrentValue <= 0) Die();
+            if (!_isDead && _health.Health.CurrentValue <= 0) Die();
         }
 
         private void Die()
         {
             _isDead = true;
             _eventSystem.FireEvent(new HeroDeadEvent());
-            heroMovement.enabled = false;
-            Animator.PlayDeath();
+            _heroMovement.enabled = false;
+            _animator.PlayDeath();
         }
     }
 }

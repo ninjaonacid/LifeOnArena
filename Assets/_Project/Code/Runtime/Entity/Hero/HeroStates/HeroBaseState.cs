@@ -1,4 +1,4 @@
-using Code.Runtime.Logic.StateMachine.Base;
+using Code.Runtime.Modules.StateMachine.Base;
 
 namespace Code.Runtime.Entity.Hero.HeroStates
 {

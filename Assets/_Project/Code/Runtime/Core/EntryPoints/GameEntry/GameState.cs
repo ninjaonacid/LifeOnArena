@@ -1,7 +1,7 @@
-using Code.Runtime.ConfigData.StatSystem;
 using Code.Runtime.Core.ConfigProvider;
 using Code.Runtime.Data;
 using Code.Runtime.Data.PlayerData;
+using Code.Runtime.Modules.StatSystem;
 using Code.Runtime.Services.PersistentProgress;
 using Code.Runtime.Services.SaveLoad;
 

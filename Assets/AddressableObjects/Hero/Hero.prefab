@@ -2129,9 +2129,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 328abe740dc8a1347895b19207859fed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Animator: {fileID: 7390316171520665867}
-  Health: {fileID: 7046878093413620408}
-  heroMovement: {fileID: 7390316171520665878}
+  _animator: {fileID: 7390316171520665867}
+  _health: {fileID: 7046878093413620408}
+  _heroMovement: {fileID: 7390316171520665878}
 --- !u!114 &8881719371883239237
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2326,6 +2326,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbad346b6efc4506b420a0217a79a87c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _statController: {fileID: 0}
 --- !u!1 &6496497783292776582
 GameObject:
   m_ObjectHideFlags: 0

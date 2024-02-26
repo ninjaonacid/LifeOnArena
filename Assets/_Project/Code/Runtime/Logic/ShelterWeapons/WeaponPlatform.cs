@@ -1,5 +1,6 @@
 using System;
 using Code.Runtime.ConfigData;
+using Code.Runtime.ConfigData.Weapon;
 using Code.Runtime.Data.PlayerData;
 using Code.Runtime.Entity.Enemy;
 using Code.Runtime.Entity.EntitiesComponents;

@@ -1,6 +1,7 @@
 using System;
 using Code.Runtime.ConfigData;
 using Code.Runtime.ConfigData.Identifiers;
+using Code.Runtime.ConfigData.Weapon;
 using UnityEngine;
 
 namespace Code.Runtime.Entity

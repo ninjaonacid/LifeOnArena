@@ -8,13 +8,12 @@ using Code.Runtime.Core.ConfigProvider;
 using Code.Runtime.Core.Factory;
 using Code.Runtime.Core.SceneManagement;
 using Code.Runtime.Logic.EnemySpawners;
-using Code.Runtime.Services;
 using Code.Runtime.Utils;
 using Cysharp.Threading.Tasks;
 
 namespace Code.Runtime.Logic.WaveLogic
 {
-    public class EnemySpawnerController : IService, IDisposable
+    public class EnemySpawnerController : IDisposable
     {
         private readonly IConfigProvider _config;
         private readonly IEnemyFactory _enemyFactory;

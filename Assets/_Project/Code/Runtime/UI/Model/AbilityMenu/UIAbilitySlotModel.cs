@@ -1,5 +1,5 @@
 using System;
-using Code.Runtime.ConfigData.Ability;
+using Code.Runtime.Modules.AbilitySystem;
 using Newtonsoft.Json;
 
 namespace Code.Runtime.UI.Model.AbilityMenu

@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using Code.Runtime.ConfigData.Identifiers;
-using Code.Runtime.ConfigData.StatSystem;
 using Code.Runtime.Core.Audio;
 using Code.Runtime.Core.Factory;
 using Code.Runtime.Entity.Enemy;
@@ -9,6 +8,7 @@ using Code.Runtime.Entity.EntitiesComponents;
 using Code.Runtime.Entity.StatusEffects;
 using Code.Runtime.Logic.Collision;
 using Code.Runtime.Logic.Weapon;
+using Code.Runtime.Modules.StatSystem;
 using Code.Runtime.Services.BattleService;
 using Cysharp.Threading.Tasks;
 using UnityEngine;

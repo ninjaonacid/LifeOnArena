@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-using Code.Runtime.ConfigData.Ability;
 using Code.Runtime.Core.Factory;
 using Code.Runtime.Core.SceneManagement;
 using Code.Runtime.Data.PlayerData;
+using Code.Runtime.Modules.AbilitySystem;
 using Code.Runtime.Services.PersistentProgress;
 using Code.Runtime.UI.View.HUD.Skills;
 using UnityEngine;

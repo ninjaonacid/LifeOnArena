@@ -1,6 +1,6 @@
-using Code.Runtime.ConfigData.Ability;
 using Code.Runtime.Core.AssetManagement;
 using Code.Runtime.Core.ConfigProvider;
+using Code.Runtime.Modules.AbilitySystem;
 using Code.Runtime.Services.BattleService;
 using Code.Runtime.Services.RandomService;
 using Cysharp.Threading.Tasks;

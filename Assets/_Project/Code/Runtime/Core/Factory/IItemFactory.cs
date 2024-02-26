@@ -1,15 +1,15 @@
 using System.Threading.Tasks;
 using Code.Runtime.ConfigData;
 using Code.Runtime.ConfigData.Identifiers;
+using Code.Runtime.ConfigData.Weapon;
 using Code.Runtime.Logic.LevelObjectsSpawners;
 using Code.Runtime.Logic.Weapon;
-using Code.Runtime.Services;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace Code.Runtime.Core.Factory
 {
-    public interface IItemFactory : IService
+    public interface IItemFactory
     { 
         WeaponData LoadWeapon(int weaponId);
 

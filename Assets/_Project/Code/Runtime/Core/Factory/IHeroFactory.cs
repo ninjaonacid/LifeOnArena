@@ -1,10 +1,9 @@
-using Code.Runtime.Services;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace Code.Runtime.Core.Factory
 {
-    public interface IHeroFactory : IService
+    public interface IHeroFactory
     {
         GameObject HeroGameObject { get; set; }
         UniTask<GameObject> CreateHero(Vector3 initialPoint);

@@ -1,6 +1,6 @@
 using Code.Runtime.ConfigData.StateMachine;
 using Code.Runtime.Entity.Enemy.CommonEnemy;
-using Code.Runtime.Logic.StateMachine;
+using Code.Runtime.Modules.StateMachine;
 using UnityEngine;
 
 namespace Code.Runtime.Entity.Enemy

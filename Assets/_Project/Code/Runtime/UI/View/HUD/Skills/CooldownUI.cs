@@ -1,4 +1,4 @@
-﻿using Code.Runtime.ConfigData.Ability;
+﻿using Code.Runtime.Modules.AbilitySystem;
 using Cysharp.Threading.Tasks;
 using TMPro;
 using UnityEngine;

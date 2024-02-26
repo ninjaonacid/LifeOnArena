@@ -1,6 +1,7 @@
 using System;
 using Code.Runtime.ConfigData;
 using Code.Runtime.ConfigData.Identifiers;
+using Code.Runtime.ConfigData.Weapon;
 using Code.Runtime.Core.Factory;
 using Code.Runtime.Data.PlayerData;
 using Code.Runtime.Logic.Weapon;

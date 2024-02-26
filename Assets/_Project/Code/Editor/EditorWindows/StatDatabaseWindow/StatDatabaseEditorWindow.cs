@@ -1,4 +1,4 @@
-using Code.Runtime.ConfigData.StatSystem;
+using Code.Runtime.Modules.StatSystem;
 using UnityEditor;
 using UnityEditor.Callbacks;
 using UnityEngine;

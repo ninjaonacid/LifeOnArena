@@ -1,18 +1,18 @@
 ﻿using System.Collections.Generic;
 using Code.Runtime.ConfigData;
-using Code.Runtime.ConfigData.Ability;
 using Code.Runtime.ConfigData.Audio;
 using Code.Runtime.ConfigData.Levels;
 using Code.Runtime.ConfigData.ScreenUI;
 using Code.Runtime.ConfigData.Settings;
 using Code.Runtime.ConfigData.StateMachine;
-using Code.Runtime.ConfigData.StatSystem;
-using Code.Runtime.Services;
+using Code.Runtime.ConfigData.Weapon;
+using Code.Runtime.Modules.AbilitySystem;
+using Code.Runtime.Modules.StatSystem;
 using Code.Runtime.UI;
 
 namespace Code.Runtime.Core.ConfigProvider
 {
-    public interface IConfigProvider : IService
+    public interface IConfigProvider
     {
         EnemyDataConfig Monster(int monsterId);
         void Load();

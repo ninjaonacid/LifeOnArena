@@ -1,10 +1,10 @@
 using System.Collections.Generic;
-using Code.Runtime.ConfigData.StatSystem;
-using Code.Runtime.ConfigData.StatSystem.StatModifiers;
 using Code.Runtime.Entity;
 using Code.Runtime.Entity.EntitiesComponents;
 using Code.Runtime.Entity.StatusEffects;
 using Code.Runtime.Logic.Damage;
+using Code.Runtime.Modules.StatSystem;
+using Code.Runtime.Modules.StatSystem.StatModifiers;
 using UnityEngine;
 
 namespace Code.Runtime.Services.BattleService
