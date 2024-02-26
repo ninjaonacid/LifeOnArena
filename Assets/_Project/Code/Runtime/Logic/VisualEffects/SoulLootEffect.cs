@@ -32,13 +32,13 @@ namespace Code.Runtime.Logic.VisualEffects
                 
                 particle.position =
                     Vector3.MoveTowards(particle.position, _targetTransform.position, _speed * Time.deltaTime);
-                
-                _particles[i] = particle;
+            
+                if (Vector3.Distance(particle.position, _targetTransform.position) <= 0.5f)
+                {
+                    particle.remainingLifetime = -1;
+                }
 
-                // if (Vector3.Distance(_particles[particle].position, _targetTransform.position) <= 1)
-                // {
-                //     _particles[particle].remainingLifetime = -1;
-                // }
+                _particles[i] = particle;
             }
             
             _particleSystem.SetParticles(_particles, particlesCount);
