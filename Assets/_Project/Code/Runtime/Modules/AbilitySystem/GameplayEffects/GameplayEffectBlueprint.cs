@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Code.Runtime.Entity.StatusEffects;
+using Code.Runtime.Modules.AbilitySystem.GameplayTags;
 using UnityEngine;
 
 namespace Code.Runtime.Modules.AbilitySystem.GameplayEffects
@@ -15,6 +16,7 @@ namespace Code.Runtime.Modules.AbilitySystem.GameplayEffects
     {
         public EffectDurationType EffectDurationType;
         public List<StatModifierTemplate> Modifiers;
+        public List<GameplayTag> Tags;
         
         public virtual GameplayEffect GetGameplayEffect()
         {

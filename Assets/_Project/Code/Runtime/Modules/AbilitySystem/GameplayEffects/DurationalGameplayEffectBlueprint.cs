@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Code.Runtime.Modules.AbilitySystem.GameplayEffects
 {
-    [CreateAssetMenu(menuName = "AbilitySystem/GameplayEffect/GameplayEffect", fileName = "GameplayEffect")]
+    [CreateAssetMenu(menuName = "AbilitySystem/GameplayEffect/DurationalGameplayEffect", fileName = "DurationalGameplayEffect")]
     public class DurationalGameplayEffectBlueprint : GameplayEffectBlueprint
     {
         public float Duration;
