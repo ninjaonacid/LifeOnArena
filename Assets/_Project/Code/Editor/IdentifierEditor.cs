@@ -1,4 +1,4 @@
-using Code.ConfigData.Identifiers;
+using Code.Runtime.ConfigData.Identifiers;
 using Sirenix.OdinInspector.Editor;
 using UnityEditor;
 using UnityEngine;

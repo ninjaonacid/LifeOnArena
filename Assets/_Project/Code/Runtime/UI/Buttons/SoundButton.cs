@@ -1,0 +1,27 @@
+using UnityEngine;
+using UnityEngine.UI;
+
+namespace Code.Runtime.UI.Buttons
+{
+    
+    public class SoundButton : BaseButton
+    {
+        [SerializeField] private Image OnImage;
+        [SerializeField] private Image OffImage;
+        
+        
+        public void SetButton(bool isMuted)
+        {
+            if (isMuted)
+            {
+                OffImage.enabled = false;
+                OnImage.enabled = true;
+            }
+            else
+            {
+                OnImage.enabled = true;
+                OffImage.enabled = false;
+            }
+        }
+    }
+}

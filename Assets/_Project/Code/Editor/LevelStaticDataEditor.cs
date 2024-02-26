@@ -1,9 +1,9 @@
 using System.Linq;
-using Code.ConfigData.Levels;
-using Code.ConfigData.Spawners;
-using Code.Logic;
-using Code.Logic.EnemySpawners;
-using Code.Logic.LevelObjectsSpawners;
+using Code.Runtime.ConfigData.Levels;
+using Code.Runtime.ConfigData.Spawners;
+using Code.Runtime.Logic;
+using Code.Runtime.Logic.EnemySpawners;
+using Code.Runtime.Logic.LevelObjectsSpawners;
 using Sirenix.OdinInspector.Editor;
 using UnityEditor;
 using UnityEngine;

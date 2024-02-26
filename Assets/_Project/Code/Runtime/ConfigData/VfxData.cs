@@ -1,0 +1,13 @@
+using Code.Runtime.ConfigData.Identifiers;
+using UnityEngine;
+using UnityEngine.AddressableAssets;
+
+namespace Code.Runtime.ConfigData
+{
+    [CreateAssetMenu(fileName = "ParticleEffect", menuName = "Config/Particle")]
+    public class VfxData : ScriptableObject
+    {
+        public ParticleIdentifier Identifier;
+        public AssetReference PrefabReference;
+    }
+}

@@ -1,3 +1,0 @@
-﻿namespace Code.Services.PersistentProgress
-{
-}
