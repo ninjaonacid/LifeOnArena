@@ -1,10 +1,9 @@
-using Code.Runtime.Modules.StatSystem;
+﻿using Code.Runtime.Modules.StatSystem;
 using UnityEngine;
 
 namespace Code.Runtime.Modules.AbilitySystem.GameplayEffects
 {
-    [CreateAssetMenu(menuName = "Config/StatModifiers/DamageModifier", fileName = "DamageModifier")]
-    public class DamageStatModifierTemplate : StatModifierTemplate
+    public class ManaStatModifierBlueprint : StatModifierBlueprint
     {
         [SerializeField] private string _statName;
         [SerializeField] private ModifierOperationType _operationType;

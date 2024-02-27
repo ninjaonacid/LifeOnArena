@@ -59,7 +59,7 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
 
             var stats = caster.GetComponent<StatController>();
 
-            int hits = _battleService.CreateAoeAbility(stats, _statusEffects, projectileTransform.position, _attackRadius, mask);
+            var hits = _battleService.CreateAoeAbility(stats, _statusEffects, projectileTransform.position, _attackRadius, mask);
             
             var entityAttack = caster.GetComponent<IAttack>();
             entityAttack.InvokeHit(hits);

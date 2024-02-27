@@ -15,7 +15,7 @@ namespace Code.Runtime.Modules.AbilitySystem.GameplayEffects
     public class GameplayEffectBlueprint : ScriptableObject
     {
         public EffectDurationType EffectDurationType;
-        public List<StatModifierTemplate> Modifiers;
+        public List<StatModifierBlueprint> Modifiers;
         public List<GameplayTag> Tags;
         
         public virtual GameplayEffect GetGameplayEffect()

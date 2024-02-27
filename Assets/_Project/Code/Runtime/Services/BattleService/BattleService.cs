@@ -25,16 +25,16 @@ namespace Code.Runtime.Services.BattleService
         }
 
         
-        public Collider[] GetTargetsInRadius(Vector3 startPoint, float radius, LayerMask mask)
+        public (int, Collider[]) GetTargetsInRadius(Vector3 startPoint, float radius, LayerMask mask)
         {
             int hits = FindTargets(startPoint, radius, mask);
 
             if (hits > 0)
             {
-                return _overlapBuffer;
+                return (hits, _overlapBuffer);
             }
 
-            return null;
+            return (0, null);
         }
 
         public void CreateOverlapAttack(StatController attackerStats, Vector3 startPoint,  LayerMask mask)

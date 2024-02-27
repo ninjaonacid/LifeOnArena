@@ -12,9 +12,9 @@ namespace Code.Runtime.Entity.StatusEffects
 
         private readonly List<StatModifier> _statModifiers = new List<StatModifier>();
         public ReadOnlyCollection<StatModifier> Modifiers => _statModifiers.AsReadOnly();
-        public List<StatModifierTemplate> ModifierTemplates;
+        public List<StatModifierBlueprint> ModifierTemplates;
 
-        public GameplayEffect(List<StatModifierTemplate> modifiers, EffectDurationType type)
+        public GameplayEffect(List<StatModifierBlueprint> modifiers, EffectDurationType type)
         {
             Type = type;
             ModifierTemplates = modifiers;
@@ -22,7 +22,7 @@ namespace Code.Runtime.Entity.StatusEffects
 
             foreach (var modifier in modifiers)
             {
-                if (modifier is DamageStatModifierTemplate)
+                if (modifier is DamageStatModifierBlueprint)
                 {
                     var healthModifier = new HealthModifier
                     {

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Code.Runtime.Modules.AbilitySystem.GameplayEffects
 {
-    public abstract class StatModifierTemplate : ScriptableObject
+    public abstract class StatModifierBlueprint : ScriptableObject
     {
         public abstract string StatName { get; }
         public abstract ModifierOperationType Type { get; }

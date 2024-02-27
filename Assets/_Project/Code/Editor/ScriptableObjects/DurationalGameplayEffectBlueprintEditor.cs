@@ -1,0 +1,36 @@
+using Code.Runtime.Modules.AbilitySystem.GameplayEffects;
+using UnityEditor;
+using UnityEditor.UIElements;
+using UnityEngine.UIElements;
+
+namespace Code.Editor.ScriptableObjects
+{
+    [CustomEditor(typeof(DurationalGameplayEffectBlueprint))]
+    public class DurationalGameplayEffectBlueprintEditor : GameplayEffectBlueprintEditor
+    {
+        public override VisualElement CreateInspectorGUI()
+        {
+            VisualElement root = new VisualElement();
+            
+            root.Add(CreateProperties());
+            root.Add(CreateModifierList());
+
+            return root;
+        }
+
+        protected override VisualElement CreateProperties()
+        {
+            VisualElement root = base.CreateProperties();
+            
+            root.Add(new PropertyField(serializedObject.FindProperty("_duration")));
+            root.Add(new PropertyField(serializedObject.FindProperty("_tickRate")));
+
+            return root;
+        }
+
+        protected override VisualElement CreateModifierList()
+        {
+            return base.CreateModifierList();
+        }
+    }
+}
