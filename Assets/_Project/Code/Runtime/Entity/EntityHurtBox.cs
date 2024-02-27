@@ -13,7 +13,7 @@ namespace Code.Runtime.Entity
             return _hitBoxCollider.center;
         }
         
-        public Vector3 StartPoint()
+        public Vector3 GetCenterTransform()
         {
             var colliderCenter = _hitBoxCollider.center;
 
@@ -27,7 +27,7 @@ namespace Code.Runtime.Entity
              Gizmos.color = Color.red;
 
              Transform direction;
-             Gizmos.DrawWireSphere(StartPoint() + ((direction = transform).forward * offsetZ) + (direction.up * offsetY), 2);
+             Gizmos.DrawWireSphere(GetCenterTransform() + ((direction = transform).forward * offsetZ) + (direction.up * offsetY), 2);
          }
     }
 }
