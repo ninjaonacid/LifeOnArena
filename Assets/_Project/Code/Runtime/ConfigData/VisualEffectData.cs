@@ -7,7 +7,7 @@ namespace Code.Runtime.ConfigData
     [CreateAssetMenu(fileName = "ParticleEffect", menuName = "Config/Particle")]
     public class VisualEffectData : ScriptableObject
     {
-        public ParticleIdentifier Identifier;
+        public VisualEffectIdentifier Identifier;
         public AssetReference PrefabReference;
     }
 }

@@ -13,7 +13,7 @@ namespace Code.Runtime.Entity.Enemy
 {
     public class LootSpawner : MonoBehaviour
     {
-        [SerializeField] private ParticleIdentifier _souls;
+        [SerializeField] private VisualEffectIdentifier _souls;
         
         private IRandomService _randomService;
         private IItemFactory _itemFactory;

@@ -14,6 +14,7 @@ namespace Code.Editor.ScriptableObjects
             
             root.Add(CreateProperties());
             root.Add(CreateModifierList());
+            root.Add(CreateTagsList());
 
             return root;
         }
@@ -27,10 +28,6 @@ namespace Code.Editor.ScriptableObjects
 
             return root;
         }
-
-        protected override VisualElement CreateModifierList()
-        {
-            return base.CreateModifierList();
-        }
+        
     }
 }

@@ -12,7 +12,8 @@ namespace Code.Runtime.Modules.AbilitySystem.GameplayEffects
         public float TickRate => _tickRate;
         public override GameplayEffect GetGameplayEffect()
         {
-            return new DurationalGameplayEffect(Modifiers, EffectDurationType, Duration, Duration, TickRate);
+            return new DurationalGameplayEffect(Modifiers, EffectDurationType, VisualEffectId, 
+                Duration, Duration, TickRate);
         }
     }
 }

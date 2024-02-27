@@ -6,7 +6,6 @@ using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
-using Object = System.Object;
 
 namespace Code.Editor.ScriptableObjects
 {
@@ -19,7 +18,8 @@ namespace Code.Editor.ScriptableObjects
             
             root.Add(CreateProperties());
             root.Add(CreateModifierList());
-
+            root.Add(CreateTagsList());
+            
             return root;
         }
 
@@ -28,6 +28,7 @@ namespace Code.Editor.ScriptableObjects
             var root = new VisualElement();
             
             root.Add(new PropertyField(serializedObject.FindProperty("EffectDurationType")));
+            root.Add(new PropertyField(serializedObject.FindProperty("VisualEffectId")));
             return root;
         }
 
@@ -51,6 +52,15 @@ namespace Code.Editor.ScriptableObjects
             addButton.clicked += AddButtonClicked;
             removeButton.clicked += RemoveButtonClicked;
             root.Add(modifiers);
+            return root;
+        }
+
+        protected virtual VisualElement CreateTagsList()
+        {
+            var root = new VisualElement();
+            
+            root.Add(new PropertyField(serializedObject.FindProperty("Tags")));
+            
             return root;
         }
 
@@ -107,7 +117,6 @@ namespace Code.Editor.ScriptableObjects
                AssetDatabase.RemoveObjectFromAsset(assetToRemove);
                AssetDatabase.SaveAssets();
            }
-           
         }
     }
 }

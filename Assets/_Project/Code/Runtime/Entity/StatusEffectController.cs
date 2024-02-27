@@ -1,8 +1,11 @@
 ﻿using System.Collections.Generic;
+using Code.Runtime.Core.Factory;
 using Code.Runtime.Entity.StatusEffects;
 using Code.Runtime.Modules.AbilitySystem.GameplayEffects;
 using Code.Runtime.Modules.StatSystem;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
+using VContainer;
 using Attribute = Code.Runtime.Modules.StatSystem.Attribute;
 
 namespace Code.Runtime.Entity
@@ -10,9 +13,16 @@ namespace Code.Runtime.Entity
     public class StatusEffectController : MonoBehaviour
     {
         [SerializeField] private StatController _statController;
+        
+        private VisualEffectFactory _visualFactory;
 
         private readonly List<DurationalGameplayEffect> _activeEffects = new List<DurationalGameplayEffect>();
-
+        
+        [Inject]
+        public void Construct(VisualEffectFactory visualFactory)
+        {
+            _visualFactory = visualFactory;
+        }
         private void Update()
         {
             HandleDuration();
@@ -29,6 +39,11 @@ namespace Code.Runtime.Entity
             {
                 if (_activeEffects.Contains(durationalEffect)) return;
                 _activeEffects.Add(durationalEffect);
+            }
+
+            if (effect.VisualEffectId != null)
+            {
+                _visualFactory.CreateVisualEffect(effect.VisualEffectId.Id).Forget();
             }
             
         }
@@ -76,6 +91,11 @@ namespace Code.Runtime.Entity
                     }
                 }
             }
+        }
+
+        private void PlayVisualEffect()
+        {
+            
         }
     }
 }
