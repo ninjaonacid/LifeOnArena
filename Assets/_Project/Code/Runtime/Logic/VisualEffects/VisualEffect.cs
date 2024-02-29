@@ -17,7 +17,7 @@ namespace Code.Runtime.Logic.VisualEffects
         {
             _particleSystem.Play();
             
-            if (_particleSystem.main.loop)
+            if (!_particleSystem.main.loop)
             {
                 WaitForDurationEnd(TaskHelper.CreateToken(ref _cts)).Forget();
             }
@@ -42,6 +42,7 @@ namespace Code.Runtime.Logic.VisualEffects
             _particleSystem.Stop(true, ParticleSystemStopBehavior.StopEmitting);
             await UniTask.WaitUntil(() => _particleSystem.particleCount == 0, cancellationToken: token);
             Finished?.Invoke(this);
+            ReturnToPool();
         }
     }
 }

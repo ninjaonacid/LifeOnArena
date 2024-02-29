@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
+using Code.Runtime.ConfigData.Identifiers;
 using Code.Runtime.Core.Factory;
 using Code.Runtime.Entity.StatusEffects;
 using Code.Runtime.Modules.AbilitySystem.GameplayEffects;
 using Code.Runtime.Modules.StatSystem;
-using Cysharp.Threading.Tasks;
 using UnityEngine;
 using VContainer;
 using Attribute = Code.Runtime.Modules.StatSystem.Attribute;
@@ -13,6 +13,7 @@ namespace Code.Runtime.Entity
     public class StatusEffectController : MonoBehaviour
     {
         [SerializeField] private StatController _statController;
+        [SerializeField] private EntityHurtBox _hurtBox;
         
         private VisualEffectFactory _visualFactory;
 
@@ -43,7 +44,7 @@ namespace Code.Runtime.Entity
 
             if (effect.VisualEffectId != null)
             {
-                _visualFactory.CreateVisualEffect(effect.VisualEffectId.Id).Forget();
+                PlayVisualEffect(effect.VisualEffectId);
             }
             
         }
@@ -93,9 +94,13 @@ namespace Code.Runtime.Entity
             }
         }
 
-        private void PlayVisualEffect()
+        private async void PlayVisualEffect(VisualEffectIdentifier identifier)
         {
-            
+            var effect = await _visualFactory.CreateVisualEffect(identifier.Id);
+            var goCenter = _hurtBox.GetCenterTransform();
+
         }
+        
+        
     }
 }
