@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Code.Runtime.ConfigData.Identifiers;
+using Code.Runtime.ConfigData;
 using Code.Runtime.Modules.AbilitySystem.GameplayEffects;
 using UnityEngine;
 
@@ -14,8 +14,8 @@ namespace Code.Runtime.Entity.StatusEffects
         private readonly float _executeRate;
         
         public DurationalGameplayEffect(List<StatModifierBlueprint> modifiers, EffectDurationType type, 
-            VisualEffectIdentifier visualEffectId, float remainingDuration,
-            float duration, float executeRate) : base(modifiers, type, visualEffectId)
+            StatusVisualEffect statusVisualEffect, float remainingDuration,
+            float duration, float executeRate) : base(modifiers, type, statusVisualEffect)
         {
             _remainingDuration = remainingDuration;
             _duration = duration;

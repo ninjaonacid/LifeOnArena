@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Code.Runtime.ConfigData;
 using Code.Runtime.ConfigData.Identifiers;
 using Code.Runtime.Entity.StatusEffects;
 using Code.Runtime.Modules.AbilitySystem.GameplayTags;
@@ -18,11 +19,11 @@ namespace Code.Runtime.Modules.AbilitySystem.GameplayEffects
         public EffectDurationType EffectDurationType;
         public List<StatModifierBlueprint> Modifiers;
         public List<GameplayTag> Tags;
-        public VisualEffectIdentifier VisualEffectId;
+        public StatusVisualEffect StatusVisualEffect;
         
         public virtual GameplayEffect GetGameplayEffect()
         {
-            return new GameplayEffect(Modifiers, EffectDurationType, VisualEffectId);
+            return new GameplayEffect(Modifiers, EffectDurationType, StatusVisualEffect);
         }
 
     }

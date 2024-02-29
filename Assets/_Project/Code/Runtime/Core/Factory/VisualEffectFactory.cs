@@ -26,9 +26,9 @@ namespace Code.Runtime.Core.Factory
 
         public async UniTask<VisualEffect> CreateVisualEffect(int id)
         {
-            var particle = _configProvider.Particle(id);
+            var visualEffect = _configProvider.VisualEffect(id);
 
-            var prefab = await _assetProvider.Load<GameObject>(particle.PrefabReference);
+            var prefab = await _assetProvider.Load<GameObject>(visualEffect.PrefabReference);
             
             var particleSystem = _poolProvider.Spawn<VisualEffect>(id, prefab);
 
@@ -68,7 +68,7 @@ namespace Code.Runtime.Core.Factory
 
         public async UniTaskVoid PrewarmParticlePool(int id, int size)
         {
-            var particle = _configProvider.Particle(id);
+            var particle = _configProvider.VisualEffect(id);
 
             var prefab = await _assetProvider.Load<GameObject>(particle.PrefabReference);
 

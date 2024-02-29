@@ -42,9 +42,9 @@ namespace Code.Runtime.Entity
                 _activeEffects.Add(durationalEffect);
             }
 
-            if (effect.VisualEffectId != null)
+            if (effect.StatusVisualEffect != null)
             {
-                PlayVisualEffect(effect.VisualEffectId);
+                PlayVisualEffect(effect);
             }
             
         }
@@ -94,10 +94,11 @@ namespace Code.Runtime.Entity
             }
         }
 
-        private async void PlayVisualEffect(VisualEffectIdentifier identifier)
+        private async void PlayVisualEffect(GameplayEffect effect)
         {
-            var effect = await _visualFactory.CreateVisualEffect(identifier.Id);
+            var visualEffect = await _visualFactory.CreateVisualEffect(effect.StatusVisualEffect.VisualEffectData.Identifier.Id);
             var goCenter = _hurtBox.GetCenterTransform();
+            
 
         }
         

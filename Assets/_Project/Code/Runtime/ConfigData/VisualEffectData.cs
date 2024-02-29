@@ -4,7 +4,7 @@ using UnityEngine.AddressableAssets;
 
 namespace Code.Runtime.ConfigData
 {
-    [CreateAssetMenu(fileName = "ParticleEffect", menuName = "Config/Particle")]
+    [CreateAssetMenu(fileName = "VisualEffect", menuName = "Config/VisualEffects")]
     public class VisualEffectData : ScriptableObject
     {
         public VisualEffectIdentifier Identifier;

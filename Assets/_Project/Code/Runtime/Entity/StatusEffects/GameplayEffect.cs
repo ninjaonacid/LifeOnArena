@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using Code.Runtime.ConfigData;
 using Code.Runtime.ConfigData.Identifiers;
 using Code.Runtime.Modules.AbilitySystem.GameplayEffects;
 using Code.Runtime.Modules.StatSystem;
@@ -11,19 +12,19 @@ namespace Code.Runtime.Entity.StatusEffects
     {
         public EffectDurationType Type { get; private set; }
         public ReadOnlyCollection<StatModifier> Modifiers => _statModifiers.AsReadOnly();
-        public VisualEffectIdentifier VisualEffectId => _visualEffectId;
+        public StatusVisualEffect StatusVisualEffect => _statusVisualEffect;
         
         public List<StatModifierBlueprint> ModifierTemplates;
         
         private readonly List<StatModifier> _statModifiers = new List<StatModifier>();
-        private VisualEffectIdentifier _visualEffectId;
+        private StatusVisualEffect _statusVisualEffect;
 
         public GameplayEffect(List<StatModifierBlueprint> modifiers, EffectDurationType type, 
-            VisualEffectIdentifier visualEffectId)
+            StatusVisualEffect statusVisualEffect)
         {
             Type = type;
             ModifierTemplates = modifiers;
-            _visualEffectId = visualEffectId;
+            _statusVisualEffect = statusVisualEffect;
             
             StatModifier statModifier;
 
