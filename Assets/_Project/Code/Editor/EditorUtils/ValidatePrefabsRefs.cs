@@ -8,7 +8,7 @@ namespace Code.Editor.EditorUtils
     public class ValidatePrefabFields : EditorWindow
     {
         [MenuItem("Tools/Check Prefab Fields")]
-        static void CheckPrefabs()
+        public static void CheckPrefabs()
         {
             string[] prefabPaths = GetAllPrefabPaths();
             
@@ -18,9 +18,9 @@ namespace Code.Editor.EditorUtils
            
                 if (prefab != null)
                 {
-                    MonoBehaviour[] components = prefab.GetComponents<MonoBehaviour>();
+                    Component[] components = prefab.GetComponents<Component>();
                     
-                    foreach (MonoBehaviour component in components)
+                    foreach (Component component in components)
                     {
                         if (!component)
                         {
@@ -36,6 +36,33 @@ namespace Code.Editor.EditorUtils
                             if (property.propertyType == SerializedPropertyType.ObjectReference &&
                                 property.objectReferenceValue == null)
                             {
+                                Type componentType = Type.GetType(property.propertyPath);
+                                Component missingComponent;
+
+                                if (componentType != null)
+                                {
+                                    if(prefab.TryGetComponent(componentType, out missingComponent))
+                                    {
+                                        property.objectReferenceValue = missingComponent;
+                                    }
+                                
+                                    else if (!missingComponent)
+                                    {
+                                        missingComponent = prefab.GetComponentInChildren(componentType);
+                                        property.objectReferenceValue = missingComponent;
+                                    }
+
+                                    else if (!missingComponent)
+                                    {
+                                        missingComponent = component.GetComponentInParent(componentType);
+                                        property.objectReferenceValue = missingComponent;
+                                    }
+                                }
+                                
+
+                                serializedObject.ApplyModifiedProperties();
+                                
+                                
                                 Debug.LogWarning($"Field '{property.name}' is null on component '{component.GetType().Name}' in prefab '{prefab.name}' ({prefabPath})");
                             }
                         }
