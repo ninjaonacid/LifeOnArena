@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Code.Editor.EditorUtils
 {
@@ -33,10 +35,12 @@ namespace Code.Editor.EditorUtils
 
                         while (property.NextVisible(true))
                         {
-                            if (property.propertyType == SerializedPropertyType.ObjectReference &&
+                            if (IsValidReferenceType(property) &&
                                 property.objectReferenceValue == null)
                             {
-                                Type componentType = Type.GetType(property.propertyPath);
+
+                                Type componentType = GetFieldType(property);
+                                
                                 Component missingComponent;
 
                                 if (componentType != null)
@@ -87,6 +91,24 @@ namespace Code.Editor.EditorUtils
            }
 
            return prefabPaths.ToArray();
+        }
+
+        private static Type GetFieldType(SerializedProperty property)
+        {
+            var path = property.type;
+            Type type = property.serializedObject.targetObject.GetType();
+            FieldInfo fieldInfo = type.GetField(property.propertyPath, BindingFlags.NonPublic);
+            Type fieldType = fieldInfo.FieldType;
+            return fieldType;
+        }
+
+        private static bool IsValidReferenceType(SerializedProperty property)
+        {
+            switch (property.propertyType)
+            {
+                case SerializedPropertyType.ObjectReference: return true;
+                default : return false;
+            }
         }
     }
 }
