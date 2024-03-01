@@ -6,6 +6,7 @@ using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Object = System.Object;
 
 namespace Code.Editor.ScriptableObjects
 {
@@ -38,7 +39,7 @@ namespace Code.Editor.ScriptableObjects
 
             ListView modifiers = new ListView
             {
-                bindingPath = "Modifiers",
+                bindingPath = "_modifiers",
                 virtualizationMethod = CollectionVirtualizationMethod.DynamicHeight,
                 reorderable = true,
                 showFoldoutHeader = true,
@@ -100,7 +101,7 @@ namespace Code.Editor.ScriptableObjects
             AssetDatabase.AddObjectToAsset(item, target);
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
-            SerializedProperty modifiers = serializedObject.FindProperty("Modifiers");
+            SerializedProperty modifiers = serializedObject.FindProperty("_modifiers");
             modifiers.GetArrayElementAtIndex(modifiers.arraySize - 1).objectReferenceValue = item;
             serializedObject.ApplyModifiedProperties();
             EditorUtility.SetDirty(target);
@@ -108,15 +109,19 @@ namespace Code.Editor.ScriptableObjects
 
         private void RemoveItem()
         {
-           var path = AssetDatabase.GetAssetPath(target);
-           var items = AssetDatabase.LoadAllAssetRepresentationsAtPath(path);
+            var assetPath = AssetDatabase.GetAssetPath(target);
+            var objects = AssetDatabase.LoadAllAssetRepresentationsAtPath(assetPath);
 
-           if (items.Length > 0)
-           {
-               var assetToRemove = items[0];
-               AssetDatabase.RemoveObjectFromAsset(assetToRemove);
-               AssetDatabase.SaveAssets();
-           }
+            if (objects.Length > 1)
+            {
+                var assetToRemove = objects[0];
+                AssetDatabase.RemoveObjectFromAsset(assetToRemove);
+                DestroyImmediate(assetToRemove);
+            }
+            
+            AssetDatabase.SaveAssets();
+            serializedObject.ApplyModifiedProperties();
+            EditorUtility.SetDirty(target);
         }
     }
 }

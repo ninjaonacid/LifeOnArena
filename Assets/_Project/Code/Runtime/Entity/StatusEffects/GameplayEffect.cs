@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Code.Runtime.ConfigData;
-using Code.Runtime.ConfigData.Identifiers;
 using Code.Runtime.Modules.AbilitySystem.GameplayEffects;
+using Code.Runtime.Modules.AbilitySystem.GameplayTags;
 using Code.Runtime.Modules.StatSystem;
 using Code.Runtime.Modules.StatSystem.StatModifiers;
 
@@ -11,20 +11,18 @@ namespace Code.Runtime.Entity.StatusEffects
     public class GameplayEffect
     {
         public EffectDurationType Type { get; private set; }
+        public ReadOnlyCollection<GameplayTag> EffectTags;
+        public readonly ReadOnlyCollection<StatModifierBlueprint> ModifierBlueprints;
         public ReadOnlyCollection<StatModifier> Modifiers => _statModifiers.AsReadOnly();
-        public StatusVisualEffect StatusVisualEffect => _statusVisualEffect;
-        
-        public List<StatModifierBlueprint> ModifierTemplates;
-        
         private readonly List<StatModifier> _statModifiers = new List<StatModifier>();
-        private StatusVisualEffect _statusVisualEffect;
-
-        public GameplayEffect(List<StatModifierBlueprint> modifiers, EffectDurationType type, 
+        public StatusVisualEffect StatusVisualEffect { get; }
+        public GameplayEffect(ReadOnlyCollection<StatModifierBlueprint> modifiers, ReadOnlyCollection<GameplayTag> tags, EffectDurationType type, 
             StatusVisualEffect statusVisualEffect)
         {
+            ModifierBlueprints = modifiers;
+            EffectTags = tags;
             Type = type;
-            ModifierTemplates = modifiers;
-            _statusVisualEffect = statusVisualEffect;
+            StatusVisualEffect = statusVisualEffect;
             
             StatModifier statModifier;
 

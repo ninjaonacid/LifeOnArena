@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Code.Runtime.ConfigData;
-using Code.Runtime.ConfigData.Identifiers;
 using Code.Runtime.Core.Factory;
 using Code.Runtime.Entity.StatusEffects;
 using Code.Runtime.Modules.AbilitySystem.GameplayEffects;
@@ -13,8 +12,10 @@ namespace Code.Runtime.Entity
 {
     public class StatusEffectController : MonoBehaviour
     {
+        [SerializeField] private TagController _tagController;
         [SerializeField] private StatController _statController;
         [SerializeField] private EntityHurtBox _hurtBox;
+        
         
         private VisualEffectFactory _visualFactory;
 
@@ -42,6 +43,8 @@ namespace Code.Runtime.Entity
                 if (_activeEffects.Contains(durationalEffect)) return;
                 _activeEffects.Add(durationalEffect);
             }
+            
+            
 
             if (effect.StatusVisualEffect != null)
             {
@@ -82,9 +85,9 @@ namespace Code.Runtime.Entity
 
         private void ExecuteEffect(GameplayEffect effect)
         {
-            for (var i = 0; i < effect.ModifierTemplates.Count; i++)
+            for (var i = 0; i < effect.ModifierBlueprints.Count; i++)
             {
-                var modifierTemplate = effect.ModifierTemplates[i];
+                var modifierTemplate = effect.ModifierBlueprints[i];
                 if (_statController.Stats.TryGetValue(modifierTemplate.StatName, out var stat))
                 {
                     if (stat is Attribute attribute)
