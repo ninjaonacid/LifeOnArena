@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Code.Runtime.ConfigData;
 using Code.Runtime.ConfigData.Identifiers;
 using Code.Runtime.Core.Factory;
 using Code.Runtime.Entity.StatusEffects;
@@ -98,7 +99,17 @@ namespace Code.Runtime.Entity
         {
             var visualEffect = await _visualFactory.CreateVisualEffect(effect.StatusVisualEffect.VisualEffectData.Identifier.Id);
             var goCenter = _hurtBox.GetCenterTransform();
+            var goPosition = transform.position;
             
+            if (effect.StatusVisualEffect)
+            {
+                if (effect.StatusVisualEffect.PlayLocation == PlayLocation.Above)
+                {
+                    var height = _hurtBox.GetHeight();
+
+                    visualEffect.transform.position = new Vector3(goPosition.x, (height.y * Vector3.up).y, goPosition.z);
+                }
+            }
 
         }
         

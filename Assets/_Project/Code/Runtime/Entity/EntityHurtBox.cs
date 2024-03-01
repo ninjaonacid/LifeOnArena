@@ -18,8 +18,15 @@ namespace Code.Runtime.Entity
             var colliderCenter = _hitBoxCollider.center;
 
             var position = transform.position;
-            return new Vector3(position.x, colliderCenter.y, position.z);
             
+            return new Vector3(position.x, colliderCenter.y, position.z);
+        }
+
+        public Vector3 GetHeight()
+        {
+            var colliderUp = _hitBoxCollider.bounds.size.y;
+
+            return new Vector3(0, colliderUp, 0);
         }
         
          private void OnDrawGizmos()

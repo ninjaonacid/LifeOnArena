@@ -8,6 +8,7 @@ namespace Code.Runtime.ConfigData
         Center,
         Below
     }
+    
     [CreateAssetMenu(fileName = "StatusVisualEffect", menuName = "AbilitySystem/StatusVisualEffects")]
     public class StatusVisualEffect : ScriptableObject
     {
