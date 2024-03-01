@@ -5,7 +5,6 @@ namespace Code.Runtime.Entity.Enemy.CommonEnemy
         public float DisableDuration;
         public EnemyStaggerState(
             EnemyAnimator enemyAnimator,
-            StatusEffectController statusController,
             bool needsExitTime, bool isGhostState = false) : base(enemyAnimator, needsExitTime, isGhostState)
         {
 

@@ -36,6 +36,7 @@ namespace Code.Runtime.Entity.Hero
         [SerializeField] private HeroAttack _heroAttack;
         [SerializeField] private HeroSkills _heroSkills;
         [SerializeField] private HeroWeapon _heroWeapon;
+        [SerializeField] private TagController _tagController;
         
 
         [Inject]

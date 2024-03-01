@@ -15,7 +15,7 @@ namespace Code.Runtime.Entity.Enemy
         [SerializeField] protected Aggression _aggression;
         [SerializeField] protected EnemyTarget _enemyTarget;
         [SerializeField] protected EnemyHealth _enemyHealth;
-        [SerializeField] protected StatusEffectController _statusController;
+        [SerializeField] protected TagController _tagController;
 
         protected EnemyStateMachineConfig _enemyConfig;
 
@@ -36,7 +36,6 @@ namespace Code.Runtime.Entity.Enemy
 
             _fsm.AddState(nameof(EnemyStaggerState), new EnemyStaggerState(
                 _enemyAnimator,
-                _statusController,
                 false,
                 true));
             
@@ -50,6 +49,12 @@ namespace Code.Runtime.Entity.Enemy
                 _enemyAnimator,
                 _enemyTarget, 
                 _aggression, false, false));
+            
+            _fsm.AddState(nameof(EnemyStunnedState), new EnemyStunnedState(
+                _enemyAnimator,
+                _agentMoveToPlayer,
+                _tagController, true, false
+                ));
         }
 
         private void Update()
