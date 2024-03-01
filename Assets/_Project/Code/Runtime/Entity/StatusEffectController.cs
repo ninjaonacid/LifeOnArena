@@ -109,10 +109,21 @@ namespace Code.Runtime.Entity
 
                     visualEffect.transform.position = new Vector3(goPosition.x, (height.y * Vector3.up).y, goPosition.z);
                 }
-            }
+                
+                else if(effect.StatusVisualEffect.PlayLocation == PlayLocation.Below)
+                {
+                    var height = _hurtBox.GetHeight();
 
+                    visualEffect.transform.position = new Vector3(goPosition.x, (-height.y), goPosition.z);
+                }
+                
+                else if (effect.StatusVisualEffect.PlayLocation == PlayLocation.Center)
+                {
+                    var center = _hurtBox.GetCenterTransform();
+
+                    visualEffect.transform.position = center;
+                }
+            }
         }
-        
-        
     }
 }
