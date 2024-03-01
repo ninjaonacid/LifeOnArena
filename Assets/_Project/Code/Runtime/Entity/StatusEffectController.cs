@@ -43,8 +43,14 @@ namespace Code.Runtime.Entity
                 if (_activeEffects.Contains(durationalEffect)) return;
                 _activeEffects.Add(durationalEffect);
             }
-            
-            
+
+            if (effect.EffectTags.Count >= 1)
+            {
+                foreach (var gameplayTag in effect.EffectTags)
+                {
+                    _tagController.AddTag(gameplayTag);
+                }
+            }
 
             if (effect.StatusVisualEffect != null)
             {
@@ -79,6 +85,11 @@ namespace Code.Runtime.Entity
         {
             if (_activeEffects.Contains(effect))
             {
+                foreach (var gameplayTag in effect.EffectTags)
+                {
+                    _tagController.RemoveTag(gameplayTag);
+                }
+                
                 _activeEffects.Remove(effect);
             }
         }
