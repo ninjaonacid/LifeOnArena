@@ -26,7 +26,7 @@ namespace Code.Editor.EditorUtils
                     {
                         if (!component)
                         {
-                            Debug.LogWarning($"Component missing in prefab '{prefab.name}' Prefab path ({prefabPath})");
+                            Debug.LogWarning($"Component missing in prefab '{prefab.name}' Prefab path {prefabPath}", prefab.gameObject);
                             continue;
                         }
 
@@ -64,9 +64,9 @@ namespace Code.Editor.EditorUtils
                                         property.objectReferenceValue = missingComponent;
                                         serializedObject.ApplyModifiedProperties();
                                     }
-
+                                    
                                     Debug.LogWarning(
-                                        $"Field '{property.name}' is null on component '{component.GetType().Name}' in prefab '{prefab.name}' Prefab path ({prefabPath})");
+                                        $"Field '{property.name}' is null on component '{component.GetType().Name}' in prefab '{prefab.name}' Prefab path {prefabPath}", prefab.gameObject);
                                 }
                             }
                         }
@@ -98,7 +98,7 @@ namespace Code.Editor.EditorUtils
             var path = property.type;
             Type type = property.serializedObject.targetObject.GetType();
             FieldInfo fieldInfo = type.GetField(property.propertyPath,
-                BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public | BindingFlags.GetField);
+                 BindingFlags.Instance | BindingFlags.Public | BindingFlags.GetField);
             Type fieldType = fieldInfo?.FieldType;
             return fieldType;
         }

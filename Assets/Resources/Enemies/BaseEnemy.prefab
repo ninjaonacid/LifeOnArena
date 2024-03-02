@@ -44,8 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecf08cb24d03bb4418368f5ed4f309d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnemyDeath: {fileID: 2892997724190106139}
   _souls: {fileID: 11400000, guid: 2b613d09568c554488bdbc63732d708e, type: 2}
+  EnemyDeath: {fileID: 2892997724190106139}
 --- !u!1 &2091178329331578730
 GameObject:
   m_ObjectHideFlags: 0
@@ -147,6 +147,7 @@ GameObject:
   - component: {fileID: 4845501457382912920}
   - component: {fileID: -2428386047012113892}
   - component: {fileID: 1713337227256712141}
+  - component: {fileID: 5837056075893014178}
   m_Layer: 16
   m_Name: BaseEnemy
   m_TagString: Untagged
@@ -281,7 +282,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 989bfc85d969d91428fdc33c3d43149b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _stats: {fileID: 0}
+  _stats: {fileID: 2085898622953279013}
 --- !u!114 &6610648692135647668
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -308,7 +309,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e482eac29799a44a9bc0a342600d505, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _stats: {fileID: 0}
+  _stats: {fileID: 2085898622953279013}
   Animator: {fileID: 7813538039565963228}
   Health: {fileID: 2892997724190106138}
   FracturedPrefab: {fileID: 0}
@@ -357,7 +358,8 @@ MonoBehaviour:
   _enemyAnimator: {fileID: 7813538039565963228}
   _aggression: {fileID: 9028153927956947511}
   _enemyTarget: {fileID: 3027789663709577760}
-  _enemyHealth: {fileID: 0}
+  _enemyHealth: {fileID: 2892997724190106138}
+  _tagController: {fileID: 5837056075893014178}
 --- !u!114 &3027789663709577760
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -398,7 +400,7 @@ MonoBehaviour:
   _weaponSlot:
     WeaponId: {fileID: 0}
     WeaponData: {fileID: 0}
-  _weaponPosition: {fileID: 0}
+  _weaponPosition: {fileID: 3436043548892321881}
 --- !u!114 &4845501457382912920
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -434,6 +436,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cbad346b6efc4506b420a0217a79a87c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tagController: {fileID: 5837056075893014178}
+  _statController: {fileID: 2085898622953279013}
+  _hurtBox: {fileID: 2500014843645060732}
+--- !u!114 &5837056075893014178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2658416580451336931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 202b34f87cfc3b14eb9de7c0b349df02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &3762135731228810403
