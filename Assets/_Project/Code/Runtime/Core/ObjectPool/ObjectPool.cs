@@ -62,7 +62,7 @@ namespace Code.Runtime.Core.ObjectPool
         {
             var obj = _factory();
 
-            obj.Initialize(Return);
+            obj.InitializePoolable(Return);
             
             obj.transform.SetParent(_poolRoot.transform);
 

@@ -9,15 +9,12 @@ namespace Code.Runtime.Logic.Projectiles
 {
     public class TornadoVisualEffect : VisualEffect
     {
-        private BattleService _battleService;
         
-
         private List<Collider> _collidersInRadius;
         private LayerMask _hittable;
         
-        public void Initialize(BattleService battleService, float lifeTime)
+        public void Initialize(float lifeTime)
         {
-            _battleService = battleService;
             ReturnToPoolTask(lifeTime).Forget();
         }
         

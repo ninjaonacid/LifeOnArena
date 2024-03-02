@@ -2,9 +2,11 @@
 {
     public class EnemyStunnedState : CommonEnemyState
     {
+        private readonly TagController _tagController;
         public EnemyStunnedState(EnemyAnimator enemyAnimator, AgentMoveToPlayer moveAgent, 
             TagController tagController, bool needsExitTime, bool isGhostState = false) : base(enemyAnimator, needsExitTime, isGhostState)
         {
+            _tagController = tagController;
         }
 
         public override void OnEnter()
@@ -22,9 +24,15 @@
             base.OnExit();
         }
 
+        public override void OnExitRequest()
+        {
+            base.OnExitRequest();
+            if(IsStateOver()) fsm.StateCanExit();
+        }
+
         public override bool IsStateOver()
         {
-            return base.IsStateOver();
+            return !_tagController.HasTag("Stun");
         }
     }
 }

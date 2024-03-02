@@ -13,6 +13,19 @@ namespace Code.Runtime.Entity
             return _grantedTags.Contains(tag);
         }
 
+        public bool HasTag(string tagName)
+        {
+            foreach (var gameplayTag in _grantedTags)
+            {
+                if (gameplayTag.name == tagName)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         public void AddTag(GameplayTag tag)
         {
             _grantedTags.Add(tag);

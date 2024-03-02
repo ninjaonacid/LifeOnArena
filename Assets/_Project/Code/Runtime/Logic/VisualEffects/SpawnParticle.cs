@@ -8,7 +8,7 @@ namespace Code.Runtime.Logic.VisualEffects
     {
         public event Action<PooledObject> ReturnToPool;
    
-        public void Initialize(Action<PooledObject> returnToPool)
+        public void InitializePoolable(Action<PooledObject> returnToPool)
         {
             ReturnToPool = returnToPool;
         }

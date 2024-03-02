@@ -7,7 +7,7 @@ namespace Code.Runtime.Core.ObjectPool
     {
         private Action<PooledObject> _returnToPool;
         
-        public void Initialize(Action<PooledObject> returnToPool)
+        public void InitializePoolable(Action<PooledObject> returnToPool)
         {
             _returnToPool = returnToPool;
         }

@@ -51,6 +51,7 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
                 await _visualEffectFactory.CreateVisualEffect(_visualEffectData.Identifier.Id) 
                     as TornadoVisualEffect;
             
+            _tornadoVisual.Initialize(_duration);
             Transform projectileTransform = _tornadoVisual.transform;
             projectileTransform.position = casterPosition + casterDirection * _castDistance;
             projectileTransform.rotation = Quaternion.identity;

@@ -27,11 +27,11 @@ namespace Code.Runtime.Entity.Enemy.CommonEnemy
                 _aggression.Cooldown,
                 (transition) => !_aggression.HasTarget));
 
-            _fsm.AddTriggerTransitionFromAny("OnDamage", new Transition(
+            _fsm.AddTriggerTransitionFromAny("OnDamage", 
+                new Transition(
                     " ", 
                     nameof(EnemyStaggerState)
-             
-            ));
+                ));
             
             _fsm.AddTransition(new TransitionAfter(
                 nameof(EnemyStaggerState),
@@ -56,6 +56,11 @@ namespace Code.Runtime.Entity.Enemy.CommonEnemy
                 nameof(EnemyAttackState),
                 (transition) => _enemyAttack.CanAttack(),
                 true));
+            
+            _fsm.AddTransitionFromAny(new Transition(
+                "",
+                nameof(EnemyStunnedState),
+                (transition) => _tagController.HasTag("Stun")));
 
 
             _fsm.InitStateMachine();
