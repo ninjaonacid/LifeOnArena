@@ -7,29 +7,29 @@ using UnityEngine.UI;
 
 namespace Code.Editor.EditorUtils
 {
-    public class ValidatePrefabFields : EditorWindow
+    public class PrefabFieldsValidator : EditorWindow
     {
         [MenuItem("Tools/Check Prefab Fields")]
         public static void CheckPrefabs()
         {
             string[] prefabPaths = GetAllPrefabPaths();
-            
+
             foreach (string prefabPath in prefabPaths)
             {
                 GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(prefabPath);
-           
+
                 if (prefab != null)
                 {
                     Component[] components = prefab.GetComponents<Component>();
-                    
+
                     foreach (Component component in components)
                     {
                         if (!component)
                         {
-                            Debug.LogWarning($"Component missing in prefab '{prefab.name}' ({prefabPath})");
+                            Debug.LogWarning($"Component missing in prefab '{prefab.name}' Prefab path ({prefabPath})");
                             continue;
                         }
-                        
+
                         SerializedObject serializedObject = new SerializedObject(component);
                         SerializedProperty property = serializedObject.GetIterator();
 
@@ -38,36 +38,36 @@ namespace Code.Editor.EditorUtils
                             if (IsValidReferenceType(property) &&
                                 property.objectReferenceValue == null)
                             {
-
                                 Type componentType = GetFieldType(property);
-                                
-                                Component missingComponent;
 
-                                if (componentType != null)
+                                if (componentType != null && IsComponentType(componentType))
                                 {
-                                    if(prefab.TryGetComponent(componentType, out missingComponent))
+                                    Component missingComponent;
+
+                                    if (prefab.TryGetComponent(componentType, out missingComponent))
                                     {
                                         property.objectReferenceValue = missingComponent;
                                     }
-                                
+
                                     else if (!missingComponent)
                                     {
                                         missingComponent = prefab.GetComponentInChildren(componentType);
-                                        property.objectReferenceValue = missingComponent;
                                     }
 
                                     else if (!missingComponent)
                                     {
                                         missingComponent = component.GetComponentInParent(componentType);
-                                        property.objectReferenceValue = missingComponent;
                                     }
-                                }
-                                
 
-                                serializedObject.ApplyModifiedProperties();
-                                
-                                
-                                Debug.LogWarning($"Field '{property.name}' is null on component '{component.GetType().Name}' in prefab '{prefab.name}' ({prefabPath})");
+                                    if (missingComponent != null)
+                                    {
+                                        property.objectReferenceValue = missingComponent;
+                                        serializedObject.ApplyModifiedProperties();
+                                    }
+
+                                    Debug.LogWarning(
+                                        $"Field '{property.name}' is null on component '{component.GetType().Name}' in prefab '{prefab.name}' Prefab path ({prefabPath})");
+                                }
                             }
                         }
                     }
@@ -76,30 +76,36 @@ namespace Code.Editor.EditorUtils
 
             Debug.Log("Prefab field check complete.");
         }
-        
+
         private static string[] GetAllPrefabPaths()
         {
-           var assetPaths =  AssetDatabase.GetAllAssetPaths();
-           List<string> prefabPaths = new List<string>();
+            var assetPaths = AssetDatabase.GetAllAssetPaths();
+            List<string> prefabPaths = new List<string>();
 
-           foreach (var path in assetPaths)
-           {
-               if(path.Contains(".prefab"))
-               {
-                   prefabPaths.Add(path);
-               }
-           }
+            foreach (var path in assetPaths)
+            {
+                if (path.Contains(".prefab"))
+                {
+                    prefabPaths.Add(path);
+                }
+            }
 
-           return prefabPaths.ToArray();
+            return prefabPaths.ToArray();
         }
 
         private static Type GetFieldType(SerializedProperty property)
         {
             var path = property.type;
             Type type = property.serializedObject.targetObject.GetType();
-            FieldInfo fieldInfo = type.GetField(property.propertyPath, BindingFlags.NonPublic);
-            Type fieldType = fieldInfo.FieldType;
+            FieldInfo fieldInfo = type.GetField(property.propertyPath,
+                BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public | BindingFlags.GetField);
+            Type fieldType = fieldInfo?.FieldType;
             return fieldType;
+        }
+
+        private static bool IsComponentType(Type type)
+        {
+            return type.IsSubclassOf(typeof(Component));
         }
 
         private static bool IsValidReferenceType(SerializedProperty property)
@@ -107,7 +113,7 @@ namespace Code.Editor.EditorUtils
             switch (property.propertyType)
             {
                 case SerializedPropertyType.ObjectReference: return true;
-                default : return false;
+                default: return false;
             }
         }
     }
