@@ -3,12 +3,12 @@ using UnityEngine.AI;
 
 namespace Code.Runtime.Entity.Enemy
 {
+    [RequireComponent(typeof(NavMeshAgent))]
     public class AgentMoveToPlayer : MonoBehaviour
     {
+        [SerializeField] private NavMeshAgent Agent;
+        
         private Transform _heroTransform;
-
-        public NavMeshAgent Agent;
-
         public void Construct(Transform heroTransform)
         {
             _heroTransform = heroTransform;

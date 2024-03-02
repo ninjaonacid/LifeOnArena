@@ -8,7 +8,7 @@ namespace Code.Runtime.Entity.Enemy
     public class EnemyStateMachine : MonoBehaviour
     {
         protected FiniteStateMachine _fsm;
-        
+
         [SerializeField] protected AgentMoveToPlayer _agentMoveToPlayer;
         [SerializeField] protected EnemyAttack _enemyAttack;
         [SerializeField] protected EnemyAnimator _enemyAnimator;
@@ -27,18 +27,18 @@ namespace Code.Runtime.Entity.Enemy
         private void Awake()
         {
             _fsm = new FiniteStateMachine();
-            
+
             _fsm.AddState(nameof(EnemyChaseState), new EnemyChaseState(
-                _enemyAnimator, 
-                _agentMoveToPlayer, 
-                false, 
+                _enemyAnimator,
+                _agentMoveToPlayer,
+                false,
                 false));
 
             _fsm.AddState(nameof(EnemyStaggerState), new EnemyStaggerState(
                 _enemyAnimator,
                 false,
                 true));
-            
+
             _fsm.AddState(nameof(EnemyAttackState), new EnemyAttackState(
                 _enemyAnimator,
                 _enemyAttack,
@@ -47,14 +47,14 @@ namespace Code.Runtime.Entity.Enemy
 
             _fsm.AddState(nameof(EnemyIdleState), new EnemyIdleState(
                 _enemyAnimator,
-                _enemyTarget, 
+                _enemyTarget,
                 _aggression, false, false));
-            
+
             _fsm.AddState(nameof(EnemyStunnedState), new EnemyStunnedState(
                 _enemyAnimator,
                 _agentMoveToPlayer,
                 _tagController, true, false
-                ));
+            ));
         }
 
         private void Update()

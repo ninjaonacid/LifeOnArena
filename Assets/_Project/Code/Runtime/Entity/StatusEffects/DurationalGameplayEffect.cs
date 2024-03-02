@@ -15,8 +15,7 @@ namespace Code.Runtime.Entity.StatusEffects
         private readonly float _duration;
         private readonly float _executeRate;
 
-
-        public DurationalGameplayEffect(ReadOnlyCollection<StatModifierBlueprint> modifiers, 
+        public DurationalGameplayEffect(ReadOnlyCollection<StatModifierBlueprint> modifiers,
             ReadOnlyCollection<GameplayTag> tags, EffectDurationType type, StatusVisualEffect statusVisualEffect,
             float duration, float executeRate) : base(modifiers, tags, type, statusVisualEffect)
         {
@@ -29,7 +28,7 @@ namespace Code.Runtime.Entity.StatusEffects
         {
             _remainingDuration = Mathf.Max(_remainingDuration - deltaTime, 0f);
             _remainingToExecute = Mathf.Max(_remainingToExecute - deltaTime, 0f);
-            
+
             return this;
         }
 

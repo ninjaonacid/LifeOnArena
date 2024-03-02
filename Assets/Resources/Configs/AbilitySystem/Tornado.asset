@@ -15,16 +15,16 @@ MonoBehaviour:
   Identifier: {fileID: 11400000, guid: 45d10b59d4df26e42977a193ab100b76, type: 2}
   Icon: {fileID: 21300000, guid: b7028d96bb02a7742a98c5cdd94f3505, type: 3}
   Cooldown: 5
-  CurrentCooldown: 2.6319427
+  CurrentCooldown: 1.3690457
   ActiveTime: 0.5
-  CurrentActiveTime: -1.8680595
+  CurrentActiveTime: -3.1309514
   Price: 0
   State: 0
   IsCastAbility: 1
-  VfxData: {fileID: 11400000, guid: 4329e6e0fb17724458abb5b7bdeabc6a, type: 2}
-  Damage: 50
-  AttackRadius: 10
-  CastDistance: 8
-  ProjectileLifetime: 2
-  _statusEffects:
-  - {fileID: 11400000, guid: c4e27c574e14bd94284c63bfa834fc1a, type: 2}
+  VisualEffectData: {fileID: 11400000, guid: 4329e6e0fb17724458abb5b7bdeabc6a, type: 2}
+  _statusTemplates:
+  - {fileID: 11400000, guid: 65f3b74aaae495944bf11dcab7e8e825, type: 2}
+  - {fileID: 11400000, guid: 0bafd07b2c069e640a50c29734cd8f35, type: 2}
+  _radius: 5
+  _castDistance: 5
+  _lifeTime: 5

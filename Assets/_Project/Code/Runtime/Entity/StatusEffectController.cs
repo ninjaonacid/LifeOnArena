@@ -15,18 +15,19 @@ namespace Code.Runtime.Entity
         [SerializeField] private TagController _tagController;
         [SerializeField] private StatController _statController;
         [SerializeField] private EntityHurtBox _hurtBox;
-        
-        
+
+
         private VisualEffectFactory _visualFactory;
 
         private readonly List<DurationalGameplayEffect> _activeEffects = new List<DurationalGameplayEffect>();
         private List<DurationalGameplayEffect> _effectsToRemove = new List<DurationalGameplayEffect>();
-        
+
         [Inject]
         public void Construct(VisualEffectFactory visualFactory)
         {
             _visualFactory = visualFactory;
         }
+
         private void Update()
         {
             HandleDuration();
@@ -57,9 +58,8 @@ namespace Code.Runtime.Entity
             {
                 PlayVisualEffect(effect);
             }
-            
         }
-        
+
         private void HandleDuration()
         {
             foreach (var activeEffect in _activeEffects)
@@ -69,14 +69,14 @@ namespace Code.Runtime.Entity
                 if (activeEffect.IsExecuteTime())
                 {
                     ExecuteEffect(activeEffect);
-                    
+
                     activeEffect.ResetExecutionTime();
                 }
 
                 if (activeEffect.IsDurationEnd())
                 {
                     _effectsToRemove.Add(activeEffect);
-                    
+
                     activeEffect.ResetRemainingDuration();
                 }
             }
@@ -85,7 +85,7 @@ namespace Code.Runtime.Entity
             {
                 RemoveEffect(effect);
             }
-            
+
             _effectsToRemove.Clear();
         }
 
@@ -97,7 +97,7 @@ namespace Code.Runtime.Entity
                 {
                     _tagController.RemoveTag(gameplayTag);
                 }
-                
+
                 _activeEffects.Remove(effect);
             }
         }
@@ -119,26 +119,28 @@ namespace Code.Runtime.Entity
 
         private async void PlayVisualEffect(GameplayEffect effect)
         {
-            var visualEffect = await _visualFactory.CreateVisualEffect(effect.StatusVisualEffect.VisualEffectData.Identifier.Id);
+            var visualEffect =
+                await _visualFactory.CreateVisualEffect(effect.StatusVisualEffect.VisualEffectData.Identifier.Id);
             var goCenter = _hurtBox.GetCenterTransform();
             var goPosition = transform.position;
-            
+
             if (effect.StatusVisualEffect)
             {
                 if (effect.StatusVisualEffect.PlayLocation == PlayLocation.Above)
                 {
                     var height = _hurtBox.GetHeight();
 
-                    visualEffect.transform.position = new Vector3(goPosition.x, (height.y * Vector3.up).y, goPosition.z);
+                    visualEffect.transform.position =
+                        new Vector3(goPosition.x, (height.y * Vector3.up).y, goPosition.z);
                 }
-                
-                else if(effect.StatusVisualEffect.PlayLocation == PlayLocation.Below)
+
+                else if (effect.StatusVisualEffect.PlayLocation == PlayLocation.Below)
                 {
                     var height = _hurtBox.GetHeight();
 
                     visualEffect.transform.position = new Vector3(goPosition.x, (-height.y), goPosition.z);
                 }
-                
+
                 else if (effect.StatusVisualEffect.PlayLocation == PlayLocation.Center)
                 {
                     var center = _hurtBox.GetCenterTransform();
