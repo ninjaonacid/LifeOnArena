@@ -98,7 +98,7 @@ namespace Code.Editor.EditorUtils
             var path = property.type;
             Type type = property.serializedObject.targetObject.GetType();
             FieldInfo fieldInfo = type.GetField(property.propertyPath,
-                 BindingFlags.Instance | BindingFlags.Public | BindingFlags.GetField);
+                BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public | BindingFlags.GetField);
             Type fieldType = fieldInfo?.FieldType;
             return fieldType;
         }
