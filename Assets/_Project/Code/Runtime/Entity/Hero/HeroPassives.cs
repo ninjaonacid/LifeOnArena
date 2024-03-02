@@ -10,20 +10,20 @@ namespace Code.Runtime.Entity.Hero
     public class HeroPassives : MonoBehaviour, ISave
     {
         private PlayerData _data;
-        private List<PassiveAbilityTemplateBase> _heroPassives = new List<PassiveAbilityTemplateBase>();
+        private List<PassiveAbilityBlueprintTemplateBase> _heroPassives = new List<PassiveAbilityBlueprintTemplateBase>();
         private IAbilityFactory _abilityFactory;
 
        
-        public void AddPassive(PassiveAbilityTemplateBase passiveAbility)
+        public void AddPassive(PassiveAbilityBlueprintTemplateBase passiveAbilityBlueprint)
         {
-            if (_heroPassives.Contains(passiveAbility))
+            if (_heroPassives.Contains(passiveAbilityBlueprint))
             {
-                passiveAbility.GetAbility().Apply(gameObject, _data);
+                passiveAbilityBlueprint.GetAbility().Apply(gameObject, _data);
             }
             else
             {
-                _heroPassives.Add(passiveAbility);
-                passiveAbility.GetAbility().Apply(gameObject, _data);
+                _heroPassives.Add(passiveAbilityBlueprint);
+                passiveAbilityBlueprint.GetAbility().Apply(gameObject, _data);
             }
         }
 

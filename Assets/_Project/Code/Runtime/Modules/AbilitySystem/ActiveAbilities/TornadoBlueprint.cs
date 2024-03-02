@@ -3,26 +3,24 @@ using UnityEngine;
 namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
 {
     [CreateAssetMenu(fileName = "TornadoAbility", menuName = "Config/AbilityData/Cast/TornadoAbility")]
-    public class TornadoTemplate : AbilityTemplate<TornadoAbility>
+    public class TornadoBlueprint : ActiveAbilityBlueprint<TornadoAbility>
     {
-        public float Damage;
-        public float Radius;
-        public float CastDistance;
-        public float ProjectileLifetime;
-
+        [SerializeField] private float _radius;
+        [SerializeField] private float _castDistance;
+        [SerializeField] private float _lifeTime;
+        
         private IAbility _abilityInstance;
         public override IAbility GetAbility()
         {
             return _abilityInstance ??= 
                 new TornadoAbility
-                (VisualEffectFactory,
+                (_visualEffectFactory,
                 _battleService,
                 VisualEffectData,
                 StatusEffects,
-                ProjectileLifetime,
-                Damage,
-                Radius,
-                CastDistance);
+                _lifeTime,
+                _radius,
+                _castDistance);
         }
         
     }

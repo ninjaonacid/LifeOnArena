@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Code.Runtime.Modules.AbilitySystem.PassiveAbilities
 {
     [CreateAssetMenu(menuName = "AbilityData/Cast/DancingSwords" , fileName = "DancingSwords")]
-    public class DancingSwordsTemplate : PassiveAbilityTemplate<DancingSwords>
+    public class DancingSwordsBlueprintTemplate : PassiveAbilityBlueprintTemplate<DancingSwords>
     {
         public float Damage;
         public SpinningProjectile SwordPrefab;

@@ -30,25 +30,25 @@ namespace Code.Runtime.Core.Factory
             _random = random;
         }
 
-        public AbilityTemplateBase CreateAbilityTemplate(int heroAbilityId)
+        public ActiveAbilityBlueprintBase CreateAbilityTemplate(int heroAbilityId)
         {
-            AbilityTemplateBase abilityTemplate = _config.Ability(heroAbilityId);
+            ActiveAbilityBlueprintBase activeAbilityBlueprintBaseBluePrint = _config.Ability(heroAbilityId);
 
-            InitializeAbilityTemplate(abilityTemplate);
+            InitializeAbilityTemplate(activeAbilityBlueprintBaseBluePrint);
 
-            return abilityTemplate;
+            return activeAbilityBlueprintBaseBluePrint;
         }
         
-        public AbilityTemplateBase InitializeAbilityTemplate(AbilityTemplateBase ability)
+        public ActiveAbilityBlueprintBase InitializeAbilityTemplate(ActiveAbilityBlueprintBase activeAbilityBlueprintBase)
         {
-            ability.InitServices(_visualEffectFactory, _battleService);
+            activeAbilityBlueprintBase.InitServices(_visualEffectFactory, _battleService);
             
-            if (ability.VisualEffectData)
+            if (activeAbilityBlueprintBase.VisualEffectData)
             {
-                InitAbilityAssets(ability.VisualEffectData.PrefabReference).Forget();
+                InitAbilityAssets(activeAbilityBlueprintBase.VisualEffectData.PrefabReference).Forget();
             }
             
-            return ability;
+            return activeAbilityBlueprintBase;
         }
 
         private async UniTaskVoid InitAbilityAssets(AssetReference prefabReference)

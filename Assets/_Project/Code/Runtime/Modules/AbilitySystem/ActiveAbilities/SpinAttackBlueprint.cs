@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
 {
     [CreateAssetMenu(fileName = "SpinAttackAbility", menuName = "AbilityData/Attack/SpinAttack")]
-    public class SpinAttackTemplate : AbilityTemplate<SpinAttack>
+    public class SpinAttackBlueprint : ActiveAbilityBlueprint<SpinAttack>
     {
         public float Damage;
         public override IAbility GetAbility()

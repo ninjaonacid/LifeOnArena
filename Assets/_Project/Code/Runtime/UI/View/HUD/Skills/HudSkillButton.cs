@@ -8,7 +8,7 @@ namespace Code.Runtime.UI.View.HUD.Skills
     {
         [SerializeField] private AbilitySlotID _abilitySlotID;
 
-        [SerializeField] private AbilityTemplateBase _heroAbility;
+        [SerializeField] private ActiveAbilityBlueprintBase HeroActiveAbilityBlueprintBase;
         
         [SerializeField] private HudSkillIcon _skillIcon;
 
@@ -21,9 +21,9 @@ namespace Code.Runtime.UI.View.HUD.Skills
 
         public void UpdateSkillView()
         {
-            if (_heroAbility != null)
+            if (HeroActiveAbilityBlueprintBase != null)
             {
-                _skillIcon.Image.sprite = _heroAbility.Icon;
+                _skillIcon.Image.sprite = HeroActiveAbilityBlueprintBase.Icon;
                 _skillIcon.Image.enabled = true;
             }
         }
@@ -33,19 +33,19 @@ namespace Code.Runtime.UI.View.HUD.Skills
             return _abilitySlotID;
         }
 
-        public void SetAbility(AbilityTemplateBase ability)
+        public void SetAbility(ActiveAbilityBlueprintBase activeAbilityBlueprintBase)
         {
-            _heroAbility = ability;
+            HeroActiveAbilityBlueprintBase = activeAbilityBlueprintBase;
         }
 
-        public AbilityTemplateBase GetAbility()
+        public ActiveAbilityBlueprintBase GetAbility()
         {
-            return _heroAbility;
+            return HeroActiveAbilityBlueprintBase;
         }
 
         public void UpdateCooldownView()
         {
-            _cooldown.UpdateCooldown(_heroAbility).Forget();
+            _cooldown.UpdateCooldown(HeroActiveAbilityBlueprintBase).Forget();
         }
         
     }

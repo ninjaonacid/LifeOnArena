@@ -6,7 +6,6 @@ using Code.Runtime.Entity.StatusEffects;
 using Code.Runtime.Modules.AbilitySystem.GameplayEffects;
 using Code.Runtime.Services.BattleService;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Code.Runtime.Modules.AbilitySystem
 {
@@ -16,7 +15,7 @@ namespace Code.Runtime.Modules.AbilitySystem
         Active,
         Cooldown
     }
-    public abstract class AbilityTemplateBase : AbilityBase
+    public abstract class ActiveAbilityBlueprintBase : AbilityBlueprintBase
     {
         public float Cooldown;
         public float CurrentCooldown;
@@ -25,13 +24,13 @@ namespace Code.Runtime.Modules.AbilitySystem
         public int Price;
         public AbilityState State;
         public bool IsCastAbility; 
-        [FormerlySerializedAs("VfxData")] public VisualEffectData VisualEffectData;
+        public VisualEffectData VisualEffectData;
         
-        [SerializeField] private List<GameplayEffectBlueprint> _statusTemplates;
 
+        [SerializeField] private List<GameplayEffectBlueprint> _statusTemplates;
         protected IReadOnlyList<GameplayEffect> StatusEffects => _statusTemplates.Select(x => x.GetGameplayEffect()).ToList();
 
-        protected VisualEffectFactory VisualEffectFactory;
+        protected VisualEffectFactory _visualEffectFactory;
         protected BattleService _battleService;
         public abstract IAbility GetAbility();
 
@@ -39,7 +38,7 @@ namespace Code.Runtime.Modules.AbilitySystem
             VisualEffectFactory visualEffectFactory,
             BattleService battleService)
         {
-            VisualEffectFactory = visualEffectFactory;
+            _visualEffectFactory = visualEffectFactory;
             _battleService = battleService;
         }
         

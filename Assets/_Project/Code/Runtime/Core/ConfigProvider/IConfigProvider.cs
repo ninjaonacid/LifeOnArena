@@ -22,13 +22,13 @@ namespace Code.Runtime.Core.ConfigProvider
         VisualEffectData VisualEffect(int id);
         LevelConfig Level(string sceneKey);
         ScreenConfig ForWindow(ScreenID menuId);
-        AbilityTemplateBase Ability(int heroAbilityId);
+        ActiveAbilityBlueprintBase Ability(int heroAbilityId);
         WeaponData Weapon(int weaponId);
         List<LevelConfig> LoadLevels();
 
         AudioLibrary AudioLibrary();
         AudioServiceSettings AudioServiceSettings();
-        List<AbilityTemplateBase> AllAbilities();
+        List<ActiveAbilityBlueprintBase> AllAbilities();
         WeaponStateMachineDatabase GetWeaponFsmDatabase();
     }
 }

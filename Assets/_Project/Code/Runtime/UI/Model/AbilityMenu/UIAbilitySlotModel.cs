@@ -14,7 +14,7 @@ namespace Code.Runtime.UI.Model.AbilityMenu
         public int AbilityId;
         
         [JsonIgnore]
-        public AbilityTemplateBase Ability;
+        public ActiveAbilityBlueprintBase ActiveAbilityBlueprintBase;
         
     }
 }

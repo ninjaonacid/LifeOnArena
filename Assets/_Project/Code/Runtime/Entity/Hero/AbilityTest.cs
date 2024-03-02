@@ -5,7 +5,7 @@ namespace Code.Runtime.Entity.Hero
 {
     public class AbilityTest : MonoBehaviour
     {
-        public AbilityTemplateBase ability;
+        public ActiveAbilityBlueprintBase ActiveAbilityBlueprintBase;
 
         // private void Update()
         // {

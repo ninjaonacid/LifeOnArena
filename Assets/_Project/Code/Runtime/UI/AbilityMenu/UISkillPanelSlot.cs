@@ -13,7 +13,7 @@ namespace Code.Runtime.UI.AbilityMenu
         [SerializeField] private Image _skillIcon;
         [SerializeField] private CanvasGroup _selectionFrame;
         [SerializeField] private CanvasGroup _equippedFrame;
-        [SerializeField] private AbilityTemplateBase _abilitySO;
+        [SerializeField] private ActiveAbilityBlueprintBase ActiveAbilityBlueprintBaseSo;
         [SerializeField] private TextMeshProUGUI _slotNumber;
 
         public bool IsEquipped = false;
@@ -34,7 +34,7 @@ namespace Code.Runtime.UI.AbilityMenu
 
         private void SetIcon()
         {
-            _skillIcon.sprite = _abilitySO?.Icon;
+            _skillIcon.sprite = ActiveAbilityBlueprintBaseSo?.Icon;
         }
         public void ShowSelectionFrame(bool value)
         {
@@ -46,8 +46,8 @@ namespace Code.Runtime.UI.AbilityMenu
             _slotNumber.text = ((int)id).ToString();
         }
 
-        public AbilityTemplateBase GetAbility() =>
-            _abilitySO;
+        public ActiveAbilityBlueprintBase GetAbility() =>
+            ActiveAbilityBlueprintBaseSo;
 
     }
 }

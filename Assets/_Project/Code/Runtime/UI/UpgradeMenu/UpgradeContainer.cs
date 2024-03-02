@@ -19,7 +19,7 @@ namespace Code.Runtime.UI.UpgradeMenu
       
 
         private GameObject _hero;
-        private PassiveAbilityTemplateBase _passiveAbilityTemplate;
+        private PassiveAbilityBlueprintTemplateBase _passiveAbilityBlueprintTemplate;
         public void Construct(IAbilityFactory abilityFactory, 
             IHeroFactory heroFactory)
         {
@@ -33,14 +33,14 @@ namespace Code.Runtime.UI.UpgradeMenu
         private void SetContainer()
         {
             //_passiveAbilityTemplate = _abilityFactory.GetRandomPassiveAbility();
-            _upgradeImage.sprite = _passiveAbilityTemplate.Icon;
-            _upgradeRarityImage.sprite = _passiveAbilityTemplate.RarityIcon;
-            _upgradeText.text = _passiveAbilityTemplate.Description;
+            _upgradeImage.sprite = _passiveAbilityBlueprintTemplate.Icon;
+            _upgradeRarityImage.sprite = _passiveAbilityBlueprintTemplate.RarityIcon;
+            _upgradeText.text = _passiveAbilityBlueprintTemplate.Description;
         }
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            _hero.GetComponent<HeroPassives>().AddPassive(_passiveAbilityTemplate);
+            _hero.GetComponent<HeroPassives>().AddPassive(_passiveAbilityBlueprintTemplate);
 
             UpgradeScreen.CloseButton.onClick.Invoke();
         }

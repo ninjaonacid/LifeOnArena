@@ -6,7 +6,7 @@ using UnityEngine.UIElements;
 
 namespace Code.Editor.ScriptableObjects
 {
-    [CustomEditor(typeof(AbilityBase), true)]
+    [CustomEditor(typeof(AbilityBlueprintBase), true)]
     public class AbilityTemplateEditor : OdinEditor
     {
         // public override VisualElement CreateInspectorGUI()

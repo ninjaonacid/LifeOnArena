@@ -6,7 +6,7 @@ namespace Code.Runtime.Entity.Hero
 {
     public class HeroAbilityCooldown : MonoBehaviour
     {
-        private readonly List<AbilityTemplateBase> _abilitiesOnCooldown = new List<AbilityTemplateBase>();
+        private readonly List<ActiveAbilityBlueprintBase> _abilitiesOnCooldown = new List<ActiveAbilityBlueprintBase>();
 
         private void Update()
         {
@@ -27,19 +27,19 @@ namespace Code.Runtime.Entity.Hero
             }
         }
 
-        public void StartCooldown(AbilityTemplateBase ability)
+        public void StartCooldown(ActiveAbilityBlueprintBase activeAbilityBlueprintBase)
         {
-            if (!_abilitiesOnCooldown.Contains(ability))
+            if (!_abilitiesOnCooldown.Contains(activeAbilityBlueprintBase))
             {
-                ability.CurrentActiveTime = ability.ActiveTime;   
-                ability.CurrentCooldown = ability.Cooldown;
-                _abilitiesOnCooldown.Add(ability);
+                activeAbilityBlueprintBase.CurrentActiveTime = activeAbilityBlueprintBase.ActiveTime;   
+                activeAbilityBlueprintBase.CurrentCooldown = activeAbilityBlueprintBase.Cooldown;
+                _abilitiesOnCooldown.Add(activeAbilityBlueprintBase);
             }
         }
 
-        public bool IsOnCooldown(AbilityTemplateBase ability)
+        public bool IsOnCooldown(ActiveAbilityBlueprintBase activeAbilityBlueprintBase)
         {
-            return _abilitiesOnCooldown.Contains(ability);
+            return _abilitiesOnCooldown.Contains(activeAbilityBlueprintBase);
         }
     }
 }

@@ -21,7 +21,7 @@ namespace Code.Runtime.Core.ConfigProvider
         private Dictionary<string, LevelConfig> _levels; 
         private Dictionary<LocationReward, LevelReward> _levelReward;
         private Dictionary<ScreenID, ScreenConfig> _windowConfigs;
-        private Dictionary<int, AbilityTemplateBase> _heroAbilities;
+        private Dictionary<int, ActiveAbilityBlueprintBase> _heroAbilities;
         private Dictionary<int, VisualEffectData> _visualEffects;
         private Dictionary<int, WeaponData> _weapons;
 
@@ -56,7 +56,7 @@ namespace Code.Runtime.Core.ConfigProvider
                 .ToDictionary(x => x.ScreenID, x => x);
 
             _heroAbilities = Resources
-                .LoadAll<AbilityTemplateBase>($"{ConfigFolder}/AbilitySystem")
+                .LoadAll<ActiveAbilityBlueprintBase>($"{ConfigFolder}/AbilitySystem")
                 .ToDictionary(x => x.Identifier.Id, x => x);
 
             _characterStats = Resources
@@ -102,7 +102,7 @@ namespace Code.Runtime.Core.ConfigProvider
             return null;
         }
 
-        public AbilityTemplateBase Ability(int heroAbilityId)    
+        public ActiveAbilityBlueprintBase Ability(int heroAbilityId)    
         {
             if (_heroAbilities.TryGetValue(heroAbilityId, out var heroAbility))
                 return heroAbility;
@@ -110,7 +110,7 @@ namespace Code.Runtime.Core.ConfigProvider
             return null;
         }
 
-        public List<AbilityTemplateBase> AllAbilities()
+        public List<ActiveAbilityBlueprintBase> AllAbilities()
         {
             if (_heroAbilities.Count > 0)
             {

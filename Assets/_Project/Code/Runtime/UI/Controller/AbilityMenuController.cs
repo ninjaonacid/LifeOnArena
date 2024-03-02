@@ -79,7 +79,7 @@ namespace Code.Runtime.UI.Controller
                 {
                     equippedIndex = _model.GetEquippedSlotIndex(ability);
                 }
-                _view.AbilityContainer.UpdateData(index,  equippedIndex,  ability.Ability.Icon, ability.IsUnlocked);
+                _view.AbilityContainer.UpdateData(index,  equippedIndex,  ability.ActiveAbilityBlueprintBase.Icon, ability.IsUnlocked);
             }
         }
 

@@ -33,7 +33,7 @@ namespace Code.Runtime.UI.Model.AbilityMenu
             {
                 var abilitySlotModel = new UIAbilitySlotModel()
                 {
-                    Ability = ability,
+                    ActiveAbilityBlueprintBase = ability,
                     AbilityName = ability.Identifier.Name,
                     AbilityId = ability.Identifier.Id,
                     Price = ability.Price

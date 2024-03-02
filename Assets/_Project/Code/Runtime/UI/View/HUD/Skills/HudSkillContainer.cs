@@ -35,7 +35,7 @@ namespace Code.Runtime.UI.View.HUD.Skills
             {
                 if (_skillButtons[i].GetSlotId() == _heroSkills.SkillSlots[i].AbilitySlotID)
                 {
-                    _skillButtons[i].SetAbility(_heroSkills.SkillSlots[i].AbilityTemplate);
+                    _skillButtons[i].SetAbility(_heroSkills.SkillSlots[i].Ability);
                     _skillButtons[i].UpdateSkillView();
                 }
             }

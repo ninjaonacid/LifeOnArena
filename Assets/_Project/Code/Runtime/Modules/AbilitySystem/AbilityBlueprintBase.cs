@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Code.Runtime.Modules.AbilitySystem
 {
-    public class AbilityBase : ScriptableObject
+    public class AbilityBlueprintBase : ScriptableObject
     {
         public AbilityIdentifier Identifier;
         public Sprite Icon;
