@@ -17,7 +17,6 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
         private readonly VisualEffectData _visualEffectData;
         private readonly BattleService _battleService;
         private readonly float _duration;
-        private readonly float _damage;
         private readonly float _attackRadius;
         private readonly float _castDistance;
         private readonly IReadOnlyList<GameplayEffect> _statusEffects;
@@ -29,7 +28,6 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
             VisualEffectData visualEffectData,
             IReadOnlyList<GameplayEffect> statusEffects,
             float duration,
-            float damage,
             float attackRadius,
             float castDistance)
         {
@@ -38,7 +36,6 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
             _visualEffectData = visualEffectData;
             _statusEffects = statusEffects;
             _duration = duration;
-            _damage = damage;
             _attackRadius = attackRadius;
             _castDistance = castDistance;
         }

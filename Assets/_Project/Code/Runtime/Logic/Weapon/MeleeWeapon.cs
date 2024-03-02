@@ -19,7 +19,7 @@ namespace Code.Runtime.Logic.Weapon
             _mask = LayerMask.NameToLayer("Hittable");
         }
 
-        private async void OnTriggerEnter(Collider other)
+        private void OnTriggerEnter(Collider other)
         {
             if (_mask.value == other.gameObject.layer)
             {

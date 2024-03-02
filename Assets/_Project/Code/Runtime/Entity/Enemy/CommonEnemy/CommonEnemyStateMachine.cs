@@ -60,7 +60,8 @@ namespace Code.Runtime.Entity.Enemy.CommonEnemy
             _fsm.AddTransitionFromAny(new Transition(
                 "",
                 nameof(EnemyStunnedState),
-                (transition) => _tagController.HasTag("Stun")));
+                (transition) => _tagController.HasTag("Stun"),
+                true));
 
 
             _fsm.InitStateMachine();
