@@ -11,9 +11,9 @@
     "PositionOnLevel": {
       "Level": "StoneDungeon_Arena_1",
       "Position": {
-        "X": -14.8491344,
-        "Y": 0.6062944,
-        "Z": -10.6438732
+        "X": -14.8518486,
+        "Y": -0.00162005424,
+        "Z": -17.4083977
       }
     },
     "LootData": {
@@ -24,8 +24,38 @@
     }
   },
   "AbilityData": {
-    "AbilitySlots": [],
-    "EquippedSlots": [],
+    "AbilitySlots": [
+      {
+        "IsEquipped": false,
+        "IsUnlocked": true,
+        "AbilityName": "SpinAttackAbilityId",
+        "Price": 0,
+        "AbilityId": 1622972859
+      },
+      {
+        "IsEquipped": true,
+        "IsUnlocked": true,
+        "AbilityName": "TornadoAbilityId",
+        "Price": 0,
+        "AbilityId": -455526352
+      },
+      {
+        "IsEquipped": false,
+        "IsUnlocked": false,
+        "AbilityName": "DodgeRollAbilityId",
+        "Price": 100,
+        "AbilityId": 116093297
+      }
+    ],
+    "EquippedSlots": [
+      {
+        "IsEquipped": true,
+        "IsUnlocked": true,
+        "AbilityName": "TornadoAbilityId",
+        "Price": 0,
+        "AbilityId": -455526352
+      }
+    ],
     "SkillIds": []
   },
   "HeroEquipment": {

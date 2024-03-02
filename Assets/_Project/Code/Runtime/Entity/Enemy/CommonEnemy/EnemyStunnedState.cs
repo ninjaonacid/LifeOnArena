@@ -17,6 +17,7 @@
         public override void OnLogic()
         {
             base.OnLogic();
+            if(IsStateOver()) fsm.StateCanExit();
         }
 
         public override void OnExit()
