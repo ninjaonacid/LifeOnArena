@@ -13,11 +13,9 @@ namespace Code.Runtime.Entity.Hero
 {
     public class HeroWeapon : EntityWeapon, ISave
     {
-        private MeleeWeapon CurrentWeapon { get; set; }
-
         [SerializeField] private HeroAnimator _heroAnimator;
         public event Action<MeleeWeapon, WeaponId> OnWeaponChange;
-
+        private MeleeWeapon CurrentWeapon { get; set; }
         private IItemFactory _itemFactory;
 
         [Inject]
@@ -34,19 +32,19 @@ namespace Code.Runtime.Entity.Hero
             {
                 Destroy(CurrentWeapon.gameObject);
             }
-            
+
             _weaponSlot.WeaponData = weaponData;
             _weaponSlot.WeaponId = weaponData.WeaponId;
 
             _heroAnimator.OverrideController(weaponData.OverrideController);
 
             CurrentWeapon = _itemFactory.CreateMeleeWeapon(weaponData.WeaponPrefab, _weaponPosition);
-            
+
             CurrentWeapon.gameObject.transform.localPosition = Vector3.zero;
-    
+
             CurrentWeapon.gameObject.transform.localRotation = Quaternion.Euler(
                 weaponData.LocalRotation.x,
-                weaponData.LocalRotation.y, 
+                weaponData.LocalRotation.y,
                 weaponData.LocalRotation.z);
 
             OnWeaponChange?.Invoke(CurrentWeapon, _weaponSlot.WeaponId);
@@ -61,10 +59,10 @@ namespace Code.Runtime.Entity.Hero
         public void LoadData(PlayerData data)
         {
             var weaponId = data.HeroEquipment.WeaponIntId;
-            
+
             if (weaponId != 0)
             {
-                WeaponData weapon =  _itemFactory.LoadWeapon(weaponId);
+                WeaponData weapon = _itemFactory.LoadWeapon(weaponId);
                 EquipWeapon(weapon);
             }
             else
@@ -76,6 +74,7 @@ namespace Code.Runtime.Entity.Hero
                 }
             }
         }
+
         public void UpdateData(PlayerData data)
         {
             data.HeroEquipment.WeaponStringId = _weaponSlot.WeaponId.Name;

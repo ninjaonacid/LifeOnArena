@@ -26,7 +26,8 @@ namespace Code.Editor.EditorUtils
                     {
                         if (!component)
                         {
-                            Debug.LogWarning($"Component missing in prefab '{prefab.name}' Prefab path {prefabPath}", prefab.gameObject);
+                            Debug.LogWarning($"Component missing in prefab '{prefab.name}' Prefab path {prefabPath}",
+                                prefab.gameObject);
                             continue;
                         }
 
@@ -64,9 +65,10 @@ namespace Code.Editor.EditorUtils
                                         property.objectReferenceValue = missingComponent;
                                         serializedObject.ApplyModifiedProperties();
                                     }
-                                    
+
                                     Debug.LogWarning(
-                                        $"Field '{property.name}' is null on component '{component.GetType().Name}' in prefab '{prefab.name}' Prefab path {prefabPath}", prefab.gameObject);
+                                        $"Field '{property.name}' is null on component '{component.GetType().Name}' in prefab '{prefab.name}' Prefab path {prefabPath}",
+                                        prefab.gameObject);
                                 }
                             }
                         }

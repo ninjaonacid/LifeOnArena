@@ -28,8 +28,8 @@ namespace Code.Editor.ScriptableObjects
         {
             var root = new VisualElement();
             
-            root.Add(new PropertyField(serializedObject.FindProperty("EffectDurationType")));
-            root.Add(new PropertyField(serializedObject.FindProperty("VisualEffectId")));
+            root.Add(new PropertyField(serializedObject.FindProperty("_effectDurationType")));
+            root.Add(new PropertyField(serializedObject.FindProperty("_statusVisualEffect")));
             return root;
         }
 
@@ -60,7 +60,7 @@ namespace Code.Editor.ScriptableObjects
         {
             var root = new VisualElement();
             
-            root.Add(new PropertyField(serializedObject.FindProperty("Tags")));
+            root.Add(new PropertyField(serializedObject.FindProperty("_tags")));
             
             return root;
         }

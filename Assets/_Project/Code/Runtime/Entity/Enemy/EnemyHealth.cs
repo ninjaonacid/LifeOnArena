@@ -6,11 +6,10 @@ namespace Code.Runtime.Entity.Enemy
     public class EnemyHealth : EntityHealth
     {
         public EnemyAnimator Animator;
-        
+
         private void OnDisable()
         {
             Health.ResetHealth();
         }
-        
     }
 }

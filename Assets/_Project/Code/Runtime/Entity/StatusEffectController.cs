@@ -20,6 +20,7 @@ namespace Code.Runtime.Entity
         private VisualEffectFactory _visualFactory;
 
         private readonly List<DurationalGameplayEffect> _activeEffects = new List<DurationalGameplayEffect>();
+        private List<DurationalGameplayEffect> _effectsToRemove = new List<DurationalGameplayEffect>();
         
         [Inject]
         public void Construct(VisualEffectFactory visualFactory)
@@ -74,11 +75,18 @@ namespace Code.Runtime.Entity
 
                 if (activeEffect.IsDurationEnd())
                 {
-                    RemoveEffect(activeEffect);
+                    _effectsToRemove.Add(activeEffect);
                     
                     activeEffect.ResetRemainingDuration();
                 }
             }
+
+            foreach (var effect in _effectsToRemove)
+            {
+                RemoveEffect(effect);
+            }
+            
+            _effectsToRemove.Clear();
         }
 
         private void RemoveEffect(DurationalGameplayEffect effect)

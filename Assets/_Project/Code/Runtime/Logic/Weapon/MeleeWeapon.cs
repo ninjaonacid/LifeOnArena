@@ -8,7 +8,7 @@ namespace Code.Runtime.Logic.Weapon
     public class MeleeWeapon : MonoBehaviour
     {
         public event Action<CollisionData> Hit;
-        
+
         [SerializeField] private Collider _collider;
         [SerializeField] private ParticleSystem _slashTrail;
 
@@ -27,10 +27,9 @@ namespace Code.Runtime.Logic.Weapon
                 {
                     Target = other.gameObject
                 });
-                
             }
         }
-        
+
         public void EnableCollider(bool value)
         {
             _collider.enabled = value;
@@ -40,10 +39,9 @@ namespace Code.Runtime.Logic.Weapon
         {
             var slashTrailEmission = _slashTrail.emission;
             slashTrailEmission.enabled = value;
-            
+
             if (value) _slashTrail.Play();
             else _slashTrail.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
-
         }
     }
 }
