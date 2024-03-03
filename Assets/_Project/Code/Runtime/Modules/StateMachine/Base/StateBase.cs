@@ -4,8 +4,8 @@ namespace Code.Runtime.Modules.StateMachine.Base
 {
     public class StateBase<TState>
     {
-        public bool NeedExitTime;
-        public bool IsGhostState;
+        public readonly bool NeedExitTime;
+        public readonly bool IsGhostState;
         public TState name;
 
         public IStateMachine<TState> fsm;

@@ -1,14 +1,15 @@
+using System;
+using Code.Runtime.Logic.Timer;
+using Code.Runtime.Modules.StateMachine.States;
+
 namespace Code.Runtime.Entity.Enemy.CommonEnemy
 {
     public class EnemyStaggerState : CommonEnemyState
     {
-        public float DisableDuration;
-        public EnemyStaggerState(
-            EnemyAnimator enemyAnimator,
-            bool needsExitTime, bool isGhostState = false) : base(enemyAnimator, needsExitTime, isGhostState)
+        public EnemyStaggerState(EnemyAnimator enemyAnimator, bool needsExitTime, bool isGhostState = false) : base(enemyAnimator, needsExitTime, isGhostState)
         {
-
         }
+
         public override void OnEnter()
         {
             base.OnEnter();

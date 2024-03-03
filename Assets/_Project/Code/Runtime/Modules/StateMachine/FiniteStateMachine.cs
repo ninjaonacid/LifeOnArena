@@ -300,6 +300,10 @@ namespace Code.Runtime.Modules.StateMachine
             (_activeState as ITriggerable<TEvent>)?.Trigger(trigger);
         }
     }
+    
+    public class FiniteStateMachine<TStateId> : FiniteStateMachine<TStateId, string>
+    {
+    }
 
     public class FiniteStateMachine : FiniteStateMachine<string, string>
     {

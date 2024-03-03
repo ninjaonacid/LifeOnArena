@@ -6,10 +6,9 @@ namespace Code.Runtime.Modules.StateMachine.Transitions
 {
     public class TransitionAfter<TStateId> : TransitionBase<TStateId>
     {
-
-        public float delay;
-        public Func<TransitionAfter<TStateId>, bool> condition;
-        public ITimer timer;
+        public readonly float delay;
+        public readonly Func<TransitionAfter<TStateId>, bool> condition;
+        public readonly ITimer timer;
         public TransitionAfter(
             TStateId from,
             TStateId to,
@@ -19,7 +18,7 @@ namespace Code.Runtime.Modules.StateMachine.Transitions
         {
             this.delay = delay;
             this.condition = condition;
-            this.timer = new Logic.Timer.Timer();
+            this.timer = new Timer();
         }
 
         public override void OnEnter()

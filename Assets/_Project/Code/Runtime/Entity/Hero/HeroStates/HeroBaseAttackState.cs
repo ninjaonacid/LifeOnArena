@@ -9,7 +9,9 @@ namespace Code.Runtime.Entity.Hero.HeroStates
         protected float _duration;
 
 
-        protected HeroBaseAttackState(HeroAttack heroAttack, HeroWeapon heroWeapon, HeroAnimator heroAnimator, HeroMovement heroMovement, HeroRotation heroRotation, bool needsExitTime, bool isGhostState = false) : base(heroAnimator, heroMovement, heroRotation, needsExitTime, isGhostState)
+        protected HeroBaseAttackState(HeroAttack heroAttack, HeroWeapon heroWeapon, HeroAnimator heroAnimator,
+            HeroMovement heroMovement, HeroRotation heroRotation, bool needsExitTime, bool isGhostState = false) : base(
+            heroAnimator, heroMovement, heroRotation, needsExitTime, isGhostState)
         {
             _heroAttack = heroAttack;
             _heroWeapon = heroWeapon;
@@ -19,11 +21,11 @@ namespace Code.Runtime.Entity.Hero.HeroStates
         {
             _duration -= Time.deltaTime;
 
-            if(IsStateOver()) fsm.StateCanExit(); 
+            if (IsStateOver()) fsm.StateCanExit();
         }
 
         public override bool IsStateOver() => _duration <= 0;
-        
+
         public override void OnExitRequest()
         {
             base.OnExitRequest();
@@ -33,7 +35,5 @@ namespace Code.Runtime.Entity.Hero.HeroStates
                 fsm.StateCanExit();
             }
         }
-
-
     }
 }

@@ -36,14 +36,15 @@ namespace Code.Runtime.Entity.Enemy
 
             _fsm.AddState(nameof(EnemyStaggerState), new EnemyStaggerState(
                 _enemyAnimator,
-                false,
+                true,
                 true));
 
             _fsm.AddState(nameof(EnemyAttackState), new EnemyAttackState(
-                _enemyAnimator,
                 _enemyAttack,
+                _agentMoveToPlayer,
                 _enemyTarget,
-                _agentMoveToPlayer, false, false));
+                _enemyAnimator,
+                 false, false));
 
             _fsm.AddState(nameof(EnemyIdleState), new EnemyIdleState(
                 _enemyAnimator,
