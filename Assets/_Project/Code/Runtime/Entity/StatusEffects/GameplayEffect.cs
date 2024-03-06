@@ -12,10 +12,11 @@ namespace Code.Runtime.Entity.StatusEffects
     {
         public EffectDurationType Type { get; private set; }
         public ReadOnlyCollection<GameplayTag> EffectTags;
-        public readonly ReadOnlyCollection<StatModifierBlueprint> ModifierBlueprints;
         public ReadOnlyCollection<StatModifier> Modifiers => _statModifiers.AsReadOnly();
-        private readonly List<StatModifier> _statModifiers = new List<StatModifier>();
+        public readonly ReadOnlyCollection<StatModifierBlueprint> ModifierBlueprints;
         public StatusVisualEffect StatusVisualEffect { get; }
+        
+        private readonly List<StatModifier> _statModifiers = new List<StatModifier>();
         public GameplayEffect(ReadOnlyCollection<StatModifierBlueprint> modifiers, ReadOnlyCollection<GameplayTag> tags, EffectDurationType type, 
             StatusVisualEffect statusVisualEffect)
         {
