@@ -9,7 +9,6 @@ namespace Code.Runtime.Core.Factory
         private ObjectPoolProvider _poolProvider;
         private IConfigProvider _configProvider;
         
-        
         public ProjectileFactory(ObjectPoolProvider poolProvider, IConfigProvider configProvider)
         {
             _poolProvider = poolProvider;

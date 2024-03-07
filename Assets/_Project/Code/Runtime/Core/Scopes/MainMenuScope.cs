@@ -12,8 +12,8 @@ namespace Code.Runtime.Core.Scopes
         protected override void Configure(IContainerBuilder builder)
         {
             builder.RegisterEntryPoint<MainMenuStarter>();
-            
-            
+
+            builder.Register<ProjectileFactory>(Lifetime.Scoped);
             builder.Register<IItemFactory, ItemFactory>(Lifetime.Scoped);
             builder.Register<IAbilityFactory, AbilityFactory>(Lifetime.Scoped);
             builder.Register<IHeroFactory, HeroFactory>(Lifetime.Scoped);

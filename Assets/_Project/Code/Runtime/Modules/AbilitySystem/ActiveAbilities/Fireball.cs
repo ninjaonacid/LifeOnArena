@@ -20,6 +20,7 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
             var hurtBox = caster.GetComponent<EntityHurtBox>();
             Vector3 casterCenter = hurtBox.GetCenterTransform();
             projectile.transform.position = (casterCenter + Vector3.forward);
+            
         }
     }
 }

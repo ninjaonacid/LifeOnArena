@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+
 using Code.Runtime.Core.AssetManagement;
 using Code.Runtime.Core.ConfigProvider;
 using Code.Runtime.Core.ObjectPool;
@@ -66,7 +66,7 @@ namespace Code.Runtime.Core.Factory
             return visualEffect;
         }
 
-        public async UniTaskVoid PrewarmParticlePool(int id, int size)
+        public async UniTaskVoid PrewarmEffect(int id, int size)
         {
             var particle = _configProvider.VisualEffect(id);
 
@@ -75,7 +75,7 @@ namespace Code.Runtime.Core.Factory
             _poolProvider.WarmPool(prefab, size);
         }
 
-        public void PrewarmParticlePool(GameObject prefab, int size)
+        public void PrewarmEffect(GameObject prefab, int size)
         {
             _poolProvider.WarmPool(prefab, size);
         }
