@@ -15,6 +15,7 @@ namespace Code.Runtime.Logic.Projectiles
         [SerializeField] private Collider _collider;
 
         [SerializeField] private VisualEffect _collisionEffect;
+        
         private VisualEffectFactory _visualFactory;
 
         public void Construct(VisualEffectFactory visualFactory)

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
 {
-    [CreateAssetMenu(fileName = "Fireball", menuName = "Config/AbilityData/Cast/Fireball")]
+    [CreateAssetMenu(fileName = "Fireball", menuName = "AbilitySystem/Ability/Fireball")]
     public class FireballBlueprint : ActiveAbilityBlueprint<Fireball>
     {
         [SerializeField] private Projectile _projectile;

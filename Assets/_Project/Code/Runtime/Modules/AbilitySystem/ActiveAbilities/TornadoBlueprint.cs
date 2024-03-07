@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
 {
-    [CreateAssetMenu(fileName = "TornadoAbility", menuName = "Config/AbilityData/Cast/TornadoAbility")]
+    [CreateAssetMenu(fileName = "Tornado", menuName = "AbilitySystem/Ability/Tornado")]
     public class TornadoBlueprint : ActiveAbilityBlueprint<TornadoAbility>
     {
         [SerializeField] private float _radius;
