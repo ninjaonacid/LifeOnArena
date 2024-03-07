@@ -1,19 +1,32 @@
+﻿using System;
+using Code.Runtime.Core.Factory;
+using Code.Runtime.Core.ObjectPool;
+using Code.Runtime.Logic.Collision;
+using Code.Runtime.Logic.VisualEffects;
 using UnityEngine;
+
 
 namespace Code.Runtime.Logic.Projectiles
 {
-    public class Projectile : MonoBehaviour
+    public class Projectile : PooledObject
     {
-        // Start is called before the first frame update
-        void Start()
-        {
+        public event Action<CollisionData> OnHit;
         
-        }
+        [SerializeField] private Collider _collider;
 
-        // Update is called once per frame
-        void Update()
+        [SerializeField] private VisualEffect _collisionEffect;
+        private VisualEffectFactory _visualFactory;
+
+        public void Construct(VisualEffectFactory visualFactory)
         {
-        
+            _visualFactory = visualFactory;
+        }
+        protected void HandleCollision(GameObject other)
+        {
+            if (_collisionEffect is not null)
+            {
+                VisualEffect collisionEffect;
+            }
         }
     }
 }
