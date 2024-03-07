@@ -16,16 +16,19 @@ namespace Code.Runtime.Core.Factory
         private readonly IRandomService _random;
         private readonly IAssetProvider _assetProvider;
         private readonly VisualEffectFactory _visualEffectFactory;
+        private readonly ProjectileFactory _projectileFactory;
         public AbilityFactory(
             IAssetProvider assetProvider,
             IConfigProvider config,
             VisualEffectFactory visualEffectFactory,
+            ProjectileFactory projectileFactory,
             BattleService battleService,
             IRandomService random)
         {
             _assetProvider = assetProvider;
             _config = config;
             _visualEffectFactory = visualEffectFactory;
+            _projectileFactory = projectileFactory;
             _battleService = battleService;
             _random = random;
         }
@@ -41,7 +44,7 @@ namespace Code.Runtime.Core.Factory
         
         public ActiveAbilityBlueprintBase InitializeAbilityTemplate(ActiveAbilityBlueprintBase activeAbilityBlueprintBase)
         {
-            activeAbilityBlueprintBase.InitServices(_visualEffectFactory, _battleService);
+            activeAbilityBlueprintBase.InitServices(_visualEffectFactory, _projectileFactory, _battleService);
             
             if (activeAbilityBlueprintBase.VisualEffectData)
             {

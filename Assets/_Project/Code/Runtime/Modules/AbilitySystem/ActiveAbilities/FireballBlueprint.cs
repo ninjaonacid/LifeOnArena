@@ -9,7 +9,7 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
         [SerializeField] private Projectile _projectile;
         public override IAbility GetAbility()
         {
-            throw new System.NotImplementedException();
+            return new Fireball(_projectile, _projectileFactory);
         }
     }
 }

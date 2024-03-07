@@ -110,6 +110,12 @@ namespace Code.Runtime.Core.ObjectPool
            return go.GetComponent<TComponent>();
         }
         
+        public TComponent Spawn<TComponent>(GameObject prefab)
+        {
+            var go =  Spawn(prefab);
+            return go.GetComponent<TComponent>();
+        }
+        
         private PooledObject Instantiate(GameObject prefab)  
         {
             var go = _objectResolver.Instantiate(prefab);

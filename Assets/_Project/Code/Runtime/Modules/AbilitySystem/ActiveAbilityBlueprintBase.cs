@@ -31,14 +31,17 @@ namespace Code.Runtime.Modules.AbilitySystem
         protected IReadOnlyList<GameplayEffect> StatusEffects => _statusTemplates.Select(x => x.GetGameplayEffect()).ToList();
 
         protected VisualEffectFactory _visualEffectFactory;
+        protected ProjectileFactory _projectileFactory;
         protected BattleService _battleService;
         public abstract IAbility GetAbility();
 
         public void InitServices(
             VisualEffectFactory visualEffectFactory,
+            ProjectileFactory projectileFactory,
             BattleService battleService)
         {
             _visualEffectFactory = visualEffectFactory;
+            _projectileFactory = projectileFactory;
             _battleService = battleService;
         }
         
