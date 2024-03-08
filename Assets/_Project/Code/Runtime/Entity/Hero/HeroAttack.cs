@@ -67,7 +67,7 @@ namespace Code.Runtime.Entity.Hero
             _collidedData.Clear();
         }
 
-        private void ChangeWeapon(MeleeWeapon weapon, WeaponId weaponId)
+        private void ChangeWeapon(Weapon weapon, WeaponId weaponId)
         {
             weapon.Hit += BaseAttack;
         }

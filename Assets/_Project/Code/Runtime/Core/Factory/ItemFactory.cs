@@ -58,10 +58,10 @@ namespace Code.Runtime.Core.Factory
             _poolProvider.WarmPool(id, hitVfx, 5);
         }
         
-        public MeleeWeapon CreateMeleeWeapon(GameObject prefab, Transform position)
+        public Weapon CreateWeapon(GameObject prefab, Transform position)
         {
             var weapon = _objectResolver.Instantiate(prefab, position);
-            return weapon.GetComponent<MeleeWeapon>();
+            return weapon.GetComponent<Weapon>();
         }
 
         public async Task<WeaponPlatformSpawner> CreateWeaponPlatformSpawner(Vector3 point,

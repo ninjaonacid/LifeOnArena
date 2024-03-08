@@ -17,7 +17,7 @@ namespace Code.Runtime.Core.Factory
             string spawnerId,
             WeaponId weaponId);
 
-        MeleeWeapon CreateMeleeWeapon(GameObject prefab, Transform position);
+        Weapon CreateWeapon(GameObject prefab, Transform position);
         
         UniTaskVoid InitAssets();
     }

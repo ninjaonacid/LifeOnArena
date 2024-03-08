@@ -7,21 +7,23 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
 {
     public class Fireball : IAbility
     {
-        private readonly Projectile _projectile;
+        private readonly Projectile _projectilePrefab;
         private readonly ProjectileFactory _projectileFactory;
-        public Fireball(Projectile projectile, ProjectileFactory projectileFactory)
+        private readonly float _lifeTime;
+        public Fireball(Projectile projectilePrefab, ProjectileFactory projectileFactory)
         {
-            _projectile = projectile;
+            _projectilePrefab = projectilePrefab;
             _projectileFactory = projectileFactory;
         }
         public void Use(GameObject caster, GameObject target)
         {
-            Projectile projectile = _projectileFactory.CreateProjectile(_projectile);
+            Projectile projectile = _projectileFactory.CreateProjectile(_projectilePrefab);
             var hurtBox = caster.GetComponent<EntityHurtBox>();
             Vector3 casterCenter = hurtBox.GetCenterTransform();
             projectile.transform.position = (casterCenter + Vector3.forward);
             var direction = caster.transform.forward;
-            projectile.MoveProjectile(direction, 100);
+            projectile.SetVelocity(direction, 50);
+            
         }
     }
 }

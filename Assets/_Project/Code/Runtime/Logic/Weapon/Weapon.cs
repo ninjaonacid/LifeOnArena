@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Code.Runtime.Logic.Weapon
 {
     [RequireComponent(typeof(Collider))]
-    public class MeleeWeapon : MonoBehaviour
+    public class Weapon : MonoBehaviour
     {
         public event Action<CollisionData> Hit;
 

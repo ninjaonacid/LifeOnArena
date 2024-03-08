@@ -14,16 +14,8 @@ namespace Code.Runtime.Entity.Hero
     public class HeroWeapon : EntityWeapon, ISave
     {
         [SerializeField] private HeroAnimator _heroAnimator;
-        public event Action<MeleeWeapon, WeaponId> OnWeaponChange;
-        private MeleeWeapon CurrentWeapon { get; set; }
-        private IItemFactory _itemFactory;
-
-        [Inject]
-        public void Construct(IItemFactory itemFactory)
-        {
-            _itemFactory = itemFactory;
-        }
-
+        public event Action<Weapon, WeaponId> OnWeaponChange;
+        
         public void EquipWeapon(WeaponData weaponData)
         {
             if (weaponData == null) return;
@@ -38,7 +30,7 @@ namespace Code.Runtime.Entity.Hero
 
             _heroAnimator.OverrideController(weaponData.OverrideController);
 
-            CurrentWeapon = _itemFactory.CreateMeleeWeapon(weaponData.WeaponPrefab, _weaponPosition);
+            CurrentWeapon = _itemFactory.CreateWeapon(weaponData.WeaponPrefab, _weaponPosition);
 
             CurrentWeapon.gameObject.transform.localPosition = Vector3.zero;
 

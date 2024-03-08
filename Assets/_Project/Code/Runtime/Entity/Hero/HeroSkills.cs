@@ -21,7 +21,6 @@ namespace Code.Runtime.Entity.Hero
         public SkillSlot[] SkillSlots => _skillSlots;
         public ActiveAbilityBlueprintBase ActiveSkill => _activeSkill;
 
-
         private ActiveAbilityBlueprintBase _activeSkill;
         private AbilityData _abilityData;
         private IAbilityFactory _abilityFactory;

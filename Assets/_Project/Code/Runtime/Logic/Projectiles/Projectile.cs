@@ -33,17 +33,18 @@ namespace Code.Runtime.Logic.Projectiles
             
         }
 
-        public void MoveProjectile(Vector3 direction, float speed)
-        {
-            Move(direction, speed).Forget();
-        }
-
         public async void OnTriggerEnter(Collider other)
         {
             await HandleCollision(other.gameObject);
         }
-        
-        protected async UniTask HandleCollision(GameObject other)
+
+        public void SetVelocity(Vector3 direction, float speed)
+        {
+            Vector3 movementVector = new Vector3(direction.x, 0, direction.z);
+            _rb.velocity = movementVector * speed;
+        }
+
+        private async UniTask HandleCollision(GameObject other)
         {
             if (_collisionEffectId is not null)
             {
@@ -55,13 +56,6 @@ namespace Code.Runtime.Logic.Projectiles
             {
                 Target = other
             });
-        }
-
-        public virtual async UniTask Move(Vector3 direction, float speed)
-        {
-            Vector3 movementVector = new Vector3(direction.x * speed, 0, direction.z * speed);
-            _rb.velocity = movementVector;
-            await UniTask.Yield();
         }
     }
 }

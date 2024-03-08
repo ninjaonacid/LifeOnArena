@@ -6,8 +6,8 @@ namespace Code.Runtime.Core.Factory
 {
     public class ProjectileFactory
     {
-        private ObjectPoolProvider _poolProvider;
-        private IConfigProvider _configProvider;
+        private readonly ObjectPoolProvider _poolProvider;
+        private readonly IConfigProvider _configProvider;
         
         public ProjectileFactory(ObjectPoolProvider poolProvider, IConfigProvider configProvider)
         {
