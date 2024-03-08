@@ -16,11 +16,12 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
         }
         public void Use(GameObject caster, GameObject target)
         {
-            var projectile = _projectileFactory.CreateProjectile(_projectile);
+            Projectile projectile = _projectileFactory.CreateProjectile(_projectile);
             var hurtBox = caster.GetComponent<EntityHurtBox>();
             Vector3 casterCenter = hurtBox.GetCenterTransform();
             projectile.transform.position = (casterCenter + Vector3.forward);
-            
+            var direction = caster.transform.forward;
+            projectile.MoveProjectile(direction, 100);
         }
     }
 }
