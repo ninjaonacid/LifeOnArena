@@ -2,7 +2,7 @@ namespace Code.Runtime.Entity.Hero.HeroStates
 {
     public class SecondAttackState : HeroBaseAttackState
     {
-        public SecondAttackState(HeroAttack heroAttack, HeroWeapon heroWeapon, HeroAnimator heroAnimator, HeroMovement heroMovement, HeroRotation heroRotation, bool needsExitTime, bool isGhostState = false) : base(heroAttack, heroWeapon, heroAnimator, heroMovement, heroRotation, needsExitTime, isGhostState)
+        public SecondAttackState(HeroAttackComponent heroAttackComponent, HeroWeapon heroWeapon, HeroAnimator heroAnimator, HeroMovement heroMovement, HeroRotation heroRotation, bool needsExitTime, bool isGhostState = false) : base(heroAttackComponent, heroWeapon, heroAnimator, heroMovement, heroRotation, needsExitTime, isGhostState)
         {
         }
         
@@ -17,7 +17,7 @@ namespace Code.Runtime.Entity.Hero.HeroStates
         public override void OnExit()
         {
             base.OnExit();
-            _heroAttack.ClearCollisionData();
+            HeroAttackComponent.ClearCollisionData();
             _heroWeapon.EnableWeapon(false);
         }
         

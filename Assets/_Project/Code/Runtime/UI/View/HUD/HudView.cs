@@ -12,7 +12,7 @@ namespace Code.Runtime.UI.View.HUD
         public MusicButton MusicButton;
         public SoundButton SoundButton;
         
-        private HeroAttack _heroAttack;
+        private HeroAttackComponent _heroAttackComponent;
         private HeroHealth _heroHealth;
     }
 }

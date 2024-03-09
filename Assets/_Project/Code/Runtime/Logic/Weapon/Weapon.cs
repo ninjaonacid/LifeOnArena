@@ -8,17 +8,12 @@ namespace Code.Runtime.Logic.Weapon
     public class Weapon : MonoBehaviour
     {
         public event Action<CollisionData> Hit;
-
+        
         [SerializeField] private Collider _collider;
         [SerializeField] private ParticleSystem _slashTrail;
 
         private LayerMask _mask;
-
-        private void Awake()
-        {
-            _mask = LayerMask.NameToLayer("Hittable");
-        }
-
+        
         private void OnTriggerEnter(Collider other)
         {
             if (_mask.value == other.gameObject.layer)

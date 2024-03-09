@@ -11,16 +11,18 @@ namespace Code.Runtime.Entity
 {
     public class EntityWeapon : MonoBehaviour
     {
+        [SerializeField] protected WeaponId _weaponId;
         [SerializeField] protected WeaponSlot _weaponSlot = new();
         [SerializeField] protected Transform _weaponPosition;
+        [SerializeField] private bool IsCollisionWeapon;
+
+        protected WeaponData _weaponData;
         protected IItemFactory _itemFactory;
-        public Weapon CurrentWeapon { get ; set; }
 
         [Serializable]
         protected class WeaponSlot
         {
-            public WeaponId WeaponId;
-            public WeaponData WeaponData;
+            public Weapon EquippedWeapon;
         }
         
         [Inject]
@@ -31,13 +33,22 @@ namespace Code.Runtime.Entity
 
         public void InitializeWeapon()
         {
-            if (_weaponSlot.WeaponId != null)
+            if (_weaponId != null)
             {
-                _weaponSlot.WeaponData = _itemFactory.LoadWeapon(_weaponSlot.WeaponId.Id);
+                _weaponData = _itemFactory.LoadWeapon(_weaponId.Id);
+                _weaponSlot.EquippedWeapon = _itemFactory.CreateWeapon(_weaponData.WeaponPrefab, _weaponPosition);
             }
+            
+            EnableWeapon(IsCollisionWeapon);
         }
         
-        public WeaponData GetEquippedWeaponData() => _weaponSlot.WeaponData;
+        public void EnableWeapon(bool value)
+        {
+            _weaponSlot.EquippedWeapon.EnableCollider(value);
+            _weaponSlot.EquippedWeapon.EnableTrail(value);
+        }
+        
+        public WeaponData GetEquippedWeaponData() => _weaponData;
    
     }
 }

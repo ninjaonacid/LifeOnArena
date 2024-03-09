@@ -23,7 +23,6 @@ namespace Code.Runtime.Services.BattleService
                 _overlapBuffer,
                 mask);
         }
-
         
         public (int, Collider[]) GetTargetsInRadius(Vector3 startPoint, float radius, LayerMask mask)
         {

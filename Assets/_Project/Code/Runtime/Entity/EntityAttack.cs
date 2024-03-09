@@ -5,7 +5,7 @@ namespace Code.Runtime.Entity
 {
     public class EntityAttack : MonoBehaviour
     {
-        [SerializeField] private LayerMask _targetLayer;
-        [SerializeField] private StatController _stats;
+        [SerializeField] protected LayerMask _attackLayer;
+        [SerializeField] protected StatController _stats;
     }
 }

@@ -61,7 +61,7 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
 
             var hits = _battleService.CreateAoeAbility(stats, _statusEffects, projectileTransform.position, _attackRadius, mask);
             
-            var entityAttack = caster.GetComponent<IAttack>();
+            var entityAttack = caster.GetComponent<IAttackComponent>();
             entityAttack.InvokeHit(hits);
             
         }

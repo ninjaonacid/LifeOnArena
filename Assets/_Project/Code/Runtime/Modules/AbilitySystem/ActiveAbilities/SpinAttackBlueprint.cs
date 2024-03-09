@@ -29,7 +29,7 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
 
         public void Use(GameObject caster, GameObject target)
         {
-            var attack = caster.GetComponent<IAttack>();
+            var attack = caster.GetComponent<IAttackComponent>();
             
             
         }

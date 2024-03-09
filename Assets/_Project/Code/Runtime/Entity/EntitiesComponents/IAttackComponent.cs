@@ -1,11 +1,13 @@
+using System;
 using System.Collections.Generic;
 using Code.Runtime.Entity.StatusEffects;
 using UnityEngine;
 
 namespace Code.Runtime.Entity.EntitiesComponents
 {
-    public interface IAttack
+    public interface IAttackComponent
     {
-        void InvokeHit(int hitCount);
+        public event Action<int> OnHit;
+        public void InvokeHit(int hitCount);
     }
 }

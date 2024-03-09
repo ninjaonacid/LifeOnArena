@@ -20,32 +20,26 @@ namespace Code.Runtime.Entity.Hero
         {
             if (weaponData == null) return;
 
-            if (CurrentWeapon != null)
+            if (_weaponSlot.EquippedWeapon != null)
             {
-                Destroy(CurrentWeapon.gameObject);
+                Destroy(_weaponSlot.EquippedWeapon.gameObject);
             }
 
-            _weaponSlot.WeaponData = weaponData;
-            _weaponSlot.WeaponId = weaponData.WeaponId;
+            _weaponData = weaponData;
+            _weaponId = weaponData.WeaponId;
 
             _heroAnimator.OverrideController(weaponData.OverrideController);
 
-            CurrentWeapon = _itemFactory.CreateWeapon(weaponData.WeaponPrefab, _weaponPosition);
+            _weaponSlot.EquippedWeapon = _itemFactory.CreateWeapon(weaponData.WeaponPrefab, _weaponPosition);
 
-            CurrentWeapon.gameObject.transform.localPosition = Vector3.zero;
+            _weaponSlot.EquippedWeapon.gameObject.transform.localPosition = Vector3.zero;
 
-            CurrentWeapon.gameObject.transform.localRotation = Quaternion.Euler(
+            _weaponSlot.EquippedWeapon.gameObject.transform.localRotation = Quaternion.Euler(
                 weaponData.LocalRotation.x,
                 weaponData.LocalRotation.y,
                 weaponData.LocalRotation.z);
 
-            OnWeaponChange?.Invoke(CurrentWeapon, _weaponSlot.WeaponId);
-        }
-
-        public void EnableWeapon(bool value)
-        {
-            CurrentWeapon.EnableCollider(value);
-            CurrentWeapon.EnableTrail(value);
+            OnWeaponChange?.Invoke(_weaponSlot.EquippedWeapon, _weaponId);
         }
 
         public void LoadData(PlayerData data)
@@ -59,9 +53,9 @@ namespace Code.Runtime.Entity.Hero
             }
             else
             {
-                if (_weaponSlot.WeaponData)
+                if (_weaponData)
                 {
-                    WeaponData weapon = _itemFactory.LoadWeapon(_weaponSlot.WeaponData.WeaponId.Id);
+                    WeaponData weapon = _itemFactory.LoadWeapon(_weaponData.WeaponId.Id);
                     EquipWeapon(weapon);
                 }
             }
@@ -69,8 +63,8 @@ namespace Code.Runtime.Entity.Hero
 
         public void UpdateData(PlayerData data)
         {
-            data.HeroEquipment.WeaponStringId = _weaponSlot.WeaponId.Name;
-            data.HeroEquipment.WeaponIntId = _weaponSlot.WeaponId.Id;
+            data.HeroEquipment.WeaponStringId = _weaponId.Name;
+            data.HeroEquipment.WeaponIntId = _weaponId.Id;
         }
     }
 }

@@ -7,9 +7,8 @@ using VContainer;
 namespace Code.Runtime.Entity.Enemy
 {
     [RequireComponent(typeof(EnemyAnimator))]
-    public class EnemyAttack : MonoBehaviour
+    public class EnemyAttack : EntityAttack
     {
-        [SerializeField] private StatController _stats;
         private float _attackCooldown;
         private bool _attackIsActive;
         public bool TargetInAttackRange => _attackIsActive;

@@ -14,7 +14,7 @@ namespace Code.Runtime.UI.View.HUD
     {
         [SerializeField] private TextMeshProUGUI _textMesh;
         
-        private HeroAttack _heroAttack;
+        private HeroAttackComponent _heroAttackComponent;
         private HeroHealth _heroHealth;
         
         private int _hitCount = 0;
@@ -26,11 +26,11 @@ namespace Code.Runtime.UI.View.HUD
         private Timer _resetTimer;
         private CancellationTokenSource _cts;
         
-        public void Construct(HeroAttack heroAttack, HeroHealth heroHealth)
+        public void Construct(HeroAttackComponent heroAttackComponent, HeroHealth heroHealth)
         {
-            _heroAttack = heroAttack;
+            _heroAttackComponent = heroAttackComponent;
             _heroHealth = heroHealth;
-            _heroAttack.OnHit += IncreaseHitCounter;
+            _heroAttackComponent.OnHit += IncreaseHitCounter;
             _heroHealth.Health.CurrentValueChanged += ResetHitCounter;
         }
         
@@ -88,7 +88,7 @@ namespace Code.Runtime.UI.View.HUD
 
         private void OnDisable()
         {
-            _heroAttack.OnHit -= IncreaseHitCounter;
+            _heroAttackComponent.OnHit -= IncreaseHitCounter;
             _heroHealth.Health.CurrentValueChanged -= ResetHitCounter;
         }
     }

@@ -33,7 +33,7 @@ namespace Code.Runtime.Entity.Hero
         [SerializeField] private HeroAnimator _heroAnimator;
         [SerializeField] private HeroMovement _heroMovement;
         [SerializeField] private HeroRotation _heroRotation;
-        [SerializeField] private HeroAttack _heroAttack;
+        [SerializeField] private HeroAttackComponent HeroAttackComponent;
         [SerializeField] private HeroSkills _heroSkills;
         [SerializeField] private HeroWeapon _heroWeapon;
         [SerializeField] private TagController _tagController;
@@ -72,7 +72,7 @@ namespace Code.Runtime.Entity.Hero
                 _heroWeapon, _heroSkills, _heroAnimator, _heroMovement, _heroRotation, true, true));
 
             _stateMachine.AddState(HeroBaseAttack1, new FirstAttackState(
-                _heroAttack,
+                HeroAttackComponent,
                 _heroWeapon,
                 _heroAnimator,
                 _heroMovement,
@@ -81,7 +81,7 @@ namespace Code.Runtime.Entity.Hero
                 isGhostState: false));
 
             _stateMachine.AddState(HeroBaseAttack2, new SecondAttackState(
-                _heroAttack,
+                HeroAttackComponent,
                 _heroWeapon,
                 _heroAnimator,
                 _heroMovement,
@@ -90,7 +90,7 @@ namespace Code.Runtime.Entity.Hero
                 isGhostState: false));
 
             _stateMachine.AddState(HeroBaseAttack3, new ThirdAttackState(
-                _heroAttack,
+                HeroAttackComponent,
                 _heroWeapon,
                 _heroAnimator,
                 _heroMovement,
