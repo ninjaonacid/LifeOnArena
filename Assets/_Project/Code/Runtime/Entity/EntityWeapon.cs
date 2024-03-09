@@ -4,6 +4,7 @@ using Code.Runtime.ConfigData.Identifiers;
 using Code.Runtime.ConfigData.Weapon;
 using Code.Runtime.Core.Factory;
 using Code.Runtime.Logic.Weapon;
+using Cysharp.Threading.Tasks.Triggers;
 using UnityEngine;
 using VContainer;
 
@@ -16,7 +17,7 @@ namespace Code.Runtime.Entity
         [SerializeField] protected Transform _weaponPosition;
         [SerializeField] private bool IsCollisionWeapon;
 
-        protected WeaponData _weaponData;
+        [SerializeField] protected WeaponData _weaponData;
         protected IItemFactory _itemFactory;
 
         [Serializable]
@@ -29,17 +30,40 @@ namespace Code.Runtime.Entity
         public void Construct(IItemFactory itemFactory)
         {
             _itemFactory = itemFactory;
+            InitializeWeapon();
         }
 
-        public void InitializeWeapon()
+        public virtual void EquipWeapon(WeaponData weaponData)
+        {
+            if (weaponData == null) return;
+
+            if (_weaponSlot.EquippedWeapon != null)
+            {
+                Destroy(_weaponSlot.EquippedWeapon.gameObject);
+            }
+     
+            _weaponData = weaponData;
+            _weaponId = weaponData.WeaponId;
+            
+            _weaponSlot.EquippedWeapon = _itemFactory.CreateWeapon(_weaponData.WeaponPrefab, _weaponPosition);
+            _weaponSlot.EquippedWeapon.gameObject.transform.localPosition = Vector3.zero;
+
+            _weaponSlot.EquippedWeapon.gameObject.transform.localRotation = Quaternion.Euler(
+                _weaponData.LocalRotation.x,
+                _weaponData.LocalRotation.y,
+                _weaponData.LocalRotation.z);
+            
+            EnableWeapon(IsCollisionWeapon);
+            
+        }
+
+        private void InitializeWeapon()
         {
             if (_weaponId != null)
             {
-                _weaponData = _itemFactory.LoadWeapon(_weaponId.Id);
-                _weaponSlot.EquippedWeapon = _itemFactory.CreateWeapon(_weaponData.WeaponPrefab, _weaponPosition);
+                WeaponData weaponData = _itemFactory.LoadWeapon(_weaponId.Id);
+                EquipWeapon(weaponData);
             }
-            
-            EnableWeapon(IsCollisionWeapon);
         }
         
         public void EnableWeapon(bool value)
