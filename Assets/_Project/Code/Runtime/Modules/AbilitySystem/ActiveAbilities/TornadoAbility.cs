@@ -7,6 +7,7 @@ using Code.Runtime.Logic.Projectiles;
 using Code.Runtime.Logic.VisualEffects;
 using Code.Runtime.Modules.StatSystem;
 using Code.Runtime.Services.BattleService;
+using UnityEditor;
 using UnityEngine;
 
 namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
@@ -54,6 +55,7 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
             projectileTransform.rotation = Quaternion.identity;
 
             LayerMask mask = 1 << LayerMask.NameToLayer("Hittable");
+            
 
             var stats = caster.GetComponent<StatController>();
 

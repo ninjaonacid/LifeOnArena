@@ -24,6 +24,7 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
             var direction = caster.transform.forward;
             projectile.SetVelocity(direction, 50);
             
+
         }
     }
 }

@@ -50,17 +50,6 @@ namespace Code.Runtime.Entity.Hero
         {
             OnHit?.Invoke(hitCount);
         }
-        
-
-        public void AoeAbilityAttack(Vector3 castPoint, IReadOnlyList<GameplayEffect> statusEffects)
-        {
-            // var hits = _battleService.CreateAoeAbility(_stats, statusEffects,  castPoint, _layerMask);
-            //
-            // if (hits > 0)
-            // {
-            //     OnHit?.Invoke(hits);
-            // }
-        }
 
         public void ClearCollisionData()
         {

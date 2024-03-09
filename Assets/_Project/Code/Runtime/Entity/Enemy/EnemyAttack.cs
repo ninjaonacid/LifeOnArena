@@ -13,7 +13,6 @@ namespace Code.Runtime.Entity.Enemy
         private float _attackCooldown;
         private bool _attackIsActive;
         public bool TargetInAttackRange => _attackIsActive;
-        private readonly Collider[] _hits = new Collider[1];
 
         private bool _isAttacking;
 
@@ -81,24 +80,12 @@ namespace Code.Runtime.Entity.Enemy
             _battleService.CreateOverlapAttack(_stats, StartPoint(), _layerMask);
         }
 
-        private bool Hit(out Collider hit)
-        {
-            var startPoint = StartPoint();
-
-            var hitscount = Physics.OverlapSphereNonAlloc(startPoint,
-                _stats.Stats["AttackRadius"].Value,
-                _hits,
-                _layerMask);
-            hit = _hits.FirstOrDefault();
-            return hitscount > 0;
-        }
-
-
         private Vector3 StartPoint()
         {
-            return new Vector3(transform.position.x,
-                transform.position.y + 2f,
-                transform.position.z) + transform.forward * _stats.Stats["AttackDistance"].Value;
+            var position = transform.position;
+            return new Vector3(position.x,
+                position.y + 2f,
+                position.z) + transform.forward * _stats.Stats["AttackDistance"].Value;
         }
 
         private bool CoolDownIsUp()
