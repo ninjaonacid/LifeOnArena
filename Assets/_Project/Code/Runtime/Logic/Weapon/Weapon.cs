@@ -25,6 +25,11 @@ namespace Code.Runtime.Logic.Weapon
             }
         }
 
+        public void SetLayerMask(LayerMask mask)
+        {
+            _mask = mask;
+        }
+
         public void EnableCollider(bool value)
         {
             _collider.enabled = value;

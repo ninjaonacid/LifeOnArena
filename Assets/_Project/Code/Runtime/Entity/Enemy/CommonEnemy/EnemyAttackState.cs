@@ -6,13 +6,13 @@ namespace Code.Runtime.Entity.Enemy.CommonEnemy
 {
     public class EnemyAttackState : CommonEnemyState
     {
-        private readonly EnemyAttack _enemyAttack;
+        private readonly EnemyAttackComponent _enemyAttackComponent;
         private readonly AgentMoveToPlayer _agentMoveToPlayer;
         private readonly EnemyTarget _enemyTarget;
 
-        public EnemyAttackState(EnemyAttack enemyAttack, AgentMoveToPlayer agentMoveToPlayer, EnemyTarget enemyTarget, EnemyAnimator enemyAnimator, bool needsExitTime, bool isGhostState = false) : base(enemyAnimator, needsExitTime, isGhostState)
+        public EnemyAttackState(EnemyAttackComponent enemyAttackComponent, AgentMoveToPlayer agentMoveToPlayer, EnemyTarget enemyTarget, EnemyAnimator enemyAnimator, bool needsExitTime, bool isGhostState = false) : base(enemyAnimator, needsExitTime, isGhostState)
         {
-            _enemyAttack = enemyAttack;
+            _enemyAttackComponent = enemyAttackComponent;
             _agentMoveToPlayer = agentMoveToPlayer;
             _enemyTarget = enemyTarget;
         }
@@ -36,8 +36,8 @@ namespace Code.Runtime.Entity.Enemy.CommonEnemy
         public override void OnExit()
         {
             base.OnExit();
-            _enemyAttack.Attack();
-            _enemyAttack.AttackEnded();
+            _enemyAttackComponent.Attack();
+            _enemyAttackComponent.AttackEnded();
         }
 
         public override void OnExitRequest()

@@ -1,5 +1,6 @@
 using System.Threading;
 using Code.Runtime.ConfigData.Levels;
+using Code.Runtime.Core.Audio;
 using Code.Runtime.Core.ConfigProvider;
 using Code.Runtime.Core.Factory;
 using Code.Runtime.Services.SaveLoad;
@@ -17,14 +18,14 @@ namespace Code.Runtime.Core.EntryPoints
         private readonly IHeroFactory _heroFactory;
         private readonly IConfigProvider _config;
         private readonly IScreenService _screenService;
-        private readonly Audio.AudioService _audioService;
+        private readonly AudioService _audioService;
         private readonly PlayerControls _controls;
         private readonly ISaveLoadService _saveLoad;
 
-        public MainMenuStarter(IHeroFactory heroFactory, IUIFactory uiFactory, 
+        public MainMenuStarter(IHeroFactory heroFactory, IUIFactory uiFactory,
             IScreenService screenService,
             IConfigProvider config, ISaveLoadService saveLoad, PlayerControls controls,
-            Audio.AudioService audioService)
+            AudioService audioService)
         {
             _heroFactory = heroFactory;
             _config = config;
@@ -33,22 +34,24 @@ namespace Code.Runtime.Core.EntryPoints
             _audioService = audioService;
             _saveLoad = saveLoad;
         }
-        
+
         public async UniTask StartAsync(CancellationToken cancellation)
         {
             _saveLoad.Cleanup();
-            
+
             LevelConfig config = _config.Level(SceneManager.GetActiveScene().name);
 
-            GameObject hero = await _heroFactory.CreateHeroUnregistered(config.HeroInitialPosition, config.HeroInitialRotation);
-            
+            GameObject hero = await _heroFactory.CreateHero(config.HeroInitialPosition, config.HeroInitialRotation);
+
             DisableInput();
-              
+            
+            _saveLoad.LoadData();
+
             _audioService.PlayBackgroundMusic("MainTheme", volume: 1, true);
 
             _screenService.Open(ScreenID.MainMenu);
         }
-        
+
         private void DisableInput()
         {
             _controls.Disable();

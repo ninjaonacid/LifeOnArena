@@ -7,26 +7,20 @@ using VContainer;
 namespace Code.Runtime.Entity.Enemy
 {
     [RequireComponent(typeof(EnemyAnimator))]
-    public class EnemyAttack : EntityAttack
+    public class EnemyAttackComponent : EntityAttack
     {
         private float _attackCooldown;
         private bool _attackIsActive;
         public bool TargetInAttackRange => _attackIsActive;
 
         private bool _isAttacking;
-
-        private int _layerMask;
-
+        
         private BattleService _battleService;
         
         [Inject]
         public void Construct(BattleService battleService)
         {
             _battleService = battleService;
-        }
-        private void Awake()
-        {
-            _layerMask = 1 << LayerMask.NameToLayer("PlayerHitBox");
         }
 
         private void OnDisable()
@@ -76,7 +70,7 @@ namespace Code.Runtime.Entity.Enemy
         public void Attack()
         {
             _isAttacking = true;
-            _battleService.CreateOverlapAttack(_stats, StartPoint(), _layerMask);
+            _battleService.CreateOverlapAttack(_stats, StartPoint(), _targetLayer);
         }
 
         private Vector3 StartPoint()

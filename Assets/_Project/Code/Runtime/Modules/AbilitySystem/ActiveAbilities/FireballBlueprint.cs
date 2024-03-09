@@ -7,9 +7,11 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
     public class FireballBlueprint : ActiveAbilityBlueprint<Fireball>
     {
         [SerializeField] private Projectile _projectile;
+        [SerializeField] private float _lifeTime;
+        [SerializeField] private float _speed;
         public override IAbility GetAbility()
         {
-            return new Fireball(_projectile, _projectileFactory);
+            return new Fireball(_projectile, _projectileFactory, _lifeTime, _speed);
         }
     }
 }

@@ -10,7 +10,7 @@ namespace Code.Runtime.Entity.Enemy
         protected FiniteStateMachine _fsm;
 
         [SerializeField] protected AgentMoveToPlayer _agentMoveToPlayer;
-        [SerializeField] protected EnemyAttack _enemyAttack;
+        [SerializeField] protected EnemyAttackComponent EnemyAttackComponent;
         [SerializeField] protected EnemyAnimator _enemyAnimator;
         [SerializeField] protected Aggression _aggression;
         [SerializeField] protected EnemyTarget _enemyTarget;
@@ -40,7 +40,7 @@ namespace Code.Runtime.Entity.Enemy
                 true));
 
             _fsm.AddState(nameof(EnemyAttackState), new EnemyAttackState(
-                _enemyAttack,
+                EnemyAttackComponent,
                 _agentMoveToPlayer,
                 _enemyTarget,
                 _enemyAnimator,

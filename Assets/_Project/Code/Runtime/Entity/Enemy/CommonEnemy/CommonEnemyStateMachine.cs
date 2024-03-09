@@ -13,13 +13,13 @@ namespace Code.Runtime.Entity.Enemy.CommonEnemy
             _fsm.AddTransition(new Transition(
                 nameof(EnemyIdleState),
                 nameof(EnemyChaseState),
-                (transition) => _aggression.HasTarget && !_enemyAttack.TargetInAttackRange));
+                (transition) => _aggression.HasTarget && !EnemyAttackComponent.TargetInAttackRange));
 
             _fsm.AddTransition(new TransitionAfter(
                 nameof(EnemyAttackState),
                 nameof(EnemyChaseState),
                 _enemyConfig.AttackDuration,
-                (transition) => _aggression.HasTarget && !_enemyAttack.TargetInAttackRange));
+                (transition) => _aggression.HasTarget && !EnemyAttackComponent.TargetInAttackRange));
                 
             _fsm.AddTransition(new TransitionAfter(
                 nameof(EnemyChaseState),
@@ -42,7 +42,7 @@ namespace Code.Runtime.Entity.Enemy.CommonEnemy
             _fsm.AddTransition(new Transition(
                 nameof(EnemyChaseState),
                 nameof(EnemyAttackState),
-                (transition) => _enemyAttack.CanAttack()));
+                (transition) => EnemyAttackComponent.CanAttack()));
 
             _fsm.AddTransition(new TransitionAfter(
                 nameof(EnemyAttackState),
@@ -54,7 +54,7 @@ namespace Code.Runtime.Entity.Enemy.CommonEnemy
             _fsm.AddTransition(new Transition(
                 nameof(EnemyIdleState),
                 nameof(EnemyAttackState),
-                (transition) => _enemyAttack.CanAttack(),
+                (transition) => EnemyAttackComponent.CanAttack(),
                 true));
             
             _fsm.AddTransitionFromAny(new Transition(

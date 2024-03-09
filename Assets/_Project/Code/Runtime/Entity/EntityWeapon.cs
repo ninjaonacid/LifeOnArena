@@ -12,12 +12,11 @@ namespace Code.Runtime.Entity
 {
     public class EntityWeapon : MonoBehaviour
     {
-        [SerializeField] protected WeaponId _weaponId;
         [SerializeField] protected WeaponSlot _weaponSlot = new();
         [SerializeField] protected Transform _weaponPosition;
         [SerializeField] private bool IsCollisionWeapon;
-
         [SerializeField] protected WeaponData _weaponData;
+        
         protected IItemFactory _itemFactory;
 
         [Serializable]
@@ -30,9 +29,9 @@ namespace Code.Runtime.Entity
         public void Construct(IItemFactory itemFactory)
         {
             _itemFactory = itemFactory;
-            InitializeWeapon();
-        }
 
+        }
+        
         public virtual void EquipWeapon(WeaponData weaponData)
         {
             if (weaponData == null) return;
@@ -43,8 +42,7 @@ namespace Code.Runtime.Entity
             }
      
             _weaponData = weaponData;
-            _weaponId = weaponData.WeaponId;
-            
+
             _weaponSlot.EquippedWeapon = _itemFactory.CreateWeapon(_weaponData.WeaponPrefab, _weaponPosition);
             _weaponSlot.EquippedWeapon.gameObject.transform.localPosition = Vector3.zero;
 
@@ -54,16 +52,11 @@ namespace Code.Runtime.Entity
                 _weaponData.LocalRotation.z);
             
             EnableWeapon(IsCollisionWeapon);
-            
         }
 
         private void InitializeWeapon()
         {
-            if (_weaponId != null)
-            {
-                WeaponData weaponData = _itemFactory.LoadWeapon(_weaponId.Id);
-                EquipWeapon(weaponData);
-            }
+           
         }
         
         public void EnableWeapon(bool value)

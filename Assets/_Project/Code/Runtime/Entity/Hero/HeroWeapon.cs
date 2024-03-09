@@ -1,5 +1,4 @@
 using System;
-using Code.Runtime.ConfigData.Identifiers;
 using Code.Runtime.ConfigData.Weapon;
 using Code.Runtime.Data.PlayerData;
 using Code.Runtime.Logic.Weapon;
@@ -11,7 +10,7 @@ namespace Code.Runtime.Entity.Hero
     public class HeroWeapon : EntityWeapon, ISave
     {
         [SerializeField] private HeroAnimator _heroAnimator;
-        public event Action<Weapon, WeaponId> OnWeaponChange;
+        public event Action<Weapon> OnWeaponChange;
 
         public override void EquipWeapon(WeaponData weaponData)
         {
@@ -19,7 +18,7 @@ namespace Code.Runtime.Entity.Hero
 
             _heroAnimator.OverrideController(weaponData.OverrideController);
 
-            OnWeaponChange?.Invoke(_weaponSlot.EquippedWeapon, _weaponId);
+            OnWeaponChange?.Invoke(_weaponSlot.EquippedWeapon);
         }
 
         public void LoadData(PlayerData data)
@@ -28,7 +27,6 @@ namespace Code.Runtime.Entity.Hero
 
             if (weaponId != 0)
             {
-                _weaponId.Id = weaponId;
                 WeaponData weaponData = _itemFactory.LoadWeapon(weaponId);
                 EquipWeapon(weaponData);
             }
@@ -36,16 +34,15 @@ namespace Code.Runtime.Entity.Hero
             {
                 if (_weaponData)
                 {
-                    WeaponData weapon = _itemFactory.LoadWeapon(_weaponData.WeaponId.Id);
-                    EquipWeapon(weapon);
+                    EquipWeapon(_weaponData);
                 }
             }
         }
 
         public void UpdateData(PlayerData data)
         {
-            data.HeroEquipment.WeaponStringId = _weaponId.Name;
-            data.HeroEquipment.WeaponIntId = _weaponId.Id;
+            data.HeroEquipment.WeaponStringId = _weaponData.WeaponId.Name;
+            data.HeroEquipment.WeaponIntId = _weaponData.WeaponId.Id;
         }
     }
 }

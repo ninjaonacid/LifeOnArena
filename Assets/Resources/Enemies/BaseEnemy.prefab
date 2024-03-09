@@ -282,7 +282,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 989bfc85d969d91428fdc33c3d43149b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _targetLayer:
+    serializedVersion: 2
+    m_Bits: 2048
   _stats: {fileID: 2085898622953279013}
+  _entityWeapon: {fileID: 8293864989913983261}
 --- !u!114 &6610648692135647668
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -295,7 +299,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd96e37caf83dc848941bda6b7d0deb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Attack: {fileID: 6966552553589898628}
+  AttackComponent: {fileID: 6966552553589898628}
   TriggerObserver: {fileID: 8949411577163398733}
 --- !u!114 &2892997724190106139
 MonoBehaviour:
@@ -326,7 +330,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4d656a13cfa1d84d94341642ae53936, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _stats: {fileID: 0}
+  _stats: {fileID: 2085898622953279013}
   Animator: {fileID: 7813538039565963228}
 --- !u!114 &4058648672316291509
 MonoBehaviour:
@@ -354,7 +358,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _agentMoveToPlayer: {fileID: 7813538039565963230}
-  _enemyAttack: {fileID: 6966552553589898628}
+  EnemyAttackComponent: {fileID: 6966552553589898628}
   _enemyAnimator: {fileID: 7813538039565963228}
   _aggression: {fileID: 9028153927956947511}
   _enemyTarget: {fileID: 3027789663709577760}
@@ -398,9 +402,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _weaponSlot:
-    WeaponId: {fileID: 0}
-    WeaponData: {fileID: 0}
+    EquippedWeapon: {fileID: 0}
   _weaponPosition: {fileID: 3436043548892321881}
+  IsCollisionWeapon: 0
+  _weaponData: {fileID: 0}
 --- !u!114 &4845501457382912920
 MonoBehaviour:
   m_ObjectHideFlags: 0

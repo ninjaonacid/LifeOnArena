@@ -1862,6 +1862,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HurtBox
       objectReference: {fileID: 0}
+    - target: {fileID: 6610648692135647668, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
+      propertyPath: AttackComponent
+      value: 
+      objectReference: {fileID: 5111746336203048662}
     - target: {fileID: 6716876832464804808, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
       propertyPath: _enemyConfig
       value: 
@@ -1874,6 +1878,14 @@ PrefabInstance:
       propertyPath: _stats
       value: 
       objectReference: {fileID: 4227790607017457015}
+    - target: {fileID: 6966552553589898628, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
+      propertyPath: _entityWeapon
+      value: 
+      objectReference: {fileID: 6144883331567080015}
+    - target: {fileID: 8293864989913983261, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
+      propertyPath: _weaponData
+      value: 
+      objectReference: {fileID: 11400000, guid: da9e05244a9efcc44bc96f1dfc86a47f, type: 2}
     - target: {fileID: 8293864989913983261, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
       propertyPath: _weaponSlot.WeaponId
       value: 
@@ -1911,7 +1923,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _agentMoveToPlayer: {fileID: 5346331190574822540}
-  _enemyAttack: {fileID: 5111746336203048662}
+  EnemyAttackComponent: {fileID: 5111746336203048662}
   _enemyAnimator: {fileID: 5346331190574822542}
   _aggression: {fileID: 6563093468807338341}
   _enemyTarget: {fileID: 890136297104685426}
@@ -1991,6 +2003,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9364bfd7d71f53e41ace818fd1ea7be2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6144883331567080015 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8293864989913983261, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
+  m_PrefabInstance: {fileID: 2764850178834398034}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 196521611167726001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1193d293b5931b48b8e90d7f46f7890, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &6563093468807338341 stripped

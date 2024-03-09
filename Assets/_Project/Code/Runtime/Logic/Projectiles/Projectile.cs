@@ -18,8 +18,8 @@ namespace Code.Runtime.Logic.Projectiles
         
         [SerializeField] private Collider _collider;
         [SerializeField] private Rigidbody _rb;
-        
         [SerializeField] private VisualEffectIdentifier _collisionEffectId;
+        [SerializeField] private LayerMask _mask;
         
         private VisualEffectFactory _visualFactory;
         
@@ -30,12 +30,23 @@ namespace Code.Runtime.Logic.Projectiles
             
             if(_collisionEffectId != null)
                 _visualFactory.PrewarmEffect(_collisionEffectId.Id, 1).Forget();
-            
+        }
+
+        public void Setup(Vector3 direction, float speed, float lifeTime, LayerMask mask)
+        {
+            Vector3 movementVector = new Vector3(direction.x, 0, direction.z);
+            _rb.velocity = movementVector * speed;
+            _mask = mask;
+
+            HandleLifetime(lifeTime).Forget();
         }
 
         public async void OnTriggerEnter(Collider other)
         {
-            await HandleCollision(other.gameObject);
+            if (other.gameObject.layer == _mask)
+            {
+                await HandleCollision(other.gameObject);
+            }
         }
 
         public void SetVelocity(Vector3 direction, float speed)
@@ -56,6 +67,12 @@ namespace Code.Runtime.Logic.Projectiles
             {
                 Target = other
             });
+        }
+
+        private async UniTask HandleLifetime(float lifeTime)
+        {
+            await UniTask.Delay(TimeSpan.FromSeconds(lifeTime));
+            ReturnToPool();
         }
     }
 }
