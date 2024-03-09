@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Threading;
 using Code.Runtime.ConfigData.Identifiers;
 using Code.Runtime.Core.Factory;
 using Code.Runtime.Core.ObjectPool;
 using Code.Runtime.Logic.Collision;
 using Code.Runtime.Logic.VisualEffects;
+using Code.Runtime.Utils;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using VContainer;
@@ -22,6 +24,7 @@ namespace Code.Runtime.Logic.Projectiles
         [SerializeField] private LayerMask _mask;
         
         private VisualEffectFactory _visualFactory;
+        private CancellationTokenSource _cts;
         
         [Inject]
         public void Construct(VisualEffectFactory visualFactory)
@@ -38,14 +41,14 @@ namespace Code.Runtime.Logic.Projectiles
             _rb.velocity = movementVector * speed;
             _mask = mask;
 
-            HandleLifetime(lifeTime).Forget();
+            HandleLifetime(lifeTime, TaskHelper.CreateToken(ref _cts)).Forget();
         }
 
         public async void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.layer == _mask)
+            if (_mask == 1 << other.gameObject.layer)
             {
-                await HandleCollision(other.gameObject);
+                await HandleCollision(other.gameObject, TaskHelper.CreateToken(ref _cts));
             }
         }
 
@@ -55,7 +58,7 @@ namespace Code.Runtime.Logic.Projectiles
             _rb.velocity = movementVector * speed;
         }
 
-        private async UniTask HandleCollision(GameObject other)
+        private async UniTask HandleCollision(GameObject other, CancellationToken token)
         {
             if (_collisionEffectId is not null)
             {
@@ -69,9 +72,9 @@ namespace Code.Runtime.Logic.Projectiles
             });
         }
 
-        private async UniTask HandleLifetime(float lifeTime)
+        private async UniTask HandleLifetime(float lifeTime, CancellationToken token)
         {
-            await UniTask.Delay(TimeSpan.FromSeconds(lifeTime));
+            await UniTask.Delay(TimeSpan.FromSeconds(lifeTime), cancellationToken: token);
             ReturnToPool();
         }
     }

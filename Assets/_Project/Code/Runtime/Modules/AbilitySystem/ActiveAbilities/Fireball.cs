@@ -1,5 +1,6 @@
 ﻿using Code.Runtime.Core.Factory;
 using Code.Runtime.Entity;
+using Code.Runtime.Logic.Collision;
 using Code.Runtime.Logic.Projectiles;
 using UnityEngine;
 
@@ -29,6 +30,12 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
             projectile.transform.position = (casterCenter + Vector3.forward);
             var direction = caster.transform.forward;
             projectile.Setup(direction, _speed, _lifeTime, layer);
+            projectile.OnHit += OnHit;
+        }
+
+        private void OnHit(CollisionData obj)
+        {
+            obj.Target.GetComponent<StatusEffectController>().ApplyEffectToSelf();
         }
     }
 }

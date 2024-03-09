@@ -16,7 +16,7 @@ namespace Code.Runtime.Logic.Weapon
         
         private void OnTriggerEnter(Collider other)
         {
-            if (_mask.value == other.gameObject.layer)
+            if (_mask == 1 << other.gameObject.layer)
             {
                 Hit?.Invoke(new CollisionData()
                 {
