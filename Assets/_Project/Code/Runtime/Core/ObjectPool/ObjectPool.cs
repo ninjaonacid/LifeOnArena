@@ -7,23 +7,30 @@ namespace Code.Runtime.Core.ObjectPool
     public class ObjectPool<T> where T : Component, IPoolable
     {
         private GameObject _poolRoot;
-
-        private readonly GameObject _prefab;
+        
         private readonly Func<T> _factory;
         private readonly Stack<T> _objectsStock;
 
-        public ObjectPool(Func<T> factory, GameObject prefab)
+        private readonly Action _onCreate;
+        private readonly Action _onRelease;
+
+        public ObjectPool(Func<T> factory, Action onCreate, Action onRelease)
         {
             _factory = factory;
-            _prefab = prefab;
+            _onCreate = onCreate;
             _objectsStock = new Stack<T>();
         }
 
-        public void Initialize(int size = 1)
+        public ObjectPool(Func<T> factory)
+        {
+            _factory = factory;
+        }
+
+        public void Initialize(string prefabName)
         {
             if (_poolRoot is null)
             {
-                _poolRoot = new GameObject($"{_prefab.gameObject.name} Pool");
+                _poolRoot = new GameObject($"{prefabName} Pool");
             }
         }
 
@@ -65,6 +72,8 @@ namespace Code.Runtime.Core.ObjectPool
             obj.InitializePoolable(Return);
             
             obj.transform.SetParent(_poolRoot.transform);
+
+            _onCreate?.Invoke();
 
             return obj;
         }

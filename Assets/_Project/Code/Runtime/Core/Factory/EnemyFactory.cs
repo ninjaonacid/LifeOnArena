@@ -75,7 +75,7 @@ namespace Code.Runtime.Core.Factory
 
             GameObject prefab = await _assetProvider.Load<GameObject>(monsterData.PrefabReference);
             
-            GameObject monster = _objectPoolProvider.Spawn(mobId, prefab);
+            GameObject monster = _objectPoolProvider.Spawn(prefab);
             
             monster.transform.SetParent(parent);
 

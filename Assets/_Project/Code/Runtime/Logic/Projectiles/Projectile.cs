@@ -52,24 +52,21 @@ namespace Code.Runtime.Logic.Projectiles
             }
         }
 
-        public void SetVelocity(Vector3 direction, float speed)
-        {
-            Vector3 movementVector = new Vector3(direction.x, 0, direction.z);
-            _rb.velocity = movementVector * speed;
-        }
-
         private async UniTask HandleCollision(GameObject other, CancellationToken token)
         {
             if (_collisionEffectId is not null)
             {
                 VisualEffect collisionEffect = await _visualFactory.CreateVisualEffect(_collisionEffectId.Id);
                 transform.position = other.transform.position;
+                
             }
             
             OnHit?.Invoke(new CollisionData
             {
                 Target = other
             });
+            
+            ReturnToPool();
         }
 
         private async UniTask HandleLifetime(float lifeTime, CancellationToken token)

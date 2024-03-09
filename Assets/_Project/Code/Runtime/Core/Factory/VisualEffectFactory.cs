@@ -30,7 +30,7 @@ namespace Code.Runtime.Core.Factory
 
             var prefab = await _assetProvider.Load<GameObject>(visualEffect.PrefabReference);
             
-            var particleSystem = _poolProvider.Spawn<VisualEffect>(id, prefab);
+            var particleSystem = _poolProvider.Spawn<VisualEffect>(prefab);
 
             return particleSystem;
         }
@@ -45,14 +45,14 @@ namespace Code.Runtime.Core.Factory
         public async UniTask<VisualEffect> CreateVisualEffectWithTimer(int id, float time)
         {
             var visualEffect = await CreateVisualEffect(id);
-            _poolProvider.ReturnWithTimer(id, visualEffect, time).Forget();
+            _poolProvider.ReturnWithTimer(visualEffect, time).Forget();
             return visualEffect;
         }
 
         public async UniTask<VisualEffect> CreateVisualEffectWithTimer(int id, Vector3 position, float time)
         {
             var visualEffect = await CreateVisualEffect(id);
-            _poolProvider.ReturnWithTimer(id, visualEffect, time).Forget();
+            _poolProvider.ReturnWithTimer(visualEffect, time).Forget();
             visualEffect.transform.position = position;
             return visualEffect;
         }

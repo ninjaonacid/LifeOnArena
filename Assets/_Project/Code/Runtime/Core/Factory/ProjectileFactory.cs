@@ -1,4 +1,5 @@
-﻿using Code.Runtime.Core.ConfigProvider;
+﻿using System;
+using Code.Runtime.Core.ConfigProvider;
 using Code.Runtime.Core.ObjectPool;
 using Code.Runtime.Logic.Projectiles;
 
@@ -21,6 +22,12 @@ namespace Code.Runtime.Core.Factory
         }
 
         public Projectile CreateProjectile(Projectile prefab)
+        {
+            var projectile = _poolProvider.Spawn<Projectile>(prefab.gameObject);
+            return projectile;
+        }
+
+        public Projectile CreateProjectile(Projectile prefab, Action onCreate)
         {
             var projectile = _poolProvider.Spawn<Projectile>(prefab.gameObject);
             return projectile;

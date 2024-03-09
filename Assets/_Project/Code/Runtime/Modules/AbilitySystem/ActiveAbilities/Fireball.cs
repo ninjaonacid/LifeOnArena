@@ -35,7 +35,7 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
 
         private void OnHit(CollisionData obj)
         {
-            obj.Target.GetComponent<StatusEffectController>().ApplyEffectToSelf();
+            
         }
     }
 }

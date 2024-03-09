@@ -55,7 +55,7 @@ namespace Code.Runtime.Core.Factory
         private async UniTaskVoid WarmAssets(int id, AssetReference assetReference)
         {
             var hitVfx = await _assetProvider.Load<GameObject>(assetReference);
-            _poolProvider.WarmPool(id, hitVfx, 5);
+            _poolProvider.WarmPool(hitVfx, 5);
         }
         
         public Weapon CreateWeapon(GameObject prefab, Transform position)

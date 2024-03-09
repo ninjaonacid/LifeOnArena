@@ -10,29 +10,13 @@ namespace Code.Runtime.Core.ObjectPool
     public class ObjectPoolProvider : IDisposable
     {
         private readonly IObjectResolver _objectResolver;
-        private readonly Dictionary<int, ObjectPool<PooledObject>> _identifierToPoolMap;
         private readonly Dictionary<int, ObjectPool<PooledObject>> _prefabToPoolMap;
 
         public ObjectPoolProvider(IObjectResolver resolver)
         {
             _objectResolver = resolver;
             
-            _identifierToPoolMap = new Dictionary<int, ObjectPool<PooledObject>>();
             _prefabToPoolMap = new Dictionary<int, ObjectPool<PooledObject>>();
-        }
-
-        public GameObject Spawn(int id, GameObject prefab)
-        {
-            if (!_identifierToPoolMap.TryGetValue(id, out var objectPool))
-            {
-                objectPool = CreatePool(prefab);
-                
-                _identifierToPoolMap.Add(id, objectPool);
-                
-                objectPool.Initialize();
-            }
-      
-            return objectPool.Get().gameObject;
         }
 
         public GameObject Spawn(GameObject prefab)
@@ -44,7 +28,22 @@ namespace Code.Runtime.Core.ObjectPool
                 
                 _prefabToPoolMap.Add(prefabInstanceId, objectPool);
                 
-                objectPool.Initialize();
+                objectPool.Initialize(prefab.name);
+            }
+
+            return objectPool.Get().gameObject;
+        }
+        
+        public GameObject Spawn(GameObject prefab, Action onCreate, Action onRelease)
+        {
+            int prefabInstanceId = prefab.GetInstanceID();
+            if (!_prefabToPoolMap.TryGetValue(prefabInstanceId, out var objectPool))
+            {
+                objectPool = CreatePool(prefab, onCreate, onRelease);
+                
+                _prefabToPoolMap.Add(prefabInstanceId, objectPool);
+                
+                objectPool.Initialize(prefab.name);
             }
 
             return objectPool.Get().gameObject;
@@ -60,7 +59,7 @@ namespace Code.Runtime.Core.ObjectPool
                 
                 _prefabToPoolMap.Add(prefabInstanceId, objectPool);
                 
-                objectPool.Initialize();
+                objectPool.Initialize(prefab.name);
                 objectPool.Warm(size);
             }
             else
@@ -68,27 +67,12 @@ namespace Code.Runtime.Core.ObjectPool
                 objectPool.Warm(size);
             }
         }
-
-        public void WarmPool(int id, GameObject prefab, int size)
+        
+        public async UniTaskVoid ReturnWithTimer(PooledObject obj, float time)
         {
-            if (!_identifierToPoolMap.TryGetValue(id, out var objectPool))
-            {
-                objectPool = CreatePool(prefab);
-                
-                _identifierToPoolMap.Add(id, objectPool);
-                
-                objectPool.Initialize();
-                objectPool.Warm(size);
-            }
-            else
-            {
-                objectPool.Warm(size);
-            }
-        }
-
-        public async UniTaskVoid ReturnWithTimer(int id, PooledObject obj, float time)
-        {
-            if(_identifierToPoolMap.TryGetValue(id, out var objectPool))
+            int prefabId = obj.gameObject.GetInstanceID();
+            
+            if(_prefabToPoolMap.TryGetValue(prefabId, out var objectPool))
             {
                 await UniTask.Delay(TimeSpan.FromSeconds(time));
                 objectPool.Return(obj);
@@ -99,22 +83,23 @@ namespace Code.Runtime.Core.ObjectPool
             }
         }
 
-        private ObjectPool<PooledObject> CreatePool(GameObject prefab)
+        private ObjectPool<PooledObject> CreatePool(GameObject prefab, Action onCreate, Action onRelease)
         {
-            return new ObjectPool<PooledObject>(() => Instantiate(prefab), prefab);
-        }
-
-        public TComponent Spawn<TComponent>(int id, GameObject prefab)
-        {
-           var go =  Spawn(id, prefab);
-           return go.GetComponent<TComponent>();
+            return new ObjectPool<PooledObject>(() => Instantiate(prefab), onCreate, onRelease);
         }
         
+        private ObjectPool<PooledObject> CreatePool(GameObject prefab)
+        {
+            return new ObjectPool<PooledObject>(() => Instantiate(prefab));
+        }
+
+      
         public TComponent Spawn<TComponent>(GameObject prefab)
         {
             var go =  Spawn(prefab);
             return go.GetComponent<TComponent>();
         }
+        
         
         private PooledObject Instantiate(GameObject prefab)  
         {
