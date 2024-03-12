@@ -44,7 +44,7 @@ namespace Code.Runtime.Logic.Projectiles
 
         public Projectile SetLayerMask(LayerMask mask)
         {
-            _mask = mask;
+            _mask = LayerMask.NameToLayer("Hittable");
             return this;
         }
 
@@ -55,8 +55,10 @@ namespace Code.Runtime.Logic.Projectiles
 
         public void OnTriggerEnter(Collider other)
         {
-            HandleCollision(other.gameObject);
-            
+            if(_mask == 1 << other.gameObject.layer)
+            {
+                HandleCollision(other.gameObject);
+            }
         }
 
         private void HandleCollision(GameObject other)

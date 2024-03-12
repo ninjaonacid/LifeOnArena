@@ -35,8 +35,8 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
             
             var layer = caster.GetComponent<EntityAttack>().GetTargetLayer();
             var hurtBox = caster.GetComponent<EntityHurtBox>();
-            Vector3 casterCenter = hurtBox.GetCenterTransform();
-            projectile.transform.position = (casterCenter + Vector3.forward + Vector3.up);
+            Vector3 casterCenter = hurtBox.GetHeightTransform();
+            projectile.transform.position = casterCenter;
             var direction = caster.transform.forward;
 
             projectile
