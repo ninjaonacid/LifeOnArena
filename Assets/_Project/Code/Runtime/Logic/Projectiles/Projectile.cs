@@ -34,32 +34,39 @@ namespace Code.Runtime.Logic.Projectiles
             if(_collisionEffectId != null)
                 _visualFactory.PrewarmEffect(_collisionEffectId.Id, 1).Forget();
         }
-
-        public void Setup(Vector3 direction, float speed, float lifeTime, LayerMask mask)
+        
+        public Projectile SetVelocity(Vector3 direction, float speed)
         {
             Vector3 movementVector = new Vector3(direction.x, 0, direction.z);
             _rb.velocity = movementVector * speed;
-            _mask = mask;
+            return this;
+        }
 
+        public Projectile SetLayerMask(LayerMask mask)
+        {
+            _mask = mask;
+            return this;
+        }
+
+        public void SetLifetime(float lifeTime)
+        {
             HandleLifetime(lifeTime, TaskHelper.CreateToken(ref _cts)).Forget();
         }
 
-        public async void OnTriggerEnter(Collider other)
+        public void OnTriggerEnter(Collider other)
         {
-            if (_mask == 1 << other.gameObject.layer)
-            {
-                await HandleCollision(other.gameObject, TaskHelper.CreateToken(ref _cts));
-            }
+            HandleCollision(other.gameObject);
+            
         }
 
-        private async UniTask HandleCollision(GameObject other, CancellationToken token)
+        private void HandleCollision(GameObject other)
         {
-            if (_collisionEffectId is not null)
-            {
-                VisualEffect collisionEffect = await _visualFactory.CreateVisualEffect(_collisionEffectId.Id);
-                transform.position = other.transform.position;
-                
-            }
+            // if (_collisionEffectId is not null)
+            // {
+            //     VisualEffect collisionEffect = await _visualFactory.CreateVisualEffect(_collisionEffectId.Id);
+            //     transform.position = other.transform.position;
+            //     
+            // }
             
             OnHit?.Invoke(new CollisionData
             {

@@ -9,7 +9,7 @@ namespace Code.Runtime.Core.Factory
     {
         private readonly ObjectPoolProvider _poolProvider;
         private readonly IConfigProvider _configProvider;
-        
+
         public ProjectileFactory(ObjectPoolProvider poolProvider, IConfigProvider configProvider)
         {
             _poolProvider = poolProvider;
@@ -27,9 +27,11 @@ namespace Code.Runtime.Core.Factory
             return projectile;
         }
 
-        public Projectile CreateProjectile(Projectile prefab, Action onCreate)
+        public Projectile CreateProjectile(Projectile prefab, Action<Projectile> onCreate, Action<Projectile> onRelease,
+            Action<Projectile> onGet)
         {
-            var projectile = _poolProvider.Spawn<Projectile>(prefab.gameObject);
+            var projectile = _poolProvider.Spawn<Projectile>(prefab.gameObject, onCreate as Action<PooledObject>,
+                onRelease as Action<PooledObject>, onGet as Action<PooledObject>);
             return projectile;
         }
     }

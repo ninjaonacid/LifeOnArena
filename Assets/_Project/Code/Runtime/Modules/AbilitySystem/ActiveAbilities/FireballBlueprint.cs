@@ -11,7 +11,7 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
         [SerializeField] private float _speed;
         public override IAbility GetAbility()
         {
-            return new Fireball(_projectile, _projectileFactory, _lifeTime, _speed);
+            return new Fireball(_projectile, StatusEffects, _projectileFactory, _lifeTime, _speed);
         }
     }
 }

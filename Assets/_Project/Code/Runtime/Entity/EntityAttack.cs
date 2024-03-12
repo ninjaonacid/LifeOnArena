@@ -13,5 +13,10 @@ namespace Code.Runtime.Entity
         {
             return _targetLayer;
         }
+
+        public LayerMask GetLayer()
+        {
+            return this.gameObject.layer;
+        }
     }
 }

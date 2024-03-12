@@ -13702,8 +13702,8 @@ GameObject:
   - component: {fileID: 4302124420856992568}
   - component: {fileID: 4301188087434772166}
   - component: {fileID: 4140074422687958933}
-  - component: {fileID: 2052135052558941523}
   - component: {fileID: 6980933038677081159}
+  - component: {fileID: 3241038886618412806}
   m_Layer: 0
   m_Name: FireballProjectile
   m_TagString: Untagged
@@ -18608,23 +18608,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d06574a790ac4c52a4790ddb77902c1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _collider: {fileID: 2052135052558941523}
+  _collider: {fileID: 3241038886618412806}
   _rb: {fileID: 6980933038677081159}
   _collisionEffectId: {fileID: 0}
---- !u!136 &2052135052558941523
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4139478733270736082}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 0.809683
-  m_Height: 1.619366
-  m_Direction: 1
-  m_Center: {x: -0.017736733, y: -0.04010564, z: -0.018196762}
+  _mask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!54 &6980933038677081159
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -18641,6 +18630,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &3241038886618412806
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4139478733270736082}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.4699602, y: 1.3246467, z: 1.65636}
+  m_Center: {x: -0.0005736351, y: 0.049566746, z: -0.082912505}
 --- !u!1 &4140074422925127366
 GameObject:
   m_ObjectHideFlags: 0

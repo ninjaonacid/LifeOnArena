@@ -11,19 +11,22 @@ namespace Code.Runtime.Core.ObjectPool
         private readonly Func<T> _factory;
         private readonly Stack<T> _objectsStock;
 
-        private readonly Action _onCreate;
-        private readonly Action _onRelease;
+        private readonly Action<T> _onCreate;
+        private readonly Action<T> _onRelease;
+        private readonly Action<T> _onGet;
 
-        public ObjectPool(Func<T> factory, Action onCreate, Action onRelease)
+        public ObjectPool(Func<T> factory, Action<T> onCreate, Action<T> onRelease, Action<T> onGet)
         {
             _factory = factory;
             _onCreate = onCreate;
+            _onGet = onGet;
             _objectsStock = new Stack<T>();
         }
 
         public ObjectPool(Func<T> factory)
         {
             _factory = factory;
+            _objectsStock = new Stack<T>();
         }
 
         public void Initialize(string prefabName)
@@ -61,8 +64,18 @@ namespace Code.Runtime.Core.ObjectPool
             }
             
             obj.gameObject.SetActive(true);
+            
+            _onGet?.Invoke(obj);
 
             return obj;
+        }
+
+        public void Release(T obj)
+        {
+            if (_objectsStock.Contains(obj))
+            {
+                
+            }
         }
 
         private T CreateObject() 
@@ -73,7 +86,7 @@ namespace Code.Runtime.Core.ObjectPool
             
             obj.transform.SetParent(_poolRoot.transform);
 
-            _onCreate?.Invoke();
+            _onCreate?.Invoke(obj);
 
             return obj;
         }
