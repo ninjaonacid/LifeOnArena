@@ -90,6 +90,11 @@ namespace Code.Runtime.Logic.Projectiles
 
         private async UniTask HandleLifetime(float lifeTime, CancellationToken token)
         {
+            if (token.IsCancellationRequested)
+            {
+                ReturnToPool();
+                token.ThrowIfCancellationRequested();
+            }
             await UniTask.Delay(TimeSpan.FromSeconds(lifeTime), cancellationToken: token);
             ReturnToPool();
         }

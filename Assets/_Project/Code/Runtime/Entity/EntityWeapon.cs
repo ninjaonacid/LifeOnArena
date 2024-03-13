@@ -51,18 +51,23 @@ namespace Code.Runtime.Entity
                 _weaponData.LocalRotation.y,
                 _weaponData.LocalRotation.z);
             
-            EnableWeapon(IsCollisionWeapon);
+            EnableCollider(IsCollisionWeapon);
         }
 
-        private void InitializeWeapon()
-        {
-           
-        }
-        
         public void EnableWeapon(bool value)
         {
+            EnableCollider(value);
+            EnableTrail(value);
+        }
+        
+        private void EnableCollider(bool value)
+        {
             _weaponSlot.EquippedWeapon.EnableCollider(value);
-            _weaponSlot.EquippedWeapon.EnableTrail(value);
+        }
+
+        private void EnableTrail(bool value)
+        {
+            _weaponSlot.EquippedWeapon.EnableCollider(value);
         }
 
         public Weapon GetEquippedWeapon() => _weaponSlot.EquippedWeapon;

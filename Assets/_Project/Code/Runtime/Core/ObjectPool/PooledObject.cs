@@ -12,16 +12,9 @@ namespace Code.Runtime.Core.ObjectPool
             _returnToPool = returnToPool;
         }
 
-        private void OnDisable()
-        {
-            _returnToPool?.Invoke(this);
-        }
-
         public void ReturnToPool()
         {
            _returnToPool?.Invoke(this);
         }
     }
-
-    
 }

@@ -70,12 +70,14 @@ namespace Code.Runtime.Core.ObjectPool
             return obj;
         }
 
-        public void Release(T obj)
+        public void ReleaseAll()
         {
-            if (_objectsStock.Contains(obj))
+            foreach (var obj in _objectsStock)
             {
-                
+                _onRelease?.Invoke(obj);
             }
+
+            _objectsStock.Clear();
         }
 
         private T CreateObject() 
