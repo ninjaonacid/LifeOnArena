@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Code.Runtime.Core.Factory;
 using Code.Runtime.Entity;
+using Code.Runtime.Entity.EntitiesComponents;
 using Code.Runtime.Entity.StatusEffects;
 using Code.Runtime.Logic.Collision;
 using Code.Runtime.Logic.Projectiles;
@@ -43,17 +44,20 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
             projectile
                 .SetVelocity(direction, _speed)
                 .SetLayerMask(layer)
+                .SetOwner(caster)
                 .SetLifetime(_lifeTime);
         }
 
-        private void OnHit(CollisionData obj)
+        private void OnHit(CollisionData data)
         {
-            var statusController = obj.Target.GetComponentInParent<StatusEffectController>();
+            var statusController = data.Target.GetComponentInParent<StatusEffectController>();
 
             foreach (var effect in _effects)
             {
                 statusController.ApplyEffectToSelf(effect);
             }
+            
+            data.Source.GetComponent<IAttackComponent>().InvokeHit(1);
         }
 
         private void OnCreate(Projectile projectile)

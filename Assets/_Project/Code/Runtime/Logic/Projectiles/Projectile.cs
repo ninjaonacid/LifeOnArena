@@ -22,7 +22,9 @@ namespace Code.Runtime.Logic.Projectiles
         [SerializeField] private Collider _collider;
         [SerializeField] private Rigidbody _rb;
         [SerializeField] private VisualEffectIdentifier _collisionEffectId;
-        [SerializeField] private LayerMask _mask;
+        
+        private LayerMask _mask;
+        private GameObject _owner;
         
         private VisualEffectFactory _visualFactory;
         private CancellationTokenSource _cts;
@@ -48,6 +50,12 @@ namespace Code.Runtime.Logic.Projectiles
             _mask = mask;
             return this;
         }
+
+        public Projectile SetOwner(GameObject obj)
+        {
+            _owner = obj;
+            return this;
+        } 
 
         public void SetLifetime(float lifeTime)
         {
