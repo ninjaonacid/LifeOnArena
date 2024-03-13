@@ -28,6 +28,7 @@ namespace Code.Runtime.Logic.VisualEffects
         public void Stop()
         {
             _particleSystem.Stop();
+            
             if (_cts.IsCancellationRequested)
             {
                 _cts.Token.ThrowIfCancellationRequested();

@@ -1,9 +1,7 @@
-using System;
 using System.Collections.Generic;
 using Code.Runtime.Core.Audio;
 using Code.Runtime.Core.Factory;
 using Code.Runtime.Entity.Enemy;
-using Code.Runtime.Entity.EntitiesComponents;
 using Code.Runtime.Logic.Collision;
 using Code.Runtime.Logic.Weapon;
 using Code.Runtime.Services.BattleService;
@@ -14,10 +12,8 @@ using VContainer;
 namespace Code.Runtime.Entity.Hero
 {
     [RequireComponent(typeof(HeroAnimator), typeof(CharacterController))]
-    public class HeroAttackComponent : EntityAttack, IAttackComponent
+    public class HeroAttackComponent : EntityAttack
     {
-        public event Action<int> OnHit;
-        
         [SerializeField] private HeroWeapon _heroWeapon;
 
         private List<CollisionData> _collidedData;
@@ -39,10 +35,7 @@ namespace Code.Runtime.Entity.Hero
             _heroWeapon.OnWeaponChange += ChangeWeapon;
         }
         
-        public void InvokeHit(int hitCount)
-        {
-            OnHit?.Invoke(hitCount);
-        }
+        
 
         public void ClearCollisionData()
         {
@@ -68,7 +61,7 @@ namespace Code.Runtime.Entity.Hero
 
             _battleService.CreateWeaponAttack(_stats, collision.Target);
             _collidedData.Add(collision);
-            OnHit?.Invoke(1);
+            InvokeHit(1);
         }
 
         private async UniTaskVoid HitVfx(Vector3 position)

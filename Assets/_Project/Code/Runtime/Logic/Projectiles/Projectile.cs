@@ -3,7 +3,9 @@ using System.Threading;
 using Code.Runtime.ConfigData.Identifiers;
 using Code.Runtime.Core.Factory;
 using Code.Runtime.Core.ObjectPool;
+using Code.Runtime.Entity.Enemy;
 using Code.Runtime.Logic.Collision;
+using Code.Runtime.Logic.VisualEffects;
 using Code.Runtime.Utils;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -31,7 +33,7 @@ namespace Code.Runtime.Logic.Projectiles
             _visualFactory = visualFactory;
             
             if(_collisionEffectId != null)
-                _visualFactory.PrewarmEffect(_collisionEffectId.Id, 1).Forget();
+                _visualFactory.PrewarmEffect(_collisionEffectId.Id, 2).Forget();
         }
         
         public Projectile SetVelocity(Vector3 direction, float speed)
@@ -56,21 +58,19 @@ namespace Code.Runtime.Logic.Projectiles
         {
             if(_mask == 1 << other.gameObject.layer)
             {
-                HandleCollision(other.gameObject);
+                HandleCollision(other.gameObject).Forget();
             }
         }
 
-        private void HandleCollision(GameObject other)
+        private async UniTask HandleCollision(GameObject other)
         {
-            // if (_collisionEffectId is not null)
-            // {
-            //     VisualEffect collisionEffect = await _visualFactory.CreateVisualEffect(_collisionEffectId.Id);
-            //     transform.position = other.transform.position;
-            //     
-            // }
-            
-            Debug.Log($"collided with: {other.gameObject.name}");
-            
+            if (_collisionEffectId is not null)
+            {
+                VisualEffect collisionEffect = await _visualFactory.CreateVisualEffect(_collisionEffectId.Id);
+                collisionEffect.transform.position = other.GetComponent<EnemyHurtBox>().GetCenterTransform();
+                collisionEffect.Play();
+            }
+
             OnHit?.Invoke(new CollisionData
             {
                 Target = other
