@@ -70,6 +70,8 @@ namespace Code.Runtime.Logic.Projectiles
             //     
             // }
             
+            Debug.Log($"collided with: {other.gameObject.name}");
+            
             OnHit?.Invoke(new CollisionData
             {
                 Target = other

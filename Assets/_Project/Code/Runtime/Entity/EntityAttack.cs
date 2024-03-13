@@ -16,7 +16,7 @@ namespace Code.Runtime.Entity
 
         public LayerMask GetLayer()
         {
-            return this.gameObject.layer;
+            return _entityWeapon.GetEquippedWeapon().gameObject.layer;
         }
     }
 }

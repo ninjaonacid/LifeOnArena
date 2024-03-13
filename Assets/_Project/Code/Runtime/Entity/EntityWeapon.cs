@@ -64,7 +64,8 @@ namespace Code.Runtime.Entity
             _weaponSlot.EquippedWeapon.EnableCollider(value);
             _weaponSlot.EquippedWeapon.EnableTrail(value);
         }
-        
+
+        public Weapon GetEquippedWeapon() => _weaponSlot.EquippedWeapon;
         public WeaponData GetEquippedWeaponData() => _weaponData;
    
     }
