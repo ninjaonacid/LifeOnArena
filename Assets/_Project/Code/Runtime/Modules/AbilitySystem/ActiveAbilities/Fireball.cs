@@ -48,7 +48,7 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
 
         private void OnHit(CollisionData obj)
         {
-            var statusController = obj.Target.GetComponent<StatusEffectController>();
+            var statusController = obj.Target.GetComponentInParent<StatusEffectController>();
 
             foreach (var effect in _effects)
             {

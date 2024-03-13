@@ -4,7 +4,6 @@ using Code.Runtime.ConfigData.Identifiers;
 using Code.Runtime.Core.Factory;
 using Code.Runtime.Core.ObjectPool;
 using Code.Runtime.Logic.Collision;
-using Code.Runtime.Logic.VisualEffects;
 using Code.Runtime.Utils;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -44,7 +43,7 @@ namespace Code.Runtime.Logic.Projectiles
 
         public Projectile SetLayerMask(LayerMask mask)
         {
-            _mask = LayerMask.NameToLayer("Hittable");
+            _mask = mask;
             return this;
         }
 
