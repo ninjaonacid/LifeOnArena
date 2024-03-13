@@ -35,8 +35,6 @@ namespace Code.Runtime.Entity.Hero
             _heroWeapon.OnWeaponChange += ChangeWeapon;
         }
         
-        
-
         public void ClearCollisionData()
         {
             _collidedData.Clear();

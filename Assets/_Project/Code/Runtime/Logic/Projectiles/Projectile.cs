@@ -81,6 +81,7 @@ namespace Code.Runtime.Logic.Projectiles
 
             OnHit?.Invoke(new CollisionData
             {
+                Source = _owner,
                 Target = other
             });
             
