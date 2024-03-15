@@ -13,19 +13,18 @@ namespace Code.Runtime.Entity.Enemy.CommonEnemy
             _fsm.AddTransition(new Transition(
                 nameof(EnemyIdleState),
                 nameof(EnemyChaseState),
-                (transition) => _aggression.HasTarget && !EnemyAttackComponent.TargetInAttackRange));
+                (transition) => _enemyTarget.HasTarget() && !EnemyAttackComponent.TargetInAttackRange));
 
             _fsm.AddTransition(new TransitionAfter(
                 nameof(EnemyAttackState),
                 nameof(EnemyChaseState),
                 _enemyConfig.AttackDuration,
-                (transition) => _aggression.HasTarget && !EnemyAttackComponent.TargetInAttackRange));
+                (transition) => _enemyTarget.HasTarget() && !EnemyAttackComponent.TargetInAttackRange));
                 
-            _fsm.AddTransition(new TransitionAfter(
+            _fsm.AddTransition(new Transition(
                 nameof(EnemyChaseState),
                 nameof(EnemyIdleState),
-                _aggression.Cooldown,
-                (transition) => !_aggression.HasTarget));
+                (transition) => !_enemyTarget.HasTarget()));
 
             _fsm.AddTriggerTransitionFromAny("OnDamage", 
                 new Transition(
