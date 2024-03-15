@@ -14,7 +14,6 @@ namespace Code.Runtime.Entity.Enemy
             TriggerEnter?.Invoke(other);
         }
 
-
         private void OnTriggerExit(Collider other)
         {
             TriggerExit?.Invoke(other);

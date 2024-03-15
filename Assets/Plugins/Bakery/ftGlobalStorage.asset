@@ -16,7 +16,14 @@ MonoBehaviour:
   - Assets/Bakery/examples/content/sponza/sponza.FBX
   - Assets/_Project/Sources/Models/Enviroment/bloodSpikes.fbx
   - Assets/_Project/Sources/Models/Enviroment/FlatRockBlack_01.fbx
-  modifiedAssetPaddingHash: aaf8cc2e78c6d890323fd3d9
+  - Assets/_Project/Sources/Models/Enviroment/Ground_dark_black.fbx
+  - Assets/_Project/Sources/Models/Enviroment/Cemetery_fence.fbx
+  - Assets/_Project/Sources/Models/Enviroment/Cemetery_column.fbx
+  - Assets/_Project/Sources/Models/Enviroment/Dead_tree_1.fbx
+  - Assets/_Project/Sources/Models/Enviroment/brazeier.fbx
+  - Assets/_Project/Sources/Models/Enviroment/mogila.fbx
+  - Assets/_Project/Sources/Models/Terrain/Arena_dark_emissive.fbx
+  modifiedAssetPaddingHash: aaf8cc2e78c6d890323fd3d9363fd3d9567e9363194efff0de09ecc027dc894b8c67e2a814f33a06
   modifiedMeshList: []
   modifiedMeshPaddingList: 
   modifiedAssets:
@@ -407,6 +414,34 @@ MonoBehaviour:
     - RockFlat_01
     padding: 05000000
     unwrapper: 00000000
+  - meshName:
+    - Cliff_U.002
+    padding: 01000000
+    unwrapper: 00000000
+  - meshName:
+    - FenceSection.001
+    padding: 17000000
+    unwrapper: 00000000
+  - meshName:
+    - Column.003
+    padding: 1c000000
+    unwrapper: 00000000
+  - meshName:
+    - DeadTree.001
+    padding: 0c000000
+    unwrapper: 00000000
+  - meshName:
+    - Brazier
+    padding: 1a000000
+    unwrapper: 00000000
+  - meshName:
+    - Grave_002.001
+    padding: 15000000
+    unwrapper: 00000000
+  - meshName:
+    - Arena_red_purple
+    padding: 0a000000
+    unwrapper: 00000000
   assetList:
   - Assets/Bakery/examples/content/sponza/bush.FBX
   - Assets/Bakery/examples/content/floor_lamp.FBX
@@ -562,7 +597,100 @@ MonoBehaviour:
   - Assets/Plugins/ParticleEffects/Models/FX_WoodChip_01.fbx
   - Assets/Plugins/ParticleEffects/Models/FX_Vine_01.fbx
   - Assets/Plugins/ParticleEffects/Models/FX_Shard_Rock_03.fbx
-  uvOverlapAssetList: 00000000ffffffff00000000010100000000000001010000000000000000000000000000000000000000000000000000000000000000000000000000010100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000101000000000000000000000000000001010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001010000000000000000000000000000000000000000000000000000000000000000000000000000000000000101000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001010000000000000000000001010000000000000000000000000000000000000000000000000000000000000000000001010000000000000000000000000000010100000000000000000000000000000101000000000000000000000000000000000000000000000000000000000000000000000000000001010000000000000000000000000000010100000000000000000000000000000000000000000000
+  - Assets/Fantasy Asia Arena/Environment/Element/Models/Element.fbx
+  - Assets/Fantasy Asia Arena/Environment/ParticalFX/Plane.fbx
+  - Assets/Fantasy Asia Arena/Environment/Stones/Models/Stone.fbx
+  - Assets/Fantasy Asia Arena/Environment/Tree/Models/Tree.fbx
+  - Assets/Fantasy Asia Arena/Environment/Buildings/Models/Building.fbx
+  - Assets/LowPolyFantasyArena/Models/Candle_01.fbx
+  - Assets/LowPolyFantasyArena/Models/Lantern.fbx
+  - Assets/LowPolyFantasyArena/Models/Plant_02.fbx
+  - Assets/LowPolyFantasyArena/Models/Crystal_05.fbx
+  - Assets/LowPolyFantasyArena/Models/Crystal_11.fbx
+  - Assets/LowPolyFantasyArena/Models/Mushroom_01.fbx
+  - Assets/LowPolyFantasyArena/Models/Grass_03.fbx
+  - Assets/LowPolyFantasyArena/Models/Desk_05.fbx
+  - Assets/LowPolyFantasyArena/Models/Plant_03.fbx
+  - Assets/LowPolyFantasyArena/Models/Crystal_04.fbx
+  - Assets/LowPolyFantasyArena/Models/Mushroom_04.fbx
+  - Assets/LowPolyFantasyArena/Models/Reeds_01.fbx
+  - Assets/LowPolyFantasyArena/Models/Crystal_06.fbx
+  - Assets/LowPolyFantasyArena/Models/Crystal_07.fbx
+  - Assets/LowPolyFantasyArena/Models/Crystal_09.fbx
+  - Assets/LowPolyFantasyArena/Models/Crystal_14.fbx
+  - Assets/LowPolyFantasyArena/Models/Tree_01.fbx
+  - Assets/LowPolyFantasyArena/Models/Rock_02.fbx
+  - Assets/LowPolyFantasyArena/Models/Arena_02.fbx
+  - Assets/LowPolyFantasyArena/Models/Grass_01.fbx
+  - Assets/LowPolyFantasyArena/Models/Rock_03.fbx
+  - Assets/LowPolyFantasyArena/Models/Tile_04.fbx
+  - Assets/LowPolyFantasyArena/Models/Desk_04.fbx
+  - Assets/LowPolyFantasyArena/Models/Crystal_08.fbx
+  - Assets/LowPolyFantasyArena/Models/Coin_03.fbx
+  - Assets/LowPolyFantasyArena/Models/FenceBig_02.fbx
+  - Assets/LowPolyFantasyArena/Models/Ruins_02.fbx
+  - Assets/LowPolyFantasyArena/Models/Arena_01.fbx
+  - Assets/LowPolyFantasyArena/Models/Desk_01.fbx
+  - Assets/LowPolyFantasyArena/Models/Rock_04.fbx
+  - Assets/LowPolyFantasyArena/Models/Coin_02.fbx
+  - Assets/LowPolyFantasyArena/Models/Chest.fbx
+  - Assets/LowPolyFantasyArena/Models/Fire_01.fbx
+  - Assets/LowPolyFantasyArena/Models/Tree_02.fbx
+  - Assets/LowPolyFantasyArena/Models/Rock_01.fbx
+  - Assets/LowPolyFantasyArena/Models/Bridge_02.fbx
+  - Assets/LowPolyFantasyArena/Models/Plant_01.fbx
+  - Assets/LowPolyFantasyArena/Models/Tile_02.fbx
+  - Assets/LowPolyFantasyArena/Models/Coin_01.fbx
+  - Assets/LowPolyFantasyArena/Models/Stump_01.fbx
+  - Assets/LowPolyFantasyArena/Models/Crystal_01.fbx
+  - Assets/LowPolyFantasyArena/Models/Water_lily_01.fbx
+  - Assets/LowPolyFantasyArena/Models/Tile_01.fbx
+  - Assets/LowPolyFantasyArena/Models/Tile_07.fbx
+  - Assets/LowPolyFantasyArena/Models/Tile_05.fbx
+  - Assets/LowPolyFantasyArena/Models/Crystal_10.fbx
+  - Assets/LowPolyFantasyArena/Models/Crystal_13.fbx
+  - Assets/LowPolyFantasyArena/Models/Crystal_02.fbx
+  - Assets/LowPolyFantasyArena/Models/Crystal_03.fbx
+  - Assets/LowPolyFantasyArena/Models/Grass_04.fbx
+  - Assets/LowPolyFantasyArena/Models/Ruins_03.fbx
+  - Assets/LowPolyFantasyArena/Models/Water_lily_02.fbx
+  - Assets/LowPolyFantasyArena/Models/Mushroom_02.fbx
+  - Assets/LowPolyFantasyArena/Models/FenceBig_01.fbx
+  - Assets/LowPolyFantasyArena/Models/Log.fbx
+  - Assets/LowPolyFantasyArena/Models/Rock_05.fbx
+  - Assets/LowPolyFantasyArena/Models/Bridge_01.fbx
+  - Assets/LowPolyFantasyArena/Models/Grass_05.fbx
+  - Assets/LowPolyFantasyArena/Models/Mushroom_03.fbx
+  - Assets/LowPolyFantasyArena/Models/Ruins_04.fbx
+  - Assets/LowPolyFantasyArena/Models/Desk_03.fbx
+  - Assets/LowPolyFantasyArena/Models/Tile_06.fbx
+  - Assets/LowPolyFantasyArena/Models/Candle_02.fbx
+  - Assets/LowPolyFantasyArena/Models/Grass_02.fbx
+  - Assets/LowPolyFantasyArena/Models/Ruins_01.fbx
+  - Assets/LowPolyFantasyArena/Models/Tile_03.fbx
+  - Assets/LowPolyFantasyArena/Models/Crystal_12.fbx
+  - Assets/LowPolyFantasyArena/Models/Desk_02.fbx
+  - Assets/External/LowPolyFantasyArena/Models/Tile_03.fbx
+  - Assets/_Project/Sources/Models/Terrain/FantasyGrassTerrain.fbx
+  - Assets/_Project/Sources/Models/Terrain/FantasyGrassTerrain 1.fbx
+  - Assets/_Project/Sources/Models/Terrain/FantasyGrassTerrainGround.fbx
+  - Assets/_Project/Sources/Models/Enviroment/Ground_dark_grey.fbx
+  - Assets/_Project/Sources/Models/Enviroment/Ground_dark_black.fbx
+  - Assets/_Project/Sources/Models/Enviroment/Arena_red_grey.fbx
+  - Assets/_Project/Sources/Models/Enviroment/Arena_purple_grey.fbx
+  - Assets/_Project/Sources/Models/Terrain/Arena_dark_emissive.fbx
+  - Assets/_Project/Sources/Models/Enviroment/Cemetery_column.fbx
+  - Assets/_Project/Sources/Models/Enviroment/Dead_tree_1.fbx
+  - Assets/_Project/Sources/Models/Enviroment/Dead_tree_2.fbx
+  - Assets/_Project/Sources/Models/Enviroment/Dead_tree_3.fbx
+  - Assets/External/LowPolyFantasyArena/Scenes/Cemetery_fence.fbx
+  - Assets/_Project/Sources/Models/Enviroment/Cemetery_fence.fbx
+  - Assets/_Project/Sources/Models/Enviroment/brazeier.fbx
+  - Assets/_Project/Sources/Models/Enviroment/firecoal.fbx
+  - Assets/_Project/Sources/Models/Enviroment/firecoal 1.fbx
+  - Assets/_Project/Sources/Models/Enviroment/mogila.fbx
+  - Assets/_Project/Sources/Models/Enviroment/Cross_1.fbx
+  uvOverlapAssetList: 00000000ffffffff00000000010100000000000001010000000000000000000000000000000000000000000000000000000000000000000000000000010100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000101000000000000000000000000000001010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001010000000000000000000000000000000000000000000000000000000000000000000000000000000000000101000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001010000000000000000000001010000000000000000000000000000000000000000000000000000000000000000000001010000000000000000000000000000010100000000000000000000000000000101000000000000000000000000000000000000000000000000000000000000000000000000000001010000000000000000000000000000010100000000000000000000000000000000000000000000010100000000000001010000010100000101000001010000010100000101000001010000010100000101000001010000000000000101000001010000010100000101000001010000010100000101000001010000010100000101000001010000010100000101000000000000000000000101000001010000010100000000000001010000000000000101000001010000010100000101000001010000010100000101000001010000000000000000000001010000010100000101000001010000010100000000000001010000010100000101000001010000010100000000000001010000010100000101000001010000010100000101000001010000010100000000000000000000000000000101000001010000000000000000000001010000000000000000000000000000000000000000000000000000000000000000000000000000000000000101000000000000000000000000000000000000010100000000000000000000000000000000000001010000
   xatlasWarningShown: 0
   foundCompatibleSetup: 1
   gpuName: NVIDIA GeForce RTX 3060
@@ -648,5 +776,5 @@ MonoBehaviour:
   renderSettingsRTPVSceneView: 0
   renderSettingsRTPVWidth: 640
   renderSettingsRTPVHeight: 360
-  modifiedMeshPaddingArray: 05000000
+  modifiedMeshPaddingArray: 0a000000
   modifiedMeshUnwrapperArray: 00000000
