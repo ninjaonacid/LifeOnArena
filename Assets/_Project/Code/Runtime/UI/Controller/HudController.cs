@@ -34,7 +34,7 @@ namespace Code.Runtime.UI.Controller
             _heroFactory.HeroGameObject.TryGetComponent(out HeroAttackComponent heroAttack);
             _heroFactory.HeroGameObject.TryGetComponent(out HeroSkills heroSkills);
             _heroFactory.HeroGameObject.TryGetComponent(out HeroHealth heroHealth);
-            _heroFactory.HeroGameObject.TryGetComponent(out HeroAbilityCooldown heroCooldown);
+            _heroFactory.HeroGameObject.TryGetComponent(out AbilityCooldownController heroCooldown);
             
             _view.ComboCounter.Construct(heroAttack, heroHealth);
             _view.LootCounter.Construct(_gameData.PlayerData.WorldData);

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Code.Runtime.Entity.Hero
 {
-    public class HeroAbilityCooldown : MonoBehaviour
+    public class AbilityCooldownController : MonoBehaviour
     {
         private readonly List<ActiveAbilityBlueprintBase> _abilitiesOnCooldown = new List<ActiveAbilityBlueprintBase>();
 

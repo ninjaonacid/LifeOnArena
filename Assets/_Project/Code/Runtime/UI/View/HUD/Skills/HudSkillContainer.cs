@@ -8,12 +8,12 @@ namespace Code.Runtime.UI.View.HUD.Skills
         [SerializeField] private HudSkillButton[] _skillButtons;
 
         private HeroSkills _heroSkills;
-        private HeroAbilityCooldown _heroCooldown;
+        private AbilityCooldownController _cooldownController;
 
-        public void Construct(HeroSkills heroSkills, HeroAbilityCooldown heroCooldown)
+        public void Construct(HeroSkills heroSkills, AbilityCooldownController cooldownController)
         {
             _heroSkills = heroSkills;
-            _heroCooldown = heroCooldown;
+            _cooldownController = cooldownController;
             _heroSkills.OnSkillChanged += SetSkillSlots;
             _heroSkills.OnAbilityUse += UpdateCooldownView;
         }
@@ -22,7 +22,7 @@ namespace Code.Runtime.UI.View.HUD.Skills
         {
             foreach (var button in _skillButtons)
             {
-                if (_heroCooldown.IsOnCooldown(button.GetAbility()))
+                if (_cooldownController.IsOnCooldown(button.GetAbility()))
                 {
                     button.UpdateCooldownView();
                 }

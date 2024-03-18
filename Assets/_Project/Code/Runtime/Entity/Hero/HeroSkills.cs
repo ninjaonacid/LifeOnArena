@@ -14,11 +14,11 @@ namespace Code.Runtime.Entity.Hero
 {
     public class HeroSkills : MonoBehaviour, ISaveLoader
     {
-        [SerializeField] private HeroAbilityCooldown _heroCooldown;
-        [SerializeField] private SkillSlot[] _skillSlots;
+        [SerializeField] private AbilityCooldownController CooldownController;
+        [SerializeField] private AbilitySlot[] _skillSlots;
         public event Action OnSkillChanged;
         public event Action OnAbilityUse;
-        public SkillSlot[] SkillSlots => _skillSlots;
+        public AbilitySlot[] SkillSlots => _skillSlots;
         public ActiveAbilityBlueprintBase ActiveSkill => _activeSkill;
 
         private ActiveAbilityBlueprintBase _activeSkill;
@@ -30,7 +30,7 @@ namespace Code.Runtime.Entity.Hero
         private readonly List<Action<InputAction.CallbackContext>> _hashedDelegates = new();
 
         [Serializable]
-        public class SkillSlot
+        public class AbilitySlot
         {
             public ActiveAbilityBlueprintBase Ability;
             public AbilitySlotID AbilitySlotID;
@@ -90,7 +90,7 @@ namespace Code.Runtime.Entity.Hero
             _skillSlots[index].Ability.GetAbility().Use(this.gameObject, null);
             _skillSlots[index].Ability.State = AbilityState.Active;
             _activeSkill = _skillSlots[index].Ability;
-            _heroCooldown.StartCooldown(_skillSlots[index].Ability);
+            CooldownController.StartCooldown(_skillSlots[index].Ability);
             OnAbilityUse?.Invoke();
         }
 
