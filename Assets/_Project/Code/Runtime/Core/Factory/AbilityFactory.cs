@@ -33,16 +33,16 @@ namespace Code.Runtime.Core.Factory
             _random = random;
         }
 
-        public ActiveAbilityBlueprintBase CreateAbilityTemplate(int heroAbilityId)
+        public ActiveAbilityBlueprintBase CreateAbilityTemplate(int abilityId)
         {
-            ActiveAbilityBlueprintBase activeAbilityBlueprintBaseBluePrint = _config.Ability(heroAbilityId);
+            ActiveAbilityBlueprintBase activeAbilityBluePrint = _config.Ability(abilityId);
 
-            InitializeAbilityTemplate(activeAbilityBlueprintBaseBluePrint);
+            InitializeAbilityBlueprint(activeAbilityBluePrint);
 
-            return activeAbilityBlueprintBaseBluePrint;
+            return activeAbilityBluePrint;
         }
         
-        public ActiveAbilityBlueprintBase InitializeAbilityTemplate(ActiveAbilityBlueprintBase activeAbilityBlueprintBase)
+        public ActiveAbilityBlueprintBase InitializeAbilityBlueprint(ActiveAbilityBlueprintBase activeAbilityBlueprintBase)
         {
             activeAbilityBlueprintBase.InitServices(_visualEffectFactory, _projectileFactory, _battleService);
             

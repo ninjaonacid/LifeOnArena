@@ -4,7 +4,7 @@ namespace Code.Runtime.Core.Factory
 {
     public interface IAbilityFactory
     {
-        ActiveAbilityBlueprintBase CreateAbilityTemplate(int heroAbilityId);
-        ActiveAbilityBlueprintBase InitializeAbilityTemplate(ActiveAbilityBlueprintBase activeAbilityBlueprintBase);
+        ActiveAbilityBlueprintBase CreateAbilityTemplate(int abilityId);
+        ActiveAbilityBlueprintBase InitializeAbilityBlueprint(ActiveAbilityBlueprintBase activeAbilityBlueprintBase);
     }
 }

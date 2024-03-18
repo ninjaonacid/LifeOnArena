@@ -55,7 +55,7 @@ namespace Code.Runtime.Entity.Hero
                 if (slot.Ability)
                 {
                     slot.Ability =
-                        _abilityFactory.InitializeAbilityTemplate(slot.Ability);
+                        _abilityFactory.InitializeAbilityBlueprint(slot.Ability);
                 }
             }
 
