@@ -19,9 +19,9 @@ namespace Code.Runtime.Entity.Hero
         public event Action OnSkillChanged;
         public event Action OnAbilityUse;
         public AbilitySlot[] SkillSlots => _skillSlots;
-        public ActiveAbilityBlueprintBase ActiveSkill => _activeSkill;
+        public ActiveAbility ActiveAbility => _activeAbility;
 
-        private ActiveAbilityBlueprintBase _activeSkill;
+        private ActiveAbility _activeAbility;
         private AbilityData _abilityData;
         private IAbilityFactory _abilityFactory;
         private PlayerControls _controls;
@@ -32,7 +32,8 @@ namespace Code.Runtime.Entity.Hero
         [Serializable]
         public class AbilitySlot
         {
-            public ActiveAbilityBlueprintBase Ability;
+            public ActiveAbilityBlueprintBase AbilityBlueprint;
+            public ActiveAbility Ability;
             public AbilitySlotID AbilitySlotID;
         }
 
@@ -52,10 +53,10 @@ namespace Code.Runtime.Entity.Hero
 
             foreach (var slot in _skillSlots)
             {
-                if (slot.Ability)
+                if (slot.AbilityBlueprint is not null)
                 {
                     slot.Ability =
-                        _abilityFactory.InitializeAbilityBlueprint(slot.Ability);
+                        _abilityFactory.InitializeAbilityBlueprint(slot.AbilityBlueprint).GetAbility();
                 }
             }
 
@@ -87,9 +88,9 @@ namespace Code.Runtime.Entity.Hero
             if (abilityTemplate == null) return;
             if (abilityTemplate.State is AbilityState.Cooldown or AbilityState.Active) return;
 
-            _skillSlots[index].Ability.GetAbility().Use(this.gameObject, null);
+            _skillSlots[index].Ability.Use(this.gameObject, null);
             _skillSlots[index].Ability.State = AbilityState.Active;
-            _activeSkill = _skillSlots[index].Ability;
+            _activeAbility = _skillSlots[index].Ability;
             CooldownController.StartCooldown(_skillSlots[index].Ability);
             OnAbilityUse?.Invoke();
         }

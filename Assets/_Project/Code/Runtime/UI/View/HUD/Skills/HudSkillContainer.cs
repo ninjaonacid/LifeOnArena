@@ -22,7 +22,7 @@ namespace Code.Runtime.UI.View.HUD.Skills
         {
             foreach (var button in _skillButtons)
             {
-                if (_cooldownController.IsOnCooldown(button.GetAbility()))
+                if (_cooldownController.IsOnCooldown(button.GetAbilityBlueprint().GetAbility()))
                 {
                     button.UpdateCooldownView();
                 }

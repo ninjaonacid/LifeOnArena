@@ -38,7 +38,7 @@ namespace Code.Runtime.UI.View.HUD.Skills
             HeroActiveAbilityBlueprintBase = activeAbilityBlueprintBase;
         }
 
-        public ActiveAbilityBlueprintBase GetAbility()
+        public ActiveAbilityBlueprintBase GetAbilityBlueprint()
         {
             return HeroActiveAbilityBlueprintBase;
         }

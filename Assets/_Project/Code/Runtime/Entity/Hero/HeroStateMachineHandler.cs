@@ -148,9 +148,9 @@ namespace Code.Runtime.Entity.Hero
                 HeroBaseAttack1,
                 SpinAttackAbility,
                 (transition) =>
-                    _heroSkills.ActiveSkill != null &&
-                    _heroSkills.ActiveSkill.IsActive() &&
-                    _heroSkills.ActiveSkill.Identifier.Id.Equals(_spinAttackAbilityId.Id)
+                    _heroSkills.ActiveAbility != null &&
+                    _heroSkills.ActiveAbility.IsActive() &&
+                    _heroSkills.ActiveAbility.AbilityIdentifier.Id.Equals(_spinAttackAbilityId.Id)
             ));
 
 
@@ -158,9 +158,9 @@ namespace Code.Runtime.Entity.Hero
                 HeroBaseAttack2,
                 SpinAttackAbility,
                 (transition) =>
-                    _heroSkills.ActiveSkill != null &&
-                    _heroSkills.ActiveSkill.IsActive() &&
-                    _heroSkills.ActiveSkill.Identifier.Id.Equals(_spinAttackAbilityId.Id)
+                    _heroSkills.ActiveAbility != null &&
+                    _heroSkills.ActiveAbility.IsActive() &&
+                    _heroSkills.ActiveAbility.AbilityIdentifier.Id.Equals(_spinAttackAbilityId.Id)
             ));
 
             _stateMachine.AddTransitionFromAny(new Transition(
@@ -173,9 +173,9 @@ namespace Code.Runtime.Entity.Hero
                 HeroBaseAttack3,
                 SpinAttackAbility,
                 (transition) =>
-                    _heroSkills.ActiveSkill != null &&
-                    _heroSkills.ActiveSkill.IsActive() &&
-                    _heroSkills.ActiveSkill.Identifier.Id.Equals(_spinAttackAbilityId.Id)
+                    _heroSkills.ActiveAbility != null &&
+                    _heroSkills.ActiveAbility.IsActive() &&
+                    _heroSkills.ActiveAbility.AbilityIdentifier.Id.Equals(_spinAttackAbilityId.Id)
             ));
 
             _stateMachine.AddTransition(new Transition(
@@ -193,31 +193,31 @@ namespace Code.Runtime.Entity.Hero
                 HeroIdle,
                 SpinAttackAbility,
                 (transition) =>
-                    _heroSkills.ActiveSkill != null &&
-                    _heroSkills.ActiveSkill.IsActive() &&
-                    _heroSkills.ActiveSkill.Identifier.Id.Equals(_spinAttackAbilityId.Id)));
+                    _heroSkills.ActiveAbility != null &&
+                    _heroSkills.ActiveAbility.IsActive() &&
+                    _heroSkills.ActiveAbility.AbilityIdentifier.Id.Equals(_spinAttackAbilityId.Id)));
 
             _stateMachine.AddTransition(new Transition(
                 HeroIdle,
                 AbilityCast,
-                (transition) => _heroSkills.ActiveSkill != null &&
-                                _heroSkills.ActiveSkill.IsActive() &&
-                                _heroSkills.ActiveSkill.IsCastAbility, true));
+                (transition) => _heroSkills.ActiveAbility != null &&
+                                _heroSkills.ActiveAbility.IsActive() &&
+                                _heroSkills.ActiveAbility.IsCastAbility, true));
 
             _stateMachine.AddTransition(new Transition(
                 HeroBaseAttack3,
                 AbilityCast,
-                (transition) => _heroSkills.ActiveSkill != null &&
-                                _heroSkills.ActiveSkill.IsActive() &&
-                                _heroSkills.ActiveSkill.IsCastAbility, true));
+                (transition) => _heroSkills.ActiveAbility != null &&
+                                _heroSkills.ActiveAbility.IsActive() &&
+                                _heroSkills.ActiveAbility.IsCastAbility, true));
 
             _stateMachine.AddTransition(new Transition(
                 HeroIdle,
                 RollAbility,
                 (transition) =>
-                    _heroSkills.ActiveSkill != null &&
-                    _heroSkills.ActiveSkill.IsActive() &&
-                    _heroSkills.ActiveSkill.Identifier.Id.Equals(_dodgeRollAbilityId.Id)));
+                    _heroSkills.ActiveAbility != null &&
+                    _heroSkills.ActiveAbility.IsActive() &&
+                    _heroSkills.ActiveAbility.AbilityIdentifier.Id.Equals(_dodgeRollAbilityId.Id)));
 
             _stateMachine.AddTransition(new Transition(
                 RollAbility,
@@ -228,9 +228,9 @@ namespace Code.Runtime.Entity.Hero
                 HeroMovement,
                 RollAbility,
                 (transition) =>
-                    _heroSkills.ActiveSkill != null &&
-                    _heroSkills.ActiveSkill.IsActive() &&
-                    _heroSkills.ActiveSkill.Identifier.Id.Equals(_dodgeRollAbilityId.Id)));
+                    _heroSkills.ActiveAbility != null &&
+                    _heroSkills.ActiveAbility.IsActive() &&
+                    _heroSkills.ActiveAbility.AbilityIdentifier.Id.Equals(_dodgeRollAbilityId.Id)));
 
             _stateMachine.InitStateMachine();
         }

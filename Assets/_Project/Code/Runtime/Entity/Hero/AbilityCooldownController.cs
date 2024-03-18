@@ -6,7 +6,7 @@ namespace Code.Runtime.Entity.Hero
 {
     public class AbilityCooldownController : MonoBehaviour
     {
-        private readonly List<ActiveAbilityBlueprintBase> _abilitiesOnCooldown = new List<ActiveAbilityBlueprintBase>();
+        private readonly List<ActiveAbility> _abilitiesOnCooldown = new List<ActiveAbility>();
 
         private void Update()
         {
@@ -27,7 +27,7 @@ namespace Code.Runtime.Entity.Hero
             }
         }
 
-        public void StartCooldown(ActiveAbilityBlueprintBase activeAbilityBlueprintBase)
+        public void StartCooldown(ActiveAbility activeAbilityBlueprintBase)
         {
             if (!_abilitiesOnCooldown.Contains(activeAbilityBlueprintBase))
             {
@@ -37,7 +37,7 @@ namespace Code.Runtime.Entity.Hero
             }
         }
 
-        public bool IsOnCooldown(ActiveAbilityBlueprintBase activeAbilityBlueprintBase)
+        public bool IsOnCooldown(ActiveAbility activeAbilityBlueprintBase)
         {
             return _abilitiesOnCooldown.Contains(activeAbilityBlueprintBase);
         }

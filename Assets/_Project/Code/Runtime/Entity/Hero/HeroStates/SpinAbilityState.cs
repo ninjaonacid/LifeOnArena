@@ -14,7 +14,7 @@ namespace Code.Runtime.Entity.Hero.HeroStates
             _heroRotation.enabled = false;
             _heroWeapon.EnableWeapon(true);
             _heroAnimator.PlaySpinAttackSkill();
-            _duration = _heroSkills.ActiveSkill.ActiveTime;
+            _duration = _heroSkills.ActiveAbility.ActiveTime;
         }
 
         public override void OnLogic()

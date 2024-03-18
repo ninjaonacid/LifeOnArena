@@ -22,7 +22,6 @@ namespace Code.Runtime.Modules.AbilitySystem
         public float ActiveTime;
         public float CurrentActiveTime;
         public int Price;
-        public AbilityState State;
         public bool IsCastAbility; 
         public VisualEffectData VisualEffectData;
         
@@ -32,7 +31,7 @@ namespace Code.Runtime.Modules.AbilitySystem
         protected VisualEffectFactory _visualEffectFactory;
         protected ProjectileFactory _projectileFactory;
         protected BattleService _battleService;
-        public abstract IAbility GetAbility();
+        public abstract ActiveAbility GetAbility();
 
         public void InitServices(
             VisualEffectFactory visualEffectFactory,
@@ -44,15 +43,5 @@ namespace Code.Runtime.Modules.AbilitySystem
             _battleService = battleService;
         }
         
-        public virtual bool IsReady() =>
-            State == AbilityState.Ready;
-        
-        public virtual bool IsActive() =>
-            State == AbilityState.Active;
-
-        private void OnEnable()
-        {
-            State = AbilityState.Ready;
-        }
     }
 }

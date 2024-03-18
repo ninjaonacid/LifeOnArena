@@ -10,7 +10,7 @@ namespace Code.Runtime.Entity.Hero.HeroStates
         {
             base.OnEnter();
             _heroAnimator.PlayAbilityCast();
-            _duration = _heroSkills.ActiveSkill.ActiveTime;
+            _duration = _heroSkills.ActiveAbility.ActiveTime;
         }
         
     }

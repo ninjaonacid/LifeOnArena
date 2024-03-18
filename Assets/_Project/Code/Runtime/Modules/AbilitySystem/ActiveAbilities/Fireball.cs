@@ -9,31 +9,33 @@ using UnityEngine;
 
 namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
 {
-    public class Fireball : IAbility
+    public class Fireball : ActiveAbility
     {
         private readonly Projectile _projectilePrefab;
-        private readonly IReadOnlyList<GameplayEffect> _effects;
         private readonly ProjectileFactory _projectileFactory;
         private readonly float _lifeTime;
         private readonly float _speed;
 
         private Projectile _projectile;
 
-        public Fireball(Projectile projectilePrefab, IReadOnlyList<GameplayEffect> effects,
-            ProjectileFactory projectileFactory, float lifeTime, float speed)
+
+        public Fireball(IReadOnlyList<GameplayEffect> effects, float cooldown, float activeTime, bool isCastAbility,
+            Projectile projectilePrefab, ProjectileFactory projectileFactory, float lifeTime, float speed,
+            Projectile projectile) : base(effects, cooldown, activeTime, isCastAbility)
         {
             _projectilePrefab = projectilePrefab;
             _effects = effects;
             _projectileFactory = projectileFactory;
             _lifeTime = lifeTime;
             _speed = speed;
+            _projectile = projectile;
         }
 
-        public void Use(GameObject caster, GameObject target)
+        public override void Use(GameObject caster, GameObject target)
         {
             Projectile projectile = _projectileFactory
                 .CreateProjectile(_projectilePrefab, OnCreate, OnRelease, OnGet);
-            
+
             var layer = caster.GetComponent<EntityAttack>().GetTargetLayer();
             projectile.gameObject.layer = caster.GetComponent<EntityAttack>().GetLayer();
             var hurtBox = caster.GetComponent<EntityHurtBox>();
@@ -50,13 +52,8 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
 
         private void OnHit(CollisionData data)
         {
-            var statusController = data.Target.GetComponentInParent<StatusEffectController>();
+            ApplyEffects(data.Target);
 
-            foreach (var effect in _effects)
-            {
-                statusController.ApplyEffectToSelf(effect);
-            }
-            
             data.Source.GetComponent<IAttackComponent>().InvokeHit(1);
         }
 

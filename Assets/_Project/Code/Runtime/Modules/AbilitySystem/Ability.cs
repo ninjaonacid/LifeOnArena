@@ -1,33 +1,33 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using Code.Runtime.ConfigData.Identifiers;
+using Code.Runtime.Entity;
+using Code.Runtime.Entity.StatusEffects;
+using UnityEngine;
 
 namespace Code.Runtime.Modules.AbilitySystem
 {
     public abstract class Ability
     {
-        public float Cooldown { get; } 
-        public float CurrentCooldown { get; set; }
-        public float ActiveTime { get; }
-        public float CurrentActiveTime { get; set; }
-        public AbilityState AbilityState { get; }
-        public bool IsCastAbility { get; }
+        public AbilityIdentifier AbilityIdentifier { get; private set; }
+        protected IReadOnlyList<GameplayEffect> _effects;
         
-        protected Ability(float cooldown, float activeTime, bool isCastAbility)
+        protected Ability(IReadOnlyList<GameplayEffect> effects, AbilityIdentifier identifier)
         {
-            Cooldown = cooldown;
-            ActiveTime = activeTime;
-            IsCastAbility = isCastAbility;
-
-            AbilityState = AbilityState.Ready;
-            CurrentCooldown = cooldown;
-            CurrentActiveTime = activeTime;
+            _effects = effects;
+            AbilityIdentifier = identifier;
         }
 
-        
         public abstract void Use(GameObject caster, GameObject target);
 
-        public virtual bool IsActive() =>  AbilityState == AbilityState.Active;
-        public virtual bool IsReady() => AbilityState == AbilityState.Ready;
+        public void ApplyEffects(GameObject target)
+        {
+            var statusController = target.GetComponent<StatusEffectController>();
 
-
+            foreach (var effect in _effects)
+            {
+                statusController.ApplyEffectToSelf(effect);
+            }
+        }
+        
     }
 }
