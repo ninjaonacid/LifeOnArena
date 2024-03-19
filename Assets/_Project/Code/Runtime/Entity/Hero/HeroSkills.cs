@@ -106,7 +106,7 @@ namespace Code.Runtime.Entity.Hero
                     var slot = _skillSlots[index];
 
                     slot.Ability =
-                        _abilityFactory.CreateAbilityTemplate(skillsData.EquippedSlots[index].AbilityId);
+                        _abilityFactory.CreateAbilityTemplate(skillsData.EquippedSlots[index].AbilityId).GetAbility();
                 }
             }
 

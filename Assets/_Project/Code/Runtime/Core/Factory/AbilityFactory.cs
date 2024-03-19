@@ -42,6 +42,17 @@ namespace Code.Runtime.Core.Factory
             return activeAbilityBluePrint;
         }
         
+        public ActiveAbility CreateActiveAbility(int abilityId)
+        {
+            ActiveAbilityBlueprintBase activeAbilityBluePrint = _config.Ability(abilityId);
+
+            InitializeAbilityBlueprint(activeAbilityBluePrint);
+            
+            activeAbilityBluePrint.
+
+            return activeAbilityBluePrint;
+        }
+        
         public ActiveAbilityBlueprintBase InitializeAbilityBlueprint(ActiveAbilityBlueprintBase activeAbilityBlueprintBase)
         {
             activeAbilityBlueprintBase.InitServices(_visualEffectFactory, _projectileFactory, _battleService);

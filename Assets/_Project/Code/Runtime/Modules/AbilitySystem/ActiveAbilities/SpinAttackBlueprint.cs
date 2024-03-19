@@ -1,4 +1,6 @@
-using Code.Runtime.Entity.EntitiesComponents;
+using System.Collections.Generic;
+using Code.Runtime.ConfigData.Identifiers;
+using Code.Runtime.Entity.StatusEffects;
 using Code.Runtime.Services.BattleService;
 using UnityEngine;
 
@@ -8,30 +10,27 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
     public class SpinAttackBlueprint : ActiveAbilityBlueprint<SpinAttack>
     {
         public float Damage;
-        public override IAbility GetAbility()
+
+        public override ActiveAbility GetAbility()
         {
-            return new SpinAttack(Damage, _battleService);
+            //return new SpinAttack(Damage, _battleService);
+            return null;
         }
     }
 
-    public class SpinAttack : IAbility
+    public class SpinAttack : ActiveAbility
     {
-        private float _damage;
         private readonly BattleService _battleService;
-        private readonly LayerMask _layerMask = 1 << LayerMask.NameToLayer("Hittable");
 
-        public SpinAttack(float damage, BattleService battleService)
+        public SpinAttack(IReadOnlyList<GameplayEffect> effects, AbilityIdentifier identifier, UnityEngine.Sprite icon,
+            float cooldown, float activeTime, bool isCastAbility, BattleService battleService) : base(effects,
+            identifier, icon, cooldown, activeTime, isCastAbility)
         {
-            _damage = damage;
             _battleService = battleService;
         }
 
-
-        public void Use(GameObject caster, GameObject target)
+        public override void Use(GameObject caster, GameObject target)
         {
-            var attack = caster.GetComponent<IAttackComponent>();
-            
-            
         }
     }
 }

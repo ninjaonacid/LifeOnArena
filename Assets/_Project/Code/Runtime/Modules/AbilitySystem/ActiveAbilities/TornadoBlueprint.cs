@@ -9,11 +9,9 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
         [SerializeField] private float _castDistance;
         [SerializeField] private float _lifeTime;
         
-        private IAbility _abilityInstance;
-        public override IAbility GetAbility()
+        public override ActiveAbility GetAbility()
         {
-            return _abilityInstance ??= 
-                new TornadoAbility
+            return new TornadoAbility
                 (_visualEffectFactory,
                 _battleService,
                 VisualEffectData,

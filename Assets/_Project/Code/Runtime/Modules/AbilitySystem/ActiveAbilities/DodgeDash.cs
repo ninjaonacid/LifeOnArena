@@ -9,8 +9,9 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
     {
         private readonly float _activeTime;
         private readonly float _dashSpeed;
-        
-        public DodgeDash(IReadOnlyList<GameplayEffect> effects, float cooldown, float activeTime, bool isCastAbility, float dashSpeed) : base(effects, cooldown, activeTime, isCastAbility)
+
+
+        public DodgeDash(ActiveAbilityBlueprintBase abilityBlueprint, float activeTime, float dashSpeed) : base(abilityBlueprint)
         {
             _activeTime = activeTime;
             _dashSpeed = dashSpeed;

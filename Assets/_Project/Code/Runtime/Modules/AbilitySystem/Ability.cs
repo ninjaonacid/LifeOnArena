@@ -1,20 +1,16 @@
-﻿using System.Collections.Generic;
-using Code.Runtime.ConfigData.Identifiers;
-using Code.Runtime.Entity;
-using Code.Runtime.Entity.StatusEffects;
+﻿using Code.Runtime.Entity;
 using UnityEngine;
+
 
 namespace Code.Runtime.Modules.AbilitySystem
 {
     public abstract class Ability
     {
-        public AbilityIdentifier AbilityIdentifier { get; private set; }
-        protected IReadOnlyList<GameplayEffect> _effects;
-        
-        protected Ability(IReadOnlyList<GameplayEffect> effects, AbilityIdentifier identifier)
+        protected readonly ActiveAbilityBlueprintBase _abilityBlueprint;
+
+        protected Ability(ActiveAbilityBlueprintBase abilityBlueprint)
         {
-            _effects = effects;
-            AbilityIdentifier = identifier;
+            _abilityBlueprint = abilityBlueprint;
         }
 
         public abstract void Use(GameObject caster, GameObject target);
@@ -23,7 +19,7 @@ namespace Code.Runtime.Modules.AbilitySystem
         {
             var statusController = target.GetComponent<StatusEffectController>();
 
-            foreach (var effect in _effects)
+            foreach (var effect in _abilityBlueprint.StatusEffects)
             {
                 statusController.ApplyEffectToSelf(effect);
             }

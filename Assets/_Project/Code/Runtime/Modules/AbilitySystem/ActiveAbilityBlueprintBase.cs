@@ -9,12 +9,6 @@ using UnityEngine;
 
 namespace Code.Runtime.Modules.AbilitySystem
 {
-    public enum AbilityState
-    {
-        Ready,
-        Active,
-        Cooldown
-    }
     public abstract class ActiveAbilityBlueprintBase : AbilityBlueprintBase
     {
         public float Cooldown;
@@ -26,7 +20,7 @@ namespace Code.Runtime.Modules.AbilitySystem
         public VisualEffectData VisualEffectData;
         
         [SerializeField] private List<GameplayEffectBlueprint> _statusTemplates;
-        protected IReadOnlyList<GameplayEffect> StatusEffects => _statusTemplates.Select(x => x.GetGameplayEffect()).ToList();
+        public IReadOnlyList<GameplayEffect> StatusEffects => _statusTemplates.Select(x => x.GetGameplayEffect()).ToList();
 
         protected VisualEffectFactory _visualEffectFactory;
         protected ProjectileFactory _projectileFactory;
