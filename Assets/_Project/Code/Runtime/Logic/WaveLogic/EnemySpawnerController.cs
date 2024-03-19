@@ -28,7 +28,6 @@ namespace Code.Runtime.Logic.WaveLogic
             _enemyFactory = enemyFactory;
         }
         
-        
         public async UniTask InitSpawners(LevelConfig levelConfig, CancellationToken token = default)
         {
             foreach (EnemySpawnerData spawnerData in levelConfig.EnemySpawners)
@@ -37,7 +36,7 @@ namespace Code.Runtime.Logic.WaveLogic
                     spawnerData.Position,
                     spawnerData.Id,
                     spawnerData.MobId,
-                    spawnerData.RespawnCount, token);
+                    spawnerData.SpawnCount, token);
 
                 _enemySpawnPoints.Add(spawner);
             }

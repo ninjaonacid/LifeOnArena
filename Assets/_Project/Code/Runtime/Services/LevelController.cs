@@ -55,8 +55,6 @@ namespace Code.Runtime.Services
                 PlayerLoopTiming.Update, _cancellationToken.Token);
         }
 
-        
-
         private async UniTask ShowUpgradeWindow()
         {
             

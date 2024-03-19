@@ -1,5 +1,6 @@
 ﻿using System;
 using Code.Runtime.ConfigData.Identifiers;
+using Code.Runtime.Logic.EnemySpawners;
 using UnityEngine;
 
 namespace Code.Runtime.ConfigData.Spawners
@@ -8,16 +9,18 @@ namespace Code.Runtime.ConfigData.Spawners
     public class EnemySpawnerData
     {
         public string Id;
-        public int RespawnCount;
+        public int SpawnCount;
         public MobIdentifier MobId;
         public Vector3 Position;
+        public EnemyType EnemyType;
 
-        public EnemySpawnerData(string id, MobIdentifier mobId, Vector3 position, int respawnCount)
+        public EnemySpawnerData(string id, MobIdentifier mobId, Vector3 position, int spawnCount, EnemyType enemyType)
         {
             Id = id;
             MobId = mobId;
             Position = position;
-            RespawnCount = respawnCount;
+            SpawnCount = spawnCount;
+            EnemyType = enemyType;
         }
     }
 }

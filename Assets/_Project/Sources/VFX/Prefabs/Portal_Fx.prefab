@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8389680880839161886}
   - component: {fileID: 8556667150718733964}
   - component: {fileID: 8555333122422717372}
+  - component: {fileID: 3112599521772471778}
   m_Layer: 0
   m_Name: Portal_Fx
   m_TagString: Untagged
@@ -43,14 +44,14 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8392889778921209008}
   serializedVersion: 8
-  lengthInSec: 0.5
+  lengthInSec: 3
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 1
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 0
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -4731,6 +4732,19 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &3112599521772471778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8392889778921209008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7cb44888f4bd564abb5c6b6eb27a935, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _particleSystem: {fileID: 8556667150718733964}
 --- !u!1 &8392933469692609296
 GameObject:
   m_ObjectHideFlags: 0

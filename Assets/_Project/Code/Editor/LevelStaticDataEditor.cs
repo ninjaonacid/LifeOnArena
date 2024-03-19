@@ -26,7 +26,7 @@ namespace Code.Editor
                 levelData.EnemySpawners =
                     FindObjectsOfType<SpawnMarker>()
                         .Select(x => new EnemySpawnerData(x.GetComponent<UniqueId>().Id,
-                            x.MobId, x.transform.position, x.RespawnCount))
+                            x.MobId, x.transform.position, x.SpawnCount, x.EnemyType))
                         .ToList();
 
                 levelData.NextLevelDoorSpawners =

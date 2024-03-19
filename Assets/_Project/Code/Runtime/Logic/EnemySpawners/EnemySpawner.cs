@@ -1,5 +1,6 @@
 using System.Threading;
 using Code.Runtime.ConfigData.Identifiers;
+using Code.Runtime.ConfigData.Levels;
 using Code.Runtime.Core.Factory;
 using Code.Runtime.Core.ObjectPool;
 using Code.Runtime.Entity.Enemy;
@@ -12,17 +13,17 @@ namespace Code.Runtime.Logic.EnemySpawners
 {
     public class EnemySpawner : MonoBehaviour
     {
+        [SerializeField] private VisualEffectIdentifier _visualEffectIdentifier;
+        public string Id { get; set; }
+        public int RespawnCount { get; set; }
+        public MobIdentifier MobId { get; set; }
+        public bool Alive  { get; private set; }
+        
         private EnemyDeath _enemyDeath;
         private IPoolable _pooledObject;
         private IEnemyFactory _factory;
         private VisualEffectFactory _visualEffectFactory;
         private VisualEffect _spawnVfx;
-        public string Id { get; set; }
-        public int RespawnCount { get; set; }
-
-        public MobIdentifier MobId;
-        public Identifier ParticleIdentifier;
-        public bool Alive  { get; private set; }
 
         [Inject]
         public void Construct(IEnemyFactory enemyFactory,
@@ -30,6 +31,11 @@ namespace Code.Runtime.Logic.EnemySpawners
         {
             _factory = enemyFactory;
             _visualEffectFactory = visualEffectFactory;
+        }
+
+        public void InitializeSpawner(LevelConfig levelConfig)
+        {
+            _visualEffectFactory.PrewarmEffect(_visualEffectIdentifier.Id, levelConfig.EnemySpawners.Count).Forget();
         }
 
         public async UniTaskVoid Spawn(CancellationToken token)
@@ -40,7 +46,10 @@ namespace Code.Runtime.Logic.EnemySpawners
             var position = transform.position;
             monster.transform.position = position;
 
-            _spawnVfx = await _visualEffectFactory.CreateVisualEffectWithTimer(ParticleIdentifier.Id, position, 2);
+            _spawnVfx = await _visualEffectFactory.CreateVisualEffectWithTimer(_visualEffectIdentifier.Id, position, 2);
+            var spawnVfxPosition = _spawnVfx.transform.position;
+            spawnVfxPosition =
+                new Vector3(spawnVfxPosition.x, spawnVfxPosition.y + 2, spawnVfxPosition.z);
             
             _enemyDeath = monster.GetComponent<EnemyDeath>();
             _enemyDeath.Happened += Slay;

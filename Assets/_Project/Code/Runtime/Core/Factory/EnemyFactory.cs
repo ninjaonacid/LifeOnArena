@@ -14,6 +14,7 @@ using Code.Runtime.UI.View.HUD;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 using VContainer;
 using VContainer.Unity;
 using Object = UnityEngine.Object;
@@ -61,10 +62,14 @@ namespace Code.Runtime.Core.Factory
 
             EnemySpawner spawner = InstantiateRegistered(prefab, at)
                 .GetComponent<EnemySpawner>();
+            
+            var levelConfig = _config.Level(SceneManager.GetActiveScene().name);
 
             spawner.Id = spawnerDataId;
             spawner.MobId = spawnerDataMobId;
             spawner.RespawnCount = spawnerRespawnCount;
+            
+            spawner.InitializeSpawner(levelConfig);
 
             return spawner;
         }
