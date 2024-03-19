@@ -47,16 +47,17 @@ namespace Code.Runtime.Core.Factory
             ActiveAbilityBlueprintBase activeAbilityBluePrint = _config.Ability(abilityId);
 
             InitializeAbilityBlueprint(activeAbilityBluePrint);
-            
-            activeAbilityBluePrint.
 
-            return activeAbilityBluePrint;
+            var abilityInstance = activeAbilityBluePrint.GetAbility();
+            
+            abilityInstance.InjectServices(_visualEffectFactory, _projectileFactory, _battleService);
+
+            return abilityInstance;
         }
         
         public ActiveAbilityBlueprintBase InitializeAbilityBlueprint(ActiveAbilityBlueprintBase activeAbilityBlueprintBase)
         {
-            activeAbilityBlueprintBase.InitServices(_visualEffectFactory, _projectileFactory, _battleService);
-            
+
             if (activeAbilityBlueprintBase.VisualEffectData)
             {
                 InitAbilityAssets(activeAbilityBlueprintBase.VisualEffectData.PrefabReference).Forget();

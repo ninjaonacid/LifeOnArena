@@ -1,54 +1,58 @@
-using System.Collections.Generic;
-using Code.Runtime.ConfigData;
-using Code.Runtime.ConfigData.Identifiers;
-using Code.Runtime.Core.Factory;
 using Code.Runtime.Entity.EntitiesComponents;
-using Code.Runtime.Entity.StatusEffects;
 using Code.Runtime.Logic.Projectiles;
-using Code.Runtime.Logic.VisualEffects;
 using Code.Runtime.Modules.StatSystem;
-using Code.Runtime.Services.BattleService;
-using UnityEditor;
 using UnityEngine;
 
 namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
 {
     public class TornadoAbility : ActiveAbility
     {
-        private readonly VisualEffectFactory _visualEffectFactory;
-        private readonly VisualEffectData _visualEffectData;
-        private readonly BattleService _battleService;
         private readonly float _duration;
         private readonly float _attackRadius;
         private readonly float _castDistance;
 
-        private TornadoVisualEffect _tornadoVisual;
-        
+        public TornadoAbility(ActiveAbilityBlueprintBase abilityBlueprint, float duration, float attackRadius, float castDistance) : base(abilityBlueprint)
+        {
+            _duration = duration;
+            _attackRadius = attackRadius;
+            _castDistance = castDistance;
+        }
 
         public override async void Use(GameObject caster, GameObject target)
         {
             Vector3 casterPosition = caster.transform.position;
             Vector3 casterDirection = caster.transform.forward;
 
-            _tornadoVisual =
-                await _visualEffectFactory.CreateVisualEffect(_visualEffectData.Identifier.Id)
+            var tornadoVisual =
+                await _visualEffectFactory.CreateVisualEffect(_abilityBlueprint.VisualEffectData.Identifier.Id)
                     as TornadoVisualEffect;
 
-            _tornadoVisual.Initialize(_duration);
-            Transform projectileTransform = _tornadoVisual.transform;
-            projectileTransform.position = casterPosition + casterDirection * _castDistance;
+            tornadoVisual.Initialize(_duration);
+            Transform projectileTransform = tornadoVisual.transform;
+            var position = projectileTransform.position;
+            position = casterPosition + casterDirection * _castDistance;
+            projectileTransform.position = position;
             projectileTransform.rotation = Quaternion.identity;
 
             LayerMask mask = 1 << LayerMask.NameToLayer("Hittable");
 
 
             var stats = caster.GetComponent<StatController>();
+            
 
-            var hits = _battleService.CreateAoeAbility(stats, _effects, projectileTransform.position,
-                _attackRadius, mask);
+            var targets = _battleService.GetTargetsInRadius(position, _attackRadius, mask);
+
+            if (targets.hits > 0)
+            {
+                foreach (var collider in targets.colliders)
+                {
+                    ApplyEffects(collider.gameObject);
+                }
+            }
 
             var entityAttack = caster.GetComponent<IAttackComponent>();
-            entityAttack.InvokeHit(hits);
+            entityAttack.InvokeHit(targets.hits);
         }
+        
     }
 }

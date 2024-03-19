@@ -6,5 +6,6 @@ namespace Code.Runtime.Core.Factory
     {
         ActiveAbilityBlueprintBase CreateAbilityTemplate(int abilityId);
         ActiveAbilityBlueprintBase InitializeAbilityBlueprint(ActiveAbilityBlueprintBase activeAbilityBlueprintBase);
+        ActiveAbility CreateActiveAbility(int abilityId);
     }
 }

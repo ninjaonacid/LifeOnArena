@@ -24,7 +24,7 @@ namespace Code.Runtime.Services.BattleService
                 mask);
         }
         
-        public (int, Collider[]) GetTargetsInRadius(Vector3 startPoint, float radius, LayerMask mask)
+        public (int hits, Collider[] colliders) GetTargetsInRadius(Vector3 startPoint, float radius, LayerMask mask)
         {
             int hits = FindTargets(startPoint, radius, mask);
 

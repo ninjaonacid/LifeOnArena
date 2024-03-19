@@ -9,14 +9,13 @@ namespace Code.Runtime.Modules.AbilitySystem
 {
     public class ProjectileAbility : ActiveAbility
     {
-        private readonly ProjectileFactory _projectileFactory;
-        private readonly Projectile _projectilePrefab;
-        private readonly float _lifeTime;
-        private readonly float _speed;
-        
-        public ProjectileAbility(ActiveAbilityBlueprintBase abilityBlueprint, ProjectileFactory projectileFactory, Projectile projectilePrefab, float lifeTime, float speed) : base(abilityBlueprint)
+        private ProjectileFactory _projectileFactory;
+        private Projectile _projectilePrefab;
+        private float _lifeTime;
+        private float _speed;
+
+        public ProjectileAbility(ActiveAbilityBlueprintBase abilityBlueprint, Projectile projectilePrefab, float lifeTime, float speed) : base(abilityBlueprint)
         {
-            _projectileFactory = projectileFactory;
             _projectilePrefab = projectilePrefab;
             _lifeTime = lifeTime;
             _speed = speed;
