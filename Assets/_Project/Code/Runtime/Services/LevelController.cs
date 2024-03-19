@@ -49,10 +49,12 @@ namespace Code.Runtime.Services
         private async void HeroDead(HeroDeadEvent obj)
         {
             _controls.Player.Disable();
+            
 
             await UniTask.Delay(TimeSpan.FromSeconds(2),
                 DelayType.DeltaTime,
                 PlayerLoopTiming.Update, _cancellationToken.Token);
+            
         }
 
         private async UniTask ShowUpgradeWindow()

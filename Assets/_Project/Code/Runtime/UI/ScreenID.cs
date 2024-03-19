@@ -9,5 +9,6 @@ namespace Code.Runtime.UI
         UpgradeMenu = 4,
         MainMenu = 5,
         HUD = 6,
+        MessageWindow = 7,
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Code.Runtime.UI.View.WeaponShopView
 {
-    public class WeaponShopView : MonoBehaviour, IScreenView
+    public class WeaponShopView : MonoBehaviour
     {
         public void Show()
         {

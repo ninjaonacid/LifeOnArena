@@ -49,6 +49,8 @@ namespace Code.Runtime.UI.Services
             }
         }
 
+    
+
         public void Close(ScreenID screenID)
         {
             if (_activeViews.TryGetValue(screenID, out var activeView))

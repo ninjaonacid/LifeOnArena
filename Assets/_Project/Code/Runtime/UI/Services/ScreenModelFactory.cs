@@ -26,6 +26,7 @@ namespace Code.Runtime.UI.Services
             _modelMap.Add(typeof(WeaponShopMenuModel), () => new WeaponShopMenuModel());
             _modelMap.Add(typeof(AbilityMenuModel), () => new AbilityMenuModel(gameData, config));
             _modelMap.Add(typeof(HudModel), () => new HudModel());
+            _modelMap.Add(typeof(MessageWindowModel), () => new MessageWindowModel("zalupa"));
         }
 
         public IScreenModel CreateModel(Type model)
@@ -34,5 +35,6 @@ namespace Code.Runtime.UI.Services
             modelInstance.Initialize();
             return modelInstance;
         }
+        
     }
 }
