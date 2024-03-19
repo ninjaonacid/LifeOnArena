@@ -17,14 +17,14 @@ namespace Code.Runtime.Services
         
         private int _enemySpawners;
 
-        private readonly IScreenService _screenService;
+        private readonly ScreenService _screenService;
         private readonly IEventSystem _eventSystem;
         private readonly SceneLoader _sceneLoader;
         private readonly PlayerControls _controls;
 
         private readonly CancellationTokenSource _cancellationToken = new CancellationTokenSource();
 
-        public LevelController(IScreenService screenService,
+        public LevelController(ScreenService screenService,
             IEventSystem eventSystem, PlayerControls controls,
             SceneLoader sceneLoader)
         {
@@ -51,7 +51,7 @@ namespace Code.Runtime.Services
         {
             _controls.Player.Disable();
             
-            _screenService.Open(ScreenID.MessageWindow, new MessageWindowDto("You died"));
+            _screenService.OpenWithParameters(ScreenID.MessageWindow, new MessageWindowDto("You died"));
 
             await UniTask.Delay(TimeSpan.FromSeconds(2),
                 DelayType.DeltaTime,

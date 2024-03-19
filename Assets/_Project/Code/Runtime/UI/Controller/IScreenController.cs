@@ -6,7 +6,7 @@ namespace Code.Runtime.UI.Controller
 {
     public interface IScreenController
     {
-        void InitController(IScreenModel model, BaseView view, IScreenService screenService);
+        void InitController(IScreenModel model, BaseView view, ScreenService screenService);
         
     }
 }

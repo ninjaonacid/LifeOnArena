@@ -8,10 +8,10 @@ using UnityEngine;
 
 namespace Code.Runtime.UI.Services
 {
-    public class ScreenService : IScreenService, IDisposable
+    public class ScreenService :  IDisposable
     {
         private readonly Dictionary<ScreenID, (Type model, Type controller)> _screenMap = new();
-        private readonly Dictionary<ScreenID, (BaseView view, IScreenController controller)> _activeViews = new();
+        private readonly Dictionary<ScreenID, (BaseView view, IScreenController controller)> _activeWindows = new();
         private readonly IUIFactory _uiFactory;
         private readonly ScreenModelFactory _screenModelFactory;
         private readonly IScreenControllerFactory _controllerFactory;
@@ -28,6 +28,7 @@ namespace Code.Runtime.UI.Services
             _screenMap.Add(ScreenID.Shop, (typeof(WeaponShopMenuModel), typeof(ShopMenuController)));
             _screenMap.Add(ScreenID.AbilityMenu, (typeof(AbilityMenuModel), typeof(AbilityMenuController)));
             _screenMap.Add(ScreenID.HUD, (typeof(HudModel), (typeof(HudController))));
+            _screenMap.Add(ScreenID.MessageWindow, (typeof(MessageWindowModel), typeof(MessageWindowController)));
         }
 
         public void Open(ScreenID screenId)
@@ -41,7 +42,10 @@ namespace Code.Runtime.UI.Services
                 
                 view.Show();
                 
-                _activeViews.Add(screenId, (view, controller));
+                if(!_activeWindows.TryAdd(screenId, (view, controller)))
+                {
+                    Debug.LogError($"{screenId} already opened");
+                };
             }
             else
             {
@@ -49,7 +53,7 @@ namespace Code.Runtime.UI.Services
             }
         }
         
-        public void Open(ScreenID screenId, IScreenModelDto dto)
+        public void OpenWithParameters(ScreenID screenId, IScreenModelDto dto)
         {
             if (_screenMap.TryGetValue(screenId, out var mc))
             {
@@ -59,20 +63,22 @@ namespace Code.Runtime.UI.Services
                 controller.InitController(model, view, this);
                 
                 view.Show();
-                
-                _activeViews.Add(screenId, (view, controller));
+
+                if(!_activeWindows.TryAdd(screenId, (view, controller)))
+                {
+                    Debug.LogError($"{screenId} already opened");
+                };
             }
             else
             {
                 throw new ArgumentException($"{screenId} doesnt present in the dictionary");
             }
         }
-
-    
+        
 
         public void Close(ScreenID screenID)
         {
-            if (_activeViews.TryGetValue(screenID, out var activeView))
+            if (_activeWindows.TryGetValue(screenID, out var activeView))
             {
                 activeView.view.Close();
                 
@@ -81,13 +87,13 @@ namespace Code.Runtime.UI.Services
                     controller.Dispose();
                 }
 
-                _activeViews.Remove(screenID);
+                _activeWindows.Remove(screenID);
             }
         }
 
         public void Cleanup()
         {
-            foreach (var activeView in _activeViews.Values)
+            foreach (var activeView in _activeWindows.Values)
             {
                 if (activeView.controller is IDisposable controller)
                 {
@@ -97,7 +103,7 @@ namespace Code.Runtime.UI.Services
                     activeView.view.Close();
             }
             
-            _activeViews.Clear();
+            _activeWindows.Clear();
         }
 
         public void Dispose()

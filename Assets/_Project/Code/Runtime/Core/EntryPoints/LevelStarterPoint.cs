@@ -20,13 +20,13 @@ namespace Code.Runtime.Core.EntryPoints
         private readonly IConfigProvider _config;
         private readonly ISaveLoadService _saveLoad;
         private readonly IHeroFactory _heroFactory;
-        private readonly IScreenService _screenService;
+        private readonly ScreenService _screenService;
         private readonly PlayerControls _controls;
         private readonly EnemySpawnerController _enemySpawnerController;
         private readonly LevelController _levelController;
 
         public LevelStarterPoint(IConfigProvider config, 
-            ISaveLoadService saveLoad, IHeroFactory heroFactory, IScreenService screenService,
+            ISaveLoadService saveLoad, IHeroFactory heroFactory, ScreenService screenService,
             PlayerControls controls, EnemySpawnerController enemySpawnerController,
             LevelController controller)
         {

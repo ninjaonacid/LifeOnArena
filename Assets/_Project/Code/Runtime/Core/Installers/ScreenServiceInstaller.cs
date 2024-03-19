@@ -10,7 +10,7 @@ namespace Code.Runtime.Core.Installers
         {
             builder.Register<ScreenModelFactory>(Lifetime.Scoped);
             builder.Register<IScreenControllerFactory, ScreenControllerFactory>(Lifetime.Scoped);
-            builder.Register<IScreenService, ScreenService>(Lifetime.Scoped);
+            builder.Register<ScreenService, ScreenService>(Lifetime.Scoped);
         }
     }
 }

@@ -8,7 +8,7 @@ namespace Code.Runtime.Logic
 {
     public class TreasureBox : MonoBehaviour, IInteractable
     {
-        private IScreenService _screenService;
+        private ScreenService _screenService;
         private void Awake()
         {
         }

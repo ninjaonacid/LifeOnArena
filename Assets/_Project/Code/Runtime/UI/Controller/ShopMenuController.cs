@@ -17,7 +17,7 @@ namespace Code.Runtime.UI.Controller
             _sceneLoader = sceneLoader;
         }
         
-        public void InitController(IScreenModel model, BaseView view, IScreenService screenService)
+        public void InitController(IScreenModel model, BaseView view, ScreenService screenService)
         {
             _model = model as WeaponShopMenuModel;
             _view = view as ShopMenuView;

@@ -16,7 +16,7 @@ namespace Code.Runtime.UI.Controller
         private  MainMenuModel _model;
         private  MainMenuView _view;
         
-        private IScreenService _screenService;
+        private ScreenService _screenService;
         private readonly IGameDataContainer _gameData;
         private readonly SceneLoader _sceneLoader;
         private readonly AudioService _audioService; 
@@ -29,7 +29,7 @@ namespace Code.Runtime.UI.Controller
             _audioService = audioService;
         }
         
-        public void InitController(IScreenModel model, BaseView view, IScreenService screenService)
+        public void InitController(IScreenModel model, BaseView view, ScreenService screenService)
         {
             _model = model as MainMenuModel;
             _view = view as MainMenuView;

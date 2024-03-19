@@ -14,7 +14,7 @@ namespace Code.Runtime.UI.Controller
     {
         private AbilityMenuModel _model;
         private AbilityMenuView _view;
-        private IScreenService _screenService;
+        private ScreenService _screenService;
         private readonly ISaveLoadService _saveLoad;
         private readonly CompositeDisposable _disposable = new CompositeDisposable();
         public AbilityMenuController(ISaveLoadService saveLoad)
@@ -22,7 +22,7 @@ namespace Code.Runtime.UI.Controller
             _saveLoad = saveLoad;
         }
 
-        public void InitController(IScreenModel model, BaseView view, IScreenService screenService)
+        public void InitController(IScreenModel model, BaseView view, ScreenService screenService)
         {
             _model = model as AbilityMenuModel;
             _view = view as AbilityMenuView;

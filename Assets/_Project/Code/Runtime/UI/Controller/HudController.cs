@@ -23,7 +23,7 @@ namespace Code.Runtime.UI.Controller
             _heroFactory = heroFactory;
         }
 
-        public void InitController(IScreenModel model, BaseView view, IScreenService screenService)
+        public void InitController(IScreenModel model, BaseView view, ScreenService screenService)
         {
             _model = model as HudModel;
             _view = view as HudView;

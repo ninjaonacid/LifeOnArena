@@ -17,13 +17,13 @@ namespace Code.Runtime.Core.EntryPoints
     {
         private readonly IHeroFactory _heroFactory;
         private readonly IConfigProvider _config;
-        private readonly IScreenService _screenService;
+        private readonly ScreenService _screenService;
         private readonly AudioService _audioService;
         private readonly PlayerControls _controls;
         private readonly ISaveLoadService _saveLoad;
 
         public MainMenuStarter(IHeroFactory heroFactory, IUIFactory uiFactory,
-            IScreenService screenService,
+            ScreenService screenService,
             IConfigProvider config, ISaveLoadService saveLoad, PlayerControls controls,
             AudioService audioService)
         {
