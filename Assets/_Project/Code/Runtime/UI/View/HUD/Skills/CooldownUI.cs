@@ -11,15 +11,15 @@ namespace Code.Runtime.UI.View.HUD.Skills
         public Image CooldownImage;
         public TextMeshProUGUI CooldownText;
         
-        public async UniTaskVoid UpdateCooldown(ActiveAbilityBlueprintBase activeAbilityBlueprintBase)
+        public async UniTaskVoid UpdateCooldown(ActiveAbility activeAbility)
         {
             CooldownImage.gameObject.SetActive(true);
             CooldownText.gameObject.SetActive(true);
 
-            while (activeAbilityBlueprintBase.CurrentCooldown >= 0)
+            while (activeAbility.CurrentCooldown >= 0)
             {
-                CooldownText.SetText(Mathf.RoundToInt(activeAbilityBlueprintBase.CurrentCooldown).ToString());
-                CooldownImage.fillAmount = activeAbilityBlueprintBase.CurrentCooldown / activeAbilityBlueprintBase.Cooldown;
+                CooldownText.SetText(Mathf.RoundToInt(activeAbility.CurrentCooldown).ToString());
+                CooldownImage.fillAmount = activeAbility.CurrentCooldown / activeAbility.Cooldown;
                 await UniTask.Yield();
             }
 

@@ -12,10 +12,7 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
         public override ActiveAbility GetAbility()
         {
             return new TornadoAbility
-                (_visualEffectFactory,
-                _battleService,
-                VisualEffectData,
-                StatusEffects,
+                (this,
                 _lifeTime,
                 _radius,
                 _castDistance);

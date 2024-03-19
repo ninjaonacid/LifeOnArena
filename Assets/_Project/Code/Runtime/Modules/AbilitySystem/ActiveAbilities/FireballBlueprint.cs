@@ -12,8 +12,7 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
 
         public override ActiveAbility GetAbility()
         {
-            return new Fireball(StatusEffects, Identifier, Icon, Cooldown, ActiveTime, IsCastAbility,
-                _projectileFactory, _projectile, _lifeTime, _speed);
+            return new Fireball (this, _projectile, _lifeTime, _speed);
         }
     }
 }

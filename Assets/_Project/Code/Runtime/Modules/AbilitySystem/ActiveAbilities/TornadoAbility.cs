@@ -24,7 +24,7 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
             Vector3 casterDirection = caster.transform.forward;
 
             var tornadoVisual =
-                await _visualEffectFactory.CreateVisualEffect(_abilityBlueprint.VisualEffectData.Identifier.Id)
+                await _visualEffectFactory.CreateVisualEffect(AbilityBlueprint.VisualEffectData.Identifier.Id)
                     as TornadoVisualEffect;
 
             tornadoVisual.Initialize(_duration);

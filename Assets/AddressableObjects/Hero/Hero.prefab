@@ -2066,11 +2066,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecf359ceca450a042b0bd9bf851eb298, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _heroCooldown: {fileID: 7773590576850612865}
+  CooldownController: {fileID: 7773590576850612865}
   _skillSlots:
-  - Ability: {fileID: 11400000, guid: b818ef02d3b2e894192e984dc1d9e244, type: 2}
+  - AbilityIdentifier: {fileID: 0}
     AbilitySlotID: 1
-  - Ability: {fileID: 0}
+  - AbilityIdentifier: {fileID: 0}
     AbilitySlotID: 2
 --- !u!114 &6331987856363381589
 MonoBehaviour:
@@ -2258,7 +2258,7 @@ SkinnedMeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6496497783292776582}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0

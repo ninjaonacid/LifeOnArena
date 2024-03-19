@@ -6,11 +6,11 @@ namespace Code.Runtime.Modules.AbilitySystem
 {
     public abstract class Ability
     {
-        protected readonly ActiveAbilityBlueprintBase _abilityBlueprint;
+        public ActiveAbilityBlueprintBase AbilityBlueprint { get; }
 
         protected Ability(ActiveAbilityBlueprintBase abilityBlueprint)
         {
-            _abilityBlueprint = abilityBlueprint;
+            AbilityBlueprint = abilityBlueprint;
         }
 
         public abstract void Use(GameObject caster, GameObject target);
@@ -19,7 +19,7 @@ namespace Code.Runtime.Modules.AbilitySystem
         {
             var statusController = target.GetComponent<StatusEffectController>();
 
-            foreach (var effect in _abilityBlueprint.StatusEffects)
+            foreach (var effect in AbilityBlueprint.StatusEffects)
             {
                 statusController.ApplyEffectToSelf(effect);
             }

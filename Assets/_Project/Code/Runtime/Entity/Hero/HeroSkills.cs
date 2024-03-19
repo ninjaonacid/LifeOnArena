@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Code.Runtime.ConfigData.Identifiers;
 using Code.Runtime.Core.Factory;
 using Code.Runtime.Core.SceneManagement;
 using Code.Runtime.Data.PlayerData;
@@ -32,7 +33,7 @@ namespace Code.Runtime.Entity.Hero
         [Serializable]
         public class AbilitySlot
         {
-            public ActiveAbilityBlueprintBase AbilityBlueprint;
+            public AbilityIdentifier AbilityIdentifier;
             public ActiveAbility Ability;
             public AbilitySlotID AbilitySlotID;
         }
@@ -53,10 +54,10 @@ namespace Code.Runtime.Entity.Hero
 
             foreach (var slot in _skillSlots)
             {
-                if (slot.AbilityBlueprint is not null)
+                if (slot.AbilityIdentifier is not null)
                 {
                     slot.Ability =
-                        _abilityFactory.InitializeAbilityBlueprint(slot.AbilityBlueprint).GetAbility();
+                        _abilityFactory.CreateActiveAbility(slot.AbilityIdentifier.Id);
                 }
             }
 
@@ -106,7 +107,7 @@ namespace Code.Runtime.Entity.Hero
                     var slot = _skillSlots[index];
 
                     slot.Ability =
-                        _abilityFactory.CreateAbilityTemplate(skillsData.EquippedSlots[index].AbilityId).GetAbility();
+                        _abilityFactory.CreateActiveAbility(skillsData.EquippedSlots[index].AbilityId);
                 }
             }
 
