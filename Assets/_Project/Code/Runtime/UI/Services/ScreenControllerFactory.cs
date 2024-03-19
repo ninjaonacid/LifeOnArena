@@ -19,6 +19,7 @@ namespace Code.Runtime.UI.Services
             _screenControllers.Add(typeof(ShopMenuController), () => new ShopMenuController(sceneLoader));
             _screenControllers.Add(typeof(AbilityMenuController), () => new AbilityMenuController(saveLoad));
             _screenControllers.Add(typeof(HudController), () => new HudController(gameData, heroFactory));
+            _screenControllers.Add(typeof(MessageWindowController), () => new MessageWindowController());
         }
 
         public IScreenController CreateController(Type controller)
