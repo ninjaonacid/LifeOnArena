@@ -7,9 +7,12 @@ namespace Code.Runtime.UI.Model
     {
         public string Message;
 
-        public MessageWindowModel(string message)
+        public MessageWindowModel(IScreenModelDto modelDto)
         {
-            Message = message;
+            if (modelDto is MessageWindowDto messageDto)
+            {
+                Message = messageDto.Message;
+            }
         }
 
         public void Initialize()

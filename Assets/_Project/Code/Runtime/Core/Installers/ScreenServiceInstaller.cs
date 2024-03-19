@@ -8,7 +8,7 @@ namespace Code.Runtime.Core.Installers
     {
         public void Install(IContainerBuilder builder)
         {
-            builder.Register<IScreenModelFactory, ScreenModelFactory>(Lifetime.Scoped);
+            builder.Register<ScreenModelFactory>(Lifetime.Scoped);
             builder.Register<IScreenControllerFactory, ScreenControllerFactory>(Lifetime.Scoped);
             builder.Register<IScreenService, ScreenService>(Lifetime.Scoped);
         }

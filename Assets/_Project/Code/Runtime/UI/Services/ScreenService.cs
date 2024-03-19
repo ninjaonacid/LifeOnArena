@@ -13,11 +13,11 @@ namespace Code.Runtime.UI.Services
         private readonly Dictionary<ScreenID, (Type model, Type controller)> _screenMap = new();
         private readonly Dictionary<ScreenID, (BaseView view, IScreenController controller)> _activeViews = new();
         private readonly IUIFactory _uiFactory;
-        private readonly IScreenModelFactory _screenModelFactory;
+        private readonly ScreenModelFactory _screenModelFactory;
         private readonly IScreenControllerFactory _controllerFactory;
         
         public ScreenService(IUIFactory uiFactory, 
-            IScreenModelFactory screenModelFactory, 
+            ScreenModelFactory screenModelFactory, 
             IScreenControllerFactory controllerFactory)
         {
             _uiFactory = uiFactory;
@@ -45,7 +45,26 @@ namespace Code.Runtime.UI.Services
             }
             else
             {
-                Debug.LogError($"{screenId} doesnt present in the dictionary");
+                throw new ArgumentException($"{screenId} doesnt present in the dictionary");
+            }
+        }
+        
+        public void Open(ScreenID screenId, IScreenModelDto dto)
+        {
+            if (_screenMap.TryGetValue(screenId, out var mc))
+            {
+                BaseView view = _uiFactory.CreateScreenView(screenId);
+                IScreenModel model = _screenModelFactory.CreateModel(mc.model, dto);
+                IScreenController controller = _controllerFactory.CreateController(mc.controller);
+                controller.InitController(model, view, this);
+                
+                view.Show();
+                
+                _activeViews.Add(screenId, (view, controller));
+            }
+            else
+            {
+                throw new ArgumentException($"{screenId} doesnt present in the dictionary");
             }
         }
 

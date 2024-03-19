@@ -5,6 +5,7 @@ using Code.Runtime.Core.EventSystem;
 using Code.Runtime.Core.SceneManagement;
 using Code.Runtime.CustomEvents;
 using Code.Runtime.UI;
+using Code.Runtime.UI.Model;
 using Code.Runtime.UI.Services;
 using Cysharp.Threading.Tasks;
 
@@ -50,6 +51,7 @@ namespace Code.Runtime.Services
         {
             _controls.Player.Disable();
             
+            _screenService.Open(ScreenID.MessageWindow, new MessageWindowDto("You died"));
 
             await UniTask.Delay(TimeSpan.FromSeconds(2),
                 DelayType.DeltaTime,
