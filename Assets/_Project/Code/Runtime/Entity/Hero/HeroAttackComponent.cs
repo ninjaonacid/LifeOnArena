@@ -67,7 +67,7 @@ namespace Code.Runtime.Entity.Hero
             int particleId = _heroWeapon.GetEquippedWeaponData().HitVisualEffect.Identifier.Id;
             
             var particle =
-                await _visualEffectFactory.CreateVisualEffectWithTimer(particleId, 1);
+                await _visualEffectFactory.CreateVisualEffect(particleId);
 
             particle.transform.position = position;
             particle.Play();

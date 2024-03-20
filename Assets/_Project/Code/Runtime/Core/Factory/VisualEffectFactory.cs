@@ -42,21 +42,6 @@ namespace Code.Runtime.Core.Factory
            return visualEffect;
         }
 
-        public async UniTask<VisualEffect> CreateVisualEffectWithTimer(int id, float time)
-        {
-            var visualEffect = await CreateVisualEffect(id);
-            _poolProvider.ReturnWithTimer(visualEffect, time).Forget();
-            return visualEffect;
-        }
-
-        public async UniTask<VisualEffect> CreateVisualEffectWithTimer(int id, Vector3 position, float time)
-        {
-            var visualEffect = await CreateVisualEffect(id);
-            _poolProvider.ReturnWithTimer(visualEffect, time).Forget();
-            visualEffect.transform.position = position;
-            return visualEffect;
-        }
-
         public async UniTask<VisualEffect> CreateVisualEffect(int id, Vector3 position, Transform parent)
         {
             var visualEffect = await CreateVisualEffect(id);

@@ -47,7 +47,7 @@ namespace Code.Runtime.Logic.EnemySpawners
             var position = transform.position;
             monster.transform.position = position;
 
-            _spawnVfx = await _visualEffectFactory.CreateVisualEffectWithTimer(_visualEffectIdentifier.Id, position, 2);
+            _spawnVfx = await _visualEffectFactory.CreateVisualEffect(_visualEffectIdentifier.Id, position);
             var spawnVfxPosition = _spawnVfx.transform.position;
             spawnVfxPosition =
                 new Vector3(spawnVfxPosition.x, spawnVfxPosition.y + 2, spawnVfxPosition.z);

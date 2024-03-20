@@ -70,21 +70,6 @@ namespace Code.Runtime.Core.ObjectPool
             }
         }
 
-        public async UniTaskVoid ReturnWithTimer(PooledObject obj, float time)
-        {
-            int prefabId = obj.gameObject.GetInstanceID();
-
-            if (_prefabToPoolMap.TryGetValue(prefabId, out var objectPool))
-            {
-                await UniTask.Delay(TimeSpan.FromSeconds(time));
-                objectPool.Return(obj);
-            }
-            else
-            {
-                Debug.Log("NO OBJECT IN POOL");
-            }
-        }
-
         private ObjectPool<PooledObject> CreatePool(GameObject prefab, Action<PooledObject> onCreate,
             Action<PooledObject> onRelease, Action<PooledObject> onGet)
         {

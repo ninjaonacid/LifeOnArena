@@ -19,7 +19,7 @@ namespace Code.Runtime.Entity
 
         public async UniTask PlayVisualEffect(VisualEffectIdentifier effectId)
         {
-            var effect = await _visualFactory.CreateVisualEffectWithTimer(effectId.Id, 3);
+            var effect = await _visualFactory.CreateVisualEffect(effectId.Id);
         }
     }
 }

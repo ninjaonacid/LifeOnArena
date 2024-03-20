@@ -17,7 +17,7 @@ namespace Code.Runtime.Modules.AbilitySystem
 
         public void ApplyEffects(GameObject target)
         {
-            var statusController = target.GetComponent<StatusEffectController>();
+            var statusController = target.GetComponentInParent<StatusEffectController>();
 
             foreach (var effect in AbilityBlueprint.StatusEffects)
             {
