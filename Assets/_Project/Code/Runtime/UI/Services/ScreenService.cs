@@ -5,7 +5,6 @@ using Code.Runtime.UI.Controller;
 using Code.Runtime.UI.Model;
 using Code.Runtime.UI.Model.AbilityMenu;
 using Code.Runtime.UI.View;
-using UnityEngine;
 using UnityEngine.Assertions;
 
 namespace Code.Runtime.UI.Services
@@ -31,7 +30,6 @@ namespace Code.Runtime.UI.Services
             _screenMap.Add(ScreenID.AbilityMenu, (typeof(AbilityMenuModel), typeof(AbilityMenuController)));
             _screenMap.Add(ScreenID.HUD, (typeof(HudModel), (typeof(HudController))));
             _screenMap.Add(ScreenID.MessageWindow, (typeof(MessageWindowModel), typeof(MessageWindowController)));
-            _screenMap.Add(ScreenID.MessageWindowTimer, (typeof(MessageWindowModelWithTimer), typeof(MessageWindowWithTimerController)));
         }
 
         public void Open(ScreenID screenId)
@@ -66,15 +64,13 @@ namespace Code.Runtime.UI.Services
                 _activeWindows.Add(activeWindow);
                 
                 windowView.Show();
-                
             }
+            
             else
             {
                 throw new ArgumentException($"{screenId} doesnt present in the dictionary");
             }
         }
-        
-        
         
         public void Close(ScreenID screenID)
         {
@@ -82,18 +78,33 @@ namespace Code.Runtime.UI.Services
             
             Assert.IsNotNull(screen);
 
+            if (screen.WindowView is not null)
+            {
+                screen.WindowView.Close();
+            }
+
             if (screen.Controller is IDisposable controller)
             {
                 controller.Dispose();
             }
+        }
+        public void Close(IScreenController controller)
+        {
+            var screen = _activeWindows.FirstOrDefault(x => Equals(x.Controller, controller));
+            
+            Assert.IsNotNull(screen);
 
             if (screen.WindowView is not null)
             {
                 screen.WindowView.Close();
             }
+
+            if (controller is IDisposable disposable)
+            {
+                disposable.Dispose();
+            }
         }
         
-
         private void Cleanup()
         {
             foreach (var activeWindow in _activeWindows)

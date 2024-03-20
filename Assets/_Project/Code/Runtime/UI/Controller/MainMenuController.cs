@@ -62,7 +62,7 @@ namespace Code.Runtime.UI.Controller
       
             _windowView.CloseButton
                 .OnClickAsObservable()
-                .Subscribe(x => _screenService.Close(_windowView.ScreenId));
+                .Subscribe(x => _screenService.Close(this));
 
             _windowView.StartFightButton
                 .OnClickAsObservable()

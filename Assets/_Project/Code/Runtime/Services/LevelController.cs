@@ -7,6 +7,7 @@ using Code.Runtime.CustomEvents;
 using Code.Runtime.Logic.WaveLogic;
 using Code.Runtime.UI;
 using Code.Runtime.UI.Model;
+using Code.Runtime.UI.Model.DTO;
 using Code.Runtime.UI.Services;
 using Cysharp.Threading.Tasks;
 using VContainer.Unity;
@@ -59,14 +60,15 @@ namespace Code.Runtime.Services
 
         private async void WaveCleared(int secondsToNextWave)
         {
-            _screenService.Open(ScreenID.MessageWindow, new MessageWindowDto("next"));
+            _screenService.Open(ScreenID.MessageWindow, new TimerMessageDto("Next wave", _spawnerController.TimeToNextWave));
+
         }
 
         private async void HeroDead(HeroDeadEvent obj)
         {
             _controls.Player.Disable();
             
-            _screenService.Open(ScreenID.MessageWindow, new MessageWindowDto("You died"));
+            _screenService.Open(ScreenID.MessageWindow, new MessageDto("You died"));
 
             await UniTask.Delay(TimeSpan.FromSeconds(2),
                 DelayType.DeltaTime,

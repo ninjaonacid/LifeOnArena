@@ -6,7 +6,7 @@ namespace Code.Runtime.UI.Services
     public class ActiveWindow
     {
         public readonly IScreenController Controller;
-        public BaseWindowView WindowView;
+        public readonly BaseWindowView WindowView;
         public readonly ScreenID Id;
 
         public ActiveWindow(IScreenController controller, BaseWindowView windowView, ScreenID id)

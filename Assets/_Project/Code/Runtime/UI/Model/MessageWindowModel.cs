@@ -1,18 +1,14 @@
-using Sirenix.OdinInspector.Editor;
-using UnityEngine;
+using Code.Runtime.UI.Model.DTO;
 
 namespace Code.Runtime.UI.Model
 {
     public class MessageWindowModel : IScreenModel
     {
-        public readonly string Message;
-
+        public IScreenModelDto ModelDto;
+        
         public MessageWindowModel(IScreenModelDto modelDto)
         {
-            if (modelDto is MessageWindowDto messageDto)
-            {
-                Message = messageDto.Message;
-            }
+            ModelDto = modelDto;
         }
 
         public void Initialize()

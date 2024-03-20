@@ -40,7 +40,7 @@ namespace Code.Runtime.UI.Controller
                 .Subscribe(x =>
                 {
                     _model.SaveModelData();
-                    _screenService.Close(_windowView.ScreenId);
+                    _screenService.Close(this);
                 });
             
             _windowView.AbilityContainer
