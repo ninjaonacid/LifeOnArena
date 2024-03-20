@@ -1,5 +1,6 @@
 using Code.Runtime.Modules.StateMachine;
 using Code.Runtime.Modules.StateMachine.Transitions;
+using Unity.Jobs.LowLevel.Unsafe;
 
 namespace Code.Runtime.Entity.Enemy.CommonEnemy
 {
@@ -31,7 +32,7 @@ namespace Code.Runtime.Entity.Enemy.CommonEnemy
                     " ", 
                     nameof(EnemyStaggerState)
                 ));
-            
+          
             _fsm.AddTransition(new TransitionAfter(
                 nameof(EnemyStaggerState),
                 nameof(EnemyIdleState),
