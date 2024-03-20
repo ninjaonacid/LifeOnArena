@@ -9,7 +9,6 @@ namespace Code.Runtime.Modules.AbilitySystem
 {
     public class ProjectileAbility : ActiveAbility
     {
-        private ProjectileFactory _projectileFactory;
         private Projectile _projectilePrefab;
         private float _lifeTime;
         private float _speed;

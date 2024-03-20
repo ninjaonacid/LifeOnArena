@@ -20,9 +20,8 @@ namespace Code.Runtime.UI.View.AbilityMenu
 
             for (int i = 0; i < abilitiesCount; i++)
             {
-                var abilityView = Instantiate(_abilityItem, Vector3.zero, Quaternion.identity);
-                abilityView.transform.SetParent(this.gameObject.transform);
-                
+                var abilityView = Instantiate(_abilityItem, gameObject.transform);
+
                 _abilityViews.Add(abilityView);
             }
 
