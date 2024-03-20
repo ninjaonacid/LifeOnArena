@@ -56,7 +56,7 @@ namespace Code.Runtime.Core.Factory
         public async UniTask<EnemySpawner> CreateSpawner(Vector3 at,
             string spawnerDataId,
             MobIdentifier spawnerDataMobId,
-            int spawnerRespawnCount, CancellationToken token)
+            int spawnerRespawnCount, EnemyType enemyType, CancellationToken token)
         {
             var prefab = await _assetProvider.Load<GameObject>(AssetAddress.EnemySpawner);
 
@@ -68,12 +68,13 @@ namespace Code.Runtime.Core.Factory
             spawner.Id = spawnerDataId;
             spawner.MobId = spawnerDataMobId;
             spawner.RespawnCount = spawnerRespawnCount;
+            spawner.EnemyType = enemyType;
             
             spawner.InitializeSpawner(levelConfig);
 
             return spawner;
         }
-
+        
         public async UniTask<GameObject> CreateMonster(int mobId, Transform parent, CancellationToken token)
         {
             var monsterData = _config.Monster(mobId);

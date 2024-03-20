@@ -1,6 +1,6 @@
 namespace Code.Runtime.CustomEvents
 {
-    public class SpawnersClearEvent : IEvent
+    public struct SpawnersClearEvent : IEvent
     {
         
     }

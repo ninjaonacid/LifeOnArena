@@ -16,6 +16,7 @@ namespace Code.Runtime.Logic.EnemySpawners
         [SerializeField] private VisualEffectIdentifier _visualEffectIdentifier;
         public string Id { get; set; }
         public int RespawnCount { get; set; }
+        public EnemyType EnemyType { get; set; }
         public MobIdentifier MobId { get; set; }
         public bool Alive  { get; private set; }
         

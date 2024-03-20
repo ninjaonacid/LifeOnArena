@@ -15,11 +15,14 @@ namespace Code.Runtime.Logic.WaveLogic
 {
     public class EnemySpawnerController : IDisposable
     {
+        public event Action<int> WaveCleared;
+        
         private readonly IConfigProvider _config;
         private readonly IEnemyFactory _enemyFactory;
+
         private readonly List<EnemySpawner> _enemySpawnPoints = new List<EnemySpawner>();
         private CancellationTokenSource _cancellationTokenSource;
-        private int _waveCounter = 0;
+        private readonly int _numberOfWaves = 3;
         private readonly int _nextWaveDelay = 5;
         
         private Timer.Timer _timer;
@@ -36,7 +39,8 @@ namespace Code.Runtime.Logic.WaveLogic
                     spawnerData.Position,
                     spawnerData.Id,
                     spawnerData.MobId,
-                    spawnerData.SpawnCount, token);
+                    spawnerData.SpawnCount,
+                    spawnerData.EnemyType, token);
 
                 _enemySpawnPoints.Add(spawner);
             }
@@ -54,20 +58,23 @@ namespace Code.Runtime.Logic.WaveLogic
 
         private async UniTaskVoid WaveSpawn(CancellationToken token)
         {
+            int waveCounter = 0;
+            
             while (true)
             {
-                if (SpawnersClear())
+                if (IsWaveCleared() && waveCounter < _numberOfWaves)
                 {
                     await UniTask.Delay(ConvertSeconds(_nextWaveDelay), cancellationToken: token);
                     foreach (EnemySpawner spawner in _enemySpawnPoints)
                     {
                         spawner.Spawn(token).Forget();
                     }
-                    _waveCounter++;
+                    waveCounter++;
                     _timer.Reset();
                 }
                 
                 await UniTask.Delay(200, cancellationToken: token);
+                
 
                 if (token.IsCancellationRequested)
                 {
@@ -87,10 +94,20 @@ namespace Code.Runtime.Logic.WaveLogic
             return _timer.Elapsed >= 5f;
         }
 
-        private bool SpawnersClear()
+        private bool IsWaveCleared()
         {
-            return _enemySpawnPoints.All(x => !x.Alive);
+            return _enemySpawnPoints
+                .Where(x => x.EnemyType == EnemyType.Common)
+                .All(x => !x.Alive);
         }
+
+        private bool IsBossKilled()
+        {
+            return _enemySpawnPoints
+                .Where(x => x.EnemyType == EnemyType.Boss)
+                .All(x => !x.Alive);
+        }
+       
 
         private int ConvertSeconds(int seconds)
         {

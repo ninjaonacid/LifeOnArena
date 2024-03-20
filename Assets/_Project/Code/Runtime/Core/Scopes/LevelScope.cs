@@ -19,8 +19,9 @@ namespace Code.Runtime.Core.Scopes
         {
             builder.RegisterEntryPoint<LevelStarterPoint>();
             
-            builder.Register<EnemySpawnerController>(Lifetime.Scoped);
             builder.Register<LevelController>(Lifetime.Scoped);
+            builder.Register<EnemySpawnerController>(Lifetime.Scoped);
+            
             builder.Register<ProjectileFactory>(Lifetime.Scoped);
             
             builder.Register<ObjectPoolProvider>(Lifetime.Singleton);
