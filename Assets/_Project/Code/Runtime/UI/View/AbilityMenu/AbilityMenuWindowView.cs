@@ -2,7 +2,7 @@ using Code.Runtime.UI.AbilityMenu;
 
 namespace Code.Runtime.UI.View.AbilityMenu
 {
-    public class AbilityMenuView : BaseView
+    public class AbilityMenuWindowView : BaseWindowView
     {
         public AbilityContainer AbilityContainer;
         public EquipSkillButton EquipButton;

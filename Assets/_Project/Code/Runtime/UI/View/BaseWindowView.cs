@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Code.Runtime.UI.View
 {
-    public abstract class BaseView : MonoBehaviour, IDisposable
+    public abstract class BaseWindowView : MonoBehaviour, IDisposable
     {
         public ScreenID ScreenId;
         public CloseButton CloseButton;

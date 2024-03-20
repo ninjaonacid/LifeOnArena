@@ -4,7 +4,7 @@ using Code.Runtime.UI.View.HUD.Skills;
 
 namespace Code.Runtime.UI.View.HUD
 {
-    public class HudView : BaseView
+    public class HudWindowView : BaseWindowView
     {
         public HudSkillContainer HudSkillContainer;
         public ComboCounter ComboCounter;

@@ -13,7 +13,7 @@ namespace Code.Runtime.UI.Controller
     public class AbilityMenuController : IScreenController, IDisposable
     {
         private AbilityMenuModel _model;
-        private AbilityMenuView _view;
+        private AbilityMenuWindowView _windowView;
         private ScreenService _screenService;
         private readonly ISaveLoadService _saveLoad;
         private readonly CompositeDisposable _disposable = new CompositeDisposable();
@@ -22,43 +22,43 @@ namespace Code.Runtime.UI.Controller
             _saveLoad = saveLoad;
         }
 
-        public void InitController(IScreenModel model, BaseView view, ScreenService screenService)
+        public void InitController(IScreenModel model, BaseWindowView windowView, ScreenService screenService)
         {
             _model = model as AbilityMenuModel;
-            _view = view as AbilityMenuView;
+            _windowView = windowView as AbilityMenuWindowView;
             _screenService = screenService;
 
             Assert.IsNotNull(_model);
-            Assert.IsNotNull(_view);
+            Assert.IsNotNull(_windowView);
             
             _model.LoadData();
             
-            _view.AbilityContainer.InitializeAbilityContainer(_model.GetSlots().Count);
+            _windowView.AbilityContainer.InitializeAbilityContainer(_model.GetSlots().Count);
 
-            _view.CloseButton
+            _windowView.CloseButton
                 .OnClickAsObservable()
                 .Subscribe(x =>
                 {
                     _model.SaveModelData();
-                    _screenService.Close(_view.ScreenId);
+                    _screenService.Close(_windowView.ScreenId);
                 });
             
-            _view.AbilityContainer
+            _windowView.AbilityContainer
                 .OnAbilitySelectedAsObservable()
                 .Subscribe(AbilitySelected)
                 .AddTo(_disposable);
             
-            _view.EquipButton
+            _windowView.EquipButton
                 .OnClickAsObservable()
                 .Subscribe(x => Equip())
                 .AddTo(_disposable);
             
-            _view.UnEquipButton
+            _windowView.UnEquipButton
                 .OnClickAsObservable()
                 .Subscribe(x => UnEquip())
                 .AddTo(_disposable);
             
-            _view.UnlockButton
+            _windowView.UnlockButton
                 .OnClickAsObservable()
                 .Subscribe(x => Unlock())
                 .AddTo(_disposable);
@@ -79,7 +79,7 @@ namespace Code.Runtime.UI.Controller
                 {
                     equippedIndex = _model.GetEquippedSlotIndex(ability);
                 }
-                _view.AbilityContainer.UpdateData(index,  equippedIndex,  ability.ActiveAbilityBlueprintBase.Icon, ability.IsUnlocked);
+                _windowView.AbilityContainer.UpdateData(index,  equippedIndex,  ability.ActiveAbilityBlueprintBase.Icon, ability.IsUnlocked);
             }
         }
 
@@ -88,14 +88,14 @@ namespace Code.Runtime.UI.Controller
             var isEquipped = _model.IsAbilityEquipped(abilityIndex);
             var isUnlocked = _model.IsAbilityUnlocked(abilityIndex);
             
-            _view.EquipButton.ShowButton(!isEquipped && isUnlocked);
-            _view.UnEquipButton.ShowButton(isEquipped && isUnlocked);
-            _view.UnlockButton.ShowButton(!isEquipped && !isUnlocked);
+            _windowView.EquipButton.ShowButton(!isEquipped && isUnlocked);
+            _windowView.UnEquipButton.ShowButton(isEquipped && isUnlocked);
+            _windowView.UnlockButton.ShowButton(!isEquipped && !isUnlocked);
         }
 
         private void Unlock()
         {
-            var abilityIndex = _view.AbilityContainer.GetSelectedSlotIndex();
+            var abilityIndex = _windowView.AbilityContainer.GetSelectedSlotIndex();
             _model.UnlockAbility(abilityIndex);
             
             AbilitySelected(abilityIndex);
@@ -104,7 +104,7 @@ namespace Code.Runtime.UI.Controller
 
         private void UnEquip()
         {
-            var abilityIndex = _view.AbilityContainer.GetSelectedSlotIndex();
+            var abilityIndex = _windowView.AbilityContainer.GetSelectedSlotIndex();
             
             _model.UnEquipAbility(abilityIndex);
             AbilitySelected(abilityIndex);
@@ -114,7 +114,7 @@ namespace Code.Runtime.UI.Controller
 
         private void Equip()
         {
-            var abilityIndex = _view.AbilityContainer.GetSelectedSlotIndex();
+            var abilityIndex = _windowView.AbilityContainer.GetSelectedSlotIndex();
             
             _model.EquipAbility(abilityIndex);
             

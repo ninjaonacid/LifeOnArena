@@ -5,7 +5,7 @@ namespace Code.Runtime.UI.Model
 {
     public class MessageWindowModel : IScreenModel
     {
-        public string Message;
+        public readonly string Message;
 
         public MessageWindowModel(IScreenModelDto modelDto)
         {

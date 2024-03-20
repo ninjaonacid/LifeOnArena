@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Code.Runtime.UI.View.MessageWindow
 {
-    public class MessageWindowView : BaseView
+    public class MessageWindowWindowView : BaseWindowView
     {
         public TextMeshProUGUI Text;
     }

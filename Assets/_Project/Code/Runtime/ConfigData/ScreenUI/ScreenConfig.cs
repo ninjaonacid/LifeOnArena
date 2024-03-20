@@ -8,6 +8,6 @@ namespace Code.Runtime.ConfigData.ScreenUI
     public class ScreenConfig
     { 
         public ScreenID ScreenID;
-        public BaseView ViewPrefab;
+        public BaseWindowView WindowViewPrefab;
     }
 }

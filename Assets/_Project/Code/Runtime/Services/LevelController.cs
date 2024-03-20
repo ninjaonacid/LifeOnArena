@@ -41,7 +41,7 @@ namespace Code.Runtime.Services
 
         public void Initialize()
         {
-           _spawnerController.WaveCleared += 
+            _spawnerController.WaveCleared += WaveCleared;
         }
 
         public void Subscribe()
@@ -59,14 +59,14 @@ namespace Code.Runtime.Services
 
         private async void WaveCleared(int secondsToNextWave)
         {
-            _screenService.OpenWithParameters(ScreenID.MessageWindow, new MessageWindowDto("next"));
+            _screenService.Open(ScreenID.MessageWindow, new MessageWindowDto("next"));
         }
 
         private async void HeroDead(HeroDeadEvent obj)
         {
             _controls.Player.Disable();
             
-            _screenService.OpenWithParameters(ScreenID.MessageWindow, new MessageWindowDto("You died"));
+            _screenService.Open(ScreenID.MessageWindow, new MessageWindowDto("You died"));
 
             await UniTask.Delay(TimeSpan.FromSeconds(2),
                 DelayType.DeltaTime,

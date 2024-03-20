@@ -14,7 +14,7 @@ namespace Code.Runtime.UI.Controller
     public class MainMenuController : IScreenController, IDisposable
     {
         private  MainMenuModel _model;
-        private  MainMenuView _view;
+        private  MainMenuWindowView _windowView;
         
         private ScreenService _screenService;
         private readonly IGameDataContainer _gameData;
@@ -29,55 +29,55 @@ namespace Code.Runtime.UI.Controller
             _audioService = audioService;
         }
         
-        public void InitController(IScreenModel model, BaseView view, ScreenService screenService)
+        public void InitController(IScreenModel model, BaseWindowView windowView, ScreenService screenService)
         {
             _model = model as MainMenuModel;
-            _view = view as MainMenuView;
+            _windowView = windowView as MainMenuWindowView;
             _screenService = screenService;
             
             Assert.IsNotNull(_model);
-            Assert.IsNotNull(_view);
+            Assert.IsNotNull(_windowView);
             
-            _view.MusicButton.SetButton(_model.IsMusicMuted);
+            _windowView.MusicButton.SetButton(_model.IsMusicMuted);
 
             _model.Health.Subscribe(x =>
             {
-                _view.StatContainer.SetHealth(nameof(_model.Health) + " ", _model.Health.Value);
+                _windowView.StatContainer.SetHealth(nameof(_model.Health) + " ", _model.Health.Value);
                 _gameData.PlayerData.StatsData.Stats["Health"] = _model.Health.Value;
             }).AddTo(_disposables);
             
             _model.Attack.Subscribe(x =>
             {
-                _view.StatContainer.SetAttack(nameof(_model.Attack) + " ", _model.Attack.Value);
+                _windowView.StatContainer.SetAttack(nameof(_model.Attack) + " ", _model.Attack.Value);
                 _gameData.PlayerData.StatsData.Stats["Attack"] = _model.Attack.Value;
             }).AddTo(_disposables);
 
 
             _model.Defense.Subscribe(x =>
             {
-                _view.StatContainer.SetDefense(nameof(_model.Defense) + " ", _model.Defense.Value);
+                _windowView.StatContainer.SetDefense(nameof(_model.Defense) + " ", _model.Defense.Value);
                 _gameData.PlayerData.StatsData.Stats["Defense"] = _model.Defense.Value;
             }).AddTo(_disposables);
 
       
-            _view.CloseButton
+            _windowView.CloseButton
                 .OnClickAsObservable()
-                .Subscribe(x => _screenService.Close(_view.ScreenId));
+                .Subscribe(x => _screenService.Close(_windowView.ScreenId));
 
-            _view.StartFightButton
+            _windowView.StartFightButton
                 .OnClickAsObservable()
                 .Subscribe(x => _sceneLoader.Load("StoneDungeon_Arena_1"));
 
-            _view.SkillMenu.Button
+            _windowView.SkillMenu.Button
                 .OnClickAsObservable()
-                .Subscribe(x => _screenService.Open(_view.SkillMenu.WindowId));
+                .Subscribe(x => _screenService.Open(_windowView.SkillMenu.WindowId));
 
-            _view.MusicButton
+            _windowView.MusicButton
                 .OnClickAsObservable()
                 .Subscribe(x =>
                 {
                     _model.ChangeMusicButtonState();
-                    _view.MusicButton.SetButton(_model.IsMusicMuted);
+                    _windowView.MusicButton.SetButton(_model.IsMusicMuted);
                 });
 
         }

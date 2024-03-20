@@ -12,7 +12,7 @@ namespace Code.Runtime.UI.Controller
     public class HudController : IScreenController
     {
         private HudModel _model;
-        private HudView _view;
+        private HudWindowView _windowView;
 
         private readonly IGameDataContainer _gameData;
         private readonly IHeroFactory _heroFactory;
@@ -23,12 +23,12 @@ namespace Code.Runtime.UI.Controller
             _heroFactory = heroFactory;
         }
 
-        public void InitController(IScreenModel model, BaseView view, ScreenService screenService)
+        public void InitController(IScreenModel model, BaseWindowView windowView, ScreenService screenService)
         {
             _model = model as HudModel;
-            _view = view as HudView;
+            _windowView = windowView as HudWindowView;
 
-            Assert.IsNotNull(_view);
+            Assert.IsNotNull(_windowView);
             Assert.IsNotNull(_model);
 
             _heroFactory.HeroGameObject.TryGetComponent(out HeroAttackComponent heroAttack);
@@ -36,10 +36,10 @@ namespace Code.Runtime.UI.Controller
             _heroFactory.HeroGameObject.TryGetComponent(out HeroHealth heroHealth);
             _heroFactory.HeroGameObject.TryGetComponent(out AbilityCooldownController heroCooldown);
             
-            _view.ComboCounter.Construct(heroAttack, heroHealth);
-            _view.LootCounter.Construct(_gameData.PlayerData.WorldData);
-            _view.HudSkillContainer.Construct(heroSkills, heroCooldown);
-            _view.GetComponent<EntityUI>().Construct(heroHealth);
+            _windowView.ComboCounter.Construct(heroAttack, heroHealth);
+            _windowView.LootCounter.Construct(_gameData.PlayerData.WorldData);
+            _windowView.HudSkillContainer.Construct(heroSkills, heroCooldown);
+            _windowView.GetComponent<EntityUI>().Construct(heroHealth);
             
 
 

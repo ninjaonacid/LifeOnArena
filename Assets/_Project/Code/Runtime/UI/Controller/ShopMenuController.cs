@@ -10,22 +10,22 @@ namespace Code.Runtime.UI.Controller
     public class ShopMenuController : IScreenController
     {
         private WeaponShopMenuModel _model;
-        private ShopMenuView _view;
+        private ShopMenuWindowView _windowView;
         private readonly SceneLoader _sceneLoader;
         public ShopMenuController(SceneLoader sceneLoader)
         {
             _sceneLoader = sceneLoader;
         }
         
-        public void InitController(IScreenModel model, BaseView view, ScreenService screenService)
+        public void InitController(IScreenModel model, BaseWindowView windowView, ScreenService screenService)
         {
             _model = model as WeaponShopMenuModel;
-            _view = view as ShopMenuView;
+            _windowView = windowView as ShopMenuWindowView;
             
             Assert.IsNotNull(_model);
-            Assert.IsNotNull(_view);
+            Assert.IsNotNull(_windowView);
 
-            _view.NextSceneButton.OnClickAsObservable().Subscribe(x => _sceneLoader.Load("StoneDungeon_2"));
+            _windowView.NextSceneButton.OnClickAsObservable().Subscribe(x => _sceneLoader.Load("StoneDungeon_2"));
         }
     }
 }

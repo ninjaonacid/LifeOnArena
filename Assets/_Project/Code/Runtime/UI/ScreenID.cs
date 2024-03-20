@@ -10,5 +10,6 @@ namespace Code.Runtime.UI
         MainMenu = 5,
         HUD = 6,
         MessageWindow = 7,
+        MessageWindowTimer = 8,
     }
 }

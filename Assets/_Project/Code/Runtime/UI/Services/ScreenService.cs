@@ -1,17 +1,19 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Code.Runtime.UI.Controller;
 using Code.Runtime.UI.Model;
 using Code.Runtime.UI.Model.AbilityMenu;
 using Code.Runtime.UI.View;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 namespace Code.Runtime.UI.Services
 {
     public class ScreenService :  IDisposable
     {
         private readonly Dictionary<ScreenID, (Type model, Type controller)> _screenMap = new();
-        private readonly Dictionary<ScreenID, (BaseView view, IScreenController controller)> _activeWindows = new();
+        private readonly List<ActiveWindow> _activeWindows = new();
         private readonly IUIFactory _uiFactory;
         private readonly ScreenModelFactory _screenModelFactory;
         private readonly IScreenControllerFactory _controllerFactory;
@@ -29,45 +31,42 @@ namespace Code.Runtime.UI.Services
             _screenMap.Add(ScreenID.AbilityMenu, (typeof(AbilityMenuModel), typeof(AbilityMenuController)));
             _screenMap.Add(ScreenID.HUD, (typeof(HudModel), (typeof(HudController))));
             _screenMap.Add(ScreenID.MessageWindow, (typeof(MessageWindowModel), typeof(MessageWindowController)));
+            _screenMap.Add(ScreenID.MessageWindowTimer, (typeof(MessageWindowModelWithTimer), typeof(MessageWindowWithTimerController)));
         }
 
         public void Open(ScreenID screenId)
         {
             if (_screenMap.TryGetValue(screenId, out var mc))
             {
-                BaseView view = _uiFactory.CreateScreenView(screenId);
+                BaseWindowView windowView = _uiFactory.CreateScreenView(screenId);
                 IScreenModel model = _screenModelFactory.CreateModel(mc.model);
                 IScreenController controller = _controllerFactory.CreateController(mc.controller);
-                controller.InitController(model, view, this);
+                controller.InitController(model, windowView, this);
                 
-                view.Show();
+                ActiveWindow activeWindow = new ActiveWindow(controller, windowView, screenId);
+                windowView.Show();
                 
-                if(!_activeWindows.TryAdd(screenId, (view, controller)))
-                {
-                    Debug.LogError($"{screenId} already opened");
-                };
+                _activeWindows.Add(activeWindow);
             }
             else
             {
                 throw new ArgumentException($"{screenId} doesnt present in the dictionary");
             }
         }
-        
-        public void OpenWithParameters(ScreenID screenId, IScreenModelDto dto)
+        public void Open(ScreenID screenId, IScreenModelDto dto)
         {
             if (_screenMap.TryGetValue(screenId, out var mc))
             {
-                BaseView view = _uiFactory.CreateScreenView(screenId);
+                BaseWindowView windowView = _uiFactory.CreateScreenView(screenId);
                 IScreenModel model = _screenModelFactory.CreateModel(mc.model, dto);
                 IScreenController controller = _controllerFactory.CreateController(mc.controller);
-                controller.InitController(model, view, this);
-                
-                view.Show();
+                controller.InitController(model, windowView, this);
 
-                if(!_activeWindows.TryAdd(screenId, (view, controller)))
-                {
-                    Debug.LogError($"{screenId} already opened");
-                };
+                ActiveWindow activeWindow = new ActiveWindow(controller, windowView, screenId);
+                _activeWindows.Add(activeWindow);
+                
+                windowView.Show();
+                
             }
             else
             {
@@ -75,32 +74,36 @@ namespace Code.Runtime.UI.Services
             }
         }
         
-
+        
+        
         public void Close(ScreenID screenID)
         {
-            if (_activeWindows.TryGetValue(screenID, out var activeView))
-            {
-                activeView.view.Close();
-                
-                if (activeView.controller is IDisposable controller)
-                {
-                    controller.Dispose();
-                }
+            var screen = _activeWindows.FirstOrDefault(x => x.Id == screenID);
+            
+            Assert.IsNotNull(screen);
 
-                _activeWindows.Remove(screenID);
+            if (screen.Controller is IDisposable controller)
+            {
+                controller.Dispose();
+            }
+
+            if (screen.WindowView is not null)
+            {
+                screen.WindowView.Close();
             }
         }
+        
 
-        public void Cleanup()
+        private void Cleanup()
         {
-            foreach (var activeView in _activeWindows.Values)
+            foreach (var activeWindow in _activeWindows)
             {
-                if (activeView.controller is IDisposable controller)
+                if (activeWindow.Controller is IDisposable controller)
                 {
                     controller.Dispose();
                 }
-                if(activeView.view)
-                    activeView.view.Close();
+                if(activeWindow.WindowView)
+                    activeWindow.WindowView.Close();
             }
             
             _activeWindows.Clear();

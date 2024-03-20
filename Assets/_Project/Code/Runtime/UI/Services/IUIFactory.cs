@@ -8,7 +8,7 @@ namespace Code.Runtime.UI.Services
     public interface IUIFactory
     {
         Task<Sprite> CreateSprite(AssetReferenceSprite spriteReference);
-        BaseView CreateScreenView(ScreenID screenId);
+        BaseWindowView CreateScreenView(ScreenID screenId);
         void CreateCore();
     }
 }

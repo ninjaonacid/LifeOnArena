@@ -9,16 +9,16 @@ namespace Code.Runtime.UI.Controller
     public class MessageWindowController : IScreenController
     {
         private MessageWindowModel _model;
-        private MessageWindowView _view;
-        public void InitController(IScreenModel model, BaseView view, ScreenService screenService)
+        private MessageWindowWindowView _windowView;
+        public void InitController(IScreenModel model, BaseWindowView windowView, ScreenService screenService)
         {
             _model = model as MessageWindowModel;
-            _view = view as MessageWindowView;
+            _windowView = windowView as MessageWindowWindowView;
             
             Assert.IsNotNull(_model);
-            Assert.IsNotNull(_view);
+            Assert.IsNotNull(_windowView);
 
-            _view.Text.text = _model.Message;
+            _windowView.Text.text = _model.Message;
 
         }
     }

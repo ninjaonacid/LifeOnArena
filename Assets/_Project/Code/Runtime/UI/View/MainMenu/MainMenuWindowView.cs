@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 namespace Code.Runtime.UI.View.MainMenu
 {
-    public class MainMenuView : BaseView
+    public class MainMenuWindowView : BaseWindowView
     {
         public Button StartFightButton;
         public OpenWindowButton SkillMenu;

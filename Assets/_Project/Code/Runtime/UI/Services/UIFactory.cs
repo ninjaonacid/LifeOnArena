@@ -26,15 +26,15 @@ namespace Code.Runtime.UI.Services
             _objectResolver = objectResolver;
         }
         
-        public BaseView CreateScreenView(ScreenID screenId)
+        public BaseWindowView CreateScreenView(ScreenID screenId)
         {
             if (!_uiCoreTransform)
             {
                 CreateCore();
             }
             
-            BaseView view = _config.ForWindow(screenId).ViewPrefab;
-            var viewInstance = _objectResolver.Instantiate(view, _uiCoreTransform);
+            BaseWindowView windowView = _config.ForWindow(screenId).WindowViewPrefab;
+            var viewInstance = _objectResolver.Instantiate(windowView, _uiCoreTransform);
             return viewInstance;
         }
 
