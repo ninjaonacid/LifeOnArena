@@ -32,6 +32,10 @@ namespace Code.Runtime.UI.Controller
                 {
                     var time = updatableDto.Seconds -= Time.deltaTime;
                     _windowView.Text.text = $"{updatableDto.Message} {Mathf.RoundToInt(updatableDto.Seconds)}";
+                    if (time < 0)
+                    {
+                        screenService.Close(this);
+                    }
                 });
             }
             

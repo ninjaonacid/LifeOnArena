@@ -62,7 +62,7 @@ namespace Code.Runtime.Entity.Enemy
 
         public void PlayAttack()
         {
-            _enemyAnimator.CrossFade(Attack, 0.5f);
+            _enemyAnimator.CrossFade(Attack, 0.1f);
         }
     }
 }
