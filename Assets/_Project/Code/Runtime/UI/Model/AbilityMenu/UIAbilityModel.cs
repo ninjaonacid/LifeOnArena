@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 namespace Code.Runtime.UI.Model.AbilityMenu
 {
     [Serializable]
-    public class UIAbilitySlotModel
+    public class UIAbilityModel
     {
         public bool IsEquipped;
         public bool IsUnlocked;

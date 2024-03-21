@@ -12,8 +12,8 @@ namespace Code.Runtime.UI.Model.AbilityMenu
     {
         private readonly IGameDataContainer _gameData;
         private readonly IConfigProvider _configProvider;
-        private List<UIAbilitySlotModel> _abilitySlots;
-        private IndexedQueue<UIAbilitySlotModel> _equippedSlots;
+        private List<UIAbilityModel> _abilitySlots;
+        private IndexedQueue<UIAbilityModel> _equippedAbilities;
 
         public AbilityMenuModel(IGameDataContainer gameData, IConfigProvider configProvider)
         {
@@ -23,15 +23,15 @@ namespace Code.Runtime.UI.Model.AbilityMenu
 
         public void Initialize()
         {
-            _abilitySlots = new List<UIAbilitySlotModel>();
-            _equippedSlots = new IndexedQueue<UIAbilitySlotModel>();
+            _abilitySlots = new List<UIAbilityModel>();
+            _equippedAbilities = new IndexedQueue<UIAbilityModel>();
 
             var allAbilities = _configProvider.AllAbilities().OrderBy(x => x.Price);
             
 
             foreach (var ability in allAbilities)
             {
-                var abilitySlotModel = new UIAbilitySlotModel()
+                var abilitySlotModel = new UIAbilityModel()
                 {
                     ActiveAbilityBlueprintBase = ability,
                     AbilityName = ability.Identifier.Name,
@@ -48,13 +48,13 @@ namespace Code.Runtime.UI.Model.AbilityMenu
             }
         }
 
-        public int GetEquippedSlotIndex(UIAbilitySlotModel slot)
+        public int GetEquippedSlotIndex(UIAbilityModel slot)
         {
-            return _equippedSlots.FindIndex(0,
-                _equippedSlots.Count, x => x.AbilityId == slot.AbilityId) + 1;
+            return _equippedAbilities.FindIndex(0,
+                _equippedAbilities.Count, x => x.AbilityId == slot.AbilityId) + 1;
         }
 
-        public UIAbilitySlotModel GetSlotByIndex(int index)
+        public UIAbilityModel GetSlotByIndex(int index)
         {
             return _abilitySlots[index];
         }
@@ -84,7 +84,7 @@ namespace Code.Runtime.UI.Model.AbilityMenu
             var ability = _abilitySlots[slotIndex];
             ability.IsEquipped = false;
 
-            _equippedSlots.Remove(ability);
+            _equippedAbilities.Remove(ability);
         }
 
         public void EquipAbility(int slotIndex)
@@ -93,19 +93,19 @@ namespace Code.Runtime.UI.Model.AbilityMenu
 
             ability.IsEquipped = true;
 
-            if (_equippedSlots.Count < 2)
+            if (_equippedAbilities.Count < 2)
             {
-                _equippedSlots.Enqueue(ability);
+                _equippedAbilities.Enqueue(ability);
             }
             else
             {
-                var deletedAbility = _equippedSlots.Dequeue();
+                var deletedAbility = _equippedAbilities.Dequeue();
                 deletedAbility.IsEquipped = false;
-                _equippedSlots.Enqueue(ability);
+                _equippedAbilities.Enqueue(ability);
             }
         }
 
-        public List<UIAbilitySlotModel> GetSlots()
+        public List<UIAbilityModel> GetSlots()
         {
             return _abilitySlots;
         }
@@ -125,15 +125,15 @@ namespace Code.Runtime.UI.Model.AbilityMenu
             foreach (var slot in _gameData.PlayerData.AbilityData.EquippedSlots)
             {
                 var ability = _abilitySlots.FirstOrDefault(x => x.AbilityId == slot.AbilityId);
-                _equippedSlots.Enqueue(ability);
+                _equippedAbilities.Enqueue(ability);
             }
             
         }
 
         public void SaveModelData()
         {
-            _gameData.PlayerData.AbilityData.AbilitySlots = new List<UIAbilitySlotModel>(_abilitySlots);
-            _gameData.PlayerData.AbilityData.EquippedSlots = new List<UIAbilitySlotModel>(_equippedSlots);
+            _gameData.PlayerData.AbilityData.AbilitySlots = new List<UIAbilityModel>(_abilitySlots);
+            _gameData.PlayerData.AbilityData.EquippedSlots = new List<UIAbilityModel>(_equippedAbilities);
         }
     }
 }
