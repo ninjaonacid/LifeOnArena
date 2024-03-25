@@ -1,13 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 
 namespace Code.Runtime.Modules.AbilitySystem
 {
-    public class AbilityTreeData : ScriptableObject
+    [Serializable]
+    public struct AbilityTreeData
     {
         public AbilityTreeBranch Branch;
         public int Position;
         public int Price;
-        
     }
 }

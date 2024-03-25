@@ -26,7 +26,7 @@ namespace Code.Runtime.UI.Model.AbilityMenu
             _abilitySlots = new List<UIAbilityModel>();
             _equippedAbilities = new IndexedQueue<UIAbilityModel>();
 
-            var allAbilities = _configProvider.AllAbilities().OrderBy(x => x.Price);
+            var allAbilities = _configProvider.AllAbilities().OrderBy(x => x.AbilityTreeData.Price);
             
             foreach (var ability in allAbilities)
             {
@@ -35,7 +35,7 @@ namespace Code.Runtime.UI.Model.AbilityMenu
                     ActiveAbilityBlueprintBase = ability,
                     AbilityName = ability.Identifier.Name,
                     AbilityId = ability.Identifier.Id,
-                    Price = ability.Price
+                    Price = ability.AbilityTreeData.Price
                 };
 
                 if (abilitySlotModel.Price == 0)
@@ -111,17 +111,17 @@ namespace Code.Runtime.UI.Model.AbilityMenu
 
         public void LoadData()
         {
-            if (_gameData.PlayerData.AbilityData.AbilitySlots.Count <= 0) return;
+            if (_gameData.PlayerData.AbilityData.UnlockedAbilities.Count <= 0) return;
 
             for (var index = 0; index < _abilitySlots.Count; index++)
             {
                 var abilitySlot = _abilitySlots[index];
 
-                abilitySlot.IsEquipped = _gameData.PlayerData.AbilityData.AbilitySlots[index].IsEquipped;
-                abilitySlot.IsUnlocked = _gameData.PlayerData.AbilityData.AbilitySlots[index].IsUnlocked;
+                abilitySlot.IsEquipped = _gameData.PlayerData.AbilityData.UnlockedAbilities[index].IsEquipped;
+                abilitySlot.IsUnlocked = _gameData.PlayerData.AbilityData.UnlockedAbilities[index].IsUnlocked;
             }
 
-            foreach (var slot in _gameData.PlayerData.AbilityData.EquippedSlots)
+            foreach (var slot in _gameData.PlayerData.AbilityData.EquippedAbilities)
             {
                 var ability = _abilitySlots.FirstOrDefault(x => x.AbilityId == slot.AbilityId);
                 _equippedAbilities.Enqueue(ability);
@@ -131,8 +131,8 @@ namespace Code.Runtime.UI.Model.AbilityMenu
 
         public void SaveModelData()
         {
-            _gameData.PlayerData.AbilityData.AbilitySlots = new List<UIAbilityModel>(_abilitySlots);
-            _gameData.PlayerData.AbilityData.EquippedSlots = new List<UIAbilityModel>(_equippedAbilities);
+            _gameData.PlayerData.AbilityData.UnlockedAbilities = new List<UIAbilityModel>(_abilitySlots);
+            _gameData.PlayerData.AbilityData.EquippedAbilities = new List<UIAbilityModel>(_equippedAbilities);
         }
     }
 }

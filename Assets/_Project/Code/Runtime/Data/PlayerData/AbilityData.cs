@@ -7,8 +7,8 @@ namespace Code.Runtime.Data.PlayerData
     [Serializable]
     public class AbilityData
     {
-        public List<UIAbilityModel> AbilitySlots = new();
-        public List<UIAbilityModel> EquippedSlots = new();
+        public List<UIAbilityModel> UnlockedAbilities = new();
+        public List<UIAbilityModel> EquippedAbilities = new();
         public Queue<int> SkillIds = new Queue<int>();
         
     }

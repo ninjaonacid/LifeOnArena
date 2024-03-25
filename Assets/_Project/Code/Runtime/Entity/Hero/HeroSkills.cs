@@ -23,7 +23,6 @@ namespace Code.Runtime.Entity.Hero
         public ActiveAbility ActiveAbility => _activeAbility;
 
         private ActiveAbility _activeAbility;
-        private AbilityData _abilityData;
         private IAbilityFactory _abilityFactory;
         private PlayerControls _controls;
 
@@ -100,14 +99,14 @@ namespace Code.Runtime.Entity.Hero
         {
             var skillsData = data.AbilityData;
 
-            if (skillsData.EquippedSlots.Count > 0)
+            if (skillsData.EquippedAbilities.Count > 0)
             {
-                for (var index = 0; index < skillsData.EquippedSlots.Count; index++)
+                for (var index = 0; index < skillsData.EquippedAbilities.Count; index++)
                 {
                     var slot = _skillSlots[index];
 
                     slot.Ability =
-                        _abilityFactory.CreateActiveAbility(skillsData.EquippedSlots[index].AbilityId);
+                        _abilityFactory.CreateActiveAbility(skillsData.EquippedAbilities[index].AbilityId);
                 }
             }
 

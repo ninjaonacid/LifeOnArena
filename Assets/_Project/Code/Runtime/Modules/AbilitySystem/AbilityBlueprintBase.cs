@@ -7,5 +7,6 @@ namespace Code.Runtime.Modules.AbilitySystem
     {
         public AbilityIdentifier Identifier;
         public Sprite Icon;
+        public AbilityTreeData AbilityTreeData;
     }
 }
