@@ -13,6 +13,18 @@ namespace Code.Runtime.Modules.AbilitySystem
         
         public bool CheckRequirement(PlayerData playerData)
         {
+            var previousAbilityIndex = _abilityIndex - 1;
+            
+            if (previousAbilityIndex >= 0)
+            {
+                var ability = playerData.AbilityData.UnlockedAbilities[previousAbilityIndex];
+                
+                if (ability is not null)
+                {
+                    return true;
+                }
+            }
+
             return false;
         }
     }

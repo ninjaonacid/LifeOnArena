@@ -16,7 +16,8 @@ namespace Code.Runtime.Modules.AbilitySystem
         
         
         [SerializeField] private List<GameplayEffectBlueprint> _gameplayEffectBlueprints;
-        public IReadOnlyList<GameplayEffect> GameplayEffects => _gameplayEffectBlueprints.Select(x => x.GetGameplayEffect()).ToList();
+        public IReadOnlyList<GameplayEffect> GameplayEffects => 
+            _gameplayEffectBlueprints.Select(x => x.GetGameplayEffect()).ToList();
 
         public abstract ActiveAbility GetAbility();
     }
