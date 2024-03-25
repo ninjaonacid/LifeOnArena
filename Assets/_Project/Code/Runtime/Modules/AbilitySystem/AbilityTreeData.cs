@@ -7,7 +7,7 @@ namespace Code.Runtime.Modules.AbilitySystem
     {
         public AbilityTreeBranch Branch;
         public int Position;
-        
+        public int Price;
         
     }
 }

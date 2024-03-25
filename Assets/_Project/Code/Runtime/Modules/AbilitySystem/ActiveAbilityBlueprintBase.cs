@@ -11,7 +11,6 @@ namespace Code.Runtime.Modules.AbilitySystem
     {
         public float Cooldown;
         public float ActiveTime;
-        public int Price;
         public bool IsCastAbility; 
         public VisualEffectData VisualEffectData;
         
