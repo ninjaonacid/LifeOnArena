@@ -14,7 +14,6 @@ namespace Code.Runtime.Modules.AbilitySystem
         public bool IsCastAbility; 
         public VisualEffectData VisualEffectData;
         
-        
         [SerializeField] private List<GameplayEffectBlueprint> _gameplayEffectBlueprints;
         public IReadOnlyList<GameplayEffect> GameplayEffects => 
             _gameplayEffectBlueprints.Select(x => x.GetGameplayEffect()).ToList();

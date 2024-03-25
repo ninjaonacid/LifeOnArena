@@ -72,10 +72,19 @@ namespace Code.Runtime.UI.Model.AbilityMenu
         {
             var ability = _abilities[index];
 
-            if (_gameData.PlayerData.WorldData.LootData.Collected >= ability.Price)
+            if (index > 0)
             {
-                ability.IsUnlocked = true;
+                var previousAbility = _abilities[index - 1];
+                
+                if (!previousAbility.IsUnlocked) return;
+                
+                if (_gameData.PlayerData.WorldData.LootData.Collected >= ability.Price)
+                {
+                    ability.IsUnlocked = true;
+                }
             }
+            
+            
         }
 
         public void UnEquipAbility(int slotIndex)
