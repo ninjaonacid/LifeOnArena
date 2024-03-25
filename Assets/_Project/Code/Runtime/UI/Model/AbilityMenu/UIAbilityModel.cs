@@ -12,7 +12,7 @@ namespace Code.Runtime.UI.Model.AbilityMenu
         public string AbilityName;
         public int Price;
         public int AbilityId;
-        
+
         [JsonIgnore]
         public ActiveAbilityBlueprintBase ActiveAbilityBlueprintBase;
         

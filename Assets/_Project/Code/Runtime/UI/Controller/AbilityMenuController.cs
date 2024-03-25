@@ -12,7 +12,7 @@ namespace Code.Runtime.UI.Controller
 {
     public class AbilityMenuController : IScreenController, IDisposable
     {
-        private AbilityMenuModel _model;
+        private AbilityTreeWindowModel _model;
         private AbilityMenuWindowView _windowView;
         private ScreenService _screenService;
         private readonly ISaveLoadService _saveLoad;
@@ -24,7 +24,7 @@ namespace Code.Runtime.UI.Controller
 
         public void InitController(IScreenModel model, BaseWindowView windowView, ScreenService screenService)
         {
-            _model = model as AbilityMenuModel;
+            _model = model as AbilityTreeWindowModel;
             _windowView = windowView as AbilityMenuWindowView;
             _screenService = screenService;
 

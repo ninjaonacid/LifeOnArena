@@ -8,14 +8,14 @@ using Code.Runtime.Services.PersistentProgress;
 namespace Code.Runtime.UI.Model.AbilityMenu
 {
     [Serializable]
-    public class AbilityMenuModel : IScreenModel
+    public class AbilityTreeWindowModel : IScreenModel
     {
         private readonly IGameDataContainer _gameData;
         private readonly IConfigProvider _configProvider;
         private List<UIAbilityModel> _abilitySlots;
         private IndexedQueue<UIAbilityModel> _equippedAbilities;
 
-        public AbilityMenuModel(IGameDataContainer gameData, IConfigProvider configProvider)
+        public AbilityTreeWindowModel(IGameDataContainer gameData, IConfigProvider configProvider)
         {
             _gameData = gameData;
             _configProvider = configProvider;
@@ -28,7 +28,6 @@ namespace Code.Runtime.UI.Model.AbilityMenu
 
             var allAbilities = _configProvider.AllAbilities().OrderBy(x => x.Price);
             
-
             foreach (var ability in allAbilities)
             {
                 var abilitySlotModel = new UIAbilityModel()
