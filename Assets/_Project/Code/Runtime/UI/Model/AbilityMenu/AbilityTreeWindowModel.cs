@@ -65,8 +65,7 @@ namespace Code.Runtime.UI.Model.AbilityMenu
 
         public bool IsAbilityUnlocked(int index)
         {
-            return _abilities[index].IsUnlocked;
-        }
+            return _abilities[index].IsUnlocked; }
 
         public void UnlockAbility(int index)
         {

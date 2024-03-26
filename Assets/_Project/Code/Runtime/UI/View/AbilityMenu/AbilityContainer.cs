@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Code.Runtime.UI.AbilityMenu;
 using UniRx;
 using UnityEngine;
 
@@ -8,8 +9,10 @@ namespace Code.Runtime.UI.View.AbilityMenu
     public class AbilityContainer : MonoBehaviour
     {
         [SerializeField] private AbilityItemView _abilityItem;
+        [SerializeField] private List<AbilityTreeCell> _abilityTreeCells;
         
         private List<AbilityItemView> _abilityViews;
+        
         private AbilityItemView _selectedItem;
 
         private Subject<int> _abilitySelected;
@@ -18,12 +21,20 @@ namespace Code.Runtime.UI.View.AbilityMenu
         {
             _abilityViews = new List<AbilityItemView>();
 
-            for (int i = 0; i < abilitiesCount; i++)
+            for (int i = 0; i < _abilityTreeCells.Count; i++)
             {
-                var abilityView = Instantiate(_abilityItem, gameObject.transform);
-
+                var abilityView = Instantiate(_abilityItem, _abilityTreeCells[i].transform);
+                abilityView.transform.SetAsFirstSibling();
+                
                 _abilityViews.Add(abilityView);
             }
+
+            // for (int i = 0; i < abilitiesCount; i++)
+            // {
+            //     var abilityView = Instantiate(_abilityItem, gameObject.transform);
+            //
+            //     _abilityViews.Add(abilityView);
+            // }
 
             foreach (var ability in _abilityViews)
             {
@@ -55,6 +66,8 @@ namespace Code.Runtime.UI.View.AbilityMenu
             
             _selectedItem = obj;
             _selectedItem.Select();
+
+            var abilityCell = _abilityTreeCells[_abilityViews.IndexOf(obj)];
             
             _abilitySelected?.OnNext(_abilityViews.IndexOf(obj));
         }
