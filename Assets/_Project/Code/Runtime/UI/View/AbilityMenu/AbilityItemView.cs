@@ -10,7 +10,6 @@ namespace Code.Runtime.UI.View.AbilityMenu
     public class AbilityItemView : MonoBehaviour, IPointerClickHandler
     {
         [SerializeField] private Image _abilityIcon;
-        [SerializeField] private Image _selectionFrame;
         [SerializeField] private Image _lockIcon;
         [SerializeField] private TextMeshProUGUI _equippedSlotIndex;
 

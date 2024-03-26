@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Code.Runtime.Core.ConfigProvider;
 using Code.Runtime.Data.DataStructures;
+using Code.Runtime.Modules.AbilitySystem;
 using Code.Runtime.Services.PersistentProgress;
 
 namespace Code.Runtime.UI.Model.AbilityMenu
@@ -26,7 +27,10 @@ namespace Code.Runtime.UI.Model.AbilityMenu
             _abilities = new List<UIAbilityModel>();
             _equippedAbilities = new IndexedQueue<UIAbilityModel>();
 
-            var allAbilities = _configProvider.AllAbilities().OrderBy(x => x.AbilityTreeData.Price);
+            var allAbilities =
+                _configProvider.AllAbilities()
+                    .OrderBy(x => x.AbilityTreeData.Position);
+                    
             
             foreach (var ability in allAbilities)
             {
