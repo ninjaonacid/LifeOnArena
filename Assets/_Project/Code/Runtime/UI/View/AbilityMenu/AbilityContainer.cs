@@ -61,16 +61,19 @@ namespace Code.Runtime.UI.View.AbilityMenu
         private void HandleAbilitySelection(AbilityItemView obj)
         {
             int selectedItemIndex = _abilityItems.IndexOf(obj);
-            var abilityCell = _abilityTreeCells[selectedItemIndex];
+            
+            var selectedAbilityCell = _abilityTreeCells[selectedItemIndex];
+            
             
             if (_selectedItem is not null && _selectedItem != obj)
             {
-                abilityCell.Deselect();
+                var previousSelectedCell = _abilityTreeCells[_abilityItems.IndexOf(_selectedItem)];
+                previousSelectedCell.Deselect();
             }
             
             _selectedItem = obj;
             
-            abilityCell.Select();
+            selectedAbilityCell.Select();
 
             _abilitySelected?.OnNext(_abilityItems.IndexOf(obj));
         }

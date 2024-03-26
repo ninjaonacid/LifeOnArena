@@ -54,7 +54,6 @@ namespace Code.Runtime.UI.View.AbilityMenu
         {
             return _abilityClick ??= (_abilityClick = new Subject<AbilityItemView>());
         }
-        
-        
+
     }
 }
