@@ -11,7 +11,7 @@ namespace Code.Runtime.UI.View.AbilityMenu
         [SerializeField] private AbilityItemView _abilityItem;
         [SerializeField] private List<AbilityTreeCell> _abilityTreeCells;
         
-        private List<AbilityItemView> _abilityViews;
+        private List<AbilityItemView> _abilityItems;
         
         private AbilityItemView _selectedItem;
 
@@ -19,14 +19,15 @@ namespace Code.Runtime.UI.View.AbilityMenu
         
         public void InitializeAbilityContainer(int abilitiesCount)
         {
-            _abilityViews = new List<AbilityItemView>();
+            _abilityItems = new List<AbilityItemView>();
 
             for (int i = 0; i < _abilityTreeCells.Count; i++)
             {
                 var abilityView = Instantiate(_abilityItem, _abilityTreeCells[i].transform);
                 abilityView.transform.SetAsFirstSibling();
                 
-                _abilityViews.Add(abilityView);
+
+                _abilityItems.Add(abilityView);
             }
 
             // for (int i = 0; i < abilitiesCount; i++)
@@ -36,7 +37,7 @@ namespace Code.Runtime.UI.View.AbilityMenu
             //     _abilityViews.Add(abilityView);
             // }
 
-            foreach (var ability in _abilityViews)
+            foreach (var ability in _abilityItems)
             {
                 ability.OnAbilityItemClickAsObservable().Subscribe(HandleAbilitySelection).AddTo(gameObject);
             }
@@ -44,12 +45,12 @@ namespace Code.Runtime.UI.View.AbilityMenu
 
         public int GetSelectedSlotIndex()
         {
-            return _abilityViews.IndexOf(_selectedItem);
+            return _abilityItems.IndexOf(_selectedItem);
         }
         
         public void UpdateData(int abilityIndex, int equippedIndex, Sprite abilityIcon, bool isUnlocked)
         {
-            _abilityViews[abilityIndex].SetData(abilityIcon, isUnlocked, equippedIndex);
+            _abilityItems[abilityIndex].SetData(abilityIcon, isUnlocked, equippedIndex);
         }
 
         public IObservable<int> OnAbilitySelectedAsObservable()
@@ -59,17 +60,19 @@ namespace Code.Runtime.UI.View.AbilityMenu
 
         private void HandleAbilitySelection(AbilityItemView obj)
         {
-            if (_selectedItem && _selectedItem != obj)
+            int selectedItemIndex = _abilityItems.IndexOf(obj);
+            var abilityCell = _abilityTreeCells[selectedItemIndex];
+            
+            if (_selectedItem is not null && _selectedItem != obj)
             {
-                _selectedItem.Deselect();
+                abilityCell.Deselect();
             }
             
             _selectedItem = obj;
-            _selectedItem.Select();
-
-            var abilityCell = _abilityTreeCells[_abilityViews.IndexOf(obj)];
             
-            _abilitySelected?.OnNext(_abilityViews.IndexOf(obj));
+            abilityCell.Select();
+
+            _abilitySelected?.OnNext(_abilityItems.IndexOf(obj));
         }
         
         

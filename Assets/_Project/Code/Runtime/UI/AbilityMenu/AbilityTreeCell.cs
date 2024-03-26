@@ -7,10 +7,18 @@ namespace Code.Runtime.UI.AbilityMenu
     public class AbilityTreeCell : MonoBehaviour
     {
         [SerializeField] private Image _abilitySlotFrame;
-
-        private void Start()
+        [SerializeField] private Image _selectionFrame;
+        
+        
+        public void Select()
         {
-            _abilitySlotFrame.transform.SetAsLastSibling();
+            _selectionFrame.enabled = true;
         }
+
+        public void Deselect()
+        {
+            _selectionFrame.enabled = false;
+        }
+        
     }
 }

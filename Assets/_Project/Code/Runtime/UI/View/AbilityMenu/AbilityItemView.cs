@@ -54,16 +54,6 @@ namespace Code.Runtime.UI.View.AbilityMenu
         {
             return _abilityClick ??= (_abilityClick = new Subject<AbilityItemView>());
         }
-
-        public void Select()
-        {
-            _selectionFrame.enabled = true;
-        }
-
-        public void Deselect()
-        {
-            _selectionFrame.enabled = false;
-        }
         
         
     }
