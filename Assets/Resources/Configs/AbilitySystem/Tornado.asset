@@ -13,18 +13,16 @@ MonoBehaviour:
   m_Name: Tornado
   m_EditorClassIdentifier: 
   Identifier: {fileID: 11400000, guid: 45d10b59d4df26e42977a193ab100b76, type: 2}
-  Icon: {fileID: 21300000, guid: b7028d96bb02a7742a98c5cdd94f3505, type: 3}
+  Icon: {fileID: 21300000, guid: 2eeccbb1e57a86a45bfc5c5c986cb68c, type: 3}
+  AbilityTreeData:
+    Branch: 2
+    Position: 2
+    Price: 300
   Cooldown: 5
-  CurrentCooldown: 1.3690457
   ActiveTime: 0.5
-  CurrentActiveTime: -3.1309514
-  Price: 0
-  State: 0
   IsCastAbility: 1
   VisualEffectData: {fileID: 11400000, guid: 4329e6e0fb17724458abb5b7bdeabc6a, type: 2}
-  _statusTemplates:
-  - {fileID: 11400000, guid: 65f3b74aaae495944bf11dcab7e8e825, type: 2}
-  - {fileID: 11400000, guid: 0bafd07b2c069e640a50c29734cd8f35, type: 2}
+  _gameplayEffectBlueprints: []
   _radius: 5
   _castDistance: 5
   _lifeTime: 5
