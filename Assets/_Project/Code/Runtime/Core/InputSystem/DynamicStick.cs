@@ -13,6 +13,9 @@ namespace Code.Runtime.Core.InputSystem
 {
     public class DynamicStick : OnScreenControl, IPointerDownHandler, IPointerUpHandler, IDragHandler
     {
+        [SerializeField] private Image _joyStick;
+        [SerializeField] private RectTransform _stick;
+        
         private const string kDynamicOriginClickable = "DynamicOriginClickable";
         
          public void OnPointerDown(PointerEventData eventData)
@@ -55,6 +58,11 @@ namespace Code.Runtime.Core.InputSystem
 
             image.sprite = SpriteUtilities.CreateCircleSprite(16, new Color32(255, 255, 255, 255));
             image.alphaHitTestMinimumThreshold = 0.5f;
+
+            var color = _joyStick.color;
+            color.a = 1;
+            _joyStick.color = color;
+
         }
 
         private void BeginInteraction(Vector2 pointerPosition, Camera uiCamera)
@@ -78,9 +86,11 @@ namespace Code.Runtime.Core.InputSystem
                 case Behaviour.ExactPositionWithDynamicOrigin:
                     RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasRect, pointerPosition, uiCamera, out var pointerDown);
                     m_PointerDownPos = ((RectTransform)transform).anchoredPosition = pointerDown;
-                    var parentRect = transform.GetComponentInParent<RectTransform>();
-                    parentRect.gameObject.SetActive(true);
-                    parentRect.position = m_PointerDownPos;
+                    _stick.anchoredPosition = pointerDown;
+                    
+                    var color = _joyStick.color;
+                    color.a = 255;
+                    _joyStick.color = color;
                     break;
             }
         }
@@ -111,7 +121,7 @@ namespace Code.Runtime.Core.InputSystem
 
                 case Behaviour.ExactPositionWithDynamicOrigin:
                     delta = Vector2.ClampMagnitude(delta, movementRange);
-                    ((RectTransform)transform).anchoredPosition = m_PointerDownPos + delta;
+                    _stick.anchoredPosition = delta;
                     break;
             }
 
@@ -122,8 +132,7 @@ namespace Code.Runtime.Core.InputSystem
         private void EndInteraction()
         {
             ((RectTransform)transform).anchoredPosition = m_PointerDownPos = m_StartPos;
-            var parentRect = transform.GetComponentInParent<RectTransform>();
-            parentRect.gameObject.SetActive(false);
+            //_backGround.anchoredPosition = m_StartPos;
             SendValueToControl(Vector2.zero);
         }
 
