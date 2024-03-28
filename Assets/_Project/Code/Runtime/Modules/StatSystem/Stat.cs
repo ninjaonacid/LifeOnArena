@@ -34,7 +34,7 @@ namespace Code.Runtime.Modules.StatSystem
 
         public void RemoveModifier(Object source)
         {
-            int num = _modifiers.RemoveAll(x => x.Source == source);
+            int num = _modifiers.RemoveAll(x => (Object)x.Source == source);
 
             if (num > 0)
             {

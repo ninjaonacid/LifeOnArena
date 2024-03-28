@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
 {
-    [CreateAssetMenu(fileName = "SpinAttackAbility", menuName = "AbilityData/Attack/SpinAttack")]
+    [CreateAssetMenu(fileName = "SpinAttackAbility", menuName = "AbilitySystem/SpinAttack")]
     public class SpinAttackBlueprint : ActiveAbilityBlueprint<SpinAttack>
     {
         public override ActiveAbility GetAbility()
