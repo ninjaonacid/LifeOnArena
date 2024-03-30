@@ -11,9 +11,10 @@ using UnityEngine.UI;
 
 namespace Code.Runtime.Core.InputSystem
 {
-    public class DynamicStick : OnScreenControl, IPointerDownHandler, IPointerUpHandler, IDragHandler
+    public class DynamicJoyStick : OnScreenControl, IPointerDownHandler, IPointerUpHandler, IDragHandler
     {
         [SerializeField] private Image _joyStick;
+        [SerializeField] private CanvasGroup _joyStickCanvas;
         [SerializeField] private RectTransform _stick;
         
         private const string kDynamicOriginClickable = "DynamicOriginClickable";
@@ -59,10 +60,7 @@ namespace Code.Runtime.Core.InputSystem
             image.sprite = SpriteUtilities.CreateCircleSprite(16, new Color32(255, 255, 255, 255));
             image.alphaHitTestMinimumThreshold = 0.5f;
 
-            var color = _joyStick.color;
-            color.a = 1;
-            _joyStick.color = color;
-
+            
         }
 
         private void BeginInteraction(Vector2 pointerPosition, Camera uiCamera)
@@ -86,11 +84,7 @@ namespace Code.Runtime.Core.InputSystem
                 case Behaviour.ExactPositionWithDynamicOrigin:
                     RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasRect, pointerPosition, uiCamera, out var pointerDown);
                     m_PointerDownPos = ((RectTransform)transform).anchoredPosition = pointerDown;
-                    _stick.anchoredPosition = pointerDown;
-                    
-                    var color = _joyStick.color;
-                    color.a = 255;
-                    _joyStick.color = color;
+                    _stick.anchoredPosition = Vector2.zero;
                     break;
             }
         }
