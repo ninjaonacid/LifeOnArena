@@ -59,8 +59,8 @@ namespace Code.Runtime.Entity
             EnableCollider(value);
             EnableTrail(value);
         }
-        
-        private void EnableCollider(bool value)
+
+        protected void EnableCollider(bool value)
         {
             _weaponSlot.EquippedWeapon.EnableCollider(value);
         }

@@ -97,8 +97,7 @@ namespace Code.Runtime.Entity.Hero
                 _heroRotation,
                 needsExitTime: true,
                 isGhostState: false));
-
-
+            
             _stateMachine.AddTwoWayTransition(new Transition(
                 HeroIdle,
                 HeroMovement,

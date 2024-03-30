@@ -17,6 +17,8 @@ namespace Code.Runtime.Entity.Hero
             base.EquipWeapon(weaponData);
 
             _heroAnimator.OverrideController(weaponData.OverrideController);
+            
+            EnableCollider(false);
 
             OnWeaponChange?.Invoke(_weaponSlot.EquippedWeapon);
         }

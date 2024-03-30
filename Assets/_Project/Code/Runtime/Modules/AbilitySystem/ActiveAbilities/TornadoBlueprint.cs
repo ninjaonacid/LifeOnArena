@@ -3,7 +3,7 @@ using UnityEngine;
 namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
 {
     [CreateAssetMenu(fileName = "Tornado", menuName = "AbilitySystem/Ability/Tornado")]
-    public class TornadoBlueprint : ActiveAbilityBlueprint<TornadoAbility>
+    public class TornadoBlueprint : ActiveAbilityBlueprint<AoeAbility>
     {
         [SerializeField] private float _radius;
         [SerializeField] private float _castDistance;
@@ -11,7 +11,7 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
         
         public override ActiveAbility GetAbility()
         {
-            return new TornadoAbility
+            return new AoeAbility
                 (this,
                 _lifeTime,
                 _radius,

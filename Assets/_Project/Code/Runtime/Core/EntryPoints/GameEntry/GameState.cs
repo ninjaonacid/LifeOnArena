@@ -37,7 +37,7 @@ namespace Code.Runtime.Core.EntryPoints.GameEntry
         {
             PlayerData data = new PlayerData("Shelter");
 
-            data.WorldData.LootData.Collected = 100;
+            data.WorldData.LootData.Collected = 10000;
 
             StatDatabase characterStats = _configProvider.CharacterStats();
 

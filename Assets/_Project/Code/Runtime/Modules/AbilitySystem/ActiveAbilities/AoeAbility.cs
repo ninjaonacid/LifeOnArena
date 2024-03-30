@@ -7,12 +7,15 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
 {
     public class AoeAbility : ActiveAbility
     {
-        private float _castDistance;
-        private float _duration;
-        private float _aoeRadius;
+        private readonly float _castDistance;
+        private readonly float _duration;
+        private readonly float _aoeRadius;
         
-        public AoeAbility(ActiveAbilityBlueprintBase abilityBlueprint) : base(abilityBlueprint)
+        public AoeAbility(ActiveAbilityBlueprintBase abilityBlueprint, float castDistance, float duration, float aoeRadius) : base(abilityBlueprint)
         {
+            _castDistance = castDistance;
+            _duration = duration;
+            _aoeRadius = aoeRadius;
         }
 
         public override async void Use(GameObject caster, GameObject target)
@@ -36,8 +39,9 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
 
             if (targets.hits > 0)
             {
-                foreach (var collider in targets.colliders)
+                for (var index = 0; index < targets.hits; index++)
                 {
+                    var collider = targets.colliders[index];
                     ApplyEffects(collider.gameObject);
                 }
             }
