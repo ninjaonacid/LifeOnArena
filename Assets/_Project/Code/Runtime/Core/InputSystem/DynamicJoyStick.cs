@@ -13,7 +13,6 @@ namespace Code.Runtime.Core.InputSystem
 {
     public class DynamicJoyStick : OnScreenControl, IPointerDownHandler, IPointerUpHandler, IDragHandler
     {
-        [SerializeField] private Image _joyStick;
         [SerializeField] private CanvasGroup _joyStickCanvas;
         [SerializeField] private RectTransform _stick;
         
@@ -60,7 +59,7 @@ namespace Code.Runtime.Core.InputSystem
             image.sprite = SpriteUtilities.CreateCircleSprite(16, new Color32(255, 255, 255, 255));
             image.alphaHitTestMinimumThreshold = 0.5f;
 
-            
+            HideJoystick();
         }
 
         private void BeginInteraction(Vector2 pointerPosition, Camera uiCamera)
@@ -85,6 +84,9 @@ namespace Code.Runtime.Core.InputSystem
                     RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasRect, pointerPosition, uiCamera, out var pointerDown);
                     m_PointerDownPos = ((RectTransform)transform).anchoredPosition = pointerDown;
                     _stick.anchoredPosition = Vector2.zero;
+
+                    ShowJoystick();
+                    
                     break;
             }
         }
@@ -126,7 +128,9 @@ namespace Code.Runtime.Core.InputSystem
         private void EndInteraction()
         {
             ((RectTransform)transform).anchoredPosition = m_PointerDownPos = m_StartPos;
-            //_backGround.anchoredPosition = m_StartPos;
+            
+            HideJoystick();
+            
             SendValueToControl(Vector2.zero);
         }
 
@@ -186,6 +190,16 @@ namespace Code.Runtime.Core.InputSystem
             return canvas?.worldCamera ?? Camera.main;
         }
 
+        private void ShowJoystick()
+        {
+            _joyStickCanvas.alpha = 1f;
+        }
+
+        private void HideJoystick()
+        {
+            _joyStickCanvas.alpha = 0f;
+        }
+
         private void OnDrawGizmosSelected()
         {
             Gizmos.matrix = ((RectTransform)transform.parent).localToWorldMatrix;
@@ -229,25 +243,13 @@ namespace Code.Runtime.Core.InputSystem
                 rectTransform.sizeDelta = new Vector2(m_DynamicOriginRange * 2, m_DynamicOriginRange * 2);
             }
         }
-
-        /// <summary>
-        /// The distance from the onscreen control's center of origin, around which the control can move.
-        /// </summary>
+        
         public float movementRange
         {
             get => m_MovementRange;
             set => m_MovementRange = value;
         }
-
-        /// <summary>
-        /// Defines the circular region where the onscreen control may have it's origin placed.
-        /// </summary>
-        /// <remarks>
-        /// This only applies if <see cref="behaviour"/> is set to <see cref="Behaviour.ExactPositionWithDynamicOrigin"/>.
-        /// When the first press is within this region, then the control will appear at that position and have it's origin of motion placed there.
-        /// Otherwise, if pressed outside of this region the control will ignore it.
-        /// This property defines the radius of the circular region. The center point being defined by the component position in the scene.
-        /// </remarks>
+        
         public float dynamicOriginRange
         {
             get => m_DynamicOriginRange;

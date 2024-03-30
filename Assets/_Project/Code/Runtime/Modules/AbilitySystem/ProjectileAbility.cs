@@ -26,7 +26,7 @@ namespace Code.Runtime.Modules.AbilitySystem
                 .CreateProjectile(_projectilePrefab, OnCreate, OnRelease, OnGet);
 
             var layer = caster.GetComponent<EntityAttack>().GetTargetLayer();
-            projectile.gameObject.layer = caster.GetComponent<EntityAttack>().GetLayer();
+            projectile.gameObject.layer = layer;
             var hurtBox = caster.GetComponent<EntityHurtBox>();
             Vector3 casterCenter = hurtBox.GetHeightTransform();
             projectile.transform.position = casterCenter;
