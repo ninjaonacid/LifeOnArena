@@ -124,7 +124,7 @@ namespace Code.Runtime.Entity
             var goCenter = _hurtBox.GetCenterTransform();
             var goPosition = transform.position;
 
-            if (effect.StatusVisualEffect)
+            if (effect.StatusVisualEffect is not null)
             {
                 if (effect.StatusVisualEffect.PlayLocation == PlayLocation.Above)
                 {

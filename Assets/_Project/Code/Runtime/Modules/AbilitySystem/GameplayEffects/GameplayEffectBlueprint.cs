@@ -16,7 +16,7 @@ namespace Code.Runtime.Modules.AbilitySystem.GameplayEffects
     [CreateAssetMenu(menuName = "AbilitySystem/GameplayEffect/GameplayEffect", fileName = "GameplayEffect")]
     public class GameplayEffectBlueprint : ScriptableObject
     {
-        [SerializeField] private EffectDurationType _effectDurationType;
+        [SerializeField] private EffectDurationType _effectDurationType = EffectDurationType.Instant;
         [SerializeField] private List<StatModifierBlueprint> _modifiers;
         [SerializeField] private List<GameplayTag> _tags;
         [SerializeField] private StatusVisualEffect _statusVisualEffect;

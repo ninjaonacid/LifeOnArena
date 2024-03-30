@@ -2,24 +2,18 @@ using UnityEngine;
 
 namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
 {
-    public class FireWallBlueprint : ActiveAbilityBlueprint<FireWall>
+    [CreateAssetMenu(fileName = "FireWall", menuName = "AbilitySystem/Ability/FireWall")]
+    public class FireWallBlueprint : ActiveAbilityBlueprint<AoeAbility>
     {
+        [SerializeField] private float _castDistance;
+        [SerializeField] private float _duration;
+        [SerializeField] private float _aoeRadius;
+        
         public override ActiveAbility GetAbility()
         {
-            return new FireWall(this);
+            return new AoeAbility(this, _castDistance, _duration, _aoeRadius);
         }
     }
 
-    public class FireWall : ActiveAbility
-    {
-        public FireWall(ActiveAbilityBlueprintBase abilityBlueprint) : base(abilityBlueprint)
-        {
-        }
-        
-
-        public override void Use(GameObject caster, GameObject target)
-        {
-           
-        }
-    }
+    
 }
