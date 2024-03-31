@@ -54,6 +54,7 @@ namespace Code.Runtime.Logic.Projectiles
         public Projectile SetOwner(GameObject obj)
         {
             _owner = obj;
+            gameObject.layer = _owner.layer;
             return this;
         } 
 

@@ -14,8 +14,7 @@ namespace Code.Runtime.Logic.VisualEffects
         private ParticleSystem[] _childs;
         public event Action<VisualEffect> Finished;
         private CancellationTokenSource _cts;
-
-
+        
         private void Awake()
         {
             _childs = GetComponentsInChildren<ParticleSystem>();

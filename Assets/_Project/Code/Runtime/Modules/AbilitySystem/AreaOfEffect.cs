@@ -7,17 +7,44 @@ namespace Code.Runtime.Modules.AbilitySystem
     {
         public event Action<GameObject> OnEnter;
         public event Action<GameObject> OnExit;
+
+        private LayerMask _targetLayer;
+        
         
         [SerializeField] private Collider _area;
+        
+        public AreaOfEffect SetTargetLayer(LayerMask layer)
+        {
+            _targetLayer = layer;
+            return this;
+        }
 
+        public void SetOwnerLayer(LayerMask owner)
+        {
+            gameObject.layer = owner;
+
+            foreach (Transform child in gameObject.transform)
+            {
+                child.gameObject.layer = owner;
+            }
+        }
+        
         private void OnTriggerEnter(Collider other)
         {
-            OnEnter?.Invoke(other.gameObject);
+            var targetvalue = _targetLayer.value;
+            var vasda = 1 << other.gameObject.layer;
+            if (_targetLayer == 1 << other.gameObject.layer)
+            {
+                OnEnter?.Invoke(other.gameObject);
+            }
         }
 
         private void OnTriggerExit(Collider other)
         {
-            OnExit?.Invoke(other.gameObject);
+            if (_targetLayer == 1 << other.gameObject.layer)
+            {
+                OnExit?.Invoke(other.gameObject);
+            }
         }
     }
 }

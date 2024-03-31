@@ -16,7 +16,6 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
             _castDistance = castDistance;
             _aoeRadius = aoeRadius;
         }
-
         public override async void Use(GameObject caster, GameObject target)
         {
             Vector3 casterPosition = caster.transform.position;
@@ -30,12 +29,22 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
             visualEffectTransform.position = visualEffectPosition;
             visualEffectTransform.rotation = Quaternion.LookRotation(casterDirection);
             visualEffect.Play();
-            
-            var layer = caster.GetComponent<EntityAttack>().GetTargetLayer();
+
+            var entityAttack = caster.GetComponent<EntityAttack>();
+            var layer = entityAttack.GetTargetLayer();
+            var owner = entityAttack.GetLayer();
             var stats = caster.GetComponent<StatController>();
+            
             
             if (visualEffect.TryGetComponent<AreaOfEffect>(out var areaOfEffect))
             {
+                areaOfEffect
+                    .SetTargetLayer(layer)
+                    .SetOwnerLayer(owner);
+
+                areaOfEffect.OnEnter -= EntityEnter;
+                areaOfEffect.OnExit -= EntityExit;
+                
                 areaOfEffect.OnEnter += EntityEnter;
                 areaOfEffect.OnExit += EntityExit;
             };
@@ -50,6 +59,7 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
         {
             RemoveEffects(obj);
         }
+        
 
         private void RemoveEffects(GameObject target)
         {

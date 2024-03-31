@@ -11,7 +11,7 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
         
         public override ActiveAbility GetAbility()
         {
-            return new AoeAbility(this, _castDistance, _duration, _aoeRadius);
+            return new DotAoeAbility(this, _castDistance, _duration, _aoeRadius);
         }
     }
     
