@@ -30,7 +30,8 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
             var position = visualEffectTransform.position;
             position = casterPosition + casterDirection * _castDistance;
             visualEffectTransform.position = position;
-            visualEffectTransform.rotation = Quaternion.identity;
+            visualEffectTransform.rotation = Quaternion.LookRotation(casterDirection);
+            
 
             var layer = caster.GetComponent<EntityAttack>().GetTargetLayer();
             var stats = caster.GetComponent<StatController>();
