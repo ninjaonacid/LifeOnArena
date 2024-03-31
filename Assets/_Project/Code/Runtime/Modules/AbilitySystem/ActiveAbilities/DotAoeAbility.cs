@@ -1,20 +1,18 @@
 ﻿using Code.Runtime.Entity;
-using Code.Runtime.Entity.EntitiesComponents;
 using Code.Runtime.Modules.StatSystem;
 using UnityEngine;
 
 namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
 {
-    public class AoeAbility : ActiveAbility
+    public class DotAoeAbility : AoeAbility
     {
         private readonly float _castDistance;
-        private readonly float _duration;
-        private readonly float _aoeRadius;
+        private float _aoeRadius;
         
-        public AoeAbility(ActiveAbilityBlueprintBase abilityBlueprint, float castDistance, float duration, float aoeRadius) : base(abilityBlueprint)
+        public DotAoeAbility(ActiveAbilityBlueprintBase abilityBlueprint, float castDistance, float duration,
+            float aoeRadius) : base(abilityBlueprint, castDistance, duration, aoeRadius)
         {
             _castDistance = castDistance;
-            _duration = duration;
             _aoeRadius = aoeRadius;
         }
 
@@ -34,20 +32,6 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
             
             var layer = caster.GetComponent<EntityAttack>().GetTargetLayer();
             var stats = caster.GetComponent<StatController>();
-            
-            var targets = _battleService.GetTargetsInRadius(visualEffectPosition, _aoeRadius, layer);
-
-            if (targets.hits > 0)
-            {
-                for (var index = 0; index < targets.hits; index++)
-                {
-                    var collider = targets.colliders[index];
-                    ApplyEffects(collider.gameObject);
-                }
-            }
-
-            var entityAttack = caster.GetComponent<IAttackComponent>();
-            entityAttack.InvokeHit(targets.hits);
         }
     }
 }

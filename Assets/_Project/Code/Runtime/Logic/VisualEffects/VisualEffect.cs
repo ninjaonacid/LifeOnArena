@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Threading;
 using Code.Runtime.Core.ObjectPool;
 using Code.Runtime.Utils;
@@ -10,8 +11,15 @@ namespace Code.Runtime.Logic.VisualEffects
     public class VisualEffect : PooledObject
     {
         [SerializeField] protected ParticleSystem _particleSystem;
+        private ParticleSystem[] _childs;
         public event Action<VisualEffect> Finished;
         private CancellationTokenSource _cts;
+
+
+        private void Awake()
+        {
+            _childs = GetComponentsInChildren<ParticleSystem>();
+        }
 
         public void Play()
         {
@@ -40,8 +48,12 @@ namespace Code.Runtime.Logic.VisualEffects
         private async UniTask WaitForDurationEnd(CancellationToken token)
         {
             await UniTask.Delay(TimeSpan.FromSeconds(_particleSystem.main.duration), cancellationToken: token);
-            _particleSystem.Stop(true, ParticleSystemStopBehavior.StopEmitting);
-            await UniTask.WaitUntil(() => _particleSystem.particleCount == 0, cancellationToken: token);
+            _particleSystem.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+            await UniTask.WaitUntil(() =>
+            {
+                return _childs.All(ps => ps.particleCount == 0);
+            }, cancellationToken: token);
+            
             Finished?.Invoke(this);
             ReturnToPool();
         }
