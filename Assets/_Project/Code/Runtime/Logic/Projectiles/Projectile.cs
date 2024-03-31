@@ -3,6 +3,7 @@ using System.Threading;
 using Code.Runtime.ConfigData.Identifiers;
 using Code.Runtime.Core.Factory;
 using Code.Runtime.Core.ObjectPool;
+using Code.Runtime.Entity;
 using Code.Runtime.Entity.Enemy;
 using Code.Runtime.Logic.Collision;
 using Code.Runtime.Logic.VisualEffects;
@@ -23,7 +24,7 @@ namespace Code.Runtime.Logic.Projectiles
         [SerializeField] private Rigidbody _rb;
         [SerializeField] private VisualEffectIdentifier _collisionEffectId;
         
-        private LayerMask _mask;
+        private LayerMask _targetLayer;
         private GameObject _owner;
         
         private VisualEffectFactory _visualFactory;
@@ -45,16 +46,17 @@ namespace Code.Runtime.Logic.Projectiles
             return this;
         }
 
-        public Projectile SetLayerMask(LayerMask mask)
+        public Projectile SetTargetLayer(LayerMask mask)
         {
-            _mask = mask;
+            _targetLayer = mask;
             return this;
         }
 
-        public Projectile SetOwner(GameObject obj)
+        public Projectile SetOwnerLayer(GameObject owner)
         {
-            _owner = obj;
-            gameObject.layer = _owner.layer;
+            var ownerLayer = owner.GetComponent<EntityAttack>().GetLayer();
+            gameObject.layer = ownerLayer;
+            _owner = owner;
             return this;
         } 
 
@@ -65,7 +67,9 @@ namespace Code.Runtime.Logic.Projectiles
 
         public void OnTriggerEnter(Collider other)
         {
-            if(_mask == 1 << other.gameObject.layer)
+            var value = _targetLayer.value;
+            var target = 1 << other.gameObject.layer;
+            if(_targetLayer == 1 << other.gameObject.layer)
             {
                 HandleCollision(other.gameObject).Forget();
             }

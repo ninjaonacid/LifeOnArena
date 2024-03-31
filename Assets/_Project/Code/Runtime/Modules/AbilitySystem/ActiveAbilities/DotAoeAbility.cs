@@ -1,7 +1,6 @@
 ﻿using Code.Runtime.Core.ObjectPool;
 using Code.Runtime.Entity;
 using Code.Runtime.Entity.StatusEffects;
-using Code.Runtime.Modules.StatSystem;
 using UnityEngine;
 
 namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
@@ -41,8 +40,7 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
             areaOfEffect
                 .SetTargetLayer(layer)
                 .SetOwnerLayer(owner);
-
-
+            
         }
 
         private void EntityEnter(GameObject obj)

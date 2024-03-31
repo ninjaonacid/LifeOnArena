@@ -165,7 +165,7 @@ namespace Code.Runtime.Entity.Hero
             _stateMachine.AddTransitionFromAny(new Transition(
                 "",
                 HeroIdle,
-                t => _stateMachine.ActiveState.IsStateOver() &&
+                (transition) => _stateMachine.ActiveState.IsStateOver() &&
                      _stateMachine.ActiveState is not HeroMovementState));
 
             _stateMachine.AddTransition(new Transition(

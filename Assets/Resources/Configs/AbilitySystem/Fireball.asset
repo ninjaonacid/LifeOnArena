@@ -9,21 +9,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fcff775678aca5344838a9639120b85c, type: 3}
+  m_Script: {fileID: 11500000, guid: 46bdbeaf8e3a403cb80181882889c8bd, type: 3}
   m_Name: Fireball
   m_EditorClassIdentifier: 
-  Identifier: {fileID: 11400000, guid: 48d5edeb247b38345974b2cb065b7438, type: 2}
-  Icon: {fileID: 21300000, guid: 337568a94ef22f14694fdfb08cfd875b, type: 3}
+  Identifier: {fileID: 0}
+  Icon: {fileID: 0}
   AbilityTreeData:
-    Branch: 2
-    Position: 1
-    Price: 500
-  Cooldown: 1
+    Branch: 0
+    Position: 0
+    Price: 0
+  Cooldown: 0
   ActiveTime: 0
-  IsCastAbility: 1
+  IsCastAbility: 0
   VisualEffectData: {fileID: 0}
-  _gameplayEffectBlueprints:
-  - {fileID: 11400000, guid: 34ecfd28a25248848bbcfcd8a68a8741, type: 2}
-  _projectile: {fileID: 4140074422687958933, guid: eef611f69a043234daa794211d3ef4a7, type: 3}
-  _lifeTime: 5
-  _speed: 20
+  _gameplayEffectBlueprints: []
+  _prefab: {fileID: 0}
+  _lifeTime: 0
+  _speed: 0

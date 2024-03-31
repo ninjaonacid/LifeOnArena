@@ -9,9 +9,9 @@ namespace Code.Runtime.Modules.AbilitySystem
 {
     public class ProjectileAbility : ActiveAbility
     {
-        private Projectile _projectilePrefab;
-        private float _lifeTime;
-        private float _speed;
+        private readonly Projectile _projectilePrefab;
+        private readonly float _lifeTime;
+        private readonly float _speed;
 
         public ProjectileAbility(ActiveAbilityBlueprintBase abilityBlueprint, Projectile projectilePrefab, float lifeTime, float speed) : base(abilityBlueprint)
         {
@@ -27,7 +27,7 @@ namespace Code.Runtime.Modules.AbilitySystem
 
             var entityAttack = caster.GetComponent<EntityAttack>();
             var layer = entityAttack.GetTargetLayer();
-            projectile.gameObject.layer = entityAttack.GetLayer();
+
             var hurtBox = caster.GetComponent<EntityHurtBox>();
             Vector3 casterCenter = hurtBox.GetHeightTransform();
             projectile.transform.position = casterCenter;
@@ -35,8 +35,8 @@ namespace Code.Runtime.Modules.AbilitySystem
 
             projectile
                 .SetVelocity(direction, _speed)
-                .SetLayerMask(layer)
-                .SetOwner(caster)
+                .SetTargetLayer(layer)
+                .SetOwnerLayer(caster)
                 .SetLifetime(_lifeTime);
         }
 
@@ -47,17 +47,17 @@ namespace Code.Runtime.Modules.AbilitySystem
             data.Source.GetComponent<IAttackComponent>().InvokeHit(1);
         }
 
-        protected void OnCreate(Projectile projectile)
+        private void OnCreate(Projectile projectile)
         {
             projectile.OnHit += OnHit;
         }
 
-        protected void OnRelease(Projectile projectile)
+        private void OnRelease(Projectile projectile)
         {
             projectile.OnHit -= OnHit;
         }
 
-        protected void OnGet(Projectile projectile)
+        private void OnGet(Projectile projectile)
         {
             projectile.SetVelocity(Vector3.zero, 0);
         }

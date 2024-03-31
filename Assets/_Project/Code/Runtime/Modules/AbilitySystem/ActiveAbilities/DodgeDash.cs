@@ -1,6 +1,4 @@
-using System.Collections.Generic;
 using Code.Runtime.Entity.Hero;
-using Code.Runtime.Entity.StatusEffects;
 using UnityEngine;
 
 namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
