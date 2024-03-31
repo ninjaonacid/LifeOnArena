@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Pool;
 using VContainer;
 using VContainer.Unity;
 
@@ -19,23 +20,11 @@ namespace Code.Runtime.Core.ObjectPool
             _prefabToPoolMap = new Dictionary<int, ObjectPool<PooledObject>>();
         }
 
-        public GameObject Spawn(GameObject prefab)
-        {
-            int prefabInstanceId = prefab.GetInstanceID();
-
-            if (!_prefabToPoolMap.TryGetValue(prefabInstanceId, out var objectPool))
-            {
-                objectPool = CreatePool(prefab);
-
-                _prefabToPoolMap.Add(prefabInstanceId, objectPool);
-
-                objectPool.Initialize(prefab.name);
-            }
-
-            return objectPool.Get().gameObject;
-        }
-
-        public GameObject Spawn(GameObject prefab, Action<PooledObject> onCreate, Action<PooledObject> onRelease, Action<PooledObject> onGet)
+        public GameObject Spawn(GameObject prefab,
+            Action<PooledObject> onCreate = null,
+            Action<PooledObject> onRelease = null,
+            Action<PooledObject> onGet = null,
+            Action<PooledObject> onReturn = null)
         {
             int prefabInstanceId = prefab.GetInstanceID();
 
@@ -70,31 +59,21 @@ namespace Code.Runtime.Core.ObjectPool
             }
         }
 
-        private ObjectPool<PooledObject> CreatePool(GameObject prefab, Action<PooledObject> onCreate,
-            Action<PooledObject> onRelease, Action<PooledObject> onGet)
+        private ObjectPool<PooledObject> CreatePool(GameObject prefab, Action<PooledObject> onCreate = null,
+            Action<PooledObject> onRelease = null, Action<PooledObject> onGet = null,
+            Action<PooledObject> onReturn = null)
         {
-            return new ObjectPool<PooledObject>(() => Instantiate(prefab), onCreate, onRelease, onGet);
+            return new ObjectPool<PooledObject>(() => Instantiate(prefab), onCreate, onRelease, onGet, onReturn);
         }
 
-        private ObjectPool<PooledObject> CreatePool(GameObject prefab)
-        {
-            return new ObjectPool<PooledObject>(() => Instantiate(prefab));
-        }
-
-
-        public TComponent Spawn<TComponent>(GameObject prefab)
-        {
-            var go = Spawn(prefab);
-            return go.GetComponent<TComponent>();
-        }
-
-        public TComponent Spawn<TComponent>(GameObject prefab, Action<PooledObject> onCreate,
-            Action<PooledObject> onRelease, Action<PooledObject> onGet)
+        public TComponent Spawn<TComponent>(GameObject prefab, 
+            Action<PooledObject> onCreate = null,
+            Action<PooledObject> onRelease = null, Action<PooledObject> onGet = null,
+            Action<PooledObject> onReturn = null)
         {
             var go = Spawn(prefab, onCreate, onRelease, onGet);
             return go.GetComponent<TComponent>();
         }
-
 
         private PooledObject Instantiate(GameObject prefab)
         {
@@ -111,6 +90,10 @@ namespace Code.Runtime.Core.ObjectPool
 
         public void Dispose()
         {
+            foreach (var pool in _prefabToPoolMap.Values)
+            {
+                pool.ReleaseAll();
+            }
         }
     }
 }

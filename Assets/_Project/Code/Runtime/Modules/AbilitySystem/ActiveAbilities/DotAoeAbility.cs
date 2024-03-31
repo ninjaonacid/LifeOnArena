@@ -1,4 +1,5 @@
-﻿using Code.Runtime.Entity;
+﻿using Code.Runtime.Core.ObjectPool;
+using Code.Runtime.Entity;
 using Code.Runtime.Entity.StatusEffects;
 using Code.Runtime.Modules.StatSystem;
 using UnityEngine;
@@ -22,7 +23,9 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
             Vector3 casterDirection = caster.transform.forward;
 
             var visualEffect =
-                await _visualEffectFactory.CreateVisualEffect(AbilityBlueprint.VisualEffectData.Identifier.Id);
+                await _visualEffectFactory
+                    .CreateVisualEffect(AbilityBlueprint.VisualEffectData.Identifier.Id,
+                    OnCreate, OnRelease);
 
             Transform visualEffectTransform = visualEffect.transform;
             var visualEffectPosition = casterPosition + casterDirection * _castDistance;
@@ -33,21 +36,13 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
             var entityAttack = caster.GetComponent<EntityAttack>();
             var layer = entityAttack.GetTargetLayer();
             var owner = entityAttack.GetLayer();
-            var stats = caster.GetComponent<StatController>();
-            
-            
-            if (visualEffect.TryGetComponent<AreaOfEffect>(out var areaOfEffect))
-            {
-                areaOfEffect
-                    .SetTargetLayer(layer)
-                    .SetOwnerLayer(owner);
 
-                areaOfEffect.OnEnter -= EntityEnter;
-                areaOfEffect.OnExit -= EntityExit;
-                
-                areaOfEffect.OnEnter += EntityEnter;
-                areaOfEffect.OnExit += EntityExit;
-            };
+            var areaOfEffect = visualEffect.GetComponent<AreaOfEffect>();
+            areaOfEffect
+                .SetTargetLayer(layer)
+                .SetOwnerLayer(owner);
+
+
         }
 
         private void EntityEnter(GameObject obj)
@@ -59,8 +54,21 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
         {
             RemoveEffects(obj);
         }
-        
 
+        private void OnCreate(PooledObject visualObj)
+        {
+            var areaOfEffect = visualObj.GetComponent<AreaOfEffect>();
+            areaOfEffect.OnEnter += EntityEnter;
+            areaOfEffect.OnExit += EntityExit;
+        }
+
+        private void OnRelease(PooledObject visualObj)
+        {
+            var areaOfEffect = visualObj.GetComponent<AreaOfEffect>();
+            areaOfEffect.OnEnter -= EntityEnter;
+            areaOfEffect.OnExit -= EntityExit;
+        }
+        
         private void RemoveEffects(GameObject target)
         {
             var statusController = target.GetComponentInParent<StatusEffectController>();

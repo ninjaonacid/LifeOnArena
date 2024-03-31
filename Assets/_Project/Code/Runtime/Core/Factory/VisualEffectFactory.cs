@@ -1,4 +1,5 @@
 
+using System;
 using Code.Runtime.Core.AssetManagement;
 using Code.Runtime.Core.ConfigProvider;
 using Code.Runtime.Core.ObjectPool;
@@ -23,14 +24,17 @@ namespace Code.Runtime.Core.Factory
             _objectResolver = objectResolver;
             _poolProvider = poolProvider;
         }
-
-        public async UniTask<VisualEffect> CreateVisualEffect(int id)
+        
+        public async UniTask<VisualEffect> CreateVisualEffect(int id, Action<PooledObject> onCreate = null,
+            Action<PooledObject> onRelease = null,
+            Action<PooledObject> onGet = null,
+            Action<PooledObject> onReturn = null)
         {
             var visualEffect = _configProvider.VisualEffect(id);
 
             var prefab = await _assetProvider.Load<GameObject>(visualEffect.PrefabReference);
             
-            var particleSystem = _poolProvider.Spawn<VisualEffect>(prefab);
+            var particleSystem = _poolProvider.Spawn<VisualEffect>(prefab, onCreate, onRelease, onGet, onReturn);
 
             return particleSystem;
         }

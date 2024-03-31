@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace Code.Runtime.Core.ObjectPool
@@ -7,19 +8,25 @@ namespace Code.Runtime.Core.ObjectPool
     public class ObjectPool<T> where T : Component, IPoolable
     {
         private GameObject _poolRoot;
-        
+
         private readonly Func<T> _factory;
         private readonly Stack<T> _objectsStock;
 
-        private readonly Action<T> _onCreate;
-        private readonly Action<T> _onRelease;
-        private readonly Action<T> _onGet;
+        [CanBeNull] private readonly Action<T> _onCreate;
+        [CanBeNull] private readonly Action<T> _onRelease;
+        [CanBeNull] private readonly Action<T> _onGet;
+        [CanBeNull] private readonly Action<T> _onReturn;
 
-        public ObjectPool(Func<T> factory, Action<T> onCreate, Action<T> onRelease, Action<T> onGet)
+
+        public ObjectPool(Func<T> factory, Action<T> onCreate = null,
+            Action<T> onRelease = null,
+            Action<T> onGet = null,
+            Action<T> onReturn = null)
         {
             _factory = factory;
             _onCreate = onCreate;
             _onGet = onGet;
+            _onReturn = onReturn;
             _objectsStock = new Stack<T>();
         }
 
@@ -49,11 +56,11 @@ namespace Code.Runtime.Core.ObjectPool
                 _objectsStock.Push(obj);
             }
         }
-        
+
         public T Get()
         {
             T obj = default;
-            
+
             if (_objectsStock.Count > 0)
             {
                 obj = _objectsStock.Pop();
@@ -62,9 +69,9 @@ namespace Code.Runtime.Core.ObjectPool
             {
                 obj = CreateObject();
             }
-            
+
             obj.gameObject.SetActive(true);
-            
+
             _onGet?.Invoke(obj);
 
             return obj;
@@ -80,25 +87,24 @@ namespace Code.Runtime.Core.ObjectPool
             _objectsStock.Clear();
         }
 
-        private T CreateObject() 
+        private T CreateObject()
         {
             var obj = _factory();
 
             obj.InitializePoolable(Return);
-            
+
             obj.transform.SetParent(_poolRoot.transform);
 
             _onCreate?.Invoke(obj);
 
             return obj;
         }
-        
+
 
         public void Return(PooledObject obj)
         {
             _objectsStock.Push(obj as T);
             obj.gameObject.SetActive(false);
         }
-
     }
 }
