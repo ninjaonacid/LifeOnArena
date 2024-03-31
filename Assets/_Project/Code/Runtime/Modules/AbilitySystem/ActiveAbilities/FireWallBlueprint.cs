@@ -14,6 +14,5 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
             return new AoeAbility(this, _castDistance, _duration, _aoeRadius);
         }
     }
-
     
 }

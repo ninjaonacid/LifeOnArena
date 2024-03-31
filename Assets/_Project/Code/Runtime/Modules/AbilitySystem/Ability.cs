@@ -15,7 +15,7 @@ namespace Code.Runtime.Modules.AbilitySystem
 
         public abstract void Use(GameObject caster, GameObject target);
 
-        public void ApplyEffects(GameObject target)
+        protected void ApplyEffects(GameObject target)
         {
             var statusController = target.GetComponentInParent<StatusEffectController>();
 
@@ -24,6 +24,7 @@ namespace Code.Runtime.Modules.AbilitySystem
                 statusController.ApplyEffectToSelf(effect);
             }
         }
-        
+
+       
     }
 }

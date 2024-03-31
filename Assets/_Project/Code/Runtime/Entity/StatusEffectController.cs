@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Code.Runtime.ConfigData;
 using Code.Runtime.Core.Factory;
 using Code.Runtime.Entity.StatusEffects;
@@ -60,6 +61,14 @@ namespace Code.Runtime.Entity
             }
         }
 
+        public void AddEffectToRemove(DurationalGameplayEffect effect)
+        {
+            if (_activeEffects.Contains(effect) && !_effectsToRemove.Contains(effect))
+            {
+                _effectsToRemove.Add(effect);
+            }
+        }
+
         private void HandleDuration()
         {
             foreach (var activeEffect in _activeEffects)
@@ -73,7 +82,7 @@ namespace Code.Runtime.Entity
                     activeEffect.ResetExecutionTime();
                 }
 
-                if (activeEffect.IsDurationEnd())
+                if (activeEffect.IsDurationEnd() && !_effectsToRemove.Contains(activeEffect))
                 {
                     _effectsToRemove.Add(activeEffect);
 
@@ -83,13 +92,13 @@ namespace Code.Runtime.Entity
 
             foreach (var effect in _effectsToRemove)
             {
-                RemoveEffect(effect);
+                RemoveEffectInternal(effect);
             }
 
             _effectsToRemove.Clear();
         }
 
-        private void RemoveEffect(DurationalGameplayEffect effect)
+        private void RemoveEffectInternal(DurationalGameplayEffect effect)
         {
             if (_activeEffects.Contains(effect))
             {
