@@ -10,22 +10,24 @@ namespace Code.Runtime.Modules.StateMachine.States
         private readonly Action<State<TStateId, TEvent>> _onExit;
         private readonly Func<State<TStateId, TEvent>, bool> _canExit;
 
-        public ITimer timer;
+        public ITimer Timer;
 
-        public State(bool needExitTime, bool isGhostState, Action<State<TStateId, TEvent>> onEnter,
-            Action<State<TStateId, TEvent>> onLogic, Action<State<TStateId, TEvent>> onExit,
-            Func<State<TStateId, TEvent>, bool> canExit, ITimer timer) : base(needExitTime, isGhostState)
+        public State(bool needExitTime = false, bool isGhostState = false,
+            Action<State<TStateId, TEvent>> onEnter = null,
+            Action<State<TStateId, TEvent>> onLogic = null,
+            Action<State<TStateId, TEvent>> onExit = null,
+            Func<State<TStateId, TEvent>, bool> canExit = null) : base(needExitTime, isGhostState)
         {
             _onEnter = onEnter;
             _onLogic = onLogic;
             _onExit = onExit;
             _canExit = canExit;
-            this.timer = timer;
+            this.Timer = new Timer();
         }
 
         public override void OnEnter()
         {
-            timer.Reset();
+            Timer.Reset();
 
             _onEnter?.Invoke(this);
         }
@@ -56,26 +58,20 @@ namespace Code.Runtime.Modules.StateMachine.States
 
     public class State<TStateId> : State<TStateId, string>
     {
-        public State(bool needExitTime,
-            bool isGhostState,
-            Action<State<TStateId, string>> onEnter,
-            Action<State<TStateId, string>> onLogic,
-            Action<State<TStateId, string>> onExit,
-            Func<State<TStateId, string>, bool> canExit, ITimer timer) :
-            base(needExitTime, isGhostState, onEnter, onLogic, onExit, canExit, timer)
+        public State(bool needExitTime = false, bool isGhostState = false,
+            Action<State<TStateId, string>> onEnter = null, Action<State<TStateId, string>> onLogic = null,
+            Action<State<TStateId, string>> onExit = null, Func<State<TStateId, string>, bool> canExit = null) : base(
+            needExitTime, isGhostState, onEnter, onLogic, onExit, canExit)
         {
         }
     }
 
     public class State : State<string, string>
     {
-        public State(bool needExitTime,
-            bool isGhostState,
-            Action<State<string, string>> onEnter,
-            Action<State<string, string>> onLogic,
-            Action<State<string, string>> onExit,
-            Func<State<string, string>, bool> canExit, ITimer timer) :
-            base(needExitTime, isGhostState, onEnter, onLogic, onExit, canExit, timer)
+        public State(bool needExitTime = false, bool isGhostState = false, Action<State<string, string>> onEnter = null,
+            Action<State<string, string>> onLogic = null, Action<State<string, string>> onExit = null,
+            Func<State<string, string>, bool> canExit = null) : base(needExitTime, isGhostState, onEnter, onLogic,
+            onExit, canExit)
         {
         }
     }

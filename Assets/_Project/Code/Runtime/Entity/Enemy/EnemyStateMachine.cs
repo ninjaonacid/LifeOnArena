@@ -37,6 +37,11 @@ namespace Code.Runtime.Entity.Enemy
                 _enemyAnimator,
                 false,
                 true));
+            
+            _fsm.AddState(nameof(EnemyPreAttackState), new EnemyPreAttackState(
+                _enemyAnimator,
+                true,
+                false));
 
             _fsm.AddState(nameof(EnemyAttackState), new EnemyAttackState(
                 EnemyAttackComponent,

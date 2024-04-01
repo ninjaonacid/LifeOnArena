@@ -7,8 +7,7 @@ namespace Code.Runtime.Entity.Hero.HeroStates
         protected readonly HeroAttackComponent HeroAttackComponent;
         protected readonly HeroWeapon _heroWeapon;
         protected float _duration;
-
-
+        
         protected HeroBaseAttackState(HeroAttackComponent heroAttackComponent, HeroWeapon heroWeapon, HeroAnimator heroAnimator,
             HeroMovement heroMovement, HeroRotation heroRotation, bool needsExitTime, bool isGhostState = false) : base(
             heroAnimator, heroMovement, heroRotation, needsExitTime, isGhostState)
