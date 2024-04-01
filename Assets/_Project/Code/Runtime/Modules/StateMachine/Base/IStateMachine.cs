@@ -10,5 +10,6 @@ namespace Code.Runtime.Modules.StateMachine.Base
 
         StateBase<TState> ActiveState { get; }
         TState ActiveStateName { get; }
+        bool HasPendingTransition { get; }
     }
 }

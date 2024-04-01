@@ -7,6 +7,6 @@ namespace Code.Runtime.ConfigData.StateMachine
     {
         public float AttackDuration;
         public float HitStaggerDuration;
-
+        public float PreAttackDuration;
     }
 }

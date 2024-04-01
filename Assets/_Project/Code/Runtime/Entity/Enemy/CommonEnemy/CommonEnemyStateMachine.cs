@@ -50,6 +50,9 @@ namespace Code.Runtime.Entity.Enemy.CommonEnemy
                 _enemyConfig.AttackDuration
                 ));
 
+            _fsm.AddTransition(new Transition(
+                nameof(EnemyPreAttackState),
+                nameof(EnemyAttackState)));
             
             _fsm.AddTransition(new Transition(
                 nameof(EnemyIdleState),

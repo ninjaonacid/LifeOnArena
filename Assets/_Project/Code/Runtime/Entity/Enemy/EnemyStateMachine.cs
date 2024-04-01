@@ -1,3 +1,4 @@
+using System.Timers;
 using Code.Runtime.ConfigData.StateMachine;
 using Code.Runtime.Entity.Enemy.CommonEnemy;
 using Code.Runtime.Modules.StateMachine;
@@ -37,11 +38,13 @@ namespace Code.Runtime.Entity.Enemy
                 _enemyAnimator,
                 false,
                 true));
-            
+
             _fsm.AddState(nameof(EnemyPreAttackState), new EnemyPreAttackState(
+
                 _enemyAnimator,
                 true,
-                false));
+                canExit: (state) => state.Timer.Elapsed >= _enemyConfig.PreAttackDuration
+                ));
 
             _fsm.AddState(nameof(EnemyAttackState), new EnemyAttackState(
                 EnemyAttackComponent,

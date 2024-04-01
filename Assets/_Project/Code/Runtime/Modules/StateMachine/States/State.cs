@@ -34,7 +34,7 @@ namespace Code.Runtime.Modules.StateMachine.States
 
         public override void OnLogic()
         {
-            if (NeedExitTime && _canExit != null && _canExit(this))
+            if (NeedExitTime && _canExit != null && fsm.HasPendingTransition && _canExit(this))
             {
                 fsm.StateCanExit();
             }

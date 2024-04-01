@@ -35,6 +35,8 @@ namespace Code.Runtime.Modules.StateMachine
         private (TState state, bool hasState) startState = (default, false);
         private (TState state, bool isPending) pendingState = (default, false);
 
+        public bool HasPendingTransition => pendingState.isPending;
+
         public StateBase<TState> ActiveState  => _activeState;
 
         public TState ActiveStateName => _activeState.name;
