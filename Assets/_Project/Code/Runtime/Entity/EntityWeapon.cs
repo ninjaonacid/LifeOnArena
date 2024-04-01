@@ -1,10 +1,7 @@
 using System;
-using Code.Runtime.ConfigData;
-using Code.Runtime.ConfigData.Identifiers;
 using Code.Runtime.ConfigData.Weapon;
 using Code.Runtime.Core.Factory;
 using Code.Runtime.Logic.Weapon;
-using Cysharp.Threading.Tasks.Triggers;
 using UnityEngine;
 using VContainer;
 
@@ -29,9 +26,8 @@ namespace Code.Runtime.Entity
         public void Construct(IItemFactory itemFactory)
         {
             _itemFactory = itemFactory;
-
         }
-        
+
         public virtual void EquipWeapon(WeaponData weaponData)
         {
             if (weaponData == null) return;

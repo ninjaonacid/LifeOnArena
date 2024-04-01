@@ -41,7 +41,7 @@ namespace Code.Runtime.Entity.Enemy.CommonEnemy
 
             _fsm.AddTransition(new Transition(
                 nameof(EnemyChaseState),
-                nameof(EnemyPreAttackState),
+                nameof(EnemyAttackState),
                 (transition) => EnemyAttackComponent.CanAttack()));
 
             _fsm.AddTransition(new TransitionAfter(

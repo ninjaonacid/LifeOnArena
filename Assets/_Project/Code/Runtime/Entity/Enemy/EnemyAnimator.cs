@@ -52,7 +52,6 @@ namespace Code.Runtime.Entity.Enemy
         public void Move()
         {
             _enemyAnimator.CrossFade(Run, 0.1f);
-            
         }
 
         public void StopMoving()

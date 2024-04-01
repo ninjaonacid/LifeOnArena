@@ -39,19 +39,12 @@ namespace Code.Runtime.Entity.Enemy
                 false,
                 true));
 
-            _fsm.AddState(nameof(EnemyPreAttackState), new EnemyPreAttackState(
-
-                _enemyAnimator,
-                true,
-                canExit: (state) => state.Timer.Elapsed >= _enemyConfig.PreAttackDuration
-                ));
-
             _fsm.AddState(nameof(EnemyAttackState), new EnemyAttackState(
                 EnemyAttackComponent,
                 _agentMoveToPlayer,
                 _enemyTarget,
                 _enemyAnimator,
-                 false, false));
+                 true, false, canExit: (state) => state.Timer.Elapsed >= _enemyConfig.AttackDuration));
 
             _fsm.AddState(nameof(EnemyIdleState), new EnemyIdleState(
                 _enemyAnimator,
