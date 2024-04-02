@@ -47,7 +47,7 @@ namespace Code.Runtime.Core.EntryPoints
             
             _saveLoad.LoadData();
 
-            _audioService.PlayBackgroundMusic("MainTheme", volume: 1, true);
+            //_audioService.PlayBackgroundMusic("MainTheme", volume: 1, true);
 
             _screenService.Open(ScreenID.MainMenu);
         }

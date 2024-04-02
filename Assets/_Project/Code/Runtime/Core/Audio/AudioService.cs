@@ -121,7 +121,7 @@ namespace Code.Runtime.Core.Audio
         {
             SoundAudioChannel soundChannel = FindFreeSoundChannel();
 
-            if (soundChannel)
+            if (soundChannel is not null)
             {
                 soundChannel.Play(sound);
             }
@@ -141,7 +141,19 @@ namespace Code.Runtime.Core.Audio
           
             SoundAudioChannel soundChannel = FindFreeSoundChannel();
 
-            if (soundChannel)
+            if (soundChannel is not null)
+            {
+                soundChannel.SetChannelTransform(soundTransform);
+                soundChannel.AudioSource.volume = volume;
+                soundChannel.Play(sound);
+            }
+        }
+        
+        public void PlaySound3D(SoundAudioFile sound, Transform soundTransform, float volume = 1f)
+        {
+            SoundAudioChannel soundChannel = FindFreeSoundChannel();
+
+            if (soundChannel is not null)
             {
                 soundChannel.SetChannelTransform(soundTransform);
                 soundChannel.AudioSource.volume = volume;

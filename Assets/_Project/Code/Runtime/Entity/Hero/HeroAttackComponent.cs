@@ -56,7 +56,8 @@ namespace Code.Runtime.Entity.Hero
             var hitBox = collision.Target.GetComponent<EnemyHurtBox>().GetHitBoxCenter();
             
             HitVfx(hitBox + collision.Target.transform.position).Forget();
-
+            
+            _audioService.PlaySound3D("Hit", collision.Target.transform, 1f);
             _battleService.CreateWeaponAttack(_stats, collision.Target);
             _collidedData.Add(collision);
             InvokeHit(1);

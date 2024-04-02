@@ -32,6 +32,11 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
             visualEffectTransform.rotation = Quaternion.LookRotation(casterDirection);
             visualEffect.Play();
             
+            if (AbilityBlueprint.AbilitySound is not null)
+            {
+                _audioService.PlaySound3D(AbilityBlueprint.AbilitySound.Id, visualEffectTransform, 1f);
+            }
+
             var layer = caster.GetComponent<EntityAttack>().GetTargetLayer();
             var stats = caster.GetComponent<StatController>();
             

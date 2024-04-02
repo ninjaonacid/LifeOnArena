@@ -1,4 +1,5 @@
 using Code.Runtime.Core.AssetManagement;
+using Code.Runtime.Core.Audio;
 using Code.Runtime.Core.ConfigProvider;
 using Code.Runtime.Modules.AbilitySystem;
 using Code.Runtime.Services.BattleService;
@@ -17,13 +18,15 @@ namespace Code.Runtime.Core.Factory
         private readonly IAssetProvider _assetProvider;
         private readonly VisualEffectFactory _visualEffectFactory;
         private readonly ProjectileFactory _projectileFactory;
+        private readonly AudioService _audioService;
         public AbilityFactory(
             IAssetProvider assetProvider,
             IConfigProvider config,
             VisualEffectFactory visualEffectFactory,
             ProjectileFactory projectileFactory,
             BattleService battleService,
-            IRandomService random)
+            IRandomService random,
+            AudioService audioService)
         {
             _assetProvider = assetProvider;
             _config = config;
@@ -31,6 +34,7 @@ namespace Code.Runtime.Core.Factory
             _projectileFactory = projectileFactory;
             _battleService = battleService;
             _random = random;
+            _audioService = audioService;
         }
 
         public ActiveAbilityBlueprintBase CreateAbilityTemplate(int abilityId)
@@ -50,7 +54,7 @@ namespace Code.Runtime.Core.Factory
 
             var abilityInstance = activeAbilityBluePrint.GetAbility();
             
-            abilityInstance.InjectServices(_visualEffectFactory, _projectileFactory, _battleService);
+            abilityInstance.InjectServices(_visualEffectFactory, _projectileFactory, _battleService, _audioService);
 
             return abilityInstance;
         }

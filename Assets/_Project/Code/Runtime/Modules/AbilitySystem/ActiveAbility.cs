@@ -1,4 +1,5 @@
-﻿using Code.Runtime.Core.Factory;
+﻿using Code.Runtime.Core.Audio;
+using Code.Runtime.Core.Factory;
 using Code.Runtime.Services.BattleService;
 
 namespace Code.Runtime.Modules.AbilitySystem
@@ -15,6 +16,7 @@ namespace Code.Runtime.Modules.AbilitySystem
         protected VisualEffectFactory _visualEffectFactory;
         protected ProjectileFactory _projectileFactory;
         protected BattleService _battleService;
+        protected AudioService _audioService;
 
         public bool IsActive() => State is AbilityState.Active;
 
@@ -34,11 +36,13 @@ namespace Code.Runtime.Modules.AbilitySystem
         public void InjectServices(
             VisualEffectFactory visualEffectFactory,
             ProjectileFactory projectileFactory,
-            BattleService battleService)
+            BattleService battleService,
+            AudioService audioService)
         {
             _visualEffectFactory = visualEffectFactory;
             _projectileFactory = projectileFactory;
             _battleService = battleService;
+            _audioService = audioService;
         }
     }
 }

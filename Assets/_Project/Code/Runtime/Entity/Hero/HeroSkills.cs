@@ -15,10 +15,11 @@ namespace Code.Runtime.Entity.Hero
 {
     public class HeroSkills : MonoBehaviour, ISaveLoader
     {
+        public event Action OnAbilityUse;
+        public event Action OnSkillChanged;
+        
         [SerializeField] private AbilityCooldownController CooldownController;
         [SerializeField] private AbilitySlot[] _skillSlots;
-        public event Action OnSkillChanged;
-        public event Action OnAbilityUse;
         public AbilitySlot[] SkillSlots => _skillSlots;
         public ActiveAbility ActiveAbility => _activeAbility;
 
