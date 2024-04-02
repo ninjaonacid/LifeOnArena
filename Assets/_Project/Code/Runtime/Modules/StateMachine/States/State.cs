@@ -8,7 +8,7 @@ namespace Code.Runtime.Modules.StateMachine.States
         private readonly Action<State<TStateId, TEvent>> _onEnter;
         private readonly Action<State<TStateId, TEvent>> _onLogic;
         private readonly Action<State<TStateId, TEvent>> _onExit;
-        private readonly Func<State<TStateId, TEvent>, bool> _canExit;
+        protected Func<State<TStateId, TEvent>, bool> _canExit;
 
         public ITimer Timer;
 

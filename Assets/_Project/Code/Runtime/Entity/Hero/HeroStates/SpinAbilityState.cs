@@ -16,30 +16,14 @@ namespace Code.Runtime.Entity.Hero.HeroStates
             _heroAnimator.PlaySpinAttackSkill();
             _duration = _heroSkills.ActiveAbility.ActiveTime;
         }
-
-        public override void OnLogic()
-        {
-            _duration -= Time.deltaTime;
-            if (IsStateOver())
-            {
-                fsm.StateCanExit();
-            }
-        }
-
+        
         public override void OnExit()
         {
             _heroRotation.enabled = true;
             _heroWeapon.EnableWeapon(false);
         }
 
-        public override void OnExitRequest()
-        {
-            if (IsStateOver())
-            {
-                fsm.StateCanExit();
-            }
-        }
-
-        public override bool IsStateOver() => _duration <= 0;
+     
+        
     }
 }

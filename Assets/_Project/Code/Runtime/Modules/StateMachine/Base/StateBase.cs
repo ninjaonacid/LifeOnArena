@@ -40,11 +40,6 @@ namespace Code.Runtime.Modules.StateMachine.Base
         {
             
         }
-
-        public virtual bool IsStateOver()
-        {
-            return true;
-        }
     }
 
     public class StateBase : StateBase<string>

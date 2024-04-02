@@ -10,7 +10,10 @@ namespace Code.Runtime.Modules.AbilitySystem
 {
     public abstract class ActiveAbilityBlueprintBase : AbilityBlueprintBase
     {
-        public float Cooldown;
+        [SerializeField] private float _cooldown;
+
+        public float Cooldown => _cooldown;
+        
         public float ActiveTime;
         public bool IsCastAbility; 
         public VisualEffectData VisualEffectData;

@@ -5,8 +5,12 @@ namespace Code.Runtime.Modules.AbilitySystem
 {
     public class AbilityBlueprintBase : ScriptableObject
     {
-        public AbilityIdentifier Identifier;
-        public Sprite Icon;
-        public AbilityTreeData AbilityTreeData;
+        [SerializeField] private AbilityIdentifier _identifier;
+        [SerializeField] private Sprite _icon;
+        [SerializeField] private AbilityTreeData _treeData;
+
+        public AbilityIdentifier Identifier => _identifier;
+        public Sprite Icon => _icon;
+        public AbilityTreeData AbilityTreeData => _treeData;
     }
 }

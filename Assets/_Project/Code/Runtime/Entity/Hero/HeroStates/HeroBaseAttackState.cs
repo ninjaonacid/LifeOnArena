@@ -1,3 +1,5 @@
+using System;
+using Code.Runtime.Modules.StateMachine.States;
 using UnityEngine;
 
 namespace Code.Runtime.Entity.Hero.HeroStates
@@ -6,33 +8,17 @@ namespace Code.Runtime.Entity.Hero.HeroStates
     {
         protected readonly HeroAttackComponent HeroAttackComponent;
         protected readonly HeroWeapon _heroWeapon;
-        protected float _duration;
-        
-        protected HeroBaseAttackState(HeroAttackComponent heroAttackComponent, HeroWeapon heroWeapon, HeroAnimator heroAnimator,
-            HeroMovement heroMovement, HeroRotation heroRotation, bool needsExitTime, bool isGhostState = false) : base(
-            heroAnimator, heroMovement, heroRotation, needsExitTime, isGhostState)
+
+        protected HeroBaseAttackState(HeroAttackComponent heroAttackComponent, HeroWeapon heroWeapon,
+            HeroAnimator heroAnimator, HeroMovement heroMovement, HeroRotation heroRotation, bool needExitTime = false,
+            bool isGhostState = false, 
+            Action<State<string, string>> onEnter = null,
+            Action<State<string, string>> onLogic = null, Action<State<string, string>> onExit = null,
+            Func<State<string, string>, bool> canExit = null) : base(heroAnimator, heroMovement, heroRotation,
+            needExitTime, isGhostState, onEnter, onLogic, onExit, canExit)
         {
             HeroAttackComponent = heroAttackComponent;
             _heroWeapon = heroWeapon;
-        }
-
-        public override void OnLogic()
-        {
-            _duration -= Time.deltaTime;
-
-            if (IsStateOver()) fsm.StateCanExit();
-        }
-
-        public override bool IsStateOver() => _duration <= 0;
-
-        public override void OnExitRequest()
-        {
-            base.OnExitRequest();
-
-            if (IsStateOver())
-            {
-                fsm.StateCanExit();
-            }
         }
     }
 }

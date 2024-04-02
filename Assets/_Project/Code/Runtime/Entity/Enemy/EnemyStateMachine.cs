@@ -53,9 +53,9 @@ namespace Code.Runtime.Entity.Enemy
                 false, false));
 
             _fsm.AddState(nameof(EnemyStunnedState), new EnemyStunnedState(
+                _tagController, 
                 _enemyAnimator,
-                _agentMoveToPlayer,
-                _tagController, true, false
+                true, false
             ));
         }
 

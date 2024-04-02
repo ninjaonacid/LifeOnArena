@@ -77,8 +77,11 @@ namespace Code.Runtime.Entity.Hero
                 _heroAnimator,
                 _heroMovement,
                 _heroRotation,
-                needsExitTime: true,
-                isGhostState: false));
+                needExitTime: true,
+                isGhostState: false,
+                canExit: (state) =>
+                    state.Timer.Elapsed >=
+                    _heroWeapon.GetEquippedWeaponData().WeaponFsmConfig.FirstAttackStateDuration));
 
             _stateMachine.AddState(HeroBaseAttack2, new SecondAttackState(
                 HeroAttackComponent,
@@ -86,8 +89,10 @@ namespace Code.Runtime.Entity.Hero
                 _heroAnimator,
                 _heroMovement,
                 _heroRotation,
-                needsExitTime: true,
-                isGhostState: false));
+                needExitTime: true,
+                isGhostState: false,
+                canExit: (state) => state.Timer.Elapsed >= 
+                                    _heroWeapon.GetEquippedWeaponData().WeaponFsmConfig.SecondAttackStateDuration));
 
             _stateMachine.AddState(HeroBaseAttack3, new ThirdAttackState(
                 HeroAttackComponent,
@@ -95,8 +100,10 @@ namespace Code.Runtime.Entity.Hero
                 _heroAnimator,
                 _heroMovement,
                 _heroRotation,
-                needsExitTime: true,
-                isGhostState: false));
+                needExitTime: true,
+                isGhostState: false,
+                canExit: (state) => state.Timer.Elapsed >= 
+                                    _heroWeapon.GetEquippedWeaponData().WeaponFsmConfig.ThirdAttackStateDuration));
             
             _stateMachine.AddTwoWayTransition(new Transition(
                 HeroIdle,
@@ -129,19 +136,15 @@ namespace Code.Runtime.Entity.Hero
 
             _stateMachine.AddTransition(new Transition(
                 HeroBaseAttack1,
-                HeroIdle,
-                (transition) => _stateMachine.ActiveState.IsStateOver()));
+                HeroIdle));
 
-            _stateMachine.AddTransition(new Transition(
+                _stateMachine.AddTransition(new Transition(
                 HeroBaseAttack2,
-                HeroIdle,
-                (transition) => _stateMachine.ActiveState.IsStateOver()));
+                HeroIdle));
 
-
-            _stateMachine.AddTransition(new Transition(
-                HeroBaseAttack3,
-                HeroIdle,
-                (transition) => _stateMachine.ActiveState.IsStateOver()));
+                _stateMachine.AddTransition(new Transition(
+                    HeroBaseAttack3,
+                    HeroIdle));
 
             _stateMachine.AddTransition(new Transition(
                 HeroBaseAttack1,
@@ -165,7 +168,7 @@ namespace Code.Runtime.Entity.Hero
             _stateMachine.AddTransitionFromAny(new Transition(
                 "",
                 HeroIdle,
-                (transition) => _stateMachine.ActiveState.IsStateOver() &&
+                (transition) => 
                      _stateMachine.ActiveState is not HeroMovementState));
 
             _stateMachine.AddTransition(new Transition(
@@ -179,13 +182,12 @@ namespace Code.Runtime.Entity.Hero
 
             _stateMachine.AddTransition(new Transition(
                 SpinAttackAbility,
-                HeroIdle,
-                (transition) => _stateMachine.ActiveState.IsStateOver()));
+                HeroIdle));
 
             _stateMachine.AddTransition(new Transition(
                 SpinAttackAbility,
                 HeroMovement,
-                (transition) => _stateMachine.ActiveState.IsStateOver() &&
+                (transition) => 
                                 _controls.Player.Movement.ReadValue<Vector2>().sqrMagnitude > Constants.Epsilon));
 
             _stateMachine.AddTransition(new Transition(
@@ -220,8 +222,7 @@ namespace Code.Runtime.Entity.Hero
 
             _stateMachine.AddTransition(new Transition(
                 RollAbility,
-                HeroIdle,
-                (transition) => _stateMachine.ActiveState.IsStateOver()));
+                HeroIdle));
 
             _stateMachine.AddTransition(new Transition(
                 HeroMovement,

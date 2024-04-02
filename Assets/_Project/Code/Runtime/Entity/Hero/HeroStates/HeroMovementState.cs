@@ -26,10 +26,6 @@ namespace Code.Runtime.Entity.Hero.HeroStates
         {
             base.OnExitRequest();
         }
-
-        public override bool IsStateOver()
-        {
-            return base.IsStateOver();
-        }
+        
     }
 }

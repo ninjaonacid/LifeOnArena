@@ -39,10 +39,5 @@ namespace Code.Runtime.Entity.Enemy.CommonEnemy
         {
             base.OnExitRequest();
         }
-
-        public override bool IsStateOver()
-        {
-            return base.IsStateOver();
-        }
     }
 }
