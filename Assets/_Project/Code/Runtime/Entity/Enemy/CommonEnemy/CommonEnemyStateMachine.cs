@@ -6,8 +6,11 @@ namespace Code.Runtime.Entity.Enemy.CommonEnemy
 {
     public class CommonEnemyStateMachine : EnemyStateMachine
     {
-        private void Start()
+        protected override void Start()
         {
+            
+            base.Start();
+            
             _enemyHealth.Health.CurrentValueChanged += TriggerDamageState;
             
 

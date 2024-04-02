@@ -1,4 +1,3 @@
-using System.Timers;
 using Code.Runtime.ConfigData.StateMachine;
 using Code.Runtime.Entity.Enemy.CommonEnemy;
 using Code.Runtime.Modules.StateMachine;
@@ -24,7 +23,7 @@ namespace Code.Runtime.Entity.Enemy
             _enemyConfig = config;
         }
 
-        private void Awake()
+        protected virtual void Start()
         {
             _fsm = new FiniteStateMachine();
 
@@ -46,10 +45,10 @@ namespace Code.Runtime.Entity.Enemy
                 _enemyTarget,
                 _enemyAnimator,
                 _enemyConfig,
-                 true, false, canExit: (state) => state.Timer.Elapsed >= _enemyConfig.AttackDuration,
-                onEnter: (state) => _enemyAnimator.PlayAttack(_enemyConfig.AttackDuration)));
+                true, false, 
+                canExit: (state) => state.Timer.Elapsed >= _enemyConfig.AttackDuration));
 
-            _fsm.AddState(nameof(EnemyIdleState), new EnemyIdleState(
+                _fsm.AddState(nameof(EnemyIdleState), new EnemyIdleState(
                 _enemyAnimator,
                 _enemyTarget,
                 false, false));

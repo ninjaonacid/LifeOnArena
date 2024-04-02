@@ -28,6 +28,7 @@ namespace Code.Runtime.Entity.Enemy.CommonEnemy
         {
             base.OnEnter();
             
+            _enemyAnimator.PlayAttack(_enemyConfig.AttackDuration);
             _agentMoveToPlayer.ShouldMove(false);
         }
 
