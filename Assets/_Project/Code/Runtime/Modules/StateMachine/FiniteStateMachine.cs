@@ -263,7 +263,6 @@ namespace Code.Runtime.Modules.StateMachine
 
         private bool TryTrigger(TEvent trigger)
         {
-
             List<TransitionBase<TState>> triggerTransitions;
 
             if (_triggerTransitionsFromAny.TryGetValue(trigger, out triggerTransitions))

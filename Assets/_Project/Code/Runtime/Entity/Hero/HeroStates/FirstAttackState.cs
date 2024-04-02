@@ -16,6 +16,7 @@ namespace Code.Runtime.Entity.Hero.HeroStates
             heroMovement, heroRotation, needExitTime, isGhostState, onEnter, onLogic, onExit, canExit)
         {
         }
+        
 
         public override void OnEnter()
         {

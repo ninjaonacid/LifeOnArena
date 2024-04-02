@@ -1,0 +1,10 @@
+diff a/Assets/_Project/Code/Runtime/Entity/Hero/HeroStateMachineHandler.cs b/Assets/_Project/Code/Runtime/Entity/Hero/HeroStateMachineHandler.cs	(rejected hunks)
+@@ -168,7 +168,7 @@
+             _stateMachine.AddTransitionFromAny(new Transition(
+                 "",
+                 HeroIdle,
+-                (transition) => _stateMachine.ActiveState.IsStateOver() &&
++                (transition) => 
+                      _stateMachine.ActiveState is not HeroMovementState));
+ 
+             _stateMachine.AddTransition(new Transition(

@@ -3,7 +3,7 @@ using System;
 namespace Code.Runtime.ConfigData.StateMachine
 {
     [Serializable]
-    public class WeaponFsmConfig
+    public struct WeaponFsmConfig
     {
         public float FirstAttackStateDuration;
         public float SecondAttackStateDuration;

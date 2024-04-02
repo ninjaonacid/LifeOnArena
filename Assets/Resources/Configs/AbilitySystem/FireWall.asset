@@ -12,18 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9a16faaa8934169a3b3eac86fd0c672, type: 3}
   m_Name: FireWall
   m_EditorClassIdentifier: 
-  Identifier: {fileID: 0}
-  Icon: {fileID: 0}
-  AbilityTreeData:
-    Branch: 0
-    Position: 0
+  _identifier: {fileID: 11400000, guid: 78b12abb467b127449cb050db75d1f9a, type: 2}
+  _icon: {fileID: 21300000, guid: 95f0dc5e22b103142b3936bb37c61a1d, type: 3}
+  _treeData:
+    Branch: 2
+    Position: 1
     Price: 0
-  Cooldown: 0
-  ActiveTime: 0
-  IsCastAbility: 0
-  VisualEffectData: {fileID: 0}
-  AbilitySound: {fileID: 0}
-  _gameplayEffectBlueprints: []
-  _castDistance: 0
-  _duration: 0
-  _aoeRadius: 0
+  _cooldown: 3
+  ActiveTime: 1
+  IsCastAbility: 1
+  VisualEffectData: {fileID: 11400000, guid: 652e908a5deabb84284c7f76aceeb4a6, type: 2}
+  AbilitySound: {fileID: 11400000, guid: 105825fadfc378c46b8a5a8dfdb972b9, type: 2}
+  _gameplayEffectBlueprints:
+  - {fileID: 11400000, guid: 686bdb64a0712554982e7c8ea7eaf89c, type: 2}
+  _castDistance: 5

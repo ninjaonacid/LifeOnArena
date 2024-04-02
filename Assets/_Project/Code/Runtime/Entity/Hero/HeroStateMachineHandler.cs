@@ -4,6 +4,7 @@ using Code.Runtime.Core.ConfigProvider;
 using Code.Runtime.Entity.Hero.HeroStates;
 using Code.Runtime.Logic;
 using Code.Runtime.Modules.StateMachine;
+using Code.Runtime.Modules.StateMachine.Transitions;
 using UnityEngine;
 using VContainer;
 
@@ -119,32 +120,30 @@ namespace Code.Runtime.Entity.Hero
             _stateMachine.AddTransition(new Transition(
                 HeroIdle,
                 HeroBaseAttack1,
-                (transition) => _controls.Player.Attack.triggered));
+                (transition) => _controls.Player.Attack.WasPressedThisFrame()));
 
 
             _stateMachine.AddTransition(new Transition(
                 HeroBaseAttack1,
                 HeroBaseAttack2,
-                (transition) => _controls.Player.Attack.triggered,
-                false));
+                (transition) => _controls.Player.Attack.WasPressedThisFrame()));
 
             _stateMachine.AddTransition(new Transition(
                 HeroBaseAttack2,
                 HeroBaseAttack3,
-                (transition) => _controls.Player.Attack.triggered,
-                false));
+                (transition) => _controls.Player.Attack.WasPressedThisFrame()));
 
-            _stateMachine.AddTransition(new Transition(
+            _stateMachine.AddTransition(new TransitionAfter(
                 HeroBaseAttack1,
-                HeroIdle));
-
-                _stateMachine.AddTransition(new Transition(
+                HeroIdle, _heroWeapon.GetEquippedWeaponData().WeaponFsmConfig.FirstAttackStateDuration + 0.1f));
+            
+                _stateMachine.AddTransition(new TransitionAfter(
                 HeroBaseAttack2,
-                HeroIdle));
-
-                _stateMachine.AddTransition(new Transition(
+                HeroIdle, _heroWeapon.GetEquippedWeaponData().WeaponFsmConfig.SecondAttackStateDuration + 0.1f));
+            
+                _stateMachine.AddTransition(new TransitionAfter(
                     HeroBaseAttack3,
-                    HeroIdle));
+                    HeroIdle, _heroWeapon.GetEquippedWeaponData().WeaponFsmConfig.ThirdAttackStateDuration + 0.1f));
 
             _stateMachine.AddTransition(new Transition(
                 HeroBaseAttack1,
@@ -165,11 +164,12 @@ namespace Code.Runtime.Entity.Hero
                     _heroSkills.ActiveAbility.AbilityBlueprint.Identifier.Id.Equals(_spinAttackAbilityId.Id)
             ));
 
-            _stateMachine.AddTransitionFromAny(new Transition(
-                "",
-                HeroIdle,
-                (transition) => 
-                     _stateMachine.ActiveState is not HeroMovementState));
+            // _stateMachine.AddTransitionFromAny(new TransitionAfter(
+            //     "",
+            //     HeroIdle,
+            //     1f,
+            //     (transition) => 
+            //          _stateMachine.ActiveState is not HeroMovementState));
 
             _stateMachine.AddTransition(new Transition(
                 HeroBaseAttack3,
@@ -212,26 +212,7 @@ namespace Code.Runtime.Entity.Hero
                                 _heroSkills.ActiveAbility.IsActive() &&
                                 _heroSkills.ActiveAbility.IsCastAbility, true));
 
-            _stateMachine.AddTransition(new Transition(
-                HeroIdle,
-                RollAbility,
-                (transition) =>
-                    _heroSkills.ActiveAbility != null &&
-                    _heroSkills.ActiveAbility.IsActive() &&
-                    _heroSkills.ActiveAbility.AbilityBlueprint.Identifier.Id.Equals(_dodgeRollAbilityId.Id)));
-
-            _stateMachine.AddTransition(new Transition(
-                RollAbility,
-                HeroIdle));
-
-            _stateMachine.AddTransition(new Transition(
-                HeroMovement,
-                RollAbility,
-                (transition) =>
-                    _heroSkills.ActiveAbility != null &&
-                    _heroSkills.ActiveAbility.IsActive() &&
-                    _heroSkills.ActiveAbility.AbilityBlueprint.Identifier.Id.Equals(_dodgeRollAbilityId.Id)));
-
+       
             _stateMachine.InitStateMachine();
         }
     }

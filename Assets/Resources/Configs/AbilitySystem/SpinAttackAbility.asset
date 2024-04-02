@@ -12,14 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8743f7055b7e74945b7fae92e5ea630f, type: 3}
   m_Name: SpinAttackAbility
   m_EditorClassIdentifier: 
-  Identifier: {fileID: 11400000, guid: 630144b53aba86245b26160679af021d, type: 2}
-  Icon: {fileID: 21300000, guid: b6b50f0de8b15ef4294f63cf007dc0dd, type: 3}
-  AbilityTreeData:
-    Branch: 1
-    Position: 5
-    Price: 500
-  Cooldown: 2
+  _identifier: {fileID: 11400000, guid: 630144b53aba86245b26160679af021d, type: 2}
+  _icon: {fileID: 21300000, guid: b6b50f0de8b15ef4294f63cf007dc0dd, type: 3}
+  _treeData:
+    Branch: 0
+    Position: 0
+    Price: 0
+  _cooldown: 0
   ActiveTime: 0.7
   IsCastAbility: 0
   VisualEffectData: {fileID: 0}
+  AbilitySound: {fileID: 0}
   _gameplayEffectBlueprints: []

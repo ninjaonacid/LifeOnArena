@@ -12,16 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52fb44a806ac432b841d503a0183391a, type: 3}
   m_Name: FrostNova
   m_EditorClassIdentifier: 
-  Identifier: {fileID: 11400000, guid: 8eb27fffab9d46044a48c74378f57890, type: 2}
-  Icon: {fileID: 21300000, guid: d4ed4f0abb28eab46ac9f84a809049e3, type: 3}
-  AbilityTreeData:
-    Branch: 2
-    Position: 3
+  _identifier: {fileID: 11400000, guid: 8eb27fffab9d46044a48c74378f57890, type: 2}
+  _icon: {fileID: 21300000, guid: d4ed4f0abb28eab46ac9f84a809049e3, type: 3}
+  _treeData:
+    Branch: 0
+    Position: 0
     Price: 0
-  Cooldown: 1
+  _cooldown: 0
   ActiveTime: 1
   IsCastAbility: 1
   VisualEffectData: {fileID: 11400000, guid: 73ddebacc940e90468d0c88a792343a4, type: 2}
+  AbilitySound: {fileID: 0}
   _gameplayEffectBlueprints:
   - {fileID: 11400000, guid: d58736e60d61ad64fa6f96430fda27d5, type: 2}
   _castDistance: 0
