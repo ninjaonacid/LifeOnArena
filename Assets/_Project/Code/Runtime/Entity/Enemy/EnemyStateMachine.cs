@@ -36,8 +36,9 @@ namespace Code.Runtime.Entity.Enemy
 
             _fsm.AddState(nameof(EnemyStaggerState), new EnemyStaggerState(
                 _enemyAnimator,
+                true,
                 false,
-                true));
+                canExit: (state) => state.Timer.Elapsed >= _enemyConfig.HitStaggerDuration));
 
             _fsm.AddState(nameof(EnemyAttackState), new EnemyAttackState(
                 EnemyAttackComponent,

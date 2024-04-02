@@ -5,17 +5,15 @@ using UnityEngine;
 
 namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
 {
-    public class DotAoeAbility : AoeAbility
+    public class DotAoeAbility : ActiveAbility
     {
         private readonly float _castDistance;
-        private float _aoeRadius;
-        
-        public DotAoeAbility(ActiveAbilityBlueprintBase abilityBlueprint, float castDistance, float duration,
-            float aoeRadius) : base(abilityBlueprint, castDistance, duration, aoeRadius)
+
+        public DotAoeAbility(ActiveAbilityBlueprintBase abilityBlueprint, float castDistance) : base(abilityBlueprint)
         {
             _castDistance = castDistance;
-            _aoeRadius = aoeRadius;
         }
+
         public override async void Use(GameObject caster, GameObject target)
         {
             Vector3 casterPosition = caster.transform.position;
@@ -24,13 +22,18 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
             var visualEffect =
                 await _visualEffectFactory
                     .CreateVisualEffect(AbilityBlueprint.VisualEffectData.Identifier.Id,
-                    OnCreate, OnRelease);
+                        OnCreate, OnRelease);
 
             Transform visualEffectTransform = visualEffect.transform;
             var visualEffectPosition = casterPosition + casterDirection * _castDistance;
             visualEffectTransform.position = visualEffectPosition;
             visualEffectTransform.rotation = Quaternion.LookRotation(casterDirection);
             visualEffect.Play();
+
+            if (AbilityBlueprint.AbilitySound is not null)
+            {
+                _audioService.PlaySound3D(AbilityBlueprint.AbilitySound, visualEffectTransform, 1f);
+            }
 
             var entityAttack = caster.GetComponent<EntityAttack>();
             var layer = entityAttack.GetTargetLayer();
@@ -40,7 +43,6 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
             areaOfEffect
                 .SetTargetLayer(layer)
                 .SetOwnerLayer(owner);
-            
         }
 
         private void EntityEnter(GameObject obj)
@@ -66,7 +68,7 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
             areaOfEffect.OnEnter -= EntityEnter;
             areaOfEffect.OnExit -= EntityExit;
         }
-        
+
         private void RemoveEffects(GameObject target)
         {
             var statusController = target.GetComponentInParent<StatusEffectController>();

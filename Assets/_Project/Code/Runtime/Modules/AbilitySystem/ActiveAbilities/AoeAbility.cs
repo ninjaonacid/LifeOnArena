@@ -1,4 +1,5 @@
-﻿using Code.Runtime.Entity;
+﻿using System.Linq;
+using Code.Runtime.Entity;
 using Code.Runtime.Entity.EntitiesComponents;
 using Code.Runtime.Modules.StatSystem;
 using UnityEngine;
@@ -34,7 +35,7 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
             
             if (AbilityBlueprint.AbilitySound is not null)
             {
-                _audioService.PlaySound3D(AbilityBlueprint.AbilitySound.Id, visualEffectTransform, 1f);
+                _audioService.PlaySound3D(AbilityBlueprint.AbilitySound, visualEffectTransform, 1f);
             }
 
             var layer = caster.GetComponent<EntityAttack>().GetTargetLayer();

@@ -161,44 +161,14 @@ namespace Code.Runtime.Core.Audio
             }
         }
 
-        private void PreloadSound(string name)
-        {
-            if (_sfx.TryGetValue(name, out var sound))
-            {
-                
-            }
-        }
-        private void PrepareSound(BaseAudioFile baseAudioFile, Transform soundTransform, float volume)
-        {
-            //sound.SourceTransform = soundTransform;
-           // sound.Source = soundTransform.gameObject.AddComponent<AudioSource>();
-            baseAudioFile.Volume = volume;
-        }
-
         private SoundAudioChannel FindFreeSoundChannel()
         {
-            foreach (var channel in _soundChannelsPool)
-            {
-                if (channel.IsFree)
-                {
-                    return channel;
-                }
-            }
-
-            return CreateSoundChannel();
+            return _soundChannelsPool.FirstOrDefault(channel => channel.IsFree) ?? CreateSoundChannel();
         }
 
         private MusicAudioChannel FindFreeMusicChannel()
         {
-            foreach (var channel in _musicChannelsPool)
-            {
-                if (channel.IsFree)
-                {
-                    return channel;
-                }
-            }
-
-            return CreateMusicChannel();
+           return _musicChannelsPool.FirstOrDefault(channel => channel.IsFree) ?? CreateMusicChannel();
         }
 
         private MusicAudioChannel CreateMusicChannel()
@@ -246,8 +216,6 @@ namespace Code.Runtime.Core.Audio
                 _mainMusicChannel.Stop();
             }
         }
-        
-        
 
         private void StopAllSounds()
         {

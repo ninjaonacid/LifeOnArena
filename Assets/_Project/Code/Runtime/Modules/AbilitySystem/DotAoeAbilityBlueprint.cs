@@ -1,12 +1,15 @@
 ﻿using Code.Runtime.Modules.AbilitySystem.ActiveAbilities;
+using UnityEngine;
 
 namespace Code.Runtime.Modules.AbilitySystem
 {
-    public class DotAoeAbilityBlueprint : AoeAbilityBlueprint
+    [CreateAssetMenu(fileName = "DotAoeAbility", menuName = "AbilitySystem/ActiveAbility/DotAoeAbility")]
+    public class DotAoeAbilityBlueprint : ActiveAbilityBlueprintBase
     {
+        [SerializeField] private float _castDistance;
         public override ActiveAbility GetAbility()
         {
-            return new DotAoeAbility(this, _castDistance, _duration, _aoeRadius);
+            return new DotAoeAbility(this, _castDistance);
         }
     }
 }
