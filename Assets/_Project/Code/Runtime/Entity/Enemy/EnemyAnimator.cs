@@ -15,6 +15,7 @@ namespace Code.Runtime.Entity.Enemy
         private static readonly int Run = Animator.StringToHash("Run");
         private static readonly int Attack = Animator.StringToHash("Attack01");
         private static readonly int Idle = Animator.StringToHash("Idle");
+        private static readonly int AttackSpeed = Animator.StringToHash("attackSpeed");
 
         private Animator _enemyAnimator;
 
@@ -59,9 +60,10 @@ namespace Code.Runtime.Entity.Enemy
             _enemyAnimator.SetBool(IsMoving, false);
         }
 
-        public void PlayAttack()
+        public void PlayAttack(float attackSpeed)
         {
             _enemyAnimator.CrossFade(Attack, 0.1f);
+            _enemyAnimator.SetFloat(AttackSpeed, attackSpeed/100);
         }
     }
 }

@@ -45,7 +45,9 @@ namespace Code.Runtime.Entity.Enemy
                 _agentMoveToPlayer,
                 _enemyTarget,
                 _enemyAnimator,
-                 true, false, canExit: (state) => state.Timer.Elapsed >= _enemyConfig.AttackDuration));
+                _enemyConfig,
+                 true, false, canExit: (state) => state.Timer.Elapsed >= _enemyConfig.AttackDuration,
+                onEnter: (state) => _enemyAnimator.PlayAttack(_enemyConfig.AttackDuration)));
 
             _fsm.AddState(nameof(EnemyIdleState), new EnemyIdleState(
                 _enemyAnimator,

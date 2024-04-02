@@ -70,7 +70,9 @@ namespace Code.Runtime.Entity.Hero
                 _heroWeapon, _heroSkills, _heroAnimator, _heroMovement, _heroRotation, true, false));
 
             _stateMachine.AddState(AbilityCast, new AbilityCastState(
-                _heroWeapon, _heroSkills, _heroAnimator, _heroMovement, _heroRotation, true, true));
+                _heroWeapon, _heroSkills, _heroAnimator, _heroMovement, _heroRotation, 
+                true, true,
+                canExit: (state) => state.Timer.Elapsed >= _heroSkills.ActiveAbility.ActiveTime));
 
             _stateMachine.AddState(HeroBaseAttack1, new FirstAttackState(
                 HeroAttackComponent,
@@ -163,13 +165,11 @@ namespace Code.Runtime.Entity.Hero
                     _heroSkills.ActiveAbility.IsActive() &&
                     _heroSkills.ActiveAbility.AbilityBlueprint.Identifier.Id.Equals(_spinAttackAbilityId.Id)
             ));
-
-            // _stateMachine.AddTransitionFromAny(new TransitionAfter(
-            //     "",
-            //     HeroIdle,
-            //     1f,
-            //     (transition) => 
-            //          _stateMachine.ActiveState is not HeroMovementState));
+            
+            _stateMachine.AddTransition(new Transition(
+                AbilityCast,
+                HeroIdle));
+            
 
             _stateMachine.AddTransition(new Transition(
                 HeroBaseAttack3,

@@ -6,10 +6,11 @@ namespace Code.Runtime.Entity.Hero
 {
     public class HeroRotation : MonoBehaviour
     {
+        [SerializeField] private float _rotationSmooth;
+        [SerializeField] private float _rotationSpeed;
         private PlayerControls _controls;
-        public float rotationSmooth;
-        public float rotationSpeed;
         private Camera _camera;
+        private bool _isEnabled = true;
 
         private void Awake()
         {
@@ -24,7 +25,11 @@ namespace Code.Runtime.Entity.Hero
 
         private void Update()
         {
-            LookRotation();
+            if (_isEnabled is true)
+            {
+                LookRotation();
+            }
+            
         }
 
         private void LookRotation()
@@ -36,8 +41,13 @@ namespace Code.Runtime.Entity.Hero
                 directionVector.y = 0;
                 directionVector.Normalize();
                 var rotateTo = Quaternion.LookRotation(directionVector);
-                transform.rotation = Quaternion.Slerp(rotateFrom, rotateTo,  rotationSmooth * rotationSpeed * Time.deltaTime );
+                transform.rotation = Quaternion.Slerp(rotateFrom, rotateTo,  _rotationSmooth * _rotationSpeed * Time.deltaTime );
             }
+        }
+
+        public void EnableRotation(bool value)
+        {
+            _isEnabled = value;
         }
     }
 }

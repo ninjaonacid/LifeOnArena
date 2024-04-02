@@ -15,8 +15,14 @@ namespace Code.Runtime.Entity.Hero.HeroStates
             base.OnEnter();
             _heroAnimator.PlayAttack(this);
             _heroWeapon.EnableWeapon(true);
+            _heroRotation.EnableRotation(false);
         }
-        
 
+        public override void OnExit()
+        {
+            base.OnExit();
+            _heroWeapon.EnableWeapon(false);
+            _heroRotation.EnableRotation(true);
+        }
     }
 }

@@ -18,7 +18,6 @@ namespace Code.Runtime.Entity.Hero.HeroStates
         {
             base.OnEnter();
             _heroAnimator.PlayAbilityCast();
-            _canExit = (state) => Timer.Elapsed >= _heroSkills.ActiveAbility.ActiveTime;
         }
     }
 }
