@@ -11,15 +11,16 @@ namespace Code.Runtime.Modules.AbilitySystem
     public abstract class ActiveAbilityBlueprintBase : AbilityBlueprintBase
     {
         [SerializeField] private float _cooldown;
-
-        public float Cooldown => _cooldown;
-        
-        public float ActiveTime;
-        public bool IsCastAbility; 
-        public VisualEffectData VisualEffectData;
-        public SoundAudioFile AbilitySound;
-        
+        [SerializeField] private float _activeTime;
+        [SerializeField] private bool _isCastAbility;
+        [SerializeField] private VisualEffectData _visualEffect;
+        [SerializeField] private SoundAudioFile _abilitySound;
         [SerializeField] private List<GameplayEffectBlueprint> _gameplayEffectBlueprints;
+        public float Cooldown => _cooldown;
+        public float ActiveTime => _activeTime;
+        public bool IsCastAbility => _isCastAbility;
+        public VisualEffectData VisualEffectData => _visualEffect;
+        public SoundAudioFile AbilitySound => _abilitySound;
         public IReadOnlyList<GameplayEffect> GameplayEffects => 
             _gameplayEffectBlueprints.Select(x => x.GetGameplayEffect()).ToList();
 

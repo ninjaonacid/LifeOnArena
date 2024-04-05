@@ -6,7 +6,7 @@ namespace Code.Runtime.Entity.Hero.HeroStates
     public class FirstAttackState : HeroBaseAttackState
     {
         public FirstAttackState(HeroAttackComponent heroAttackComponent, HeroWeapon heroWeapon,
-            HeroAnimator heroAnimator, HeroMovement heroMovement, HeroRotation heroRotation, 
+            HeroAnimator heroAnimator, HeroMovement heroMovement, HeroRotation heroRotation,
             bool needExitTime = false,
             bool isGhostState = false, 
             Action<State<string, string>> onEnter = null,
@@ -22,6 +22,8 @@ namespace Code.Runtime.Entity.Hero.HeroStates
             base.OnEnter();
             _heroWeapon.EnableWeapon(true);
             _heroAnimator.PlayAttack(this);
+            
+            _canExit = (state) => true;
             _heroRotation.EnableRotation(false);
         }
 

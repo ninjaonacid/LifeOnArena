@@ -22,6 +22,7 @@ namespace Code.Runtime.Entity.Enemy
         public AnimatorState State { get; private set; }
 
         public void EnteredState(int stateHash)
+        
         {
             throw new NotImplementedException();
         }
@@ -62,7 +63,7 @@ namespace Code.Runtime.Entity.Enemy
 
         public void PlayAttack(float attackSpeed)
         {
-            _enemyAnimator.SetFloat(AttackSpeed,  attackSpeed);
+            _enemyAnimator.SetFloat(AttackSpeed,  attackSpeed/10f);
             _enemyAnimator.CrossFade(Attack, 0.1f);
         }
     }

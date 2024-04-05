@@ -3,6 +3,7 @@ using Code.Runtime.Core.Audio;
 using Code.Runtime.Core.ConfigProvider;
 using Code.Runtime.Entity.Hero.HeroStates;
 using Code.Runtime.Logic;
+using Code.Runtime.Logic.Animator;
 using Code.Runtime.Modules.StateMachine;
 using Code.Runtime.Modules.StateMachine.Transitions;
 using UnityEngine;
@@ -31,6 +32,7 @@ namespace Code.Runtime.Entity.Hero
         [SerializeField] private AbilityIdentifier _dodgeRollAbilityId;
         [SerializeField] private AbilityIdentifier _tornadoAbilityId;
 
+        [SerializeField] private AnimationEventReceiver _eventReceiver;
         [SerializeField] private HeroAnimator _heroAnimator;
         [SerializeField] private HeroMovement _heroMovement;
         [SerializeField] private HeroRotation _heroRotation;
@@ -38,6 +40,7 @@ namespace Code.Runtime.Entity.Hero
         [SerializeField] private HeroSkills _heroSkills;
         [SerializeField] private HeroWeapon _heroWeapon;
         [SerializeField] private TagController _tagController;
+        
 
 
         [Inject]

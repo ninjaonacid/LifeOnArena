@@ -9,6 +9,9 @@ namespace Code.Runtime.Entity.Hero
     [RequireComponent(typeof(Animator))]
     public class HeroAnimator : MonoBehaviour, IAnimationStateReader
     {
+        public event Action<AnimatorState> StateEntered;
+        public event Action<AnimatorState> StateExited;
+        
         private static readonly int Die = Animator.StringToHash("Die");
         private static readonly int Hit = Animator.StringToHash("Hit");
         private static readonly int Move = Animator.StringToHash("Move");
@@ -19,32 +22,30 @@ namespace Code.Runtime.Entity.Hero
 
         private readonly int _spinAttackStateHash = Animator.StringToHash("SPIN_ATTACK");
         private readonly int _abilityCast = Animator.StringToHash("AbilityCast");
-        
+
         private readonly int _dieStateHash = Animator.StringToHash("Dying");
         private readonly int _idleStateHash = Animator.StringToHash("IDLE");
         private readonly int _runStateHash = Animator.StringToHash("WALKING");
         private readonly int _rollStateHash = Animator.StringToHash("Roll");
-        
+
         [SerializeField] private CharacterController _characterController;
         [SerializeField] private Animator _heroAnimator;
-        
+
         public AnimatorState State { get; private set; }
-        
+
+
         public void EnteredState(int stateHash)
         {
             State = StateFor(stateHash);
             
             StateEntered?.Invoke(StateFor(stateHash));
         }
-        
+
         public void ExitedState(int stateHash)
         {
             StateExited?.Invoke(StateFor(stateHash));
         }
 
-        public event Action<AnimatorState> StateEntered;
-        public event Action<AnimatorState> StateExited;
-        
         public void PlayRoll()
         {
             _heroAnimator.CrossFade(_rollStateHash, 0.1f);
@@ -61,15 +62,7 @@ namespace Code.Runtime.Entity.Hero
                 0.1f,
                 Time.deltaTime);
         }
-
-        public bool IsAttacking()
-        {
-            return 
-                State == AnimatorState.Attack
-                   || State == AnimatorState.Attack2
-                   || State == AnimatorState.Attack3;
-        }
-
+        
         public void ToIdleState() =>
             _heroAnimator.CrossFade(_idleStateHash, 0.1f);
 
