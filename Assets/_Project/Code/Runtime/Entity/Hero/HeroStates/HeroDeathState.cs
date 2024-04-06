@@ -1,23 +1,24 @@
-using System;
+﻿using System;
 using Code.Runtime.ConfigData.Animations;
 using Code.Runtime.Modules.StateMachine.States;
 
 namespace Code.Runtime.Entity.Hero.HeroStates
 {
-    public abstract class HeroBaseAttackState : HeroBaseState
+    public class HeroDeathState : HeroBaseState
     {
-        protected readonly HeroAttackComponent HeroAttackComponent;
-        protected readonly HeroWeapon _heroWeapon;
-        protected HeroBaseAttackState(HeroAttackComponent heroAttackComponent, HeroWeapon heroWeapon,
-            HeroAnimator heroAnimator, HeroMovement heroMovement, HeroRotation heroRotation,
+        public HeroDeathState(HeroAnimator heroAnimator, HeroMovement heroMovement, HeroRotation heroRotation,
             AnimationDataContainer animationData, bool needExitTime = false, bool isGhostState = false,
             Action<State<string, string>> onEnter = null, Action<State<string, string>> onLogic = null,
             Action<State<string, string>> onExit = null, Func<State<string, string>, bool> canExit = null) : base(
             heroAnimator, heroMovement, heroRotation, animationData, needExitTime, isGhostState, onEnter, onLogic,
             onExit, canExit)
         {
-            HeroAttackComponent = heroAttackComponent;
-            _heroWeapon = heroWeapon;
+        }
+
+        public override void OnEnter()
+        {
+            base.OnEnter();
+            _heroAnimator.PlayAnimation(_animationData.Animations[AnimationKey.Die].Hash);
         }
     }
 }

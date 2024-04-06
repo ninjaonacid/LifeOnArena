@@ -1,3 +1,4 @@
+using Code.Runtime.ConfigData.Animations;
 using Code.Runtime.ConfigData.Identifiers;
 using Code.Runtime.Core.Audio;
 using Code.Runtime.Core.ConfigProvider;
@@ -40,7 +41,8 @@ namespace Code.Runtime.Entity.Hero
         [SerializeField] private HeroSkills _heroSkills;
         [SerializeField] private HeroWeapon _heroWeapon;
         [SerializeField] private TagController _tagController;
-        
+        [SerializeField] private AnimationDataContainer _animationData;
+        [SerializeField] private HeroDeath _heroDeath;
 
 
         [Inject]
@@ -61,19 +63,35 @@ namespace Code.Runtime.Entity.Hero
             _stateMachine = new FiniteStateMachine();
 
             _stateMachine.AddState(HeroIdle, new HeroIdleState(
-                _heroAnimator, _heroMovement, _heroRotation, false, true));
+                _heroAnimator, _heroMovement, _heroRotation, _animationData, false, true));
 
             _stateMachine.AddState(HeroMovement, new HeroMovementState(
-                _heroAnimator, _heroMovement, _heroRotation, false, false));
+                _heroAnimator, _heroMovement, _heroRotation, _animationData, false, false));
+            
+            _stateMachine.AddState(nameof(HeroDeathState), new HeroDeathState(
+                _heroAnimator, 
+                _heroMovement, 
+                _heroRotation, 
+                _animationData));
 
             _stateMachine.AddState(RollAbility, new RollDodgeState(
-                _heroWeapon, _heroSkills, _heroAnimator, _heroMovement, _heroRotation, true, false));
+                _heroWeapon, _heroSkills, _heroAnimator, _heroMovement, _heroRotation, _animationData, true, false));
 
             _stateMachine.AddState(SpinAttackAbility, new SpinAbilityState(
-                _heroWeapon, _heroSkills, _heroAnimator, _heroMovement, _heroRotation, true, false));
+                _heroWeapon,
+                _heroSkills,
+                _heroAnimator,
+                _heroMovement,
+                _heroRotation,
+                _animationData, true, false));
 
             _stateMachine.AddState(AbilityCast, new AbilityCastState(
-                _heroWeapon, _heroSkills, _heroAnimator, _heroMovement, _heroRotation, 
+                _heroWeapon,
+                _heroSkills,
+                _heroAnimator,
+                _heroMovement,
+                _heroRotation,
+                _animationData,
                 true, true,
                 canExit: (state) => state.Timer.Elapsed >= _heroSkills.ActiveAbility.ActiveTime));
 
@@ -83,6 +101,7 @@ namespace Code.Runtime.Entity.Hero
                 _heroAnimator,
                 _heroMovement,
                 _heroRotation,
+                _animationData,
                 needExitTime: true,
                 isGhostState: false,
                 canExit: (state) =>
@@ -95,9 +114,10 @@ namespace Code.Runtime.Entity.Hero
                 _heroAnimator,
                 _heroMovement,
                 _heroRotation,
+                _animationData,
                 needExitTime: true,
                 isGhostState: false,
-                canExit: (state) => state.Timer.Elapsed >= 
+                canExit: (state) => state.Timer.Elapsed >=
                                     _heroWeapon.GetEquippedWeaponData().WeaponFsmConfig.SecondAttackStateDuration));
 
             _stateMachine.AddState(HeroBaseAttack3, new ThirdAttackState(
@@ -106,11 +126,27 @@ namespace Code.Runtime.Entity.Hero
                 _heroAnimator,
                 _heroMovement,
                 _heroRotation,
+                _animationData,
                 needExitTime: true,
                 isGhostState: false,
-                canExit: (state) => state.Timer.Elapsed >= 
+                canExit: (state) => state.Timer.Elapsed >=
                                     _heroWeapon.GetEquippedWeaponData().WeaponFsmConfig.ThirdAttackStateDuration));
             
+            _stateMachine.AddTransitionFromAny(new Transition("", nameof(HeroDeathState),
+                (transition) => _heroDeath.IsDead));
+
+            _stateMachine.AddTransition(new TransitionAfter(
+                HeroBaseAttack1,
+                HeroIdle, _heroWeapon.GetEquippedWeaponData().WeaponFsmConfig.FirstAttackStateDuration + 0.1f));
+
+            _stateMachine.AddTransition(new TransitionAfter(
+                HeroBaseAttack2,
+                HeroIdle, _heroWeapon.GetEquippedWeaponData().WeaponFsmConfig.SecondAttackStateDuration + 0.1f));
+
+            _stateMachine.AddTransition(new TransitionAfter(
+                HeroBaseAttack3,
+                HeroIdle, _heroWeapon.GetEquippedWeaponData().WeaponFsmConfig.ThirdAttackStateDuration + 0.1f));
+
             _stateMachine.AddTwoWayTransition(new Transition(
                 HeroIdle,
                 HeroMovement,
@@ -138,17 +174,6 @@ namespace Code.Runtime.Entity.Hero
                 HeroBaseAttack3,
                 (transition) => _controls.Player.Attack.WasPressedThisFrame()));
 
-            _stateMachine.AddTransition(new TransitionAfter(
-                HeroBaseAttack1,
-                HeroIdle, _heroWeapon.GetEquippedWeaponData().WeaponFsmConfig.FirstAttackStateDuration + 0.1f));
-            
-                _stateMachine.AddTransition(new TransitionAfter(
-                HeroBaseAttack2,
-                HeroIdle, _heroWeapon.GetEquippedWeaponData().WeaponFsmConfig.SecondAttackStateDuration + 0.1f));
-            
-                _stateMachine.AddTransition(new TransitionAfter(
-                    HeroBaseAttack3,
-                    HeroIdle, _heroWeapon.GetEquippedWeaponData().WeaponFsmConfig.ThirdAttackStateDuration + 0.1f));
 
             _stateMachine.AddTransition(new Transition(
                 HeroBaseAttack1,
@@ -168,11 +193,11 @@ namespace Code.Runtime.Entity.Hero
                     _heroSkills.ActiveAbility.IsActive() &&
                     _heroSkills.ActiveAbility.AbilityBlueprint.Identifier.Id.Equals(_spinAttackAbilityId.Id)
             ));
-            
+
             _stateMachine.AddTransition(new Transition(
                 AbilityCast,
                 HeroIdle));
-            
+
 
             _stateMachine.AddTransition(new Transition(
                 HeroBaseAttack3,
@@ -190,8 +215,8 @@ namespace Code.Runtime.Entity.Hero
             _stateMachine.AddTransition(new Transition(
                 SpinAttackAbility,
                 HeroMovement,
-                (transition) => 
-                                _controls.Player.Movement.ReadValue<Vector2>().sqrMagnitude > Constants.Epsilon));
+                (transition) =>
+                    _controls.Player.Movement.ReadValue<Vector2>().sqrMagnitude > Constants.Epsilon));
 
             _stateMachine.AddTransition(new Transition(
                 HeroIdle,
@@ -215,7 +240,7 @@ namespace Code.Runtime.Entity.Hero
                                 _heroSkills.ActiveAbility.IsActive() &&
                                 _heroSkills.ActiveAbility.IsCastAbility, true));
 
-       
+
             _stateMachine.InitStateMachine();
         }
     }

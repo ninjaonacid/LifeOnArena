@@ -19,10 +19,10 @@ MonoBehaviour:
     Position: 0
     Price: 0
   _cooldown: 0
-  ActiveTime: 1
-  IsCastAbility: 1
-  VisualEffectData: {fileID: 11400000, guid: 73ddebacc940e90468d0c88a792343a4, type: 2}
-  AbilitySound: {fileID: 0}
+  _activeTime: 0
+  _isCastAbility: 1
+  _visualEffect: {fileID: 11400000, guid: 73ddebacc940e90468d0c88a792343a4, type: 2}
+  _abilitySound: {fileID: 0}
   _gameplayEffectBlueprints:
   - {fileID: 11400000, guid: d58736e60d61ad64fa6f96430fda27d5, type: 2}
   _castDistance: 0

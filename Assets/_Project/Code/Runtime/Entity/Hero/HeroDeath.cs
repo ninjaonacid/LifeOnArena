@@ -16,6 +16,7 @@ namespace Code.Runtime.Entity.Hero
         [SerializeField] private HeroMovement _heroMovement;
         
         private bool _isDead;
+        public bool IsDead => _isDead;
         
         private IEventSystem _eventSystem;
 
@@ -44,7 +45,6 @@ namespace Code.Runtime.Entity.Hero
             _isDead = true;
             _eventSystem.FireEvent(new HeroDeadEvent());
             _heroMovement.enabled = false;
-            _animator.PlayDeath();
         }
     }
 }
