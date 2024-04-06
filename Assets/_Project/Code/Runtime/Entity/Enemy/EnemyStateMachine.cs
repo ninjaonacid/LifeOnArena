@@ -47,6 +47,7 @@ namespace Code.Runtime.Entity.Enemy
                 _agentMoveToPlayer,
                 _enemyTarget,
                 _enemyAnimator,
+                _statController,
                 _animationData,
                 true,
                 canExit: (state) => state.Timer.Elapsed >= 
