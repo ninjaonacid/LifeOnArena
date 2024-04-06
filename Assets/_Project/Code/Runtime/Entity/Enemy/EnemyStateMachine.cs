@@ -34,7 +34,8 @@ namespace Code.Runtime.Entity.Enemy
             _fsm.AddState(nameof(EnemyDeathState), new EnemyDeathState(
                 _enemyAnimator,
                 _enemyDeath, 
-                _animationData));
+                _animationData,
+                _enemyTarget));
 
             _fsm.AddState(nameof(EnemyStaggerState), new EnemyStaggerState(
                 _enemyAnimator,

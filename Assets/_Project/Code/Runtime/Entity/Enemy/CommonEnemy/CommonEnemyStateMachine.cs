@@ -17,6 +17,11 @@ namespace Code.Runtime.Entity.Enemy.CommonEnemy
                 "", 
                 nameof(EnemyDeathState), 
                 (transition) => _enemyDeath.IsDead));
+            
+            _fsm.AddTransition(new Transition(
+                nameof(EnemyDeathState), 
+                nameof(EnemyIdleState),
+                (transition) => !_enemyDeath.IsDead));
 
             _fsm.AddTransition(new Transition(
                 nameof(EnemyIdleState),
