@@ -1,11 +1,17 @@
+using System;
+using Code.Runtime.ConfigData.Animations;
+using Code.Runtime.Modules.StateMachine.States;
+
 namespace Code.Runtime.Entity.Enemy.CommonEnemy
 {
     public class EnemyPatrolState : CommonEnemyState
     {
-        public EnemyPatrolState(EnemyAnimator enemyAnimator, bool needsExitTime, bool isGhostState = false) : 
-        base(enemyAnimator, needsExitTime, isGhostState)
+        public EnemyPatrolState(EnemyAnimator enemyAnimator, AnimationDataContainer animationData,
+            bool needExitTime = false, bool isGhostState = false, Action<State<string, string>> onEnter = null,
+            Action<State<string, string>> onLogic = null, Action<State<string, string>> onExit = null,
+            Func<State<string, string>, bool> canExit = null) : base(enemyAnimator, animationData, needExitTime,
+            isGhostState, onEnter, onLogic, onExit, canExit)
         {
-            
         }
 
         public override void Init()
@@ -21,7 +27,6 @@ namespace Code.Runtime.Entity.Enemy.CommonEnemy
         public override void OnLogic()
         {
             base.OnLogic();
-
         }
 
         public override void OnExit()
@@ -33,6 +38,5 @@ namespace Code.Runtime.Entity.Enemy.CommonEnemy
         {
             base.OnExitRequest();
         }
-
     }
 }

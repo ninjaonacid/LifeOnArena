@@ -98,8 +98,6 @@ namespace Code.Runtime.Core.Factory
             var expDrop = monster.GetComponentInChildren<ExpDrop>();
             expDrop.Construct(_randomService, _gameDataContainer.PlayerData.PlayerExp);
             expDrop.SetExperienceGain(monsterData.MinExp, monsterData.MaxExp);
-            var fsm = monster.GetComponent<EnemyStateMachine>();
-            fsm.Construct(monsterData.EnemyStateMachineConfig);
 
             return monster;
         }

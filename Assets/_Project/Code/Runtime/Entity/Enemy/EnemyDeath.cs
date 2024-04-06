@@ -13,6 +13,7 @@ namespace Code.Runtime.Entity.Enemy
         public EnemyHealth Health;
         public GameObject FracturedPrefab;
         public GameObject EnemyModel;
+        public bool IsDead { get; private set; }
 
         public event Action Happened;
 
@@ -41,7 +42,6 @@ namespace Code.Runtime.Entity.Enemy
         private void Die()
         {
             Health.Health.CurrentValueChanged -= HealthChanged;
-            Animator.PlayDeath();
             //EnemyModel.SetActive(false);
            // FracturedPrefab.SetActive(true);
             //FracturedPrefab.GetComponentInChildren<Rigidbody>().AddExplosionForce(10f, Vector3.down, 1f);

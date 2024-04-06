@@ -21,6 +21,17 @@ namespace Code.Runtime.Entity.Enemy
 
         public AnimatorState State { get; private set; }
 
+        public void PlayAnimation(int hash)
+        {
+            _enemyAnimator.CrossFade(hash, 0.1f);
+        }
+
+        public void PlayAnimation(int hash, string parameter, float value)
+        {
+            _enemyAnimator.SetFloat(parameter,  value/10f);
+            _enemyAnimator.CrossFade(hash, 0.1f);
+        }
+
         public void EnteredState(int stateHash)
         
         {
@@ -31,40 +42,10 @@ namespace Code.Runtime.Entity.Enemy
         {
             throw new NotImplementedException();
         }
-        
+
         private void Awake()
         {
             _enemyAnimator = GetComponent<Animator>();
-        }
-
-        public void PlayDeath()
-        {
-            _enemyAnimator.SetTrigger(Die);
-        }
-
-        public void PlayHit()
-        {
-            _enemyAnimator.CrossFade(GetHit, 0.1f);
-        }
-
-        public void PlayIdle()
-        {
-            _enemyAnimator.CrossFade(Idle, 0.5f);
-        }
-        public void Move()
-        {
-            _enemyAnimator.CrossFade(Run, 0.1f);
-        }
-
-        public void StopMoving()
-        {
-            _enemyAnimator.SetBool(IsMoving, false);
-        }
-
-        public void PlayAttack(float attackSpeed)
-        {
-            _enemyAnimator.SetFloat(AttackSpeed,  attackSpeed/10f);
-            _enemyAnimator.CrossFade(Attack, 0.1f);
         }
     }
 }

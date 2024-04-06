@@ -92,7 +92,7 @@ namespace Code.Runtime.Entity.Hero
                 _heroMovement,
                 _heroRotation,
                 _animationData,
-                true, true,
+                true, false,
                 canExit: (state) => state.Timer.Elapsed >= _heroSkills.ActiveAbility.ActiveTime));
 
             _stateMachine.AddState(HeroBaseAttack1, new FirstAttackState(
@@ -196,7 +196,7 @@ namespace Code.Runtime.Entity.Hero
 
             _stateMachine.AddTransition(new Transition(
                 AbilityCast,
-                HeroIdle));
+                HeroIdle, (transition) => !_heroSkills.ActiveAbility.IsActive()));
 
 
             _stateMachine.AddTransition(new Transition(

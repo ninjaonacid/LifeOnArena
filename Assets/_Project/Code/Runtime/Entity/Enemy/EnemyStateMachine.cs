@@ -1,6 +1,8 @@
+using Code.Runtime.ConfigData.Animations;
 using Code.Runtime.ConfigData.StateMachine;
 using Code.Runtime.Entity.Enemy.CommonEnemy;
 using Code.Runtime.Modules.StateMachine;
+using Code.Runtime.Modules.StatSystem;
 using UnityEngine;
 
 namespace Code.Runtime.Entity.Enemy
@@ -15,47 +17,51 @@ namespace Code.Runtime.Entity.Enemy
         [SerializeField] protected EnemyTarget _enemyTarget;
         [SerializeField] protected EnemyHealth _enemyHealth;
         [SerializeField] protected TagController _tagController;
+        [SerializeField] protected AnimationDataContainer _animationData;
+        [SerializeField] protected StatController _statController;
+        [SerializeField] protected EnemyDeath _enemyDeath;
 
-        protected EnemyStateMachineConfig _enemyConfig;
-
-        public void Construct(EnemyStateMachineConfig config)
-        {
-            _enemyConfig = config;
-        }
 
         protected virtual void Start()
         {
             _fsm = new FiniteStateMachine();
 
             _fsm.AddState(nameof(EnemyChaseState), new EnemyChaseState(
-                _enemyAnimator,
                 _agentMoveToPlayer,
-                false,
-                false));
+                _enemyAnimator,
+                _animationData));
+            
+            _fsm.AddState(nameof(EnemyDeathState), new EnemyDeathState(
+                _enemyAnimator,
+                _enemyDeath, 
+                _animationData));
 
             _fsm.AddState(nameof(EnemyStaggerState), new EnemyStaggerState(
                 _enemyAnimator,
+                _animationData,
                 true,
-                false,
-                canExit: (state) => state.Timer.Elapsed >= _enemyConfig.HitStaggerDuration));
+                canExit: (state) => state.Timer.Elapsed >= _statController.Stats["HitRecovery"].Value));
 
             _fsm.AddState(nameof(EnemyAttackState), new EnemyAttackState(
                 EnemyAttackComponent,
                 _agentMoveToPlayer,
                 _enemyTarget,
                 _enemyAnimator,
-                _enemyConfig,
-                true, false, 
-                canExit: (state) => state.Timer.Elapsed >= _enemyConfig.AttackDuration));
+                _animationData,
+                true,
+                canExit: (state) => state.Timer.Elapsed >= 
+                                    _animationData.Animations[AnimationKey.Attack1].Length * (_statController.Stats["AttackSpeed"].Value / 10f)));
 
                 _fsm.AddState(nameof(EnemyIdleState), new EnemyIdleState(
-                _enemyAnimator,
                 _enemyTarget,
+                _enemyAnimator,
+                _animationData,
                 false, false));
 
             _fsm.AddState(nameof(EnemyStunnedState), new EnemyStunnedState(
                 _tagController, 
                 _enemyAnimator,
+                _animationData,
                 true, false
             ));
         }

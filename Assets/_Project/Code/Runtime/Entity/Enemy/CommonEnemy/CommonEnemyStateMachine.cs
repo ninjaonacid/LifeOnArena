@@ -1,6 +1,6 @@
+using Code.Runtime.ConfigData.Animations;
 using Code.Runtime.Modules.StateMachine;
 using Code.Runtime.Modules.StateMachine.Transitions;
-using Unity.Jobs.LowLevel.Unsafe;
 
 namespace Code.Runtime.Entity.Enemy.CommonEnemy
 {
@@ -13,6 +13,10 @@ namespace Code.Runtime.Entity.Enemy.CommonEnemy
             
             _enemyHealth.Health.CurrentValueChanged += TriggerDamageState;
             
+            _fsm.AddTransitionFromAny(new Transition(
+                "", 
+                nameof(EnemyDeathState), 
+                (transition) => _enemyDeath.IsDead));
 
             _fsm.AddTransition(new Transition(
                 nameof(EnemyIdleState),
@@ -22,7 +26,7 @@ namespace Code.Runtime.Entity.Enemy.CommonEnemy
             _fsm.AddTransition(new TransitionAfter(
                 nameof(EnemyAttackState),
                 nameof(EnemyChaseState),
-                _enemyConfig.AttackDuration,
+                _animationData.Animations[AnimationKey.Attack1].Length,
                 (transition) => _enemyTarget.HasTarget() && !EnemyAttackComponent.TargetInAttackRange));
                 
             _fsm.AddTransition(new Transition(
@@ -39,7 +43,7 @@ namespace Code.Runtime.Entity.Enemy.CommonEnemy
             _fsm.AddTransition(new TransitionAfter(
                 nameof(EnemyStaggerState),
                 nameof(EnemyIdleState),
-                _enemyConfig.HitStaggerDuration
+                _statController.Stats["HitRecovery"].Value
             ));
 
             _fsm.AddTransition(new Transition(
@@ -50,12 +54,8 @@ namespace Code.Runtime.Entity.Enemy.CommonEnemy
             _fsm.AddTransition(new TransitionAfter(
                 nameof(EnemyAttackState),
                 nameof(EnemyIdleState),
-                _enemyConfig.AttackDuration
+                _animationData.Animations[AnimationKey.Attack1].Length
                 ));
-
-            _fsm.AddTransition(new Transition(
-                nameof(EnemyPreAttackState),
-                nameof(EnemyAttackState)));
             
             _fsm.AddTransition(new Transition(
                 nameof(EnemyIdleState),

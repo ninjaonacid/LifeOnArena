@@ -1,5 +1,3 @@
-using System;
-using Code.Runtime.Entity.Hero.HeroStates;
 using Code.Runtime.Logic.Animator;
 using UnityEngine;
 
@@ -23,6 +21,5 @@ namespace Code.Runtime.Entity.Hero
         {
             _heroAnimator.runtimeAnimatorController = controller;
         }
-        
     }
 }

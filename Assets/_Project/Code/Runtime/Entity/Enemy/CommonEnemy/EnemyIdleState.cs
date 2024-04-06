@@ -1,21 +1,26 @@
+using System;
+using Code.Runtime.ConfigData.Animations;
+using Code.Runtime.Modules.StateMachine.States;
+
 namespace Code.Runtime.Entity.Enemy.CommonEnemy
 {
     public class EnemyIdleState : CommonEnemyState
     {
         private readonly EnemyTarget _target;
 
-        public EnemyIdleState(EnemyAnimator enemyAnimator, 
-            EnemyTarget enemyTarget,
-            bool needsExitTime, bool isGhostState = false) : base(enemyAnimator, needsExitTime, isGhostState)
+        public EnemyIdleState(EnemyTarget target, EnemyAnimator enemyAnimator, AnimationDataContainer animationData,
+            bool needExitTime = false, bool isGhostState = false, Action<State<string, string>> onEnter = null,
+            Action<State<string, string>> onLogic = null, Action<State<string, string>> onExit = null,
+            Func<State<string, string>, bool> canExit = null) : base(enemyAnimator, animationData, needExitTime,
+            isGhostState, onEnter, onLogic, onExit, canExit)
         {
-            _target = enemyTarget;
+            _target = target;
         }
 
         public override void OnEnter()
         {
             base.OnEnter();
-            _enemyAnimator.PlayIdle();
-
+            _enemyAnimator.PlayAnimation(_animationData.Animations[AnimationKey.Idle].Hash);
         }
 
         public override void OnLogic()

@@ -1948,6 +1948,9 @@ MonoBehaviour:
   _enemyTarget: {fileID: 890136297104685426}
   _enemyHealth: {fileID: 1043505308070320456}
   _tagController: {fileID: 8601834630225200624}
+  _animationData: {fileID: 11400000, guid: 26005db4dc9b9a34cb461fd30e372b28, type: 2}
+  _statController: {fileID: 4227790607017457015}
+  _enemyDeath: {fileID: 1043505308070320457}
 --- !u!4 &716635229013844747 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3436043548892321881, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
@@ -1973,6 +1976,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b4d656a13cfa1d84d94341642ae53936, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1043505308070320457 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2892997724190106139, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
+  m_PrefabInstance: {fileID: 2764850178834398034}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 196521611167726001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e482eac29799a44a9bc0a342600d505, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!65 &4048868504055413890 stripped
