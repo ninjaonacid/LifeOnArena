@@ -1,7 +1,5 @@
-using System;
 using Code.Runtime.ConfigData.Weapon;
 using Code.Runtime.Data.PlayerData;
-using Code.Runtime.Logic.Weapon;
 using Code.Runtime.Services.PersistentProgress;
 using UnityEngine;
 
@@ -18,8 +16,6 @@ namespace Code.Runtime.Entity.Hero
             _heroAnimator.OverrideController(weaponData.OverrideController);
             
             EnableCollider(false);
-
-            WeaponEquipped(_weaponSlot.EquippedWeapon);
         }
         
         public void LoadData(PlayerData data)

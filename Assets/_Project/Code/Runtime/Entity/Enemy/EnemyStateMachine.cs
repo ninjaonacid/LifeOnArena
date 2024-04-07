@@ -12,6 +12,7 @@ namespace Code.Runtime.Entity.Enemy
 
         [SerializeField] protected AgentMoveToPlayer _agentMoveToPlayer;
         [SerializeField] protected EnemyAttackComponent _enemyAttackComponent;
+        [SerializeField] protected EnemyWeapon _enemyWeapon;
         [SerializeField] protected EnemyAnimator _enemyAnimator;
         [SerializeField] protected EnemyTarget _enemyTarget;
         [SerializeField] protected EnemyHealth _enemyHealth;
@@ -19,7 +20,6 @@ namespace Code.Runtime.Entity.Enemy
         [SerializeField] protected AnimationDataContainer _animationData;
         [SerializeField] protected StatController _statController;
         [SerializeField] protected EnemyDeath _enemyDeath;
-
 
         protected virtual void Start()
         {
@@ -47,6 +47,7 @@ namespace Code.Runtime.Entity.Enemy
                 _agentMoveToPlayer,
                 _enemyTarget,
                 _enemyAnimator,
+                _enemyWeapon,
                 _animationData,
                 true
                 ));

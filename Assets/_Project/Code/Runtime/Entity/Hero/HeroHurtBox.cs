@@ -5,7 +5,6 @@ namespace Code.Runtime.Entity.Hero
 {
     public class HeroHurtBox : EntityHurtBox
     {
-        
         public void DisableHitBox(float time)
         {
             _hitBoxCollider.enabled = false;

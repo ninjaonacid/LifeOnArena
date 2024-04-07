@@ -22,6 +22,7 @@ namespace Code.Runtime.Entity.Enemy.CommonEnemy
         {
             base.OnEnter();
             _enemyTarget.enabled = false;
+            _enemyAnimator.PlayDie();
         }
 
         public override void OnExit()

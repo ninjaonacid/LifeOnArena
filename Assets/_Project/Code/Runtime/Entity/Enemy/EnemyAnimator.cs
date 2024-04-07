@@ -6,7 +6,7 @@ namespace Code.Runtime.Entity.Enemy
 {
     public class EnemyAnimator : MonoBehaviour, IAnimationStateReader
     {
-        private static readonly int Die = Animator.StringToHash("Die");
+        private static readonly int Die = Animator.StringToHash("Dying");
         private static readonly int Speed = Animator.StringToHash("Speed");
         private static readonly int IsMoving = Animator.StringToHash("IsMoving");
         private static readonly int GetHit = Animator.StringToHash("GetHit");
@@ -51,6 +51,9 @@ namespace Code.Runtime.Entity.Enemy
         {
             throw new NotImplementedException();
         }
+
+
+        public void PlayDie() => _enemyAnimator.Play(Die);
 
         private void Awake()
         {

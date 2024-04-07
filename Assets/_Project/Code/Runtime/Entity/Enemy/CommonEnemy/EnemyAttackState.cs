@@ -1,6 +1,7 @@
 using System;
 using Code.Runtime.ConfigData.Animations;
 using Code.Runtime.Modules.StateMachine.States;
+using UnityEngine;
 
 namespace Code.Runtime.Entity.Enemy.CommonEnemy
 {
@@ -12,7 +13,7 @@ namespace Code.Runtime.Entity.Enemy.CommonEnemy
         private readonly EnemyWeapon _enemyWeapon;
 
         public EnemyAttackState(EnemyAttackComponent enemyAttackComponent, AgentMoveToPlayer agentMoveToPlayer,
-            EnemyTarget enemyTarget, EnemyAnimator enemyAnimator,
+            EnemyTarget enemyTarget, EnemyAnimator enemyAnimator, EnemyWeapon enemyWeapon,
             AnimationDataContainer animationData, bool needExitTime = false, bool isGhostState = false,
             Action<State<string, string>> onEnter = null, Action<State<string, string>> onLogic = null,
             Action<State<string, string>> onExit = null, Func<State<string, string>, bool> canExit = null) : base(
@@ -21,6 +22,7 @@ namespace Code.Runtime.Entity.Enemy.CommonEnemy
             _enemyAttackComponent = enemyAttackComponent;
             _agentMoveToPlayer = agentMoveToPlayer;
             _enemyTarget = enemyTarget;
+            _enemyWeapon = enemyWeapon;
         }
 
         public override void OnEnter()
@@ -30,25 +32,33 @@ namespace Code.Runtime.Entity.Enemy.CommonEnemy
             _enemyAnimator.PlayAnimation(_animationData.Animations[AnimationKey.Attack1].Hash);
             _enemyAnimator.SetAttackAnimationSpeed(_enemyAttackComponent.GetAttacksPerSecond());
             _agentMoveToPlayer.ShouldMove(false);
+            
         }
 
         public override void OnLogic()
         {
             base.OnLogic();
 
-            if (Timer.Elapsed * 3 >= ((_animationData.Animations[AnimationKey.Attack1].Length  /
-                                  _enemyAttackComponent.GetAttacksPerSecond())))
+            if (Timer.Elapsed >= ((_animationData.Animations[AnimationKey.Attack1].Length  /
+                                   _enemyAttackComponent.GetAttacksPerSecond()) / 5f))
             {
                 _enemyAnimator.SetAttackAnimationSpeed(1f);
-
+                _enemyWeapon.EnableCollider(true);
+                
+                _canExit = (state) => state.Timer.Elapsed >= ((_animationData.Animations[AnimationKey.Attack1].Length /
+                                                             _enemyAttackComponent.GetAttacksPerSecond()) / 5f) + 0.5f;
             };
             
-            _enemyTarget.RotationToTarget();
+            
+            //_enemyTarget.RotationToTarget();
         }
 
         public override void OnExit()
         {
             base.OnExit();
+            _enemyWeapon.EnableCollider(false);
+            _enemyAttackComponent.AttackEnded();
+            _enemyAttackComponent.ClearCollisionData();
             
         }
 

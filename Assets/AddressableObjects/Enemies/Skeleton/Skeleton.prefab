@@ -1832,6 +1832,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1713337227256712141, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
+      propertyPath: _hurtBox
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1713337227256712141, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
       propertyPath: _statController
       value: 
       objectReference: {fileID: 4227790607017457015}
@@ -1853,7 +1857,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2658416580451336931, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 2892997724190106138, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
       propertyPath: _stats
@@ -1951,6 +1955,18 @@ PrefabInstance:
       propertyPath: AttackComponent
       value: 
       objectReference: {fileID: 5111746336203048662}
+    - target: {fileID: 6625279289632298001, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
+      propertyPath: _weaponData
+      value: 
+      objectReference: {fileID: 11400000, guid: da9e05244a9efcc44bc96f1dfc86a47f, type: 2}
+    - target: {fileID: 6625279289632298001, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
+      propertyPath: _weaponPosition
+      value: 
+      objectReference: {fileID: 2806085925602394247}
+    - target: {fileID: 6625279289632298001, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
+      propertyPath: IsCollisionWeapon
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6716876832464804808, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
       propertyPath: _enemyConfig
       value: 
@@ -1966,7 +1982,7 @@ PrefabInstance:
     - target: {fileID: 6966552553589898628, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
       propertyPath: _entityWeapon
       value: 
-      objectReference: {fileID: 6144883331567080015}
+      objectReference: {fileID: 9056458474553110339}
     - target: {fileID: 7813538039565963231, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
       propertyPath: m_StoppingDistance
       value: 7
@@ -2001,6 +2017,7 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: 5d71493b0d467664b89c966f633adc91, type: 2}
     m_RemovedComponents:
     - {fileID: 6716876832464804808, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
+    - {fileID: 2500014843645060732, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
 --- !u!1 &196521611167726001 stripped
 GameObject:
@@ -2021,6 +2038,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _agentMoveToPlayer: {fileID: 5346331190574822540}
   _enemyAttackComponent: {fileID: 5111746336203048662}
+  _enemyWeapon: {fileID: 9056458474553110339}
   _enemyAnimator: {fileID: 5346331190574822542}
   _enemyTarget: {fileID: 890136297104685426}
   _enemyHealth: {fileID: 1043505308070320456}
@@ -2115,17 +2133,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9364bfd7d71f53e41ace818fd1ea7be2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &6144883331567080015 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8293864989913983261, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
-  m_PrefabInstance: {fileID: 2764850178834398034}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 196521611167726001}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1193d293b5931b48b8e90d7f46f7890, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &8601834630225200624 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5837056075893014178, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
@@ -2135,5 +2142,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 202b34f87cfc3b14eb9de7c0b349df02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &9056458474553110339 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6625279289632298001, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
+  m_PrefabInstance: {fileID: 2764850178834398034}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 196521611167726001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1807a5f376c3a484a89ee3c78e656313, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

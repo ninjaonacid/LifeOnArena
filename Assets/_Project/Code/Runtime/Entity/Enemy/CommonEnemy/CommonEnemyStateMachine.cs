@@ -16,7 +16,7 @@ namespace Code.Runtime.Entity.Enemy.CommonEnemy
             _fsm.AddTransitionFromAny(new Transition(
                 "", 
                 nameof(EnemyDeathState), 
-                (transition) => _enemyDeath.IsDead));
+                (transition) => _enemyDeath.IsDead, true));
             
             _fsm.AddTransition(new Transition(
                 nameof(EnemyDeathState), 
@@ -31,7 +31,7 @@ namespace Code.Runtime.Entity.Enemy.CommonEnemy
             _fsm.AddTransition(new TransitionAfter(
                 nameof(EnemyAttackState),
                 nameof(EnemyChaseState),
-                _animationData.Animations[AnimationKey.Attack1].Length / _enemyAnimator.GetFloat("AttackSpeed"),
+                _animationData.Animations[AnimationKey.Attack1].Length,
                 (transition) => _enemyTarget.HasTarget() && !_enemyAttackComponent.TargetInAttackRange));
                 
             _fsm.AddTransition(new Transition(
@@ -42,7 +42,7 @@ namespace Code.Runtime.Entity.Enemy.CommonEnemy
             _fsm.AddTriggerTransitionFromAny("OnDamage", 
                 new Transition(
                     " ", 
-                    nameof(EnemyStaggerState)
+                    nameof(EnemyStaggerState), isForceTransition: true
                 ));
           
             _fsm.AddTransition(new TransitionAfter(

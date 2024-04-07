@@ -11,12 +11,14 @@ namespace Code.Runtime.Entity.Enemy
     public class EnemyDeath : MonoBehaviour
     {
         [SerializeField] private StatController _stats;
-        public EnemyAnimator Animator;
+        
         public EnemyHealth Health;
         public GameObject FracturedPrefab;
         public GameObject EnemyModel;
         public bool IsDead { get; private set; }
-
+        [SerializeField] private float _distance;
+        [SerializeField] private float _maxHeight;
+        [SerializeField] private float _flightDuration;
         public event Action Happened;
 
         private void OnEnable()
@@ -52,16 +54,11 @@ namespace Code.Runtime.Entity.Enemy
             foreach (Transform obj in FracturedPrefab.transform)
             {
                 Vector2 randomPoint = Random.insideUnitCircle.normalized;
-                
-                //float angle = Vector3.SignedAngle()
-
                 Vector3 direction2D = new Vector3(randomPoint.x, 0, randomPoint.y);
-                Vector3 direction3D = transform.TransformDirection(direction2D).normalized;
-                float explosionForce = Random.Range(2f, 5f);
-                float distance = Random.Range(0f, 10f);
-                float randomAngle = Random.Range(-90 / 2f, 90 / 2f);
-                float maxHeight = 2f;
-                float flightDuration = 2f;
+
+                float distance = 1f;
+                float maxHeight = 1f;
+                float flightDuration = 1f;
                 
                 float angle = Vector3.SignedAngle(Vector3.forward, direction2D, -transform.forward);
                 angle = Mathf.Clamp(angle, Random.Range(-45f, 0), Random.Range(0, 45f));
@@ -81,7 +78,7 @@ namespace Code.Runtime.Entity.Enemy
                 obj.DOMove(endPoint, flightDuration).SetEase(Ease.OutQuad);
                 
                 obj.DOLocalMoveY(0, flightDuration).SetEase(Ease.OutQuad);
-                
+
             }
             
             StartCoroutine(DestroyTimer());

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Code.Runtime.Core.Audio;
 using Code.Runtime.Core.Factory;
-using Code.Runtime.Entity.Enemy;
 using Code.Runtime.Entity.EntitiesComponents;
 using Code.Runtime.Logic.Collision;
 using Code.Runtime.Logic.Weapon;
@@ -18,14 +17,15 @@ namespace Code.Runtime.Entity
     {
         public event Action<int> OnHit;
         protected List<CollisionData> _collidedData;
-        
+
+        [SerializeField] private LayerMask _ownerLayer;
         [SerializeField] protected LayerMask _targetLayer;
         [SerializeField] protected StatController _stats;
         [SerializeField] protected EntityWeapon _entityWeapon;
 
-        protected AudioService _audioService;
-        protected BattleService _battleService;
-        protected VisualEffectFactory _visualEffectFactory;
+        private AudioService _audioService;
+        private BattleService _battleService;
+        private VisualEffectFactory _visualEffectFactory;
 
         [Inject]
         public void Construct(AudioService audioService, BattleService battleService, VisualEffectFactory visualEffectFactory)
@@ -64,6 +64,7 @@ namespace Code.Runtime.Entity
         private void ChangeWeapon(Weapon weapon)
         {
             weapon.SetLayerMask(_targetLayer);
+            weapon.gameObject.layer = Mathf.RoundToInt(Mathf.Log(_ownerLayer.value, 2));
             weapon.Hit += BaseAttack;
         }
         
@@ -74,7 +75,7 @@ namespace Code.Runtime.Entity
                 return;
             }
 
-            var hitBox = collision.Target.GetComponent<EnemyHurtBox>().GetHitBoxCenter();
+            var hitBox = collision.Target.GetComponentInParent<EntityHurtBox>().GetHitBoxCenter();
             
             HitVfx(hitBox + collision.Target.transform.position).Forget();
             
