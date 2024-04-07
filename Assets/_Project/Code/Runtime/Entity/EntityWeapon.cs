@@ -3,15 +3,18 @@ using Code.Runtime.ConfigData.Weapon;
 using Code.Runtime.Core.Factory;
 using Code.Runtime.Logic.Weapon;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using VContainer;
 
 namespace Code.Runtime.Entity
 {
     public class EntityWeapon : MonoBehaviour
     {
+        public event Action<Weapon> OnWeaponChange;
+        
         [SerializeField] protected WeaponSlot _weaponSlot = new();
         [SerializeField] protected Transform _weaponPosition;
-        [SerializeField] private bool IsCollisionWeapon;
+        [SerializeField] protected bool IsCollisionWeapon;
         [SerializeField] protected WeaponData _weaponData;
         
         protected IItemFactory _itemFactory;
@@ -26,6 +29,14 @@ namespace Code.Runtime.Entity
         public void Construct(IItemFactory itemFactory)
         {
             _itemFactory = itemFactory;
+        }
+
+        protected virtual void Start()
+        {
+            if (_weaponData != null)
+            {
+                EquipWeapon(_weaponData);
+            }
         }
 
         public virtual void EquipWeapon(WeaponData weaponData)
@@ -64,6 +75,11 @@ namespace Code.Runtime.Entity
         private void EnableTrail(bool value)
         {
             _weaponSlot.EquippedWeapon.EnableCollider(value);
+        }
+
+        protected void WeaponEquipped(Weapon weapon)
+        {
+            OnWeaponChange?.Invoke(weapon);
         }
 
         public Weapon GetEquippedWeapon() => _weaponSlot.EquippedWeapon;

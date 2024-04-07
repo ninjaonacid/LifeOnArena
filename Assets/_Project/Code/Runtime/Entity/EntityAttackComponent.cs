@@ -1,20 +1,40 @@
 ﻿using System;
+using System.Collections.Generic;
+using Code.Runtime.Core.Audio;
+using Code.Runtime.Core.Factory;
+using Code.Runtime.Entity.Enemy;
 using Code.Runtime.Entity.EntitiesComponents;
+using Code.Runtime.Logic.Collision;
+using Code.Runtime.Logic.Weapon;
 using Code.Runtime.Modules.StatSystem;
+using Code.Runtime.Services.BattleService;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
+using VContainer;
 
 namespace Code.Runtime.Entity
 {
     public class EntityAttackComponent : MonoBehaviour, IAttackComponent
     {
         public event Action<int> OnHit;
+        protected List<CollisionData> _collidedData;
         
         [SerializeField] protected LayerMask _targetLayer;
         [SerializeField] protected StatController _stats;
         [SerializeField] protected EntityWeapon _entityWeapon;
 
-        protected float _attackSpeedDivider = 10f;
+        protected AudioService _audioService;
+        protected BattleService _battleService;
+        protected VisualEffectFactory _visualEffectFactory;
 
+        [Inject]
+        public void Construct(AudioService audioService, BattleService battleService, VisualEffectFactory visualEffectFactory)
+        {
+            _audioService = audioService;
+            _battleService = battleService;
+            _visualEffectFactory = visualEffectFactory;
+        }
+        
         public LayerMask GetTargetLayer()
         {
             return _targetLayer;
@@ -28,6 +48,51 @@ namespace Code.Runtime.Entity
         public void InvokeHit(int hitCount)
         {
             OnHit?.Invoke(hitCount);
+        }
+        
+        public void ClearCollisionData()
+        {
+            _collidedData.Clear();
+        }
+        
+        private void Awake()
+        {
+            _collidedData = new List<CollisionData>();
+            _entityWeapon.OnWeaponChange += ChangeWeapon;
+        }
+        
+        private void ChangeWeapon(Weapon weapon)
+        {
+            weapon.SetLayerMask(_targetLayer);
+            weapon.Hit += BaseAttack;
+        }
+        
+        private void BaseAttack(CollisionData collision)
+        {
+            if(_collidedData.Contains(collision))
+            {
+                return;
+            }
+
+            var hitBox = collision.Target.GetComponent<EnemyHurtBox>().GetHitBoxCenter();
+            
+            HitVfx(hitBox + collision.Target.transform.position).Forget();
+            
+            _audioService.PlaySound3D("Hit", collision.Target.transform, 1f);
+            _battleService.CreateWeaponAttack(_stats, collision.Target);
+            _collidedData.Add(collision);
+            InvokeHit(1);
+        }
+
+        private async UniTaskVoid HitVfx(Vector3 position)
+        {
+            int particleId = _entityWeapon.GetEquippedWeaponData().HitVisualEffect.Identifier.Id;
+            
+            var particle =
+                await _visualEffectFactory.CreateVisualEffect(particleId);
+
+            particle.transform.position = position;
+            particle.Play();
         }
 
         public float GetAttacksPerSecond()
@@ -43,7 +108,7 @@ namespace Code.Runtime.Entity
                 return attackSpeed + bias;
             }
 
-            return 1.0f / (1.0f - attackSpeed);
+            return Mathf.Abs(1.0f / (1.0f - attackSpeed));
         }
     }
 }

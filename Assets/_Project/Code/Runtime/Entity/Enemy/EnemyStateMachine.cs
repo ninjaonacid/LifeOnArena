@@ -47,12 +47,9 @@ namespace Code.Runtime.Entity.Enemy
                 _agentMoveToPlayer,
                 _enemyTarget,
                 _enemyAnimator,
-                _statController,
                 _animationData,
-                true,
-                canExit: (state) => state.Timer.Elapsed >= 
-                                    _animationData.Animations[AnimationKey.Attack1].Length * 
-                                    _enemyAnimator.GetFloat("AttackSpeed")));
+                true
+                ));
 
                 _fsm.AddState(nameof(EnemyIdleState), new EnemyIdleState(
                 _enemyTarget,

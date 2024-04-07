@@ -60,7 +60,7 @@ namespace Code.Runtime.Core.Factory
         
         public Weapon CreateWeapon(GameObject prefab, Transform position)
         {
-            var weapon = _objectResolver.Instantiate(prefab, position);
+            var weapon = _objectResolver.Instantiate(prefab, position, true);
             return weapon.GetComponent<Weapon>();
         }
 

@@ -10,7 +10,6 @@ namespace Code.Runtime.Entity.Hero
     public class HeroWeapon : EntityWeapon, ISave
     {
         [SerializeField] private HeroAnimator _heroAnimator;
-        public event Action<Weapon> OnWeaponChange;
 
         public override void EquipWeapon(WeaponData weaponData)
         {
@@ -20,9 +19,9 @@ namespace Code.Runtime.Entity.Hero
             
             EnableCollider(false);
 
-            OnWeaponChange?.Invoke(_weaponSlot.EquippedWeapon);
+            WeaponEquipped(_weaponSlot.EquippedWeapon);
         }
-
+        
         public void LoadData(PlayerData data)
         {
             var weaponId = data.HeroEquipment.WeaponIntId;

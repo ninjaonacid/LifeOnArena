@@ -56,11 +56,9 @@ namespace Code.Runtime.Entity.Enemy.CommonEnemy
                 nameof(EnemyAttackState),
                 (transition) => _enemyAttackComponent.CanAttack()));
 
-            _fsm.AddTransition(new TransitionAfter(
+            _fsm.AddTransition(new Transition(
                 nameof(EnemyAttackState),
-                nameof(EnemyIdleState),
-                _animationData.Animations[AnimationKey.Attack1].Length / _enemyAnimator.GetFloat("AttackSpeed"))
-                );
+                nameof(EnemyIdleState)));
             
             _fsm.AddTransition(new Transition(
                 nameof(EnemyIdleState),

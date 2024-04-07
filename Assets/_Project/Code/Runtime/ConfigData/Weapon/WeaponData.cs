@@ -17,7 +17,6 @@ namespace Code.Runtime.ConfigData.Weapon
         public WeaponId WeaponId;
         public VisualEffectData HitVisualEffect;
         public int Price;
-        public float AttackSpeed;
         public float Damage;
         public WeaponFsmConfig WeaponFsmConfig;
         public AnimatorOverrideController OverrideController;

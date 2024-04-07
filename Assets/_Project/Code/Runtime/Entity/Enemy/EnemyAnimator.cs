@@ -36,9 +36,9 @@ namespace Code.Runtime.Entity.Enemy
             return _enemyAnimator.GetFloat(parameterName);
         } 
 
-        public void SetAttackSpeed(string parameter, float value)
+        public void SetAttackAnimationSpeed(float value)
         {
-            _enemyAnimator.SetFloat(parameter,  value);
+            _enemyAnimator.SetFloat(AttackSpeed,  value);
         }
 
         public void EnteredState(int stateHash)
