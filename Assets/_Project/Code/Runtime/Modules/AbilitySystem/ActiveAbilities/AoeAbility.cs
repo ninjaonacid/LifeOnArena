@@ -38,7 +38,7 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
                 _audioService.PlaySound3D(AbilityBlueprint.AbilitySound, visualEffectTransform, 1f);
             }
 
-            var layer = caster.GetComponent<EntityAttack>().GetTargetLayer();
+            var layer = caster.GetComponent<EntityAttackComponent>().GetTargetLayer();
             var stats = caster.GetComponent<StatController>();
             
             var targets = _battleService.GetTargetsInRadius(visualEffectPosition, _aoeRadius, layer);

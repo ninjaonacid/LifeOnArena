@@ -28,8 +28,12 @@ namespace Code.Runtime.Entity.Enemy
 
         public void PlayAnimation(int hash, string parameter, float value)
         {
-            _enemyAnimator.SetFloat(parameter,  value/10f);
             _enemyAnimator.CrossFade(hash, 0.1f);
+        }
+
+        public void SetAttackSpeed(string parameter, float value)
+        {
+            _enemyAnimator.SetFloat(parameter,  value/10f);
         }
 
         public void EnteredState(int stateHash)

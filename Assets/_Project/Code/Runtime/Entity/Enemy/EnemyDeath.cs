@@ -51,16 +51,28 @@ namespace Code.Runtime.Entity.Enemy
             
             foreach (Transform obj in FracturedPrefab.transform)
             {
+                Vector2 randomPoint = Random.insideUnitCircle.normalized;
+                
+                //float angle = Vector3.SignedAngle()
+
+                Vector3 direction2D = new Vector3(randomPoint.x, 0, randomPoint.y);
+                Vector3 direction3D = transform.TransformDirection(direction2D).normalized;
                 float explosionForce = Random.Range(2f, 5f);
                 float distance = Random.Range(0f, 10f);
                 float randomAngle = Random.Range(-90 / 2f, 90 / 2f);
                 float maxHeight = 2f;
                 float flightDuration = 2f;
                 
-                Vector3 direction = Quaternion.AngleAxis(randomAngle, -transform.forward) * -transform.forward;
+                float angle = Vector3.SignedAngle(Vector3.forward, direction2D, -transform.forward);
+                angle = Mathf.Clamp(angle, Random.Range(-45f, 0), Random.Range(0, 45f));
+
+                Quaternion rotation = Quaternion.AngleAxis(angle, -transform.forward);
+
+
+                Vector3 direction = rotation * -transform.forward;
+
                 Vector3 targetPosition = obj.position + direction * distance;
-                
-                
+
                 Vector3 startPoint = obj.position;
                 Vector3 endPoint = targetPosition;
                 Vector3 controlPoint = (startPoint + endPoint) / 2f + Vector3.up * maxHeight;
@@ -68,7 +80,7 @@ namespace Code.Runtime.Entity.Enemy
                 
                 obj.DOMove(endPoint, flightDuration).SetEase(Ease.OutQuad);
                 
-                obj.DOMoveY(targetPosition.y, flightDuration).SetEase(Ease.OutQuad);
+                obj.DOLocalMoveY(0, flightDuration).SetEase(Ease.OutQuad);
                 
             }
             

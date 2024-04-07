@@ -22,6 +22,5 @@ namespace Code.Runtime.Entity.Enemy
         
         public bool HasTarget() => _targetTransform != null;
         
-        
     }
 }

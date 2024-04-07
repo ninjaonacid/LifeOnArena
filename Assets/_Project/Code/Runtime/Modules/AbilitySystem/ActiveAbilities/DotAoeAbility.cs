@@ -35,7 +35,7 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
                 _audioService.PlaySound3D(AbilityBlueprint.AbilitySound, visualEffectTransform, 1f);
             }
 
-            var entityAttack = caster.GetComponent<EntityAttack>();
+            var entityAttack = caster.GetComponent<EntityAttackComponent>();
             var layer = entityAttack.GetTargetLayer();
             var owner = entityAttack.GetLayer();
 

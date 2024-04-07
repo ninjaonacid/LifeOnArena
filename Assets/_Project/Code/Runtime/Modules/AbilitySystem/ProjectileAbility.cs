@@ -24,7 +24,7 @@ namespace Code.Runtime.Modules.AbilitySystem
             Projectile projectile = _projectileFactory
                 .CreateProjectile(_projectilePrefab, OnCreate, OnRelease, OnGet);
 
-            var entityAttack = caster.GetComponent<EntityAttack>();
+            var entityAttack = caster.GetComponent<EntityAttackComponent>();
             var layer = entityAttack.GetTargetLayer();
 
             var hurtBox = caster.GetComponent<EntityHurtBox>();

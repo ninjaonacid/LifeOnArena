@@ -54,7 +54,7 @@ namespace Code.Runtime.Logic.Projectiles
 
         public Projectile SetOwnerLayer(GameObject owner)
         {
-            var ownerLayer = owner.GetComponent<EntityAttack>().GetLayer();
+            var ownerLayer = owner.GetComponent<EntityAttackComponent>().GetLayer();
             gameObject.layer = ownerLayer;
             _owner = owner;
             return this;

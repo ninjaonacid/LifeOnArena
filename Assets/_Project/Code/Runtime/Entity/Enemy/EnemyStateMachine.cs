@@ -12,7 +12,7 @@ namespace Code.Runtime.Entity.Enemy
         protected FiniteStateMachine _fsm;
 
         [SerializeField] protected AgentMoveToPlayer _agentMoveToPlayer;
-        [SerializeField] protected EnemyAttackComponent EnemyAttackComponent;
+        [SerializeField] protected EnemyAttackComponent _enemyAttackComponent;
         [SerializeField] protected EnemyAnimator _enemyAnimator;
         [SerializeField] protected EnemyTarget _enemyTarget;
         [SerializeField] protected EnemyHealth _enemyHealth;
@@ -44,7 +44,7 @@ namespace Code.Runtime.Entity.Enemy
                 canExit: (state) => state.Timer.Elapsed >= _statController.Stats["HitRecovery"].Value));
 
             _fsm.AddState(nameof(EnemyAttackState), new EnemyAttackState(
-                EnemyAttackComponent,
+                _enemyAttackComponent,
                 _agentMoveToPlayer,
                 _enemyTarget,
                 _enemyAnimator,
@@ -52,7 +52,7 @@ namespace Code.Runtime.Entity.Enemy
                 _animationData,
                 true,
                 canExit: (state) => state.Timer.Elapsed >= 
-                                    _animationData.Animations[AnimationKey.Attack1].Length * (_statController.Stats["AttackSpeed"].Value / 10f)));
+                                    _animationData.Animations[AnimationKey.Attack1].Length * (Mathf.Abs(_enemyAttackComponent.GetAttacksPerSecond()))));
 
                 _fsm.AddState(nameof(EnemyIdleState), new EnemyIdleState(
                 _enemyTarget,

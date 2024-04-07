@@ -5,13 +5,15 @@ using UnityEngine;
 
 namespace Code.Runtime.Entity
 {
-    public class EntityAttack : MonoBehaviour, IAttackComponent
+    public class EntityAttackComponent : MonoBehaviour, IAttackComponent
     {
         public event Action<int> OnHit;
         
         [SerializeField] protected LayerMask _targetLayer;
         [SerializeField] protected StatController _stats;
         [SerializeField] protected EntityWeapon _entityWeapon;
+
+        protected float _attackSpeedDivider = 10f;
 
         public LayerMask GetTargetLayer()
         {
@@ -26,6 +28,22 @@ namespace Code.Runtime.Entity
         public void InvokeHit(int hitCount)
         {
             OnHit?.Invoke(hitCount);
+        }
+
+        public float GetAttacksPerSecond()
+        {
+            float attackSpeed = _stats.Stats["AttackSpeed"].Value;
+            
+            if (attackSpeed >= 0) {
+             
+                float bias = 1.25f - attackSpeed / 8.0f;
+                
+                bias = Mathf.Clamp(bias, 0, 1);
+
+                return attackSpeed + bias;
+            }
+
+            return 1.0f / (1.0f - attackSpeed);
         }
     }
 }

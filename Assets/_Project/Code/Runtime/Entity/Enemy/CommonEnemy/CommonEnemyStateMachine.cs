@@ -26,13 +26,13 @@ namespace Code.Runtime.Entity.Enemy.CommonEnemy
             _fsm.AddTransition(new Transition(
                 nameof(EnemyIdleState),
                 nameof(EnemyChaseState),
-                (transition) => _enemyTarget.HasTarget() && !EnemyAttackComponent.TargetInAttackRange));
+                (transition) => _enemyTarget.HasTarget() && !_enemyAttackComponent.TargetInAttackRange));
 
             _fsm.AddTransition(new TransitionAfter(
                 nameof(EnemyAttackState),
                 nameof(EnemyChaseState),
-                _animationData.Animations[AnimationKey.Attack1].Length / (_statController.Stats["AttackSpeed"].Value / 10f),
-                (transition) => _enemyTarget.HasTarget() && !EnemyAttackComponent.TargetInAttackRange));
+                _animationData.Animations[AnimationKey.Attack1].Length / _enemyAttackComponent.GetAttacksPerSecond(),
+                (transition) => _enemyTarget.HasTarget() && !_enemyAttackComponent.TargetInAttackRange));
                 
             _fsm.AddTransition(new Transition(
                 nameof(EnemyChaseState),
@@ -54,18 +54,18 @@ namespace Code.Runtime.Entity.Enemy.CommonEnemy
             _fsm.AddTransition(new Transition(
                 nameof(EnemyChaseState),
                 nameof(EnemyAttackState),
-                (transition) => EnemyAttackComponent.CanAttack()));
+                (transition) => _enemyAttackComponent.CanAttack()));
 
             _fsm.AddTransition(new TransitionAfter(
                 nameof(EnemyAttackState),
                 nameof(EnemyIdleState),
-                _animationData.Animations[AnimationKey.Attack1].Length / (_statController.Stats["AttackSpeed"].Value / 10f)
-                ));
+                _animationData.Animations[AnimationKey.Attack1].Length / _enemyAttackComponent.GetAttacksPerSecond())
+                );
             
             _fsm.AddTransition(new Transition(
                 nameof(EnemyIdleState),
                 nameof(EnemyAttackState),
-                (transition) => EnemyAttackComponent.CanAttack(),
+                (transition) => _enemyAttackComponent.CanAttack(),
                 true));
             
             _fsm.AddTransitionFromAny(new Transition(

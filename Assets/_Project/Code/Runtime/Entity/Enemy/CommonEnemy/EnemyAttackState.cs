@@ -1,7 +1,5 @@
 using System;
 using Code.Runtime.ConfigData.Animations;
-using Code.Runtime.ConfigData.StateMachine;
-using Code.Runtime.Logic.Timer;
 using Code.Runtime.Modules.StateMachine.States;
 using Code.Runtime.Modules.StatSystem;
 
@@ -31,8 +29,8 @@ namespace Code.Runtime.Entity.Enemy.CommonEnemy
         {
             base.OnEnter();
 
-            _enemyAnimator.PlayAnimation(_animationData.Animations[AnimationKey.Attack1].Hash,
-                "AttackSpeed", _statController.Stats["AttackSpeed"].Value);
+            _enemyAnimator.PlayAnimation(_animationData.Animations[AnimationKey.Attack1].Hash);
+            //_enemyAnimator.SetAttackSpeed("AttackSpeed", _enemyAttackComponent.GetAttacksPerSecond());
             _agentMoveToPlayer.ShouldMove(false);
         }
 
@@ -40,6 +38,12 @@ namespace Code.Runtime.Entity.Enemy.CommonEnemy
         {
             base.OnLogic();
 
+            // if (Timer.Elapsed * 2 >= ((_animationData.Animations[AnimationKey.Attack1].Length  *
+            //                       (MathF.Abs(_enemyAttackComponent.GetAttacksPerSecond())))))
+            // {
+            //     _enemyAnimator.SetAttackSpeed("AttackSpeed", 10f);
+            // };
+            
             _enemyTarget.RotationToTarget();
         }
 

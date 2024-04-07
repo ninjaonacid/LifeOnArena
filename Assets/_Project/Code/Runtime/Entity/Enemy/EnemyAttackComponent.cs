@@ -5,7 +5,7 @@ using VContainer;
 namespace Code.Runtime.Entity.Enemy
 {
     [RequireComponent(typeof(EnemyAnimator))]
-    public class EnemyAttackComponent : EntityAttack
+    public class EnemyAttackComponent : EntityAttackComponent
     {
         private float _attackCooldown;
         private bool _attackIsActive;
@@ -40,14 +40,12 @@ namespace Code.Runtime.Entity.Enemy
         {
             _attackIsActive = true;
         }
-
-
+        
         public void DisableAttack()
         {
             _attackIsActive = false;
         }
         
-
         private void UpdateCooldown()
         {
             if (!CoolDownIsUp())

@@ -12,7 +12,7 @@ using VContainer;
 namespace Code.Runtime.Entity.Hero
 {
     [RequireComponent(typeof(HeroAnimator), typeof(CharacterController))]
-    public class HeroAttackComponent : EntityAttack
+    public class HeroAttackComponent : EntityAttackComponent
     {
         [SerializeField] private HeroWeapon _heroWeapon;
 
