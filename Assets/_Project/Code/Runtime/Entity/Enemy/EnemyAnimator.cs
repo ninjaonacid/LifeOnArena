@@ -31,9 +31,14 @@ namespace Code.Runtime.Entity.Enemy
             _enemyAnimator.CrossFade(hash, 0.1f);
         }
 
+        public float GetFloat(string parameterName)
+        {
+            return _enemyAnimator.GetFloat(parameterName);
+        } 
+
         public void SetAttackSpeed(string parameter, float value)
         {
-            _enemyAnimator.SetFloat(parameter,  value/10f);
+            _enemyAnimator.SetFloat(parameter,  value);
         }
 
         public void EnteredState(int stateHash)

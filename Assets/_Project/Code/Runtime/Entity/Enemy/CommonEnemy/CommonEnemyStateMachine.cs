@@ -31,7 +31,7 @@ namespace Code.Runtime.Entity.Enemy.CommonEnemy
             _fsm.AddTransition(new TransitionAfter(
                 nameof(EnemyAttackState),
                 nameof(EnemyChaseState),
-                _animationData.Animations[AnimationKey.Attack1].Length / _enemyAttackComponent.GetAttacksPerSecond(),
+                _animationData.Animations[AnimationKey.Attack1].Length / _enemyAnimator.GetFloat("AttackSpeed"),
                 (transition) => _enemyTarget.HasTarget() && !_enemyAttackComponent.TargetInAttackRange));
                 
             _fsm.AddTransition(new Transition(
@@ -59,7 +59,7 @@ namespace Code.Runtime.Entity.Enemy.CommonEnemy
             _fsm.AddTransition(new TransitionAfter(
                 nameof(EnemyAttackState),
                 nameof(EnemyIdleState),
-                _animationData.Animations[AnimationKey.Attack1].Length / _enemyAttackComponent.GetAttacksPerSecond())
+                _animationData.Animations[AnimationKey.Attack1].Length / _enemyAnimator.GetFloat("AttackSpeed"))
                 );
             
             _fsm.AddTransition(new Transition(

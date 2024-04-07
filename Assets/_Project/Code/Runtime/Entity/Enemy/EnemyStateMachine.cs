@@ -1,5 +1,4 @@
 using Code.Runtime.ConfigData.Animations;
-using Code.Runtime.ConfigData.StateMachine;
 using Code.Runtime.Entity.Enemy.CommonEnemy;
 using Code.Runtime.Modules.StateMachine;
 using Code.Runtime.Modules.StatSystem;
@@ -52,7 +51,8 @@ namespace Code.Runtime.Entity.Enemy
                 _animationData,
                 true,
                 canExit: (state) => state.Timer.Elapsed >= 
-                                    _animationData.Animations[AnimationKey.Attack1].Length * (Mathf.Abs(_enemyAttackComponent.GetAttacksPerSecond()))));
+                                    _animationData.Animations[AnimationKey.Attack1].Length * 
+                                    _enemyAnimator.GetFloat("AttackSpeed")));
 
                 _fsm.AddState(nameof(EnemyIdleState), new EnemyIdleState(
                 _enemyTarget,
