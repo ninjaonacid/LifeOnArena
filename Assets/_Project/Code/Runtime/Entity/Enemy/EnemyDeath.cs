@@ -7,25 +7,26 @@ using Random = UnityEngine.Random;
 
 namespace Code.Runtime.Entity.Enemy
 {
-    [RequireComponent(typeof(EnemyHealth), typeof(EnemyAnimator))]
+    [RequireComponent(typeof(EnemyHealth), typeof(StatController))]
     public class EnemyDeath : MonoBehaviour
     {
         [SerializeField] private StatController _stats;
-        
-        public EnemyHealth Health;
-        public GameObject FracturedPrefab;
-        public GameObject EnemyModel;
-        public bool IsDead { get; private set; }
+        [SerializeField] private EnemyHealth _health;
+        [SerializeField] private GameObject _fracturedPrefab;
+        [SerializeField] private GameObject _enemyModel;
         [SerializeField] private float _distance;
         [SerializeField] private float _maxHeight;
         [SerializeField] private float _flightDuration;
+
+        public bool IsDead { get; private set; }
+
         public event Action Happened;
 
         private void OnEnable()
         {
             if (_stats.IsInitialized)
             {
-                Health.Health.CurrentValueChanged += HealthChanged;
+                _health.Health.CurrentValueChanged += HealthChanged;
             }
             else
             {
@@ -37,50 +38,50 @@ namespace Code.Runtime.Entity.Enemy
 
         private void OnDestroy()
         {
-            Health.Health.CurrentValueChanged -= HealthChanged;
+            _health.Health.CurrentValueChanged -= HealthChanged;
         }
 
         private void HealthChanged()
         {
-            if (Health.Health.CurrentValue <= 0) Die();
+            if (_health.Health.CurrentValue <= 0) Die();
         }
 
         private void Die()
         {
-            Health.Health.CurrentValueChanged -= HealthChanged;
-            EnemyModel.SetActive(false);
-            FracturedPrefab.SetActive(true);
-            
-            foreach (Transform obj in FracturedPrefab.transform)
+            _health.Health.CurrentValueChanged -= HealthChanged;
+            _enemyModel.SetActive(false);
+
+            if (_fracturedPrefab is not null)
             {
-                Vector2 randomPoint = Random.insideUnitCircle.normalized;
-                Vector3 direction2D = new Vector3(randomPoint.x, 0, randomPoint.y);
+                _fracturedPrefab.SetActive(true);
 
-                float distance = 1f;
-                float maxHeight = 1f;
-                float flightDuration = 1f;
-                
-                float angle = Vector3.SignedAngle(Vector3.forward, direction2D, -transform.forward);
-                angle = Mathf.Clamp(angle, Random.Range(-45f, 0), Random.Range(0, 45f));
+                foreach (Transform obj in _fracturedPrefab.transform)
+                {
+                    Vector2 randomPoint = Random.insideUnitCircle.normalized;
+                    Vector3 direction2D = new Vector3(randomPoint.x, 0, randomPoint.y);
 
-                Quaternion rotation = Quaternion.AngleAxis(angle, -transform.forward);
+                    var forward = transform.forward;
+                    float angle = Vector3.SignedAngle(Vector3.forward, direction2D, -forward);
+                    angle = Mathf.Clamp(angle, Random.Range(-45f, 0), Random.Range(0, 45f));
 
+                    Quaternion rotation = Quaternion.AngleAxis(angle, -forward);
+                    
+                    Vector3 direction = rotation * -forward;
 
-                Vector3 direction = rotation * -transform.forward;
+                    var position = obj.position;
+                    Vector3 targetPosition = position + direction * _distance;
 
-                Vector3 targetPosition = obj.position + direction * distance;
+                    Vector3 startPoint = position;
+                    Vector3 endPoint = targetPosition;
+                    Vector3 controlPoint = (startPoint + endPoint) / 2f + Vector3.up * _maxHeight;
+                    
+                    obj.DOMove(endPoint, _flightDuration).SetEase(Ease.OutQuad);
 
-                Vector3 startPoint = obj.position;
-                Vector3 endPoint = targetPosition;
-                Vector3 controlPoint = (startPoint + endPoint) / 2f + Vector3.up * maxHeight;
+                    obj.DOLocalMoveY(0, _flightDuration).SetEase(Ease.OutQuad);
 
-                
-                obj.DOMove(endPoint, flightDuration).SetEase(Ease.OutQuad);
-                
-                obj.DOLocalMoveY(0, flightDuration).SetEase(Ease.OutQuad);
-
+                }
             }
-            
+
             StartCoroutine(DestroyTimer());
 
             IsDead = true;
@@ -91,8 +92,8 @@ namespace Code.Runtime.Entity.Enemy
         private IEnumerator DestroyTimer()
         {
             yield return new WaitForSeconds(2);
-            EnemyModel.SetActive(true);
-            FracturedPrefab.SetActive(false);
+            _enemyModel.SetActive(true);
+            _fracturedPrefab.SetActive(false);
             gameObject.SetActive(false);
         }
 

@@ -58,10 +58,9 @@ namespace Code.Runtime.Services
             _eventSystem.FireEvent(new OpenDoorEvent("open door"));
         }
 
-        private async void WaveCleared(int secondsToNextWave)
+        private void WaveCleared(int secondsToNextWave)
         {
             _screenService.Open(ScreenID.MessageWindow, new TimerMessageDto("Next wave", _spawnerController.TimeToNextWave));
-
         }
 
         private async void HeroDead(HeroDeadEvent obj)

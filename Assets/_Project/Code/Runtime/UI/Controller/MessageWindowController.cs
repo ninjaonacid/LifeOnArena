@@ -25,8 +25,8 @@ namespace Code.Runtime.UI.Controller
             {
                 _windowView.Text.text = messageDto.Message;
             }
-            
-            if (_model.ModelDto is TimerMessageDto updatableDto)
+
+            else if (_model.ModelDto is TimerMessageDto updatableDto)
             {
                 Observable.EveryUpdate().Subscribe(x =>
                 {
@@ -35,8 +35,9 @@ namespace Code.Runtime.UI.Controller
                     if (time < 0)
                     {
                         screenService.Close(this);
+                   
                     }
-                });
+                }).AddTo(_windowView);
             }
             
 

@@ -18,8 +18,8 @@ namespace Code.Runtime.Core.Scopes
         protected override void Configure(IContainerBuilder builder)
         {
             builder.RegisterEntryPoint<LevelStarterPoint>();
-            
-            builder.Register<LevelController>(Lifetime.Scoped);
+
+            builder.Register<LevelController>(Lifetime.Scoped).AsImplementedInterfaces().AsSelf();
             builder.Register<EnemySpawnerController>(Lifetime.Scoped);
             
             builder.Register<ProjectileFactory>(Lifetime.Scoped);

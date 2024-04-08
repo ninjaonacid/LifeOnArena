@@ -9,7 +9,7 @@ namespace Code.Runtime.Entity
     public class EntityHealth : MonoBehaviour, IDamageable
     {
         [SerializeField] private StatController _stats;
-        public Health Health => _stats.Stats["Health"] as Health;
+        public Health Health => _stats.Stats["Health"] as Health; 
         
         public void TakeDamage(IDamage damage)
         {

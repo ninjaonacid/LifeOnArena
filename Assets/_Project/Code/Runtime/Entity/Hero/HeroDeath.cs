@@ -28,6 +28,7 @@ namespace Code.Runtime.Entity.Hero
         private void Start()
         {
             _health.Health.CurrentValueChanged += HealthChanged;
+            Debug.Log("awsd");
         }
 
         private void OnDestroy()

@@ -9,13 +9,11 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
     public class AoeAbility : ActiveAbility
     {
         private readonly float _castDistance;
-        private readonly float _duration;
         private readonly float _aoeRadius;
         
-        public AoeAbility(ActiveAbilityBlueprintBase abilityBlueprint, float castDistance, float duration, float aoeRadius) : base(abilityBlueprint)
+        public AoeAbility(ActiveAbilityBlueprintBase abilityBlueprint, float castDistance,  float aoeRadius) : base(abilityBlueprint)
         {
             _castDistance = castDistance;
-            _duration = duration;
             _aoeRadius = aoeRadius;
         }
 

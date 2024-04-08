@@ -7,11 +7,10 @@ namespace Code.Runtime.Modules.AbilitySystem
     public class AoeAbilityBlueprint : ActiveAbilityBlueprintBase
     {
         [SerializeField] protected float _castDistance;
-        [SerializeField] protected float _duration;
         [SerializeField] protected float _aoeRadius;
         public override ActiveAbility GetAbility()
         {
-            return new AoeAbility(this, _castDistance, _duration, _aoeRadius);
+            return new AoeAbility(this, _castDistance, _aoeRadius);
         }
     }
 }

@@ -13,7 +13,7 @@ namespace Code.Runtime.UI.Controller
     public class AbilityMenuController : IScreenController, IDisposable
     {
         private AbilityTreeWindowModel _model;
-        private AbilityMenuWindowView _windowView;
+        private AbilityWindowView _windowView;
         private ScreenService _screenService;
         private readonly ISaveLoadService _saveLoad;
         private readonly CompositeDisposable _disposable = new CompositeDisposable();
@@ -25,7 +25,7 @@ namespace Code.Runtime.UI.Controller
         public void InitController(IScreenModel model, BaseWindowView windowView, ScreenService screenService)
         {
             _model = model as AbilityTreeWindowModel;
-            _windowView = windowView as AbilityMenuWindowView;
+            _windowView = windowView as AbilityWindowView;
             _screenService = screenService;
 
             Assert.IsNotNull(_model);

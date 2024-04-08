@@ -304,10 +304,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _stats: {fileID: 2085898622953279013}
-  Animator: {fileID: 7813538039565963228}
-  Health: {fileID: 2892997724190106138}
-  FracturedPrefab: {fileID: 0}
-  EnemyModel: {fileID: 0}
+  _health: {fileID: 2892997724190106138}
+  _fracturedPrefab: {fileID: 0}
+  _enemyModel: {fileID: 0}
+  _distance: 0
+  _maxHeight: 0
+  _flightDuration: 0
 --- !u!114 &2892997724190106138
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -321,7 +323,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _stats: {fileID: 2085898622953279013}
-  Animator: {fileID: 7813538039565963228}
 --- !u!114 &4058648672316291509
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -349,7 +350,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _agentMoveToPlayer: {fileID: 7813538039565963230}
   _enemyAttackComponent: {fileID: 6966552553589898628}
-  _enemyWeapon: {fileID: 0}
+  _enemyWeapon: {fileID: 6625279289632298001}
   _enemyAnimator: {fileID: 7813538039565963228}
   _enemyTarget: {fileID: 3027789663709577760}
   _enemyHealth: {fileID: 2892997724190106138}
@@ -421,7 +422,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tagController: {fileID: 5837056075893014178}
   _statController: {fileID: 2085898622953279013}
-  _hurtBox: {fileID: 0}
+  _hurtBox: {fileID: 5563712467432588495}
 --- !u!114 &5837056075893014178
 MonoBehaviour:
   m_ObjectHideFlags: 0
