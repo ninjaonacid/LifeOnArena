@@ -10,14 +10,14 @@ using UnityEngine.Assertions;
 
 namespace Code.Runtime.UI.Controller
 {
-    public class AbilityMenuController : IScreenController, IDisposable
+    public class AbilityScreenController : IScreenController, IDisposable
     {
         private AbilityTreeWindowModel _model;
-        private AbilityWindowView _windowView;
+        private AbilityScreenView _screenView;
         private ScreenService _screenService;
         private readonly ISaveLoadService _saveLoad;
         private readonly CompositeDisposable _disposable = new CompositeDisposable();
-        public AbilityMenuController(ISaveLoadService saveLoad)
+        public AbilityScreenController(ISaveLoadService saveLoad)
         {
             _saveLoad = saveLoad;
         }
@@ -25,17 +25,17 @@ namespace Code.Runtime.UI.Controller
         public void InitController(IScreenModel model, BaseWindowView windowView, ScreenService screenService)
         {
             _model = model as AbilityTreeWindowModel;
-            _windowView = windowView as AbilityWindowView;
+            _screenView = windowView as AbilityScreenView;
             _screenService = screenService;
 
             Assert.IsNotNull(_model);
-            Assert.IsNotNull(_windowView);
+            Assert.IsNotNull(_screenView);
             
             _model.LoadData();
             
-            _windowView.AbilityContainer.InitializeAbilityContainer(_model.GetSlots().Count);
+            _screenView.AbilityContainer.InitializeAbilityContainer(_model.GetSlots().Count);
 
-            _windowView.CloseButton
+            _screenView.CloseButton
                 .OnClickAsObservable()
                 .Subscribe(x =>
                 {
@@ -43,25 +43,27 @@ namespace Code.Runtime.UI.Controller
                     _screenService.Close(this);
                 });
             
-            _windowView.AbilityContainer
+            _screenView.AbilityContainer
                 .OnAbilitySelectedAsObservable()
                 .Subscribe(AbilitySelected)
                 .AddTo(_disposable);
             
-            _windowView.EquipButton
+            _screenView.EquipButton
                 .OnClickAsObservable()
                 .Subscribe(x => Equip())
                 .AddTo(_disposable);
             
-            _windowView.UnEquipButton
+            _screenView.UnEquipButton
                 .OnClickAsObservable()
                 .Subscribe(x => UnEquip())
                 .AddTo(_disposable);
             
-            _windowView.UnlockButton
+            _screenView.UnlockButton
                 .OnClickAsObservable()
                 .Subscribe(x => Unlock())
                 .AddTo(_disposable);
+            
+            
             
             
           UpdateData();
@@ -79,7 +81,7 @@ namespace Code.Runtime.UI.Controller
                 {
                     equippedIndex = _model.GetEquippedSlotIndex(ability);
                 }
-                _windowView.AbilityContainer.UpdateData(index,  equippedIndex,  ability.ActiveAbilityBlueprintBase.Icon, ability.IsUnlocked);
+                _screenView.AbilityContainer.UpdateData(index,  equippedIndex,  ability.ActiveAbilityBlueprintBase.Icon, ability.IsUnlocked);
             }
         }
 
@@ -88,14 +90,19 @@ namespace Code.Runtime.UI.Controller
             var isEquipped = _model.IsAbilityEquipped(abilityIndex);
             var isUnlocked = _model.IsAbilityUnlocked(abilityIndex);
             
-            _windowView.EquipButton.ShowButton(!isEquipped && isUnlocked);
-            _windowView.UnEquipButton.ShowButton(isEquipped && isUnlocked);
-            _windowView.UnlockButton.ShowButton(!isEquipped && !isUnlocked);
+            _screenView.EquipButton.ShowButton(!isEquipped && isUnlocked);
+            _screenView.UnEquipButton.ShowButton(isEquipped && isUnlocked);
+            _screenView.UnlockButton.ShowButton(!isEquipped && !isUnlocked);
+
+            var slotModel = _model.GetSlotByIndex(abilityIndex);
+
+            _screenView.AbilityDescription.Icon.sprite = slotModel.ActiveAbilityBlueprintBase.Icon;
+            _screenView.AbilityDescription.Text.text = slotModel.ActiveAbilityBlueprintBase.Description;
         }
 
         private void Unlock()
         {
-            var abilityIndex = _windowView.AbilityContainer.GetSelectedSlotIndex();
+            var abilityIndex = _screenView.AbilityContainer.GetSelectedSlotIndex();
             _model.UnlockAbility(abilityIndex);
             
             AbilitySelected(abilityIndex);
@@ -104,7 +111,7 @@ namespace Code.Runtime.UI.Controller
 
         private void UnEquip()
         {
-            var abilityIndex = _windowView.AbilityContainer.GetSelectedSlotIndex();
+            var abilityIndex = _screenView.AbilityContainer.GetSelectedSlotIndex();
             
             _model.UnEquipAbility(abilityIndex);
             AbilitySelected(abilityIndex);
@@ -114,7 +121,7 @@ namespace Code.Runtime.UI.Controller
 
         private void Equip()
         {
-            var abilityIndex = _windowView.AbilityContainer.GetSelectedSlotIndex();
+            var abilityIndex = _screenView.AbilityContainer.GetSelectedSlotIndex();
             
             _model.EquipAbility(abilityIndex);
             

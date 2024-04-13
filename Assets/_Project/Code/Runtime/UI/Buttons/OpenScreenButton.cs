@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 namespace Code.Runtime.UI.Buttons
 {
-    public class OpenWindowButton : MonoBehaviour
+    public class OpenScreenButton : MonoBehaviour
     {
         public Button Button;
         public ScreenID WindowId;

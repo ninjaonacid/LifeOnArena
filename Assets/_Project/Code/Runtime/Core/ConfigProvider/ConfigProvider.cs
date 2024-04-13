@@ -51,7 +51,7 @@ namespace Code.Runtime.Core.ConfigProvider
                 .ToDictionary(x => x.LocationReward);
 
             _windowConfigs = Resources
-                .Load<WindowDatabase>($"{ConfigFolder}/ScreenUI/WindowDatabase")
+                .Load<WindowDatabase>($"{ConfigFolder}/ScreenUI/ScreenDatabase")
                 .Configs
                 .ToDictionary(x => x.ScreenID, x => x);
 

@@ -5,7 +5,7 @@ using UnityEngine.AddressableAssets;
 
 namespace Code.Runtime.ConfigData
 {
-    [CreateAssetMenu(fileName = "EnemyData", menuName = "StaticData/Monster")]
+    [CreateAssetMenu(fileName = "EnemyData", menuName = "Config/Mob")]
     public class EnemyDataConfig : ScriptableObject
     {
         public int MaxLoot;

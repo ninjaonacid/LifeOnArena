@@ -16,8 +16,8 @@ namespace Code.Runtime.UI.Services
         public ScreenControllerFactory(IGameDataContainer gameData, IHeroFactory heroFactory, ISaveLoadService saveLoad, AudioService audioService, SceneLoader sceneLoader)
         {
             _screenControllers.Add(typeof(MainMenuController), () => new MainMenuController(gameData, audioService, sceneLoader));
-            _screenControllers.Add(typeof(ShopMenuController), () => new ShopMenuController(sceneLoader));
-            _screenControllers.Add(typeof(AbilityMenuController), () => new AbilityMenuController(saveLoad));
+            _screenControllers.Add(typeof(WeaponShopScreenController), () => new WeaponShopScreenController(sceneLoader));
+            _screenControllers.Add(typeof(AbilityScreenController), () => new AbilityScreenController(saveLoad));
             _screenControllers.Add(typeof(HudController), () => new HudController(gameData, heroFactory));
             _screenControllers.Add(typeof(MessageWindowController), () => new MessageWindowController());
         }

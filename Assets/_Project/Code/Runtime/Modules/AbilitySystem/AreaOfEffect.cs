@@ -31,8 +31,6 @@ namespace Code.Runtime.Modules.AbilitySystem
         
         private void OnTriggerEnter(Collider other)
         {
-            var targetvalue = _targetLayer.value;
-            var vasda = 1 << other.gameObject.layer;
             if (_targetLayer == 1 << other.gameObject.layer)
             {
                 OnEnter?.Invoke(other.gameObject);

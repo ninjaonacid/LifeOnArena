@@ -80,7 +80,7 @@ namespace Code.Runtime.Logic.Projectiles
             if (_collisionEffectId is not null)
             {
                 VisualEffect collisionEffect = await _visualFactory.CreateVisualEffect(_collisionEffectId.Id);
-                collisionEffect.transform.position = other.GetComponent<EnemyHurtBox>().GetCenterTransform();
+                collisionEffect.transform.position = other.GetComponentInParent<EntityHurtBox>().GetCenterTransform();
                 collisionEffect.Play();
             }
 

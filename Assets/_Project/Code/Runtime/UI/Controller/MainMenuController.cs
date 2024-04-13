@@ -68,9 +68,13 @@ namespace Code.Runtime.UI.Controller
                 .OnClickAsObservable()
                 .Subscribe(x => _sceneLoader.Load("StoneDungeon_Arena_1"));
 
-            _windowView.SkillMenu.Button
+            _windowView.SkillScreen.Button
                 .OnClickAsObservable()
-                .Subscribe(x => _screenService.Open(_windowView.SkillMenu.WindowId));
+                .Subscribe(x => _screenService.Open(_windowView.SkillScreen.WindowId));
+
+            _windowView.WeaponScreen.Button
+                .OnClickAsObservable()
+                .Subscribe(x => _screenService.Open(_windowView.WeaponScreen.WindowId));
 
             _windowView.MusicButton
                 .OnClickAsObservable()

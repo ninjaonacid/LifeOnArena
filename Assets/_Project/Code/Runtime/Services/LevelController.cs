@@ -19,6 +19,7 @@ namespace Code.Runtime.Services
         private LevelReward _levelReward;
         
         private int _enemySpawners;
+        private int _timerToEndOfLevel = 5;
 
         private EnemySpawnerController _spawnerController;
         private readonly ScreenService _screenService;
@@ -43,6 +44,18 @@ namespace Code.Runtime.Services
         public void Initialize()
         {
             _spawnerController.WaveCleared += WaveCleared;
+            _spawnerController.CommonEnemiesCleared += BossMessage;
+            _spawnerController.BossKilled += LevelEnd;
+        }
+
+        private void LevelEnd()
+        {
+            _screenService.Open(ScreenID.MessageWindow, new TimerMessageDto("Return to camp : ", _timerToEndOfLevel ));
+        }
+
+        private void BossMessage(int secondsToBoss)
+        {
+            _screenService.Open(ScreenID.MessageWindow, new TimerMessageDto("Boss reveal in : ", _spawnerController.TimeToNextWave));
         }
 
         public void Subscribe()

@@ -6,7 +6,8 @@ namespace Code.Runtime.UI.View.MainMenu
     public class MainMenuWindowView : BaseWindowView
     {
         public Button StartFightButton;
-        public OpenWindowButton SkillMenu;
+        public OpenScreenButton SkillScreen;
+        public OpenScreenButton WeaponScreen;
         public UIStatContainer StatContainer;
         public MusicButton MusicButton;
         public SoundButton SoundButton;

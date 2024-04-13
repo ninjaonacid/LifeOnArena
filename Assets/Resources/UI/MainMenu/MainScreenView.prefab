@@ -1000,7 +1000,7 @@ GameObject:
   - component: {fileID: 2687669712352484056}
   - component: {fileID: 3798632805351860031}
   m_Layer: 0
-  m_Name: MainMenuView
+  m_Name: MainScreenView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1057,6 +1057,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -1116,7 +1117,8 @@ MonoBehaviour:
   ScreenId: 5
   CloseButton: {fileID: 7740823107951068954}
   StartFightButton: {fileID: 6739599391148669925}
-  SkillMenu: {fileID: 7375099360277016037}
+  SkillScreen: {fileID: 7375099360277016037}
+  WeaponScreen: {fileID: 2125286279786686045}
   StatContainer: {fileID: 3556345832726125250}
   MusicButton: {fileID: 2641244157600591473}
   SoundButton: {fileID: 244447218588954398}
@@ -1616,7 +1618,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Button: {fileID: 2170511889390254594}
-  WindowId: 2
+  WindowId: 1
 --- !u!1001 &228724216827667344
 PrefabInstance:
   m_ObjectHideFlags: 0

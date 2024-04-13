@@ -137,9 +137,9 @@ GameObject:
   - component: {fileID: 4258437434355244222}
   - component: {fileID: 7651578000257109153}
   - component: {fileID: 4034272246065216214}
-  - component: {fileID: 3976892449313147974}
+  - component: {fileID: 9032239460106788509}
   m_Layer: 5
-  m_Name: WeaponShopView
+  m_Name: WeaponShopScreenView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -186,6 +186,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -230,7 +231,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 228407
---- !u!114 &3976892449313147974
+--- !u!114 &9032239460106788509
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -239,10 +240,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 3159297910851276618}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72fdd1d54d5947d19353003ff8a0eb40, type: 3}
+  m_Script: {fileID: 11500000, guid: 62648b742f020a3458839b74ad3ee6d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ScreenId: 2
+  ScreenId: 1
   CloseButton: {fileID: 2230978896371373662}
 --- !u!1001 &3007633331095106945
 PrefabInstance:
