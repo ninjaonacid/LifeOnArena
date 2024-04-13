@@ -75,10 +75,9 @@ namespace Code.Runtime.Entity.Enemy
                     Vector3 endPoint = targetPosition;
                     Vector3 controlPoint = (startPoint + endPoint) / 2f + Vector3.up * _maxHeight;
                     
-                    obj.DOMove(endPoint, _flightDuration).SetEase(Ease.OutQuad);
+                    obj.DOMove(endPoint, _flightDuration).SetEase(Ease.OutQuad).SetLink(gameObject);
 
-                    obj.DOLocalMoveY(0, _flightDuration).SetEase(Ease.OutQuad);
-
+                    obj.DOLocalMoveY(0, _flightDuration).SetEase(Ease.OutQuad).SetLink(gameObject);
                 }
             }
 

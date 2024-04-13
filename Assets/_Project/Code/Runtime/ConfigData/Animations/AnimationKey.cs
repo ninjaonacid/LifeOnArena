@@ -9,6 +9,7 @@ namespace Code.Runtime.ConfigData.Animations
         Hit = 5,
         Die = 6,
         Walking = 7,
-        Idle = 8
+        Idle = 8,
+        Spinning = 9,
     }
 }

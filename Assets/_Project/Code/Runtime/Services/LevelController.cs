@@ -6,7 +6,6 @@ using Code.Runtime.Core.SceneManagement;
 using Code.Runtime.CustomEvents;
 using Code.Runtime.Logic.WaveLogic;
 using Code.Runtime.UI;
-using Code.Runtime.UI.Model;
 using Code.Runtime.UI.Model.DTO;
 using Code.Runtime.UI.Services;
 using Cysharp.Threading.Tasks;

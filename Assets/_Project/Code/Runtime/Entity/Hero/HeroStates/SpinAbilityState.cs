@@ -20,6 +20,8 @@ namespace Code.Runtime.Entity.Hero.HeroStates
         {
             base.OnEnter();
             _heroRotation.enabled = false;
+            _heroAnimator.PlayAnimation(_animationData.Animations[AnimationKey.Spinning].Hash, 3f);
+            
             _heroWeapon.EnableWeapon(true);
         }
 

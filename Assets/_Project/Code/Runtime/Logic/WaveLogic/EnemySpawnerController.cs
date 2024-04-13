@@ -10,7 +10,6 @@ using Code.Runtime.Core.SceneManagement;
 using Code.Runtime.Logic.EnemySpawners;
 using Code.Runtime.Utils;
 using Cysharp.Threading.Tasks;
-using UnityEngine;
 
 namespace Code.Runtime.Logic.WaveLogic
 {
@@ -23,7 +22,6 @@ namespace Code.Runtime.Logic.WaveLogic
         private readonly IConfigProvider _config;
         private readonly IEnemyFactory _enemyFactory;
         
-
         private readonly List<EnemySpawner> _enemySpawnPoints = new List<EnemySpawner>();
         private CancellationTokenSource _cancellationTokenSource;
         private readonly int _numberOfWaves = 3;
@@ -80,7 +78,6 @@ namespace Code.Runtime.Logic.WaveLogic
                         {
                             spawner.Spawn(token).Forget();
                         }
-                        
                     }
 
                     waveCounter++;

@@ -4,7 +4,6 @@ using Code.Runtime.ConfigData.Identifiers;
 using Code.Runtime.Core.Factory;
 using Code.Runtime.Core.ObjectPool;
 using Code.Runtime.Entity;
-using Code.Runtime.Entity.Enemy;
 using Code.Runtime.Logic.Collision;
 using Code.Runtime.Logic.VisualEffects;
 using Code.Runtime.Utils;

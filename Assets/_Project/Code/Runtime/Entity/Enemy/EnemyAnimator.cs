@@ -24,6 +24,7 @@ namespace Code.Runtime.Entity.Enemy
         public void PlayAnimation(int hash)
         {
             _enemyAnimator.CrossFade(hash, 0.1f);
+            
         }
 
         public void PlayAnimation(int hash, string parameter, float value)
