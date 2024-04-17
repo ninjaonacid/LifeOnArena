@@ -207,6 +207,15 @@ namespace Code.Runtime.Entity.Hero
                     _heroSkills.ActiveAbility.IsActive() &&
                     _heroSkills.ActiveAbility.AbilityBlueprint.Identifier.Id.Equals(_spinAttackAbilityId.Id)
             ));
+            
+            _stateMachine.AddTransition(new Transition(
+                HeroMovement,
+                SpinAttackAbility,
+                (transition) =>
+                    _heroSkills.ActiveAbility != null &&
+                    _heroSkills.ActiveAbility.IsActive() &&
+                    _heroSkills.ActiveAbility.AbilityBlueprint.Identifier.Id.Equals(_spinAttackAbilityId.Id)
+            ));
 
             _stateMachine.AddTransition(new Transition(
                 SpinAttackAbility,

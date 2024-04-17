@@ -1,7 +1,6 @@
 using System;
 using Code.Runtime.ConfigData.Animations;
 using Code.Runtime.Modules.StateMachine.States;
-using UnityEngine;
 
 namespace Code.Runtime.Entity.Hero.HeroStates
 {
@@ -19,16 +18,24 @@ namespace Code.Runtime.Entity.Hero.HeroStates
         public override void OnEnter()
         {
             base.OnEnter();
-            _heroRotation.enabled = false;
-            _heroAnimator.PlayAnimation(_animationData.Animations[AnimationKey.Spinning].Hash, 3f);
+            //_heroAnimator.PlayAnimation(_animationData.Animations[AnimationKey.Spinning].Hash, 3f);
             
+            _heroRotation.EnableRotation(false);
             _heroWeapon.EnableWeapon(true);
+        }
+
+        public override void OnLogic()
+        {
+            base.OnLogic();
+            _heroMovement.Movement();
+            _heroRotation.Rotate(720f);
+
         }
 
         public override void OnExit()
         {
-            _heroRotation.enabled = true;
             _heroWeapon.EnableWeapon(false);
+            _heroRotation.EnableRotation(true);
         }
     }
 }

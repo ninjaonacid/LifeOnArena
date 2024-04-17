@@ -8,6 +8,8 @@ namespace Code.Runtime.Entity.Hero
     {
         [SerializeField] private float _rotationSmooth;
         [SerializeField] private float _rotationSpeed;
+        [SerializeField] private Transform _playerModel;
+        
         private PlayerControls _controls;
         private Camera _camera;
         private bool _isEnabled = true;
@@ -32,6 +34,17 @@ namespace Code.Runtime.Entity.Hero
             
         }
 
+        public void EnableRotation(bool value)
+        {
+            _isEnabled = value;
+        }
+
+        public void Rotate(float rotationSpeed)
+        {
+            Quaternion deltaRotation = Quaternion.Euler(Vector3.up * rotationSpeed * Time.deltaTime);
+            transform.rotation *= deltaRotation;
+        }
+
         private void LookRotation()
         {
             if (_controls.Player.Movement.ReadValue<Vector2>().sqrMagnitude > Constants.Epsilon)
@@ -43,11 +56,6 @@ namespace Code.Runtime.Entity.Hero
                 var rotateTo = Quaternion.LookRotation(directionVector);
                 transform.rotation = Quaternion.Slerp(rotateFrom, rotateTo,  _rotationSmooth * _rotationSpeed * Time.deltaTime );
             }
-        }
-
-        public void EnableRotation(bool value)
-        {
-            _isEnabled = value;
         }
     }
 }

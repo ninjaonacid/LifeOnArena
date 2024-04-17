@@ -77,12 +77,11 @@ namespace Code.Runtime.Entity.Hero
             }
         }
 
-        public void Movement(bool isForced = false)
+        public void Movement()
         { 
             var movementVector = Vector3.zero;
 
             var moveAxis = _controls.Player.Movement.ReadValue<Vector2>();
-            
 
             if (moveAxis.sqrMagnitude > Constants.Epsilon)
             {
@@ -92,7 +91,7 @@ namespace Code.Runtime.Entity.Hero
             }
 
             movementVector += Physics.gravity;
-            
+
             _characterController.Move(movementVector * MovementSpeed * Time.deltaTime);
         }
 
