@@ -18,7 +18,7 @@ namespace Code.Runtime.Entity.Hero.HeroStates
         public override void OnEnter()
         {
             base.OnEnter();
-            //_heroAnimator.PlayAnimation(_animationData.Animations[AnimationKey.Spinning].Hash, 3f);
+            _heroAnimator.PlayAnimation(_animationData.Animations[AnimationKey.Spinning].Hash);
             
             _heroRotation.EnableRotation(false);
             _heroWeapon.EnableWeapon(true);
@@ -27,6 +27,7 @@ namespace Code.Runtime.Entity.Hero.HeroStates
         public override void OnLogic()
         {
             base.OnLogic();
+            
             _heroMovement.Movement();
             _heroRotation.Rotate(720f);
 

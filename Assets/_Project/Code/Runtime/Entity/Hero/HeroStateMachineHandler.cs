@@ -83,7 +83,7 @@ namespace Code.Runtime.Entity.Hero
                 _heroAnimator,
                 _heroMovement,
                 _heroRotation,
-                _animationData, true, canExit: (state) => state.Timer.Elapsed >= _heroSkills.ActiveAbility.ActiveTime));
+                _animationData, true, canExit: (state) => state.Timer.Elapsed >= _heroSkills.ActiveAbility.ActiveTime - 1f));
 
             _stateMachine.AddState(AbilityCast, new AbilityCastState(
                 _heroWeapon,
