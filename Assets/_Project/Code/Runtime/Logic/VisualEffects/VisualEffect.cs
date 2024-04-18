@@ -29,6 +29,7 @@ namespace Code.Runtime.Logic.VisualEffects
                 WaitForDurationEnd(TaskHelper.CreateToken(ref _cts)).Forget();
             }
         }
+        
 
         public bool IsPlaying() => _particleSystem.particleCount != 0;
 
