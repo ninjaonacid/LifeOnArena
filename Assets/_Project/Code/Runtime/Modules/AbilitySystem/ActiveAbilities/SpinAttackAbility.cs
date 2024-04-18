@@ -13,6 +13,7 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
         {
             var effect = await _visualEffectFactory.CreateVisualEffect(AbilityBlueprint.VisualEffectData.Identifier.Id);
             var effectTargetTransform = caster.GetComponent<EntityHurtBox>().GetCenterTransform();
+            effect.Play(AbilityBlueprint.ActiveTime);
             effect.transform.position = effectTargetTransform;
             effect.transform.SetParent(caster.transform);
         }

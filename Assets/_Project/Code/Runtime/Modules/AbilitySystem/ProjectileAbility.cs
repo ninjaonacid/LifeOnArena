@@ -2,6 +2,7 @@ using Code.Runtime.Entity;
 using Code.Runtime.Entity.EntitiesComponents;
 using Code.Runtime.Logic.Collision;
 using Code.Runtime.Logic.Projectiles;
+using Code.Runtime.Logic.VisualEffects;
 using UnityEngine;
 
 namespace Code.Runtime.Modules.AbilitySystem
@@ -39,9 +40,16 @@ namespace Code.Runtime.Modules.AbilitySystem
                 .SetLifetime(_lifeTime);
         }
 
-        private void OnHit(CollisionData data)
+        private async void OnHit(CollisionData data)
         {
             ApplyEffects(data.Target);
+            
+            if (AbilityBlueprint.VisualEffectData is not null)
+            {
+                VisualEffect collisionEffect = await _visualEffectFactory.CreateVisualEffect(AbilityBlueprint.VisualEffectData.Identifier.Id);
+                collisionEffect.transform.position = data.Target.GetComponentInParent<EntityHurtBox>().GetCenterTransform();
+                collisionEffect.Play();
+            }
 
             data.Source.GetComponent<IAttackComponent>().InvokeHit(1);
         }

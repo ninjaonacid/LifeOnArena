@@ -14,15 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _identifier: {fileID: 11400000, guid: 48d5edeb247b38345974b2cb065b7438, type: 2}
   _icon: {fileID: 21300000, guid: 337568a94ef22f14694fdfb08cfd875b, type: 3}
+  _description: 
   _treeData:
     Branch: 2
     Position: 2
     Price: 0
   _cooldown: 3
-  ActiveTime: 1
-  IsCastAbility: 1
-  VisualEffectData: {fileID: 0}
-  AbilitySound: {fileID: 0}
+  _activeTime: 0
+  _isCastAbility: 1
+  _visualEffect: {fileID: 11400000, guid: 1436113d8ed112f409486750b254e9fc, type: 2}
+  _abilitySound: {fileID: 0}
   _gameplayEffectBlueprints:
   - {fileID: 11400000, guid: 34ecfd28a25248848bbcfcd8a68a8741, type: 2}
   _prefab: {fileID: 4140074422687958933, guid: eef611f69a043234daa794211d3ef4a7, type: 3}

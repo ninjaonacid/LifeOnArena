@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Code.Runtime.ConfigData.Identifiers;
 using Code.Runtime.Core.Factory;
 using Code.Runtime.Core.SceneManagement;
@@ -85,9 +86,13 @@ namespace Code.Runtime.Entity.Hero
 
         private void OnSkillSlot(InputAction.CallbackContext ctx, int index)
         {
-            var abilityTemplate = _skillSlots[index].Ability;
-            if (abilityTemplate == null) return;
-            if (abilityTemplate.State is AbilityState.Cooldown or AbilityState.Active) return;
+            var abilityToUse = _skillSlots[index].Ability;
+            if (abilityToUse == null) return;
+            if (abilityToUse.State is AbilityState.Cooldown or AbilityState.Active) return;
+            if (_skillSlots.Any(slot => slot.Ability != null && slot.Ability.IsActive()))
+            {
+                return;
+            }
 
             _skillSlots[index].Ability.Use(this.gameObject, null);
             _skillSlots[index].Ability.State = AbilityState.Active;

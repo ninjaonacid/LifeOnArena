@@ -8,7 +8,6 @@ namespace Code.Runtime.Entity.Enemy.CommonEnemy
     {
         protected override void Start()
         {
-            
             base.Start();
             
             _enemyHealth.Health.CurrentValueChanged += TriggerDamageState;

@@ -37,7 +37,7 @@ namespace Code.Runtime.Entity.Hero
         [SerializeField] private HeroAnimator _heroAnimator;
         [SerializeField] private HeroMovement _heroMovement;
         [SerializeField] private HeroRotation _heroRotation;
-        [SerializeField] private HeroAttackComponent HeroAttackComponent;
+        [SerializeField] private HeroAttackComponent _heroAttackComponent;
         [SerializeField] private HeroSkills _heroSkills;
         [SerializeField] private HeroWeapon _heroWeapon;
         [SerializeField] private TagController _tagController;
@@ -79,11 +79,12 @@ namespace Code.Runtime.Entity.Hero
 
             _stateMachine.AddState(SpinAttackAbility, new SpinAbilityState(
                 _heroWeapon,
+                _heroAttackComponent,
                 _heroSkills,
                 _heroAnimator,
                 _heroMovement,
                 _heroRotation,
-                _animationData, true, canExit: (state) => state.Timer.Elapsed >= _heroSkills.ActiveAbility.ActiveTime - 1f));
+                _animationData, true, canExit: (state) => state.Timer.Elapsed >= _heroSkills.ActiveAbility.ActiveTime));
 
             _stateMachine.AddState(AbilityCast, new AbilityCastState(
                 _heroWeapon,
@@ -96,7 +97,7 @@ namespace Code.Runtime.Entity.Hero
                 canExit: (state) => state.Timer.Elapsed >= _heroSkills.ActiveAbility.ActiveTime));
 
             _stateMachine.AddState(HeroBaseAttack1, new FirstAttackState(
-                HeroAttackComponent,
+                _heroAttackComponent,
                 _heroWeapon,
                 _heroAnimator,
                 _heroMovement,
@@ -109,7 +110,7 @@ namespace Code.Runtime.Entity.Hero
                     _heroWeapon.GetEquippedWeaponData().WeaponFsmConfig.FirstAttackStateDuration));
 
             _stateMachine.AddState(HeroBaseAttack2, new SecondAttackState(
-                HeroAttackComponent,
+                _heroAttackComponent,
                 _heroWeapon,
                 _heroAnimator,
                 _heroMovement,
@@ -121,7 +122,7 @@ namespace Code.Runtime.Entity.Hero
                                     _heroWeapon.GetEquippedWeaponData().WeaponFsmConfig.SecondAttackStateDuration));
 
             _stateMachine.AddState(HeroBaseAttack3, new ThirdAttackState(
-                HeroAttackComponent,
+                _heroAttackComponent,
                 _heroWeapon,
                 _heroAnimator,
                 _heroMovement,
@@ -219,7 +220,10 @@ namespace Code.Runtime.Entity.Hero
 
             _stateMachine.AddTransition(new Transition(
                 SpinAttackAbility,
-                HeroIdle));
+                HeroIdle,
+                (transition) => _heroSkills.ActiveAbility != null &&
+                                        !_heroSkills.ActiveAbility.IsActive() &&
+                                        _heroSkills.ActiveAbility.AbilityBlueprint.Identifier.Id.Equals(_spinAttackAbilityId.Id)));
 
             _stateMachine.AddTransition(new Transition(
                 SpinAttackAbility,
