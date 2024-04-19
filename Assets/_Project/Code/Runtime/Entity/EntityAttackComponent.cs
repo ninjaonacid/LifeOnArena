@@ -61,11 +61,11 @@ namespace Code.Runtime.Entity
             _entityWeapon.OnWeaponChange += ChangeWeapon;
         }
         
-        private void ChangeWeapon(Weapon weapon)
+        private void ChangeWeapon(WeaponView weaponView)
         {
-            weapon.SetLayerMask(_targetLayer);
-            weapon.gameObject.layer = Mathf.RoundToInt(Mathf.Log(_ownerLayer.value, 2));
-            weapon.Hit += BaseAttack;
+            weaponView.SetLayerMask(_targetLayer);
+            weaponView.gameObject.layer = Mathf.RoundToInt(Mathf.Log(_ownerLayer.value, 2));
+            weaponView.Hit += BaseAttack;
         }
         
         private void BaseAttack(CollisionData collision)

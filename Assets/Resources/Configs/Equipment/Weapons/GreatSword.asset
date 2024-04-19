@@ -12,18 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ec85cfef59c751479b3ac3c5068c7da, type: 3}
   m_Name: GreatSword
   m_EditorClassIdentifier: 
-  DamageType: 01000000
-  WeaponPrefab: {fileID: 7053281041097936720, guid: f5e154f2103eb1847b7106b702a86613, type: 3}
-  WeaponId: {fileID: 11400000, guid: 2bb90049b182d3e4e862dce85ce642cd, type: 2}
-  HitVisualEffect: {fileID: 0}
-  Price: 30
-  AttackSpeed: 0
-  Damage: 0
-  WeaponFsmConfig:
-    FirstAttackStateDuration: 1
-    SecondAttackStateDuration: 1
-    ThirdAttackStateDuration: 1
-  OverrideController: {fileID: 22100000, guid: 50885c06293ec8044b3694729dc71f10, type: 2}
-  LocalRotation: {x: 0, y: 0, z: 0}
-  LocalPosition: {x: 0, y: 0, z: 0}
-  WeaponSound: {fileID: 0}
+  _weaponPrefab: {fileID: 0}
+  _weaponId: {fileID: 11400000, guid: 2bb90049b182d3e4e862dce85ce642cd, type: 2}
+  _hitVfx: {fileID: 0}
+  _price: 0
+  _damage: 0
+  _weaponFsmConfig:
+    FirstAttackStateDuration: 0
+    SecondAttackStateDuration: 0
+    ThirdAttackStateDuration: 0
+  _overrideController: {fileID: 0}
+  _localRotation: {x: 0, y: 0, z: 0}
+  _weaponSound: {fileID: 0}
+  _damageType: 

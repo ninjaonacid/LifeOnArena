@@ -16,7 +16,7 @@ namespace Code.Editor
 
             if (GUILayout.Button("Set Weapon"))
             {
-                var weaponObj = PrefabUtility.InstantiatePrefab(weaponPlatform.WeaponData.WeaponPrefab) as UnityEngine.GameObject;
+                var weaponObj = PrefabUtility.InstantiatePrefab(weaponPlatform.WeaponData.WeaponView) as UnityEngine.GameObject;
                 weaponObj.transform.SetParent(weaponPlatform.WeaponContainer);
                 weaponObj.gameObject.transform.localPosition = Vector3.zero;
 

@@ -17,7 +17,7 @@ namespace Code.Runtime.Core.Factory
             string spawnerId,
             WeaponId weaponId);
 
-        Weapon CreateWeapon(GameObject prefab, Transform position);
+        WeaponView CreateWeapon(WeaponView prefab, Transform position);
         
         UniTaskVoid InitAssets();
     }

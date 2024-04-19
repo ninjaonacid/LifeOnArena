@@ -10,7 +10,7 @@ namespace Code.Runtime.Entity
 {
     public class EntityWeapon : MonoBehaviour
     {
-        public event Action<Weapon> OnWeaponChange;
+        public event Action<WeaponView> OnWeaponChange;
         
         [SerializeField] protected WeaponSlot _weaponSlot = new();
         [SerializeField] protected Transform _weaponPosition;
@@ -22,7 +22,7 @@ namespace Code.Runtime.Entity
         [Serializable]
         protected class WeaponSlot
         {
-            public Weapon EquippedWeapon;
+            public WeaponView EquippedWeaponView;
         }
         
         [Inject]
@@ -43,24 +43,24 @@ namespace Code.Runtime.Entity
         {
             if (weaponData == null) return;
 
-            if (_weaponSlot.EquippedWeapon != null)
+            if (_weaponSlot.EquippedWeaponView != null)
             {
-                Destroy(_weaponSlot.EquippedWeapon.gameObject);
+                Destroy(_weaponSlot.EquippedWeaponView.gameObject);
             }
      
             _weaponData = weaponData;
 
-            _weaponSlot.EquippedWeapon = _itemFactory.CreateWeapon(_weaponData.WeaponPrefab, _weaponPosition);
-            _weaponSlot.EquippedWeapon.gameObject.transform.localPosition = Vector3.zero;
+            _weaponSlot.EquippedWeaponView = _itemFactory.CreateWeapon(_weaponData.WeaponView, _weaponPosition);
+            _weaponSlot.EquippedWeaponView.gameObject.transform.localPosition = Vector3.zero;
 
-            _weaponSlot.EquippedWeapon.gameObject.transform.localRotation = Quaternion.Euler(
+            _weaponSlot.EquippedWeaponView.gameObject.transform.localRotation = Quaternion.Euler(
                 _weaponData.LocalRotation.x,
                 _weaponData.LocalRotation.y,
                 _weaponData.LocalRotation.z);
             
             EnableWeapon(false);
             
-            OnWeaponChange?.Invoke(_weaponSlot.EquippedWeapon);
+            OnWeaponChange?.Invoke(_weaponSlot.EquippedWeaponView);
         }
 
         public void EnableWeapon(bool value)
@@ -71,15 +71,15 @@ namespace Code.Runtime.Entity
 
         public void EnableCollider(bool value)
         {
-            _weaponSlot.EquippedWeapon.EnableCollider(value);
+            _weaponSlot.EquippedWeaponView.EnableCollider(value);
         }
 
         private void EnableTrail(bool value)
         {
-            _weaponSlot.EquippedWeapon.EnableCollider(value);
+            _weaponSlot.EquippedWeaponView.EnableCollider(value);
         }
 
-        public Weapon GetEquippedWeapon() => _weaponSlot.EquippedWeapon;
+        public WeaponView GetEquippedWeapon() => _weaponSlot.EquippedWeaponView;
         public WeaponData GetEquippedWeaponData() => _weaponData;
    
     }

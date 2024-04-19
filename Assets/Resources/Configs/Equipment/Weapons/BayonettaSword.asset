@@ -12,18 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ec85cfef59c751479b3ac3c5068c7da, type: 3}
   m_Name: BayonettaSword
   m_EditorClassIdentifier: 
-  DamageType: 01000000
-  WeaponPrefab: {fileID: 3379918035056214380, guid: 6ad99354571b2c54ca75e386a85f9d72, type: 3}
-  WeaponId: {fileID: 11400000, guid: 4cba6645841fa244c94aa7563499a7a3, type: 2}
-  HitVisualEffect: {fileID: 11400000, guid: aa9d05048adc4df4cb697b348b6c2a61, type: 2}
-  Price: 1000
-  AttackSpeed: 0
-  Damage: 20
-  WeaponFsmConfig:
+  _weaponPrefab: {fileID: 4205608658574549835, guid: 6ad99354571b2c54ca75e386a85f9d72, type: 3}
+  _weaponId: {fileID: 11400000, guid: 4cba6645841fa244c94aa7563499a7a3, type: 2}
+  _hitVfx: {fileID: 11400000, guid: aa9d05048adc4df4cb697b348b6c2a61, type: 2}
+  _price: 1000
+  _damage: 20
+  _weaponFsmConfig:
     FirstAttackStateDuration: 0.7
-    SecondAttackStateDuration: 0.5
-    ThirdAttackStateDuration: 0.65
-  OverrideController: {fileID: 22100000, guid: 8c7ae28e8248b1f4fa1503fd6c5fa11b, type: 2}
-  LocalRotation: {x: 3.0742311, y: 157, z: 243}
-  LocalPosition: {x: -0.31, y: 0.06, z: -0.01}
-  WeaponSound: {fileID: 0}
+    SecondAttackStateDuration: 0.6
+    ThirdAttackStateDuration: 0.7
+  _overrideController: {fileID: 22100000, guid: 8c7ae28e8248b1f4fa1503fd6c5fa11b, type: 2}
+  _localRotation: {x: 3.0742311, y: 157, z: 243}
+  _weaponSound: {fileID: 0}
+  _damageType: 01000000
