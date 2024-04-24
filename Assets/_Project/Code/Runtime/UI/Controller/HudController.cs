@@ -1,10 +1,12 @@
 using Code.Runtime.Core.Factory;
+using Code.Runtime.Core.SceneManagement;
 using Code.Runtime.Entity.Hero;
 using Code.Runtime.Services.PersistentProgress;
 using Code.Runtime.UI.Model;
 using Code.Runtime.UI.Services;
 using Code.Runtime.UI.View;
 using Code.Runtime.UI.View.HUD;
+using UniRx;
 using UnityEngine.Assertions;
 
 namespace Code.Runtime.UI.Controller
@@ -16,11 +18,13 @@ namespace Code.Runtime.UI.Controller
 
         private readonly IGameDataContainer _gameData;
         private readonly IHeroFactory _heroFactory;
+        private readonly SceneLoader _sceneLoader;
         
-        public HudController(IGameDataContainer gameData, IHeroFactory heroFactory)
+        public HudController(IGameDataContainer gameData, IHeroFactory heroFactory, SceneLoader sceneLoader)
         {
             _gameData = gameData;
             _heroFactory = heroFactory;
+            _sceneLoader = sceneLoader;
         }
 
         public void InitController(IScreenModel model, BaseWindowView windowView, ScreenService screenService)
@@ -40,7 +44,8 @@ namespace Code.Runtime.UI.Controller
             _windowView.LootCounter.Construct(_gameData.PlayerData.WorldData);
             _windowView.HudSkillContainer.Construct(heroSkills, heroCooldown);
             _windowView.GetComponent<EntityUI>().Construct(heroHealth);
-            
+
+            _windowView.RestartButton.onClick.AsObservable().Subscribe(x => _sceneLoader.Load("MainMenu"));
 
 
 

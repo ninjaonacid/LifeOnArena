@@ -13,12 +13,19 @@ namespace Code.Runtime.UI.Services
     {
         private readonly Dictionary<Type, Func<IScreenController>> _screenControllers = new();
 
-        public ScreenControllerFactory(IGameDataContainer gameData, IHeroFactory heroFactory, ISaveLoadService saveLoad, AudioService audioService, SceneLoader sceneLoader)
+        public ScreenControllerFactory(IGameDataContainer gameData, IHeroFactory heroFactory, ISaveLoadService saveLoad,
+            AudioService audioService, SceneLoader sceneLoader)
         {
-            _screenControllers.Add(typeof(MainMenuController), () => new MainMenuController(gameData, audioService, sceneLoader));
-            _screenControllers.Add(typeof(WeaponShopScreenController), () => new WeaponShopScreenController(sceneLoader));
+            _screenControllers.Add(typeof(MainMenuController),
+                () => new MainMenuController(gameData, audioService, sceneLoader));
+            
+            _screenControllers.Add(typeof(WeaponShopScreenController),
+                () => new WeaponShopScreenController(sceneLoader));
+            
             _screenControllers.Add(typeof(AbilityScreenController), () => new AbilityScreenController(saveLoad));
-            _screenControllers.Add(typeof(HudController), () => new HudController(gameData, heroFactory));
+            _screenControllers.Add(typeof(HudController), () => 
+                new HudController(gameData, heroFactory, sceneLoader));
+            
             _screenControllers.Add(typeof(MessageWindowController), () => new MessageWindowController());
         }
 
@@ -26,7 +33,5 @@ namespace Code.Runtime.UI.Services
         {
             return _screenControllers[controller].Invoke();
         }
-        
-        
     }
 }
