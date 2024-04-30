@@ -46,11 +46,18 @@ namespace Code.Runtime.UI.Controller
             _windowView.HudSkillContainer.Construct(heroSkills, heroCooldown);
             _windowView.GetComponent<EntityUI>().Construct(heroHealth);
 
-            _gameData.PlayerData.PlayerExp.OnExperienceChanged().Subscribe( x =>
+            _gameData.PlayerData.PlayerExp
+                .OnExperienceChangedAsObservable()
+                .Subscribe( x =>
                 _windowView.StatusBar.SetExpValue(_gameData.PlayerData.PlayerExp.Experience,
                     _gameData.PlayerData.PlayerExp.ExperienceToNextLevel));
+
+            _gameData.PlayerData.PlayerExp
+                .OnLevelChangedAsObservable()
+                .Subscribe(x => _windowView.StatusBar.SetLevel(_gameData.PlayerData.PlayerExp.Level));
             
             _windowView.StatusBar.SetExpValue(_gameData.PlayerData.PlayerExp.Experience, _gameData.PlayerData.PlayerExp.ExperienceToNextLevel);
+            _windowView.StatusBar.SetLevel(_gameData.PlayerData.PlayerExp.Level);
         
 
             _windowView.RestartButton.onClick.AsObservable().Subscribe(x => _sceneLoader.Load("MainMenu"));

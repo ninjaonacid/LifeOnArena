@@ -8,6 +8,7 @@ namespace Code.Runtime.Data.PlayerData
     public class PlayerExp
     {
         public event Action OnExpChanged;
+        public event Action OnLevelChanged;
         public int Experience;
         public int Level;
         public int ExperienceToNextLevel;
@@ -27,6 +28,7 @@ namespace Code.Runtime.Data.PlayerData
                 Level++;
                 Experience -= ExperienceToNextLevel;
                 ExperienceToNextLevel = 100 * (Level * Level);
+                OnLevelChanged?.Invoke();
             }
             
             Debug.Log($"Experience added  {Experience}");
@@ -34,11 +36,18 @@ namespace Code.Runtime.Data.PlayerData
             OnExpChanged?.Invoke();
         }
 
-        public IObservable<Unit> OnExperienceChanged()
+        public IObservable<Unit> OnExperienceChangedAsObservable()
         {
             return Observable.FromEvent(
                 addHandler => OnExpChanged += addHandler,
                 removeHandler => OnExpChanged -= removeHandler);
+        }
+
+        public IObservable<Unit> OnLevelChangedAsObservable()
+        {
+            return Observable.FromEvent(
+                addHandler => OnLevelChanged += addHandler,
+                removeHandler => OnLevelChanged += removeHandler);
         }
     }
 }
