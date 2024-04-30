@@ -6,7 +6,7 @@ namespace Code.Runtime.UI.View.HUD
     public class EntityUI : MonoBehaviour
     {
         private IDamageable _damageable;
-        public HpBar HpBar;
+        public StatusBar StatusBar;
         
         public void Construct(IDamageable damageable)
         {
@@ -22,7 +22,7 @@ namespace Code.Runtime.UI.View.HUD
 
         private void UpdateHpBar()
         {
-            HpBar.SetValue(_damageable.Health.CurrentValue, _damageable.Health.Value);
+            StatusBar.SetHpValue(_damageable.Health.CurrentValue, _damageable.Health.Value);
         }
     }
 }

@@ -1987,6 +1987,10 @@ PrefabInstance:
       propertyPath: IsCollisionWeapon
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6716832012151853455, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
+      propertyPath: HpBarImage
+      value: 
+      objectReference: {fileID: 623829490321162010}
     - target: {fileID: 6716876832464804808, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
       propertyPath: _enemyConfig
       value: 
@@ -2066,6 +2070,17 @@ MonoBehaviour:
   _animationData: {fileID: 11400000, guid: 26005db4dc9b9a34cb461fd30e372b28, type: 2}
   _statController: {fileID: 4227790607017457015}
   _enemyDeath: {fileID: 1043505308070320457}
+--- !u!114 &623829490321162010 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3384157201669555272, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
+  m_PrefabInstance: {fileID: 2764850178834398034}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &716635229013844747 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3436043548892321881, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}

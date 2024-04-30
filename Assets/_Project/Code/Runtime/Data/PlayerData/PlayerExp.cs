@@ -1,4 +1,6 @@
 using System;
+using UniRx;
+using UnityEngine;
 
 namespace Code.Runtime.Data.PlayerData
 {
@@ -12,7 +14,7 @@ namespace Code.Runtime.Data.PlayerData
 
         public PlayerExp()
         {
-            Level = 0;
+            Level = 1;
             Experience = 0;
             ExperienceToNextLevel = 100;
         }
@@ -27,7 +29,16 @@ namespace Code.Runtime.Data.PlayerData
                 ExperienceToNextLevel = 100 * (Level * Level);
             }
             
+            Debug.Log($"Experience added  {Experience}");
+            
             OnExpChanged?.Invoke();
+        }
+
+        public IObservable<Unit> OnExperienceChanged()
+        {
+            return Observable.FromEvent(
+                addHandler => OnExpChanged += addHandler,
+                removeHandler => OnExpChanged -= removeHandler);
         }
     }
 }

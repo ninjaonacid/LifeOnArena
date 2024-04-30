@@ -7,6 +7,7 @@ using Code.Runtime.UI.Services;
 using Code.Runtime.UI.View;
 using Code.Runtime.UI.View.HUD;
 using UniRx;
+using UnityEngine;
 using UnityEngine.Assertions;
 
 namespace Code.Runtime.UI.Controller
@@ -44,6 +45,13 @@ namespace Code.Runtime.UI.Controller
             _windowView.LootCounter.Construct(_gameData.PlayerData.WorldData);
             _windowView.HudSkillContainer.Construct(heroSkills, heroCooldown);
             _windowView.GetComponent<EntityUI>().Construct(heroHealth);
+
+            _gameData.PlayerData.PlayerExp.OnExperienceChanged().Subscribe( x =>
+                _windowView.StatusBar.SetExpValue(_gameData.PlayerData.PlayerExp.Experience,
+                    _gameData.PlayerData.PlayerExp.ExperienceToNextLevel));
+            
+            _windowView.StatusBar.SetExpValue(_gameData.PlayerData.PlayerExp.Experience, _gameData.PlayerData.PlayerExp.ExperienceToNextLevel);
+        
 
             _windowView.RestartButton.onClick.AsObservable().Subscribe(x => _sceneLoader.Load("MainMenu"));
 

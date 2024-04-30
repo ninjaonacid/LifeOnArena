@@ -107,7 +107,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ab0753188ec03342934e2894388c9bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ImageCurrent: {fileID: 3384157201669555272}
+  HpBarImage: {fileID: 3384157201669555272}
+  ExpBarImage: {fileID: 0}
 --- !u!114 &3766484426012382019
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -335,7 +336,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64253ad1206f55d4b8d454588479aed8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HpBar: {fileID: 6716832012151853455}
+  StatusBar: {fileID: 6716832012151853455}
 --- !u!114 &6716876832464804808
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -473,7 +474,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _weaponSlot:
-    EquippedWeapon: {fileID: 0}
+    EquippedWeaponView: {fileID: 0}
   _weaponPosition: {fileID: 0}
   IsCollisionWeapon: 0
   _weaponData: {fileID: 0}
