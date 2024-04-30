@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4836229979669184683
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 431702581290660804}
+  m_Layer: 0
+  m_Name: WeaponPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &431702581290660804
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4836229979669184683}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5012751016917512871}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &5547392218910358729
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -103,6 +134,14 @@ PrefabInstance:
       propertyPath: m_Center.z
       value: 1.1729975
       objectReference: {fileID: 0}
+    - target: {fileID: 6625279289632298001, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
+      propertyPath: _weaponData
+      value: 
+      objectReference: {fileID: 11400000, guid: 431ab5f648de9834e982e4e7c3e35d19, type: 2}
+    - target: {fileID: 6625279289632298001, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
+      propertyPath: _weaponPosition
+      value: 
+      objectReference: {fileID: 431702581290660804}
     - target: {fileID: 7813538039565963231, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
       propertyPath: m_Height
       value: 8
@@ -314,3 +353,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fed771effdf6fc545880ee2414f95eae, type: 3}
+--- !u!4 &5012751016917512871 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2628299924906412216, guid: fed771effdf6fc545880ee2414f95eae, type: 3}
+  m_PrefabInstance: {fileID: 7055247972277369375}
+  m_PrefabAsset: {fileID: 0}

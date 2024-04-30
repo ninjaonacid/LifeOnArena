@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 2540178271147803593}
   - component: {fileID: 1508526897907190892}
   - component: {fileID: 3678220924897835174}
+  - component: {fileID: 6865785359894506633}
+  - component: {fileID: 1974200891882779768}
   m_Layer: 0
   m_Name: BaneHammer
   m_TagString: Untagged
@@ -83,3 +85,30 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &6865785359894506633
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2885494549753239923}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.2658935, y: 4.3142886, z: 1.0370152}
+  m_Center: {x: -0.000008046625, y: 1.7347454, z: -0.001777112}
+--- !u!114 &1974200891882779768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2885494549753239923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba85227bb42de2d458bc384a1e926cf3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _collider: {fileID: 6865785359894506633}
+  _slashTrail: {fileID: 0}
