@@ -22,17 +22,16 @@ namespace Code.Runtime.Entity
         [SerializeField] protected LayerMask _targetLayer;
         [SerializeField] protected StatController _stats;
         [SerializeField] protected EntityWeapon _entityWeapon;
+        [SerializeField] protected VisualEffectController _visualEffectController;
 
         private AudioService _audioService;
         private BattleService _battleService;
-        private VisualEffectFactory _visualEffectFactory;
 
         [Inject]
-        public void Construct(AudioService audioService, BattleService battleService, VisualEffectFactory visualEffectFactory)
+        public void Construct(AudioService audioService, BattleService battleService)
         {
             _audioService = audioService;
             _battleService = battleService;
-            _visualEffectFactory = visualEffectFactory;
         }
         
         public LayerMask GetTargetLayer()
@@ -67,8 +66,8 @@ namespace Code.Runtime.Entity
             weaponView.gameObject.layer = Mathf.RoundToInt(Mathf.Log(_ownerLayer.value, 2));
             weaponView.Hit += BaseAttack;
         }
-        
-        private void BaseAttack(CollisionData collision)
+
+        protected virtual void BaseAttack(CollisionData collision)
         {
             if(_collidedData.Contains(collision))
             {
@@ -76,25 +75,16 @@ namespace Code.Runtime.Entity
             }
 
             var hitBox = collision.Target.GetComponentInParent<EntityHurtBox>().GetHitBoxCenter();
-            
-            HitVfx(hitBox + collision.Target.transform.position).Forget();
+
+            _visualEffectController.PlayVisualEffect(
+                _entityWeapon.GetEquippedWeaponData().HitVisualEffect.Identifier, collision.Target.transform.position).Forget();
             
             _audioService.PlaySound3D("Hit", collision.Target.transform, 1f);
             _battleService.CreateWeaponAttack(_stats, collision.Target);
             _collidedData.Add(collision);
             InvokeHit(1);
         }
-
-        private async UniTaskVoid HitVfx(Vector3 position)
-        {
-            int particleId = _entityWeapon.GetEquippedWeaponData().HitVisualEffect.Identifier.Id;
-            
-            var particle =
-                await _visualEffectFactory.CreateVisualEffect(particleId);
-
-            particle.transform.position = position;
-            particle.Play();
-        }
+        
 
         public float GetAttacksPerSecond()
         {

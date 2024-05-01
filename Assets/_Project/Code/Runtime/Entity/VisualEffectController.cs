@@ -20,6 +20,16 @@ namespace Code.Runtime.Entity
         public async UniTask PlayVisualEffect(VisualEffectIdentifier effectId)
         {
             var effect = await _visualFactory.CreateVisualEffect(effectId.Id);
+            effect.Play();
+            
+        }
+
+        public async UniTask PlayVisualEffect(VisualEffectIdentifier effectId, Vector3 position)
+        {
+            var effect = await _visualFactory.CreateVisualEffect(effectId.Id);
+            effect.transform.position = position;
+            effect.Play();
+
         }
     }
 }

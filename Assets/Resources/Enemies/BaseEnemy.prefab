@@ -151,6 +151,7 @@ GameObject:
   - component: {fileID: 6549393848085028640}
   - component: {fileID: 5563712467432588495}
   - component: {fileID: 6625279289632298001}
+  - component: {fileID: 5485434957042966360}
   m_Layer: 9
   m_Name: BaseEnemy
   m_TagString: Untagged
@@ -279,6 +280,7 @@ MonoBehaviour:
     m_Bits: 2048
   _stats: {fileID: 2085898622953279013}
   _entityWeapon: {fileID: 6625279289632298001}
+  _visualEffectController: {fileID: 5485434957042966360}
 --- !u!114 &6610648692135647668
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -479,6 +481,18 @@ MonoBehaviour:
   _weaponPosition: {fileID: 0}
   IsCollisionWeapon: 0
   _weaponData: {fileID: 0}
+--- !u!114 &5485434957042966360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2658416580451336931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c79ebb6abe5dc324a8c23890f8788d21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3762135731228810403
 GameObject:
   m_ObjectHideFlags: 0

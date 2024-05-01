@@ -39,6 +39,14 @@ namespace Code.Runtime.Entity
             }
         }
 
+        private void Update()
+        {
+            if (_weaponSlot.EquippedWeaponView)
+            {
+                _weaponSlot.EquippedWeaponView.transform.rotation = _weaponPosition.rotation;
+            }
+        }
+
         public virtual void EquipWeapon(WeaponData weaponData)
         {
             if (weaponData == null) return;
@@ -76,7 +84,7 @@ namespace Code.Runtime.Entity
 
         private void EnableTrail(bool value)
         {
-            _weaponSlot.EquippedWeaponView.EnableCollider(value);
+            _weaponSlot.EquippedWeaponView.EnableTrail(value);
         }
 
         public WeaponView GetEquippedWeapon() => _weaponSlot.EquippedWeaponView;

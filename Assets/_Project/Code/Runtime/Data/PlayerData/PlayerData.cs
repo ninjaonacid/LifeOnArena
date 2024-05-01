@@ -23,5 +23,6 @@ namespace Code.Runtime.Data.PlayerData
         StatsData = new StatsData();
         PlayerExp = new PlayerExp();
     }
+        
     }
 }
