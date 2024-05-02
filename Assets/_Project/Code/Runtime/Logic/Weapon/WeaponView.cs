@@ -11,6 +11,7 @@ namespace Code.Runtime.Logic.Weapon
         
         [SerializeField] private Collider _collider;
         [SerializeField] private ParticleSystem _slashTrail;
+        [SerializeField] private Transform _slashTransform;
 
         private LayerMask _mask;
         
@@ -43,5 +44,7 @@ namespace Code.Runtime.Logic.Weapon
             if (value) _slashTrail.Play();
             else _slashTrail.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
         }
+        
+        
     }
 }
