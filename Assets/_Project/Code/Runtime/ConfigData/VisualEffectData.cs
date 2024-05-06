@@ -4,7 +4,7 @@ using UnityEngine.AddressableAssets;
 
 namespace Code.Runtime.ConfigData
 {
-    [CreateAssetMenu(fileName = "VisualEffect", menuName = "Config/VisualEffects")]
+    [CreateAssetMenu(fileName = "VisualEffect", menuName = "Config/VisualEffects/VisualEffect")]
     public class VisualEffectData : ScriptableObject
     {
         public VisualEffectIdentifier Identifier;

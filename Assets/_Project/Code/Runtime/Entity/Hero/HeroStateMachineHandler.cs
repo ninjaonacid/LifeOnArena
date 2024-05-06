@@ -43,6 +43,7 @@ namespace Code.Runtime.Entity.Hero
         [SerializeField] private TagController _tagController;
         [SerializeField] private AnimationDataContainer _animationData;
         [SerializeField] private HeroDeath _heroDeath;
+        [SerializeField] private VisualEffectController _vfxController;
 
 
         [Inject]
@@ -103,6 +104,7 @@ namespace Code.Runtime.Entity.Hero
                 _heroMovement,
                 _heroRotation,
                 _animationData,
+                _vfxController,
                 needExitTime: true,
                 isGhostState: false,
                 canExit: (state) =>
@@ -116,6 +118,7 @@ namespace Code.Runtime.Entity.Hero
                 _heroMovement,
                 _heroRotation,
                 _animationData,
+                _vfxController,
                 needExitTime: true,
                 isGhostState: false,
                 canExit: (state) => state.Timer.Elapsed >=
@@ -170,10 +173,10 @@ namespace Code.Runtime.Entity.Hero
                 HeroBaseAttack2,
                 (transition) => _controls.Player.Attack.WasPressedThisFrame()));
 
-            _stateMachine.AddTransition(new Transition(
-                HeroBaseAttack2,
-                HeroBaseAttack3,
-                (transition) => _controls.Player.Attack.WasPressedThisFrame()));
+            // _stateMachine.AddTransition(new Transition(
+            //     HeroBaseAttack2,
+            //     HeroBaseAttack3,
+            //     (transition) => _controls.Player.Attack.WasPressedThisFrame()));
 
 
             _stateMachine.AddTransition(new Transition(

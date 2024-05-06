@@ -13,6 +13,8 @@ namespace Code.Runtime.Logic.Weapon
         [SerializeField] private ParticleSystem _slashTrail;
         [SerializeField] private Transform _slashTransform;
 
+        public Transform SlashVfxTransform => _slashTransform;
+
         private LayerMask _mask;
         
         private void OnTriggerEnter(Collider other)

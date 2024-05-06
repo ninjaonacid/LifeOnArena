@@ -3,7 +3,6 @@ using Code.Runtime.ConfigData.Weapon;
 using Code.Runtime.Core.Factory;
 using Code.Runtime.Logic.Weapon;
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
 using VContainer;
 
 namespace Code.Runtime.Entity
@@ -86,6 +85,8 @@ namespace Code.Runtime.Entity
         {
             _weaponSlot.EquippedWeaponView.EnableTrail(value);
         }
+
+        public Transform GetEquipJointTransform => _weaponPosition;
 
         public WeaponView GetEquippedWeapon() => _weaponSlot.EquippedWeaponView;
         public WeaponData GetEquippedWeaponData() => _weaponData;

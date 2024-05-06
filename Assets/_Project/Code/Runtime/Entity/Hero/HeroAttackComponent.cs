@@ -1,6 +1,3 @@
-using Code.Runtime.ConfigData.Identifiers;
-using Code.Runtime.Logic.Collision;
-using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace Code.Runtime.Entity.Hero
@@ -9,12 +6,5 @@ namespace Code.Runtime.Entity.Hero
     public class HeroAttackComponent : EntityAttackComponent
     {
         [SerializeField] private HeroWeapon _heroWeapon;
-        [SerializeField] private VisualEffectIdentifier _slashId;
-        protected override void BaseAttack(CollisionData collision)
-        {
-            base.BaseAttack(collision);
-
-            _visualEffectController.PlayVisualEffect(_slashId).Forget();
-        }
     }
 }
