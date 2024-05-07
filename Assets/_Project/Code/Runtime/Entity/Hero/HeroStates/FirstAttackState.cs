@@ -1,4 +1,5 @@
 using System;
+using Code.Runtime.ConfigData;
 using Code.Runtime.ConfigData.Animations;
 using Code.Runtime.Modules.StateMachine.States;
 using Cysharp.Threading.Tasks;
@@ -30,10 +31,11 @@ namespace Code.Runtime.Entity.Hero.HeroStates
 
             _heroWeapon.EnableWeapon(true);
             _heroAnimator.PlayAnimation(_animationData.Animations[AnimationKey.Attack1].Hash);
-            _vfxController.PlayVisualEffect(
+            
+            _vfxController.PlaySlashVisualEffect(
                 _heroWeapon.GetEquippedWeaponData().SlashVisualEffect.VisualEffect.Identifier,
-                _heroWeapon.GetEquippedWeapon().SlashVfxTransform,
-                 0.15f).Forget();
+                SlashDirection.Left,
+                 0.25f).Forget();
 
             _canExit = (state) => true;
             _heroRotation.EnableRotation(false);

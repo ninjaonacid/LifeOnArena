@@ -73,7 +73,7 @@ namespace Code.Runtime.Entity
         public void EnableWeapon(bool value)
         {
             EnableCollider(value);
-            EnableTrail(value);
+            //EnableTrail(value);
         }
 
         public void EnableCollider(bool value)

@@ -9,7 +9,11 @@ namespace Code.Runtime.ConfigData
         Left = 0,
         Right = 1,
         Up = 2,
-        Down = 3
+        Down = 3,
+        LeftUp = 4,
+        RightUp = 5,
+        LeftDown = 6,
+        RightDown = 7,
     }
     
     [CreateAssetMenu(fileName = "SlashVisualEffect", menuName = "Config/VisualEffects/SlashVisualEffect")]
