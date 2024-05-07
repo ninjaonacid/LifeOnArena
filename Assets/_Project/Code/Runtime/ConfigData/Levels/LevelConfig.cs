@@ -7,8 +7,8 @@ namespace Code.Runtime.ConfigData.Levels
 {
     public enum LevelType
     {
-        Playable,
-        System
+        Playable = 0,
+        Unplayable = 1,
     }
 
     public enum LocationReward
