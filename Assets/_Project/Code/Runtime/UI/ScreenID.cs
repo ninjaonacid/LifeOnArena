@@ -10,5 +10,7 @@ namespace Code.Runtime.UI
         HUD = 6,
         MessageWindow = 7,
         MessageWindowTimer = 8,
+        ArenaSelectionScreen = 9,
+        Zalupa = 10,
     }
 }

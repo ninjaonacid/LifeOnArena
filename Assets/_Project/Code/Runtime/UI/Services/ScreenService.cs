@@ -81,12 +81,15 @@ namespace Code.Runtime.UI.Services
             if (screen.WindowView is not null)
             {
                 screen.WindowView.Close();
+                _activeWindows.Remove(screen);
             }
 
             if (screen.Controller is IDisposable controller)
             {
                 controller.Dispose();
             }
+            
+            _activeWindows.Remove(screen);
         }
         public void Close(IScreenController controller)
         {
@@ -97,12 +100,15 @@ namespace Code.Runtime.UI.Services
             if (screen.WindowView is not null)
             {
                 screen.WindowView.Close();
+                
             }
 
             if (controller is IDisposable disposable)
             {
                 disposable.Dispose();
             }
+
+            _activeWindows.Remove(screen);
         }
         
         private void Cleanup()

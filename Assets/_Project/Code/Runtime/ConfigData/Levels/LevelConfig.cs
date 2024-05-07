@@ -5,11 +5,10 @@ using UnityEngine;
 
 namespace Code.Runtime.ConfigData.Levels
 {
-    public enum LocationType
+    public enum LevelType
     {
-        Shelter,
-        StoneDungeon,
-        Forest
+        Playable,
+        System
     }
 
     public enum LocationReward
@@ -25,11 +24,12 @@ namespace Code.Runtime.ConfigData.Levels
         public string LevelKey;
         [Title("Location Type")]
         [EnumToggleButtons]
-        public LocationType LocationType;
+        public LevelType LevelType;
 
+        public int RequiredLevel;
 
         public int WavesToSpawn;
-  
+    
         [BoxGroup("Spawners")]
         [LabelWidth(100)]
         public List<EnemySpawnerData> EnemySpawners;
