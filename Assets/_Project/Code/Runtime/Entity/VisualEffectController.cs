@@ -73,10 +73,10 @@ namespace Code.Runtime.Entity
             switch (direction)
             {
                 case SlashDirection.Left:
-                    effect.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+                    effect.transform.rotation = Quaternion.Euler(new Vector3(180, 0, 0));
                     break;
                 case SlashDirection.Right:
-                    effect.transform.rotation = Quaternion.Euler(new Vector3(180, 0, 0));
+                    effect.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
                     break;
             }
             

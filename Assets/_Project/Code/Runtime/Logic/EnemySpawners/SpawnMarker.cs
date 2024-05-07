@@ -7,6 +7,7 @@ namespace Code.Runtime.Logic.EnemySpawners
     public class SpawnMarker : MonoBehaviour
     {
         public int SpawnCount;
+        public float SpawnTimer;
         public MobIdentifier MobId;
 
         [Title("Enemy Type Button")]

@@ -36,8 +36,7 @@ namespace Code.Runtime.Entity.Hero.HeroStates
                 _heroWeapon.GetEquippedWeaponData().SlashVisualEffect.VisualEffect.Identifier,
                 SlashDirection.Left,
                  0.25f).Forget();
-
-            _canExit = (state) => true;
+            
             _heroRotation.EnableRotation(false);
         }
 
