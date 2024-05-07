@@ -5,6 +5,7 @@ using Code.Runtime.Services.PersistentProgress;
 using Code.Runtime.Services.SaveLoad;
 using Code.Runtime.UI.Model;
 using Code.Runtime.UI.Model.AbilityMenu;
+using Code.Runtime.UI.Model.ArenaSelectionScreenModel;
 
 namespace Code.Runtime.UI.Services
 {
@@ -27,6 +28,7 @@ namespace Code.Runtime.UI.Services
             _modelMap.Add(typeof(AbilityTreeWindowModel), (dto) => new AbilityTreeWindowModel(gameData, config));
             _modelMap.Add(typeof(HudModel), (dto) => new HudModel());
             _modelMap.Add(typeof(MessageWindowModel), (dto) => new MessageWindowModel(dto));
+            _modelMap.Add(typeof(ArenaSelectionScreenModel), (dto) => new ArenaSelectionScreenModel(config));
         }
 
         public IScreenModel CreateModel(Type model)
