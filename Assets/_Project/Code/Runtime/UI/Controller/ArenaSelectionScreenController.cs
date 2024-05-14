@@ -18,8 +18,7 @@ namespace Code.Runtime.UI.Controller
             
             Assert.IsNotNull(_model);
             Assert.IsNotNull(_view);
-            
-            
+
         }
     }
 }

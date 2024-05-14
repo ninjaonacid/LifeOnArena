@@ -62,21 +62,7 @@ namespace Code.Runtime.Entity.Enemy
         {
             return CoolDownIsUp() && !_isAttacking && _attackIsActive;
         }
-
-        public void Attack()
-        {
-            _isAttacking = true;
-            _battleService.CreateOverlapAttack(_stats, StartPoint(), _targetLayer);
-        }
-
-        private Vector3 StartPoint()
-        {
-            var position = transform.position;
-            return new Vector3(position.x,
-                position.y + 2f,
-                position.z) + transform.forward * _stats.Stats["AttackDistance"].Value;
-        }
-
+        
         private bool CoolDownIsUp()
         {
             return _attackCooldown <= 0f;

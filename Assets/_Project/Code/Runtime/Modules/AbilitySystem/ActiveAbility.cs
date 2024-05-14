@@ -22,6 +22,8 @@ namespace Code.Runtime.Modules.AbilitySystem
 
         public bool IsOnCooldown() => State is AbilityState.Cooldown;
 
+        public bool IsReady() => State is AbilityState.Ready;
+
         protected ActiveAbility(ActiveAbilityBlueprintBase abilityBlueprint) : base(abilityBlueprint)
         {
             Cooldown = abilityBlueprint.Cooldown;
