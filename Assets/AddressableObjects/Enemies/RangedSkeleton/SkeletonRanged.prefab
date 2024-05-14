@@ -1912,14 +1912,14 @@ PrefabInstance:
     - target: {fileID: 6625279289632298001, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
       propertyPath: _weaponData
       value: 
-      objectReference: {fileID: 11400000, guid: da9e05244a9efcc44bc96f1dfc86a47f, type: 2}
+      objectReference: {fileID: 11400000, guid: fed0bbb2b9ad2c54eb8f870acf891661, type: 2}
     - target: {fileID: 6625279289632298001, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
       propertyPath: _weaponPosition
       value: 
       objectReference: {fileID: 2806085925602394247}
     - target: {fileID: 6625279289632298001, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
       propertyPath: IsCollisionWeapon
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6716832012151853455, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
       propertyPath: HpBarImage
@@ -1941,6 +1941,10 @@ PrefabInstance:
       propertyPath: _entityWeapon
       value: 
       objectReference: {fileID: 3632841084782273422}
+    - target: {fileID: 7338046863862579743, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
+      propertyPath: _abilitySlots.Array.data[0].AbilityIdentifier
+      value: 
+      objectReference: {fileID: 11400000, guid: 48d5edeb247b38345974b2cb065b7438, type: 2}
     - target: {fileID: 7813538039565963231, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
       propertyPath: m_StoppingDistance
       value: 7

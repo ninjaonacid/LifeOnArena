@@ -1,51 +1,24 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using Code.Runtime.ConfigData.Identifiers;
-using Code.Runtime.Core.Factory;
-using Code.Runtime.Core.SceneManagement;
 using Code.Runtime.Data.PlayerData;
 using Code.Runtime.Modules.AbilitySystem;
 using Code.Runtime.Services.PersistentProgress;
-using Code.Runtime.UI.View.HUD.Skills;
-using UnityEngine;
 using UnityEngine.InputSystem;
 using VContainer;
 
 namespace Code.Runtime.Entity.Hero
 {
-    public class HeroSkills : AbilityController, ISaveLoader
+    public class HeroAbilityController : AbilityController, ISaveLoader
     {
-        public event Action OnAbilityUse;
-        public event Action OnSkillChanged;
-        
-        [SerializeField] private AbilityCooldownController CooldownController;
-        [SerializeField] private AbilitySlot[] _skillSlots;
-        public AbilitySlot[] SkillSlots => _skillSlots;
-        public ActiveAbility ActiveAbility => _activeAbility;
-
-        private ActiveAbility _activeAbility;
-        private IAbilityFactory _abilityFactory;
         private PlayerControls _controls;
 
         private readonly List<InputAction> _skillActions = new();
         private readonly List<Action<InputAction.CallbackContext>> _hashedDelegates = new();
 
-        [Serializable]
-        public class AbilitySlot
-        {
-            public AbilityIdentifier AbilityIdentifier;
-            public ActiveAbility Ability;
-            public AbilitySlotID AbilitySlotID;
-        }
-
         [Inject]
-        public void Construct(IAbilityFactory abilityFactory, PlayerControls controls, SceneLoader sceneLoader)
+        public void Construct(PlayerControls controls)
         {
-            _abilityFactory = abilityFactory;
             _controls = controls;
-
-            _controls.Player.RestartScene.performed += (ctx) => sceneLoader.Load("StoneDungeon_Arena_1");
         }
 
         private void Start()
@@ -53,7 +26,7 @@ namespace Code.Runtime.Entity.Hero
             _skillActions.Add(_controls.Player.SkillSlot1);
             _skillActions.Add(_controls.Player.SkillSlot2);
 
-            foreach (var slot in _skillSlots)
+            foreach (var slot in _abilitySlots)
             {
                 if (slot.AbilityIdentifier is not null)
                 {
@@ -86,19 +59,10 @@ namespace Code.Runtime.Entity.Hero
 
         private void OnSkillSlot(InputAction.CallbackContext ctx, int index)
         {
-            var abilityToUse = _skillSlots[index].Ability;
+            var abilityToUse = _abilitySlots[index].Ability;
             if (abilityToUse == null) return;
-            if (abilityToUse.State is AbilityState.Cooldown or AbilityState.Active) return;
-            if (_skillSlots.Any(slot => slot.Ability != null && slot.Ability.IsActive()))
-            {
-                return;
-            }
 
-            _skillSlots[index].Ability.Use(this.gameObject, null);
-            _skillSlots[index].Ability.State = AbilityState.Active;
-            _activeAbility = _skillSlots[index].Ability;
-            CooldownController.StartCooldown(_skillSlots[index].Ability);
-            OnAbilityUse?.Invoke();
+            TryActivateAbility(_abilitySlots[index].Ability);
         }
 
         public void LoadData(PlayerData data)
@@ -109,14 +73,14 @@ namespace Code.Runtime.Entity.Hero
             {
                 for (var index = 0; index < skillsData.EquippedAbilities.Count; index++)
                 {
-                    var slot = _skillSlots[index];
+                    var slot = _abilitySlots[index];
 
                     slot.Ability =
                         _abilityFactory.CreateActiveAbility(skillsData.EquippedAbilities[index].AbilityId);
                 }
             }
 
-            OnSkillChanged?.Invoke();
+            OnAbilityChanged();
         }
     }
 }

@@ -37,7 +37,7 @@ namespace Code.Runtime.UI.Controller
             Assert.IsNotNull(_model);
 
             _heroFactory.HeroGameObject.TryGetComponent(out HeroAttackComponent heroAttack);
-            _heroFactory.HeroGameObject.TryGetComponent(out HeroSkills heroSkills);
+            _heroFactory.HeroGameObject.TryGetComponent(out HeroAbilityController heroSkills);
             _heroFactory.HeroGameObject.TryGetComponent(out HeroHealth heroHealth);
             _heroFactory.HeroGameObject.TryGetComponent(out AbilityCooldownController heroCooldown);
             

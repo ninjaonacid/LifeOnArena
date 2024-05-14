@@ -6,11 +6,11 @@ namespace Code.Runtime.Entity.Hero.HeroStates
 {
     public class AbilityCastState : HeroBaseAbilityState
     {
-        public AbilityCastState(HeroWeapon heroWeapon, HeroSkills heroSkills, HeroAnimator heroAnimator,
+        public AbilityCastState(HeroWeapon heroWeapon, HeroAbilityController heroAbilityController, HeroAnimator heroAnimator,
             HeroMovement heroMovement, HeroRotation heroRotation, AnimationDataContainer animationData,
             bool needExitTime = false, bool isGhostState = false, Action<State<string, string>> onEnter = null,
             Action<State<string, string>> onLogic = null, Action<State<string, string>> onExit = null,
-            Func<State<string, string>, bool> canExit = null) : base(heroWeapon, heroSkills, heroAnimator, heroMovement,
+            Func<State<string, string>, bool> canExit = null) : base(heroWeapon, heroAbilityController, heroAnimator, heroMovement,
             heroRotation, animationData, needExitTime, isGhostState, onEnter, onLogic, onExit, canExit)
         {
         }

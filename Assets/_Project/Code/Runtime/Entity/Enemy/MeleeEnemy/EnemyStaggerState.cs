@@ -1,5 +1,6 @@
 using System;
 using Code.Runtime.ConfigData.Animations;
+using Code.Runtime.Entity.Enemy.MeleeEnemy;
 using Code.Runtime.Logic.Timer;
 using Code.Runtime.Modules.StateMachine.States;
 

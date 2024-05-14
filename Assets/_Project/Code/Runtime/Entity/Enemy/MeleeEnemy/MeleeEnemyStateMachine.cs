@@ -1,10 +1,11 @@
 using Code.Runtime.ConfigData.Animations;
+using Code.Runtime.Entity.Enemy.CommonEnemy;
 using Code.Runtime.Modules.StateMachine;
 using Code.Runtime.Modules.StateMachine.Transitions;
 
-namespace Code.Runtime.Entity.Enemy.CommonEnemy
+namespace Code.Runtime.Entity.Enemy.MeleeEnemy
 {
-    public class CommonEnemyStateMachine : EnemyStateMachine
+    public class MeleeEnemyStateMachine : EnemyStateMachine
     {
         protected override void Start()
         {

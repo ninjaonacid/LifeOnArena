@@ -7,15 +7,15 @@ namespace Code.Runtime.UI.View.HUD.Skills
     {
         [SerializeField] private HudSkillButton[] _skillButtons;
 
-        private HeroSkills _heroSkills;
+        private HeroAbilityController _heroAbilityController;
         private AbilityCooldownController _cooldownController;
 
-        public void Construct(HeroSkills heroSkills, AbilityCooldownController cooldownController)
+        public void Construct(HeroAbilityController heroAbilityController, AbilityCooldownController cooldownController)
         {
-            _heroSkills = heroSkills;
+            _heroAbilityController = heroAbilityController;
             _cooldownController = cooldownController;
-            _heroSkills.OnSkillChanged += SetSkillSlots;
-            _heroSkills.OnAbilityUse += UpdateCooldownView;
+            _heroAbilityController.OnSkillChanged += SetAbilityControllerSlots;
+            _heroAbilityController.OnAbilityUse += UpdateCooldownView;
         }
 
         private void UpdateCooldownView()
@@ -29,13 +29,13 @@ namespace Code.Runtime.UI.View.HUD.Skills
             }
         }
 
-        private void SetSkillSlots()
+        private void SetAbilityControllerSlots()
         {
             for (int i = 0; i < _skillButtons.Length; i++)
             {
-                if (_skillButtons[i].GetSlotId() == _heroSkills.SkillSlots[i].AbilitySlotID)
+                if (_skillButtons[i].GetSlotId() == _heroAbilityController.AbilitySlots[i].AbilitySlotID)
                 {
-                    _skillButtons[i].SetAbility(_heroSkills.SkillSlots[i].Ability);
+                    _skillButtons[i].SetAbility(_heroAbilityController.AbilitySlots[i].Ability);
                     _skillButtons[i].UpdateSkillView();
                 }
             }

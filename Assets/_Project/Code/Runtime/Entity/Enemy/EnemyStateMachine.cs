@@ -1,5 +1,6 @@
 using Code.Runtime.ConfigData.Animations;
 using Code.Runtime.Entity.Enemy.CommonEnemy;
+using Code.Runtime.Entity.Enemy.MeleeEnemy;
 using Code.Runtime.Modules.StateMachine;
 using Code.Runtime.Modules.StatSystem;
 using UnityEngine;

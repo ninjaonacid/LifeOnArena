@@ -8,8 +8,8 @@ namespace Code.Runtime.Entity.Hero.HeroStates
     public abstract class HeroBaseAbilityState : HeroBaseState
     {
         protected readonly HeroWeapon _heroWeapon;
-        protected readonly HeroSkills _heroSkills;
-        protected HeroBaseAbilityState(HeroWeapon heroWeapon, HeroSkills heroSkills, HeroAnimator heroAnimator,
+        protected readonly HeroAbilityController _heroAbilityController;
+        protected HeroBaseAbilityState(HeroWeapon heroWeapon, HeroAbilityController heroAbilityController, HeroAnimator heroAnimator,
             HeroMovement heroMovement, HeroRotation heroRotation, AnimationDataContainer animationData,
             bool needExitTime = false, bool isGhostState = false, Action<State<string, string>> onEnter = null,
             Action<State<string, string>> onLogic = null, Action<State<string, string>> onExit = null,
@@ -17,7 +17,7 @@ namespace Code.Runtime.Entity.Hero.HeroStates
             animationData, needExitTime, isGhostState, onEnter, onLogic, onExit, canExit)
         {
             _heroWeapon = heroWeapon;
-            _heroSkills = heroSkills;
+            _heroAbilityController = heroAbilityController;
         }
     }
 }
