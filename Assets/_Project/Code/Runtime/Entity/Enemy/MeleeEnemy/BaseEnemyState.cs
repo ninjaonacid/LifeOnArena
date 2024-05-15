@@ -4,12 +4,12 @@ using Code.Runtime.Modules.StateMachine.States;
 
 namespace Code.Runtime.Entity.Enemy.MeleeEnemy
 {
-    public class CommonEnemyState : State
+    public class BaseEnemyState : State
     {
         protected readonly EnemyAnimator _enemyAnimator;
         protected readonly AnimationDataContainer _animationData;
         
-        public CommonEnemyState(EnemyAnimator enemyAnimator, AnimationDataContainer animationData, bool needExitTime = false, bool isGhostState = false,
+        public BaseEnemyState(EnemyAnimator enemyAnimator, AnimationDataContainer animationData, bool needExitTime = false, bool isGhostState = false,
             Action<State<string, string>> onEnter = null, Action<State<string, string>> onLogic = null,
             Action<State<string, string>> onExit = null, Func<State<string, string>, bool> canExit = null) : base(
             needExitTime, isGhostState, onEnter, onLogic, onExit, canExit)

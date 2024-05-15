@@ -30,7 +30,7 @@ namespace Code.Runtime.Entity.Enemy.RangedEnemy
                 (transition) => _enemyTarget.HasTarget() && !_enemyAttackComponent.TargetInAttackRange));
 
             _fsm.AddTransition(new TransitionAfter(
-                nameof(EnemyAttackState),
+                nameof(RangedEnemyAttackState),
                 nameof(EnemyChaseState),
                 _animationData.Animations[AnimationKey.Attack1].Length,
                 (transition) => _enemyTarget.HasTarget() && !_enemyAttackComponent.TargetInAttackRange));
@@ -54,16 +54,16 @@ namespace Code.Runtime.Entity.Enemy.RangedEnemy
 
             _fsm.AddTransition(new Transition(
                 nameof(EnemyChaseState),
-                nameof(EnemyAttackState),
+                nameof(RangedEnemyAttackState),
                 (transition) => _enemyAttackComponent.CanAttack()));
 
             _fsm.AddTransition(new Transition(
-                nameof(EnemyAttackState),
+                nameof(RangedEnemyAttackState),
                 nameof(EnemyIdleState)));
             
             _fsm.AddTransition(new Transition(
                 nameof(EnemyIdleState),
-                nameof(EnemyAttackState),
+                nameof(RangedEnemyAttackState),
                 (transition) => _enemyAttackComponent.CanAttack(),
                 true));
             

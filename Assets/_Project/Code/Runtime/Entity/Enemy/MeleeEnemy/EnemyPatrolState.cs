@@ -5,7 +5,7 @@ using Code.Runtime.Modules.StateMachine.States;
 
 namespace Code.Runtime.Entity.Enemy.CommonEnemy
 {
-    public class EnemyPatrolState : CommonEnemyState
+    public class EnemyPatrolState : BaseEnemyState
     {
         public EnemyPatrolState(EnemyAnimator enemyAnimator, AnimationDataContainer animationData,
             bool needExitTime = false, bool isGhostState = false, Action<State<string, string>> onEnter = null,

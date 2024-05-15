@@ -1,18 +1,17 @@
 using System;
 using Code.Runtime.ConfigData.Animations;
-using Code.Runtime.Entity.Enemy.CommonEnemy;
 using Code.Runtime.Modules.StateMachine.States;
 
 namespace Code.Runtime.Entity.Enemy.MeleeEnemy
 {
-    public class EnemyAttackState : CommonEnemyState
+    public class MeleeEnemyAttackState : BaseEnemyState
     {
         private readonly EnemyAttackComponent _enemyAttackComponent;
         private readonly AgentMoveToPlayer _agentMoveToPlayer;
         private readonly EnemyTarget _enemyTarget;
         private readonly EnemyWeapon _enemyWeapon;
 
-        public EnemyAttackState(EnemyAttackComponent enemyAttackComponent, AgentMoveToPlayer agentMoveToPlayer,
+        public MeleeEnemyAttackState(EnemyAttackComponent enemyAttackComponent, AgentMoveToPlayer agentMoveToPlayer,
             EnemyTarget enemyTarget, EnemyAnimator enemyAnimator, EnemyWeapon enemyWeapon,
             AnimationDataContainer animationData, bool needExitTime = false, bool isGhostState = false,
             Action<State<string, string>> onEnter = null, Action<State<string, string>> onLogic = null,

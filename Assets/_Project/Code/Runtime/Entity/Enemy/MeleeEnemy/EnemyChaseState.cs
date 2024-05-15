@@ -5,7 +5,7 @@ using Code.Runtime.Modules.StateMachine.States;
 
 namespace Code.Runtime.Entity.Enemy.CommonEnemy
 {
-    public class EnemyChaseState : CommonEnemyState
+    public class EnemyChaseState : BaseEnemyState
     {
         private readonly AgentMoveToPlayer _moveToPlayer;
 

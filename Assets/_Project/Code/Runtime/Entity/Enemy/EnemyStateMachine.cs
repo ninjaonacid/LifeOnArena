@@ -1,6 +1,5 @@
 using Code.Runtime.ConfigData.Animations;
 using Code.Runtime.Entity.Enemy.CommonEnemy;
-using Code.Runtime.Entity.Enemy.MeleeEnemy;
 using Code.Runtime.Modules.StateMachine;
 using Code.Runtime.Modules.StatSystem;
 using UnityEngine;
@@ -42,16 +41,7 @@ namespace Code.Runtime.Entity.Enemy
                 _animationData,
                 true,
                 canExit: (state) => state.Timer.Elapsed >= _statController.Stats["HitRecovery"].Value));
-
-            _fsm.AddState(nameof(EnemyAttackState), new EnemyAttackState(
-                _enemyAttackComponent,
-                _agentMoveToPlayer,
-                _enemyTarget,
-                _enemyAnimator,
-                _enemyWeapon,
-                _animationData,
-                true
-                ));
+            
 
                 _fsm.AddState(nameof(EnemyIdleState), new EnemyIdleState(
                 _enemyTarget,

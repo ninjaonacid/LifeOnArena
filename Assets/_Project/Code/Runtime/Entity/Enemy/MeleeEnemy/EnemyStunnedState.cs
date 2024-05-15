@@ -5,7 +5,7 @@ using Code.Runtime.Modules.StateMachine.States;
 
 namespace Code.Runtime.Entity.Enemy.CommonEnemy
 {
-    public class EnemyStunnedState : CommonEnemyState
+    public class EnemyStunnedState : BaseEnemyState
     {
         private readonly TagController _tagController;
 

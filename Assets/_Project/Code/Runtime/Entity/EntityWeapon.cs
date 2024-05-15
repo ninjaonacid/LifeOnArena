@@ -60,10 +60,10 @@ namespace Code.Runtime.Entity
             _weaponSlot.EquippedWeaponView = _itemFactory.CreateWeapon(_weaponData.WeaponView, _weaponPosition);
             _weaponSlot.EquippedWeaponView.gameObject.transform.localPosition = Vector3.zero;
 
-            _weaponSlot.EquippedWeaponView.gameObject.transform.localRotation = Quaternion.Euler(
-                _weaponData.LocalRotation.x,
-                _weaponData.LocalRotation.y,
-                _weaponData.LocalRotation.z);
+            // _weaponSlot.EquippedWeaponView.gameObject.transform.localRotation = Quaternion.Euler(
+            //     _weaponData.LocalRotation.x,
+            //     _weaponData.LocalRotation.y,
+            //     _weaponData.LocalRotation.z);
             
             EnableWeapon(false);
             

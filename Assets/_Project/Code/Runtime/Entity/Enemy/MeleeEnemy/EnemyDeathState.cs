@@ -5,7 +5,7 @@ using Code.Runtime.Modules.StateMachine.States;
 
 namespace Code.Runtime.Entity.Enemy.CommonEnemy
 {
-    public class EnemyDeathState : CommonEnemyState
+    public class EnemyDeathState : BaseEnemyState
     {
         private EnemyDeath _enemyDeath;
         private EnemyTarget _enemyTarget;

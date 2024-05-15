@@ -13,6 +13,16 @@ namespace Code.Runtime.Entity.Enemy.MeleeEnemy
             
             _enemyHealth.Health.CurrentValueChanged += TriggerDamageState;
             
+            _fsm.AddState(nameof(MeleeEnemyAttackState), new MeleeEnemyAttackState(
+                _enemyAttackComponent,
+                _agentMoveToPlayer,
+                _enemyTarget,
+                _enemyAnimator,
+                _enemyWeapon,
+                _animationData,
+                true
+            ));
+            
             _fsm.AddTransitionFromAny(new Transition(
                 "", 
                 nameof(EnemyDeathState), 
@@ -29,7 +39,7 @@ namespace Code.Runtime.Entity.Enemy.MeleeEnemy
                 (transition) => _enemyTarget.HasTarget() && !_enemyAttackComponent.TargetInAttackRange));
 
             _fsm.AddTransition(new TransitionAfter(
-                nameof(EnemyAttackState),
+                nameof(MeleeEnemyAttackState),
                 nameof(EnemyChaseState),
                 _animationData.Animations[AnimationKey.Attack1].Length,
                 (transition) => _enemyTarget.HasTarget() && !_enemyAttackComponent.TargetInAttackRange));
@@ -53,16 +63,16 @@ namespace Code.Runtime.Entity.Enemy.MeleeEnemy
 
             _fsm.AddTransition(new Transition(
                 nameof(EnemyChaseState),
-                nameof(EnemyAttackState),
+                nameof(MeleeEnemyAttackState),
                 (transition) => _enemyAttackComponent.CanAttack()));
 
             _fsm.AddTransition(new Transition(
-                nameof(EnemyAttackState),
+                nameof(MeleeEnemyAttackState),
                 nameof(EnemyIdleState)));
             
             _fsm.AddTransition(new Transition(
                 nameof(EnemyIdleState),
-                nameof(EnemyAttackState),
+                nameof(MeleeEnemyAttackState),
                 (transition) => _enemyAttackComponent.CanAttack(),
                 true));
             

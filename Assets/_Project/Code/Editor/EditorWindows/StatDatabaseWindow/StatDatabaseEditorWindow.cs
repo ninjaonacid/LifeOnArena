@@ -10,7 +10,7 @@ namespace Code.Editor.EditorWindows.StatDatabaseWindow
     {
         private StatDatabase _dataBase;
         private StatCollectionEditor _currentCollection;
-        
+
         [MenuItem("Window/StatSystem/StatDatabase")]
         public static void ShowWindow()
         {
