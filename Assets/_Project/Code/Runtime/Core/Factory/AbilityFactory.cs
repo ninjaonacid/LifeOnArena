@@ -46,7 +46,7 @@ namespace Code.Runtime.Core.Factory
             return activeAbilityBluePrint;
         }
         
-        public ActiveAbility CreateActiveAbility(int abilityId)
+        public ActiveAbility CreateActiveAbility(int abilityId, AbilityController owner)
         {
             ActiveAbilityBlueprintBase activeAbilityBluePrint = _config.Ability(abilityId);
 
@@ -55,7 +55,8 @@ namespace Code.Runtime.Core.Factory
             var abilityInstance = activeAbilityBluePrint.GetAbility();
             
             abilityInstance.InjectServices(_visualEffectFactory, _projectileFactory, _battleService, _audioService);
-
+            
+            abilityInstance.Initialize(owner);
             return abilityInstance;
         }
         

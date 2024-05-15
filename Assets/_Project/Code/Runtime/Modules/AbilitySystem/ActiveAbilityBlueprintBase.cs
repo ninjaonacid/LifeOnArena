@@ -21,8 +21,9 @@ namespace Code.Runtime.Modules.AbilitySystem
         public bool IsCastAbility => _isCastAbility;
         public VisualEffectData VisualEffectData => _visualEffect;
         public SoundAudioFile AbilitySound => _abilitySound;
-        public IReadOnlyList<GameplayEffect> GameplayEffects => 
-            _gameplayEffectBlueprints.Select(x => x.GetGameplayEffect()).ToList();
+
+        public IReadOnlyList<GameplayEffectBlueprint> GameplayEffectsBlueprints =>
+            _gameplayEffectBlueprints;
 
         public abstract ActiveAbility GetAbility();
     }

@@ -10,10 +10,9 @@ namespace Code.Runtime.Modules.AbilitySystem.GameplayEffects
         [SerializeField] private float _tickRate;
         public float Duration => _duration;
         public float TickRate => _tickRate;
-        public override GameplayEffect GetGameplayEffect()
+        public override GameplayEffect GetGameplayEffect(AbilityController owner)
         {
-            return new DurationalGameplayEffect(Modifiers, Tags, DurationType, StatusVisualEffect, 
-                Duration, TickRate);
+            return new DurationalGameplayEffect(this, owner, _duration, _tickRate);
         }
     }
 }

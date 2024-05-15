@@ -73,7 +73,7 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
         {
             var statusController = target.GetComponentInParent<StatusEffectController>();
 
-            foreach (var effect in AbilityBlueprint.GameplayEffects)
+            foreach (var effect in _gameplayEffects)
             {
                 if (effect is DurationalGameplayEffect durationalEffect)
                 {

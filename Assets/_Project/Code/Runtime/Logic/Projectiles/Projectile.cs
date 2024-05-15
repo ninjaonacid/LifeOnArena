@@ -21,6 +21,7 @@ namespace Code.Runtime.Logic.Projectiles
         
         [SerializeField] private Collider _collider;
         [SerializeField] private Rigidbody _rb;
+        [SerializeField] private VisualEffect _effect;
 
         private LayerMask _targetLayer;
         private GameObject _owner;
@@ -51,6 +52,12 @@ namespace Code.Runtime.Logic.Projectiles
         public void SetLifetime(float lifeTime)
         {
             HandleLifetime(lifeTime, TaskHelper.CreateToken(ref _cts)).Forget();
+
+            if (_effect != null)
+            {
+                _effect.Play(lifeTime);
+            }
+            
         }
 
         public void OnTriggerEnter(Collider other)
@@ -70,10 +77,11 @@ namespace Code.Runtime.Logic.Projectiles
                 Source = _owner,
                 Target = other
             });
-            
+
             ReturnToPool();
         }
-
+        
+        
         private async UniTask HandleLifetime(float lifeTime, CancellationToken token)
         {
             if (token.IsCancellationRequested)
@@ -82,6 +90,9 @@ namespace Code.Runtime.Logic.Projectiles
                 token.ThrowIfCancellationRequested();
             }
             await UniTask.Delay(TimeSpan.FromSeconds(lifeTime), cancellationToken: token);
+            
+            _effect.Stop();
+            
             ReturnToPool();
         }
     }

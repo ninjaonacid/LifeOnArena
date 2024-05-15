@@ -45,7 +45,7 @@ namespace Code.Runtime.Modules.AbilitySystem
                 if (slot.AbilityIdentifier is not null)
                 {
                     slot.Ability =
-                        _abilityFactory.CreateActiveAbility(slot.AbilityIdentifier.Id);
+                        _abilityFactory.CreateActiveAbility(slot.AbilityIdentifier.Id, this);
                 }
             }
         }
@@ -111,7 +111,7 @@ namespace Code.Runtime.Modules.AbilitySystem
         {
             if (ability.State == AbilityState.Ready)
             {
-                if (_abilitySlots.Any(x => x.Ability.IsActive()))
+                if (_abilitySlots != null && _abilitySlots.Any(x => x.Ability != null && x.Ability.IsActive()))
                 {
                     return false;
                 }

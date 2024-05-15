@@ -26,9 +26,9 @@ namespace Code.Runtime.Modules.AbilitySystem.GameplayEffects
         public ReadOnlyCollection<GameplayTag> Tags => _tags.AsReadOnly();
         public StatusVisualEffect StatusVisualEffect => _statusVisualEffect;
         
-        public virtual GameplayEffect GetGameplayEffect()
+        public virtual GameplayEffect GetGameplayEffect(AbilityController owner)
         {
-            return new GameplayEffect(Modifiers, Tags, DurationType, StatusVisualEffect);
+            return new GameplayEffect(this, owner);
         }
 
     }

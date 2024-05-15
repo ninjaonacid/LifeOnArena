@@ -69,7 +69,7 @@ namespace Code.Runtime.Entity.Hero
                     var slot = _abilitySlots[index];
 
                     slot.Ability =
-                        _abilityFactory.CreateActiveAbility(skillsData.EquippedAbilities[index].AbilityId);
+                        _abilityFactory.CreateActiveAbility(skillsData.EquippedAbilities[index].AbilityId, this);
                 }
             }
 

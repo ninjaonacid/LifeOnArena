@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Code.Runtime.ConfigData;
+using Code.Runtime.Modules.AbilitySystem;
 using Code.Runtime.Modules.AbilitySystem.GameplayEffects;
 using Code.Runtime.Modules.AbilitySystem.GameplayTags;
 using UnityEngine;
@@ -15,12 +16,11 @@ namespace Code.Runtime.Entity.StatusEffects
         private readonly float _duration;
         private readonly float _executeRate;
 
-        public DurationalGameplayEffect(ReadOnlyCollection<StatModifierBlueprint> modifiers,
-            ReadOnlyCollection<GameplayTag> tags, EffectDurationType type, StatusVisualEffect statusVisualEffect,
-            float duration, float executeRate) : base(modifiers, tags, type, statusVisualEffect)
+
+        public DurationalGameplayEffect(GameplayEffectBlueprint effectBlueprint, AbilityController owner, float duration, float executeRate) : base(effectBlueprint, owner)
         {
+            _remainingDuration = duration;
             _duration = duration;
-            _remainingDuration = _duration;
             _executeRate = executeRate;
         }
 
