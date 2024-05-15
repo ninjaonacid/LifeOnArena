@@ -21,19 +21,12 @@ namespace Code.Runtime.Entity.Hero
             _controls = controls;
         }
 
-        private void Start()
+        public override void Start()
         {
+            base.Start();
+            
             _skillActions.Add(_controls.Player.SkillSlot1);
             _skillActions.Add(_controls.Player.SkillSlot2);
-
-            foreach (var slot in _abilitySlots)
-            {
-                if (slot.AbilityIdentifier is not null)
-                {
-                    slot.Ability =
-                        _abilityFactory.CreateActiveAbility(slot.AbilityIdentifier.Id);
-                }
-            }
 
             for (var index = 0; index < _skillActions.Count; index++)
             {

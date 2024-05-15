@@ -1,6 +1,7 @@
 using System;
 using Code.Runtime.ConfigData.Animations;
 using Code.Runtime.Modules.StateMachine.States;
+using UnityEngine;
 
 namespace Code.Runtime.Entity.Enemy.MeleeEnemy
 {
@@ -16,6 +17,23 @@ namespace Code.Runtime.Entity.Enemy.MeleeEnemy
         {
             _enemyAnimator = enemyAnimator;
             _animationData = animationData;
+        }
+
+        public override void OnEnter()
+        {
+            base.OnEnter();
+            Debug.Log($"Entered {this.name}");
+        }
+
+        public override void OnLogic()
+        {
+            base.OnLogic();
+        }
+
+        public override void OnExit()
+        {
+            base.OnExit();
+            Debug.Log($"Exited {this.name}");
         }
     }
 }

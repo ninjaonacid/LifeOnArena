@@ -38,6 +38,18 @@ namespace Code.Runtime.Modules.AbilitySystem
             _abilityFactory = abilityFactory;
         }
 
+        public virtual void Start()
+        {
+            foreach (var slot in _abilitySlots)
+            {
+                if (slot.AbilityIdentifier is not null)
+                {
+                    slot.Ability =
+                        _abilityFactory.CreateActiveAbility(slot.AbilityIdentifier.Id);
+                }
+            }
+        }
+
         public bool TryActivateAbility(AbilityIdentifier abilityId)
         {
             AbilitySlot slot = _abilitySlots.FirstOrDefault(x => x.AbilityIdentifier == abilityId);
@@ -61,6 +73,25 @@ namespace Code.Runtime.Modules.AbilitySystem
         {
             AbilitySlot slot = _abilitySlots.FirstOrDefault(x => x.Ability == ability);
 
+            if (slot != null)
+            {
+                if (CanActivateAbility(slot.Ability))
+                {
+                    _activeAbility = slot.Ability;
+                    slot.Ability.Use(gameObject, null);
+                    slot.Ability.State = AbilityState.Active;
+                    _cooldownController.StartCooldown(slot.Ability);
+                    OnAbilityUse?.Invoke();
+                }
+            }
+
+            return false;
+        }
+
+        public bool TryActivateAbility(string abilityName)
+        {
+            AbilitySlot slot = _abilitySlots.FirstOrDefault(x => x.AbilityIdentifier.name == abilityName);
+            
             if (slot != null)
             {
                 if (CanActivateAbility(slot.Ability))

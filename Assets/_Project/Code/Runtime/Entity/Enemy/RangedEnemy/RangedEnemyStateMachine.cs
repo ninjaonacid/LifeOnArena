@@ -1,6 +1,5 @@
 ﻿using Code.Runtime.ConfigData.Animations;
 using Code.Runtime.Entity.Enemy.CommonEnemy;
-using Code.Runtime.Entity.Enemy.MeleeEnemy;
 using Code.Runtime.Modules.StateMachine;
 using Code.Runtime.Modules.StateMachine.Transitions;
 
@@ -13,6 +12,14 @@ namespace Code.Runtime.Entity.Enemy.RangedEnemy
             base.Start();
             
             _enemyHealth.Health.CurrentValueChanged += TriggerDamageState;
+            
+            _fsm.AddState(nameof(RangedEnemyAttackState), 
+                new RangedEnemyAttackState(_enemyAnimator, 
+                    _animationData, 
+                    _abilityController, 
+                    _agentMoveToPlayer,
+                    _enemyAttackComponent,
+                    _enemyTarget, needExitTime: true));
             
             _fsm.AddTransitionFromAny(new Transition(
                 "", 
@@ -32,7 +39,7 @@ namespace Code.Runtime.Entity.Enemy.RangedEnemy
             _fsm.AddTransition(new TransitionAfter(
                 nameof(RangedEnemyAttackState),
                 nameof(EnemyChaseState),
-                _animationData.Animations[AnimationKey.Attack1].Length,
+                _animationData.Animations[AnimationKey.SpellCast].Length,
                 (transition) => _enemyTarget.HasTarget() && !_enemyAttackComponent.TargetInAttackRange));
                 
             _fsm.AddTransition(new Transition(
@@ -57,9 +64,10 @@ namespace Code.Runtime.Entity.Enemy.RangedEnemy
                 nameof(RangedEnemyAttackState),
                 (transition) => _enemyAttackComponent.CanAttack()));
 
-            _fsm.AddTransition(new Transition(
+            _fsm.AddTransition(new TransitionAfter(
                 nameof(RangedEnemyAttackState),
-                nameof(EnemyIdleState)));
+                nameof(EnemyIdleState), 
+                _animationData.Animations[AnimationKey.SpellCast].Length));
             
             _fsm.AddTransition(new Transition(
                 nameof(EnemyIdleState),

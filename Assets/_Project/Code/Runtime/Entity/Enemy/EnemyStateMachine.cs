@@ -1,5 +1,6 @@
 using Code.Runtime.ConfigData.Animations;
 using Code.Runtime.Entity.Enemy.CommonEnemy;
+using Code.Runtime.Modules.AbilitySystem;
 using Code.Runtime.Modules.StateMachine;
 using Code.Runtime.Modules.StatSystem;
 using UnityEngine;
@@ -20,6 +21,7 @@ namespace Code.Runtime.Entity.Enemy
         [SerializeField] protected AnimationDataContainer _animationData;
         [SerializeField] protected StatController _statController;
         [SerializeField] protected EnemyDeath _enemyDeath;
+        [SerializeField] protected AbilityController _abilityController;
 
         protected virtual void Start()
         {

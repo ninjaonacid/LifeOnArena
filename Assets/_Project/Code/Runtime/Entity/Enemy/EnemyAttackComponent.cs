@@ -54,7 +54,7 @@ namespace Code.Runtime.Entity.Enemy
 
         public void AttackEnded()
         {
-            _attackCooldown = _stats.Stats["AttackSpeed"].Value;
+            _attackCooldown = GetAttacksPerSecond();
             _isAttacking = false;
         }
 
