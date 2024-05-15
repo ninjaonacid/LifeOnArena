@@ -21,7 +21,7 @@ namespace Code.Runtime.Logic.Projectiles
         
         [SerializeField] private Collider _collider;
         [SerializeField] private Rigidbody _rb;
-        [SerializeField] private VisualEffect _effect;
+        [SerializeField] private ParticleSystem _effect;
 
         private LayerMask _targetLayer;
         private GameObject _owner;
@@ -55,7 +55,7 @@ namespace Code.Runtime.Logic.Projectiles
 
             if (_effect != null)
             {
-                _effect.Play(lifeTime);
+                _effect.Play();
             }
             
         }
@@ -91,7 +91,8 @@ namespace Code.Runtime.Logic.Projectiles
             }
             await UniTask.Delay(TimeSpan.FromSeconds(lifeTime), cancellationToken: token);
             
-            _effect.Stop();
+            if(_effect != null)
+                _effect.Stop();
             
             ReturnToPool();
         }

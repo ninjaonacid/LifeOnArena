@@ -13704,7 +13704,6 @@ GameObject:
   - component: {fileID: 6980933038677081159}
   - component: {fileID: 4301188087434772166}
   - component: {fileID: 4140074422687958933}
-  - component: {fileID: 653551604507362666}
   m_Layer: 0
   m_Name: FireballProjectile
   m_TagString: Untagged
@@ -18639,17 +18638,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _collider: {fileID: 3241038886618412806}
   _rb: {fileID: 6980933038677081159}
-  _effect: {fileID: 653551604507362666}
---- !u!114 &653551604507362666
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4139478733270736082}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7cb44888f4bd564abb5c6b6eb27a935, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _particleSystem: {fileID: 4302124420856992568}
+  _effect: {fileID: 4302124420856992568}
