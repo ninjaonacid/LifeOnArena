@@ -52,12 +52,11 @@ namespace Code.Runtime.Logic.Projectiles
         public void SetLifetime(float lifeTime)
         {
             HandleLifetime(lifeTime, TaskHelper.CreateToken(ref _cts)).Forget();
-
+            
             if (_effect != null)
             {
                 _effect.Play();
             }
-            
         }
 
         public void OnTriggerEnter(Collider other)

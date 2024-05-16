@@ -30,7 +30,7 @@ namespace Code.Runtime.Core.ObjectPool
 
             if (!_prefabToPoolMap.TryGetValue(prefabInstanceId, out var objectPool))
             {
-                objectPool = CreatePool(prefab, onCreate, onRelease, onGet);
+                objectPool = CreatePool(prefab, onCreate, onRelease, onGet, onReturn);
 
                 _prefabToPoolMap.Add(prefabInstanceId, objectPool);
 
@@ -71,7 +71,7 @@ namespace Code.Runtime.Core.ObjectPool
             Action<PooledObject> onRelease = null, Action<PooledObject> onGet = null,
             Action<PooledObject> onReturn = null)
         {
-            var go = Spawn(prefab, onCreate, onRelease, onGet);
+            var go = Spawn(prefab, onCreate, onRelease, onGet, onReturn);
             return go.GetComponent<TComponent>();
         }
 

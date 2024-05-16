@@ -25,14 +25,9 @@ namespace Code.Runtime.Core.ObjectPool
         {
             _factory = factory;
             _onCreate = onCreate;
+            _onRelease = onRelease;
             _onGet = onGet;
             _onReturn = onReturn;
-            _objectsStock = new Stack<T>();
-        }
-
-        public ObjectPool(Func<T> factory)
-        {
-            _factory = factory;
             _objectsStock = new Stack<T>();
         }
 
@@ -105,6 +100,8 @@ namespace Code.Runtime.Core.ObjectPool
         {
             _objectsStock.Push(obj as T);
             obj.gameObject.SetActive(false);
+            
+            _onReturn?.Invoke(obj as T);
         }
     }
 }

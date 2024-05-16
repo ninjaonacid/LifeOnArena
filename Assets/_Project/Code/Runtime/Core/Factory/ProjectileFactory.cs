@@ -28,14 +28,15 @@ namespace Code.Runtime.Core.Factory
         }
 
         public Projectile CreateProjectile(Projectile prefab, Action<Projectile> onCreate, Action<Projectile> onRelease,
-            Action<Projectile> onGet)
+            Action<Projectile> onGet, Action<Projectile> onReturn)
         {
             void OnCreateAdapter(PooledObject obj) => onCreate(obj as Projectile);
             void OnReleaseAdapter(PooledObject obj) => onRelease(obj as Projectile);
             void OnGetAdapter(PooledObject obj) => onGet(obj as Projectile);
+            void OnReturnAdapter(PooledObject obj) => onReturn(obj as Projectile);
 
             var projectile = _poolProvider.Spawn<Projectile>(prefab.gameObject, OnCreateAdapter,
-                OnReleaseAdapter, OnGetAdapter);
+                OnReleaseAdapter, OnGetAdapter, OnReturnAdapter);
             return projectile;
         }
     }

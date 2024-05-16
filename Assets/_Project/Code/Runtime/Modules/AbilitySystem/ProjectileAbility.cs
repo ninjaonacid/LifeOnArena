@@ -23,7 +23,7 @@ namespace Code.Runtime.Modules.AbilitySystem
         public override void Use(GameObject caster, GameObject target)
         {
             Projectile projectile = _projectileFactory
-                .CreateProjectile(_projectilePrefab, OnCreate, OnRelease, OnGet);
+                .CreateProjectile(_projectilePrefab, OnCreate, OnRelease, OnGet, OnReturn);
 
             var entityAttack = caster.GetComponent<EntityAttackComponent>();
             var layer = entityAttack.GetTargetLayer();
@@ -56,7 +56,11 @@ namespace Code.Runtime.Modules.AbilitySystem
 
         private void OnCreate(Projectile projectile)
         {
-            projectile.OnHit += OnHit;
+        }
+
+        private void OnReturn(Projectile projectile)
+        {
+            projectile.OnHit -= OnHit;
         }
 
         private void OnRelease(Projectile projectile)
@@ -66,7 +70,9 @@ namespace Code.Runtime.Modules.AbilitySystem
 
         private void OnGet(Projectile projectile)
         {
+            projectile.OnHit += OnHit;
             projectile.SetVelocity(Vector3.zero, 0);
         }
+        
     }
 }

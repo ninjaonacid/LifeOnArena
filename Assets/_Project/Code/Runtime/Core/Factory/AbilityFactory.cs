@@ -57,6 +57,7 @@ namespace Code.Runtime.Core.Factory
             abilityInstance.InjectServices(_visualEffectFactory, _projectileFactory, _battleService, _audioService);
             
             abilityInstance.Initialize(owner);
+            
             return abilityInstance;
         }
         
