@@ -22,7 +22,7 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
             var visualEffect =
                 await _visualEffectFactory
                     .CreateVisualEffect(AbilityBlueprint.VisualEffectData.Identifier.Id,
-                        OnCreate, OnRelease);
+                        caster, OnCreate, OnRelease);
 
             Transform visualEffectTransform = visualEffect.transform;
             var visualEffectPosition = casterPosition + casterDirection * _castDistance;

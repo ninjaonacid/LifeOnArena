@@ -2,6 +2,7 @@
 using Code.Runtime.Core.ConfigProvider;
 using Code.Runtime.Core.ObjectPool;
 using Code.Runtime.Logic.Projectiles;
+using UnityEngine;
 
 namespace Code.Runtime.Core.Factory
 {
@@ -27,7 +28,7 @@ namespace Code.Runtime.Core.Factory
             return projectile;
         }
 
-        public Projectile CreateProjectile(Projectile prefab, Action<Projectile> onCreate, Action<Projectile> onRelease,
+        public Projectile CreateProjectile(Projectile prefab, GameObject owner, Action<Projectile> onCreate, Action<Projectile> onRelease,
             Action<Projectile> onGet, Action<Projectile> onReturn)
         {
             void OnCreateAdapter(PooledObject obj) => onCreate(obj as Projectile);
@@ -35,7 +36,7 @@ namespace Code.Runtime.Core.Factory
             void OnGetAdapter(PooledObject obj) => onGet(obj as Projectile);
             void OnReturnAdapter(PooledObject obj) => onReturn(obj as Projectile);
 
-            var projectile = _poolProvider.Spawn<Projectile>(prefab.gameObject, OnCreateAdapter,
+            var projectile = _poolProvider.Spawn<Projectile>(prefab.gameObject, owner, OnCreateAdapter,
                 OnReleaseAdapter, OnGetAdapter, OnReturnAdapter);
             return projectile;
         }

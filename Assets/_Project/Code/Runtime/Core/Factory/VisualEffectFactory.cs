@@ -25,7 +25,7 @@ namespace Code.Runtime.Core.Factory
             _poolProvider = poolProvider;
         }
         
-        public async UniTask<VisualEffect> CreateVisualEffect(int id, Action<PooledObject> onCreate = null,
+        public async UniTask<VisualEffect> CreateVisualEffect(int id, GameObject owner = null, Action<PooledObject> onCreate = null,
             Action<PooledObject> onRelease = null,
             Action<PooledObject> onGet = null,
             Action<PooledObject> onReturn = null)
@@ -34,7 +34,7 @@ namespace Code.Runtime.Core.Factory
 
             var prefab = await _assetProvider.Load<GameObject>(visualEffect.PrefabReference);
             
-            var particleSystem = _poolProvider.Spawn<VisualEffect>(prefab, onCreate, onRelease, onGet, onReturn);
+            var particleSystem = _poolProvider.Spawn<VisualEffect>(prefab, owner, onCreate, onRelease, onGet, onReturn);
 
             return particleSystem;
         }
