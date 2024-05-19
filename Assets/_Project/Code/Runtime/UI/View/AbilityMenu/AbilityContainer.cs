@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Code.Runtime.UI.AbilityMenu;
 using UniRx;
 using UnityEngine;
 
@@ -8,42 +7,28 @@ namespace Code.Runtime.UI.View.AbilityMenu
 {
     public class AbilityContainer : MonoBehaviour
     {
-        [SerializeField] private AbilityItemView _abilityItem;
         [SerializeField] private List<AbilityTreeCell> _abilityTreeCells;
-        
-        private List<AbilityItemView> _abilityItems;
-        
-        private AbilityItemView _selectedItem;
+
+        private AbilityTreeCell _selectedCell;
 
         private Subject<int> _abilitySelected;
-        
-        public void InitializeAbilityContainer(int abilitiesCount)
+
+        public void Initialize()
         {
-            _abilityItems = new List<AbilityItemView>();
-
-            for (int i = 0; i < _abilityTreeCells.Count; i++)
+            foreach (var cell in _abilityTreeCells)
             {
-                var abilityView = Instantiate(_abilityItem, _abilityTreeCells[i].transform);
-                abilityView.transform.SetAsFirstSibling();
-                
-
-                _abilityItems.Add(abilityView);
-            }
-
-            foreach (var ability in _abilityItems)
-            {
-                ability.OnAbilityItemClickAsObservable().Subscribe(HandleAbilitySelection).AddTo(gameObject);
+                cell.OnClickAsObservable().Subscribe(HandleAbilitySelection);
             }
         }
 
         public int GetSelectedSlotIndex()
         {
-            return _abilityItems.IndexOf(_selectedItem);
+            return _abilityTreeCells.IndexOf(_selectedCell);
         }
         
         public void UpdateData(int abilityIndex, int equippedIndex, Sprite abilityIcon, bool isUnlocked)
         {
-            _abilityItems[abilityIndex].SetData(abilityIcon, isUnlocked, equippedIndex);
+            _abilityTreeCells[abilityIndex].UpdateData(abilityIcon, isUnlocked, equippedIndex);
         }
 
         public IObservable<int> OnAbilitySelectedAsObservable()
@@ -51,24 +36,24 @@ namespace Code.Runtime.UI.View.AbilityMenu
             return _abilitySelected ??= (_abilitySelected = new Subject<int>());
         }
 
-        private void HandleAbilitySelection(AbilityItemView obj)
+        private void HandleAbilitySelection(AbilityTreeCell obj)
         {
-            int selectedItemIndex = _abilityItems.IndexOf(obj);
+            int selectedItemIndex = _abilityTreeCells.IndexOf(obj);
             
             var selectedAbilityCell = _abilityTreeCells[selectedItemIndex];
             
             
-            if (_selectedItem is not null && _selectedItem != obj)
+            if (_selectedCell is not null && _selectedCell != obj)
             {
-                var previousSelectedCell = _abilityTreeCells[_abilityItems.IndexOf(_selectedItem)];
+                var previousSelectedCell = _abilityTreeCells[_abilityTreeCells.IndexOf(_selectedCell)];
                 previousSelectedCell.Deselect();
             }
             
-            _selectedItem = obj;
+            _selectedCell = obj;
             
             selectedAbilityCell.Select();
 
-            _abilitySelected?.OnNext(_abilityItems.IndexOf(obj));
+            _abilitySelected?.OnNext(_abilityTreeCells.IndexOf(obj));
         }
         
         

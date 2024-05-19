@@ -38,6 +38,7 @@ namespace Code.Runtime.UI.View.AbilityMenu
                 _equippedSlotIndex.gameObject.SetActive(true);
                 _equippedSlotIndex.text = equippedSlotIndex.ToString();
             }
+            
 
             _lockIcon.gameObject.SetActive(!isUnlocked);
         }

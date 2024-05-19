@@ -329,6 +329,7 @@ GameObject:
   - component: {fileID: 4783474853848083527}
   - component: {fileID: 7547982924282891183}
   - component: {fileID: 819212837027285666}
+  - component: {fileID: 1364866960257241353}
   m_Layer: 0
   m_Name: SkillButton
   m_TagString: Untagged
@@ -387,7 +388,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 5d1d7cf97eb8abb48b1186aefc2c79bd, type: 3}
-  m_Type: 0
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -408,8 +409,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3af7a808dd35437448b7135769c698b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ControlPath: 
-  _abilitySlotID: 0
-  _heroAbility: {fileID: 0}
+  m_ControlPath: <Mouse>/rightButton
+  _abilitySlotID: 1
   _skillIcon: {fileID: 1952344347578689738}
   _cooldown: {fileID: 549999318034061395}
+--- !u!114 &1364866960257241353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6510519317988240789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3312d7739989d2b4e91e6319e9a96d76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding: {x: 5, y: 15, z: 5, w: 15}
+  m_Softness: {x: 0, y: 80}

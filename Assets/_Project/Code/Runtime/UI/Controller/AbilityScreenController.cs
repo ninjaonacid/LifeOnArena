@@ -33,7 +33,7 @@ namespace Code.Runtime.UI.Controller
             
             _model.LoadData();
             
-            _screenView.AbilityContainer.InitializeAbilityContainer(_model.GetSlots().Count);
+            _screenView.AbilityContainer.Initialize();
 
             _screenView.CloseButton
                 .OnClickAsObservable()
