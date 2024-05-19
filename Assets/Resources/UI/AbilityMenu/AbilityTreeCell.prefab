@@ -55,6 +55,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _abilitySlotFrame: {fileID: 1078365414884320439}
   _selectionFrame: {fileID: 5369690224981363651}
+  _line: {fileID: 0}
 --- !u!222 &6552101526621459759
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -74,6 +75,7 @@ GameObject:
   - component: {fileID: 7758737813132671420}
   - component: {fileID: 6390257539523940160}
   - component: {fileID: 812343414874989020}
+  - component: {fileID: 334385693055886745}
   m_Layer: 5
   m_Name: Line
   m_TagString: Untagged
@@ -139,6 +141,24 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &334385693055886745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2957422146246487659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 175310d38f294f2397fc2157720e339c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _lockedColor:
+    serializedVersion: 2
+    rgba: 4408131
+  _unlockedColor:
+    serializedVersion: 2
+    rgba: 895449
 --- !u!1 &4965542613343617925
 GameObject:
   m_ObjectHideFlags: 0

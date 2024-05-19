@@ -30,13 +30,6 @@ namespace Code.Runtime.UI.View.AbilityMenu
                 _abilityItems.Add(abilityView);
             }
 
-            // for (int i = 0; i < abilitiesCount; i++)
-            // {
-            //     var abilityView = Instantiate(_abilityItem, gameObject.transform);
-            //
-            //     _abilityViews.Add(abilityView);
-            // }
-
             foreach (var ability in _abilityItems)
             {
                 ability.OnAbilityItemClickAsObservable().Subscribe(HandleAbilitySelection).AddTo(gameObject);

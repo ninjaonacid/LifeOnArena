@@ -39,14 +39,7 @@ namespace Code.Runtime.UI.View.AbilityMenu
                 _equippedSlotIndex.text = equippedSlotIndex.ToString();
             }
 
-            if (!isUnlocked)
-            {
-                _lockIcon.gameObject.SetActive(true);
-            }
-            else
-            {
-                _lockIcon.gameObject.SetActive(false);
-            }
+            _lockIcon.gameObject.SetActive(!isUnlocked);
         }
 
         public IObservable<AbilityItemView> OnAbilityItemClickAsObservable()
