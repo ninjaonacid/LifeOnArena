@@ -1,5 +1,6 @@
 ﻿using System;
 using Newtonsoft.Json;
+using UniRx;
 
 namespace Code.Runtime.Data.PlayerData
 {
@@ -22,6 +23,13 @@ namespace Code.Runtime.Data.PlayerData
         {
             Collected += value;
             CountChanged?.Invoke(value);
+        }
+        
+        public IObservable<int> OnLootChangedAsObservable()
+        {
+            return Observable.FromEvent<int>(
+                addHandler => CountChanged += addHandler,
+                removeHandler => CountChanged -= removeHandler);
         }
     }
 }

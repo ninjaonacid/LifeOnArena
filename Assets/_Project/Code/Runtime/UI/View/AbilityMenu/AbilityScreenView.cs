@@ -9,6 +9,7 @@ namespace Code.Runtime.UI.View.AbilityMenu
         public UnEquipSkillButton UnEquipButton;
         public UnlockButton UnlockButton;
         public AbilityDescriptionArea AbilityDescription;
+        public ResourcesCountUI ResourcesCount;
 
     }
 }

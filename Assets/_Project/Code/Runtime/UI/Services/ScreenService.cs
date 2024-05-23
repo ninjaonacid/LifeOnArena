@@ -27,7 +27,7 @@ namespace Code.Runtime.UI.Services
 
             _screenMap.Add(ScreenID.MainMenu, (typeof(MainMenuModel), typeof(MainMenuController)));
             _screenMap.Add(ScreenID.WeaponShop, (typeof(WeaponShopWindowModel), typeof(WeaponShopScreenController)));
-            _screenMap.Add(ScreenID.AbilityMenu, (typeof(AbilityTreeWindowModel), typeof(AbilityScreenController)));
+            _screenMap.Add(ScreenID.AbilityMenu, (typeof(AbilityScreenModel), typeof(AbilityScreenController)));
             _screenMap.Add(ScreenID.HUD, (typeof(HudModel), (typeof(HudController))));
             _screenMap.Add(ScreenID.MessageWindow, (typeof(MessageWindowModel), typeof(MessageWindowController)));
         }

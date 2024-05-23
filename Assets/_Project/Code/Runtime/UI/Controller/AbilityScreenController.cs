@@ -12,7 +12,7 @@ namespace Code.Runtime.UI.Controller
 {
     public class AbilityScreenController : IScreenController, IDisposable
     {
-        private AbilityTreeWindowModel _model;
+        private AbilityScreenModel _model;
         private AbilityScreenView _screenView;
         private ScreenService _screenService;
         private readonly ISaveLoadService _saveLoad;
@@ -24,7 +24,7 @@ namespace Code.Runtime.UI.Controller
 
         public void InitController(IScreenModel model, BaseWindowView windowView, ScreenService screenService)
         {
-            _model = model as AbilityTreeWindowModel;
+            _model = model as AbilityScreenModel;
             _screenView = windowView as AbilityScreenView;
             _screenService = screenService;
 
@@ -32,7 +32,7 @@ namespace Code.Runtime.UI.Controller
             Assert.IsNotNull(_screenView);
             
             _model.LoadData();
-            
+
             _screenView.AbilityContainer.Initialize();
 
             _screenView.CloseButton
@@ -62,8 +62,9 @@ namespace Code.Runtime.UI.Controller
                 .OnClickAsObservable()
                 .Subscribe(x => Unlock())
                 .AddTo(_disposable);
-            
-            
+
+            _screenView.ResourcesCount.ChangeText(_model.Souls.Value.ToString());
+            _model.Souls.Subscribe(x => _screenView.ResourcesCount.ChangeText(_model.Souls.Value.ToString()));
             
             
           UpdateData();

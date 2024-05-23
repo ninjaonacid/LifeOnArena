@@ -29,6 +29,8 @@ namespace Code.Runtime.UI.View.AbilityMenu
         public void UpdateData(Sprite abilityIcon, bool isUnlocked, int equippedSlot)
         {
             _abilityItem.SetData(abilityIcon, isUnlocked, equippedSlot);
+
+            _line.ChangeColor(isUnlocked);
         }
 
         public IObservable<AbilityTreeCell> OnClickAsObservable()

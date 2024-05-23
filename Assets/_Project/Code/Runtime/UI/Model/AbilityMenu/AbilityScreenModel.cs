@@ -5,18 +5,22 @@ using Code.Runtime.Core.ConfigProvider;
 using Code.Runtime.Data.DataStructures;
 using Code.Runtime.Modules.AbilitySystem;
 using Code.Runtime.Services.PersistentProgress;
+using UniRx;
 
 namespace Code.Runtime.UI.Model.AbilityMenu
 {
     [Serializable]
-    public class AbilityTreeWindowModel : IScreenModel
+    public class AbilityScreenModel : IScreenModel
     {
+        public ReactiveProperty<int> Souls;
+
         private readonly IGameDataContainer _gameData;
         private readonly IConfigProvider _configProvider;
         private List<UIAbilityModel> _abilities;
         private IndexedQueue<UIAbilityModel> _equippedAbilities;
+        
 
-        public AbilityTreeWindowModel(IGameDataContainer gameData, IConfigProvider configProvider)
+        public AbilityScreenModel(IGameDataContainer gameData, IConfigProvider configProvider)
         {
             _gameData = gameData;
             _configProvider = configProvider;
@@ -24,6 +28,9 @@ namespace Code.Runtime.UI.Model.AbilityMenu
 
         public void Initialize()
         {
+            var souls = _gameData.PlayerData.WorldData.LootData.Collected;
+            Souls = new ReactiveProperty<int>(souls);
+            
             _abilities = new List<UIAbilityModel>();
             _equippedAbilities = new IndexedQueue<UIAbilityModel>();
 
@@ -81,8 +88,9 @@ namespace Code.Runtime.UI.Model.AbilityMenu
                 
                 if (!previousAbility.IsUnlocked) return;
                 
-                if (_gameData.PlayerData.WorldData.LootData.Collected >= ability.Price)
+                if (Souls.Value >= ability.Price)
                 {
+                    Souls.Value -= ability.Price;
                     ability.IsUnlocked = true;
                 }
             }
@@ -121,6 +129,13 @@ namespace Code.Runtime.UI.Model.AbilityMenu
             return _abilities;
         }
 
+        public int GetResourceCount()
+        {
+            return _gameData.PlayerData.WorldData.LootData.Collected;
+        }
+        
+        
+
         public void LoadData()
         {
             if (_gameData.PlayerData.AbilityData.UnlockedAbilities.Count <= 0) return;
@@ -145,6 +160,7 @@ namespace Code.Runtime.UI.Model.AbilityMenu
         {
             _gameData.PlayerData.AbilityData.UnlockedAbilities = new List<UIAbilityModel>(_abilities);
             _gameData.PlayerData.AbilityData.EquippedAbilities = new List<UIAbilityModel>(_equippedAbilities);
+            _gameData.PlayerData.WorldData.LootData.Collected = Souls.Value;
         }
     }
 }
