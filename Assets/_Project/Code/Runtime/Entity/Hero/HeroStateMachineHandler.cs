@@ -136,6 +136,8 @@ namespace Code.Runtime.Entity.Hero
                 canExit: (state) => state.Timer.Elapsed >=
                                     _heroWeapon.GetEquippedWeaponData().WeaponFsmConfig.ThirdAttackStateDuration));
             
+            
+            
             _stateMachine.AddTransitionFromAny(new Transition("", nameof(HeroDeathState),
                 (transition) => _heroDeath.IsDead));
 

@@ -1,6 +1,7 @@
 using Code.Runtime.Modules.AbilitySystem;
 using UnityEngine;
 using UnityEngine.InputSystem.OnScreen;
+using UnityEngine.UI;
 
 namespace Code.Runtime.UI.View.HUD.Skills
 {
@@ -11,6 +12,7 @@ namespace Code.Runtime.UI.View.HUD.Skills
         [SerializeField] private ActiveAbility _heroActiveAbility;
         
         [SerializeField] private HudSkillIcon _skillIcon;
+        [SerializeField] private Image _skillMask;
 
         [SerializeField] private CooldownUI _cooldown;
 
@@ -24,6 +26,7 @@ namespace Code.Runtime.UI.View.HUD.Skills
             if (_heroActiveAbility != null)
             {
                 _skillIcon.Image.sprite = _heroActiveAbility.AbilityBlueprint.Icon;
+                _skillMask.enabled = true;
                 _skillIcon.Image.enabled = true;
             }
         }

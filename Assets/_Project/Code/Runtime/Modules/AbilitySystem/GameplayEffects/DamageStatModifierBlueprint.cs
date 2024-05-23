@@ -5,7 +5,7 @@ namespace Code.Runtime.Modules.AbilitySystem.GameplayEffects
 {
     public class DamageStatModifierBlueprint : StatModifierBlueprint
     {
-        [SerializeField] private string _statName;
+        [SerializeField] private string _statName = "Health";
         [SerializeField] private ModifierOperationType _operationType;
         [SerializeField] private int _magnitude;
         public override string StatName => _statName;

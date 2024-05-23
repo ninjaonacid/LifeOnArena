@@ -9,7 +9,7 @@ using Vector3 = UnityEngine.Vector3;
 
 namespace Code.Runtime.ConfigData.Weapon
 {
-    [CreateAssetMenu(menuName = "Configs/Equipment/Weapon", fileName = "NewWeapon")]
+    [CreateAssetMenu(menuName = "Config/Equipment/Weapon", fileName = "NewWeapon")]
     public class WeaponData : ScriptableObject, IDamageSource
     {
         [SerializeField] private WeaponView _weaponPrefab;
