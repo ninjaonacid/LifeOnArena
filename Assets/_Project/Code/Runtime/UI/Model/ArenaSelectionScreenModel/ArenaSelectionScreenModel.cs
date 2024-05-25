@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Code.Runtime.ConfigData.Levels;
 using Code.Runtime.Core.ConfigProvider;
 using UnityEngine;
@@ -8,7 +9,7 @@ namespace Code.Runtime.UI.Model.ArenaSelectionScreenModel
     public class ArenaSelectionScreenModel : IScreenModel
     {
         private IConfigProvider _configProvider;
-        private LevelModel _levelModel;
+        public List<LevelModel> LevelModel { get; private set; } = new();
 
         public ArenaSelectionScreenModel(IConfigProvider configProvider)
         {
@@ -25,7 +26,7 @@ namespace Code.Runtime.UI.Model.ArenaSelectionScreenModel
 
             foreach (var level in playableLevels)
             {
-                var levelModel = new LevelModel();
+                LevelModel.Add(new LevelModel(level));
             }
         }
     }
@@ -35,9 +36,11 @@ namespace Code.Runtime.UI.Model.ArenaSelectionScreenModel
         public Sprite Icon;
         public int RequiredLevel;
         public bool IsUnlocked;
-        public LevelModel()
+
+        public LevelConfig LevelConfig;
+        public LevelModel(LevelConfig config)
         {
-            
+            LevelConfig = config;
         }
     }
 }

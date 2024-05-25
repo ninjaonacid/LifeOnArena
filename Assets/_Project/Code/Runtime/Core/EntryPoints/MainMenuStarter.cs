@@ -43,6 +43,10 @@ namespace Code.Runtime.Core.EntryPoints
 
             GameObject hero = await _heroFactory.CreateHero(config.HeroInitialPosition, config.HeroInitialRotation);
 
+            var transformRotation = hero.transform.rotation;
+            transformRotation.eulerAngles =  new Vector3(0, 180, 0);
+            hero.transform.rotation = transformRotation;
+
             DisableInput();
             
             _saveLoad.LoadData();

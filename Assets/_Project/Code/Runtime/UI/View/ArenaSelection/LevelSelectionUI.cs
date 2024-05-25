@@ -5,6 +5,12 @@ namespace Code.Runtime.UI.View.ArenaSelection
 {
     public class LevelSelectionUI : MonoBehaviour
     {
-        public Image LevelImage;
+        [SerializeField] private Image _levelImage;
+
+
+        public void UpdateData(Sprite icon, bool isUnlocked)
+        {
+            _levelImage.sprite = icon;
+        }
     }
 }

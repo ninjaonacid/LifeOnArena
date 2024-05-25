@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3114596317793520818}
   - component: {fileID: 2060009028919853847}
   - component: {fileID: 4283600569635796957}
+  - component: {fileID: 189232983}
   m_Layer: 0
   m_Name: mogila
   m_TagString: Untagged
@@ -25,7 +26,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2338094391058683400}
-  m_LocalRotation: {x: -0.7021044, y: -0, z: -0, w: 0.712074}
+  m_LocalRotation: {x: -0.7021033, y: 0, z: 0, w: 0.7120751}
   m_LocalPosition: {x: -8.7, y: 2.01, z: -45.58}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
@@ -83,3 +84,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &189232983
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2338094391058683400}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.1126331, y: 0.056846593, z: 0.020897964}
+  m_Center: {x: -0.002194535, y: -0.005840013, z: 0.01044898}

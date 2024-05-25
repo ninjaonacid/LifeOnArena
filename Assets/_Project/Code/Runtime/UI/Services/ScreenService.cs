@@ -4,6 +4,7 @@ using System.Linq;
 using Code.Runtime.UI.Controller;
 using Code.Runtime.UI.Model;
 using Code.Runtime.UI.Model.AbilityMenu;
+using Code.Runtime.UI.Model.ArenaSelectionScreenModel;
 using Code.Runtime.UI.View;
 using UnityEngine.Assertions;
 
@@ -30,6 +31,7 @@ namespace Code.Runtime.UI.Services
             _screenMap.Add(ScreenID.AbilityMenu, (typeof(AbilityScreenModel), typeof(AbilityScreenController)));
             _screenMap.Add(ScreenID.HUD, (typeof(HudModel), (typeof(HudController))));
             _screenMap.Add(ScreenID.MessageWindow, (typeof(MessageWindowModel), typeof(MessageWindowController)));
+            _screenMap.Add(ScreenID.ArenaSelectionScreen, (typeof(ArenaSelectionScreenModel), typeof(ArenaSelectionScreenController)));
         }
 
         public void Open(ScreenID screenId)

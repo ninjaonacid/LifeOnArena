@@ -37,8 +37,6 @@ namespace Code.Runtime.UI.Controller
             
             Assert.IsNotNull(_model);
             Assert.IsNotNull(_windowView);
-            
-            _windowView.MusicButton.SetButton(_model.IsMusicMuted);
 
             _model.Health.Subscribe(x =>
             {
@@ -66,23 +64,22 @@ namespace Code.Runtime.UI.Controller
 
             _windowView.StartFightButton
                 .OnClickAsObservable()
-                .Subscribe(x => _sceneLoader.Load("FantasyArena_1"));
+                .Subscribe(x => _screenService.Open(ScreenID.ArenaSelectionScreen)
+                    //_sceneLoader.Load("FantasyArena_1")
+                );
 
             _windowView.SkillScreen.Button
                 .OnClickAsObservable()
                 .Subscribe(x => _screenService.Open(_windowView.SkillScreen.WindowId));
+            
 
-            _windowView.WeaponScreen.Button
-                .OnClickAsObservable()
-                .Subscribe(x => _screenService.Open(_windowView.WeaponScreen.WindowId));
-
-            _windowView.MusicButton
-                .OnClickAsObservable()
-                .Subscribe(x =>
-                {
-                    _model.ChangeMusicButtonState();
-                    _windowView.MusicButton.SetButton(_model.IsMusicMuted);
-                });
+            // _windowView.MusicButton
+            //     .OnClickAsObservable()
+            //     .Subscribe(x =>
+            //     {
+            //         _model.ChangeMusicButtonState();
+            //         _windowView.MusicButton.SetButton(_model.IsMusicMuted);
+            //     });
 
         }
         

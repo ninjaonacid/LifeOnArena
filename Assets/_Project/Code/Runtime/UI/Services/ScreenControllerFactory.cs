@@ -27,6 +27,8 @@ namespace Code.Runtime.UI.Services
                 new HudController(gameData, heroFactory, sceneLoader));
             
             _screenControllers.Add(typeof(MessageWindowController), () => new MessageWindowController());
+            
+            _screenControllers.Add(typeof(ArenaSelectionScreenController), () => new ArenaSelectionScreenController());
         }
 
         public IScreenController CreateController(Type controller)

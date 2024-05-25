@@ -3,6 +3,7 @@ using Code.Runtime.UI.Model.ArenaSelectionScreenModel;
 using Code.Runtime.UI.Services;
 using Code.Runtime.UI.View;
 using Code.Runtime.UI.View.ArenaSelection;
+using UniRx;
 using UnityEngine.Assertions;
 
 namespace Code.Runtime.UI.Controller
@@ -18,9 +19,23 @@ namespace Code.Runtime.UI.Controller
             
             Assert.IsNotNull(_model);
             Assert.IsNotNull(_view);
-            
-            
 
+            _view.CloseButton
+                .OnClickAsObservable()
+                .Subscribe(x => screenService.Close(this));;
+            
+            UpdateData();
+
+        }
+
+
+        private void UpdateData()
+        {
+            for (var index = 0; index < _model.LevelModel.Count; index++)
+            {
+                var levelModel = _model.LevelModel[index];
+                _view.LevelContainer.UpdateData(index, levelModel.LevelConfig.Icon, true);
+            }
         }
     }
 }
