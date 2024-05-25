@@ -9,11 +9,12 @@ using Code.Runtime.UI;
 using Code.Runtime.UI.Model.DTO;
 using Code.Runtime.UI.Services;
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 using VContainer.Unity;
 
 namespace Code.Runtime.Services
 {
-    public class LevelController : IInitializable, IDisposable
+    public class LevelController : IInitializable, ITickable, IDisposable
     {
         private LevelReward _levelReward;
         
@@ -37,7 +38,6 @@ namespace Code.Runtime.Services
             _eventSystem = eventSystem;
             _controls = controls;
             _sceneLoader = sceneLoader;
-            
         }
 
         public void Initialize()
@@ -45,6 +45,8 @@ namespace Code.Runtime.Services
             _spawnerController.WaveCleared += WaveCleared;
             _spawnerController.CommonEnemiesCleared += BossMessage;
             _spawnerController.BossKilled += LevelEnd;
+            
+            _controls.LevelControls.Enable();
         }
 
         private void LevelEnd()
@@ -105,6 +107,20 @@ namespace Code.Runtime.Services
             _cancellationToken?.Dispose();
             
             _eventSystem.Unsubscribe<HeroDeadEvent>(HeroDead);
+        }
+
+        public void Tick()
+        {
+            if (_controls.LevelControls.Button.triggered)
+            {
+                _sceneLoader.Load("FantasyArena_1");
+            }if (_controls.LevelControls.Button1.triggered)
+            {
+                _sceneLoader.Load("FantasyArena_2");
+            }if (_controls.LevelControls.Button2.triggered)
+            {
+                _sceneLoader.Load("FantasyArena_3");
+            }
         }
     }
 }

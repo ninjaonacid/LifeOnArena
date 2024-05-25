@@ -97,8 +97,8 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000000, guid: c85631345ffef6944b56dc4035df3c51, type: 2}
-  m_LightingSettings: {fileID: 658590932}
+  m_LightingDataAsset: {fileID: 112000000, guid: faef0e6f221e42144bee153e47f15b37, type: 2}
+  m_LightingSettings: {fileID: 1763813277}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -123,7 +123,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!850595691 &658590932
+--- !u!850595691 &1763813277
 LightingSettings:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -185,7 +185,7 @@ LightingSettings:
   m_PVRFilteringAtrousPositionSigmaIndirect: 2
   m_PVRFilteringAtrousPositionSigmaAO: 1
   m_PVRTiledBaking: 0
---- !u!1 &1559173857
+--- !u!1 &2115248737
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -193,8 +193,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1559173859}
-  - component: {fileID: 1559173858}
+  - component: {fileID: 2115248739}
+  - component: {fileID: 2115248738}
   m_Layer: 0
   m_Name: New Game Object
   m_TagString: Untagged
@@ -202,13 +202,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!220 &1559173858
+--- !u!220 &2115248738
 LightProbeGroup:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1559173857}
+  m_GameObject: {fileID: 2115248737}
   m_Enabled: 1
   m_SourcePositions:
   - {x: -26.710108, y: 1.6046752, z: 56.47333}
@@ -724,13 +724,13 @@ LightProbeGroup:
   - {x: 16.198122, y: -1, z: -26.139523}
   - {x: 16.198122, y: -1, z: -28.139523}
   m_Dering: 1
---- !u!4 &1559173859
+--- !u!4 &2115248739
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1559173857}
+  m_GameObject: {fileID: 2115248737}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -6.136387, y: 1.38, z: -17.108902}
   m_LocalScale: {x: 1, y: 1, z: 1}

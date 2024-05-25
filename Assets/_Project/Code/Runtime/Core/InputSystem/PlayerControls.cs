@@ -62,15 +62,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""RestartScene"",
-                    ""type"": ""Button"",
-                    ""id"": ""10a5d64d-5175-4a35-8974-1dba8d05a7a8"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -271,17 +262,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""SkillSlot2"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""70f0b1ff-0b76-49c2-b103-a64aa76b7b01"",
-                    ""path"": ""<Keyboard>/l"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""RestartScene"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -323,6 +303,94 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""LevelControls"",
+            ""id"": ""da32416d-fe66-44d8-8a25-a12354864b61"",
+            ""actions"": [
+                {
+                    ""name"": ""Button"",
+                    ""type"": ""Button"",
+                    ""id"": ""9a3ba9c6-0e8c-48f7-9dbe-b8a3eadb33f1"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Button1"",
+                    ""type"": ""Button"",
+                    ""id"": ""d4f678c9-ac4c-458f-8ead-aa7e1bdf5afa"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Button2"",
+                    ""type"": ""Button"",
+                    ""id"": ""88ba256f-4b61-4395-9174-d392cd61a262"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RestartScene"",
+                    ""type"": ""Button"",
+                    ""id"": ""fa9180b4-a0d8-4935-9782-b6a73d902304"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""6c4b30f2-8341-46f7-b49f-5e7fe7a2f4c7"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Button"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2a417d1d-85da-433b-9dd0-a303fcc8afe6"",
+                    ""path"": ""<Keyboard>/l"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RestartScene"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f0567902-7193-4107-aec5-1b85c6fd2510"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Button1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a31b3e7a-c1ad-4e19-83ff-0104f832f458"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Button2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -333,10 +401,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Player_SkillSlot1 = m_Player.FindAction("SkillSlot1", throwIfNotFound: true);
         m_Player_SkillSlot2 = m_Player.FindAction("SkillSlot2", throwIfNotFound: true);
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
-        m_Player_RestartScene = m_Player.FindAction("RestartScene", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Click = m_UI.FindAction("Click", throwIfNotFound: true);
+        // LevelControls
+        m_LevelControls = asset.FindActionMap("LevelControls", throwIfNotFound: true);
+        m_LevelControls_Button = m_LevelControls.FindAction("Button", throwIfNotFound: true);
+        m_LevelControls_Button1 = m_LevelControls.FindAction("Button1", throwIfNotFound: true);
+        m_LevelControls_Button2 = m_LevelControls.FindAction("Button2", throwIfNotFound: true);
+        m_LevelControls_RestartScene = m_LevelControls.FindAction("RestartScene", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -402,7 +475,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_SkillSlot1;
     private readonly InputAction m_Player_SkillSlot2;
     private readonly InputAction m_Player_Attack;
-    private readonly InputAction m_Player_RestartScene;
     public struct PlayerActions
     {
         private @PlayerControls m_Wrapper;
@@ -411,7 +483,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @SkillSlot1 => m_Wrapper.m_Player_SkillSlot1;
         public InputAction @SkillSlot2 => m_Wrapper.m_Player_SkillSlot2;
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
-        public InputAction @RestartScene => m_Wrapper.m_Player_RestartScene;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -433,9 +504,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Attack.started += instance.OnAttack;
             @Attack.performed += instance.OnAttack;
             @Attack.canceled += instance.OnAttack;
-            @RestartScene.started += instance.OnRestartScene;
-            @RestartScene.performed += instance.OnRestartScene;
-            @RestartScene.canceled += instance.OnRestartScene;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -452,9 +520,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Attack.started -= instance.OnAttack;
             @Attack.performed -= instance.OnAttack;
             @Attack.canceled -= instance.OnAttack;
-            @RestartScene.started -= instance.OnRestartScene;
-            @RestartScene.performed -= instance.OnRestartScene;
-            @RestartScene.canceled -= instance.OnRestartScene;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -518,16 +583,92 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         }
     }
     public UIActions @UI => new UIActions(this);
+
+    // LevelControls
+    private readonly InputActionMap m_LevelControls;
+    private List<ILevelControlsActions> m_LevelControlsActionsCallbackInterfaces = new List<ILevelControlsActions>();
+    private readonly InputAction m_LevelControls_Button;
+    private readonly InputAction m_LevelControls_Button1;
+    private readonly InputAction m_LevelControls_Button2;
+    private readonly InputAction m_LevelControls_RestartScene;
+    public struct LevelControlsActions
+    {
+        private @PlayerControls m_Wrapper;
+        public LevelControlsActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Button => m_Wrapper.m_LevelControls_Button;
+        public InputAction @Button1 => m_Wrapper.m_LevelControls_Button1;
+        public InputAction @Button2 => m_Wrapper.m_LevelControls_Button2;
+        public InputAction @RestartScene => m_Wrapper.m_LevelControls_RestartScene;
+        public InputActionMap Get() { return m_Wrapper.m_LevelControls; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(LevelControlsActions set) { return set.Get(); }
+        public void AddCallbacks(ILevelControlsActions instance)
+        {
+            if (instance == null || m_Wrapper.m_LevelControlsActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_LevelControlsActionsCallbackInterfaces.Add(instance);
+            @Button.started += instance.OnButton;
+            @Button.performed += instance.OnButton;
+            @Button.canceled += instance.OnButton;
+            @Button1.started += instance.OnButton1;
+            @Button1.performed += instance.OnButton1;
+            @Button1.canceled += instance.OnButton1;
+            @Button2.started += instance.OnButton2;
+            @Button2.performed += instance.OnButton2;
+            @Button2.canceled += instance.OnButton2;
+            @RestartScene.started += instance.OnRestartScene;
+            @RestartScene.performed += instance.OnRestartScene;
+            @RestartScene.canceled += instance.OnRestartScene;
+        }
+
+        private void UnregisterCallbacks(ILevelControlsActions instance)
+        {
+            @Button.started -= instance.OnButton;
+            @Button.performed -= instance.OnButton;
+            @Button.canceled -= instance.OnButton;
+            @Button1.started -= instance.OnButton1;
+            @Button1.performed -= instance.OnButton1;
+            @Button1.canceled -= instance.OnButton1;
+            @Button2.started -= instance.OnButton2;
+            @Button2.performed -= instance.OnButton2;
+            @Button2.canceled -= instance.OnButton2;
+            @RestartScene.started -= instance.OnRestartScene;
+            @RestartScene.performed -= instance.OnRestartScene;
+            @RestartScene.canceled -= instance.OnRestartScene;
+        }
+
+        public void RemoveCallbacks(ILevelControlsActions instance)
+        {
+            if (m_Wrapper.m_LevelControlsActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(ILevelControlsActions instance)
+        {
+            foreach (var item in m_Wrapper.m_LevelControlsActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_LevelControlsActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public LevelControlsActions @LevelControls => new LevelControlsActions(this);
     public interface IPlayerActions
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnSkillSlot1(InputAction.CallbackContext context);
         void OnSkillSlot2(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
-        void OnRestartScene(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
         void OnClick(InputAction.CallbackContext context);
+    }
+    public interface ILevelControlsActions
+    {
+        void OnButton(InputAction.CallbackContext context);
+        void OnButton1(InputAction.CallbackContext context);
+        void OnButton2(InputAction.CallbackContext context);
+        void OnRestartScene(InputAction.CallbackContext context);
     }
 }
