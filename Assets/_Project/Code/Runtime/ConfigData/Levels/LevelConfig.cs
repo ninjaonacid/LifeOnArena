@@ -29,6 +29,8 @@ namespace Code.Runtime.ConfigData.Levels
         public int RequiredLevel;
 
         public int WavesToSpawn;
+
+        public Sprite Icon;
     
         [BoxGroup("Spawners")]
         [LabelWidth(100)]

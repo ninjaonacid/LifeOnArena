@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Code.Runtime.ConfigData.Levels;
 using Code.Runtime.Core.ConfigProvider;
+using UnityEngine;
 
 namespace Code.Runtime.UI.Model.ArenaSelectionScreenModel
 {
@@ -31,8 +32,9 @@ namespace Code.Runtime.UI.Model.ArenaSelectionScreenModel
 
     public class LevelModel
     {
+        public Sprite Icon;
         public int RequiredLevel;
-        public bool Unlocked;
+        public bool IsUnlocked;
         public LevelModel()
         {
             
