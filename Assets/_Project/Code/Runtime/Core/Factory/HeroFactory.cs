@@ -37,7 +37,7 @@ namespace Code.Runtime.Core.Factory
             await _assetProvider.Load<GameObject>(AssetAddress.Hero);
         }
 
-        public async UniTask<GameObject> CreateHero(Vector3 initialPoint,  Quaternion rotation)
+        public async UniTask<GameObject> CreateHero(Vector3 initialPoint, Quaternion rotation)
         {
             GameObject prefab = await _assetProvider.Load<GameObject>(AssetAddress.Hero);
 

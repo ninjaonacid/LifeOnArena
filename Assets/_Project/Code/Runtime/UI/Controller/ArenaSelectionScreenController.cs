@@ -24,6 +24,7 @@ namespace Code.Runtime.UI.Controller
                 .OnClickAsObservable()
                 .Subscribe(x => screenService.Close(this));;
             
+            
             UpdateData();
 
         }
