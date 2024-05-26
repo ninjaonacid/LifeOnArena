@@ -10,6 +10,7 @@ namespace Code.Runtime.UI.View.AbilityMenu
     {
         [SerializeField] private Image _abilitySlotFrame;
         [SerializeField] private Image _selectionFrame;
+        [SerializeField] private Image _equippedFrame;
         [SerializeField] private Image _lockIcon;
         [SerializeField] private AbilityTreeLinePathUI _line;
         [SerializeField] private AbilityItemView _abilityItem;
@@ -28,7 +29,18 @@ namespace Code.Runtime.UI.View.AbilityMenu
 
         public void UpdateData(Sprite abilityIcon, bool isUnlocked, int equippedSlot)
         {
-            _abilityItem.SetData(abilityIcon, isUnlocked, equippedSlot);
+            _abilityItem.SetData(abilityIcon, equippedSlot);
+
+            if (equippedSlot != 0)
+            {
+                _equippedFrame.gameObject.SetActive(true);
+            }
+            else
+            {
+                _equippedFrame.gameObject.SetActive(false);
+            }
+            
+            _lockIcon.gameObject.SetActive(!isUnlocked);
 
             _line.ChangeColor(isUnlocked);
         }

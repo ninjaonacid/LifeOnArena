@@ -9,6 +9,7 @@ namespace Code.Runtime.UI.View.ArenaSelection
     public class LevelSelectionUI : MonoBehaviour, IPointerClickHandler
     {
         [SerializeField] private Image _levelImage;
+        [SerializeField] private Image _lockImage;
 
         private Subject<LevelSelectionUI> _subject;
         public void UpdateData(Sprite icon, bool isUnlocked)
