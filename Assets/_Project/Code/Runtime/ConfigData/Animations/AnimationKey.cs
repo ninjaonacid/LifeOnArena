@@ -11,5 +11,6 @@ namespace Code.Runtime.ConfigData.Animations
         Walking = 7,
         Idle = 8,
         Spinning = 9,
+        Stomp = 10,
     }
 }

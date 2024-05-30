@@ -9,7 +9,7 @@ namespace Code.Runtime.Core.Factory
     public interface IEnemyFactory
     {
         UniTask<EnemySpawner> CreateSpawner(Vector3 at, string spawnerDataId, MobIdentifier mobId,
-            int respawnCount, EnemyType enemyType, CancellationToken token);
+            int respawnCount, float spawnTimer, EnemyType enemyType, CancellationToken token);
         UniTask<GameObject> CreateMonster(int mobId, Transform parent, CancellationToken token);
         UniTask InitAssets();
     }

@@ -3,9 +3,7 @@ using Code.Runtime.Core.Factory;
 using Code.Runtime.Core.Installers;
 using Code.Runtime.Core.ObjectPool;
 using Code.Runtime.Logic.WaveLogic;
-using Code.Runtime.Modules.AbilitySystem.GameplayTags;
 using Code.Runtime.Services;
-using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
@@ -13,8 +11,6 @@ namespace Code.Runtime.Core.Scopes
 {
     public class LevelScope : LifetimeScope
     {
-        [SerializeField] private GameplayTag stunTag;
-        [SerializeField] private GameplayTag stunTag1;
         protected override void Configure(IContainerBuilder builder)
         {
             builder.RegisterEntryPoint<LevelStarterPoint>();
@@ -48,11 +44,7 @@ namespace Code.Runtime.Core.Scopes
 
                 enemyFactory.InitAssets();
                 itemFactory.InitAssets();
-
                 
-                Debug.Log(stunTag == stunTag1);
-                Debug.Log(stunTag.GetInstanceID());
-                Debug.Log(stunTag1.GetInstanceID());
             });
         }
 

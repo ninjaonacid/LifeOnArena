@@ -18,26 +18,30 @@ MonoBehaviour:
   WavesToSpawn: 0
   Icon: {fileID: 21300000, guid: c82cddd528a57b6488b1f072ad51506c, type: 3}
   EnemySpawners:
-  - Id: FantasyArena_1_dc566222-b98a-4886-a773-5a4da56e82f9
-    SpawnCount: 1
-    MobId: {fileID: 11400000, guid: da24c5c5806845a4ebed54c799031191, type: 2}
-    Position: {x: -23.84, y: -0.626276, z: -14.5}
-    EnemyType: 1
-  - Id: FantasyArena_1_c67f5bcd-20a6-4e25-ae47-4a36e81c7344
-    SpawnCount: 1
-    MobId: {fileID: 11400000, guid: c926abab697947a4a9b6547139ee0e4d, type: 2}
-    Position: {x: 8.2, y: -0.626276, z: -45.49}
-    EnemyType: 0
   - Id: FantasyArena_1_aebba7ba-791e-4750-a4ed-0a2cccec5b96
     SpawnCount: 1
+    TimeToSpawn: 3
     MobId: {fileID: 11400000, guid: c926abab697947a4a9b6547139ee0e4d, type: 2}
     Position: {x: 8.2, y: -0.626276, z: 22.2}
     EnemyType: 0
   - Id: _0702d4e2-cb82-46aa-80c3-7a3c4b588b61
     SpawnCount: 1
+    TimeToSpawn: 10
     MobId: {fileID: 11400000, guid: 770735b52f36cc9468fe91489a321c53, type: 2}
     Position: {x: 33.58, y: -0.626276, z: -14.05}
     EnemyType: 0
+  - Id: FantasyArena_1_c67f5bcd-20a6-4e25-ae47-4a36e81c7344
+    SpawnCount: 1
+    TimeToSpawn: 2
+    MobId: {fileID: 11400000, guid: c926abab697947a4a9b6547139ee0e4d, type: 2}
+    Position: {x: 8.2, y: -0.626276, z: -45.49}
+    EnemyType: 0
+  - Id: FantasyArena_1_dc566222-b98a-4886-a773-5a4da56e82f9
+    SpawnCount: 1
+    TimeToSpawn: 2
+    MobId: {fileID: 11400000, guid: da24c5c5806845a4ebed54c799031191, type: 2}
+    Position: {x: -23.84, y: -0.626276, z: -14.5}
+    EnemyType: 1
   NextLevelDoorSpawners: []
   HeroInitialPosition: {x: 7.1, y: 0, z: -15.7}
   HeroInitialRotation: {x: 0, y: 0, z: 0, w: 1}

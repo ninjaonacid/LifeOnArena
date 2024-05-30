@@ -44,6 +44,7 @@ namespace Code.Runtime.Logic.WaveLogic
                     spawnerData.Id,
                     spawnerData.MobId,
                     spawnerData.SpawnCount,
+                    spawnerData.TimeToSpawn,
                     spawnerData.EnemyType, token);
 
                 _enemySpawnPoints.Add(spawner);
@@ -60,7 +61,7 @@ namespace Code.Runtime.Logic.WaveLogic
             WaveSpawn(TaskHelper.CreateToken(ref _cancellationTokenSource)).Forget();
         }
 
-        private async UniTaskVoid WaveSpawn(CancellationToken token)
+        private async UniTask WaveSpawn(CancellationToken token)
         {
             int waveCounter = 0;
 
@@ -76,7 +77,7 @@ namespace Code.Runtime.Logic.WaveLogic
                     {
                         if (spawner.EnemyType == EnemyType.Common)
                         {
-                            spawner.Spawn(token).Forget();
+                            await spawner.Spawn(token);
                         }
                     }
 

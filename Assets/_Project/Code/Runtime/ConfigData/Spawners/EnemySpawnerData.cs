@@ -10,16 +10,18 @@ namespace Code.Runtime.ConfigData.Spawners
     {
         public string Id;
         public int SpawnCount;
+        public float TimeToSpawn;
         public MobIdentifier MobId;
         public Vector3 Position;
         public EnemyType EnemyType;
 
-        public EnemySpawnerData(string id, MobIdentifier mobId, Vector3 position, int spawnCount, EnemyType enemyType)
+        public EnemySpawnerData(string id, MobIdentifier mobId, Vector3 position, int spawnCount, float timeToSpawn, EnemyType enemyType)
         {
             Id = id;
             MobId = mobId;
             Position = position;
             SpawnCount = spawnCount;
+            TimeToSpawn = timeToSpawn;
             EnemyType = enemyType;
         }
     }

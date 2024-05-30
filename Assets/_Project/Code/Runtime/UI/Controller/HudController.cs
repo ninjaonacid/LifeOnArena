@@ -1,3 +1,4 @@
+using System;
 using Code.Runtime.Core.Factory;
 using Code.Runtime.Core.SceneManagement;
 using Code.Runtime.Entity.Hero;
@@ -6,13 +7,14 @@ using Code.Runtime.UI.Model;
 using Code.Runtime.UI.Services;
 using Code.Runtime.UI.View;
 using Code.Runtime.UI.View.HUD;
+using Cysharp.Threading.Tasks;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
 
 namespace Code.Runtime.UI.Controller
 {
-    public class HudController : IScreenController
+    public class HudController : IScreenController, IDisposable
     {
         private HudModel _model;
         private HudWindowView _windowView;
@@ -20,6 +22,8 @@ namespace Code.Runtime.UI.Controller
         private readonly IGameDataContainer _gameData;
         private readonly IHeroFactory _heroFactory;
         private readonly SceneLoader _sceneLoader;
+        
+        private readonly CompositeDisposable _disposable = new CompositeDisposable();
         
         public HudController(IGameDataContainer gameData, IHeroFactory heroFactory, SceneLoader sceneLoader)
         {
@@ -50,11 +54,11 @@ namespace Code.Runtime.UI.Controller
                 .OnExperienceChangedAsObservable()
                 .Subscribe( x =>
                 _windowView.StatusBar.SetExpValue(_gameData.PlayerData.PlayerExp.Experience,
-                    _gameData.PlayerData.PlayerExp.ExperienceToNextLevel));
+                    _gameData.PlayerData.PlayerExp.ExperienceToNextLevel)).AddTo(_disposable);
 
             _gameData.PlayerData.PlayerExp
                 .OnLevelChangedAsObservable()
-                .Subscribe(x => _windowView.StatusBar.SetLevel(_gameData.PlayerData.PlayerExp.Level));
+                .Subscribe(x => _windowView.StatusBar.SetLevel(_gameData.PlayerData.PlayerExp.Level)).AddTo(_disposable);
             
             _windowView.StatusBar.SetExpValue(_gameData.PlayerData.PlayerExp.Experience, _gameData.PlayerData.PlayerExp.ExperienceToNextLevel);
             _windowView.StatusBar.SetLevel(_gameData.PlayerData.PlayerExp.Level);
@@ -62,8 +66,12 @@ namespace Code.Runtime.UI.Controller
 
             _windowView.RestartButton.onClick.AsObservable().Subscribe(x => _sceneLoader.Load("MainMenu"));
 
+            
+        }
 
-
+        public void Dispose()
+        {
+            _disposable.Dispose();
         }
     }
 }

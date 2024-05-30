@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using Code.Runtime.ConfigData.Identifiers;
 using Code.Runtime.ConfigData.Levels;
@@ -16,6 +17,7 @@ namespace Code.Runtime.Logic.EnemySpawners
         [SerializeField] private VisualEffectIdentifier _visualEffectIdentifier;
         public string Id { get; set; }
         public int RespawnCount { get; set; }
+        public float TimeToSpawn { get; set; }
         public EnemyType EnemyType { get; set; }
         public MobIdentifier MobId { get; set; }
         public bool Alive  { get; private set; }
@@ -39,9 +41,13 @@ namespace Code.Runtime.Logic.EnemySpawners
             _visualEffectFactory.PrewarmEffect(_visualEffectIdentifier.Id, levelConfig.EnemySpawners.Count).Forget();
         }
 
-        public async UniTaskVoid Spawn(CancellationToken token)
+        public async UniTask Spawn(CancellationToken token)
         {
             Alive = true;
+            if (TimeToSpawn > 0)
+            {
+                await UniTask.Delay(TimeSpan.FromSeconds(TimeToSpawn), cancellationToken: token);
+            }
             var monster = await _factory.CreateMonster(MobId.Id, transform, token);
 
             var position = transform.position;
