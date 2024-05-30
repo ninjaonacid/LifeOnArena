@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 52fb44a806ac432b841d503a0183391a, type: 3}
-  m_Name: GroundSlam
+  m_Name: GroundStomp
   m_EditorClassIdentifier: 
-  _identifier: {fileID: 11400000, guid: c995a2f6a60a88c42a767c72df339604, type: 2}
+  _identifier: {fileID: 11400000, guid: b7e1b76dfa43a6a40aa37103371ec426, type: 2}
   _icon: {fileID: 21300000, guid: fa92a05800b96f74f8c3992964761763, type: 3}
   _description: Strong ground strike
   _treeData:
@@ -24,6 +24,7 @@ MonoBehaviour:
   _isCastAbility: 0
   _visualEffect: {fileID: 11400000, guid: 95a5a09158e3c764cbc84af1ea8a7a6e, type: 2}
   _abilitySound: {fileID: 0}
-  _gameplayEffectBlueprints: []
+  _gameplayEffectBlueprints:
+  - {fileID: 11400000, guid: 27bcb6cffb236fd40ba8e195aee3e146, type: 2}
   _castDistance: 0
   _aoeRadius: 5
