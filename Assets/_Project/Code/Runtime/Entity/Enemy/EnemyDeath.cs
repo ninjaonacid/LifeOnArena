@@ -55,29 +55,10 @@ namespace Code.Runtime.Entity.Enemy
             {
                 _fracturedPrefab.SetActive(true);
 
-                foreach (Transform obj in _fracturedPrefab.transform)
+                foreach (Rigidbody rb in _fracturedPrefab.GetComponentsInChildren<Rigidbody>())
                 {
-                    Vector2 randomPoint = Random.insideUnitCircle.normalized;
-                    Vector3 direction2D = new Vector3(randomPoint.x, 0, randomPoint.y);
-
-                    var forward = transform.forward;
-                    float angle = Vector3.SignedAngle(Vector3.forward, direction2D, -forward);
-                    angle = Mathf.Clamp(angle, Random.Range(-45f, 0), Random.Range(0, 45f));
-
-                    Quaternion rotation = Quaternion.AngleAxis(angle, -forward);
-                    
-                    Vector3 direction = rotation * -forward;
-
-                    var position = obj.position;
-                    Vector3 targetPosition = position + direction * _distance;
-
-                    Vector3 startPoint = position;
-                    Vector3 endPoint = targetPosition;
-                    Vector3 controlPoint = (startPoint + endPoint) / 2f + Vector3.up * _maxHeight;
-                    
-                    obj.DOMove(endPoint, _flightDuration).SetEase(Ease.OutQuad).SetLink(gameObject);
-
-                    obj.DOLocalMoveY(0, _flightDuration).SetEase(Ease.OutQuad).SetLink(gameObject);
+                    rb.AddExplosionForce(150f, transform.position, 5f, 0f);
+                    rb.AddTorque(new Vector3(0, 1f, 0));
                 }
             }
 
@@ -90,7 +71,7 @@ namespace Code.Runtime.Entity.Enemy
 
         private IEnumerator DestroyTimer()
         {
-            yield return new WaitForSeconds(2);
+            yield return new WaitForSeconds(5);
             _enemyModel.SetActive(true);
             _fracturedPrefab.SetActive(false);
             gameObject.SetActive(false);

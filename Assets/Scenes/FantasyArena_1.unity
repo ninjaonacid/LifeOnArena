@@ -643,7 +643,7 @@ MonoBehaviour:
   cloudShadowTilingY: 0.01
   cloudShadowOffsetX: 0
   cloudShadowOffsetY: 0
-  UID: -1404192617
+  UID: -27903777
 --- !u!1001 &273047744
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6142,10 +6142,6 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2457576890995017567, guid: e950b145502dfb34ea89aa4e4fc09eb6, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.2323
-      objectReference: {fileID: 0}
-    - target: {fileID: 2457576890995017567, guid: e950b145502dfb34ea89aa4e4fc09eb6, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.739
       objectReference: {fileID: 0}
@@ -6185,36 +6181,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2707129930382762167, guid: e950b145502dfb34ea89aa4e4fc09eb6, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2977092133909421541, guid: e950b145502dfb34ea89aa4e4fc09eb6, type: 3}
       propertyPath: m_Name
       value: black_rock_terrain
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 2707129930382762167, guid: e950b145502dfb34ea89aa4e4fc09eb6, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e950b145502dfb34ea89aa4e4fc09eb6, type: 3}
 --- !u!4 &2707129931702040961 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2457576890995017567, guid: e950b145502dfb34ea89aa4e4fc09eb6, type: 3}
   m_PrefabInstance: {fileID: 2707129931702040960}
   m_PrefabAsset: {fileID: 0}
---- !u!64 &2707129931702040962
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 919132148326900837}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 386758796353515396, guid: 292b940efa2336540afaf239d147cb42, type: 3}
 --- !u!1001 &3082943543741249188
 PrefabInstance:
   m_ObjectHideFlags: 0

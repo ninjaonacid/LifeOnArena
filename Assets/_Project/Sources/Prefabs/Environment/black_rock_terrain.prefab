@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 2457576890995017567}
   - component: {fileID: 1564097879909894394}
   - component: {fileID: 3625465826668739632}
-  - component: {fileID: 2707129930382762167}
-  m_Layer: 0
+  - component: {fileID: 2707129931702040962}
+  m_Layer: 6
   m_Name: black_rock_terrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26,9 +26,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2977092133909421541}
-  m_LocalRotation: {x: 0, y: -0.65405196, z: -0, w: 0.75644964}
+  m_LocalRotation: {x: 0, y: -0.6540545, z: 0, w: 0.7564475}
   m_LocalPosition: {x: -3.7, y: 0, z: -16.3}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.2323, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -84,8 +84,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &2707129930382762167
-BoxCollider:
+--- !u!64 &2707129931702040962
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -94,6 +94,7 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 96.47203, y: 21.66711, z: 86.5678}
-  m_Center: {x: 1.0221713, y: -11.4598255, z: -10.007243}
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 386758796353515396, guid: 292b940efa2336540afaf239d147cb42, type: 3}
