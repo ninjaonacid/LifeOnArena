@@ -15,11 +15,11 @@ namespace Code.Runtime.Logic.Weapon
 
         public Transform SlashVfxTransform => _slashTransform;
 
-        private LayerMask _mask;
+        private LayerMask _targetLayer;
         
         private void OnTriggerEnter(Collider other)
         {
-            if (_mask == 1 << other.gameObject.layer)
+            if (_targetLayer == 1 << other.gameObject.layer)
             {
                 Hit?.Invoke(new CollisionData()
                 {
@@ -30,7 +30,7 @@ namespace Code.Runtime.Logic.Weapon
 
         public void SetLayerMask(LayerMask mask)
         {
-            _mask = mask;
+            _targetLayer = mask;
         }
 
         public void EnableCollider(bool value)

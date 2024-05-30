@@ -14,9 +14,11 @@ namespace Code.Runtime.Entity.Enemy
         [SerializeField] private EnemyHealth _health;
         [SerializeField] private GameObject _fracturedPrefab;
         [SerializeField] private GameObject _enemyModel;
-        [SerializeField] private float _distance;
+        [SerializeField] private EnemyHurtBox _enemyHurtBox;
+        
+        [SerializeField] private float _maxForce;
+        [SerializeField] private float _minForce;
         [SerializeField] private float _maxHeight;
-        [SerializeField] private float _flightDuration;
 
         public bool IsDead { get; private set; }
 
@@ -50,6 +52,7 @@ namespace Code.Runtime.Entity.Enemy
         {
             _health.Health.CurrentValueChanged -= HealthChanged;
             _enemyModel.SetActive(false);
+            
 
             if (_fracturedPrefab is not null)
             {
@@ -57,7 +60,9 @@ namespace Code.Runtime.Entity.Enemy
 
                 foreach (Rigidbody rb in _fracturedPrefab.GetComponentsInChildren<Rigidbody>())
                 {
-                    rb.AddExplosionForce(150f, transform.position, 5f, 0f);
+                    Vector3 force = _enemyHurtBox.LastHitDirection * Random.Range(1f, 10f);
+                    force.y = Mathf.Clamp(force.y, -2f, 3f);
+                    rb.AddForce(force, ForceMode.Impulse);
                     rb.AddTorque(new Vector3(0, 1f, 0));
                 }
             }

@@ -11,11 +11,17 @@ namespace Code.Runtime.Entity.Enemy
         private readonly float _hitBoxCooldown = 0.5f;
         private CancellationTokenSource _cts;
         private Vector3 _boxColliderSize;
+
+        [SerializeField] private TriggerObserver _observer;
+        
+        public Vector3 LastHitDirection { get; set; }
         private void Awake()
         {
             _hitBoxTimer = _hitBoxCooldown;
             _boxColliderSize = _hitBoxCollider.size;
             _playerWeaponLayer = LayerMask.NameToLayer("PlayerWeapon");
+
+            _observer.TriggerEnter += TriggerEnter;
         }
 
         // private void OnTriggerEnter(Collider other)
@@ -26,16 +32,23 @@ namespace Code.Runtime.Entity.Enemy
         //         _hitBoxCollider.size = new Vector3(0, 0, 0);
         //     }
         // }
-
-        private void Update()
+        
+        private void TriggerEnter(Collider other)
         {
-            _hitBoxTimer -= Time.deltaTime;
-            if (_hitBoxTimer < 0 && _isInvincible)
-            {
-                _isInvincible = false;
-                _hitBoxTimer = _hitBoxCooldown;
-                _hitBoxCollider.size = _boxColliderSize;
-            }
+            var position = transform.position;
+            Vector3 hitPoint = other.ClosestPoint(position);
+            LastHitDirection = (hitPoint - position).normalized;
         }
+
+        // private void Update()
+        // {
+        //     _hitBoxTimer -= Time.deltaTime;
+        //     if (_hitBoxTimer < 0 && _isInvincible)
+        //     {
+        //         _isInvincible = false;
+        //         _hitBoxTimer = _hitBoxCooldown;
+        //         _hitBoxCollider.size = _boxColliderSize;
+        //     }
+        // }
     }
 }

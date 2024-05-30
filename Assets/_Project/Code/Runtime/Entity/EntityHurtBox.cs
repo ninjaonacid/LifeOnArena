@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Code.Runtime.Entity
@@ -5,14 +6,18 @@ namespace Code.Runtime.Entity
     public class EntityHurtBox : MonoBehaviour
     {
         [SerializeField] protected BoxCollider _hitBoxCollider;
+        
 
         private float offsetY = 3;
         private float offsetZ = 2;
+
+        
+
         public Vector3 GetHitBoxCenter()
         {
             return _hitBoxCollider.center;
         }
-        
+
         public Vector3 GetCenterTransform()
         {
             var colliderCenter = _hitBoxCollider.center;
