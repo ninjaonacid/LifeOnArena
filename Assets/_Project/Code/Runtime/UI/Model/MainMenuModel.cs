@@ -6,6 +6,8 @@ namespace Code.Runtime.UI.Model
     public class MainMenuModel : IScreenModel
     {
         private readonly IGameDataContainer _gameData;
+
+        public bool IsTutorialEnabled { get; set; } = new();
         
         public ReactiveProperty<int> Health { get; } = new(); 
         public ReactiveProperty<int> Attack { get; } = new();

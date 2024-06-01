@@ -38,8 +38,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -291, y: 0}
-  m_SizeDelta: {x: 635.4434, y: 817.0313}
+  m_AnchoredPosition: {x: -254, y: 0.0000076294}
+  m_SizeDelta: {x: 635.4434, y: 877.216}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!222 &248850778037789559
 CanvasRenderer:
@@ -759,7 +759,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.8396226, g: 0.7836701, b: 0.2891153, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -797,7 +797,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_NormalColor: {r: 0.754717, g: 0.25602406, b: 0.05339978, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -871,7 +871,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -37.722, y: 182.1}
+  m_AnchoredPosition: {x: -37.722, y: 152.1}
   m_SizeDelta: {x: 560, y: 180}
   m_Pivot: {x: 1, y: 0}
 --- !u!222 &8321612252180198614
@@ -1214,7 +1214,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -1383,7 +1383,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -37.722, y: 348}
+  m_AnchoredPosition: {x: -37.722, y: 318}
   m_SizeDelta: {x: 560, y: 180}
   m_Pivot: {x: 1, y: 0}
 --- !u!222 &4664102812980294747
@@ -2130,6 +2130,10 @@ PrefabInstance:
     - target: {fileID: 2104390169682768250, guid: 06b22f0c19364fa46ad72cbd9218ba66, type: 3}
       propertyPath: m_Name
       value: CloseButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 2104390169682768250, guid: 06b22f0c19364fa46ad72cbd9218ba66, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7935893264977102040, guid: 06b22f0c19364fa46ad72cbd9218ba66, type: 3}
       propertyPath: m_Pivot.x

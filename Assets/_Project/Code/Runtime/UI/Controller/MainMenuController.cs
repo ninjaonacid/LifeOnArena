@@ -37,6 +37,11 @@ namespace Code.Runtime.UI.Controller
             
             Assert.IsNotNull(_model);
             Assert.IsNotNull(_windowView);
+            
+            if (_model.IsTutorialEnabled)
+            {
+                _windowView.StartFightButton.interactable = false;
+            }
 
             _model.Health.Subscribe(x =>
             {
@@ -58,9 +63,9 @@ namespace Code.Runtime.UI.Controller
             }).AddTo(_disposables);
 
       
-            _windowView.CloseButton
-                .OnClickAsObservable()
-                .Subscribe(x => _screenService.Close(this));
+            // _windowView.CloseButton
+            //     .OnClickAsObservable()
+            //     .Subscribe(x => _screenService.Close(this));
 
             _windowView.StartFightButton
                 .OnClickAsObservable()
@@ -71,15 +76,9 @@ namespace Code.Runtime.UI.Controller
             _windowView.SkillScreen.Button
                 .OnClickAsObservable()
                 .Subscribe(x => _screenService.Open(_windowView.SkillScreen.WindowId));
-            
 
-            // _windowView.MusicButton
-            //     .OnClickAsObservable()
-            //     .Subscribe(x =>
-            //     {
-            //         _model.ChangeMusicButtonState();
-            //         _windowView.MusicButton.SetButton(_model.IsMusicMuted);
-            //     });
+            
+            
 
         }
         
