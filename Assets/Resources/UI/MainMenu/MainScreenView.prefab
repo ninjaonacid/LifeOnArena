@@ -710,6 +710,7 @@ GameObject:
   - component: {fileID: 9182453079527412012}
   - component: {fileID: 6739599391148669925}
   - component: {fileID: 4969285292793754576}
+  - component: {fileID: 7596081528884851216}
   m_Layer: 0
   m_Name: Start Fight
   m_TagString: Untagged
@@ -833,6 +834,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Button: {fileID: 6739599391148669925}
+--- !u!114 &7596081528884851216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5929227860988398780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5287c8edf39730f4d861cc7e6fcd4e6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _elementId: {fileID: 11400000, guid: 6f3b0de92d052ae4ea7013231dbe03ac, type: 2}
 --- !u!1 &6109627335837847366
 GameObject:
   m_ObjectHideFlags: 0
@@ -1358,6 +1372,7 @@ GameObject:
   - component: {fileID: 4166390802736344144}
   - component: {fileID: 414756892663118959}
   - component: {fileID: 7375099360277016037}
+  - component: {fileID: 3096258715572291254}
   m_Layer: 0
   m_Name: Skills
   m_TagString: Untagged
@@ -1482,6 +1497,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Button: {fileID: 414756892663118959}
   WindowId: 3
+--- !u!114 &3096258715572291254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7852354593345055354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5287c8edf39730f4d861cc7e6fcd4e6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _elementId: {fileID: 11400000, guid: c80357dd44211ee438284e705842b0b7, type: 2}
 --- !u!1 &7881905694461783266
 GameObject:
   m_ObjectHideFlags: 0

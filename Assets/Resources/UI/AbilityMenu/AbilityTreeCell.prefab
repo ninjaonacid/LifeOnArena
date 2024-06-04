@@ -278,7 +278,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4965542613343617925}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -319,7 +319,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 0eb3874af7fcd2a48a1b5d71ff458b77, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e95fd653bbd463e4c830cdc3277b06c9, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -534,6 +534,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 5404366335466105168}
     m_Modifications:
     - target: {fileID: 56964303096524824, guid: 9d22721d9a8631245b7ca92114f21fe8, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 56964303096524824, guid: 9d22721d9a8631245b7ca92114f21fe8, type: 3}
       propertyPath: m_RaycastTarget
       value: 0
       objectReference: {fileID: 0}
@@ -552,6 +556,14 @@ PrefabInstance:
     - target: {fileID: 6622350417330212426, guid: 9d22721d9a8631245b7ca92114f21fe8, type: 3}
       propertyPath: m_RaycastTarget
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7271018230080858790, guid: 9d22721d9a8631245b7ca92114f21fe8, type: 3}
+      propertyPath: m_MinWidth
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 7271018230080858790, guid: 9d22721d9a8631245b7ca92114f21fe8, type: 3}
+      propertyPath: m_MinHeight
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 7665323175598331005, guid: 9d22721d9a8631245b7ca92114f21fe8, type: 3}
       propertyPath: m_Pivot.x

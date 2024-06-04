@@ -69,8 +69,8 @@ namespace Code.Runtime.UI.Controller
 
             _windowView.StartFightButton
                 .OnClickAsObservable()
-                .Subscribe(x => //_screenService.Open(ScreenID.ArenaSelectionScreen)
-                    _sceneLoader.Load("FantasyArena_1")
+                .Subscribe(x => _screenService.Open(ScreenID.ArenaSelectionScreen)
+                    //_sceneLoader.Load("FantasyArena_1")
                 );
 
             _windowView.SkillScreen.Button
