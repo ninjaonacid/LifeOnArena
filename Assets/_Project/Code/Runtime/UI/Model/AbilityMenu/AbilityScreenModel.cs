@@ -36,7 +36,7 @@ namespace Code.Runtime.UI.Model.AbilityMenu
 
             var allAbilities =
                 _configProvider.AllAbilities()
-                    .OrderBy(x => x.AbilityTreeData.Position);
+                    .OrderBy(x => x.AbilityTreeData.Position).ToArray();
                     
             
             foreach (var ability in allAbilities)

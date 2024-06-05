@@ -21,9 +21,10 @@ namespace Code.Runtime.UI.View.AbilityMenu
             }
         }
 
-        public int GetSelectedSlotIndex()
+        public bool TryGetSelectedSlotIndex(out int index)
         {
-            return _abilityTreeCells.IndexOf(_selectedCell);
+            index = _abilityTreeCells.IndexOf(_selectedCell);
+            return index != -1;
         }
         
         public void UpdateData(int abilityIndex, int equippedIndex, Sprite abilityIcon, bool isUnlocked)

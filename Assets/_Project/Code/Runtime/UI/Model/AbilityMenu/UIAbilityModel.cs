@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using Code.Runtime.Modules.AbilitySystem;
+using Code.Runtime.Modules.Requirements;
 using Newtonsoft.Json;
 
 namespace Code.Runtime.UI.Model.AbilityMenu
@@ -12,6 +14,7 @@ namespace Code.Runtime.UI.Model.AbilityMenu
         public string AbilityName;
         public int Price;
         public int AbilityId;
+        public List<IRequirement> Requirements;
 
         [JsonIgnore]
         public ActiveAbilityBlueprintBase ActiveAbilityBlueprintBase;

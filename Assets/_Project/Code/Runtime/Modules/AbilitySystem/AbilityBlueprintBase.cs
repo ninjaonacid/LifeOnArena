@@ -1,9 +1,10 @@
 using Code.Runtime.ConfigData.Identifiers;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Code.Runtime.Modules.AbilitySystem
 {
-    public class AbilityBlueprintBase : ScriptableObject
+    public class AbilityBlueprintBase : SerializedScriptableObject
     {
         [SerializeField] private AbilityIdentifier _identifier;
         [SerializeField] private Sprite _icon;

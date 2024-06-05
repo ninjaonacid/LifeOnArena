@@ -1,31 +1,13 @@
-﻿using Code.Runtime.Data.PlayerData;
+﻿using Code.Runtime.ConfigData.Identifiers;
+using Code.Runtime.Modules.Requirements;
 
 namespace Code.Runtime.Modules.AbilitySystem
 {
-    public class AbilityLearnRequirement : IRequirement
+    public class AbilityLearnRequirement : Requirement<AbilityIdentifier>
     {
-        private int _abilityIndex;
-        
-        public AbilityLearnRequirement(int index)
+        protected override bool CheckRequirement(AbilityIdentifier value)
         {
-            _abilityIndex = index;
-        }
-        
-        public bool CheckRequirement(PlayerData playerData)
-        {
-            var previousAbilityIndex = _abilityIndex - 1;
-            
-            if (previousAbilityIndex >= 0)
-            {
-                var ability = playerData.AbilityData.UnlockedAbilities[previousAbilityIndex];
-                
-                if (ability is not null)
-                {
-                    return true;
-                }
-            }
-
-            return false;
+           return value = _requiredValue;
         }
     }
 }

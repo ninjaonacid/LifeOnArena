@@ -29,6 +29,12 @@ namespace Code.Runtime.UI.Model.ArenaSelectionScreenModel
                 LevelModel.Add(new LevelModel(level));
             }
         }
+
+        public bool IsLevelUnlocked(int index)
+        {
+            var levelModel = LevelModel[index];
+            return levelModel.IsUnlocked;
+        }
     }
 
     public class LevelModel

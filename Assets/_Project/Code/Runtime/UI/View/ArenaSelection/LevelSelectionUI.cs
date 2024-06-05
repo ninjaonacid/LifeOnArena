@@ -10,11 +10,14 @@ namespace Code.Runtime.UI.View.ArenaSelection
     {
         [SerializeField] private Image _levelImage;
         [SerializeField] private Image _lockImage;
+        [SerializeField] private Image _selectionFrame;
 
         private Subject<LevelSelectionUI> _subject;
         public void UpdateData(Sprite icon, bool isUnlocked)
         {
             _levelImage.sprite = icon;
+            
+            _lockImage.gameObject.SetActive(!isUnlocked);
         }
 
         public void OnPointerClick(PointerEventData eventData)
@@ -25,6 +28,16 @@ namespace Code.Runtime.UI.View.ArenaSelection
         public IObservable<LevelSelectionUI> OnClickAsObservable()
         {
             return _subject ??= new Subject<LevelSelectionUI>();
+        }
+        
+        public void Select()
+        {
+            _selectionFrame.gameObject.SetActive(true);
+        }
+
+        public void Deselect()
+        {
+            _selectionFrame.gameObject.SetActive(false);
         }
     }
 }

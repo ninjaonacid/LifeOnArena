@@ -1,6 +1,6 @@
 ﻿using Code.Runtime.UI.Buttons;
 
-namespace Code.Runtime.UI.AbilityMenu
+namespace Code.Runtime.UI.View.AbilityMenu
 {
     public class UnlockButton : BaseButton
     {

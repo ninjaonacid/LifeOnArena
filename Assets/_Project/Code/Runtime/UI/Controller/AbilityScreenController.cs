@@ -103,31 +103,34 @@ namespace Code.Runtime.UI.Controller
 
         private void Unlock()
         {
-            var abilityIndex = _screenView.AbilityContainer.GetSelectedSlotIndex();
-            _model.UnlockAbility(abilityIndex);
-            
-            AbilitySelected(abilityIndex);
+            if (_screenView.AbilityContainer.TryGetSelectedSlotIndex(out var index))
+            {
+                _model.UnlockAbility(index);
+                AbilitySelected(index);
+            };
+
             UpdateData();
         }
 
         private void UnEquip()
         {
-            var abilityIndex = _screenView.AbilityContainer.GetSelectedSlotIndex();
-            
-            _model.UnEquipAbility(abilityIndex);
-            AbilitySelected(abilityIndex);
-            
+            if (_screenView.AbilityContainer.TryGetSelectedSlotIndex(out var index))
+            {
+                _model.UnEquipAbility(index);
+                AbilitySelected(index);
+            };
+
             UpdateData();
         }
 
         private void Equip()
         {
-            var abilityIndex = _screenView.AbilityContainer.GetSelectedSlotIndex();
-            
-            _model.EquipAbility(abilityIndex);
-            
-            AbilitySelected(abilityIndex);
-            
+            if (_screenView.AbilityContainer.TryGetSelectedSlotIndex(out var index))
+            {
+                _model.EquipAbility(index);
+                AbilitySelected(index);
+            };
+
             UpdateData();
         }
 

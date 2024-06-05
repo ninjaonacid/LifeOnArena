@@ -44,8 +44,6 @@ namespace Code.Runtime.ConfigData.Levels
         [BoxGroup("Hero")]
         public Quaternion HeroInitialRotation;
         
-        public Vector3 NextLevelDoorPosition;
-        public Quaternion NextLevelDoorRotation;
 
         
     }

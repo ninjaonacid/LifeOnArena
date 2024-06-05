@@ -19,11 +19,14 @@ namespace Code.Runtime.UI.Controller
             
             Assert.IsNotNull(_model);
             Assert.IsNotNull(_view);
+            
+            _view.LevelContainer.Initialize();
 
             _view.CloseButton
                 .OnClickAsObservable()
                 .Subscribe(x => screenService.Close(this));;
-            
+
+            _view.LevelContainer.OnLevelSelectedAsObservable().Subscribe(LevelSelected);
             
             UpdateData();
 
@@ -37,6 +40,19 @@ namespace Code.Runtime.UI.Controller
                 var levelModel = _model.LevelModel[index];
                 _view.LevelContainer.UpdateData(index, levelModel.LevelConfig.Icon, true);
             }
+        }
+        
+        private void LevelSelected(int abilityIndex)
+        {
+            var isUnlocked = _model.IsLevelUnlocked(abilityIndex);
+            
+            // _view.EquipButton.ShowButton(!isEquipped && isUnlocked);
+            // _view.UnEquipButton.ShowButton(isEquipped && isUnlocked);
+            // _view.UnlockButton.ShowButton(!isEquipped && !isUnlocked);
+            
+            UpdateData();
+            
+
         }
     }
 }
