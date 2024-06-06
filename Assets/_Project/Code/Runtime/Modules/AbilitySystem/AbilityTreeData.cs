@@ -1,16 +1,16 @@
-﻿using System;
+﻿using System.Collections.Generic;
+using Code.Runtime.Data.PlayerData;
 using Code.Runtime.Modules.Requirements;
-using Sirenix.Serialization;
-using UnityEngine;
+using Sirenix.OdinInspector;
 
 namespace Code.Runtime.Modules.AbilitySystem
 {
-    [Serializable]
     public class AbilityTreeData
     {
         public AbilityTreeBranch Branch;
         public int Position;
         public int Price;
-        [SerializeReference] public IRequirement Requirement;
+        [FoldoutGroup("AbilityUnlockRequirements", true)]
+        public List<IRequirement<PlayerData>> UnlockRequirements;
     }
 }

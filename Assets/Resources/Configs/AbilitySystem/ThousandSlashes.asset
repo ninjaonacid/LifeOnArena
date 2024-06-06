@@ -12,13 +12,65 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52fb44a806ac432b841d503a0183391a, type: 3}
   m_Name: ThousandSlashes
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 11400000, guid: 630144b53aba86245b26160679af021d, type: 2}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: _treeData
+      Entry: 7
+      Data: 0|Code.Runtime.Modules.AbilitySystem.AbilityTreeData, Assembly-CSharp
+    - Name: Branch
+      Entry: 3
+      Data: 1
+    - Name: Position
+      Entry: 3
+      Data: 3
+    - Name: Price
+      Entry: 3
+      Data: 3000
+    - Name: UnlockRequirements
+      Entry: 7
+      Data: 1|System.Collections.Generic.List`1[[Code.Runtime.Modules.Requirements.IRequirement`1[[Code.Runtime.Data.PlayerData.PlayerData,
+        Assembly-CSharp]], Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 2
+    - Name: 
+      Entry: 7
+      Data: 2|Code.Runtime.Modules.Requirements.PreviousAbilityRequirement, Assembly-CSharp
+    - Name: _requiredAbility
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 3|Code.Runtime.Modules.Requirements.SoulsRequirement, Assembly-CSharp
+    - Name: _requiredSouls
+      Entry: 3
+      Data: 3000
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
   _identifier: {fileID: 11400000, guid: c5e362aec60c2434fbe8da67176f4498, type: 2}
   _icon: {fileID: 21300000, guid: c23b6d7a0d45b0a428dd827ad20fe981, type: 3}
   _description: 
-  _treeData:
-    Branch: 1
-    Position: 7
-    Price: 5000
   _cooldown: 1
   _activeTime: 1
   _isCastAbility: 0

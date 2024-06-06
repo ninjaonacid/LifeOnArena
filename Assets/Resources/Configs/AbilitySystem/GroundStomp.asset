@@ -12,13 +12,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52fb44a806ac432b841d503a0183391a, type: 3}
   m_Name: GroundStomp
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: _treeData
+      Entry: 7
+      Data: 0|Code.Runtime.Modules.AbilitySystem.AbilityTreeData, Assembly-CSharp
+    - Name: Branch
+      Entry: 3
+      Data: 1
+    - Name: Position
+      Entry: 3
+      Data: 1
+    - Name: Price
+      Entry: 3
+      Data: 0
+    - Name: UnlockRequirements
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
   _identifier: {fileID: 11400000, guid: b7e1b76dfa43a6a40aa37103371ec426, type: 2}
   _icon: {fileID: 21300000, guid: fa92a05800b96f74f8c3992964761763, type: 3}
   _description: Strong ground strike
-  _treeData:
-    Branch: 1
-    Position: 4
-    Price: 0
   _cooldown: 2
   _activeTime: 1
   _isCastAbility: 0

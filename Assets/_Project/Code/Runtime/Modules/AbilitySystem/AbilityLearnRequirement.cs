@@ -1,13 +1,15 @@
-﻿using Code.Runtime.ConfigData.Identifiers;
+﻿using System;
+using Code.Runtime.ConfigData.Identifiers;
 using Code.Runtime.Modules.Requirements;
 
 namespace Code.Runtime.Modules.AbilitySystem
 {
-    public class AbilityLearnRequirement : Requirement<AbilityIdentifier>
+    [Serializable]
+    public class AbilityLearnRequirement : IRequirement<AbilityIdentifier>
     {
-        protected override bool CheckRequirement(AbilityIdentifier value)
+        public bool CheckRequirement(AbilityIdentifier value)
         {
-           return value = _requiredValue;
+            return false;
         }
     }
 }

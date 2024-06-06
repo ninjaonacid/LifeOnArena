@@ -82,7 +82,7 @@ namespace Code.Runtime.UI.Controller
                 {
                     equippedIndex = _model.GetEquippedSlotIndex(ability);
                 }
-                _screenView.AbilityContainer.UpdateData(index,  equippedIndex,  ability.ActiveAbilityBlueprintBase.Icon, ability.IsUnlocked);
+                _screenView.AbilityContainer.UpdateData(index,  equippedIndex,  ability.Icon, ability.IsUnlocked);
             }
         }
 
@@ -97,8 +97,8 @@ namespace Code.Runtime.UI.Controller
 
             var slotModel = _model.GetSlotByIndex(abilityIndex);
 
-            _screenView.AbilityDescription.Icon.sprite = slotModel.ActiveAbilityBlueprintBase.Icon;
-            _screenView.AbilityDescription.Text.text = slotModel.ActiveAbilityBlueprintBase.Description;
+            _screenView.AbilityDescription.Icon.sprite = slotModel.Icon;
+            _screenView.AbilityDescription.Text.text = slotModel.Description;
         }
 
         private void Unlock()

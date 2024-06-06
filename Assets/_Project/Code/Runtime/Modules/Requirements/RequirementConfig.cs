@@ -7,7 +7,7 @@ namespace Code.Runtime.Modules.Requirements
     [CreateAssetMenu(menuName = "Config/Requirements", fileName = "RequirementsConfig")] 
     public class RequirementConfig : SerializedScriptableObject
     {
-        [SerializeField] private List<IRequirement> _requirements;
-        public List<IRequirement> Requirements => _requirements;
+        // [SerializeField] private List<IRequirement> _requirements;
+        // public List<IRequirement> Requirements => _requirements;
     }
 }

@@ -1,10 +1,13 @@
-﻿namespace Code.Runtime.Modules.Requirements
+﻿using System;
+
+namespace Code.Runtime.Modules.Requirements
 {
-    public class LevelRequirement : Requirement<int>
+    [Serializable]
+    public class LevelRequirement : IRequirement<int>
     {
-        protected override bool CheckRequirement(int value)
+        public bool CheckRequirement(int value)
         {
-            return value >= _requiredValue;
+            throw new NotImplementedException();
         }
     }
 }

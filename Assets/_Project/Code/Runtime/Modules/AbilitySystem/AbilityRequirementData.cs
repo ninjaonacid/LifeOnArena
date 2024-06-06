@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Code.Runtime.Modules.AbilitySystem
 {
-    public abstract class AbilityRequirementData<T> : ScriptableObject where T : IRequirement
+    public abstract class AbilityRequirementData<T> : ScriptableObject 
     {
         public abstract T CreateRequirement();
     }

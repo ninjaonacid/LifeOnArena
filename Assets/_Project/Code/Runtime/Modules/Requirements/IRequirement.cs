@@ -1,7 +1,11 @@
+using System;
+using Code.Runtime.Data.PlayerData;
+
 namespace Code.Runtime.Modules.Requirements
 {
-    public interface IRequirement
+    public interface IRequirement<T>
     {
-        public bool CheckRequirement(object value);
+        public bool CheckRequirement(T value);
     }
+    
 }

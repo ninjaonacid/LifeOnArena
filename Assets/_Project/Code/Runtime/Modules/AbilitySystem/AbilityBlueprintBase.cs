@@ -1,4 +1,7 @@
+using System.Collections.Generic;
 using Code.Runtime.ConfigData.Identifiers;
+using Code.Runtime.Data.PlayerData;
+using Code.Runtime.Modules.Requirements;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
