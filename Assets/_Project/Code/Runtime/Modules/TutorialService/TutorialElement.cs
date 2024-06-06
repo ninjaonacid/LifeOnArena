@@ -10,7 +10,7 @@ namespace Code.Runtime.Modules.TutorialService
         
         public void OnPointerClick(PointerEventData eventData)
         {
-            
+            Debug.Log("TutorialElementClicked");
         }
     }
 }
