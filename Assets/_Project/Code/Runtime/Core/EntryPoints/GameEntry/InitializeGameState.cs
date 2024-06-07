@@ -40,6 +40,8 @@ namespace Code.Runtime.Core.EntryPoints.GameEntry
         {
             PlayerData data = new PlayerData("Shelter");
 
+            data.TutorialData.IsTutorialCompleted = false;
+
             data.WorldData.LootData.Collected = 10000;
 
             StatDatabase characterStats = _configProvider.CharacterStats();

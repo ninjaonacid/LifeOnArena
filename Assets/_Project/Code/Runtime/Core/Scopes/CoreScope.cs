@@ -4,6 +4,7 @@ using Code.Runtime.Core.ConfigProvider;
 using Code.Runtime.Core.EntryPoints;
 using Code.Runtime.Core.EventSystem;
 using Code.Runtime.Core.SceneManagement;
+using Code.Runtime.Modules.TutorialService;
 using Code.Runtime.Services.BattleService;
 using Code.Runtime.Services.PersistentProgress;
 using Code.Runtime.Services.RandomService;
@@ -37,6 +38,7 @@ namespace Code.Runtime.Core.Scopes
 
             builder.Register<PlayerControls>(Lifetime.Singleton).AsSelf();
             builder.Register<SceneLoader>(Lifetime.Singleton);
+            builder.Register<TutorialService>(Lifetime.Singleton);
 
             builder.RegisterComponentInNewPrefab(AudioService, Lifetime.Singleton).DontDestroyOnLoad().AsSelf();
             builder.RegisterComponentInNewPrefab(Screen, Lifetime.Singleton).AsImplementedInterfaces();

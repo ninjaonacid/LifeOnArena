@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Code.Runtime.Core.Audio;
 using Code.Runtime.Core.Factory;
 using Code.Runtime.Core.SceneManagement;
+using Code.Runtime.Modules.TutorialService;
 using Code.Runtime.Services.PersistentProgress;
 using Code.Runtime.Services.SaveLoad;
 using Code.Runtime.UI.Controller;
@@ -14,10 +15,12 @@ namespace Code.Runtime.UI.Services
         private readonly Dictionary<Type, Func<IScreenController>> _screenControllers = new();
 
         public ScreenControllerFactory(IGameDataContainer gameData, IHeroFactory heroFactory, ISaveLoadService saveLoad,
-            AudioService audioService, SceneLoader sceneLoader)
+            AudioService audioService, SceneLoader sceneLoader, TutorialService tutorialService)
         {
             _screenControllers.Add(typeof(MainMenuController),
-                () => new MainMenuController(gameData, audioService, sceneLoader));
+                () => gameData.PlayerData.TutorialData.IsTutorialCompleted
+                    ? new MainMenuController(gameData, audioService, sceneLoader)
+                    : new TutorialMainMenuController(gameData, audioService, sceneLoader, tutorialService)); 
             
             _screenControllers.Add(typeof(WeaponShopScreenController),
                 () => new WeaponShopScreenController(sceneLoader));

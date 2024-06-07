@@ -3,8 +3,7 @@ using UnityEngine.UI;
 
 namespace Code.Runtime.UI.Buttons
 {
-    public class StartGameButton : MonoBehaviour
+    public class StartGameButton : BaseButton
     {
-        public Button Button;
     }
 }

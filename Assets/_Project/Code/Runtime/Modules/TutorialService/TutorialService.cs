@@ -1,24 +1,41 @@
 using System.Collections.Generic;
 using System.Linq;
+using Code.Runtime.Core.ConfigProvider;
 
 namespace Code.Runtime.Modules.TutorialService
 {
     public class TutorialService
     {
-        private List<TutorialTask> _tutorialSteps = new();
+        private ConfigProvider _configProvider;
+        private List<TutorialTask> _tutorialTasks = new();
+        private TutorialTask _currentTask;
 
+        public TutorialService(ConfigProvider configProvider)
+        {
+            _configProvider = configProvider;
+        }
 
+        private void Initialize()
+        {
+            
+        }
+        
         public void UpdateTutorialStatus(TutorialTask task)
         {
-            if (_tutorialSteps.Contains(task))
+            if (_tutorialTasks.Contains(task))
             {
-                var tutorialStep = _tutorialSteps.FirstOrDefault(x => x == task);
+                var tutorialStep = _tutorialTasks.FirstOrDefault(x => x == task);
 
                 if (tutorialStep != null)
                 {
                     
                 }
             }
+        }
+
+        public TutorialTask GetCurrentTask()
+        {
+            return _currentTask;
         }
     }
 }

@@ -13,8 +13,8 @@ namespace Code.Runtime.UI.Controller
 {
     public class MainMenuController : IScreenController, IDisposable
     {
-        private  MainMenuModel _model;
-        private  MainMenuWindowView _windowView;
+        protected MainMenuModel _model;
+        protected MainMenuWindowView _windowView;
         
         private ScreenService _screenService;
         private readonly IGameDataContainer _gameData;
@@ -73,12 +73,9 @@ namespace Code.Runtime.UI.Controller
                     //_sceneLoader.Load("FantasyArena_1")
                 );
 
-            _windowView.SkillScreen.Button
+            _windowView.SkillScreen
                 .OnClickAsObservable()
                 .Subscribe(x => _screenService.Open(_windowView.SkillScreen.WindowId));
-
-            
-            
 
         }
         

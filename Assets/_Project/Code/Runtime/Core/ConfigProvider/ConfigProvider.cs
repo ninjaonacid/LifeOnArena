@@ -9,6 +9,7 @@ using Code.Runtime.ConfigData.StateMachine;
 using Code.Runtime.ConfigData.Weapon;
 using Code.Runtime.Modules.AbilitySystem;
 using Code.Runtime.Modules.StatSystem;
+using Code.Runtime.Modules.TutorialService;
 using Code.Runtime.UI;
 using UnityEngine;
 
@@ -25,6 +26,8 @@ namespace Code.Runtime.Core.ConfigProvider
         private Dictionary<int, VisualEffectData> _visualEffects;
         private Dictionary<int, WeaponData> _weapons;
 
+
+        private TutorialConfig _tutorialConfig;
         private WeaponStateMachineDatabase _weaponFsmDatabase;
         private AudioLibrary _audioLibrary;
         private AudioServiceSettings _audioServiceSettings;
@@ -59,19 +62,21 @@ namespace Code.Runtime.Core.ConfigProvider
                 .LoadAll<ActiveAbilityBlueprintBase>($"{ConfigFolder}/AbilitySystem")
                 .ToDictionary(x => x.Identifier.Id, x => x);
 
-            _characterStats = Resources
-                .Load<StatDatabase>($"{ConfigFolder}/Hero/Stats/HeroStatsData");
-
             _visualEffects = Resources
                 .LoadAll<VisualEffectData>($"{ConfigFolder}/VisualEffects")
                 .ToDictionary(x => x.Identifier.Id, x => x);
-            
+
             _weapons = Resources
                 .LoadAll<WeaponData>($"{ConfigFolder}/Equipment/Weapons")
                 .ToDictionary(x => x.WeaponId.Id, x => x);
+            
+            _characterStats = Resources
+                .Load<StatDatabase>($"{ConfigFolder}/Hero/Stats/HeroStatsData");
 
             _weaponFsmDatabase = Resources
                 .Load<WeaponStateMachineDatabase>($"{ConfigFolder}/StateMachine/WeaponFsmConfigDatabase");
+            
+            _tutorialConfig = Resources.Load<TutorialConfig>($"{ConfigFolder}/Tutorial/StartGameTutorial");
 
         }
 

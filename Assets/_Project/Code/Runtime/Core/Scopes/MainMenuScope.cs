@@ -2,6 +2,7 @@ using Code.Runtime.Core.EntryPoints;
 using Code.Runtime.Core.Factory;
 using Code.Runtime.Core.Installers;
 using Code.Runtime.Core.ObjectPool;
+using Code.Runtime.Modules.TutorialService;
 using VContainer;
 using VContainer.Unity;
 
@@ -20,6 +21,7 @@ namespace Code.Runtime.Core.Scopes
             
             builder.Register<VisualEffectFactory>(Lifetime.Scoped);
             builder.Register<ObjectPoolProvider>(Lifetime.Scoped);
+            
 
             IInstaller screenServiceInstaller = new ScreenServiceInstaller();
             screenServiceInstaller.Install(builder);
