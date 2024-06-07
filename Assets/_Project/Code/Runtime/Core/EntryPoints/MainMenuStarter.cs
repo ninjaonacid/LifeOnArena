@@ -1,7 +1,7 @@
 using System.Threading;
 using Code.Runtime.ConfigData.Levels;
 using Code.Runtime.Core.Audio;
-using Code.Runtime.Core.ConfigProvider;
+using Code.Runtime.Core.Config;
 using Code.Runtime.Core.Factory;
 using Code.Runtime.Services.SaveLoad;
 using Code.Runtime.UI;
@@ -16,7 +16,7 @@ namespace Code.Runtime.Core.EntryPoints
     public class MainMenuStarter : IAsyncStartable
     {
         private readonly IHeroFactory _heroFactory;
-        private readonly IConfigProvider _config;
+        private readonly ConfigProvider _config;
         private readonly ScreenService _screenService;
         private readonly AudioService _audioService;
         private readonly PlayerControls _controls;
@@ -24,7 +24,7 @@ namespace Code.Runtime.Core.EntryPoints
 
         public MainMenuStarter(IHeroFactory heroFactory, IUIFactory uiFactory,
             ScreenService screenService,
-            IConfigProvider config, ISaveLoadService saveLoad, PlayerControls controls,
+            ConfigProvider config, ISaveLoadService saveLoad, PlayerControls controls,
             AudioService audioService)
         {
             _heroFactory = heroFactory;

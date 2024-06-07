@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading;
 using Code.Runtime.ConfigData.Levels;
 using Code.Runtime.ConfigData.Spawners;
-using Code.Runtime.Core.ConfigProvider;
+using Code.Runtime.Core.Config;
 using Code.Runtime.Core.Factory;
 using Code.Runtime.Core.SceneManagement;
 using Code.Runtime.Logic.EnemySpawners;
@@ -19,7 +19,7 @@ namespace Code.Runtime.Logic.WaveLogic
         public event Action<int> CommonEnemiesCleared;
         public event Action BossKilled;
 
-        private readonly IConfigProvider _config;
+        private readonly ConfigProvider _config;
         private readonly IEnemyFactory _enemyFactory;
         
         private readonly List<EnemySpawner> _enemySpawnPoints = new List<EnemySpawner>();

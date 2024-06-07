@@ -1,6 +1,6 @@
 using Code.Runtime.Core.AssetManagement;
 using Code.Runtime.Core.Audio;
-using Code.Runtime.Core.ConfigProvider;
+using Code.Runtime.Core.Config;
 using Code.Runtime.Core.EntryPoints;
 using Code.Runtime.Core.EventSystem;
 using Code.Runtime.Core.SceneManagement;
@@ -26,7 +26,7 @@ namespace Code.Runtime.Core.Scopes
         {
             builder.RegisterEntryPoint<CoreLoader>();
 
-            builder.Register<IConfigProvider, ConfigProvider.ConfigProvider>(Lifetime.Singleton);
+            builder.Register<ConfigProvider>(Lifetime.Singleton);
             builder.Register<ISaveLoadService, SaveLoadService>(Lifetime.Singleton);
 
             builder.Register<IUIFactory, UIFactory>(Lifetime.Singleton);

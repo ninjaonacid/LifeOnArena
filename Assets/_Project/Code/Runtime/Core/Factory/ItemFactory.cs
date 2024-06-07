@@ -3,7 +3,7 @@ using Code.Runtime.ConfigData;
 using Code.Runtime.ConfigData.Identifiers;
 using Code.Runtime.ConfigData.Weapon;
 using Code.Runtime.Core.AssetManagement;
-using Code.Runtime.Core.ConfigProvider;
+using Code.Runtime.Core.Config;
 using Code.Runtime.Core.ObjectPool;
 using Code.Runtime.Logic.LevelObjectsSpawners;
 using Code.Runtime.Logic.Weapon;
@@ -19,13 +19,13 @@ namespace Code.Runtime.Core.Factory
 {
     public class ItemFactory : IItemFactory
     {
-        private readonly IConfigProvider _config;
+        private readonly ConfigProvider _config;
         private readonly ISaveLoadService _saveLoadService;
         private readonly IAssetProvider _assetProvider;
         private readonly IObjectResolver _objectResolver;
         private readonly ObjectPoolProvider _poolProvider;
 
-        public ItemFactory(IConfigProvider config, 
+        public ItemFactory(ConfigProvider config, 
             ISaveLoadService saveLoadService, 
             IAssetProvider assetProvider,
             IObjectResolver objectResolver,

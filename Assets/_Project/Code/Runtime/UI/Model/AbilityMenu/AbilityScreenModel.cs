@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Code.Runtime.Core.ConfigProvider;
+using Code.Runtime.Core.Config;
 using Code.Runtime.Data.DataStructures;
 using Code.Runtime.Services.PersistentProgress;
 using UniRx;
@@ -14,12 +14,12 @@ namespace Code.Runtime.UI.Model.AbilityMenu
         public ReactiveProperty<int> Souls;
 
         private readonly IGameDataContainer _gameData;
-        private readonly IConfigProvider _configProvider;
+        private readonly ConfigProvider _configProvider;
         private List<AbilityModel> _abilities;
         private IndexedQueue<AbilityModel> _equippedAbilities;
         
 
-        public AbilityScreenModel(IGameDataContainer gameData, IConfigProvider configProvider)
+        public AbilityScreenModel(IGameDataContainer gameData, ConfigProvider configProvider)
         {
             _gameData = gameData;
             _configProvider = configProvider;

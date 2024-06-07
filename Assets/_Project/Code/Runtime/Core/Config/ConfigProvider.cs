@@ -13,9 +13,9 @@ using Code.Runtime.Modules.TutorialService;
 using Code.Runtime.UI;
 using UnityEngine;
 
-namespace Code.Runtime.Core.ConfigProvider
+namespace Code.Runtime.Core.Config
 {
-    public class ConfigProvider : IConfigProvider
+    public class ConfigProvider
     {
         private const string ConfigFolder = "Configs";
         private Dictionary<int, EnemyDataConfig> _monsters;
@@ -98,7 +98,8 @@ namespace Code.Runtime.Core.ConfigProvider
 
             return null;
         }
-        
+
+        public TutorialConfig GetTutorialConfig() => _tutorialConfig;
         public EnemyDataConfig Monster(int id)
         {
             if (_monsters.TryGetValue(id, out var monsterStaticData))

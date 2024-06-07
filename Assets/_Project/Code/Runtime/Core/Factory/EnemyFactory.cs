@@ -2,7 +2,7 @@ using System;
 using System.Threading;
 using Code.Runtime.ConfigData.Identifiers;
 using Code.Runtime.Core.AssetManagement;
-using Code.Runtime.Core.ConfigProvider;
+using Code.Runtime.Core.Config;
 using Code.Runtime.Core.ObjectPool;
 using Code.Runtime.Entity.Enemy;
 using Code.Runtime.Entity.EntitiesComponents;
@@ -24,7 +24,7 @@ namespace Code.Runtime.Core.Factory
     public class EnemyFactory : IEnemyFactory, IDisposable
     {
         private readonly IHeroFactory _heroFactory;
-        private readonly IConfigProvider _config;
+        private readonly ConfigProvider _config;
         private readonly IAssetProvider _assetProvider;
         private readonly ISaveLoadService _saveLoadService;
         private readonly IGameDataContainer _gameDataContainer;
@@ -33,7 +33,7 @@ namespace Code.Runtime.Core.Factory
         private readonly ObjectPoolProvider _objectPoolProvider;
 
         private readonly CancellationTokenSource _cancellationTokenSource = default;
-        public EnemyFactory(IHeroFactory heroFactory, IConfigProvider config, IAssetProvider assetProvider, 
+        public EnemyFactory(IHeroFactory heroFactory, ConfigProvider config, IAssetProvider assetProvider, 
             ISaveLoadService saveLoadService, IGameDataContainer gameDataContainer,
             IRandomService randomService, IObjectResolver objectResolver, ObjectPoolProvider poolProvider)
         {

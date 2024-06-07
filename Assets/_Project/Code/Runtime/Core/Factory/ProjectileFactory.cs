@@ -1,5 +1,5 @@
 ﻿using System;
-using Code.Runtime.Core.ConfigProvider;
+using Code.Runtime.Core.Config;
 using Code.Runtime.Core.ObjectPool;
 using Code.Runtime.Logic.Projectiles;
 using UnityEngine;
@@ -9,9 +9,9 @@ namespace Code.Runtime.Core.Factory
     public class ProjectileFactory
     {
         private readonly ObjectPoolProvider _poolProvider;
-        private readonly IConfigProvider _configProvider;
+        private readonly ConfigProvider _configProvider;
 
-        public ProjectileFactory(ObjectPoolProvider poolProvider, IConfigProvider configProvider)
+        public ProjectileFactory(ObjectPoolProvider poolProvider, ConfigProvider configProvider)
         {
             _poolProvider = poolProvider;
             _configProvider = configProvider;

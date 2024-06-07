@@ -3,7 +3,7 @@ using System.Linq;
 using Code.Runtime.ConfigData.Audio;
 using Code.Runtime.ConfigData.Settings;
 using Code.Runtime.Core.AssetManagement;
-using Code.Runtime.Core.ConfigProvider;
+using Code.Runtime.Core.Config;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.Audio;
@@ -14,7 +14,7 @@ namespace Code.Runtime.Core.Audio
     public class AudioService : MonoBehaviour
     {
         private  IAssetProvider _assetProvider;
-        private  IConfigProvider _configProvider;
+        private  ConfigProvider _configProvider;
         
         private readonly Dictionary<string, BaseAudioFile> _sfx = new();
         private readonly Dictionary<string, BaseAudioFile> _bgm = new();
@@ -36,7 +36,7 @@ namespace Code.Runtime.Core.Audio
         [SerializeField] private Transform _musicChannels;
 
         [Inject]
-        public void Construct(IAssetProvider assetProvider, IConfigProvider configProvider)
+        public void Construct(IAssetProvider assetProvider, ConfigProvider configProvider)
         {
             _assetProvider = assetProvider;
             _configProvider = configProvider;

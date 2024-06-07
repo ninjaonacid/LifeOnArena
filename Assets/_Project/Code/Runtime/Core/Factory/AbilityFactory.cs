@@ -1,6 +1,6 @@
 using Code.Runtime.Core.AssetManagement;
 using Code.Runtime.Core.Audio;
-using Code.Runtime.Core.ConfigProvider;
+using Code.Runtime.Core.Config;
 using Code.Runtime.Modules.AbilitySystem;
 using Code.Runtime.Services.BattleService;
 using Code.Runtime.Services.RandomService;
@@ -12,7 +12,7 @@ namespace Code.Runtime.Core.Factory
 {
     public class AbilityFactory : IAbilityFactory
     {
-        private readonly IConfigProvider _config;
+        private readonly ConfigProvider _config;
         private readonly BattleService _battleService;
         private readonly IRandomService _random;
         private readonly IAssetProvider _assetProvider;
@@ -21,7 +21,7 @@ namespace Code.Runtime.Core.Factory
         private readonly AudioService _audioService;
         public AbilityFactory(
             IAssetProvider assetProvider,
-            IConfigProvider config,
+            ConfigProvider config,
             VisualEffectFactory visualEffectFactory,
             ProjectileFactory projectileFactory,
             BattleService battleService,

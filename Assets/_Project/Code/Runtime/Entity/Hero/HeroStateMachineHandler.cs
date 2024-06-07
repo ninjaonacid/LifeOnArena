@@ -1,7 +1,7 @@
 using Code.Runtime.ConfigData.Animations;
 using Code.Runtime.ConfigData.Identifiers;
 using Code.Runtime.Core.Audio;
-using Code.Runtime.Core.ConfigProvider;
+using Code.Runtime.Core.Config;
 using Code.Runtime.Entity.Hero.HeroStates;
 using Code.Runtime.Logic;
 using Code.Runtime.Logic.Animator;
@@ -15,7 +15,7 @@ namespace Code.Runtime.Entity.Hero
 {
     public class HeroStateMachineHandler : MonoBehaviour
     {
-        private IConfigProvider _configProvider;
+        private ConfigProvider _configProvider;
 
         private const string HeroIdle = "HeroIdle";
         private const string HeroMovement = "HeroMovement";
@@ -48,7 +48,7 @@ namespace Code.Runtime.Entity.Hero
 
 
         [Inject]
-        public void Construct(PlayerControls controls, AudioService audioService, IConfigProvider configProvider)
+        public void Construct(PlayerControls controls, AudioService audioService, ConfigProvider configProvider)
         {
             _controls = controls;
             _audioService = audioService;

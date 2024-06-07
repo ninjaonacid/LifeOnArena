@@ -29,7 +29,7 @@ namespace Code.Runtime.UI.Controller
             _audioService = audioService;
         }
         
-        public void InitController(IScreenModel model, BaseWindowView windowView, ScreenService screenService)
+        public virtual void InitController(IScreenModel model, BaseWindowView windowView, ScreenService screenService)
         {
             _model = model as MainMenuModel;
             _windowView = windowView as MainMenuWindowView;
@@ -38,10 +38,6 @@ namespace Code.Runtime.UI.Controller
             Assert.IsNotNull(_model);
             Assert.IsNotNull(_windowView);
             
-            if (_model.IsTutorialEnabled)
-            {
-                _windowView.StartFightButton.interactable = false;
-            }
 
             _model.Health.Subscribe(x =>
             {

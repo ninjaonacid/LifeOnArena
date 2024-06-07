@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 using Code.Runtime.Core.AssetManagement;
-using Code.Runtime.Core.ConfigProvider;
+using Code.Runtime.Core.Config;
 using Code.Runtime.UI.View;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -12,13 +12,13 @@ namespace Code.Runtime.UI.Services
     public class UIFactory : IUIFactory
     {
         private readonly IAssetProvider _assetProvider;
-        private readonly IConfigProvider _config;
+        private readonly ConfigProvider _config;
         private readonly IObjectResolver _objectResolver;
 
         private Transform _uiCoreTransform;
 
         public UIFactory(IAssetProvider assetProvider, 
-            IConfigProvider configProvider,
+            ConfigProvider configProvider,
             IObjectResolver objectResolver)
         {
             _assetProvider = assetProvider;

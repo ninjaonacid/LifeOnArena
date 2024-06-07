@@ -1,7 +1,7 @@
 
 using System;
 using Code.Runtime.Core.AssetManagement;
-using Code.Runtime.Core.ConfigProvider;
+using Code.Runtime.Core.Config;
 using Code.Runtime.Core.ObjectPool;
 using Code.Runtime.Logic.VisualEffects;
 using Cysharp.Threading.Tasks;
@@ -13,11 +13,11 @@ namespace Code.Runtime.Core.Factory
     public class VisualEffectFactory
     {
         private readonly IAssetProvider _assetProvider;
-        private readonly IConfigProvider _configProvider;
+        private readonly ConfigProvider _configProvider;
         private readonly IObjectResolver _objectResolver;
         private readonly ObjectPoolProvider _poolProvider;
 
-        public VisualEffectFactory(IAssetProvider assetProvider, ObjectPoolProvider poolProvider, IConfigProvider configProvider, IObjectResolver objectResolver)
+        public VisualEffectFactory(IAssetProvider assetProvider, ObjectPoolProvider poolProvider, ConfigProvider configProvider, IObjectResolver objectResolver)
         {
             _assetProvider = assetProvider;
             _configProvider = configProvider;

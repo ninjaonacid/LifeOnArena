@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using Code.Runtime.Core.ConfigProvider;
+using Code.Runtime.Core.Config;
 using Code.Runtime.Data;
 using Code.Runtime.Data.PlayerData;
 using Code.Runtime.Modules.StatSystem;
@@ -12,12 +12,12 @@ namespace Code.Runtime.Core.EntryPoints.GameEntry
 {
     public class InitializeGameState
     {
-        private readonly IConfigProvider _configProvider;
+        private readonly ConfigProvider _configProvider;
         private readonly ISaveLoadService _saveLoadService;
         private readonly IGameDataContainer _gameDataContainer;
         
         public InitializeGameState(
-            IConfigProvider configProvider, 
+            ConfigProvider configProvider, 
             IGameDataContainer dataContainer,
             ISaveLoadService saveLoad)
         {

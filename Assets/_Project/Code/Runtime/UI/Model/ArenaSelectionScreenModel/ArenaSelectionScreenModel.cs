@@ -1,17 +1,17 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Code.Runtime.ConfigData.Levels;
-using Code.Runtime.Core.ConfigProvider;
+using Code.Runtime.Core.Config;
 using UnityEngine;
 
 namespace Code.Runtime.UI.Model.ArenaSelectionScreenModel
 {
     public class ArenaSelectionScreenModel : IScreenModel
     {
-        private IConfigProvider _configProvider;
+        private ConfigProvider _configProvider;
         public List<LevelModel> LevelModel { get; private set; } = new();
 
-        public ArenaSelectionScreenModel(IConfigProvider configProvider)
+        public ArenaSelectionScreenModel(ConfigProvider configProvider)
         {
             _configProvider = configProvider;
             

@@ -708,7 +708,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ScreenId: 5
   CloseButton: {fileID: 7740823107951068954}
-  StartFightButton: {fileID: 0}
+  StartFightButton: {fileID: 7594090686892494860}
   SkillScreen: {fileID: 7375099360277016037}
   WeaponScreen: {fileID: 0}
   StatContainer: {fileID: 3556345832726125250}
@@ -935,10 +935,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2779499650361398505}
     m_Modifications:
+    - target: {fileID: -1166250979092234467, guid: bb4dbeff254dfb14dbe720d92b7040e1, type: 3}
+      propertyPath: m_Interactable
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -1166250979092234467, guid: bb4dbeff254dfb14dbe720d92b7040e1, type: 3}
+      propertyPath: m_IgnoreParentGroups
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3789163640338092058, guid: bb4dbeff254dfb14dbe720d92b7040e1, type: 3}
       propertyPath: m_text
       value: START FIGHT
       objectReference: {fileID: 0}
+    - target: {fileID: 3813891064735693494, guid: bb4dbeff254dfb14dbe720d92b7040e1, type: 3}
+      propertyPath: _elementId
+      value: 
+      objectReference: {fileID: 11400000, guid: 6f3b0de92d052ae4ea7013231dbe03ac, type: 2}
     - target: {fileID: 6168692415630556294, guid: bb4dbeff254dfb14dbe720d92b7040e1, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1038,6 +1050,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6168692415630556294, guid: bb4dbeff254dfb14dbe720d92b7040e1, type: 3}
   m_PrefabInstance: {fileID: 1238361973254406633}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7594090686892494860 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8668350223014826469, guid: bb4dbeff254dfb14dbe720d92b7040e1, type: 3}
+  m_PrefabInstance: {fileID: 1238361973254406633}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74f7cbb788b221e4bb546bbf85fc04bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1488467552272779720
 PrefabInstance:
   m_ObjectHideFlags: 0

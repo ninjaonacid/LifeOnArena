@@ -21,7 +21,9 @@ namespace Code.Runtime.Modules.TutorialService
 
         public void BlockInteractions(bool value)
         {
-            _canvas.interactable = value;
+            _canvas.blocksRaycasts = !value;
         }
+
+        public TutorialElementIdentifier GetId() => _elementId;
     }
 }

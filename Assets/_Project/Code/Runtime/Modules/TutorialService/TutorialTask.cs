@@ -9,12 +9,14 @@ namespace Code.Runtime.Modules.TutorialService
     {
         public event Action Completed;
         public event Action TaskStarted;
+
+        [SerializeField] private TutorialTaskData _data;
         
         [SerializeField] private TutorialElementIdentifier _elementId;
-        [SerializeField] private string _description;
 
+        public TutorialTaskData TaskData => _data;
         public TutorialElementIdentifier ElementId => _elementId;
-        public string Description => _description;
+        
         
     }
 }

@@ -1,6 +1,6 @@
 using System.Threading;
 using Code.Runtime.ConfigData.Levels;
-using Code.Runtime.Core.ConfigProvider;
+using Code.Runtime.Core.Config;
 using Code.Runtime.Core.Factory;
 using Code.Runtime.Logic.CameraLogic;
 using Code.Runtime.Logic.WaveLogic;
@@ -17,7 +17,7 @@ namespace Code.Runtime.Core.EntryPoints
 {
     public class LevelStarterPoint : IAsyncStartable
     {
-        private readonly IConfigProvider _config;
+        private readonly ConfigProvider _config;
         private readonly ISaveLoadService _saveLoad;
         private readonly IHeroFactory _heroFactory;
         private readonly ScreenService _screenService;
@@ -25,7 +25,7 @@ namespace Code.Runtime.Core.EntryPoints
         private readonly EnemySpawnerController _enemySpawnerController;
         private readonly LevelController _levelController;
 
-        public LevelStarterPoint(IConfigProvider config, 
+        public LevelStarterPoint(ConfigProvider config, 
             ISaveLoadService saveLoad, IHeroFactory heroFactory, ScreenService screenService,
             PlayerControls controls, EnemySpawnerController enemySpawnerController,
             LevelController controller)
