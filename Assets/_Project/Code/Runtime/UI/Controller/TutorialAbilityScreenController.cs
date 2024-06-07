@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Code.Runtime.ConfigData.Identifiers;
-using Code.Runtime.Core.Audio;
-using Code.Runtime.Core.SceneManagement;
 using Code.Runtime.Modules.TutorialService;
-using Code.Runtime.Services.PersistentProgress;
+using Code.Runtime.Services.SaveLoad;
 using Code.Runtime.UI.Model;
 using Code.Runtime.UI.Services;
 using Code.Runtime.UI.View;
@@ -15,14 +12,12 @@ using UnityEngine;
 
 namespace Code.Runtime.UI.Controller
 {
-    public class TutorialMainMenuController : MainMenuController
+    public class TutorialAbilityScreenController : AbilityScreenController
     {
         private TutorialService _tutorialService;
         private List<TutorialElement> _tutorialElements = new();
         private ArrowUI _arrow;
-
-        public TutorialMainMenuController(IGameDataContainer gameData, AudioService audioService,
-            SceneLoader sceneLoader, TutorialService tutorialService) : base(gameData, audioService, sceneLoader)
+        public TutorialAbilityScreenController(ISaveLoadService saveLoad, TutorialService tutorialService) : base(saveLoad)
         {
             _tutorialService = tutorialService;
         }
@@ -30,8 +25,8 @@ namespace Code.Runtime.UI.Controller
         public override void InitController(IScreenModel model, BaseWindowView windowView, ScreenService screenService)
         {
             base.InitController(model, windowView, screenService);
-
-            _tutorialElements = _windowView.GetComponentsInChildren<TutorialElement>().ToList();
+            
+            _tutorialElements = _screenView.GetComponentsInChildren<TutorialElement>().ToList();
 
             foreach (var element in _tutorialElements)
             {
@@ -44,10 +39,8 @@ namespace Code.Runtime.UI.Controller
                 _arrow.gameObject.SetActive(false);
             }
             
-            
-            UpdateTutorial();
         }
-
+        
         private void HandleTutorialLogic(TutorialElementIdentifier tutorialElement)
         {
             var task = _tutorialService.GetCurrentTask();
@@ -87,9 +80,10 @@ namespace Code.Runtime.UI.Controller
                 Vector2 newPosition =
                     (Vector2)transform.anchoredPosition + forwardDirection * movementDistance;
                 
-                _arrow.Movement(newPosition); }
+                _arrow.Movement(newPosition);
+
+            }
 
         }
-        
     }
 }

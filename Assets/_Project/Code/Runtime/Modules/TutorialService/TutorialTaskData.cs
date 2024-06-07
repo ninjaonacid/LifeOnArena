@@ -6,8 +6,9 @@ namespace Code.Runtime.Modules.TutorialService
     [Serializable]
     public class TutorialTaskData
     {
-        public Vector2 TutorialArrowPosition;
+        public Vector3 TutorialArrowPosition;
         public float ZRotation;
+        public float MovementOffset = 100;
         public string Description;
         public bool IsCompleted;
     }

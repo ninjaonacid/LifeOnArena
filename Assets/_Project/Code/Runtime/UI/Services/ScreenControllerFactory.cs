@@ -25,7 +25,11 @@ namespace Code.Runtime.UI.Services
             _screenControllers.Add(typeof(WeaponShopScreenController),
                 () => new WeaponShopScreenController(sceneLoader));
             
-            _screenControllers.Add(typeof(AbilityScreenController), () => new AbilityScreenController(saveLoad));
+            _screenControllers.Add(typeof(AbilityScreenController), () => 
+                gameData.PlayerData.TutorialData.IsTutorialCompleted 
+                  ?  new AbilityScreenController(saveLoad) 
+                  : new TutorialAbilityScreenController(saveLoad, tutorialService));
+            
             _screenControllers.Add(typeof(HudController), () => 
                 new HudController(gameData, heroFactory, sceneLoader));
             

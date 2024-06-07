@@ -1,21 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
+using DG.Tweening;
 using UnityEngine;
 
-namespace Code
+namespace Code.Runtime.UI
 {
     public class ArrowUI : MonoBehaviour
     {
-        // Start is called before the first frame update
-        void Start()
+        private RectTransform _transform;
+
+        private void Awake()
         {
-        
+            _transform = GetComponent<RectTransform>();
         }
 
-        // Update is called once per frame
-        void Update()
+        public void Movement(Vector3 movementDirection)
         {
-        
+            _transform.DOAnchorPos(movementDirection, 1).SetLoops(-1, LoopType.Yoyo).SetLink(this.gameObject);
         }
     }
 }

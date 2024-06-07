@@ -88,6 +88,8 @@ GameObject:
   - component: {fileID: 150241162072315791}
   - component: {fileID: 6552101526621459759}
   - component: {fileID: 4960250034176197562}
+  - component: {fileID: 1634337702013016187}
+  - component: {fileID: 1408574528893330061}
   m_Layer: 5
   m_Name: AbilityTreeCell
   m_TagString: Untagged
@@ -177,6 +179,32 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1634337702013016187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2010932772804548500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5287c8edf39730f4d861cc7e6fcd4e6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _elementId: {fileID: 11400000, guid: b808d61d2206cc94da9d91d39c5b34ce, type: 2}
+  _canvas: {fileID: 1408574528893330061}
+--- !u!225 &1408574528893330061
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2010932772804548500}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &3801237455979459346
 GameObject:
   m_ObjectHideFlags: 0

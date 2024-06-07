@@ -13,7 +13,7 @@ namespace Code.Runtime.Modules.TutorialService
         private Subject<TutorialElementIdentifier> _subject;
         public void OnPointerClick(PointerEventData eventData)
         {
-            Debug.Log("TutorialElementClicked");
+            _subject?.OnNext(_elementId);
         }
 
         public IObservable<TutorialElementIdentifier> OnClickAsObservable() =>

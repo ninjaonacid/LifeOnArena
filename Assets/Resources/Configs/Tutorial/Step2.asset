@@ -12,5 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c719232063204bcc95e5832b50327c7c, type: 3}
   m_Name: Step2
   m_EditorClassIdentifier: 
-  _elementId: {fileID: 0}
-  _description: 
+  _data:
+    TutorialArrowPosition: {x: -250, y: 0, z: 0}
+    ZRotation: -90
+    MovementOffset: 50
+    Description: Select ability
+    IsCompleted: 0
+  _elementId: {fileID: 11400000, guid: b808d61d2206cc94da9d91d39c5b34ce, type: 2}

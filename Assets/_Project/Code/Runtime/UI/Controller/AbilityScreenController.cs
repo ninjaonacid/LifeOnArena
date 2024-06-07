@@ -12,8 +12,8 @@ namespace Code.Runtime.UI.Controller
 {
     public class AbilityScreenController : IScreenController, IDisposable
     {
-        private AbilityScreenModel _model;
-        private AbilityScreenView _screenView;
+        protected AbilityScreenModel _model;
+        protected AbilityScreenView _screenView;
         private ScreenService _screenService;
         private readonly ISaveLoadService _saveLoad;
         private readonly CompositeDisposable _disposable = new CompositeDisposable();
@@ -22,7 +22,7 @@ namespace Code.Runtime.UI.Controller
             _saveLoad = saveLoad;
         }
 
-        public void InitController(IScreenModel model, BaseWindowView windowView, ScreenService screenService)
+        public virtual void InitController(IScreenModel model, BaseWindowView windowView, ScreenService screenService)
         {
             _model = model as AbilityScreenModel;
             _screenView = windowView as AbilityScreenView;
