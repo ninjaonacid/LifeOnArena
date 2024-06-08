@@ -86,17 +86,13 @@ namespace Code.Runtime.UI.Model.AbilityMenu
         public void UnlockAbility(int index)
         {
             var ability = _abilities[index];
-
-            if (index > 0)
+            
+            if (ability.AbilityTreeData.UnlockRequirements.All(x => x.CheckRequirement(_gameData.PlayerData))) 
             {
-                var previousAbility = _abilities[index - 1];
-                
-                if (ability.AbilityTreeData.UnlockRequirements.All(x => x.CheckRequirement(_gameData.PlayerData))) 
-                {
-                    Souls.Value -= ability.Price;
-                    ability.IsUnlocked = true;
-                };
-            }
+                Souls.Value -= ability.Price;
+                ability.IsUnlocked = true;
+            };
+            
         }
 
         public void UnEquipAbility(int slotIndex)

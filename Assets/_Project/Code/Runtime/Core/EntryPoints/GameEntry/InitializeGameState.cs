@@ -45,8 +45,7 @@ namespace Code.Runtime.Core.EntryPoints.GameEntry
             data.WorldData.LootData.Collected = 10000;
 
             StatDatabase characterStats = _configProvider.CharacterStats();
-
-
+            
             foreach (StatDefinition stat in characterStats.PrimaryStats)
             {
                 data.StatsData.Stats.TryAdd(stat.name, stat.BaseValue);

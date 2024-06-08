@@ -38,7 +38,9 @@ namespace Code.Runtime.UI.Controller
                 _arrow = UnityEngine.Object.Instantiate(_tutorialService.GetArrowUI());
                 _arrow.gameObject.SetActive(false);
             }
-            
+
+            _tutorialService.OnTaskChanged += UpdateTutorial;
+
         }
         
         private void HandleTutorialLogic(TutorialElementIdentifier tutorialElement)
@@ -49,40 +51,24 @@ namespace Code.Runtime.UI.Controller
             {
                 _tutorialService.UpdateTutorialStatus(task);
             }
-            
-            UpdateTutorial();
         }
 
-        private void UpdateTutorial()
+        private void UpdateTutorial(TutorialTask task)
         {
-            var task = _tutorialService.GetCurrentTask();
-
-            _tutorialElements.Where(x => x.GetId() != task.ElementId).ForEach(x => x.BlockInteractions(true));
-            var currentElement = _tutorialElements.FirstOrDefault(x => x.GetId() == task.ElementId);
-
-            if (currentElement != null)
+            TutorialElement currentElement = default;
+            
+            _tutorialElements.ForEach(x =>
             {
-                _arrow.gameObject.SetActive(true);
-                
-                RectTransform transform;
-                (transform = (RectTransform)_arrow.transform).SetParent(currentElement.transform);
-                
-                transform.localScale = Vector3.one;
-                transform.anchoredPosition = task.TaskData.TutorialArrowPosition;
-                var transformLocalRotation = transform.localRotation;
-                var eulerAngles = transformLocalRotation.eulerAngles;
-                eulerAngles.z = task.TaskData.ZRotation;
-                transform.localRotation = Quaternion.Euler(eulerAngles);
-
-                var movementDistance = 50f;
-                Vector2 forwardDirection = transform.up;
-
-                Vector2 newPosition =
-                    (Vector2)transform.anchoredPosition + forwardDirection * movementDistance;
-                
-                _arrow.Movement(newPosition);
-
-            }
+                if (x.GetId() == task.ElementId)
+                {
+                    currentElement = x;
+                    _tutorialService.HandlePointer(currentElement);
+                }
+                else
+                {
+                    x.BlockInteractions(true);
+                }
+            });
 
         }
     }

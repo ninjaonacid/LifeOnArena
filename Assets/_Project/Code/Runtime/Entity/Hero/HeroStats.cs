@@ -8,21 +8,6 @@ namespace Code.Runtime.Entity.Hero
     {
         private StatsData _statsData;
 
-        // private void Update()
-        // {
-        //     if (Input.GetKeyDown(KeyCode.T))
-        //     {
-        //         Attribute health = _stats["Health"] as Attribute;
-        //         health.ApplyModifier(new StatModifier()
-        //         {
-        //             OperationType = ModifierOperationType.Additive,
-        //             Magnitude = -10,
-        //             Source = this,
-        //         });
-        //         Debug.Log(health.BaseValue.ToString());
-        //     }
-        // }
-
         public void LoadData(PlayerData data)
         {
             _statsData = data.StatsData;

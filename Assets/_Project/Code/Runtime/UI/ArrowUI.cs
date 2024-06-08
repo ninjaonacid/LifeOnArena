@@ -13,9 +13,10 @@ namespace Code.Runtime.UI
             _transform = GetComponent<RectTransform>();
         }
 
-        public void Movement(Vector3 movementDirection)
+        public void Movement(Vector2 movementDirection)
         {
-            _transform.DOAnchorPos(movementDirection, 1).SetLoops(-1, LoopType.Yoyo).SetLink(this.gameObject);
+            _transform.DOAnchorPos(movementDirection, 1).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo).SetLink(this.gameObject);
+            
         }
     }
 }
