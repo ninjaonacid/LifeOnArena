@@ -10,7 +10,7 @@ namespace Code.Runtime.Modules.TutorialService
     public class TutorialService
     {
         public Action<TutorialTask> OnTaskChanged;
-        private ConfigProvider _configProvider;
+        private readonly ConfigProvider _configProvider;
         private Queue<TutorialTask> _tutorialTasks = new();
         private List<TutorialTask> _completedTasks = new();
         private TutorialTask _currentTask;

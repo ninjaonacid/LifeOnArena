@@ -10,9 +10,9 @@ namespace Code.Runtime.UI.Controller
 {
     public class ArenaSelectionScreenController : IScreenController
     {
-        private ArenaSelectionScreenModel _model;
-        private ArenaSelectionScreenView _view;
-        public void InitController(IScreenModel model, BaseWindowView windowView, ScreenService screenService)
+        protected ArenaSelectionScreenModel _model;
+        protected ArenaSelectionScreenView _view;
+        public virtual void InitController(IScreenModel model, BaseWindowView windowView, ScreenService screenService)
         {
             _model = model as ArenaSelectionScreenModel;
             _view = windowView as ArenaSelectionScreenView;

@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using Code.Runtime.Core.AssetManagement;
 using Code.Runtime.Core.Config;
+using Code.Runtime.Core.ObjectPool;
 using Code.Runtime.UI.View;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -14,16 +15,18 @@ namespace Code.Runtime.UI.Services
         private readonly IAssetProvider _assetProvider;
         private readonly ConfigProvider _config;
         private readonly IObjectResolver _objectResolver;
+        private readonly ObjectPoolProvider _poolProvider;
 
         private Transform _uiCoreTransform;
 
         public UIFactory(IAssetProvider assetProvider, 
             ConfigProvider configProvider,
-            IObjectResolver objectResolver)
+            IObjectResolver objectResolver, ObjectPoolProvider poolProvider)
         {
             _assetProvider = assetProvider;
             _config = configProvider;
             _objectResolver = objectResolver;
+            _poolProvider = poolProvider;
         }
         
         public BaseWindowView CreateScreenView(ScreenID screenId)

@@ -62,7 +62,6 @@ namespace Code.Runtime.UI.Controller
                     x.BlockInteractions(true);
                 }
             });
-
         }
     }
 }

@@ -35,7 +35,10 @@ namespace Code.Runtime.UI.Services
             
             _screenControllers.Add(typeof(MessageWindowController), () => new MessageWindowController());
             
-            _screenControllers.Add(typeof(ArenaSelectionScreenController), () => new ArenaSelectionScreenController());
+            _screenControllers.Add(typeof(ArenaSelectionScreenController), 
+                () => gameData.PlayerData.TutorialData.IsTutorialCompleted 
+                ? new ArenaSelectionScreenController()
+                : new TutorialArenaSelectionController(tutorialService));
         }
 
         public IScreenController CreateController(Type controller)

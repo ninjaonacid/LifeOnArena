@@ -35,7 +35,6 @@ namespace Code.Runtime.UI.Controller
                     if (time < 0)
                     {
                         screenService.Close(this);
-                   
                     }
                 }).AddTo(_windowView);
             }
