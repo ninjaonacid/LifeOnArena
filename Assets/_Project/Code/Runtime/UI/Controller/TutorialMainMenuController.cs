@@ -19,7 +19,6 @@ namespace Code.Runtime.UI.Controller
     {
         private TutorialService _tutorialService;
         private List<TutorialElement> _tutorialElements = new();
-        private ArrowUI _arrow;
 
         public TutorialMainMenuController(IGameDataContainer gameData, AudioService audioService,
             SceneLoader sceneLoader, TutorialService tutorialService) : base(gameData, audioService, sceneLoader)
@@ -38,13 +37,8 @@ namespace Code.Runtime.UI.Controller
                 element.OnClickAsObservable().Subscribe(HandleTutorialLogic);
             }
 
-            if (_arrow == null)
-            {
-                _arrow = UnityEngine.Object.Instantiate(_tutorialService.GetArrowUI());
-                _arrow.gameObject.SetActive(false);
-            }
-
             _tutorialService.OnTaskChanged += UpdateTutorial;
+            
             UpdateTutorial(_tutorialService.GetCurrentTask());
         }
 
@@ -67,6 +61,7 @@ namespace Code.Runtime.UI.Controller
                 if (x.GetId() == task.ElementId)
                 {
                     currentElement = x;
+                    currentElement.BlockInteractions(false);
                     _tutorialService.HandlePointer(currentElement);
                 }
                 else

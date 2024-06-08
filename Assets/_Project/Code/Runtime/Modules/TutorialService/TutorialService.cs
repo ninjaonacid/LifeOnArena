@@ -40,6 +40,10 @@ namespace Code.Runtime.Modules.TutorialService
                 _currentTask = _tutorialTasks.Peek();
                 OnTaskChanged.Invoke(_currentTask);
             }
+            else
+            {
+                
+            }
             
             Debug.Log($"Current task is {_currentTask}");
         }
