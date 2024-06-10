@@ -12,6 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70f773d672fc7be4b85eb2e6f0b9ccd1, type: 3}
   m_Name: MainMenu
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: UnlockRequirements
+      Entry: 6
+      Data: 
+  LocationName: 
   LevelKey: MainMenu
   LevelType: 1
   RequiredLevel: 0
@@ -19,7 +32,5 @@ MonoBehaviour:
   Icon: {fileID: 0}
   EnemySpawners: []
   NextLevelDoorSpawners: []
-  HeroInitialPosition: {x: -7.2, y: 0, z: 7.4}
+  HeroInitialPosition: {x: -6.1, y: 0, z: 5.3}
   HeroInitialRotation: {x: 0, y: 0, z: 0, w: 1}
-  NextLevelDoorPosition: {x: 0, y: 0, z: 0}
-  NextLevelDoorRotation: {x: 0, y: 0, z: 0, w: 0}

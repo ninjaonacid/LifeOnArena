@@ -1,5 +1,6 @@
 using System;
 using System.Threading;
+using System.Threading.Tasks;
 using Code.Runtime.ConfigData.Identifiers;
 using Code.Runtime.ConfigData.Levels;
 using Code.Runtime.Core.Factory;
@@ -38,7 +39,7 @@ namespace Code.Runtime.Logic.EnemySpawners
 
         public void InitializeSpawner(LevelConfig levelConfig)
         {
-            _visualEffectFactory.PrewarmEffect(_visualEffectIdentifier.Id, levelConfig.EnemySpawners.Count).Forget();
+            _visualEffectFactory.PrewarmEffect(_visualEffectIdentifier.Id, 1).Forget();
         }
 
         public async UniTask Spawn(CancellationToken token)
@@ -48,18 +49,29 @@ namespace Code.Runtime.Logic.EnemySpawners
             {
                 await UniTask.Delay(TimeSpan.FromSeconds(TimeToSpawn), cancellationToken: token);
             }
+            
+            var position = transform.position;
+            await VfxSpawnLogic(position, token);
+            await UniTask.Delay(TimeSpan.FromSeconds(1.5f), cancellationToken: token);
+            
             var monster = await _factory.CreateMonster(MobId.Id, transform, token);
 
-            var position = transform.position;
             monster.transform.position = position;
 
-            _spawnVfx = await _visualEffectFactory.CreateVisualEffect(_visualEffectIdentifier.Id, position);
-            var spawnVfxPosition = _spawnVfx.transform.position;
-            spawnVfxPosition =
-                new Vector3(spawnVfxPosition.x, spawnVfxPosition.y + 2, spawnVfxPosition.z);
-            
+
             _enemyDeath = monster.GetComponent<EnemyDeath>();
             _enemyDeath.Happened += Slay;
+        }
+
+        private async Task VfxSpawnLogic(Vector3 position, CancellationToken token)
+        {
+            _spawnVfx = await _visualEffectFactory.CreateVisualEffect(_visualEffectIdentifier.Id, position, token);
+
+            var spawnVfxPosition = _spawnVfx.transform.position;
+            spawnVfxPosition =
+                new Vector3(spawnVfxPosition.x, spawnVfxPosition.y + 5, spawnVfxPosition.z);
+
+            _spawnVfx.transform.position = spawnVfxPosition;
         }
 
         private void Slay()

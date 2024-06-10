@@ -26,7 +26,12 @@ namespace Code.Runtime.UI.Model.ArenaSelectionScreenModel
 
             foreach (var level in playableLevels)
             {
-                LevelModel.Add(new LevelModel(level));
+                LevelModel.Add(new LevelModel()
+                {
+                    Icon = level.Icon,
+                    LocationName =  level.LocationName,
+                    
+                });
             }
         }
 
@@ -42,11 +47,9 @@ namespace Code.Runtime.UI.Model.ArenaSelectionScreenModel
         public Sprite Icon;
         public int RequiredLevel;
         public bool IsUnlocked;
+        public string LocationName;
 
         public LevelConfig LevelConfig;
-        public LevelModel(LevelConfig config)
-        {
-            LevelConfig = config;
-        }
+        
     }
 }

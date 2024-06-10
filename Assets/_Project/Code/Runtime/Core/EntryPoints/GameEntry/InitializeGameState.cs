@@ -40,7 +40,7 @@ namespace Code.Runtime.Core.EntryPoints.GameEntry
         {
             PlayerData data = new PlayerData("Shelter");
 
-            data.TutorialData.IsTutorialCompleted = false;
+            data.TutorialData.IsTutorialCompleted = true;
 
             data.WorldData.LootData.Collected = 10000;
 
@@ -84,6 +84,7 @@ namespace Code.Runtime.Core.EntryPoints.GameEntry
                 if (abilityModel.Price == 0)
                 {
                     abilityModel.IsUnlocked = true;
+                    data.AbilityData.UnlockedAbilities.Add(abilityModel);
                 }
                 
                 abilityModels.Add(abilityModel);

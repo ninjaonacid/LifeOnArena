@@ -38,7 +38,7 @@ namespace Code.Runtime.UI.Controller
             for (var index = 0; index < _model.LevelModel.Count; index++)
             {
                 var levelModel = _model.LevelModel[index];
-                _view.LevelContainer.UpdateData(index, levelModel.LevelConfig.Icon, true);
+                _view.LevelContainer.UpdateData(index, levelModel.LocationName, levelModel.Icon, true);
             }
         }
         

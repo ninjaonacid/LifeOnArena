@@ -11,7 +11,7 @@ namespace Code.Runtime.Modules.Requirements
         
         public bool CheckRequirement(PlayerData value)
         {
-           return value.AbilityData.Abilities
+           return value.AbilityData.UnlockedAbilities
                .Any(x => x.AbilityId == _requiredAbility.Id);
         }
     }

@@ -21,12 +21,11 @@ namespace Code.Runtime.UI.Services
 
         public UIFactory(IAssetProvider assetProvider, 
             ConfigProvider configProvider,
-            IObjectResolver objectResolver, ObjectPoolProvider poolProvider)
+            IObjectResolver objectResolver)
         {
             _assetProvider = assetProvider;
             _config = configProvider;
             _objectResolver = objectResolver;
-            _poolProvider = poolProvider;
         }
         
         public BaseWindowView CreateScreenView(ScreenID screenId)

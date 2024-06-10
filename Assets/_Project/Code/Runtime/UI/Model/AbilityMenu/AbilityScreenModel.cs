@@ -42,24 +42,22 @@ namespace Code.Runtime.UI.Model.AbilityMenu
             
             foreach (var ability in allAbilities)
             {
-                var abilitySlotModel = new AbilityModel()
+                var abilityModel = new AbilityModel()
                 {
-                    //ActiveAbilityBlueprintBase = ability,
                     AbilityId = ability.Identifier.Id,
-                    //AbilityId = ability.Identifier.Id,
                     Price = ability.AbilityTreeData.Price,
                     AbilityTreeData = ability.AbilityTreeData,
                     Icon = ability.Icon,
                     Description = ability.Description
                 };
 
-                if (abilitySlotModel.Price == 0)
+                if (abilityModel.Price == 0)
                 {
-                    abilitySlotModel.IsUnlocked = true;
+                    abilityModel.IsUnlocked = true;
                 }
                 
 
-                _abilities.Add(abilitySlotModel);
+                _abilities.Add(abilityModel);
             }
         }
 
@@ -91,6 +89,7 @@ namespace Code.Runtime.UI.Model.AbilityMenu
             {
                 Souls.Value -= ability.Price;
                 ability.IsUnlocked = true;
+                _gameData.PlayerData.AbilityData.UnlockedAbilities.Add(ability);
             };
             
         }
@@ -155,8 +154,8 @@ namespace Code.Runtime.UI.Model.AbilityMenu
 
         public void SaveModelData()
         {
-            _gameData.PlayerData.AbilityData.Abilities = new List<AbilityModel>(_abilities);
-            _gameData.PlayerData.AbilityData.EquippedAbilities = new List<AbilityModel>(_equippedAbilities);
+            _gameData.PlayerData.AbilityData.Abilities = _abilities;
+            _gameData.PlayerData.AbilityData.EquippedAbilities = _equippedAbilities;
             _gameData.PlayerData.WorldData.LootData.Collected = Souls.Value;
         }
     }

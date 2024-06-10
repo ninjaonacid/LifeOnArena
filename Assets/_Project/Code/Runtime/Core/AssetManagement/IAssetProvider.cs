@@ -1,4 +1,5 @@
-﻿using Cysharp.Threading.Tasks;
+﻿using System.Threading;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
@@ -11,12 +12,12 @@ namespace Code.Runtime.Core.AssetManagement
         GameObject InstantiateSync(string path, Transform parent);
         void Initialize();
 
-        UniTask<T> Load<T>(AssetReferenceGameObject assetReference) where T : class;
+        UniTask<T> Load<T>(AssetReferenceGameObject assetReference, CancellationToken cancellationToken = default) where T : class;
 
-        UniTask<T> Load<T>(AssetReferenceSprite spriteReference) where T: class;
-        UniTask<T> Load<T>(AssetReference assetReference) where T: class;
+        UniTask<T> Load<T>(AssetReferenceSprite spriteReference, CancellationToken cancellationToken = default) where T: class;
+        UniTask<T> Load<T>(AssetReference assetReference, CancellationToken cancellationToken = default) where T: class;
 
-        UniTask<T> Load<T>(string assetAddress) where T : class;
+        UniTask<T> Load<T>(string assetAddress, CancellationToken cancellationToken = default) where T : class;
 
         void UnloadAll();
     }

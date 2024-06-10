@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -17,33 +18,37 @@ namespace Code.Runtime.Core.AssetManagement
             Addressables.InitializeAsync();
         }
 
-        public async UniTask<T> Load<T>(AssetReferenceGameObject assetReference) where T : class
+        public async UniTask<T> Load<T>(AssetReferenceGameObject assetReference, CancellationToken cancellationToken = default) where T : class
         {
             if (_loadedAssets.TryGetValue(assetReference.AssetGUID, 
                     out AsyncOperationHandle completedHandle))
             {
                 return completedHandle.Result as T;
             }
+            
+            cancellationToken.ThrowIfCancellationRequested();
 
             return await LoadWithCache(
                 Addressables.LoadAssetAsync<T>(assetReference),
                 assetReference.AssetGUID);
         }
 
-        public async UniTask<T> Load<T>(AssetReferenceSprite spriteReference) where T : class
+        public async UniTask<T> Load<T>(AssetReferenceSprite spriteReference, CancellationToken cancellationToken = default) where T : class
         {
             if (_loadedAssets.TryGetValue(spriteReference.AssetGUID,
                     out AsyncOperationHandle completedHandle))
             {
                 return completedHandle.Result as T;
             }
-
+            
+            cancellationToken.ThrowIfCancellationRequested();
+          
             return await LoadWithCache(
                 Addressables.LoadAssetAsync<T>(spriteReference),
                 spriteReference.AssetGUID);
         }
 
-        public async UniTask<T> Load<T>(AssetReference assetReference) where T : class
+        public async UniTask<T> Load<T>(AssetReference assetReference, CancellationToken cancellationToken = default) where T : class
         {
             if (_loadedAssets.TryGetValue(assetReference.AssetGUID,
                     out AsyncOperationHandle completedHandle))
@@ -51,19 +56,23 @@ namespace Code.Runtime.Core.AssetManagement
                 return completedHandle.Result as T;
             }
             
+            cancellationToken.ThrowIfCancellationRequested();
+            
             return await LoadWithCache(
                 Addressables.LoadAssetAsync<T>(assetReference),
                 assetReference.AssetGUID);
         }
 
         
-        public async UniTask<T> Load<T>(string assetAddress) where T : class
+        public async UniTask<T> Load<T>(string assetAddress, CancellationToken cancellationToken = default) where T : class
         {
             if (_loadedAssets.TryGetValue(assetAddress,
                     out AsyncOperationHandle completedHandle))
             {
                 return completedHandle.Result as T;
             }
+            
+            cancellationToken.ThrowIfCancellationRequested();
             
             return await LoadWithCache(
                 Addressables.LoadAssetAsync<T>(assetAddress),

@@ -1,5 +1,6 @@
 
 using System;
+using System.Threading;
 using Code.Runtime.Core.AssetManagement;
 using Code.Runtime.Core.Config;
 using Code.Runtime.Core.ObjectPool;
@@ -28,11 +29,13 @@ namespace Code.Runtime.Core.Factory
         public async UniTask<VisualEffect> CreateVisualEffect(int id, GameObject owner = null, Action<PooledObject> onCreate = null,
             Action<PooledObject> onRelease = null,
             Action<PooledObject> onGet = null,
-            Action<PooledObject> onReturn = null)
+            Action<PooledObject> onReturn = null,
+            CancellationToken cancellationToken  = default)
         {
+            
             var visualEffect = _configProvider.VisualEffect(id);
 
-            var prefab = await _assetProvider.Load<GameObject>(visualEffect.PrefabReference);
+            var prefab = await _assetProvider.Load<GameObject>(visualEffect.PrefabReference, cancellationToken: cancellationToken);
             
             var particleSystem = _poolProvider.Spawn<VisualEffect>(prefab, owner, onCreate, onRelease, onGet, onReturn);
 
@@ -40,9 +43,9 @@ namespace Code.Runtime.Core.Factory
         }
         
         
-        public async UniTask<VisualEffect> CreateVisualEffect(int id, Vector3 position)
+        public async UniTask<VisualEffect> CreateVisualEffect(int id, Vector3 position, CancellationToken token = default)
         {
-           var visualEffect =  await CreateVisualEffect(id);
+           var visualEffect =  await CreateVisualEffect(id, cancellationToken: token);
            visualEffect.transform.position = position;
            return visualEffect;
         }

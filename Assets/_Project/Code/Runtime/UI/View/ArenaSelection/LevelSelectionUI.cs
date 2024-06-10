@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using UniRx;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -11,12 +12,13 @@ namespace Code.Runtime.UI.View.ArenaSelection
         [SerializeField] private Image _levelImage;
         [SerializeField] private Image _lockImage;
         [SerializeField] private Image _selectionFrame;
+        [SerializeField] private TextMeshProUGUI _locationName;
 
         private Subject<LevelSelectionUI> _subject;
-        public void UpdateData(Sprite icon, bool isUnlocked)
+        public void UpdateData(Sprite icon, string locationName, bool isUnlocked)
         {
             _levelImage.sprite = icon;
-            
+            _locationName.SetText(locationName);
             _lockImage.gameObject.SetActive(!isUnlocked);
         }
 

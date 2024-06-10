@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using Code.Runtime.ConfigData.Spawners;
+using Code.Runtime.Data.PlayerData;
+using Code.Runtime.Modules.Requirements;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -19,19 +21,23 @@ namespace Code.Runtime.ConfigData.Levels
     }
 
     [CreateAssetMenu(fileName = "LevelData", menuName = "Config/Level")]
-    public class LevelConfig : ScriptableObject
+    public class LevelConfig : SerializedScriptableObject
     {
+        public string LocationName;
         public string LevelKey;
         [Title("Location Type")]
         [EnumToggleButtons]
         public LevelType LevelType;
 
         public int RequiredLevel;
-
+        
+        [FoldoutGroup("Unlock requirements list", true)]
+        public List<IRequirement<PlayerData>> UnlockRequirements;
+        
         public int WavesToSpawn;
 
         public Sprite Icon;
-    
+        
         [BoxGroup("Spawners")]
         [LabelWidth(100)]
         public List<EnemySpawnerData> EnemySpawners;

@@ -69,8 +69,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 36df78afffbe19a438d9a840730c4bef, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 4b1d5fc063acce74197c7df94fa0417d, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -1535,7 +1535,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8281167215227737722, guid: bb4dbeff254dfb14dbe720d92b7040e1, type: 3}
       propertyPath: m_Name
-      value: Options
+      value: Weapons
+      objectReference: {fileID: 0}
+    - target: {fileID: 8281167215227737722, guid: bb4dbeff254dfb14dbe720d92b7040e1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8668350223014826469, guid: bb4dbeff254dfb14dbe720d92b7040e1, type: 3}
       propertyPath: WindowId

@@ -9,6 +9,7 @@ namespace Code.Runtime.Data.PlayerData
     {
         public List<AbilityModel> Abilities = new();
         public List<AbilityModel> EquippedAbilities = new();
+        public List<AbilityModel> UnlockedAbilities = new();
 
     }
 

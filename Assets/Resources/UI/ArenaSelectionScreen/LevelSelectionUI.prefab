@@ -59,14 +59,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.8584906, g: 0.044544328, b: 0.044544328, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 818b6cf45137b494bad2e5753ed84b81, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fd4799eaf69f3c74f91db5f7c908a141, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -164,7 +164,7 @@ GameObject:
   - component: {fileID: 2139031838791787814}
   - component: {fileID: 3587538613103685131}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: LocationName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -422,6 +422,7 @@ MonoBehaviour:
   _levelImage: {fileID: 1461324523140132046}
   _lockImage: {fileID: 8244496246502909569}
   _selectionFrame: {fileID: 4181686998850653094}
+  _locationName: {fileID: 3587538613103685131}
 --- !u!222 &3350171785270093831
 CanvasRenderer:
   m_ObjectHideFlags: 0
