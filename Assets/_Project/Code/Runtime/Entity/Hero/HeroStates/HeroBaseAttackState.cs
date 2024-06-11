@@ -6,7 +6,7 @@ namespace Code.Runtime.Entity.Hero.HeroStates
 {
     public abstract class HeroBaseAttackState : HeroBaseState
     {
-        protected readonly HeroAttackComponent HeroAttackComponent;
+        protected readonly HeroAttackComponent _heroAttackComponent;
         protected readonly HeroWeapon _heroWeapon;
         protected HeroBaseAttackState(HeroAttackComponent heroAttackComponent, HeroWeapon heroWeapon,
             HeroAnimator heroAnimator, HeroMovement heroMovement, HeroRotation heroRotation,
@@ -16,7 +16,7 @@ namespace Code.Runtime.Entity.Hero.HeroStates
             heroAnimator, heroMovement, heroRotation, animationData, needExitTime, isGhostState, onEnter, onLogic,
             onExit, canExit)
         {
-            HeroAttackComponent = heroAttackComponent;
+            _heroAttackComponent = heroAttackComponent;
             _heroWeapon = heroWeapon;
         }
     }

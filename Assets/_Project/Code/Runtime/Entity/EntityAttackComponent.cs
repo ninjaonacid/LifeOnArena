@@ -65,6 +65,7 @@ namespace Code.Runtime.Entity
             weaponView.gameObject.layer = Mathf.RoundToInt(Mathf.Log(_ownerLayer.value, 2));
             weaponView.Hit += BaseAttack;
         }
+        
 
         protected virtual void BaseAttack(CollisionData collision)
         {

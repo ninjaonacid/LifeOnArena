@@ -10,11 +10,13 @@ namespace Code.Runtime.UI.View.HUD.Skills
     {
         public Image CooldownImage;
         public TextMeshProUGUI CooldownText;
+        public Image BlurImage;
         
         public async UniTaskVoid UpdateCooldown(ActiveAbility activeAbility)
         {
             CooldownImage.gameObject.SetActive(true);
             CooldownText.gameObject.SetActive(true);
+            BlurImage.gameObject.SetActive(true);
 
             while (activeAbility.CurrentCooldown >= 0)
             {
@@ -25,6 +27,7 @@ namespace Code.Runtime.UI.View.HUD.Skills
 
             CooldownText.gameObject.SetActive(false);
             CooldownImage.gameObject.SetActive(false);
+            BlurImage.gameObject.SetActive(false);
         }
     }
 }

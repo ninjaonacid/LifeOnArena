@@ -123,47 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 23800000, guid: 1f3af4dd3c4c3de4c96a1c7e572865ed, type: 2}
---- !u!114 &108556813
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec0b4dd729a12d046982652f834580a2, type: 3}
-  m_Name: MainMenu_LMA2
-  m_EditorClassIdentifier: 
-  resolution: 1024
-  bitmask: 1
-  id: 2
-  sortingID: 2
-  isImplicit: 1
-  area: 0
-  totalVertexCount: 0
-  vertexCounter: 0
-  sceneLodLevel: -1
-  sceneName: 
-  containsTerrains: 0
-  probes: 0
-  mode: 1
-  renderMode: 1000
-  renderDirMode: 1000
-  atlasPacker: 1000
-  computeSSS: 0
-  sssSamples: 16
-  sssDensity: 10
-  sssColor: {r: 1, g: 1, b: 1, a: 1}
-  sssScale: 1
-  fakeShadowBias: 0
-  transparentSelfShadow: 0
-  flipNormal: 0
-  parentName: 
-  overridePath: 
-  fixPos3D: 0
-  voxelSize: {x: 1, y: 1, z: 1}
-  passedFilter: 0
 --- !u!1001 &131827733
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -574,7 +533,7 @@ MonoBehaviour:
   cloudShadowTilingY: 0.01
   cloudShadowOffsetX: 0
   cloudShadowOffsetY: 0
-  UID: 1080563218
+  UID: -1823764206
 --- !u!1 &273936489
 GameObject:
   m_ObjectHideFlags: 0
@@ -1014,7 +973,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57f24a4aaa0761b45ba25e7e5108e2c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UID: -1884277455
+  UID: 44808040
   color: {r: 0.8867924, g: 0.352489, b: 0.16313636, a: 1}
   intensity: 100
   shadowSpread: 0.05
@@ -1039,6 +998,47 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5010148892237557419, guid: fd3866811e5a6a149a4985baa69c019e, type: 3}
   m_PrefabInstance: {fileID: 418009488}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &516294808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec0b4dd729a12d046982652f834580a2, type: 3}
+  m_Name: MainMenu_LMA1
+  m_EditorClassIdentifier: 
+  resolution: 1024
+  bitmask: 1
+  id: 1
+  sortingID: 1
+  isImplicit: 1
+  area: 0
+  totalVertexCount: 0
+  vertexCounter: 0
+  sceneLodLevel: -1
+  sceneName: 
+  containsTerrains: 0
+  probes: 0
+  mode: 1
+  renderMode: 1000
+  renderDirMode: 1000
+  atlasPacker: 1000
+  computeSSS: 0
+  sssSamples: 16
+  sssDensity: 10
+  sssColor: {r: 1, g: 1, b: 1, a: 1}
+  sssScale: 1
+  fakeShadowBias: 0
+  transparentSelfShadow: 0
+  flipNormal: 0
+  parentName: 
+  overridePath: 
+  fixPos3D: 0
+  voxelSize: {x: 1, y: 1, z: 1}
+  passedFilter: 0
 --- !u!1001 &534360010
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1363,7 +1363,7 @@ MonoBehaviour:
   tangentSH: 0
   correctRotation: 0
   cubemap: {fileID: 0}
-  UID: 12629124
+  UID: -2094869113
 --- !u!4 &574904319
 Transform:
   m_ObjectHideFlags: 0
@@ -1576,7 +1576,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57f24a4aaa0761b45ba25e7e5108e2c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UID: -1437192676
+  UID: -1296679121
   color: {r: 0.8867924, g: 0.352489, b: 0.16313636, a: 1}
   intensity: 100
   shadowSpread: 0.05
@@ -1601,6 +1601,47 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5010148892237557419, guid: fd3866811e5a6a149a4985baa69c019e, type: 3}
   m_PrefabInstance: {fileID: 688857256}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &707191902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec0b4dd729a12d046982652f834580a2, type: 3}
+  m_Name: MainMenu_LMA2
+  m_EditorClassIdentifier: 
+  resolution: 1024
+  bitmask: 1
+  id: 2
+  sortingID: 2
+  isImplicit: 1
+  area: 0
+  totalVertexCount: 0
+  vertexCounter: 0
+  sceneLodLevel: -1
+  sceneName: 
+  containsTerrains: 0
+  probes: 0
+  mode: 1
+  renderMode: 1000
+  renderDirMode: 1000
+  atlasPacker: 1000
+  computeSSS: 0
+  sssSamples: 16
+  sssDensity: 10
+  sssColor: {r: 1, g: 1, b: 1, a: 1}
+  sssScale: 1
+  fakeShadowBias: 0
+  transparentSelfShadow: 0
+  flipNormal: 0
+  parentName: 
+  overridePath: 
+  fixPos3D: 0
+  voxelSize: {x: 1, y: 1, z: 1}
+  passedFilter: 0
 --- !u!1 &791842861
 GameObject:
   m_ObjectHideFlags: 0
@@ -1749,7 +1790,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57f24a4aaa0761b45ba25e7e5108e2c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UID: 1062603748
+  UID: -118264965
   color: {r: 0.8867924, g: 0.352489, b: 0.16313636, a: 1}
   intensity: 100
   shadowSpread: 0.05
@@ -2061,7 +2102,7 @@ MonoBehaviour:
   lastBakeTime: 20
   enlightenWarningShown: 0
   enlightenWarningShown2: 0
-  lightUIDs: 6e78918c45555fe31b410053442e8a69f84e2fc6ab9e0a50
+  lightUIDs: 68b7ab022f3fb6b27b6bf3f83bca445687d5228312914b93
   lights:
   - tform:
       e00: -0.00000035762787
@@ -2244,37 +2285,37 @@ MonoBehaviour:
     cookie: {fileID: 0}
     angle: 30
   implicitGroups:
-  - {fileID: 893385490}
-  - {fileID: 108556813}
-  - {fileID: 893385490}
-  - {fileID: 893385490}
-  - {fileID: 108556813}
-  - {fileID: 893385490}
-  - {fileID: 893385490}
-  - {fileID: 108556813}
-  - {fileID: 108556813}
-  - {fileID: 893385490}
-  - {fileID: 893385490}
-  - {fileID: 893385490}
-  - {fileID: 108556813}
-  - {fileID: 893385490}
-  - {fileID: 893385490}
-  - {fileID: 108556813}
-  - {fileID: 108556813}
-  - {fileID: 108556813}
-  - {fileID: 108556813}
-  - {fileID: 893385490}
-  - {fileID: 1110436053}
-  - {fileID: 893385490}
-  - {fileID: 108556813}
-  - {fileID: 108556813}
-  - {fileID: 108556813}
-  - {fileID: 893385490}
-  - {fileID: 893385490}
-  - {fileID: 893385490}
-  - {fileID: 893385490}
-  - {fileID: 893385490}
-  - {fileID: 893385490}
+  - {fileID: 516294808}
+  - {fileID: 707191902}
+  - {fileID: 707191902}
+  - {fileID: 516294808}
+  - {fileID: 707191902}
+  - {fileID: 516294808}
+  - {fileID: 516294808}
+  - {fileID: 516294808}
+  - {fileID: 707191902}
+  - {fileID: 516294808}
+  - {fileID: 516294808}
+  - {fileID: 516294808}
+  - {fileID: 707191902}
+  - {fileID: 516294808}
+  - {fileID: 516294808}
+  - {fileID: 516294808}
+  - {fileID: 707191902}
+  - {fileID: 516294808}
+  - {fileID: 707191902}
+  - {fileID: 516294808}
+  - {fileID: 1112540918}
+  - {fileID: 516294808}
+  - {fileID: 707191902}
+  - {fileID: 707191902}
+  - {fileID: 516294808}
+  - {fileID: 516294808}
+  - {fileID: 516294808}
+  - {fileID: 516294808}
+  - {fileID: 516294808}
+  - {fileID: 516294808}
+  - {fileID: 516294808}
   implicitGroupedObjects:
   - {fileID: 131827734}
   - {fileID: 134318136}
@@ -2312,8 +2353,8 @@ MonoBehaviour:
     m_Extent: {x: 51.546455, y: 10.833555, z: 53.999084}
   - m_Center: {x: -1.1953201, y: -2.218645, z: -1.1266708}
     m_Extent: {x: 58.180756, y: 21.344614, z: 101.45527}
-  - m_Center: {x: -1.0499992, y: 0.5801439, z: -26.750174}
-    m_Extent: {x: 26.95, y: 5.6078253, z: 30.20563}
+  - m_Center: {x: -1.0499992, y: 1.7334956, z: -15.605389}
+    m_Extent: {x: 26.95, y: 2.712579, z: 19.060844}
   hasEmissive: 010101
   uvBuffOffsets: 
   uvBuffLengths: 
@@ -2374,39 +2415,39 @@ MonoBehaviour:
   - {fileID: 147731325896879581}
   - {fileID: 3082943543741249189}
   - {fileID: 3248029272111347571}
-  bakedIDs: 01000000020000000100000001000000020000000100000001000000020000000200000001000000010000000100000002000000010000000100000002000000020000000200000002000000010000000000000001000000020000000200000002000000010000000100000001000000010000000100000001000000
+  bakedIDs: 01000000020000000200000001000000020000000100000001000000010000000200000001000000010000000100000002000000010000000100000001000000020000000100000002000000010000000000000001000000020000000200000001000000010000000100000001000000010000000100000001000000
   bakedScaleOffset:
-  - {x: 0.14462888, y: 0.14462888, z: 0.72067094, w: 0.42060015}
-  - {x: 0.10958485, y: 0.10958485, z: 0.66455853, w: 0.25785777}
-  - {x: 0.04072767, y: 0.04072767, z: 0.13985837, w: 0.95674723}
-  - {x: 0.37877366, y: 0.37877366, z: -0.00085541356, w: 0.57630396}
-  - {x: 0.10958488, y: 0.10958488, z: 0.66455853, w: 0.14503814}
-  - {x: 0.13484801, y: 0.13484801, z: 0.825145, w: 0.5787433}
-  - {x: 0.2277948, y: 0.2277948, z: 0.59803915, w: 0.57488656}
-  - {x: 0.1387611, y: 0.1387611, z: 0.5503513, w: 0.0016298046}
-  - {x: 0.109584875, y: 0.109584875, z: 0.77737814, w: 0.14503814}
-  - {x: 0.06273026, y: 0.06273026, z: 0.82586616, w: 0.71748006}
-  - {x: 0.13484797, y: 0.13484797, z: 0.73991156, w: 0.8019924}
-  - {x: 0.134848, y: 0.134848, z: 0.60189587, w: 0.8019924}
-  - {x: 0.10958488, y: 0.10958488, z: 0.5517389, w: 0.2578578}
-  - {x: 0.14462888, y: 0.14462888, z: 0.57678694, w: 0.42060015}
-  - {x: 0.04072768, y: 0.04072768, z: 0.048302833, w: 0.95674723}
-  - {x: 0.10958489, y: 0.10958489, z: 0.5517389, w: 0.14503814}
+  - {x: 0.14478414, y: 0.14478414, z: 0.5774061, w: 0.42105165}
+  - {x: 0.10958485, y: 0.10958485, z: 0.5517389, w: 0.34147623}
+  - {x: 0.054320335, y: 0.054320335, z: 0.55119574, w: 0.45375264}
+  - {x: 0.37918025, y: 0.37918025, z: -0.0008563318, w: 0.5769226}
+  - {x: 0.10958488, y: 0.10958488, z: 0.77737814, w: 0.0030174158}
+  - {x: 0.07122911, y: 0.07122911, z: 0.8266684, w: 0.7174828}
+  - {x: 0.22803932, y: 0.22803932, z: 0.59868115, w: 0.5755037}
+  - {x: 0.071229085, y: 0.071229085, z: 0.71293527, w: 0.91324663}
+  - {x: 0.109584875, y: 0.109584875, z: 0.89019775, w: 0.0030174158}
+  - {x: 0.0627976, y: 0.0627976, z: 0.9325311, w: 0.8035752}
+  - {x: 0.071229085, y: 0.071229085, z: 0.6031796, w: 0.91324663}
+  - {x: 0.0712291, y: 0.0712291, z: 0.9023438, w: 0.7174828}
+  - {x: 0.10958488, y: 0.10958488, z: 0.5517389, w: 0.0030174158}
+  - {x: 0.14478414, y: 0.14478414, z: 0.72144455, w: 0.42105165}
+  - {x: 0.052845143, y: 0.052845143, z: 0.8805341, w: 0.9134305}
+  - {x: 0.10660886, y: 0.10660886, z: 0.82340336, w: 0.8042032}
   - {x: 0.5537619, y: 0.5537619, z: -0.0025202034, w: -0.0025202034}
-  - {x: 0.1380446, y: 0.1380446, z: 0.6923792, w: 0.0016369696}
-  - {x: 0.10958485, y: 0.10958485, z: 0.66455853, w: 0.37067735}
-  - {x: 0.040727697, y: 0.040727697, z: 0.002525046, w: 0.95674723}
+  - {x: 0.13429567, y: 0.13429567, z: 0.8260377, w: 0.57937145}
+  - {x: 0.10958485, y: 0.10958485, z: 0.5517389, w: 0.115837045}
+  - {x: 0.05284516, y: 0.05284516, z: 0.8228749, w: 0.9134305}
   - {x: 1.0144292, y: 1.0144292, z: -0.0072146044, w: -0.0072146044}
-  - {x: 0.10649454, y: 0.10649454, z: 0.8792757, w: 0.80334085}
-  - {x: 0.10958485, y: 0.10958485, z: 0.89019775, w: 0.14503814}
-  - {x: 0.10958488, y: 0.10958488, z: 0.5517389, w: 0.3706774}
-  - {x: 0.10958489, y: 0.10958489, z: 0.83507824, w: 0.0030174158}
-  - {x: 0.18156026, y: 0.18156026, z: 0.37817955, w: 0.8015253}
-  - {x: 0.2277948, y: 0.2277948, z: 0.37478998, w: 0.57488656}
-  - {x: 0.5829538, y: 0.5829538, z: -0.0028972148, w: -0.0028972148}
-  - {x: 0.42357957, y: 0.42357957, z: 0.5758559, w: -0.0013034727}
-  - {x: 0.1307508, y: 0.1307508, z: 0.86655205, w: 0.42259744}
-  - {x: 0.040727675, y: 0.040727675, z: 0.094080605, w: 0.95674723}
+  - {x: 0.10660886, y: 0.10660886, z: 0.7136476, w: 0.8042032}
+  - {x: 0.10958485, y: 0.10958485, z: 0.5517389, w: 0.22865663}
+  - {x: 0.10958488, y: 0.10958488, z: 0.66455853, w: 0.0030174158}
+  - {x: 0.10660886, y: 0.10660886, z: 0.60389185, w: 0.8042032}
+  - {x: 0.18175516, y: 0.18175516, z: 0.37858552, w: 0.8023857}
+  - {x: 0.22803932, y: 0.22803932, z: 0.3751923, w: 0.5755037}
+  - {x: 0.5835796, y: 0.5835796, z: -0.002900325, w: -0.002900325}
+  - {x: 0.42403427, y: 0.42403427, z: 0.5764741, w: -0.0013048719}
+  - {x: 0.13089116, y: 0.13089116, z: 0.8674823, w: 0.4230511}
+  - {x: 0.052845143, y: 0.052845143, z: 0.9381933, w: 0.9134305}
   bakedVertexOffset: ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
   bakedVertexColorMesh:
   - {fileID: 0}
@@ -2467,9 +2508,6 @@ MonoBehaviour:
     rnmMaps2: []
     mapsMode: 
     bakedRenderers:
-    - {fileID: 1620491340}
-    - {fileID: 1320156767}
-    - {fileID: 545892681}
     - {fileID: 131827735}
     - {fileID: 134318137}
     - {fileID: 229245680}
@@ -2478,6 +2516,7 @@ MonoBehaviour:
     - {fileID: 1114979126}
     - {fileID: 534360012}
     - {fileID: 540452079}
+    - {fileID: 545892681}
     - {fileID: 604292067}
     - {fileID: 581583197}
     - {fileID: 594933522}
@@ -2486,10 +2525,12 @@ MonoBehaviour:
     - {fileID: 1032895779}
     - {fileID: 1103523619}
     - {fileID: 1187930499}
+    - {fileID: 1320156767}
     - {fileID: 1350458540}
     - {fileID: 1432433108}
     - {fileID: 1453824309}
     - {fileID: 1514024821}
+    - {fileID: 1620491340}
     - {fileID: 1677714685}
     - {fileID: 1731958813}
     - {fileID: 1840184190}
@@ -2499,33 +2540,33 @@ MonoBehaviour:
     - {fileID: 3082943543741249189}
     - {fileID: 3248029272111347571}
     bakedRenderersTerrain: []
-    bakedIDs: 02000000020000000200000001000000020000000100000001000000020000000100000001000000010000000100000002000000010000000200000001000000010000000100000002000000020000000100000000000000020000000200000002000000010000000100000001000000010000000100000001000000
+    bakedIDs: 01000000020000000100000001000000020000000100000001000000020000000200000001000000010000000100000002000000010000000100000002000000020000000200000002000000010000000000000001000000020000000200000002000000010000000100000001000000010000000100000001000000
     bakedIDsTerrain: 
     bakedScaleOffset:
-    - {x: 0.10958485, y: 0.10958485, z: 0.89019775, w: 0.14503814}
-    - {x: 0.1380446, y: 0.1380446, z: 0.6923792, w: 0.0016369696}
-    - {x: 0.109584875, y: 0.109584875, z: 0.77737814, w: 0.14503814}
     - {x: 0.14462888, y: 0.14462888, z: 0.72067094, w: 0.42060015}
-    - {x: 0.10958485, y: 0.10958485, z: 0.66455853, w: 0.37067735}
+    - {x: 0.10958485, y: 0.10958485, z: 0.66455853, w: 0.25785777}
     - {x: 0.04072767, y: 0.04072767, z: 0.13985837, w: 0.95674723}
     - {x: 0.37877366, y: 0.37877366, z: -0.00085541356, w: 0.57630396}
-    - {x: 0.10958488, y: 0.10958488, z: 0.5517389, w: 0.2578578}
+    - {x: 0.10958488, y: 0.10958488, z: 0.66455853, w: 0.14503814}
     - {x: 0.13484801, y: 0.13484801, z: 0.825145, w: 0.5787433}
     - {x: 0.2277948, y: 0.2277948, z: 0.59803915, w: 0.57488656}
-    - {x: 0.13484797, y: 0.13484797, z: 0.73991156, w: 0.8019924}
-    - {x: 0.06273026, y: 0.06273026, z: 0.82586616, w: 0.71748006}
     - {x: 0.1387611, y: 0.1387611, z: 0.5503513, w: 0.0016298046}
+    - {x: 0.109584875, y: 0.109584875, z: 0.77737814, w: 0.14503814}
+    - {x: 0.06273026, y: 0.06273026, z: 0.82586616, w: 0.71748006}
+    - {x: 0.13484797, y: 0.13484797, z: 0.73991156, w: 0.8019924}
     - {x: 0.134848, y: 0.134848, z: 0.60189587, w: 0.8019924}
-    - {x: 0.10958488, y: 0.10958488, z: 0.5517389, w: 0.3706774}
+    - {x: 0.10958488, y: 0.10958488, z: 0.5517389, w: 0.2578578}
     - {x: 0.14462888, y: 0.14462888, z: 0.57678694, w: 0.42060015}
     - {x: 0.04072768, y: 0.04072768, z: 0.048302833, w: 0.95674723}
-    - {x: 0.10649454, y: 0.10649454, z: 0.8792757, w: 0.80334085}
+    - {x: 0.10958489, y: 0.10958489, z: 0.5517389, w: 0.14503814}
     - {x: 0.5537619, y: 0.5537619, z: -0.0025202034, w: -0.0025202034}
-    - {x: 0.10958485, y: 0.10958485, z: 0.66455853, w: 0.25785777}
+    - {x: 0.1380446, y: 0.1380446, z: 0.6923792, w: 0.0016369696}
+    - {x: 0.10958485, y: 0.10958485, z: 0.66455853, w: 0.37067735}
     - {x: 0.040727697, y: 0.040727697, z: 0.002525046, w: 0.95674723}
     - {x: 1.0144292, y: 1.0144292, z: -0.0072146044, w: -0.0072146044}
-    - {x: 0.10958489, y: 0.10958489, z: 0.5517389, w: 0.14503814}
-    - {x: 0.10958488, y: 0.10958488, z: 0.66455853, w: 0.14503814}
+    - {x: 0.10649454, y: 0.10649454, z: 0.8792757, w: 0.80334085}
+    - {x: 0.10958485, y: 0.10958485, z: 0.89019775, w: 0.14503814}
+    - {x: 0.10958488, y: 0.10958488, z: 0.5517389, w: 0.3706774}
     - {x: 0.10958489, y: 0.10958489, z: 0.83507824, w: 0.0030174158}
     - {x: 0.18156026, y: 0.18156026, z: 0.37817955, w: 0.8015253}
     - {x: 0.2277948, y: 0.2277948, z: 0.37478998, w: 0.57488656}
@@ -2599,7 +2640,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57f24a4aaa0761b45ba25e7e5108e2c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UID: 1168444184
+  UID: 1447348795
   color: {r: 0.8867924, g: 0.352489, b: 0.16313636, a: 1}
   intensity: 100
   shadowSpread: 0.05
@@ -2619,47 +2660,6 @@ MonoBehaviour:
   falloffMinRadius: 0.01
   shadowmaskGroupID: 0
   directionMode: 0
---- !u!114 &893385490
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec0b4dd729a12d046982652f834580a2, type: 3}
-  m_Name: MainMenu_LMA1
-  m_EditorClassIdentifier: 
-  resolution: 1024
-  bitmask: 1
-  id: 1
-  sortingID: 1
-  isImplicit: 1
-  area: 0
-  totalVertexCount: 0
-  vertexCounter: 0
-  sceneLodLevel: -1
-  sceneName: 
-  containsTerrains: 0
-  probes: 0
-  mode: 1
-  renderMode: 1000
-  renderDirMode: 1000
-  atlasPacker: 1000
-  computeSSS: 0
-  sssSamples: 16
-  sssDensity: 10
-  sssColor: {r: 1, g: 1, b: 1, a: 1}
-  sssScale: 1
-  fakeShadowBias: 0
-  transparentSelfShadow: 0
-  flipNormal: 0
-  parentName: 
-  overridePath: 
-  fixPos3D: 0
-  voxelSize: {x: 1, y: 1, z: 1}
-  passedFilter: 0
 --- !u!1001 &1032895777
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2849,7 +2849,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ab2f8bff3a677224a8434f08e4f70eb8, type: 3}
   m_PrefabInstance: {fileID: 1103523618}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1110436053
+--- !u!114 &1112540918
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2866,7 +2866,7 @@ MonoBehaviour:
   id: 0
   sortingID: 0
   isImplicit: 1
-  area: 49886.266
+  area: 49660.887
   totalVertexCount: 0
   vertexCounter: 0
   sceneLodLevel: -1

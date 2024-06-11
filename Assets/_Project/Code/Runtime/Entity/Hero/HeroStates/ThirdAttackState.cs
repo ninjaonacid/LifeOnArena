@@ -33,8 +33,17 @@ namespace Code.Runtime.Entity.Hero.HeroStates
                 SlashDirection.Right,
                 0.25f).Forget();
             
-            _heroWeapon.EnableWeapon(true);
             _heroRotation.EnableRotation(false);
+        }
+
+        public override void OnLogic()
+        {
+            base.OnLogic();
+
+            if (Timer.Elapsed > _animationData.Animations[AnimationKey.Attack3].Length / 3f)
+            {
+                _heroWeapon.EnableWeapon(true);
+            }
         }
 
         public override void OnExit()
@@ -42,6 +51,8 @@ namespace Code.Runtime.Entity.Hero.HeroStates
             base.OnExit();
             _heroWeapon.EnableWeapon(false);
             _heroRotation.EnableRotation(true);
+            _heroAttackComponent.ClearCollisionData();
+            
         }
     }
 }

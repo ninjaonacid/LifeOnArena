@@ -57,12 +57,12 @@ namespace Code.Runtime.Entity
             return new Vector3(0, colliderUp, 0);
         }
         
-         private void OnDrawGizmos()
-         {
-             Gizmos.color = Color.red;
-
-             Transform direction;
-             Gizmos.DrawWireSphere(GetCenterTransform() + ((direction = transform).forward * offsetZ) + (direction.up * offsetY), 2);
-         }
+         // private void OnDrawGizmos()
+         // {
+         //     Gizmos.color = Color.red;
+         //
+         //     Transform direction;
+         //     Gizmos.DrawWireSphere(GetCenterTransform() + ((direction = transform).forward * offsetZ) + (direction.up * offsetY), 2);
+         // }
     }
 }
