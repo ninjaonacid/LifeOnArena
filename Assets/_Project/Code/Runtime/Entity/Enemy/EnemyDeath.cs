@@ -66,6 +66,8 @@ namespace Code.Runtime.Entity.Enemy
                     rb.AddTorque(new Vector3(0, 1f, 0));
                 }
             }
+            
+            _enemyHurtBox.DisableCollider(true);
 
             StartCoroutine(DestroyTimer());
 

@@ -23,6 +23,8 @@ namespace Code.Runtime.Entity.Enemy
 
             _observer.TriggerEnter += TriggerEnter;
         }
+        
+        
 
         // private void OnTriggerEnter(Collider other)
         // {

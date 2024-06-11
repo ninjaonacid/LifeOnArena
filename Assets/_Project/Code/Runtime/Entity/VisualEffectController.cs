@@ -69,17 +69,23 @@ namespace Code.Runtime.Entity
             await UniTask.Delay(TimeSpan.FromSeconds(delay));
 
             effect.transform.position = _slashVfxPoint.position;
-            
+
+            Quaternion rotation = default;
+
             switch (direction)
             {
                 case SlashDirection.Left:
-                    effect.transform.rotation = Quaternion.Euler(new Vector3(180, 0, 0));
+                    rotation = Quaternion.Euler(new Vector3(180, 0, 0));
                     break;
                 case SlashDirection.Right:
-                    effect.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+                    rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+                    break;
+                case SlashDirection.Down:
+                    rotation = Quaternion.Euler(new Vector3(0, 0, -90));
                     break;
             }
             
+            effect.transform.rotation = _slashVfxPoint.rotation * rotation;
             
             effect.Play();
         }
