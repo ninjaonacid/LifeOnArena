@@ -17,7 +17,7 @@ namespace Code.Runtime.Core.Factory
             string spawnerId,
             WeaponId weaponId);
 
-        WeaponView CreateWeapon(WeaponView prefab, Transform position);
+        WeaponView CreateWeapon(WeaponView prefab, Transform position, bool worldPositionStays = true);
         
         UniTaskVoid InitAssets();
     }

@@ -12,7 +12,7 @@ namespace Code.Runtime.Entity
         public event Action<WeaponView> OnWeaponChange;
         
         [SerializeField] protected WeaponSlot _weaponSlot = new();
-        [SerializeField] protected Transform _weaponPosition;
+        [SerializeField] protected Transform _equipJoint;
         [SerializeField] protected bool IsCollisionWeapon;
         [SerializeField] protected WeaponData _weaponData;
         
@@ -38,13 +38,13 @@ namespace Code.Runtime.Entity
             }
         }
 
-        private void Update()
-        {
-            if (_weaponSlot.EquippedWeaponView)
-            {
-                _weaponSlot.EquippedWeaponView.transform.rotation = _weaponPosition.rotation;
-            }
-        }
+        // private void Update()
+        // {
+        //     if (_weaponSlot.EquippedWeaponView)
+        //     {
+        //         _weaponSlot.EquippedWeaponView.transform.rotation = _equipJoint.rotation;
+        //     }
+        // }
 
         public virtual void EquipWeapon(WeaponData weaponData)
         {
@@ -57,8 +57,11 @@ namespace Code.Runtime.Entity
      
             _weaponData = weaponData;
 
-            _weaponSlot.EquippedWeaponView = _itemFactory.CreateWeapon(_weaponData.WeaponView, _weaponPosition);
-            _weaponSlot.EquippedWeaponView.gameObject.transform.localPosition = Vector3.zero;
+            _weaponSlot.EquippedWeaponView = _itemFactory.CreateWeapon(_weaponData.WeaponView, _equipJoint, false);
+            _weaponSlot.EquippedWeaponView.transform.localPosition = Vector3.zero;
+            // var weaponRotation = _weaponSlot.EquippedWeaponView.transform.rotation;
+            // var newRotation = weaponRotation * _equipJoint.rotation;
+            // _weaponSlot.EquippedWeaponView.transform.rotation = newRotation;
 
             // _weaponSlot.EquippedWeaponView.gameObject.transform.localRotation = Quaternion.Euler(
             //     _weaponData.LocalRotation.x,
@@ -81,7 +84,7 @@ namespace Code.Runtime.Entity
             _weaponSlot.EquippedWeaponView.EnableCollider(value);
         }
 
-        public Transform GetEquipJointTransform => _weaponPosition;
+        public Transform GetEquipJointTransform => _equipJoint;
 
         public WeaponView GetEquippedWeapon() => _weaponSlot.EquippedWeaponView;
         public WeaponData GetEquippedWeaponData() => _weaponData;

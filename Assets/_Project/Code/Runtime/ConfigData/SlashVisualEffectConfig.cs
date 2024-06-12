@@ -24,20 +24,5 @@ namespace Code.Runtime.ConfigData
         public VisualEffectData VisualEffect;
         [Title("SlashSize")]
         public Vector3 SlashSize;
-        [Title("SlashDirections")]
-        [BoxGroup("SlashDirections")]
-        public SlashDirection FirstSlash;
-        [BoxGroup("SlashDirections")]
-        public SlashDirection SecondSlash;
-        [BoxGroup("SlashDirections")]
-        public SlashDirection ThirdSlash;
-        
-        [Title("SlashDelays")]
-        [BoxGroup("SlashDelays")]
-        public float FirstSlashDelay;
-        [BoxGroup("SlashDelays")]
-        public float SecondSlashDelay;
-        [BoxGroup("SlashDelays")]
-        public float ThirdSlashDelay;
     }
 }

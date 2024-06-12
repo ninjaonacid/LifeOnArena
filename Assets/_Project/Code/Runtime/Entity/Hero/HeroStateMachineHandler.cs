@@ -119,7 +119,7 @@ namespace Code.Runtime.Entity.Hero
                 isGhostState: false,
                 canExit: (state) =>
                     state.Timer.Elapsed >=
-                    _heroWeapon.GetEquippedWeaponData().WeaponFsmConfig.FirstAttackStateDuration));
+                    _heroWeapon.GetEquippedWeaponData().FirstAttackConfig.AnimationData.Length));
 
             _stateMachine.AddState(HeroBaseAttack2, new SecondAttackState(
                 _heroAttackComponent,
@@ -132,7 +132,7 @@ namespace Code.Runtime.Entity.Hero
                 needExitTime: true,
                 isGhostState: false,
                 canExit: (state) => state.Timer.Elapsed >=
-                                    _heroWeapon.GetEquippedWeaponData().WeaponFsmConfig.SecondAttackStateDuration));
+                                    _heroWeapon.GetEquippedWeaponData().SecondAttackConfig.AnimationData.Length));
 
             _stateMachine.AddState(HeroBaseAttack3, new ThirdAttackState(
                 _heroAttackComponent,
@@ -145,7 +145,7 @@ namespace Code.Runtime.Entity.Hero
                 needExitTime: true,
                 isGhostState: false,
                 canExit: (state) => state.Timer.Elapsed >=
-                                    _heroWeapon.GetEquippedWeaponData().WeaponFsmConfig.ThirdAttackStateDuration));
+                                    _heroWeapon.GetEquippedWeaponData().ThirdAttackConfig.AnimationData.Length));
             
             
             
@@ -154,15 +154,15 @@ namespace Code.Runtime.Entity.Hero
 
             _stateMachine.AddTransition(new TransitionAfter(
                 HeroBaseAttack1,
-                HeroIdle, _heroWeapon.GetEquippedWeaponData().WeaponFsmConfig.FirstAttackStateDuration + 0.1f));
+                HeroIdle, _heroWeapon.GetEquippedWeaponData().FirstAttackConfig.AnimationData.Length + 0.1f));
 
             _stateMachine.AddTransition(new TransitionAfter(
                 HeroBaseAttack2,
-                HeroIdle, _heroWeapon.GetEquippedWeaponData().WeaponFsmConfig.SecondAttackStateDuration + 0.1f));
+                HeroIdle, _heroWeapon.GetEquippedWeaponData().SecondAttackConfig.AnimationData.Length + 0.1f));
 
             _stateMachine.AddTransition(new TransitionAfter(
                 HeroBaseAttack3,
-                HeroIdle, _heroWeapon.GetEquippedWeaponData().WeaponFsmConfig.ThirdAttackStateDuration + 0.1f));
+                HeroIdle, _heroWeapon.GetEquippedWeaponData().ThirdAttackConfig.AnimationData.Length + 0.1f));
 
             _stateMachine.AddTwoWayTransition(new Transition(
                 HeroIdle,

@@ -80,7 +80,7 @@ namespace Code.Runtime.Core.Factory
         {
             var monsterData = _config.Monster(mobId);
 
-            GameObject prefab = await _assetProvider.Load<GameObject>(monsterData.PrefabReference);
+            GameObject prefab = await _assetProvider.Load<GameObject>(monsterData.PrefabReference, token);
             
             GameObject monster = _objectPoolProvider.Spawn(prefab);
             

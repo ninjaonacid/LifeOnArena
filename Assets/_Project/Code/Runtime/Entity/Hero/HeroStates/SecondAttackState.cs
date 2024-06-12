@@ -23,14 +23,15 @@ namespace Code.Runtime.Entity.Hero.HeroStates
         public override void OnEnter()
         {
             base.OnEnter();
-            _heroAnimator.PlayAnimation(_animationData.Animations[AnimationKey.Attack2].Hash);
+            var attackConfig = _heroWeapon.GetEquippedWeaponData().SecondAttackConfig;
+            
+            _heroAnimator.PlayAnimation(attackConfig.AnimationData.Hash);
             _heroWeapon.EnableWeapon(true);
-            var slashConfig = _heroWeapon.GetEquippedWeaponData().SlashVisualEffect;
             
             
             _vfxController.PlaySlashVisualEffect(
-                slashConfig.VisualEffect.Identifier, slashConfig.SecondSlash, 
-                slashConfig.SlashSize, slashConfig.SecondSlashDelay).Forget();
+                attackConfig.SlashConfig.VisualEffect.Identifier, attackConfig.SlashDirection, 
+                attackConfig.SlashConfig.SlashSize, attackConfig.SlashDelay).Forget();
             
             _heroRotation.EnableRotation(false);
         }

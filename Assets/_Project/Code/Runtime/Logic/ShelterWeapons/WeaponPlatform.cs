@@ -45,17 +45,17 @@ namespace Code.Runtime.Logic.ShelterWeapons
 
         public void Interact(HeroInteraction interactor)
         {
-           var heroWeapon = interactor.GetComponent<HeroWeapon>();
-
-           if (_lootData.Collected >= WeaponData.Price)
-           {
-               _lootData.Collected -= WeaponData.Price;
-               //_lootData.CountChanged?.Invoke();
-
-               OnWeaponPurchase?.Invoke();
-
-               heroWeapon.EquipWeapon(WeaponData);
-           }
+           // var heroWeapon = interactor.GetComponent<HeroWeapon>();
+           //
+           // if (_lootData.Collected >= WeaponData.Price)
+           // {
+           //     _lootData.Collected -= WeaponData.Price;
+           //     //_lootData.CountChanged?.Invoke();
+           //
+           //     OnWeaponPurchase?.Invoke();
+           //
+           //     heroWeapon.EquipWeapon(WeaponData);
+           // }
         }
 
         public void UnlockWeapon()

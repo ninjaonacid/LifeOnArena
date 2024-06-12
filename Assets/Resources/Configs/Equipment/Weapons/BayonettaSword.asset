@@ -16,13 +16,10 @@ MonoBehaviour:
   _weaponId: {fileID: 11400000, guid: 4cba6645841fa244c94aa7563499a7a3, type: 2}
   _hitVfx: {fileID: 11400000, guid: aa9d05048adc4df4cb697b348b6c2a61, type: 2}
   _slashVfx: {fileID: 11400000, guid: ccebba11f065c044688496e5fb5547bd, type: 2}
-  _price: 1000
-  _damage: 20
-  _weaponFsmConfig:
-    FirstAttackStateDuration: 0.8
-    SecondAttackStateDuration: 0.6
-    ThirdAttackStateDuration: 0.7
   _overrideController: {fileID: 22100000, guid: 8c7ae28e8248b1f4fa1503fd6c5fa11b, type: 2}
   _localRotation: {x: 0, y: 0, z: 0}
   _weaponSound: {fileID: 0}
   _damageType: 01000000
+  _firstAttackConfig: {fileID: 11400000, guid: b5bc19c3b2d2a754499b83866fdb5aa3, type: 2}
+  _secondAttackConfig: {fileID: 11400000, guid: 192108d4a2ed1904fbdcd935f4845e25, type: 2}
+  _thirdAttackConfig: {fileID: 11400000, guid: c3e90898775f50d4d8ace59b66127023, type: 2}

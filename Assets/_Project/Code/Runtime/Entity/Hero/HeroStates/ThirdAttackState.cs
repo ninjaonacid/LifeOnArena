@@ -1,6 +1,7 @@
 using System;
 using Code.Runtime.ConfigData;
 using Code.Runtime.ConfigData.Animations;
+using Code.Runtime.ConfigData.Attack;
 using Code.Runtime.Modules.StateMachine.States;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -10,6 +11,7 @@ namespace Code.Runtime.Entity.Hero.HeroStates
     public class ThirdAttackState : HeroBaseAttackState
     {
         private readonly VisualEffectController _vfxController;
+        private AttackConfig _attackConfig;
         public ThirdAttackState(HeroAttackComponent heroAttackComponent, HeroWeapon heroWeapon,
             HeroAnimator heroAnimator, HeroMovement heroMovement, HeroRotation heroRotation,
             AnimationDataContainer animationData, VisualEffectController vfxController,
@@ -25,14 +27,14 @@ namespace Code.Runtime.Entity.Hero.HeroStates
         public override void OnEnter()
         {
             base.OnEnter();
-            _heroAnimator.PlayAnimation(_animationData.Animations[AnimationKey.Attack3].Hash, 2);
+            _attackConfig = _heroWeapon.GetEquippedWeaponData().ThirdAttackConfig;
             
-            var slashConfig = _heroWeapon.GetEquippedWeaponData().SlashVisualEffect;
-            
+            _heroAnimator.PlayAnimation(_attackConfig.AnimationData.Hash);
             
             _vfxController.PlaySlashVisualEffect(
-                slashConfig.VisualEffect.Identifier, slashConfig.ThirdSlash, 
-                slashConfig.SlashSize, slashConfig.ThirdSlashDelay).Forget();
+                _attackConfig.SlashConfig.VisualEffect.Identifier, _attackConfig.SlashDirection, 
+                _attackConfig.SlashConfig.SlashSize, _attackConfig.SlashDelay).Forget();
+            
             _heroRotation.EnableRotation(false);
         }
 
@@ -40,7 +42,7 @@ namespace Code.Runtime.Entity.Hero.HeroStates
         {
             base.OnLogic();
 
-            if (Timer.Elapsed > _animationData.Animations[AnimationKey.Attack3].Length / 3f)
+            if (Timer.Elapsed > _attackConfig.AnimationData.Length / 3f)
             {
                 _heroWeapon.EnableWeapon(true);
             }

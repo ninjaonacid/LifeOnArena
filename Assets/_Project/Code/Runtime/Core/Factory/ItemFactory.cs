@@ -58,9 +58,9 @@ namespace Code.Runtime.Core.Factory
             _poolProvider.WarmPool(hitVfx, 5);
         }
         
-        public WeaponView CreateWeapon(WeaponView prefab, Transform position)
+        public WeaponView CreateWeapon(WeaponView prefab, Transform position, bool worldPositionStays = true)
         {
-            var weapon = _objectResolver.Instantiate(prefab, position, true);
+            var weapon = _objectResolver.Instantiate(prefab, position, worldPositionStays);
             return weapon;
         }
 
