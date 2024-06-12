@@ -37,14 +37,7 @@ namespace Code.Runtime.Entity
                 EquipWeapon(_weaponData);
             }
         }
-
-        // private void Update()
-        // {
-        //     if (_weaponSlot.EquippedWeaponView)
-        //     {
-        //         _weaponSlot.EquippedWeaponView.transform.rotation = _equipJoint.rotation;
-        //     }
-        // }
+        
 
         public virtual void EquipWeapon(WeaponData weaponData)
         {
@@ -54,20 +47,11 @@ namespace Code.Runtime.Entity
             {
                 Destroy(_weaponSlot.EquippedWeaponView.gameObject);
             }
-     
             _weaponData = weaponData;
 
             _weaponSlot.EquippedWeaponView = _itemFactory.CreateWeapon(_weaponData.WeaponView, _equipJoint, false);
             _weaponSlot.EquippedWeaponView.transform.localPosition = Vector3.zero;
-            // var weaponRotation = _weaponSlot.EquippedWeaponView.transform.rotation;
-            // var newRotation = weaponRotation * _equipJoint.rotation;
-            // _weaponSlot.EquippedWeaponView.transform.rotation = newRotation;
 
-            // _weaponSlot.EquippedWeaponView.gameObject.transform.localRotation = Quaternion.Euler(
-            //     _weaponData.LocalRotation.x,
-            //     _weaponData.LocalRotation.y,
-            //     _weaponData.LocalRotation.z);
-            
             EnableWeapon(false);
             
             OnWeaponChange?.Invoke(_weaponSlot.EquippedWeaponView);
