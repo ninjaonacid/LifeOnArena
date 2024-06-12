@@ -81,11 +81,6 @@ namespace Code.Runtime.Entity
             _weaponSlot.EquippedWeaponView.EnableCollider(value);
         }
 
-        private void EnableTrail(bool value)
-        {
-            _weaponSlot.EquippedWeaponView.EnableTrail(value);
-        }
-
         public Transform GetEquipJointTransform => _weaponPosition;
 
         public WeaponView GetEquippedWeapon() => _weaponSlot.EquippedWeaponView;

@@ -311,12 +311,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stats: {fileID: 2085898622953279013}
   _health: {fileID: 2892997724190106138}
+  _entityUI: {fileID: 4058648672316291509}
   _fracturedPrefab: {fileID: 0}
   _enemyModel: {fileID: 0}
   _enemyHurtBox: {fileID: 1349759437447274721}
-  _distance: 0
+  _maxForce: 0
+  _minForce: 0
   _maxHeight: 0
-  _flightDuration: 0
 --- !u!114 &2892997724190106138
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -342,7 +343,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64253ad1206f55d4b8d454588479aed8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StatusBar: {fileID: 6716832012151853455}
+  _statusBar: {fileID: 6716832012151853455}
 --- !u!114 &6716876832464804808
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -365,7 +366,7 @@ MonoBehaviour:
   _animationData: {fileID: 0}
   _statController: {fileID: 2085898622953279013}
   _enemyDeath: {fileID: 2892997724190106139}
-  _abilityController: {fileID: 0}
+  _abilityController: {fileID: 7338046863862579743}
 --- !u!114 &3027789663709577760
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -526,6 +527,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hitBoxCollider: {fileID: 2192902159981610960}
+  _initialColliderSize: {x: 0, y: 0, z: 0}
   _observer: {fileID: 6285818247793368993}
 --- !u!1 &3762135731228810403
 GameObject:

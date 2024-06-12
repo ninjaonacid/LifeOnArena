@@ -31,22 +31,18 @@ namespace Code.Runtime.Entity.Enemy.MeleeEnemy
             _enemyAnimator.PlayAnimation(_animationData.Animations[AnimationKey.Attack1].Hash);
             _enemyAnimator.SetAttackAnimationSpeed(_enemyAttackComponent.GetAttacksPerSecond());
             _agentMoveToPlayer.ShouldMove(false);
-            
         }
 
         public override void OnLogic()
         {
             base.OnLogic();
 
-            if (Timer.Elapsed >= ((_animationData.Animations[AnimationKey.Attack1].Length  /
+            if (Timer.Elapsed >= ((_animationData.Animations[AnimationKey.Attack1].Length /
                                    _enemyAttackComponent.GetAttacksPerSecond()) / 5f))
             {
                 _enemyAnimator.SetAttackAnimationSpeed(1f);
                 _enemyWeapon.EnableCollider(true);
-                
-                _canExit = (state) => state.Timer.Elapsed >= ((_animationData.Animations[AnimationKey.Attack1].Length /
-                                                             _enemyAttackComponent.GetAttacksPerSecond()) / 5f) + 0.5f;
-            };
+            }
             
             
             //_enemyTarget.RotationToTarget();
@@ -63,6 +59,11 @@ namespace Code.Runtime.Entity.Enemy.MeleeEnemy
 
         public override void OnExitRequest()
         {
+            if ( Timer.Elapsed >= ((_animationData.Animations[AnimationKey.Attack1].Length /
+                                    _enemyAttackComponent.GetAttacksPerSecond() / 5f) + 0.5f))
+            {
+                fsm.StateCanExit();
+            }
         }
     }
 }

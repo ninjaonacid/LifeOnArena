@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 112000000, guid: cca1e5f76c37ea645b04b013dcd49b4b, type: 2}
-  m_LightingSettings: {fileID: 1958801612}
+  m_LightingSettings: {fileID: 1907482409}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -123,7 +123,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &263544074
+--- !u!1 &823638215
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -131,8 +131,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 263544076}
-  - component: {fileID: 263544075}
+  - component: {fileID: 823638217}
+  - component: {fileID: 823638216}
   m_Layer: 0
   m_Name: New Game Object
   m_TagString: Untagged
@@ -140,13 +140,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!220 &263544075
+--- !u!220 &823638216
 LightProbeGroup:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 263544074}
+  m_GameObject: {fileID: 823638215}
   m_Enabled: 1
   m_SourcePositions:
   - {x: -56.290794, y: 1.6046752, z: 56.47333}
@@ -1192,13 +1192,13 @@ LightProbeGroup:
   - {x: -34.76818, y: -1, z: 71.06154}
   - {x: -34.76818, y: -1, z: 69.06153}
   m_Dering: 1
---- !u!4 &263544076
+--- !u!4 &823638217
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 263544074}
+  m_GameObject: {fileID: 823638215}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -6.136387, y: 1.38, z: -17.108902}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -1207,7 +1207,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!850595691 &1958801612
+--- !u!850595691 &1907482409
 LightingSettings:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

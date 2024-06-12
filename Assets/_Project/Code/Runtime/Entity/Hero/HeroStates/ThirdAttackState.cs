@@ -27,12 +27,12 @@ namespace Code.Runtime.Entity.Hero.HeroStates
             base.OnEnter();
             _heroAnimator.PlayAnimation(_animationData.Animations[AnimationKey.Attack3].Hash, 2);
             
+            var slashConfig = _heroWeapon.GetEquippedWeaponData().SlashVisualEffect;
+            
             
             _vfxController.PlaySlashVisualEffect(
-                _heroWeapon.GetEquippedWeaponData().SlashVisualEffect.VisualEffect.Identifier,
-                SlashDirection.Right,
-                0.25f).Forget();
-            
+                slashConfig.VisualEffect.Identifier, slashConfig.ThirdSlash, 
+                slashConfig.SlashSize, slashConfig.ThirdSlashDelay).Forget();
             _heroRotation.EnableRotation(false);
         }
 

@@ -6,13 +6,18 @@ namespace Code.Runtime.UI.View.HUD
     public class EntityUI : MonoBehaviour
     {
         private IDamageable _damageable;
-        public StatusBar StatusBar;
+        [SerializeField] private StatusBar _statusBar;
         
         public void Construct(IDamageable damageable)
         {
             _damageable = damageable;
 
             _damageable.Health.CurrentValueChanged += UpdateHpBar;
+        }
+
+        public void SetActiveHpView(bool value)
+        {
+            _statusBar.gameObject.SetActive(value);
         }
 
         private void OnDestroy()
@@ -22,7 +27,7 @@ namespace Code.Runtime.UI.View.HUD
 
         private void UpdateHpBar()
         {
-            StatusBar.SetHpValue(_damageable.Health.CurrentValue, _damageable.Health.Value);
+            _statusBar.SetHpValue(_damageable.Health.CurrentValue, _damageable.Health.Value);
         }
     }
 }

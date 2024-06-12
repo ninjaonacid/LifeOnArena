@@ -4,13 +4,12 @@ using UnityEngine;
 
 namespace Code.Runtime.Logic.Weapon
 {
-    [RequireComponent(typeof(Collider))]
+    [RequireComponent(typeof(Collider), typeof(Rigidbody))]
     public class WeaponView : MonoBehaviour
     {
         public event Action<CollisionData> Hit;
         
         [SerializeField] private Collider _collider;
-        [SerializeField] private ParticleSystem _slashTrail;
         [SerializeField] private Transform _slashTransform;
 
         public Transform SlashVfxTransform => _slashTransform;
@@ -37,15 +36,7 @@ namespace Code.Runtime.Logic.Weapon
         {
             _collider.enabled = value;
         }
-
-        public void EnableTrail(bool value)
-        {
-            var slashTrailEmission = _slashTrail.emission;
-            slashTrailEmission.enabled = value;
-
-            if (value) _slashTrail.Play();
-            else _slashTrail.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
-        }
+        
         
         
     }

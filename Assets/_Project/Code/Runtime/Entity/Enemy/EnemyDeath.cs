@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using Code.Runtime.Modules.StatSystem;
+using Code.Runtime.UI.View.HUD;
 using DG.Tweening;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -12,6 +13,7 @@ namespace Code.Runtime.Entity.Enemy
     {
         [SerializeField] private StatController _stats;
         [SerializeField] private EnemyHealth _health;
+        [SerializeField] private EntityUI _entityUI;
         [SerializeField] private GameObject _fracturedPrefab;
         [SerializeField] private GameObject _enemyModel;
         [SerializeField] private EnemyHurtBox _enemyHurtBox;
@@ -36,6 +38,7 @@ namespace Code.Runtime.Entity.Enemy
             }
 
             IsDead = false;
+            _entityUI.SetActiveHpView(true);
         }
 
         private void OnDestroy()
@@ -52,7 +55,7 @@ namespace Code.Runtime.Entity.Enemy
         {
             _health.Health.CurrentValueChanged -= HealthChanged;
             _enemyModel.SetActive(false);
-            
+            _entityUI.SetActiveHpView(false);
 
             if (_fracturedPrefab is not null)
             {
@@ -60,11 +63,12 @@ namespace Code.Runtime.Entity.Enemy
 
                 foreach (Rigidbody rb in _fracturedPrefab.GetComponentsInChildren<Rigidbody>())
                 {
-                    Vector3 force = _enemyHurtBox.LastHitDirection * Random.Range(1f, 10f);
+                    Vector3 force = (transform.position - _enemyHurtBox.LastHitPosition) * Random.Range(1f, 4f);
                     force.y = Mathf.Clamp(force.y, -2f, 3f);
                     rb.AddForce(force, ForceMode.Impulse);
                     rb.AddTorque(new Vector3(0, 1f, 0));
                 }
+                
             }
             
             _enemyHurtBox.DisableCollider(true);

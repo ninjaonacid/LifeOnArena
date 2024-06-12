@@ -37,8 +37,9 @@ namespace Code.Runtime.Entity
         public async UniTask PlayVisualEffect(VisualEffectIdentifier effectId, Vector3 position, Quaternion rotation)
         {
             var effect = await _visualFactory.CreateVisualEffect(effectId.Id);
-            effect.transform.position = position;
-            effect.transform.rotation = rotation;
+            var transform1 = effect.transform;
+            transform1.position = position;
+            transform1.rotation = rotation;
             effect.Play();
         }
         
@@ -54,21 +55,23 @@ namespace Code.Runtime.Entity
         {
             var effect = await _visualFactory.CreateVisualEffect(effectId.Id);
             await UniTask.Delay(TimeSpan.FromSeconds(delay));
-            
 
-            effect.transform.rotation = _slashVfxPoint.rotation;
-            effect.transform.position = _slashVfxPoint.position;
+
+            var transform1 = effect.transform;
+            transform1.rotation = _slashVfxPoint.rotation;
+            transform1.position = _slashVfxPoint.position;
             
             effect.Play();
         }
         
         
-        public async UniTask PlaySlashVisualEffect(VisualEffectIdentifier effectId, SlashDirection direction, float delay)
+        public async UniTask PlaySlashVisualEffect(VisualEffectIdentifier effectId, SlashDirection direction, Vector3 scale, float delay)
         {
             var effect = await _visualFactory.CreateVisualEffect(effectId.Id);
             await UniTask.Delay(TimeSpan.FromSeconds(delay));
 
             effect.transform.position = _slashVfxPoint.position;
+            effect.transform.localScale = scale;
 
             Quaternion rotation = default;
 

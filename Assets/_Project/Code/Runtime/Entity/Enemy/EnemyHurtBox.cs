@@ -14,7 +14,7 @@ namespace Code.Runtime.Entity.Enemy
 
         [SerializeField] private TriggerObserver _observer;
         
-        public Vector3 LastHitDirection { get; set; }
+        public Vector3 LastHitPosition { get; set; }
         private void Awake()
         {
             _hitBoxTimer = _hitBoxCooldown;
@@ -37,9 +37,7 @@ namespace Code.Runtime.Entity.Enemy
         
         private void TriggerEnter(Collider other)
         {
-            var position = transform.position;
-            Vector3 hitPoint = other.ClosestPoint(position);
-            LastHitDirection = (hitPoint - position).normalized;
+            LastHitPosition = other.gameObject.transform.position;
         }
 
         // private void Update()
