@@ -13,7 +13,6 @@ namespace Code.Runtime.Entity
         
         [SerializeField] protected WeaponSlot _weaponSlot = new();
         [SerializeField] protected Transform _equipJoint;
-        [SerializeField] protected bool IsCollisionWeapon;
         [SerializeField] protected WeaponData _weaponData;
         
         protected IItemFactory _itemFactory;
