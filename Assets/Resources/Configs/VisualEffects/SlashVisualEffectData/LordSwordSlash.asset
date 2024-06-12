@@ -10,8 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9efdd14110b4d87b0792124661f25e2, type: 3}
-  m_Name: SlashVisualEffect
+  m_Name: LordSwordSlash
   m_EditorClassIdentifier: 
-  VisualEffect: {fileID: 0}
-  FirstSlashRotation: {x: 0, y: 0, z: 0}
-  SecondSlashRotation: {x: 0, y: 0, z: 0}
+  VisualEffect: {fileID: 11400000, guid: eb9e24ea33649e042b672e5e7a418646, type: 2}
+  SlashSize: {x: 2.5, y: 2.5, z: 2.5}
+  FirstSlash: 0
+  SecondSlash: 1
+  ThirdSlash: 1
+  FirstSlashDelay: 0
+  SecondSlashDelay: 0
+  ThirdSlashDelay: 0
