@@ -5,7 +5,7 @@ using VContainer;
 namespace Code.Runtime.Entity.Enemy
 {
     [RequireComponent(typeof(EnemyAnimator))]
-    public class MeleeEnemyAttackComponent : EntityAttackComponent
+    public class EnemyAttackComponent : EntityAttackComponent
     {
         private float _attackCooldown;
         private bool _meleeAttackIsActive;

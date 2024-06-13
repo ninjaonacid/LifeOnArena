@@ -22,9 +22,14 @@ namespace Code.Runtime.Entity.Enemy.RangedEnemy
                 _castCooldown -= Time.deltaTime;
             }
         }
+
+        public void Cast()
+        {
+            _abilityController.TryActivateAbility(_rangeAbility);
+        }
         public bool CanAttack()
         {
-            return  !_isCastCooldown && _abilityController.TryActivateAbility(_rangeAbility);
+            return  !_isCastCooldown && _abilityController.CanActivateAbility(_rangeAbility);
         }
 
         public void EnableCast()

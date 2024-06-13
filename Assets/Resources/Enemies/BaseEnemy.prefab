@@ -295,8 +295,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd96e37caf83dc848941bda6b7d0deb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AttackComponent: {fileID: 6966552553589898628}
-  TriggerObserver: {fileID: 8949411577163398733}
+  _attackComponent: {fileID: 6966552553589898628}
+  _meleeRangeObserver: {fileID: 8949411577163398733}
 --- !u!114 &2892997724190106139
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -357,7 +357,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _agentMoveToPlayer: {fileID: 7813538039565963230}
-  _enemyAttackComponent: {fileID: 6966552553589898628}
+  MeleeEnemyAttackComponent: {fileID: 0}
   _enemyWeapon: {fileID: 6625279289632298001}
   _enemyAnimator: {fileID: 7813538039565963228}
   _enemyTarget: {fileID: 3027789663709577760}
@@ -470,8 +470,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _weaponSlot:
     EquippedWeaponView: {fileID: 0}
-  _weaponPosition: {fileID: 0}
-  IsCollisionWeapon: 0
+  _equipJoint: {fileID: 0}
   _weaponData: {fileID: 0}
 --- !u!114 &5485434957042966360
 MonoBehaviour:

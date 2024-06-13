@@ -10,12 +10,13 @@ namespace Code.Runtime.Entity.Enemy.RangedEnemy
     {
         private AbilityController _abilityController;
         private AgentMoveToPlayer _moveToPlayer;
-        private MeleeEnemyAttackComponent _meleeEnemyAttack;
+        private EnemyAttackComponent _enemyAttack;
         private EnemyTarget _enemyTarget;
+        private EnemyCastComponent _enemyCast;
         
         public RangedEnemyAttackState(EnemyAnimator enemyAnimator, AnimationDataContainer animationData,
             AbilityController abilityController, AgentMoveToPlayer moveToPlayer,
-            MeleeEnemyAttackComponent meleeEnemyAttack, EnemyTarget enemyTarget,
+            EnemyAttackComponent enemyAttack, EnemyTarget enemyTarget, EnemyCastComponent castComponent,
             bool needExitTime = false, bool isGhostState = false, Action<State<string, string>> onEnter = null,
             Action<State<string, string>> onLogic = null, Action<State<string, string>> onExit = null,
             Func<State<string, string>, bool> canExit = null) : base(enemyAnimator, animationData, needExitTime,
@@ -23,8 +24,9 @@ namespace Code.Runtime.Entity.Enemy.RangedEnemy
         {
             _abilityController = abilityController;
             _moveToPlayer = moveToPlayer;
-            _meleeEnemyAttack = meleeEnemyAttack;
+            _enemyAttack = enemyAttack;
             _enemyTarget = enemyTarget;
+            _enemyCast = castComponent;
         }
 
         public override void OnEnter()
@@ -43,7 +45,7 @@ namespace Code.Runtime.Entity.Enemy.RangedEnemy
             
             if(Timer.Elapsed >= _animationData.Animations[AnimationKey.SpellCast].Length - 0.2f)
             {
-                _abilityController.TryActivateAbility("FireballId");
+                _enemyCast.Cast();
                 fsm.StateCanExit();
             }
         }
@@ -51,7 +53,7 @@ namespace Code.Runtime.Entity.Enemy.RangedEnemy
         public override void OnExit()
         {
             base.OnExit();
-            _meleeEnemyAttack.AttackEnded();
+            _enemyAttack.AttackEnded();
 
         }
     }

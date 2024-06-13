@@ -107,6 +107,22 @@ namespace Code.Runtime.Modules.AbilitySystem
             return false;
         }
 
+        public bool CanActivateAbility(AbilityIdentifier ability)
+        {
+            AbilitySlot slot = _abilitySlots.FirstOrDefault(x => x.AbilityIdentifier == ability);
+            
+            if (slot != null && slot.Ability.State == AbilityState.Ready)
+            {
+                if (_abilitySlots != null && _abilitySlots.Any(x => x.Ability != null && x.Ability.IsActive()))
+                {
+                    return false;
+                }
+                return true;
+            }
+
+            return false;
+        }
+
         private bool CanActivateAbility(ActiveAbility ability)
         {
             if (ability.State == AbilityState.Ready)
