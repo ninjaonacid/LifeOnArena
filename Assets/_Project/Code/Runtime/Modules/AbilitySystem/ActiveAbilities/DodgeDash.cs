@@ -15,7 +15,7 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
             _dashSpeed = dashSpeed;
         }
 
-        public override void Use(GameObject caster, GameObject target)
+        public override void Use(AbilityController caster, GameObject target)
         {
             var heroCollider = caster.GetComponent<HeroHurtBox>();
             var heroMovement = caster.GetComponent<HeroMovement>();

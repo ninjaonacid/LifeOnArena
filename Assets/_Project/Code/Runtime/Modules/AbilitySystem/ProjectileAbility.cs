@@ -20,10 +20,10 @@ namespace Code.Runtime.Modules.AbilitySystem
             _speed = speed;
         }
 
-        public override void Use(GameObject caster, GameObject target)
+        public override void Use(AbilityController caster, GameObject target)
         {
             Projectile projectile = _projectileFactory
-                .CreateProjectile(_projectilePrefab, caster, OnCreate, OnRelease, OnGet, OnReturn);
+                .CreateProjectile(_projectilePrefab, caster.gameObject, OnCreate, OnRelease, OnGet, OnReturn);
 
             var entityAttack = caster.GetComponent<EntityAttackComponent>();
             var layer = entityAttack.GetTargetLayer();
@@ -36,7 +36,7 @@ namespace Code.Runtime.Modules.AbilitySystem
             projectile
                 .SetVelocity(direction, _speed)
                 .SetTargetLayer(layer)
-                .SetOwnerLayer(caster)
+                .SetOwnerLayer(caster.gameObject)
                 .SetLifetime(_lifeTime);
         }
 

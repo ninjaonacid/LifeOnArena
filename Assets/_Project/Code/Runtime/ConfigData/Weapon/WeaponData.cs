@@ -25,9 +25,7 @@ namespace Code.Runtime.ConfigData.Weapon
         [SerializeField] private Vector3 _localRotation;
         [SerializeField] private SoundAudioFile _weaponSound;
         [SerializeField] private List<DamageType> _damageType;
-        [SerializeField] private AttackConfig _firstAttackConfig;
-        [SerializeField] private AttackConfig _secondAttackConfig;
-        [SerializeField] private AttackConfig _thirdAttackConfig;
+        [SerializeField] private List<AttackConfig> _attacks;
         public IReadOnlyList<DamageType> DamageTypes => _damageType;
         public WeaponView WeaponView => _weaponPrefab;
         public WeaponId WeaponId => _weaponId;
@@ -40,10 +38,6 @@ namespace Code.Runtime.ConfigData.Weapon
         public Vector3 LocalRotation => _localRotation;
         public SoundAudioFile WeaponSound => _weaponSound;
 
-        public AttackConfig FirstAttackConfig => _firstAttackConfig;
-
-        public AttackConfig SecondAttackConfig => _secondAttackConfig;
-
-        public AttackConfig ThirdAttackConfig => _thirdAttackConfig;
+        public List<AttackConfig> AttacksConfigs => _attacks;
     }
 }

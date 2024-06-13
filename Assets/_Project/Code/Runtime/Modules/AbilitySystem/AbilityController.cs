@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Code.Runtime.ConfigData.Identifiers;
 using Code.Runtime.Core.Factory;
@@ -19,8 +20,10 @@ namespace Code.Runtime.Modules.AbilitySystem
         
         public AbilitySlot[] AbilitySlots => _abilitySlots;
         public ActiveAbility ActiveAbility => _activeAbility;
-
+        
         private ActiveAbility _activeAbility;
+        private readonly Queue<ActiveAbility> _abilityQueue = new();
+        private readonly int _abilityQueueLimit = 2;
 
         protected IAbilityFactory _abilityFactory;
 
@@ -50,62 +53,23 @@ namespace Code.Runtime.Modules.AbilitySystem
             }
         }
 
-        public bool TryActivateAbility(AbilityIdentifier abilityId)
+        private void Update()
         {
-            AbilitySlot slot = _abilitySlots.FirstOrDefault(x => x.AbilityIdentifier == abilityId);
-
-            if (slot != null)
-            {
-                if (CanActivateAbility(slot.Ability))
-                {
-                    _activeAbility = slot.Ability;
-                    slot.Ability.Use(gameObject, null);
-                    slot.Ability.State = AbilityState.Active;
-                    _cooldownController.StartCooldown(slot.Ability);
-                    OnAbilityUse?.Invoke();
-                }
-            }
-
-            return false;
+            HandleAbilityQueue();
         }
 
-        public bool TryActivateAbility(ActiveAbility ability)
+        private void HandleAbilityQueue()
         {
-            AbilitySlot slot = _abilitySlots.FirstOrDefault(x => x.Ability == ability);
-
-            if (slot != null)
+            if (_activeAbility != null && !_activeAbility.IsActive())
             {
-                if (CanActivateAbility(slot.Ability))
+                if (_abilityQueue.Count > 0)
                 {
-                    _activeAbility = slot.Ability;
-                    slot.Ability.Use(gameObject, null);
-                    slot.Ability.State = AbilityState.Active;
-                    _cooldownController.StartCooldown(slot.Ability);
-                    OnAbilityUse?.Invoke();
+                    var nextAbility = _abilityQueue.Dequeue();
+                    ActivateAbility(nextAbility);
                 }
             }
-
-            return false;
         }
-
-        public bool TryActivateAbility(string abilityName)
-        {
-            AbilitySlot slot = _abilitySlots.FirstOrDefault(x => x.AbilityIdentifier.name == abilityName);
-            
-            if (slot != null)
-            {
-                if (CanActivateAbility(slot.Ability))
-                {
-                    _activeAbility = slot.Ability;
-                    slot.Ability.Use(gameObject, null);
-                    slot.Ability.State = AbilityState.Active;
-                    _cooldownController.StartCooldown(slot.Ability);
-                    OnAbilityUse?.Invoke();
-                }
-            }
-
-            return false;
-        }
+        
 
         public bool CanActivateAbility(AbilityIdentifier ability)
         {
@@ -129,6 +93,8 @@ namespace Code.Runtime.Modules.AbilitySystem
             {
                 if (_abilitySlots != null && _abilitySlots.Any(x => x.Ability != null && x.Ability.IsActive()))
                 {
+                    if(_abilityQueue.Count < _abilityQueueLimit)
+                        _abilityQueue.Enqueue(ability);
                     return false;
                 }
                 return true;
@@ -140,6 +106,43 @@ namespace Code.Runtime.Modules.AbilitySystem
         protected void OnAbilityChanged()
         {
             OnSkillChanged?.Invoke();
+        }
+        
+        public bool TryActivateAbility(AbilityIdentifier abilityId)
+        {
+            return TryActivateAbility(slot => slot.AbilityIdentifier == abilityId);
+        }
+
+        public bool TryActivateAbility(ActiveAbility ability)
+        {
+            return TryActivateAbility(slot => slot.Ability == ability);
+        }
+
+        public bool TryActivateAbility(string abilityName)
+        {
+            return TryActivateAbility(slot => slot.AbilityIdentifier.name == abilityName);
+        }
+
+        private bool TryActivateAbility(Func<AbilitySlot, bool> predicate)
+        {
+            AbilitySlot slot = _abilitySlots.FirstOrDefault(predicate);
+
+            if (slot != null && CanActivateAbility(slot.Ability))
+            {
+                ActivateAbility(slot.Ability);
+                return true;
+            }
+
+            return false;
+        }
+
+        private void ActivateAbility(ActiveAbility ability)
+        {
+            ability.Use(this, null);
+            ability.State = AbilityState.Active;
+            _activeAbility = ability;
+            _cooldownController.StartCooldown(ability);
+            OnAbilityUse?.Invoke();
         }
     }
 }

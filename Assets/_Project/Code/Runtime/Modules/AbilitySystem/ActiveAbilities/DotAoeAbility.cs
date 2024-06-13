@@ -14,7 +14,7 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
             _castDistance = castDistance;
         }
 
-        public override async void Use(GameObject caster, GameObject target)
+        public override async void Use(AbilityController caster, GameObject target)
         {
             Vector3 casterPosition = caster.transform.position;
             Vector3 casterDirection = caster.transform.forward;
@@ -22,7 +22,7 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
             var visualEffect =
                 await _visualEffectFactory
                     .CreateVisualEffect(AbilityBlueprint.VisualEffectData.Identifier.Id,
-                        caster, OnCreate, OnRelease);
+                        caster.gameObject, OnCreate, OnRelease);
 
             Transform visualEffectTransform = visualEffect.transform;
             var visualEffectPosition = casterPosition + casterDirection * _castDistance;

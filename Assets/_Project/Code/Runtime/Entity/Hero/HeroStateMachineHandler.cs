@@ -105,7 +105,7 @@ namespace Code.Runtime.Entity.Hero
                 _heroRotation,
                 _animationData,
                 true, false,
-                canExit: (state) => state.Timer.Elapsed >= _heroAbilityController.ActiveAbility.ActiveTime));
+                canExit: (state) => state.Timer.Elapsed >= _heroAbilityController.ActiveAbility.ActiveTime - 0.5f));
 
             _stateMachine.AddState(HeroBaseAttack1, new FirstAttackState(
                 _heroAttackComponent,
@@ -119,7 +119,7 @@ namespace Code.Runtime.Entity.Hero
                 isGhostState: false,
                 canExit: (state) =>
                     state.Timer.Elapsed >=
-                    _heroWeapon.GetEquippedWeaponData().FirstAttackConfig.AnimationData.Length));
+                    _heroWeapon.GetEquippedWeaponData().AttacksConfigs[0].AnimationData.Length));
 
             _stateMachine.AddState(HeroBaseAttack2, new SecondAttackState(
                 _heroAttackComponent,
@@ -132,7 +132,7 @@ namespace Code.Runtime.Entity.Hero
                 needExitTime: true,
                 isGhostState: false,
                 canExit: (state) => state.Timer.Elapsed >=
-                                    _heroWeapon.GetEquippedWeaponData().SecondAttackConfig.AnimationData.Length));
+                                    _heroWeapon.GetEquippedWeaponData().AttacksConfigs[1].AnimationData.Length));
 
             _stateMachine.AddState(HeroBaseAttack3, new ThirdAttackState(
                 _heroAttackComponent,
@@ -145,7 +145,7 @@ namespace Code.Runtime.Entity.Hero
                 needExitTime: true,
                 isGhostState: false,
                 canExit: (state) => state.Timer.Elapsed >=
-                                    _heroWeapon.GetEquippedWeaponData().ThirdAttackConfig.AnimationData.Length));
+                                    _heroWeapon.GetEquippedWeaponData().AttacksConfigs[2].AnimationData.Length));
             
             
             
@@ -154,15 +154,15 @@ namespace Code.Runtime.Entity.Hero
 
             _stateMachine.AddTransition(new TransitionAfter(
                 HeroBaseAttack1,
-                HeroIdle, _heroWeapon.GetEquippedWeaponData().FirstAttackConfig.AnimationData.Length + 0.1f));
+                HeroIdle, _heroWeapon.GetEquippedWeaponData().AttacksConfigs[0].AnimationData.Length + 0.1f));
 
             _stateMachine.AddTransition(new TransitionAfter(
                 HeroBaseAttack2,
-                HeroIdle, _heroWeapon.GetEquippedWeaponData().SecondAttackConfig.AnimationData.Length + 0.1f));
+                HeroIdle, _heroWeapon.GetEquippedWeaponData().AttacksConfigs[1].AnimationData.Length + 0.1f));
 
             _stateMachine.AddTransition(new TransitionAfter(
                 HeroBaseAttack3,
-                HeroIdle, _heroWeapon.GetEquippedWeaponData().ThirdAttackConfig.AnimationData.Length + 0.1f));
+                HeroIdle, _heroWeapon.GetEquippedWeaponData().AttacksConfigs[2].AnimationData.Length + 0.1f));
 
             _stateMachine.AddTwoWayTransition(new Transition(
                 HeroIdle,
@@ -233,9 +233,9 @@ namespace Code.Runtime.Entity.Hero
                 HeroIdle,
                 _animationData.Animations[AnimationKey.Stomp].Length - 0.5f));
 
-            _stateMachine.AddTransition(new Transition(
+            _stateMachine.AddTransition(new TransitionAfter(
                 AbilityCast,
-                HeroIdle, (transition) => !_heroAbilityController.ActiveAbility.IsActive()));
+                HeroIdle, _animationData.Animations[AnimationKey.SpellCast].Length - 0.4f));
 
 
             _stateMachine.AddTransition(new Transition(

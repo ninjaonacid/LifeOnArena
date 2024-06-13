@@ -17,7 +17,7 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
             _aoeRadius = aoeRadius;
         }
 
-        public override async void Use(GameObject caster, GameObject target)
+        public override async void Use(AbilityController caster, GameObject target)
         {
             Vector3 casterPosition = caster.transform.position;
             Vector3 casterDirection = caster.transform.forward;

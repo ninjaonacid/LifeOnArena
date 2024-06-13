@@ -30,7 +30,7 @@ namespace Code.Runtime.Modules.AbilitySystem
             }
         }
 
-        public abstract void Use(GameObject caster, GameObject target);
+        public abstract void Use(AbilityController caster, GameObject target);
 
         protected void ApplyEffects(GameObject target)
         {
