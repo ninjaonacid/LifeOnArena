@@ -2,10 +2,10 @@ using UnityEngine;
 
 namespace Code.Runtime.Entity.Enemy
 {
-    [RequireComponent(typeof(EnemyAttackComponent))]
+    [RequireComponent(typeof(MeleeEnemyAttackComponent))]
     public class CheckAttackRange : MonoBehaviour
     {
-        public EnemyAttackComponent AttackComponent;
+        public MeleeEnemyAttackComponent AttackComponent;
         public TriggerObserver TriggerObserver;
 
         private void Start()

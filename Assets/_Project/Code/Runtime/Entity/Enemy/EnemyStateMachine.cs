@@ -12,7 +12,7 @@ namespace Code.Runtime.Entity.Enemy
         protected FiniteStateMachine _fsm;
 
         [SerializeField] protected AgentMoveToPlayer _agentMoveToPlayer;
-        [SerializeField] protected EnemyAttackComponent _enemyAttackComponent;
+        [SerializeField] protected MeleeEnemyAttackComponent MeleeEnemyAttackComponent;
         [SerializeField] protected EnemyWeapon _enemyWeapon;
         [SerializeField] protected EnemyAnimator _enemyAnimator;
         [SerializeField] protected EnemyTarget _enemyTarget;

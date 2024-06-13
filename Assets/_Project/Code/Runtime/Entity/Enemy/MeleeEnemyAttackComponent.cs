@@ -5,12 +5,12 @@ using VContainer;
 namespace Code.Runtime.Entity.Enemy
 {
     [RequireComponent(typeof(EnemyAnimator))]
-    public class EnemyAttackComponent : EntityAttackComponent
+    public class MeleeEnemyAttackComponent : EntityAttackComponent
     {
         private float _attackCooldown;
-        private bool _attackIsActive;
-        public bool TargetInAttackRange => _attackIsActive;
-
+        private bool _meleeAttackIsActive;
+        public bool TargetInMeleeAttackRange => _meleeAttackIsActive;
+        
         private bool _isAttacking;
         
         private BattleService _battleService;
@@ -23,7 +23,7 @@ namespace Code.Runtime.Entity.Enemy
 
         private void OnDisable()
         {
-            _attackIsActive = false;
+            _meleeAttackIsActive = false;
         }
 
         private void OnEnable()
@@ -38,12 +38,12 @@ namespace Code.Runtime.Entity.Enemy
 
         public void EnableAttack()
         {
-            _attackIsActive = true;
+            _meleeAttackIsActive = true;
         }
         
         public void DisableAttack()
         {
-            _attackIsActive = false;
+            _meleeAttackIsActive = false;
         }
         
         private void UpdateCooldown()
@@ -58,9 +58,9 @@ namespace Code.Runtime.Entity.Enemy
             _isAttacking = false;
         }
 
-        public bool CanAttack()
+        public virtual bool CanAttack()
         {
-            return CoolDownIsUp() && !_isAttacking && _attackIsActive;
+            return CoolDownIsUp() && !_isAttacking && _meleeAttackIsActive;
         }
         
         private bool CoolDownIsUp()

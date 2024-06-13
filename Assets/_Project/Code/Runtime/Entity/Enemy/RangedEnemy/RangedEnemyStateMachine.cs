@@ -18,7 +18,7 @@ namespace Code.Runtime.Entity.Enemy.RangedEnemy
                     _animationData, 
                     _abilityController, 
                     _agentMoveToPlayer,
-                    _enemyAttackComponent,
+                    MeleeEnemyAttackComponent,
                     _enemyTarget, needExitTime: true));
             
             _fsm.AddTransitionFromAny(new Transition(
@@ -34,13 +34,13 @@ namespace Code.Runtime.Entity.Enemy.RangedEnemy
             _fsm.AddTransition(new Transition(
                 nameof(EnemyIdleState),
                 nameof(EnemyChaseState),
-                (transition) => _enemyTarget.HasTarget() && !_enemyAttackComponent.TargetInAttackRange));
+                (transition) => _enemyTarget.HasTarget() && !MeleeEnemyAttackComponent.TargetInMeleeAttackRange));
 
             _fsm.AddTransition(new TransitionAfter(
                 nameof(RangedEnemyAttackState),
                 nameof(EnemyChaseState),
                 _animationData.Animations[AnimationKey.SpellCast].Length,
-                (transition) => _enemyTarget.HasTarget() && !_enemyAttackComponent.TargetInAttackRange));
+                (transition) => _enemyTarget.HasTarget() && !MeleeEnemyAttackComponent.TargetInMeleeAttackRange));
                 
             _fsm.AddTransition(new Transition(
                 nameof(EnemyChaseState),
@@ -62,7 +62,7 @@ namespace Code.Runtime.Entity.Enemy.RangedEnemy
             _fsm.AddTransition(new Transition(
                 nameof(EnemyChaseState),
                 nameof(RangedEnemyAttackState),
-                (transition) => _enemyAttackComponent.CanAttack()));
+                (transition) => MeleeEnemyAttackComponent.CanAttack()));
 
             _fsm.AddTransition(new TransitionAfter(
                 nameof(RangedEnemyAttackState),
@@ -72,7 +72,7 @@ namespace Code.Runtime.Entity.Enemy.RangedEnemy
             _fsm.AddTransition(new Transition(
                 nameof(EnemyIdleState),
                 nameof(RangedEnemyAttackState),
-                (transition) => _enemyAttackComponent.CanAttack(),
+                (transition) => MeleeEnemyAttackComponent.CanAttack(),
                 true));
             
             _fsm.AddTransitionFromAny(new Transition(

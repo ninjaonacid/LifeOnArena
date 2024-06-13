@@ -10,12 +10,12 @@ namespace Code.Runtime.Entity.Enemy.RangedEnemy
     {
         private AbilityController _abilityController;
         private AgentMoveToPlayer _moveToPlayer;
-        private EnemyAttackComponent _enemyAttack;
+        private MeleeEnemyAttackComponent _meleeEnemyAttack;
         private EnemyTarget _enemyTarget;
         
         public RangedEnemyAttackState(EnemyAnimator enemyAnimator, AnimationDataContainer animationData,
             AbilityController abilityController, AgentMoveToPlayer moveToPlayer,
-            EnemyAttackComponent enemyAttack, EnemyTarget enemyTarget,
+            MeleeEnemyAttackComponent meleeEnemyAttack, EnemyTarget enemyTarget,
             bool needExitTime = false, bool isGhostState = false, Action<State<string, string>> onEnter = null,
             Action<State<string, string>> onLogic = null, Action<State<string, string>> onExit = null,
             Func<State<string, string>, bool> canExit = null) : base(enemyAnimator, animationData, needExitTime,
@@ -23,7 +23,7 @@ namespace Code.Runtime.Entity.Enemy.RangedEnemy
         {
             _abilityController = abilityController;
             _moveToPlayer = moveToPlayer;
-            _enemyAttack = enemyAttack;
+            _meleeEnemyAttack = meleeEnemyAttack;
             _enemyTarget = enemyTarget;
         }
 
@@ -51,7 +51,7 @@ namespace Code.Runtime.Entity.Enemy.RangedEnemy
         public override void OnExit()
         {
             base.OnExit();
-            _enemyAttack.AttackEnded();
+            _meleeEnemyAttack.AttackEnded();
 
         }
     }

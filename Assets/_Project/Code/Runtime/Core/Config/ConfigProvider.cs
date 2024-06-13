@@ -28,7 +28,6 @@ namespace Code.Runtime.Core.Config
 
 
         private TutorialConfig _tutorialConfig;
-        private WeaponStateMachineDatabase _weaponFsmDatabase;
         private AudioLibrary _audioLibrary;
         private AudioServiceSettings _audioServiceSettings;
         private StatDatabase _characterStats;
@@ -73,9 +72,6 @@ namespace Code.Runtime.Core.Config
             _characterStats = Resources
                 .Load<StatDatabase>($"{ConfigFolder}/Hero/Stats/HeroStatsData");
 
-            _weaponFsmDatabase = Resources
-                .Load<WeaponStateMachineDatabase>($"{ConfigFolder}/StateMachine/WeaponFsmConfigDatabase");
-            
             _tutorialConfig = Resources.Load<TutorialConfig>($"{ConfigFolder}/Tutorial/StartGameTutorial");
 
         }
@@ -152,9 +148,7 @@ namespace Code.Runtime.Core.Config
             _windowConfigs.TryGetValue(menuId, out ScreenConfig windowConfig)
                 ? windowConfig
                 : null;
-
-        public WeaponStateMachineDatabase GetWeaponFsmDatabase() => _weaponFsmDatabase;
-
+        
 
     }
 }
