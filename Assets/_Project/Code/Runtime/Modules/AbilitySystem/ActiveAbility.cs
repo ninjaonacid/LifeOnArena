@@ -6,7 +6,7 @@ namespace Code.Runtime.Modules.AbilitySystem
 {
     public abstract class ActiveAbility : Ability
     {
-        public float Cooldown { get; }
+        public float Cooldown { get; set; }
         public float CurrentCooldown { get; set; }
         public float ActiveTime { get; set; }
         public float CurrentActiveTime { get; set; }

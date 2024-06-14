@@ -8,9 +8,11 @@ namespace Code.Runtime.Entity.Hero.HeroStates
     {
         protected readonly HeroAttackComponent _heroAttackComponent;
         protected readonly HeroWeapon _heroWeapon;
+        protected readonly VisualEffectController _vfxController;
+        protected readonly HeroAbilityController _heroAbilityController;
         protected HeroBaseAttackState(HeroAttackComponent heroAttackComponent, HeroWeapon heroWeapon,
             HeroAnimator heroAnimator, HeroMovement heroMovement, HeroRotation heroRotation,
-            AnimationDataContainer animationData, bool needExitTime = false, bool isGhostState = false,
+            AnimationDataContainer animationData, VisualEffectController vfxController, HeroAbilityController heroAbilityController, bool needExitTime = false, bool isGhostState = false,
             Action<State<string, string>> onEnter = null, Action<State<string, string>> onLogic = null,
             Action<State<string, string>> onExit = null, Func<State<string, string>, bool> canExit = null) : base(
             heroAnimator, heroMovement, heroRotation, animationData, needExitTime, isGhostState, onEnter, onLogic,
@@ -18,6 +20,8 @@ namespace Code.Runtime.Entity.Hero.HeroStates
         {
             _heroAttackComponent = heroAttackComponent;
             _heroWeapon = heroWeapon;
+            _vfxController = vfxController;
+            _heroAbilityController = heroAbilityController;
         }
     }
 }

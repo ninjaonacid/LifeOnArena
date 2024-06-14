@@ -8,31 +8,31 @@ namespace Code.Runtime.Entity.Hero.HeroStates
 {
     public class SecondAttackState : HeroBaseAttackState
     {
-        private VisualEffectController _vfxController;
         public SecondAttackState(HeroAttackComponent heroAttackComponent, HeroWeapon heroWeapon,
             HeroAnimator heroAnimator, HeroMovement heroMovement, HeroRotation heroRotation,
-            AnimationDataContainer animationData, VisualEffectController vfxController, bool needExitTime = false, bool isGhostState = false,
+            AnimationDataContainer animationData, VisualEffectController vfxController,
+            HeroAbilityController heroAbilityController, bool needExitTime = false, bool isGhostState = false,
             Action<State<string, string>> onEnter = null, Action<State<string, string>> onLogic = null,
             Action<State<string, string>> onExit = null, Func<State<string, string>, bool> canExit = null) : base(
-            heroAttackComponent, heroWeapon, heroAnimator, heroMovement, heroRotation, animationData, needExitTime,
-            isGhostState, onEnter, onLogic, onExit, canExit)
+            heroAttackComponent, heroWeapon, heroAnimator, heroMovement, heroRotation, animationData, vfxController,
+            heroAbilityController, needExitTime, isGhostState, onEnter, onLogic, onExit, canExit)
         {
-            _vfxController = vfxController;
         }
 
         public override void OnEnter()
         {
             base.OnEnter();
             var attackConfig = _heroWeapon.GetEquippedWeaponData().AttacksConfigs[1];
-            
+
             _heroAnimator.PlayAnimation(attackConfig.AnimationData.Hash);
             _heroWeapon.EnableWeapon(true);
-            
-            
-            // _vfxController.PlaySlashVisualEffect(
-            //     attackConfig.SlashConfig.VisualEffect.Identifier, attackConfig.SlashDirection, 
-            //     attackConfig.SlashConfig.SlashSize, attackConfig.SlashDelay).Forget();
-            
+            _heroAbilityController.TryActivateAbility(attackConfig.AttackIdentifier);
+
+
+            _vfxController.PlaySlashVisualEffect(
+                attackConfig.SlashConfig.VisualEffect.Identifier, attackConfig.SlashDirection, 
+                attackConfig.SlashConfig.SlashSize, attackConfig.SlashDelay).Forget();
+
             _heroRotation.EnableRotation(false);
         }
 

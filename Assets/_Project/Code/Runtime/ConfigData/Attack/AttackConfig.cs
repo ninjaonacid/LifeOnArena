@@ -1,4 +1,5 @@
 using Code.Runtime.ConfigData.Animations;
+using Code.Runtime.ConfigData.Identifiers;
 using UnityEngine;
 
 namespace Code.Runtime.ConfigData.Attack
@@ -11,5 +12,6 @@ namespace Code.Runtime.ConfigData.Attack
         public SlashDirection SlashDirection;
         public float SlashDelay;
         public AnimationData AnimationData;
+        public AbilityIdentifier AttackIdentifier;
     }
 }

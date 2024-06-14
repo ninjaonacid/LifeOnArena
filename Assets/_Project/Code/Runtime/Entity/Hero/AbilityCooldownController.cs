@@ -27,14 +27,15 @@ namespace Code.Runtime.Entity.Hero
             }
         }
 
-        public void StartCooldown(ActiveAbility activeAbilityBlueprintBase)
+        public void StartCooldown(ActiveAbility activeAbility)
         {
-            if (!_abilitiesOnCooldown.Contains(activeAbilityBlueprintBase))
+            if (!_abilitiesOnCooldown.Contains(activeAbility))
             {
-                activeAbilityBlueprintBase.CurrentActiveTime = activeAbilityBlueprintBase.ActiveTime;   
-                activeAbilityBlueprintBase.CurrentCooldown = activeAbilityBlueprintBase.Cooldown;
-                _abilitiesOnCooldown.Add(activeAbilityBlueprintBase);
+                activeAbility.CurrentActiveTime = activeAbility.ActiveTime;   
+                activeAbility.CurrentCooldown = activeAbility.Cooldown;
+                _abilitiesOnCooldown.Add(activeAbility);
             }
+          
         }
 
         public bool IsOnCooldown(ActiveAbility activeAbilityBlueprintBase)

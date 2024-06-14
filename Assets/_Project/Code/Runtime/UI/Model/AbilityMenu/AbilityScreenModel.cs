@@ -35,6 +35,7 @@ namespace Code.Runtime.UI.Model.AbilityMenu
 
             var allAbilities =
                 _configProvider.AllAbilities()
+                    .Where(x => x.AbilityTreeData != null)
                     .OrderBy(x => x.AbilityTreeData.Branch)
                     .ThenBy(x => x.AbilityTreeData.Position)
                     .ToArray();

@@ -30,7 +30,7 @@ namespace Code.Runtime.Modules.AbilitySystem
 
             var hurtBox = caster.GetComponent<EntityHurtBox>();
             Vector3 casterCenter = hurtBox.GetHeightTransform();
-            projectile.transform.position = casterCenter;
+            projectile.transform.position = casterCenter + new Vector3(0, 0, 5);
             var direction = caster.transform.forward;
 
             projectile

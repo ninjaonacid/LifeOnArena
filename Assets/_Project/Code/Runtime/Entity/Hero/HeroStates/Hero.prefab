@@ -1262,6 +1262,8 @@ MonoBehaviour:
     AbilitySlotID: 1
   - AbilityIdentifier: {fileID: 0}
     AbilitySlotID: 2
+  - AbilityIdentifier: {fileID: 11400000, guid: bfb788b57061def4abcd06ad2d562dfa, type: 2}
+    AbilitySlotID: 0
 --- !u!114 &6331987856363381589
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1317,6 +1319,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _spinAttackAbilityId: {fileID: 11400000, guid: 630144b53aba86245b26160679af021d, type: 2}
   _stompAbilityId: {fileID: 11400000, guid: b7e1b76dfa43a6a40aa37103371ec426, type: 2}
+  _commonAttackId: {fileID: 11400000, guid: bfb788b57061def4abcd06ad2d562dfa, type: 2}
   _eventReceiver: {fileID: 3953687927081849907}
   _heroAnimator: {fileID: 7390316171520665867}
   _heroMovement: {fileID: 7390316171520665878}

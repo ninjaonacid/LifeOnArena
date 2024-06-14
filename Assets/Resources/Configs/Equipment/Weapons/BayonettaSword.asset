@@ -20,6 +20,7 @@ MonoBehaviour:
   _localRotation: {x: 0, y: 0, z: 0}
   _weaponSound: {fileID: 0}
   _damageType: 01000000
-  _firstAttackConfig: {fileID: 11400000, guid: b5bc19c3b2d2a754499b83866fdb5aa3, type: 2}
-  _secondAttackConfig: {fileID: 11400000, guid: 192108d4a2ed1904fbdcd935f4845e25, type: 2}
-  _thirdAttackConfig: {fileID: 11400000, guid: c3e90898775f50d4d8ace59b66127023, type: 2}
+  _attacks:
+  - {fileID: 11400000, guid: b5bc19c3b2d2a754499b83866fdb5aa3, type: 2}
+  - {fileID: 11400000, guid: 192108d4a2ed1904fbdcd935f4845e25, type: 2}
+  - {fileID: 11400000, guid: c3e90898775f50d4d8ace59b66127023, type: 2}

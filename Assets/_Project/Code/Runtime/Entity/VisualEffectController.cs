@@ -86,6 +86,20 @@ namespace Code.Runtime.Entity
                 case SlashDirection.Down:
                     rotation = Quaternion.Euler(new Vector3(0, 0, -90));
                     break;
+                case SlashDirection.Up:
+                    break;
+                case SlashDirection.LeftUp:
+                    rotation = Quaternion.Euler(new Vector3(0, 0, -325));
+                    break;
+                case SlashDirection.RightDown:
+                    rotation = Quaternion.Euler(new Vector3(0, 0, 225));
+                    break;
+                case SlashDirection.LeftDown:
+                    rotation = Quaternion.Euler(new Vector3(0, 0, 225));
+                    break;
+                case SlashDirection.RightUp:
+                    rotation = Quaternion.Euler(new Vector3(0, 0, -45));
+                    break;
             }
             
             effect.transform.rotation = _slashVfxPoint.rotation * rotation;

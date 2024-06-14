@@ -22,7 +22,7 @@ namespace Code.Runtime.Modules.AbilitySystem
 
         public IReadOnlyList<GameplayEffectBlueprint> GameplayEffectsBlueprints =>
             _gameplayEffectBlueprints;
-
+        
         public abstract ActiveAbility GetAbility();
     }
 }

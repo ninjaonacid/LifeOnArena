@@ -64,13 +64,17 @@ namespace Code.Runtime.Modules.AbilitySystem
             {
                 if (_abilityQueue.Count > 0)
                 {
-                    var nextAbility = _abilityQueue.Dequeue();
-                    ActivateAbility(nextAbility);
+                    var nextAbility = _abilityQueue.Peek();
+                    if (CanActivateAbility(nextAbility))
+                    {
+                        _abilityQueue.Dequeue();
+                        ActivateAbility(nextAbility);
+                    }
                 }
             }
+
         }
         
-
         public bool CanActivateAbility(AbilityIdentifier ability)
         {
             AbilitySlot slot = _abilitySlots.FirstOrDefault(x => x.AbilityIdentifier == ability);
@@ -138,9 +142,9 @@ namespace Code.Runtime.Modules.AbilitySystem
 
         private void ActivateAbility(ActiveAbility ability)
         {
-            ability.Use(this, null);
             ability.State = AbilityState.Active;
             _activeAbility = ability;
+            ability.Use(this, null);
             _cooldownController.StartCooldown(ability);
             OnAbilityUse?.Invoke();
         }
