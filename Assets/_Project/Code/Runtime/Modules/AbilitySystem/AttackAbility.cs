@@ -10,8 +10,9 @@ namespace Code.Runtime.Modules.AbilitySystem
     public class AttackAbility : ActiveAbility
     {
         private List<AttackConfig> _attackConfigs;
-        private ITimer _timer;
-        public int ComboCount { get; set; } = 0;
+        private readonly ITimer _timer;
+        public int ComboCount { get; private set; } = 0;
+        public int MaxCombo { get; private set; } = 0;
         private float _lastAttackTime = 0f;
         private float _comboWindow;
 
@@ -24,25 +25,31 @@ namespace Code.Runtime.Modules.AbilitySystem
         {
             WeaponData weaponData = caster.GetComponent<EntityWeapon>().WeaponData;
 
-            if (Time.time - _lastAttackTime > _comboWindow)
+            MaxCombo = weaponData.AttacksConfigs.Count;
+            
+            if (_timer.Elapsed > _comboWindow)
             {
                 ResetComboCounter();
             }
 
             AttackConfig attackConfig = default;
             attackConfig = weaponData.AttacksConfigs[ComboCount % weaponData.AttacksConfigs.Count];
-            _comboWindow = attackConfig.AnimationData.Length;
+            _comboWindow = attackConfig.AnimationData.Length + 0.2f;
 
-            ActiveTime = attackConfig.AnimationData.Length - 0.5f;
+            ActiveTime = attackConfig.AnimationData.Length;
             CurrentActiveTime = attackConfig.AnimationData.Length;
+            
+            Debug.Log("ATTACK ABILITY ACTIVATED");
 
             ComboCount++;
-            _lastAttackTime = Time.time;
+            
+            _timer.Reset();
         }
 
         public void ResetComboCounter()
         {
             ComboCount = 0;
         }
+        
     }
 }

@@ -110,7 +110,7 @@ namespace Code.Runtime.Entity.Hero
                 _heroRotation,
                 _animationData,
                 true, false,
-                canExit: (state) => state.Timer.Elapsed >= _heroAbilityController.ActiveAbility.ActiveTime - 0.5f));
+                canExit: (state) => state.Timer.Elapsed >= _heroAbilityController.ActiveAbility.ActiveTime - 0.3f));
 
             _stateMachine.AddState(nameof(FirstAttackState), new FirstAttackState(
                 _heroAttackComponent,
@@ -155,16 +155,16 @@ namespace Code.Runtime.Entity.Hero
            _stateMachine.AddTransition(new TransitionAfter(nameof(FirstAttackState), HeroIdle,
                _heroWeapon
                    .WeaponData
-                   .AttacksConfigs[0].AnimationData.Length));
+                   .AttacksConfigs[0].ExitTime));
            
            _stateMachine.AddTransition(new TransitionAfter(nameof(SecondAttackState), HeroIdle,
                _heroWeapon
                    .WeaponData
-                   .AttacksConfigs[1].AnimationData.Length));
+                   .AttacksConfigs[1].ExitTime));
            _stateMachine.AddTransition(new TransitionAfter(nameof(ThirdAttackState), HeroIdle,
                _heroWeapon
                    .WeaponData
-                   .AttacksConfigs[2].AnimationData.Length));
+                   .AttacksConfigs[2].ExitTime - 0.2f));
 
             _stateMachine.AddTwoWayTransition(new Transition(
                 HeroIdle,
@@ -227,10 +227,7 @@ namespace Code.Runtime.Entity.Hero
                     break;
                 case 3:
                     _stateMachine.RequestStateChange(nameof(ThirdAttackState));
-                    break;
-                default:
                     ability.ResetComboCounter();
-                    _stateMachine.RequestStateChange(HeroIdle);
                     break;
             }
         }

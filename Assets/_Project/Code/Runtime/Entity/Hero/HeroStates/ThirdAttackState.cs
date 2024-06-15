@@ -45,7 +45,7 @@ namespace Code.Runtime.Entity.Hero.HeroStates
                 _heroWeapon.EnableWeapon(true);
             }
 
-            if (Timer.Elapsed >= _attackConfig.AnimationData.Length - 0.4f)
+            if (Timer.Elapsed >= _attackConfig.ExitTime)
             {
                 fsm.StateCanExit();
             }

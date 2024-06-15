@@ -106,9 +106,20 @@ namespace Code.Runtime.Modules.AbilitySystem
 
         private bool CanActivateAbility(ActiveAbility ability)
         {
-            if (ability.State == AbilityState.Cooldown) return false;
             if (_abilitySlots != null && _abilitySlots.Any(x => x.Ability != null && x.Ability.IsActive()))
             {
+                if (ability is AttackAbility attackAbility)
+                {
+                    if (_abilityQueue.Count >= _abilityQueueLimit)
+                    {
+                        return false;
+                    }
+                    
+                    _abilityQueue.Enqueue(attackAbility);
+                    return false;
+                }
+
+                if (ability.State != AbilityState.Ready) return false;
                 if (_abilityQueue.Count >= _abilityQueueLimit) 
                 {
                     // Cannot add ability to queue
@@ -116,6 +127,7 @@ namespace Code.Runtime.Modules.AbilitySystem
                 }
 
                 // Add ability to queue
+          
                 _abilityQueue.Enqueue(ability);
                 return false;
             }

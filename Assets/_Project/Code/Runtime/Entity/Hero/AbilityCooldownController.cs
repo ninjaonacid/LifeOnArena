@@ -29,18 +29,14 @@ namespace Code.Runtime.Entity.Hero
 
         public void StartCooldown(ActiveAbility activeAbility)
         {
-            if (!_abilitiesOnCooldown.Contains(activeAbility))
-            {
-                activeAbility.CurrentActiveTime = activeAbility.ActiveTime;   
-                activeAbility.CurrentCooldown = activeAbility.Cooldown;
-                _abilitiesOnCooldown.Add(activeAbility);
-            }
+            activeAbility.CurrentActiveTime = activeAbility.ActiveTime;   
+            activeAbility.CurrentCooldown = activeAbility.Cooldown;
+            _abilitiesOnCooldown.Add(activeAbility);
         }
 
         public bool IsOnCooldown(ActiveAbility activeAbility)
         {
             return _abilitiesOnCooldown.Contains(activeAbility);
         }
-        
     }
 }

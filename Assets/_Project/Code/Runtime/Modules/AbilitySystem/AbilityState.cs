@@ -2,8 +2,8 @@
 {
     public enum AbilityState
     {
-        Ready,
-        Active,
-        Cooldown
+        Ready = 1,
+        Active = 2,
+        Cooldown = 3
     }
 }

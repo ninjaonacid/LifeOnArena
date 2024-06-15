@@ -12,5 +12,6 @@ namespace Code.Runtime.ConfigData.Attack
         public float SlashDelay;
         public AnimationData AnimationData;
         public AbilityIdentifier AttackIdentifier;
+        public float ExitTime;
     }
 }
