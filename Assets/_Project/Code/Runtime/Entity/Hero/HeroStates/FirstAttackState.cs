@@ -1,5 +1,6 @@
 using System;
 using Code.Runtime.ConfigData.Animations;
+using Code.Runtime.ConfigData.Attack;
 using Code.Runtime.Modules.StateMachine.States;
 using Cysharp.Threading.Tasks;
 
@@ -7,6 +8,7 @@ namespace Code.Runtime.Entity.Hero.HeroStates
 {
     public class FirstAttackState : HeroBaseAttackState
     {
+        private AttackConfig _attackConfig;
         public FirstAttackState(HeroAttackComponent heroAttackComponent, HeroWeapon heroWeapon,
             HeroAnimator heroAnimator, HeroMovement heroMovement, HeroRotation heroRotation,
             AnimationDataContainer animationData, VisualEffectController vfxController,
@@ -23,16 +25,25 @@ namespace Code.Runtime.Entity.Hero.HeroStates
             base.OnEnter();
 
             _heroWeapon.EnableWeapon(true);
-            var attackConfig = _heroWeapon.GetEquippedWeaponData().AttacksConfigs[0];
-            _heroAnimator.PlayAnimation(attackConfig.AnimationData.Hash);
-            _heroAbilityController.TryActivateAbility(attackConfig.AttackIdentifier);
+            _attackConfig = _heroWeapon.WeaponData.AttacksConfigs[0];
+            _heroAnimator.PlayAnimation(_attackConfig.AnimationData.Hash);
 
-            
+
             _vfxController.PlaySlashVisualEffect(
-                attackConfig.SlashConfig.VisualEffect.Identifier, attackConfig.SlashDirection, 
-                attackConfig.SlashConfig.SlashSize, attackConfig.SlashDelay).Forget();
+                _attackConfig.SlashConfig.VisualEffect.Identifier, _attackConfig.SlashDirection, 
+                _attackConfig.SlashConfig.SlashSize, _attackConfig.SlashDelay).Forget();
 
             _heroRotation.EnableRotation(false);
+        }
+        
+        public override void OnLogic()
+        {
+            base.OnLogic();
+
+            if (Timer.Elapsed >= _attackConfig.AnimationData.Length - 0.4f)
+            {
+                fsm.StateCanExit();
+            }
         }
 
 

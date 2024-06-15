@@ -27,6 +27,7 @@ namespace Code.Runtime.Entity.Hero
             
             _skillActions.Add(_controls.Player.SkillSlot1);
             _skillActions.Add(_controls.Player.SkillSlot2);
+            _skillActions.Add(_controls.Player.Attack);
 
             for (var index = 0; index < _skillActions.Count; index++)
             {

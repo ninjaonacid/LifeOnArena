@@ -12,9 +12,9 @@ namespace Code.Runtime.Modules.AbilitySystem
 {
     public class AbilityController : MonoBehaviour
     {
-        public event Action OnAbilityUse;
+        public event Action<ActiveAbility> OnAbilityUse;
         public event Action OnSkillChanged;
-        
+
         [SerializeField] protected AbilityCooldownController _cooldownController;
         [SerializeField] protected AbilitySlot[] _abilitySlots;
         
@@ -79,13 +79,27 @@ namespace Code.Runtime.Modules.AbilitySystem
         {
             AbilitySlot slot = _abilitySlots.FirstOrDefault(x => x.AbilityIdentifier == ability);
             
-            if (slot != null && slot.Ability.State == AbilityState.Ready)
+            if (slot?.Ability.State == AbilityState.Ready)
             {
                 if (_abilitySlots != null && _abilitySlots.Any(x => x.Ability != null && x.Ability.IsActive()))
                 {
-                    return false;
+                    if(_abilityQueue.Count >= _abilityQueueLimit)
+                    {
+                        // Cannot add ability to queue
+                        return false;
+                    }
+                    else
+                    {
+                        // Add ability to queue
+                        _abilityQueue.Enqueue(slot.Ability);
+                        return false;
+                    }
                 }
-                return true;
+                else
+                {
+                    // No active abilities, so can activate this one
+                    return true;
+                }
             }
 
             return false;
@@ -97,11 +111,21 @@ namespace Code.Runtime.Modules.AbilitySystem
             {
                 if (_abilitySlots != null && _abilitySlots.Any(x => x.Ability != null && x.Ability.IsActive()))
                 {
-                    if(_abilityQueue.Count < _abilityQueueLimit)
-                        _abilityQueue.Enqueue(ability);
+                    if(_abilityQueue.Count >= _abilityQueueLimit)
+                    {
+                        // Cannot add ability to queue
+                        return false;
+                    }
+
+                    // Add ability to queue
+                    _abilityQueue.Enqueue(ability);
                     return false;
                 }
-                return true;
+                else
+                {
+                    // No active abilities, so can activate this one
+                    return true;
+                }
             }
 
             return false;
@@ -146,7 +170,8 @@ namespace Code.Runtime.Modules.AbilitySystem
             _activeAbility = ability;
             ability.Use(this, null);
             _cooldownController.StartCooldown(ability);
-            OnAbilityUse?.Invoke();
+            OnAbilityUse?.Invoke(ability);
         }
+
     }
 }

@@ -14,6 +14,9 @@ namespace Code.Runtime.Entity
         [SerializeField] protected WeaponSlot _weaponSlot = new();
         [SerializeField] protected Transform _equipJoint;
         [SerializeField] protected WeaponData _weaponData;
+
+        public WeaponData WeaponData => _weaponData;
+        public WeaponView WeaponView => _weaponSlot.EquippedWeaponView;
         
         protected IItemFactory _itemFactory;
 
@@ -69,8 +72,5 @@ namespace Code.Runtime.Entity
 
         public Transform GetEquipJointTransform => _equipJoint;
 
-        public WeaponView GetEquippedWeapon() => _weaponSlot.EquippedWeaponView;
-        public WeaponData GetEquippedWeaponData() => _weaponData;
-   
     }
 }

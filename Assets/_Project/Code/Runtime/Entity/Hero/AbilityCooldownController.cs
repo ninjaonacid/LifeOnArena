@@ -19,7 +19,7 @@ namespace Code.Runtime.Entity.Hero
                 {
                     _abilitiesOnCooldown[i].State = AbilityState.Cooldown;
                 }
-                if (_abilitiesOnCooldown[i].CurrentCooldown <= 0)
+                if (_abilitiesOnCooldown[i].CurrentCooldown <= 0 && _abilitiesOnCooldown[i].State != AbilityState.Active)
                 {
                     _abilitiesOnCooldown[i].State = AbilityState.Ready;
                     _abilitiesOnCooldown.RemoveAt(i);
@@ -35,12 +35,12 @@ namespace Code.Runtime.Entity.Hero
                 activeAbility.CurrentCooldown = activeAbility.Cooldown;
                 _abilitiesOnCooldown.Add(activeAbility);
             }
-          
         }
 
         public bool IsOnCooldown(ActiveAbility activeAbilityBlueprintBase)
         {
             return _abilitiesOnCooldown.Contains(activeAbilityBlueprintBase);
         }
+        
     }
 }

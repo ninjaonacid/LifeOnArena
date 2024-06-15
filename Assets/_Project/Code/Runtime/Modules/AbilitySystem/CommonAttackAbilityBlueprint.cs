@@ -2,12 +2,12 @@
 
 namespace Code.Runtime.Modules.AbilitySystem
 {
-    [CreateAssetMenu(fileName = "CommonAttackAbility", menuName = "AbilitySystem/CommonAttack")]
-    public class CommonAttackAbilityBlueprint : ActiveAbilityBlueprint<CommonAttackAbility>
+    [CreateAssetMenu(fileName = "AttackAbility", menuName = "AbilitySystem/CommonAttack")]
+    public class CommonAttackAbilityBlueprint : ActiveAbilityBlueprint<AttackAbility>
     {
         public override ActiveAbility GetAbility()
         {
-            return new CommonAttackAbility(this);
+            return new AttackAbility(this);
         }
     }
 }

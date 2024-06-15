@@ -1,4 +1,5 @@
 using Code.Runtime.Entity.Hero;
+using Code.Runtime.Modules.AbilitySystem;
 using UnityEngine;
 
 namespace Code.Runtime.UI.View.HUD.Skills
@@ -19,7 +20,7 @@ namespace Code.Runtime.UI.View.HUD.Skills
             SetAbilityControllerSlots();
         }
 
-        private void UpdateCooldownView()
+        private void UpdateCooldownView(ActiveAbility ability)
         {
             foreach (var button in _skillButtons)
             {

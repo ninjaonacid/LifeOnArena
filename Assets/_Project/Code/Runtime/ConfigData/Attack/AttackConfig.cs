@@ -8,7 +8,6 @@ namespace Code.Runtime.ConfigData.Attack
     public class AttackConfig : ScriptableObject
     {
         public SlashVisualEffectConfig SlashConfig;
-        public float AttackDuration;
         public SlashDirection SlashDirection;
         public float SlashDelay;
         public AnimationData AnimationData;

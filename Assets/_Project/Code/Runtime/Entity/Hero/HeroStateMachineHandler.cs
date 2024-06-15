@@ -7,6 +7,7 @@ using Code.Runtime.Logic;
 using Code.Runtime.Logic.Animator;
 using Code.Runtime.Modules.AbilitySystem;
 using Code.Runtime.Modules.StateMachine;
+using Code.Runtime.Modules.StateMachine.States;
 using Code.Runtime.Modules.StateMachine.Transitions;
 using UnityEngine;
 using VContainer;
@@ -64,20 +65,23 @@ namespace Code.Runtime.Entity.Hero
         {
             _stateMachine = new FiniteStateMachine();
 
+            _heroAbilityController.OnAbilityUse += HandleAbilityUse;
+
             _stateMachine.AddState(HeroIdle, new HeroIdleState(
                 _heroAnimator, _heroMovement, _heroRotation, _animationData, false, true));
 
             _stateMachine.AddState(HeroMovement, new HeroMovementState(
                 _heroAnimator, _heroMovement, _heroRotation, _animationData, false, false));
-            
+
             _stateMachine.AddState(nameof(HeroDeathState), new HeroDeathState(
-                _heroAnimator, 
-                _heroMovement, 
-                _heroRotation, 
+                _heroAnimator,
+                _heroMovement,
+                _heroRotation,
                 _animationData));
 
             _stateMachine.AddState(RollAbility, new RollDodgeState(
-                _heroWeapon, _heroAbilityController, _heroAnimator, _heroMovement, _heroRotation, _animationData, true, false));
+                _heroWeapon, _heroAbilityController, _heroAnimator, _heroMovement, _heroRotation, _animationData, true,
+                false));
 
             _stateMachine.AddState(SpinAttackAbility, new SpinAbilityState(
                 _heroWeapon,
@@ -86,16 +90,17 @@ namespace Code.Runtime.Entity.Hero
                 _heroAnimator,
                 _heroMovement,
                 _heroRotation,
-                _animationData, true, canExit: (state) => state.Timer.Elapsed >= _heroAbilityController.ActiveAbility.ActiveTime));
-            
+                _animationData, true,
+                canExit: (state) => state.Timer.Elapsed >= _heroAbilityController.ActiveAbility.ActiveTime));
+
             _stateMachine.AddState(nameof(HeroStompAbilityState), new HeroStompAbilityState(
-                _heroWeapon, 
-                _heroAbilityController, 
-                _heroAnimator, 
+                _heroWeapon,
+                _heroAbilityController,
+                _heroAnimator,
                 _heroMovement,
-                _heroRotation, 
+                _heroRotation,
                 _animationData));
-            
+
 
             _stateMachine.AddState(AbilityCast, new AbilityCastState(
                 _heroWeapon,
@@ -107,7 +112,7 @@ namespace Code.Runtime.Entity.Hero
                 true, false,
                 canExit: (state) => state.Timer.Elapsed >= _heroAbilityController.ActiveAbility.ActiveTime - 0.5f));
 
-            _stateMachine.AddState(HeroBaseAttack1, new FirstAttackState(
+            _stateMachine.AddState(nameof(FirstAttackState), new FirstAttackState(
                 _heroAttackComponent,
                 _heroWeapon,
                 _heroAnimator,
@@ -117,54 +122,54 @@ namespace Code.Runtime.Entity.Hero
                 _vfxController,
                 _heroAbilityController,
                 needExitTime: true,
-                isGhostState: false,
-                canExit: (state) =>
-                    state.Timer.Elapsed >=
-                    _heroWeapon.GetEquippedWeaponData().AttacksConfigs[0].AnimationData.Length - 0.2f));
-
-            _stateMachine.AddState(HeroBaseAttack2, new SecondAttackState(
-                _heroAttackComponent,
-                _heroWeapon,
-                _heroAnimator,
-                _heroMovement,
-                _heroRotation,
-                _animationData,
-                _vfxController,
-                _heroAbilityController,
-                needExitTime: true,
-                isGhostState: false,
-                canExit: (state) => state.Timer.Elapsed >=
-                                    _heroWeapon.GetEquippedWeaponData().AttacksConfigs[1].AnimationData.Length - 0.2f));
-
-            _stateMachine.AddState(HeroBaseAttack3, new ThirdAttackState(
-                _heroAttackComponent,
-                _heroWeapon,
-                _heroAnimator,
-                _heroMovement,
-                _heroRotation,
-                _animationData,
-                _vfxController,
-                _heroAbilityController,
-                needExitTime: true,
-                isGhostState: false,
-                canExit: (state) => state.Timer.Elapsed >=
-                                    _heroWeapon.GetEquippedWeaponData().AttacksConfigs[2].AnimationData.Length - 0.2f));
-
+                isGhostState: false));
             
+            _stateMachine.AddState(nameof(SecondAttackState), new SecondAttackState(
+                _heroAttackComponent,
+                _heroWeapon,
+                _heroAnimator,
+                _heroMovement,
+                _heroRotation,
+                _animationData,
+                _vfxController,
+                _heroAbilityController,
+                needExitTime: true,
+                isGhostState: false));
+            
+            _stateMachine.AddState(nameof(ThirdAttackState), new ThirdAttackState(
+                _heroAttackComponent,
+                _heroWeapon,
+                _heroAnimator,
+                _heroMovement,
+                _heroRotation,
+                _animationData,
+                _vfxController,
+                _heroAbilityController,
+                needExitTime: true,
+                isGhostState: false));
+            
+            //_stateMachine.AddState("AttackExitState", new State(isGhostState: true));
+            
+           // _stateMachine.AddTransition(new TransitionAfter(nameof(HeroAttackState), "AttackExitState", delay: 
+              //  _heroWeapon.WeaponData.AttacksConfigs[_heroAbilityController.AttackAbilityCombo % _heroWeapon.WeaponData.AttacksConfigs.Count].AnimationData.Length - 0.2f));
+
+
             _stateMachine.AddTransitionFromAny(new Transition("", nameof(HeroDeathState),
                 (transition) => _heroDeath.IsDead));
 
-            _stateMachine.AddTransition(new TransitionAfter(
-                HeroBaseAttack1,
-                HeroIdle, _heroWeapon.GetEquippedWeaponData().AttacksConfigs[0].AnimationData.Length));
-
-            _stateMachine.AddTransition(new TransitionAfter(
-                HeroBaseAttack2,
-                HeroIdle, _heroWeapon.GetEquippedWeaponData().AttacksConfigs[1].AnimationData.Length ));
-
-            _stateMachine.AddTransition(new TransitionAfter(
-                HeroBaseAttack3,
-                HeroIdle, _heroWeapon.GetEquippedWeaponData().AttacksConfigs[2].AnimationData.Length - 0.2f));
+           _stateMachine.AddTransition(new TransitionAfter(nameof(FirstAttackState), HeroIdle,
+               _heroWeapon
+                   .WeaponData
+                   .AttacksConfigs[0].AnimationData.Length));
+           
+           _stateMachine.AddTransition(new TransitionAfter(nameof(SecondAttackState), HeroIdle,
+               _heroWeapon
+                   .WeaponData
+                   .AttacksConfigs[1].AnimationData.Length));
+           _stateMachine.AddTransition(new TransitionAfter(nameof(ThirdAttackState), HeroIdle,
+               _heroWeapon
+                   .WeaponData
+                   .AttacksConfigs[2].AnimationData.Length));
 
             _stateMachine.AddTwoWayTransition(new Transition(
                 HeroIdle,
@@ -172,63 +177,10 @@ namespace Code.Runtime.Entity.Hero
                 (transition) => _controls.Player.Movement.ReadValue<Vector2>().sqrMagnitude > Constants.Epsilon,
                 true));
 
-            _stateMachine.AddTransition(new Transition(
-                HeroMovement,
-                HeroBaseAttack1,
-                (transition) => _controls.Player.Attack.triggered));
-
-            _stateMachine.AddTransition(new Transition(
-                HeroIdle,
-                HeroBaseAttack1,
-                (transition) => _controls.Player.Attack.WasPressedThisFrame()));
-
-
-            _stateMachine.AddTransition(new Transition(
-                HeroBaseAttack1,
-                HeroBaseAttack2,
-                (transition) => _controls.Player.Attack.WasPressedThisFrame()));
-
-            _stateMachine.AddTransition(new Transition(
-                HeroBaseAttack2,
-                HeroBaseAttack3,
-                (transition) => _controls.Player.Attack.WasPressedThisFrame()));
-
-
-            _stateMachine.AddTransition(new Transition(
-                HeroBaseAttack1,
-                SpinAttackAbility,
-                (transition) =>
-                    _heroAbilityController.ActiveAbility != null &&
-                    _heroAbilityController.ActiveAbility.IsActive() &&
-                    _heroAbilityController.ActiveAbility.AbilityBlueprint.Identifier.Id.Equals(_spinAttackAbilityId.Id)
-            ));
             
-            _stateMachine.AddTransition(new Transition(
-                HeroBaseAttack2,
-                SpinAttackAbility,
-                (transition) =>
-                    _heroAbilityController.ActiveAbility != null &&
-                    _heroAbilityController.ActiveAbility.IsActive() &&
-                    _heroAbilityController.ActiveAbility.AbilityBlueprint.Identifier.Id.Equals(_spinAttackAbilityId.Id)
-            ));
-            
-            _stateMachine.AddTransition(new Transition(
-                HeroBaseAttack1,
-                nameof(HeroStompAbilityState),
-                (transition) =>
-                    _heroAbilityController.ActiveAbility != null &&
-                    _heroAbilityController.ActiveAbility.IsActive() &&
-                    _heroAbilityController.ActiveAbility.AbilityBlueprint.Identifier.Id.Equals(_stompAbilityId.Id)
-            ));
-            
-            _stateMachine.AddTransition(new Transition(
-                HeroBaseAttack2,
-                nameof(HeroStompAbilityState),
-                (transition) =>
-                    _heroAbilityController.ActiveAbility != null &&
-                    _heroAbilityController.ActiveAbility.IsActive() &&
-                    _heroAbilityController.ActiveAbility.AbilityBlueprint.Identifier.Id.Equals(_stompAbilityId.Id)
-            ));
+            _stateMachine.AddTransition(new TransitionAfter(SpinAttackAbility, HeroIdle,
+                _animationData.Animations[AnimationKey.Spinning].Length));
+
 
             _stateMachine.AddTransition(new TransitionAfter(
                 nameof(HeroStompAbilityState),
@@ -238,79 +190,50 @@ namespace Code.Runtime.Entity.Hero
             _stateMachine.AddTransition(new TransitionAfter(
                 AbilityCast,
                 HeroIdle, _animationData.Animations[AnimationKey.SpellCast].Length - 0.4f));
-
-
-            _stateMachine.AddTransition(new Transition(
-                HeroBaseAttack3,
-                SpinAttackAbility,
-                (transition) =>
-                    _heroAbilityController.ActiveAbility != null &&
-                    _heroAbilityController.ActiveAbility.IsActive() &&
-                    _heroAbilityController.ActiveAbility.AbilityBlueprint.Identifier.Id.Equals(_spinAttackAbilityId.Id)
-            ));
             
-            _stateMachine.AddTransition(new Transition(
-                HeroMovement,
-                SpinAttackAbility,
-                (transition) =>
-                    _heroAbilityController.ActiveAbility != null &&
-                    _heroAbilityController.ActiveAbility.IsActive() &&
-                    _heroAbilityController.ActiveAbility.AbilityBlueprint.Identifier.Id.Equals(_spinAttackAbilityId.Id)
-            ));
 
-            _stateMachine.AddTransition(new Transition(
-                SpinAttackAbility,
-                HeroIdle,
-                (transition) => _heroAbilityController.ActiveAbility != null &&
-                                        !_heroAbilityController.ActiveAbility.IsActive() &&
-                                        _heroAbilityController.ActiveAbility.AbilityBlueprint.Identifier.Id.Equals(_spinAttackAbilityId.Id)));
-            
-            _stateMachine.AddTransition(new Transition(
-                HeroIdle,
-                nameof(HeroStompAbilityState),
-                (transition) =>
-                    _heroAbilityController.ActiveAbility != null &&
-                    _heroAbilityController.ActiveAbility.IsActive() &&
-                    _heroAbilityController.ActiveAbility.AbilityBlueprint.Identifier.Id.Equals(_stompAbilityId.Id)));
-
-            _stateMachine.AddTransition(new Transition(
-                SpinAttackAbility,
-                HeroMovement,
-                (transition) =>
-                    _controls.Player.Movement.ReadValue<Vector2>().sqrMagnitude > Constants.Epsilon));
-
-            _stateMachine.AddTransition(new Transition(
-                HeroIdle,
-                SpinAttackAbility,
-                (transition) =>
-                    _heroAbilityController.ActiveAbility != null &&
-                    _heroAbilityController.ActiveAbility.IsActive() &&
-                    _heroAbilityController.ActiveAbility.AbilityBlueprint.Identifier.Id.Equals(_spinAttackAbilityId.Id)));
-        
-            _stateMachine.AddTransition(new Transition(
-                HeroIdle,
-                AbilityCast,
-                (transition) => _heroAbilityController.ActiveAbility != null &&
-                                _heroAbilityController.ActiveAbility.IsActive() &&
-                                _heroAbilityController.ActiveAbility.IsCastAbility, true));
-
-            _stateMachine.AddTransition(new Transition(
-                HeroBaseAttack3,
-                AbilityCast,
-                (transition) => _heroAbilityController.ActiveAbility != null &&
-                                _heroAbilityController.ActiveAbility.IsActive() &&
-                                _heroAbilityController.ActiveAbility.IsCastAbility, true));
-            
-            _stateMachine.AddTransition(new Transition(
-                nameof(HeroStompAbilityState),
-                AbilityCast,
-                (transition) =>
-                    _heroAbilityController.ActiveAbility != null &&
-                    _heroAbilityController.ActiveAbility.IsActive() &&
-                    _heroAbilityController.ActiveAbility.AbilityBlueprint.Identifier.Id.Equals(_stompAbilityId.Id)));
 
 
             _stateMachine.InitStateMachine();
+        }
+
+        private void HandleAbilityUse(ActiveAbility ability)
+        {
+            if (ability.IsCastAbility)
+            {
+                _stateMachine.RequestStateChange(AbilityCast);
+            }
+            else if (ability.AbilityBlueprint.Identifier.Id.Equals(_spinAttackAbilityId.Id))
+            {
+                _stateMachine.RequestStateChange(SpinAttackAbility);
+            }
+            else if (ability.AbilityBlueprint.Identifier.Id.Equals(_stompAbilityId.Id))
+            {
+                _stateMachine.RequestStateChange(nameof(HeroStompAbilityState));
+            }
+
+            if (ability is AttackAbility attackAbility)
+            {
+                HandleAttackAbility(attackAbility);
+            }
+                
+            
+        }
+
+        private void HandleAttackAbility(AttackAbility ability)
+        {
+            if (ability.ComboCount == 1)
+            {
+                _stateMachine.Trigger("Attack1");
+            } 
+            else if (ability.ComboCount == 2)
+            {
+                _stateMachine.Trigger("Attack2");
+            }
+            else if (ability.ComboCount == 3)
+            {
+                _stateMachine.Trigger("Attack3");
+            }
         }
     }
 }

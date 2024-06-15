@@ -40,7 +40,7 @@ namespace Code.Runtime.Entity
 
         public LayerMask GetLayer()
         {
-            return _entityWeapon.GetEquippedWeapon().gameObject.layer;
+            return _entityWeapon.WeaponView.gameObject.layer;
         }
         
         public void InvokeHit(int hitCount)
@@ -77,7 +77,7 @@ namespace Code.Runtime.Entity
             var hitBox = collision.Target.GetComponentInParent<EntityHurtBox>().GetHitBoxCenter();
 
             _visualEffectController.PlayVisualEffect(
-                _entityWeapon.GetEquippedWeaponData().HitVisualEffect.Identifier, collision.Target.transform.position).Forget();
+                _entityWeapon.WeaponData.HitVisualEffect.Identifier, collision.Target.transform.position).Forget();
             
             _audioService.PlaySound3D("Hit", collision.Target.transform, 1f);
             _battleService.CreateWeaponAttack(_stats, collision.Target);

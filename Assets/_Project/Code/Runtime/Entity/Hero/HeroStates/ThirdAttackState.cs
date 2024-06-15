@@ -25,10 +25,9 @@ namespace Code.Runtime.Entity.Hero.HeroStates
         public override void OnEnter()
         {
             base.OnEnter();
-            _attackConfig = _heroWeapon.GetEquippedWeaponData().AttacksConfigs[2];
+            _attackConfig = _heroWeapon.WeaponData.AttacksConfigs[2];
 
             _heroAnimator.PlayAnimation(_attackConfig.AnimationData.Hash);
-            _heroAbilityController.TryActivateAbility(_attackConfig.AttackIdentifier);
 
             _vfxController.PlaySlashVisualEffect(
                 _attackConfig.SlashConfig.VisualEffect.Identifier, _attackConfig.SlashDirection, 
@@ -44,6 +43,11 @@ namespace Code.Runtime.Entity.Hero.HeroStates
             if (Timer.Elapsed > _attackConfig.AnimationData.Length / 3f)
             {
                 _heroWeapon.EnableWeapon(true);
+            }
+
+            if (Timer.Elapsed >= _attackConfig.AnimationData.Length - 0.4f)
+            {
+                fsm.StateCanExit();
             }
         }
 
