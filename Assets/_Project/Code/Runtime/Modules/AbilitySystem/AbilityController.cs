@@ -57,7 +57,7 @@ namespace Code.Runtime.Modules.AbilitySystem
         {
             HandleAbilityQueue();
         }
-
+        
         private void HandleAbilityQueue()
         {
             if (_activeAbility != null && !_activeAbility.IsActive())
@@ -72,7 +72,6 @@ namespace Code.Runtime.Modules.AbilitySystem
                     }
                 }
             }
-
         }
         
         public bool CanActivateAbility(AbilityIdentifier ability)
@@ -107,28 +106,24 @@ namespace Code.Runtime.Modules.AbilitySystem
 
         private bool CanActivateAbility(ActiveAbility ability)
         {
-            if (ability.State == AbilityState.Ready)
+            if (ability.State == AbilityState.Cooldown) return false;
+            if (_abilitySlots != null && _abilitySlots.Any(x => x.Ability != null && x.Ability.IsActive()))
             {
-                if (_abilitySlots != null && _abilitySlots.Any(x => x.Ability != null && x.Ability.IsActive()))
+                if (_abilityQueue.Count >= _abilityQueueLimit) 
                 {
-                    if(_abilityQueue.Count >= _abilityQueueLimit)
-                    {
-                        // Cannot add ability to queue
-                        return false;
-                    }
-
-                    // Add ability to queue
-                    _abilityQueue.Enqueue(ability);
+                    // Cannot add ability to queue
                     return false;
                 }
-                else
-                {
-                    // No active abilities, so can activate this one
-                    return true;
-                }
-            }
 
-            return false;
+                // Add ability to queue
+                _abilityQueue.Enqueue(ability);
+                return false;
+            }
+            else
+            {
+                // No active abilities, so can activate this one
+                return true;
+            }
         }
 
         protected void OnAbilityChanged()

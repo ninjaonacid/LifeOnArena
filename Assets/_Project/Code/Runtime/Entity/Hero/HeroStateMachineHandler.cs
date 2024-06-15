@@ -146,12 +146,7 @@ namespace Code.Runtime.Entity.Hero
                 _vfxController,
                 _heroAbilityController,
                 needExitTime: true,
-                isGhostState: false));
-            
-            //_stateMachine.AddState("AttackExitState", new State(isGhostState: true));
-            
-           // _stateMachine.AddTransition(new TransitionAfter(nameof(HeroAttackState), "AttackExitState", delay: 
-              //  _heroWeapon.WeaponData.AttacksConfigs[_heroAbilityController.AttackAbilityCombo % _heroWeapon.WeaponData.AttacksConfigs.Count].AnimationData.Length - 0.2f));
+                isGhostState: false)); ;
 
 
             _stateMachine.AddTransitionFromAny(new Transition("", nameof(HeroDeathState),
@@ -222,17 +217,21 @@ namespace Code.Runtime.Entity.Hero
 
         private void HandleAttackAbility(AttackAbility ability)
         {
-            if (ability.ComboCount == 1)
+            switch (ability.ComboCount)
             {
-                _stateMachine.Trigger("Attack1");
-            } 
-            else if (ability.ComboCount == 2)
-            {
-                _stateMachine.Trigger("Attack2");
-            }
-            else if (ability.ComboCount == 3)
-            {
-                _stateMachine.Trigger("Attack3");
+                case 1:
+                    _stateMachine.RequestStateChange(nameof(FirstAttackState));
+                    break;
+                case 2:
+                    _stateMachine.RequestStateChange(nameof(SecondAttackState));
+                    break;
+                case 3:
+                    _stateMachine.RequestStateChange(nameof(ThirdAttackState));
+                    break;
+                default:
+                    ability.ResetComboCounter();
+                    _stateMachine.RequestStateChange(HeroIdle);
+                    break;
             }
         }
     }

@@ -37,9 +37,9 @@ namespace Code.Runtime.Entity.Hero
             }
         }
 
-        public bool IsOnCooldown(ActiveAbility activeAbilityBlueprintBase)
+        public bool IsOnCooldown(ActiveAbility activeAbility)
         {
-            return _abilitiesOnCooldown.Contains(activeAbilityBlueprintBase);
+            return _abilitiesOnCooldown.Contains(activeAbility);
         }
         
     }

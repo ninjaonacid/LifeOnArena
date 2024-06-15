@@ -13,7 +13,7 @@ namespace Code.Runtime.Modules.AbilitySystem
         private ITimer _timer;
         public int ComboCount { get; set; } = 0;
         private float _lastAttackTime = 0f;
-        private float _comboWindow = 0.5f;
+        private float _comboWindow;
 
         public AttackAbility(ActiveAbilityBlueprintBase abilityBlueprint) : base(abilityBlueprint)
         {
@@ -23,19 +23,21 @@ namespace Code.Runtime.Modules.AbilitySystem
         public override void Use(AbilityController caster, GameObject target)
         {
             WeaponData weaponData = caster.GetComponent<EntityWeapon>().WeaponData;
-            
-            if (ComboCount >= weaponData.AttacksConfigs.Count)
+
+            if (Time.time - _lastAttackTime > _comboWindow)
             {
                 ResetComboCounter();
             }
-            
+
             AttackConfig attackConfig = default;
-            attackConfig = weaponData.AttacksConfigs[ComboCount];
-            ActiveTime = attackConfig.AnimationData.Length - 1f;
-        
-            
-            
+            attackConfig = weaponData.AttacksConfigs[ComboCount % weaponData.AttacksConfigs.Count];
+            _comboWindow = attackConfig.AnimationData.Length;
+
+            ActiveTime = attackConfig.AnimationData.Length - 0.5f;
+            CurrentActiveTime = attackConfig.AnimationData.Length;
+
             ComboCount++;
+            _lastAttackTime = Time.time;
         }
 
         public void ResetComboCounter()
