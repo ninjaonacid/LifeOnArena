@@ -29,9 +29,9 @@ namespace Code.Runtime.Modules.AbilitySystem
             var layer = entityAttack.GetTargetLayer();
 
             var hurtBox = caster.GetComponent<EntityHurtBox>();
-            Vector3 casterCenter = hurtBox.GetHeightTransform();
-            projectile.transform.position = casterCenter + new Vector3(0, 0, 5);
+            Vector3 casterCenter = hurtBox.GetCenterTransform();
             var direction = caster.transform.forward;
+            projectile.transform.position = casterCenter + (5 * direction);
 
             projectile
                 .SetVelocity(direction, _speed)

@@ -89,7 +89,7 @@ namespace Code.Runtime.Core.Factory
             IDamageable damageable = monster.GetComponent<IDamageable>();
 
             monster.GetComponent<EntityUI>().Construct(damageable);
-            monster.GetComponent<AgentMoveToPlayer>().Construct(_heroFactory.HeroGameObject.transform);
+            monster.GetComponent<NavMeshMoveToPlayer>().Construct(_heroFactory.HeroGameObject.transform);
             monster.GetComponent<NavMeshAgent>().speed = monsterData.MoveSpeed;
             monster.GetComponent<EnemyTarget>().Construct(_heroFactory.HeroGameObject.transform);
 

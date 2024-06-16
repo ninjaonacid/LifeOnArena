@@ -10,6 +10,8 @@ namespace Code.Runtime.Entity.Enemy.RangedEnemy
         [SerializeField] private AbilityIdentifier _rangeAbility;
         [SerializeField] private float _castCooldown;
 
+        private float _currentCooldown;
+
         private bool _isCastCooldown;
         private bool _targetInAttackRange;
         public bool TargetInAttackRange => _targetInAttackRange;
@@ -19,13 +21,20 @@ namespace Code.Runtime.Entity.Enemy.RangedEnemy
         {
             if (_isCastCooldown)
             {
-                _castCooldown -= Time.deltaTime;
+                _currentCooldown -= Time.deltaTime;
+                if (_currentCooldown <= 0)
+                {
+                    _isCastCooldown = false;
+                }
             }
         }
 
         public void Cast()
         {
             _abilityController.TryActivateAbility(_rangeAbility);
+            _currentCooldown = _castCooldown;
+            _isCastCooldown = true;
+
         }
         public bool CanAttack()
         {

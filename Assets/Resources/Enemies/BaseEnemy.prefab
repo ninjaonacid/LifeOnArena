@@ -247,7 +247,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ec489970ef189d44aca4f7b478793aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Agent: {fileID: 7813538039565963231}
+  _navMeshAgent: {fileID: 7813538039565963231}
 --- !u!114 &7813538039565963217
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -356,8 +356,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3ba0c0b85f7dbf4eae52e38324c0acf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _agentMoveToPlayer: {fileID: 7813538039565963230}
-  MeleeEnemyAttackComponent: {fileID: 0}
+  NavMeshMoveToPlayer: {fileID: 0}
+  _enemyAttackComponent: {fileID: 0}
   _enemyWeapon: {fileID: 6625279289632298001}
   _enemyAnimator: {fileID: 7813538039565963228}
   _enemyTarget: {fileID: 3027789663709577760}

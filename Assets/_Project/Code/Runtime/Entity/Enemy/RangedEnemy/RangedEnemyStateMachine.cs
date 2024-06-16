@@ -1,5 +1,5 @@
 ﻿using Code.Runtime.ConfigData.Animations;
-using Code.Runtime.Entity.Enemy.CommonEnemy;
+using Code.Runtime.Entity.Enemy.MeleeEnemy;
 using Code.Runtime.Modules.StateMachine;
 using Code.Runtime.Modules.StateMachine.Transitions;
 using UnityEngine;
@@ -15,11 +15,11 @@ namespace Code.Runtime.Entity.Enemy.RangedEnemy
             
             _enemyHealth.Health.CurrentValueChanged += TriggerDamageState;
             
-            _fsm.AddState(nameof(RangedEnemyAttackState), 
-                new RangedEnemyAttackState(_enemyAnimator, 
+            _fsm.AddState(nameof(EnemyCastState), 
+                new EnemyCastState(_enemyAnimator, 
                     _animationData, 
                     _abilityController, 
-                    _agentMoveToPlayer,
+                    NavMeshMoveToPlayer,
                     _enemyAttackComponent,
                     _enemyTarget, _enemyCastComponent, needExitTime: true));
             
@@ -39,7 +39,7 @@ namespace Code.Runtime.Entity.Enemy.RangedEnemy
                 (transition) => _enemyTarget.HasTarget() && !_enemyCastComponent.TargetInAttackRange));
 
             _fsm.AddTransition(new TransitionAfter(
-                nameof(RangedEnemyAttackState),
+                nameof(EnemyCastState),
                 nameof(EnemyIdleState),
                 _animationData.Animations[AnimationKey.SpellCast].Length));
                 
@@ -62,17 +62,17 @@ namespace Code.Runtime.Entity.Enemy.RangedEnemy
 
             _fsm.AddTransition(new Transition(
                 nameof(EnemyChaseState),
-                nameof(RangedEnemyAttackState),
+                nameof(EnemyCastState),
                 (transition) => _enemyCastComponent.CanAttack()));
 
             _fsm.AddTransition(new TransitionAfter(
-                nameof(RangedEnemyAttackState),
+                nameof(EnemyCastState),
                 nameof(EnemyIdleState), 
                 _animationData.Animations[AnimationKey.SpellCast].Length));
             
             _fsm.AddTransition(new Transition(
                 nameof(EnemyIdleState),
-                nameof(RangedEnemyAttackState),
+                nameof(EnemyCastState),
                 (transition) => _enemyCastComponent.CanAttack(),
                 true));
             

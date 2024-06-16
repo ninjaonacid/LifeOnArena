@@ -4,9 +4,9 @@ using UnityEngine.AI;
 namespace Code.Runtime.Entity.Enemy
 {
     [RequireComponent(typeof(NavMeshAgent))]
-    public class AgentMoveToPlayer : MonoBehaviour
+    public class NavMeshMoveToPlayer : MonoBehaviour
     {
-        [SerializeField] private NavMeshAgent Agent;
+        [SerializeField] private NavMeshAgent _navMeshAgent;
         
         private Transform _heroTransform;
         public void Construct(Transform heroTransform)
@@ -15,13 +15,18 @@ namespace Code.Runtime.Entity.Enemy
         }
         public void SetDestination()
         {
-            if (_heroTransform != null) Agent.destination = _heroTransform.position;
+            if (_heroTransform != null) _navMeshAgent.destination = _heroTransform.position;
         }
 
         public void ShouldMove(bool context)
         {
             if(gameObject.activeSelf)
-                Agent.isStopped = !context;
+                _navMeshAgent.isStopped = !context;
+        }
+
+        public void Warp(Vector3 position)
+        {
+            _navMeshAgent.Warp(position);
         }
     }
 }

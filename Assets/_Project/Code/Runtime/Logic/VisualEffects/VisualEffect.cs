@@ -26,7 +26,7 @@ namespace Code.Runtime.Logic.VisualEffects
             
             if (!_particleSystem.main.loop)
             {
-                WaitForDurationEnd(_particleSystem.main.duration, TaskHelper.CreateToken(ref _cts)).Forget();
+                WaitForDurationEnd(_particleSystem.main.duration, this.GetCancellationTokenOnDestroy()).Forget();
             }
         }
 
@@ -34,7 +34,7 @@ namespace Code.Runtime.Logic.VisualEffects
         {
             _particleSystem.Play();
             
-            WaitForDurationEnd(duration, TaskHelper.CreateToken(ref _cts)).Forget();
+            WaitForDurationEnd(duration, this.GetCancellationTokenOnDestroy()).Forget();
         }
         
         public bool IsPlaying() => _particleSystem.particleCount != 0;
@@ -56,12 +56,14 @@ namespace Code.Runtime.Logic.VisualEffects
         private async UniTask WaitForDurationEnd(float duration, CancellationToken token)
         {
             await UniTask.Delay(TimeSpan.FromSeconds(duration), cancellationToken: token);
+            token.ThrowIfCancellationRequested();
             _particleSystem.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
             await UniTask.WaitUntil(() =>
             {
                 return _childs.All(ps => ps.particleCount == 0);
             }, cancellationToken: token);
             
+            token.ThrowIfCancellationRequested();
             Finished?.Invoke(this);
             ReturnToPool();
         }

@@ -1,4 +1,4 @@
-﻿namespace Code.Runtime.UI.Model
+﻿namespace Code.Runtime.UI.Model.DTO
 {
     public interface IScreenModelDto
     {

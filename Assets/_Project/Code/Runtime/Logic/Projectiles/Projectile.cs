@@ -22,6 +22,7 @@ namespace Code.Runtime.Logic.Projectiles
         [SerializeField] private Collider _collider;
         [SerializeField] private Rigidbody _rb;
         [SerializeField] private ParticleSystem _effect;
+        [SerializeField] private TrailRenderer _trailRenderer;
 
         private LayerMask _targetLayer;
         private GameObject _owner;
@@ -32,6 +33,7 @@ namespace Code.Runtime.Logic.Projectiles
         {
             Vector3 movementVector = new Vector3(direction.x, 0, direction.z);
             _rb.velocity = movementVector * speed;
+            _trailRenderer.Clear();
             return this;
         }
 

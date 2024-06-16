@@ -1,10 +1,8 @@
 using System;
 using Code.Runtime.ConfigData.Animations;
-using Code.Runtime.Entity.Enemy.MeleeEnemy;
-using Code.Runtime.Logic.Timer;
 using Code.Runtime.Modules.StateMachine.States;
 
-namespace Code.Runtime.Entity.Enemy.CommonEnemy
+namespace Code.Runtime.Entity.Enemy.MeleeEnemy
 {
     public class EnemyStaggerState : BaseEnemyState
     {

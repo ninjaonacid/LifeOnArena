@@ -133,9 +133,11 @@ namespace Code.Runtime.Modules.AbilitySystem
             }
             else
             {
-                // No active abilities, so can activate this one
-                return true;
+                if(ability.IsReady())
+                    return true;
             }
+
+            return false;
         }
 
         protected void OnAbilityChanged()

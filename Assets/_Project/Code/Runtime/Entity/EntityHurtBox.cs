@@ -8,8 +8,6 @@ namespace Code.Runtime.Entity
         [SerializeField] protected BoxCollider _hitBoxCollider;
         public Vector3 _initialColliderSize;
         
-        
-
         private float offsetY = 3;
         private float offsetZ = 2;
 

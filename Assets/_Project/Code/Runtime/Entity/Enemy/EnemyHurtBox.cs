@@ -14,7 +14,7 @@ namespace Code.Runtime.Entity.Enemy
 
         [SerializeField] private TriggerObserver _observer;
         
-        public Vector3 LastHitPosition { get; set; }
+        public Vector3 LastHitPosition { get; private set; }
         private void Awake()
         {
             _hitBoxTimer = _hitBoxCooldown;
@@ -34,11 +34,12 @@ namespace Code.Runtime.Entity.Enemy
         //         _hitBoxCollider.size = new Vector3(0, 0, 0);
         //     }
         // }
-        
         private void TriggerEnter(Collider other)
         {
             LastHitPosition = other.gameObject.transform.position;
         }
+        
+        
 
         // private void Update()
         // {

@@ -16,7 +16,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &8640671073435524269
 Transform:
@@ -92,12 +92,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6174502999372373060}
+  - component: {fileID: 7585547591614258545}
   m_Layer: 0
   m_Name: _cemeteryFencewithPillar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &6174502999372373060
 Transform:
@@ -116,6 +117,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &7585547591614258545
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6304723286317227994}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4.907696, y: 11.001685, z: 19.580013}
+  m_Center: {x: 0.028028488, y: 5.0008426, z: -0.3764615}
 --- !u!1 &7252556328761459632
 GameObject:
   m_ObjectHideFlags: 0
@@ -132,7 +146,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &1269547199718821981
 Transform:
@@ -141,14 +155,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7252556328761459632}
-  m_LocalRotation: {x: -0, y: 0.65727836, z: -0, w: 0.753648}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: 0.6898038, z: -0, w: 0.7239964}
+  m_LocalPosition: {x: 0.33, y: 0, z: 0.02}
   m_LocalScale: {x: 1.5000002, y: 1.5, z: 1.5000002}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6174502999372373060}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 82.185, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 87.229, z: 0}
 --- !u!33 &3321092472928581393
 MeshFilter:
   m_ObjectHideFlags: 0

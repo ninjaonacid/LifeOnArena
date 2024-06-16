@@ -6,16 +6,16 @@ using Code.Runtime.Modules.StateMachine.States;
 
 namespace Code.Runtime.Entity.Enemy.RangedEnemy
 {
-    public class RangedEnemyAttackState : BaseEnemyState
+    public class EnemyCastState : BaseEnemyState
     {
         private AbilityController _abilityController;
-        private AgentMoveToPlayer _moveToPlayer;
+        private NavMeshMoveToPlayer _moveToPlayer;
         private EnemyAttackComponent _enemyAttack;
         private EnemyTarget _enemyTarget;
         private EnemyCastComponent _enemyCast;
         
-        public RangedEnemyAttackState(EnemyAnimator enemyAnimator, AnimationDataContainer animationData,
-            AbilityController abilityController, AgentMoveToPlayer moveToPlayer,
+        public EnemyCastState(EnemyAnimator enemyAnimator, AnimationDataContainer animationData,
+            AbilityController abilityController, NavMeshMoveToPlayer moveToPlayer,
             EnemyAttackComponent enemyAttack, EnemyTarget enemyTarget, EnemyCastComponent castComponent,
             bool needExitTime = false, bool isGhostState = false, Action<State<string, string>> onEnter = null,
             Action<State<string, string>> onLogic = null, Action<State<string, string>> onExit = null,

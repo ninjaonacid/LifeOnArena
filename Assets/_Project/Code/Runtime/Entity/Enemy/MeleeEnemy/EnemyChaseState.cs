@@ -1,15 +1,14 @@
 using System;
 using Code.Runtime.ConfigData.Animations;
-using Code.Runtime.Entity.Enemy.MeleeEnemy;
 using Code.Runtime.Modules.StateMachine.States;
 
-namespace Code.Runtime.Entity.Enemy.CommonEnemy
+namespace Code.Runtime.Entity.Enemy.MeleeEnemy
 {
     public class EnemyChaseState : BaseEnemyState
     {
-        private readonly AgentMoveToPlayer _moveToPlayer;
+        private readonly NavMeshMoveToPlayer _moveToPlayer;
 
-        public EnemyChaseState(AgentMoveToPlayer moveToPlayer, EnemyAnimator enemyAnimator,
+        public EnemyChaseState(NavMeshMoveToPlayer moveToPlayer, EnemyAnimator enemyAnimator,
             AnimationDataContainer animationData, bool needExitTime = false, bool isGhostState = false,
             Action<State<string, string>> onEnter = null, Action<State<string, string>> onLogic = null,
             Action<State<string, string>> onExit = null, Func<State<string, string>, bool> canExit = null) : base(

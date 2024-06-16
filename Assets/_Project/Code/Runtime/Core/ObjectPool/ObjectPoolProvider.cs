@@ -102,13 +102,13 @@ namespace Code.Runtime.Core.ObjectPool
 
         private PooledObject Instantiate(GameObject prefab)
         {
-            var go = _objectResolver.Instantiate(prefab);
+            var go = _objectResolver?.Instantiate(prefab);
             return go.GetComponent<PooledObject>();
         }
 
         private PooledObject Instantiate(GameObject prefab, Transform parent)
         {
-            var go = _objectResolver.Instantiate(prefab, parent);
+            var go = _objectResolver?.Instantiate(prefab, parent);
             return go.GetComponent<PooledObject>();
         }
 

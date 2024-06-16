@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using Code.Runtime.ConfigData;
 using Code.Runtime.ConfigData.Identifiers;
 using Code.Runtime.Core.Factory;
@@ -69,6 +70,7 @@ namespace Code.Runtime.Entity
         {
             var effect = await _visualFactory.CreateVisualEffect(effectId.Id);
             await UniTask.Delay(TimeSpan.FromSeconds(delay));
+            
 
             effect.transform.position = _slashVfxPoint.position;
             effect.transform.localScale = scale;

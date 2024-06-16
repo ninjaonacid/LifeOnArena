@@ -81,7 +81,7 @@ namespace Code.Runtime.Services
             _controls.Player.Disable();
             
             _screenService.Open(ScreenID.MessageWindow, new MessageDto("You died"));
-
+            
             await UniTask.Delay(TimeSpan.FromSeconds(2),
                 DelayType.DeltaTime,
                 PlayerLoopTiming.Update, _cancellationToken.Token);
@@ -103,9 +103,11 @@ namespace Code.Runtime.Services
 
         public void Dispose()
         {
+            _cancellationToken?.Cancel();
             _cancellationToken?.Dispose();
             
             _eventSystem.Unsubscribe<HeroDeadEvent>(HeroDead);
+            _eventSystem.Unsubscribe<SpawnersClearEvent>(SpawnersClear);
         }
 
         public void Tick()

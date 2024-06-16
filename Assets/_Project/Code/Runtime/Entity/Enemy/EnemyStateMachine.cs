@@ -1,5 +1,5 @@
 using Code.Runtime.ConfigData.Animations;
-using Code.Runtime.Entity.Enemy.CommonEnemy;
+using Code.Runtime.Entity.Enemy.MeleeEnemy;
 using Code.Runtime.Modules.AbilitySystem;
 using Code.Runtime.Modules.StateMachine;
 using Code.Runtime.Modules.StatSystem;
@@ -11,7 +11,7 @@ namespace Code.Runtime.Entity.Enemy
     {
         protected FiniteStateMachine _fsm;
 
-        [SerializeField] protected AgentMoveToPlayer _agentMoveToPlayer;
+        [SerializeField] protected NavMeshMoveToPlayer NavMeshMoveToPlayer;
         [SerializeField] protected EnemyAttackComponent _enemyAttackComponent;
         [SerializeField] protected EnemyWeapon _enemyWeapon;
         [SerializeField] protected EnemyAnimator _enemyAnimator;
@@ -27,11 +27,17 @@ namespace Code.Runtime.Entity.Enemy
         {
             _fsm = new FiniteStateMachine();
 
+            _fsm.AddState(nameof(EnemyIdleState), new EnemyIdleState(
+                _enemyTarget,
+                _enemyAnimator,
+                _animationData,
+                false, false));
+            
             _fsm.AddState(nameof(EnemyChaseState), new EnemyChaseState(
-                _agentMoveToPlayer,
+                NavMeshMoveToPlayer,
                 _enemyAnimator,
                 _animationData));
-            
+
             _fsm.AddState(nameof(EnemyDeathState), new EnemyDeathState(
                 _enemyAnimator,
                 _enemyDeath, 
@@ -43,13 +49,7 @@ namespace Code.Runtime.Entity.Enemy
                 _animationData,
                 true,
                 canExit: (state) => state.Timer.Elapsed >= _statController.Stats["HitRecovery"].Value));
-            
 
-                _fsm.AddState(nameof(EnemyIdleState), new EnemyIdleState(
-                _enemyTarget,
-                _enemyAnimator,
-                _animationData,
-                false, false));
 
             _fsm.AddState(nameof(EnemyStunnedState), new EnemyStunnedState(
                 _tagController, 

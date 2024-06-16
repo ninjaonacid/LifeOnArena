@@ -55,9 +55,10 @@ namespace Code.Runtime.Logic.EnemySpawners
             await UniTask.Delay(TimeSpan.FromSeconds(1.5f), cancellationToken: token);
             
             var monster = await _factory.CreateMonster(MobId.Id, transform, token);
-
+            
+            
             monster.transform.position = position;
-
+            monster.GetComponent<NavMeshMoveToPlayer>().Warp(position);
 
             _enemyDeath = monster.GetComponent<EnemyDeath>();
             _enemyDeath.Happened += Slay;

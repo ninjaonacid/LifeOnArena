@@ -7,11 +7,11 @@ namespace Code.Runtime.Entity.Enemy.MeleeEnemy
     public class MeleeEnemyAttackState : BaseEnemyState
     {
         private readonly EnemyAttackComponent _enemyAttackComponent;
-        private readonly AgentMoveToPlayer _agentMoveToPlayer;
+        private readonly NavMeshMoveToPlayer _navMeshMoveToPlayer;
         private readonly EnemyTarget _enemyTarget;
         private readonly EnemyWeapon _enemyWeapon;
 
-        public MeleeEnemyAttackState(EnemyAttackComponent enemyAttackComponent, AgentMoveToPlayer agentMoveToPlayer,
+        public MeleeEnemyAttackState(EnemyAttackComponent enemyAttackComponent, NavMeshMoveToPlayer navMeshMoveToPlayer,
             EnemyTarget enemyTarget, EnemyAnimator enemyAnimator, EnemyWeapon enemyWeapon,
             AnimationDataContainer animationData, bool needExitTime = false, bool isGhostState = false,
             Action<State<string, string>> onEnter = null, Action<State<string, string>> onLogic = null,
@@ -19,7 +19,7 @@ namespace Code.Runtime.Entity.Enemy.MeleeEnemy
             enemyAnimator, animationData, needExitTime, isGhostState, onEnter, onLogic, onExit, canExit)
         {
             _enemyAttackComponent = enemyAttackComponent;
-            _agentMoveToPlayer = agentMoveToPlayer;
+            _navMeshMoveToPlayer = navMeshMoveToPlayer;
             _enemyTarget = enemyTarget;
             _enemyWeapon = enemyWeapon;
         }
@@ -30,7 +30,7 @@ namespace Code.Runtime.Entity.Enemy.MeleeEnemy
 
             _enemyAnimator.PlayAnimation(_animationData.Animations[AnimationKey.Attack1].Hash);
             _enemyAnimator.SetAttackAnimationSpeed(_enemyAttackComponent.GetAttacksPerSecond());
-            _agentMoveToPlayer.ShouldMove(false);
+            _navMeshMoveToPlayer.ShouldMove(false);
         }
 
         public override void OnLogic()

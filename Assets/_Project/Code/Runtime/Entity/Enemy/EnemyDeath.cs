@@ -63,13 +63,14 @@ namespace Code.Runtime.Entity.Enemy
 
                 foreach (Rigidbody rb in _fracturedPrefab.GetComponentsInChildren<Rigidbody>())
                 {
-                    Vector3 force = (transform.position - _enemyHurtBox.LastHitPosition) * Random.Range(1f, 4f);
+                    Vector3 force = (transform.position - _enemyHurtBox.LastHitPosition).normalized * Random.Range(10f, 20f);
                     force.y = Mathf.Clamp(force.y, -2f, 3f);
                     rb.AddForce(force, ForceMode.Impulse);
                     rb.AddTorque(new Vector3(0, 1f, 0));
                 }
                 
             }
+            
             
             _enemyHurtBox.DisableCollider(true);
 

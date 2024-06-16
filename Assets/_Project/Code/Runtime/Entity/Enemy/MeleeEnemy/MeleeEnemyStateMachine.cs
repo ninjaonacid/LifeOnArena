@@ -1,5 +1,4 @@
 using Code.Runtime.ConfigData.Animations;
-using Code.Runtime.Entity.Enemy.CommonEnemy;
 using Code.Runtime.Modules.StateMachine;
 using Code.Runtime.Modules.StateMachine.Transitions;
 
@@ -15,7 +14,7 @@ namespace Code.Runtime.Entity.Enemy.MeleeEnemy
             
             _fsm.AddState(nameof(MeleeEnemyAttackState), new MeleeEnemyAttackState(
                 _enemyAttackComponent,
-                _agentMoveToPlayer,
+                NavMeshMoveToPlayer,
                 _enemyTarget,
                 _enemyAnimator,
                 _enemyWeapon,
