@@ -7,6 +7,7 @@ namespace Code.Runtime.Entity.Enemy
     [RequireComponent(typeof(EnemyAnimator))]
     public class EnemyAttackComponent : EntityAttackComponent
     {
+        [SerializeField] private float _attackInterval;
         private float _attackCooldown;
         private bool _meleeAttackIsActive;
         public bool TargetInMeleeAttackRange => _meleeAttackIsActive;
@@ -54,7 +55,7 @@ namespace Code.Runtime.Entity.Enemy
 
         public void AttackEnded()
         {
-            _attackCooldown = GetAttacksPerSecond();
+            _attackCooldown = _attackInterval;
             _isAttacking = false;
         }
 

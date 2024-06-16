@@ -12,10 +12,7 @@ namespace Code.Runtime.Core.EventSystem
         }
         public Subscription(Action<TEvent> action)
         {
-            if(action == null)
-                throw new ArgumentNullException("action");
-
-            _action = action;
+            _action = action ?? throw new ArgumentNullException("action");
         }
 
  

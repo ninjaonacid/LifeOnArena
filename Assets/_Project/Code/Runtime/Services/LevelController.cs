@@ -103,11 +103,12 @@ namespace Code.Runtime.Services
 
         public void Dispose()
         {
-            _cancellationToken?.Cancel();
-            _cancellationToken?.Dispose();
-            
             _eventSystem.Unsubscribe<HeroDeadEvent>(HeroDead);
             _eventSystem.Unsubscribe<SpawnersClearEvent>(SpawnersClear);
+            
+            _cancellationToken?.Cancel();
+            _cancellationToken?.Dispose();
+
         }
 
         public void Tick()

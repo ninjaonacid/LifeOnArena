@@ -10,47 +10,39 @@ namespace Code.Runtime.Core.EventSystem
     {
         private readonly Dictionary<Type, SubscriptionsList<ISubscription<IEvent>>> _subscriptions;
         private readonly Dictionary<object, Type> _cachedTypes;
+
         public GameEventSystem()
         {
             _subscriptions = new Dictionary<Type, SubscriptionsList<ISubscription<IEvent>>>();
             _cachedTypes = new Dictionary<object, Type>();
-
         }
+
         public void FireEvent<TEvent>(TEvent eventItem) where TEvent : IEvent
         {
             var type = eventItem.GetType();
 
-            if (!_subscriptions.ContainsKey(type))
+            if (!_subscriptions.TryGetValue(type, out var subscriptions))
             {
-                throw new Exception("Cant invoke event, doesnt present in the subscriptions");
-
-            }
-            var allSubscriptions = new SubscriptionsList<ISubscription<IEvent>>();
-
-            
-            if (_subscriptions.TryGetValue(type, out var subscriptions))
-            {
-                allSubscriptions = subscriptions;
+                return;
             }
 
-            foreach (var sub in allSubscriptions)
+            foreach (var sub in subscriptions)
             {
                 try
                 {
                     sub.Publish(eventItem);
                 }
-                catch(Exception exception)
+                catch (Exception exception)
                 {
                     Debug.LogException(exception);
                 }
             }
 
-            allSubscriptions.Cleanup();
+            subscriptions.Cleanup();
         }
 
         public void Subscribe<TEvent>(Action<TEvent> action) where TEvent : IEvent
         {
-
             var type = typeof(TEvent);
 
             if (action == null)
@@ -58,35 +50,39 @@ namespace Code.Runtime.Core.EventSystem
                 throw new ArgumentNullException(nameof(action));
             }
 
-            if (!_subscriptions.ContainsKey(typeof(TEvent)))
+            if (!_subscriptions.TryGetValue(type, out var subscriptions))
             {
-                _subscriptions.Add(type, new SubscriptionsList<ISubscription<IEvent>>());
+                subscriptions = new SubscriptionsList<ISubscription<IEvent>>();
+                _subscriptions.Add(type, subscriptions);
             }
 
-            
             _cachedTypes.Add(action, type);
-            _subscriptions[type].Add((new Subscription<TEvent>(action)));
-
+            subscriptions.Add(new Subscription<TEvent>(action));
         }
 
         public void Unsubscribe<TEvent>(Action<TEvent> action) where TEvent : IEvent
         {
-            var type = _cachedTypes[action];
-
-            SubscriptionsList<ISubscription<IEvent>> allSubscriptions = _subscriptions[type];
-
-            if (_subscriptions.ContainsKey(type))
+            if (!_cachedTypes.TryGetValue(action, out var type))
             {
-                
-                ISubscription<IEvent> subToRemove = 
-                    allSubscriptions.FirstOrDefault(x =>
+                return;
+            }
+
+            if (!_subscriptions.TryGetValue(type, out var subscriptions))
+            {
+                return;
+            }
+
+            if (!_subscriptions.TryGetValue(type, out var subscription)) return;
+            ISubscription<IEvent> subToRemove =
+                subscriptions.FirstOrDefault(x =>
                     x.SubscriptionToken.Equals(action));
 
-                if (subToRemove != null)
-                {
-                    _subscriptions[type].Remove(subToRemove);
-                }
+            if (subToRemove != null)
+            {
+                subscription.Remove(subToRemove);
             }
+
+            subscriptions.Cleanup();
         }
     }
 }

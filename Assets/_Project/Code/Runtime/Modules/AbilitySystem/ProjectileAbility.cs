@@ -31,7 +31,7 @@ namespace Code.Runtime.Modules.AbilitySystem
             var hurtBox = caster.GetComponent<EntityHurtBox>();
             Vector3 casterCenter = hurtBox.GetCenterTransform();
             var direction = caster.transform.forward;
-            projectile.transform.position = casterCenter + (5 * direction);
+            projectile.transform.position = casterCenter + (2 * direction);
 
             projectile
                 .SetVelocity(direction, _speed)
