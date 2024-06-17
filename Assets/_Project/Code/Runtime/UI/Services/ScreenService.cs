@@ -74,7 +74,7 @@ namespace Code.Runtime.UI.Services
                 throw new ArgumentException($"{screenId} doesnt present in the dictionary");
             }
         }
-        
+
         public void Close(ScreenID screenID)
         {
             var screen = _activeWindows.FirstOrDefault(x => x.Id == screenID);

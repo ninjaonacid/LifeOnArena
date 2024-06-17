@@ -67,10 +67,10 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: d10b429098aad3143af79d2abadd2e0d, type: 3}
-  m_Type: 0
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
-  m_FillMethod: 4
+  m_FillMethod: 0
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
@@ -1161,6 +1161,7 @@ MonoBehaviour:
   SoundButton: {fileID: 0}
   RestartButton: {fileID: 298246508750348272}
   StatusBar: {fileID: 1096047173397762279}
+  BossHudHealthBar: {fileID: 3993253544216075025}
 --- !u!1 &5825073301857150518
 GameObject:
   m_ObjectHideFlags: 0
@@ -1170,6 +1171,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7661507943831545609}
+  - component: {fileID: 3993253544216075025}
+  - component: {fileID: 6845330891367977149}
   m_Layer: 0
   m_Name: BossHealthBar
   m_TagString: Untagged
@@ -1200,6 +1203,33 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 150}
   m_SizeDelta: {x: 625.4818, y: 65.7953}
   m_Pivot: {x: 0.49999997, y: 0}
+--- !u!114 &3993253544216075025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5825073301857150518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef9583e621421e840b87b52192ee5a19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _healthBar: {fileID: 3483957540881657510}
+  _bossName: {fileID: 3613576593392199861}
+  _canvasGroup: {fileID: 6845330891367977149}
+--- !u!225 &6845330891367977149
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5825073301857150518}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &6847698000085143252
 GameObject:
   m_ObjectHideFlags: 0

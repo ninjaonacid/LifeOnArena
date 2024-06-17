@@ -215,6 +215,10 @@ PrefabInstance:
       propertyPath: _entityUI
       value: 
       objectReference: {fileID: 2056921130674259649}
+    - target: {fileID: 2892997724190106139, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
+      propertyPath: _isAnimatedDeath
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3436043548892321881, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -347,6 +351,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5511fbb5ee14dbc44b06457f4bde379c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemyCastComponent: {fileID: 5674643982305537493}
   NavMeshMoveToPlayer: {fileID: 5239888527462019242}
   _enemyAttackComponent: {fileID: 4933336099503244016}
   _enemyWeapon: {fileID: 9162900826121399141}
@@ -358,7 +363,6 @@ MonoBehaviour:
   _statController: {fileID: 4047056108073464145}
   _enemyDeath: {fileID: 936027109049834863}
   _abilityController: {fileID: 4687520529545084267}
-  _enemyCastComponent: {fileID: 5674643982305537493}
 --- !u!114 &5674643982305537493
 MonoBehaviour:
   m_ObjectHideFlags: 0

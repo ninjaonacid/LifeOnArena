@@ -14,7 +14,8 @@ namespace Code.Runtime.Entity
     {
         private VisualEffectFactory _visualFactory;
         [SerializeField] private Transform _slashVfxPoint;
-
+        private CancellationTokenSource _cts = new();
+        
         [Inject]
         public void Construct(VisualEffectFactory visualFactory)
         {
@@ -64,14 +65,21 @@ namespace Code.Runtime.Entity
             
             effect.Play();
         }
-        
-        
+
+        private void OnDestroy()
+        {
+            _cts.Cancel();
+        }
+
         public async UniTask PlaySlashVisualEffect(VisualEffectIdentifier effectId, SlashDirection direction, Vector3 scale, float delay)
         {
             var effect = await _visualFactory.CreateVisualEffect(effectId.Id);
-            await UniTask.Delay(TimeSpan.FromSeconds(delay));
-            
+            await UniTask.Delay(TimeSpan.FromSeconds(delay), cancellationToken: _cts.Token);
 
+            if (effect == null) _cts.Cancel();
+            
+            _cts.Token.ThrowIfCancellationRequested();
+                
             effect.transform.position = _slashVfxPoint.position;
             effect.transform.localScale = scale;
 

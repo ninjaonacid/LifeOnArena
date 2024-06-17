@@ -1,13 +1,19 @@
 using System;
+using Code.Runtime.ConfigData.Identifiers;
+using Code.Runtime.Core.EventSystem;
 using Code.Runtime.Core.Factory;
 using Code.Runtime.Core.SceneManagement;
+using Code.Runtime.CustomEvents;
+using Code.Runtime.Entity.EntitiesComponents;
 using Code.Runtime.Entity.Hero;
+using Code.Runtime.Logic.WaveLogic;
 using Code.Runtime.Services.PersistentProgress;
 using Code.Runtime.UI.Model;
 using Code.Runtime.UI.Services;
 using Code.Runtime.UI.View;
 using Code.Runtime.UI.View.HUD;
 using UniRx;
+using UnityEngine;
 using UnityEngine.Assertions;
 
 namespace Code.Runtime.UI.Controller
@@ -20,14 +26,17 @@ namespace Code.Runtime.UI.Controller
         private readonly IGameDataContainer _gameData;
         private readonly IHeroFactory _heroFactory;
         private readonly SceneLoader _sceneLoader;
+        private readonly IEventSystem _eventSystem;
         
         private readonly CompositeDisposable _disposable = new CompositeDisposable();
         
-        public HudController(IGameDataContainer gameData, IHeroFactory heroFactory, SceneLoader sceneLoader)
+        public HudController(IGameDataContainer gameData, IHeroFactory heroFactory, SceneLoader sceneLoader, 
+            IEventSystem eventSystem)
         {
             _gameData = gameData;
             _heroFactory = heroFactory;
             _sceneLoader = sceneLoader;
+            _eventSystem = eventSystem;
         }
 
         public void InitController(IScreenModel model, BaseWindowView windowView, ScreenService screenService)
@@ -64,6 +73,27 @@ namespace Code.Runtime.UI.Controller
 
             _windowView.RestartButton.onClick.AsObservable().Subscribe(x => _sceneLoader.Load("MainMenu"));
 
+            _eventSystem.Subscribe<BossSpawnEvent>(SubscribeHealthBar);
+
+        }
+
+        private void SubscribeHealthBar(BossSpawnEvent obj)
+        {
+            var damageable = obj.BossGo.GetComponent<IDamageable>();
+            
+            _windowView.BossHudHealthBar.Show(true);
+
+            Observable.FromEvent(x => damageable.Health.CurrentValueChanged += x,
+                    x => damageable.Health.CurrentValueChanged -= x)
+                .Subscribe(x =>
+                    _windowView.BossHudHealthBar.UpdateHpBar(damageable.Health.Value, damageable.Health.CurrentValue))
+                .AddTo(_disposable);
+            
+            _windowView.BossHudHealthBar.SetBossName(obj.BossId.name);
+        }
+
+        private void SubscribeHealthBar(GameObject go, MobIdentifier mobId)
+        {
             
         }
 

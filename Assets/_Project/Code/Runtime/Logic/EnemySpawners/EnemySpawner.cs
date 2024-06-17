@@ -42,7 +42,7 @@ namespace Code.Runtime.Logic.EnemySpawners
             _visualEffectFactory.PrewarmEffect(_visualEffectIdentifier.Id, 1).Forget();
         }
 
-        public async UniTask Spawn(CancellationToken token)
+        public async UniTask<GameObject> Spawn(CancellationToken token)
         {
             Alive = true;
             if (TimeToSpawn > 0)
@@ -56,12 +56,12 @@ namespace Code.Runtime.Logic.EnemySpawners
             
             var monster = await _factory.CreateMonster(MobId.Id, transform, token);
             
-            
             monster.transform.position = position;
             monster.GetComponent<NavMeshMoveToPlayer>().Warp(position);
 
             _enemyDeath = monster.GetComponent<EnemyDeath>();
             _enemyDeath.Happened += Slay;
+            return monster;
         }
 
         private async Task VfxSpawnLogic(Vector3 position, CancellationToken token)

@@ -10,7 +10,7 @@ namespace Code.Runtime.Entity.Enemy
         [SerializeField] private List<WeaponData> _possibleWeapons;
         protected override void Start()
         {
-            if (_possibleWeapons != null)
+            if (_possibleWeapons.Count > 0)
             {
                 var randomWeaponData = _possibleWeapons.GetRandomElement();
                 EquipWeapon(randomWeaponData);

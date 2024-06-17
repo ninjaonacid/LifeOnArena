@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c25f78c95a25130468689f0a24fb6c85, type: 3}
   m_Name: MageSkeleton
   m_EditorClassIdentifier: 
-  MaxLoot: 100
-  MinLoot: 10
-  MinExp: 10
-  MaxExp: 100
-  MobId: {fileID: 11400000, guid: 770735b52f36cc9468fe91489a321c53, type: 2}
-  MoveSpeed: 10
+  _name: Skeleton Mage
+  _maxSouls: 100
+  _minSouls: 10
+  _maxExp: 150
+  _minExp: 15
+  _mobId: {fileID: 11400000, guid: 770735b52f36cc9468fe91489a321c53, type: 2}
+  _moveSpeed: 10
   PrefabReference:
     m_AssetGUID: a0cdd7898fdfdfe429ae33f0acac2110
     m_SubObjectName: 

@@ -113,7 +113,9 @@ namespace Code.Runtime.Entity.Enemy
                 _fracturedPrefab.SetActive(false);
             }
             gameObject.SetActive(false);
-            _enemyModel.SetActive(true);
+            
+            if(_enemyModel != null)
+                _enemyModel.SetActive(true);
         }
     }
 }

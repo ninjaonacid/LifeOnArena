@@ -12,8 +12,8 @@ namespace Code.Runtime.Entity.Hero
         public override void EquipWeapon(WeaponData weaponData)
         {
             base.EquipWeapon(weaponData);
-            _heroAnimator.OverrideController(weaponData.OverrideController);
-            
+            if(weaponData.OverrideController != null)
+                _heroAnimator.OverrideController(weaponData.OverrideController);
         }
         
         public void LoadData(PlayerData data)

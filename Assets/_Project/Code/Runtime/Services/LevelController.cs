@@ -1,5 +1,6 @@
 using System;
 using System.Threading;
+using Code.Runtime.ConfigData.Identifiers;
 using Code.Runtime.ConfigData.Levels;
 using Code.Runtime.Core.EventSystem;
 using Code.Runtime.Core.SceneManagement;
@@ -9,6 +10,7 @@ using Code.Runtime.UI;
 using Code.Runtime.UI.Model.DTO;
 using Code.Runtime.UI.Services;
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 using VContainer.Unity;
 
 namespace Code.Runtime.Services
@@ -44,9 +46,15 @@ namespace Code.Runtime.Services
             _spawnerController.WaveCleared += WaveCleared;
             _spawnerController.CommonEnemiesCleared += BossMessage;
             _spawnerController.BossKilled += LevelEnd;
-            
+            _spawnerController.BossSpawned += OnBossSpawn;
             _controls.LevelControls.Enable();
         }
+
+        private void OnBossSpawn(GameObject arg1, MobIdentifier arg2)
+        {
+            _eventSystem.FireEvent<BossSpawnEvent>(new BossSpawnEvent(arg1, arg2));
+        }
+        
 
         private void LevelEnd()
         {

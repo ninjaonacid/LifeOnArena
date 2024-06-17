@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
 using Code.Runtime.Core.Audio;
+using Code.Runtime.Core.EventSystem;
 using Code.Runtime.Core.Factory;
 using Code.Runtime.Core.SceneManagement;
+using Code.Runtime.Logic.WaveLogic;
 using Code.Runtime.Modules.TutorialService;
 using Code.Runtime.Services.PersistentProgress;
 using Code.Runtime.Services.SaveLoad;
@@ -14,8 +16,11 @@ namespace Code.Runtime.UI.Services
     {
         private readonly Dictionary<Type, Func<IScreenController>> _screenControllers = new();
 
-        public ScreenControllerFactory(IGameDataContainer gameData, IHeroFactory heroFactory, ISaveLoadService saveLoad,
-            AudioService audioService, SceneLoader sceneLoader, TutorialService tutorialService)
+        public ScreenControllerFactory(IGameDataContainer gameData, 
+            IEventSystem eventSystem,
+            IHeroFactory heroFactory, ISaveLoadService saveLoad,
+            AudioService audioService, SceneLoader sceneLoader, 
+            TutorialService tutorialService)
         {
             _screenControllers.Add(typeof(MainMenuController),
                 () => gameData.PlayerData.TutorialData.IsTutorialCompleted
@@ -31,7 +36,7 @@ namespace Code.Runtime.UI.Services
                   : new TutorialAbilityScreenController(saveLoad, tutorialService));
             
             _screenControllers.Add(typeof(HudController), () => 
-                new HudController(gameData, heroFactory, sceneLoader));
+                new HudController(gameData, heroFactory, sceneLoader, eventSystem));
             
             _screenControllers.Add(typeof(MessageWindowController), () => new MessageWindowController());
             

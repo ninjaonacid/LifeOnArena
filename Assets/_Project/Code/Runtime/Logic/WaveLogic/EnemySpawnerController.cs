@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using Code.Runtime.ConfigData.Identifiers;
 using Code.Runtime.ConfigData.Levels;
 using Code.Runtime.ConfigData.Spawners;
 using Code.Runtime.Core.Config;
@@ -10,6 +11,7 @@ using Code.Runtime.Core.SceneManagement;
 using Code.Runtime.Logic.EnemySpawners;
 using Code.Runtime.Utils;
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 
 namespace Code.Runtime.Logic.WaveLogic
 {
@@ -18,6 +20,7 @@ namespace Code.Runtime.Logic.WaveLogic
         public event Action<int> WaveCleared;
         public event Action<int> CommonEnemiesCleared;
         public event Action BossKilled;
+        public event Action<GameObject, MobIdentifier> BossSpawned;
 
         private readonly ConfigProvider _config;
         private readonly IEnemyFactory _enemyFactory;
@@ -97,7 +100,10 @@ namespace Code.Runtime.Logic.WaveLogic
                     {
                         if (spawner.EnemyType == EnemyType.Boss)
                         {
-                            spawner.Spawn(token).Forget();
+                            var bossEnemy = await spawner.Spawn(token);
+                            
+                            BossSpawned?.Invoke(bossEnemy, spawner.MobId);
+                            
                             _isBossSpawned = true;
                         }
                     }
@@ -108,6 +114,7 @@ namespace Code.Runtime.Logic.WaveLogic
                     if (IsBossKilled())
                     {
                         BossKilled?.Invoke();
+                        break;
                     }
                 }
                 

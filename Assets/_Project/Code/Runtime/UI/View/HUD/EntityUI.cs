@@ -1,4 +1,5 @@
 ﻿using Code.Runtime.Entity.EntitiesComponents;
+using UniRx;
 using UnityEngine;
 
 namespace Code.Runtime.UI.View.HUD
@@ -13,18 +14,17 @@ namespace Code.Runtime.UI.View.HUD
             _damageable = damageable;
 
             _damageable.Health.CurrentValueChanged += UpdateHpBar;
+
+            _damageable.Health.ObserveEveryValueChanged(x => x.CurrentValue)
+                .Subscribe(x => UpdateHpBar())
+                .AddTo(this);
         }
 
         public void SetActiveHpView(bool value)
         {
             _statusBar.gameObject.SetActive(value);
         }
-
-        private void OnDestroy()
-        {
-           _damageable.Health.CurrentValueChanged -= UpdateHpBar;
-        }
-
+        
         private void UpdateHpBar()
         {
             _statusBar.SetHpValue(_damageable.Health.CurrentValue, _damageable.Health.Value);

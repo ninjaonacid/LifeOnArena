@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c25f78c95a25130468689f0a24fb6c85, type: 3}
   m_Name: SkeletonWithShield
   m_EditorClassIdentifier: 
-  MaxLoot: 50
-  MinLoot: 20
-  MinExp: 20
-  MaxExp: 50
-  MobId: {fileID: 11400000, guid: 45d5611a5ce3ef54ab424b591bd41145, type: 2}
-  MoveSpeed: 10
+  _name: Skeleton Warrior
+  _maxSouls: 100
+  _minSouls: 10
+  _maxExp: 0
+  _minExp: 0
+  _mobId: {fileID: 11400000, guid: 45d5611a5ce3ef54ab424b591bd41145, type: 2}
+  _moveSpeed: 10
   PrefabReference:
     m_AssetGUID: d04935f712b55bf46ae3364437f06fac
     m_SubObjectName: 

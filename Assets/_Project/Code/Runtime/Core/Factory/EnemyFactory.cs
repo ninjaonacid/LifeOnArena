@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using Code.Runtime.ConfigData.Identifiers;
 using Code.Runtime.Core.AssetManagement;
@@ -31,6 +32,7 @@ namespace Code.Runtime.Core.Factory
         private readonly IRandomService _randomService;
         private readonly IObjectResolver _objectResolver;
         private readonly ObjectPoolProvider _objectPoolProvider;
+        private readonly Dictionary<MobIdentifier, GameObject> _spawnedEntities;
 
         private readonly CancellationTokenSource _cancellationTokenSource = default;
         public EnemyFactory(IHeroFactory heroFactory, ConfigProvider config, IAssetProvider assetProvider, 
@@ -94,7 +96,7 @@ namespace Code.Runtime.Core.Factory
             monster.GetComponent<EnemyTarget>().Construct(_heroFactory.HeroGameObject.transform);
 
             var lootSpawner = monster.GetComponentInChildren<LootSpawner>();
-            lootSpawner.SetLoot(monsterData.MinLoot, monsterData.MaxLoot);
+            lootSpawner.SetLoot(monsterData.MinSouls, monsterData.MaxSouls);
 
             var expDrop = monster.GetComponentInChildren<ExpDrop>();
             expDrop.Construct(_randomService, _gameDataContainer.PlayerData.PlayerExp);
