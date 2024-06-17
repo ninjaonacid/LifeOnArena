@@ -27,7 +27,6 @@ namespace Code.Runtime.Entity.Hero.HeroStates
             _attackConfig = _heroWeapon.WeaponData.AttacksConfigs[1];
 
             _heroAnimator.PlayAnimation(_attackConfig.AnimationData.Hash);
-            _heroWeapon.EnableWeapon(true);
 
 
             _vfxController.PlaySlashVisualEffect(
@@ -52,7 +51,7 @@ namespace Code.Runtime.Entity.Hero.HeroStates
         {
             base.OnExit();
             _heroAttackComponent.ClearCollisionData();
-            _heroWeapon.EnableWeapon(false);
+            _heroWeapon.DisableWeaponCollider();
             _heroRotation.EnableRotation(true);
         }
     }

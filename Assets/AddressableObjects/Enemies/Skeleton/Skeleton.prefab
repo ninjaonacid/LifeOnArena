@@ -373,14 +373,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1571415673043112688}
-  m_LocalRotation: {x: -0.49649182, y: 0.53935146, z: 0.5594094, w: 0.3868552}
-  m_LocalPosition: {x: -0.005, y: 0.226, z: -0}
+  m_LocalRotation: {x: -0.5265562, y: 0.35600924, z: 0.22957434, w: 0.73708326}
+  m_LocalPosition: {x: -0.00028074015, y: 0.46055758, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4587669182583828098}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: -80.959, y: -118.43, z: 220.835}
+  m_LocalEulerAnglesHint: {x: -70, y: 55.851, z: -6.124}
 --- !u!1 &1844011034090314514
 GameObject:
   m_ObjectHideFlags: 0
@@ -1817,6 +1817,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 793235289409450796, guid: 9720fc178328f11468d3f41ed8261401, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 793235289409450796, guid: 9720fc178328f11468d3f41ed8261401, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a0ec5399aebe8f24daf718e2bf0865f2, type: 2}
+    - target: {fileID: 2081503022635701182, guid: 9720fc178328f11468d3f41ed8261401, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2081503022635701182, guid: 9720fc178328f11468d3f41ed8261401, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a0ec5399aebe8f24daf718e2bf0865f2, type: 2}
     - target: {fileID: 4967254650991076309, guid: 9720fc178328f11468d3f41ed8261401, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -1825,10 +1841,26 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6008754942879902521, guid: 9720fc178328f11468d3f41ed8261401, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6008754942879902521, guid: 9720fc178328f11468d3f41ed8261401, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a0ec5399aebe8f24daf718e2bf0865f2, type: 2}
     - target: {fileID: 7669925564790921675, guid: 9720fc178328f11468d3f41ed8261401, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8663011834849458189, guid: 9720fc178328f11468d3f41ed8261401, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8663011834849458189, guid: 9720fc178328f11468d3f41ed8261401, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a0ec5399aebe8f24daf718e2bf0865f2, type: 2}
     - target: {fileID: 9097217257825247406, guid: 9720fc178328f11468d3f41ed8261401, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -1907,6 +1939,10 @@ PrefabInstance:
       propertyPath: _fracturedPrefab
       value: 
       objectReference: {fileID: 4435567651140579883}
+    - target: {fileID: 2892997724190106139, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
+      propertyPath: _disappearDuration
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3436043548892321881, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -1999,6 +2035,18 @@ PrefabInstance:
       propertyPath: IsCollisionWeapon
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6625279289632298001, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
+      propertyPath: _possibleWeapons.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6625279289632298001, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
+      propertyPath: _possibleWeapons.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: cf39cfdcac6cebb418e41811a04f8381, type: 2}
+    - target: {fileID: 6625279289632298001, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
+      propertyPath: _possibleWeapons.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: cf38d925e73f78e40846d27680b547dc, type: 2}
     - target: {fileID: 6716832012151853455, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
       propertyPath: HpBarImage
       value: 
@@ -2163,6 +2211,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: daf023601dd0b224380ddf6c6f825a59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemyCastComponent: {fileID: 0}
   NavMeshMoveToPlayer: {fileID: 245040648690702633}
   _enemyAttackComponent: {fileID: 1128124193535798131}
   _enemyWeapon: {fileID: 3816928435442303718}

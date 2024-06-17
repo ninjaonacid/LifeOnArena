@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using Random = UnityEngine.Random;
 
 namespace Code.Runtime.Utils
 {
@@ -50,6 +52,13 @@ namespace Code.Runtime.Utils
             }
 
             return initialCount - list.Count;
+        }
+        
+        public static T GetRandomElement<T>(this IEnumerable<T> enumerable)
+        {
+            int count = enumerable.Count();
+            int randomIndex = Random.Range(0, count);
+            return enumerable.ElementAt(randomIndex);
         }
     }
 }

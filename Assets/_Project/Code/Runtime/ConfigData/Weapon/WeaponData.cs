@@ -18,11 +18,8 @@ namespace Code.Runtime.ConfigData.Weapon
         [SerializeField] private VisualEffectData _hitVfx;
         [BoxGroup("SlashEffect")]
         [SerializeField] private SlashVisualEffectConfig _slashVfx;
-        // [SerializeField] private int _price;
-        // [SerializeField] private float _damage;
-        // [SerializeField] private WeaponFsmConfig _weaponFsmConfig;
         [SerializeField] private AnimatorOverrideController _overrideController;
-        [SerializeField] private Vector3 _localRotation;
+        [SerializeField] private Vector3 _localScale;
         [SerializeField] private SoundAudioFile _weaponSound;
         [SerializeField] private List<DamageType> _damageType;
         [SerializeField] private List<AttackConfig> _attacks;
@@ -31,11 +28,8 @@ namespace Code.Runtime.ConfigData.Weapon
         public WeaponId WeaponId => _weaponId;
         public VisualEffectData HitVisualEffect => _hitVfx;
         public SlashVisualEffectConfig SlashVisualEffect => _slashVfx;
-        // public int Price => _price;
-        // public float Damage => _damage;
-        // public WeaponFsmConfig WeaponFsmConfig => _weaponFsmConfig;
         public AnimatorOverrideController OverrideController => _overrideController;
-        public Vector3 LocalRotation => _localRotation;
+        public Vector3 LocalScale => _localScale;
         public SoundAudioFile WeaponSound => _weaponSound;
 
         public List<AttackConfig> AttacksConfigs => _attacks;

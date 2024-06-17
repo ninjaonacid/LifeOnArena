@@ -1,6 +1,9 @@
 using System;
 using Code.Runtime.ConfigData.Animations;
+using Code.Runtime.ConfigData.Attack;
 using Code.Runtime.Modules.StateMachine.States;
+using Code.Runtime.Utils;
+using Random = UnityEngine.Random;
 
 namespace Code.Runtime.Entity.Enemy.MeleeEnemy
 {
@@ -10,6 +13,7 @@ namespace Code.Runtime.Entity.Enemy.MeleeEnemy
         private readonly NavMeshMoveToPlayer _navMeshMoveToPlayer;
         private readonly EnemyTarget _enemyTarget;
         private readonly EnemyWeapon _enemyWeapon;
+        private AttackConfig _currentAttack;
 
         public MeleeEnemyAttackState(EnemyAttackComponent enemyAttackComponent, NavMeshMoveToPlayer navMeshMoveToPlayer,
             EnemyTarget enemyTarget, EnemyAnimator enemyAnimator, EnemyWeapon enemyWeapon,
@@ -27,8 +31,8 @@ namespace Code.Runtime.Entity.Enemy.MeleeEnemy
         public override void OnEnter()
         {
             base.OnEnter();
-
-            _enemyAnimator.PlayAnimation(_animationData.Animations[AnimationKey.Attack1].Hash);
+            _currentAttack = _enemyWeapon.WeaponData.AttacksConfigs.GetRandomElement();
+            _enemyAnimator.PlayAnimation(_currentAttack.AnimationData.Hash);
             _enemyAnimator.SetAttackAnimationSpeed(_enemyAttackComponent.GetAttacksPerSecond());
             _navMeshMoveToPlayer.ShouldMove(false);
         }
@@ -37,11 +41,11 @@ namespace Code.Runtime.Entity.Enemy.MeleeEnemy
         {
             base.OnLogic();
 
-            if (Timer.Elapsed >= ((_animationData.Animations[AnimationKey.Attack1].Length /
+            if (Timer.Elapsed >= ((_currentAttack.AnimationData.Length /
                                    _enemyAttackComponent.GetAttacksPerSecond()) / 5f))
             {
                 _enemyAnimator.SetAttackAnimationSpeed(1f);
-                _enemyWeapon.EnableCollider(true);
+                //_enemyWeapon.EnableCollider(true);
             }
             
             
@@ -51,15 +55,14 @@ namespace Code.Runtime.Entity.Enemy.MeleeEnemy
         public override void OnExit()
         {
             base.OnExit();
-            _enemyWeapon.EnableCollider(false);
+            _enemyWeapon.DisableWeaponCollider();
             _enemyAttackComponent.AttackEnded();
             _enemyAttackComponent.ClearCollisionData();
-            
         }
 
         public override void OnExitRequest()
         {
-            if ( Timer.Elapsed >= ((_animationData.Animations[AnimationKey.Attack1].Length /
+            if ( Timer.Elapsed >= ((_currentAttack.AnimationData.Length /
                                     _enemyAttackComponent.GetAttacksPerSecond() / 5f) + 0.5f))
             {
                 fsm.StateCanExit();

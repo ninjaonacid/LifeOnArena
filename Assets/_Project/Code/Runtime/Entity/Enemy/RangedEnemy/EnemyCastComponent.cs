@@ -38,7 +38,7 @@ namespace Code.Runtime.Entity.Enemy.RangedEnemy
         }
         public bool CanAttack()
         {
-            return  !_isCastCooldown && _abilityController.CanActivateAbility(_rangeAbility);
+            return _rangeAbility != null && !_isCastCooldown && _abilityController.CanActivateAbility(_rangeAbility);
         }
 
         public void EnableCast()

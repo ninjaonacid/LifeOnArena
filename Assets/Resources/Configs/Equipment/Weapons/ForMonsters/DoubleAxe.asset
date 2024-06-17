@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ec85cfef59c751479b3ac3c5068c7da, type: 3}
+  m_Name: DoubleAxe
+  m_EditorClassIdentifier: 
+  _weaponPrefab: {fileID: 9099119649560949103, guid: c70700ebd3e0fe9428bb883c4175e3c2, type: 3}
+  _weaponId: {fileID: 11400000, guid: d2c169cc5e808b74c8e3976000b05073, type: 2}
+  _hitVfx: {fileID: 11400000, guid: aa9d05048adc4df4cb697b348b6c2a61, type: 2}
+  _slashVfx: {fileID: 11400000, guid: 947ebc7b0ef9b764a99059ab65017c12, type: 2}
+  _overrideController: {fileID: 22100000, guid: 50885c06293ec8044b3694729dc71f10, type: 2}
+  _localRotation: {x: 0, y: 0, z: 0}
+  _weaponSound: {fileID: 0}
+  _damageType: 01000000
+  _attacks:
+  - {fileID: 11400000, guid: b06717b28d12bec43a271b656176cf0c, type: 2}
+  - {fileID: 11400000, guid: 0c62446044751534780c6725e37fa6ef, type: 2}
+  - {fileID: 11400000, guid: 8bdae05bdc56365429265039f883b891, type: 2}

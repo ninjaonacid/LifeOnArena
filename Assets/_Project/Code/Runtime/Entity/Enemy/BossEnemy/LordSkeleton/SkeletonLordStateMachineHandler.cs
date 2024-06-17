@@ -9,7 +9,6 @@ namespace Code.Runtime.Entity.Enemy.BossEnemy.LordSkeleton
 {
     public class SkeletonLordStateMachineHandler : EnemyStateMachine
     {
-        [SerializeField] private EnemyCastComponent _enemyCastComponent;
         protected override void Start()
         {
             base.Start();

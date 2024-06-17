@@ -39,11 +39,7 @@ namespace Code.Runtime.Entity.Hero.HeroStates
         public override void OnLogic()
         {
             base.OnLogic();
-
-            if (Timer.Elapsed > _attackConfig.AnimationData.Length / 3f)
-            {
-                _heroWeapon.EnableWeapon(true);
-            }
+            
 
             if (Timer.Elapsed >= _attackConfig.ExitTime)
             {
@@ -54,8 +50,8 @@ namespace Code.Runtime.Entity.Hero.HeroStates
         public override void OnExit()
         {
             base.OnExit();
-            _heroWeapon.EnableWeapon(false);
             _heroRotation.EnableRotation(true);
+            _heroWeapon.DisableWeaponCollider();
             _heroAttackComponent.ClearCollisionData();
         }
     }

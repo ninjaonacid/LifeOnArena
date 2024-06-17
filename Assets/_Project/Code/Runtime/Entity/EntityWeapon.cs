@@ -54,18 +54,23 @@ namespace Code.Runtime.Entity
             _weaponSlot.EquippedWeaponView = _itemFactory.CreateWeapon(_weaponData.WeaponView, _equipJoint, false);
             _weaponSlot.EquippedWeaponView.transform.localPosition = Vector3.zero;
 
-            EnableWeapon(false);
+            EnableCollider(false);
             
             OnWeaponChange?.Invoke(_weaponSlot.EquippedWeaponView);
         }
-
-        public void EnableWeapon(bool value)
+        
+        //CallFromAnimation
+        public void EnableWeaponCollider()
         {
-            EnableCollider(value);
-            //EnableTrail(value);
+            EnableCollider(true);
+        }
+        
+        public void DisableWeaponCollider()
+        {
+            EnableCollider(false);
         }
 
-        public void EnableCollider(bool value)
+        private void EnableCollider(bool value)
         {
             _weaponSlot.EquippedWeaponView.EnableCollider(value);
         }

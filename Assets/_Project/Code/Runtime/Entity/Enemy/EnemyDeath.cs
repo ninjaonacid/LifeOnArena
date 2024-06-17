@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using Code.Runtime.Modules.StatSystem;
 using Code.Runtime.UI.View.HUD;
 using DG.Tweening;
@@ -18,13 +19,26 @@ namespace Code.Runtime.Entity.Enemy
         [SerializeField] private GameObject _enemyModel;
         [SerializeField] private EnemyHurtBox _enemyHurtBox;
         
+        
+        [SerializeField] private bool _isAnimatedDeath;
+        [SerializeField] private float _disappearDuration = 4f;
         [SerializeField] private float _maxForce;
         [SerializeField] private float _minForce;
         [SerializeField] private float _maxHeight;
 
+        private Rigidbody[] _fractureParts;
+
         public bool IsDead { get; private set; }
 
         public event Action Happened;
+
+        private void Awake()
+        {
+            if (!_isAnimatedDeath)
+            {
+                _fractureParts = _fracturedPrefab.GetComponentsInChildren<Rigidbody>();
+            }
+        }
 
         private void OnEnable()
         {
@@ -54,41 +68,52 @@ namespace Code.Runtime.Entity.Enemy
         private void Die()
         {
             _health.Health.CurrentValueChanged -= HealthChanged;
-            _enemyModel.SetActive(false);
-            _entityUI.SetActiveHpView(false);
-
-            if (_fracturedPrefab is not null)
+            
+            if (!_isAnimatedDeath)
             {
-                _fracturedPrefab.SetActive(true);
+                _enemyModel.SetActive(false);
+                _entityUI.SetActiveHpView(false);
 
-                foreach (Rigidbody rb in _fracturedPrefab.GetComponentsInChildren<Rigidbody>())
+                if (_fracturedPrefab is not null)
                 {
-                    Vector3 force = (transform.position - _enemyHurtBox.LastHitPosition).normalized * Random.Range(10f, 20f);
-                    force.y = Mathf.Clamp(force.y, -2f, 3f);
-                    rb.AddForce(force, ForceMode.Impulse);
-                    rb.AddTorque(new Vector3(0, 1f, 0));
+                    _fracturedPrefab.SetActive(true);
+
+                    foreach (Rigidbody rb in _fractureParts)
+                    {
+                        Vector3 force = (transform.position - _enemyHurtBox.LastHitPosition).normalized *
+                                        Random.Range(10f, 20f);
+                        force.y = Mathf.Clamp(force.y, -2f, 3f);
+                        rb.AddForce(force, ForceMode.Impulse);
+                        rb.AddTorque(new Vector3(0, 1f, 0));
+                    }
                 }
-                
             }
-            
-            
+
             _enemyHurtBox.DisableCollider(true);
 
             StartCoroutine(DestroyTimer());
 
             IsDead = true;
-            
+
             Happened?.Invoke();
         }
 
         private IEnumerator DestroyTimer()
         {
             yield return new WaitForSeconds(5);
-            _enemyModel.SetActive(true);
-            _fracturedPrefab.SetActive(false);
-            gameObject.SetActive(false);
+
+            ResetObject();
         }
 
-        
+
+        private void ResetObject()
+        {
+            if (!_isAnimatedDeath)
+            {
+                _fracturedPrefab.SetActive(false);
+            }
+            gameObject.SetActive(false);
+            _enemyModel.SetActive(true);
+        }
     }
 }

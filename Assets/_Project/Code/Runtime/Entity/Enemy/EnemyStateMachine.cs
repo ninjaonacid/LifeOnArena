@@ -1,5 +1,6 @@
 using Code.Runtime.ConfigData.Animations;
 using Code.Runtime.Entity.Enemy.MeleeEnemy;
+using Code.Runtime.Entity.Enemy.RangedEnemy;
 using Code.Runtime.Modules.AbilitySystem;
 using Code.Runtime.Modules.StateMachine;
 using Code.Runtime.Modules.StatSystem;
@@ -11,6 +12,7 @@ namespace Code.Runtime.Entity.Enemy
     {
         protected FiniteStateMachine _fsm;
 
+        [SerializeField] protected EnemyCastComponent _enemyCastComponent;
         [SerializeField] protected NavMeshMoveToPlayer NavMeshMoveToPlayer;
         [SerializeField] protected EnemyAttackComponent _enemyAttackComponent;
         [SerializeField] protected EnemyWeapon _enemyWeapon;

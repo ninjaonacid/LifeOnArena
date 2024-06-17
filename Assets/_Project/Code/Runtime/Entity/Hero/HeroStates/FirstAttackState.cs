@@ -23,8 +23,7 @@ namespace Code.Runtime.Entity.Hero.HeroStates
         public override void OnEnter()
         {
             base.OnEnter();
-
-            _heroWeapon.EnableWeapon(true);
+            
             _attackConfig = _heroWeapon.WeaponData.AttacksConfigs[0];
             _heroAnimator.PlayAnimation(_attackConfig.AnimationData.Hash);
 
@@ -51,7 +50,7 @@ namespace Code.Runtime.Entity.Hero.HeroStates
         {
             base.OnExit();
             _heroAttackComponent.ClearCollisionData();
-            _heroWeapon.EnableWeapon(false);
+            _heroWeapon.DisableWeaponCollider();
             _heroRotation.EnableRotation(true);
         }
     }

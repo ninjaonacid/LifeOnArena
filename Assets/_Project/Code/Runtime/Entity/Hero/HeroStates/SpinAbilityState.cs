@@ -28,7 +28,6 @@ namespace Code.Runtime.Entity.Hero.HeroStates
             _heroAnimator.PlayAnimation(_animationData.Animations[AnimationKey.Spinning].Hash);
             
             _heroRotation.EnableRotation(false);
-            _heroWeapon.EnableWeapon(true);
             _heroAttack.ClearCollisionData();
             _intervalTimer.Reset();
         }
@@ -49,7 +48,7 @@ namespace Code.Runtime.Entity.Hero.HeroStates
 
         public override void OnExit()
         {
-            _heroWeapon.EnableWeapon(false);
+            _heroWeapon.DisableWeaponCollider();
             _heroRotation.EnableRotation(true);
             
         }

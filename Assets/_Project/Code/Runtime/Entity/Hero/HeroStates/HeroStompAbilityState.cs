@@ -26,11 +26,21 @@ namespace Code.Runtime.Entity.Hero.HeroStates
         public override void OnLogic()
         {
             base.OnLogic();
+            
+            if(Timer.Elapsed >= _animationData.Animations[AnimationKey.Stomp].Length)
+            {
+                fsm.StateCanExit();
+            }
         }
 
         public override void OnExit()
         {
             base.OnExit();
+        }
+
+        public override void OnExitRequest()
+        {
+            base.OnExitRequest();
         }
     }
 }

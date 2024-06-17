@@ -112,40 +112,14 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
---- !u!1102 &-6923160492546008367
+--- !u!1102 &-6287223286381342857
 AnimatorState:
   serializedVersion: 6
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: HeroAttack3
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: bf26c5ca30149964bb7abb1c11d2e0d2, type: 2}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &-5625473608341429269
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: HeroAttack2
+  m_Name: OneHandAttack2
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -246,7 +220,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: GreatSwordSlash_3
+  m_Name: GreatSwordSlash3
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -345,7 +319,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: BaseHero
+  m_Name: BaseHeroAnimator
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: Attack
@@ -435,32 +409,6 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
---- !u!1102 &1514005615973548973
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: HeroAttack1
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 2718aacaf4a38234f91b0a99c981f526, type: 2}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
 --- !u!1101 &2079765436638533085
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -509,6 +457,32 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!1102 &4597620265084852275
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: OneHandAttack3
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: bf26c5ca30149964bb7abb1c11d2e0d2, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!1102 &6548441965998648402
 AnimatorState:
   serializedVersion: 6
@@ -552,7 +526,7 @@ AnimatorStateMachine:
     m_Position: {x: 790, y: 50, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 6548441965998648402}
-    m_Position: {x: 790, y: -20, z: 0}
+    m_Position: {x: 790, y: 0, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -8581810707150590271}
     m_Position: {x: 480, y: 110, z: 0}
@@ -564,19 +538,10 @@ AnimatorStateMachine:
     m_Position: {x: 170, y: 50, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -7594568908393504074}
-    m_Position: {x: 790, y: 120, z: 0}
+    m_Position: {x: 790, y: 100, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -4529603224579687815}
-    m_Position: {x: 790, y: 190, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: -5625473608341429269}
-    m_Position: {x: 450, y: -110, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: -6923160492546008367}
-    m_Position: {x: 450, y: -60, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 1514005615973548973}
-    m_Position: {x: 450, y: -160, z: 0}
+    m_Position: {x: 790, y: 150, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 2891931032208619698}
     m_Position: {x: 220, y: -160, z: 0}
@@ -586,6 +551,18 @@ AnimatorStateMachine:
   - serializedVersion: 1
     m_State: {fileID: -2952104048646184981}
     m_Position: {x: 220, y: -60, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 8657134032543396275}
+    m_Position: {x: 480, y: 180, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 6952270552115864256}
+    m_Position: {x: 460, y: -160, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: -6287223286381342857}
+    m_Position: {x: 460, y: -110, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 4597620265084852275}
+    m_Position: {x: 460, y: -60, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions:
   - {fileID: -5395346139164069399}
@@ -597,3 +574,55 @@ AnimatorStateMachine:
   m_ExitPosition: {x: 1220, y: 350, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: 1289876168874806259}
+--- !u!1102 &6952270552115864256
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: OneHandAttack1
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: 2718aacaf4a38234f91b0a99c981f526, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
+--- !u!1102 &8657134032543396275
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: OneHandWeaponWalking
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: 1296b3032b8138e4c892563438ec9362, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 

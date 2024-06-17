@@ -8,7 +8,6 @@ namespace Code.Runtime.Entity.Enemy.RangedEnemy
 {
     public class RangedEnemyStateMachine : EnemyStateMachine
     {
-        [SerializeField] private EnemyCastComponent _enemyCastComponent;
         protected override void Start()
         {
             base.Start();
