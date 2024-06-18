@@ -7,8 +7,8 @@ namespace Code.Runtime.CustomEvents
 {
     public class BossSpawnEvent : IEvent
     {
-        public GameObject BossGo;
-        public MobIdentifier BossId;
+        public readonly GameObject BossGo;
+        public readonly MobIdentifier BossId;
 
         public BossSpawnEvent(GameObject bossGo, MobIdentifier bossId)
         {
