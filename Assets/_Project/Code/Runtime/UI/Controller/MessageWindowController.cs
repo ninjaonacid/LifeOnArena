@@ -9,24 +9,24 @@ using UnityEngine.Assertions;
 
 namespace Code.Runtime.UI.Controller
 {
-    public class PopUpWindowController : IScreenController
+    public class MessageWindowController : IScreenController
     {
-        private PopUpWindowModel _model;
+        private MessageWindowCompositeModel _compositeModel;
         private MessageWindowView _windowView;
         public void InitController(IScreenModel model, BaseWindowView windowView, ScreenService screenService)
         {
-            _model = model as PopUpWindowModel;
+            _compositeModel = model as MessageWindowCompositeModel;
             _windowView = windowView as MessageWindowView;
             
-            Assert.IsNotNull(_model);
+            Assert.IsNotNull(_compositeModel);
             Assert.IsNotNull(_windowView);
 
-            if (_model.ModelDto is MessageDto messageDto)
+            if (_compositeModel.ModelDto is MessageDto messageDto)
             {
                 _windowView.Text.text = messageDto.Message;
             }
 
-            else if (_model.ModelDto is TimerMessageDto updatableDto)
+            else if (_compositeModel.ModelDto is TimerMessageDto updatableDto)
             {
                 Observable.EveryUpdate().Subscribe(x =>
                 {
@@ -38,8 +38,6 @@ namespace Code.Runtime.UI.Controller
                     }
                 }).AddTo(_windowView);
             }
-            
-
         }
     }
 }

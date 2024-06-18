@@ -83,7 +83,7 @@ namespace Code.Runtime.Core.Factory
 
         public TreasureChest CreateTreasureChest()
         {
-            
+            return null;
         }
         
         

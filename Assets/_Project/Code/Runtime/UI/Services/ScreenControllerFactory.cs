@@ -38,7 +38,7 @@ namespace Code.Runtime.UI.Services
             _screenControllers.Add(typeof(HudController), () => 
                 new HudController(gameData, heroFactory, sceneLoader, eventSystem));
             
-            _screenControllers.Add(typeof(PopUpWindowController), () => new PopUpWindowController());
+            _screenControllers.Add(typeof(MessageWindowController), () => new MessageWindowController());
             
             _screenControllers.Add(typeof(ArenaSelectionScreenController), 
                 () => gameData.PlayerData.TutorialData.IsTutorialCompleted 

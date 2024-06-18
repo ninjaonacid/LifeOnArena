@@ -2,11 +2,11 @@ using Code.Runtime.UI.Model.DTO;
 
 namespace Code.Runtime.UI.Model
 {
-    public class PopUpWindowModel : IScreenModel
+    public class MessageWindowCompositeModel : IScreenModel
     {
-        public IScreenModelDto ModelDto;
+        public readonly IScreenModelDto ModelDto;
         
-        public PopUpWindowModel(IScreenModelDto modelDto)
+        public MessageWindowCompositeModel(IScreenModelDto modelDto)
         {
             ModelDto = modelDto;
         }

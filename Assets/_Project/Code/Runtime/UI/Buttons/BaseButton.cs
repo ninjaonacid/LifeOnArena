@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 namespace Code.Runtime.UI.Buttons
 {
-    public abstract class BaseButton : MonoBehaviour, IPointerClickHandler
+    public class BaseButton : MonoBehaviour, IPointerClickHandler
     {
         private Subject<PointerEventData> _subject;
 
