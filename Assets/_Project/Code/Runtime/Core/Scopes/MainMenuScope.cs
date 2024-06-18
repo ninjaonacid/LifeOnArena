@@ -16,7 +16,7 @@ namespace Code.Runtime.Core.Scopes
             builder.RegisterEntryPoint<MainMenuStarter>();
 
             builder.Register<ProjectileFactory>(Lifetime.Scoped);
-            builder.Register<IItemFactory, ItemFactory>(Lifetime.Scoped);
+            builder.Register<ItemFactory, ItemFactory>(Lifetime.Scoped);
             builder.Register<IAbilityFactory, AbilityFactory>(Lifetime.Scoped);
             builder.Register<IHeroFactory, HeroFactory>(Lifetime.Scoped);
             builder.Register<IUIFactory, UIFactory>(Lifetime.Scoped);

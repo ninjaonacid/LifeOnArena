@@ -22,7 +22,7 @@ namespace Code.Runtime.Core.Scopes
             
             builder.Register<ObjectPoolProvider>(Lifetime.Singleton);
             
-            builder.Register<IItemFactory, ItemFactory>(Lifetime.Scoped);
+            builder.Register<ItemFactory, ItemFactory>(Lifetime.Scoped);
             builder.Register<IEnemyFactory, EnemyFactory>(Lifetime.Scoped);
             builder.Register<IAbilityFactory, AbilityFactory>(Lifetime.Scoped);
             builder.Register<IHeroFactory, HeroFactory>(Lifetime.Scoped);
@@ -40,7 +40,7 @@ namespace Code.Runtime.Core.Scopes
             builder.RegisterBuildCallback(container =>
             {
                 var enemyFactory = container.Resolve<IEnemyFactory>();
-                var itemFactory = container.Resolve<IItemFactory>();
+                var itemFactory = container.Resolve<ItemFactory>();
 
                 enemyFactory.InitAssets();
                 itemFactory.InitAssets();

@@ -12,8 +12,8 @@ namespace Code.Runtime.Logic.LevelObjectsSpawners
         public string Id;
         public bool IsPurchased { get; private set; }
 
-        private IItemFactory _itemFactory;
-        public void Construct(IItemFactory itemFactory)
+        private ItemFactory _itemFactory;
+        public void Construct(ItemFactory itemFactory)
         {
             _itemFactory = itemFactory;
             //SpawnPlatform();
@@ -32,23 +32,23 @@ namespace Code.Runtime.Logic.LevelObjectsSpawners
 
         public  void LoadData(PlayerData data)
         {
-            if (data.WorldData.WeaponPurchaseData.PurchasedWeapons.Contains(Id))
-            {
-                IsPurchased = true;
-               // var platform = await SpawnPlatform();
-               // platform.UnlockWeapon();
-            }
-
-            {
-                //var platform = await SpawnPlatform();
-               // platform.OnWeaponPurchase += WeaponPurchased;
-            }
+            // if (data.WorldData.WeaponUnlockedData.UnlockedWeapons.Contains(Id))
+            // {
+            //     IsPurchased = true;
+            //    // var platform = await SpawnPlatform();
+            //    // platform.UnlockWeapon();
+            // }
+            //
+            // {
+            //     //var platform = await SpawnPlatform();
+            //    // platform.OnWeaponPurchase += WeaponPurchased;
+            // }
         }
 
         public void UpdateData(PlayerData data)
         {
-            if (IsPurchased)
-                data.WorldData.WeaponPurchaseData.PurchasedWeapons.Add(Id);
+            // if (IsPurchased)
+            //     data.WorldData.WeaponUnlockedData.UnlockedWeapons.Add(Id);
         }
     }
 }

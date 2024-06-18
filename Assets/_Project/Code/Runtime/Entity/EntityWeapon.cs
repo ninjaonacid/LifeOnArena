@@ -18,7 +18,7 @@ namespace Code.Runtime.Entity
         public WeaponData WeaponData => _weaponData;
         public WeaponView WeaponView => _weaponSlot.EquippedWeaponView;
         
-        protected IItemFactory _itemFactory;
+        protected ItemFactory _itemFactory;
 
         [Serializable]
         protected class WeaponSlot
@@ -27,7 +27,7 @@ namespace Code.Runtime.Entity
         }
         
         [Inject]
-        public void Construct(IItemFactory itemFactory)
+        public void Construct(ItemFactory itemFactory)
         {
             _itemFactory = itemFactory;
         }

@@ -9,13 +9,13 @@ using UnityEngine.Assertions;
 
 namespace Code.Runtime.UI.Controller
 {
-    public class MessageWindowController : IScreenController
+    public class PopUpWindowController : IScreenController
     {
-        private MessageWindowModel _model;
+        private PopUpWindowModel _model;
         private MessageWindowView _windowView;
         public void InitController(IScreenModel model, BaseWindowView windowView, ScreenService screenService)
         {
-            _model = model as MessageWindowModel;
+            _model = model as PopUpWindowModel;
             _windowView = windowView as MessageWindowView;
             
             Assert.IsNotNull(_model);

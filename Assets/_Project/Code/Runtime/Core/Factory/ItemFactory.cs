@@ -5,6 +5,7 @@ using Code.Runtime.ConfigData.Weapon;
 using Code.Runtime.Core.AssetManagement;
 using Code.Runtime.Core.Config;
 using Code.Runtime.Core.ObjectPool;
+using Code.Runtime.Logic;
 using Code.Runtime.Logic.LevelObjectsSpawners;
 using Code.Runtime.Logic.Weapon;
 using Code.Runtime.Services.SaveLoad;
@@ -17,7 +18,7 @@ using Vector3 = UnityEngine.Vector3;
 
 namespace Code.Runtime.Core.Factory
 {
-    public class ItemFactory : IItemFactory
+    public class ItemFactory
     {
         private readonly ConfigProvider _config;
         private readonly ISaveLoadService _saveLoadService;
@@ -78,6 +79,11 @@ namespace Code.Runtime.Core.Factory
             weaponPlatformSpawner.WeaponId = weaponId;
        
             return weaponPlatformSpawner;
+        }
+
+        public TreasureChest CreateTreasureChest()
+        {
+            
         }
         
         

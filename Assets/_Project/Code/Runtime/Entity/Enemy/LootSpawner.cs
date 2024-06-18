@@ -16,7 +16,7 @@ namespace Code.Runtime.Entity.Enemy
         [SerializeField] private VisualEffectIdentifier _souls;
         
         private IRandomService _randomService;
-        private IItemFactory _itemFactory;
+        private ItemFactory _itemFactory;
         private VisualEffectFactory _visualEffectFactory;
         private IGameDataContainer _dataContainer;
         public EnemyDeath EnemyDeath;
@@ -26,7 +26,7 @@ namespace Code.Runtime.Entity.Enemy
         private CancellationTokenSource _cts;
 
         [Inject]
-        public void Construct(IItemFactory factory, VisualEffectFactory visualEffectFactory, IRandomService randomService, IGameDataContainer dataContainer)
+        public void Construct(ItemFactory factory, VisualEffectFactory visualEffectFactory, IRandomService randomService, IGameDataContainer dataContainer)
         {
             _itemFactory = factory;
             _randomService = randomService;

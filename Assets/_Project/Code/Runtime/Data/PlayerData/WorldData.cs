@@ -7,12 +7,12 @@ namespace Code.Runtime.Data.PlayerData
     {
         public PositionOnLevel PositionOnLevel;
         public LootData LootData;
-        public WeaponPurchaseData WeaponPurchaseData;
+        public WeaponUnlockedData WeaponUnlockedData;
         public WorldData(string initialLevel)
         {
             PositionOnLevel = new PositionOnLevel(initialLevel);
             LootData = new LootData();
-            WeaponPurchaseData = new WeaponPurchaseData();
+            WeaponUnlockedData = new WeaponUnlockedData();
         }
     }
 }

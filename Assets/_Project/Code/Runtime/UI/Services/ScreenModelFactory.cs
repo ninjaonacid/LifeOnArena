@@ -28,7 +28,7 @@ namespace Code.Runtime.UI.Services
             _modelMap.Add(typeof(WeaponShopWindowModel), (dto) => new WeaponShopWindowModel());
             _modelMap.Add(typeof(AbilityScreenModel), (dto) => new AbilityScreenModel(gameData, config));
             _modelMap.Add(typeof(HudModel), (dto) => new HudModel());
-            _modelMap.Add(typeof(MessageWindowModel), (dto) => new MessageWindowModel(dto));
+            _modelMap.Add(typeof(PopUpWindowModel), (dto) => new PopUpWindowModel(dto));
             _modelMap.Add(typeof(ArenaSelectionScreenModel), (dto) => new ArenaSelectionScreenModel(config));
         }
 

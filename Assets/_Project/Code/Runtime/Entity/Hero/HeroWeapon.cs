@@ -36,7 +36,6 @@ namespace Code.Runtime.Entity.Hero
 
         public void UpdateData(PlayerData data)
         {
-            data.HeroEquipment.WeaponStringId = _weaponData.WeaponId.Name;
             data.HeroEquipment.WeaponIntId = _weaponData.WeaponId.Id;
         }
     }
