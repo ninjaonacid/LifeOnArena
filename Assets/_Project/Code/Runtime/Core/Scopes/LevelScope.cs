@@ -3,6 +3,7 @@ using Code.Runtime.Core.Factory;
 using Code.Runtime.Core.Installers;
 using Code.Runtime.Core.ObjectPool;
 using Code.Runtime.Logic.WaveLogic;
+using Code.Runtime.Modules.RewardSystem;
 using Code.Runtime.Services;
 using VContainer;
 using VContainer.Unity;
@@ -19,7 +20,7 @@ namespace Code.Runtime.Core.Scopes
             builder.Register<EnemySpawnerController>(Lifetime.Scoped);
             
             builder.Register<ProjectileFactory>(Lifetime.Scoped);
-            
+            builder.Register<GameRewardSystem>(Lifetime.Singleton).AsSelf();
             builder.Register<ObjectPoolProvider>(Lifetime.Singleton);
             
             builder.Register<ItemFactory, ItemFactory>(Lifetime.Scoped);

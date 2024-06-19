@@ -59,6 +59,8 @@ namespace Code.Runtime.Entity.Enemy
                 _animationData,
                 true, false
             ));
+            
+           
         }
 
         private void Update()

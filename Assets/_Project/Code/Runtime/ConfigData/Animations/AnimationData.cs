@@ -26,10 +26,17 @@ namespace Code.Runtime.ConfigData.Animations
         [field: BoxGroup("$GetClipName/Settings")]
         public int Hash { get; private set; }
 
+        [field: SerializeField]
+        [field: ReadOnly]
+        [field: FoldoutGroup("$GetClipName")]
+        [field: BoxGroup("$GetClipName/Settings")]
+        public string AnimationName;
+
 #if UNITY_EDITOR
         private void OnClipChanged()
         {
             Length = clip ? clip.length : default;
+            AnimationName = clip.name;
             Hash = clip ? Animator.StringToHash(clip.name) : default;
         }
 

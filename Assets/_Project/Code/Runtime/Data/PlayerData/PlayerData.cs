@@ -13,6 +13,7 @@ namespace Code.Runtime.Data.PlayerData
         public PassiveSkills PassiveSkills;
         public StatsData StatsData;
         public TutorialData TutorialData;
+        public RewardsData RewardsData;
 
         public PlayerData(string initialLevel)
     {
@@ -24,6 +25,7 @@ namespace Code.Runtime.Data.PlayerData
         StatsData = new StatsData();
         PlayerExp = new PlayerExp();
         TutorialData = new TutorialData();
+        RewardsData = new RewardsData();
     }
         
     }

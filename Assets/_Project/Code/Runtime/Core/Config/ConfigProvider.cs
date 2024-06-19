@@ -3,6 +3,7 @@ using System.Linq;
 using Code.Runtime.ConfigData;
 using Code.Runtime.ConfigData.Audio;
 using Code.Runtime.ConfigData.Levels;
+using Code.Runtime.ConfigData.Reward;
 using Code.Runtime.ConfigData.ScreenUI;
 using Code.Runtime.ConfigData.Settings;
 using Code.Runtime.ConfigData.StateMachine;
@@ -25,6 +26,7 @@ namespace Code.Runtime.Core.Config
         private Dictionary<int, ActiveAbilityBlueprintBase> _heroAbilities;
         private Dictionary<int, VisualEffectData> _visualEffects;
         private Dictionary<int, WeaponData> _weapons;
+        private Dictionary<int, RewardBlueprintBase> _rewards;
 
 
         private TutorialConfig _tutorialConfig;
@@ -68,6 +70,10 @@ namespace Code.Runtime.Core.Config
             _weapons = Resources
                 .LoadAll<WeaponData>($"{ConfigFolder}/Equipment/Weapons")
                 .ToDictionary(x => x.WeaponId.Id, x => x);
+
+            _rewards = Resources
+                .LoadAll<RewardBlueprintBase>($"{ConfigFolder}/Rewards")
+                .ToDictionary(x => x.RewardId.Id, x => x);
             
             _characterStats = Resources
                 .Load<StatDatabase>($"{ConfigFolder}/Hero/Stats/HeroStatsData");
@@ -132,10 +138,8 @@ namespace Code.Runtime.Core.Config
         public List<LevelConfig> LoadLevels() =>
         _levels.Values.ToList();
 
-        public LevelReward Reward(LocationReward rewardId)
-        {
-            throw new System.NotImplementedException();
-        }
+        public RewardBlueprintBase Reward(int id) =>
+            _rewards.TryGetValue(id, out RewardBlueprintBase reward) ? reward : null;
 
         public StatDatabase CharacterStats() =>
             _characterStats;

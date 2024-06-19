@@ -45,9 +45,10 @@ namespace Code.Runtime.Services
         {
             _spawnerController.WaveCleared += WaveCleared;
             _spawnerController.CommonEnemiesCleared += BossMessage;
-            _spawnerController.BossKilled += LevelEnd;
+            //_spawnerController.BossKilled += LevelEnd;
             _spawnerController.BossSpawned += OnBossSpawn;
             _controls.LevelControls.Enable();
+            
         }
 
         private void OnBossSpawn(GameObject arg1, MobIdentifier arg2)

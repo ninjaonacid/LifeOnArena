@@ -61,6 +61,10 @@ namespace Code.Runtime.Entity.Enemy.BossEnemy.Demon
                 nameof(MeleeEnemyAttackState),
                 nameof(EnemyIdleState)));
             
+            _fsm.AddTransitionFromAny(new Transition("", nameof(EnemyDeathState), 
+                (condition) => _enemyDeath.IsDead , 
+                isForceTransition: true));
+            
             
             _fsm.InitStateMachine();
         }

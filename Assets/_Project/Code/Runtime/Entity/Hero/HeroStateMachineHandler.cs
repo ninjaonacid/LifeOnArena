@@ -121,7 +121,6 @@ namespace Code.Runtime.Entity.Hero
                 _animationData,
                 _vfxController,
                 _heroAbilityController,
-                needExitTime: true,
                 isGhostState: false));
             
             _stateMachine.AddState(nameof(SecondAttackState), new SecondAttackState(
@@ -133,7 +132,6 @@ namespace Code.Runtime.Entity.Hero
                 _animationData,
                 _vfxController,
                 _heroAbilityController,
-                needExitTime: true,
                 isGhostState: false));
             
             _stateMachine.AddState(nameof(ThirdAttackState), new ThirdAttackState(
@@ -145,8 +143,7 @@ namespace Code.Runtime.Entity.Hero
                 _animationData,
                 _vfxController,
                 _heroAbilityController,
-                needExitTime: true,
-                isGhostState: false)); ;
+                isGhostState: false)); 
 
 
             _stateMachine.AddTransitionFromAny(new Transition("", nameof(HeroDeathState),
@@ -220,13 +217,13 @@ namespace Code.Runtime.Entity.Hero
             switch (ability.ComboCount)
             {
                 case 1:
-                    _stateMachine.RequestStateChange(nameof(FirstAttackState));
+                    _stateMachine.RequestStateChange(nameof(FirstAttackState), true);
                     break;
                 case 2:
-                    _stateMachine.RequestStateChange(nameof(SecondAttackState));
+                    _stateMachine.RequestStateChange(nameof(SecondAttackState), true);
                     break;
                 case 3:
-                    _stateMachine.RequestStateChange(nameof(ThirdAttackState));
+                    _stateMachine.RequestStateChange(nameof(ThirdAttackState), true);
                     ability.ResetComboCounter();
                     break;
             }

@@ -33,11 +33,11 @@ namespace Code.Runtime.Modules.AbilitySystem
             }
 
             AttackConfig attackConfig = default;
-            attackConfig = weaponData.AttacksConfigs[ComboCount % weaponData.AttacksConfigs.Count];
+            attackConfig = weaponData.AttacksConfigs[ComboCount];
             _comboWindow = attackConfig.AnimationData.Length + 0.2f;
 
             ActiveTime = attackConfig.AnimationData.Length - 0.1f;
-            CurrentActiveTime = attackConfig.AnimationData.Length;
+            CurrentActiveTime = attackConfig.AnimationData.Length - 0.1f;
             
             Debug.Log("ATTACK ABILITY ACTIVATED");
 

@@ -44,6 +44,8 @@ namespace Code.Runtime.UI.Services
                 () => gameData.PlayerData.TutorialData.IsTutorialCompleted 
                 ? new ArenaSelectionScreenController()
                 : new TutorialArenaSelectionController(tutorialService));
+            
+            _screenControllers.Add(typeof(RewardPopupController), () => new RewardPopupController());
         }
 
         public IScreenController CreateController(Type controller)

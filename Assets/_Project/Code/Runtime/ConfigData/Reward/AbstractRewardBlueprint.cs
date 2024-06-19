@@ -4,6 +4,6 @@ namespace Code.Runtime.ConfigData.Reward
 {
     public abstract class AbstractRewardBlueprint<T> : RewardBlueprintBase where T : IReward
     {
-        public abstract IReward GetReward();
+        public abstract override IReward GetReward();
     }
 }

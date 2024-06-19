@@ -50,7 +50,7 @@ namespace Code.Runtime.Entity.Enemy
 
             lootVisualEffect.transform.position = transform.position + new Vector3(0, 2, 0);
 
-            var lootItem = new Loot()
+            var lootItem = new SoulLoot()
             {
                 Value = _randomService.RandomizeValue(_lootMin, _lootMax)
             };

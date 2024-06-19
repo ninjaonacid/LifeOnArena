@@ -4,6 +4,7 @@ using Code.Runtime.Core.Config;
 using Code.Runtime.Core.EntryPoints;
 using Code.Runtime.Core.EventSystem;
 using Code.Runtime.Core.SceneManagement;
+using Code.Runtime.Modules.RewardSystem;
 using Code.Runtime.Modules.TutorialService;
 using Code.Runtime.Services.BattleService;
 using Code.Runtime.Services.PersistentProgress;
@@ -28,6 +29,7 @@ namespace Code.Runtime.Core.Scopes
 
             builder.Register<ConfigProvider>(Lifetime.Singleton);
             builder.Register<ISaveLoadService, SaveLoadService>(Lifetime.Singleton);
+          
 
             builder.Register<IUIFactory, UIFactory>(Lifetime.Singleton);
             builder.Register<IAssetProvider, AssetProvider>(Lifetime.Singleton);

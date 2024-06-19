@@ -7,6 +7,7 @@ using Code.Runtime.Core.Config;
 using Code.Runtime.Core.ObjectPool;
 using Code.Runtime.Logic;
 using Code.Runtime.Logic.LevelObjectsSpawners;
+using Code.Runtime.Logic.TreasureChest;
 using Code.Runtime.Logic.Weapon;
 using Code.Runtime.Services.SaveLoad;
 using Cysharp.Threading.Tasks;

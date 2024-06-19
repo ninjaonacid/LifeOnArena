@@ -40,11 +40,6 @@ namespace Code.Runtime.Entity.Hero.HeroStates
         {
             base.OnLogic();
             
-
-            if (Timer.Elapsed >= _attackConfig.ExitTime)
-            {
-                fsm.StateCanExit();
-            }
         }
 
         public override void OnExit()

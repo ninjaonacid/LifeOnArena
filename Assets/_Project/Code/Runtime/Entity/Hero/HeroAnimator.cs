@@ -19,6 +19,11 @@ namespace Code.Runtime.Entity.Hero
             _heroAnimator.CrossFade(hash, 0.1f);
         }
 
+        public void PlayAnimation(string animationName)
+        {
+            _heroAnimator.CrossFade(animationName, 0.1f);
+        }
+
         public void PlayAnimation(int hash, float speed)
         {
             _heroAnimator.CrossFade(hash, 0.1f);

@@ -13,10 +13,10 @@ namespace Code.Runtime.Data.PlayerData
         public Action<int> CountChanged;
 
         
-        public void Collect(Loot loot)
+        public void Collect(SoulLoot soulLoot)
         {
-            Collected += loot.Value;
-            CountChanged?.Invoke(loot.Value);
+            Collected += soulLoot.Value;
+            CountChanged?.Invoke(soulLoot.Value);
         }
 
         public void Collect(int value)

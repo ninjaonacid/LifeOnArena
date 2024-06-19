@@ -33,6 +33,7 @@ namespace Code.Runtime.UI.Services
             _screenMap.Add(ScreenID.HUD, (typeof(HudModel), (typeof(HudController))));
             _screenMap.Add(ScreenID.MessageWindow, (typeof(MessageWindowCompositeModel), typeof(MessageWindowController)));
             _screenMap.Add(ScreenID.ArenaSelectionScreen, (typeof(ArenaSelectionScreenModel), typeof(ArenaSelectionScreenController)));
+            _screenMap.Add(ScreenID.RewardPopup, (typeof(RewardPopupModel), typeof(RewardPopupController)));
         }
 
         public void Open(ScreenID screenId)
