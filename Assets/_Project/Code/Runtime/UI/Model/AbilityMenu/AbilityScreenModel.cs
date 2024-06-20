@@ -140,7 +140,6 @@ namespace Code.Runtime.UI.Model.AbilityMenu
             for (var index = 0; index < _abilities.Count; index++)
             {
                 var abilitySlot = _abilities[index];
-
                 abilitySlot.IsEquipped = _gameData.PlayerData.AbilityData.Abilities[index].IsEquipped;
                 abilitySlot.IsUnlocked = _gameData.PlayerData.AbilityData.Abilities[index].IsUnlocked;
             }

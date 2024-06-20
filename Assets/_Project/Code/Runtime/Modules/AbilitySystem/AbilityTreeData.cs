@@ -7,7 +7,6 @@ using Sirenix.OdinInspector;
 
 namespace Code.Runtime.Modules.AbilitySystem
 {
-    [Serializable]
     public class AbilityTreeData
     {
         public AbilityTreeBranch Branch;
