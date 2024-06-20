@@ -3,6 +3,7 @@
     public enum AbilityTreeBranch
     {
         Warrior = 1,
-        Mage = 2
+        Mage = 2,
+        NotInTree = 3
     }
 }

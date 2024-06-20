@@ -1,48 +1,297 @@
 {
+  "$type": "Code.Runtime.Data.PlayerData.PlayerData, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
   "PlayerExp": {
+    "$type": "Code.Runtime.Data.PlayerData.PlayerExp, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
     "Experience": 0,
-    "Level": 0,
+    "Level": 1,
     "ExperienceToNextLevel": 100
   },
   "KillData": {
-    "ClearedSpawners": []
+    "$type": "Code.Runtime.Data.PlayerData.KillData, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "ClearedSpawners": {
+      "$type": "System.Collections.Generic.List`1[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+      "$values": []
+    },
+    "KilledBosses": {
+      "$type": "System.Collections.Generic.List`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+      "$values": []
+    }
   },
   "WorldData": {
+    "$type": "Code.Runtime.Data.PlayerData.WorldData, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
     "PositionOnLevel": {
-      "Level": "StoneDungeon_Arena_1",
+      "$type": "Code.Runtime.Data.PlayerData.PositionOnLevel, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "Level": "FantasyArena_1",
       "Position": {
-        "X": 13.0178118,
-        "Y": -0.00162005424,
-        "Z": -12.7841339
+        "$type": "Code.Runtime.Data.PlayerData.Vector3Data, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "X": -15.501503,
+        "Y": -0.5462744,
+        "Z": -15.6680279
       }
     },
     "LootData": {
-      "Collected": 543
+      "$type": "Code.Runtime.Data.PlayerData.LootData, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "Collected": 8000
     },
-    "WeaponPurchaseData": {
-      "PurchasedWeapons": []
+    "WeaponUnlockedData": {
+      "$type": "Code.Runtime.Data.PlayerData.WeaponUnlockedData, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "UnlockedWeapons": {
+        "$type": "System.Collections.Generic.List`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+        "$values": []
+      }
     }
   },
   "AbilityData": {
-    "AbilitySlots": [],
-    "EquippedSlots": [],
-    "SkillIds": []
+    "$type": "Code.Runtime.Data.PlayerData.AbilityData, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "Abilities": {
+      "$type": "System.Collections.Generic.List`1[[Code.Runtime.UI.Model.AbilityMenu.AbilityModel, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+      "$values": [
+        {
+          "$type": "Code.Runtime.UI.Model.AbilityMenu.AbilityModel, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+          "IsEquipped": true,
+          "IsUnlocked": true,
+          "AbilityId": 74492325,
+          "Price": 500,
+          "AbilityTreeData": {
+            "$type": "Code.Runtime.Modules.AbilitySystem.AbilityTreeData, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+            "Branch": 1,
+            "Position": 1,
+            "Price": 500,
+            "UnlockRequirements": {
+              "$type": "System.Collections.Generic.List`1[[Code.Runtime.Modules.Requirements.IRequirement`1[[Code.Runtime.Data.PlayerData.PlayerData, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+              "$values": [
+                {
+                  "$type": "Code.Runtime.Modules.Requirements.SoulsRequirement, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+                }
+              ]
+            }
+          },
+          "Description": "Strong ground strike"
+        },
+        {
+          "$type": "Code.Runtime.UI.Model.AbilityMenu.AbilityModel, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+          "IsEquipped": true,
+          "IsUnlocked": true,
+          "AbilityId": 1622972859,
+          "Price": 1500,
+          "AbilityTreeData": {
+            "$type": "Code.Runtime.Modules.AbilitySystem.AbilityTreeData, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+            "Branch": 1,
+            "Position": 2,
+            "Price": 1500,
+            "UnlockRequirements": {
+              "$type": "System.Collections.Generic.List`1[[Code.Runtime.Modules.Requirements.IRequirement`1[[Code.Runtime.Data.PlayerData.PlayerData, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+              "$values": [
+                {
+                  "$type": "Code.Runtime.Modules.Requirements.PreviousAbilityRequirement, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+                },
+                {
+                  "$type": "Code.Runtime.Modules.Requirements.SoulsRequirement, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+                }
+              ]
+            }
+          },
+          "Description": "whidnmill barbarian slash"
+        },
+        {
+          "$type": "Code.Runtime.UI.Model.AbilityMenu.AbilityModel, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+          "IsEquipped": false,
+          "IsUnlocked": false,
+          "AbilityId": 2083628040,
+          "Price": 3000,
+          "AbilityTreeData": {
+            "$type": "Code.Runtime.Modules.AbilitySystem.AbilityTreeData, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+            "Branch": 1,
+            "Position": 3,
+            "Price": 3000,
+            "UnlockRequirements": null
+          },
+          "Description": ""
+        },
+        {
+          "$type": "Code.Runtime.UI.Model.AbilityMenu.AbilityModel, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+          "IsEquipped": false,
+          "IsUnlocked": true,
+          "AbilityId": 1778802000,
+          "Price": 0,
+          "AbilityTreeData": {
+            "$type": "Code.Runtime.Modules.AbilitySystem.AbilityTreeData, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+            "Branch": 2,
+            "Position": 1,
+            "Price": 0,
+            "UnlockRequirements": null
+          },
+          "Description": "Fire projectile flying at the nearest enemy and exploding in the area"
+        },
+        {
+          "$type": "Code.Runtime.UI.Model.AbilityMenu.AbilityModel, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+          "IsEquipped": false,
+          "IsUnlocked": false,
+          "AbilityId": 1463881339,
+          "Price": 1000,
+          "AbilityTreeData": {
+            "$type": "Code.Runtime.Modules.AbilitySystem.AbilityTreeData, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+            "Branch": 2,
+            "Position": 2,
+            "Price": 1000,
+            "UnlockRequirements": null
+          },
+          "Description": "Pillars of flame gradually scorching nearby enemies"
+        },
+        {
+          "$type": "Code.Runtime.UI.Model.AbilityMenu.AbilityModel, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+          "IsEquipped": false,
+          "IsUnlocked": false,
+          "AbilityId": -154096085,
+          "Price": 2000,
+          "AbilityTreeData": {
+            "$type": "Code.Runtime.Modules.AbilitySystem.AbilityTreeData, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+            "Branch": 2,
+            "Position": 3,
+            "Price": 2000,
+            "UnlockRequirements": null
+          },
+          "Description": ""
+        }
+      ]
+    },
+    "EquippedAbilities": {
+      "$type": "Code.Runtime.Data.DataStructures.IndexedQueue`1[[Code.Runtime.UI.Model.AbilityMenu.AbilityModel, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "$values": [
+        {
+          "$type": "Code.Runtime.UI.Model.AbilityMenu.AbilityModel, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+          "IsEquipped": true,
+          "IsUnlocked": true,
+          "AbilityId": 74492325,
+          "Price": 500,
+          "AbilityTreeData": {
+            "$type": "Code.Runtime.Modules.AbilitySystem.AbilityTreeData, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+            "Branch": 1,
+            "Position": 1,
+            "Price": 500,
+            "UnlockRequirements": {
+              "$type": "System.Collections.Generic.List`1[[Code.Runtime.Modules.Requirements.IRequirement`1[[Code.Runtime.Data.PlayerData.PlayerData, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+              "$values": [
+                {
+                  "$type": "Code.Runtime.Modules.Requirements.SoulsRequirement, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+                }
+              ]
+            }
+          },
+          "Description": "Strong ground strike"
+        },
+        {
+          "$type": "Code.Runtime.UI.Model.AbilityMenu.AbilityModel, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+          "IsEquipped": true,
+          "IsUnlocked": true,
+          "AbilityId": 1622972859,
+          "Price": 1500,
+          "AbilityTreeData": {
+            "$type": "Code.Runtime.Modules.AbilitySystem.AbilityTreeData, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+            "Branch": 1,
+            "Position": 2,
+            "Price": 1500,
+            "UnlockRequirements": {
+              "$type": "System.Collections.Generic.List`1[[Code.Runtime.Modules.Requirements.IRequirement`1[[Code.Runtime.Data.PlayerData.PlayerData, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+              "$values": [
+                {
+                  "$type": "Code.Runtime.Modules.Requirements.PreviousAbilityRequirement, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+                },
+                {
+                  "$type": "Code.Runtime.Modules.Requirements.SoulsRequirement, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+                }
+              ]
+            }
+          },
+          "Description": "whidnmill barbarian slash"
+        }
+      ]
+    },
+    "UnlockedAbilities": {
+      "$type": "System.Collections.Generic.List`1[[Code.Runtime.UI.Model.AbilityMenu.AbilityModel, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+      "$values": [
+        {
+          "$type": "Code.Runtime.UI.Model.AbilityMenu.AbilityModel, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+          "IsEquipped": true,
+          "IsUnlocked": true,
+          "AbilityId": 74492325,
+          "Price": 500,
+          "AbilityTreeData": {
+            "$type": "Code.Runtime.Modules.AbilitySystem.AbilityTreeData, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+            "Branch": 1,
+            "Position": 1,
+            "Price": 500,
+            "UnlockRequirements": {
+              "$type": "System.Collections.Generic.List`1[[Code.Runtime.Modules.Requirements.IRequirement`1[[Code.Runtime.Data.PlayerData.PlayerData, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+              "$values": [
+                {
+                  "$type": "Code.Runtime.Modules.Requirements.SoulsRequirement, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+                }
+              ]
+            }
+          },
+          "Description": "Strong ground strike"
+        },
+        {
+          "$type": "Code.Runtime.UI.Model.AbilityMenu.AbilityModel, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+          "IsEquipped": true,
+          "IsUnlocked": true,
+          "AbilityId": 1622972859,
+          "Price": 1500,
+          "AbilityTreeData": {
+            "$type": "Code.Runtime.Modules.AbilitySystem.AbilityTreeData, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+            "Branch": 1,
+            "Position": 2,
+            "Price": 1500,
+            "UnlockRequirements": {
+              "$type": "System.Collections.Generic.List`1[[Code.Runtime.Modules.Requirements.IRequirement`1[[Code.Runtime.Data.PlayerData.PlayerData, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+              "$values": [
+                {
+                  "$type": "Code.Runtime.Modules.Requirements.PreviousAbilityRequirement, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+                },
+                {
+                  "$type": "Code.Runtime.Modules.Requirements.SoulsRequirement, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+                }
+              ]
+            }
+          },
+          "Description": "whidnmill barbarian slash"
+        }
+      ]
+    }
   },
   "HeroEquipment": {
-    "WeaponStringId": "BayonettaSword",
-    "WeaponIntId": -131257144
+    "$type": "Code.Runtime.Data.PlayerData.HeroEquipment, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "WeaponIntId": -2132645565
   },
   "PassiveSkills": {
-    "AbilitiesId": []
+    "$type": "Code.Runtime.Data.PlayerData.PassiveSkills, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "AbilitiesId": {
+      "$type": "System.Collections.Generic.List`1[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+      "$values": []
+    }
   },
   "StatsData": {
+    "$type": "Code.Runtime.Data.PlayerData.StatsData, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
     "Stats": {
-      "Attack": 30,
+      "$type": "System.Collections.Generic.Dictionary`2[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+      "Attack": 100,
       "Defense": 10,
       "AttackSpeed": 1,
       "AttackRadius": 5,
       "MoveSpeed": 20,
-      "Health": 70
+      "Health": 100
+    }
+  },
+  "TutorialData": {
+    "$type": "Code.Runtime.Data.PlayerData.TutorialData, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "IsTutorialCompleted": true
+  },
+  "RewardsData": {
+    "$type": "Code.Runtime.Data.PlayerData.RewardsData, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "ClaimedRewards": {
+      "$type": "System.Collections.Generic.List`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+      "$values": []
     }
   }
 }

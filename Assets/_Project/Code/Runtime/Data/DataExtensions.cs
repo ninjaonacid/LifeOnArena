@@ -18,13 +18,23 @@ namespace Code.Runtime.Data
 
         public static string ToJson(this object obj)
         {
-            return JsonConvert.SerializeObject(obj, Formatting.Indented);
-
+            return JsonConvert.SerializeObject(obj, JsonSettings());
         }
 
         public static T ToDeserialized<T>(this string json)
         {
-            return JsonConvert.DeserializeObject<T>(json);
+            return JsonConvert.DeserializeObject<T>(json, JsonSettings());
+        }
+
+        private static JsonSerializerSettings JsonSettings()
+        {
+            var settings = new JsonSerializerSettings()
+            {
+                TypeNameHandling = TypeNameHandling.All,
+                TypeNameAssemblyFormatHandling = TypeNameAssemblyFormatHandling.Full,
+                Formatting = Formatting.Indented
+            };
+            return settings;
         }
 
         public static Vector3 AddY(this Vector3 vector, float y)

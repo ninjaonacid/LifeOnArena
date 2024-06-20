@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Code.Runtime.Core.Config;
 using Code.Runtime.Data.DataStructures;
+using Code.Runtime.Modules.AbilitySystem;
 using Code.Runtime.Services.PersistentProgress;
 using UniRx;
 
@@ -17,7 +18,6 @@ namespace Code.Runtime.UI.Model.AbilityMenu
         private readonly ConfigProvider _configProvider;
         private List<AbilityModel> _abilities;
         private IndexedQueue<AbilityModel> _equippedAbilities;
-        
 
         public AbilityScreenModel(IGameDataContainer gameData, ConfigProvider configProvider)
         {
@@ -35,7 +35,7 @@ namespace Code.Runtime.UI.Model.AbilityMenu
 
             var allAbilities =
                 _configProvider.AllAbilities()
-                    .Where(x => x.AbilityTreeData != null)
+                    .Where(x => x.AbilityTreeData != null && x.AbilityTreeData.Branch != AbilityTreeBranch.NotInTree)
                     .OrderBy(x => x.AbilityTreeData.Branch)
                     .ThenBy(x => x.AbilityTreeData.Position)
                     .ToArray();
