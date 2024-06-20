@@ -115,6 +115,7 @@ namespace Code.Runtime.Services
             _eventSystem.Unsubscribe<HeroDeadEvent>(HeroDead);
             _eventSystem.Unsubscribe<SpawnersClearEvent>(SpawnersClear);
             
+            
             _cancellationToken?.Cancel();
             _cancellationToken?.Dispose();
 

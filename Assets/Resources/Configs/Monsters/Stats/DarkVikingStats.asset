@@ -28,20 +28,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _baseValue: 1
   _capacity: 10
---- !u!114 &-6240929064255222219
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98250235709fef84b9f07a21852eb067, type: 3}
-  m_Name: MoveSpeed
-  m_EditorClassIdentifier: 
-  _baseValue: 10
-  _capacity: 100
 --- !u!114 &-3853926964119082701
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -54,7 +40,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98250235709fef84b9f07a21852eb067, type: 3}
   m_Name: Defense
   m_EditorClassIdentifier: 
-  _baseValue: 0
+  _baseValue: 10
   _capacity: 100
 --- !u!114 &-974959048072143401
 MonoBehaviour:
@@ -68,8 +54,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98250235709fef84b9f07a21852eb067, type: 3}
   m_Name: AttackSpeed
   m_EditorClassIdentifier: 
-  _baseValue: 1
-  _capacity: 0
+  _baseValue: -5
+  _capacity: 10
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -80,7 +66,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 177dd3b2b58030f45bda869c02788674, type: 3}
-  m_Name: DarkKnight
+  m_Name: DarkVikingStats
   m_EditorClassIdentifier: 
   StatDefinitions: []
   AttributeDefinitions:
@@ -91,8 +77,8 @@ MonoBehaviour:
   - {fileID: -974959048072143401}
   - {fileID: -6254114424431537057}
   - {fileID: -8531978930270708772}
-  - {fileID: -6240929064255222219}
-  - {fileID: 6248550790135988847}
+  - {fileID: 7836724662511910568}
+  - {fileID: 990586441385051763}
 --- !u!114 &397683349264247204
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -105,9 +91,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98250235709fef84b9f07a21852eb067, type: 3}
   m_Name: Health
   m_EditorClassIdentifier: 
-  _baseValue: 100
-  _capacity: 500
---- !u!114 &6248550790135988847
+  _baseValue: 500
+  _capacity: 10000
+--- !u!114 &990586441385051763
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -120,7 +106,21 @@ MonoBehaviour:
   m_Name: HitRecovery
   m_EditorClassIdentifier: 
   _baseValue: 1
-  _capacity: 3
+  _capacity: 10
+--- !u!114 &7836724662511910568
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98250235709fef84b9f07a21852eb067, type: 3}
+  m_Name: MoveSpeed
+  m_EditorClassIdentifier: 
+  _baseValue: 10
+  _capacity: 100
 --- !u!114 &8800271895548670577
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -133,5 +133,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98250235709fef84b9f07a21852eb067, type: 3}
   m_Name: Attack
   m_EditorClassIdentifier: 
-  _baseValue: 10
+  _baseValue: 60
   _capacity: 200

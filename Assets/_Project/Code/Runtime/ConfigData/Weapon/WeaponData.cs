@@ -16,6 +16,7 @@ namespace Code.Runtime.ConfigData.Weapon
         [SerializeField] private Sprite _weaponIcon;
         [SerializeField] private WeaponView _weaponPrefab;
         [SerializeField] private WeaponId _weaponId;
+        [SerializeField] private bool _isDual;
         [SerializeField] private VisualEffectData _hitVfx;
         [SerializeField] private AnimatorOverrideController _overrideController;
         [SerializeField] private Vector3 _localScale;
@@ -27,6 +28,7 @@ namespace Code.Runtime.ConfigData.Weapon
         public Sprite WeaponIcon => _weaponIcon;
         public WeaponView WeaponView => _weaponPrefab;
         public WeaponId WeaponId => _weaponId;
+        public bool IsDual => _isDual;
         public VisualEffectData HitVisualEffect => _hitVfx;
         public AnimatorOverrideController OverrideController => _overrideController;
         public Vector3 LocalScale => _localScale;

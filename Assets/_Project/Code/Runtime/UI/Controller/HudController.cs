@@ -100,6 +100,7 @@ namespace Code.Runtime.UI.Controller
         public void Dispose()
         {
             _disposable.Dispose();
+            _eventSystem.Unsubscribe<BossSpawnEvent>(SubscribeHealthBar);
         }
     }
 }

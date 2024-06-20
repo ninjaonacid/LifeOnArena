@@ -51,6 +51,8 @@ namespace Code.Runtime.Modules.AbilitySystem
                         _abilityFactory.CreateActiveAbility(slot.AbilityIdentifier.Id, this);
                 }
             }
+            
+            OnSkillChanged?.Invoke();
         }
 
         private void Update()

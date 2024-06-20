@@ -11,12 +11,15 @@ namespace Code.Runtime.Entity
     {
         public event Action<WeaponView> OnWeaponChange;
         
-        [SerializeField] protected WeaponSlot _weaponSlot = new();
-        [SerializeField] protected Transform _equipJoint;
+        [SerializeField] protected WeaponSlot _mainWeaponSlot = new();
+        [SerializeField] protected WeaponSlot _offHandWeaponSlot = new();
+        [SerializeField] protected Transform _equipJointMain;
+        [SerializeField] protected Transform _equipJointOffhand;
         [SerializeField] protected WeaponData _weaponData;
 
         public WeaponData WeaponData => _weaponData;
-        public WeaponView WeaponView => _weaponSlot.EquippedWeaponView;
+        public WeaponView MainWeaponView => _mainWeaponSlot.EquippedWeaponView;
+        public WeaponView OffHandWeaponView => _offHandWeaponSlot.EquippedWeaponView;
         
         protected ItemFactory _itemFactory;
 
@@ -25,7 +28,8 @@ namespace Code.Runtime.Entity
         {
             public WeaponView EquippedWeaponView;
         }
-        
+
+
         [Inject]
         public void Construct(ItemFactory itemFactory)
         {
@@ -45,18 +49,46 @@ namespace Code.Runtime.Entity
         {
             if (weaponData == null) return;
 
-            if (_weaponSlot.EquippedWeaponView != null)
+            if (weaponData.IsDual)
             {
-                Destroy(_weaponSlot.EquippedWeaponView.gameObject);
+                if (_mainWeaponSlot.EquippedWeaponView != null)
+                {
+                    Destroy(_mainWeaponSlot.EquippedWeaponView.gameObject);
+                }
+
+                if (_offHandWeaponSlot.EquippedWeaponView != null)
+                {
+                    Destroy(_offHandWeaponSlot.EquippedWeaponView.gameObject);
+                }
+
+                _weaponData = weaponData;
+                
+                _mainWeaponSlot.EquippedWeaponView = _itemFactory.CreateWeapon(_weaponData.WeaponView, _equipJointMain, false);
+                _mainWeaponSlot.EquippedWeaponView.transform.localPosition = Vector3.zero;
+                
+                _offHandWeaponSlot.EquippedWeaponView = _itemFactory.CreateWeapon(_weaponData.WeaponView, _equipJointMain, false);
+                _offHandWeaponSlot.EquippedWeaponView.transform.localPosition = Vector3.zero;
+            } 
+            else 
+
+            if (_mainWeaponSlot.EquippedWeaponView != null)
+            {
+                Destroy(_mainWeaponSlot.EquippedWeaponView.gameObject);
             }
+
+            if (_offHandWeaponSlot.EquippedWeaponView != null)
+            {
+                Destroy(_offHandWeaponSlot.EquippedWeaponView.gameObject);
+            }
+            
             _weaponData = weaponData;
 
-            _weaponSlot.EquippedWeaponView = _itemFactory.CreateWeapon(_weaponData.WeaponView, _equipJoint, false);
-            _weaponSlot.EquippedWeaponView.transform.localPosition = Vector3.zero;
+            _mainWeaponSlot.EquippedWeaponView = _itemFactory.CreateWeapon(_weaponData.WeaponView, _equipJointMain, false);
+            _mainWeaponSlot.EquippedWeaponView.transform.localPosition = Vector3.zero;
 
             EnableCollider(false);
             
-            OnWeaponChange?.Invoke(_weaponSlot.EquippedWeaponView);
+            OnWeaponChange?.Invoke(_mainWeaponSlot.EquippedWeaponView);
         }
         
         //CallFromAnimation
@@ -72,10 +104,10 @@ namespace Code.Runtime.Entity
 
         private void EnableCollider(bool value)
         {
-            _weaponSlot.EquippedWeaponView.EnableCollider(value);
+            _mainWeaponSlot.EquippedWeaponView.EnableCollider(value);
         }
 
-        public Transform GetEquipJointTransform => _equipJoint;
+        public Transform GetEquipJointMainTransform => _equipJointMain;
 
     }
 }

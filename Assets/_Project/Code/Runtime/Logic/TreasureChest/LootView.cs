@@ -20,6 +20,7 @@ namespace Code.Runtime.Logic.TreasureChest
                 .Join(moveTween)
                 .Join(rotationTween)
                 .OnComplete(() => MoveTo(_player));
+            
         }
 
         public void SetTarget(Transform targetTransform)

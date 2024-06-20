@@ -39,7 +39,7 @@ namespace Code.Runtime.Logic.TreasureChest
             {
                 Open();
                 _isOpened = true;
-                var loot = Object.Instantiate(_reward.LootView);
+                var loot = Object.Instantiate(_reward.LootView, transform);
                 loot.SetTarget(other.transform);
                 loot.LootSpawnLogic();
                 _reward.Claim();

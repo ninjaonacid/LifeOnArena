@@ -17,7 +17,6 @@ namespace Code.Runtime.UI.View.HUD.Skills
             _cooldownController = cooldownController;
             _heroAbilityController.OnSkillChanged += SetAbilityControllerSlots;
             _heroAbilityController.OnAbilityUse += UpdateCooldownView;
-            SetAbilityControllerSlots();
         }
 
         private void UpdateCooldownView(ActiveAbility ability)

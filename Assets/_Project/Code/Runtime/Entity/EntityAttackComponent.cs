@@ -40,7 +40,7 @@ namespace Code.Runtime.Entity
 
         public LayerMask GetLayer()
         {
-            return _entityWeapon.WeaponView.gameObject.layer;
+            return _entityWeapon.MainWeaponView.gameObject.layer;
         }
         
         public void InvokeHit(int hitCount)
