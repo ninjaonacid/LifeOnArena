@@ -1,4 +1,5 @@
-﻿using Code.Runtime.Modules.AbilitySystem;
+﻿using System.Threading;
+using Code.Runtime.Modules.AbilitySystem;
 using Cysharp.Threading.Tasks;
 using TMPro;
 using UnityEngine;
@@ -12,14 +13,16 @@ namespace Code.Runtime.UI.View.HUD.Skills
         public TextMeshProUGUI CooldownText;
         public Image BlurImage;
         
-        public async UniTaskVoid UpdateCooldown(ActiveAbility activeAbility)
+        public async UniTaskVoid UpdateCooldown(ActiveAbility activeAbility, CancellationToken token)
         {
             CooldownImage.gameObject.SetActive(true);
             CooldownText.gameObject.SetActive(true);
             BlurImage.gameObject.SetActive(true);
 
             while (activeAbility.CurrentCooldown >= 0)
-            {
+            {  
+                token.ThrowIfCancellationRequested();
+                
                 CooldownText.SetText(Mathf.RoundToInt(activeAbility.CurrentCooldown).ToString());
                 CooldownImage.fillAmount = activeAbility.CurrentCooldown / activeAbility.Cooldown;
                 await UniTask.Yield();

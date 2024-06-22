@@ -12,38 +12,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70f773d672fc7be4b85eb2e6f0b9ccd1, type: 3}
   m_Name: FantasyArena_3
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: UnlockRequirements
+      Entry: 6
+      Data: 
+  LocationName: 
   LevelKey: FantasyArena_3
   LevelType: 0
   RequiredLevel: 0
   WavesToSpawn: 0
   Icon: {fileID: 21300000, guid: 9815887a3ee576f478c03fb1c2163779, type: 3}
   EnemySpawners:
-  - Id: _0702d4e2-cb82-46aa-80c3-7a3c4b588b61
+  - Id: FantasyArena_3_69eacd7d-c214-4a3e-8b40-51104fcfdd41
     SpawnCount: 0
     TimeToSpawn: 0
-    MobId: {fileID: 11400000, guid: c926abab697947a4a9b6547139ee0e4d, type: 2}
-    Position: {x: -3.7, y: 0, z: 11.9}
-    EnemyType: 0
-  - Id: FantasyArena 2_9ffeac14-8ce9-4c23-b3af-51a2cdd93909
-    SpawnCount: 0
-    TimeToSpawn: 0
-    MobId: {fileID: 11400000, guid: c926abab697947a4a9b6547139ee0e4d, type: 2}
-    Position: {x: 13.92, y: 0, z: -5.18}
-    EnemyType: 0
-  - Id: FantasyArena 2_af73c76d-7dce-4df0-83ec-f18ad60142b6
-    SpawnCount: 0
-    TimeToSpawn: 0
-    MobId: {fileID: 11400000, guid: c926abab697947a4a9b6547139ee0e4d, type: 2}
-    Position: {x: -22.41, y: 0, z: -4}
-    EnemyType: 0
-  - Id: FantasyArena 2_46b9ae44-50df-409f-b3b4-0dea89c785a4
-    SpawnCount: 0
-    TimeToSpawn: 0
-    MobId: {fileID: 11400000, guid: c926abab697947a4a9b6547139ee0e4d, type: 2}
-    Position: {x: -7.33, y: 0, z: 11.67}
-    EnemyType: 0
+    MobId: {fileID: 11400000, guid: 2dcb3accab65ee74ea620704230da380, type: 2}
+    Position: {x: -57.7, y: 0, z: 6.9}
+    EnemyType: 1
   NextLevelDoorSpawners: []
   HeroInitialPosition: {x: -6.5, y: 0, z: -31.1}
   HeroInitialRotation: {x: 0, y: 0, z: 0, w: 1}
-  NextLevelDoorPosition: {x: 0, y: 0, z: 0}
-  NextLevelDoorRotation: {x: 0, y: 0, z: 0, w: 0}

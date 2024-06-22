@@ -66,25 +66,28 @@ namespace Code.Runtime.Entity
                 _mainWeaponSlot.EquippedWeaponView = _itemFactory.CreateWeapon(_weaponData.WeaponView, _equipJointMain, false);
                 _mainWeaponSlot.EquippedWeaponView.transform.localPosition = Vector3.zero;
                 
-                _offHandWeaponSlot.EquippedWeaponView = _itemFactory.CreateWeapon(_weaponData.WeaponView, _equipJointMain, false);
+                _offHandWeaponSlot.EquippedWeaponView = _itemFactory.CreateWeapon(_weaponData.WeaponView, _equipJointOffhand, false);
                 _offHandWeaponSlot.EquippedWeaponView.transform.localPosition = Vector3.zero;
-            } 
-            else 
-
-            if (_mainWeaponSlot.EquippedWeaponView != null)
-            {
-                Destroy(_mainWeaponSlot.EquippedWeaponView.gameObject);
             }
-
-            if (_offHandWeaponSlot.EquippedWeaponView != null)
+            else
             {
-                Destroy(_offHandWeaponSlot.EquippedWeaponView.gameObject);
-            }
-            
-            _weaponData = weaponData;
 
-            _mainWeaponSlot.EquippedWeaponView = _itemFactory.CreateWeapon(_weaponData.WeaponView, _equipJointMain, false);
-            _mainWeaponSlot.EquippedWeaponView.transform.localPosition = Vector3.zero;
+                if (_mainWeaponSlot.EquippedWeaponView != null)
+                {
+                    Destroy(_mainWeaponSlot.EquippedWeaponView.gameObject);
+                }
+
+                if (_offHandWeaponSlot.EquippedWeaponView != null)
+                {
+                    Destroy(_offHandWeaponSlot.EquippedWeaponView.gameObject);
+                }
+
+                _weaponData = weaponData;
+
+                _mainWeaponSlot.EquippedWeaponView =
+                    _itemFactory.CreateWeapon(_weaponData.WeaponView, _equipJointMain, false);
+                _mainWeaponSlot.EquippedWeaponView.transform.localPosition = Vector3.zero;
+            }
 
             EnableCollider(false);
             
@@ -105,6 +108,9 @@ namespace Code.Runtime.Entity
         private void EnableCollider(bool value)
         {
             _mainWeaponSlot.EquippedWeaponView.EnableCollider(value);
+            
+            if(_offHandWeaponSlot.EquippedWeaponView != null)
+                _offHandWeaponSlot.EquippedWeaponView.EnableCollider(value);
         }
 
         public Transform GetEquipJointMainTransform => _equipJointMain;

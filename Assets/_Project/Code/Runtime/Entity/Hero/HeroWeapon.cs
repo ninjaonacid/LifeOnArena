@@ -9,6 +9,11 @@ namespace Code.Runtime.Entity.Hero
     {
         [SerializeField] private HeroAnimator _heroAnimator;
 
+
+        protected override void Start()
+        {
+        }
+
         public override void EquipWeapon(WeaponData weaponData)
         {
             base.EquipWeapon(weaponData);

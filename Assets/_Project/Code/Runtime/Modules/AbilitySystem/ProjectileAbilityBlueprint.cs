@@ -1,4 +1,5 @@
 ﻿using Code.Runtime.Logic.Projectiles;
+using Code.Runtime.Modules.AbilitySystem.ActiveAbilities;
 using UnityEngine;
 
 namespace Code.Runtime.Modules.AbilitySystem
@@ -6,9 +7,9 @@ namespace Code.Runtime.Modules.AbilitySystem
     [CreateAssetMenu(fileName = "ProjectileAbility", menuName = "AbilitySystem/ActiveAbility/ProjectileAbility")]
     public class ProjectileAbilityBlueprint : ActiveAbilityBlueprintBase
     {
-        [SerializeField] private Projectile _prefab;
-        [SerializeField] private float _lifeTime;
-        [SerializeField] private float _speed;
+        [SerializeField] protected Projectile _prefab;
+        [SerializeField] protected float _lifeTime;
+        [SerializeField] protected float _speed;
         public override ActiveAbility GetAbility()
         {
             return new ProjectileAbility(this, _prefab, _lifeTime, _speed);

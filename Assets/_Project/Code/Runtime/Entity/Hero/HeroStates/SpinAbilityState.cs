@@ -28,6 +28,7 @@ namespace Code.Runtime.Entity.Hero.HeroStates
             _heroAnimator.PlayAnimation(_animationData.Animations[AnimationKey.Spinning].Hash);
             
             _heroRotation.EnableRotation(false);
+            _heroWeapon.EnableWeaponCollider();
             _heroAttack.ClearCollisionData();
             _intervalTimer.Reset();
         }

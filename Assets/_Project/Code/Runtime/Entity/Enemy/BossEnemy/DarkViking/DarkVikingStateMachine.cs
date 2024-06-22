@@ -50,11 +50,16 @@ namespace Code.Runtime.Entity.Enemy.BossEnemy.DarkViking
             
             _fsm.AddTransition(new Transition(nameof(EnemyCastState), nameof(EnemyIdleState)));
 
-            _fsm.AddTransition(new TransitionAfter(
+            // _fsm.AddTransition(new TransitionAfter(
+            //     nameof(MeleeEnemyAttackState),
+            //     nameof(EnemyChaseState),
+            //     _animationData.Animations[AnimationKey.Attack1].Length,
+            //     (transition) => _enemyTarget.HasTarget() && !_enemyAttackComponent.TargetInMeleeAttackRange));
+            
+            
+            _fsm.AddTransition(new Transition(
                 nameof(MeleeEnemyAttackState),
-                nameof(EnemyChaseState),
-                _animationData.Animations[AnimationKey.Attack1].Length,
-                (transition) => _enemyTarget.HasTarget() && !_enemyAttackComponent.TargetInMeleeAttackRange));
+                nameof(EnemyIdleState)));
             
             _fsm.AddTransition(new Transition(
                 nameof(MeleeEnemyAttackState),

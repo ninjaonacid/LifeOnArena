@@ -1,4 +1,7 @@
+using System;
+using System.Threading;
 using Code.Runtime.Modules.AbilitySystem;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.InputSystem.OnScreen;
 using UnityEngine.UI;
@@ -15,6 +18,7 @@ namespace Code.Runtime.UI.View.HUD.Skills
 
         [SerializeField] private CooldownUI _cooldown;
 
+        private readonly CancellationTokenSource _cts = new();
         private void Awake()
         {
             _skillIcon.Image.enabled = false;
@@ -46,9 +50,13 @@ namespace Code.Runtime.UI.View.HUD.Skills
 
         public void UpdateCooldownView()
         {
-            _cooldown.UpdateCooldown(_heroActiveAbility).Forget();
+            _cooldown.UpdateCooldown(_heroActiveAbility, _cts.Token).Forget();
         }
-        
+
+        private void OnDestroy()
+        {
+            _cts.Cancel();
+        }
     }
 }
     

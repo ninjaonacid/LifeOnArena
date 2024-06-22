@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dc82edc8c604c30a859a3d6174c1ff6, type: 3}
+  m_Name: MultipleFireball
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: _treeData
+      Entry: 7
+      Data: 0|Code.Runtime.Modules.AbilitySystem.AbilityTreeData, Assembly-CSharp
+    - Name: Branch
+      Entry: 3
+      Data: 3
+    - Name: Position
+      Entry: 3
+      Data: 0
+    - Name: Price
+      Entry: 3
+      Data: 0
+    - Name: UnlockRequirements
+      Entry: 6
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+  _identifier: {fileID: 11400000, guid: 57f0a8ac0afc4c6479c67c15b99cdacb, type: 2}
+  _icon: {fileID: 0}
+  _description: 
+  _cooldown: 3
+  _activeTime: 1
+  _isCastAbility: 1
+  _visualEffect: {fileID: 11400000, guid: 1436113d8ed112f409486750b254e9fc, type: 2}
+  _abilitySound: {fileID: 0}
+  _gameplayEffectBlueprints:
+  - {fileID: 11400000, guid: 34ecfd28a25248848bbcfcd8a68a8741, type: 2}
+  _prefab: {fileID: 4140074422687958933, guid: eef611f69a043234daa794211d3ef4a7, type: 3}
+  _lifeTime: 4
+  _speed: 30
+  _numberOfProjectiles: 6

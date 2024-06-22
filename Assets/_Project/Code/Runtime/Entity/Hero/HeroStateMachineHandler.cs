@@ -6,6 +6,7 @@ using Code.Runtime.Entity.Hero.HeroStates;
 using Code.Runtime.Logic;
 using Code.Runtime.Logic.Animator;
 using Code.Runtime.Modules.AbilitySystem;
+using Code.Runtime.Modules.AbilitySystem.ActiveAbilities;
 using Code.Runtime.Modules.StateMachine;
 using Code.Runtime.Modules.StateMachine.States;
 using Code.Runtime.Modules.StateMachine.Transitions;
