@@ -7,6 +7,7 @@ using Code.Runtime.UI.Model.AbilityMenu;
 using Code.Runtime.UI.Model.ArenaSelectionScreenModel;
 using Code.Runtime.UI.Model.DTO;
 using Code.Runtime.UI.View;
+using UnityEngine;
 using UnityEngine.Assertions;
 
 namespace Code.Runtime.UI.Services
@@ -38,6 +39,12 @@ namespace Code.Runtime.UI.Services
 
         public void Open(ScreenID screenId)
         {
+            if (_activeWindows.Any(x => x.Id == screenId))
+            {
+                Debug.Log("Screen already opened");
+                return;
+            }
+            
             if (_screenMap.TryGetValue(screenId, out var mc))
             {
                 BaseWindowView windowView = _uiFactory.CreateScreenView(screenId);
@@ -57,6 +64,12 @@ namespace Code.Runtime.UI.Services
         }
         public void Open(ScreenID screenId, IScreenModelDto dto)
         {
+            if (_activeWindows.Any(x => x.Id == screenId))
+            {
+                Debug.Log("Screen already opened");
+                return;
+            }
+            
             if (_screenMap.TryGetValue(screenId, out var mc))
             {
                 BaseWindowView windowView = _uiFactory.CreateScreenView(screenId);
@@ -114,6 +127,7 @@ namespace Code.Runtime.UI.Services
 
             _activeWindows.Remove(screen);
         }
+        
         
         private void Cleanup()
         {

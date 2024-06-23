@@ -1,3 +1,6 @@
+using Code.Runtime.Modules.WindowAnimations;
+using UnityEngine;
+
 namespace Code.Runtime.UI.View.AbilityMenu
 {
     public class AbilityScreenView : BaseWindowView
@@ -8,6 +11,20 @@ namespace Code.Runtime.UI.View.AbilityMenu
         public UnlockButton UnlockButton;
         public AbilityDescriptionArea AbilityDescription;
         public ResourcesCountUI ResourcesCount;
+        
+        public override void Show()
+        {
+            base.Show();
+        }
 
+        public override void Hide()
+        {
+            base.Hide();
+        }
+
+        public override void Close()
+        {
+            base.Close();
+        }
     }
 }

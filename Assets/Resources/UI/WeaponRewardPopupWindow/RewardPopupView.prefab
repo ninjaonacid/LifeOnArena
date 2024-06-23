@@ -5,7 +5,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 3733535269489918969}
+    m_TransformParent: {fileID: 2328963277581838363}
     m_Modifications:
     - target: {fileID: 1344454440028975029, guid: ac5058047eb67724dae895808c0d5c84, type: 3}
       propertyPath: m_Name
@@ -65,15 +65,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2235357705671146690, guid: ac5058047eb67724dae895808c0d5c84, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2235357705671146690, guid: ac5058047eb67724dae895808c0d5c84, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2235357705671146690, guid: ac5058047eb67724dae895808c0d5c84, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2235357705671146690, guid: ac5058047eb67724dae895808c0d5c84, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -259,9 +259,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 86fff4179bbcf5a42beb980ec603bd16, type: 3}
---- !u!224 &3733535269489918969 stripped
+--- !u!224 &2328963277581838363 stripped
 RectTransform:
-  m_CorrespondingSourceObject: {fileID: 984743110005154585, guid: 86fff4179bbcf5a42beb980ec603bd16, type: 3}
+  m_CorrespondingSourceObject: {fileID: 2173145069144099067, guid: 86fff4179bbcf5a42beb980ec603bd16, type: 3}
   m_PrefabInstance: {fileID: 4502100098670928096}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &6860989136363474514 stripped
@@ -281,8 +281,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 409a893fb10330f49ab4f51ac9ae335c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ScreenId: 0
+  ScreenId: 11
   CloseButton: {fileID: 0}
+  _animation: {fileID: 7170416412491548965}
   WeaponName: {fileID: 8171189049585228298}
   WeaponIcon: {fileID: 7022046339054011888}
   ClaimButton: {fileID: 8405364585218094166}
+--- !u!114 &7170416412491548965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6860989136363474514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f38a68080b745a2aabdaf73fc6a8503, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _windowRectTransform: {fileID: 2328963277581838363}
+  _canvasGroup: {fileID: 0}
