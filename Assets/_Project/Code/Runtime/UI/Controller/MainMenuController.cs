@@ -73,6 +73,10 @@ namespace Code.Runtime.UI.Controller
                 .OnClickAsObservable()
                 .Subscribe(x => _screenService.Open(_windowView.SkillScreen.WindowId));
 
+            _windowView.WeaponScreen
+                .OnClickAsObservable()
+                .Subscribe(x => _screenService.Open(_windowView.WeaponScreen.WindowId));
+
         }
         
 
