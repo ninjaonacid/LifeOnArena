@@ -16,36 +16,44 @@ MonoBehaviour:
     m_Code: en
   m_SharedData: {fileID: 11400000, guid: 908445a34d696ec449ffe62e7e3cd673, type: 2}
   m_Metadata:
-    m_Items: []
+    m_Items:
+    - rid: 3708976529188323328
   m_TableData:
   - m_Id: 148316975104
     m_Localized: Fire projectile that flies at a target and explodes on impact
     m_Metadata:
-      m_Items: []
+      m_Items:
+      - rid: 3708976529188323328
   - m_Id: 895913914368
     m_Localized: A wall of fire appears in front of the hero and burns the enemies
       who fall into it
     m_Metadata:
-      m_Items: []
+      m_Items:
+      - rid: 3708976529188323328
   - m_Id: 1463575212032
     m_Localized: "\u0413\u0435\u0440\u043E\u0439 \u0431\u044B\u0441\u0442\u0440\u043E
       \u0432\u0440\u0430\u0449\u0430\u0435\u0442\u0441\u044F \u043D\u0430\u043D\u043E\u0441\u044F
       \u0443\u0440\u043E\u043D \u043E\u0440\u0443\u0436\u0438\u0435\u043C \u043E\u043A\u0440\u0443\u0436\u0430\u044E\u0449\u0438\u043C
       \u043F\u0440\u043E\u0442\u0438\u0432\u043D\u0438\u043A\u0430\u043C"
     m_Metadata:
-      m_Items: []
+      m_Items:
+      - rid: 3708976529188323328
   - m_Id: 1675618250752
-    m_Localized: Play
+    m_Localized: PLAY
     m_Metadata:
       m_Items: []
   - m_Id: 2894315220992
-    m_Localized: Weapons
+    m_Localized: WEAPONS
     m_Metadata:
       m_Items: []
   - m_Id: 5967544676352
-    m_Localized: Skills
+    m_Localized: SKILLS
     m_Metadata:
       m_Items: []
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 3708976529188323328
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 00706188220000000070a198d00000000070e1c354010000

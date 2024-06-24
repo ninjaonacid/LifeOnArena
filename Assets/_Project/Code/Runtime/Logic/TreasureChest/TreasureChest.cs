@@ -2,6 +2,7 @@ using Code.Runtime.Modules.RewardSystem;
 using Code.Runtime.UI;
 using Code.Runtime.UI.Model.DTO;
 using Code.Runtime.UI.Services;
+using DG.Tweening;
 using UnityEngine;
 using VContainer;
 
@@ -28,22 +29,19 @@ namespace Code.Runtime.Logic.TreasureChest
             _reward = reward;
         }
 
-        private void Open()
+        public void Open()
         {
-            
+            _isOpened = true;
+            _chestLid.transform.DOLocalRotate(new Vector3(5, 0, 0), 1f);
+            var loot = Object.Instantiate(_reward.LootView, transform);
+            loot.LootReady += ClaimReward;
+            loot.LootSpawnLogic();
         }
 
-        public void OnTriggerEnter(Collider other)
+        private void ClaimReward()
         {
-            if (_player == 1 << other.gameObject.layer && !_isOpened)
-            {
-                Open();
-                _isOpened = true;
-                var loot = Object.Instantiate(_reward.LootView, transform);
-                loot.SetTarget(other.transform);
-                loot.LootSpawnLogic();
-                _reward.Claim();
-            }
+            _reward.Claim();
         }
+        
     }
 }
