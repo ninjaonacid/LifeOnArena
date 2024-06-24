@@ -23,12 +23,14 @@ namespace Code.Runtime.Core.Config
         private Dictionary<string, LevelConfig> _levels; 
         private Dictionary<LocationReward, LevelReward> _levelReward;
         private Dictionary<ScreenID, ScreenConfig> _windowConfigs;
-        private Dictionary<int, ActiveAbilityBlueprintBase> _heroAbilities;
+        private Dictionary<int, ActiveAbilityBlueprintBase> _abilities;
         private Dictionary<int, VisualEffectData> _visualEffects;
         private Dictionary<int, WeaponData> _weapons;
         private Dictionary<int, RewardBlueprintBase> _rewards;
-
-
+        
+        private List<ActiveAbilityBlueprintBase> _treeAbilities;
+        private List<WeaponData> _heroWeapons;
+        
         private TutorialConfig _tutorialConfig;
         private AudioLibrary _audioLibrary;
         private AudioServiceSettings _audioServiceSettings;
@@ -59,7 +61,7 @@ namespace Code.Runtime.Core.Config
                 .Configs
                 .ToDictionary(x => x.ScreenID, x => x);
 
-            _heroAbilities = Resources
+            _abilities = Resources
                 .LoadAll<ActiveAbilityBlueprintBase>($"{ConfigFolder}/AbilitySystem")
                 .ToDictionary(x => x.Identifier.Id, x => x);
 
@@ -70,6 +72,15 @@ namespace Code.Runtime.Core.Config
             _weapons = Resources
                 .LoadAll<WeaponData>($"{ConfigFolder}/Equipment/Weapons")
                 .ToDictionary(x => x.WeaponId.Id, x => x);
+            
+            _heroWeapons = _weapons.Values
+                .Where(x => x.IsHeroWeapon)
+                .ToList();
+            
+            _treeAbilities = _abilities.Values
+                .Where(x => x.AbilityTreeData != null 
+            && x.AbilityTreeData.Branch != AbilityTreeBranch.NotInTree)
+                .ToList(); 
 
             _rewards = Resources
                 .LoadAll<RewardBlueprintBase>($"{ConfigFolder}/Rewards")
@@ -112,7 +123,7 @@ namespace Code.Runtime.Core.Config
 
         public ActiveAbilityBlueprintBase Ability(int heroAbilityId)    
         {
-            if (_heroAbilities.TryGetValue(heroAbilityId, out var heroAbility))
+            if (_abilities.TryGetValue(heroAbilityId, out var heroAbility))
                 return heroAbility;
 
             return null;
@@ -120,14 +131,17 @@ namespace Code.Runtime.Core.Config
 
         public List<ActiveAbilityBlueprintBase> AllAbilities()
         {
-            if (_heroAbilities.Count > 0)
+            if (_abilities.Count > 0)
             {
-                return _heroAbilities.Values.ToList();
+                return _abilities.Values.ToList();
             }
 
             return null;
         }
-        
+
+        public List<ActiveAbilityBlueprintBase> GetTreeAbilities() => _treeAbilities;
+
+        public List<WeaponData> GetHeroWeapons() => _heroWeapons;
         public LevelConfig Level(string sceneKey) =>
         
             _levels.TryGetValue(sceneKey, out LevelConfig staticData)

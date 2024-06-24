@@ -70,7 +70,15 @@ MonoBehaviour:
       Data: 
   _identifier: {fileID: 11400000, guid: 78b12abb467b127449cb050db75d1f9a, type: 2}
   _icon: {fileID: 21300000, guid: 408c468a960514043b24563f5ed23891, type: 3}
-  _description: Pillars of flame gradually scorching nearby enemies
+  _description:
+    m_TableReference:
+      m_TableCollectionName: GUID:908445a34d696ec449ffe62e7e3cd673
+    m_TableEntryReference:
+      m_KeyId: 895913914368
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   _cooldown: 3
   _activeTime: 1
   _isCastAbility: 1
@@ -79,3 +87,6 @@ MonoBehaviour:
   _gameplayEffectBlueprints:
   - {fileID: 11400000, guid: 686bdb64a0712554982e7c8ea7eaf89c, type: 2}
   _castDistance: 5
+  references:
+    version: 2
+    RefIds: []

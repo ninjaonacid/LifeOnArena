@@ -1,3 +1,4 @@
+using System;
 using Code.Runtime.Core.SceneManagement;
 using Code.Runtime.UI.Model;
 using Code.Runtime.UI.Services;
@@ -8,11 +9,12 @@ using UnityEngine.Assertions;
 
 namespace Code.Runtime.UI.Controller
 {
-    public class WeaponScreenController : IScreenController
+    public class WeaponScreenController : IScreenController, IDisposable
     {
         private WeaponScreenModel _model;
         private WeaponScreenView _windowView;
         private readonly SceneLoader _sceneLoader;
+        private readonly CompositeDisposable _disposables = new();
         public WeaponScreenController(SceneLoader sceneLoader)
         {
             _sceneLoader = sceneLoader;
@@ -28,7 +30,15 @@ namespace Code.Runtime.UI.Controller
 
             _windowView.CloseButton
                 .OnClickAsObservable()
-                .Subscribe( x => screenService.Close(_windowView.ScreenId));
+                .Subscribe( x => screenService.Close(this)).AddTo(_disposables);
+            
+            
+        }
+
+
+        public void Dispose()
+        {
+            _disposables?.Dispose();
         }
     }
 }

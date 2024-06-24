@@ -2,10 +2,12 @@ using System.Collections.Generic;
 using Code.Runtime.ConfigData.Attack;
 using Code.Runtime.ConfigData.Audio;
 using Code.Runtime.ConfigData.Identifiers;
+using Code.Runtime.Data.PlayerData;
 using Code.Runtime.Logic.Damage;
 using Code.Runtime.Logic.Weapon;
-using Sirenix.OdinInspector;
+using Code.Runtime.Modules.Requirements;
 using UnityEngine;
+using UnityEngine.Localization;
 using Vector3 = UnityEngine.Vector3;
 
 namespace Code.Runtime.ConfigData.Weapon
@@ -23,8 +25,11 @@ namespace Code.Runtime.ConfigData.Weapon
         [SerializeField] private SoundAudioFile _weaponSound;
         [SerializeField] private List<DamageType> _damageType;
         [SerializeField] private List<AttackConfig> _attacks;
+        [SerializeField] private IRequirement<PlayerData> _unlockRequirement;
+        [SerializeField] private bool _isHeroWeapon;
+        [SerializeField] private LocalizedString _weaponName;
+        [SerializeField] private LocalizedString _weaponDescription;
         public IReadOnlyList<DamageType> DamageTypes => _damageType;
-
         public Sprite WeaponIcon => _weaponIcon;
         public WeaponView WeaponView => _weaponPrefab;
         public WeaponId WeaponId => _weaponId;
@@ -33,7 +38,8 @@ namespace Code.Runtime.ConfigData.Weapon
         public AnimatorOverrideController OverrideController => _overrideController;
         public Vector3 LocalScale => _localScale;
         public SoundAudioFile WeaponSound => _weaponSound;
-
+        public bool IsHeroWeapon => _isHeroWeapon;
+        public IRequirement<PlayerData> UnlockRequirement => _unlockRequirement;
         public List<AttackConfig> AttacksConfigs => _attacks;
     }
 }

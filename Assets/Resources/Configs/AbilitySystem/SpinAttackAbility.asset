@@ -70,10 +70,21 @@ MonoBehaviour:
       Data: 
   _identifier: {fileID: 11400000, guid: 630144b53aba86245b26160679af021d, type: 2}
   _icon: {fileID: 21300000, guid: 18801476a96539e479cd6af6e9b48095, type: 3}
-  _description: whidnmill barbarian slash
+  _description:
+    m_TableReference:
+      m_TableCollectionName: GUID:908445a34d696ec449ffe62e7e3cd673
+    m_TableEntryReference:
+      m_KeyId: 1463575212032
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   _cooldown: 8
   _activeTime: 3
   _isCastAbility: 0
   _visualEffect: {fileID: 11400000, guid: 4329e6e0fb17724458abb5b7bdeabc6a, type: 2}
   _abilitySound: {fileID: 0}
   _gameplayEffectBlueprints: []
+  references:
+    version: 2
+    RefIds: []
