@@ -488,7 +488,6 @@ MonoBehaviour:
   UnlockButton: {fileID: 7510176645117408270}
   AbilityDescription: {fileID: 5890834590363326384}
   ResourcesCount: {fileID: 8457572055211427548}
-  _windowScaleAnimation: {fileID: 7479417365897216500}
 --- !u!114 &7479417365897216500
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -549,6 +548,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DescriptionArea
       objectReference: {fileID: 0}
+    - target: {fileID: 7654411362854740846, guid: 8619b1185fe83c2489740a6a8c75d8de, type: 3}
+      propertyPath: CanvasGroup
+      value: 
+      objectReference: {fileID: 7510944242154025335}
     - target: {fileID: 7889377176446394621, guid: 8619b1185fe83c2489740a6a8c75d8de, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -635,12 +638,29 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8619b1185fe83c2489740a6a8c75d8de, type: 3}
+--- !u!1 &3395945154883210541 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1502318180949752307, guid: 8619b1185fe83c2489740a6a8c75d8de, type: 3}
+  m_PrefabInstance: {fileID: 4321657172814148830}
+  m_PrefabAsset: {fileID: 0}
+--- !u!225 &7510944242154025335
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3395945154883210541}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!114 &5890834590363326384 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7654411362854740846, guid: 8619b1185fe83c2489740a6a8c75d8de, type: 3}
   m_PrefabInstance: {fileID: 4321657172814148830}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 3395945154883210541}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1db43b65ed813f74fb160844102cf7a7, type: 3}

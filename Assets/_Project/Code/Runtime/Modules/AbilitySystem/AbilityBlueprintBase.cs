@@ -4,6 +4,7 @@ using Code.Runtime.Data.PlayerData;
 using Code.Runtime.Modules.Requirements;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Localization;
 
 namespace Code.Runtime.Modules.AbilitySystem
 {
@@ -11,11 +12,11 @@ namespace Code.Runtime.Modules.AbilitySystem
     {
         [SerializeField] private AbilityIdentifier _identifier;
         [SerializeField] private Sprite _icon;
-        [SerializeField] private string _description;
+        [SerializeField] private LocalizedString _description;
         [SerializeField] private AbilityTreeData _treeData;
         public AbilityIdentifier Identifier => _identifier;
         public Sprite Icon => _icon;
-        public string Description => _description;
+        public LocalizedString Description => _description;
         public AbilityTreeData AbilityTreeData => _treeData;
     }
 }

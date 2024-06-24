@@ -1,6 +1,6 @@
 namespace Code.Runtime.UI.Model
 {
-    public class WeaponShopWindowModel : IScreenModel
+    public class WeaponScreenModel : IScreenModel
     {
         public void Initialize()
         {

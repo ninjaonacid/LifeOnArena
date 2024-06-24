@@ -29,7 +29,7 @@ namespace Code.Runtime.UI.Services
             _controllerFactory = controllerFactory;
 
             _screenMap.Add(ScreenID.MainMenu, (typeof(MainMenuModel), typeof(MainMenuController)));
-            _screenMap.Add(ScreenID.WeaponShop, (typeof(WeaponShopWindowModel), typeof(WeaponShopScreenController)));
+            _screenMap.Add(ScreenID.WeaponShop, (typeof(WeaponScreenModel), typeof(WeaponScreenController)));
             _screenMap.Add(ScreenID.AbilityMenu, (typeof(AbilityScreenModel), typeof(AbilityScreenController)));
             _screenMap.Add(ScreenID.HUD, (typeof(HudModel), (typeof(HudController))));
             _screenMap.Add(ScreenID.MessageWindow, (typeof(MessageWindowCompositeModel), typeof(MessageWindowController)));

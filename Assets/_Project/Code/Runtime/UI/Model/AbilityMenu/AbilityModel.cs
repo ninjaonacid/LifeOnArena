@@ -2,6 +2,7 @@ using System;
 using Code.Runtime.Modules.AbilitySystem;
 using Newtonsoft.Json;
 using UnityEngine;
+using UnityEngine.Localization;
 
 namespace Code.Runtime.UI.Model.AbilityMenu
 {
@@ -15,7 +16,8 @@ namespace Code.Runtime.UI.Model.AbilityMenu
         [JsonIgnore]
         public Sprite Icon;
         public AbilityTreeData AbilityTreeData;
-        public string Description;
+        [JsonIgnore]
+        public LocalizedString Description;
         
     }
 }

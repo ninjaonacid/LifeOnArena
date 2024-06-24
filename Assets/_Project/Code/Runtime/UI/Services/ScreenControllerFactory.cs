@@ -27,8 +27,8 @@ namespace Code.Runtime.UI.Services
                     ? new MainMenuController(gameData, audioService, sceneLoader)
                     : new TutorialMainMenuController(gameData, audioService, sceneLoader, tutorialService)); 
             
-            _screenControllers.Add(typeof(WeaponShopScreenController),
-                () => new WeaponShopScreenController(sceneLoader));
+            _screenControllers.Add(typeof(WeaponScreenController),
+                () => new WeaponScreenController(sceneLoader));
             
             _screenControllers.Add(typeof(AbilityScreenController), () => 
                 gameData.PlayerData.TutorialData.IsTutorialCompleted 

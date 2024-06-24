@@ -25,7 +25,7 @@ namespace Code.Runtime.UI.Services
         private void InitializeModelMap(IGameDataContainer gameData, ConfigProvider config)
         {
             _modelMap.Add(typeof(MainMenuModel), (dto) => new MainMenuModel(gameData));
-            _modelMap.Add(typeof(WeaponShopWindowModel), (dto) => new WeaponShopWindowModel());
+            _modelMap.Add(typeof(WeaponScreenModel), (dto) => new WeaponScreenModel());
             _modelMap.Add(typeof(AbilityScreenModel), (dto) => new AbilityScreenModel(gameData, config));
             _modelMap.Add(typeof(HudModel), (dto) => new HudModel());
             _modelMap.Add(typeof(MessageWindowCompositeModel), (dto) => new MessageWindowCompositeModel(dto));

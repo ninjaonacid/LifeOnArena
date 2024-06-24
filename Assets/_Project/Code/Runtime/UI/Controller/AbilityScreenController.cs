@@ -61,8 +61,9 @@ namespace Code.Runtime.UI.Controller
             _screenView.UnlockButton
                 .OnClickAsObservable()
                 .Subscribe(x => Unlock())
-                .AddTo(_disposable);
-
+                .AddTo(_disposable);  
+            
+            _screenView.AbilityDescription.Show(false);
             _screenView.ResourcesCount.ChangeText(_model.Souls.Value.ToString());
             _model.Souls.Subscribe(x => _screenView.ResourcesCount.ChangeText(_model.Souls.Value.ToString()));
             
@@ -96,9 +97,10 @@ namespace Code.Runtime.UI.Controller
             _screenView.UnlockButton.ShowButton(!isEquipped && !isUnlocked);
 
             var slotModel = _model.GetSlotByIndex(abilityIndex);
-
+            
+            _screenView.AbilityDescription.Show(true);
             _screenView.AbilityDescription.Icon.sprite = slotModel.Icon;
-            _screenView.AbilityDescription.Text.text = slotModel.Description;
+            _screenView.AbilityDescription.LocalizeString.StringReference = slotModel.Description;
         }
 
         private void Unlock()
