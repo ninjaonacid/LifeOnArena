@@ -35,8 +35,10 @@ namespace Code.Runtime.UI.View
             {
                 _animation.CloseAnimation();
             }
-            
-            Destroy(gameObject);
+            else
+            {
+                Destroy(gameObject); 
+            }
         }
 
         public void Dispose()

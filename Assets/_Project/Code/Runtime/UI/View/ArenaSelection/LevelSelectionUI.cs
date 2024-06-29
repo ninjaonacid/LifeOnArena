@@ -17,7 +17,7 @@ namespace Code.Runtime.UI.View.ArenaSelection
         private Subject<LevelSelectionUI> _subject;
         public void UpdateData(Sprite icon, string locationName, bool isUnlocked)
         {
-            _levelImage.sprite = icon;
+            //_levelImage.sprite = icon;
             _locationName.SetText(locationName);
             _lockImage.gameObject.SetActive(!isUnlocked);
         }

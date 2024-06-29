@@ -67,6 +67,10 @@ namespace Code.Runtime.UI.Controller
             _screenView.ResourcesCount.ChangeText(_model.Souls.Value.ToString());
             _model.Souls.Subscribe(x => _screenView.ResourcesCount.ChangeText(_model.Souls.Value.ToString()));
             
+            _screenView.UnlockButton.ShowButton(false);
+            _screenView.EquipButton.ShowButton(false);
+            _screenView.UnEquipButton.ShowButton(false);
+            
             
           UpdateData();
         }

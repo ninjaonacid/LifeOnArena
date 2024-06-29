@@ -17,14 +17,14 @@ namespace Code.Runtime.Modules.WindowAnimations
         {
             if (_tween != null) _tween.Kill();
             
-            _tween = _windowRectTransform.DOScale(Vector3.one, 0.5f).SetEase(Ease.InOutExpo);
+            _tween = _windowRectTransform.DOScale(Vector3.one, 0.5f).SetEase(Ease.InOutExpo).SetLink(gameObject);
         }
 
         public override void CloseAnimation()
         {
             if(_tween != null) _tween.Kill();
 
-            _tween = _windowRectTransform.DOScale(Vector3.zero, 0.5f).SetEase(Ease.InBack).OnComplete(() => Destroy(gameObject));
+            _tween = _windowRectTransform.DOScale(Vector3.zero, 0.5f).SetEase(Ease.InBack).OnComplete(() => Destroy(gameObject)).SetLink(gameObject);
         }
 
         public override void HideAnimation()

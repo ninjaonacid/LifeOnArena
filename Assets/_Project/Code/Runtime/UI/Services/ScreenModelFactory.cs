@@ -7,6 +7,7 @@ using Code.Runtime.UI.Model;
 using Code.Runtime.UI.Model.AbilityMenu;
 using Code.Runtime.UI.Model.ArenaSelectionScreenModel;
 using Code.Runtime.UI.Model.DTO;
+using Code.Runtime.UI.Model.WeaponScreen;
 
 namespace Code.Runtime.UI.Services
 {

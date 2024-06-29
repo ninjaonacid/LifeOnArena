@@ -6,6 +6,7 @@ using Code.Runtime.Data.PlayerData;
 using Code.Runtime.Logic.Damage;
 using Code.Runtime.Logic.Weapon;
 using Code.Runtime.Modules.Requirements;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Localization;
 using Vector3 = UnityEngine.Vector3;
@@ -13,7 +14,7 @@ using Vector3 = UnityEngine.Vector3;
 namespace Code.Runtime.ConfigData.Weapon
 {
     [CreateAssetMenu(menuName = "Config/Equipment/Weapon", fileName = "NewWeapon")]
-    public class WeaponData : ScriptableObject, IDamageSource
+    public class WeaponData : SerializedScriptableObject, IDamageSource
     {
         [SerializeField] private Sprite _weaponIcon;
         [SerializeField] private WeaponView _weaponPrefab;
@@ -41,5 +42,7 @@ namespace Code.Runtime.ConfigData.Weapon
         public bool IsHeroWeapon => _isHeroWeapon;
         public IRequirement<PlayerData> UnlockRequirement => _unlockRequirement;
         public List<AttackConfig> AttacksConfigs => _attacks;
+        public LocalizedString WeaponName => _weaponName;
+        public LocalizedString WeaponDescription => _weaponDescription;
     }
 }

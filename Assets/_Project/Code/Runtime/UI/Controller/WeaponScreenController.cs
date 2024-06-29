@@ -1,6 +1,7 @@
 using System;
 using Code.Runtime.Core.SceneManagement;
 using Code.Runtime.UI.Model;
+using Code.Runtime.UI.Model.WeaponScreen;
 using Code.Runtime.UI.Services;
 using Code.Runtime.UI.View;
 using Code.Runtime.UI.View.WeaponShopView;
@@ -32,9 +33,41 @@ namespace Code.Runtime.UI.Controller
                 .OnClickAsObservable()
                 .Subscribe( x => screenService.Close(this)).AddTo(_disposables);
             
-            
+            _windowView.WeaponContainer.Initialize();
+            _windowView.WeaponContainer.OnWeaponCellSelectedAsObservable().Subscribe(WeaponSelected);
+            _windowView.EquipButton.OnClickAsObservable().Subscribe(x => EquipWeapon());
+            UpdateView();
         }
 
+        private void UpdateView()
+        {
+            var weaponList = _model.GetSlots();
+            
+            for (var index = 0; index < weaponList.Count; index++)
+            {
+                var weapon = weaponList[index];
+                
+                _windowView.WeaponContainer.UpdateView(index, weapon.WeaponName.GetLocalizedString(), weapon.WeaponDescription.GetLocalizedString(), weapon.WeaponIcon, weapon.isUnlocked);
+            }
+        }
+        
+        private void WeaponSelected(int index)
+        {
+            if (_model.IsEquipped(index))
+            {
+                
+            }
+        }
+
+        private void EquipWeapon()
+        {
+            int index;
+            
+            if (_windowView.WeaponContainer.TryGetSelectedWeaponIndex(out index))
+            {
+                _model.EquipWeapon(index);
+            }
+        }
 
         public void Dispose()
         {

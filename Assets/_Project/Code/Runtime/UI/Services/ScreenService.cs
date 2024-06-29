@@ -6,6 +6,7 @@ using Code.Runtime.UI.Model;
 using Code.Runtime.UI.Model.AbilityMenu;
 using Code.Runtime.UI.Model.ArenaSelectionScreenModel;
 using Code.Runtime.UI.Model.DTO;
+using Code.Runtime.UI.Model.WeaponScreen;
 using Code.Runtime.UI.View;
 using UnityEngine;
 using UnityEngine.Assertions;

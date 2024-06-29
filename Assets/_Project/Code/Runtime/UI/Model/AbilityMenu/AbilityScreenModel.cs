@@ -34,11 +34,7 @@ namespace Code.Runtime.UI.Model.AbilityMenu
             _equippedAbilities = new IndexedQueue<AbilityModel>();
 
             var allAbilities =
-                _configProvider.AllAbilities()
-                    .Where(x => x.AbilityTreeData != null && x.AbilityTreeData.Branch != AbilityTreeBranch.NotInTree)
-                    .OrderBy(x => x.AbilityTreeData.Branch)
-                    .ThenBy(x => x.AbilityTreeData.Position)
-                    .ToArray();
+                _configProvider.GetTreeAbilities();
                     
             
             foreach (var ability in allAbilities)
@@ -55,11 +51,12 @@ namespace Code.Runtime.UI.Model.AbilityMenu
                 if (abilityModel.Price == 0)
                 {
                     abilityModel.IsUnlocked = true;
+                    _gameData.PlayerData.AbilityData.UnlockedAbilities.Add(abilityModel);
                 }
                 
-
                 _abilities.Add(abilityModel);
             }
+            
         }
 
         public int GetEquippedSlotIndex(AbilityModel slot)

@@ -12,7 +12,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ec85cfef59c751479b3ac3c5068c7da, type: 3}
   m_Name: DualAxes
   m_EditorClassIdentifier: 
-  _weaponIcon: {fileID: 0}
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 11400000, guid: 2dcb3accab65ee74ea620704230da380, type: 2}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: _unlockRequirement
+      Entry: 7
+      Data: 0|Code.Runtime.Modules.Requirements.EnemyKillRequirement, Assembly-CSharp
+    - Name: _enemyToKill
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+  _weaponIcon: {fileID: 21300000, guid: 21186fb97af3dae49bb320db093a50fe, type: 3}
   _weaponPrefab: {fileID: 9099119649560949103, guid: c70700ebd3e0fe9428bb883c4175e3c2, type: 3}
   _weaponId: {fileID: 11400000, guid: d2c169cc5e808b74c8e3976000b05073, type: 2}
   _isDual: 1
@@ -25,3 +44,25 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1dbdd80a9ce9376438b63cad3fd8c17b, type: 2}
   - {fileID: 11400000, guid: 163d9b27044520940989bae10c11215e, type: 2}
   - {fileID: 11400000, guid: 7d8633fe83756e84bb1d78a5272d86b0, type: 2}
+  _isHeroWeapon: 1
+  _weaponName:
+    m_TableReference:
+      m_TableCollectionName: GUID:908445a34d696ec449ffe62e7e3cd673
+    m_TableEntryReference:
+      m_KeyId: 2160840771989504
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  _weaponDescription:
+    m_TableReference:
+      m_TableCollectionName: GUID:908445a34d696ec449ffe62e7e3cd673
+    m_TableEntryReference:
+      m_KeyId: 2162019266555904
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  references:
+    version: 2
+    RefIds: []
