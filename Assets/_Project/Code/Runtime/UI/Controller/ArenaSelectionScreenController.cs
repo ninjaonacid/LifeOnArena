@@ -1,4 +1,5 @@
-﻿using Code.Runtime.UI.Model;
+﻿using Code.Runtime.Services.LevelLoader;
+using Code.Runtime.UI.Model;
 using Code.Runtime.UI.Model.ArenaSelectionScreenModel;
 using Code.Runtime.UI.Services;
 using Code.Runtime.UI.View;
@@ -12,6 +13,13 @@ namespace Code.Runtime.UI.Controller
     {
         protected ArenaSelectionScreenModel _model;
         protected ArenaSelectionScreenView _view;
+        private LevelLoader _levelLoader;
+
+        public ArenaSelectionScreenController(LevelLoader levelLoader)
+        {
+            _levelLoader = levelLoader;
+        }
+
         public virtual void InitController(IScreenModel model, BaseWindowView windowView, ScreenService screenService)
         {
             _model = model as ArenaSelectionScreenModel;
@@ -27,6 +35,7 @@ namespace Code.Runtime.UI.Controller
                 .Subscribe(x => screenService.Close(this));;
 
             _view.LevelContainer.OnLevelSelectedAsObservable().Subscribe(LevelSelected);
+            _view.StartBattleButton.OnClickAsObservable().Subscribe(x => StartBattle());
             
             UpdateData();
 
@@ -35,21 +44,27 @@ namespace Code.Runtime.UI.Controller
 
         private void UpdateData()
         {
-            for (var index = 0; index < _model.LevelModel.Count; index++)
+            for (var index = 0; index < _model.LocationPointModel.Count; index++)
             {
-                var levelModel = _model.LevelModel[index];
+                var levelModel = _model.LocationPointModel[index];
                 _view.LevelContainer.UpdateData(index, levelModel.LocationName, levelModel.Icon, true);
             }
         }
-        
-        private void LevelSelected(int abilityIndex)
+
+        private void StartBattle()
         {
-            var isUnlocked = _model.IsLevelUnlocked(abilityIndex);
-            
-            // _view.EquipButton.ShowButton(!isEquipped && isUnlocked);
-            // _view.UnEquipButton.ShowButton(isEquipped && isUnlocked);
-            // _view.UnlockButton.ShowButton(!isEquipped && !isUnlocked);
-            
+           var locationId =  _view.LevelContainer.GetSelectedLocationId();
+           _levelLoade
+        }
+        private void LevelSelected(int levelId)
+        {
+            var isUnlocked = _model.IsLevelUnlocked(levelId);
+
+            if (isUnlocked)
+            {
+                
+            }
+
             UpdateData();
             
 

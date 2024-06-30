@@ -2,6 +2,7 @@
 using System.Linq;
 using Code.Runtime.ConfigData.Levels;
 using Code.Runtime.Core.Config;
+using Code.Runtime.Services.PersistentProgress;
 using UnityEngine;
 
 namespace Code.Runtime.UI.Model.ArenaSelectionScreenModel
@@ -9,12 +10,12 @@ namespace Code.Runtime.UI.Model.ArenaSelectionScreenModel
     public class ArenaSelectionScreenModel : IScreenModel
     {
         private ConfigProvider _configProvider;
-        public List<LocationPointModel> LevelModel { get; private set; } = new();
-
-        public ArenaSelectionScreenModel(ConfigProvider configProvider)
+        private IGameDataContainer _gameData;
+        public List<LocationPointModel> LocationPointModel { get; private set; } = new();
+        public ArenaSelectionScreenModel(ConfigProvider configProvider, IGameDataContainer gameData)
         {
             _configProvider = configProvider;
-            
+            _gameData = gameData;
         }
 
         public void Initialize()
@@ -25,18 +26,27 @@ namespace Code.Runtime.UI.Model.ArenaSelectionScreenModel
 
             foreach (var level in playableLevels)
             {
-                LevelModel.Add(new LocationPointModel()
+                var locationModel = new LocationPointModel()
                 {
                     LocationName =  level.LocationName,
-                    LevelId = level.LevelId.Id
-                });
+                    LevelId = level.LevelId.Id,
+                    IsUnlocked = level.UnlockRequirement == null || level.UnlockRequirement.CheckRequirement(_gameData.PlayerData)
+                };
+                
+                LocationPointModel.Add(locationModel);
             }
         }
 
-        public bool IsLevelUnlocked(int index)
+        public bool IsLevelUnlocked(int id)
         {
-            var levelModel = LevelModel[index];
-            return levelModel.IsUnlocked;
+            foreach (var model in LocationPointModel)
+            {
+                if (model.LevelId == id)
+                {
+                    return model.IsUnlocked;
+                }
+            }
+            return false;
         }
     }
 

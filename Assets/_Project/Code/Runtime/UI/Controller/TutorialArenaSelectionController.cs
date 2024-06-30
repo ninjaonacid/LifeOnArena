@@ -2,6 +2,7 @@
 using System.Linq;
 using Code.Runtime.ConfigData.Identifiers;
 using Code.Runtime.Modules.TutorialService;
+using Code.Runtime.Services.LevelLoader;
 using Code.Runtime.UI.Model;
 using Code.Runtime.UI.Services;
 using Code.Runtime.UI.View;
@@ -14,7 +15,8 @@ namespace Code.Runtime.UI.Controller
         private TutorialService _tutorialService;
         private List<TutorialElement> _tutorialElements;
 
-        public TutorialArenaSelectionController(TutorialService tutorialService)
+
+        public TutorialArenaSelectionController(LevelLoader levelLoader, TutorialService tutorialService) : base(levelLoader)
         {
             _tutorialService = tutorialService;
         }
@@ -34,7 +36,7 @@ namespace Code.Runtime.UI.Controller
             
             UpdateTutorial(_tutorialService.GetCurrentTask());
         }
-        
+
         private void HandleTutorialLogic(TutorialElementIdentifier tutorialElement)
         {
             var task = _tutorialService.GetCurrentTask();

@@ -29,7 +29,7 @@ namespace Code.Runtime.UI.Services
                     : new TutorialMainMenuController(gameData, audioService, tutorialService, levelLoader)); 
             
             _screenControllers.Add(typeof(WeaponScreenController),
-                () => new WeaponScreenController(sceneLoader));
+                () => new WeaponScreenController());
             
             _screenControllers.Add(typeof(AbilityScreenController), () => 
                 gameData.PlayerData.TutorialData.IsTutorialCompleted 
@@ -43,8 +43,8 @@ namespace Code.Runtime.UI.Services
             
             _screenControllers.Add(typeof(ArenaSelectionScreenController), 
                 () => gameData.PlayerData.TutorialData.IsTutorialCompleted 
-                ? new ArenaSelectionScreenController()
-                : new TutorialArenaSelectionController(tutorialService));
+                ? new ArenaSelectionScreenController(levelLoader)
+                : new TutorialArenaSelectionController(levelLoader, tutorialService));
             
             _screenControllers.Add(typeof(RewardPopupController), () => new RewardPopupController());
         }

@@ -30,7 +30,7 @@ namespace Code.Runtime.UI.Services
             _modelMap.Add(typeof(AbilityScreenModel), (dto) => new AbilityScreenModel(gameData, config));
             _modelMap.Add(typeof(HudModel), (dto) => new HudModel());
             _modelMap.Add(typeof(MessageWindowCompositeModel), (dto) => new MessageWindowCompositeModel(dto));
-            _modelMap.Add(typeof(ArenaSelectionScreenModel), (dto) => new ArenaSelectionScreenModel(config));
+            _modelMap.Add(typeof(ArenaSelectionScreenModel), (dto) => new ArenaSelectionScreenModel(config, gameData));
             _modelMap.Add(typeof(RewardPopupModel), (dto) => new RewardPopupModel(dto));
         }
 

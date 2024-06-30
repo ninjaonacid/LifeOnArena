@@ -67,8 +67,8 @@ namespace Code.Runtime.UI.Controller
 
             _windowView.StartFightButton
                 .OnClickAsObservable()
-                .Subscribe(x => //_screenService.Open(ScreenID.ArenaSelectionScreen)
-                   _levelLoader.LoadLevel(229687619)
+                .Subscribe(x => _screenService.Open(ScreenID.ArenaSelectionScreen)
+                   //_levelLoader.LoadLevel(229687619)
                 );
 
             _windowView.SkillScreen

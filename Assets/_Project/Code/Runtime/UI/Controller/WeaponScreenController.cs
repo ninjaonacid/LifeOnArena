@@ -14,13 +14,8 @@ namespace Code.Runtime.UI.Controller
     {
         private WeaponScreenModel _model;
         private WeaponScreenView _windowView;
-        private readonly SceneLoader _sceneLoader;
         private readonly CompositeDisposable _disposables = new();
-        public WeaponScreenController(SceneLoader sceneLoader)
-        {
-            _sceneLoader = sceneLoader;
-        }
-        
+
         public void InitController(IScreenModel model, BaseWindowView windowView, ScreenService screenService)
         {
             _model = model as WeaponScreenModel;

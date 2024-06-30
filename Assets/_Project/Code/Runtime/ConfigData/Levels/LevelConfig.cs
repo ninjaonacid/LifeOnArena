@@ -30,9 +30,8 @@ namespace Code.Runtime.ConfigData.Levels
         [EnumToggleButtons]
         public LevelType LevelType;
 
-        [FoldoutGroup("Unlock requirements list", true)]
-        public List<IRequirement<PlayerData>> UnlockRequirements;
-        
+        public IRequirement<PlayerData> UnlockRequirement;
+
         public int WavesToSpawn;
 
         [BoxGroup("Spawners")]

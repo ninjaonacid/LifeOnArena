@@ -9,17 +9,23 @@ namespace Code.Runtime.UI.View.ArenaSelection
 {
     public class LocationPoint : MonoBehaviour, IPointerClickHandler
     {
+        public LevelIdentifier LevelId;
         [SerializeField] private Image _line;
         [SerializeField] private Image _markerIcon;
         [SerializeField] private Image _rayIcon;
-        [SerializeField] private LevelIdentifier LevelId;
         [SerializeField] private Color32 _highlightColor;
         [SerializeField] private Color32 _baseColor;
+        [SerializeField] private Color32 _lockedLineColor;
+        [SerializeField] private Color32 _unlockedLineColor;
 
         private Subject<LocationPoint> _subject;
         
-        public void UpdateData(Sprite icon, string locationName, bool isUnlocked)
+        public void UpdateData(bool isUnlocked)
         {
+            if (isUnlocked)
+            {
+                
+            }
         }
 
         public void OnPointerClick(PointerEventData eventData)
