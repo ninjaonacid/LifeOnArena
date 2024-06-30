@@ -1,6 +1,7 @@
+using Code.Runtime.ConfigData.Identifiers;
 using Code.Runtime.Core.Audio;
 using Code.Runtime.Core.Config;
-using Code.Runtime.Core.SceneManagement;
+using Code.Runtime.Services.LevelLoader;
 using VContainer.Unity;
 
 namespace Code.Runtime.Core.EntryPoints.GameEntry
@@ -8,26 +9,30 @@ namespace Code.Runtime.Core.EntryPoints.GameEntry
     public class GameEntryPoint : IInitializable
     {
         private readonly InitializeGameState _gameState;
-        private readonly SceneLoader _sceneLoader;
+        private readonly LevelLoader _levelLoader;
         private readonly AudioService _audioService;
         private readonly ConfigProvider _config;
-        
-        private const string MainMenuScene = "MainMenu";
 
-
-        public GameEntryPoint(InitializeGameState gameState, SceneLoader sceneLoader, AudioService audioService, ConfigProvider config)
+        private LevelIdentifier _startLevelId;
+        public GameEntryPoint(InitializeGameState gameState,
+            LevelIdentifier startLevelId,
+            LevelLoader levelLoader, 
+            AudioService audioService, 
+            ConfigProvider config)
         {
             _gameState = gameState;
-            _sceneLoader = sceneLoader;
+            _startLevelId = startLevelId;
+            _levelLoader = levelLoader;
             _audioService = audioService;
             _config = config;
+            
         }
 
         public void Initialize()
         {
             _gameState.LoadProgressOrInitNew();
             
-            _sceneLoader.Load(MainMenuScene);
+            _levelLoader.LoadLevel(_startLevelId);
         }
         
     }

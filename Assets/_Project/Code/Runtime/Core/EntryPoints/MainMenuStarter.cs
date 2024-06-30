@@ -40,7 +40,7 @@ namespace Code.Runtime.Core.EntryPoints
         {
             _saveLoad.Cleanup();
 
-            LevelConfig config = _levelLoader.GetCurerntLevelConfig();
+            LevelConfig config = _levelLoader.GetCurrentLevelConfig();
 
             GameObject hero = await _heroFactory.CreateHero(config.HeroInitialPosition, config.HeroInitialRotation);
 

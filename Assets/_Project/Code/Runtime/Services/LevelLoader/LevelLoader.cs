@@ -23,8 +23,15 @@ namespace Code.Runtime.Services.LevelLoader
             _currentLevel = levelConfig;
             _sceneLoader.Load(levelConfig.SceneKey);
         }
+        
+        public void LoadLevel(int levelId)
+        {
+            var levelConfig = _configProvider.Level(levelId);
+            _currentLevel = levelConfig;
+            _sceneLoader.Load(levelConfig.SceneKey);
+        }
 
-        public LevelConfig GetCurerntLevelConfig()
+        public LevelConfig GetCurrentLevelConfig()
         {
             return _currentLevel;
         }

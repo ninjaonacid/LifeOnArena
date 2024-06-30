@@ -7,6 +7,7 @@ using Code.Runtime.Core.SceneManagement;
 using Code.Runtime.Modules.RewardSystem;
 using Code.Runtime.Modules.TutorialService;
 using Code.Runtime.Services.BattleService;
+using Code.Runtime.Services.LevelLoader;
 using Code.Runtime.Services.PersistentProgress;
 using Code.Runtime.Services.RandomService;
 using Code.Runtime.Services.SaveLoad;
@@ -40,6 +41,7 @@ namespace Code.Runtime.Core.Scopes
 
             builder.Register<PlayerControls>(Lifetime.Singleton).AsSelf();
             builder.Register<SceneLoader>(Lifetime.Singleton);
+            builder.Register<LevelLoader>(Lifetime.Singleton);
             builder.Register<TutorialService>(Lifetime.Singleton);
 
             builder.RegisterComponentInNewPrefab(AudioService, Lifetime.Singleton).DontDestroyOnLoad().AsSelf();

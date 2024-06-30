@@ -44,7 +44,7 @@ namespace Code.Runtime.Core.EntryPoints
         {
             _saveLoad.Cleanup();
 
-            var config = _levelLoader.GetCurerntLevelConfig();
+            var config = _levelLoader.GetCurrentLevelConfig();
 
             await _enemySpawnerController.InitSpawners(config, cancellation);
 

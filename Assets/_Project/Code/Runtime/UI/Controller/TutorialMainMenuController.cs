@@ -4,6 +4,7 @@ using Code.Runtime.ConfigData.Identifiers;
 using Code.Runtime.Core.Audio;
 using Code.Runtime.Core.SceneManagement;
 using Code.Runtime.Modules.TutorialService;
+using Code.Runtime.Services.LevelLoader;
 using Code.Runtime.Services.PersistentProgress;
 using Code.Runtime.UI.Model;
 using Code.Runtime.UI.Services;
@@ -17,11 +18,11 @@ namespace Code.Runtime.UI.Controller
         private TutorialService _tutorialService;
         private List<TutorialElement> _tutorialElements = new();
 
-        public TutorialMainMenuController(IGameDataContainer gameData, AudioService audioService,
-            SceneLoader sceneLoader, TutorialService tutorialService) : base(gameData, audioService, sceneLoader)
+        public TutorialMainMenuController(IGameDataContainer gameData, AudioService audioService, TutorialService tutorialService, LevelLoader levelLoader) : base(gameData, audioService, levelLoader)
         {
             _tutorialService = tutorialService;
         }
+
 
         public override void InitController(IScreenModel model, BaseWindowView windowView, ScreenService screenService)
         {
@@ -68,6 +69,5 @@ namespace Code.Runtime.UI.Controller
             });
 
         }
-        
     }
 }

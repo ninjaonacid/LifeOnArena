@@ -15,7 +15,7 @@ namespace Code.Runtime.Entity
     public class EntityAttackComponent : MonoBehaviour, IAttackComponent
     {
         public event Action<int> OnHit;
-        protected List<CollisionData> _collidedData;
+        protected Dictionary<CollisionData, int> _collidedData;
 
         [SerializeField] private LayerMask _ownerLayer;
         [SerializeField] protected LayerMask _targetLayer;
@@ -55,7 +55,7 @@ namespace Code.Runtime.Entity
         
         private void Awake()
         {
-            _collidedData = new List<CollisionData>();
+            _collidedData = new Dictionary<CollisionData, int>();
             _entityWeapon.OnWeaponChange += ChangeWeapon;
         }
         
@@ -69,19 +69,30 @@ namespace Code.Runtime.Entity
 
         protected virtual void BaseAttack(CollisionData collision)
         {
-            if(_collidedData.Contains(collision))
+            if (_collidedData.ContainsKey(collision))
             {
-                return;
+                if (_collidedData[collision] < _entityWeapon.WeaponData.PossibleCollisions)
+                {
+                    _collidedData[collision]++;
+                }
+                else
+                {
+                    return;
+                }
             }
-
+            else
+            {
+                _collidedData.Add(collision, 1);
+            }
+            
             var hitBox = collision.Target.GetComponentInParent<EntityHurtBox>().GetHitBoxCenter();
 
             _visualEffectController.PlayVisualEffect(
                 _entityWeapon.WeaponData.HitVisualEffect.Identifier, collision.Target.transform.position).Forget();
-            
+
             _audioService.PlaySound3D("Hit", collision.Target.transform, 1f);
             _battleService.CreateWeaponAttack(_stats, collision.Target);
-            _collidedData.Add(collision);
+
             InvokeHit(1);
         }
         

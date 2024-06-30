@@ -2092,7 +2092,10 @@ PrefabInstance:
       propertyPath: m_CastShadows
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1843855418, guid: a8b891d78a5f4fe40ac188cd72907e63, type: 3}
+    - {fileID: 1344551177, guid: a8b891d78a5f4fe40ac188cd72907e63, type: 3}
+    - {fileID: 2071487176, guid: a8b891d78a5f4fe40ac188cd72907e63, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a8b891d78a5f4fe40ac188cd72907e63, type: 3}
 --- !u!4 &694086586 stripped
 Transform:
@@ -2115,8 +2118,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.246981, y: 2.4642398, z: 2.2071416}
-  m_Center: {x: -0.12357242, y: 1.2321174, z: 0.33525723}
+  m_Size: {x: 2.246981, y: 3.2280953, z: 2.2071416}
+  m_Center: {x: -0.123570114, y: 1.6140482, z: 0.33525532}
 --- !u!23 &694086589 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 6172914685338236488, guid: a8b891d78a5f4fe40ac188cd72907e63, type: 3}
@@ -3539,7 +3542,9 @@ PrefabInstance:
       propertyPath: m_CastShadows
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1457605104, guid: 33c49d44f3bd45d4fb7c8c769a603517, type: 3}
+    - {fileID: 3082943543741249192, guid: 33c49d44f3bd45d4fb7c8c769a603517, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 33c49d44f3bd45d4fb7c8c769a603517, type: 3}
 --- !u!4 &1015926160 stripped
 Transform:
@@ -3562,8 +3567,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.661045, y: 5.1995683, z: 3.8673067}
-  m_Center: {x: 0.07552334, y: 2.5997798, z: -0.054330368}
+  m_Size: {x: 2.661045, y: 6.158252, z: 3.8673067}
+  m_Center: {x: 0.075518906, y: 3.079127, z: -0.05433033}
 --- !u!23 &1015926163 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 3981849785468441374, guid: 33c49d44f3bd45d4fb7c8c769a603517, type: 3}
@@ -3717,7 +3722,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 82efa92a8b75eb046bd52974aabff04d, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1843855418, guid: a8b891d78a5f4fe40ac188cd72907e63, type: 3}
+    - {fileID: 1344551177, guid: a8b891d78a5f4fe40ac188cd72907e63, type: 3}
+    - {fileID: 2071487176, guid: a8b891d78a5f4fe40ac188cd72907e63, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a8b891d78a5f4fe40ac188cd72907e63, type: 3}
 --- !u!1 &1032895778 stripped
 GameObject:
@@ -3745,8 +3753,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.2469804, y: 2.4642396, z: 2.2071414}
-  m_Center: {x: -0.12357232, y: 1.2321174, z: 0.3352573}
+  m_Size: {x: 2.2469804, y: 3.8959832, z: 2.2071414}
+  m_Center: {x: -0.123573795, y: 1.9480027, z: 0.3352522}
 --- !u!1001 &1057563684
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4537,7 +4545,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 82efa92a8b75eb046bd52974aabff04d, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1843855418, guid: a8b891d78a5f4fe40ac188cd72907e63, type: 3}
+    - {fileID: 1344551177, guid: a8b891d78a5f4fe40ac188cd72907e63, type: 3}
+    - {fileID: 2071487176, guid: a8b891d78a5f4fe40ac188cd72907e63, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a8b891d78a5f4fe40ac188cd72907e63, type: 3}
 --- !u!1 &1320156766 stripped
 GameObject:
@@ -4565,8 +4576,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.246981, y: 2.46424, z: 2.2071416}
-  m_Center: {x: -0.12357232, y: 1.2321175, z: 0.3352573}
+  m_Size: {x: 2.246981, y: 2.8448958, z: 2.663078}
+  m_Center: {x: -0.12357666, y: 1.4224402, z: 0.5632205}
 --- !u!114 &1338576691
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4974,6 +4985,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 18.032
       objectReference: {fileID: 0}
+    - target: {fileID: 3082943543741249192, guid: 33c49d44f3bd45d4fb7c8c769a603517, type: 3}
+      propertyPath: m_Size.y
+      value: 6.5376577
+      objectReference: {fileID: 0}
+    - target: {fileID: 3082943543741249192, guid: 33c49d44f3bd45d4fb7c8c769a603517, type: 3}
+      propertyPath: m_Center.x
+      value: 0.075526
+      objectReference: {fileID: 0}
+    - target: {fileID: 3082943543741249192, guid: 33c49d44f3bd45d4fb7c8c769a603517, type: 3}
+      propertyPath: m_Center.y
+      value: 3.268823
+      objectReference: {fileID: 0}
+    - target: {fileID: 3082943543741249192, guid: 33c49d44f3bd45d4fb7c8c769a603517, type: 3}
+      propertyPath: m_Center.z
+      value: -0.054330353
+      objectReference: {fileID: 0}
     - target: {fileID: 3189290948343395019, guid: 33c49d44f3bd45d4fb7c8c769a603517, type: 3}
       propertyPath: m_Name
       value: Small_clif_2 (3)
@@ -4982,7 +5009,8 @@ PrefabInstance:
       propertyPath: m_CastShadows
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1457605104, guid: 33c49d44f3bd45d4fb7c8c769a603517, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 33c49d44f3bd45d4fb7c8c769a603517, type: 3}
 --- !u!4 &1457605102 stripped
 Transform:
@@ -5994,6 +6022,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 791842862}
     m_Modifications:
+    - target: {fileID: 2071487176, guid: a8b891d78a5f4fe40ac188cd72907e63, type: 3}
+      propertyPath: m_Size.y
+      value: 3.1345727
+      objectReference: {fileID: 0}
+    - target: {fileID: 2071487176, guid: a8b891d78a5f4fe40ac188cd72907e63, type: 3}
+      propertyPath: m_Center.x
+      value: -0.12357234
+      objectReference: {fileID: 0}
+    - target: {fileID: 2071487176, guid: a8b891d78a5f4fe40ac188cd72907e63, type: 3}
+      propertyPath: m_Center.y
+      value: 1.5672837
+      objectReference: {fileID: 0}
+    - target: {fileID: 2071487176, guid: a8b891d78a5f4fe40ac188cd72907e63, type: 3}
+      propertyPath: m_Center.z
+      value: 0.33525732
+      objectReference: {fileID: 0}
     - target: {fileID: 5035505899775413543, guid: a8b891d78a5f4fe40ac188cd72907e63, type: 3}
       propertyPath: m_RootOrder
       value: 29
@@ -6046,7 +6090,9 @@ PrefabInstance:
       propertyPath: m_CastShadows
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1843855418, guid: a8b891d78a5f4fe40ac188cd72907e63, type: 3}
+    - {fileID: 1344551177, guid: a8b891d78a5f4fe40ac188cd72907e63, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a8b891d78a5f4fe40ac188cd72907e63, type: 3}
 --- !u!4 &1843855416 stripped
 Transform:
@@ -6316,7 +6362,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 82efa92a8b75eb046bd52974aabff04d, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1843855418, guid: a8b891d78a5f4fe40ac188cd72907e63, type: 3}
+    - {fileID: 1344551177, guid: a8b891d78a5f4fe40ac188cd72907e63, type: 3}
+    - {fileID: 2071487176, guid: a8b891d78a5f4fe40ac188cd72907e63, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a8b891d78a5f4fe40ac188cd72907e63, type: 3}
 --- !u!4 &1953080424 stripped
 Transform:
@@ -6339,8 +6388,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.246981, y: 2.46424, z: 2.2071419}
-  m_Center: {x: -0.123572424, y: 1.2321175, z: 0.3352574}
+  m_Size: {x: 2.246981, y: 3.5703468, z: 2.2071419}
+  m_Center: {x: -0.12356204, y: 1.7851552, z: 0.3352665}
 --- !u!23 &1953080427 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 6172914685338236488, guid: a8b891d78a5f4fe40ac188cd72907e63, type: 3}
@@ -7415,6 +7464,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 791842862}
     m_Modifications:
+    - target: {fileID: 1457605104, guid: 33c49d44f3bd45d4fb7c8c769a603517, type: 3}
+      propertyPath: m_Size.y
+      value: 8.928265
+      objectReference: {fileID: 0}
+    - target: {fileID: 1457605104, guid: 33c49d44f3bd45d4fb7c8c769a603517, type: 3}
+      propertyPath: m_Center.x
+      value: 0.075519875
+      objectReference: {fileID: 0}
+    - target: {fileID: 1457605104, guid: 33c49d44f3bd45d4fb7c8c769a603517, type: 3}
+      propertyPath: m_Center.y
+      value: 4.464133
+      objectReference: {fileID: 0}
+    - target: {fileID: 1457605104, guid: 33c49d44f3bd45d4fb7c8c769a603517, type: 3}
+      propertyPath: m_Center.z
+      value: -0.054330327
+      objectReference: {fileID: 0}
     - target: {fileID: 2812906525382682737, guid: 33c49d44f3bd45d4fb7c8c769a603517, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -7467,7 +7532,8 @@ PrefabInstance:
       propertyPath: m_CastShadows
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3082943543741249192, guid: 33c49d44f3bd45d4fb7c8c769a603517, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 33c49d44f3bd45d4fb7c8c769a603517, type: 3}
 --- !u!23 &3082943543741249189 stripped
 MeshRenderer:
@@ -7555,7 +7621,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 82efa92a8b75eb046bd52974aabff04d, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1843855418, guid: a8b891d78a5f4fe40ac188cd72907e63, type: 3}
+    - {fileID: 1344551177, guid: a8b891d78a5f4fe40ac188cd72907e63, type: 3}
+    - {fileID: 2071487176, guid: a8b891d78a5f4fe40ac188cd72907e63, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a8b891d78a5f4fe40ac188cd72907e63, type: 3}
 --- !u!23 &3248029272111347571 stripped
 MeshRenderer:
@@ -7583,8 +7652,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.2469807, y: 2.4642396, z: 2.2071414}
-  m_Center: {x: -0.12357235, y: 1.2321174, z: 0.3352573}
+  m_Size: {x: 2.2469807, y: 3.4016426, z: 2.2071414}
+  m_Center: {x: -0.12357235, y: 1.7008187, z: 0.3352573}
 --- !u!1001 &5593614165512324899
 PrefabInstance:
   m_ObjectHideFlags: 0

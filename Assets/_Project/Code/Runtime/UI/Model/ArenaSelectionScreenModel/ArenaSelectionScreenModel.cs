@@ -21,15 +21,14 @@ namespace Code.Runtime.UI.Model.ArenaSelectionScreenModel
         {
             var playableLevels = _configProvider
                 .LoadLevels()
-                .Where(x => x.LevelType == LevelType.Playable)
-                .OrderBy(x => x.RequiredLevel);
+                .Where(x => x.LevelType == LevelType.Playable);
 
             foreach (var level in playableLevels)
             {
                 LevelModel.Add(new LocationPointModel()
                 {
                     LocationName =  level.LocationName,
-                    
+                    LevelId = level.LevelId.Id
                 });
             }
         }
@@ -46,8 +45,7 @@ namespace Code.Runtime.UI.Model.ArenaSelectionScreenModel
         public Sprite Icon;
         public bool IsUnlocked;
         public string LocationName;
+        public int LevelId;
 
-        public LevelConfig LevelConfig;
-        
     }
 }

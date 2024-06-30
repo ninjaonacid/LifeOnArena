@@ -1,6 +1,7 @@
 using System;
 using Code.Runtime.Core.Audio;
 using Code.Runtime.Core.SceneManagement;
+using Code.Runtime.Services.LevelLoader;
 using Code.Runtime.Services.PersistentProgress;
 using Code.Runtime.UI.Model;
 using Code.Runtime.UI.Services;
@@ -18,14 +19,15 @@ namespace Code.Runtime.UI.Controller
         
         private ScreenService _screenService;
         private readonly IGameDataContainer _gameData;
+        private readonly LevelLoader _levelLoader;
         private readonly SceneLoader _sceneLoader;
         private readonly AudioService _audioService; 
         private readonly CompositeDisposable _disposables = new CompositeDisposable();
 
-        public MainMenuController(IGameDataContainer gameData, AudioService audioService, SceneLoader sceneLoader)
+        public MainMenuController(IGameDataContainer gameData, AudioService audioService, LevelLoader levelLoader)
         {
             _gameData = gameData;
-            _sceneLoader = sceneLoader;
+            _levelLoader = levelLoader;
             _audioService = audioService;
         }
         
@@ -65,8 +67,8 @@ namespace Code.Runtime.UI.Controller
 
             _windowView.StartFightButton
                 .OnClickAsObservable()
-                .Subscribe(x => _screenService.Open(ScreenID.ArenaSelectionScreen)
-                   // _sceneLoader.Load("FantasyArena_1")
+                .Subscribe(x => //_screenService.Open(ScreenID.ArenaSelectionScreen)
+                   _levelLoader.LoadLevel(229687619)
                 );
 
             _windowView.SkillScreen

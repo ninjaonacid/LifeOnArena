@@ -23,7 +23,7 @@ namespace Code.Runtime.UI.View.ArenaSelection
 
         public void UpdateData(int itemIndex, string locationName, Sprite icon, bool isUnlocked)
         {
-            _levelSelectionItems[itemIndex].UpdateData(icon, locationName, isUnlocked);
+            _locationPoints[itemIndex].UpdateData(icon, locationName, isUnlocked);
         }
         
         private void HandleLevelSelection(LocationPoint obj)

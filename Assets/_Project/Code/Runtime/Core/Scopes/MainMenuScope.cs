@@ -25,7 +25,6 @@ namespace Code.Runtime.Core.Scopes
             builder.Register<GameRewardSystem>(Lifetime.Singleton).AsSelf();
             builder.Register<VisualEffectFactory>(Lifetime.Scoped);
             builder.Register<ObjectPoolProvider>(Lifetime.Scoped);
-            builder.Register<LevelLoader>(Lifetime.Scoped);
 
             IInstaller screenServiceInstaller = new ScreenServiceInstaller();
             screenServiceInstaller.Install(builder);

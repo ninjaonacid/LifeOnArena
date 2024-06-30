@@ -6,6 +6,7 @@ using Code.Runtime.Core.Factory;
 using Code.Runtime.Core.SceneManagement;
 using Code.Runtime.Logic.WaveLogic;
 using Code.Runtime.Modules.TutorialService;
+using Code.Runtime.Services.LevelLoader;
 using Code.Runtime.Services.PersistentProgress;
 using Code.Runtime.Services.SaveLoad;
 using Code.Runtime.UI.Controller;
@@ -19,13 +20,13 @@ namespace Code.Runtime.UI.Services
         public ScreenControllerFactory(IGameDataContainer gameData, 
             IEventSystem eventSystem,
             IHeroFactory heroFactory, ISaveLoadService saveLoad,
-            AudioService audioService, SceneLoader sceneLoader, 
+            AudioService audioService, SceneLoader sceneLoader, LevelLoader levelLoader,
             TutorialService tutorialService)
         {
             _screenControllers.Add(typeof(MainMenuController),
                 () => gameData.PlayerData.TutorialData.IsTutorialCompleted
-                    ? new MainMenuController(gameData, audioService, sceneLoader)
-                    : new TutorialMainMenuController(gameData, audioService, sceneLoader, tutorialService)); 
+                    ? new MainMenuController(gameData, audioService, levelLoader)
+                    : new TutorialMainMenuController(gameData, audioService, tutorialService, levelLoader)); 
             
             _screenControllers.Add(typeof(WeaponScreenController),
                 () => new WeaponScreenController(sceneLoader));

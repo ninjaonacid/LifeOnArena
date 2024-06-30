@@ -30,8 +30,6 @@ namespace Code.Runtime.ConfigData.Levels
         [EnumToggleButtons]
         public LevelType LevelType;
 
-        public int RequiredLevel;
-        
         [FoldoutGroup("Unlock requirements list", true)]
         public List<IRequirement<PlayerData>> UnlockRequirements;
         

@@ -11,7 +11,10 @@ namespace Code.Runtime.UI.View.ArenaSelection
     {
         [SerializeField] private Image _line;
         [SerializeField] private Image _markerIcon;
+        [SerializeField] private Image _rayIcon;
         [SerializeField] private LevelIdentifier LevelId;
+        [SerializeField] private Color32 _highlightColor;
+        [SerializeField] private Color32 _baseColor;
 
         private Subject<LocationPoint> _subject;
         
@@ -31,12 +34,15 @@ namespace Code.Runtime.UI.View.ArenaSelection
         
         public void Select()
         {
-            //_selectionFrame.gameObject.SetActive(true);
+            _markerIcon.color = _highlightColor;
+            _rayIcon.color = _highlightColor;
+
         }
 
         public void Deselect()
         {
-            //_selectionFrame.gameObject.SetActive(false);
+            _markerIcon.color = _baseColor;
+            _rayIcon.color = _baseColor;
         }
     }
 }

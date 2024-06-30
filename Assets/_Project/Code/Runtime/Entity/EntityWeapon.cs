@@ -47,51 +47,63 @@ namespace Code.Runtime.Entity
 
         public virtual void EquipWeapon(WeaponData weaponData)
         {
-            if (weaponData == null) return;
+            if (weaponData == null)
+            {
+                return;
+            }
+
+            RemoveCurrentWeapon();
+
+            _weaponData = weaponData;
 
             if (weaponData.IsDual)
             {
-                if (_mainWeaponSlot.EquippedWeaponView != null)
-                {
-                    Destroy(_mainWeaponSlot.EquippedWeaponView.gameObject);
-                }
-
-                if (_offHandWeaponSlot.EquippedWeaponView != null)
-                {
-                    Destroy(_offHandWeaponSlot.EquippedWeaponView.gameObject);
-                }
-
-                _weaponData = weaponData;
-                
-                _mainWeaponSlot.EquippedWeaponView = _itemFactory.CreateWeapon(_weaponData.WeaponView, _equipJointMain, false);
-                _mainWeaponSlot.EquippedWeaponView.transform.localPosition = Vector3.zero;
-                
-                _offHandWeaponSlot.EquippedWeaponView = _itemFactory.CreateWeapon(_weaponData.WeaponView, _equipJointOffhand, false);
-                _offHandWeaponSlot.EquippedWeaponView.transform.localPosition = Vector3.zero;
+                EquipWeaponInSlot(_weaponData.WeaponView, _equipJointMain);
+                EquipWeaponInSlot(_weaponData.WeaponView, _equipJointOffhand);
             }
             else
             {
+                EquipWeaponInSlot(_weaponData.WeaponView, _equipJointMain);
 
-                if (_mainWeaponSlot.EquippedWeaponView != null)
+                if (weaponData.IsWithShield)
                 {
-                    Destroy(_mainWeaponSlot.EquippedWeaponView.gameObject);
+                    EquipWeaponInSlot(_weaponData.ShieldPrefab, _equipJointOffhand);
                 }
-
-                if (_offHandWeaponSlot.EquippedWeaponView != null)
-                {
-                    Destroy(_offHandWeaponSlot.EquippedWeaponView.gameObject);
-                }
-
-                _weaponData = weaponData;
-
-                _mainWeaponSlot.EquippedWeaponView =
-                    _itemFactory.CreateWeapon(_weaponData.WeaponView, _equipJointMain, false);
-                _mainWeaponSlot.EquippedWeaponView.transform.localPosition = Vector3.zero;
             }
 
             EnableCollider(false);
-            
-            OnWeaponChange?.Invoke(_mainWeaponSlot.EquippedWeaponView);
+        }
+
+        private void RemoveCurrentWeapon()
+        {
+            if (_mainWeaponSlot.EquippedWeaponView != null)
+            {
+                Destroy(_mainWeaponSlot.EquippedWeaponView.gameObject);
+                _mainWeaponSlot.EquippedWeaponView = null;
+            }
+
+            if (_offHandWeaponSlot.EquippedWeaponView != null)
+            {
+                Destroy(_offHandWeaponSlot.EquippedWeaponView.gameObject);
+                _offHandWeaponSlot.EquippedWeaponView = null;
+            }
+        }
+
+        private void EquipWeaponInSlot(WeaponView weaponPrefab, Transform equipJoint)
+        {
+            var weaponView = _itemFactory.CreateWeapon(weaponPrefab, equipJoint, false);
+            weaponView.transform.localPosition = Vector3.zero;
+
+            if (equipJoint == _equipJointMain)
+            {
+                _mainWeaponSlot.EquippedWeaponView = weaponView;
+                OnWeaponChange?.Invoke(_mainWeaponSlot.EquippedWeaponView);
+            }
+            else if (equipJoint == _equipJointOffhand)
+            {
+                _offHandWeaponSlot.EquippedWeaponView = weaponView;
+                OnWeaponChange?.Invoke(_offHandWeaponSlot.EquippedWeaponView);
+            }
         }
         
         //CallFromAnimation
