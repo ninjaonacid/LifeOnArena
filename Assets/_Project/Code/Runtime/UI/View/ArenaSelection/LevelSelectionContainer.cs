@@ -8,13 +8,14 @@ namespace Code.Runtime.UI.View.ArenaSelection
     public class LevelSelectionContainer : MonoBehaviour
     {
         [SerializeField] private List<LevelSelectionUI> _levelSelectionItems;
+        [SerializeField] private List<LocationPoint> _locationPoints;
         
-        private LevelSelectionUI _selectedLevel;
+        private LocationPoint _selectedLevel;
         private Subject<int> _levelSelectedSubject;
 
         public void Initialize()
         {
-            foreach (var level in _levelSelectionItems)
+            foreach (var level in _locationPoints)
             {
                 level.OnClickAsObservable().Subscribe(HandleLevelSelection);
             }
@@ -25,24 +26,23 @@ namespace Code.Runtime.UI.View.ArenaSelection
             _levelSelectionItems[itemIndex].UpdateData(icon, locationName, isUnlocked);
         }
         
-        private void HandleLevelSelection(LevelSelectionUI obj)
+        private void HandleLevelSelection(LocationPoint obj)
         {
+            int selectedItemIndex = _locationPoints.IndexOf(obj);
             
-            int selectedItemIndex = _levelSelectionItems.IndexOf(obj);
-            
-            var selectedAbilityCell = _levelSelectionItems[selectedItemIndex];
+            var selectedLocationPoint = _locationPoints[selectedItemIndex];
             
             if (_selectedLevel is not null && _selectedLevel != obj)
             {
-                var previousSelectedCell = _levelSelectionItems[_levelSelectionItems.IndexOf(_selectedLevel)];
+                var previousSelectedCell = _locationPoints[_locationPoints.IndexOf(_selectedLevel)];
                 previousSelectedCell.Deselect();
             }
             
             _selectedLevel = obj;
             
-            selectedAbilityCell.Select();
+            selectedLocationPoint.Select();
 
-            _levelSelectedSubject?.OnNext(_levelSelectionItems.IndexOf(obj));
+            _levelSelectedSubject?.OnNext(_locationPoints.IndexOf(obj));
         }
 
         public IObservable<int> OnLevelSelectedAsObservable()

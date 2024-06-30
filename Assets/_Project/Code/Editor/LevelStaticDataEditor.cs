@@ -34,7 +34,7 @@ namespace Code.Editor
                         .Select(x => new NextLevelDoorSpawnerData(x.transform.position, x.transform.rotation))
                         .ToList();
                         
-                levelData.LevelKey = SceneManager.GetActiveScene().name;
+                levelData.SceneKey = SceneManager.GetActiveScene().name;
 
                 levelData.HeroInitialPosition = GameObject.FindWithTag(InitialPointTag).transform.position;
                 levelData.HeroInitialRotation = GameObject.FindWithTag(InitialPointTag).transform.rotation;

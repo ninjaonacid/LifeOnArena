@@ -20,7 +20,7 @@ namespace Code.Runtime.Core.Config
     {
         private const string ConfigFolder = "Configs";
         private Dictionary<int, EnemyDataConfig> _monsters;
-        private Dictionary<string, LevelConfig> _levels; 
+        private Dictionary<int, LevelConfig> _levels; 
         private Dictionary<LocationReward, LevelReward> _levelReward;
         private Dictionary<ScreenID, ScreenConfig> _windowConfigs;
         private Dictionary<int, ActiveAbilityBlueprintBase> _abilities;
@@ -50,7 +50,7 @@ namespace Code.Runtime.Core.Config
 
             _levels = Resources
                 .LoadAll<LevelConfig>($"{ConfigFolder}/Levels")
-                .ToDictionary(x => x.LevelKey, x => x);
+                .ToDictionary(x => x.LevelId.Id, x => x);
 
             _levelReward = Resources
                 .LoadAll<LevelReward>($"{ConfigFolder}/Levels/LevelReward")
@@ -142,9 +142,9 @@ namespace Code.Runtime.Core.Config
         public List<ActiveAbilityBlueprintBase> GetTreeAbilities() => _treeAbilities;
 
         public List<WeaponData> GetHeroWeapons() => _heroWeapons;
-        public LevelConfig Level(string sceneKey) =>
+        public LevelConfig Level(int configId) =>
         
-            _levels.TryGetValue(sceneKey, out LevelConfig staticData)
+            _levels.TryGetValue(configId, out LevelConfig staticData)
                 ? staticData
                 : null;
 

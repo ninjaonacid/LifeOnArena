@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Code.Runtime.ConfigData.Identifiers;
 using Code.Runtime.ConfigData.Spawners;
 using Code.Runtime.Data.PlayerData;
 using Code.Runtime.Modules.Requirements;
@@ -24,7 +25,7 @@ namespace Code.Runtime.ConfigData.Levels
     public class LevelConfig : SerializedScriptableObject
     {
         public string LocationName;
-        public string LevelKey;
+        public string SceneKey;
         [Title("Location Type")]
         [EnumToggleButtons]
         public LevelType LevelType;
@@ -36,8 +37,6 @@ namespace Code.Runtime.ConfigData.Levels
         
         public int WavesToSpawn;
 
-        public Sprite Icon;
-        
         [BoxGroup("Spawners")]
         [LabelWidth(100)]
         public List<EnemySpawnerData> EnemySpawners;
@@ -51,6 +50,6 @@ namespace Code.Runtime.ConfigData.Levels
         public Quaternion HeroInitialRotation;
         
 
-        
+        public LevelIdentifier LevelId;
     }
 }

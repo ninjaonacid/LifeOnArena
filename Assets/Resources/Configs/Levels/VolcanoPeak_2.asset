@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 70f773d672fc7be4b85eb2e6f0b9ccd1, type: 3}
-  m_Name: FantasyArena_3
+  m_Name: VolcanoPeak_2
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -22,21 +22,31 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes:
     - Name: UnlockRequirements
-      Entry: 6
+      Entry: 7
+      Data: 0|System.Collections.Generic.List`1[[Code.Runtime.Modules.Requirements.IRequirement`1[[Code.Runtime.Data.PlayerData.PlayerData,
+        Assembly-CSharp]], Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
       Data: 
-  LocationName: 
-  LevelKey: FantasyArena_3
+    - Name: 
+      Entry: 8
+      Data: 
+  LocationName: Misty rock
+  LevelKey: FantasyArena_1
   LevelType: 0
   RequiredLevel: 0
   WavesToSpawn: 0
-  Icon: {fileID: 21300000, guid: 9815887a3ee576f478c03fb1c2163779, type: 3}
   EnemySpawners:
-  - Id: FantasyArena_3_69eacd7d-c214-4a3e-8b40-51104fcfdd41
-    SpawnCount: 0
-    TimeToSpawn: 0
-    MobId: {fileID: 11400000, guid: 2dcb3accab65ee74ea620704230da380, type: 2}
-    Position: {x: -57.7, y: 0, z: 6.9}
+  - Id: _0702d4e2-cb82-46aa-80c3-7a3c4b588b61
+    SpawnCount: 1
+    TimeToSpawn: 1
+    MobId: {fileID: 11400000, guid: da24c5c5806845a4ebed54c799031191, type: 2}
+    Position: {x: 9.4, y: -0.626276, z: 6.6}
     EnemyType: 1
   NextLevelDoorSpawners: []
-  HeroInitialPosition: {x: -6.5, y: 0, z: -31.1}
+  HeroInitialPosition: {x: 7.1, y: 0, z: -15.7}
   HeroInitialRotation: {x: 0, y: 0, z: 0, w: 1}
+  LocationId: {fileID: 11400000, guid: 7c9011846d2436e41a20b6007d4db896, type: 2}

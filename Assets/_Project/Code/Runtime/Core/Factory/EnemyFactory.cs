@@ -65,7 +65,6 @@ namespace Code.Runtime.Core.Factory
             EnemySpawner spawner = InstantiateRegistered(prefab, at)
                 .GetComponent<EnemySpawner>();
             
-            var levelConfig = _config.Level(SceneManager.GetActiveScene().name);
 
             spawner.Id = spawnerDataId;
             spawner.MobId = spawnerDataMobId;
@@ -73,7 +72,6 @@ namespace Code.Runtime.Core.Factory
             spawner.EnemyType = enemyType;
             spawner.TimeToSpawn = timeToSpawn;
             
-            spawner.InitializeSpawner(levelConfig);
 
             return spawner;
         }

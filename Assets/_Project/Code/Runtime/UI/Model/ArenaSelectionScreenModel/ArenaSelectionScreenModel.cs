@@ -9,7 +9,7 @@ namespace Code.Runtime.UI.Model.ArenaSelectionScreenModel
     public class ArenaSelectionScreenModel : IScreenModel
     {
         private ConfigProvider _configProvider;
-        public List<LevelModel> LevelModel { get; private set; } = new();
+        public List<LocationPointModel> LevelModel { get; private set; } = new();
 
         public ArenaSelectionScreenModel(ConfigProvider configProvider)
         {
@@ -26,9 +26,8 @@ namespace Code.Runtime.UI.Model.ArenaSelectionScreenModel
 
             foreach (var level in playableLevels)
             {
-                LevelModel.Add(new LevelModel()
+                LevelModel.Add(new LocationPointModel()
                 {
-                    Icon = level.Icon,
                     LocationName =  level.LocationName,
                     
                 });
@@ -42,10 +41,9 @@ namespace Code.Runtime.UI.Model.ArenaSelectionScreenModel
         }
     }
 
-    public class LevelModel
+    public class LocationPointModel
     {
         public Sprite Icon;
-        public int RequiredLevel;
         public bool IsUnlocked;
         public string LocationName;
 

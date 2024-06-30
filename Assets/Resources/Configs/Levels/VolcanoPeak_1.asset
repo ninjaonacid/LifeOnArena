@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70f773d672fc7be4b85eb2e6f0b9ccd1, type: 3}
+  m_Name: VolcanoPeak_1
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: UnlockRequirements
+      Entry: 7
+      Data: 0|System.Collections.Generic.List`1[[Code.Runtime.Modules.Requirements.IRequirement`1[[Code.Runtime.Data.PlayerData.PlayerData,
+        Assembly-CSharp]], Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+  LocationName: Misty rock
+  LevelKey: FantasyArena_1
+  LevelType: 0
+  RequiredLevel: 0
+  WavesToSpawn: 0
+  EnemySpawners:
+  - Id: _0702d4e2-cb82-46aa-80c3-7a3c4b588b61
+    SpawnCount: 1
+    TimeToSpawn: 1
+    MobId: {fileID: 11400000, guid: da24c5c5806845a4ebed54c799031191, type: 2}
+    Position: {x: 9.4, y: -0.626276, z: 6.6}
+    EnemyType: 1
+  NextLevelDoorSpawners: []
+  HeroInitialPosition: {x: 7.1, y: 0, z: -15.7}
+  HeroInitialRotation: {x: 0, y: 0, z: 0, w: 1}
+  LocationId: {fileID: 11400000, guid: e90a525cdea2d9342a4ad0ebd9238697, type: 2}

@@ -1,3 +1,4 @@
+using Code.Runtime.Core.Audio;
 using Code.Runtime.Core.Config;
 using Code.Runtime.Core.SceneManagement;
 using VContainer.Unity;
@@ -8,13 +9,13 @@ namespace Code.Runtime.Core.EntryPoints.GameEntry
     {
         private readonly InitializeGameState _gameState;
         private readonly SceneLoader _sceneLoader;
-        private readonly Audio.AudioService _audioService;
+        private readonly AudioService _audioService;
         private readonly ConfigProvider _config;
         
         private const string MainMenuScene = "MainMenu";
 
 
-        public GameEntryPoint(InitializeGameState gameState, SceneLoader sceneLoader, Audio.AudioService audioService, ConfigProvider config)
+        public GameEntryPoint(InitializeGameState gameState, SceneLoader sceneLoader, AudioService audioService, ConfigProvider config)
         {
             _gameState = gameState;
             _sceneLoader = sceneLoader;

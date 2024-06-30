@@ -3,6 +3,7 @@ using Code.Runtime.ConfigData.Levels;
 using Code.Runtime.Core.Audio;
 using Code.Runtime.Core.Config;
 using Code.Runtime.Core.Factory;
+using Code.Runtime.Services.LevelLoader;
 using Code.Runtime.Services.SaveLoad;
 using Code.Runtime.UI;
 using Code.Runtime.UI.Services;
@@ -16,7 +17,7 @@ namespace Code.Runtime.Core.EntryPoints
     public class MainMenuStarter : IAsyncStartable
     {
         private readonly IHeroFactory _heroFactory;
-        private readonly ConfigProvider _config;
+        private readonly LevelLoader _levelLoader;
         private readonly ScreenService _screenService;
         private readonly AudioService _audioService;
         private readonly PlayerControls _controls;
@@ -24,11 +25,11 @@ namespace Code.Runtime.Core.EntryPoints
 
         public MainMenuStarter(IHeroFactory heroFactory, IUIFactory uiFactory,
             ScreenService screenService,
-            ConfigProvider config, ISaveLoadService saveLoad, PlayerControls controls,
+            LevelLoader levelLoader, ISaveLoadService saveLoad, PlayerControls controls,
             AudioService audioService)
         {
             _heroFactory = heroFactory;
-            _config = config;
+            _levelLoader = levelLoader;
             _screenService = screenService;
             _controls = controls;
             _audioService = audioService;
@@ -39,7 +40,7 @@ namespace Code.Runtime.Core.EntryPoints
         {
             _saveLoad.Cleanup();
 
-            LevelConfig config = _config.Level(SceneManager.GetActiveScene().name);
+            LevelConfig config = _levelLoader.GetCurerntLevelConfig();
 
             GameObject hero = await _heroFactory.CreateHero(config.HeroInitialPosition, config.HeroInitialRotation);
 

@@ -5,6 +5,7 @@ using Code.Runtime.Core.ObjectPool;
 using Code.Runtime.Logic.WaveLogic;
 using Code.Runtime.Modules.RewardSystem;
 using Code.Runtime.Services;
+using Cysharp.Threading.Tasks;
 using VContainer;
 using VContainer.Unity;
 
@@ -28,6 +29,8 @@ namespace Code.Runtime.Core.Scopes
             builder.Register<IAbilityFactory, AbilityFactory>(Lifetime.Scoped);
             builder.Register<IHeroFactory, HeroFactory>(Lifetime.Scoped);
 
+            builder.Register<LevelScope>(Lifetime.Scoped);
+
             IInstaller screenServiceInstaller = new ScreenServiceInstaller();
             screenServiceInstaller.Install(builder);
             
@@ -43,8 +46,8 @@ namespace Code.Runtime.Core.Scopes
                 var enemyFactory = container.Resolve<IEnemyFactory>();
                 var itemFactory = container.Resolve<ItemFactory>();
 
-                enemyFactory.InitAssets();
-                itemFactory.InitAssets();
+                enemyFactory.InitAssets().Forget();
+                itemFactory.InitAssets().Forget();
                 
             });
         }

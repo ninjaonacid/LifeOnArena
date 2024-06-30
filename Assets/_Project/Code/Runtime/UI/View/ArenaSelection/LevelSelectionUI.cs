@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace Code.Runtime.UI.View.ArenaSelection
 {
-    public class LevelSelectionUI : MonoBehaviour, IPointerClickHandler
+    public class LevelSelectionUI : MonoBehaviour
     {
         [SerializeField] private Image _levelImage;
         [SerializeField] private Image _lockImage;
