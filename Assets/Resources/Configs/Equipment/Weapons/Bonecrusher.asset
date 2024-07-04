@@ -16,7 +16,7 @@ MonoBehaviour:
     SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects:
-    - {fileID: 11400000, guid: 826bba7ed8057d84c9b7b535f458bf42, type: 2}
+    - {fileID: 11400000, guid: d14dab713f26a3845bcbff3108940d99, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -24,8 +24,8 @@ MonoBehaviour:
     SerializationNodes:
     - Name: _unlockRequirement
       Entry: 7
-      Data: 0|Code.Runtime.Modules.Requirements.EnemyKillRequirement, Assembly-CSharp
-    - Name: _enemyToKill
+      Data: 0|Code.Runtime.Modules.Requirements.RewardClaimRequirement, Assembly-CSharp
+    - Name: _rewardId
       Entry: 10
       Data: 0
     - Name: 
@@ -33,18 +33,20 @@ MonoBehaviour:
       Data: 
   _weaponIcon: {fileID: 21300000, guid: e7cd1d7ad94b1784980ac8a959984946, type: 3}
   _weaponPrefab: {fileID: 1032639120842078724, guid: 0288beb12cf8a414298961da1a88935b, type: 3}
+  _shieldPrefab: {fileID: 0}
   _weaponId: {fileID: 11400000, guid: 2bb90049b182d3e4e862dce85ce642cd, type: 2}
   _isDual: 0
+  _isHeroWeapon: 1
+  _isWithShield: 0
   _hitVfx: {fileID: 11400000, guid: aa9d05048adc4df4cb697b348b6c2a61, type: 2}
   _overrideController: {fileID: 22100000, guid: 50885c06293ec8044b3694729dc71f10, type: 2}
-  _localScale: {x: 0, y: 0, z: 0}
   _weaponSound: {fileID: 11400000, guid: 3c45baed3c6d6c343b7a41a621f85a6e, type: 2}
   _damageType: 01000000
   _attacks:
   - {fileID: 11400000, guid: b06717b28d12bec43a271b656176cf0c, type: 2}
   - {fileID: 11400000, guid: 0c62446044751534780c6725e37fa6ef, type: 2}
   - {fileID: 11400000, guid: 8bdae05bdc56365429265039f883b891, type: 2}
-  _isHeroWeapon: 1
+  _possibleCollisions: 0
   _weaponName:
     m_TableReference:
       m_TableCollectionName: GUID:908445a34d696ec449ffe62e7e3cd673

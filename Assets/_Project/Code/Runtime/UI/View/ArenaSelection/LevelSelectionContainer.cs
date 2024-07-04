@@ -28,7 +28,11 @@ namespace Code.Runtime.UI.View.ArenaSelection
 
         public int GetSelectedLocationId()
         {
-            return _selectedLevel.LevelId.Id;
+            if (_selectedLevel is not null)
+            {
+                return _selectedLevel.LevelId.Id;
+            }
+            else return -1;
         }
         
         private void HandleLevelSelection(LocationPoint obj)

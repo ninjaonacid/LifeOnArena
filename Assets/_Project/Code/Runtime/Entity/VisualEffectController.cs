@@ -73,10 +73,11 @@ namespace Code.Runtime.Entity
 
         public async UniTask PlaySlashVisualEffect(VisualEffectIdentifier effectId, SlashDirection direction, Vector3 scale, float delay)
         {
-            var effect = await _visualFactory.CreateVisualEffect(effectId.Id);
+            _cts.Token.ThrowIfCancellationRequested();
+            
+            var effect = await _visualFactory.CreateVisualEffect(effectId.Id, cancellationToken: _cts.Token);
             await UniTask.Delay(TimeSpan.FromSeconds(delay), cancellationToken: _cts.Token);
-
-            if (effect == null) _cts.Cancel();
+            
             
             _cts.Token.ThrowIfCancellationRequested();
                 

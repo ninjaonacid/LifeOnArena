@@ -34,8 +34,12 @@ namespace Code.Runtime.Core.Factory
         {
             
             var visualEffect = _configProvider.VisualEffect(id);
-
+            
+            cancellationToken.ThrowIfCancellationRequested();
+            
             var prefab = await _assetProvider.Load<GameObject>(visualEffect.PrefabReference, cancellationToken: cancellationToken);
+            
+            cancellationToken.ThrowIfCancellationRequested();
             
             var particleSystem = _poolProvider.Spawn<VisualEffect>(prefab, owner, onCreate, onRelease, onGet, onReturn);
 

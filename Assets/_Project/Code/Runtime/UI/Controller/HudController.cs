@@ -7,6 +7,7 @@ using Code.Runtime.CustomEvents;
 using Code.Runtime.Entity.EntitiesComponents;
 using Code.Runtime.Entity.Hero;
 using Code.Runtime.Logic.WaveLogic;
+using Code.Runtime.Services.LevelLoader;
 using Code.Runtime.Services.PersistentProgress;
 using Code.Runtime.UI.Model;
 using Code.Runtime.UI.Services;
@@ -25,17 +26,17 @@ namespace Code.Runtime.UI.Controller
 
         private readonly IGameDataContainer _gameData;
         private readonly IHeroFactory _heroFactory;
-        private readonly SceneLoader _sceneLoader;
+        private readonly LevelLoader _levelLoader;
         private readonly IEventSystem _eventSystem;
         
         private readonly CompositeDisposable _disposable = new CompositeDisposable();
         
-        public HudController(IGameDataContainer gameData, IHeroFactory heroFactory, SceneLoader sceneLoader, 
+        public HudController(IGameDataContainer gameData, IHeroFactory heroFactory, LevelLoader sceneLoader, 
             IEventSystem eventSystem)
         {
             _gameData = gameData;
             _heroFactory = heroFactory;
-            _sceneLoader = sceneLoader;
+            _levelLoader = sceneLoader;
             _eventSystem = eventSystem;
         }
 
@@ -71,7 +72,7 @@ namespace Code.Runtime.UI.Controller
             _windowView.StatusBar.SetLevel(_gameData.PlayerData.PlayerExp.Level);
         
 
-            _windowView.RestartButton.onClick.AsObservable().Subscribe(x => _sceneLoader.Load("MainMenu"));
+            _windowView.RestartButton.onClick.AsObservable().Subscribe(x => _levelLoader.LoadLevel(-2022301165));
 
             _eventSystem.Subscribe<BossSpawnEvent>(SubscribeHealthBar);
 

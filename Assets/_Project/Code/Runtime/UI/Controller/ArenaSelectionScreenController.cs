@@ -53,8 +53,10 @@ namespace Code.Runtime.UI.Controller
 
         private void StartBattle()
         {
-           var locationId =  _view.LevelContainer.GetSelectedLocationId();
-           _levelLoade
+            var locationId =  _view.LevelContainer.GetSelectedLocationId();
+           
+           if(locationId != -1)
+               _levelLoader.LoadLevel(locationId);
         }
         private void LevelSelected(int levelId)
         {

@@ -37,7 +37,7 @@ namespace Code.Runtime.UI.Services
                   : new TutorialAbilityScreenController(saveLoad, tutorialService));
             
             _screenControllers.Add(typeof(HudController), () => 
-                new HudController(gameData, heroFactory, sceneLoader, eventSystem));
+                new HudController(gameData, heroFactory, levelLoader, eventSystem));
             
             _screenControllers.Add(typeof(MessageWindowController), () => new MessageWindowController());
             

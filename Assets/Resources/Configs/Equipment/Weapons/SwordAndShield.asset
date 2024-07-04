@@ -15,16 +15,23 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects: []
+    ReferencedUnityObjects:
+    - {fileID: 11400000, guid: 045f46caa02fc9846bdb976eecac29b2, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes:
     - Name: _unlockRequirement
-      Entry: 6
+      Entry: 7
+      Data: 0|Code.Runtime.Modules.Requirements.RewardClaimRequirement, Assembly-CSharp
+    - Name: _rewardId
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 8
       Data: 
-  _weaponIcon: {fileID: 0}
+  _weaponIcon: {fileID: 21300000, guid: 6a99d143e12edb7418f23f4a9410cfb4, type: 3}
   _weaponPrefab: {fileID: 189877975913806795, guid: 940ed484144f5f54d80433d80a863bb0, type: 3}
   _shieldPrefab: {fileID: 4532614167613449843, guid: bcfc9b7a1e5d7ff4e89fd035fa349e7a, type: 3}
   _weaponId: {fileID: 11400000, guid: 06ff3464e6becd445a415b461ad63aec, type: 2}

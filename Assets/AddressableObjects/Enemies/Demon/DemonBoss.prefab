@@ -223,7 +223,11 @@ PrefabInstance:
     - target: {fileID: 6625279289632298001, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
       propertyPath: _weaponData
       value: 
-      objectReference: {fileID: 11400000, guid: 659ec8d656911f341821d10f6425bd34, type: 2}
+      objectReference: {fileID: 11400000, guid: 55740ba5cc3529f4cb6cd977ecb5ae33, type: 2}
+    - target: {fileID: 6625279289632298001, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
+      propertyPath: _equipJointMain
+      value: 
+      objectReference: {fileID: 4444908125696938062}
     - target: {fileID: 6625279289632298001, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
       propertyPath: _weaponPosition
       value: 
@@ -430,7 +434,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyDeath: {fileID: 7267039373793140434}
-  _mainReward: {fileID: 11400000, guid: a60616072b0e08d499bbc072cb2d2afe, type: 2}
+  _mainReward: {fileID: 11400000, guid: 72a98bce9ea5b9a4cafc1de06798806c, type: 2}
   _secondReward: {fileID: 11400000, guid: bc9eacbbe1c3fa04eacb2eb58ab7ba12, type: 2}
   _treasurePrefab: {fileID: 3542508034450265144, guid: 297628a935eff4a4ba3efe6df6d4a0f0, type: 3}
 --- !u!1001 &7055247972277369375

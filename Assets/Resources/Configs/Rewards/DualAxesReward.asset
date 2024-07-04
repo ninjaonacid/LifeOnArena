@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49f5ffb4eacb42e4b8b8d3f7ced8e40d, type: 3}
+  m_Name: DualAxesReward
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 11400000, guid: 4c49c95ff73ae76478deacc79a6eac76, type: 2}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: _claimRequirement
+      Entry: 7
+      Data: 0|Code.Runtime.Modules.Requirements.RewardWasNotClaimedRequirement, Assembly-CSharp
+    - Name: _rewardIdentifier
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+  _rewardId: {fileID: 11400000, guid: 4c49c95ff73ae76478deacc79a6eac76, type: 2}
+  _isOneTimeReward: 1
+  _rewardLootView: {fileID: 6246228347373464722, guid: 4c1b366ce9efb934da3831b008d88fe7, type: 3}
+  _weapon: {fileID: 11400000, guid: cf38d925e73f78e40846d27680b547dc, type: 2}
