@@ -1,7 +1,7 @@
 using Code.Runtime.ConfigData.Identifiers;
 using Code.Runtime.Core.Audio;
 using Code.Runtime.Core.Config;
-using Code.Runtime.Services.LevelLoader;
+using Code.Runtime.Services.LevelLoaderService;
 using VContainer.Unity;
 
 namespace Code.Runtime.Core.EntryPoints.GameEntry

@@ -29,7 +29,7 @@ namespace Code.Runtime.ConfigData.Levels
         public LocalizedString LocationObjective;
 
         public int WavesToSpawn;
-
+        public bool IsBossLevel;
         [BoxGroup("Spawners")]
         [LabelWidth(100)]
         public List<EnemySpawnerData> EnemySpawners;

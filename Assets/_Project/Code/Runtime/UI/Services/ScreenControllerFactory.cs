@@ -6,7 +6,7 @@ using Code.Runtime.Core.Factory;
 using Code.Runtime.Core.SceneManagement;
 using Code.Runtime.Logic.WaveLogic;
 using Code.Runtime.Modules.TutorialService;
-using Code.Runtime.Services.LevelLoader;
+using Code.Runtime.Services.LevelLoaderService;
 using Code.Runtime.Services.PersistentProgress;
 using Code.Runtime.Services.SaveLoad;
 using Code.Runtime.UI.Controller;

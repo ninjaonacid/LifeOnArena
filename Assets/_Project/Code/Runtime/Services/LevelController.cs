@@ -6,6 +6,7 @@ using Code.Runtime.Core.EventSystem;
 using Code.Runtime.Core.SceneManagement;
 using Code.Runtime.CustomEvents;
 using Code.Runtime.Logic.WaveLogic;
+using Code.Runtime.Services.LevelLoaderService;
 using Code.Runtime.UI;
 using Code.Runtime.UI.Model.DTO;
 using Code.Runtime.UI.Services;
@@ -25,26 +26,26 @@ namespace Code.Runtime.Services
         private EnemySpawnerController _spawnerController;
         private readonly ScreenService _screenService;
         private readonly IEventSystem _eventSystem;
-        private readonly SceneLoader _sceneLoader;
+        private readonly LevelLoader _levelLoader;
         private readonly PlayerControls _controls;
 
         private readonly CancellationTokenSource _cancellationToken = new CancellationTokenSource();
 
         public LevelController(EnemySpawnerController spawnerController, ScreenService screenService,
             IEventSystem eventSystem, PlayerControls controls,
-            SceneLoader sceneLoader)
+            LevelLoader levelLoader)
         {
             _spawnerController = spawnerController;
             _screenService = screenService;
             _eventSystem = eventSystem;
             _controls = controls;
-            _sceneLoader = sceneLoader;
+            _levelLoader = levelLoader;
         }
 
         public void Initialize()
         {
             _spawnerController.WaveCleared += WaveCleared;
-            _spawnerController.CommonEnemiesCleared += BossMessage;
+            _spawnerController.CommonEnemiesCleared += CommonEnemiesCleared;
             //_spawnerController.BossKilled += LevelEnd;
             _spawnerController.BossSpawned += OnBossSpawn;
             _controls.LevelControls.Enable();
@@ -62,9 +63,19 @@ namespace Code.Runtime.Services
             _screenService.Open(ScreenID.MessageWindow, new TimerMessageDto("Return to camp : ", _timerToEndOfLevel ));
         }
 
-        private void BossMessage(int secondsToBoss)
+        private void CommonEnemiesCleared(int secondsToBoss)
         {
-            _screenService.Open(ScreenID.MessageWindow, new TimerMessageDto("Boss reveal in : ", _spawnerController.TimeToNextWave));
+            var levelConfig = _levelLoader.GetCurrentLevelConfig();
+            
+            if (levelConfig.IsBossLevel)
+            {
+                _screenService.Open(ScreenID.MessageWindow, new TimerMessageDto("Boss reveal in : ", _spawnerController.TimeToNextWave));
+            }
+            else
+            {
+                LevelEnd();
+            }
+            
         }
 
         public void Subscribe()
@@ -119,18 +130,18 @@ namespace Code.Runtime.Services
 
         }
 
-        public void Tick()
-        {
-            if (_controls.LevelControls.Button.triggered)
-            {
-                _sceneLoader.Load("FantasyArena_1");
-            }if (_controls.LevelControls.Button1.triggered)
-            {
-                _sceneLoader.Load("FantasyArena_2");
-            }if (_controls.LevelControls.Button2.triggered)
-            {
-                _sceneLoader.Load("FantasyArena_3");
-            }
-        }
+        // public void Tick()
+        // {
+        //     if (_controls.LevelControls.Button.triggered)
+        //     {
+        //         _levelLoader.Load("FantasyArena_1");
+        //     }if (_controls.LevelControls.Button1.triggered)
+        //     {
+        //         _levelLoader.Load("FantasyArena_2");
+        //     }if (_controls.LevelControls.Button2.triggered)
+        //     {
+        //         _levelLoader.Load("FantasyArena_3");
+        //     }
+        // }
     }
 }

@@ -7,7 +7,7 @@ using Code.Runtime.Core.SceneManagement;
 using Code.Runtime.Modules.RewardSystem;
 using Code.Runtime.Modules.TutorialService;
 using Code.Runtime.Services.BattleService;
-using Code.Runtime.Services.LevelLoader;
+using Code.Runtime.Services.LevelLoaderService;
 using Code.Runtime.Services.PersistentProgress;
 using Code.Runtime.Services.RandomService;
 using Code.Runtime.Services.SaveLoad;

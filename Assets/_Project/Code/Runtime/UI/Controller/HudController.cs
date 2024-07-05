@@ -7,7 +7,7 @@ using Code.Runtime.CustomEvents;
 using Code.Runtime.Entity.EntitiesComponents;
 using Code.Runtime.Entity.Hero;
 using Code.Runtime.Logic.WaveLogic;
-using Code.Runtime.Services.LevelLoader;
+using Code.Runtime.Services.LevelLoaderService;
 using Code.Runtime.Services.PersistentProgress;
 using Code.Runtime.UI.Model;
 using Code.Runtime.UI.Services;

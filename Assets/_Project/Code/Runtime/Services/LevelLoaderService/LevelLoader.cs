@@ -3,7 +3,7 @@ using Code.Runtime.ConfigData.Levels;
 using Code.Runtime.Core.Config;
 using Code.Runtime.Core.SceneManagement;
 
-namespace Code.Runtime.Services.LevelLoader
+namespace Code.Runtime.Services.LevelLoaderService
 {
     public class LevelLoader
     {
@@ -30,8 +30,7 @@ namespace Code.Runtime.Services.LevelLoader
             _currentLevel = levelConfig;
             _sceneLoader.Load(levelConfig.SceneKey);
         }
-
-
+        
         public LevelConfig GetCurrentLevelConfig()
         {
             return _currentLevel;

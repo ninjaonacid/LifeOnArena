@@ -4,7 +4,7 @@ using Code.Runtime.ConfigData.Identifiers;
 using Code.Runtime.Core.Audio;
 using Code.Runtime.Core.SceneManagement;
 using Code.Runtime.Modules.TutorialService;
-using Code.Runtime.Services.LevelLoader;
+using Code.Runtime.Services.LevelLoaderService;
 using Code.Runtime.Services.PersistentProgress;
 using Code.Runtime.UI.Model;
 using Code.Runtime.UI.Services;

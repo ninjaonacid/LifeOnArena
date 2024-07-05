@@ -5,7 +5,7 @@ using Code.Runtime.Core.Factory;
 using Code.Runtime.Logic.CameraLogic;
 using Code.Runtime.Logic.WaveLogic;
 using Code.Runtime.Services;
-using Code.Runtime.Services.LevelLoader;
+using Code.Runtime.Services.LevelLoaderService;
 using Code.Runtime.Services.SaveLoad;
 using Code.Runtime.UI;
 using Code.Runtime.UI.Services;

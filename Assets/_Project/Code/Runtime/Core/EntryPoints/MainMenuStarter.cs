@@ -4,7 +4,7 @@ using Code.Runtime.ConfigData.Levels;
 using Code.Runtime.Core.Audio;
 using Code.Runtime.Core.Config;
 using Code.Runtime.Core.Factory;
-using Code.Runtime.Services.LevelLoader;
+using Code.Runtime.Services.LevelLoaderService;
 using Code.Runtime.Services.SaveLoad;
 using Code.Runtime.UI;
 using Code.Runtime.UI.Services;

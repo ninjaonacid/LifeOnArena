@@ -2,7 +2,7 @@
 using System.Linq;
 using Code.Runtime.ConfigData.Identifiers;
 using Code.Runtime.Modules.TutorialService;
-using Code.Runtime.Services.LevelLoader;
+using Code.Runtime.Services.LevelLoaderService;
 using Code.Runtime.UI.Model;
 using Code.Runtime.UI.Services;
 using Code.Runtime.UI.View;
