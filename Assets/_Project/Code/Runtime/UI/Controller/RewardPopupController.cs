@@ -28,6 +28,7 @@ namespace Code.Runtime.UI.Controller
             } 
 
             _view.ClaimButton.OnClickAsObservable().Subscribe(x => screenService.Close(this));
+            _view.ClaimButton.PlayScaleAnimation();
         }
         
     }

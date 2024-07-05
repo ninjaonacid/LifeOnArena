@@ -2,7 +2,7 @@
 
 namespace Code.Runtime.UI.View.WeaponRewardPopup
 {
-    public class ClaimButton : BaseButton
+    public class ClaimButton : AnimatedButton
     {
         
     }

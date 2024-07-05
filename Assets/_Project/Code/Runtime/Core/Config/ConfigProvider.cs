@@ -20,8 +20,7 @@ namespace Code.Runtime.Core.Config
     {
         private const string ConfigFolder = "Configs";
         private Dictionary<int, EnemyDataConfig> _monsters;
-        private Dictionary<int, LevelConfig> _levels; 
-        private Dictionary<LocationReward, LevelReward> _levelReward;
+        private Dictionary<int, LevelConfig> _levels;
         private Dictionary<ScreenID, ScreenConfig> _windowConfigs;
         private Dictionary<int, ActiveAbilityBlueprintBase> _abilities;
         private Dictionary<int, VisualEffectData> _visualEffects;
@@ -51,10 +50,6 @@ namespace Code.Runtime.Core.Config
             _levels = Resources
                 .LoadAll<LevelConfig>($"{ConfigFolder}/Levels")
                 .ToDictionary(x => x.LevelId.Id, x => x);
-
-            _levelReward = Resources
-                .LoadAll<LevelReward>($"{ConfigFolder}/Levels/LevelReward")
-                .ToDictionary(x => x.LocationReward);
 
             _windowConfigs = Resources
                 .Load<WindowDatabase>($"{ConfigFolder}/ScreenUI/ScreenDatabase")
@@ -147,8 +142,7 @@ namespace Code.Runtime.Core.Config
             _levels.TryGetValue(configId, out LevelConfig staticData)
                 ? staticData
                 : null;
-
-
+        
         public List<LevelConfig> LoadLevels() =>
         _levels.Values.ToList();
 
@@ -157,9 +151,6 @@ namespace Code.Runtime.Core.Config
 
         public StatDatabase CharacterStats() =>
             _characterStats;
-
-        public List<LevelReward> LoadRewards() =>
-        _levelReward.Values.ToList();
         
         public ScreenConfig ForWindow(ScreenID menuId) =>
         

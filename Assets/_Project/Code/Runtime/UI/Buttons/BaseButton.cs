@@ -1,4 +1,5 @@
 ﻿using System;
+using DG.Tweening;
 using UniRx;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -10,7 +11,6 @@ namespace Code.Runtime.UI.Buttons
         private Subject<PointerEventData> _subject;
 
         [SerializeField] private CanvasGroup _canvasGroup;
-
         public virtual void OnPointerClick(PointerEventData eventData)
         {
             _subject?.OnNext(eventData);
@@ -27,5 +27,9 @@ namespace Code.Runtime.UI.Buttons
             _canvasGroup.interactable = value;
             _canvasGroup.blocksRaycasts = value;
         }
+
+      
+        
+        
     }
 }

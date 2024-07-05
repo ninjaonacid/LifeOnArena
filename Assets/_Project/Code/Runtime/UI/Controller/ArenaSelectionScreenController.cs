@@ -58,18 +58,21 @@ namespace Code.Runtime.UI.Controller
            if(locationId != -1)
                _levelLoader.LoadLevel(locationId);
         }
+        
         private void LevelSelected(int levelId)
         {
             var isUnlocked = _model.IsLevelUnlocked(levelId);
 
             if (isUnlocked)
             {
-                
+                _view.StartBattleButton.PlayScaleAnimation();
             }
-
-            UpdateData();
+            else
+            {
+                _view.StartBattleButton.StopAnimation();
+            }
             
-
+            //UpdateData();
         }
     }
 }

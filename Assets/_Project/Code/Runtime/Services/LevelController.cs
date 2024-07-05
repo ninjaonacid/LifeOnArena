@@ -108,8 +108,6 @@ namespace Code.Runtime.Services
             _screenService.Open(ScreenID.UpgradeMenu);
         }
 
-        public LevelReward GetLevelReward() => _levelReward;
-
         public void Dispose()
         {
             _eventSystem.Unsubscribe<HeroDeadEvent>(HeroDead);

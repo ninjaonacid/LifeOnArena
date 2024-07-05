@@ -27,15 +27,39 @@ MonoBehaviour:
   LocationName: Misty rock
   SceneKey: FantasyArena_1
   LevelType: 0
+  LocationObjective:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   WavesToSpawn: 0
   EnemySpawners:
   - Id: _0702d4e2-cb82-46aa-80c3-7a3c4b588b61
-    SpawnCount: 1
+    SpawnCount: 3
+    TimeToSpawn: 3
+    MobId: {fileID: 11400000, guid: 45d5611a5ce3ef54ab424b591bd41145, type: 2}
+    Position: {x: -20.8, y: -0.6262741, z: -13.7}
+    EnemyType: 0
+  - Id: FantasyArena_1_877efda5-1294-493b-bf5b-79b3e56b3703
+    SpawnCount: 3
     TimeToSpawn: 1
-    MobId: {fileID: 11400000, guid: da24c5c5806845a4ebed54c799031191, type: 2}
-    Position: {x: 9.4, y: -0.626276, z: 6.6}
-    EnemyType: 1
+    MobId: {fileID: 11400000, guid: c926abab697947a4a9b6547139ee0e4d, type: 2}
+    Position: {x: 34.6, y: -0.6262741, z: -14.7}
+    EnemyType: 0
+  - Id: FantasyArena_1_92d4a563-4376-4dfa-a515-9dfa4063cba9
+    SpawnCount: 3
+    TimeToSpawn: 0
+    MobId: {fileID: 11400000, guid: c926abab697947a4a9b6547139ee0e4d, type: 2}
+    Position: {x: 7.8, y: -0.6262741, z: 22.6}
+    EnemyType: 0
   NextLevelDoorSpawners: []
   HeroInitialPosition: {x: 7.1, y: 0, z: -15.7}
   HeroInitialRotation: {x: 0, y: 0, z: 0, w: 1}
   LevelId: {fileID: 11400000, guid: e90a525cdea2d9342a4ad0ebd9238697, type: 2}
+  references:
+    version: 2
+    RefIds: []

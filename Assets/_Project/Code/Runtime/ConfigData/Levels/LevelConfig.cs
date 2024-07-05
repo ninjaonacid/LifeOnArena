@@ -5,6 +5,7 @@ using Code.Runtime.Data.PlayerData;
 using Code.Runtime.Modules.Requirements;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Localization;
 
 namespace Code.Runtime.ConfigData.Levels
 {
@@ -12,13 +13,6 @@ namespace Code.Runtime.ConfigData.Levels
     {
         Playable = 0,
         Unplayable = 1,
-    }
-
-    public enum LocationReward
-    {
-        Heal,
-        Souls,
-        None
     }
 
     [CreateAssetMenu(fileName = "LevelData", menuName = "Config/Level")]
@@ -31,6 +25,8 @@ namespace Code.Runtime.ConfigData.Levels
         public LevelType LevelType;
 
         public IRequirement<PlayerData> UnlockRequirement;
+
+        public LocalizedString LocationObjective;
 
         public int WavesToSpawn;
 

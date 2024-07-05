@@ -42,7 +42,7 @@ namespace Code.Runtime.UI.Controller
             {
                 var weapon = weaponList[index];
                 
-                _windowView.WeaponContainer.UpdateView(index, weapon.WeaponName.GetLocalizedString(), weapon.WeaponDescription.GetLocalizedString(), weapon.WeaponIcon, weapon.isUnlocked);
+                _windowView.WeaponContainer.UpdateView(weapon.WeaponId, weapon.WeaponName.GetLocalizedString(), weapon.WeaponDescription.GetLocalizedString(), weapon.WeaponIcon, weapon.isUnlocked);
             }
         }
         
@@ -58,7 +58,7 @@ namespace Code.Runtime.UI.Controller
         {
             int index;
             
-            if (_windowView.WeaponContainer.TryGetSelectedWeaponIndex(out index))
+            if (_windowView.WeaponContainer.TryGetSelectedWeaponId(out index))
             {
                 _model.EquipWeapon(index);
             }

@@ -15,18 +15,34 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects: []
+    ReferencedUnityObjects:
+    - {fileID: 11400000, guid: e90a525cdea2d9342a4ad0ebd9238697, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes:
     - Name: UnlockRequirement
-      Entry: 6
+      Entry: 7
+      Data: 0|Code.Runtime.Modules.Requirements.LevelCompleteRequirement, Assembly-CSharp
+    - Name: _levelId
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 8
       Data: 
   LocationName: Misty rock
   SceneKey: FantasyArena_1
   LevelType: 0
+  LocationObjective:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   WavesToSpawn: 0
   EnemySpawners:
   - Id: _0702d4e2-cb82-46aa-80c3-7a3c4b588b61
@@ -39,3 +55,6 @@ MonoBehaviour:
   HeroInitialPosition: {x: 7.1, y: 0, z: -15.7}
   HeroInitialRotation: {x: 0, y: 0, z: 0, w: 1}
   LevelId: {fileID: 11400000, guid: 7c9011846d2436e41a20b6007d4db896, type: 2}
+  references:
+    version: 2
+    RefIds: []

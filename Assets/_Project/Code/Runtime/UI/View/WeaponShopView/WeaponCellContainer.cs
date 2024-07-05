@@ -18,15 +18,27 @@ namespace Code.Runtime.UI.View.WeaponShopView
             }
         }
         
-        public void UpdateView(int elementIndex, string weaponName, string weaponDescription, Sprite weaponIcon, bool isUnlocked)
+        public void UpdateView(int elementID, string weaponName, string weaponDescription, Sprite weaponIcon, bool isUnlocked)
         {
-            _weaponCells[elementIndex].UpdateView(weaponIcon,weaponName, weaponDescription, isUnlocked);
+            foreach (var weaponCell in _weaponCells)
+            {
+                if (elementID == weaponCell.WeaponId.Id)
+                {
+                    weaponCell.UpdateView(weaponIcon,weaponName, weaponDescription, isUnlocked);
+                }
+            }
         }
         
-        public bool TryGetSelectedWeaponIndex(out int index)
+        public bool TryGetSelectedWeaponId(out int id)
         {
-            index = _weaponCells.IndexOf(_selectedCell);
-            return index != -1;
+            if (_selectedCell != null)
+            {
+                id = _selectedCell.WeaponId.Id;
+                return true;
+            }
+
+            id = -1;
+            return false;
         }
         public IObservable<int> OnWeaponCellSelectedAsObservable()
         {

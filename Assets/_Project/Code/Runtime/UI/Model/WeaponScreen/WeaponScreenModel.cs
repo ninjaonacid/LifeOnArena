@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Code.Runtime.Core.Config;
 using Code.Runtime.Services.PersistentProgress;
+using UnityEngine.Localization.SmartFormat.Utilities;
 
 namespace Code.Runtime.UI.Model.WeaponScreen
 {
@@ -54,16 +55,22 @@ namespace Code.Runtime.UI.Model.WeaponScreen
 
         public List<WeaponUIModel> GetSlots() => _weaponModels;
 
-        public void EquipWeapon(int index)
+        public void EquipWeapon(int id)
         {
             if (_equippedWeapon != null)
             {
                 _equippedWeapon.isEquipped = false;
             }
 
-            _weaponModels[index].isEquipped = true;
-            _equippedWeapon = _weaponModels[index];
-            _gameData.PlayerData.HeroEquipment.WeaponIntId = _equippedWeapon.WeaponId;
+            foreach (var weaponModel in _weaponModels)
+            {
+                if (weaponModel.WeaponId == id)
+                {
+                    weaponModel.isEquipped = true;
+                    _equippedWeapon = weaponModel;
+                    _gameData.PlayerData.HeroEquipment.WeaponIntId = weaponModel.WeaponId;
+                }
+            }
         }
         
         public bool IsEquipped(int index)

@@ -1,4 +1,5 @@
 using System;
+using Code.Runtime.ConfigData.Identifiers;
 using TMPro;
 using UniRx;
 using UnityEngine;
@@ -9,6 +10,7 @@ namespace Code.Runtime.UI.View.WeaponShopView
 {
     public class WeaponCell : MonoBehaviour, IPointerClickHandler
     {
+        public WeaponId WeaponId;
         [SerializeField] private Image _weaponImage;
         [SerializeField] private Image _lockImage;
         [SerializeField] private CanvasGroup _selectionFrame;

@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 namespace Code.Runtime.UI.Buttons
 {
-    public class OpenScreenButton : BaseButton
+    public class OpenScreenButton : AnimatedButton
     {
         public ScreenID WindowId;
     }

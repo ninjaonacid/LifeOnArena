@@ -28,6 +28,7 @@ namespace Code.Runtime.Logic.EnemySpawners
         private IEnemyFactory _factory;
         private VisualEffectFactory _visualEffectFactory;
         private VisualEffect _spawnVfx;
+        private int _spawnCounter;
 
         [Inject]
         public void Construct(IEnemyFactory enemyFactory,
@@ -44,6 +45,8 @@ namespace Code.Runtime.Logic.EnemySpawners
 
         public async UniTask<GameObject> Spawn(CancellationToken token)
         {
+            if (_spawnCounter >= RespawnCount) return null;
+            
             Alive = true;
             if (TimeToSpawn > 0)
             {
@@ -61,6 +64,9 @@ namespace Code.Runtime.Logic.EnemySpawners
 
             _enemyDeath = monster.GetComponent<EnemyDeath>();
             _enemyDeath.Happened += Slay;
+
+            _spawnCounter++;
+            
             return monster;
         }
 

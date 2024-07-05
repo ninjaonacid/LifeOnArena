@@ -15,21 +15,40 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects: []
+    ReferencedUnityObjects:
+    - {fileID: 11400000, guid: 7c9011846d2436e41a20b6007d4db896, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes:
     - Name: UnlockRequirement
-      Entry: 6
+      Entry: 7
+      Data: 0|Code.Runtime.Modules.Requirements.LevelCompleteRequirement, Assembly-CSharp
+    - Name: _levelId
+      Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 8
       Data: 
   LocationName: 
   SceneKey: FantasyArena_2
   LevelType: 0
+  LocationObjective:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   WavesToSpawn: 0
   EnemySpawners: []
   NextLevelDoorSpawners: []
   HeroInitialPosition: {x: 0, y: 0, z: -37.4}
   HeroInitialRotation: {x: 0, y: 0, z: 0, w: 1}
   LevelId: {fileID: 11400000, guid: 3dbcc115147f52b42b898c569934cc8b, type: 2}
+  references:
+    version: 2
+    RefIds: []
