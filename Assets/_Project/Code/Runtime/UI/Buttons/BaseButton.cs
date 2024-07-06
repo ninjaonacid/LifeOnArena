@@ -23,13 +23,9 @@ namespace Code.Runtime.UI.Buttons
 
         public void ShowButton(bool value)
         {
-            _canvasGroup.alpha = value ? 255 : 0;
+            _canvasGroup.alpha = value ? 1 : 0;
             _canvasGroup.interactable = value;
             _canvasGroup.blocksRaycasts = value;
         }
-
-      
-        
-        
     }
 }

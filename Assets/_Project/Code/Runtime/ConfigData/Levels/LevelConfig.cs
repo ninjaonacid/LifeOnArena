@@ -18,18 +18,21 @@ namespace Code.Runtime.ConfigData.Levels
     [CreateAssetMenu(fileName = "LevelData", menuName = "Config/Level")]
     public class LevelConfig : SerializedScriptableObject
     {
-        public string LocationName;
+        public LocalizedString LocationName;
+        public LocalizedString LocationObjective;
         public string SceneKey;
+        
         [Title("Location Type")]
         [EnumToggleButtons]
         public LevelType LevelType;
 
         public IRequirement<PlayerData> UnlockRequirement;
-
-        public LocalizedString LocationObjective;
+        
 
         public int WavesToSpawn;
         public bool IsBossLevel;
+        [Range(1, 3)]
+        public int LevelDifficulty;
         [BoxGroup("Spawners")]
         [LabelWidth(100)]
         public List<EnemySpawnerData> EnemySpawners;

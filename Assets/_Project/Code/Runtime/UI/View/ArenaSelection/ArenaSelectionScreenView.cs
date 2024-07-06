@@ -1,5 +1,4 @@
 using Code.Runtime.UI.Buttons;
-using UnityEngine;
 
 namespace Code.Runtime.UI.View.ArenaSelection
 {
@@ -7,5 +6,6 @@ namespace Code.Runtime.UI.View.ArenaSelection
     {
         public LevelSelectionContainer LevelContainer;
         public AnimatedButton StartBattleButton;
+        public LocationInfo LocationInfo;
     }
 }

@@ -61,11 +61,14 @@ namespace Code.Runtime.UI.Controller
         
         private void LevelSelected(int levelId)
         {
-            var isUnlocked = _model.IsLevelUnlocked(levelId);
+            var levelModel = _model.GetLevelModel(levelId);
 
-            if (isUnlocked)
+            if (levelModel.IsUnlocked)
             {
                 _view.StartBattleButton.PlayScaleAnimation();
+                _view.LocationInfo.DifficultyInfo.SetDifficultyInfo(levelModel.Difficulty);
+                _view.LocationInfo.Area.text = levelModel.LocationName;
+                _view.LocationInfo.ObjectiveText.text = levelModel.LevelObjective;
             }
             else
             {

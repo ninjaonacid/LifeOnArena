@@ -28,11 +28,12 @@ namespace Code.Runtime.UI.Model.ArenaSelectionScreenModel
             {
                 var locationModel = new LocationPointModel()
                 {
-                    LocationName =  level.LocationName,
+                    LocationName =  level.LocationName.GetLocalizedString(),
                     LevelId = level.LevelId.Id,
                     IsUnlocked = level.UnlockRequirement == null || level.UnlockRequirement.CheckRequirement(_gameData.PlayerData),
                     IsCompleted =  _gameData.PlayerData.WorldData.LocationProgressData.CompletedLocations.Contains(level.LevelId.Id),
                     LevelObjective = level.LocationObjective.GetLocalizedString(),
+                    Difficulty = level.LevelDifficulty
                     
                 };
                 
@@ -40,6 +41,18 @@ namespace Code.Runtime.UI.Model.ArenaSelectionScreenModel
             }
         }
 
+        public LocationPointModel GetLevelModel(int id)
+        {
+            foreach (var model in LocationPointModel)
+            {
+                if (model.LevelId == id)
+                {
+                    return model;
+                }
+            }
+
+            return null;
+        }
         public bool IsLevelUnlocked(int id)
         {
             foreach (var model in LocationPointModel)
@@ -61,6 +74,7 @@ namespace Code.Runtime.UI.Model.ArenaSelectionScreenModel
         public string LocationName;
         public string LevelObjective;
         public string LevelUnlockDescription;
+        public int Difficulty;
         public int LevelId;
 
     }
