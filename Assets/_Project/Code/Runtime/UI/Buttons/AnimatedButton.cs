@@ -6,14 +6,17 @@ namespace Code.Runtime.UI.Buttons
 {
     public class AnimatedButton : BaseButton
     {
-        [SerializeField] private Vector3 _animationScale;
+        [SerializeField] private Vector2 _animationScale;
         [SerializeField] private float _duration;
+        
         private Tween _tween;
         private Vector3 _baseScale;
+        private RectTransform _rectTransform;
 
-        public void Start()
+        public void Awake()
         {
-            _baseScale = transform.localScale;
+            _rectTransform = (RectTransform)transform;
+            _baseScale = _rectTransform.localScale;
         }
 
         public void PlayScaleAnimation()
@@ -24,8 +27,8 @@ namespace Code.Runtime.UI.Buttons
                 _tween.Kill();
             }
             
-            _tween = transform.DOScale(new Vector3(_baseScale.x + _animationScale.x,
-                _baseScale.y + _animationScale.y, _baseScale.z + _animationScale.z), _duration)
+            _tween = _rectTransform.DOScale(new Vector3(_baseScale.x + _animationScale.x,
+                _baseScale.y + _animationScale.y), _duration)
                 .SetLoops(-1, LoopType.Yoyo).SetEase(Ease.OutBack).SetLink(gameObject);
         }
 
@@ -38,7 +41,7 @@ namespace Code.Runtime.UI.Buttons
 
         private void ResetState()
         {
-            transform.localScale = _baseScale;
+            _rectTransform.localScale = _baseScale;
         }
     }
 }

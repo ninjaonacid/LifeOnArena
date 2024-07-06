@@ -47,7 +47,7 @@ namespace Code.Runtime.UI.Controller
             for (var index = 0; index < _model.LocationPointModel.Count; index++)
             {
                 var levelModel = _model.LocationPointModel[index];
-                _view.LevelContainer.UpdateData(index, levelModel.LocationName, levelModel.Icon, true);
+                _view.LevelContainer.UpdateData(levelModel.LevelId, levelModel.LocationName, levelModel.Icon, levelModel.IsUnlocked);
             }
         }
 

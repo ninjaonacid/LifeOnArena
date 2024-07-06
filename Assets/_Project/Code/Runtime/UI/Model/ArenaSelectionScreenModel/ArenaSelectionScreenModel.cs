@@ -30,7 +30,10 @@ namespace Code.Runtime.UI.Model.ArenaSelectionScreenModel
                 {
                     LocationName =  level.LocationName,
                     LevelId = level.LevelId.Id,
-                    IsUnlocked = level.UnlockRequirement == null || level.UnlockRequirement.CheckRequirement(_gameData.PlayerData)
+                    IsUnlocked = level.UnlockRequirement == null || level.UnlockRequirement.CheckRequirement(_gameData.PlayerData),
+                    IsCompleted =  _gameData.PlayerData.WorldData.LocationProgressData.CompletedLocations.Contains(level.LevelId.Id),
+                    LevelObjective = level.LocationObjective.GetLocalizedString(),
+                    
                 };
                 
                 LocationPointModel.Add(locationModel);
@@ -54,7 +57,10 @@ namespace Code.Runtime.UI.Model.ArenaSelectionScreenModel
     {
         public Sprite Icon;
         public bool IsUnlocked;
+        public bool IsCompleted;
         public string LocationName;
+        public string LevelObjective;
+        public string LevelUnlockDescription;
         public int LevelId;
 
     }

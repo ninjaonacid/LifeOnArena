@@ -2,6 +2,7 @@
 using System.Linq;
 using Code.Runtime.ConfigData;
 using Code.Runtime.ConfigData.Audio;
+using Code.Runtime.ConfigData.Identifiers;
 using Code.Runtime.ConfigData.Levels;
 using Code.Runtime.ConfigData.Reward;
 using Code.Runtime.ConfigData.ScreenUI;
@@ -20,7 +21,8 @@ namespace Code.Runtime.Core.Config
     {
         private const string ConfigFolder = "Configs";
         private Dictionary<int, EnemyDataConfig> _monsters;
-        private Dictionary<int, LevelConfig> _levels;
+        private Dictionary<int, LevelConfig> _levelsByInt;
+        private Dictionary<string, LevelConfig> _levelsByString;
         private Dictionary<ScreenID, ScreenConfig> _windowConfigs;
         private Dictionary<int, ActiveAbilityBlueprintBase> _abilities;
         private Dictionary<int, VisualEffectData> _visualEffects;
@@ -47,9 +49,13 @@ namespace Code.Runtime.Core.Config
             _audioServiceSettings = Resources
                 .Load<AudioServiceSettings>($"{ConfigFolder}/Audio/AudioServiceSettings");
 
-            _levels = Resources
+            _levelsByInt = Resources
                 .LoadAll<LevelConfig>($"{ConfigFolder}/Levels")
                 .ToDictionary(x => x.LevelId.Id, x => x);
+            
+            _levelsByString = Resources
+                .LoadAll<LevelConfig>($"{ConfigFolder}/Levels")
+                .ToDictionary(x => x.LevelId.Name, x => x);
 
             _windowConfigs = Resources
                 .Load<WindowDatabase>($"{ConfigFolder}/ScreenUI/ScreenDatabase")
@@ -139,12 +145,18 @@ namespace Code.Runtime.Core.Config
         public List<WeaponData> GetHeroWeapons() => _heroWeapons;
         public LevelConfig Level(int configId) =>
         
-            _levels.TryGetValue(configId, out LevelConfig staticData)
+            _levelsByInt.TryGetValue(configId, out LevelConfig staticData)
+                ? staticData
+                : null;
+        
+        public LevelConfig Level(string configId) =>
+        
+            _levelsByString.TryGetValue(configId, out LevelConfig staticData)
                 ? staticData
                 : null;
         
         public List<LevelConfig> LoadLevels() =>
-        _levels.Values.ToList();
+        _levelsByInt.Values.ToList();
 
         public RewardBlueprintBase Reward(int id) =>
             _rewards.TryGetValue(id, out RewardBlueprintBase reward) ? reward : null;

@@ -21,9 +21,15 @@ namespace Code.Runtime.UI.View.ArenaSelection
             }
         }
 
-        public void UpdateData(int itemIndex, string locationName, Sprite icon, bool isUnlocked)
+        public void UpdateData(int levelId, string locationName, Sprite icon, bool isUnlocked)
         {
-            _locationPoints[itemIndex].UpdateData(isUnlocked);
+            foreach (var locationPoint in _locationPoints)
+            {
+                if (locationPoint.LevelId.Id == levelId)
+                {
+                    locationPoint.UpdateData(isUnlocked);
+                }
+            }
         }
 
         public int GetSelectedLocationId()
@@ -51,7 +57,7 @@ namespace Code.Runtime.UI.View.ArenaSelection
             
             selectedLocationPoint.Select();
 
-            _levelSelectedSubject?.OnNext(_locationPoints.IndexOf(obj));
+            _levelSelectedSubject?.OnNext(selectedLocationPoint.LevelId.Id);
         }
 
         public IObservable<int> OnLevelSelectedAsObservable()

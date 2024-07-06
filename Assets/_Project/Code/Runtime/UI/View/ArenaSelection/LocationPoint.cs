@@ -11,6 +11,7 @@ namespace Code.Runtime.UI.View.ArenaSelection
     public class LocationPoint : MonoBehaviour, IPointerClickHandler
     {
         public LevelIdentifier LevelId;
+        
         [SerializeField] private Image _line;
         [SerializeField] private Image _markerIcon;
         [SerializeField] private Image _rayIcon;
@@ -18,11 +19,14 @@ namespace Code.Runtime.UI.View.ArenaSelection
         [SerializeField] private Color32 _baseColor;
         [SerializeField] private Color32 _lockedColor;
         [SerializeField] private Color32 _unlockedColor;
+        [SerializeField] private Color32 _completedColor;
 
         private Vector3 _markerOriginalScale;
         
         private Subject<LocationPoint> _subject;
         private Tween _tween;
+        private bool _isUnlocked;
+        private bool _isCompleted;
 
         private void Start()
         {
@@ -31,6 +35,8 @@ namespace Code.Runtime.UI.View.ArenaSelection
 
         public void UpdateData(bool isUnlocked)
         {
+            _isUnlocked = isUnlocked;
+            
             if (isUnlocked)
             {
                 SetColor(_unlockedColor);
@@ -53,8 +59,11 @@ namespace Code.Runtime.UI.View.ArenaSelection
         
         public void Select()
         {
-            _markerIcon.color = _highlightColor;
-            _rayIcon.color = _highlightColor;
+            if (_isUnlocked)
+            {
+                _markerIcon.color = _highlightColor;
+                _rayIcon.color = _highlightColor;
+            }
 
             if (_tween != null)
             {
@@ -68,7 +77,15 @@ namespace Code.Runtime.UI.View.ArenaSelection
 
         public void Deselect()
         {
-            SetColor(_baseColor);
+            if (_isUnlocked)
+            {
+                SetColor(_baseColor);
+            }
+            else if (!_isUnlocked)
+            {
+                SetColor(_lockedColor);
+            }
+           
 
             _markerIcon.transform.localScale = _markerOriginalScale;
             
@@ -80,8 +97,10 @@ namespace Code.Runtime.UI.View.ArenaSelection
 
         private void SetColor(Color32 color)
         {
+            
             _markerIcon.color = color;
             _rayIcon.color = color;
+            _line.color = color;
         }
     }
 }

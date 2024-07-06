@@ -130,18 +130,18 @@ namespace Code.Runtime.Services
 
         }
 
-        // public void Tick()
-        // {
-        //     if (_controls.LevelControls.Button.triggered)
-        //     {
-        //         _levelLoader.Load("FantasyArena_1");
-        //     }if (_controls.LevelControls.Button1.triggered)
-        //     {
-        //         _levelLoader.Load("FantasyArena_2");
-        //     }if (_controls.LevelControls.Button2.triggered)
-        //     {
-        //         _levelLoader.Load("FantasyArena_3");
-        //     }
-        // }
+        public void Tick()
+        {
+            if (_controls.LevelControls.Button.triggered)
+            {
+                _levelLoader.LoadLevel("FantasyArena_1");
+            }if (_controls.LevelControls.Button1.triggered)
+            {
+                _levelLoader.LoadLevel("FantasyArena_2");
+            }if (_controls.LevelControls.Button2.triggered)
+            {
+                _levelLoader.LoadLevel("FantasyArena_3");
+            }
+        }
     }
 }
