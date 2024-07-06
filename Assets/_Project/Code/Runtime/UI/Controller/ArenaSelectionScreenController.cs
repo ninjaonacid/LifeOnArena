@@ -54,9 +54,13 @@ namespace Code.Runtime.UI.Controller
         private void StartBattle()
         {
             var locationId =  _view.LevelContainer.GetSelectedLocationId();
-           
-           if(locationId != -1)
-               _levelLoader.LoadLevel(locationId);
+            var levelModel = _model.GetLevelModel(locationId);
+            
+            if (levelModel.IsUnlocked)
+            {
+                if(locationId != -1)
+                    _levelLoader.LoadLevel(locationId);
+            }
         }
         
         private void LevelSelected(int levelId)
@@ -65,6 +69,10 @@ namespace Code.Runtime.UI.Controller
 
             if (levelModel.IsUnlocked)
             {
+                _view.StartBattleButton.BattleText.Show();
+                _view.StartBattleButton.LockedText.Hide();
+                _view.LockedInfo.Hide();
+                _view.LocationInfo.Show();
                 _view.StartBattleButton.PlayScaleAnimation();
                 _view.LocationInfo.DifficultyInfo.SetDifficultyInfo(levelModel.Difficulty);
                 _view.LocationInfo.Area.text = levelModel.LocationName;
@@ -72,7 +80,10 @@ namespace Code.Runtime.UI.Controller
             }
             else if(!levelModel.IsUnlocked)
             {
-                
+                _view.StartBattleButton.BattleText.Hide();
+                _view.StartBattleButton.LockedText.Show();
+                _view.LocationInfo.Hide();
+                _view.LockedInfo.Show();
                 _view.StartBattleButton.StopAnimation();
             }
             

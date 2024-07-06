@@ -67,9 +67,9 @@ namespace Code.Runtime.UI.Controller
             _screenView.ResourcesCount.ChangeText(_model.Souls.Value.ToString());
             _model.Souls.Subscribe(x => _screenView.ResourcesCount.ChangeText(_model.Souls.Value.ToString()));
             
-            _screenView.UnlockButton.ShowButton(false);
-            _screenView.EquipButton.ShowButton(false);
-            _screenView.UnEquipButton.ShowButton(false);
+            _screenView.UnlockButton.Show(false);
+            _screenView.EquipButton.Show(false);
+            _screenView.UnEquipButton.Show(false);
             
             
           UpdateData();
@@ -96,9 +96,9 @@ namespace Code.Runtime.UI.Controller
             var isEquipped = _model.IsAbilityEquipped(abilityIndex);
             var isUnlocked = _model.IsAbilityUnlocked(abilityIndex);
             
-            _screenView.EquipButton.ShowButton(!isEquipped && isUnlocked);
-            _screenView.UnEquipButton.ShowButton(isEquipped && isUnlocked);
-            _screenView.UnlockButton.ShowButton(!isEquipped && !isUnlocked);
+            _screenView.EquipButton.Show(!isEquipped && isUnlocked);
+            _screenView.UnEquipButton.Show(isEquipped && isUnlocked);
+            _screenView.UnlockButton.Show(!isEquipped && !isUnlocked);
 
             var slotModel = _model.GetSlotByIndex(abilityIndex);
             

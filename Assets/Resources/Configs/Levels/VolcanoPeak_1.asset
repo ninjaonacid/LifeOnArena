@@ -24,9 +24,15 @@ MonoBehaviour:
     - Name: UnlockRequirement
       Entry: 6
       Data: 
-  LocationName: Misty rock
-  SceneKey: FantasyArena_1
-  LevelType: 0
+  LocationName:
+    m_TableReference:
+      m_TableCollectionName: GUID:908445a34d696ec449ffe62e7e3cd673
+    m_TableEntryReference:
+      m_KeyId: 4641790139396096
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   LocationObjective:
     m_TableReference:
       m_TableCollectionName: GUID:908445a34d696ec449ffe62e7e3cd673
@@ -36,8 +42,11 @@ MonoBehaviour:
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
+  SceneKey: FantasyArena_1
+  LevelType: 0
   WavesToSpawn: 0
   IsBossLevel: 0
+  LevelDifficulty: 1
   EnemySpawners:
   - Id: _0702d4e2-cb82-46aa-80c3-7a3c4b588b61
     SpawnCount: 3

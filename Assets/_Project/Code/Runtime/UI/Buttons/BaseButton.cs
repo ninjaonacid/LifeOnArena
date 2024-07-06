@@ -6,11 +6,10 @@ using UnityEngine.EventSystems;
 
 namespace Code.Runtime.UI.Buttons
 {
-    public class BaseButton : MonoBehaviour, IPointerClickHandler
+    public class BaseButton : CanvasElement, IPointerClickHandler
     {
         private Subject<PointerEventData> _subject;
-
-        [SerializeField] private CanvasGroup _canvasGroup;
+        
         public virtual void OnPointerClick(PointerEventData eventData)
         {
             _subject?.OnNext(eventData);
@@ -20,12 +19,6 @@ namespace Code.Runtime.UI.Buttons
         {
             return _subject ??= (_subject = new Subject<PointerEventData>());
         }
-
-        public void ShowButton(bool value)
-        {
-            _canvasGroup.alpha = value ? 1 : 0;
-            _canvasGroup.interactable = value;
-            _canvasGroup.blocksRaycasts = value;
-        }
+        
     }
 }

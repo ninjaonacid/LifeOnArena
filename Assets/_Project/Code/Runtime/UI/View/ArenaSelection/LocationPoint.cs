@@ -43,7 +43,7 @@ namespace Code.Runtime.UI.View.ArenaSelection
             }
             else
             {
-                SetColor(_lockedColor);
+                SetLineColor(_lockedColor);
             }
         }
 
@@ -61,8 +61,7 @@ namespace Code.Runtime.UI.View.ArenaSelection
         {
             if (_isUnlocked)
             {
-                _markerIcon.color = _highlightColor;
-                _rayIcon.color = _highlightColor;
+                SetMarkerColor(_highlightColor);
             }
 
             if (_tween != null)
@@ -83,7 +82,7 @@ namespace Code.Runtime.UI.View.ArenaSelection
             }
             else if (!_isUnlocked)
             {
-                SetColor(_lockedColor);
+                SetLineColor(_lockedColor);
             }
            
 
@@ -101,6 +100,17 @@ namespace Code.Runtime.UI.View.ArenaSelection
             _markerIcon.color = color;
             _rayIcon.color = color;
             _line.color = color;
+        }
+
+        private void SetLineColor(Color32 color)
+        {
+            _line.color = color;
+        }
+
+        private void SetMarkerColor(Color32 color)
+        {
+            _rayIcon.color = color;
+            _markerIcon.color = color;
         }
     }
 }

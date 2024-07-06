@@ -31,9 +31,15 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-  LocationName: 
-  SceneKey: FantasyArena_3
-  LevelType: 0
+  LocationName:
+    m_TableReference:
+      m_TableCollectionName: GUID:908445a34d696ec449ffe62e7e3cd673
+    m_TableEntryReference:
+      m_KeyId: 4642698873106432
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   LocationObjective:
     m_TableReference:
       m_TableCollectionName: GUID:908445a34d696ec449ffe62e7e3cd673
@@ -43,8 +49,11 @@ MonoBehaviour:
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
+  SceneKey: FantasyArena_3
+  LevelType: 0
   WavesToSpawn: 0
-  IsBossLevel: 0
+  IsBossLevel: 1
+  LevelDifficulty: 3
   EnemySpawners: []
   NextLevelDoorSpawners: []
   HeroInitialPosition: {x: -6.5, y: 0, z: -31.1}

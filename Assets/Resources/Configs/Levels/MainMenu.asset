@@ -24,9 +24,15 @@ MonoBehaviour:
     - Name: UnlockRequirement
       Entry: 6
       Data: 
-  LocationName: 
-  SceneKey: MainMenu
-  LevelType: 1
+  LocationName:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   LocationObjective:
     m_TableReference:
       m_TableCollectionName: 
@@ -36,8 +42,11 @@ MonoBehaviour:
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
+  SceneKey: MainMenu
+  LevelType: 1
   WavesToSpawn: 0
   IsBossLevel: 0
+  LevelDifficulty: 0
   EnemySpawners: []
   NextLevelDoorSpawners: []
   HeroInitialPosition: {x: 0.25, y: 0, z: 21.6}

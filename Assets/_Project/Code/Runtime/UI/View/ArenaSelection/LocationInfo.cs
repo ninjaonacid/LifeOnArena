@@ -1,10 +1,8 @@
-﻿using System.Net.Mime;
-using TMPro;
-using UnityEngine;
+﻿using TMPro;
 
 namespace Code.Runtime.UI.View.ArenaSelection
 {
-    public class LocationInfo : MonoBehaviour
+    public class LocationInfo : CanvasElement
     {
         public TextMeshProUGUI Area;
         public DifficultyInfo DifficultyInfo;
