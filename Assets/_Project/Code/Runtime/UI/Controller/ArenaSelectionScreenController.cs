@@ -70,8 +70,9 @@ namespace Code.Runtime.UI.Controller
                 _view.LocationInfo.Area.text = levelModel.LocationName;
                 _view.LocationInfo.ObjectiveText.text = levelModel.LevelObjective;
             }
-            else
+            else if(!levelModel.IsUnlocked)
             {
+                
                 _view.StartBattleButton.StopAnimation();
             }
             

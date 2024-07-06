@@ -11,6 +11,11 @@ namespace Code.Runtime.UI.View.ArenaSelection
         
         public void SetDifficultyInfo(int difficulty)
         {
+            foreach (var icon in _difficultyIcons)
+            {
+                icon.Show(false);
+            }
+            
             for (int i = 0; i < difficulty; i++)
             {
                 _difficultyIcons[i].Show(true);
