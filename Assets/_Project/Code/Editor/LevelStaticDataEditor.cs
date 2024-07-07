@@ -29,11 +29,6 @@ namespace Code.Editor
                             x.MobId, x.transform.position, x.SpawnCount, x.SpawnTimer, x.EnemyType))
                         .ToList();
 
-                levelData.NextLevelDoorSpawners =
-                    FindObjectsOfType<NextLevelDoorMarker>()
-                        .Select(x => new NextLevelDoorSpawnerData(x.transform.position, x.transform.rotation))
-                        .ToList();
-                        
                 levelData.SceneKey = SceneManager.GetActiveScene().name;
 
                 levelData.HeroInitialPosition = GameObject.FindWithTag(InitialPointTag).transform.position;

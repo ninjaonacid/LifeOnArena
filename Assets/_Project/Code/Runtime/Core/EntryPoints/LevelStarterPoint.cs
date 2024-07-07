@@ -46,7 +46,7 @@ namespace Code.Runtime.Core.EntryPoints
 
             var config = _levelLoader.GetCurrentLevelConfig();
 
-            await _enemySpawnerController.InitSpawners(config, cancellation);
+            await _enemySpawnerController.Initialize(config, cancellation);
 
             var hero = await InitHero(config);
 

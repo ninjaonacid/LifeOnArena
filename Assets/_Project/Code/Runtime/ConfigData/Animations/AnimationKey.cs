@@ -12,5 +12,6 @@ namespace Code.Runtime.ConfigData.Animations
         Idle = 8,
         Spinning = 9,
         Stomp = 10,
+        Sweep = 11
     }
 }

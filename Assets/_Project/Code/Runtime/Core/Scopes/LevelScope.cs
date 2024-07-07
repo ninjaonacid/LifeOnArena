@@ -18,7 +18,7 @@ namespace Code.Runtime.Core.Scopes
             builder.RegisterEntryPoint<LevelStarterPoint>();
 
             builder.Register<LevelController>(Lifetime.Scoped).AsImplementedInterfaces().AsSelf();
-            builder.Register<EnemySpawnerController>(Lifetime.Scoped);
+            builder.Register<EnemySpawnerController>(Lifetime.Scoped).AsImplementedInterfaces().AsSelf();
             
             builder.Register<ProjectileFactory>(Lifetime.Scoped);
             builder.Register<GameRewardSystem>(Lifetime.Singleton).AsSelf();

@@ -112,6 +112,8 @@ namespace Code.Runtime.Entity.Hero
                 _animationData,
                 true, false,
                 canExit: (state) => state.Timer.Elapsed >= _heroAbilityController.ActiveAbility.ActiveTime - 0.3f));
+            
+           
 
             _stateMachine.AddState(nameof(FirstAttackState), new FirstAttackState(
                 _heroAttackComponent,

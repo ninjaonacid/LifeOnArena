@@ -1,15 +1,11 @@
 ﻿using System;
 using System.Threading;
-using Code.Runtime.ConfigData.Identifiers;
-using Code.Runtime.Core.Factory;
 using Code.Runtime.Core.ObjectPool;
 using Code.Runtime.Entity;
 using Code.Runtime.Logic.Collision;
-using Code.Runtime.Logic.VisualEffects;
 using Code.Runtime.Utils;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
-using VContainer;
 
 
 namespace Code.Runtime.Logic.Projectiles
@@ -25,7 +21,7 @@ namespace Code.Runtime.Logic.Projectiles
         [SerializeField] private TrailRenderer _trailRenderer;
 
         private LayerMask _targetLayer;
-        private GameObject _owner;
+        protected GameObject _owner;
         
         private CancellationTokenSource _cts;
 
@@ -33,7 +29,8 @@ namespace Code.Runtime.Logic.Projectiles
         {
             Vector3 movementVector = new Vector3(direction.x, 0, direction.z);
             _rb.velocity = movementVector * speed;
-            _trailRenderer.Clear();
+            if (_trailRenderer != null) 
+                _trailRenderer.Clear();
             return this;
         }
 
@@ -71,7 +68,7 @@ namespace Code.Runtime.Logic.Projectiles
             }
         }
 
-        private void HandleCollision(GameObject other)
+        protected virtual void HandleCollision(GameObject other)
         {
             OnHit?.Invoke(new CollisionData
             {
@@ -96,6 +93,11 @@ namespace Code.Runtime.Logic.Projectiles
                 _effect.Stop();
             
             ReturnToPool();
+        }
+
+        protected void InvokeOnHit(CollisionData collisionData)
+        {
+            OnHit?.Invoke(collisionData);
         }
     }
 }

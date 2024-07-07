@@ -32,6 +32,7 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
             Vector3 casterCenter = hurtBox.GetCenterTransform();
             var direction = caster.transform.forward;
             projectile.transform.position = casterCenter + (2 * direction);
+            projectile.transform.forward = direction;
 
             projectile
                 .SetVelocity(direction, _speed)

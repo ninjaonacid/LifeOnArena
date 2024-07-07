@@ -7,8 +7,8 @@ namespace Code.Runtime.Services.LevelLoaderService
 {
     public class LevelLoader
     {
-        private SceneLoader _sceneLoader;
-        private ConfigProvider _configProvider;
+        private readonly SceneLoader _sceneLoader;
+        private readonly ConfigProvider _configProvider;
         private LevelConfig _currentLevel;
 
         public LevelLoader(SceneLoader sceneLoader, ConfigProvider configProvider)

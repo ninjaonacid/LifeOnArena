@@ -27,19 +27,15 @@ namespace Code.Runtime.ConfigData.Levels
         public LevelType LevelType;
 
         public IRequirement<PlayerData> UnlockRequirement;
-        
-
-        public int WavesToSpawn;
+        public int WavesToSpawn = 3;
         public bool IsBossLevel;
+        
         [Range(1, 3)]
         public int LevelDifficulty;
         [BoxGroup("Spawners")]
         [LabelWidth(100)]
         public List<EnemySpawnerData> EnemySpawners;
-        [BoxGroup("Spawners")]
-        public List<NextLevelDoorSpawnerData> NextLevelDoorSpawners;
-        
-       
+
         [BoxGroup("Hero")]
         public Vector3 HeroInitialPosition;
         [BoxGroup("Hero")]
