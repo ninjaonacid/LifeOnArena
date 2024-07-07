@@ -8,6 +8,7 @@ using Code.Runtime.Core.ObjectPool;
 using Code.Runtime.Entity.Enemy;
 using Code.Runtime.Entity.EntitiesComponents;
 using Code.Runtime.Logic.EnemySpawners;
+using Code.Runtime.Services.LevelLoaderService;
 using Code.Runtime.Services.PersistentProgress;
 using Code.Runtime.Services.RandomService;
 using Code.Runtime.Services.SaveLoad;
@@ -15,7 +16,6 @@ using Code.Runtime.UI.View.HUD;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.SceneManagement;
 using VContainer;
 using VContainer.Unity;
 using Object = UnityEngine.Object;
@@ -31,13 +31,14 @@ namespace Code.Runtime.Core.Factory
         private readonly IGameDataContainer _gameDataContainer;
         private readonly IRandomService _randomService;
         private readonly IObjectResolver _objectResolver;
+        private readonly LevelLoader _levelLoader;
         private readonly ObjectPoolProvider _objectPoolProvider;
         private readonly Dictionary<MobIdentifier, GameObject> _spawnedEntities;
 
         private readonly CancellationTokenSource _cancellationTokenSource = default;
         public EnemyFactory(IHeroFactory heroFactory, ConfigProvider config, IAssetProvider assetProvider, 
             ISaveLoadService saveLoadService, IGameDataContainer gameDataContainer,
-            IRandomService randomService, IObjectResolver objectResolver, ObjectPoolProvider poolProvider)
+            IRandomService randomService, IObjectResolver objectResolver, LevelLoader levelLoader, ObjectPoolProvider poolProvider)
         {
             _heroFactory = heroFactory;
             _config = config;
@@ -46,6 +47,7 @@ namespace Code.Runtime.Core.Factory
             _gameDataContainer = gameDataContainer;
             _randomService = randomService;
             _objectResolver = objectResolver;
+            _levelLoader = levelLoader;
             _objectPoolProvider = poolProvider;
         }
 
@@ -64,14 +66,13 @@ namespace Code.Runtime.Core.Factory
 
             EnemySpawner spawner = InstantiateRegistered(prefab, at)
                 .GetComponent<EnemySpawner>();
-            
 
             spawner.Id = spawnerDataId;
             spawner.MobId = spawnerDataMobId;
             spawner.RespawnCount = spawnerRespawnCount;
             spawner.EnemyType = enemyType;
             spawner.TimeToSpawn = timeToSpawn;
-            
+            spawner.InitializeSpawner();
 
             return spawner;
         }
@@ -79,14 +80,21 @@ namespace Code.Runtime.Core.Factory
         public async UniTask<GameObject> CreateMonster(int mobId, Transform parent, CancellationToken token)
         {
             var monsterData = _config.Monster(mobId);
+            var levelConfig = _levelLoader.GetCurrentLevelConfig();
 
             GameObject prefab = await _assetProvider.Load<GameObject>(monsterData.PrefabReference, token);
             
             GameObject monster = _objectPoolProvider.Spawn(prefab);
             
             monster.transform.SetParent(parent);
-
+            
             IDamageable damageable = monster.GetComponent<IDamageable>();
+
+            var enemyStats = monster.GetComponent<EnemyStats>();
+
+            enemyStats.SetStats(monsterData.PossibleStats.Count > 1
+                ? monsterData.PossibleStats[levelConfig.LevelDifficulty - 1]
+                : monsterData.PossibleStats[0]);
 
             monster.GetComponent<EntityUI>().Construct(damageable);
             monster.GetComponent<NavMeshMoveToPlayer>().Construct(_heroFactory.HeroGameObject.transform);

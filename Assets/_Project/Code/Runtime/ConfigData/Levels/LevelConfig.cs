@@ -25,7 +25,7 @@ namespace Code.Runtime.ConfigData.Levels
         [Title("Location Type")]
         [EnumToggleButtons]
         public LevelType LevelType;
-
+        
         public IRequirement<PlayerData> UnlockRequirement;
         public int WavesToSpawn = 3;
         public bool IsBossLevel;

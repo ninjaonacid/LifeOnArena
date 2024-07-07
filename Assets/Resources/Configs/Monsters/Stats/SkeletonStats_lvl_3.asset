@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98250235709fef84b9f07a21852eb067, type: 3}
   m_Name: AttackDistance
   m_EditorClassIdentifier: 
-  _baseValue: 200
-  _capacity: 300
+  _baseValue: 5
+  _capacity: 10
 --- !u!114 &-6254114424431537057
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -54,7 +54,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98250235709fef84b9f07a21852eb067, type: 3}
   m_Name: AttackSpeed
   m_EditorClassIdentifier: 
-  _baseValue: -5
+  _baseValue: -1
   _capacity: 10
 --- !u!114 &11400000
 MonoBehaviour:
@@ -66,7 +66,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 177dd3b2b58030f45bda869c02788674, type: 3}
-  m_Name: MageSkeletonStats
+  m_Name: SkeletonStats_lvl_3
   m_EditorClassIdentifier: 
   StatDefinitions:
   - {fileID: 6905155689710587302}
@@ -91,7 +91,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98250235709fef84b9f07a21852eb067, type: 3}
   m_Name: Health
   m_EditorClassIdentifier: 
-  _baseValue: 100
+  _baseValue: 200
   _capacity: 500
 --- !u!114 &6905155689710587302
 MonoBehaviour:
@@ -133,5 +133,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98250235709fef84b9f07a21852eb067, type: 3}
   m_Name: Attack
   m_EditorClassIdentifier: 
-  _baseValue: 10
+  _baseValue: 15
   _capacity: 200

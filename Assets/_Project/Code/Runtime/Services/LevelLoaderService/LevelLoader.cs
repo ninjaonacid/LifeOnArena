@@ -38,6 +38,7 @@ namespace Code.Runtime.Services.LevelLoaderService
             _sceneLoader.Load(levelConfig.SceneKey);
         }
         
+        
         public LevelConfig GetCurrentLevelConfig()
         {
             return _currentLevel;

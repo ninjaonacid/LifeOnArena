@@ -6,8 +6,8 @@ namespace Code.Runtime.Modules.StatSystem
 {
     public class StatController : MonoBehaviour
     {
-        [SerializeField] private StatDatabase _StatDatabase;
-
+        [SerializeField] protected StatDatabase _statDatabase;
+        
         protected Dictionary<string, Stat> _stats = new Dictionary<string, Stat>(StringComparer.OrdinalIgnoreCase);
         public Dictionary<string, Stat> Stats => _stats;
 
@@ -15,6 +15,7 @@ namespace Code.Runtime.Modules.StatSystem
         public bool IsInitialized => _isInitialized;
         public event Action Initialized;
         public event Action Uninitiliazed;
+        
 
         protected virtual void Awake()
         {
@@ -29,14 +30,15 @@ namespace Code.Runtime.Modules.StatSystem
             Uninitiliazed?.Invoke();
         }
 
-        private void Initialize()
+        protected void Initialize()
         {
-            foreach (StatDefinition stat in _StatDatabase.StatDefinitions)
+            
+            foreach (StatDefinition stat in _statDatabase.StatDefinitions)
             {
                 _stats.Add(stat.name, new Stat(stat, this));
             }
 
-            foreach (StatDefinition stat in _StatDatabase.AttributeDefinitions)
+            foreach (StatDefinition stat in _statDatabase.AttributeDefinitions)
             {
                 if(stat.name.Equals("Health", StringComparison.OrdinalIgnoreCase))
                 {
@@ -48,7 +50,7 @@ namespace Code.Runtime.Modules.StatSystem
                 }
             }
             
-            foreach (StatDefinition stat in _StatDatabase.PrimaryStats)
+            foreach (StatDefinition stat in _statDatabase.PrimaryStats)
             {
                 _stats.Add(stat.name, new PrimaryStat(stat, this));
             }
@@ -59,10 +61,10 @@ namespace Code.Runtime.Modules.StatSystem
             }
             
             _isInitialized = true;
-            StatsLoaded();
+            StatsInitialized();
         }
 
-        protected void StatsLoaded()
+        protected void StatsInitialized()
         {
             Initialized?.Invoke();
         }

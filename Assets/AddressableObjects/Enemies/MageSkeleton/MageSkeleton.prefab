@@ -1676,7 +1676,7 @@ PrefabInstance:
     - target: {fileID: 1713337227256712141, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
       propertyPath: _statController
       value: 
-      objectReference: {fileID: 8460381815100029370}
+      objectReference: {fileID: 0}
     - target: {fileID: 2085898622953279013, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
       propertyPath: _StatDatabase
       value: 
@@ -1708,7 +1708,7 @@ PrefabInstance:
     - target: {fileID: 2892997724190106138, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
       propertyPath: _stats
       value: 
-      objectReference: {fileID: 8460381815100029370}
+      objectReference: {fileID: 0}
     - target: {fileID: 2892997724190106138, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
       propertyPath: _isNeedResetAfterDisable
       value: 1
@@ -1716,7 +1716,7 @@ PrefabInstance:
     - target: {fileID: 2892997724190106139, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
       propertyPath: _stats
       value: 
-      objectReference: {fileID: 8460381815100029370}
+      objectReference: {fileID: 4548832314929923065}
     - target: {fileID: 2892997724190106139, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
       propertyPath: _distance
       value: 2
@@ -1860,7 +1860,7 @@ PrefabInstance:
     - target: {fileID: 6966552553589898628, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
       propertyPath: _stats
       value: 
-      objectReference: {fileID: 8460381815100029370}
+      objectReference: {fileID: 4548832314929923065}
     - target: {fileID: 6966552553589898628, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
       propertyPath: _entityWeapon
       value: 
@@ -1975,6 +1975,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 202b34f87cfc3b14eb9de7c0b349df02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4548832314929923065 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6249724365430731878, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
+  m_PrefabInstance: {fileID: 7609897896664463263}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5584285532707550588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6000c1ae77264b41a5c1a2ed5b87320d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &4737285204634244484 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2892997724190106139, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
@@ -2064,7 +2075,7 @@ MonoBehaviour:
   _enemyHealth: {fileID: 4737285204634244485}
   _tagController: {fileID: 4078759614492838205}
   _animationData: {fileID: 11400000, guid: c84a29c47f9c6b141971c9668f881c0b, type: 2}
-  _statController: {fileID: 8460381815100029370}
+  _statController: {fileID: 0}
   _enemyDeath: {fileID: 4737285204634244484}
   _abilityController: {fileID: 886702728777020800}
 --- !u!114 &7665401954657485101
@@ -2082,17 +2093,6 @@ MonoBehaviour:
   _abilityController: {fileID: 886702728777020800}
   _rangeAbility: {fileID: 11400000, guid: 48d5edeb247b38345974b2cb065b7438, type: 2}
   _castCooldown: 5
---- !u!114 &8460381815100029370 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2085898622953279013, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
-  m_PrefabInstance: {fileID: 7609897896664463263}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5584285532707550588}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83af338313c235a4baec1c672265fef1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &8643825178939846735 stripped
 BoxCollider:
   m_CorrespondingSourceObject: {fileID: 2192902159981610960, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}

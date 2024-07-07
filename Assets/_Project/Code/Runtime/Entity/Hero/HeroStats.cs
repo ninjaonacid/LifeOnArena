@@ -20,7 +20,7 @@ namespace Code.Runtime.Entity.Hero
                 }
             }
             
-            StatsLoaded();
+            StatsInitialized();
         }
 
         public void UpdateData(PlayerData data)

@@ -1622,7 +1622,7 @@ PrefabInstance:
     - target: {fileID: 1713337227256712141, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
       propertyPath: _statController
       value: 
-      objectReference: {fileID: 8357367988326897874}
+      objectReference: {fileID: 4157587079065461393}
     - target: {fileID: 2085898622953279013, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
       propertyPath: _StatDatabase
       value: 
@@ -1650,7 +1650,7 @@ PrefabInstance:
     - target: {fileID: 2892997724190106138, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
       propertyPath: _stats
       value: 
-      objectReference: {fileID: 8357367988326897874}
+      objectReference: {fileID: 4157587079065461393}
     - target: {fileID: 2892997724190106138, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
       propertyPath: _isNeedResetAfterDisable
       value: 1
@@ -1658,7 +1658,7 @@ PrefabInstance:
     - target: {fileID: 2892997724190106139, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
       propertyPath: _stats
       value: 
-      objectReference: {fileID: 8357367988326897874}
+      objectReference: {fileID: 4157587079065461393}
     - target: {fileID: 2892997724190106139, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
       propertyPath: _distance
       value: 2
@@ -1818,7 +1818,7 @@ PrefabInstance:
     - target: {fileID: 6966552553589898628, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
       propertyPath: _stats
       value: 
-      objectReference: {fileID: 8357367988326897874}
+      objectReference: {fileID: 4157587079065461393}
     - target: {fileID: 6966552553589898628, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
       propertyPath: _entityWeapon
       value: 
@@ -1901,6 +1901,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1807a5f376c3a484a89ee3c78e656313, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4157587079065461393 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6249724365430731878, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
+  m_PrefabInstance: {fileID: 8001150895690176247}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5471129807182287892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6000c1ae77264b41a5c1a2ed5b87320d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &4470015913127192661 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5837056075893014178, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
@@ -1976,20 +1987,9 @@ MonoBehaviour:
   _enemyHealth: {fileID: 5128529339913352429}
   _tagController: {fileID: 4470015913127192661}
   _animationData: {fileID: 11400000, guid: 26005db4dc9b9a34cb461fd30e372b28, type: 2}
-  _statController: {fileID: 8357367988326897874}
+  _statController: {fileID: 4157587079065461393}
   _enemyDeath: {fileID: 5128529339913352428}
   _abilityController: {fileID: 782560803073791208}
---- !u!114 &8357367988326897874 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2085898622953279013, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
-  m_PrefabInstance: {fileID: 8001150895690176247}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5471129807182287892}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83af338313c235a4baec1c672265fef1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &9057446212876105238 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1349759437447274721, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}

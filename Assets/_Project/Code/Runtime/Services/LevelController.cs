@@ -3,10 +3,10 @@ using System.Threading;
 using Code.Runtime.ConfigData.Identifiers;
 using Code.Runtime.ConfigData.Levels;
 using Code.Runtime.Core.EventSystem;
-using Code.Runtime.Core.SceneManagement;
 using Code.Runtime.CustomEvents;
 using Code.Runtime.Logic.WaveLogic;
 using Code.Runtime.Services.LevelLoaderService;
+using Code.Runtime.Services.PersistentProgress;
 using Code.Runtime.UI;
 using Code.Runtime.UI.Model.DTO;
 using Code.Runtime.UI.Services;
@@ -28,18 +28,20 @@ namespace Code.Runtime.Services
         private readonly IEventSystem _eventSystem;
         private readonly LevelLoader _levelLoader;
         private readonly PlayerControls _controls;
+        private readonly IGameDataContainer _gameData;
 
         private readonly CancellationTokenSource _cancellationToken = new CancellationTokenSource();
 
         public LevelController(EnemySpawnerController spawnerController, ScreenService screenService,
             IEventSystem eventSystem, PlayerControls controls,
-            LevelLoader levelLoader)
+            LevelLoader levelLoader, IGameDataContainer gameData)
         {
             _spawnerController = spawnerController;
             _screenService = screenService;
             _eventSystem = eventSystem;
             _controls = controls;
             _levelLoader = levelLoader;
+            _gameData = gameData;
         }
 
         public void Initialize()
@@ -56,11 +58,18 @@ namespace Code.Runtime.Services
         {
             _eventSystem.FireEvent<BossSpawnEvent>(new BossSpawnEvent(arg1, arg2));
         }
-        
 
-        private void LevelEnd()
+        private void LevelCompleted()
         {
+            
+        }
+        private async UniTask LevelEnd()
+        {
+            var currentLevel = _levelLoader.GetCurrentLevelConfig();
+            _gameData.PlayerData.WorldData.LocationProgressData.CompletedLocations.Add(currentLevel.LevelId.Id);
             _screenService.Open(ScreenID.MessageWindow, new TimerMessageDto("Return to camp : ", _timerToEndOfLevel ));
+            await UniTask.Delay(TimeSpan.FromSeconds(_timerToEndOfLevel));
+            _levelLoader.LoadLevel("MainMenu");
         }
 
         private void CommonEnemiesCleared(int secondsToBoss)
@@ -73,10 +82,10 @@ namespace Code.Runtime.Services
             }
             else
             {
-                LevelEnd();
+                LevelEnd().Forget();
             }
-            
         }
+        
 
         public void Subscribe()
         {
@@ -105,7 +114,6 @@ namespace Code.Runtime.Services
             await UniTask.Delay(TimeSpan.FromSeconds(2),
                 DelayType.DeltaTime,
                 PlayerLoopTiming.Update, _cancellationToken.Token);
-            
         }
 
         private async UniTask ShowUpgradeWindow()

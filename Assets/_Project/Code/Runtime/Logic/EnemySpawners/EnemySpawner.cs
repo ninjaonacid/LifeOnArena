@@ -38,7 +38,7 @@ namespace Code.Runtime.Logic.EnemySpawners
             _visualEffectFactory = visualEffectFactory;
         }
 
-        public void InitializeSpawner(LevelConfig levelConfig)
+        public void InitializeSpawner()
         {
             _visualEffectFactory.PrewarmEffect(_visualEffectIdentifier.Id, 1).Forget();
         }

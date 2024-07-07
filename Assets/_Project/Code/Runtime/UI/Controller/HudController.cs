@@ -72,7 +72,7 @@ namespace Code.Runtime.UI.Controller
             _windowView.StatusBar.SetLevel(_gameData.PlayerData.PlayerExp.Level);
         
 
-            _windowView.RestartButton.onClick.AsObservable().Subscribe(x => _levelLoader.LoadLevel(-2022301165));
+            _windowView.RestartButton.onClick.AsObservable().Subscribe(x => _levelLoader.LoadLevel("MainMenu"));
 
             _eventSystem.Subscribe<BossSpawnEvent>(SubscribeHealthBar);
 
