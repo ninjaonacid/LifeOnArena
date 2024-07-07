@@ -18,7 +18,7 @@ namespace Code.Runtime.Entity.Enemy
         [SerializeField] private GameObject _fracturedPrefab;
         [SerializeField] private GameObject _enemyModel;
         [SerializeField] private EnemyHurtBox _enemyHurtBox;
-        
+        [SerializeField] private EnemyTarget _enemyTarget;
         
         [SerializeField] private bool _isAnimatedDeath;
         [SerializeField] private float _disappearDuration = 4f;
@@ -80,7 +80,7 @@ namespace Code.Runtime.Entity.Enemy
 
                     foreach (Rigidbody rb in _fractureParts)
                     {
-                        Vector3 force = (transform.position - _enemyHurtBox.LastHitPosition).normalized *
+                        Vector3 force = (transform.position - _enemyTarget.GetTargetTransform().position).normalized *
                                         Random.Range(10f, 20f);
                         force.y = Mathf.Clamp(force.y, -2f, 3f);
                         rb.AddForce(force, ForceMode.Impulse);
