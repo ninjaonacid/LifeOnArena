@@ -38,6 +38,7 @@ namespace Code.Runtime.Core.Factory
 
             var projectile = _poolProvider.Spawn<Projectile>(prefab.gameObject, owner, OnCreateAdapter,
                 OnReleaseAdapter, OnGetAdapter, OnReturnAdapter);
+         
             return projectile;
         }
     }

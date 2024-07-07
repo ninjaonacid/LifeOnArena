@@ -10,7 +10,7 @@ namespace Code.Runtime.Modules.AbilitySystem
 
         public override ActiveAbility GetAbility()
         {
-            return new MultipleProjectileAbility(this, _prefab, _lifeTime, _speed, _numberOfProjectiles);
+            return new MultipleProjectileAbility(this, _prefab, _lifeTime, _speed, _spawnDelay, _numberOfProjectiles);
         }
     }
 }

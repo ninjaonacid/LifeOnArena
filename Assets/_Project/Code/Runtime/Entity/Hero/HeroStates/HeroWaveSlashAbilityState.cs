@@ -19,12 +19,17 @@ namespace Code.Runtime.Entity.Hero.HeroStates
         public override void OnEnter()
         {
             base.OnEnter();
-            //_heroAnimator.PlayAnimation(_animationData.Animations[]);
+            _heroAnimator.PlayAnimation(_animationData.Animations[AnimationKey.Sweep].Hash);
         }
 
         public override void OnLogic()
         {
             base.OnLogic();
+
+            if (Timer.Elapsed >= _animationData.Animations[AnimationKey.Stomp].Length / 2f)
+            {
+               fsm.StateCanExit(); 
+            }
         }
 
         public override void OnExit()

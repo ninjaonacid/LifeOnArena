@@ -13,7 +13,6 @@ namespace Code.Runtime.Logic.ShelterWeapons
     public class WeaponPlatform : MonoBehaviour, IInteractable
     {
         [SerializeField] private WeaponPlatformAbilityUi abilityView;
-
         public event Action OnWeaponPurchase;
         public WeaponData WeaponData;
         public Transform WeaponContainer;

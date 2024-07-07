@@ -34,7 +34,7 @@ namespace Code.Runtime.Entity.Hero
 
         [SerializeField] private AbilityIdentifier _spinAttackAbilityId;
         [SerializeField] private AbilityIdentifier _stompAbilityId;
-        [SerializeField] private AbilityIdentifier _commonAttackId;
+        [SerializeField] private AbilityIdentifier _waveSlashAbilityId;
 
         [SerializeField] private AnimationEventReceiver _eventReceiver;
         [SerializeField] private HeroAnimator _heroAnimator;
@@ -113,7 +113,13 @@ namespace Code.Runtime.Entity.Hero
                 true, false,
                 canExit: (state) => state.Timer.Elapsed >= _heroAbilityController.ActiveAbility.ActiveTime - 0.3f));
             
-           
+           _stateMachine.AddState(nameof(HeroWaveSlashAbilityState), new HeroWaveSlashAbilityState(
+               _heroWeapon,
+               _heroAbilityController,
+               _heroAnimator,
+               _heroMovement,
+               _heroRotation,
+               _animationData, needExitTime: true));
 
             _stateMachine.AddState(nameof(FirstAttackState), new FirstAttackState(
                 _heroAttackComponent,
@@ -182,6 +188,11 @@ namespace Code.Runtime.Entity.Hero
                 HeroIdle,
                 _animationData.Animations[AnimationKey.Stomp].Length - 0.5f));
 
+            _stateMachine.AddTransition(new Transition(
+                nameof(HeroWaveSlashAbilityState),
+                HeroIdle));
+                
+
             _stateMachine.AddTransition(new TransitionAfter(
                 AbilityCast,
                 HeroIdle, _animationData.Animations[AnimationKey.SpellCast].Length - 0.4f));
@@ -205,6 +216,10 @@ namespace Code.Runtime.Entity.Hero
             else if (ability.AbilityBlueprint.Identifier.Id.Equals(_stompAbilityId.Id))
             {
                 _stateMachine.RequestStateChange(nameof(HeroStompAbilityState));
+            } 
+            else if (ability.AbilityBlueprint.Identifier.Id.Equals(_waveSlashAbilityId.Id))
+            {
+                _stateMachine.RequestStateChange(nameof(HeroWaveSlashAbilityState));
             }
 
             if (ability is AttackAbility attackAbility)

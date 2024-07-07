@@ -1,8 +1,10 @@
+using System;
 using Code.Runtime.Entity;
 using Code.Runtime.Entity.EntitiesComponents;
 using Code.Runtime.Logic.Collision;
 using Code.Runtime.Logic.Projectiles;
 using Code.Runtime.Logic.VisualEffects;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
@@ -12,19 +14,25 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
         protected readonly Projectile _projectilePrefab;
         protected readonly float _lifeTime;
         protected readonly float _speed;
+        protected readonly float _spawnDelay;
 
-        public ProjectileAbility(ActiveAbilityBlueprintBase abilityBlueprint, Projectile projectilePrefab, float lifeTime, float speed) : base(abilityBlueprint)
+        public ProjectileAbility(ActiveAbilityBlueprintBase abilityBlueprint, Projectile projectilePrefab, float lifeTime, float speed, float spawnDelay) : base(abilityBlueprint)
         {
             _projectilePrefab = projectilePrefab;
             _lifeTime = lifeTime;
             _speed = speed;
+            _spawnDelay = spawnDelay;
         }
 
-        public override void Use(AbilityController caster, GameObject target)
+        public override async void Use(AbilityController caster, GameObject target)
         {
             Projectile projectile = _projectileFactory
                 .CreateProjectile(_projectilePrefab, caster.gameObject, OnCreate, OnRelease, OnGet, OnReturn);
-
+            
+            projectile.gameObject.SetActive(false);
+            await UniTask.Delay(TimeSpan.FromSeconds(_spawnDelay));
+            projectile.gameObject.SetActive(true);
+            
             var entityAttack = caster.GetComponent<EntityAttackComponent>();
             var layer = entityAttack.GetTargetLayer();
 

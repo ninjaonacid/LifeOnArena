@@ -7,9 +7,11 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
     public class MultipleProjectileAbility : ProjectileAbility
     {
         private readonly int _numberOfProjectiles;
-        
+
+
         public MultipleProjectileAbility(ActiveAbilityBlueprintBase abilityBlueprint, Projectile projectilePrefab,
-            float lifeTime, float speed, int numberOfProjectiles) : base(abilityBlueprint, projectilePrefab, lifeTime, speed)
+            float lifeTime, float speed, float spawnDelay, int numberOfProjectiles) : base(abilityBlueprint,
+            projectilePrefab, lifeTime, speed, spawnDelay)
         {
             _numberOfProjectiles = numberOfProjectiles;
         }
@@ -27,7 +29,8 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
             for (int i = 0; i < _numberOfProjectiles; i++)
             {
                 float angle = i * angleStep; // The angle of the current projectile
-                Vector3 direction = Quaternion.Euler(0f, angle, 0f) * Vector3.forward; // The direction of the current projectile
+                Vector3 direction =
+                    Quaternion.Euler(0f, angle, 0f) * Vector3.forward; // The direction of the current projectile
 
                 Projectile projectile = _projectileFactory
                     .CreateProjectile(_projectilePrefab, caster.gameObject, OnCreate, OnRelease, OnGet, OnReturn);

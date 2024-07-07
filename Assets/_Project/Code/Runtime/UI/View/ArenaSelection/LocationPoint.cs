@@ -62,6 +62,10 @@ namespace Code.Runtime.UI.View.ArenaSelection
             if (_isUnlocked)
             {
                 SetMarkerColor(_highlightColor);
+            } 
+            else if (!_isUnlocked)
+            {
+                SetMarkerColor(_lockedColor);
             }
 
             if (_tween != null)
@@ -83,6 +87,7 @@ namespace Code.Runtime.UI.View.ArenaSelection
             else if (!_isUnlocked)
             {
                 SetLineColor(_lockedColor);
+                SetMarkerColor(_baseColor);
             }
            
 
