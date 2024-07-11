@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 52fb44a806ac432b841d503a0183391a, type: 3}
-  m_Name: FrostNova
+  m_Name: FireNova
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -69,14 +69,25 @@ MonoBehaviour:
       Entry: 8
       Data: 
   _identifier: {fileID: 11400000, guid: 8eb27fffab9d46044a48c74378f57890, type: 2}
-  _icon: {fileID: 21300000, guid: b875ac698b9631d469c23a32e4038143, type: 3}
-  _description: 
+  _icon: {fileID: 21300000, guid: 4b44afa3e08685748af33d83d0901047, type: 3}
+  _description:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   _cooldown: 5
   _activeTime: 1
   _isCastAbility: 1
-  _visualEffect: {fileID: 11400000, guid: 73ddebacc940e90468d0c88a792343a4, type: 2}
+  _visualEffect: {fileID: 11400000, guid: 4f7012ae64bf3664ba2c9a968518f9fb, type: 2}
   _abilitySound: {fileID: 0}
   _gameplayEffectBlueprints:
   - {fileID: 11400000, guid: d58736e60d61ad64fa6f96430fda27d5, type: 2}
   _castDistance: 0
   _aoeRadius: 10
+  references:
+    version: 2
+    RefIds: []

@@ -34,7 +34,9 @@ namespace Code.Runtime.UI.Model.AbilityMenu
             _equippedAbilities = new IndexedQueue<AbilityModel>();
 
             var allAbilities =
-                _configProvider.GetTreeAbilities();
+                _configProvider.GetTreeAbilities()
+                    .OrderBy(x => x.AbilityTreeData.Branch)
+                    .ThenBy(x => x.AbilityTreeData.Position);
                     
             
             foreach (var ability in allAbilities)

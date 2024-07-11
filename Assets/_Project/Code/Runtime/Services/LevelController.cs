@@ -56,13 +56,14 @@ namespace Code.Runtime.Services
 
         private void OnBossSpawn(GameObject arg1, MobIdentifier arg2)
         {
-            _eventSystem.FireEvent<BossSpawnEvent>(new BossSpawnEvent(arg1, arg2));
+            _eventSystem.FireEvent(new BossSpawnEvent(arg1, arg2));
         }
 
         private void LevelCompleted()
         {
             
         }
+        
         private async UniTask LevelEnd()
         {
             var currentLevel = _levelLoader.GetCurrentLevelConfig();
