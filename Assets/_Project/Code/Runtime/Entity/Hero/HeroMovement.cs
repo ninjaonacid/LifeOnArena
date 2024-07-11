@@ -28,17 +28,10 @@ namespace Code.Runtime.Entity.Hero
         }
         public void UpdateData(PlayerData data)
         {
-            data.WorldData.PositionOnLevel = new PositionOnLevel(CurrentLevel(),
-                transform.position.AsVectorData());
         }
 
         public void LoadData(PlayerData data)
         {
-            if (CurrentLevel() == data.WorldData.PositionOnLevel.Level)
-            {
-                var savedPosition = data.WorldData.PositionOnLevel.Position;
-                if (savedPosition != null) Warp(savedPosition);
-            }
         }
 
         private void Awake()

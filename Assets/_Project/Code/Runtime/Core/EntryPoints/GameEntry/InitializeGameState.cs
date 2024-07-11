@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Code.Runtime.ConfigData;
 using Code.Runtime.Core.Config;
 using Code.Runtime.Data;
 using Code.Runtime.Data.PlayerData;
@@ -38,13 +39,14 @@ namespace Code.Runtime.Core.EntryPoints.GameEntry
 
         private PlayerData NewPlayerData()
         {
-            PlayerData data = new PlayerData("Shelter");
+            InitialGameConfig config = _configProvider.GetInitialConfig();
+            PlayerData data = new PlayerData();
 
-            data.TutorialData.IsTutorialCompleted = true;
+            data.TutorialData.IsTutorialCompleted = config.IsNeedTutorial;
 
             data.WorldData.LootData.Collected = 10000;
 
-            StatDatabase characterStats = _configProvider.CharacterStats();
+            StatDatabase characterStats = config.CharacterStats;
             
             foreach (StatDefinition stat in characterStats.PrimaryStats)
             {
@@ -60,6 +62,8 @@ namespace Code.Runtime.Core.EntryPoints.GameEntry
             {
                 data.StatsData.Stats.TryAdd(stat.name, stat.BaseValue);
             }
+
+            data.HeroEquipment.WeaponIntId = config.StartWeapon.Id;
             
             return data;
         }

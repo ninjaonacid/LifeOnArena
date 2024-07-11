@@ -15,9 +15,9 @@ namespace Code.Runtime.Data.PlayerData
         public TutorialData TutorialData;
         public RewardsData RewardsData;
 
-        public PlayerData(string initialLevel)
+        public PlayerData()
     {
-        WorldData = new WorldData(initialLevel);
+        WorldData = new WorldData();
         HeroEquipment = new HeroEquipment();
         KillData = new KillData();
         AbilityData = new AbilityData();

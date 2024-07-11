@@ -31,11 +31,11 @@ namespace Code.Runtime.Core.Config
         
         private List<ActiveAbilityBlueprintBase> _treeAbilities;
         private List<WeaponData> _heroWeapons;
-        
+
+        private InitialGameConfig _initializeGameConfig;
         private TutorialConfig _tutorialConfig;
         private AudioLibrary _audioLibrary;
         private AudioServiceSettings _audioServiceSettings;
-        private StatDatabase _characterStats;
 
         public void Load()
         {
@@ -86,14 +86,15 @@ namespace Code.Runtime.Core.Config
             _rewards = Resources
                 .LoadAll<RewardBlueprintBase>($"{ConfigFolder}/Rewards")
                 .ToDictionary(x => x.RewardId.Id, x => x);
-            
-            _characterStats = Resources
-                .Load<StatDatabase>($"{ConfigFolder}/Hero/Stats/HeroStatsData");
+
+            _initializeGameConfig = Resources
+                .Load<InitialGameConfig>($"{ConfigFolder}/InitialGameConfig");
 
             _tutorialConfig = Resources.Load<TutorialConfig>($"{ConfigFolder}/Tutorial/StartGameTutorial");
 
         }
 
+        public InitialGameConfig GetInitialConfig() => _initializeGameConfig; 
         public WeaponData Weapon(int weaponId)
         {
             if(_weapons.TryGetValue(weaponId, out var weaponStaticData))
@@ -161,9 +162,6 @@ namespace Code.Runtime.Core.Config
         public RewardBlueprintBase Reward(int id) =>
             _rewards.TryGetValue(id, out RewardBlueprintBase reward) ? reward : null;
 
-        public StatDatabase CharacterStats() =>
-            _characterStats;
-        
         public ScreenConfig ForWindow(ScreenID menuId) =>
         
             _windowConfigs.TryGetValue(menuId, out ScreenConfig windowConfig)
