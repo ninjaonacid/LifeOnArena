@@ -60,39 +60,7 @@ namespace Code.Runtime.Core.EntryPoints.GameEntry
             {
                 data.StatsData.Stats.TryAdd(stat.name, stat.BaseValue);
             }
-
-            // var allAbilities =
-            //     _configProvider.AllAbilities()
-            //         .Where(x => x.AbilityTreeData != null)
-            //         .OrderBy(x => x.AbilityTreeData.Branch)
-            //         .ThenBy(x => x.AbilityTreeData.Position)
-            //         .ToArray();
-            //
-            //
-            // List<AbilityModel> abilityModels = new();
-            //
-            // foreach (var ability in allAbilities)
-            // {
-            //     var abilityModel = new AbilityModel()
-            //     {
-            //         AbilityId = ability.Identifier.Id,
-            //         Price = ability.AbilityTreeData.Price,
-            //         AbilityTreeData = ability.AbilityTreeData,
-            //         Icon = ability.Icon,
-            //         Description = ability.Description
-            //     };
-            //
-            //     if (abilityModel.Price == 0)
-            //     {
-            //         abilityModel.IsUnlocked = true;
-            //         data.AbilityData.UnlockedAbilities.Add(abilityModel);
-            //     }
-            //     
-            //     abilityModels.Add(abilityModel);
-            // }
-            //
-            // data.AbilityData.Abilities = abilityModels;
-            //
+            
             return data;
         }
 

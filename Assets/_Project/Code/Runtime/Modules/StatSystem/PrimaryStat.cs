@@ -24,7 +24,7 @@ namespace Code.Runtime.Modules.StatSystem
             CalculateValue();
         }
 
-        public void Substract(int amount)
+        public void Subtract(int amount)
         {
             _baseValue -= amount;
             CalculateValue();

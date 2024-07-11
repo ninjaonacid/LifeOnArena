@@ -77,6 +77,9 @@ namespace Code.Runtime.Services.BattleService
         public void CreateWeaponAttack(StatController attacker, GameObject target)
         {
             var damageable = target.GetComponentInParent<IDamageable>();
+
+            var entityWeapon = attacker.GetComponent<EntityWeapon>();
+            var weaponDamage = entityWeapon.WeaponData;
             
             IDamage damage = new HealthModifier
             {

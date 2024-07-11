@@ -55,6 +55,19 @@ namespace Code.Runtime.UI.Model.WeaponScreen
 
         public List<WeaponUIModel> GetSlots() => _weaponModels;
 
+        public WeaponUIModel GetModel(int id)
+        {
+            foreach (var model in _weaponModels)
+            {
+                if (model.WeaponId == id)
+                {
+                    return model;
+                }
+            }
+
+            return null;
+        }
+
         public void EquipWeapon(int id)
         {
             if (_equippedWeapon != null)

@@ -103,6 +103,7 @@ namespace Code.Runtime.UI.Controller
             var slotModel = _model.GetSlotByIndex(abilityIndex);
             
             _screenView.AbilityDescription.Show(true);
+            _screenView.UnlockButton.UnlockPrice.Price.text = slotModel.Price.ToString();
             _screenView.AbilityDescription.Icon.sprite = slotModel.Icon;
             _screenView.AbilityDescription.LocalizeString.StringReference = slotModel.Description;
         }

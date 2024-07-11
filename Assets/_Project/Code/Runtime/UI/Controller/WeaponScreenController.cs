@@ -42,7 +42,7 @@ namespace Code.Runtime.UI.Controller
             {
                 var weapon = weaponList[index];
                 
-                _windowView.WeaponContainer.UpdateView(weapon.WeaponId, weapon.WeaponName.GetLocalizedString(), weapon.WeaponDescription.GetLocalizedString(), weapon.WeaponIcon, weapon.isUnlocked);
+                _windowView.WeaponContainer.UpdateView(weapon.WeaponId, weapon.WeaponName.GetLocalizedString(), weapon.WeaponDescription.GetLocalizedString(), weapon.WeaponIcon, weapon.isUnlocked, weapon.isEquipped);
             }
         }
         
@@ -56,12 +56,14 @@ namespace Code.Runtime.UI.Controller
 
         private void EquipWeapon()
         {
-            int index;
-            
-            if (_windowView.WeaponContainer.TryGetSelectedWeaponId(out index))
-            {
-                _model.EquipWeapon(index);
-            }
+            int weaponId;
+
+            if (!_windowView.WeaponContainer.TryGetSelectedWeaponId(out weaponId)) return;
+            var weaponModel = _model.GetModel(weaponId);
+            if (!weaponModel.isUnlocked) return;
+                
+            _model.EquipWeapon(weaponId);
+            UpdateView();
         }
 
         public void Dispose()

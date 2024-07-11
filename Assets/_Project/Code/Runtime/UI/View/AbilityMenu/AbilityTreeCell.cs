@@ -8,10 +8,9 @@ namespace Code.Runtime.UI.View.AbilityMenu
 {
     public class AbilityTreeCell : MonoBehaviour, IPointerClickHandler
     {
-        [SerializeField] private Image _abilitySlotFrame;
-        [SerializeField] private Image _selectionFrame;
-        [SerializeField] private Image _equippedFrame;
-        [SerializeField] private Image _lockIcon;
+        [SerializeField] private CanvasElement _selectionFrame;
+        [SerializeField] private CanvasElement _equippedFrame;
+        [SerializeField] private CanvasElement _lockIcon;
         [SerializeField] private AbilityTreeLinePathUI _line;
         [SerializeField] private AbilityItemView _abilityItem;
 
@@ -19,12 +18,12 @@ namespace Code.Runtime.UI.View.AbilityMenu
         
         public void Select()
         {
-            _selectionFrame.enabled = true;
+            _selectionFrame.Show();
         }
 
         public void Deselect()
         {
-            _selectionFrame.enabled = false;
+            _selectionFrame.Hide();
         }
 
         public void UpdateData(Sprite abilityIcon, bool isUnlocked, int equippedSlot)
@@ -33,14 +32,14 @@ namespace Code.Runtime.UI.View.AbilityMenu
 
             if (equippedSlot != 0)
             {
-                _equippedFrame.gameObject.SetActive(true);
+                _equippedFrame.Show();
             }
             else
             {
-                _equippedFrame.gameObject.SetActive(false);
+                _equippedFrame.Hide();
             }
             
-            _lockIcon.gameObject.SetActive(!isUnlocked);
+            _lockIcon.Show(!isUnlocked);
 
             _line.ChangeColor(isUnlocked);
         }

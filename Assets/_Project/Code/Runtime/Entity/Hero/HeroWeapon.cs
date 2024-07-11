@@ -8,7 +8,7 @@ namespace Code.Runtime.Entity.Hero
     public class HeroWeapon : EntityWeapon, ISave
     {
         [SerializeField] private HeroAnimator _heroAnimator;
-
+        
 
         protected override void Start()
         {

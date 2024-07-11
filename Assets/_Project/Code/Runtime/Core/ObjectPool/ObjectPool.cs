@@ -98,6 +98,8 @@ namespace Code.Runtime.Core.ObjectPool
 
         public void Return(PooledObject obj)
         {
+            if (obj is null) return;
+            
             _objectsStock.Push(obj as T);
             obj.gameObject.SetActive(false);
             

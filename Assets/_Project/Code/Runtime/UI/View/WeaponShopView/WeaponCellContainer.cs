@@ -18,13 +18,13 @@ namespace Code.Runtime.UI.View.WeaponShopView
             }
         }
         
-        public void UpdateView(int elementID, string weaponName, string weaponDescription, Sprite weaponIcon, bool isUnlocked)
+        public void UpdateView(int elementID, string weaponName, string weaponDescription, Sprite weaponIcon, bool isUnlocked, bool isEquipped)
         {
             foreach (var weaponCell in _weaponCells)
             {
                 if (elementID == weaponCell.WeaponId.Id)
                 {
-                    weaponCell.UpdateView(weaponIcon,weaponName, weaponDescription, isUnlocked);
+                    weaponCell.UpdateView(weaponIcon,weaponName, weaponDescription, isUnlocked, isEquipped);
                 }
             }
         }
