@@ -42,7 +42,7 @@ namespace Code.Runtime.Core.EntryPoints.GameEntry
             InitialGameConfig config = _configProvider.GetInitialConfig();
             PlayerData data = new PlayerData();
 
-            data.TutorialData.IsTutorialCompleted = config.IsNeedTutorial;
+            data.TutorialData.IsTutorialCompleted = !config.IsNeedTutorial;
 
             data.WorldData.LootData.Collected = 10000;
 
