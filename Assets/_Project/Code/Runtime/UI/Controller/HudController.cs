@@ -7,6 +7,7 @@ using Code.Runtime.CustomEvents;
 using Code.Runtime.Entity.EntitiesComponents;
 using Code.Runtime.Entity.Hero;
 using Code.Runtime.Logic.WaveLogic;
+using Code.Runtime.Modules.Advertisement;
 using Code.Runtime.Services.LevelLoaderService;
 using Code.Runtime.Services.PersistentProgress;
 using Code.Runtime.UI.Model;
@@ -28,16 +29,18 @@ namespace Code.Runtime.UI.Controller
         private readonly IHeroFactory _heroFactory;
         private readonly LevelLoader _levelLoader;
         private readonly IEventSystem _eventSystem;
+        private readonly AdvertisementService _adService;
         
         private readonly CompositeDisposable _disposable = new CompositeDisposable();
         
         public HudController(IGameDataContainer gameData, IHeroFactory heroFactory, LevelLoader sceneLoader, 
-            IEventSystem eventSystem)
+            IEventSystem eventSystem, AdvertisementService adService)
         {
             _gameData = gameData;
             _heroFactory = heroFactory;
             _levelLoader = sceneLoader;
             _eventSystem = eventSystem;
+            _adService = adService;
         }
 
         public void InitController(IScreenModel model, BaseWindowView windowView, ScreenService screenService)
@@ -73,6 +76,8 @@ namespace Code.Runtime.UI.Controller
         
 
             _windowView.RestartButton.onClick.AsObservable().Subscribe(x => _levelLoader.LoadLevel("MainMenu"));
+
+            _windowView.RewardButton.onClick.AsObservable().Subscribe(x => _adService.ShowReward());
 
             _eventSystem.Subscribe<BossSpawnEvent>(SubscribeHealthBar);
 

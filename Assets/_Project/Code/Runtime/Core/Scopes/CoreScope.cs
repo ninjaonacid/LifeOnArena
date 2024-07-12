@@ -4,7 +4,8 @@ using Code.Runtime.Core.Config;
 using Code.Runtime.Core.EntryPoints;
 using Code.Runtime.Core.EventSystem;
 using Code.Runtime.Core.SceneManagement;
-using Code.Runtime.Modules.RewardSystem;
+using Code.Runtime.Modules.Advertisement;
+using Code.Runtime.Modules.LocalizationProvider;
 using Code.Runtime.Modules.TutorialService;
 using Code.Runtime.Services.BattleService;
 using Code.Runtime.Services.LevelLoaderService;
@@ -30,7 +31,8 @@ namespace Code.Runtime.Core.Scopes
 
             builder.Register<ConfigProvider>(Lifetime.Singleton);
             builder.Register<ISaveLoadService, SaveLoadService>(Lifetime.Singleton);
-          
+            builder.Register<AdvertisementService>(Lifetime.Singleton);
+            builder.Register<LocalizationService>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
 
             builder.Register<IUIFactory, UIFactory>(Lifetime.Singleton);
             builder.Register<IAssetProvider, AssetProvider>(Lifetime.Singleton);

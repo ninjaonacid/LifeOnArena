@@ -4,6 +4,7 @@ using Code.Runtime.ConfigData.Levels;
 using Code.Runtime.Core.Audio;
 using Code.Runtime.Core.Config;
 using Code.Runtime.Core.Factory;
+using Code.Runtime.Modules.Advertisement;
 using Code.Runtime.Services.LevelLoaderService;
 using Code.Runtime.Services.SaveLoad;
 using Code.Runtime.UI;
@@ -23,11 +24,12 @@ namespace Code.Runtime.Core.EntryPoints
         private readonly AudioService _audioService;
         private readonly PlayerControls _controls;
         private readonly ISaveLoadService _saveLoad;
+        private readonly AdvertisementService _adService;
 
         public MainMenuStarter(IHeroFactory heroFactory, IUIFactory uiFactory,
             ScreenService screenService,
             LevelLoader levelLoader, ISaveLoadService saveLoad, PlayerControls controls,
-            AudioService audioService)
+            AudioService audioService, AdvertisementService adService)
         {
             _heroFactory = heroFactory;
             _levelLoader = levelLoader;
@@ -35,6 +37,7 @@ namespace Code.Runtime.Core.EntryPoints
             _controls = controls;
             _audioService = audioService;
             _saveLoad = saveLoad;
+            _adService = adService;
         }
 
         public async UniTask StartAsync(CancellationToken cancellation)
@@ -48,6 +51,8 @@ namespace Code.Runtime.Core.EntryPoints
             DisableInput();
             
             _saveLoad.LoadData();
+            
+            _adService.ShowInterstitial();
 
             //_audioService.PlayBackgroundMusic("MainTheme", volume: 1, true);
 

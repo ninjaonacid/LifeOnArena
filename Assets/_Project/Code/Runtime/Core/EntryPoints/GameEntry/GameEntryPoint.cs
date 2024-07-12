@@ -2,6 +2,7 @@ using Code.Runtime.ConfigData.Identifiers;
 using Code.Runtime.Core.Audio;
 using Code.Runtime.Core.Config;
 using Code.Runtime.Services.LevelLoaderService;
+using InstantGamesBridge;
 using VContainer.Unity;
 
 namespace Code.Runtime.Core.EntryPoints.GameEntry
@@ -31,8 +32,8 @@ namespace Code.Runtime.Core.EntryPoints.GameEntry
         public void Initialize()
         {
             _gameState.LoadProgressOrInitNew();
-            
             _levelLoader.LoadLevel(_startLevelId);
+            
         }
         
     }

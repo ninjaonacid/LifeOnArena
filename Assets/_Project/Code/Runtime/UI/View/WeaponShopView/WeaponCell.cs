@@ -2,7 +2,6 @@ using System;
 using Code.Runtime.ConfigData.Identifiers;
 using TMPro;
 using UniRx;
-using UnityEditor.Search;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;

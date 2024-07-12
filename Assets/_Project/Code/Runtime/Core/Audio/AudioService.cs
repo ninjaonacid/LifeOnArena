@@ -161,6 +161,38 @@ namespace Code.Runtime.Core.Audio
             }
         }
 
+        public void PauseAll()
+        {
+            foreach (var channel in _soundChannelsPool)
+            {
+                if (!channel.IsFree)
+                {
+                    channel.Pause();
+                }
+            }
+            
+            if (!_mainMusicChannel.IsFree)
+            {
+                _mainMusicChannel.Stop();
+            }
+        }
+
+        public void UnpauseAll()
+        {
+            foreach (var channel in _soundChannelsPool)
+            {
+                if (!channel.IsFree)
+                {
+                    channel.UnPause();
+                }
+            }
+            
+            if (!_mainMusicChannel.IsFree)
+            {
+                _mainMusicChannel.UnPause();
+            }
+        }
+
         private SoundAudioChannel FindFreeSoundChannel()
         {
             return _soundChannelsPool.FirstOrDefault(channel => channel.IsFree) ?? CreateSoundChannel();
@@ -227,7 +259,6 @@ namespace Code.Runtime.Core.Audio
                 }
             }
         }
-        
 
         public void CleanUp()
         {

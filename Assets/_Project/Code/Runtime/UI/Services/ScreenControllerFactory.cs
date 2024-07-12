@@ -5,6 +5,8 @@ using Code.Runtime.Core.EventSystem;
 using Code.Runtime.Core.Factory;
 using Code.Runtime.Core.SceneManagement;
 using Code.Runtime.Logic.WaveLogic;
+using Code.Runtime.Modules.Advertisement;
+using Code.Runtime.Modules.LocalizationProvider;
 using Code.Runtime.Modules.TutorialService;
 using Code.Runtime.Services.LevelLoaderService;
 using Code.Runtime.Services.PersistentProgress;
@@ -21,12 +23,12 @@ namespace Code.Runtime.UI.Services
             IEventSystem eventSystem,
             IHeroFactory heroFactory, ISaveLoadService saveLoad,
             AudioService audioService, SceneLoader sceneLoader, LevelLoader levelLoader,
-            TutorialService tutorialService)
+            TutorialService tutorialService, AdvertisementService adService, LocalizationService localService)
         {
             _screenControllers.Add(typeof(MainMenuController),
                 () => gameData.PlayerData.TutorialData.IsTutorialCompleted
-                    ? new MainMenuController(gameData, audioService, levelLoader)
-                    : new TutorialMainMenuController(gameData, audioService, tutorialService, levelLoader)); 
+                    ? new MainMenuController(gameData, audioService, levelLoader, localService)
+                    : new TutorialMainMenuController(gameData, audioService,  levelLoader, localService, tutorialService)); 
             
             _screenControllers.Add(typeof(WeaponScreenController),
                 () => new WeaponScreenController());
@@ -37,7 +39,7 @@ namespace Code.Runtime.UI.Services
                   : new TutorialAbilityScreenController(saveLoad, tutorialService));
             
             _screenControllers.Add(typeof(HudController), () => 
-                new HudController(gameData, heroFactory, levelLoader, eventSystem));
+                new HudController(gameData, heroFactory, levelLoader, eventSystem, adService));
             
             _screenControllers.Add(typeof(MessageWindowController), () => new MessageWindowController());
             

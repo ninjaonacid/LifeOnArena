@@ -57,6 +57,16 @@ namespace Code.Runtime.Core.Audio
         {
             AudioSource.Stop();
         }
+
+        public void Pause()
+        {
+            AudioSource.Pause();
+        }
+
+        public void UnPause()
+        {
+            AudioSource.UnPause();
+        }
         
         public virtual void Update()
         {

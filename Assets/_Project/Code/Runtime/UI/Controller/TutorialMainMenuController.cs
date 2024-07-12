@@ -3,6 +3,7 @@ using System.Linq;
 using Code.Runtime.ConfigData.Identifiers;
 using Code.Runtime.Core.Audio;
 using Code.Runtime.Core.SceneManagement;
+using Code.Runtime.Modules.LocalizationProvider;
 using Code.Runtime.Modules.TutorialService;
 using Code.Runtime.Services.LevelLoaderService;
 using Code.Runtime.Services.PersistentProgress;
@@ -18,11 +19,13 @@ namespace Code.Runtime.UI.Controller
         private TutorialService _tutorialService;
         private List<TutorialElement> _tutorialElements = new();
 
-        public TutorialMainMenuController(IGameDataContainer gameData, AudioService audioService, TutorialService tutorialService, LevelLoader levelLoader) : base(gameData, audioService, levelLoader)
+
+        public TutorialMainMenuController(IGameDataContainer gameData, AudioService audioService,
+            LevelLoader levelLoader, LocalizationService localService, TutorialService tutorialService) : base(gameData,
+            audioService, levelLoader, localService)
         {
             _tutorialService = tutorialService;
         }
-
 
         public override void InitController(IScreenModel model, BaseWindowView windowView, ScreenService screenService)
         {
@@ -36,7 +39,7 @@ namespace Code.Runtime.UI.Controller
             }
 
             _tutorialService.OnTaskChanged += UpdateTutorial;
-            
+
             UpdateTutorial(_tutorialService.GetCurrentTask());
         }
 
@@ -53,7 +56,7 @@ namespace Code.Runtime.UI.Controller
         private void UpdateTutorial(TutorialTask task)
         {
             TutorialElement currentElement = default;
-            
+
             _tutorialElements.ForEach(x =>
             {
                 if (x.GetId() == task.ElementId)
@@ -67,7 +70,6 @@ namespace Code.Runtime.UI.Controller
                     x.BlockInteractions(true);
                 }
             });
-
         }
     }
 }

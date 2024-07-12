@@ -11,5 +11,9 @@ namespace Code.Runtime.UI.View.MainMenu
         public UIStatContainer StatContainer;
         public MusicButton MusicButton;
         public SoundButton SoundButton;
+
+        public Button TurkishLang;
+        public Button EnglishLang;
+        public Button RussianLang;
     }
 }
