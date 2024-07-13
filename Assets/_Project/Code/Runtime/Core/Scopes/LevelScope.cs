@@ -21,11 +21,11 @@ namespace Code.Runtime.Core.Scopes
             builder.Register<EnemySpawnerController>(Lifetime.Scoped).AsImplementedInterfaces().AsSelf();
             
             builder.Register<ProjectileFactory>(Lifetime.Scoped);
-            builder.Register<GameRewardSystem>(Lifetime.Singleton).AsSelf();
+            builder.Register<GameRewardSystem>(Lifetime.Scoped).AsSelf();
             builder.Register<ObjectPoolProvider>(Lifetime.Singleton);
             
             builder.Register<ItemFactory, ItemFactory>(Lifetime.Scoped);
-            builder.Register<IEnemyFactory, EnemyFactory>(Lifetime.Scoped);
+            builder.Register<EnemyFactory>(Lifetime.Scoped);
             builder.Register<IAbilityFactory, AbilityFactory>(Lifetime.Scoped);
             builder.Register<IHeroFactory, HeroFactory>(Lifetime.Scoped);
 
@@ -43,7 +43,7 @@ namespace Code.Runtime.Core.Scopes
         {
             builder.RegisterBuildCallback(container =>
             {
-                var enemyFactory = container.Resolve<IEnemyFactory>();
+                var enemyFactory = container.Resolve<EnemyFactory>();
                 var itemFactory = container.Resolve<ItemFactory>();
 
                 enemyFactory.InitAssets().Forget();

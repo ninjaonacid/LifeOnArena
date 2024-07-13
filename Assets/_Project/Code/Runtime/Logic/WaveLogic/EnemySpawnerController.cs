@@ -25,7 +25,7 @@ namespace Code.Runtime.Logic.WaveLogic
         public event Action<GameObject, MobIdentifier> BossSpawned;
 
         private readonly ConfigProvider _config;
-        private readonly IEnemyFactory _enemyFactory;
+        private readonly EnemyFactory _enemyFactory;
         
         private readonly List<EnemySpawner> _enemySpawnPoints = new List<EnemySpawner>();
         private CancellationTokenSource _cancellationTokenSource = new();
@@ -35,7 +35,7 @@ namespace Code.Runtime.Logic.WaveLogic
         private ITimer _timer;
         private bool _isBossSpawned = false;
 
-        public EnemySpawnerController(IEnemyFactory enemyFactory, PlayerControls controls, SceneLoader sceneLoader)
+        public EnemySpawnerController(EnemyFactory enemyFactory, PlayerControls controls, SceneLoader sceneLoader)
         {
             _enemyFactory = enemyFactory;
         }

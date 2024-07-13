@@ -25,13 +25,13 @@ namespace Code.Runtime.Logic.EnemySpawners
         
         private EnemyDeath _enemyDeath;
         private IPoolable _pooledObject;
-        private IEnemyFactory _factory;
+        private EnemyFactory _factory;
         private VisualEffectFactory _visualEffectFactory;
         private VisualEffect _spawnVfx;
         private int _spawnCounter;
 
         [Inject]
-        public void Construct(IEnemyFactory enemyFactory,
+        public void Construct(EnemyFactory enemyFactory,
             VisualEffectFactory visualEffectFactory)
         {
             _factory = enemyFactory;
@@ -57,7 +57,7 @@ namespace Code.Runtime.Logic.EnemySpawners
             await VfxSpawnLogic(position, token);
             await UniTask.Delay(TimeSpan.FromSeconds(1.5f), cancellationToken: token);
             
-            var monster = await _factory.CreateMonster(MobId.Id, transform, token);
+            var monster = await _factory.CreateMonster(MobId.Id, transform, token, onCreate: OnSpawn);
             
             monster.transform.position = position;
             monster.GetComponent<NavMeshMoveToPlayer>().Warp(position);
@@ -87,6 +87,11 @@ namespace Code.Runtime.Logic.EnemySpawners
                   _enemyDeath.Happened -= Slay;
 
             Alive = false;
+        }
+
+        private void OnSpawn(PooledObject monster)
+        {
+            monster.GetComponent<EnemyDeath>();
         }
 
     }

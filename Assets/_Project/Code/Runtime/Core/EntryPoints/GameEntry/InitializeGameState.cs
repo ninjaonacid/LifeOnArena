@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
 using Code.Runtime.ConfigData;
 using Code.Runtime.Core.Config;
 using Code.Runtime.Data;
@@ -7,7 +5,6 @@ using Code.Runtime.Data.PlayerData;
 using Code.Runtime.Modules.StatSystem;
 using Code.Runtime.Services.PersistentProgress;
 using Code.Runtime.Services.SaveLoad;
-using Code.Runtime.UI.Model.AbilityMenu;
 
 namespace Code.Runtime.Core.EntryPoints.GameEntry
 {
@@ -27,7 +24,7 @@ namespace Code.Runtime.Core.EntryPoints.GameEntry
             _gameDataContainer = dataContainer;
         }
 
-        public void LoadProgressOrInitNew()
+        public void LoadDataOrCreateNew()
         {
             _gameDataContainer.PlayerData =
                 _saveLoadService.LoadPlayerData()

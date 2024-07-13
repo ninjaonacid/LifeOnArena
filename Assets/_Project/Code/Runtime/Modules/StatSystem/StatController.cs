@@ -14,7 +14,7 @@ namespace Code.Runtime.Modules.StatSystem
         private bool _isInitialized;
         public bool IsInitialized => _isInitialized;
         public event Action Initialized;
-        public event Action Uninitiliazed;
+        public event Action Uninitialized;
         
 
         protected virtual void Awake()
@@ -27,7 +27,7 @@ namespace Code.Runtime.Modules.StatSystem
 
         private void OnDestroy()
         {
-            Uninitiliazed?.Invoke();
+            Uninitialized?.Invoke();
         }
 
         protected void Initialize()

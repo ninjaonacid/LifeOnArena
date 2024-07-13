@@ -22,7 +22,7 @@ using Object = UnityEngine.Object;
 
 namespace Code.Runtime.Core.Factory
 {
-    public class EnemyFactory : IEnemyFactory, IDisposable
+    public class EnemyFactory : IDisposable
     {
         private readonly IHeroFactory _heroFactory;
         private readonly ConfigProvider _config;
@@ -77,14 +77,16 @@ namespace Code.Runtime.Core.Factory
             return spawner;
         }
         
-        public async UniTask<GameObject> CreateMonster(int mobId, Transform parent, CancellationToken token)
+        public async UniTask<GameObject> CreateMonster(int mobId, Transform parent, CancellationToken token,
+            Action<PooledObject> onCreate = null, Action<PooledObject> onGet = null, 
+            Action<PooledObject>  onReturn = null, Action<PooledObject> onRelease = null)
         {
             var monsterData = _config.Monster(mobId);
             var levelConfig = _levelLoader.GetCurrentLevelConfig();
 
             GameObject prefab = await _assetProvider.Load<GameObject>(monsterData.PrefabReference, token);
             
-            GameObject monster = _objectPoolProvider.Spawn(prefab);
+            GameObject monster = _objectPoolProvider.Spawn(prefab, onCreate: onCreate, onRelease: onRelease, onGet: onGet, onReturn: onReturn);
             
             monster.transform.SetParent(parent);
             
@@ -95,7 +97,8 @@ namespace Code.Runtime.Core.Factory
             enemyStats.SetStats(monsterData.PossibleStats.Count > 1
                 ? monsterData.PossibleStats[levelConfig.LevelDifficulty - 1]
                 : monsterData.PossibleStats[0]);
-
+            
+            monster.GetComponent<EnemyDeath>().Initialize();
             monster.GetComponent<EntityUI>().Construct(damageable);
             monster.GetComponent<NavMeshMoveToPlayer>().Construct(_heroFactory.HeroGameObject.transform);
             monster.GetComponent<NavMeshAgent>().speed = monsterData.MoveSpeed;
@@ -110,6 +113,7 @@ namespace Code.Runtime.Core.Factory
 
             return monster;
         }
+        
 
         private GameObject InstantiateRegistered(GameObject prefab, Vector3 position)
         {

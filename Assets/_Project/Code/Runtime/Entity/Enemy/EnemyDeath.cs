@@ -1,9 +1,7 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using Code.Runtime.Modules.StatSystem;
 using Code.Runtime.UI.View.HUD;
-using DG.Tweening;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -32,15 +30,7 @@ namespace Code.Runtime.Entity.Enemy
 
         public event Action Happened;
 
-        private void Awake()
-        {
-            if (!_isAnimatedDeath)
-            {
-                _fractureParts = _fracturedPrefab.GetComponentsInChildren<Rigidbody>();
-            }
-        }
-
-        private void OnEnable()
+        public void Initialize()
         {
             if (_stats.IsInitialized)
             {
@@ -53,6 +43,14 @@ namespace Code.Runtime.Entity.Enemy
 
             IsDead = false;
             _entityUI.SetActiveHpView(true);
+        }
+
+        private void Awake()
+        {
+            if (!_isAnimatedDeath)
+            {
+                _fractureParts = _fracturedPrefab.GetComponentsInChildren<Rigidbody>();
+            }
         }
 
         private void OnDestroy()

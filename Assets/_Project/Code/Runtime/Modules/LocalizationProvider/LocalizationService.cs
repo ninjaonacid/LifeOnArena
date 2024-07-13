@@ -1,5 +1,5 @@
+using System;
 using System.Collections.Generic;
-using InstantGamesBridge;
 using UnityEngine;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
@@ -10,6 +10,7 @@ namespace Code.Runtime.Modules.LocalizationProvider
 {
     public class LocalizationService : IInitializable
     {
+        public Action Initialized;
         private LocalizationSettings _localizationSettings;
         private readonly Dictionary<LocaleIdentifier, Locale> _availableLocales = new();
 
@@ -23,27 +24,29 @@ namespace Code.Runtime.Modules.LocalizationProvider
         {
             _localizationSettings = obj.Result;
             var locales = _localizationSettings.GetAvailableLocales().Locales;
-            _localizationSettings.GetAvailableLocales().GetLocale(Application.systemLanguage);
-            var applicationLanguage = Application.systemLanguage;
 
             foreach (var locale in locales)
             {
                 _availableLocales.Add(locale.Identifier, locale);
             }
-
-            var language = Bridge.platform.language;
-            ChangeLanguage(language);
-            
+         
+            Initialized?.Invoke();
         }
 
         public void ChangeLanguage(string localeCode)
         {
-            _localizationSettings.SetSelectedLocale(_availableLocales[localeCode]);
+            if (_availableLocales.TryGetValue(localeCode, out var locale))
+            {
+                _localizationSettings.SetSelectedLocale(locale);
+            }
         }
 
         public void ChangeLanguage(SystemLanguage language)
         {
-            _localizationSettings.SetSelectedLocale(_availableLocales[language]);
+            if (_availableLocales.TryGetValue(language, out var locale))
+            {
+                _localizationSettings.SetSelectedLocale(locale);
+            }
         }
     }
 }
