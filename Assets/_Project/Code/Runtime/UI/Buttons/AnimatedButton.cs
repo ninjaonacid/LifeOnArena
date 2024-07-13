@@ -21,6 +21,8 @@ namespace Code.Runtime.UI.Buttons
 
         public void PlayScaleAnimation()
         {
+            ResetState();
+            
             if (_tween != null)
             {
                 _tween.Complete();

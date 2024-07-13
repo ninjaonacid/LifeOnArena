@@ -8,7 +8,9 @@ namespace Code.Runtime.Entity.Hero
     {
         [SerializeField] private float _rotationSmooth;
         [SerializeField] private float _rotationSpeed;
-        [SerializeField] private Transform _playerModel;
+        [SerializeField] private float _attackRotationSpeed;
+
+        private float _baseRotationSpeed;
         
         private PlayerControls _controls;
         private Camera _camera;
@@ -17,6 +19,7 @@ namespace Code.Runtime.Entity.Hero
         private void Awake()
         {
             _camera = Camera.main;
+            _baseRotationSpeed = _rotationSpeed;
         }
 
         [Inject]
@@ -37,6 +40,16 @@ namespace Code.Runtime.Entity.Hero
         public void EnableRotation(bool value)
         {
             _isEnabled = value;
+        }
+
+        public void ApplyAttackRotationSpeed()
+        {
+            _rotationSpeed = _attackRotationSpeed;
+        }
+
+        public void ResetRotationSpeed()
+        {
+            _rotationSpeed = _baseRotationSpeed;
         }
 
         public void Rotate(float rotationSpeed)

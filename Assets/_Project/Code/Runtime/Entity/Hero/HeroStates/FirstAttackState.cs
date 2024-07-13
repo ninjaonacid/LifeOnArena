@@ -32,7 +32,8 @@ namespace Code.Runtime.Entity.Hero.HeroStates
                 _attackConfig.SlashConfig.VisualEffect.Identifier, _attackConfig.SlashDirection, 
                 _attackConfig.SlashConfig.SlashSize, _attackConfig.SlashDelay).Forget();
 
-            _heroRotation.EnableRotation(false);
+            _heroRotation.ApplyAttackRotationSpeed();
+            
         }
         
         public override void OnLogic()
@@ -51,7 +52,7 @@ namespace Code.Runtime.Entity.Hero.HeroStates
             base.OnExit();
             _heroAttackComponent.ClearCollisionData();
             _heroWeapon.DisableWeaponCollider();
-            _heroRotation.EnableRotation(true);
+            _heroRotation.ResetRotationSpeed();
         }
     }
 }

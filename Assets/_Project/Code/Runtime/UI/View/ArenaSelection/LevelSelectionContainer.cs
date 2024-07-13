@@ -33,10 +33,10 @@ namespace Code.Runtime.UI.View.ArenaSelection
             }
         }
 
-        private void SelectCurrentLevel(LocationPoint location)
+        public void SelectCurrentLevel()
         {
-            _selectedLevel = location;
-            location.Select();
+            var location = _locationPoints.LastOrDefault(x => x.IsUnlocked());
+            HandleLevelSelection(location);
         }
 
         public int GetSelectedLocationId()

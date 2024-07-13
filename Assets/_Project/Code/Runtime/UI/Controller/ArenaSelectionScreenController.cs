@@ -39,6 +39,8 @@ namespace Code.Runtime.UI.Controller
             
             UpdateData();
 
+            _view.LevelContainer.SelectCurrentLevel();
+
         }
 
 

@@ -1,5 +1,3 @@
-using Code.Runtime.UI.Buttons;
-
 namespace Code.Runtime.UI.View.ArenaSelection
 {
     public class ArenaSelectionScreenView : BaseWindowView

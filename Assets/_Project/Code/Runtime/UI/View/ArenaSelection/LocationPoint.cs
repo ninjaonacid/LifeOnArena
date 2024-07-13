@@ -28,7 +28,7 @@ namespace Code.Runtime.UI.View.ArenaSelection
         private bool _isUnlocked;
         private bool _isCompleted;
 
-        private void Start()
+        private void Awake()
         {
             _markerOriginalScale = _markerIcon.transform.localScale;
         }
@@ -47,6 +47,11 @@ namespace Code.Runtime.UI.View.ArenaSelection
             else
             {
                 SetLineColor(_lockedColor);
+            }
+
+            if (isCompleted)
+            {
+                SetColor(_completedColor);
             }
         }
 
@@ -69,12 +74,15 @@ namespace Code.Runtime.UI.View.ArenaSelection
             else if (!_isUnlocked)
             {
                 SetMarkerColor(_lockedColor);
-            }
+            } 
+            
 
             if (_tween != null)
             {
                 _tween.Kill();
             }
+            
+            ResetState();
             
             _tween = _markerIcon.transform.DOScale(new Vector3(1.2f, 1.2f, 1.2f), 1f)
                 .SetLoops(-1, LoopType.Yoyo)
@@ -83,7 +91,7 @@ namespace Code.Runtime.UI.View.ArenaSelection
 
         public void Deselect()
         {
-            if (_isUnlocked)
+            if (_isUnlocked && !_isCompleted)
             {
                 SetColor(_baseColor);
             }
@@ -92,7 +100,10 @@ namespace Code.Runtime.UI.View.ArenaSelection
                 SetLineColor(_lockedColor);
                 SetMarkerColor(_baseColor);
             }
-           
+            else if (_isUnlocked && _isCompleted)
+            {
+                SetColor(_completedColor);
+            }
 
             _markerIcon.transform.localScale = _markerOriginalScale;
             
@@ -100,6 +111,11 @@ namespace Code.Runtime.UI.View.ArenaSelection
             {
                 _tween.Kill();
             }
+        }
+
+        private void ResetState()
+        {
+            _markerIcon.transform.localScale = _markerOriginalScale;
         }
 
         private void SetColor(Color32 color)

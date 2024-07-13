@@ -1672,11 +1672,11 @@ PrefabInstance:
     - target: {fileID: 1713337227256712141, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
       propertyPath: _hurtBox
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 8872239562331248510}
     - target: {fileID: 1713337227256712141, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
       propertyPath: _statController
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 4548832314929923065}
     - target: {fileID: 2085898622953279013, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
       propertyPath: _StatDatabase
       value: 
@@ -1708,7 +1708,7 @@ PrefabInstance:
     - target: {fileID: 2892997724190106138, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
       propertyPath: _stats
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 4548832314929923065}
     - target: {fileID: 2892997724190106138, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
       propertyPath: _isNeedResetAfterDisable
       value: 1
@@ -1837,6 +1837,10 @@ PrefabInstance:
       propertyPath: _weaponData
       value: 
       objectReference: {fileID: 11400000, guid: fed0bbb2b9ad2c54eb8f870acf891661, type: 2}
+    - target: {fileID: 6625279289632298001, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
+      propertyPath: _equipJointMain
+      value: 
+      objectReference: {fileID: 6504915451465975024}
     - target: {fileID: 6625279289632298001, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
       propertyPath: _weaponPosition
       value: 
@@ -2083,7 +2087,7 @@ MonoBehaviour:
   _enemyHealth: {fileID: 4737285204634244485}
   _tagController: {fileID: 4078759614492838205}
   _animationData: {fileID: 11400000, guid: c84a29c47f9c6b141971c9668f881c0b, type: 2}
-  _statController: {fileID: 0}
+  _statController: {fileID: 4548832314929923065}
   _enemyDeath: {fileID: 4737285204634244484}
   _abilityController: {fileID: 886702728777020800}
 --- !u!114 &7665401954657485101
@@ -2106,3 +2110,14 @@ BoxCollider:
   m_CorrespondingSourceObject: {fileID: 2192902159981610960, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
   m_PrefabInstance: {fileID: 7609897896664463263}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8872239562331248510 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1349759437447274721, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
+  m_PrefabInstance: {fileID: 7609897896664463263}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5584285532707550588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 891205a5c63cd5443b08a5464ab3f87b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
