@@ -54,8 +54,31 @@ MonoBehaviour:
   WavesToSpawn: 0
   IsBossLevel: 1
   LevelDifficulty: 3
-  EnemySpawners: []
-  NextLevelDoorSpawners: []
+  EnemySpawners:
+  - Id: FantasyArena_3_87b6418b-6f7c-4ef8-9b53-6a828291a8f5
+    SpawnCount: 0
+    TimeToSpawn: 0
+    MobId: {fileID: 11400000, guid: 2dcb3accab65ee74ea620704230da380, type: 2}
+    Position: {x: -49.8, y: 0.0000038146973, z: 29.3}
+    EnemyType: 1
+  - Id: FantasyArena_3_ec7a57eb-6877-494c-8ac5-62a573450c3f
+    SpawnCount: 0
+    TimeToSpawn: 0
+    MobId: {fileID: 11400000, guid: c926abab697947a4a9b6547139ee0e4d, type: 2}
+    Position: {x: 0.4, y: 0.0000038146973, z: -6.7}
+    EnemyType: 0
+  - Id: FantasyArena_3_bfa2178f-871a-4cf1-b6a4-f351186c49d2
+    SpawnCount: 0
+    TimeToSpawn: 0
+    MobId: {fileID: 11400000, guid: 770735b52f36cc9468fe91489a321c53, type: 2}
+    Position: {x: -48.7, y: 0.0000038146973, z: 28.6}
+    EnemyType: 0
+  - Id: _0702d4e2-cb82-46aa-80c3-7a3c4b588b61
+    SpawnCount: 0
+    TimeToSpawn: 0
+    MobId: {fileID: 11400000, guid: 45d5611a5ce3ef54ab424b591bd41145, type: 2}
+    Position: {x: -71.533485, y: 0.0000038146973, z: -21.508373}
+    EnemyType: 0
   HeroInitialPosition: {x: -6.5, y: 0, z: -31.1}
   HeroInitialRotation: {x: 0, y: 0, z: 0, w: 1}
   LevelId: {fileID: 11400000, guid: 5f55661faf6fda249be924d1bc714834, type: 2}
