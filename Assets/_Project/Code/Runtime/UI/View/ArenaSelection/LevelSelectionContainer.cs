@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UniRx;
 using UnityEngine;
 
@@ -21,15 +22,21 @@ namespace Code.Runtime.UI.View.ArenaSelection
             }
         }
 
-        public void UpdateData(int levelId, string locationName, Sprite icon, bool isUnlocked)
+        public void UpdateData(int levelId, string locationName, Sprite icon, bool isUnlocked, bool isCompleted)
         {
             foreach (var locationPoint in _locationPoints)
             {
                 if (locationPoint.LevelId.Id == levelId)
                 {
-                    locationPoint.UpdateData(isUnlocked);
+                    locationPoint.UpdateData(isUnlocked, isCompleted);
                 }
             }
+        }
+
+        private void SelectCurrentLevel(LocationPoint location)
+        {
+            _selectedLevel = location;
+            location.Select();
         }
 
         public int GetSelectedLocationId()

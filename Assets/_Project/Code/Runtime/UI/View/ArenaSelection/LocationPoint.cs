@@ -33,9 +33,12 @@ namespace Code.Runtime.UI.View.ArenaSelection
             _markerOriginalScale = _markerIcon.transform.localScale;
         }
 
-        public void UpdateData(bool isUnlocked)
+        public bool IsUnlocked() => _isUnlocked;
+
+        public void UpdateData(bool isUnlocked, bool isCompleted)
         {
             _isUnlocked = isUnlocked;
+            _isCompleted = isCompleted;
             
             if (isUnlocked)
             {
@@ -101,7 +104,6 @@ namespace Code.Runtime.UI.View.ArenaSelection
 
         private void SetColor(Color32 color)
         {
-            
             _markerIcon.color = color;
             _rayIcon.color = color;
             _line.color = color;

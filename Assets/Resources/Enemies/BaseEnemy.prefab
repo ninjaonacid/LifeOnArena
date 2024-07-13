@@ -222,10 +222,10 @@ NavMeshAgent:
   m_GameObject: {fileID: 2658416580451336931}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 1
+  m_Radius: 2
   m_Speed: 6
   m_Acceleration: 15
-  avoidancePriority: 50
+  avoidancePriority: 99
   m_AngularSpeed: 1500
   m_StoppingDistance: 4
   m_AutoTraverseOffMeshLink: 1
@@ -234,7 +234,7 @@ NavMeshAgent:
   m_Height: 4
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 1
 --- !u!114 &7813538039565963230
 MonoBehaviour:
   m_ObjectHideFlags: 0

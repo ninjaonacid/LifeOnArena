@@ -1,4 +1,5 @@
 using Code.Runtime.Core.AssetManagement;
+using Code.Runtime.Core.Audio;
 using Code.Runtime.Core.Config;
 using Code.Runtime.Core.Factory;
 using UnityEngine;
@@ -10,11 +11,10 @@ namespace Code.Runtime.Core.EntryPoints
     {
         private readonly ConfigProvider _configProvider;
         private readonly IAssetProvider _assetProvider;
-        private readonly Audio.AudioService _audioService;
-        private IFactory<GameObject> _factory;
+        private readonly AudioService _audioService;
 
         public CoreLoader(ConfigProvider configProvider, IAssetProvider assetProvider,
-            Audio.AudioService audioService)
+            AudioService audioService)
         {
             _configProvider = configProvider;
             _assetProvider = assetProvider;

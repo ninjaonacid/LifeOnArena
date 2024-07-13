@@ -1874,8 +1874,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 48d5edeb247b38345974b2cb065b7438, type: 2}
     - target: {fileID: 7813538039565963231, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
+      propertyPath: avoidancePriority
+      value: 99
+      objectReference: {fileID: 0}
+    - target: {fileID: 7813538039565963231, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
       propertyPath: m_StoppingDistance
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7813538039565963231, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
+      propertyPath: m_ObstacleAvoidanceType
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8293864989913983261, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
       propertyPath: _weaponData
