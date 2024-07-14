@@ -37,12 +37,18 @@ namespace Code.Runtime.Entity.Enemy.MeleeEnemy
                 nameof(EnemyChaseState),
                 (transition) => _enemyTarget.HasTarget() && !_enemyAttackComponent.TargetInMeleeAttackRange));
 
+            _fsm.AddTransition(new Transition(
+                nameof(EnemyIdleState),
+                nameof(MeleeEnemyAttackState),
+                (transition) => _enemyAttackComponent.CanAttack() && _enemyTarget.HasTarget(),
+                true));
+            
             _fsm.AddTransition(new TransitionAfter(
                 nameof(MeleeEnemyAttackState),
                 nameof(EnemyChaseState),
                 _animationData.Animations[AnimationKey.Attack1].Length,
                 (transition) => _enemyTarget.HasTarget() && !_enemyAttackComponent.TargetInMeleeAttackRange));
-                
+
             _fsm.AddTransition(new Transition(
                 nameof(EnemyChaseState),
                 nameof(EnemyIdleState),
@@ -53,7 +59,7 @@ namespace Code.Runtime.Entity.Enemy.MeleeEnemy
                     " ", 
                     nameof(EnemyStaggerState), isForceTransition: true
                 ));
-          
+
             _fsm.AddTransition(new TransitionAfter(
                 nameof(EnemyStaggerState),
                 nameof(EnemyIdleState),
@@ -68,13 +74,8 @@ namespace Code.Runtime.Entity.Enemy.MeleeEnemy
             _fsm.AddTransition(new Transition(
                 nameof(MeleeEnemyAttackState),
                 nameof(EnemyIdleState)));
-            
-            _fsm.AddTransition(new Transition(
-                nameof(EnemyIdleState),
-                nameof(MeleeEnemyAttackState),
-                (transition) => _enemyAttackComponent.CanAttack(),
-                true));
-            
+
+
             _fsm.AddTransitionFromAny(new Transition(
                 "",
                 nameof(EnemyStunnedState),
