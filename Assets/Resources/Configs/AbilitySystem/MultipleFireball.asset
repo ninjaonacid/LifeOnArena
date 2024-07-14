@@ -41,15 +41,27 @@ MonoBehaviour:
       Data: 
   _identifier: {fileID: 11400000, guid: 57f0a8ac0afc4c6479c67c15b99cdacb, type: 2}
   _icon: {fileID: 0}
-  _description: 
+  _description:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   _cooldown: 3
   _activeTime: 1
   _isCastAbility: 1
   _visualEffect: {fileID: 11400000, guid: 1436113d8ed112f409486750b254e9fc, type: 2}
   _abilitySound: {fileID: 0}
   _gameplayEffectBlueprints:
-  - {fileID: 11400000, guid: 34ecfd28a25248848bbcfcd8a68a8741, type: 2}
+  - {fileID: 11400000, guid: f565f745520be3b4a994c780df119ba7, type: 2}
   _prefab: {fileID: 4140074422687958933, guid: eef611f69a043234daa794211d3ef4a7, type: 3}
   _lifeTime: 4
   _speed: 30
+  _spawnDelay: 0
   _numberOfProjectiles: 6
+  references:
+    version: 2
+    RefIds: []

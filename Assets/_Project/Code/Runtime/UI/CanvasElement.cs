@@ -8,7 +8,7 @@ namespace Code.Runtime.UI
     {
         [SerializeField] private CanvasGroup _canvasGroup;
 
-        private void Awake()
+        protected virtual void Awake()
         {
             _canvasGroup ??= GetComponent<CanvasGroup>();
         }

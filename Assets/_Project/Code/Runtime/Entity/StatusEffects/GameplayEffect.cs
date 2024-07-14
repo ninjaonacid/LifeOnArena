@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Code.Runtime.ConfigData;
+using Code.Runtime.Logic.Damage;
 using Code.Runtime.Modules.AbilitySystem;
 using Code.Runtime.Modules.AbilitySystem.GameplayEffects;
 using Code.Runtime.Modules.AbilitySystem.GameplayTags;
@@ -18,7 +20,7 @@ namespace Code.Runtime.Entity.StatusEffects
         public StatusVisualEffect StatusVisualEffect { get; }
         
         private readonly List<StatModifier> _statModifiers = new List<StatModifier>();
-        private AbilityController _owner;
+        private readonly AbilityController _owner;
         public GameplayEffect(GameplayEffectBlueprint effectBlueprint, AbilityController owner)
         {
          
@@ -28,20 +30,45 @@ namespace Code.Runtime.Entity.StatusEffects
             Type = effectBlueprint.DurationType;
             StatusVisualEffect = effectBlueprint.StatusVisualEffect;
 
-            Stat ownerDamage;
-            _owner.GetComponent<StatController>().Stats.TryGetValue("Attack", out ownerDamage);
+
+            StatController ownerStats = _owner.GetComponent<StatController>();
+            ownerStats.Stats.TryGetValue("Attack", out var ownerPhysicalDamage);
+            ownerStats.Stats.TryGetValue("Magic", out var ownerMagicalDamage);
             
             StatModifier statModifier;
 
             foreach (var modifier in effectBlueprint.Modifiers)
             {
-                if (modifier is DamageStatModifierBlueprint)
+                if (modifier is DamageStatModifierBlueprint damageModifier)
                 {
-                    var healthModifier = new HealthModifier
+                    HealthModifier healthModifier = default;
+                    
+                    switch (damageModifier.DamageType)
                     {
-                        Magnitude = ownerDamage.Value * -1,
-                        OperationType = modifier.Type
-                    };
+                        case DamageType.Magical:
+                        {
+                            if (ownerMagicalDamage != null)
+                                healthModifier = new HealthModifier
+                                {
+                                    Magnitude = ownerMagicalDamage.Value * -1,
+                                    OperationType = damageModifier.Type
+                                };
+                            break;
+                        }
+                        case DamageType.Physical:
+                        {
+                            if (ownerPhysicalDamage != null)
+                                healthModifier = new HealthModifier
+                                {
+                                    Magnitude = ownerPhysicalDamage.Value * -1,
+                                    OperationType = damageModifier.Type
+                                };
+                            break;
+                        }
+                        default:
+                            throw new ArgumentOutOfRangeException();
+                    }
+                    
 
                     statModifier = healthModifier;
                 }

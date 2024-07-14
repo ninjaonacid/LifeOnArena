@@ -420,7 +420,7 @@ PrefabInstance:
     - target: {fileID: 2757484145192761494, guid: 1864a5c4318eae34f8f3a8051f76d861, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: b4d820c15687692429b178f2e07d6785, type: 3}
+      objectReference: {fileID: 21300000, guid: 617409adb252d2b4fa24ef767d41d348, type: 3}
     - target: {fileID: 2757484145192761494, guid: 1864a5c4318eae34f8f3a8051f76d861, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -468,9 +468,21 @@ PrefabInstance:
       value: CloseButton
       objectReference: {fileID: 0}
     - target: {fileID: 3984355158897697759, guid: 06b22f0c19364fa46ad72cbd9218ba66, type: 3}
+      propertyPath: _buttonImage
+      value: 
+      objectReference: {fileID: 2178197990750940504}
+    - target: {fileID: 3984355158897697759, guid: 06b22f0c19364fa46ad72cbd9218ba66, type: 3}
       propertyPath: _canvasGroup
       value: 
       objectReference: {fileID: 1882263855172302076, guid: 06b22f0c19364fa46ad72cbd9218ba66, type: 3}
+    - target: {fileID: 3984355158897697759, guid: 06b22f0c19364fa46ad72cbd9218ba66, type: 3}
+      propertyPath: _pressedColor.rgba
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 3984355158897697759, guid: 06b22f0c19364fa46ad72cbd9218ba66, type: 3}
+      propertyPath: _highlightColor.rgba
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 7935893264977102040, guid: 06b22f0c19364fa46ad72cbd9218ba66, type: 3}
       propertyPath: m_Pivot.x
       value: 1
@@ -562,3 +574,14 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7935893264977102040, guid: 06b22f0c19364fa46ad72cbd9218ba66, type: 3}
   m_PrefabInstance: {fileID: 9054246488292150365}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2178197990750940504 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7178076714366836997, guid: 06b22f0c19364fa46ad72cbd9218ba66, type: 3}
+  m_PrefabInstance: {fileID: 9054246488292150365}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

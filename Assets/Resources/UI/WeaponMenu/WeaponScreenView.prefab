@@ -35,7 +35,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0.000030517578, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3178261658829494686
@@ -66,7 +66,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: aa3d67ad2caa106439e528399f55c0f1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 91a625f57a7b82440a452eb63b2e0e14, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -333,7 +333,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -3.2502, y: 78}
+  m_AnchoredPosition: {x: -3.2502, y: 57}
   m_SizeDelta: {x: 497.1404, y: 157.4957}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &3097775365853240015
@@ -349,6 +349,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canvasGroup: {fileID: 6056748827312884306}
+  _highlightColor:
+    serializedVersion: 2
+    rgba: 4278251775
+  _pressedColor:
+    serializedVersion: 2
+    rgba: 4278190335
+  _baseColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  _buttonImage: {fileID: 1521385307982073450}
 --- !u!225 &6056748827312884306
 CanvasGroup:
   m_ObjectHideFlags: 0

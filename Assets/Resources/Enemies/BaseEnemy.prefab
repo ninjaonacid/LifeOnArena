@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _souls: {fileID: 11400000, guid: 2b613d09568c554488bdbc63732d708e, type: 2}
-  EnemyDeath: {fileID: 2892997724190106139}
+  _enemyDeath: {fileID: 2892997724190106139}
 --- !u!1 &2091178329331578730
 GameObject:
   m_ObjectHideFlags: 0
@@ -310,7 +310,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e482eac29799a44a9bc0a342600d505, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _stats: {fileID: 0}
+  _stats: {fileID: 6249724365430731878}
   _health: {fileID: 2892997724190106138}
   _entityUI: {fileID: 4058648672316291509}
   _fracturedPrefab: {fileID: 0}
@@ -334,7 +334,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4d656a13cfa1d84d94341642ae53936, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _stats: {fileID: 0}
+  _stats: {fileID: 6249724365430731878}
   _isNeedResetAfterDisable: 1
 --- !u!114 &4058648672316291509
 MonoBehaviour:
@@ -362,8 +362,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyCastComponent: {fileID: 0}
-  NavMeshMoveToPlayer: {fileID: 0}
-  _enemyAttackComponent: {fileID: 0}
+  NavMeshMoveToPlayer: {fileID: 7813538039565963230}
+  _enemyAttackComponent: {fileID: 6966552553589898628}
   _enemyWeapon: {fileID: 6625279289632298001}
   _enemyAnimator: {fileID: 7813538039565963228}
   _enemyTarget: {fileID: 3027789663709577760}
@@ -423,8 +423,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _tagController: {fileID: 5837056075893014178}
-  _statController: {fileID: 0}
-  _hurtBox: {fileID: 0}
+  _statController: {fileID: 6249724365430731878}
+  _hurtBox: {fileID: 1349759437447274721}
 --- !u!114 &5837056075893014178
 MonoBehaviour:
   m_ObjectHideFlags: 0
