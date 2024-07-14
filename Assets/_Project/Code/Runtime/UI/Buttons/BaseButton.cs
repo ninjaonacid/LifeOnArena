@@ -8,9 +8,9 @@ namespace Code.Runtime.UI.Buttons
 {
     public class BaseButton : CanvasElement, IPointerClickHandler, IPointerExitHandler, IPointerEnterHandler, IPointerDownHandler
     {
-        [SerializeField] private Color32 _highlightColor;
-        [SerializeField] private Color32 _pressedColor;
-        [SerializeField] private Color32 _baseColor;
+        [SerializeField] private Color32 _highlightColor = new Color32(253, 214, 15, 255);
+        [SerializeField] private Color32 _pressedColor = new Color32(253, 0, 0, 255);
+        [SerializeField] private Color32 _baseColor = new Color32(255, 255, 255, 255);
         
         [SerializeField] private Image _buttonImage;
 

@@ -443,7 +443,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -901,8 +901,8 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 1
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -2489,6 +2489,10 @@ PrefabInstance:
       value: 44
       objectReference: {fileID: 0}
     - target: {fileID: 4447214736114145900, guid: 8d7e9c249f02b83418dea87cfd815437, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4447214736114145900, guid: 8d7e9c249f02b83418dea87cfd815437, type: 3}
       propertyPath: m_fontSizeBase
       value: 44
       objectReference: {fileID: 0}
@@ -2517,8 +2521,24 @@ PrefabInstance:
       value: 44
       objectReference: {fileID: 0}
     - target: {fileID: 7951025223958851848, guid: 8d7e9c249f02b83418dea87cfd815437, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7951025223958851848, guid: 8d7e9c249f02b83418dea87cfd815437, type: 3}
       propertyPath: m_fontSizeBase
       value: 44
+      objectReference: {fileID: 0}
+    - target: {fileID: 7951025223958851848, guid: 8d7e9c249f02b83418dea87cfd815437, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8236498371030270736, guid: 8d7e9c249f02b83418dea87cfd815437, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 147.23999
+      objectReference: {fileID: 0}
+    - target: {fileID: 8236498371030270736, guid: 8d7e9c249f02b83418dea87cfd815437, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.24885178
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8d7e9c249f02b83418dea87cfd815437, type: 3}
