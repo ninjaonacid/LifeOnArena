@@ -71,7 +71,8 @@ namespace Code.Runtime.Services
         {
             var currentLevel = _levelLoader.GetCurrentLevelConfig();
             _gameData.PlayerData.WorldData.LocationProgressData.CompletedLocations.Add(currentLevel.LevelId.Id);
-            _screenService.Open(ScreenID.MessageWindow, new TimerMessageDto("Return to camp : ", _timerToEndOfLevel ));
+            var localizedString = _localService.GetLocalizedString("ReturnToPortal");
+            _screenService.Open(ScreenID.MessageWindow, new TimerMessageDto(localizedString, _timerToEndOfLevel ));
             await UniTask.Delay(TimeSpan.FromSeconds(_timerToEndOfLevel));
             _levelLoader.LoadLevel("MainMenu");
         }
@@ -82,7 +83,8 @@ namespace Code.Runtime.Services
             
             if (levelConfig.IsBossLevel)
             {
-                _screenService.Open(ScreenID.MessageWindow, new TimerMessageDto("Boss reveal in : ", _spawnerController.TimeToNextWave));
+                var localizedString = _localService.GetLocalizedString("BossSpawnMessage");
+                _screenService.Open(ScreenID.MessageWindow, new TimerMessageDto(localizedString, _spawnerController.TimeToNextWave));
             }
             else
             {
@@ -106,14 +108,17 @@ namespace Code.Runtime.Services
 
         private void WaveCleared(int secondsToNextWave)
         {
-            _screenService.Open(ScreenID.MessageWindow, new TimerMessageDto("Next wave", _spawnerController.TimeToNextWave));
+            var localizedString = _localService.GetLocalizedString("WaveSpawnMessage");
+            _screenService.Open(ScreenID.MessageWindow, new TimerMessageDto(localizedString, _spawnerController.TimeToNextWave));
         }
 
         private async void HeroDead(HeroDeadEvent obj)
         {
             _controls.Player.Disable();
+
+            var localizedString = _localService.GetLocalizedString("YouAreDead");
             
-            _screenService.Open(ScreenID.MessageWindow, new MessageDto("You died"));
+            _screenService.Open(ScreenID.MessageWindow, new MessageDto(localizedString));
             
             await UniTask.Delay(TimeSpan.FromSeconds(2),
                 DelayType.DeltaTime,

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Code.Runtime.Modules.Utils;
 using InstantGamesBridge;
@@ -9,7 +10,7 @@ using VContainer.Unity;
 
 namespace Code.Runtime.Modules.LocalizationProvider
 {
-    public class LocalizationService : IInitializable
+    public class LocalizationService : IInitializable, IDisposable
     {
         private LocalizationSettings _localizationSettings;
         private Locale _currentLocale;
@@ -40,6 +41,8 @@ namespace Code.Runtime.Modules.LocalizationProvider
                 var systemLang = Application.systemLanguage;
                 ChangeLanguage(systemLang);
             }
+
+            _localizationSettings.OnSelectedLocaleChanged += SelectedLocaleChanged;
         }
 
         public void ChangeLanguage(string localeCode)
@@ -60,10 +63,23 @@ namespace Code.Runtime.Modules.LocalizationProvider
             }
         }
 
-        public void GetLocalizedString(string key)
+        public string GetLocalizedString(string key)
         {
+            var localizedString = _localizationSettings
+                .GetStringDatabase()
+                .GetLocalizedString(key, _currentLocale);
 
-            _localizationSettings.GetStringDatabase().GetLocalizedString(key, _currentLocale);
+            return localizedString;
+        }
+
+        private void SelectedLocaleChanged(Locale obj)
+        {
+            _currentLocale = obj;
+        }
+
+        public void Dispose()
+        {
+            _localizationSettings.OnSelectedLocaleChanged -= SelectedLocaleChanged;
         }
     }
 }
