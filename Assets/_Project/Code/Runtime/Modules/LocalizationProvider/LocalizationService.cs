@@ -12,6 +12,7 @@ namespace Code.Runtime.Modules.LocalizationProvider
     public class LocalizationService : IInitializable
     {
         private LocalizationSettings _localizationSettings;
+        private Locale _currentLocale;
         private readonly Dictionary<LocaleIdentifier, Locale> _availableLocales = new();
 
         public void Initialize()
@@ -46,6 +47,7 @@ namespace Code.Runtime.Modules.LocalizationProvider
             if (_availableLocales.TryGetValue(localeCode, out var locale))
             {
                 _localizationSettings.SetSelectedLocale(locale);
+                _currentLocale = locale;
             }
         }
 
@@ -54,7 +56,14 @@ namespace Code.Runtime.Modules.LocalizationProvider
             if (_availableLocales.TryGetValue(language, out var locale))
             {
                 _localizationSettings.SetSelectedLocale(locale);
+                _currentLocale = locale;
             }
+        }
+
+        public void GetLocalizedString(string key)
+        {
+
+            _localizationSettings.GetStringDatabase().GetLocalizedString(key, _currentLocale);
         }
     }
 }

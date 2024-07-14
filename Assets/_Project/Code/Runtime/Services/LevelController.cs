@@ -5,6 +5,7 @@ using Code.Runtime.ConfigData.Levels;
 using Code.Runtime.Core.EventSystem;
 using Code.Runtime.CustomEvents;
 using Code.Runtime.Logic.WaveLogic;
+using Code.Runtime.Modules.LocalizationProvider;
 using Code.Runtime.Services.LevelLoaderService;
 using Code.Runtime.Services.PersistentProgress;
 using Code.Runtime.UI;
@@ -28,13 +29,14 @@ namespace Code.Runtime.Services
         private readonly IEventSystem _eventSystem;
         private readonly LevelLoader _levelLoader;
         private readonly PlayerControls _controls;
+        private readonly LocalizationService _localService;
         private readonly IGameDataContainer _gameData;
 
         private readonly CancellationTokenSource _cancellationToken = new CancellationTokenSource();
 
         public LevelController(EnemySpawnerController spawnerController, ScreenService screenService,
             IEventSystem eventSystem, PlayerControls controls,
-            LevelLoader levelLoader, IGameDataContainer gameData)
+            LevelLoader levelLoader, IGameDataContainer gameData, LocalizationService localService)
         {
             _spawnerController = spawnerController;
             _screenService = screenService;
@@ -42,6 +44,7 @@ namespace Code.Runtime.Services
             _controls = controls;
             _levelLoader = levelLoader;
             _gameData = gameData;
+            _localService = localService;
         }
 
         public void Initialize()

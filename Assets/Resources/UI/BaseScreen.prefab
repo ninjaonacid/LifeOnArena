@@ -209,7 +209,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 350, y: 100}
+  m_SizeDelta: {x: 519.257, y: 100}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &7011415687672000178
 GameObject:
@@ -468,20 +468,12 @@ PrefabInstance:
       value: CloseButton
       objectReference: {fileID: 0}
     - target: {fileID: 3984355158897697759, guid: 06b22f0c19364fa46ad72cbd9218ba66, type: 3}
-      propertyPath: _buttonImage
-      value: 
-      objectReference: {fileID: 2178197990750940504}
-    - target: {fileID: 3984355158897697759, guid: 06b22f0c19364fa46ad72cbd9218ba66, type: 3}
       propertyPath: _canvasGroup
       value: 
-      objectReference: {fileID: 1882263855172302076, guid: 06b22f0c19364fa46ad72cbd9218ba66, type: 3}
-    - target: {fileID: 3984355158897697759, guid: 06b22f0c19364fa46ad72cbd9218ba66, type: 3}
-      propertyPath: _pressedColor.rgba
-      value: 4294967295
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1945016476974999524}
     - target: {fileID: 3984355158897697759, guid: 06b22f0c19364fa46ad72cbd9218ba66, type: 3}
       propertyPath: _highlightColor.rgba
-      value: 4294967295
+      value: 4278242815
       objectReference: {fileID: 0}
     - target: {fileID: 7935893264977102040, guid: 06b22f0c19364fa46ad72cbd9218ba66, type: 3}
       propertyPath: m_Pivot.x
@@ -513,11 +505,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7935893264977102040, guid: 06b22f0c19364fa46ad72cbd9218ba66, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 80
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7935893264977102040, guid: 06b22f0c19364fa46ad72cbd9218ba66, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 80
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7935893264977102040, guid: 06b22f0c19364fa46ad72cbd9218ba66, type: 3}
       propertyPath: m_LocalPosition.x
@@ -549,11 +541,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7935893264977102040, guid: 06b22f0c19364fa46ad72cbd9218ba66, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -52
+      value: -40
       objectReference: {fileID: 0}
     - target: {fileID: 7935893264977102040, guid: 06b22f0c19364fa46ad72cbd9218ba66, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -21
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 7935893264977102040, guid: 06b22f0c19364fa46ad72cbd9218ba66, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -574,14 +566,8 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7935893264977102040, guid: 06b22f0c19364fa46ad72cbd9218ba66, type: 3}
   m_PrefabInstance: {fileID: 9054246488292150365}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2178197990750940504 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7178076714366836997, guid: 06b22f0c19364fa46ad72cbd9218ba66, type: 3}
+--- !u!225 &1945016476974999524 stripped
+CanvasGroup:
+  m_CorrespondingSourceObject: {fileID: 7447039653835385785, guid: 06b22f0c19364fa46ad72cbd9218ba66, type: 3}
   m_PrefabInstance: {fileID: 9054246488292150365}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

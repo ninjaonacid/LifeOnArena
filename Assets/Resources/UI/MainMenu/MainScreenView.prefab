@@ -3816,6 +3816,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6988947647594651741}
     m_Modifications:
+    - target: {fileID: 638821554363011234, guid: bda3e43a1a9832b4283da4543a8e8cd9, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 99426dd709b1f6746a69b9e19ac036de, type: 3}
     - target: {fileID: 1153870295281328288, guid: bda3e43a1a9832b4283da4543a8e8cd9, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -3902,43 +3906,55 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3342033132575080121, guid: bda3e43a1a9832b4283da4543a8e8cd9, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 210.568
+      value: 191.519
       objectReference: {fileID: 0}
     - target: {fileID: 3342033132575080121, guid: bda3e43a1a9832b4283da4543a8e8cd9, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 206.268
+      value: 187.608
       objectReference: {fileID: 0}
     - target: {fileID: 3342033132575080121, guid: bda3e43a1a9832b4283da4543a8e8cd9, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0.000015258789
+      value: 3.8549957
       objectReference: {fileID: 0}
     - target: {fileID: 3342033132575080121, guid: bda3e43a1a9832b4283da4543a8e8cd9, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 20
+      value: 29.330002
       objectReference: {fileID: 0}
     - target: {fileID: 4402865675559378766, guid: bda3e43a1a9832b4283da4543a8e8cd9, type: 3}
       propertyPath: m_Name
       value: SkillsButton
       objectReference: {fileID: 0}
+    - target: {fileID: 5104472457600632882, guid: bda3e43a1a9832b4283da4543a8e8cd9, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6366090744323840764, guid: bda3e43a1a9832b4283da4543a8e8cd9, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 2.7999878
+      objectReference: {fileID: 0}
     - target: {fileID: 6963269649633158686, guid: bda3e43a1a9832b4283da4543a8e8cd9, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 230
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 6963269649633158686, guid: bda3e43a1a9832b4283da4543a8e8cd9, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 230
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 6963269649633158686, guid: bda3e43a1a9832b4283da4543a8e8cd9, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -4.716
+      value: 0.000015776
       objectReference: {fileID: 0}
     - target: {fileID: 6963269649633158686, guid: bda3e43a1a9832b4283da4543a8e8cd9, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 3.134
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 9064024530942922054, guid: bda3e43a1a9832b4283da4543a8e8cd9, type: 3}
       propertyPath: _pressedColor.rgba
       value: 4278190272
+      objectReference: {fileID: 0}
+    - target: {fileID: 9064024530942922054, guid: bda3e43a1a9832b4283da4543a8e8cd9, type: 3}
+      propertyPath: _highlightColor.rgba
+      value: 4278220416
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bda3e43a1a9832b4283da4543a8e8cd9, type: 3}
@@ -4483,6 +4499,14 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5104472457600632882, guid: bda3e43a1a9832b4283da4543a8e8cd9, type: 3}
+      propertyPath: m_Maskable
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5104472457600632882, guid: bda3e43a1a9832b4283da4543a8e8cd9, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6196469870637555356, guid: bda3e43a1a9832b4283da4543a8e8cd9, type: 3}
       propertyPath: m_text
       value: WEAPONS
@@ -4585,7 +4609,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9064024530942922054, guid: bda3e43a1a9832b4283da4543a8e8cd9, type: 3}
       propertyPath: _highlightColor.rgba
-      value: 4278251007
+      value: 4278220416
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bda3e43a1a9832b4283da4543a8e8cd9, type: 3}

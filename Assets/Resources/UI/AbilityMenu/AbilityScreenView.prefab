@@ -1157,6 +1157,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2932045166731928380, guid: d236c4df2154a634a9aa61c3a8716c17, type: 2}
     - target: {fileID: 1584491834221695051, guid: 065d756293f330d4c9e8ca69f6b39deb, type: 3}
+      propertyPath: m_VerticalAlignment
+      value: 512
+      objectReference: {fileID: 0}
+    - target: {fileID: 1584491834221695051, guid: 065d756293f330d4c9e8ca69f6b39deb, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1584491834221695051, guid: 065d756293f330d4c9e8ca69f6b39deb, type: 3}
       propertyPath: m_hasFontAssetChanged
       value: 0
       objectReference: {fileID: 0}
@@ -1254,7 +1262,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5686039977463969809, guid: 065d756293f330d4c9e8ca69f6b39deb, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 386
+      value: 385.99997
       objectReference: {fileID: 0}
     - target: {fileID: 5686039977463969809, guid: 065d756293f330d4c9e8ca69f6b39deb, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1645,7 +1653,8 @@ PrefabInstance:
       propertyPath: m_text
       value: SKILLS
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 162492100861242882, guid: 86fff4179bbcf5a42beb980ec603bd16, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 86fff4179bbcf5a42beb980ec603bd16, type: 3}
 --- !u!224 &2874595032029595195 stripped
 RectTransform:
