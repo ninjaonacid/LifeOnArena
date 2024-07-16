@@ -56,6 +56,7 @@ namespace Code.Runtime.UI
 
             _lineImage.rectTransform.pivot = new Vector2(0.5f, 0.5f);
             _lineImage.rectTransform.position = midPoint;
+            
             var scaleFactor = _lineImage.rectTransform.lossyScale.x;
             _lineImage.rectTransform.sizeDelta = new Vector2(direction.magnitude / scaleFactor, lineHeight);
 
