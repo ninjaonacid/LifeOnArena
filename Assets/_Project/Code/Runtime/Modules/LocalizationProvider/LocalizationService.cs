@@ -10,7 +10,7 @@ using VContainer.Unity;
 
 namespace Code.Runtime.Modules.LocalizationProvider
 {
-    public class LocalizationService : IInitializable, IDisposable
+    public class LocalizationService : IInitializable
     {
         private LocalizationSettings _localizationSettings;
         private Locale _currentLocale;
@@ -76,10 +76,6 @@ namespace Code.Runtime.Modules.LocalizationProvider
         {
             _currentLocale = obj;
         }
-
-        public void Dispose()
-        {
-            _localizationSettings.OnSelectedLocaleChanged -= SelectedLocaleChanged;
-        }
+        
     }
 }
