@@ -28,7 +28,7 @@ namespace Code.Runtime.UI
         [SerializeField] private Image _lineImage;
         private DrivenRectTransformTracker _tracker;
 
-        private void OnRectTransformDimensionsChange()
+        private void Update()
         {
             if (_originRect != null && _targetRect != null)
             {

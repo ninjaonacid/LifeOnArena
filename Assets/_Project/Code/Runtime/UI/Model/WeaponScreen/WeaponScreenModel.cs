@@ -29,14 +29,13 @@ namespace Code.Runtime.UI.Model.WeaponScreen
                 {
                     WeaponIcon = weapon.WeaponIcon,
                     WeaponId = weapon.WeaponId.Id,
-                    WeaponDescription = weapon.WeaponDescription,
                     WeaponName = weapon.WeaponName
                     
                 };
                 
                 if (weapon.UnlockRequirement != null)
                 {
-                    if(weapon.UnlockRequirement.CheckRequirement(_gameData.PlayerData))
+                    if(weapon.UnlockRequirement.CheckRequirement(_gameData.PlayerData)) 
                         weaponUIModel.isUnlocked = true;
                 }
                 else
@@ -44,10 +43,21 @@ namespace Code.Runtime.UI.Model.WeaponScreen
                     weaponUIModel.isUnlocked = true;
                 }
 
+                if (weaponUIModel.isUnlocked)
+                {
+                    weaponUIModel.WeaponDescription = weapon.WeaponDescription;
+                }
+                else
+                {
+                    weaponUIModel.WeaponDescription = weapon.UnlockDescription;
+                }
+
                 if (_gameData.PlayerData.HeroEquipment.WeaponIntId == weapon.WeaponId.Id)
                 {
                     weaponUIModel.isEquipped = true;
                 }
+                
+                
                 
                 _weaponModels.Add(weaponUIModel);
             }

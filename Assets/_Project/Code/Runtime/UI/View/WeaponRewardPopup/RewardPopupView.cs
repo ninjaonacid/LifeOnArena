@@ -6,8 +6,8 @@ namespace Code.Runtime.UI.View.WeaponRewardPopup
 {
     public class RewardPopupView : BaseWindowView
     {
-        public TextMeshProUGUI WeaponName;
-        public Image WeaponIcon;
+        public TextMeshProUGUI RewardName;
+        public Image RewardIcon;
         public ClaimButton ClaimButton;
         
         public override void Show()

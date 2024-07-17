@@ -7,6 +7,7 @@ using Code.Runtime.UI.Model;
 using Code.Runtime.UI.Model.AbilityMenu;
 using Code.Runtime.UI.Model.ArenaSelectionScreenModel;
 using Code.Runtime.UI.Model.DTO;
+using Code.Runtime.UI.Model.MissionSummaryWindowModel;
 using Code.Runtime.UI.Model.WeaponScreen;
 
 namespace Code.Runtime.UI.Services
@@ -32,6 +33,7 @@ namespace Code.Runtime.UI.Services
             _modelMap.Add(typeof(MessageWindowCompositeModel), (dto) => new MessageWindowCompositeModel(dto));
             _modelMap.Add(typeof(ArenaSelectionScreenModel), (dto) => new ArenaSelectionScreenModel(config, gameData));
             _modelMap.Add(typeof(RewardPopupModel), (dto) => new RewardPopupModel(dto));
+            _modelMap.Add(typeof(MissionSummaryWindowModel), (dto) => new MissionSummaryWindowModel(dto));
         }
 
         public IScreenModel CreateModel(Type model)

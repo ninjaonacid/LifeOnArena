@@ -48,7 +48,11 @@ namespace Code.Runtime.UI.Services
                 ? new ArenaSelectionScreenController(levelLoader)
                 : new TutorialArenaSelectionController(levelLoader, tutorialService));
             
-            _screenControllers.Add(typeof(RewardPopupController), () => new RewardPopupController());
+            _screenControllers.Add(typeof(RewardPopupController), 
+                () => new RewardPopupController(localService));
+            
+            _screenControllers.Add(typeof(MissionSummaryWindowController), 
+                () => new MissionSummaryWindowController());
         }
 
         public IScreenController CreateController(Type controller)

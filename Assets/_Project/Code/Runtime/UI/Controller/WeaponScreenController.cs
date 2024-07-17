@@ -20,14 +20,14 @@ namespace Code.Runtime.UI.Controller
         {
             _model = model as WeaponScreenModel;
             _windowView = windowView as WeaponScreenView;
-            
+
             Assert.IsNotNull(_model);
             Assert.IsNotNull(_windowView);
 
             _windowView.CloseButton
                 .OnClickAsObservable()
-                .Subscribe( x => screenService.Close(this)).AddTo(_disposables);
-            
+                .Subscribe(x => screenService.Close(this)).AddTo(_disposables);
+
             _windowView.WeaponContainer.Initialize();
             _windowView.WeaponContainer.OnWeaponCellSelectedAsObservable().Subscribe(WeaponSelected);
             _windowView.EquipButton.OnClickAsObservable().Subscribe(x => EquipWeapon());
@@ -37,20 +37,22 @@ namespace Code.Runtime.UI.Controller
         private void UpdateView()
         {
             var weaponList = _model.GetSlots();
-            
+
             for (var index = 0; index < weaponList.Count; index++)
             {
                 var weapon = weaponList[index];
-                
-                _windowView.WeaponContainer.UpdateView(weapon.WeaponId, weapon.WeaponName.GetLocalizedString(), weapon.WeaponDescription.GetLocalizedString(), weapon.WeaponIcon, weapon.isUnlocked, weapon.isEquipped);
+
+                _windowView.WeaponContainer.UpdateView(weapon.WeaponId,
+                    weapon.WeaponName.GetLocalizedString(),
+                    weapon.WeaponDescription.GetLocalizedString(),
+                    weapon.WeaponIcon, weapon.isUnlocked, weapon.isEquipped);
             }
         }
-        
+
         private void WeaponSelected(int index)
         {
             if (_model.IsEquipped(index))
             {
-                
             }
         }
 
@@ -61,7 +63,7 @@ namespace Code.Runtime.UI.Controller
             if (!_windowView.WeaponContainer.TryGetSelectedWeaponId(out weaponId)) return;
             var weaponModel = _model.GetModel(weaponId);
             if (!weaponModel.isUnlocked) return;
-                
+
             _model.EquipWeapon(weaponId);
             UpdateView();
         }

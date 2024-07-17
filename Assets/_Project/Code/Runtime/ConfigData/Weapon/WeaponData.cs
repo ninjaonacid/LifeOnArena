@@ -31,6 +31,7 @@ namespace Code.Runtime.ConfigData.Weapon
         [SerializeField] private int _possibleCollisions;
         [SerializeField] private LocalizedString _weaponName;
         [SerializeField] private LocalizedString _weaponDescription;
+        [SerializeField] private LocalizedString _unlockDescription;
         public IReadOnlyList<DamageType> DamageTypes => _damageType;
         public Sprite WeaponIcon => _weaponIcon;
         public WeaponView WeaponView => _weaponPrefab;
@@ -47,5 +48,6 @@ namespace Code.Runtime.ConfigData.Weapon
         public List<AttackConfig> AttacksConfigs => _attacks;
         public LocalizedString WeaponName => _weaponName;
         public LocalizedString WeaponDescription => _weaponDescription;
+        public LocalizedString UnlockDescription => _unlockDescription;
     }
 }

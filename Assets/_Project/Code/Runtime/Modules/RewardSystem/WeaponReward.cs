@@ -1,6 +1,5 @@
 ﻿using Code.Runtime.ConfigData.Identifiers;
 using Code.Runtime.ConfigData.Weapon;
-using Code.Runtime.Core.Factory;
 using Code.Runtime.Data.PlayerData;
 using Code.Runtime.Logic.TreasureChest;
 using Code.Runtime.UI;

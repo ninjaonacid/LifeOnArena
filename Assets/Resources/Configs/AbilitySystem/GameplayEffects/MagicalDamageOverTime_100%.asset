@@ -9,15 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9aae278d082e4a2483afcefd548f3dbb, type: 3}
-  m_Name: PhysicalDamageEffect
+  m_Script: {fileID: 11500000, guid: 5f9dd0ccba9f4dd3b6e91126ae14e79c, type: 3}
+  m_Name: MagicalDamageOverTime_100%
   m_EditorClassIdentifier: 
-  _effectDurationType: 1
+  _effectDurationType: 2
   _modifiers:
-  - {fileID: 1765258983347537488}
+  - {fileID: 7849974602430803046}
   _tags: []
   _statusVisualEffect: {fileID: 0}
---- !u!114 &1765258983347537488
+  _duration: 3
+  _tickRate: 0.3
+--- !u!114 &7849974602430803046
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -31,5 +33,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _statName: Health
   _operationType: 0
-  _magnitude: 0
-  _damageType: 1
+  _magnitude: 20
+  _scaleFactor: 1
+  _damageType: 2

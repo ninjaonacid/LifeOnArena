@@ -8,6 +8,8 @@ using Code.Runtime.Modules.AbilitySystem.GameplayEffects;
 using Code.Runtime.Modules.AbilitySystem.GameplayTags;
 using Code.Runtime.Modules.StatSystem;
 using Code.Runtime.Modules.StatSystem.StatModifiers;
+using UnityEngine;
+
 
 namespace Code.Runtime.Entity.StatusEffects
 {
@@ -50,7 +52,7 @@ namespace Code.Runtime.Entity.StatusEffects
                             if (ownerMagicalDamage != null)
                                 healthModifier = new HealthModifier
                                 {
-                                    Magnitude = ownerMagicalDamage.Value * -1,
+                                    Magnitude = Mathf.RoundToInt(ownerMagicalDamage.Value * damageModifier.ScaleFactor) * -1,
                                     OperationType = damageModifier.Type
                                 };
                             break;
@@ -60,7 +62,7 @@ namespace Code.Runtime.Entity.StatusEffects
                             if (ownerPhysicalDamage != null)
                                 healthModifier = new HealthModifier
                                 {
-                                    Magnitude = ownerPhysicalDamage.Value * -1,
+                                    Magnitude = Mathf.RoundToInt(ownerPhysicalDamage.Value * damageModifier.ScaleFactor) * -1,
                                     OperationType = damageModifier.Type
                                 };
                             break;

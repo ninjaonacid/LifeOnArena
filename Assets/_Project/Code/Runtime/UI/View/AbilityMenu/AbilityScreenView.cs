@@ -1,6 +1,3 @@
-using Code.Runtime.Modules.WindowAnimations;
-using UnityEngine;
-
 namespace Code.Runtime.UI.View.AbilityMenu
 {
     public class AbilityScreenView : BaseWindowView

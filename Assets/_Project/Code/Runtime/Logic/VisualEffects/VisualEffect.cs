@@ -34,6 +34,7 @@ namespace Code.Runtime.Logic.VisualEffects
             _particleSystem.Play();
             
             WaitForDurationEnd(duration, this.GetCancellationTokenOnDestroy()).Forget();
+   
         }
         
         public bool IsPlaying() => _particleSystem.particleCount != 0;

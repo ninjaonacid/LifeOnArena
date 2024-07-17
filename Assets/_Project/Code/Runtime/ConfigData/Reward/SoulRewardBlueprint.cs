@@ -7,9 +7,10 @@ namespace Code.Runtime.ConfigData.Reward
     public class SoulRewardBlueprint : AbstractRewardBlueprint<SoulReward>
     {
         [SerializeField] private int _value;
+        [SerializeField] private Sprite _icon;
         public override IReward GetReward()
         {
-            return new SoulReward(_playerData, _value);
+            return new SoulReward(_screenService, _playerData, _value, _icon);
         }
     }
 }

@@ -11,7 +11,7 @@ namespace Code.Runtime.UI
         MessageWindow = 7,
         MessageWindowTimer = 8,
         ArenaSelectionScreen = 9,
-        Zalupa = 10,
+        MissionSummaryWindow = 10,
         RewardPopup = 11
     }
 }

@@ -6,6 +6,7 @@ using Code.Runtime.UI.Model;
 using Code.Runtime.UI.Model.AbilityMenu;
 using Code.Runtime.UI.Model.ArenaSelectionScreenModel;
 using Code.Runtime.UI.Model.DTO;
+using Code.Runtime.UI.Model.MissionSummaryWindowModel;
 using Code.Runtime.UI.Model.WeaponScreen;
 using Code.Runtime.UI.View;
 using UnityEngine;
@@ -36,6 +37,7 @@ namespace Code.Runtime.UI.Services
             _screenMap.Add(ScreenID.MessageWindow, (typeof(MessageWindowCompositeModel), typeof(MessageWindowController)));
             _screenMap.Add(ScreenID.ArenaSelectionScreen, (typeof(ArenaSelectionScreenModel), typeof(ArenaSelectionScreenController)));
             _screenMap.Add(ScreenID.RewardPopup, (typeof(RewardPopupModel), typeof(RewardPopupController)));
+            _screenMap.Add(ScreenID.MissionSummaryWindow, (typeof(MissionSummaryWindowModel), typeof(MissionSummaryWindowController)));
         }
 
         public void Open(ScreenID screenId)
