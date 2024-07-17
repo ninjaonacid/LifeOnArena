@@ -11,7 +11,7 @@ namespace Code.Runtime.UI.Model
         
         public ReactiveProperty<int> Health { get; } = new(); 
         public ReactiveProperty<int> Attack { get; } = new();
-        public ReactiveProperty<int> Defense { get; } = new();
+        public ReactiveProperty<int> Magic { get; } = new();
 
         public bool IsMusicMuted;
 
@@ -29,7 +29,7 @@ namespace Code.Runtime.UI.Model
         {
             Health.Value = _gameData.PlayerData.StatsData.Stats["Health"];
             Attack.Value = _gameData.PlayerData.StatsData.Stats["Attack"];
-            Defense.Value = _gameData.PlayerData.StatsData.Stats["Defense"];
+            Magic.Value = _gameData.PlayerData.StatsData.Stats["Magic"];
             IsMusicMuted = _gameData.AudioData.isMusicMuted;
         }
     }

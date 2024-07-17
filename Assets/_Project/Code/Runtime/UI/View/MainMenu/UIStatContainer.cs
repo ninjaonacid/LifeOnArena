@@ -10,20 +10,6 @@ namespace Code.Runtime.UI.View.MainMenu
         [SerializeField] private StatsUI Attack;
         [SerializeField] private StatsUI Defense;
         
-        public void SetHealth(string statname, int value)
-        {
-            Health.SetSlot(statname, value);
-        }
-
-        public void SetAttack(string statName, int value)
-        {
-            Attack.SetSlot(statName, value);
-        }
-
-        public void SetDefense(string statName, int value)
-        {
-            Defense.SetSlot(statName, value);
-        }
         
         
       

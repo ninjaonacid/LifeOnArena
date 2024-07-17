@@ -1278,7 +1278,7 @@ MonoBehaviour:
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
-  m_ScreenMatchMode: 0
+  m_ScreenMatchMode: 1
   m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
@@ -2563,11 +2563,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7722653630205320918, guid: 0ed46aac957891546ae1d8e270615721, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 1059.8
+      value: 1012
       objectReference: {fileID: 0}
     - target: {fileID: 7722653630205320918, guid: 0ed46aac957891546ae1d8e270615721, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 489.14
+      value: 489
       objectReference: {fileID: 0}
     - target: {fileID: 7722653630205320918, guid: 0ed46aac957891546ae1d8e270615721, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2599,11 +2599,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7722653630205320918, guid: 0ed46aac957891546ae1d8e270615721, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -529.91
+      value: -562
       objectReference: {fileID: 0}
     - target: {fileID: 7722653630205320918, guid: 0ed46aac957891546ae1d8e270615721, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -244.57
+      value: -244.5
       objectReference: {fileID: 0}
     - target: {fileID: 7722653630205320918, guid: 0ed46aac957891546ae1d8e270615721, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2622,6 +2622,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8076027890391316401, guid: 0ed46aac957891546ae1d8e270615721, type: 3}
+      propertyPath: m_Behaviour
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8076027890391316401, guid: 0ed46aac957891546ae1d8e270615721, type: 3}
       propertyPath: m_ControlPath
       value: <Gamepad>/leftStick
       objectReference: {fileID: 0}
@@ -2629,6 +2633,10 @@ PrefabInstance:
       propertyPath: _joyStickCanvas
       value: 
       objectReference: {fileID: 819556946041226097}
+    - target: {fileID: 8076027890391316401, guid: 0ed46aac957891546ae1d8e270615721, type: 3}
+      propertyPath: m_DynamicOriginRange
+      value: 500
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ed46aac957891546ae1d8e270615721, type: 3}
 --- !u!224 &4670868311564812802 stripped

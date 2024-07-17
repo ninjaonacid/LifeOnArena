@@ -45,24 +45,24 @@ namespace Code.Runtime.UI.Controller
             Assert.IsNotNull(_windowView);
             
 
-            _model.Health.Subscribe(x =>
-            {
-                _windowView.StatContainer.SetHealth(nameof(_model.Health) + " ", _model.Health.Value);
-                _gameData.PlayerData.StatsData.Stats["Health"] = _model.Health.Value;
-            }).AddTo(_disposables);
-            
-            _model.Attack.Subscribe(x =>
-            {
-                _windowView.StatContainer.SetAttack(nameof(_model.Attack) + " ", _model.Attack.Value);
-                _gameData.PlayerData.StatsData.Stats["Attack"] = _model.Attack.Value;
-            }).AddTo(_disposables);
-
-
-            _model.Defense.Subscribe(x =>
-            {
-                _windowView.StatContainer.SetDefense(nameof(_model.Defense) + " ", _model.Defense.Value);
-                _gameData.PlayerData.StatsData.Stats["Defense"] = _model.Defense.Value;
-            }).AddTo(_disposables);
+            // _model.Health.Subscribe(x =>
+            // {
+            //     _windowView.StatContainer.SetHealth(nameof(_model.Health) + " ", _model.Health.Value);
+            //     _gameData.PlayerData.StatsData.Stats["Health"] = _model.Health.Value;
+            // }).AddTo(_disposables);
+            //
+            // _model.Attack.Subscribe(x =>
+            // {
+            //     _windowView.StatContainer.SetAttack(nameof(_model.Attack) + " ", _model.Attack.Value);
+            //     _gameData.PlayerData.StatsData.Stats["Attack"] = _model.Attack.Value;
+            // }).AddTo(_disposables);
+            //
+            //
+            // _model.Defense.Subscribe(x =>
+            // {
+            //     _windowView.StatContainer.SetDefense(nameof(_model.Defense) + " ", _model.Defense.Value);
+            //     _gameData.PlayerData.StatsData.Stats["Defense"] = _model.Defense.Value;
+            // }).AddTo(_disposables);
 
       
             // _windowView.CloseButton

@@ -15,6 +15,7 @@ namespace Code.Runtime.Core.InputSystem
     {
         [SerializeField] private CanvasGroup _joyStickCanvas;
         [SerializeField] private RectTransform _stick;
+        [SerializeField] private RectTransform _stickZone;
         
         private const string kDynamicOriginClickable = "DynamicOriginClickable";
         
