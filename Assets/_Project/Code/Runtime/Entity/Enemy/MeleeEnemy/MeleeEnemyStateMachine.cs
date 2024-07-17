@@ -43,11 +43,6 @@ namespace Code.Runtime.Entity.Enemy.MeleeEnemy
                 (transition) => _enemyAttackComponent.CanAttack() && _enemyTarget.HasTarget(),
                 true));
             
-            _fsm.AddTransition(new TransitionAfter(
-                nameof(MeleeEnemyAttackState),
-                nameof(EnemyChaseState),
-                _animationData.Animations[AnimationKey.Attack1].Length,
-                (transition) => _enemyTarget.HasTarget() && !_enemyAttackComponent.TargetInMeleeAttackRange));
 
             _fsm.AddTransition(new Transition(
                 nameof(EnemyChaseState),
