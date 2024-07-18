@@ -13,8 +13,9 @@ namespace Code.Runtime.UI.Buttons
         private Vector3 _baseScale;
         private RectTransform _rectTransform;
 
-        public void Awake()
+        protected override void Awake()
         {
+            base.Awake();
             _rectTransform = (RectTransform)transform;
             _baseScale = _rectTransform.localScale;
         }

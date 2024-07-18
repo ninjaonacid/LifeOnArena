@@ -1,4 +1,5 @@
 using Code.Runtime.Services.PersistentProgress;
+using TMPro;
 using UniRx;
 
 namespace Code.Runtime.UI.Model
@@ -12,6 +13,8 @@ namespace Code.Runtime.UI.Model
         public ReactiveProperty<int> Health { get; } = new(); 
         public ReactiveProperty<int> Attack { get; } = new();
         public ReactiveProperty<int> Magic { get; } = new();
+
+        public int StatUpgradePrice;
 
         public bool IsMusicMuted;
 
@@ -27,10 +30,44 @@ namespace Code.Runtime.UI.Model
         
         public void Initialize()
         {
-            Health.Value = _gameData.PlayerData.StatsData.Stats["Health"];
-            Attack.Value = _gameData.PlayerData.StatsData.Stats["Attack"];
-            Magic.Value = _gameData.PlayerData.StatsData.Stats["Magic"];
+            Health.Value = _gameData.PlayerData.StatsData.StatsValues["Health"];
+            Attack.Value = _gameData.PlayerData.StatsData.StatsValues["Attack"];
+            Magic.Value = _gameData.PlayerData.StatsData.StatsValues["Magic"];
+            StatUpgradePrice = _gameData.PlayerData.StatsData.StatUpgradePrice;
             IsMusicMuted = _gameData.AudioData.isMusicMuted;
+        }
+
+        public bool CanUpgradeHealth()
+        {
+            if (_gameData.PlayerData.WorldData.LootData.Collected >= StatUpgradePrice &&
+                Health.Value < _gameData.PlayerData.StatsData.StatsCapacities["Health"])
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public bool CanUpgradeAttack()
+        {
+            if (_gameData.PlayerData.WorldData.LootData.Collected >= StatUpgradePrice &&
+                Health.Value < _gameData.PlayerData.StatsData.StatsCapacities["Attack"])
+            {
+                return true;
+            }
+
+            return false;
+
+        }
+        public bool CanUpgradeMagic()
+        {
+            if (_gameData.PlayerData.WorldData.LootData.Collected >= StatUpgradePrice &&
+                Health.Value < _gameData.PlayerData.StatsData.StatsCapacities["Magic"])
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }

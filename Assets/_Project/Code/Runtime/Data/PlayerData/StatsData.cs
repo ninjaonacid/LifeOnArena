@@ -6,6 +6,8 @@ namespace Code.Runtime.Data.PlayerData
     [Serializable]
     public class StatsData
     {
-        public readonly Dictionary<string, int> Stats = new Dictionary<string, int>();
+        public readonly Dictionary<string, int> StatsValues = new Dictionary<string, int>();
+        public readonly Dictionary<string, int> StatsCapacities = new Dictionary<string, int>();
+        public int StatUpgradePrice;
     }
 }

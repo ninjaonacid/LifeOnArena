@@ -22,7 +22,7 @@ namespace Code.Runtime.Modules.StatSystem
             //
             // if (damageSource.DamageTypes.Contains(DamageType.Physical))
             // {
-            //     modifier.Magnitude += _statController.Stats["Defense"].Value;
+            //     modifier.Magnitude += _statController.StatsValues["Defense"].Value;
             // } 
             // else if (damageSource.DamageTypes.Contains(DamageType.Magical))
             // {

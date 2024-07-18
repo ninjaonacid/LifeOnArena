@@ -8,10 +8,12 @@ namespace Code.Runtime.ConfigData
     public class InitialGameConfig : ScriptableObject
     {
         [SerializeField] private StatDatabase _characterStats;
+        [SerializeField] private int _statUpgradePrice;
         [SerializeField] private WeaponId _startWeapon;
         [SerializeField] private bool _isNeedTutorial;
 
         public StatDatabase CharacterStats => _characterStats;
+        public int StatUpgradePrice => _statUpgradePrice;
         public WeaponId StartWeapon => _startWeapon;
         public bool IsNeedTutorial => _isNeedTutorial;
     }

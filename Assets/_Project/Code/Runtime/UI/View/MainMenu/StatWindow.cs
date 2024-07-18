@@ -9,5 +9,6 @@ namespace Code.Runtime.UI.View.MainMenu
         public StatsUI Health;
         public StatsUI Attack;
         public StatsUI Magic;
+        public TextMeshProUGUI StatUpgradePrice;
     }
 }

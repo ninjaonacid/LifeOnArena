@@ -47,20 +47,25 @@ namespace Code.Runtime.Core.EntryPoints.GameEntry
             
             foreach (StatDefinition stat in characterStats.PrimaryStats)
             {
-                data.StatsData.Stats.TryAdd(stat.name, stat.BaseValue);
+                data.StatsData.StatsValues.TryAdd(stat.name, stat.BaseValue);
+                data.StatsData.StatsCapacities.TryAdd(stat.name, stat.Capacity);
             }
 
             foreach (StatDefinition stat in characterStats.StatDefinitions)
             {
-                data.StatsData.Stats.TryAdd(stat.name, stat.BaseValue);
+                data.StatsData.StatsValues.TryAdd(stat.name, stat.BaseValue);
+                data.StatsData.StatsCapacities.TryAdd(stat.name, stat.Capacity);
             }
 
             foreach (StatDefinition stat in characterStats.AttributeDefinitions)
             {
-                data.StatsData.Stats.TryAdd(stat.name, stat.BaseValue);
+                data.StatsData.StatsValues.TryAdd(stat.name, stat.BaseValue);
+                data.StatsData.StatsCapacities.TryAdd(stat.name, stat.Capacity);
             }
 
             data.HeroEquipment.WeaponIntId = config.StartWeapon.Id;
+
+            data.StatsData.StatUpgradePrice = config.StatUpgradePrice;
             
             return data;
         }
