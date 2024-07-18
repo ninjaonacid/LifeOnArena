@@ -1932,17 +1932,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ec489970ef189d44aca4f7b478793aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &429120299824953411 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7813538039565963228, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
-  m_PrefabInstance: {fileID: 7609897896664463263}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5584285532707550588}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9364bfd7d71f53e41ace818fd1ea7be2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &663686600793623067 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6966552553589898628, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
@@ -1963,6 +1952,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9c03fd34d3dc6214ca4c96e408041337, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1249885595893654570 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8701998477689951157, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
+  m_PrefabInstance: {fileID: 7609897896664463263}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5584285532707550588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09c6296a1b471c24385eb90fabe315b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &3632841084782273422 stripped
@@ -2079,10 +2079,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyCastComponent: {fileID: 7665401954657485101}
-  NavMeshMoveToPlayer: {fileID: 429120299824953409}
+  _navMeshMoveToPlayer: {fileID: 429120299824953409}
   _enemyAttackComponent: {fileID: 663686600793623067}
   _enemyWeapon: {fileID: 3632841084782273422}
-  _enemyAnimator: {fileID: 429120299824953411}
+  _characterAnimator: {fileID: 1249885595893654570}
   _enemyTarget: {fileID: 4872639131029550527}
   _enemyHealth: {fileID: 4737285204634244485}
   _tagController: {fileID: 4078759614492838205}

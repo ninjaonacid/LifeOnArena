@@ -26,7 +26,7 @@ namespace Code.Runtime.Entity.Hero.HeroStates
         {
             base.OnEnter();
             
-            CharacterAnimator.PlayAnimation(_animationData.Animations[AnimationKey.Spinning].Hash);
+            _characterAnimator.PlayAnimation(_animationData.Animations[AnimationKey.Spinning].Hash);
             
             _heroRotation.EnableRotation(false);
             _heroWeapon.EnableWeaponCollider();

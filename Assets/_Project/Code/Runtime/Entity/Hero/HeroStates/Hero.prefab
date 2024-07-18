@@ -1130,8 +1130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09c6296a1b471c24385eb90fabe315b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _characterController: {fileID: 7390316171520665865}
-  _heroAnimator: {fileID: 1017552816170990098}
+  _characterAnimator: {fileID: 1017552816170990098}
 --- !u!114 &7046878093413620408
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1196,7 +1195,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rotationSmooth: 5
   _rotationSpeed: 2
-  _playerModel: {fileID: 2096767805837215601}
   _attackRotationSpeed: 0.5
 --- !u!114 &-4398335753682384271
 MonoBehaviour:
@@ -1217,7 +1215,7 @@ MonoBehaviour:
   _equipJointMain: {fileID: 6558532351812204999}
   _equipJointOffhand: {fileID: 5068447407947648481}
   _weaponData: {fileID: 11400000, guid: cf38d925e73f78e40846d27680b547dc, type: 2}
-  _heroAnimator: {fileID: 7390316171520665867}
+  CharacterAnimator: {fileID: 7390316171520665867}
 --- !u!114 &-7543322082994891675
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1295,7 +1293,7 @@ MonoBehaviour:
   _stompAbilityId: {fileID: 11400000, guid: b7e1b76dfa43a6a40aa37103371ec426, type: 2}
   _waveSlashAbilityId: {fileID: 11400000, guid: 7bc8ad567e6c77e4d8e5b8fd25a87e6d, type: 2}
   _eventReceiver: {fileID: 3953687927081849907}
-  _heroAnimator: {fileID: 7390316171520665867}
+  CharacterAnimator: {fileID: 7390316171520665867}
   _heroMovement: {fileID: 7390316171520665878}
   _heroRotation: {fileID: -8125679809969938510}
   _heroAttackComponent: {fileID: 8881719371883239237}

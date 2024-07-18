@@ -1,6 +1,7 @@
 using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 namespace Code.Runtime.ConfigData.Animations
 {
@@ -9,7 +10,6 @@ namespace Code.Runtime.ConfigData.Animations
     {
 #if UNITY_EDITOR
         [SerializeField]
-        [OnValueChanged("OnClipChanged", InvokeOnInitialize = true)]
         [FoldoutGroup("$GetClipName")]
         [BoxGroup("$GetClipName/Settings", ShowLabel = false)]
         private AnimationClip clip;
@@ -33,11 +33,13 @@ namespace Code.Runtime.ConfigData.Animations
         public string AnimationName;
 
 #if UNITY_EDITOR
-        private void OnClipChanged()
+        private void OnValidate()
         {
             Length = clip ? clip.length : default;
-            AnimationName = clip.name;
+            AnimationName = clip ? clip.name : default;
             Hash = clip ? Animator.StringToHash(clip.name) : default;
+            
+            Assert.IsNotNull(clip);
         }
 
         private string GetClipName() =>

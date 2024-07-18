@@ -26,7 +26,7 @@ namespace Code.Runtime.Entity.Hero.HeroStates
             base.OnEnter();
             
             _attackConfig = _heroWeapon.WeaponData.AttacksConfigs[0];
-            CharacterAnimator.PlayAnimation(_attackConfig.AnimationData.Hash);
+            _characterAnimator.PlayAnimation(_attackConfig.AnimationData.Hash);
 
 
             _vfxController.PlaySlashVisualEffect(

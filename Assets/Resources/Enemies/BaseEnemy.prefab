@@ -155,6 +155,7 @@ GameObject:
   - component: {fileID: 3706283457517191183}
   - component: {fileID: 1349759437447274721}
   - component: {fileID: 6249724365430731878}
+  - component: {fileID: 398656111628261698}
   m_Layer: 9
   m_Name: BaseEnemy
   m_TagString: Untagged
@@ -191,7 +192,7 @@ Animator:
   m_GameObject: {fileID: 2658416580451336931}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 34abc3069cabd7248a18b7835761371b, type: 3}
-  m_Controller: {fileID: 9100000, guid: 613eaad7b92ad0f48b42a54ba2cbedc2, type: 2}
+  m_Controller: {fileID: 9100000, guid: 106dc482c4ff35348b6453ecd36a924f, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -214,7 +215,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09c6296a1b471c24385eb90fabe315b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _heroAnimator: {fileID: 0}
+  _characterAnimator: {fileID: 8741323820859785763}
 --- !u!114 &7813538039565963228
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -274,8 +275,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3129b8a5b05a4fe488263463811c5909, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Agent: {fileID: 7813538039565963231}
-  EnemyAnimator: {fileID: 7813538039565963228}
+  _agent: {fileID: 7813538039565963231}
 --- !u!114 &6966552553589898628
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -376,10 +376,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyCastComponent: {fileID: 0}
-  NavMeshMoveToPlayer: {fileID: 7813538039565963230}
+  _navMeshMoveToPlayer: {fileID: 7813538039565963230}
   _enemyAttackComponent: {fileID: 6966552553589898628}
   _enemyWeapon: {fileID: 6625279289632298001}
-  _enemyAnimator: {fileID: 7813538039565963228}
+  _characterAnimator: {fileID: 8701998477689951157}
   _enemyTarget: {fileID: 3027789663709577760}
   _enemyHealth: {fileID: 2892997724190106138}
   _tagController: {fileID: 5837056075893014178}
@@ -552,6 +552,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _statDatabase: {fileID: 0}
+--- !u!114 &398656111628261698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2658416580451336931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5e2027242be4988819417d792383561, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnemyDeath: {fileID: 2892997724190106139}
+  EnemyWeapon: {fileID: 6625279289632298001}
+  EnemyTarget: {fileID: 3027789663709577760}
+  EnemyStats: {fileID: 6249724365430731878}
+  NavMeshMove: {fileID: 7813538039565963230}
+  NavMeshAgent: {fileID: 7813538039565963231}
+  EnemyLootSpawner: {fileID: 0}
+  ExpDrop: {fileID: 4845501457382912920}
+  EntityUI: {fileID: 4058648672316291509}
+  EnemyHealth: {fileID: 2892997724190106138}
 --- !u!1 &3762135731228810403
 GameObject:
   m_ObjectHideFlags: 0

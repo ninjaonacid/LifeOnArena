@@ -296,17 +296,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 202b34f87cfc3b14eb9de7c0b349df02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2347229340296426261 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7813538039565963228, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
-  m_PrefabInstance: {fileID: 5547392218910358729}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7500987206885277226}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9364bfd7d71f53e41ace818fd1ea7be2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &2347229340296426263 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7813538039565963230, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
@@ -338,6 +327,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 989bfc85d969d91428fdc33c3d43149b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3765007460156960636 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8701998477689951157, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
+  m_PrefabInstance: {fileID: 5547392218910358729}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7500987206885277226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09c6296a1b471c24385eb90fabe315b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &6793403899218517032 stripped
@@ -422,10 +422,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyCastComponent: {fileID: 5871573058573798699}
-  NavMeshMoveToPlayer: {fileID: 2347229340296426263}
+  _navMeshMoveToPlayer: {fileID: 2347229340296426263}
   _enemyAttackComponent: {fileID: 3193722253585547597}
   _enemyWeapon: {fileID: 1661251832953170136}
-  _enemyAnimator: {fileID: 2347229340296426261}
+  _characterAnimator: {fileID: 3765007460156960636}
   _enemyTarget: {fileID: 7419844748819087081}
   _enemyHealth: {fileID: 7267039373793140435}
   _tagController: {fileID: 2160927685311300203}

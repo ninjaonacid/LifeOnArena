@@ -89,28 +89,23 @@ namespace Code.Runtime.Core.Factory
             GameObject monster = _objectPoolProvider.Spawn(prefab, onCreate: onCreate, onRelease: onRelease, onGet: onGet, onReturn: onReturn);
             
             monster.transform.SetParent(parent);
+
+            EnemyFacade enemyFacade = monster.GetComponent<EnemyFacade>();
             
-            IDamageable damageable = monster.GetComponent<IDamageable>();
-
-            var enemyStats = monster.GetComponent<EnemyStats>();
-
-            enemyStats.SetStats(monsterData.PossibleStats.Count > 1
+            enemyFacade.EnemyTarget.Construct(_heroFactory.HeroGameObject.transform);
+            enemyFacade.EnemyStats.SetStats(monsterData.PossibleStats.Count > 1
                 ? monsterData.PossibleStats[levelConfig.LevelDifficulty - 1]
                 : monsterData.PossibleStats[0]);
+            enemyFacade.EnemyWeapon.Construct(monsterData.PossibleWeapons);
+            enemyFacade.EntityUI.Construct(enemyFacade.EnemyHealth);
+            enemyFacade.EnemyDeath.Initialize();
+            enemyFacade.NavMeshMove.Construct(_heroFactory.HeroGameObject.transform);
+            enemyFacade.NavMeshAgent.speed = monsterData.MoveSpeed;
+            enemyFacade.EnemyTarget.Construct(_heroFactory.HeroGameObject.transform);
+            enemyFacade.EnemyLootSpawner.SetLoot(monsterData.MinSouls, monsterData.MaxSouls);
+            enemyFacade.ExpDrop.Construct(_randomService, _gameDataContainer.PlayerData.PlayerExp);
+            enemyFacade.ExpDrop.SetExperienceGain(monsterData.MinExp, monsterData.MaxExp);
             
-            monster.GetComponent<EnemyDeath>().Initialize();
-            monster.GetComponent<EntityUI>().Construct(damageable);
-            monster.GetComponent<NavMeshMoveToPlayer>().Construct(_heroFactory.HeroGameObject.transform);
-            monster.GetComponent<NavMeshAgent>().speed = monsterData.MoveSpeed;
-            monster.GetComponent<EnemyTarget>().Construct(_heroFactory.HeroGameObject.transform);
-
-            var lootSpawner = monster.GetComponentInChildren<LootSpawner>();
-            lootSpawner.SetLoot(monsterData.MinSouls, monsterData.MaxSouls);
-
-            var expDrop = monster.GetComponentInChildren<ExpDrop>();
-            expDrop.Construct(_randomService, _gameDataContainer.PlayerData.PlayerExp);
-            expDrop.SetExperienceGain(monsterData.MinExp, monsterData.MaxExp);
-
             return monster;
         }
         

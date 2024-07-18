@@ -8,16 +8,20 @@ namespace Code.Runtime.Entity.Enemy
     public class EnemyWeapon : EntityWeapon
     {
         [SerializeField] private List<WeaponData> _possibleWeapons;
-        protected override void Start()
+        
+        public void Construct(List<WeaponData> possibleWeapons)
         {
+            _possibleWeapons = possibleWeapons;
+            
+            
             if (_possibleWeapons.Count > 0)
             {
-                var randomWeaponData = _possibleWeapons.GetRandomElement();
-                EquipWeapon(randomWeaponData);
+                var randomWeapon = _possibleWeapons.GetRandomElement();
+                EquipWeapon(randomWeapon);
             }
             else
             {
-                EquipWeapon(_weaponData);
+                Debug.LogError("NoWeaponsForEnemy");
             }
         }
     }

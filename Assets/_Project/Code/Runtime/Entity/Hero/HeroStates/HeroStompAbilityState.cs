@@ -21,7 +21,7 @@ namespace Code.Runtime.Entity.Hero.HeroStates
         {
             base.OnEnter();
             
-            CharacterAnimator.PlayAnimation(_animationData.Animations[AnimationKey.Stomp].Hash);
+            _characterAnimator.PlayAnimation(_animationData.Animations[AnimationKey.Stomp].Hash);
         }
 
         public override void OnLogic()

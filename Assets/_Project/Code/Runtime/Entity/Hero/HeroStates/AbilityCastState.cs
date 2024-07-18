@@ -19,7 +19,7 @@ namespace Code.Runtime.Entity.Hero.HeroStates
         public override void OnEnter()
         {
             base.OnEnter();
-            CharacterAnimator.PlayAnimation(_animationData.Animations[AnimationKey.SpellCast].Hash);
+            _characterAnimator.PlayAnimation(_animationData.Animations[AnimationKey.SpellCast].Hash);
         }
     }
 }

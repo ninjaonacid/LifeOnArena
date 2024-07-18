@@ -7,7 +7,7 @@ namespace Code.Runtime.Entity.Hero.HeroStates
 {
     public abstract class HeroBaseState : State
     {
-        protected readonly CharacterAnimator CharacterAnimator;
+        protected readonly CharacterAnimator _characterAnimator;
         protected readonly HeroMovement _heroMovement;
         protected readonly HeroRotation _heroRotation;
         protected readonly AnimationDataContainer _animationData;
@@ -19,7 +19,7 @@ namespace Code.Runtime.Entity.Hero.HeroStates
             Func<State<string, string>, bool> canExit = null) : base(needExitTime, isGhostState, onEnter, onLogic,
             onExit, canExit)
         {
-            CharacterAnimator = characterAnimator;
+            _characterAnimator = characterAnimator;
             _heroMovement = heroMovement;
             _heroRotation = heroRotation;
             _animationData = animationData;
