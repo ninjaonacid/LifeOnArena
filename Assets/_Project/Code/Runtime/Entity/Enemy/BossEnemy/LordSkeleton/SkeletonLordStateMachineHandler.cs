@@ -3,7 +3,6 @@ using Code.Runtime.Entity.Enemy.MeleeEnemy;
 using Code.Runtime.Entity.Enemy.RangedEnemy;
 using Code.Runtime.Modules.StateMachine;
 using Code.Runtime.Modules.StateMachine.Transitions;
-using UnityEngine;
 
 namespace Code.Runtime.Entity.Enemy.BossEnemy.LordSkeleton
 {
@@ -14,20 +13,23 @@ namespace Code.Runtime.Entity.Enemy.BossEnemy.LordSkeleton
             base.Start();
             
             _fsm.AddState(nameof(EnemyCastState), 
-                new EnemyCastState(_enemyAnimator, 
-                    _animationData, 
+                new EnemyCastState(
                     _abilityController, 
-                    NavMeshMoveToPlayer,
+                    _navMeshMoveToPlayer,
                     _enemyAttackComponent,
-                    _enemyTarget, _enemyCastComponent, needExitTime: true));
+                    _enemyCastComponent, 
+                    _characterAnimator,
+                    _animationData, 
+                    _enemyTarget, 
+                    needExitTime: true));
             
             _fsm.AddState(nameof(MeleeEnemyAttackState), new MeleeEnemyAttackState(
                 _enemyAttackComponent,
-                NavMeshMoveToPlayer,
-                _enemyTarget,
-                _enemyAnimator,
+                _navMeshMoveToPlayer,
                 _enemyWeapon,
+                _characterAnimator,
                 _animationData,
+                _enemyTarget,
                 true
             ));
             

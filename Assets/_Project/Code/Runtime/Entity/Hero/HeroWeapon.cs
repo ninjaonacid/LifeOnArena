@@ -1,5 +1,6 @@
 using Code.Runtime.ConfigData.Weapon;
 using Code.Runtime.Data.PlayerData;
+using Code.Runtime.Entity.EntitiesComponents;
 using Code.Runtime.Services.PersistentProgress;
 using UnityEngine;
 
@@ -7,7 +8,7 @@ namespace Code.Runtime.Entity.Hero
 {
     public class HeroWeapon : EntityWeapon, ISave
     {
-        [SerializeField] private HeroAnimator _heroAnimator;
+        [SerializeField] private CharacterAnimator CharacterAnimator;
         
 
         protected override void Start()
@@ -18,7 +19,7 @@ namespace Code.Runtime.Entity.Hero
         {
             base.EquipWeapon(weaponData);
             if(weaponData.OverrideController != null)
-                _heroAnimator.OverrideController(weaponData.OverrideController);
+                CharacterAnimator.OverrideController(weaponData.OverrideController);
         }
         
         public void LoadData(PlayerData data)

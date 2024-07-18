@@ -1,5 +1,6 @@
 using System;
 using Code.Runtime.ConfigData.Animations;
+using Code.Runtime.Entity.EntitiesComponents;
 using Code.Runtime.Logic.Timer;
 using Code.Runtime.Modules.StateMachine.States;
 
@@ -10,11 +11,11 @@ namespace Code.Runtime.Entity.Hero.HeroStates
         private readonly HeroAttackComponent _heroAttack;
         private float _damageInterval = 0.5f;
         private ITimer _intervalTimer;
-        public SpinAbilityState(HeroWeapon heroWeapon, HeroAttackComponent heroAttack, HeroAbilityController heroAbilityController, HeroAnimator heroAnimator,
+        public SpinAbilityState(HeroWeapon heroWeapon, HeroAttackComponent heroAttack, HeroAbilityController heroAbilityController, CharacterAnimator characterAnimator,
             HeroMovement heroMovement, HeroRotation heroRotation, AnimationDataContainer animationData,
             bool needExitTime = false, bool isGhostState = false, Action<State<string, string>> onEnter = null,
             Action<State<string, string>> onLogic = null, Action<State<string, string>> onExit = null,
-            Func<State<string, string>, bool> canExit = null) : base(heroWeapon, heroAbilityController, heroAnimator, heroMovement,
+            Func<State<string, string>, bool> canExit = null) : base(heroWeapon, heroAbilityController, characterAnimator, heroMovement,
             heroRotation, animationData, needExitTime, isGhostState, onEnter, onLogic, onExit, canExit)
         {
             _heroAttack = heroAttack;
@@ -25,7 +26,7 @@ namespace Code.Runtime.Entity.Hero.HeroStates
         {
             base.OnEnter();
             
-            _heroAnimator.PlayAnimation(_animationData.Animations[AnimationKey.Spinning].Hash);
+            CharacterAnimator.PlayAnimation(_animationData.Animations[AnimationKey.Spinning].Hash);
             
             _heroRotation.EnableRotation(false);
             _heroWeapon.EnableWeaponCollider();

@@ -4,26 +4,16 @@ using UnityEngine.AI;
 namespace Code.Runtime.Entity.Enemy
 {
     [RequireComponent(typeof(NavMeshAgent))]
-    [RequireComponent(typeof(EnemyAnimator))]
     public class AnimateNavMesh : MonoBehaviour
     {
         private const float MinimalVelocity = 0.1f;
-
-        public NavMeshAgent Agent;
-        public EnemyAnimator EnemyAnimator;
-
-        private void Update()
-        {
-            // if (ShouldMove())
-            //     EnemyAnimator.Move(Agent.velocity.magnitude);
-            // else
-            //     EnemyAnimator.StopMoving();
-        }
+        [SerializeField] private NavMeshAgent _agent;
+        
 
         private bool ShouldMove()
         {
-            return Agent.velocity.magnitude > MinimalVelocity &&
-                   Agent.remainingDistance > Agent.radius;
+            return _agent.velocity.magnitude > MinimalVelocity &&
+                   _agent.remainingDistance > _agent.radius;
         }
     }
 }

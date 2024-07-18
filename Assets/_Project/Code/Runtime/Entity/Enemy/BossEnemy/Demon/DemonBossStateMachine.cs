@@ -14,20 +14,23 @@ namespace Code.Runtime.Entity.Enemy.BossEnemy.Demon
             base.Start();
             
             _fsm.AddState(nameof(EnemyCastState), 
-                new EnemyCastState(_enemyAnimator, 
-                    _animationData, 
+                new EnemyCastState(
                     _abilityController, 
-                    NavMeshMoveToPlayer,
+                    _navMeshMoveToPlayer,
                     _enemyAttackComponent,
-                    _enemyTarget, _enemyCastComponent, needExitTime: true));
+                    _enemyCastComponent, 
+                    _characterAnimator, 
+                    _animationData, 
+                    _enemyTarget, 
+                    needExitTime: true));
             
             _fsm.AddState(nameof(MeleeEnemyAttackState), new MeleeEnemyAttackState(
                 _enemyAttackComponent,
-                NavMeshMoveToPlayer,
-                _enemyTarget,
-                _enemyAnimator,
+                _navMeshMoveToPlayer,
                 _enemyWeapon,
+                _characterAnimator,
                 _animationData,
+                _enemyTarget,
                 true
             ));
             

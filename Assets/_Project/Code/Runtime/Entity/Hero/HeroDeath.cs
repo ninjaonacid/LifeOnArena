@@ -1,5 +1,6 @@
 using Code.Runtime.Core.EventSystem;
 using Code.Runtime.CustomEvents;
+using Code.Runtime.Entity.EntitiesComponents;
 using UnityEngine;
 using UnityEngine.Serialization;
 using VContainer;
@@ -7,11 +8,11 @@ using VContainer;
 namespace Code.Runtime.Entity.Hero
 {
     [RequireComponent(typeof(HeroHealth))]
-    [RequireComponent(typeof(HeroAnimator))]
+    [RequireComponent(typeof(CharacterAnimator))]
     [RequireComponent(typeof(HeroMovement))]
     public class HeroDeath : MonoBehaviour
     {
-        [SerializeField] private HeroAnimator _animator;
+        [SerializeField] private CharacterAnimator _animator;
         [SerializeField] private HeroHealth _health;
         [SerializeField] private HeroMovement _heroMovement;
         

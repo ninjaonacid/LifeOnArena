@@ -2,6 +2,7 @@ using Code.Runtime.ConfigData.Animations;
 using Code.Runtime.ConfigData.Identifiers;
 using Code.Runtime.Core.Audio;
 using Code.Runtime.Core.Config;
+using Code.Runtime.Entity.EntitiesComponents;
 using Code.Runtime.Entity.Hero.HeroStates;
 using Code.Runtime.Logic;
 using Code.Runtime.Logic.Animator;
@@ -37,7 +38,7 @@ namespace Code.Runtime.Entity.Hero
         [SerializeField] private AbilityIdentifier _waveSlashAbilityId;
 
         [SerializeField] private AnimationEventReceiver _eventReceiver;
-        [SerializeField] private HeroAnimator _heroAnimator;
+        [SerializeField] private CharacterAnimator CharacterAnimator;
         [SerializeField] private HeroMovement _heroMovement;
         [SerializeField] private HeroRotation _heroRotation;
         [SerializeField] private HeroAttackComponent _heroAttackComponent;
@@ -69,26 +70,26 @@ namespace Code.Runtime.Entity.Hero
             _heroAbilityController.OnAbilityUse += HandleAbilityUse;
 
             _stateMachine.AddState(HeroIdle, new HeroIdleState(
-                _heroAnimator, _heroMovement, _heroRotation, _animationData, false, true));
+                CharacterAnimator, _heroMovement, _heroRotation, _animationData, false, true));
 
             _stateMachine.AddState(HeroMovement, new HeroMovementState(
-                _heroAnimator, _heroMovement, _heroRotation, _animationData, false, false));
+                CharacterAnimator, _heroMovement, _heroRotation, _animationData, false, false));
 
             _stateMachine.AddState(nameof(HeroDeathState), new HeroDeathState(
-                _heroAnimator,
+                CharacterAnimator,
                 _heroMovement,
                 _heroRotation,
                 _animationData));
 
             _stateMachine.AddState(RollAbility, new RollDodgeState(
-                _heroWeapon, _heroAbilityController, _heroAnimator, _heroMovement, _heroRotation, _animationData, true,
+                _heroWeapon, _heroAbilityController, CharacterAnimator, _heroMovement, _heroRotation, _animationData, true,
                 false));
 
             _stateMachine.AddState(SpinAttackAbility, new SpinAbilityState(
                 _heroWeapon,
                 _heroAttackComponent,
                 _heroAbilityController,
-                _heroAnimator,
+                CharacterAnimator,
                 _heroMovement,
                 _heroRotation,
                 _animationData, true,
@@ -97,7 +98,7 @@ namespace Code.Runtime.Entity.Hero
             _stateMachine.AddState(nameof(HeroStompAbilityState), new HeroStompAbilityState(
                 _heroWeapon,
                 _heroAbilityController,
-                _heroAnimator,
+                CharacterAnimator,
                 _heroMovement,
                 _heroRotation,
                 _animationData));
@@ -106,7 +107,7 @@ namespace Code.Runtime.Entity.Hero
             _stateMachine.AddState(AbilityCast, new AbilityCastState(
                 _heroWeapon,
                 _heroAbilityController,
-                _heroAnimator,
+                CharacterAnimator,
                 _heroMovement,
                 _heroRotation,
                 _animationData,
@@ -116,7 +117,7 @@ namespace Code.Runtime.Entity.Hero
            _stateMachine.AddState(nameof(HeroWaveSlashAbilityState), new HeroWaveSlashAbilityState(
                _heroWeapon,
                _heroAbilityController,
-               _heroAnimator,
+               CharacterAnimator,
                _heroMovement,
                _heroRotation,
                _animationData, needExitTime: true));
@@ -124,7 +125,7 @@ namespace Code.Runtime.Entity.Hero
             _stateMachine.AddState(nameof(FirstAttackState), new FirstAttackState(
                 _heroAttackComponent,
                 _heroWeapon,
-                _heroAnimator,
+                CharacterAnimator,
                 _heroMovement,
                 _heroRotation,
                 _animationData,
@@ -135,7 +136,7 @@ namespace Code.Runtime.Entity.Hero
             _stateMachine.AddState(nameof(SecondAttackState), new SecondAttackState(
                 _heroAttackComponent,
                 _heroWeapon,
-                _heroAnimator,
+                CharacterAnimator,
                 _heroMovement,
                 _heroRotation,
                 _animationData,
@@ -146,7 +147,7 @@ namespace Code.Runtime.Entity.Hero
             _stateMachine.AddState(nameof(ThirdAttackState), new ThirdAttackState(
                 _heroAttackComponent,
                 _heroWeapon,
-                _heroAnimator,
+                CharacterAnimator,
                 _heroMovement,
                 _heroRotation,
                 _animationData,

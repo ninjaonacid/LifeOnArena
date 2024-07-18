@@ -2,6 +2,7 @@ using System;
 using Code.Runtime.ConfigData;
 using Code.Runtime.ConfigData.Animations;
 using Code.Runtime.ConfigData.Attack;
+using Code.Runtime.Entity.EntitiesComponents;
 using Code.Runtime.Modules.StateMachine.States;
 using Cysharp.Threading.Tasks;
 
@@ -11,12 +12,12 @@ namespace Code.Runtime.Entity.Hero.HeroStates
     {
         private AttackConfig _attackConfig;
         public SecondAttackState(HeroAttackComponent heroAttackComponent, HeroWeapon heroWeapon,
-            HeroAnimator heroAnimator, HeroMovement heroMovement, HeroRotation heroRotation,
+            CharacterAnimator characterAnimator, HeroMovement heroMovement, HeroRotation heroRotation,
             AnimationDataContainer animationData, VisualEffectController vfxController,
             HeroAbilityController heroAbilityController, bool needExitTime = false, bool isGhostState = false,
             Action<State<string, string>> onEnter = null, Action<State<string, string>> onLogic = null,
             Action<State<string, string>> onExit = null, Func<State<string, string>, bool> canExit = null) : base(
-            heroAttackComponent, heroWeapon, heroAnimator, heroMovement, heroRotation, animationData, vfxController,
+            heroAttackComponent, heroWeapon, characterAnimator, heroMovement, heroRotation, animationData, vfxController,
             heroAbilityController, needExitTime, isGhostState, onEnter, onLogic, onExit, canExit)
         {
         }
@@ -26,7 +27,7 @@ namespace Code.Runtime.Entity.Hero.HeroStates
             base.OnEnter();
             _attackConfig = _heroWeapon.WeaponData.AttacksConfigs[1];
 
-            _heroAnimator.PlayAnimation(_attackConfig.AnimationData.Hash);
+            CharacterAnimator.PlayAnimation(_attackConfig.AnimationData.Hash);
 
 
             _vfxController.PlaySlashVisualEffect(
