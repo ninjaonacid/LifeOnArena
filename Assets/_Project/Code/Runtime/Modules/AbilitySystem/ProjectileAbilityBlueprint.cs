@@ -11,9 +11,10 @@ namespace Code.Runtime.Modules.AbilitySystem
         [SerializeField] protected float _lifeTime;
         [SerializeField] protected float _speed;
         [SerializeField] protected float _spawnDelay;
+        [SerializeField] protected bool _isAutoTarget;
         public override ActiveAbility GetAbility()
         {
-            return new ProjectileAbility(this, _prefab, _lifeTime, _speed, _spawnDelay);
+            return new ProjectileAbility(this, _prefab, _lifeTime, _speed, _spawnDelay, _isAutoTarget);
         }
     }
 }

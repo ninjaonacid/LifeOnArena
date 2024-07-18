@@ -8,10 +8,9 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
     {
         private readonly int _numberOfProjectiles;
 
-
         public MultipleProjectileAbility(ActiveAbilityBlueprintBase abilityBlueprint, Projectile projectilePrefab,
-            float lifeTime, float speed, float spawnDelay, int numberOfProjectiles) : base(abilityBlueprint,
-            projectilePrefab, lifeTime, speed, spawnDelay)
+            float lifeTime, float speed, float spawnDelay, bool isAutoTarget, int numberOfProjectiles) : base(
+            abilityBlueprint, projectilePrefab, lifeTime, speed, spawnDelay, isAutoTarget)
         {
             _numberOfProjectiles = numberOfProjectiles;
         }

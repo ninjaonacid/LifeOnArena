@@ -19,8 +19,6 @@ namespace Code.Runtime.ConfigData
         [SerializeField] private int _maxExp;
         [Range(0, 1000)]
         [SerializeField] private int _minExp;
-
-        [SerializeField] private bool _isScalableStats;
         [SerializeField] private List<StatDatabase> _stats;
         [SerializeField] private List<WeaponData> _weapons;
         [SerializeField] private MobIdentifier _mobId;
@@ -34,7 +32,6 @@ namespace Code.Runtime.ConfigData
         public int MaxExp => _maxExp;
         public int MinExp => _minExp;
         public MobIdentifier MobId => _mobId;
-        public bool IsScalableStats => _isScalableStats;
         public List<StatDatabase> PossibleStats => _stats;
         public List<WeaponData> PossibleWeapons => _weapons;
 

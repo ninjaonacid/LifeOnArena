@@ -3,14 +3,15 @@ using UnityEngine;
 
 namespace Code.Runtime.Modules.AbilitySystem
 {
-    [CreateAssetMenu(fileName = "MultipleProjectileAbility", menuName = "AbilitySystem/ActiveAbility/MultipleProjectileAbility")]
+    [CreateAssetMenu(fileName = "MultipleProjectileAbility",
+        menuName = "AbilitySystem/ActiveAbility/MultipleProjectileAbility")]
     public class MultipleProjectileAbilityBlueprint : ProjectileAbilityBlueprint
     {
         [SerializeField] private int _numberOfProjectiles;
 
         public override ActiveAbility GetAbility()
         {
-            return new MultipleProjectileAbility(this, _prefab, _lifeTime, _speed, _spawnDelay, _numberOfProjectiles);
+            return new MultipleProjectileAbility(this, _prefab, _lifeTime, _speed, _spawnDelay, _isAutoTarget, _numberOfProjectiles);
         }
     }
 }

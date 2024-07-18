@@ -35,7 +35,69 @@ namespace Code.Runtime.Services.BattleService
 
             return (0, null);
         }
+        
+        public Transform FindNearestEnemy(Transform casterTransform, float searchRadius, LayerMask targetLayer)
+        {
+            var targets = GetTargetsInRadius(casterTransform.position, searchRadius, targetLayer);
+            
+            float minDistance = float.MaxValue;
+            
+            Transform nearestTransform = default;
 
+            for (var index = 0; index < targets.hits; index++)
+            {
+                var targetCollider = targets.colliders[index];
+                
+                if (targetCollider != null)
+                {
+                    float distance = Vector3.Distance(casterTransform.position, targetCollider.transform.position);
+                    
+                    if (distance < minDistance)
+                    {
+                        minDistance = distance;
+                        nearestTransform = targetCollider.transform;
+                    }
+                }
+            }
+
+            return nearestTransform;
+        }
+
+        public Transform FindNearestEnemyInSight(Transform casterTransform, float searchRadius, float fieldOfViewAngle, LayerMask targetLayer)
+        {
+            var targets = GetTargetsInRadius(casterTransform.position, searchRadius, targetLayer);
+            
+            float minDistance = float.MaxValue;
+            
+            Transform nearestTransform = default;
+            var casterForward = casterTransform.forward;
+
+            for (var index = 0; index < targets.hits; index++)
+            {
+                var targetCollider = targets.colliders[index];
+                
+                if (targetCollider != null)
+                {
+                    var targetTransform = targetCollider.transform;
+                    var directionToTarget = targetTransform.position - casterTransform.position;
+                    var angle = Vector3.Angle(casterForward, directionToTarget);
+
+                    if (angle <= fieldOfViewAngle * 0.5f)
+                    {
+                        float distance = Vector3.Distance(casterTransform.position, targetCollider.transform.position);
+                    
+                        if (distance < minDistance)
+                        {
+                            minDistance = distance;
+                            nearestTransform = targetCollider.transform;
+                        }
+                    }
+                    
+                }
+            }
+
+            return nearestTransform;
+        }
         public void CreateOverlapAttack(StatController attackerStats, Vector3 startPoint,  LayerMask mask)
         {
             int hits = 0;

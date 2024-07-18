@@ -6,11 +6,8 @@ namespace Code.Runtime.Entity
     public class EntityHurtBox : MonoBehaviour
     {
         [SerializeField] protected BoxCollider _hitBoxCollider;
-        public Vector3 _initialColliderSize;
+        private Vector3 _initialColliderSize;
         
-        private float offsetY = 3;
-        private float offsetZ = 2;
-
         private void Start()
         {
             _initialColliderSize = new Vector3(_hitBoxCollider.size.x, _hitBoxCollider.size.y, _hitBoxCollider.size.z);
