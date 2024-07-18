@@ -101,16 +101,9 @@ namespace Code.Runtime.Entity
         {
             float attackSpeed = _stats.Stats["AttackSpeed"].Value;
             
-            if (attackSpeed >= 0) {
-             
-                float bias = 1.25f - attackSpeed / 8.0f;
-                
-                bias = Mathf.Clamp(bias, 0, 1);
+            float attacksPerSecond = attackSpeed * 0.2f;
 
-                return attackSpeed + bias;
-            }
-
-            return Mathf.Abs(1.0f / (1.0f - attackSpeed));
+            return attacksPerSecond;
         }
     }
 }

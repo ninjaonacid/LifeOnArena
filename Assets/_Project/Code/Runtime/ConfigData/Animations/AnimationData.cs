@@ -11,6 +11,7 @@ namespace Code.Runtime.ConfigData.Animations
 #if UNITY_EDITOR
         [SerializeField]
         [FoldoutGroup("$GetClipName")]
+        [OnValueChanged("GetClipData")]
         [BoxGroup("$GetClipName/Settings", ShowLabel = false)]
         private AnimationClip clip;
 #endif
@@ -33,7 +34,7 @@ namespace Code.Runtime.ConfigData.Animations
         public string AnimationName;
 
 #if UNITY_EDITOR
-        private void OnValidate()
+        private void GetClipData()
         {
             Length = clip ? clip.length : default;
             AnimationName = clip ? clip.name : default;

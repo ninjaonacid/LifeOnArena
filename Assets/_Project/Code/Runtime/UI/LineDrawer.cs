@@ -20,7 +20,7 @@ namespace Code.Runtime.UI
     {
         private static readonly Vector3[] _corners = new Vector3[4];
     
-        [SerializeField] private float lineHeight;
+        [SerializeField] private float _lineHeight;
         [SerializeField] protected RectTransform _originRect;
         [SerializeField] protected RectTransform _targetRect;
         [SerializeField] protected Side _originConnectionSide = Side.Center;
@@ -58,16 +58,14 @@ namespace Code.Runtime.UI
             _lineImage.rectTransform.position = midPoint;
             
             var scaleFactor = _lineImage.rectTransform.lossyScale.x;
-            _lineImage.rectTransform.sizeDelta = new Vector2(direction.magnitude / scaleFactor, lineHeight);
+            _lineImage.rectTransform.sizeDelta = new Vector2(direction.magnitude / scaleFactor, _lineHeight);
 
             var angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             _lineImage.rectTransform.rotation = Quaternion.Euler(0, 0, angle);
         }
         
-
         private Vector3 GetConnectionPoint(RectTransform rectTransform, Side side)
         {
-           
             rectTransform.GetWorldCorners(_corners);
 
             switch (side)

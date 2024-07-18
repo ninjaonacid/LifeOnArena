@@ -4,7 +4,7 @@ using Code.Runtime.ConfigData.Attack;
 using Code.Runtime.Entity.EntitiesComponents;
 using Code.Runtime.Modules.StateMachine.States;
 using Code.Runtime.Utils;
-using Random = UnityEngine.Random;
+using UnityEngine;
 
 namespace Code.Runtime.Entity.Enemy.MeleeEnemy
 {
@@ -14,7 +14,6 @@ namespace Code.Runtime.Entity.Enemy.MeleeEnemy
         private readonly NavMeshMoveToPlayer _navMeshMoveToPlayer;
         private readonly EnemyWeapon _enemyWeapon;
         private AttackConfig _currentAttack;
-
 
         public MeleeEnemyAttackState(EnemyAttackComponent enemyAttackComponent, NavMeshMoveToPlayer navMeshMoveToPlayer,
             EnemyWeapon enemyWeapon, CharacterAnimator characterAnimator, AnimationDataContainer animationData,
@@ -29,28 +28,24 @@ namespace Code.Runtime.Entity.Enemy.MeleeEnemy
             _enemyWeapon = enemyWeapon;
         }
 
-        public override void OnEnter()
+        public override void OnEnter() 
         {
             base.OnEnter();
             _currentAttack = _enemyWeapon.WeaponData.AttacksConfigs.GetRandomElement();
             _characterAnimator.PlayAnimation(_currentAttack.AnimationData.Hash);
             _characterAnimator.SetAttackAnimationSpeed(_enemyAttackComponent.GetAttacksPerSecond());
             _navMeshMoveToPlayer.ShouldMove(false);
+            Debug.Log("MeleeSTATE ENTER");
         }
 
         public override void OnLogic()
         {
             base.OnLogic();
 
-            if (Timer.Elapsed >= ((_currentAttack.AnimationData.Length /
-                                   _enemyAttackComponent.GetAttacksPerSecond()) / 5f))
+            if (Timer.Elapsed >= ((_currentAttack.AnimationData.Length / _enemyAttackComponent.GetAttacksPerSecond() * _currentAttack.AnimationSpeedUpThreshold)))
             {
                 _characterAnimator.SetAttackAnimationSpeed(1f);
-                //_enemyWeapon.EnableCollider(true);
             }
-
-
-            //_enemyTarget.RotationToTarget();
         }
 
         public override void OnExit()
@@ -59,12 +54,21 @@ namespace Code.Runtime.Entity.Enemy.MeleeEnemy
             _enemyWeapon.DisableWeaponCollider();
             _enemyAttackComponent.AttackEnded();
             _enemyAttackComponent.ClearCollisionData();
+            Debug.Log("MeleeSTATE EXIT");
         }
 
         public override void OnExitRequest()
         {
-            if (Timer.Elapsed >= ((_currentAttack.AnimationData.Length /
-                                   _enemyAttackComponent.GetAttacksPerSecond() / 5f) + 0.5f))
+            float animationLength = _currentAttack.AnimationData.Length;
+            float animationSlowedPart = _currentAttack.AnimationSpeedUpThreshold;
+            float attackSpeed = _enemyAttackComponent.GetAttacksPerSecond();
+
+            float slowDuration = animationLength * animationSlowedPart / attackSpeed;
+            float normalDuration = animationLength * (1 - animationSlowedPart);
+
+            float totalDuration = slowDuration + normalDuration;
+
+            if (Timer.Elapsed >= totalDuration)
             {
                 fsm.StateCanExit();
             }

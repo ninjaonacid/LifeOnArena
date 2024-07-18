@@ -47,6 +47,11 @@ namespace Code.Runtime.Entity.Enemy.MeleeEnemy
                 nameof(EnemyChaseState),
                 nameof(EnemyIdleState),
                 (transition) => !_enemyTarget.HasTarget()));
+            
+            _fsm.AddTransition(new Transition(
+                nameof(EnemyChaseState),
+                nameof(EnemyIdleState),
+                (transition) => _enemyAttackComponent.TargetInMeleeAttackRange));
 
             _fsm.AddTriggerTransitionFromAny("OnDamage", 
                 new Transition(

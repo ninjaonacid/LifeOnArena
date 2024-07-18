@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 242cb31efb166d245adb587c109714c2, type: 3}
-  m_Name: BloodSwordAttackConfig_1
+  m_Name: IronBladeAttackConfig 2
   m_EditorClassIdentifier: 
   SlashConfig: {fileID: 11400000, guid: ccebba11f065c044688496e5fb5547bd, type: 2}
-  SlashDirection: 0
+  SlashDirection: 1
   SlashDelay: 0.25
   AnimationData:
-    clip: {fileID: 7400000, guid: 2718aacaf4a38234f91b0a99c981f526, type: 2}
-    <Length>k__BackingField: 0.9
-    <Hash>k__BackingField: 1889383673
-    AnimationName: OneHandAttack1
-  AttackIdentifier: {fileID: 11400000, guid: bfb788b57061def4abcd06ad2d562dfa, type: 2}
-  ExitTime: 0
+    clip: {fileID: 7400000, guid: fc30c2d5850a8954e90fe4dfbb0c6f26, type: 2}
+    <Length>k__BackingField: 0.7
+    <Hash>k__BackingField: -376117949
+    AnimationName: OneHandAttack2
+  AnimationSpeedUpThreshold: 0.2
+  ExitTime: 0.7
