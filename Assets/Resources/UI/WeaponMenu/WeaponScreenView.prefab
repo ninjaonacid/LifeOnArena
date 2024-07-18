@@ -305,8 +305,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8441671981387228823}
-  - component: {fileID: 3097775365853240015}
   - component: {fileID: 6056748827312884306}
+  - component: {fileID: 1604948072278883174}
   m_Layer: 5
   m_Name: EquipButton
   m_TagString: Untagged
@@ -336,29 +336,6 @@ RectTransform:
   m_AnchoredPosition: {x: -3.2502, y: 57}
   m_SizeDelta: {x: 497.1404, y: 157.4957}
   m_Pivot: {x: 0.5, y: 0}
---- !u!114 &3097775365853240015
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6800481585769077363}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88c06b023863c8c479ed81d080dc9564, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _canvasGroup: {fileID: 6056748827312884306}
-  _highlightColor:
-    serializedVersion: 2
-    rgba: 4278251775
-  _pressedColor:
-    serializedVersion: 2
-    rgba: 4278190335
-  _baseColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  _buttonImage: {fileID: 1521385307982073450}
 --- !u!225 &6056748827312884306
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -371,6 +348,31 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &1604948072278883174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6800481585769077363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1357ede348b486a8c088676285b6acd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _canvasGroup: {fileID: 0}
+  _highlightColor:
+    serializedVersion: 2
+    rgba: 4279228157
+  _pressedColor:
+    serializedVersion: 2
+    rgba: 4278190333
+  _baseColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  _buttonImage: {fileID: 1521385307982073450}
+  _animationScale: {x: 1.1, y: 1.1}
+  _duration: 1
 --- !u!1001 &1543204084871185362
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -795,7 +797,7 @@ MonoBehaviour:
   CloseButton: {fileID: 1016382811940273648}
   _animation: {fileID: 8302712755795897703}
   WeaponContainer: {fileID: 4763463054992040884}
-  EquipButton: {fileID: 3097775365853240015}
+  EquipButton: {fileID: 0}
 --- !u!114 &8302712755795897703
 MonoBehaviour:
   m_ObjectHideFlags: 0

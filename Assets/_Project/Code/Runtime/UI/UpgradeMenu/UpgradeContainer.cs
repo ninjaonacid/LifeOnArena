@@ -35,7 +35,7 @@ namespace Code.Runtime.UI.UpgradeMenu
             //_passiveAbilityTemplate = _abilityFactory.GetRandomPassiveAbility();
             _upgradeImage.sprite = _passiveAbilityBlueprintTemplate.Icon;
             _upgradeRarityImage.sprite = _passiveAbilityBlueprintTemplate.RarityIcon;
-            _upgradeText.text = _passiveAbilityBlueprintTemplate.Description;
+            _upgradeText.text = _passiveAbilityBlueprintTemplate.Description.GetLocalizedString();
         }
 
         public void OnPointerClick(PointerEventData eventData)

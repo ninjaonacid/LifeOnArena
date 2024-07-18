@@ -1,3 +1,4 @@
+using System;
 using Code.Runtime.Data;
 using Code.Runtime.Data.PlayerData;
 using Code.Runtime.Logic;
@@ -13,12 +14,11 @@ namespace Code.Runtime.Entity.Hero
     public class HeroMovement : MonoBehaviour, ISave
     {
         [SerializeField] private HeroStats _stats;
-        private CharacterController _characterController;
+        [SerializeField] private CharacterController _characterController;
+        
         private PlayerControls _controls;
-
         private float MovementSpeed => _stats.Stats["MoveSpeed"].Value;
         
-        private readonly float _rollForce = 1000f;
         private Camera _camera;
 
         [Inject]
@@ -33,11 +33,16 @@ namespace Code.Runtime.Entity.Hero
         public void LoadData(PlayerData data)
         {
         }
-
+        
         private void Awake()
         {
             _camera = Camera.main;
-            _characterController = GetComponent<CharacterController>();
+        }
+
+        private void OnValidate()
+        {
+            _characterController ??= GetComponent<CharacterController>();
+            _stats ??= GetComponent<HeroStats>();
         }
 
         public void DashTask(float dashTime, float dashSpeed)

@@ -54,7 +54,7 @@ namespace Code.Runtime.Modules.StatSystem
         public void Add(int value)
         {
             _value += value;
-            _currentValue = _value;
+            _currentValue += value;
             CurrentValueChanged?.Invoke();
         }
 
