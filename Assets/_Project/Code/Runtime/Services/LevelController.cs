@@ -8,6 +8,7 @@ using Code.Runtime.Logic.WaveLogic;
 using Code.Runtime.Modules.LocalizationProvider;
 using Code.Runtime.Services.LevelLoaderService;
 using Code.Runtime.Services.PersistentProgress;
+using Code.Runtime.Services.SaveLoad;
 using Code.Runtime.UI;
 using Code.Runtime.UI.Model.DTO;
 using Code.Runtime.UI.Services;
@@ -31,12 +32,14 @@ namespace Code.Runtime.Services
         private readonly PlayerControls _controls;
         private readonly LocalizationService _localService;
         private readonly IGameDataContainer _gameData;
+        private readonly ISaveLoadService _saveLoad;
 
         private readonly CancellationTokenSource _cancellationToken = new CancellationTokenSource();
 
         public LevelController(EnemySpawnerController spawnerController, ScreenService screenService,
             IEventSystem eventSystem, PlayerControls controls,
-            LevelLoader levelLoader, IGameDataContainer gameData, LocalizationService localService)
+            LevelLoader levelLoader, IGameDataContainer gameData, LocalizationService localService,
+            ISaveLoadService saveLoad)
         {
             _spawnerController = spawnerController;
             _screenService = screenService;
@@ -45,6 +48,7 @@ namespace Code.Runtime.Services
             _levelLoader = levelLoader;
             _gameData = gameData;
             _localService = localService;
+            _saveLoad = saveLoad;
         }
 
         public void Initialize()
@@ -74,6 +78,7 @@ namespace Code.Runtime.Services
             var localizedString = _localService.GetLocalizedString("ReturnToPortal");
             _screenService.Open(ScreenID.MessageWindow, new TimerMessageDto(localizedString, _timerToEndOfLevel ));
             await UniTask.Delay(TimeSpan.FromSeconds(_timerToEndOfLevel));
+            _saveLoad.SaveData();
             _levelLoader.LoadLevel("MainMenu");
         }
 
