@@ -1039,6 +1039,7 @@ GameObject:
   - component: {fileID: 2730041049963062100}
   - component: {fileID: 3953687927081849907}
   - component: {fileID: 4867455432025638488}
+  - component: {fileID: 3647126736798332893}
   m_Layer: 12
   m_Name: Hero
   m_TagString: Player
@@ -1412,6 +1413,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _slashVfxPoint: {fileID: 477168527222963334}
+--- !u!114 &3647126736798332893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6031708160037518034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7d2c71a89b44e3b82364d8b65c63924, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _stats: {fileID: 6287642891397871327}
+  _vfxController: {fileID: 4867455432025638488}
 --- !u!1 &6072728912024870471
 GameObject:
   m_ObjectHideFlags: 0

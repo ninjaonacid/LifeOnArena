@@ -10,7 +10,7 @@ using UniRx;
 namespace Code.Runtime.UI.Model.AbilityMenu
 {
     [Serializable]
-    public class AbilityScreenModel : IScreenModel
+    public class AbilityScreenModel : IScreenModel, ISavableModel
     {
         public ReactiveProperty<int> Souls;
 
@@ -91,7 +91,6 @@ namespace Code.Runtime.UI.Model.AbilityMenu
                 ability.IsUnlocked = true;
                 _gameData.PlayerData.AbilityData.UnlockedAbilities.Add(ability);
             };
-            
         }
 
         public void UnEquipAbility(int slotIndex)
@@ -131,7 +130,6 @@ namespace Code.Runtime.UI.Model.AbilityMenu
         }
         
         
-
         public void LoadData()
         {
             if (_gameData.PlayerData.AbilityData.Abilities.Count <= 0) return;

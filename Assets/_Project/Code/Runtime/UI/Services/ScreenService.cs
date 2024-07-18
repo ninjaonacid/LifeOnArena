@@ -9,6 +9,7 @@ using Code.Runtime.UI.Model.DTO;
 using Code.Runtime.UI.Model.MissionSummaryWindowModel;
 using Code.Runtime.UI.Model.WeaponScreen;
 using Code.Runtime.UI.View;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -40,95 +41,67 @@ namespace Code.Runtime.UI.Services
             _screenMap.Add(ScreenID.MissionSummaryWindow, (typeof(MissionSummaryWindowModel), typeof(MissionSummaryWindowController)));
         }
 
-        public void Open(ScreenID screenId)
+        public void Open(ScreenID screenId) => OpenInternal(screenId, null);
+
+        public void Open(ScreenID screenId, IScreenModelDto dto) => OpenInternal(screenId, dto);
+
+        public void Close(ScreenID screenId) => CloseInternal(x => x.Id == screenId);
+
+        public void Close(IScreenController controller) => CloseInternal(x => Equals(x.Controller, controller));
+
+        private void OpenInternal(ScreenID screenId, [CanBeNull] IScreenModelDto dto)
         {
             if (_activeWindows.Any(x => x.Id == screenId))
             {
-                Debug.Log("Screen already opened");
+                Debug.Log($"Screen {screenId} is already open.");
                 return;
             }
             
-            if (_screenMap.TryGetValue(screenId, out var mc))
+            if (!_screenMap.TryGetValue(screenId, out var mc))
             {
-                BaseWindowView windowView = _uiFactory.CreateScreenView(screenId);
-                IScreenModel model = _screenModelFactory.CreateModel(mc.model);
-                IScreenController controller = _controllerFactory.CreateController(mc.controller);
-                controller.InitController(model, windowView, this);
-                
-                ActiveWindow activeWindow = new ActiveWindow(controller, windowView, screenId);
-                windowView.Show();
-                
-                _activeWindows.Add(activeWindow);
+                throw new ArgumentException($"Screen {screenId} is not registered.", nameof(screenId));
             }
-            else
-            {
-                throw new ArgumentException($"{screenId} doesnt present in the dictionary");
-            }
+            
+            BaseWindowView windowView = _uiFactory.CreateScreenView(screenId);
+            IScreenModel model = _screenModelFactory.CreateModel(mc.model, dto);
+            IScreenController controller = _controllerFactory.CreateController(mc.controller);
+            controller.InitController(model, windowView, this);
+
+            ActiveWindow activeWindow = new ActiveWindow(controller, model, windowView, screenId);
+            _activeWindows.Add(activeWindow);
+            
+            windowView.Show();
+            
         }
-        public void Open(ScreenID screenId, IScreenModelDto dto)
+
+        private void CloseInternal(Func<ActiveWindow, bool> predicate)
         {
-            if (_activeWindows.Any(x => x.Id == screenId))
+            var screen = _activeWindows.FirstOrDefault(predicate);
+
+            if (screen == null)
             {
-                Debug.Log("Screen already opened");
+                Debug.LogWarning("Attempted to close a screen that is not active.");
                 return;
             }
             
-            if (_screenMap.TryGetValue(screenId, out var mc))
-            {
-                BaseWindowView windowView = _uiFactory.CreateScreenView(screenId);
-                IScreenModel model = _screenModelFactory.CreateModel(mc.model, dto);
-                IScreenController controller = _controllerFactory.CreateController(mc.controller);
-                controller.InitController(model, windowView, this);
-
-                ActiveWindow activeWindow = new ActiveWindow(controller, windowView, screenId);
-                _activeWindows.Add(activeWindow);
-                
-                windowView.Show();
-            }
-            
-            else
-            {
-                throw new ArgumentException($"{screenId} doesnt present in the dictionary");
-            }
-        }
-
-        public void Close(ScreenID screenID)
-        {
-            var screen = _activeWindows.FirstOrDefault(x => x.Id == screenID);
-            
-            Assert.IsNotNull(screen);
-
-            if (screen.WindowView is not null)
-            {
-                screen.WindowView.Close();
-                _activeWindows.Remove(screen);
-            }
-
-            if (screen.Controller is IDisposable controller)
-            {
-                controller.Dispose();
-            }
-            
+            CloseActiveWindow(screen);
             _activeWindows.Remove(screen);
         }
-        public void Close(IScreenController controller)
+
+
+        private void CloseActiveWindow(ActiveWindow activeWindow)
         {
-            var screen = _activeWindows.FirstOrDefault(x => Equals(x.Controller, controller));
-            
-            Assert.IsNotNull(screen);
+            activeWindow.WindowView?.Close();
 
-            if (screen.WindowView is not null)
+            if (activeWindow.Controller is IDisposable disposableController)
             {
-                screen.WindowView.Close();
-                
+                disposableController.Dispose();
             }
 
-            if (controller is IDisposable disposable)
+            if (activeWindow.Model is ISavableModel savableModel)
             {
-                disposable.Dispose();
+                savableModel.SaveModelData();
             }
-
-            _activeWindows.Remove(screen);
         }
         
         

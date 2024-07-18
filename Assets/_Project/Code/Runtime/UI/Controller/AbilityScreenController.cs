@@ -30,8 +30,6 @@ namespace Code.Runtime.UI.Controller
 
             Assert.IsNotNull(_model);
             Assert.IsNotNull(_screenView);
-            
-            _model.LoadData();
 
             _screenView.AbilityContainer.Initialize();
 
@@ -39,7 +37,6 @@ namespace Code.Runtime.UI.Controller
                 .OnClickAsObservable()
                 .Subscribe(x =>
                 {
-                    _model.SaveModelData();
                     _screenService.Close(this);
                 });
             

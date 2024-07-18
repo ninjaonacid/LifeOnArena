@@ -86,7 +86,8 @@ namespace Code.Runtime.UI.View.ArenaSelection
             
             _tween = _markerIcon.transform.DOScale(new Vector3(1.2f, 1.2f, 1.2f), 1f)
                 .SetLoops(-1, LoopType.Yoyo)
-                .SetEase(Ease.Linear);
+                .SetEase(Ease.Linear)
+                .SetLink(gameObject);
         }
 
         public void Deselect()

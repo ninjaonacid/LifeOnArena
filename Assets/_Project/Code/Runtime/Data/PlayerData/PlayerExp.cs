@@ -1,4 +1,5 @@
 using System;
+using Newtonsoft.Json;
 using UniRx;
 using UnityEngine;
 
@@ -9,9 +10,10 @@ namespace Code.Runtime.Data.PlayerData
     {
         public event Action OnExpChanged;
         public event Action OnLevelChanged;
-        public int Experience;
-        public int Level;
-        public int ExperienceToNextLevel;
+        [JsonProperty] public float Experience { get; private set; }
+        [JsonProperty] public int Level { get; private set; }
+        public float ExperienceToNextLevel;
+        public float ExponentialFactor;
 
         public PlayerExp()
         {
@@ -27,7 +29,7 @@ namespace Code.Runtime.Data.PlayerData
             {
                 Level++;
                 Experience -= ExperienceToNextLevel;
-                ExperienceToNextLevel = 100 * (Level * Level);
+                ExperienceToNextLevel = 100 * (Level * ExponentialFactor);
                 OnLevelChanged?.Invoke();
             }
             

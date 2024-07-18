@@ -51,6 +51,13 @@ namespace Code.Runtime.Modules.StatSystem
             }
         }
 
+        public void Add(int value)
+        {
+            _value += value;
+            _currentValue = _value;
+            CurrentValueChanged?.Invoke();
+        }
+
         protected void AttributeValueChanged()
         {
             CurrentValueChanged?.Invoke();

@@ -49,23 +49,28 @@ namespace Code.Runtime.Core.EntryPoints.GameEntry
             {
                 data.StatsData.StatsValues.TryAdd(stat.name, stat.BaseValue);
                 data.StatsData.StatsCapacities.TryAdd(stat.name, stat.Capacity);
+                data.StatsData.StatPerLevel.TryAdd(stat.name, stat.StatPerLevel);
             }
 
             foreach (StatDefinition stat in characterStats.StatDefinitions)
             {
                 data.StatsData.StatsValues.TryAdd(stat.name, stat.BaseValue);
                 data.StatsData.StatsCapacities.TryAdd(stat.name, stat.Capacity);
+                data.StatsData.StatPerLevel.TryAdd(stat.name, stat.StatPerLevel);
             }
 
             foreach (StatDefinition stat in characterStats.AttributeDefinitions)
             {
                 data.StatsData.StatsValues.TryAdd(stat.name, stat.BaseValue);
                 data.StatsData.StatsCapacities.TryAdd(stat.name, stat.Capacity);
+                data.StatsData.StatPerLevel.TryAdd(stat.name, stat.StatPerLevel);
             }
 
             data.HeroEquipment.WeaponIntId = config.StartWeapon.Id;
 
             data.StatsData.StatUpgradePrice = config.StatUpgradePrice;
+
+            data.PlayerExp.ExponentialFactor = config.ExperienceExponentialFactor;
             
             return data;
         }

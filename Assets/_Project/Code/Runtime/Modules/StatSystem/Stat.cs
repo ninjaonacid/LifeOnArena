@@ -12,6 +12,7 @@ namespace Code.Runtime.Modules.StatSystem
         protected int _value;
         public int Value => _value;
         public virtual int BaseValue => _statDefinition.BaseValue;
+        public int StatPerLevel => _statDefinition.StatPerLevel;
         public event Action ValueChanged;
         protected List<StatModifier> _modifiers = new List<StatModifier>();
         

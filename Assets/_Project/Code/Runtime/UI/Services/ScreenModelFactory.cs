@@ -35,18 +35,7 @@ namespace Code.Runtime.UI.Services
             _modelMap.Add(typeof(RewardPopupModel), (dto) => new RewardPopupModel(dto));
             _modelMap.Add(typeof(MissionSummaryWindowModel), (dto) => new MissionSummaryWindowModel(dto));
         }
-
-        public IScreenModel CreateModel(Type model)
-        {
-            if (!_modelMap.ContainsKey(model))
-            {
-                throw new ArgumentException($"Model of type {model.Name} is not registered.");
-            }
-            
-            var modelInstance = _modelMap[model].Invoke(default);
-            modelInstance.Initialize();
-            return modelInstance;
-        }
+        
         
         public IScreenModel CreateModel(Type model, IScreenModelDto dto)
         {
@@ -54,9 +43,13 @@ namespace Code.Runtime.UI.Services
             {
                 throw new ArgumentException($"Model of type {model.Name} is not registered.");
             }
-            
             var modelInstance = _modelMap[model].Invoke(dto);
             modelInstance.Initialize();
+            
+            if (modelInstance is ILoadableModel loadableModel)
+            {
+                loadableModel.LoadData();
+            }
             return modelInstance;
         }
         

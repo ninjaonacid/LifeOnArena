@@ -13,7 +13,6 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
         private readonly ITimer _timer;
         public int ComboCount { get; private set; } = 0;
         public int MaxCombo { get; private set; } = 0;
-        private float _lastAttackTime = 0f;
         private float _comboWindow;
 
         public AttackAbility(ActiveAbilityBlueprintBase abilityBlueprint) : base(abilityBlueprint)
@@ -38,8 +37,6 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
 
             ActiveTime = attackConfig.AnimationData.Length - 0.1f;
             CurrentActiveTime = attackConfig.AnimationData.Length - 0.1f;
-            
-            Debug.Log("ATTACK ABILITY ACTIVATED");
 
             ComboCount++;
             

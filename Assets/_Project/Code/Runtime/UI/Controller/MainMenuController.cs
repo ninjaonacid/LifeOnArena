@@ -43,86 +43,6 @@ namespace Code.Runtime.UI.Controller
             
             Assert.IsNotNull(_model);
             Assert.IsNotNull(_windowView);
-            
-
-            // _model.Health.Subscribe(x =>
-            // {
-            //     _windowView.StatContainer.SetHealth(nameof(_model.Health) + " ", _model.Health.Value);
-            //     _gameData.PlayerData.StatsData.StatsValues["Health"] = _model.Health.Value;
-            // }).AddTo(_disposables);
-            //
-            // _model.Attack.Subscribe(x =>
-            // {
-            //     _windowView.StatContainer.SetAttack(nameof(_model.Attack) + " ", _model.Attack.Value);
-            //     _gameData.PlayerData.StatsData.StatsValues["Attack"] = _model.Attack.Value;
-            // }).AddTo(_disposables);
-            //
-            //
-            // _model.Defense.Subscribe(x =>
-            // {
-            //     _windowView.StatContainer.SetDefense(nameof(_model.Defense) + " ", _model.Defense.Value);
-            //     _gameData.PlayerData.StatsData.StatsValues["Defense"] = _model.Defense.Value;
-            // }).AddTo(_disposables);
-
-      
-            // _windowView.CloseButton
-            //     .OnClickAsObservable()
-            //     .Subscribe(x => _screenService.Close(this));
-            
-
-            _windowView.StartFightButton
-                .OnClickAsObservable()
-                .Subscribe(x => _screenService.Open(ScreenID.ArenaSelectionScreen)
-                   //_levelLoader.LoadLevel(229687619)
-                );
-            
-            _windowView.StartFightButton.PlayScaleAnimation();
-
-            _windowView.SkillScreen
-                .OnClickAsObservable()
-                .Subscribe(x => _screenService.Open(_windowView.SkillScreen.WindowId));
-
-            _windowView.WeaponScreen
-                .OnClickAsObservable()
-                .Subscribe(x => _screenService.Open(_windowView.WeaponScreen.WindowId));
-
-            _model.Health.Subscribe(x =>
-            {
-                _windowView.StatWindow.Health.SetStatValue(_model.Health.Value);
-                _gameData.PlayerData.StatsData.StatsValues["Health"] = _model.Health.Value;
-                _windowView.StatWindow.Health.ShowPlusButton(_model.CanUpgradeHealth());
-            }).AddTo(_disposables);
-            
-            _model.Attack.Subscribe(x =>
-            {
-                _windowView.StatWindow.Attack.SetStatValue(_model.Attack.Value);
-                _gameData.PlayerData.StatsData.StatsValues["Attack"] = _model.Attack.Value;
-                _windowView.StatWindow.Attack.ShowPlusButton(_model.CanUpgradeAttack());
-            }).AddTo(_disposables);
-            
-            _model.Magic.Subscribe(x =>
-            {
-                _windowView.StatWindow.Magic.SetStatValue(_model.Magic.Value);
-                _gameData.PlayerData.StatsData.StatsValues["Magic"] = _model.Magic.Value;
-                _windowView.StatWindow.Magic.ShowPlusButton(_model.CanUpgradeMagic());
-            }).AddTo(_disposables);
-
-            _windowView.StatWindow.Health.OnPlusClicked().Subscribe(x =>
-            {
-
-            });
-            
-            _windowView.StatWindow.Attack.OnPlusClicked().Subscribe(x =>
-            {
-
-            });
-            
-            _windowView.StatWindow.Magic.OnPlusClicked().Subscribe(x =>
-            {
-
-            });
-
-            _windowView.StatWindow.StatUpgradePrice.text = _model.StatUpgradePrice.ToString();
 
             _windowView.RussianLang
                 .OnClickAsObservable()
@@ -135,8 +55,60 @@ namespace Code.Runtime.UI.Controller
             _windowView.TurkishLang
                 .OnClickAsObservable()
                 .Subscribe(x => _localService.ChangeLanguage(SystemLanguage.Turkish));
+            
+            InitializeButtons();
+            InitializeStats();
+            UpdateAllStatButtons();
         }
-        
+
+
+        private void InitializeStats()
+        {
+            InitializeStat(_model.Health, _windowView.StatWindow.Health, _model.CanUpgradeHealth, _model.UpgradeHealth);
+            InitializeStat(_model.Attack, _windowView.StatWindow.Attack, _model.CanUpgradeAttack, _model.UpgradeAttack);
+            InitializeStat(_model.Magic, _windowView.StatWindow.Magic, _model.CanUpgradeMagic, _model.UpgradeMagic);
+
+            _model.Souls.Subscribe(_ => UpdateAllStatButtons()).AddTo(_disposables);
+
+            _windowView.StatWindow.StatUpgradePrice.text = _model.StatUpgradePrice.ToString();
+        }
+
+        private void InitializeButtons()
+        {
+            _windowView.StartFightButton.OnClickAsObservable()
+                .Subscribe(_ => _screenService.Open(ScreenID.ArenaSelectionScreen))
+                .AddTo(_disposables);
+
+            _windowView.StartFightButton.PlayScaleAnimation();
+
+            _windowView.SkillScreen.OnClickAsObservable()
+                .Subscribe(_ => _screenService.Open(_windowView.SkillScreen.WindowId))
+                .AddTo(_disposables);
+
+            _windowView.WeaponScreen.OnClickAsObservable()
+                .Subscribe(_ => _screenService.Open(_windowView.WeaponScreen.WindowId))
+                .AddTo(_disposables);
+        }
+
+        private void UpdateAllStatButtons()
+        {
+            _windowView.StatWindow.Health.ShowPlusButton(_model.CanUpgradeHealth());
+            _windowView.StatWindow.Attack.ShowPlusButton(_model.CanUpgradeAttack());
+            _windowView.StatWindow.Magic.ShowPlusButton(_model.CanUpgradeMagic());
+        }
+
+
+        private void InitializeStat(ReactiveProperty<int> stat, StatsUI statView, Func<bool> canUpgrade, Action upgrade)
+        {
+            stat.Subscribe(value =>
+            {
+                statView.SetStatValue(value);
+                statView.ShowPlusButton(canUpgrade());
+                UpdateAllStatButtons();
+            }).AddTo(_disposables);
+
+            statView.OnPlusClicked().Subscribe(_ => upgrade()).AddTo(_disposables);
+        }
 
         public void Dispose()
         {

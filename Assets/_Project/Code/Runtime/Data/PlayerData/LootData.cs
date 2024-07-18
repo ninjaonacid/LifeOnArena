@@ -24,6 +24,12 @@ namespace Code.Runtime.Data.PlayerData
             Collected += value;
             CountChanged?.Invoke(value);
         }
+
+        public void Spend(int value)
+        {
+            Collected -= value;
+            CountChanged?.Invoke(value);
+        }
         
         public IObservable<int> OnLootChangedAsObservable()
         {
