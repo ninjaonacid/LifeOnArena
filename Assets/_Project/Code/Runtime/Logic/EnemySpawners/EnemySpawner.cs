@@ -59,12 +59,11 @@ namespace Code.Runtime.Logic.EnemySpawners
             
             var monster = await _factory.CreateMonster(MobId.Id, transform, token, onCreate: OnSpawn);
             
-            monster.transform.position = position;
             monster.GetComponent<NavMeshMoveToPlayer>().Warp(position);
 
-            _enemyDeath = monster.GetComponent<EnemyDeath>();
+            _pooledObject ??= monster.GetComponent<IPoolable>();
+            _enemyDeath ??= monster.GetComponent<EnemyDeath>();
             _enemyDeath.Happened += Slay;
-
             _spawnCounter++;
             
             return monster;
@@ -85,8 +84,9 @@ namespace Code.Runtime.Logic.EnemySpawners
         {
             if (_enemyDeath != null)
                   _enemyDeath.Happened -= Slay;
-
+            
             Alive = false;
+            _pooledObject.ReturnToPool();
         }
 
         private void OnSpawn(PooledObject monster)

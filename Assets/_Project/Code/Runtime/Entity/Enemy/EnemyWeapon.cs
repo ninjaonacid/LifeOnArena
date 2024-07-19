@@ -21,9 +21,7 @@ namespace Code.Runtime.Entity.Enemy
             else if(_possibleWeapons.Count == 1)
             {
                 EquipWeapon(_possibleWeapons[0]);
-            } 
-            
-           
+            }
         }
     }
 }
