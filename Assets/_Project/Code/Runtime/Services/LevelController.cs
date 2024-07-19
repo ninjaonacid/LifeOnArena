@@ -55,7 +55,7 @@ namespace Code.Runtime.Services
         {
             _spawnerController.WaveCleared += WaveCleared;
             _spawnerController.CommonEnemiesCleared += CommonEnemiesCleared;
-            //_spawnerController.BossKilled += LevelEnd;
+            _spawnerController.BossKilled += BossKilled;
             _spawnerController.BossSpawned += OnBossSpawn;
             _controls.LevelControls.Enable();
             
@@ -70,7 +70,7 @@ namespace Code.Runtime.Services
         {
             
         }
-        
+
         private async UniTask LevelEnd()
         {
             var currentLevel = _levelLoader.GetCurrentLevelConfig();
@@ -80,6 +80,11 @@ namespace Code.Runtime.Services
             await UniTask.Delay(TimeSpan.FromSeconds(_timerToEndOfLevel));
             _saveLoad.SaveData();
             _levelLoader.LoadLevel("MainMenu");
+        }
+
+        private void BossKilled()
+        {
+            Debug.Log("BOSS KILLED EVENT CALLED");
         }
 
         private void CommonEnemiesCleared(int secondsToBoss)

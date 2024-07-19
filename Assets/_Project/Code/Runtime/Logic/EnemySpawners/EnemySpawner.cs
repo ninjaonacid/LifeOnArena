@@ -2,7 +2,6 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Code.Runtime.ConfigData.Identifiers;
-using Code.Runtime.ConfigData.Levels;
 using Code.Runtime.Core.Factory;
 using Code.Runtime.Core.ObjectPool;
 using Code.Runtime.Entity.Enemy;
@@ -24,7 +23,6 @@ namespace Code.Runtime.Logic.EnemySpawners
         public bool Alive  { get; private set; }
         
         private EnemyDeath _enemyDeath;
-        private IPoolable _pooledObject;
         private EnemyFactory _factory;
         private VisualEffectFactory _visualEffectFactory;
         private VisualEffect _spawnVfx;
@@ -48,6 +46,7 @@ namespace Code.Runtime.Logic.EnemySpawners
             if (_spawnCounter >= RespawnCount) return null;
             
             Alive = true;
+            
             if (TimeToSpawn > 0)
             {
                 await UniTask.Delay(TimeSpan.FromSeconds(TimeToSpawn), cancellationToken: token);
@@ -61,9 +60,8 @@ namespace Code.Runtime.Logic.EnemySpawners
             var monster = await _factory.CreateMonster(MobId.Id, transform, token, onCreate: OnSpawn);
             
             monster.GetComponent<NavMeshMoveToPlayer>().Warp(position);
-
-            _pooledObject ??= monster.GetComponent<IPoolable>();
-            _enemyDeath ??= monster.GetComponent<EnemyDeath>();
+            
+            _enemyDeath = monster.GetComponent<EnemyDeath>();
             _enemyDeath.Happened += Slay;
             _spawnCounter++;
             
@@ -91,7 +89,6 @@ namespace Code.Runtime.Logic.EnemySpawners
 
         private void OnSpawn(PooledObject monster)
         {
-            monster.GetComponent<EnemyDeath>();
         }
 
     }

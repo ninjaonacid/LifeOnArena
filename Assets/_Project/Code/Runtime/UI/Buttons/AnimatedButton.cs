@@ -30,9 +30,11 @@ namespace Code.Runtime.UI.Buttons
                 _tween.Kill();
             }
             
-            _tween = _rectTransform.DOScale(new Vector3(_baseScale.x + _animationScale.x,
-                _baseScale.y + _animationScale.y), _duration)
-                .SetLoops(-1, LoopType.Yoyo).SetEase(Ease.OutBack).SetLink(gameObject);
+            _tween = _rectTransform.DOScale(new Vector3(_animationScale.x,
+                _animationScale.y), _duration)
+                .SetLoops(-1, LoopType.Yoyo)
+                .SetEase(Ease.OutBack)
+                .SetLink(gameObject);
         }
 
         public void StopAnimation()
