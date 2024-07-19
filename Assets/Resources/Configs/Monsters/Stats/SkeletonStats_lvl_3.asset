@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _baseValue: 5
   _capacity: 10
+  _statPerLevel: 0
 --- !u!114 &-6254114424431537057
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -28,6 +29,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _baseValue: 1
   _capacity: 10
+  _statPerLevel: 0
 --- !u!114 &-3853926964119082701
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -42,6 +44,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _baseValue: -200
   _capacity: 100
+  _statPerLevel: 0
 --- !u!114 &-974959048072143401
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -54,8 +57,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98250235709fef84b9f07a21852eb067, type: 3}
   m_Name: AttackSpeed
   m_EditorClassIdentifier: 
-  _baseValue: -1
+  _baseValue: 1
   _capacity: 10
+  _statPerLevel: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94,6 +98,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _baseValue: 200
   _capacity: 500
+  _statPerLevel: 0
 --- !u!114 &2693192107705749910
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -108,6 +113,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _baseValue: 10
   _capacity: 200
+  _statPerLevel: 0
 --- !u!114 &6905155689710587302
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -122,6 +128,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _baseValue: 1
   _capacity: 3
+  _statPerLevel: 0
 --- !u!114 &7836724662511910568
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -136,6 +143,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _baseValue: 10
   _capacity: 100
+  _statPerLevel: 0
 --- !u!114 &8800271895548670577
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -150,3 +158,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _baseValue: 15
   _capacity: 200
+  _statPerLevel: 0

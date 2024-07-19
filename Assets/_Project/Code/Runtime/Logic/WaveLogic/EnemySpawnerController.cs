@@ -30,7 +30,7 @@ namespace Code.Runtime.Logic.WaveLogic
         private readonly List<EnemySpawner> _enemySpawnPoints = new List<EnemySpawner>();
         private CancellationTokenSource _cancellationTokenSource = new();
         private int _numberOfWaves;
-        public int TimeToNextWave { get; set; } = 5;
+        public int TimeToNextWave { get; private set; } = 5;
 
         private ITimer _timer;
         private bool _isBossSpawned = false;
