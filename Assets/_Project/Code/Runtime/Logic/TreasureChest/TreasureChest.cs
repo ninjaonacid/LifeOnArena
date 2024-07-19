@@ -32,7 +32,7 @@ namespace Code.Runtime.Logic.TreasureChest
         public void Open()
         {
             _isOpened = true;
-            _chestLid.transform.DOLocalRotate(new Vector3(5, 0, 0), 1f);
+            _chestLid.transform.DOLocalRotate(new Vector3(5, 0, 0), 1f).SetLink(gameObject);
             var loot = Object.Instantiate(_reward.LootView, transform);
             loot.LootReady += ClaimReward;
             loot.LootSpawnLogic();

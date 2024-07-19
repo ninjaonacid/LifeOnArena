@@ -10,7 +10,8 @@ namespace Code.Runtime.UI.Model
         private readonly IGameDataContainer _gameData;
 
         public bool IsTutorialEnabled { get; set; } = new();
-        
+
+        public int Level { get; private set; } = new();
         
         public ReactiveProperty<int> Souls;
         public ReactiveProperty<int> Health { get; } = new(); 
@@ -33,6 +34,7 @@ namespace Code.Runtime.UI.Model
         
         public void Initialize()
         {
+            Level = _gameData.PlayerData.PlayerExp.Level;
             var souls = _gameData.PlayerData.WorldData.LootData.Collected;
             Souls = new ReactiveProperty<int>(souls);
             Health.Value = _gameData.PlayerData.StatsData.StatsValues["Health"];

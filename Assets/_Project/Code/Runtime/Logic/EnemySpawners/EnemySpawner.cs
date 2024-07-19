@@ -87,7 +87,6 @@ namespace Code.Runtime.Logic.EnemySpawners
                   _enemyDeath.Happened -= Slay;
             
             Alive = false;
-            
         }
 
         private void OnSpawn(PooledObject monster)

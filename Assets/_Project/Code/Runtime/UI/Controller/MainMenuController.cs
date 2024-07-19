@@ -62,10 +62,11 @@ namespace Code.Runtime.UI.Controller
             InitializeStats();
             UpdateAllStatButtons();
         }
-
-
+        
         private void InitializeStats()
         {
+            _windowView.StatWindow.Level.text = _model.Level.ToString();
+            
             InitializeStat(_model.Health, _windowView.StatWindow.Health, _model.CanUpgradeHealth, _model.UpgradeHealth);
             InitializeStat(_model.Attack, _windowView.StatWindow.Attack, _model.CanUpgradeAttack, _model.UpgradeAttack);
             InitializeStat(_model.Magic, _windowView.StatWindow.Magic, _model.CanUpgradeMagic, _model.UpgradeMagic);

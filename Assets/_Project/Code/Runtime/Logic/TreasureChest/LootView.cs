@@ -15,8 +15,8 @@ namespace Code.Runtime.Logic.TreasureChest
 
         public void LootSpawnLogic()
         {
-            Tween rotationTween = transform.DOShakeRotation(2f, 90f, 10, 90f);
-            Tween moveTween = transform.DOLocalMove(new Vector3(0, 5, 0), 2f);
+            Tween rotationTween = transform.DOShakeRotation(2f, 90f, 10, 90f).SetLink(gameObject);
+            Tween moveTween = transform.DOLocalMove(new Vector3(0, 5, 0), 2f).SetLink(gameObject);
 
             Tween sequence = DOTween.Sequence()
                 .Join(moveTween)

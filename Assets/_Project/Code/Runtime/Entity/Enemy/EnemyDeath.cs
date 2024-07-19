@@ -28,8 +28,8 @@ namespace Code.Runtime.Entity.Enemy
         [SerializeField] private float _maxHeight;
 
         private Rigidbody[] _fractureParts;
-        private List<Vector3> _positions = new();
-        private List<Quaternion> _rotations = new();
+        private static readonly List<Vector3> _positions = new();
+        private static readonly List<Quaternion> _rotations = new();
 
         public bool IsDead { get; private set; }
 
@@ -131,6 +131,12 @@ namespace Code.Runtime.Entity.Enemy
             if (!_isAnimatedDeath)
             {
                 _fracturedPrefab.SetActive(false);
+                for (var index = 0; index < _fractureParts.Length; index++)
+                {
+                    var part = _fractureParts[index];
+                    part.transform.localRotation = _rotations[index];
+                    part.transform.localPosition = _positions[index];
+                }
             }
             gameObject.SetActive(false);
             
@@ -139,12 +145,7 @@ namespace Code.Runtime.Entity.Enemy
             
             _enemyHurtBox.DisableCollider(false);
 
-            for (var index = 0; index < _fractureParts.Length; index++)
-            {
-                var part = _fractureParts[index];
-                part.transform.localRotation = _rotations[index];
-                part.transform.localPosition = _positions[index];
-            }
+            
         }
     }
 }
