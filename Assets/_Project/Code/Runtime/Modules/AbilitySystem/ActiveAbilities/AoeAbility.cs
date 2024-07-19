@@ -13,7 +13,7 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
         private readonly float _aoeRadius;
 
         private EntityAttackComponent _attackComponent;
-        private StatController _statComponent;
+        private StatController _statController;
         private VisualEffectController _vfxController;
         
         public AoeAbility(ActiveAbilityBlueprintBase abilityBlueprint, float castDistance,  float aoeRadius) : base(abilityBlueprint)
@@ -27,12 +27,12 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
             Vector3 casterPosition = caster.transform.position;
             Vector3 casterDirection = caster.transform.forward;
 
-            _vfxController = caster.GetComponent<VisualEffectController>();
+            _vfxController ??= caster.GetComponent<VisualEffectController>();
+            _attackComponent ??= caster.GetComponent<EntityAttackComponent>();
+            _statController ??= caster.GetComponent<StatController>();
             
             var visualEffectPosition = casterPosition + casterDirection * _castDistance;
 
-            var playPosition = AbilityBlueprint.VisualEffectData.PlayPosition;
-           
             await _vfxController.PlayVisualEffect(AbilityBlueprint.VisualEffectData, position: visualEffectPosition );
             
             if (AbilityBlueprint.AbilitySound is not null)
@@ -40,11 +40,16 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
                 _audioService.PlaySound3D(AbilityBlueprint.AbilitySound, visualEffectPosition, 1f);
             }
 
-            var layer = caster.GetComponent<EntityAttackComponent>().GetTargetLayer();
-            var stats = caster.GetComponent<StatController>();
-            
+            var layer = _attackComponent.GetTargetLayer();
+
             var targets = _battleService.GetTargetsInRadius(visualEffectPosition, _aoeRadius, layer);
 
+            ApplyEffectsToTargets(targets);
+
+        }
+
+        private void ApplyEffectsToTargets((int hits, Collider[] colliders) targets)
+        {
             if (targets.hits > 0)
             {
                 for (var index = 0; index < targets.hits; index++)
@@ -52,10 +57,9 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
                     var collider = targets.colliders[index];
                     ApplyEffects(collider.gameObject);
                 }
+                _attackComponent.InvokeHit(targets.hits);
             }
-
-            var entityAttack = caster.GetComponent<IAttackComponent>();
-            entityAttack.InvokeHit(targets.hits);
         }
+        
     }
 }

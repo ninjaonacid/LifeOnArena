@@ -28,5 +28,15 @@ namespace Code.Runtime.Utils
 
             return Vector3.zero;
         }
+
+        public static float GetColliderHeight(GameObject target)
+        {
+            if (target.TryGetComponent(out CharacterController controller))
+            {
+                return controller.height;
+            }
+
+            return 0;
+        }
     }
 }

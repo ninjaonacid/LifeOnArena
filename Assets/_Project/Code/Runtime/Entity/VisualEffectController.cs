@@ -1,4 +1,5 @@
 using System;
+using System.Numerics;
 using System.Threading;
 using Code.Runtime.ConfigData;
 using Code.Runtime.ConfigData.Identifiers;
@@ -8,6 +9,7 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 using VContainer;
 using Quaternion = UnityEngine.Quaternion;
+using Vector3 = UnityEngine.Vector3;
 
 namespace Code.Runtime.Entity
 {
@@ -23,14 +25,13 @@ namespace Code.Runtime.Entity
             _visualFactory = visualFactory;
         }
         
-        public async UniTask PlayVisualEffect(VisualEffectData effectData, Vector3? position = null, Quaternion? rotation = null, Transform targetTransform = null, float delay = 0)
+        public async UniTask PlayVisualEffect(VisualEffectData effectData, Vector3? position = null, Quaternion? rotation = null, GameObject target = null, float delay = 0)
         {
             try
             {
                 _cts.Token.ThrowIfCancellationRequested();
 
                 var effect = await _visualFactory.CreateVisualEffect(effectData.Identifier.Id, cancellationToken: _cts.Token);
-                
                 
 
                 if (delay > 0)
@@ -39,19 +40,25 @@ namespace Code.Runtime.Entity
                 }
 
                 var effectTransform = effect.transform;
+                
+                Vector3 basePosition;
+                GameObject targetObject = null;
 
-                if (targetTransform != null)
+                if (target != null)
                 {
-                    effectTransform.position = targetTransform.position;
-                    effectTransform.rotation = targetTransform.rotation;
+                    basePosition = target.transform.position;
+                   
+                    effect.transform.position = CalculatePlayPositionTarget(effectData.PlayPosition, target);
                 }
                 else
                 {
-                    effectTransform.position = position ?? CalculatePlayPosition(effectData.PlayPosition);
-                    effectTransform.rotation = rotation ?? Quaternion.identity;
+                    basePosition = position ?? transform.position;
                 }
 
+                effectTransform.position = CalculatePlayPositionCaster(effectData.PlayPosition, basePosition);
+
                 effect.Play();
+
             }
             catch (OperationCanceledException)
             {
@@ -107,19 +114,47 @@ namespace Code.Runtime.Entity
             effect.Play();
         }
 
-        private Vector3 CalculatePlayPosition(PlayPosition position)
+        private Vector3 CalculatePlayPositionCaster(PlayPosition playPosition, Vector3 basePosition)
         {
-            switch (position)
+            
+            switch (playPosition)
             {
                 case PlayPosition.Center :
                 {
-                    return Utilities.GetCenterOfCollider(gameObject);
+                    var casterCenter = Utilities.GetCenterOfCollider(gameObject);
+                    return casterCenter + basePosition;
                     break;
+                }
+
+                case PlayPosition.Above:
+                {
+                    float height = Utilities.GetColliderHeight(gameObject);
+                    return basePosition + (Vector3.up * height);
                 }
             }
             
             return Vector3.one;
         }
+
+        private Vector3 CalculatePlayPositionTarget(PlayPosition playPosition, GameObject target)
+        {
+            switch (playPosition)
+            {
+                case PlayPosition.Center :
+                {
+                    return Utilities.GetCenterOfCollider(target.gameObject);
+                    break;
+                }
+
+                case PlayPosition.Above:
+                {
+                    float height = Utilities.GetColliderHeight(gameObject);
+                    return Vector3.zero;
+                }
+            }
+            return Vector3.one;
+        }
+        
 
         private void OnDestroy()
         {

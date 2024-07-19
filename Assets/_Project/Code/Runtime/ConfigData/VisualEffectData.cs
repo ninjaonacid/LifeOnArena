@@ -6,8 +6,8 @@ namespace Code.Runtime.ConfigData
 {
     public enum PlayPosition
     {
-        Up = 1,
-        Down = 2,
+        Above = 1,
+        Below = 2,
         Center = 3
     }
     
