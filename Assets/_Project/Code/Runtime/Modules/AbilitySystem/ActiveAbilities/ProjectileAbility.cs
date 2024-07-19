@@ -44,8 +44,9 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
             Vector3 casterCenter = hurtBox.GetCenterTransform();
             var casterTransform = caster.transform;
             var direction = casterTransform.forward;
-            projectile.transform.position = casterCenter + (2 * direction);
-            projectile.transform.forward = direction;
+            var projectileTransform = projectile.transform;
+            projectileTransform.position = casterCenter + (2 * direction);
+            projectileTransform.forward = direction;
 
             if (_isAutoTarget)
             {
@@ -55,15 +56,14 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
                 if (nearestTarget != null)
                 {
                     var dif = (nearestTarget.position - caster.transform.position).normalized;
-                    projectile.transform.forward = nearestTarget.forward;
-                    
                     
                     projectile
                         .SetVelocity(dif, _speed)
                         .SetTargetLayer(layer)
                         .SetOwnerLayer(caster.gameObject)
                         .SetLifetime(_lifeTime);
-                } else
+                } 
+                else
                 {
                     projectile
                         .SetVelocity(direction, _speed)
@@ -72,7 +72,6 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
                         .SetLifetime(_lifeTime);
                 }
             }
-            
         }
 
         private async void OnHit(CollisionData data)

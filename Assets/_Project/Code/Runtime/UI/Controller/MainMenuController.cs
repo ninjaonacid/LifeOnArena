@@ -56,6 +56,8 @@ namespace Code.Runtime.UI.Controller
                 .OnClickAsObservable()
                 .Subscribe(x => _localService.ChangeLanguage(SystemLanguage.Turkish));
             
+            
+            
             InitializeButtons();
             InitializeStats();
             UpdateAllStatButtons();

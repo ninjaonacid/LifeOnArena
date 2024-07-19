@@ -16,9 +16,9 @@ namespace Code.Runtime.UI.View.HUD
             _hpBarImage.fillAmount = current / max;
         }
 
-        public void SetExpValue(float current, float max)
+        public void SetExpValue(float progress)
         {
-            _expBarImage.fillAmount = current / max;
+            _expBarImage.fillAmount = progress;
         }
 
         public void SetLevel(int value)

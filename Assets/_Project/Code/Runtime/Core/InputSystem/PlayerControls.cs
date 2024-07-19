@@ -414,7 +414,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
 
     public void Dispose()
     {
+        #if !UNITY_EDITOR
         UnityEngine.Object.Destroy(asset);
+        #endif
     }
 
     public InputBinding? bindingMask

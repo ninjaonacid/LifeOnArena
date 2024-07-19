@@ -34,9 +34,11 @@ namespace Code.Runtime.Entity.StatusEffects
 
 
             StatController ownerStats = _owner.GetComponent<StatController>();
+            
             ownerStats.Stats.TryGetValue("Attack", out var ownerPhysicalDamage);
             ownerStats.Stats.TryGetValue("Magic", out var ownerMagicalDamage);
             
+
             StatModifier statModifier;
 
             foreach (var modifier in effectBlueprint.Modifiers)

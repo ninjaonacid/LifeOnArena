@@ -62,17 +62,16 @@ namespace Code.Runtime.UI.Controller
             _gameData.PlayerData.PlayerExp
                 .OnExperienceChangedAsObservable()
                 .Subscribe( x =>
-                _windowView.StatusBar.SetExpValue(_gameData.PlayerData.PlayerExp.Experience,
-                    _gameData.PlayerData.PlayerExp.ExperienceToNextLevel)).AddTo(_disposable);
+                _windowView.StatusBar
+                    .SetExpValue(_gameData.PlayerData.PlayerExp.ProgressToNextLevel)).AddTo(_disposable);
 
             _gameData.PlayerData.PlayerExp
                 .OnLevelChangedAsObservable()
                 .Subscribe(x => _windowView.StatusBar.SetLevel(_gameData.PlayerData.PlayerExp.Level)).AddTo(_disposable);
             
-            _windowView.StatusBar.SetExpValue(_gameData.PlayerData.PlayerExp.Experience, _gameData.PlayerData.PlayerExp.ExperienceToNextLevel);
+            _windowView.StatusBar.SetExpValue(_gameData.PlayerData.PlayerExp.ProgressToNextLevel);
             _windowView.StatusBar.SetLevel(_gameData.PlayerData.PlayerExp.Level);
-        
-
+            
             _windowView.RestartButton.onClick.AsObservable().Subscribe(x => _levelLoader.LoadLevel("MainMenu"));
 
             _windowView.RewardButton.onClick.AsObservable().Subscribe(x => _adService.ShowReward());

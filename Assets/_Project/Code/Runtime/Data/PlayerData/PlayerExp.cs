@@ -10,30 +10,33 @@ namespace Code.Runtime.Data.PlayerData
     {
         public event Action OnExpChanged;
         public event Action OnLevelChanged;
-        [JsonProperty] public float Experience { get; private set; }
+
+        private const float BaseExperience = 100f;
         [JsonProperty] public int Level { get; private set; }
-        public float ExperienceToNextLevel;
+        [JsonProperty] public float CurrentExperience { get; private set; }
+
+        public float ProgressToNextLevel => CurrentExperience / ExperienceToNextLevel;
+        public float ExperienceToNextLevel => BaseExperience * Mathf.Pow(Level, ExponentialFactor);
         public float ExponentialFactor;
 
         public PlayerExp()
         {
             Level = 1;
-            Experience = 0;
-            ExperienceToNextLevel = 100;
+            CurrentExperience = 0;
         }
         
         public void AddExperience(int amount)
         {
-            Experience += amount;
-            if (Experience >= ExperienceToNextLevel)
+            CurrentExperience += amount;
+            
+            if (CurrentExperience >= ExperienceToNextLevel)
             {
+                CurrentExperience -= ExperienceToNextLevel;
                 Level++;
-                Experience -= ExperienceToNextLevel;
-                ExperienceToNextLevel = 100 * (Level * ExponentialFactor);
                 OnLevelChanged?.Invoke();
             }
             
-            Debug.Log($"Experience added  {Experience}");
+            Debug.Log($"CurrentExperience added  {CurrentExperience}");
             
             OnExpChanged?.Invoke();
         }

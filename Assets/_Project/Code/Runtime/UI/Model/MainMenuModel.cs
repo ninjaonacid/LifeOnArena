@@ -5,7 +5,7 @@ using UniRx;
 
 namespace Code.Runtime.UI.Model
 {
-    public class MainMenuModel : IScreenModel
+    public class MainMenuModel : IScreenModel, ISavableModel
     {
         private readonly IGameDataContainer _gameData;
 
@@ -72,6 +72,16 @@ namespace Code.Runtime.UI.Model
         {
             _gameData.PlayerData.WorldData.LootData.Collected -= value;
             Souls.Value -= value;
+        }
+
+        public void LoadData()
+        {
+            
+        }
+
+        public void SaveModelData()
+        {
+            
         }
     }
 }
