@@ -13,16 +13,17 @@ namespace Code.Runtime.Entity.Enemy
         {
             _possibleWeapons = possibleWeapons;
             
-            
-            if (_possibleWeapons.Count > 0)
+            if (_possibleWeapons.Count > 1)
             {
                 var randomWeapon = _possibleWeapons.GetRandomElement();
                 EquipWeapon(randomWeapon);
             }
-            else
+            else if(_possibleWeapons.Count == 1)
             {
-                Debug.LogError("NoWeaponsForEnemy");
-            }
+                EquipWeapon(_possibleWeapons[0]);
+            } 
+            
+           
         }
     }
 }
