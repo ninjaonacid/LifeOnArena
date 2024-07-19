@@ -11,9 +11,11 @@ namespace Code.Runtime.Entity.Enemy
 
         public void SetStats(StatDatabase statDatabase)
         {
-            _statDatabase = statDatabase;
-            Initialize();
+            if (!IsInitialized)
+            {
+                _statDatabase = statDatabase;
+                Initialize();
+            }
         }
-        
     }
 }

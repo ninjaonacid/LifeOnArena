@@ -1,5 +1,7 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using Code.Runtime.Core.ObjectPool;
 using Code.Runtime.Modules.StatSystem;
 using Code.Runtime.UI.View.HUD;
 using UnityEngine;
@@ -17,6 +19,7 @@ namespace Code.Runtime.Entity.Enemy
         [SerializeField] private GameObject _enemyModel;
         [SerializeField] private EnemyHurtBox _enemyHurtBox;
         [SerializeField] private EnemyTarget _enemyTarget;
+        [SerializeField] private PooledObject _poolable;
         
         [SerializeField] private bool _isAnimatedDeath;
         [SerializeField] private float _disappearDuration = 4f;
@@ -25,6 +28,8 @@ namespace Code.Runtime.Entity.Enemy
         [SerializeField] private float _maxHeight;
 
         private Rigidbody[] _fractureParts;
+        private List<Vector3> _positions = new();
+        private List<Quaternion> _rotations = new();
 
         public bool IsDead { get; private set; }
 
@@ -50,6 +55,12 @@ namespace Code.Runtime.Entity.Enemy
             if (!_isAnimatedDeath)
             {
                 _fractureParts = _fracturedPrefab.GetComponentsInChildren<Rigidbody>();
+
+                foreach (var part in _fractureParts)
+                {
+                    _positions.Add(part.transform.localPosition);
+                    _rotations.Add(part.transform.localRotation);
+                }
             }
         }
 
@@ -67,6 +78,23 @@ namespace Code.Runtime.Entity.Enemy
         {
             _health.Health.CurrentValueChanged -= HealthChanged;
             
+            HandleDeathVisuals();
+            DisableEnemyInteractions();
+
+            StartCoroutine(ReturnToPoolTimer());
+
+
+            Happened?.Invoke();
+        }
+
+        private void DisableEnemyInteractions()
+        {
+            _enemyHurtBox.DisableCollider(true);
+            IsDead = true;
+        }
+
+        private void HandleDeathVisuals()
+        {
             if (!_isAnimatedDeath)
             {
                 _enemyModel.SetActive(false);
@@ -86,21 +114,15 @@ namespace Code.Runtime.Entity.Enemy
                     }
                 }
             }
-
-            _enemyHurtBox.DisableCollider(true);
-
-            StartCoroutine(DestroyTimer());
-
-            IsDead = true;
-
-            Happened?.Invoke();
         }
 
-        private IEnumerator DestroyTimer()
+        private IEnumerator ReturnToPoolTimer()
         {
-            yield return new WaitForSeconds(5);
+            yield return new WaitForSeconds(_disappearDuration);
 
             ResetObject();
+            
+            _poolable.ReturnToPool();
         }
 
 
@@ -114,6 +136,15 @@ namespace Code.Runtime.Entity.Enemy
             
             if(_enemyModel != null)
                 _enemyModel.SetActive(true);
+            
+            _enemyHurtBox.DisableCollider(false);
+
+            for (var index = 0; index < _fractureParts.Length; index++)
+            {
+                var part = _fractureParts[index];
+                part.transform.localRotation = _rotations[index];
+                part.transform.localPosition = _positions[index];
+            }
         }
     }
 }

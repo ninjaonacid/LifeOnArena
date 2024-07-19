@@ -54,6 +54,7 @@ namespace Code.Runtime.Logic.EnemySpawners
             }
             
             var position = transform.position;
+            
             await VfxSpawnLogic(position, token);
             await UniTask.Delay(TimeSpan.FromSeconds(1.5f), cancellationToken: token);
             
@@ -86,7 +87,7 @@ namespace Code.Runtime.Logic.EnemySpawners
                   _enemyDeath.Happened -= Slay;
             
             Alive = false;
-            _pooledObject.ReturnToPool();
+            
         }
 
         private void OnSpawn(PooledObject monster)

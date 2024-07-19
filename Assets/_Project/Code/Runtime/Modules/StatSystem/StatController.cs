@@ -32,7 +32,6 @@ namespace Code.Runtime.Modules.StatSystem
 
         protected void Initialize()
         {
-            
             foreach (StatDefinition stat in _statDatabase.StatDefinitions)
             {
                 _stats.Add(stat.name, new Stat(stat, this));
