@@ -43,10 +43,10 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
             var hurtBox = caster.GetComponent<EntityHurtBox>();
             Vector3 casterCenter = hurtBox.GetCenterTransform();
             var casterTransform = caster.transform;
-            var direction = casterTransform.forward;
+            var casterForwardDirection = casterTransform.forward;
             var projectileTransform = projectile.transform;
-            projectileTransform.position = casterCenter + (2 * direction);
-            projectileTransform.forward = direction;
+            projectileTransform.position = casterCenter + (2 * casterForwardDirection);
+            projectileTransform.forward = casterForwardDirection;
 
             if (_isAutoTarget)
             {
@@ -66,11 +66,19 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
                 else
                 {
                     projectile
-                        .SetVelocity(direction, _speed)
+                        .SetVelocity(casterForwardDirection, _speed)
                         .SetTargetLayer(layer)
                         .SetOwnerLayer(caster.gameObject)
                         .SetLifetime(_lifeTime);
                 }
+            }
+            else
+            {
+                projectile
+                    .SetVelocity(casterForwardDirection, _speed)
+                    .SetTargetLayer(layer)
+                    .SetOwnerLayer(caster.gameObject)
+                    .SetLifetime(_lifeTime);
             }
         }
 

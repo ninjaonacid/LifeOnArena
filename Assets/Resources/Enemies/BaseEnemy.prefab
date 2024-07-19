@@ -333,9 +333,9 @@ MonoBehaviour:
   _enemyTarget: {fileID: 3027789663709577760}
   _isAnimatedDeath: 0
   _disappearDuration: 4
-  _maxForce: 0
-  _minForce: 0
-  _maxHeight: 0
+  _maxForce: 15
+  _minForce: 5
+  _maxHeight: 3
 --- !u!114 &2892997724190106138
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -537,7 +537,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hitBoxCollider: {fileID: 2192902159981610960}
-  _initialColliderSize: {x: 0, y: 0, z: 0}
   _observer: {fileID: 6285818247793368993}
 --- !u!114 &6249724365430731878
 MonoBehaviour:
@@ -570,7 +569,7 @@ MonoBehaviour:
   EnemyStats: {fileID: 6249724365430731878}
   NavMeshMove: {fileID: 7813538039565963230}
   NavMeshAgent: {fileID: 7813538039565963231}
-  EnemyLootSpawner: {fileID: 0}
+  EnemyLootSpawner: {fileID: 1294684749611248837}
   ExpDrop: {fileID: 4845501457382912920}
   EntityUI: {fileID: 4058648672316291509}
   EnemyHealth: {fileID: 2892997724190106138}

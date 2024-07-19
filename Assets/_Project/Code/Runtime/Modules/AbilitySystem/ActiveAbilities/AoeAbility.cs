@@ -3,6 +3,7 @@ using Code.Runtime.Entity;
 using Code.Runtime.Entity.EntitiesComponents;
 using Code.Runtime.Modules.StatSystem;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
 {
@@ -10,6 +11,10 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
     {
         private readonly float _castDistance;
         private readonly float _aoeRadius;
+
+        private EntityAttackComponent _attackComponent;
+        private StatController _statComponent;
+        private VisualEffectController _vfxController;
         
         public AoeAbility(ActiveAbilityBlueprintBase abilityBlueprint, float castDistance,  float aoeRadius) : base(abilityBlueprint)
         {
@@ -22,18 +27,17 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
             Vector3 casterPosition = caster.transform.position;
             Vector3 casterDirection = caster.transform.forward;
 
-            var visualEffect =
-                await _visualEffectFactory.CreateVisualEffect(AbilityBlueprint.VisualEffectData.Identifier.Id);
-
-            Transform visualEffectTransform = visualEffect.transform;
+            _vfxController = caster.GetComponent<VisualEffectController>();
+            
             var visualEffectPosition = casterPosition + casterDirection * _castDistance;
-            visualEffectTransform.position = visualEffectPosition;
-            visualEffectTransform.rotation = Quaternion.LookRotation(casterDirection);
-            visualEffect.Play();
+
+            var playPosition = AbilityBlueprint.VisualEffectData.PlayPosition;
+           
+            await _vfxController.PlayVisualEffect(AbilityBlueprint.VisualEffectData, position: visualEffectPosition );
             
             if (AbilityBlueprint.AbilitySound is not null)
             {
-                _audioService.PlaySound3D(AbilityBlueprint.AbilitySound, visualEffectTransform, 1f);
+                _audioService.PlaySound3D(AbilityBlueprint.AbilitySound, visualEffectPosition, 1f);
             }
 
             var layer = caster.GetComponent<EntityAttackComponent>().GetTargetLayer();

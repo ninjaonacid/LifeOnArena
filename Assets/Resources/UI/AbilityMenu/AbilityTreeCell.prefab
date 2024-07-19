@@ -719,9 +719,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83f5b0a5016d44e3b4a161c29b8aee9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lineHeight: 0
+  _lineHeight: 50
   _originRect: {fileID: 0}
   _targetRect: {fileID: 0}
+  _originConnectionSide: 5
+  _targetConnectionSide: 5
+  _lineImage: {fileID: 812343414874989020}
 --- !u!224 &7758737813132671420 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2524927598765712880, guid: 2f30aefd70fdf88469f2299d120aeb3e, type: 3}

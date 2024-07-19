@@ -79,8 +79,8 @@ namespace Code.Runtime.Entity.Enemy
                     foreach (Rigidbody rb in _fractureParts)
                     {
                         Vector3 force = (transform.position - _enemyTarget.GetTargetTransform().position).normalized *
-                                        Random.Range(10f, 20f);
-                        force.y = Mathf.Clamp(force.y, -2f, 3f);
+                                        Random.Range(_minForce, _maxForce);
+                        force.y = Mathf.Clamp(force.y, -2f, _maxHeight);
                         rb.AddForce(force, ForceMode.Impulse);
                         rb.AddTorque(new Vector3(0, 1f, 0));
                     }

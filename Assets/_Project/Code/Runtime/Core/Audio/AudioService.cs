@@ -42,7 +42,6 @@ namespace Code.Runtime.Core.Audio
             _configProvider = configProvider;
         }
         
-
         public void InitializeAudio()
         {
             _audioLibrary = _configProvider.AudioLibrary();
@@ -67,7 +66,6 @@ namespace Code.Runtime.Core.Audio
             {
                 _mainMusicChannel = _musicChannelsPool[0];
             }
-            
         }
 
         public void MuteMusic()
@@ -104,8 +102,7 @@ namespace Code.Runtime.Core.Audio
                 Debug.LogError("No sound in library with name " + soundName);
                 return;
             }
-            
-          
+
             SoundAudioChannel soundChannel = FindFreeSoundChannel();
 
             if (soundChannel)
@@ -114,7 +111,6 @@ namespace Code.Runtime.Core.Audio
             }
            
             Assert.IsNull(soundChannel);
-            
         }
 
         public void PlaySound(SoundAudioFile sound)
@@ -156,6 +152,38 @@ namespace Code.Runtime.Core.Audio
             if (soundChannel is not null)
             {
                 soundChannel.SetChannelTransform(soundTransform);
+                soundChannel.AudioSource.volume = volume;
+                soundChannel.Play(sound);
+            }
+        }
+        
+        public void PlaySound3D(string soundName, Vector3 position, float volume = 1f)
+        {
+            var sound = _audioLibrary.Sounds.FirstOrDefault(x => x.Id == soundName);
+            if (sound == null)
+            {
+                Debug.LogError("No sound in library with name " + soundName);
+                return;
+            }
+            
+          
+            SoundAudioChannel soundChannel = FindFreeSoundChannel();
+
+            if (soundChannel is not null)
+            {
+                soundChannel.SetChannelPosition(position);
+                soundChannel.AudioSource.volume = volume;
+                soundChannel.Play(sound);
+            }
+        }
+        
+        public void PlaySound3D(SoundAudioFile sound, Vector3 position, float volume = 1f)
+        {
+            SoundAudioChannel soundChannel = FindFreeSoundChannel();
+
+            if (soundChannel is not null)
+            {
+                soundChannel.SetChannelPosition(position);
                 soundChannel.AudioSource.volume = volume;
                 soundChannel.Play(sound);
             }

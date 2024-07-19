@@ -77,17 +77,5 @@ namespace Code.Runtime.Core.Factory
             if(prefabReference.RuntimeKeyIsValid()) 
                 await _assetProvider.Load<GameObject>(prefabReference);
         }
-        
-
-        //public PassiveAbilityTemplateBase GetRandomPassiveAbility()
-        //{
-        //    int randomIndex = _random.GetRandomNumber(_passiveAbilities.Count);
-
-        //    var result = _passiveAbilities[randomIndex];
-        //    _passiveAbilities.RemoveAt(randomIndex);
-        //    return result;
-        //}
-
-
     }
 }

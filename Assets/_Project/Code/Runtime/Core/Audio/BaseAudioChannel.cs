@@ -9,9 +9,8 @@ namespace Code.Runtime.Core.Audio
     public abstract class BaseAudioChannel<TAudio> : MonoBehaviour where TAudio : BaseAudioFile
     {
         public AudioSource AudioSource { get; private set; }
-        public Transform SoundTransformTarget { get; private set; }
-        public bool IsFree { get; private set; }
-        
+        public bool IsFree { get; private set; } = true;
+
         private AudioMixerGroup _mixerGroup;
 
         private TAudio _audioFile;
@@ -26,77 +25,62 @@ namespace Code.Runtime.Core.Audio
             transform.SetParent(targetTransform);
         }
 
+        public void SetChannelPosition(Vector3 position) => transform.position = position;
+
         public void InitializeChannel(Transform parent, AudioMixerGroup mixerGroup)
         {
             AudioSource = GetComponent<AudioSource>();
-            IsFree = true;
             _channelHolder = parent.transform;
+            _mixerGroup = mixerGroup;
             transform.SetParent(parent);
         }
-        
+
         public void Play(TAudio audioFile)
         {
             _audioFile = audioFile;
-            
-            if (!SetAudioClip())
+
+            if (!TrySetAudioClip())
             {
                 return;
             }
-            
+
             IsFree = false;
 
             AudioSource.outputAudioMixerGroup =
                 _audioFile.IsMixerGroupOverriden ? _audioFile.AudioMixerGroup : _mixerGroup;
 
-            
             AudioSource.loop = _audioFile.IsLoopSound;
             AudioSource.Play();
         }
 
-        public void Stop()
-        {
-            AudioSource.Stop();
-        }
+        public void Stop() => AudioSource.Stop();
+        public void Pause() => AudioSource.Pause();
+        public void UnPause() => AudioSource.UnPause();
 
-        public void Pause()
-        {
-            AudioSource.Pause();
-        }
-
-        public void UnPause()
-        {
-            AudioSource.UnPause();
-        }
-        
         public virtual void Update()
         {
-            if (!AudioSource.isPlaying)
+            if (AudioSource != null && !AudioSource.isPlaying)
             {
                 IsFree = true;
                 transform.SetParent(_channelHolder);
             }
         }
-        private bool SetAudioClip()
+
+        private bool TrySetAudioClip()
         {
-            if (_audioFile.AudioFiles.Count > 1)
-            {
-                int index = Random.Range(0, _audioFile.AudioFiles.Count);
-                AudioSource.clip = _audioFile.AudioFiles[index];
-                if (AudioSource.clip == null)
-                {
-                    throw new Exception("Missing audio clip at index " + index);
-                }
+            if (_audioFile.AudioFiles.Count == 0) return false;
 
-                return true;
-            }
-            else if (_audioFile.AudioFiles.Count == 1)
+            AudioSource.clip = _audioFile.AudioFiles.Count > 1
+                ? _audioFile.AudioFiles[Random.Range(0, _audioFile.AudioFiles.Count)]
+                : _audioFile.AudioFiles[0];
+
+            if (AudioSource.clip == null)
             {
-                AudioSource.clip = _audioFile.AudioFiles[0];
-                return true;
+                Debug.LogError($"Missing audio clip in {_audioFile.name}");
+                return false;
             }
 
-            return false;
+            return true;
         }
-
-    }   
+    }
 }

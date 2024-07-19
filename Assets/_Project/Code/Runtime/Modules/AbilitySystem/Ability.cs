@@ -22,12 +22,6 @@ namespace Code.Runtime.Modules.AbilitySystem
         public void Initialize(AbilityController owner)
         {
             Owner = owner;
-            
-            foreach (var effectBlueprint in AbilityBlueprint.GameplayEffectsBlueprints)
-            {
-               var effectInstance =  effectBlueprint.GetGameplayEffect(owner);
-               _gameplayEffects.Add(effectInstance);
-            }
         }
 
         public abstract void Use(AbilityController caster, GameObject target);
@@ -36,12 +30,10 @@ namespace Code.Runtime.Modules.AbilitySystem
         {
             var statusController = target.GetComponentInParent<StatusEffectController>();
 
-            foreach (var effect in _gameplayEffects)
+            foreach (var effect in AbilityBlueprint.GameplayEffectsBlueprints)
             {
-                statusController.ApplyEffectToSelf(effect);
+                statusController.ApplyEffectToSelf(effect.GetGameplayEffect(Owner));
             }
         }
-
-       
     }
 }

@@ -8,6 +8,7 @@ using Code.Runtime.Logic.VisualEffects;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using VContainer;
+using Object = UnityEngine.Object;
 
 namespace Code.Runtime.Core.Factory
 {
@@ -32,20 +33,18 @@ namespace Code.Runtime.Core.Factory
             Action<PooledObject> onReturn = null,
             CancellationToken cancellationToken  = default)
         {
-            
             var visualEffect = _configProvider.VisualEffect(id);
             
             cancellationToken.ThrowIfCancellationRequested();
-            
+
             var prefab = await _assetProvider.Load<GameObject>(visualEffect.PrefabReference, cancellationToken: cancellationToken);
-            
+
             cancellationToken.ThrowIfCancellationRequested();
             
             var particleSystem = _poolProvider.Spawn<VisualEffect>(prefab, owner, onCreate, onRelease, onGet, onReturn);
 
             return particleSystem;
         }
-        
         
         public async UniTask<VisualEffect> CreateVisualEffect(int id, Vector3 position, CancellationToken token = default)
         {
