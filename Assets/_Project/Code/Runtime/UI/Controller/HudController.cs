@@ -1,5 +1,4 @@
 using System;
-using Code.Runtime.ConfigData.Identifiers;
 using Code.Runtime.Core.EventSystem;
 using Code.Runtime.Core.Factory;
 using Code.Runtime.CustomEvents;
@@ -14,9 +13,7 @@ using Code.Runtime.UI.Model.DTO;
 using Code.Runtime.UI.Services;
 using Code.Runtime.UI.View;
 using Code.Runtime.UI.View.HUD;
-using Cysharp.Threading.Tasks;
 using UniRx;
-using UnityEngine;
 using UnityEngine.Assertions;
 
 namespace Code.Runtime.UI.Controller
@@ -34,7 +31,7 @@ namespace Code.Runtime.UI.Controller
         private readonly LevelCollectableTracker _collectableTracker;
         private ScreenService _screenService;
 
-        private readonly CompositeDisposable _disposable = new CompositeDisposable();
+        private readonly CompositeDisposable _disposable = new();
 
         public HudController(IGameDataContainer gameData, 
             IHeroFactory heroFactory, LevelLoader sceneLoader,
@@ -68,7 +65,6 @@ namespace Code.Runtime.UI.Controller
             _windowView.HudSkillContainer.Construct(heroSkills, heroCooldown);
             _windowView.GetComponent<EntityUI>().Construct(heroHealth);
             
-
             SubscribeStatusBar();
             _windowView.PortalButton.OnClickAsObservable().Subscribe(x =>
             {
@@ -78,7 +74,6 @@ namespace Code.Runtime.UI.Controller
                         _collectableTracker.KilledEnemies, 
                         _collectableTracker.SoulsLoot )); 
             });
-
 
             _windowView.RestartButton.onClick.AsObservable().Subscribe(x => _levelLoader.LoadLevel("MainMenu"))
                 .AddTo(_disposable);
@@ -124,7 +119,6 @@ namespace Code.Runtime.UI.Controller
         {
             _windowView.PortalButton.Show(true);
             _windowView.PortalButton.PlayScaleAnimation();
-            
         }
         
         public void Dispose()

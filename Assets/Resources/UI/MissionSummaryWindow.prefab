@@ -1420,7 +1420,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2531754919145823547}
   m_Layer: 0
-  m_Name: Exp
+  m_Name: Enemies
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1808,7 +1808,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0.0015258789, y: 0}
   m_SizeDelta: {x: 902.57, y: 190.478}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!1 &4745402627716833632
@@ -3254,9 +3254,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa2344c8d7b84f84f8f2fa6f7139b887, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ScreenId: 0
+  ScreenId: 10
   CloseButton: {fileID: 0}
   _animation: {fileID: 0}
+  ConfirmButton: {fileID: 0}
 --- !u!1 &7029480147608230901
 GameObject:
   m_ObjectHideFlags: 0
@@ -3790,8 +3791,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -91.988, y: 0}
-  m_SizeDelta: {x: 588.967, y: 200.253}
+  m_AnchoredPosition: {x: -77, y: -0.0014648438}
+  m_SizeDelta: {x: 516.851, y: 154.86}
   m_Pivot: {x: 1, y: 0}
 --- !u!225 &3701080360328776974
 CanvasGroup:
@@ -4075,7 +4076,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -0.521, y: -37.351}
+  m_AnchoredPosition: {x: 0.000011325, y: 0}
   m_SizeDelta: {x: 1457.676, y: 283.469}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &4800790488443400549
@@ -4261,7 +4262,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4574660741759454426}
   m_Layer: 0
-  m_Name: Exp_1
+  m_Name: Experience
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

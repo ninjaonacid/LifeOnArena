@@ -21,11 +21,11 @@ namespace Code.Runtime.UI.Services
         private readonly List<ActiveWindow> _activeWindows = new();
         private readonly UIFactory _uiFactory;
         private readonly ScreenModelFactory _screenModelFactory;
-        private readonly IScreenControllerFactory _controllerFactory;
+        private readonly ScreenControllerFactory _controllerFactory;
         
         public ScreenService(UIFactory uiFactory, 
             ScreenModelFactory screenModelFactory, 
-            IScreenControllerFactory controllerFactory)
+            ScreenControllerFactory controllerFactory)
         {
             _uiFactory = uiFactory;
             _screenModelFactory = screenModelFactory;

@@ -33,7 +33,6 @@ namespace Code.Runtime.Core.Factory
         private readonly IObjectResolver _objectResolver;
         private readonly LevelLoader _levelLoader;
         private readonly ObjectPoolProvider _objectPoolProvider;
-        private readonly Dictionary<MobIdentifier, GameObject> _spawnedEntities;
 
         private readonly CancellationTokenSource _cancellationTokenSource = default;
         public EnemyFactory(IHeroFactory heroFactory, ConfigProvider config, IAssetProvider assetProvider, 

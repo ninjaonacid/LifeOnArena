@@ -17,7 +17,7 @@ using Code.Runtime.UI.Controller;
 
 namespace Code.Runtime.UI.Services
 {
-    public class ScreenControllerFactory : IScreenControllerFactory
+    public class ScreenControllerFactory
     {
         private readonly Dictionary<Type, Func<IScreenController>> _screenControllers = new();
 

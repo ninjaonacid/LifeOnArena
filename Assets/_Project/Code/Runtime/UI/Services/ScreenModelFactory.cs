@@ -15,12 +15,9 @@ namespace Code.Runtime.UI.Services
     public class ScreenModelFactory 
     {
         private readonly Dictionary<Type, Func<IScreenModelDto, IScreenModel>> _modelMap = new();
-        private readonly ISaveLoadService _saveLoad;
 
         public ScreenModelFactory(IGameDataContainer gameData, ConfigProvider config, ISaveLoadService saveLoad)
         {
-            _saveLoad = saveLoad;
-
             InitializeModelMap(gameData, config);
         }
 

@@ -7,6 +7,5 @@ namespace Code.Runtime.UI.Controller
     public interface IScreenController
     {
         void InitController(IScreenModel model, BaseWindowView windowView, ScreenService screenService);
-        
     }
 }
