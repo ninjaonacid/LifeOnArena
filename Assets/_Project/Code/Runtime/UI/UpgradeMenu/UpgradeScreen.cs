@@ -5,11 +5,11 @@ namespace Code.Runtime.UI.UpgradeMenu
 {
     public class UpgradeScreen : ScreenBase
     {
-        private IAbilityFactory _abilityFactory;
-        private IHeroFactory _heroFactory;
+        private AbilityFactory _abilityFactory;
+        private HeroFactory _heroFactory;
         public void Construct(
-            IAbilityFactory abilityFactory,
-            IHeroFactory heroFactory,
+            AbilityFactory abilityFactory,
+            HeroFactory heroFactory,
             IGameDataContainer gameData)
         {
             

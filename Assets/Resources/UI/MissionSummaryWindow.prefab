@@ -3257,7 +3257,7 @@ MonoBehaviour:
   ScreenId: 10
   CloseButton: {fileID: 0}
   _animation: {fileID: 0}
-  ConfirmButton: {fileID: 0}
+  ConfirmButton: {fileID: 815072223778907598}
 --- !u!1 &7029480147608230901
 GameObject:
   m_ObjectHideFlags: 0
@@ -3764,7 +3764,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7491885888258413050}
   - component: {fileID: 3701080360328776974}
-  - component: {fileID: 5760891690702130888}
+  - component: {fileID: 815072223778907598}
   m_Layer: 5
   m_Name: OKbutton
   m_TagString: Untagged
@@ -3806,7 +3806,7 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!114 &5760891690702130888
+--- !u!114 &815072223778907598
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3815,10 +3815,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 8061572051558580967}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc5770b812cd4f48ad99b591a095a08b, type: 3}
+  m_Script: {fileID: 11500000, guid: f1357ede348b486a8c088676285b6acd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _canvasGroup: {fileID: 3701080360328776974}
+  _canvasGroup: {fileID: 0}
   _highlightColor:
     serializedVersion: 2
     rgba: 4279228157
@@ -3828,7 +3828,9 @@ MonoBehaviour:
   _baseColor:
     serializedVersion: 2
     rgba: 4294967295
-  _buttonImage: {fileID: 2586706212930843867}
+  _buttonImage: {fileID: 0}
+  _animationScale: {x: 1.1, y: 1.1}
+  _duration: 0.5
 --- !u!1 &8121785420117190568
 GameObject:
   m_ObjectHideFlags: 0

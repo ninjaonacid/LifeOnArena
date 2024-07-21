@@ -14,7 +14,7 @@ namespace Code.Runtime.Logic.VisualEffects
         private float _speed = 10f;
         
         [Inject]
-        public void Construct(IHeroFactory heroFactory)
+        public void Construct(HeroFactory heroFactory)
         {
             _hurtBox = heroFactory.HeroGameObject.GetComponent<EntityHurtBox>();
         }

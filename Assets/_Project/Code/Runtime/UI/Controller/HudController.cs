@@ -24,7 +24,7 @@ namespace Code.Runtime.UI.Controller
         private HudWindowView _windowView;
 
         private readonly IGameDataContainer _gameData;
-        private readonly IHeroFactory _heroFactory;
+        private readonly HeroFactory _heroFactory;
         private readonly LevelLoader _levelLoader;
         private readonly IEventSystem _eventSystem;
         private readonly AdvertisementService _adService;
@@ -34,7 +34,7 @@ namespace Code.Runtime.UI.Controller
         private readonly CompositeDisposable _disposable = new();
 
         public HudController(IGameDataContainer gameData, 
-            IHeroFactory heroFactory, LevelLoader sceneLoader,
+            HeroFactory heroFactory, LevelLoader sceneLoader,
             IEventSystem eventSystem, AdvertisementService adService,
             LevelCollectableTracker collectableTracker)
         {
@@ -72,7 +72,8 @@ namespace Code.Runtime.UI.Controller
                     new MissionSummaryDto(
                         _collectableTracker.GainedExperience, 
                         _collectableTracker.KilledEnemies, 
-                        _collectableTracker.SoulsLoot )); 
+                        _collectableTracker.SoulsLoot,
+                        _collectableTracker.ObjectiveExperienceReward)); 
             });
 
             _windowView.RestartButton.onClick.AsObservable().Subscribe(x => _levelLoader.LoadLevel("MainMenu"))

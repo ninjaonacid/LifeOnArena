@@ -11,7 +11,7 @@ namespace Code.Runtime.Entity.Hero
     {
         private PlayerData _data;
         private List<PassiveAbilityBlueprintTemplateBase> _heroPassives = new List<PassiveAbilityBlueprintTemplateBase>();
-        private IAbilityFactory _abilityFactory;
+        private AbilityFactory _abilityFactory;
 
        
         public void AddPassive(PassiveAbilityBlueprintTemplateBase passiveAbilityBlueprint)

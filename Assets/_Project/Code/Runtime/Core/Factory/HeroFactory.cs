@@ -7,7 +7,7 @@ using VContainer.Unity;
 
 namespace Code.Runtime.Core.Factory
 {
-    public class HeroFactory : IHeroFactory
+    public class HeroFactory
     {
         public GameObject HeroGameObject { get; set; }
         

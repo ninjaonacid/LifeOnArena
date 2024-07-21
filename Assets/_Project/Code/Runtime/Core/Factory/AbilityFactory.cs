@@ -3,18 +3,16 @@ using Code.Runtime.Core.Audio;
 using Code.Runtime.Core.Config;
 using Code.Runtime.Modules.AbilitySystem;
 using Code.Runtime.Services.BattleService;
-using Code.Runtime.Services.RandomService;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
 namespace Code.Runtime.Core.Factory
 {
-    public class AbilityFactory : IAbilityFactory
+    public class AbilityFactory
     {
         private readonly ConfigProvider _config;
         private readonly BattleService _battleService;
-        private readonly IRandomService _random;
         private readonly IAssetProvider _assetProvider;
         private readonly VisualEffectFactory _visualEffectFactory;
         private readonly ProjectileFactory _projectileFactory;
@@ -25,7 +23,6 @@ namespace Code.Runtime.Core.Factory
             VisualEffectFactory visualEffectFactory,
             ProjectileFactory projectileFactory,
             BattleService battleService,
-            IRandomService random,
             AudioService audioService)
         {
             _assetProvider = assetProvider;
@@ -33,7 +30,6 @@ namespace Code.Runtime.Core.Factory
             _visualEffectFactory = visualEffectFactory;
             _projectileFactory = projectileFactory;
             _battleService = battleService;
-            _random = random;
             _audioService = audioService;
         }
 

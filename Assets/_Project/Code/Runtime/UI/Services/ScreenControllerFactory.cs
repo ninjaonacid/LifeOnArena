@@ -23,7 +23,7 @@ namespace Code.Runtime.UI.Services
 
         public ScreenControllerFactory(IGameDataContainer gameData,
             IEventSystem eventSystem,
-            IHeroFactory heroFactory, ISaveLoadService saveLoad,
+            HeroFactory heroFactory, ISaveLoadService saveLoad,
             AudioService audioService, LevelCollectableTracker collectableTracker, LevelLoader levelLoader,
             TutorialService tutorialService, PauseService pauseService,
             AdvertisementService adService, LocalizationService localService)

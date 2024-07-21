@@ -18,7 +18,7 @@ namespace Code.Runtime.Core.EntryPoints
 {
     public class MainMenuStarter : IAsyncStartable
     {
-        private readonly IHeroFactory _heroFactory;
+        private readonly HeroFactory _heroFactory;
         private readonly LevelLoader _levelLoader;
         private readonly ScreenService _screenService;
         private readonly AudioService _audioService;
@@ -26,7 +26,7 @@ namespace Code.Runtime.Core.EntryPoints
         private readonly ISaveLoadService _saveLoad;
         private readonly AdvertisementService _adService;
 
-        public MainMenuStarter(IHeroFactory heroFactory, UIFactory uiFactory,
+        public MainMenuStarter(HeroFactory heroFactory, UIFactory uiFactory,
             ScreenService screenService,
             LevelLoader levelLoader, ISaveLoadService saveLoad, PlayerControls controls,
             AudioService audioService, AdvertisementService adService)

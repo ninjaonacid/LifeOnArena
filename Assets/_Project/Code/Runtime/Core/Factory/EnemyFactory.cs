@@ -24,7 +24,7 @@ namespace Code.Runtime.Core.Factory
 {
     public class EnemyFactory : IDisposable
     {
-        private readonly IHeroFactory _heroFactory;
+        private readonly HeroFactory _heroFactory;
         private readonly ConfigProvider _config;
         private readonly IAssetProvider _assetProvider;
         private readonly ISaveLoadService _saveLoadService;
@@ -35,7 +35,7 @@ namespace Code.Runtime.Core.Factory
         private readonly ObjectPoolProvider _objectPoolProvider;
 
         private readonly CancellationTokenSource _cancellationTokenSource = default;
-        public EnemyFactory(IHeroFactory heroFactory, ConfigProvider config, IAssetProvider assetProvider, 
+        public EnemyFactory(HeroFactory heroFactory, ConfigProvider config, IAssetProvider assetProvider, 
             ISaveLoadService saveLoadService, IGameDataContainer gameDataContainer,
             IRandomService randomService, IObjectResolver objectResolver, LevelLoader levelLoader, ObjectPoolProvider poolProvider)
         {

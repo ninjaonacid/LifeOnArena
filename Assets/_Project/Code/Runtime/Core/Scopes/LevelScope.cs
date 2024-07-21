@@ -25,10 +25,10 @@ namespace Code.Runtime.Core.Scopes
             builder.Register<GameRewardSystem>(Lifetime.Scoped).AsSelf();
             builder.Register<ObjectPoolProvider>(Lifetime.Singleton);
             
-            builder.Register<ItemFactory, ItemFactory>(Lifetime.Scoped);
+            builder.Register<ItemFactory>(Lifetime.Scoped);
             builder.Register<EnemyFactory>(Lifetime.Scoped);
-            builder.Register<IAbilityFactory, AbilityFactory>(Lifetime.Scoped);
-            builder.Register<IHeroFactory, HeroFactory>(Lifetime.Scoped);
+            builder.Register<AbilityFactory>(Lifetime.Scoped);
+            builder.Register<HeroFactory>(Lifetime.Scoped);
 
             builder.Register<LevelScope>(Lifetime.Scoped);
 

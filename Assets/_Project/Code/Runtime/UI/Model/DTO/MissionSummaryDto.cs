@@ -1,16 +1,17 @@
 ﻿namespace Code.Runtime.UI.Model.DTO
 {
     public class MissionSummaryDto : IScreenModelDto
-
     {
-        public float ExpEarnedFromEnemies;
-        public int EnemiesKilled;
-        public float ExpForClearLevel;
+        public readonly float ExpEarnedFromEnemies;
+        public readonly int EnemiesKilled;
+        public readonly float ExpForClearLevel;
+        public readonly int SoulsLoot;
 
-        public MissionSummaryDto(float expEarnedFromEnemies, int enemiesKilled, float expForClearLevel)
+        public MissionSummaryDto(float expEarnedFromEnemies, int enemiesKilled, int soulLoot, float expForClearLevel)
         {
             ExpEarnedFromEnemies = expEarnedFromEnemies;
             EnemiesKilled = enemiesKilled;
+            SoulsLoot = soulLoot;
             ExpForClearLevel = expForClearLevel;
         }
     }

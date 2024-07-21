@@ -5,9 +5,9 @@ namespace Code.Runtime.Core.EntryPoints.GameEntry
 {
     public class AssetWarmUp : IInitializable
     {
-        private readonly IHeroFactory _heroFactory;
+        private readonly HeroFactory _heroFactory;
 
-        public AssetWarmUp(IHeroFactory heroFactory)
+        public AssetWarmUp(HeroFactory heroFactory)
         {
             _heroFactory = heroFactory;
         }

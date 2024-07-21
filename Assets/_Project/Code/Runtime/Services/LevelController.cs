@@ -20,10 +20,6 @@ namespace Code.Runtime.Services
 {
     public class LevelController : IInitializable, IDisposable
     {
-        private LevelReward _levelReward;
-
-        private int _enemySpawners;
-
         private readonly EnemySpawnerController _spawnerController;
         private readonly ScreenService _screenService;
         private readonly IEventSystem _eventSystem;
@@ -32,8 +28,7 @@ namespace Code.Runtime.Services
         private readonly LocalizationService _localService;
         private readonly IGameDataContainer _gameData;
         private readonly ISaveLoadService _saveLoad;
-
-        private readonly CancellationTokenSource _cancellationToken = new CancellationTokenSource();
+        private readonly CancellationTokenSource _cancellationToken = new();
 
         public LevelController(EnemySpawnerController spawnerController, 
             ScreenService screenService,
@@ -76,29 +71,16 @@ namespace Code.Runtime.Services
         {
             var currentLevel = _levelLoader.GetCurrentLevelConfig();
             _gameData.PlayerData.WorldData.LocationProgressData.CompletedLocations.Add(currentLevel.LevelId.Id);
-
-            // var localizedString = _localService.GetLocalizedString("ReturnToPortal");
-            // _screenService.Open(ScreenID.MessageWindow, new TimerMessageDto(localizedString, _timerToEndOfLevel));
-            //
-            // await UniTask.Delay(TimeSpan.FromSeconds(_timerToEndOfLevel));
+            _saveLoad.SaveData();
             
             _eventSystem.FireEvent<LevelEndEvent>(new LevelEndEvent());
-            var levelConfig = _levelLoader.GetCurrentLevelConfig();
-            var locationId = levelConfig.LevelId.Id;
-            var levelExp = levelConfig.ExpForComplete;
-            _saveLoad.SaveData();
-            _levelLoader.LoadLevel("MainMenu");
         }
 
         private void BossKilled()
         {
-            
-            var levelEndEvent = new LevelEndEvent();
-      
-            _eventSystem.FireEvent<LevelEndEvent>(new LevelEndEvent());
+            LevelEnd();
         }
-
-
+        
         private void CommonEnemiesCleared(int secondsToBoss)
         {
             var levelConfig = _levelLoader.GetCurrentLevelConfig();

@@ -15,13 +15,13 @@ namespace Code.Runtime.UI.UpgradeMenu
         [SerializeField] private TextMeshProUGUI _upgradeText;
         [SerializeField] private UpgradeScreen UpgradeScreen;
 
-        private IAbilityFactory _abilityFactory;
+        private AbilityFactory _abilityFactory;
       
 
         private GameObject _hero;
         private PassiveAbilityBlueprintTemplateBase _passiveAbilityBlueprintTemplate;
-        public void Construct(IAbilityFactory abilityFactory, 
-            IHeroFactory heroFactory)
+        public void Construct(AbilityFactory abilityFactory, 
+            HeroFactory heroFactory)
         {
             _abilityFactory = abilityFactory;
 

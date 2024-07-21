@@ -5,6 +5,7 @@ using Code.Runtime.UI.Services;
 using Code.Runtime.UI.View;
 using Code.Runtime.UI.View.MissionSummaryWindow;
 using UniRx;
+using UnityEngine;
 using UnityEngine.Assertions;
 
 namespace Code.Runtime.UI.Controller
@@ -24,11 +25,15 @@ namespace Code.Runtime.UI.Controller
             Assert.IsNotNull(_view);
             Assert.IsNotNull(_model);
             
-            
-
             _view.ConfirmButton
                 .OnClickAsObservable()
-                .Subscribe(x => _levelLoader.LoadLevel("MainMenu"));
+                .Subscribe(x =>
+                {
+                    Debug.Log("ConfirmButtonPressed");
+                    _levelLoader.LoadLevel("MainMenu");
+                });
+            
+            _view.ConfirmButton.PlayScaleAnimation();
         }
     }
 }

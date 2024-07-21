@@ -5,8 +5,8 @@ namespace Code.Runtime.Services
         public float GainedExperience { get; private set; }
         public int KilledEnemies { get; private set; }
         public int SoulsLoot { get; private set; }
-
-
+        public float ObjectiveExperienceReward{ get; private set; }
+        
         public void CollectExperience(float value)
         {
             GainedExperience += value;
@@ -20,6 +20,11 @@ namespace Code.Runtime.Services
         public void CollectSouls(int souls)
         {
             SoulsLoot += souls;
+        }
+
+        public void CollectObjectiveExperience(float value)
+        {
+            ObjectiveExperienceReward += value;
         }
     }
 }

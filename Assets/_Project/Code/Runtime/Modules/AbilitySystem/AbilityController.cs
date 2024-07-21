@@ -26,7 +26,7 @@ namespace Code.Runtime.Modules.AbilitySystem
         private readonly Queue<ActiveAbility> _abilityQueue = new();
         private readonly int _abilityQueueLimit = 2;
 
-        protected IAbilityFactory _abilityFactory;
+        protected AbilityFactory _abilityFactory;
 
         [Serializable]
         public class AbilitySlot
@@ -37,7 +37,7 @@ namespace Code.Runtime.Modules.AbilitySystem
         }
         
         [Inject]
-        public void Construct(IAbilityFactory abilityFactory)
+        public void Construct(AbilityFactory abilityFactory)
         {
             _abilityFactory = abilityFactory;
         }

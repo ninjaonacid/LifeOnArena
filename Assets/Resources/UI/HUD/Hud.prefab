@@ -1151,7 +1151,7 @@ GameObject:
   - component: {fileID: 3142569278963308431}
   - component: {fileID: 1767071520379114702}
   m_Layer: 0
-  m_Name: Portal
+  m_Name: PortalButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1175,9 +1175,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -281, y: 0}
+  m_AnchoredPosition: {x: -192, y: -125}
   m_SizeDelta: {x: 250, y: 250}
-  m_Pivot: {x: 1, y: 1}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &3142569278963308431
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -1186,9 +1186,9 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5292193534571277968}
   m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_Alpha: 0
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!114 &1767071520379114702
 MonoBehaviour:
@@ -1202,7 +1202,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1357ede348b486a8c088676285b6acd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _canvasGroup: {fileID: 0}
+  _canvasGroup: {fileID: 3142569278963308431}
   _highlightColor:
     serializedVersion: 2
     rgba: 4279228157
@@ -1212,8 +1212,8 @@ MonoBehaviour:
   _baseColor:
     serializedVersion: 2
     rgba: 4294967295
-  _buttonImage: {fileID: 0}
-  _animationScale: {x: 1.2, y: 1.2}
+  _buttonImage: {fileID: 4428985303902882674}
+  _animationScale: {x: 1.1, y: 1.1}
   _duration: 1
 --- !u!1 &5423864307983535121
 GameObject:
@@ -2493,6 +2493,10 @@ PrefabInstance:
     - target: {fileID: 819212837027285666, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
       propertyPath: m_ControlPath
       value: <Keyboard>/e
+      objectReference: {fileID: 0}
+    - target: {fileID: 819212837027285666, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
+      propertyPath: _abilitySlotID
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2624927343658051704, guid: a623dffa7770661469a2b7e9ec5ca9d2, type: 3}
       propertyPath: m_Pivot.x

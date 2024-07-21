@@ -19,26 +19,28 @@ namespace Code.Runtime.Core.EntryPoints
     public class LevelStarterPoint : IAsyncStartable
     {
         private readonly ISaveLoadService _saveLoad;
-        private readonly IHeroFactory _heroFactory;
+        private readonly HeroFactory _heroFactory;
         private readonly ScreenService _screenService;
         private readonly PlayerControls _controls;
         private readonly EnemySpawnerController _enemySpawnerController;
-        private readonly LevelController _levelController;
         private readonly LevelLoader _levelLoader;
+        private readonly LevelCollectableTracker _collectableTracker;
 
         public LevelStarterPoint(
-            ISaveLoadService saveLoad, IHeroFactory heroFactory, 
+            ISaveLoadService saveLoad, HeroFactory heroFactory, 
             ScreenService screenService,
-            PlayerControls controls, EnemySpawnerController enemySpawnerController,
-            LevelController controller, LevelLoader levelLoader)
+            PlayerControls controls, 
+            EnemySpawnerController enemySpawnerController,
+            LevelCollectableTracker collectableTracker, 
+            LevelLoader levelLoader)
         {
             _saveLoad = saveLoad;
             _heroFactory = heroFactory;
             _screenService = screenService;
             _enemySpawnerController = enemySpawnerController;
             _controls = controls;
-            _levelController = controller;
             _levelLoader = levelLoader;
+            _collectableTracker = collectableTracker;
         }
         
         public async UniTask StartAsync(CancellationToken cancellation)
@@ -54,11 +56,12 @@ namespace Code.Runtime.Core.EntryPoints
             InitHud();
             InitializeInput();
             CameraFollow(hero);
+            
+            _collectableTracker.CollectObjectiveExperience(config.ExpForComplete);
 
             _saveLoad.LoadData();
 
             _enemySpawnerController.RunSpawner();
-            
         }
 
         private async UniTask<GameObject> InitHero(LevelConfig levelConfig)
