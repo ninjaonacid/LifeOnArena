@@ -12,6 +12,7 @@ using Code.Runtime.UI.Model;
 using Code.Runtime.UI.Services;
 using Code.Runtime.UI.View;
 using Code.Runtime.UI.View.HUD;
+using Cysharp.Threading.Tasks;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -59,51 +60,51 @@ namespace Code.Runtime.UI.Controller
             _windowView.HudSkillContainer.Construct(heroSkills, heroCooldown);
             _windowView.GetComponent<EntityUI>().Construct(heroHealth);
 
-            _gameData.PlayerData.PlayerExp
-                .OnExperienceChangedAsObservable()
-                .Subscribe( x =>
-                _windowView.StatusBar
-                    .SetExpValue(_gameData.PlayerData.PlayerExp.ProgressToNextLevel)).AddTo(_disposable);
-
-            _gameData.PlayerData.PlayerExp
-                .OnLevelChangedAsObservable()
-                .Subscribe(x => _windowView.StatusBar.SetLevel(_gameData.PlayerData.PlayerExp.Level)).AddTo(_disposable);
+            SubscribeStatusBar();
             
+            
+            _windowView.RestartButton.onClick.AsObservable().Subscribe(x => _levelLoader.LoadLevel("MainMenu")).AddTo(_disposable);
+
+            _windowView.RewardButton.onClick.AsObservable().Subscribe(x => _adService.ShowReward()).AddTo(_disposable);
+
+            _eventSystem.Subscribe<BossSpawnEvent>(SubscribeBossHealthBar);
+        }
+
+        private void SubscribeStatusBar()
+        {
+            var playerExp = _gameData.PlayerData.PlayerExp;
             _windowView.StatusBar.SetExpValue(_gameData.PlayerData.PlayerExp.ProgressToNextLevel);
             _windowView.StatusBar.SetLevel(_gameData.PlayerData.PlayerExp.Level);
             
-            _windowView.RestartButton.onClick.AsObservable().Subscribe(x => _levelLoader.LoadLevel("MainMenu"));
+            playerExp.OnExperienceChangedAsObservable()
+                .Subscribe(x =>
+                    _windowView.StatusBar
+                        .SetExpValue(_gameData.PlayerData.PlayerExp.ProgressToNextLevel))
+                .AddTo(_disposable);
 
-            _windowView.RewardButton.onClick.AsObservable().Subscribe(x => _adService.ShowReward());
-
-            _eventSystem.Subscribe<BossSpawnEvent>(SubscribeHealthBar);
-
+            playerExp.OnLevelChangedAsObservable()
+                .Subscribe(x => _windowView.StatusBar.SetLevel(_gameData.PlayerData.PlayerExp.Level))
+                .AddTo(_disposable);
         }
 
-        private void SubscribeHealthBar(BossSpawnEvent obj)
+        private void SubscribeBossHealthBar(BossSpawnEvent obj)
         {
             var damageable = obj.BossGo.GetComponent<IDamageable>();
             
             _windowView.BossHudHealthBar.Show(true);
-
+            _windowView.BossHudHealthBar.SetBossName(obj.BossId.name);
+            
             Observable.FromEvent(x => damageable.Health.CurrentValueChanged += x,
                     x => damageable.Health.CurrentValueChanged -= x)
                 .Subscribe(x =>
                     _windowView.BossHudHealthBar.UpdateHpBar(damageable.Health.Value, damageable.Health.CurrentValue))
                 .AddTo(_disposable);
-            
-            _windowView.BossHudHealthBar.SetBossName(obj.BossId.name);
-        }
-
-        private void SubscribeHealthBar(GameObject go, MobIdentifier mobId)
-        {
-            
         }
 
         public void Dispose()
         {
             _disposable.Dispose();
-            _eventSystem.Unsubscribe<BossSpawnEvent>(SubscribeHealthBar);
+            _eventSystem.Unsubscribe<BossSpawnEvent>(SubscribeBossHealthBar);
         }
     }
 }

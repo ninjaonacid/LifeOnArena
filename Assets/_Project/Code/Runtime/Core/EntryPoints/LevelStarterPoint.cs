@@ -55,10 +55,7 @@ namespace Code.Runtime.Core.EntryPoints
             CameraFollow(hero);
 
             _saveLoad.LoadData();
-            
-            _levelController.Subscribe();
-            
-            _enemySpawnerController.SpawnTimer();
+
             _enemySpawnerController.RunSpawner();
             
         }

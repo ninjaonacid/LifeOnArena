@@ -10,7 +10,7 @@ using VContainer.Unity;
 
 namespace Code.Runtime.UI.Services
 {
-    public class UIFactory : IUIFactory
+    public class UIFactory
     {
         private readonly IAssetProvider _assetProvider;
         private readonly ConfigProvider _config;

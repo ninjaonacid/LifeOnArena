@@ -19,11 +19,11 @@ namespace Code.Runtime.UI.Services
     {
         private readonly Dictionary<ScreenID, (Type model, Type controller)> _screenMap = new();
         private readonly List<ActiveWindow> _activeWindows = new();
-        private readonly IUIFactory _uiFactory;
+        private readonly UIFactory _uiFactory;
         private readonly ScreenModelFactory _screenModelFactory;
         private readonly IScreenControllerFactory _controllerFactory;
         
-        public ScreenService(IUIFactory uiFactory, 
+        public ScreenService(UIFactory uiFactory, 
             ScreenModelFactory screenModelFactory, 
             IScreenControllerFactory controllerFactory)
         {

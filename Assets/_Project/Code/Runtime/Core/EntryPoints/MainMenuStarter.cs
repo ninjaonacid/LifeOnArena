@@ -26,7 +26,7 @@ namespace Code.Runtime.Core.EntryPoints
         private readonly ISaveLoadService _saveLoad;
         private readonly AdvertisementService _adService;
 
-        public MainMenuStarter(IHeroFactory heroFactory, IUIFactory uiFactory,
+        public MainMenuStarter(IHeroFactory heroFactory, UIFactory uiFactory,
             ScreenService screenService,
             LevelLoader levelLoader, ISaveLoadService saveLoad, PlayerControls controls,
             AudioService audioService, AdvertisementService adService)

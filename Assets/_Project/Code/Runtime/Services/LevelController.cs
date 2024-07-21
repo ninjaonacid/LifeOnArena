@@ -53,33 +53,50 @@ namespace Code.Runtime.Services
 
         public void Initialize()
         {
+            SubscribeToEvents();
+            _controls.LevelControls.Enable();
+        }
+
+        private void SubscribeToEvents()
+        {
+            _eventSystem.Subscribe<HeroDeadEvent>(HeroDead);
             _spawnerController.WaveCleared += WaveCleared;
             _spawnerController.CommonEnemiesCleared += CommonEnemiesCleared;
             _spawnerController.BossKilled += BossKilled;
             _spawnerController.BossSpawned += OnBossSpawn;
-            _controls.LevelControls.Enable();
-            
         }
 
-        private void OnBossSpawn(GameObject arg1, MobIdentifier arg2)
+        private void OnBossSpawn(GameObject go, MobIdentifier mobId)
         {
-            _eventSystem.FireEvent(new BossSpawnEvent(arg1, arg2));
-        }
-
-        private void LevelCompleted()
-        {
-            
+            _eventSystem.FireEvent(new BossSpawnEvent(go, mobId));
         }
 
         private async UniTask LevelEnd()
         {
             var currentLevel = _levelLoader.GetCurrentLevelConfig();
             _gameData.PlayerData.WorldData.LocationProgressData.CompletedLocations.Add(currentLevel.LevelId.Id);
+            
             var localizedString = _localService.GetLocalizedString("ReturnToPortal");
             _screenService.Open(ScreenID.MessageWindow, new TimerMessageDto(localizedString, _timerToEndOfLevel ));
+            
             await UniTask.Delay(TimeSpan.FromSeconds(_timerToEndOfLevel));
+            
             _saveLoad.SaveData();
             _levelLoader.LoadLevel("MainMenu");
+        }
+
+        public void Tick()
+        {
+            if (_controls.LevelControls.Button.triggered)
+            {
+                _levelLoader.LoadLevel("FantasyArena_1");
+            }if (_controls.LevelControls.Button1.triggered)
+            {
+                _levelLoader.LoadLevel("FantasyArena_2");
+            }if (_controls.LevelControls.Button2.triggered)
+            {
+                _levelLoader.LoadLevel("FantasyArena_3");
+            }
         }
 
         private void BossKilled()
@@ -102,20 +119,6 @@ namespace Code.Runtime.Services
             }
         }
         
-
-        public void Subscribe()
-        {
-            _eventSystem.Subscribe<HeroDeadEvent>(HeroDead);
-            _eventSystem.Subscribe<SpawnersClearEvent>(SpawnersClear);
-        }
-
-        private async void SpawnersClear(SpawnersClearEvent obj)
-        {
-            await ShowUpgradeWindow();
-            
-            _eventSystem.FireEvent(new OpenDoorEvent("open door"));
-        }
-
         private void WaveCleared(int secondsToNextWave)
         {
             var localizedString = _localService.GetLocalizedString("WaveSpawnMessage");
@@ -134,41 +137,20 @@ namespace Code.Runtime.Services
                 DelayType.DeltaTime,
                 PlayerLoopTiming.Update, _cancellationToken.Token);
         }
-
-        private async UniTask ShowUpgradeWindow()
-        {
-            
-            await UniTask.Delay(TimeSpan.FromSeconds(2.0), 
-                DelayType.DeltaTime, 
-                PlayerLoopTiming.Update,
-                _cancellationToken.Token);
-
-            _screenService.Open(ScreenID.UpgradeMenu);
-        }
-
-        public void Dispose()
+        
+        private void UnsubscribeFromEvents()
         {
             _eventSystem.Unsubscribe<HeroDeadEvent>(HeroDead);
-            _eventSystem.Unsubscribe<SpawnersClearEvent>(SpawnersClear);
-            
-            
+            _spawnerController.WaveCleared -= WaveCleared;
+            _spawnerController.CommonEnemiesCleared -= CommonEnemiesCleared;
+            _spawnerController.BossKilled -= BossKilled;
+            _spawnerController.BossSpawned -= OnBossSpawn;
+        }
+        public void Dispose()
+        {
+            UnsubscribeFromEvents();
             _cancellationToken?.Cancel();
             _cancellationToken?.Dispose();
-
-        }
-
-        public void Tick()
-        {
-            if (_controls.LevelControls.Button.triggered)
-            {
-                _levelLoader.LoadLevel("FantasyArena_1");
-            }if (_controls.LevelControls.Button1.triggered)
-            {
-                _levelLoader.LoadLevel("FantasyArena_2");
-            }if (_controls.LevelControls.Button2.triggered)
-            {
-                _levelLoader.LoadLevel("FantasyArena_3");
-            }
         }
     }
 }

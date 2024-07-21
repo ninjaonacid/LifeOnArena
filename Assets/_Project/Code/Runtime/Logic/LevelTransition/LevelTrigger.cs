@@ -20,7 +20,7 @@ namespace Code.Runtime.Logic.LevelTransition
         [Inject]
         public void Construct(
             IEventSystem eventSystem,
-            IUIFactory uiFactory)
+            UIFactory uiFactory)
         {
             _eventSystem = eventSystem;
         }

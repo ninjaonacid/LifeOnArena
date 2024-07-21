@@ -34,7 +34,7 @@ namespace Code.Runtime.Core.Scopes
             builder.Register<AdvertisementService>(Lifetime.Singleton);
             builder.Register<LocalizationService>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
 
-            builder.Register<IUIFactory, UIFactory>(Lifetime.Singleton);
+            builder.Register<UIFactory, UIFactory>(Lifetime.Singleton);
             builder.Register<IAssetProvider, AssetProvider>(Lifetime.Singleton);
             builder.Register<IGameDataContainer, GameDataContainer>(Lifetime.Singleton);
             builder.Register<IRandomService, RandomService>(Lifetime.Singleton);

@@ -1,5 +1,3 @@
-using UnityEngine;
-
 namespace Code.Runtime.Modules.Utils
 {
     public static class WebApplication

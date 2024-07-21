@@ -15,13 +15,14 @@ namespace Code.Runtime.Entity
     public class EntityAttackComponent : MonoBehaviour, IAttackComponent
     {
         public event Action<int> OnHit;
-        protected Dictionary<CollisionData, int> _collidedData;
-
+        
         [SerializeField] private LayerMask _ownerLayer;
         [SerializeField] protected LayerMask _targetLayer;
         [SerializeField] protected StatController _stats;
         [SerializeField] protected EntityWeapon _entityWeapon;
         [SerializeField] protected VisualEffectController _visualEffectController;
+        
+        private Dictionary<CollisionData, int> _collidedData;
 
         private AudioService _audioService;
         private BattleService _battleService;
@@ -52,20 +53,28 @@ namespace Code.Runtime.Entity
         {
             _collidedData.Clear();
         }
-        
+
+        public float GetAttacksPerSecond()
+        {
+            float attackSpeed = _stats.Stats["AttackSpeed"].Value;
+            
+            float attacksPerSecond = attackSpeed * 0.2f;
+
+            return attacksPerSecond;
+        }
+
         private void Awake()
         {
             _collidedData = new Dictionary<CollisionData, int>();
             _entityWeapon.OnWeaponChange += ChangeWeapon;
         }
-        
+
         private void ChangeWeapon(WeaponView weaponView)
         {
             weaponView.SetLayerMask(_targetLayer);
             weaponView.gameObject.layer = Mathf.RoundToInt(Mathf.Log(_ownerLayer.value, 2));
             weaponView.Hit += BaseAttack;
         }
-        
 
         protected virtual void BaseAttack(CollisionData collision)
         {
@@ -94,16 +103,6 @@ namespace Code.Runtime.Entity
             _battleService.CreateWeaponAttack(_stats, collision.Target);
 
             InvokeHit(1);
-        }
-        
-
-        public float GetAttacksPerSecond()
-        {
-            float attackSpeed = _stats.Stats["AttackSpeed"].Value;
-            
-            float attacksPerSecond = attackSpeed * 0.2f;
-
-            return attacksPerSecond;
         }
     }
 }

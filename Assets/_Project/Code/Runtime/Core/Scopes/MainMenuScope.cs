@@ -20,7 +20,7 @@ namespace Code.Runtime.Core.Scopes
             builder.Register<ItemFactory, ItemFactory>(Lifetime.Scoped);
             builder.Register<IAbilityFactory, AbilityFactory>(Lifetime.Scoped);
             builder.Register<IHeroFactory, HeroFactory>(Lifetime.Scoped);
-            builder.Register<IUIFactory, UIFactory>(Lifetime.Scoped);
+            builder.Register<UIFactory, UIFactory>(Lifetime.Scoped);
             builder.Register<GameRewardSystem>(Lifetime.Singleton).AsSelf();
             builder.Register<VisualEffectFactory>(Lifetime.Scoped);
             builder.Register<ObjectPoolProvider>(Lifetime.Scoped);
