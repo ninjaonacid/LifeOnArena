@@ -12,10 +12,10 @@ namespace Code.Runtime.Modules.RewardSystem
 {
     public class GameRewardSystem
     {
-        private ConfigProvider _configs;
-        private IGameDataContainer _gameData;
-        private IObjectResolver _objectResolver;
-        private ScreenService _screenService;
+        private readonly ConfigProvider _configs;
+        private readonly IGameDataContainer _gameData;
+        private readonly IObjectResolver _objectResolver;
+        private readonly ScreenService _screenService;
 
         public GameRewardSystem(ConfigProvider configs, IGameDataContainer gameData, IObjectResolver objectResolver, ScreenService screenService)
         {

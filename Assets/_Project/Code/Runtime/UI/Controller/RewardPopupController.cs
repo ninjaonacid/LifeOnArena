@@ -1,4 +1,5 @@
 ﻿using Code.Runtime.Modules.LocalizationProvider;
+using Code.Runtime.Services.PauseService;
 using Code.Runtime.UI.Model;
 using Code.Runtime.UI.Model.DTO;
 using Code.Runtime.UI.Services;
@@ -15,10 +16,12 @@ namespace Code.Runtime.UI.Controller
         private RewardPopupView _view;
 
         private readonly LocalizationService _localService;
+        private readonly PauseService _pauseService;
 
-        public RewardPopupController(LocalizationService localService)
+        public RewardPopupController(LocalizationService localService, PauseService pauseService)
         {
             _localService = localService;
+            _pauseService = pauseService;
         }
 
         public void InitController(IScreenModel model, BaseWindowView windowView, ScreenService screenService)

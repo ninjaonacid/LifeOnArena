@@ -145,7 +145,6 @@ namespace Code.Runtime.Entity.Enemy
             
             _enemyHurtBox.DisableCollider(false);
 
-            
         }
     }
 }

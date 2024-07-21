@@ -67,6 +67,7 @@ namespace Code.Runtime.Modules.StatSystem
         {
             if (data.StatsData.StatsValues.TryGetValue(_statDefinition.name, out var value))
             {
+                _value = value;
                 _currentValue = value;
                 CurrentValueChanged?.Invoke();
             }

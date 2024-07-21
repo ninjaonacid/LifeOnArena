@@ -9,6 +9,7 @@ using Code.Runtime.Core.Config;
 using Code.Runtime.Core.Factory;
 using Code.Runtime.Entity.Enemy;
 using Code.Runtime.Logic.EnemySpawners;
+using Code.Runtime.Services;
 using Code.Runtime.Utils;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -17,24 +18,27 @@ namespace Code.Runtime.Logic.WaveLogic
 {
     public class EnemySpawnerController : IDisposable
     {
-        public event Action<int> WaveCleared;
-        public event Action<int> CommonEnemiesCleared; 
+        public event Action<int> WaveStart;
+        public event Action<int> CommonEnemiesCleared;
         public event Action BossKilled;
         public event Action<GameObject, MobIdentifier> BossSpawned;
         public int TimeToNextWave { get; private set; } = 5;
-        
+
         private readonly ConfigProvider _config;
         private readonly EnemyFactory _enemyFactory;
+        private readonly LevelCollectableTracker _collectablesTracker;
         private readonly List<EnemySpawner> _enemySpawnPoints = new List<EnemySpawner>();
         private CancellationTokenSource _cancellationTokenSource = new();
         private int _numberOfWaves;
+        private int _killedEnemies;
         private int _aliveCommonEnemies = 0;
         private int _aliveBosses = 0;
         private bool _isBossSpawned = false;
 
-        public EnemySpawnerController(EnemyFactory enemyFactory)
+        public EnemySpawnerController(EnemyFactory enemyFactory, LevelCollectableTracker collectablesTracker)
         {
             _enemyFactory = enemyFactory;
+            _collectablesTracker = collectablesTracker;
         }
 
         public async UniTask Initialize(LevelConfig levelConfig, CancellationToken token = default)
@@ -52,26 +56,28 @@ namespace Code.Runtime.Logic.WaveLogic
                     spawnerData.EnemyType, token);
 
                 _enemySpawnPoints.Add(spawner);
+
+                spawner.SpawnerCleared += SpawnerCleared;
             }
         }
-        
+
         public void RunSpawner()
         {
             WaveSpawn(TaskHelper.CreateToken(ref _cancellationTokenSource)).Forget();
         }
-        
+
         private async UniTask WaveSpawn(CancellationToken token)
         {
             int waveCounter = 0;
-                
+
             while (true)
             {
                 if (IsWaveCleared() && waveCounter < _numberOfWaves)
                 {
-                    WaveCleared?.Invoke(TimeToNextWave);
-        
+                    WaveStart?.Invoke(TimeToNextWave);
+
                     await UniTask.Delay(TimeSpan.FromSeconds(TimeToNextWave), cancellationToken: token);
-                    
+
                     foreach (EnemySpawner spawner in _enemySpawnPoints)
                     {
                         if (spawner.EnemyType == EnemyType.Common)
@@ -83,13 +89,13 @@ namespace Code.Runtime.Logic.WaveLogic
 
                     waveCounter++;
                 }
-        
+
                 await UniTask.Delay(200, cancellationToken: token);
-        
+
                 if (IsWaveCleared() && waveCounter == _numberOfWaves && !_isBossSpawned)
                 {
                     CommonEnemiesCleared?.Invoke(TimeToNextWave);
-        
+
                     await UniTask.Delay(TimeSpan.FromSeconds(TimeToNextWave), cancellationToken: token);
 
                     await SpawnBoss(token);
@@ -101,7 +107,7 @@ namespace Code.Runtime.Logic.WaveLogic
                 }
             }
         }
-        
+
         private async UniTask SpawnBoss(CancellationToken token)
         {
             foreach (var spawner in _enemySpawnPoints.Where(s => s.EnemyType == EnemyType.Boss))
@@ -120,18 +126,23 @@ namespace Code.Runtime.Logic.WaveLogic
             _cancellationTokenSource.Dispose();
         }
 
-        private bool IsWaveCleared()
+        private void SpawnerCleared(EnemySpawner spawner)
         {
-            return _enemySpawnPoints
-                .Where(x => x.EnemyType == EnemyType.Common)
-                .All(x => !x.Alive);
+            if (spawner.EnemyType == EnemyType.Common)
+            {
+                _aliveCommonEnemies--;
+                _killedEnemies++;
+            }
+            else
+            {
+                _aliveBosses--;
+                _killedEnemies++;
+            }
+
+            _collectablesTracker.CollectKill();
         }
 
-        private bool IsBossKilled()
-        {
-            return _enemySpawnPoints
-                .Where(x => x.EnemyType == EnemyType.Boss)
-                .All(x => !x.Alive);
-        }
+        private bool IsWaveCleared() => _aliveCommonEnemies == 0;
+        private bool IsBossKilled() => _aliveBosses == 0;
     }
 }

@@ -1,4 +1,3 @@
-using Code.Runtime.Entity.Hero;
 using Code.Runtime.UI.Buttons;
 using Code.Runtime.UI.View.HUD.Skills;
 using UnityEngine.UI;
@@ -16,6 +15,7 @@ namespace Code.Runtime.UI.View.HUD
         public Button RewardButton;
         public StatusBar StatusBar;
         public BossHudHealthBar BossHudHealthBar;
-   
+        public AnimatedButton PortalButton;
+
     }
 }

@@ -2,6 +2,7 @@ using System.Threading;
 using Code.Runtime.ConfigData.Identifiers;
 using Code.Runtime.Core.Factory;
 using Code.Runtime.Data.PlayerData;
+using Code.Runtime.Services;
 using Code.Runtime.Services.PersistentProgress;
 using Code.Runtime.Services.RandomService;
 using Code.Runtime.Utils;
@@ -19,6 +20,7 @@ namespace Code.Runtime.Entity.Enemy
         private IRandomService _randomService;
         private VisualEffectFactory _visualEffectFactory;
         private IGameDataContainer _dataContainer;
+        private LevelCollectableTracker _collectablesTracker;
         private int _lootMin;
         private int _lootMax;
 
@@ -26,11 +28,12 @@ namespace Code.Runtime.Entity.Enemy
 
         [Inject]
         public void Construct(VisualEffectFactory visualEffectFactory,
-            IRandomService randomService, IGameDataContainer dataContainer)
+            IRandomService randomService, IGameDataContainer dataContainer, LevelCollectableTracker collectables)
         {
             _randomService = randomService;
             _visualEffectFactory = visualEffectFactory;
             _dataContainer = dataContainer;
+            _collectablesTracker = collectables;
         }
 
         private void Start()
@@ -46,10 +49,10 @@ namespace Code.Runtime.Entity.Enemy
 
         private void SpawnLootTask()
         {
-            SpawnLoot(TaskHelper.CreateToken(ref _cts)).Forget();
+            SpawnSoulsLoot(TaskHelper.CreateToken(ref _cts)).Forget();
         }
 
-        private async UniTask SpawnLoot(CancellationToken token)
+        private async UniTask SpawnSoulsLoot(CancellationToken token)
         {
             var lootVisualEffect = await _visualEffectFactory.CreateVisualEffect(_souls.Id, cancellationToken: token);
 
@@ -59,7 +62,9 @@ namespace Code.Runtime.Entity.Enemy
             {
                 Value = _randomService.RandomizeValue(_lootMin, _lootMax)
             };
-
+            
+            _collectablesTracker.CollectSouls(lootItem.Value);
+            
             _dataContainer.PlayerData.WorldData.LootData.Collect(lootItem);
         }
     }

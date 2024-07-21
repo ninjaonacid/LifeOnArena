@@ -13,7 +13,9 @@ using VContainer;
 namespace Code.Runtime.Logic.EnemySpawners
 {
     public class EnemySpawner : MonoBehaviour
-    {
+    { 
+        public event Action<EnemySpawner> SpawnerCleared;
+        
         [SerializeField] private VisualEffectIdentifier _visualEffectIdentifier;
         public string Id { get; set; }
         public int RespawnCount { get; set; }
@@ -72,11 +74,13 @@ namespace Code.Runtime.Logic.EnemySpawners
         {
             _spawnVfx = await _visualEffectFactory.CreateVisualEffect(_visualEffectIdentifier.Id, position, token);
 
-            var spawnVfxPosition = _spawnVfx.transform.position;
+            var spawnVfxTransform = _spawnVfx.transform;
+
+            var spawnVfxPosition = spawnVfxTransform.position;
             spawnVfxPosition =
                 new Vector3(spawnVfxPosition.x, spawnVfxPosition.y + 5, spawnVfxPosition.z);
 
-            _spawnVfx.transform.position = spawnVfxPosition;
+            spawnVfxTransform.position = spawnVfxPosition;
         }
 
         private void Slay()
@@ -84,6 +88,7 @@ namespace Code.Runtime.Logic.EnemySpawners
             if (_enemyDeath != null)
                   _enemyDeath.Happened -= Slay;
             
+            SpawnerCleared?.Invoke(this);
             Alive = false;
         }
 

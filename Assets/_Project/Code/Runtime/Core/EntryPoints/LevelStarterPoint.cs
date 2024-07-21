@@ -27,7 +27,8 @@ namespace Code.Runtime.Core.EntryPoints
         private readonly LevelLoader _levelLoader;
 
         public LevelStarterPoint(
-            ISaveLoadService saveLoad, IHeroFactory heroFactory, ScreenService screenService,
+            ISaveLoadService saveLoad, IHeroFactory heroFactory, 
+            ScreenService screenService,
             PlayerControls controls, EnemySpawnerController enemySpawnerController,
             LevelController controller, LevelLoader levelLoader)
         {
