@@ -9,9 +9,8 @@ namespace Code.Runtime.Modules.Advertisement
     public class AdvertisementService : IInitializable, IDisposable
     {
         public RewardedState RewardedState;
-        private AudioService _audioService;
+        private readonly AudioService _audioService;
         
-
         public AdvertisementService(AudioService audioService)
         {
             _audioService = audioService;
