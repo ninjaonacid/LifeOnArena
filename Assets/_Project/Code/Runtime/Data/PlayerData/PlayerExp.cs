@@ -25,7 +25,7 @@ namespace Code.Runtime.Data.PlayerData
             CurrentExperience = 0;
         }
         
-        public void AddExperience(int amount)
+        public void AddExperience(float amount)
         {
             CurrentExperience += amount;
             

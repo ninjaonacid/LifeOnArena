@@ -29,7 +29,7 @@ namespace Code.Runtime.Core.Factory
         private readonly IAssetProvider _assetProvider;
         private readonly ISaveLoadService _saveLoadService;
         private readonly IGameDataContainer _gameDataContainer;
-        private readonly IRandomService _randomService;
+        private readonly RandomService _randomService;
         private readonly IObjectResolver _objectResolver;
         private readonly LevelLoader _levelLoader;
         private readonly ObjectPoolProvider _objectPoolProvider;
@@ -37,7 +37,7 @@ namespace Code.Runtime.Core.Factory
         private readonly CancellationTokenSource _cancellationTokenSource = default;
         public EnemyFactory(HeroFactory heroFactory, ConfigProvider config, IAssetProvider assetProvider, 
             ISaveLoadService saveLoadService, IGameDataContainer gameDataContainer,
-            IRandomService randomService, IObjectResolver objectResolver, LevelLoader levelLoader, ObjectPoolProvider poolProvider)
+            RandomService randomService, IObjectResolver objectResolver, LevelLoader levelLoader, ObjectPoolProvider poolProvider)
         {
             _heroFactory = heroFactory;
             _config = config;

@@ -17,7 +17,7 @@ namespace Code.Runtime.Entity.Enemy
         [SerializeField] private VisualEffectIdentifier _souls;
         [SerializeField] private EnemyDeath _enemyDeath;
 
-        private IRandomService _randomService;
+        private RandomService _randomService;
         private VisualEffectFactory _visualEffectFactory;
         private IGameDataContainer _dataContainer;
         private LevelCollectableTracker _collectablesTracker;
@@ -28,7 +28,7 @@ namespace Code.Runtime.Entity.Enemy
 
         [Inject]
         public void Construct(VisualEffectFactory visualEffectFactory,
-            IRandomService randomService, IGameDataContainer dataContainer, LevelCollectableTracker collectables)
+            RandomService randomService, IGameDataContainer dataContainer, LevelCollectableTracker collectables)
         {
             _randomService = randomService;
             _visualEffectFactory = visualEffectFactory;

@@ -38,7 +38,7 @@ namespace Code.Runtime.Core.Scopes
             builder.Register<UIFactory, UIFactory>(Lifetime.Singleton);
             builder.Register<IAssetProvider, AssetProvider>(Lifetime.Singleton);
             builder.Register<IGameDataContainer, GameDataContainer>(Lifetime.Singleton);
-            builder.Register<IRandomService, RandomService>(Lifetime.Singleton);
+            builder.Register<RandomService, RandomService>(Lifetime.Singleton);
             builder.Register<IEventSystem, GameEventSystem>(Lifetime.Singleton);
             builder.Register<BattleService>(Lifetime.Singleton).AsSelf();
 

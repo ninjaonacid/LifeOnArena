@@ -16,9 +16,9 @@ namespace Code.Runtime.Entity.Enemy
         
         [Inject] private LevelCollectableTracker _collectableTracker;
 
-        private IRandomService _random;
+        private RandomService _random;
 
-        public void Construct(IRandomService randomService, PlayerExp playerExp)
+        public void Construct(RandomService randomService, PlayerExp playerExp)
         {
             _random = randomService;
             _playerExp = playerExp;
@@ -31,9 +31,9 @@ namespace Code.Runtime.Entity.Enemy
 
         private void AddExperienceToPlayer()
         {
-            var minExpResult = _minExp * _playerExp.Level;
+            var minExpResult = _minExp * ((float)_playerExp.Level / 2);
 
-            var maxExpResult = _maxExp * _playerExp.Level;
+            var maxExpResult = _maxExp * ((float)_playerExp.Level / 2);
 
             var randomExpResult = _random.RandomizeValue(minExpResult, maxExpResult);
 

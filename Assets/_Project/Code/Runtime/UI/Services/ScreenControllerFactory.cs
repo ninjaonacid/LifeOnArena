@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using Code.Runtime.Core.Audio;
 using Code.Runtime.Core.EventSystem;
 using Code.Runtime.Core.Factory;
-using Code.Runtime.Core.SceneManagement;
-using Code.Runtime.Logic.WaveLogic;
 using Code.Runtime.Modules.Advertisement;
 using Code.Runtime.Modules.LocalizationProvider;
 using Code.Runtime.Modules.TutorialService;
@@ -60,6 +58,9 @@ namespace Code.Runtime.UI.Services
             
             _screenControllers.Add(typeof(MainMenuSettingsPopupController), 
             () => new MainMenuSettingsPopupController(localService, audioService));
+            
+            _screenControllers.Add(typeof(HeroDeathPopupController), 
+                () => new HeroDeathPopupController(levelLoader, adService));
         }
 
         public IScreenController CreateController(Type controller)
