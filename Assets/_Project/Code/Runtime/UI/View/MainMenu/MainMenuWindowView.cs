@@ -10,11 +10,5 @@ namespace Code.Runtime.UI.View.MainMenu
         public OpenScreenButton WeaponScreen;
         public BaseButton SettingsButton;
         public StatWindow StatWindow;
-        public MusicButton MusicButton;
-        public SoundButton SoundButton;
-
-        public Button TurkishLang;
-        public Button EnglishLang;
-        public Button RussianLang;
     }
 }
