@@ -17,6 +17,7 @@ namespace Code.Runtime.UI.Controller
 
         private readonly LocalizationService _localService;
         private readonly AudioService _audioService;
+        private ScreenService _screenService;
 
         public MainMenuSettingsPopupController(LocalizationService localizationService, AudioService audioService)
         {
@@ -28,11 +29,14 @@ namespace Code.Runtime.UI.Controller
         {
             _view = windowView as MainMenuSettingsPopupView;
             _model = model as MainMenuSettingsPopupModel;
+            _screenService = screenService;
 
             Assert.IsNotNull(_view);
             Assert.IsNotNull(_model);
 
             SubscribeLanguageButtons();
+            SubscribeAudioButtons();
+            SubscribeCloseButton();
         }
 
         private void SubscribeLanguageButtons()
@@ -67,6 +71,14 @@ namespace Code.Runtime.UI.Controller
                     
                     _view.SoundButton.SetButton(_model.MusicButton);
                 });
+        }
+
+        private void SubscribeCloseButton()
+        {
+            _view.CloseButton.OnClickAsObservable().Subscribe(x => 
+            {
+                _screenService.Close(this);
+            });
         }
     }
 }

@@ -22,7 +22,7 @@ namespace Code.Runtime.UI.Controller
 
         public TutorialMainMenuController(IGameDataContainer gameData, AudioService audioService,
             LevelLoader levelLoader, LocalizationService localService, TutorialService tutorialService) : base(gameData,
-            audioService, levelLoader, localService)
+            audioService, levelLoader)
         {
             _tutorialService = tutorialService;
         }

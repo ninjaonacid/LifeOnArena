@@ -18,55 +18,39 @@ namespace Code.Runtime.UI.Controller
     {
         protected MainMenuModel _model;
         protected MainMenuWindowView _windowView;
-        
+
         private ScreenService _screenService;
         private readonly IGameDataContainer _gameData;
         private readonly LevelLoader _levelLoader;
         private readonly SceneLoader _sceneLoader;
         private readonly AudioService _audioService;
-        private readonly LocalizationService _localService;
-        private readonly CompositeDisposable _disposables = new CompositeDisposable();
+        private readonly CompositeDisposable _disposables = new();
 
-        public MainMenuController(IGameDataContainer gameData, AudioService audioService, LevelLoader levelLoader, LocalizationService localService)
+        public MainMenuController(IGameDataContainer gameData, AudioService audioService, LevelLoader levelLoader)
         {
             _gameData = gameData;
             _levelLoader = levelLoader;
             _audioService = audioService;
-            _localService = localService;
         }
-        
+
         public virtual void InitController(IScreenModel model, BaseWindowView windowView, ScreenService screenService)
         {
             _model = model as MainMenuModel;
             _windowView = windowView as MainMenuWindowView;
             _screenService = screenService;
-            
+
             Assert.IsNotNull(_model);
             Assert.IsNotNull(_windowView);
 
-            _windowView.RussianLang
-                .OnClickAsObservable()
-                .Subscribe(x => _localService.ChangeLanguage(SystemLanguage.Russian));
-
-            _windowView.EnglishLang
-                .OnClickAsObservable()
-                .Subscribe(x => _localService.ChangeLanguage(SystemLanguage.English));
-
-            _windowView.TurkishLang
-                .OnClickAsObservable()
-                .Subscribe(x => _localService.ChangeLanguage(SystemLanguage.Turkish));
-            
-            
-            
             InitializeButtons();
             InitializeStats();
             UpdateAllStatButtons();
         }
-        
+
         private void InitializeStats()
         {
             _windowView.StatWindow.Level.text = _model.Level.ToString();
-            
+
             InitializeStat(_model.Health, _windowView.StatWindow.Health, _model.CanUpgradeHealth, _model.UpgradeHealth);
             InitializeStat(_model.Attack, _windowView.StatWindow.Attack, _model.CanUpgradeAttack, _model.UpgradeAttack);
             InitializeStat(_model.Magic, _windowView.StatWindow.Magic, _model.CanUpgradeMagic, _model.UpgradeMagic);
