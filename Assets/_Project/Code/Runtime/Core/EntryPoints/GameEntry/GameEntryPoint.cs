@@ -30,6 +30,7 @@ namespace Code.Runtime.Core.EntryPoints.GameEntry
         {
             _gameState.LoadDataOrCreateNew();
             _levelLoader.LoadLevel(_startLevelId);
+            
         }
         
     }

@@ -2,7 +2,6 @@ using System;
 using Code.Runtime.Core.Audio;
 using InstantGamesBridge;
 using InstantGamesBridge.Modules.Advertisement;
-using UnityEngine;
 using VContainer.Unity;
 
 namespace Code.Runtime.Modules.Advertisement
@@ -31,6 +30,23 @@ namespace Code.Runtime.Modules.Advertisement
         public void Initialize()
         {
             Bridge.advertisement.rewardedStateChanged += OnRewardedStateChange;
+            Bridge.advertisement.interstitialStateChanged += OnInterstitialStateChange;
+        }
+
+        private void OnInterstitialStateChange(InterstitialState state)
+        {
+            if (state == InterstitialState.Opened)
+            {
+                _audioService.PauseAll();
+            } 
+            else if (state == InterstitialState.Closed)
+            {
+                _audioService.UnpauseAll();
+            }
+            else if (state == InterstitialState.Failed)
+            {
+                _audioService.UnpauseAll();
+            }
         }
 
         private void OnRewardedStateChange(RewardedState state)
@@ -42,8 +58,18 @@ namespace Code.Runtime.Modules.Advertisement
             else if (state == RewardedState.Closed)
             {
                 _audioService.UnpauseAll();
+            } 
+            else if (state == RewardedState.Failed)
+            {
+                _audioService.UnpauseAll();
+            } 
+            else if (state == RewardedState.Rewarded)
+            {
+                
             }
         }
+
+   
 
         public void Dispose()
         {

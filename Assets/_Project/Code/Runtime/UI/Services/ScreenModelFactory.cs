@@ -31,6 +31,7 @@ namespace Code.Runtime.UI.Services
             _modelMap.Add(typeof(ArenaSelectionScreenModel), (dto) => new ArenaSelectionScreenModel(config, gameData));
             _modelMap.Add(typeof(RewardPopupModel), (dto) => new RewardPopupModel(dto));
             _modelMap.Add(typeof(MissionSummaryWindowModel), (dto) => new MissionSummaryWindowModel(dto));
+            _modelMap.Add(typeof(MainMenuSettingsPopupModel), (dto) => new MainMenuSettingsPopupModel(gameData));
         }
         
         

@@ -33,6 +33,8 @@ namespace Code.Runtime.UI.Controller
                     _levelLoader.LoadLevel("MainMenu");
                 });
             
+            
+            
             _view.ConfirmButton.PlayScaleAnimation();
         }
     }

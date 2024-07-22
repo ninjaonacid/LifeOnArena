@@ -16,10 +16,11 @@ namespace Code.Runtime.Entity.Enemy
         [SerializeField] private RewardBlueprintBase _mainReward;
         [SerializeField] private RewardBlueprintBase _secondReward;
         [SerializeField] private TreasureChest _treasurePrefab;
+        
         private GameRewardSystem _gameReward;
         private IGameDataContainer _gameData;
 
-        private CancellationTokenSource _cts = new();
+        private readonly CancellationTokenSource _cts = new();
         
         [Inject]
         public void Construct(GameRewardSystem gameReward, IGameDataContainer gameData)

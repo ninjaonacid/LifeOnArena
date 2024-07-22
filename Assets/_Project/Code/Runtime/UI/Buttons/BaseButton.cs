@@ -12,7 +12,7 @@ namespace Code.Runtime.UI.Buttons
         [SerializeField] private Color32 _pressedColor = new Color32(253, 0, 0, 255);
         [SerializeField] private Color32 _baseColor = new Color32(255, 255, 255, 255);
         
-        [SerializeField] private Image _buttonImage;
+        [SerializeField] protected Image _buttonImage;
 
         private Subject<PointerEventData> _subject;
 

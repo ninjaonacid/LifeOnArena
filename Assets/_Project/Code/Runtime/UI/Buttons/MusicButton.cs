@@ -14,11 +14,13 @@ namespace Code.Runtime.UI.Buttons
             {
                 OffImage.enabled = false;
                 OnImage.enabled = true;
+                _buttonImage = OnImage;
             }
             else
             {
                 OnImage.enabled = true;
                 OffImage.enabled = false;
+                _buttonImage = OffImage;
             }
         }
     }

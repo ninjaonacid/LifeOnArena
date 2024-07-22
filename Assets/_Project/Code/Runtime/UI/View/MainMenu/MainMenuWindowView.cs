@@ -8,6 +8,7 @@ namespace Code.Runtime.UI.View.MainMenu
         public OpenScreenButton StartFightButton;
         public OpenScreenButton SkillScreen;
         public OpenScreenButton WeaponScreen;
+        public BaseButton SettingsButton;
         public StatWindow StatWindow;
         public MusicButton MusicButton;
         public SoundButton SoundButton;

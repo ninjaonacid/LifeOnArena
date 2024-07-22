@@ -6,16 +6,11 @@ namespace Code.Runtime.Logic.TreasureChest
 {
     public class LootView : MonoBehaviour
     {
-        private Transform _player;
         public Action LootReady;
-        public void MoveTo(Transform target)
-        {
-            transform.DOMove(new Vector3(target.transform.position.x, target.transform.position.y, target.transform.position.z), 1f);
-        }
 
         public void LootSpawnLogic()
         {
-            //Tween rotationTween = transform.DOShakeRotation(2f, 90f, 10, 90f).SetLink(gameObject);
+            Tween rotationTween = transform.DOShakeRotation(2f, 90f, 10, 90f).SetLink(gameObject);
             Tween moveTween = transform.DOLocalMove(new Vector3(0, 5, 0), 2f).SetLink(gameObject);
 
             Tween sequence = DOTween.Sequence()
@@ -26,12 +21,6 @@ namespace Code.Runtime.Logic.TreasureChest
                     LootReady?.Invoke();
                     Destroy(gameObject);
                 });
-
-        }
-
-        public void SetTarget(Transform targetTransform)
-        {
-            _player = targetTransform;
         }
     }
 }

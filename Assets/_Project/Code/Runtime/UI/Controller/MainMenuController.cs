@@ -91,6 +91,9 @@ namespace Code.Runtime.UI.Controller
             _windowView.WeaponScreen.OnClickAsObservable()
                 .Subscribe(_ => _screenService.Open(_windowView.WeaponScreen.WindowId))
                 .AddTo(_disposables);
+
+            _windowView.SettingsButton.OnClickAsObservable()
+                .Subscribe(x => _screenService.Open(ScreenID.MainMenuSettingsPopUpView));
         }
 
         private void UpdateAllStatButtons()

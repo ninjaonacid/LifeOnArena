@@ -12,6 +12,7 @@ namespace Code.Runtime.UI
         MessageWindowTimer = 8,
         ArenaSelectionScreen = 9,
         MissionSummaryWindow = 10,
-        RewardPopup = 11
+        RewardPopup = 11,
+        MainMenuSettingsPopUpView = 12
     }
 }

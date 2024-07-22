@@ -19,8 +19,8 @@ namespace Code.Runtime.Core.Audio
         private readonly Dictionary<string, BaseAudioFile> _sfx = new();
         private readonly Dictionary<string, BaseAudioFile> _bgm = new();
         
-        private List<SoundAudioChannel> _soundChannelsPool = new();
-        private List<MusicAudioChannel> _musicChannelsPool = new();
+        private readonly List<SoundAudioChannel> _soundChannelsPool = new();
+        private readonly List<MusicAudioChannel> _musicChannelsPool = new();
 
         private MusicAudioChannel _mainMusicChannel;
         
@@ -50,6 +50,7 @@ namespace Code.Runtime.Core.Audio
             _masterMixer = _audioSettings.MasterMixerGroup;
             _sfxMixer = _audioSettings.SfxMixerGroup;
             
+            
             for (int i = 0; i < _audioSettings.SoundChannelsPoolSize; i++)
             {
                 SoundAudioChannel channel = CreateSoundChannel();
@@ -68,9 +69,17 @@ namespace Code.Runtime.Core.Audio
             }
         }
 
-        public void MuteMusic()
+        public void MuteMusic(bool value)
         {
-            _musicMixer.audioMixer.SetFloat("Volume", -80f);
+            _mainMusicChannel.AudioSource.mute = value;
+        }
+
+        public void MuteSounds(bool value)
+        {
+            foreach (var channel in _soundChannelsPool)
+            {
+                channel.AudioSource.mute = value;
+            }
         }
 
         public void PlayBackgroundMusic(string musicName, float volume = 1, bool isLoop = false)
@@ -189,6 +198,21 @@ namespace Code.Runtime.Core.Audio
             }
         }
 
+        public void PauseMusic()
+        {
+            if (!_mainMusicChannel.IsFree)
+            {
+                _mainMusicChannel.AudioSource.Pause();
+            }
+        }
+
+        public void UnpauseMusic()
+        {
+            if (!_mainMusicChannel.IsFree)
+            {
+                _mainMusicChannel.UnPause();
+            }
+        }
         public void PauseAll()
         {
             foreach (var channel in _soundChannelsPool)
@@ -201,7 +225,7 @@ namespace Code.Runtime.Core.Audio
             
             if (!_mainMusicChannel.IsFree)
             {
-                _mainMusicChannel.Stop();
+                _mainMusicChannel.Pause();
             }
         }
 
@@ -218,6 +242,25 @@ namespace Code.Runtime.Core.Audio
             if (!_mainMusicChannel.IsFree)
             {
                 _mainMusicChannel.UnPause();
+            }
+        }
+
+        public void StopMusic()
+        {
+            if (!_mainMusicChannel.IsFree)
+            {
+                _mainMusicChannel.Stop();
+            }
+        }
+
+        public void StopSounds()
+        {
+            foreach (var channel in _soundChannelsPool)
+            {
+                if (!channel.IsFree)
+                {
+                    channel.Stop();
+                }
             }
         }
 
@@ -267,25 +310,6 @@ namespace Code.Runtime.Core.Audio
             soundChannel.InitializeChannel(_soundChannels, _audioSettings.SfxMixerGroup);
 
             return soundChannel;
-        }
-
-        private void StopMusic()
-        {
-            if (!_mainMusicChannel.IsFree)
-            {
-                _mainMusicChannel.Stop();
-            }
-        }
-
-        private void StopAllSounds()
-        {
-            foreach (var channel in _soundChannelsPool)
-            {
-                if (!channel.IsFree)
-                {
-                    channel.Stop();
-                }
-            }
         }
 
         public void CleanUp()

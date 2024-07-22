@@ -57,6 +57,9 @@ namespace Code.Runtime.UI.Services
 
             _screenControllers.Add(typeof(MissionSummaryWindowController),
                 () => new MissionSummaryWindowController());
+            
+            _screenControllers.Add(typeof(MainMenuSettingsPopupController), 
+            () => new MainMenuSettingsPopupController(localService, audioService));
         }
 
         public IScreenController CreateController(Type controller)

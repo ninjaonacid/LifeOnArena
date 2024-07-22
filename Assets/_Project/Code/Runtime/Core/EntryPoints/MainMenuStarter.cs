@@ -28,7 +28,8 @@ namespace Code.Runtime.Core.EntryPoints
 
         public MainMenuStarter(HeroFactory heroFactory, UIFactory uiFactory,
             ScreenService screenService,
-            LevelLoader levelLoader, ISaveLoadService saveLoad, PlayerControls controls,
+            LevelLoader levelLoader, ISaveLoadService saveLoad, 
+            PlayerControls controls,
             AudioService audioService, AdvertisementService adService)
         {
             _heroFactory = heroFactory;
