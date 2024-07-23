@@ -60,7 +60,7 @@ namespace Code.Runtime.UI.Services
             () => new MainMenuSettingsPopupController(localService, audioService));
             
             _screenControllers.Add(typeof(HudSettingsPopupController), 
-                () => new HudSettingsPopupController(pauseService));
+                () => new HudSettingsPopupController(pauseService, levelLoader));
             
             _screenControllers.Add(typeof(HeroDeathPopupController), 
                 () => new HeroDeathPopupController(levelLoader, adService, pauseService));

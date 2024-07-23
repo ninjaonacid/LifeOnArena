@@ -4,8 +4,8 @@ namespace Code.Runtime.UI.Model
 {
     public class MainMenuSettingsPopupModel : IScreenModel, ISavableModel
     {
-        public bool SoundButton;
-        public bool MusicButton;
+        public bool IsSoundOn;
+        public bool IsMusicOn;
         
         private readonly IGameDataContainer _gameData;
         
@@ -16,30 +16,30 @@ namespace Code.Runtime.UI.Model
         
         public void Initialize()
         {
-            MusicButton = _gameData.AudioData.isMusicMuted;
-            SoundButton = _gameData.AudioData.isSoundMuted;
+            IsMusicOn = _gameData.AudioData.isMusicMuted;
+            IsSoundOn = _gameData.AudioData.isSoundMuted;
         }
 
         public void ChangeSoundState(bool value)
         {
-            SoundButton = value;
+            IsSoundOn = value;
         }
 
         public void ChangeMusicState(bool value)
         {
-            MusicButton = value;
+            IsMusicOn = value;
         }
 
         public void LoadData()
         {
-            _gameData.AudioData.isMusicMuted = MusicButton;
-            _gameData.AudioData.isSoundMuted = SoundButton;
+            _gameData.AudioData.isMusicMuted = IsMusicOn;
+            _gameData.AudioData.isSoundMuted = IsSoundOn;
         }
 
         public void SaveModelData()
         {
-            _gameData.AudioData.isMusicMuted = MusicButton;
-            _gameData.AudioData.isSoundMuted = SoundButton;
+            _gameData.AudioData.isMusicMuted = IsMusicOn;
+            _gameData.AudioData.isSoundMuted = IsSoundOn;
         }
     }
 }

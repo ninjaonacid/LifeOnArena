@@ -54,22 +54,21 @@ namespace Code.Runtime.UI.Controller
 
         private void SubscribeAudioButtons()
         {
-            _view.MusicButton.SetButton(_model.MusicButton);
-            _view.SoundButton.SetButton(_model.SoundButton);
+            _view.MusicButton.SetButton(_model.IsMusicOn);
+            _view.SoundButton.SetButton(_model.IsSoundOn);
             
             _view.MusicButton.OnClickAsObservable()
                 .Subscribe(x =>
                 {
-                    _audioService.MuteMusic(!_model.MusicButton);
-                    _view.MusicButton.SetButton(!_model.MusicButton);
+                    _audioService.MuteMusic(!_model.IsMusicOn);
+                    _view.MusicButton.SetButton(!_model.IsMusicOn);
                 });
 
             _view.SoundButton.OnClickAsObservable()
                 .Subscribe(x =>
                 {
-                    _audioService.MuteSounds(!_model.SoundButton);
-                    
-                    _view.SoundButton.SetButton(_model.MusicButton);
+                    _audioService.MuteSounds(!_model.IsSoundOn);
+                    _view.SoundButton.SetButton(_model.IsMusicOn);
                 });
         }
 

@@ -1,4 +1,5 @@
-﻿using Code.Runtime.Services.PauseService;
+﻿using Code.Runtime.Services.LevelLoaderService;
+using Code.Runtime.Services.PauseService;
 using Code.Runtime.UI.Model;
 using Code.Runtime.UI.Services;
 using Code.Runtime.UI.View;
@@ -14,10 +15,11 @@ namespace Code.Runtime.UI.Controller
         private HudSettingsPopupModel _model;
 
         private readonly PauseService _pauseService;
-
-        public HudSettingsPopupController(PauseService pauseService)
+        private readonly LevelLoader _levelLoader;
+        public HudSettingsPopupController(PauseService pauseService, LevelLoader levelLoader)
         {
             _pauseService = pauseService;
+            _levelLoader = levelLoader;
         }
 
         public void InitController(IScreenModel model, BaseWindowView windowView, ScreenService screenService)
@@ -36,6 +38,12 @@ namespace Code.Runtime.UI.Controller
             {
                 _pauseService.UnpauseGame();
                 screenService.Close(this);
+            });
+
+            _view.ReturnToPortalButton.OnClickAsObservable().Subscribe(x =>
+            {
+                _pauseService.UnpauseGame();
+                _levelLoader.LoadLevel("MainMenu");
             });
         }
     }

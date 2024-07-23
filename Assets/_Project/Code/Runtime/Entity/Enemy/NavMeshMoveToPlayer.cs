@@ -20,7 +20,7 @@ namespace Code.Runtime.Entity.Enemy
 
         public void ShouldMove(bool context)
         {
-            if(gameObject.activeSelf)
+            if(gameObject.activeInHierarchy)
                 _navMeshAgent.isStopped = !context;
         }
 
