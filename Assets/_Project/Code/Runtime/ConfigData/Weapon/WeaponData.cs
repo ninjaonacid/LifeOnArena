@@ -24,6 +24,7 @@ namespace Code.Runtime.ConfigData.Weapon
         [SerializeField] private bool _isWithShield;
         [SerializeField] private VisualEffectData _hitVfx;
         [SerializeField] private AnimatorOverrideController _overrideController;
+        [SerializeField] private SoundAudioFile _weaponHitSound;
         [SerializeField] private SoundAudioFile _weaponSound;
         [SerializeField] private List<DamageType> _damageType;
         [SerializeField] private List<AttackConfig> _attacks;
@@ -42,6 +43,7 @@ namespace Code.Runtime.ConfigData.Weapon
         public bool IsWithShield => _isWithShield;
         public VisualEffectData HitVisualEffect => _hitVfx;
         public AnimatorOverrideController OverrideController => _overrideController;
+        public SoundAudioFile WeaponHitSound => _weaponHitSound;
         public SoundAudioFile WeaponSound => _weaponSound;
         public int PossibleCollisions => _possibleCollisions;
         public IRequirement<PlayerData> UnlockRequirement => _unlockRequirement;

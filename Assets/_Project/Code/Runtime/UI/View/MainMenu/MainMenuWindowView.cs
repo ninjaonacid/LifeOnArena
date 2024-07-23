@@ -1,4 +1,6 @@
 using Code.Runtime.UI.Buttons;
+using Code.Runtime.UI.View.AbilityMenu;
+using TMPro;
 using UnityEngine.UI;
 
 namespace Code.Runtime.UI.View.MainMenu
@@ -10,5 +12,6 @@ namespace Code.Runtime.UI.View.MainMenu
         public OpenScreenButton WeaponScreen;
         public BaseButton SettingsButton;
         public StatWindow StatWindow;
+        public ResourcesCountUI ResourceCount;
     }
 }

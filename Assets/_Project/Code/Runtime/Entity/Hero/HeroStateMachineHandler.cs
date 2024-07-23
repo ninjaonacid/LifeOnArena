@@ -18,16 +18,12 @@ namespace Code.Runtime.Entity.Hero
 {
     public class HeroStateMachineHandler : MonoBehaviour
     {
-        private ConfigProvider _configProvider;
 
         private const string HeroIdle = "HeroIdle";
         private const string HeroMovement = "HeroMovement";
         private const string AbilityCast = "AbilityCast";
         private const string SpinAttackAbility = "SpinAttackAbility";
         private const string RollAbility = "RollAbility";
-        private const string HeroBaseAttack1 = "HeroBaseAttack1";
-        private const string HeroBaseAttack2 = "HeroBaseAttack2";
-        private const string HeroBaseAttack3 = "HeroBaseAttack3";
 
         private FiniteStateMachine _stateMachine;
         private PlayerControls _controls;
@@ -51,11 +47,10 @@ namespace Code.Runtime.Entity.Hero
 
 
         [Inject]
-        public void Construct(PlayerControls controls, AudioService audioService, ConfigProvider configProvider)
+        public void Construct(PlayerControls controls, AudioService audioService)
         {
             _controls = controls;
             _audioService = audioService;
-            _configProvider = configProvider;
         }
 
         void Update()

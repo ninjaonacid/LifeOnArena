@@ -54,7 +54,7 @@ namespace Code.Runtime.UI.Services
                 () => new RewardPopupController(localService, pauseService));
 
             _screenControllers.Add(typeof(MissionSummaryWindowController),
-                () => new MissionSummaryWindowController(levelLoader));
+                () => new MissionSummaryWindowController(levelLoader, collectableTracker));
             
             _screenControllers.Add(typeof(MainMenuSettingsPopupController), 
             () => new MainMenuSettingsPopupController(localService, audioService));

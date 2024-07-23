@@ -1,3 +1,4 @@
+using Code.Runtime.Services;
 using Code.Runtime.Services.LevelLoaderService;
 using Code.Runtime.UI.Model;
 using Code.Runtime.UI.Model.MissionSummaryWindowModel;
@@ -16,10 +17,12 @@ namespace Code.Runtime.UI.Controller
         private MissionSummaryWindowView _view;
 
         private readonly LevelLoader _levelLoader;
+        private readonly LevelCollectableTracker _collectableTracker;
 
-        public MissionSummaryWindowController(LevelLoader levelLoader)
+        public MissionSummaryWindowController(LevelLoader levelLoader, LevelCollectableTracker collectableTracker)
         {
             _levelLoader = levelLoader;
+            _collectableTracker = collectableTracker;
         }
 
         public void InitController(IScreenModel model, BaseWindowView windowView, ScreenService screenService)
@@ -38,6 +41,14 @@ namespace Code.Runtime.UI.Controller
                     _levelLoader.LoadLevel("MainMenu");
                 });
 
+            _view.EnemiesExp.SetText(_collectableTracker.GainedExperience.ToString());
+            _view.LevelExp.SetText(_collectableTracker.ObjectiveExperienceReward.ToString());
+            _view.TotalExp.SetText((_collectableTracker.GainedExperience + _collectableTracker.ObjectiveExperienceReward).ToString());
+            
+            _view.SoulsFromEnemies.SetText(_collectableTracker.SoulsLoot.ToString());
+            _view.SoulsForLevel.SetText(_collectableTracker.ObjectiveSoulsReward.ToString());
+            _view.TotalSouls.SetText((_collectableTracker.ObjectiveSoulsReward + _collectableTracker.SoulsLoot).ToString());
+            
             _view.ConfirmButton.PlayScaleAnimation();
         }
     }

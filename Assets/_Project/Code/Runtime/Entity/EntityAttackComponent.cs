@@ -99,7 +99,7 @@ namespace Code.Runtime.Entity
             _visualEffectController.PlayVisualEffect(
                 _entityWeapon.WeaponData.HitVisualEffect, collision.Target.transform.position).Forget();
 
-            _audioService.PlaySound3D("Hit", collision.Target.transform, 1f);
+            _audioService.PlaySound3D(_entityWeapon.WeaponData.WeaponHitSound, collision.Target.transform, 1f);
             _battleService.CreateWeaponAttack(_stats, collision.Target);
 
             InvokeHit(1);

@@ -42,7 +42,18 @@ namespace Code.Runtime.UI.Controller
 
             InitializeButtons();
             InitializeStats();
+            InitializeSouls();
             UpdateAllStatButtons();
+        }
+
+        private void InitializeSouls()
+        {
+            _windowView.ResourceCount.ChangeText(_model.Souls.Value.ToString());
+            
+            _model.Souls.Subscribe(x =>
+            {
+                _windowView.ResourceCount.ChangeText(_model.Souls.Value.ToString());
+            });
         }
 
         private void InitializeStats()

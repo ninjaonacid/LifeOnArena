@@ -29,6 +29,7 @@ namespace Code.Runtime.ConfigData.Levels
         public IRequirement<PlayerData> UnlockRequirement;
         public int WavesToSpawn = 3;
         public float ExpForComplete;
+        public int SoulsForComplete;
         public bool IsBossLevel;
         
         [Range(1, 3)]

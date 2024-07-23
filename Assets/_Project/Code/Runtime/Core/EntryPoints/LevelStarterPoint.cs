@@ -57,8 +57,8 @@ namespace Code.Runtime.Core.EntryPoints
             InitializeInput();
             CameraFollow(hero);
             
-            _collectableTracker.CollectObjectiveExperience(config.ExpForComplete);
-
+            _collectableTracker.SetObjectiveExperience(config.ExpForComplete);
+            _collectableTracker.SetObjectiveSoulsReward(config.SoulsForComplete);
             _saveLoad.LoadData();
 
             _enemySpawnerController.RunSpawner();

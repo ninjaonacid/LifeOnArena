@@ -2607,7 +2607,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1426183656767462181}
   m_Layer: 0
-  m_Name: SummarySubject
+  m_Name: ExpForEnemies
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2833,7 +2833,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1339915872156137467}
   m_Layer: 0
-  m_Name: Object
+  m_Name: ExpForEnemies
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3258,6 +3258,12 @@ MonoBehaviour:
   CloseButton: {fileID: 0}
   _animation: {fileID: 0}
   ConfirmButton: {fileID: 815072223778907598}
+  EnemiesExp: {fileID: 6565903610402084363}
+  LevelExp: {fileID: 8420230511039779088}
+  SoulsFromEnemies: {fileID: 8531137002582141862}
+  SoulsForLevel: {fileID: 2303756702821823782}
+  TotalExp: {fileID: 4205416921474030958}
+  TotalSouls: {fileID: 3926874247027290501}
 --- !u!1 &7029480147608230901
 GameObject:
   m_ObjectHideFlags: 0
@@ -4109,7 +4115,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 8eef7f2843f883944b3b9be9936bd182, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4a5b9405a58bb204e8c1449d90f3ccd5, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4264,7 +4270,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4574660741759454426}
   m_Layer: 0
-  m_Name: Experience
+  m_Name: Souls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

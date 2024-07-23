@@ -103,7 +103,6 @@ namespace Code.Runtime.Modules.AbilitySystem
                     return true;
                 }
             }
-
             return false;
         }
 
@@ -147,20 +146,20 @@ namespace Code.Runtime.Modules.AbilitySystem
         {
             OnSkillChanged?.Invoke();
         }
-        
+
+        public bool TryActivateAbility(string abilityName)
+        {
+            return TryActivateAbility(slot => slot.AbilityIdentifier.name == abilityName);
+        }
+
         public bool TryActivateAbility(AbilityIdentifier abilityId)
         {
             return TryActivateAbility(slot => slot.AbilityIdentifier == abilityId);
         }
 
-        public bool TryActivateAbility(ActiveAbility ability)
+        protected bool TryActivateAbility(ActiveAbility ability)
         {
             return TryActivateAbility(slot => slot.Ability == ability);
-        }
-
-        public bool TryActivateAbility(string abilityName)
-        {
-            return TryActivateAbility(slot => slot.AbilityIdentifier.name == abilityName);
         }
 
         private bool TryActivateAbility(Func<AbilitySlot, bool> predicate)
@@ -172,7 +171,6 @@ namespace Code.Runtime.Modules.AbilitySystem
                 ActivateAbility(slot.Ability);
                 return true;
             }
-
             return false;
         }
 
@@ -184,6 +182,5 @@ namespace Code.Runtime.Modules.AbilitySystem
             _cooldownController.StartCooldown(ability);
             OnAbilityUse?.Invoke(ability);
         }
-
     }
 }

@@ -26,6 +26,8 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
 
             MaxCombo = weaponData.AttacksConfigs.Count;
             
+           
+            
             if (_timer.Elapsed > _comboWindow)
             {
                 ResetComboCounter();
@@ -37,7 +39,8 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
 
             ActiveTime = attackConfig.AnimationData.Length - 0.1f;
             CurrentActiveTime = attackConfig.AnimationData.Length - 0.1f;
-
+            
+            _audioService.PlaySound3D(weaponData.WeaponSound, caster.transform);
             ComboCount++;
             
             _timer.Reset();
