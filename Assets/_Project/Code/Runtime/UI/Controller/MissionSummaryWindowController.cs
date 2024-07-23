@@ -15,7 +15,12 @@ namespace Code.Runtime.UI.Controller
         private MissionSummaryWindowModel _model;
         private MissionSummaryWindowView _view;
 
-        private LevelLoader _levelLoader;
+        private readonly LevelLoader _levelLoader;
+
+        public MissionSummaryWindowController(LevelLoader levelLoader)
+        {
+            _levelLoader = levelLoader;
+        }
 
         public void InitController(IScreenModel model, BaseWindowView windowView, ScreenService screenService)
         {
