@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using Code.Runtime.ConfigData.Audio;
 using Code.Runtime.ConfigData.Settings;
 using Code.Runtime.Core.AssetManagement;
@@ -32,10 +33,11 @@ namespace Code.Runtime.Core.Audio
 
         private AudioLibrary _audioLibrary;
         private AudioServiceSettings _audioSettings;
-
+        
         private AudioMixerGroup _masterMixer;
         private AudioMixerGroup _musicMixer;
         private AudioMixerGroup _sfxMixer;
+        private CancellationTokenSource _cts = new();
 
 
         [Inject]
@@ -101,7 +103,7 @@ namespace Code.Runtime.Core.Audio
         {
             SoundAudioChannel soundChannel = PlaySoundInternal(sound, volume, targetTransform);
             
-            StopAfterDuration(soundChannel, duration).Forget();
+            StopAfterDuration(soundChannel, duration, _cts.Token).Forget();
         }
 
         public void PlaySound(string soundName, float volume)
@@ -316,11 +318,19 @@ namespace Code.Runtime.Core.Audio
             return soundChannel;
         }
         
-        private async UniTaskVoid StopAfterDuration(SoundAudioChannel channel, float duration)
+        private async UniTaskVoid StopAfterDuration(SoundAudioChannel channel, float duration, CancellationToken token)
         {
-            await UniTask.Delay(TimeSpan.FromSeconds(duration));
-
+            token.ThrowIfCancellationRequested();
+            await UniTask.Delay(TimeSpan.FromSeconds(duration), cancellationToken: token);
+            token.ThrowIfCancellationRequested();
+            
             channel.Stop();
+        }
+
+        private void OnDestroy()
+        {
+            _cts.Cancel();
+            _cts.Dispose();
         }
 
         public void CleanUp()

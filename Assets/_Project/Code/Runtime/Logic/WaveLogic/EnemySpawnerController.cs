@@ -30,7 +30,6 @@ namespace Code.Runtime.Logic.WaveLogic
         private readonly List<EnemySpawner> _enemySpawnPoints = new List<EnemySpawner>();
         private CancellationTokenSource _cancellationTokenSource = new();
         private int _numberOfWaves;
-        private int _killedEnemies;
         private int _aliveCommonEnemies = 0;
         private int _aliveBosses = 0;
         private bool _isBossSpawned = false;
@@ -82,8 +81,11 @@ namespace Code.Runtime.Logic.WaveLogic
                     {
                         if (spawner.EnemyType == EnemyType.Common)
                         {
-                            await spawner.Spawn(token);
-                            _aliveCommonEnemies++;
+                            var monster = await spawner.Spawn(token);
+                            if (monster != null)
+                            {
+                                _aliveCommonEnemies++;
+                            }
                         }
                     }
 
@@ -131,12 +133,10 @@ namespace Code.Runtime.Logic.WaveLogic
             if (spawner.EnemyType == EnemyType.Common)
             {
                 _aliveCommonEnemies--;
-                _killedEnemies++;
             }
             else
             {
                 _aliveBosses--;
-                _killedEnemies++;
             }
 
             _collectablesTracker.CollectKill();

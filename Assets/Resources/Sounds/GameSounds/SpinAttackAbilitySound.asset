@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afc60dc9d846edb488ba07146f64a86d, type: 3}
   m_Name: SpinAttackAbilitySound
   m_EditorClassIdentifier: 
-  Id: 
-  AudioFiles: []
-  AudioMixerGroup: {fileID: 0}
+  Id: SpinAttack
+  AudioFiles:
+  - {fileID: 8300000, guid: 742c40750a064fc419543bc7110d8ff6, type: 3}
+  AudioMixerGroup: {fileID: 24300002, guid: a25edeac5313f404396df563c38396e9, type: 2}
   SoundStatus: 0
   IsActivated: 0
-  IsLoopSound: 0
+  IsLoopSound: 1
