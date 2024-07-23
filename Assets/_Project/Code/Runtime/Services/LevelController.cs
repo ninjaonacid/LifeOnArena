@@ -55,7 +55,7 @@ namespace Code.Runtime.Services
 
         private void SubscribeToEvents()
         {
-            _eventSystem.Subscribe<HeroDeadEvent>(HeroDead);
+            _eventSystem.Subscribe<HeroDeadEvent>(HeroDeadEvent);
             _spawnerController.WaveStart += WaveStart;
             _spawnerController.CommonEnemiesCleared += CommonEnemiesCleared;
             _spawnerController.BossKilled += BossKilled;
@@ -104,7 +104,7 @@ namespace Code.Runtime.Services
                 new TimerMessageDto(localizedString, _spawnerController.TimeToNextWave));
         }
 
-        private async void HeroDead(HeroDeadEvent obj)
+        private async UniTaskVoid HeroDead(HeroDeadEvent obj)
         {
             _controls.Player.Disable();
 
@@ -115,11 +115,18 @@ namespace Code.Runtime.Services
             await UniTask.Delay(TimeSpan.FromSeconds(2),
                 DelayType.DeltaTime,
                 PlayerLoopTiming.Update, _cancellationToken.Token);
+            
+            _screenService.Open(ScreenID.HeroDeathPopupView);
+        }
+
+        private void HeroDeadEvent(HeroDeadEvent obj)
+        { 
+            HeroDead(obj).Forget();
         }
 
         private void UnsubscribeFromEvents()
         {
-            _eventSystem.Unsubscribe<HeroDeadEvent>(HeroDead);
+            _eventSystem.Unsubscribe<HeroDeadEvent>(HeroDeadEvent);
             _spawnerController.WaveStart -= WaveStart;
             _spawnerController.CommonEnemiesCleared -= CommonEnemiesCleared;
             _spawnerController.BossKilled -= BossKilled;

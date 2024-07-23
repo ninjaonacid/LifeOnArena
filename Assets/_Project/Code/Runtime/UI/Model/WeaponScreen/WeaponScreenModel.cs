@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using Code.Runtime.Core.Config;
 using Code.Runtime.Services.PersistentProgress;
-using UnityEngine.Localization.SmartFormat.Utilities;
 
 namespace Code.Runtime.UI.Model.WeaponScreen
 {
@@ -55,10 +54,9 @@ namespace Code.Runtime.UI.Model.WeaponScreen
                 if (_gameData.PlayerData.HeroEquipment.WeaponIntId == weapon.WeaponId.Id)
                 {
                     weaponUIModel.isEquipped = true;
+                    _equippedWeapon = weaponUIModel;
                 }
-                
-                
-                
+
                 _weaponModels.Add(weaponUIModel);
             }
         }
@@ -100,6 +98,5 @@ namespace Code.Runtime.UI.Model.WeaponScreen
         {
             return _weaponModels[index].isEquipped;
         }
-
     }
 }

@@ -75,13 +75,13 @@ namespace Code.Runtime.Modules.StatSystem
 
         public void UpdateData(PlayerData data)
         {
-            if (data.StatsData.StatsValues.TryAdd(_statDefinition.name, _currentValue))
+            if (data.StatsData.StatsValues.TryAdd(_statDefinition.name, _value))
             {
                 
             }
             else
             {
-                data.StatsData.StatsValues[_statDefinition.name] = _currentValue;
+                data.StatsData.StatsValues[_statDefinition.name] = _value;
             }
         }
         

@@ -12,10 +12,10 @@ namespace Code.Runtime.Entity.Enemy
 
         private int _minExp;
         private int _maxExp;
-        private PlayerExp _playerExp;
         
         [Inject] private LevelCollectableTracker _collectableTracker;
 
+        private PlayerExp _playerExp;
         private RandomService _random;
 
         public void Construct(RandomService randomService, PlayerExp playerExp)

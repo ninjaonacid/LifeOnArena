@@ -32,9 +32,7 @@ namespace Code.Runtime.UI.Controller
                     Debug.Log("ConfirmButtonPressed");
                     _levelLoader.LoadLevel("MainMenu");
                 });
-            
-            
-            
+
             _view.ConfirmButton.PlayScaleAnimation();
         }
     }

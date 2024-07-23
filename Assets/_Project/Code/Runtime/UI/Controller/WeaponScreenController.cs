@@ -1,5 +1,4 @@
 using System;
-using Code.Runtime.Core.SceneManagement;
 using Code.Runtime.UI.Model;
 using Code.Runtime.UI.Model.WeaponScreen;
 using Code.Runtime.UI.Services;

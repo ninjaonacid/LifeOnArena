@@ -11,7 +11,6 @@ using Code.Runtime.UI.Model.WeaponScreen;
 using Code.Runtime.UI.View;
 using JetBrains.Annotations;
 using UnityEngine;
-using UnityEngine.Assertions;
 
 namespace Code.Runtime.UI.Services
 {

@@ -12,6 +12,8 @@ namespace Code.Runtime.Entity.Enemy
     [RequireComponent(typeof(EnemyHealth), typeof(StatController))]
     public class EnemyDeath : MonoBehaviour
     {
+        public event Action Happened;
+        
         [SerializeField] private StatController _stats;
         [SerializeField] private EnemyHealth _health;
         [SerializeField] private EntityUI _entityUI;
@@ -20,21 +22,18 @@ namespace Code.Runtime.Entity.Enemy
         [SerializeField] private EnemyHurtBox _enemyHurtBox;
         [SerializeField] private EnemyTarget _enemyTarget;
         [SerializeField] private PooledObject _poolable;
-        
         [SerializeField] private bool _isAnimatedDeath;
         [SerializeField] private float _disappearDuration = 4f;
         [SerializeField] private float _maxForce;
         [SerializeField] private float _minForce;
         [SerializeField] private float _maxHeight;
+        public bool IsDead { get; private set; }
 
         private Rigidbody[] _fractureParts;
         private static readonly List<Vector3> _positions = new();
         private static readonly List<Quaternion> _rotations = new();
 
-        public bool IsDead { get; private set; }
-
-        public event Action Happened;
-
+        
         public void Initialize()
         {
             if (_stats.IsInitialized)
