@@ -1,9 +1,12 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Code.Runtime.ConfigData.Audio;
 using Code.Runtime.ConfigData.Settings;
 using Code.Runtime.Core.AssetManagement;
 using Code.Runtime.Core.Config;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.Audio;
@@ -13,27 +16,27 @@ namespace Code.Runtime.Core.Audio
 {
     public class AudioService : MonoBehaviour
     {
-        private  IAssetProvider _assetProvider;
-        private  ConfigProvider _configProvider;
+        [SerializeField] private Transform _soundChannels;
+        [SerializeField] private Transform _musicChannels;
         
+        private IAssetProvider _assetProvider;
+        private ConfigProvider _configProvider;
+
         private readonly Dictionary<string, BaseAudioFile> _sfx = new();
         private readonly Dictionary<string, BaseAudioFile> _bgm = new();
-        
+
         private readonly List<SoundAudioChannel> _soundChannelsPool = new();
         private readonly List<MusicAudioChannel> _musicChannelsPool = new();
 
         private MusicAudioChannel _mainMusicChannel;
-        
+
         private AudioLibrary _audioLibrary;
         private AudioServiceSettings _audioSettings;
 
         private AudioMixerGroup _masterMixer;
         private AudioMixerGroup _musicMixer;
         private AudioMixerGroup _sfxMixer;
-        
-        
-        [SerializeField] private Transform _soundChannels;
-        [SerializeField] private Transform _musicChannels;
+
 
         [Inject]
         public void Construct(IAssetProvider assetProvider, ConfigProvider configProvider)
@@ -41,7 +44,7 @@ namespace Code.Runtime.Core.Audio
             _assetProvider = assetProvider;
             _configProvider = configProvider;
         }
-        
+
         public void InitializeAudio()
         {
             _audioLibrary = _configProvider.AudioLibrary();
@@ -49,14 +52,13 @@ namespace Code.Runtime.Core.Audio
             _musicMixer = _audioSettings.MusicMixerGroup;
             _masterMixer = _audioSettings.MasterMixerGroup;
             _sfxMixer = _audioSettings.SfxMixerGroup;
-            
-            
+
             for (int i = 0; i < _audioSettings.SoundChannelsPoolSize; i++)
             {
                 SoundAudioChannel channel = CreateSoundChannel();
                 _soundChannelsPool.Add(channel);
-            } 
-            
+            }
+
             for (int i = 0; i < _audioSettings.MusicChannelsPoolSize; i++)
             {
                 MusicAudioChannel channel = CreateMusicChannel();
@@ -66,19 +68,6 @@ namespace Code.Runtime.Core.Audio
             if (_musicChannelsPool.Count > 0)
             {
                 _mainMusicChannel = _musicChannelsPool[0];
-            }
-        }
-
-        public void MuteMusic(bool value)
-        {
-            _mainMusicChannel.AudioSource.mute = value;
-        }
-
-        public void MuteSounds(bool value)
-        {
-            foreach (var channel in _soundChannelsPool)
-            {
-                channel.AudioSource.mute = value;
             }
         }
 
@@ -101,11 +90,18 @@ namespace Code.Runtime.Core.Audio
             {
                 musicChannel.Stop();
                 musicChannel.Play(music);
-            } 
+            }
             else
             {
                 Debug.LogError("No music channel");
             }
+        }
+
+        public void PlaySoundForDuration(SoundAudioFile sound, float duration, Transform targetTransform = null, float volume = 1f)
+        {
+            SoundAudioChannel soundChannel = PlaySoundInternal(sound, volume, targetTransform);
+            
+            StopAfterDuration(soundChannel, duration).Forget();
         }
 
         public void PlaySound(string soundName, float volume)
@@ -117,27 +113,23 @@ namespace Code.Runtime.Core.Audio
                 return;
             }
 
-            SoundAudioChannel soundChannel = FindFreeSoundChannel();
-
-            if (soundChannel)
-            {
-                soundChannel.Play(sound);
-            }
-           
-            Assert.IsNull(soundChannel);
+            PlaySoundInternal(sound, volume);
         }
 
-        public void PlaySound(SoundAudioFile sound)
+        public void MuteMusic(bool value)
         {
-            SoundAudioChannel soundChannel = FindFreeSoundChannel();
-
-            if (soundChannel is not null)
-            {
-                soundChannel.Play(sound);
-            }
-            
-            Assert.IsNull(soundChannel);
+            _mainMusicChannel.AudioSource.mute = value;
         }
+
+        public void MuteSounds(bool value)
+        {
+            foreach (var channel in _soundChannelsPool)
+            {
+                channel.AudioSource.mute = value;
+            }
+        }
+
+        public void PlaySound(SoundAudioFile sound) => PlaySoundInternal(sound);
 
         public void PlaySound3D(string soundName, Transform soundTransform, float volume = 1f)
         {
@@ -147,32 +139,16 @@ namespace Code.Runtime.Core.Audio
                 Debug.LogError("No sound in library with name " + soundName);
                 return;
             }
-            
-          
-            SoundAudioChannel soundChannel = FindFreeSoundChannel();
 
-            if (soundChannel is not null)
-            {
-                soundChannel.SetChannelTransform(soundTransform);
-                soundChannel.AudioSource.volume = volume;
-                soundChannel.Play(sound);
-            }
+            PlaySoundInternal(sound, volume, soundTransform);
         }
-        
+
         public void PlaySound3D(SoundAudioFile sound, Transform soundTransform, float volume = 1f)
-        {
-            SoundAudioChannel soundChannel = FindFreeSoundChannel();
+            => PlaySoundInternal(sound, volume, soundTransform);
 
-            if (soundChannel is not null)
-            {
-                soundChannel.SetChannelTransform(soundTransform);
-                soundChannel.AudioSource.volume = volume;
-                soundChannel.Play(sound);
-            }
-        }
+        public void PlaySound3D(SoundAudioFile sound, Vector3 position, float volume = 1f)
+            => PlaySoundInternal(sound, position, volume);
 
-        
-        
         public void PlaySound3D(string soundName, Vector3 position, float volume = 1f)
         {
             var sound = _audioLibrary.Sounds.FirstOrDefault(x => x.Id == soundName);
@@ -181,28 +157,8 @@ namespace Code.Runtime.Core.Audio
                 Debug.LogError("No sound in library with name " + soundName);
                 return;
             }
-            
-          
-            SoundAudioChannel soundChannel = FindFreeSoundChannel();
 
-            if (soundChannel is not null)
-            {
-                soundChannel.SetChannelPosition(position);
-                soundChannel.AudioSource.volume = volume;
-                soundChannel.Play(sound);
-            }
-        }
-        
-        public void PlaySound3D(SoundAudioFile sound, Vector3 position, float volume = 1f)
-        {
-            SoundAudioChannel soundChannel = FindFreeSoundChannel();
-
-            if (soundChannel is not null)
-            {
-                soundChannel.SetChannelPosition(position);
-                soundChannel.AudioSource.volume = volume;
-                soundChannel.Play(sound);
-            }
+            PlaySoundInternal(sound, position, volume);
         }
 
         public void PauseMusic()
@@ -220,6 +176,7 @@ namespace Code.Runtime.Core.Audio
                 _mainMusicChannel.UnPause();
             }
         }
+
         public void PauseAll()
         {
             foreach (var channel in _soundChannelsPool)
@@ -229,7 +186,7 @@ namespace Code.Runtime.Core.Audio
                     channel.Pause();
                 }
             }
-            
+
             if (!_mainMusicChannel.IsFree)
             {
                 _mainMusicChannel.Pause();
@@ -245,7 +202,7 @@ namespace Code.Runtime.Core.Audio
                     channel.UnPause();
                 }
             }
-            
+
             if (!_mainMusicChannel.IsFree)
             {
                 _mainMusicChannel.UnPause();
@@ -271,6 +228,46 @@ namespace Code.Runtime.Core.Audio
             }
         }
 
+        private SoundAudioChannel PlaySoundInternal(SoundAudioFile sound, float volume = 1f, Transform targetTransform = null)
+        {
+            SoundAudioChannel soundChannel = FindFreeSoundChannel();
+
+            if (soundChannel == null)
+            {
+                Assert.IsNull(soundChannel);
+                return null;
+            }
+
+            if (targetTransform != null)
+            {
+                soundChannel.SetChannelTransform(targetTransform);
+            }
+
+            soundChannel.AudioSource.volume = volume;
+            soundChannel.Play(sound);
+
+            Assert.IsNotNull(soundChannel);
+            return soundChannel;
+        }
+
+        private SoundAudioChannel PlaySoundInternal(SoundAudioFile sound, Vector3 position, float volume = 1f)
+        {
+            SoundAudioChannel soundChannel = FindFreeSoundChannel();
+
+            if (soundChannel == null)
+            {
+                Assert.IsNull(soundChannel);
+                return null;
+            }
+
+            soundChannel.SetChannelPosition(position);
+            soundChannel.AudioSource.volume = volume;
+            soundChannel.Play(sound);
+
+            Assert.IsNotNull(soundChannel);
+            return soundChannel;
+        }
+
         private SoundAudioChannel FindFreeSoundChannel()
         {
             return _soundChannelsPool.FirstOrDefault(channel => channel.IsFree) ?? CreateSoundChannel();
@@ -278,13 +275,13 @@ namespace Code.Runtime.Core.Audio
 
         private MusicAudioChannel FindFreeMusicChannel()
         {
-           return _musicChannelsPool.FirstOrDefault(channel => channel.IsFree) ?? CreateMusicChannel();
+            return _musicChannelsPool.FirstOrDefault(channel => channel.IsFree) ?? CreateMusicChannel();
         }
 
         private MusicAudioChannel CreateMusicChannel()
         {
             MusicAudioChannel musicChannel;
-            
+
             if (_audioSettings.MusicChannelPrefab)
             {
                 musicChannel = Instantiate(_audioSettings.MusicChannelPrefab, _musicChannels);
@@ -294,7 +291,7 @@ namespace Code.Runtime.Core.Audio
                 var obj = new GameObject("Music Channel");
                 musicChannel = obj.AddComponent<MusicAudioChannel>();
             }
-            
+
             musicChannel.InitializeChannel(_musicChannels, _audioSettings.MusicMixerGroup);
             return musicChannel;
         }
@@ -302,8 +299,8 @@ namespace Code.Runtime.Core.Audio
         private SoundAudioChannel CreateSoundChannel()
         {
             SoundAudioChannel soundChannel;
-         
-            
+
+
             if (_audioSettings.SoundChannelPrefab)
             {
                 soundChannel = Instantiate(_audioSettings.SoundChannelPrefab, _musicChannels);
@@ -313,16 +310,23 @@ namespace Code.Runtime.Core.Audio
                 var obj = new GameObject("Sound Channel");
                 soundChannel = obj.AddComponent<SoundAudioChannel>();
             }
-            
+
             soundChannel.InitializeChannel(_soundChannels, _audioSettings.SfxMixerGroup);
 
             return soundChannel;
         }
+        
+        private async UniTaskVoid StopAfterDuration(SoundAudioChannel channel, float duration)
+        {
+            await UniTask.Delay(TimeSpan.FromSeconds(duration));
+
+            channel.Stop();
+        }
 
         public void CleanUp()
         {
-           _sfx.Clear();
-           _bgm.Clear();
+            _sfx.Clear();
+            _bgm.Clear();
         }
     }
 }
