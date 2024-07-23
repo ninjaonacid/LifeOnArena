@@ -9,8 +9,7 @@ namespace Code.Runtime.UI.View.HUD
         public HudSkillContainer HudSkillContainer;
         public ComboCounter ComboCounter;
         public LootCounter LootCounter;
-        public MusicButton MusicButton;
-        public SoundButton SoundButton;
+        public BaseButton SettingsButton;
         public Button RestartButton;
         public Button RewardButton;
         public StatusBar StatusBar;

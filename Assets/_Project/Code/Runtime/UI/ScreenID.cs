@@ -13,6 +13,7 @@ namespace Code.Runtime.UI
         ArenaSelectionScreen = 9,
         MissionSummaryWindow = 10,
         RewardPopup = 11,
-        MainMenuSettingsPopUpView = 12
+        MainMenuSettingsPopUpView = 12,
+        HudSettingsPopup = 13
     }
 }

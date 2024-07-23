@@ -41,7 +41,7 @@ namespace Code.Runtime.UI.Services
                     : new TutorialAbilityScreenController(saveLoad, tutorialService));
 
             _screenControllers.Add(typeof(HudController), () =>
-                new HudController(gameData, heroFactory, levelLoader, eventSystem, adService, collectableTracker));
+                new HudController(gameData, heroFactory, levelLoader, eventSystem, adService, pauseService, collectableTracker));
 
             _screenControllers.Add(typeof(MessageWindowController), () => new MessageWindowController());
 
@@ -60,7 +60,7 @@ namespace Code.Runtime.UI.Services
             () => new MainMenuSettingsPopupController(localService, audioService));
             
             _screenControllers.Add(typeof(HeroDeathPopupController), 
-                () => new HeroDeathPopupController(levelLoader, adService));
+                () => new HeroDeathPopupController(levelLoader, adService, pauseService));
         }
 
         public IScreenController CreateController(Type controller)

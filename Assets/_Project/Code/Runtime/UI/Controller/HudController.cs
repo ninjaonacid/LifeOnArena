@@ -7,6 +7,7 @@ using Code.Runtime.Entity.Hero;
 using Code.Runtime.Modules.Advertisement;
 using Code.Runtime.Services;
 using Code.Runtime.Services.LevelLoaderService;
+using Code.Runtime.Services.PauseService;
 using Code.Runtime.Services.PersistentProgress;
 using Code.Runtime.UI.Model;
 using Code.Runtime.UI.Model.DTO;
@@ -28,14 +29,19 @@ namespace Code.Runtime.UI.Controller
         private readonly LevelLoader _levelLoader;
         private readonly IEventSystem _eventSystem;
         private readonly AdvertisementService _adService;
+        private readonly PauseService _pauseService;
         private readonly LevelCollectableTracker _collectableTracker;
         private ScreenService _screenService;
 
         private readonly CompositeDisposable _disposable = new();
 
-        public HudController(IGameDataContainer gameData, 
-            HeroFactory heroFactory, LevelLoader sceneLoader,
-            IEventSystem eventSystem, AdvertisementService adService,
+        public HudController(
+            IGameDataContainer gameData, 
+            HeroFactory heroFactory, 
+            LevelLoader sceneLoader,
+            IEventSystem eventSystem, 
+            AdvertisementService adService,
+            PauseService pauseService,
             LevelCollectableTracker collectableTracker)
         {
             _gameData = gameData;
@@ -44,6 +50,7 @@ namespace Code.Runtime.UI.Controller
             _eventSystem = eventSystem;
             _adService = adService;
             _collectableTracker = collectableTracker;
+            _pauseService = pauseService;
         }
 
         public void InitController(IScreenModel model, BaseWindowView windowView, ScreenService screenService)
@@ -55,6 +62,45 @@ namespace Code.Runtime.UI.Controller
             Assert.IsNotNull(_windowView);
             Assert.IsNotNull(_model);
 
+            LinkHeroComponents();
+            SubscribeStatusBar();
+            SubscribeButtons();
+            
+            _windowView.RestartButton.onClick.AsObservable().Subscribe(x => _levelLoader.LoadLevel("MainMenu"))
+                .AddTo(_disposable);
+
+            _windowView.RewardButton.onClick.AsObservable().Subscribe(x => _adService.ShowReward()).AddTo(_disposable);
+
+            _eventSystem.Subscribe<BossSpawnEvent>(SubscribeBossHealthBar);
+            _eventSystem.Subscribe<LevelEndEvent>(ShowReturnToMenuButton);
+        }
+
+        private void SubscribeButtons()
+        {
+            _windowView.PortalButton
+                .OnClickAsObservable()
+                .Subscribe(x =>
+                {
+                    _screenService.Open(ScreenID.MissionSummaryWindow,
+                        new MissionSummaryDto(
+                            _collectableTracker.GainedExperience,
+                            _collectableTracker.KilledEnemies,
+                            _collectableTracker.SoulsLoot,
+                            _collectableTracker.ObjectiveExperienceReward));
+                });
+
+            _windowView.SettingsButton
+                .OnClickAsObservable()
+                .Subscribe(x =>
+                {
+                    _pauseService.PauseGame();
+                    _screenService.Open(ScreenID.HudSettingsPopup);
+                });
+
+        }
+
+        private void LinkHeroComponents()
+        {
             _heroFactory.HeroGameObject.TryGetComponent(out HeroAttackComponent heroAttack);
             _heroFactory.HeroGameObject.TryGetComponent(out HeroAbilityController heroSkills);
             _heroFactory.HeroGameObject.TryGetComponent(out HeroHealth heroHealth);
@@ -64,25 +110,6 @@ namespace Code.Runtime.UI.Controller
             _windowView.LootCounter.Construct(_gameData.PlayerData.WorldData);
             _windowView.HudSkillContainer.Construct(heroSkills, heroCooldown);
             _windowView.GetComponent<EntityUI>().Construct(heroHealth);
-            
-            SubscribeStatusBar();
-            _windowView.PortalButton.OnClickAsObservable().Subscribe(x =>
-            {
-                _screenService.Open(ScreenID.MissionSummaryWindow, 
-                    new MissionSummaryDto(
-                        _collectableTracker.GainedExperience, 
-                        _collectableTracker.KilledEnemies, 
-                        _collectableTracker.SoulsLoot,
-                        _collectableTracker.ObjectiveExperienceReward)); 
-            });
-
-            _windowView.RestartButton.onClick.AsObservable().Subscribe(x => _levelLoader.LoadLevel("MainMenu"))
-                .AddTo(_disposable);
-
-            _windowView.RewardButton.onClick.AsObservable().Subscribe(x => _adService.ShowReward()).AddTo(_disposable);
-
-            _eventSystem.Subscribe<BossSpawnEvent>(SubscribeBossHealthBar);
-            _eventSystem.Subscribe<LevelEndEvent>(ShowReturnToMenuButton);
         }
 
         private void SubscribeStatusBar()

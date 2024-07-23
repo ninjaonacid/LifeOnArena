@@ -1,5 +1,6 @@
 ﻿using Code.Runtime.Modules.Advertisement;
 using Code.Runtime.Services.LevelLoaderService;
+using Code.Runtime.Services.PauseService;
 using Code.Runtime.UI.Model;
 using Code.Runtime.UI.Services;
 using Code.Runtime.UI.View;
@@ -16,10 +17,12 @@ namespace Code.Runtime.UI.Controller
 
         private readonly LevelLoader _levelLoader;
         private readonly AdvertisementService _adService;
-        public HeroDeathPopupController(LevelLoader levelLoader, AdvertisementService adService)
+        private readonly PauseService _pauseService;
+        public HeroDeathPopupController(LevelLoader levelLoader, AdvertisementService adService, PauseService pauseService)
         {
             _levelLoader = levelLoader;
             _adService = adService;
+            _pauseService = pauseService;
         }
         
         public void InitController(IScreenModel model, BaseWindowView windowView, ScreenService screenService)
@@ -36,7 +39,11 @@ namespace Code.Runtime.UI.Controller
 
             _view.RewardRessurectButton
                 .OnClickAsObservable()
-                .Subscribe(x => _adService.ShowReward());
+                .Subscribe(x =>
+                {
+                    _pauseService.PauseGame();
+                    _adService.ShowReward();
+                });
         }
     }
 }
