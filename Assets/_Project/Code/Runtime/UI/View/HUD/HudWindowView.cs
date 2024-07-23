@@ -10,11 +10,8 @@ namespace Code.Runtime.UI.View.HUD
         public ComboCounter ComboCounter;
         public LootCounter LootCounter;
         public BaseButton SettingsButton;
-        public Button RestartButton;
-        public Button RewardButton;
         public StatusBar StatusBar;
         public BossHudHealthBar BossHudHealthBar;
         public AnimatedButton PortalButton;
-
     }
 }

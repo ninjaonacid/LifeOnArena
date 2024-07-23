@@ -40,6 +40,7 @@ namespace Code.Runtime.UI.Services
             _screenMap.Add(ScreenID.MissionSummaryWindow, (typeof(MissionSummaryWindowModel), typeof(MissionSummaryWindowController)));
             _screenMap.Add(ScreenID.MainMenuSettingsPopUpView, (typeof(MainMenuSettingsPopupModel), typeof(MainMenuSettingsPopupController)));
             _screenMap.Add(ScreenID.HeroDeathPopupView, (typeof(HeroDeathPopupModel), typeof(HeroDeathPopupController)));
+            _screenMap.Add(ScreenID.HudSettingsPopup, (typeof(HudSettingsPopupModel), typeof(HudSettingsPopupController)));
         }
 
         public void Open(ScreenID screenId) => OpenInternal(screenId, null);

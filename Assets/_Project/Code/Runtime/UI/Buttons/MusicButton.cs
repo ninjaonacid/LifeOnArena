@@ -8,9 +8,9 @@ namespace Code.Runtime.UI.Buttons
         [SerializeField] private Image OnImage;
         [SerializeField] private Image OffImage;
 
-        public void SetButton(bool isMuted)
+        public void SetButton(bool isMusicOn)
         {
-            if (isMuted)
+            if (isMusicOn)
             {
                 OffImage.enabled = false;
                 OnImage.enabled = true;
@@ -18,8 +18,8 @@ namespace Code.Runtime.UI.Buttons
             }
             else
             {
-                OnImage.enabled = true;
-                OffImage.enabled = false;
+                OnImage.enabled = false;
+                OffImage.enabled = true;
                 _buttonImage = OffImage;
             }
         }

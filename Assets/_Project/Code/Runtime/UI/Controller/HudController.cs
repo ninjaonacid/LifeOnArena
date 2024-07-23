@@ -65,11 +65,6 @@ namespace Code.Runtime.UI.Controller
             LinkHeroComponents();
             SubscribeStatusBar();
             SubscribeButtons();
-            
-            _windowView.RestartButton.onClick.AsObservable().Subscribe(x => _levelLoader.LoadLevel("MainMenu"))
-                .AddTo(_disposable);
-
-            _windowView.RewardButton.onClick.AsObservable().Subscribe(x => _adService.ShowReward()).AddTo(_disposable);
 
             _eventSystem.Subscribe<BossSpawnEvent>(SubscribeBossHealthBar);
             _eventSystem.Subscribe<LevelEndEvent>(ShowReturnToMenuButton);
