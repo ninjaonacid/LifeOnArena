@@ -16,6 +16,7 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
             effect.Play(AbilityBlueprint.ActiveTime);
             effect.transform.position = effectTargetTransform;
             effect.transform.SetParent(caster.transform);
+            _audioService.PlaySound3D(AbilityBlueprint.AbilitySound, caster.transform);
         }
     }
 }

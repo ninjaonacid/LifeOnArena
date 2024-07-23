@@ -23,7 +23,7 @@ namespace Code.Runtime.ConfigData.Audio
         public bool IsActivated;
         
         public bool IsLoopSound;
-
+        
         public bool IsPlaying { get; private set; }
         public bool IsPaused { get; private set; }
         public bool IsStopped { get; private set; }

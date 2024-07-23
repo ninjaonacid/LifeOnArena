@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Code.Runtime.ConfigData.Audio;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -81,6 +82,11 @@ namespace Code.Runtime.Core.Audio
             }
 
             return true;
+        }
+
+        private IEnumerator StopAfterDuration()
+        {
+            yield return null;
         }
     }
 }
