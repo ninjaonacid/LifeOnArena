@@ -4,8 +4,8 @@ namespace Code.Runtime.UI.Model
 {
     public class MainMenuSettingsPopupModel : IScreenModel, ISavableModel
     {
-        public bool IsSoundOn;
-        public bool IsMusicOn;
+        public bool IsSoundOn { get; private set;}
+        public bool IsMusicOn { get; private set;}
         
         private readonly IGameDataContainer _gameData;
         

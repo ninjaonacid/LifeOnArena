@@ -1,4 +1,5 @@
-﻿using Code.Runtime.Services.LevelLoaderService;
+﻿using Code.Runtime.Core.Audio;
+using Code.Runtime.Services.LevelLoaderService;
 using Code.Runtime.Services.PauseService;
 using Code.Runtime.UI.Model;
 using Code.Runtime.UI.Services;
@@ -16,10 +17,12 @@ namespace Code.Runtime.UI.Controller
 
         private readonly PauseService _pauseService;
         private readonly LevelLoader _levelLoader;
-        public HudSettingsPopupController(PauseService pauseService, LevelLoader levelLoader)
+        private readonly AudioService _audioService;
+        public HudSettingsPopupController(PauseService pauseService, LevelLoader levelLoader, AudioService audioService)
         {
             _pauseService = pauseService;
             _levelLoader = levelLoader;
+            _audioService = audioService;
         }
 
         public void InitController(IScreenModel model, BaseWindowView windowView, ScreenService screenService)
@@ -33,6 +36,20 @@ namespace Code.Runtime.UI.Controller
             _view.SoundButton.SetButton(_model.IsSoundOn);
             _view.MusicButton.SetButton(_model.IsMusicOn);
 
+            _view.SoundButton.OnClickAsObservable().Subscribe(x =>
+            {
+                _model.ChangeSoundState(!_model.IsSoundOn);
+                _audioService.MuteSounds(_model.IsSoundOn);
+                _view.SoundButton.SetButton(_model.IsSoundOn);
+            });
+
+            _view.MusicButton.OnClickAsObservable().Subscribe(x =>
+            {
+                _model.ChangeMusicState(!_model.IsMusicOn);
+                _audioService.MuteSounds(_model.IsMusicOn);
+                _view.MusicButton.SetButton(_model.IsMusicOn);
+            });
+            
             _view.CloseButton.OnClickAsObservable()
                 .Subscribe(x =>
             {

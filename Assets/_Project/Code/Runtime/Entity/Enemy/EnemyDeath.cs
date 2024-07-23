@@ -28,6 +28,7 @@ namespace Code.Runtime.Entity.Enemy
         [SerializeField] private float _minForce;
         [SerializeField] private float _maxHeight;
         public bool IsDead { get; private set; }
+        public bool IsAnimatedDeath => _isAnimatedDeath;
 
         private Rigidbody[] _fractureParts;
         private static readonly List<Vector3> _positions = new();
@@ -123,8 +124,7 @@ namespace Code.Runtime.Entity.Enemy
             
             _poolable.ReturnToPool();
         }
-
-
+        
         private void ResetObject()
         {
             if (!_isAnimatedDeath)
@@ -143,7 +143,6 @@ namespace Code.Runtime.Entity.Enemy
                 _enemyModel.SetActive(true);
             
             _enemyHurtBox.DisableCollider(false);
-
         }
     }
 }

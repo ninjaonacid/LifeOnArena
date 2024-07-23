@@ -12,7 +12,7 @@ namespace Code.Runtime.ConfigData.Settings
 
         [SerializeField] private int _musicChannelsPoolSize;
         public int MusicChannelsPoolSize => _musicChannelsPoolSize;
-
+        
         public SoundAudioChannel SoundChannelPrefab;
         public MusicAudioChannel MusicChannelPrefab;
 

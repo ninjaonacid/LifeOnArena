@@ -1,7 +1,6 @@
 using System;
 using Code.Runtime.Core.Audio;
 using Code.Runtime.Core.SceneManagement;
-using Code.Runtime.Modules.LocalizationProvider;
 using Code.Runtime.Services.LevelLoaderService;
 using Code.Runtime.Services.PersistentProgress;
 using Code.Runtime.UI.Model;
@@ -9,7 +8,6 @@ using Code.Runtime.UI.Services;
 using Code.Runtime.UI.View;
 using Code.Runtime.UI.View.MainMenu;
 using UniRx;
-using UnityEngine;
 using UnityEngine.Assertions;
 
 namespace Code.Runtime.UI.Controller

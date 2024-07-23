@@ -19,7 +19,6 @@ namespace Code.Runtime.UI.View
             {
                 _animation.ShowAnimation();
             }
-           
         }
 
         public virtual void Hide()

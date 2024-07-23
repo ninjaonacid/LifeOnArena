@@ -39,7 +39,6 @@ namespace Code.Runtime.Entity.Enemy.BossEnemy.Demon
                 (transition) => _enemyAttackComponent.CanAttack()
                 ));
 
-
             _fsm.AddTransition(new Transition(
                 nameof(EnemyIdleState),
                 nameof(EnemyChaseState),

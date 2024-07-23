@@ -35,8 +35,7 @@ namespace Code.Runtime.UI.Services
             _modelMap.Add(typeof(HeroDeathPopupModel), (dto) => new HeroDeathPopupModel());
             _modelMap.Add(typeof(HudSettingsPopupModel), (dto) => new HudSettingsPopupModel(gameData));
         }
-        
-        
+
         public IScreenModel CreateModel(Type model, IScreenModelDto dto)
         {
             if (!_modelMap.ContainsKey(model))

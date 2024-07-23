@@ -93,8 +93,11 @@ namespace Code.Runtime.UI.Services
 
         private void CloseActiveWindow(ActiveWindow activeWindow)
         {
-            activeWindow.WindowView?.Close();
-
+            if (activeWindow.WindowView != null)
+            {
+                activeWindow.WindowView.Close();
+            }
+            
             if (activeWindow.Controller is IDisposable disposableController)
             {
                 disposableController.Dispose();
@@ -106,17 +109,11 @@ namespace Code.Runtime.UI.Services
             }
         }
         
-        
         private void Cleanup()
         {
             foreach (var activeWindow in _activeWindows)
             {
-                if (activeWindow.Controller is IDisposable controller)
-                {
-                    controller.Dispose();
-                }
-                if(activeWindow.WindowView)
-                    activeWindow.WindowView.Close();
+                CloseActiveWindow(activeWindow);
             }
             
             _activeWindows.Clear();

@@ -7,7 +7,7 @@ namespace Code.Runtime.Entity.Enemy.MeleeEnemy
 {
     public class EnemyDeathState : BaseEnemyState
     {
-        private EnemyDeath _enemyDeath;
+        private readonly EnemyDeath _enemyDeath;
 
         public EnemyDeathState(EnemyDeath enemyDeath, CharacterAnimator characterAnimator,
             AnimationDataContainer animationData, EnemyTarget enemyTarget, bool needExitTime = false,
@@ -23,7 +23,10 @@ namespace Code.Runtime.Entity.Enemy.MeleeEnemy
         {
             base.OnEnter();
             _enemyTarget.enabled = false;
-            //_characterAnimator.PlayDie();
+            if (_enemyDeath.IsAnimatedDeath)
+            {
+                _characterAnimator.PlayAnimation(_animationData.Animations[AnimationKey.Die].Hash);
+            }
         }
 
         public override void OnExit()

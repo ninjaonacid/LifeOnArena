@@ -82,7 +82,7 @@ namespace Code.Runtime.Core.Audio
             }
         }
 
-        public void PlayBackgroundMusic(string musicName, float volume = 1, bool isLoop = false)
+        public void PlayMusic(string musicName, float volume = 1, bool isLoop = false)
         {
             var music = _audioLibrary.Music.FirstOrDefault(x => x.Id == musicName);
 
@@ -91,12 +91,17 @@ namespace Code.Runtime.Core.Audio
                 Debug.LogError("No music in library with name " + musicName);
             }
 
-            MusicAudioChannel musicChannel = FindFreeMusicChannel();
+            MusicAudioChannel musicChannel = _mainMusicChannel;
 
-            if (musicChannel)
+            if (musicChannel.IsFree)
             {
                 musicChannel.Play(music);
             }
+            else if (!musicChannel.IsFree)
+            {
+                musicChannel.Stop();
+                musicChannel.Play(music);
+            } 
             else
             {
                 Debug.LogError("No music channel");

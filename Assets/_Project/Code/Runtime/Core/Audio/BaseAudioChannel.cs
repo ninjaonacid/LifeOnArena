@@ -13,7 +13,7 @@ namespace Code.Runtime.Core.Audio
 
         private AudioMixerGroup _mixerGroup;
 
-        private TAudio _audioFile;
+        protected TAudio _audioFile;
 
         public bool IsPlaying => AudioSource.isPlaying;
 

@@ -21,8 +21,7 @@ namespace Code.Runtime.ConfigData.Audio
         public SoundStatus SoundStatus;
 
         public bool IsActivated;
-
-
+        
         public bool IsLoopSound;
 
         public bool IsPlaying { get; private set; }

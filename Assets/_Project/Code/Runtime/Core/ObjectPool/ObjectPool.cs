@@ -96,14 +96,24 @@ namespace Code.Runtime.Core.ObjectPool
         }
 
 
-        public void Return(PooledObject obj)
+        private void Return(PooledObject obj)
         {
             if (obj is null) return;
+
+            T typedObject = obj as T;
             
-            _objectsStock.Push(obj as T);
-            obj.gameObject.SetActive(false);
+            if (typedObject == null)
+            {
+               Debug.LogError("Failed to cast object"); 
+            }
             
-            _onReturn?.Invoke(obj as T);
+            _objectsStock.Push(typedObject);
+
+            if (obj.gameObject != null)
+            {
+                obj.gameObject.SetActive(false);
+                _onReturn?.Invoke(typedObject);
+            }
         }
     }
 }
