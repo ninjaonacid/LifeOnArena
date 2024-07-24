@@ -37,7 +37,7 @@ namespace Code.Runtime.Core.Audio
         private AudioMixerGroup _masterMixer;
         private AudioMixerGroup _musicMixer;
         private AudioMixerGroup _sfxMixer;
-        private CancellationTokenSource _cts = new();
+        private readonly CancellationTokenSource _cts = new();
 
 
         [Inject]

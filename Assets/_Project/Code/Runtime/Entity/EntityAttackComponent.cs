@@ -96,10 +96,11 @@ namespace Code.Runtime.Entity
             
             var hitBox = collision.Target.GetComponentInParent<EntityHurtBox>().GetHitBoxCenter();
 
+            var collisionPosition = collision.Target.transform.position;
             _visualEffectController.PlayVisualEffect(
-                _entityWeapon.WeaponData.HitVisualEffect, collision.Target.transform.position).Forget();
+                _entityWeapon.WeaponData.HitVisualEffect, collisionPosition).Forget();
 
-            _audioService.PlaySound3D(_entityWeapon.WeaponData.WeaponHitSound, collision.Target.transform, 1f);
+            _audioService.PlaySound3D(_entityWeapon.WeaponData.WeaponHitSound, collisionPosition, 1f);
             _battleService.CreateWeaponAttack(_stats, collision.Target);
 
             InvokeHit(1);

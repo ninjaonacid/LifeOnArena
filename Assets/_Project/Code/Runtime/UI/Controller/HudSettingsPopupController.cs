@@ -46,7 +46,7 @@ namespace Code.Runtime.UI.Controller
             _view.MusicButton.OnClickAsObservable().Subscribe(x =>
             {
                 _model.ChangeMusicState(!_model.IsMusicOn);
-                _audioService.MuteSounds(_model.IsMusicOn);
+                _audioService.MuteMusic(_model.IsMusicOn);
                 _view.MusicButton.SetButton(_model.IsMusicOn);
             });
             

@@ -28,12 +28,12 @@ namespace Code.Runtime.Core.Audio
 
         public void SetChannelPosition(Vector3 position) => transform.position = position;
 
-        public void InitializeChannel(Transform parent, AudioMixerGroup mixerGroup)
+        public void InitializeChannel(Transform origin, AudioMixerGroup mixerGroup)
         {
             AudioSource = GetComponent<AudioSource>();
-            _channelHolder = parent.transform;
+            _channelHolder = origin.transform;
             _mixerGroup = mixerGroup;
-            transform.SetParent(parent);
+            transform.SetParent(origin);
         }
 
         public void Play(TAudio audioFile)
@@ -82,11 +82,6 @@ namespace Code.Runtime.Core.Audio
             }
 
             return true;
-        }
-
-        private IEnumerator StopAfterDuration()
-        {
-            yield return null;
         }
     }
 }
