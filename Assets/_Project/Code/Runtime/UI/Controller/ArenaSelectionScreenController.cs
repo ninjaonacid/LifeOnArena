@@ -17,7 +17,7 @@ namespace Code.Runtime.UI.Controller
         protected ArenaSelectionScreenView _view;
         private readonly LevelLoader _levelLoader;
 
-        private CompositeDisposable _disposable = new();
+        protected CompositeDisposable _disposable = new();
 
         public ArenaSelectionScreenController(LevelLoader levelLoader)
         {

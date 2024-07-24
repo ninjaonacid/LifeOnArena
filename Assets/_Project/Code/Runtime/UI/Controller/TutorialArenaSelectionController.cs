@@ -30,7 +30,7 @@ namespace Code.Runtime.UI.Controller
 
             foreach (var element in _tutorialElements)
             {
-                element.OnClickAsObservable().Subscribe(HandleTutorialLogic);
+                element.OnClickAsObservable().Subscribe(HandleTutorialLogic).AddTo(_disposable);
             }
 
             _tutorialService.OnTaskChanged += UpdateTutorial;

@@ -16,7 +16,7 @@ namespace Code.Runtime.UI.Controller
         protected AbilityScreenView _screenView;
         private ScreenService _screenService;
         private readonly ISaveLoadService _saveLoad;
-        private readonly CompositeDisposable _disposable = new CompositeDisposable();
+        protected readonly CompositeDisposable _disposable = new CompositeDisposable();
         public AbilityScreenController(ISaveLoadService saveLoad)
         {
             _saveLoad = saveLoad;

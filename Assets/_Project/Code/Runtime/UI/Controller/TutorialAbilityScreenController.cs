@@ -12,7 +12,7 @@ namespace Code.Runtime.UI.Controller
 {
     public class TutorialAbilityScreenController : AbilityScreenController
     {
-        private TutorialService _tutorialService;
+        private readonly TutorialService _tutorialService;
         private List<TutorialElement> _tutorialElements = new();
  
         public TutorialAbilityScreenController(ISaveLoadService saveLoad, TutorialService tutorialService) : base(saveLoad)
@@ -28,7 +28,7 @@ namespace Code.Runtime.UI.Controller
 
             foreach (var element in _tutorialElements)
             {
-                element.OnClickAsObservable().Subscribe(HandleTutorialLogic);
+                element.OnClickAsObservable().Subscribe(HandleTutorialLogic).AddTo(_disposable);
             }
             
             _tutorialService.OnTaskChanged += UpdateTutorial;

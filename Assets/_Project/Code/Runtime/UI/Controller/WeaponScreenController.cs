@@ -13,7 +13,7 @@ namespace Code.Runtime.UI.Controller
     {
         private WeaponScreenModel _model;
         protected WeaponScreenView _windowView;
-        private readonly CompositeDisposable _disposables = new();
+        protected readonly CompositeDisposable _disposables = new();
 
         public virtual void InitController(IScreenModel model, BaseWindowView windowView, ScreenService screenService)
         {
