@@ -80,6 +80,11 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
                     .SetOwnerLayer(caster.gameObject)
                     .SetLifetime(_lifeTime);
             }
+
+            if (AbilityBlueprint.AbilitySound != null)
+            {
+                _audioService.PlaySound3D(AbilityBlueprint.AbilitySound, caster.transform.position);
+            }
         }
 
         private async void OnHit(CollisionData data)
