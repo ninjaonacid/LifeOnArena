@@ -78,7 +78,7 @@ namespace Code.Runtime.Services
 
         private void BossKilled()
         {
-            LevelEnd();
+            LevelEndTask().Forget();
         }
         
         private void CommonEnemiesCleared(int secondsToBoss)
@@ -93,8 +93,14 @@ namespace Code.Runtime.Services
             }
             else
             {
-                LevelEnd();
+                LevelEndTask().Forget();
             }
+        }
+
+        private async UniTask LevelEndTask()
+        {
+            await UniTask.Delay(TimeSpan.FromSeconds(5));
+            LevelEnd();
         }
 
         private void WaveStart(int secondsToNextWave)

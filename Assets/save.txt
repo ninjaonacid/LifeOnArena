@@ -3,10 +3,10 @@
   "PlayerExp": {
     "$type": "Code.Runtime.Data.PlayerData.PlayerExp, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
     "ExponentialFactor": 2.0,
-    "Level": 4,
-    "CurrentExperience": 1083.25671,
-    "ProgressToNextLevel": 0.677035451,
-    "ExperienceToNextLevel": 1600.0
+    "Level": 5,
+    "CurrentExperience": 2254.54883,
+    "ProgressToNextLevel": 0.9018195,
+    "ExperienceToNextLevel": 2500.0
   },
   "KillData": {
     "$type": "Code.Runtime.Data.PlayerData.KillData, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
@@ -23,10 +23,10 @@
     "$type": "Code.Runtime.Data.PlayerData.WorldData, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
     "LootData": {
       "$type": "Code.Runtime.Data.PlayerData.LootData, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "Collected": 462,
+      "Collected": 484,
       "CollectedLoot": {
         "$type": "UniRx.ReactiveProperty`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], UniRx, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-        "Value": 462,
+        "Value": 484,
         "HasValue": true
       }
     },
@@ -44,7 +44,8 @@
         "$values": [
           229687619,
           229687619,
-          229687619
+          229687619,
+          229687620
         ]
       }
     }
@@ -259,13 +260,13 @@
     "$type": "Code.Runtime.Data.PlayerData.StatsData, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
     "StatsValues": {
       "$type": "System.Collections.Generic.Dictionary`2[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
-      "Attack": 25,
+      "Attack": 35,
       "Defense": 10,
       "AttackSpeed": 1,
       "AttackRadius": 5,
       "MoveSpeed": 20,
-      "Magic": 25,
-      "Health": 130
+      "Magic": 30,
+      "Health": 140
     },
     "StatsCapacities": {
       "$type": "System.Collections.Generic.Dictionary`2[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
