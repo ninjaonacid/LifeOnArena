@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Code.Runtime.ConfigData.Identifiers;
 using Code.Runtime.Core.Config;
+using Code.Runtime.Services.PersistentProgress;
 using Code.Runtime.UI;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -16,15 +17,18 @@ namespace Code.Runtime.Modules.TutorialService
         public event Action OnTutorialCompleted;
 
         private readonly ConfigProvider _configProvider;
+        private readonly IGameDataContainer _gameData;
+        
         private Queue<TutorialTask> _tutorialTasks = new();
         private List<TutorialTask> _completedTasks = new();
         private TutorialTask _currentTask;
         private ArrowUI _arrowPrefab;
         private ArrowUI _arrow;
        
-        public TutorialService(ConfigProvider configProvider)
+        public TutorialService(ConfigProvider configProvider, IGameDataContainer gameData)
         {
             _configProvider = configProvider;
+            _gameData = gameData;
             Initialize();
         }
 
@@ -77,6 +81,7 @@ namespace Code.Runtime.Modules.TutorialService
                 {
                     _currentTask = null;
                     OnTutorialCompleted?.Invoke();
+                    _gameData.PlayerData.TutorialData.IsTutorialCompleted = true;
                 }
 
                 Debug.Log($"Current task is {_currentTask}");

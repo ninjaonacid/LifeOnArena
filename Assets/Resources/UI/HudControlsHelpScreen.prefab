@@ -698,7 +698,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e982e5b7c5116004aab06f1abb5b4f16, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d47e5af60c6aee04096a6eb7e4abdcf5, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -909,7 +909,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e982e5b7c5116004aab06f1abb5b4f16, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d47e5af60c6aee04096a6eb7e4abdcf5, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1175,7 +1175,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e982e5b7c5116004aab06f1abb5b4f16, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d47e5af60c6aee04096a6eb7e4abdcf5, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1615,9 +1615,37 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5398796558205251458, guid: 86fff4179bbcf5a42beb980ec603bd16, type: 3}
+      propertyPath: _duration
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5398796558205251458, guid: 86fff4179bbcf5a42beb980ec603bd16, type: 3}
+      propertyPath: _buttonImage
+      value: 
+      objectReference: {fileID: 1486423291376077740}
+    - target: {fileID: 5398796558205251458, guid: 86fff4179bbcf5a42beb980ec603bd16, type: 3}
+      propertyPath: _canvasGroup
+      value: 
+      objectReference: {fileID: 1181143485015326992}
+    - target: {fileID: 5398796558205251458, guid: 86fff4179bbcf5a42beb980ec603bd16, type: 3}
+      propertyPath: _animationScale.x
+      value: 1.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5398796558205251458, guid: 86fff4179bbcf5a42beb980ec603bd16, type: 3}
+      propertyPath: _animationScale.y
+      value: 1.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5398796558205251458, guid: 86fff4179bbcf5a42beb980ec603bd16, type: 3}
+      propertyPath: _pressedColor.rgba
+      value: 4278231001
+      objectReference: {fileID: 0}
+    - target: {fileID: 5398796558205251458, guid: 86fff4179bbcf5a42beb980ec603bd16, type: 3}
+      propertyPath: _highlightColor.rgba
+      value: 4279228157
+      objectReference: {fileID: 0}
     - target: {fileID: 7011415687672000178, guid: 86fff4179bbcf5a42beb980ec603bd16, type: 3}
       propertyPath: m_Name
-      value: ControlsHelpScreen
+      value: HudControlsHelpScreen
       objectReference: {fileID: 0}
     - target: {fileID: 8009996639393403278, guid: 86fff4179bbcf5a42beb980ec603bd16, type: 3}
       propertyPath: m_text
@@ -1627,19 +1655,45 @@ PrefabInstance:
       propertyPath: m_fontSize
       value: 72
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 5398796558205251458, guid: 86fff4179bbcf5a42beb980ec603bd16, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 86fff4179bbcf5a42beb980ec603bd16, type: 3}
 --- !u!224 &518150591586076141 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 984743110005154585, guid: 86fff4179bbcf5a42beb980ec603bd16, type: 3}
   m_PrefabInstance: {fileID: 764017179283384052}
   m_PrefabAsset: {fileID: 0}
+--- !u!225 &1181143485015326992 stripped
+CanvasGroup:
+  m_CorrespondingSourceObject: {fileID: 1945016476974999524, guid: 86fff4179bbcf5a42beb980ec603bd16, type: 3}
+  m_PrefabInstance: {fileID: 764017179283384052}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1486423291376077740 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2178197990750940504, guid: 86fff4179bbcf5a42beb980ec603bd16, type: 3}
+  m_PrefabInstance: {fileID: 764017179283384052}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &1491494664245784079 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2173145069144099067, guid: 86fff4179bbcf5a42beb980ec603bd16, type: 3}
   m_PrefabInstance: {fileID: 764017179283384052}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4644958674921949558 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5398796558205251458, guid: 86fff4179bbcf5a42beb980ec603bd16, type: 3}
+  m_PrefabInstance: {fileID: 764017179283384052}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d47c37a1f966054aab8baca1503968e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6110228649274434684 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6796407955581403784, guid: 86fff4179bbcf5a42beb980ec603bd16, type: 3}
@@ -1696,36 +1750,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &7640703197795048403 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6959027345784618279, guid: 86fff4179bbcf5a42beb980ec603bd16, type: 3}
-  m_PrefabInstance: {fileID: 764017179283384052}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &8010846220264217548
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7640703197795048403}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1357ede348b486a8c088676285b6acd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _canvasGroup: {fileID: 0}
-  _highlightColor:
-    serializedVersion: 2
-    rgba: 4279228157
-  _pressedColor:
-    serializedVersion: 2
-    rgba: 4278231001
-  _baseColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  _buttonImage: {fileID: 0}
-  _animationScale: {x: 1.2, y: 1.2}
-  _duration: 1
 --- !u!1 &7770918245492656198 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7011415687672000178, guid: 86fff4179bbcf5a42beb980ec603bd16, type: 3}
@@ -1744,7 +1768,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScreenId: 8
-  CloseButton: {fileID: 0}
+  CloseButton: {fileID: 4644958674921949558}
   _animation: {fileID: 0}
   HudSkillContainer: {fileID: 2936920373138480568}
 --- !u!1001 &2265563738705384020

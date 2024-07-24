@@ -59,6 +59,7 @@ namespace Code.Runtime.UI.Controller
             {
                 if (element.GetId() == elementId)
                 {
+                    element.BlockInteractions(false);
                     _tutorialService.HandlePointer(element);
                 }
                 else

@@ -30,12 +30,16 @@ namespace Code.Runtime.UI.Controller
             Assert.IsNotNull(_view);
             
             _screenService = screenService;
-
+            
+            _pauseService.PauseGame();
+            
             _view.CloseButton.OnClickAsObservable().Subscribe(x =>
             {
                 _pauseService.UnpauseGame();
                 _screenService.Close(this);
             });
+            
+            _view.CloseButton.PlayScaleAnimation();
         }
     }
 }

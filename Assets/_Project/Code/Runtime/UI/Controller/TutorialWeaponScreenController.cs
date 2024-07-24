@@ -27,11 +27,10 @@ namespace Code.Runtime.UI.Controller
 
             foreach (var element in _tutorialElements)
             {
-                element.OnClickAsObservable().Subscribe(HandleElementInteraction).AddTo(_disposables);
+                element.OnClickAsObservable().Subscribe(HandleElementInteraction).AddTo(_windowView);
             }
 
             _tutorialService.OnElementHighlighted += HandleElementHighlighted;
-
         }
 
         public override void Dispose()
@@ -51,6 +50,7 @@ namespace Code.Runtime.UI.Controller
             {
                 if (element.GetId() == elementId)
                 {
+                    element.BlockInteractions(false);
                     _tutorialService.HandlePointer(element);
                 }
                 else

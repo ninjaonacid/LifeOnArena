@@ -103,7 +103,6 @@ namespace Code.Runtime.UI.Controller
                     .OnClickAsObservable()
                     .Subscribe(x =>
                     {
-                        _pauseService.PauseGame();
                         _screenService.Open(ScreenID.HudControlsScreen);
                     });
             }

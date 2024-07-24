@@ -1,6 +1,6 @@
 namespace Code.Runtime.UI.Buttons
 {
-    public class CloseButton : BaseButton
+    public class CloseButton : AnimatedButton
     {
     }
 }

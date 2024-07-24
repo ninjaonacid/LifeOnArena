@@ -28,7 +28,7 @@ namespace Code.Runtime.UI.Controller
 
             foreach (var element in _tutorialElements)
             {
-                element.OnClickAsObservable().Subscribe(HandleElementInteraction).AddTo(_disposable);
+                element.OnClickAsObservable().Subscribe(HandleElementInteraction).AddTo(_screenView);
             }
             
             _tutorialService.OnElementHighlighted += HandleElementHighlighted;
@@ -52,6 +52,7 @@ namespace Code.Runtime.UI.Controller
             {
                 if (element.GetId() == elementId)
                 {
+                    element.BlockInteractions(false);
                     _tutorialService.HandlePointer(element);
                 }
                 else

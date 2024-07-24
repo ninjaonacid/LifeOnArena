@@ -36,7 +36,7 @@ namespace Code.Runtime.UI.View
             }
             else
             {
-                Destroy(gameObject); 
+                Destroy(gameObject);
             }
         }
 
