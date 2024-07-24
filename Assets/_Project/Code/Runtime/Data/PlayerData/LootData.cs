@@ -9,6 +9,8 @@ namespace Code.Runtime.Data.PlayerData
     {
         public int Collected;
 
+        public ReactiveProperty<int> CollectedLoot = new();
+        
         [JsonIgnore]
         public Action<int> CountChanged;
 
@@ -16,18 +18,21 @@ namespace Code.Runtime.Data.PlayerData
         public void Collect(SoulLoot soulLoot)
         {
             Collected += soulLoot.Value;
+            CollectedLoot.Value += soulLoot.Value;
             CountChanged?.Invoke(soulLoot.Value);
         }
 
         public void Collect(int value)
         {
             Collected += value;
+            CollectedLoot.Value += value;
             CountChanged?.Invoke(value);
         }
 
         public void Spend(int value)
         {
             Collected -= value;
+            CollectedLoot.Value -= value;
             CountChanged?.Invoke(value);
         }
         

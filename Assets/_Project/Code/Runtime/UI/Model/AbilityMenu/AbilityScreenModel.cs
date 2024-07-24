@@ -28,8 +28,8 @@ namespace Code.Runtime.UI.Model.AbilityMenu
         public void Initialize()
         {
             var souls = _gameData.PlayerData.WorldData.LootData.Collected;
-            Souls = new ReactiveProperty<int>(souls);
-            
+            Souls = _gameData.PlayerData.WorldData.LootData.CollectedLoot;
+       
             _abilities = new List<AbilityModel>();
             _equippedAbilities = new IndexedQueue<AbilityModel>();
 

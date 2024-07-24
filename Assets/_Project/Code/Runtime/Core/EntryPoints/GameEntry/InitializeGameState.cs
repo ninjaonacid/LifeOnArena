@@ -41,7 +41,8 @@ namespace Code.Runtime.Core.EntryPoints.GameEntry
 
             data.TutorialData.IsTutorialCompleted = !config.IsNeedTutorial;
 
-            data.WorldData.LootData.Collected = 10000;
+            data.WorldData.LootData.Collected = config.StartSouls;
+            data.WorldData.LootData.CollectedLoot.Value = config.StartSouls;
 
             StatDatabase characterStats = config.CharacterStats;
             

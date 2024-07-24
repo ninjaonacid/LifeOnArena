@@ -14,7 +14,7 @@ namespace Code.Runtime.UI.Controller
 {
     public class MainMenuController : IScreenController, IDisposable
     {
-        protected MainMenuModel _model;
+        private MainMenuModel _model;
         protected MainMenuWindowView _windowView;
 
         private ScreenService _screenService;

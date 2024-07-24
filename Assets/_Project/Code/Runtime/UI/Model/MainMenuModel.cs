@@ -35,16 +35,15 @@ namespace Code.Runtime.UI.Model
         public void Initialize()
         {
             Level = _gameData.PlayerData.PlayerExp.Level;
-            var souls = _gameData.PlayerData.WorldData.LootData.Collected;
-            Souls = new ReactiveProperty<int>(souls);
+            Souls = _gameData.PlayerData.WorldData.LootData.CollectedLoot;
+         
             Health.Value = _gameData.PlayerData.StatsData.StatsValues["Health"];
             Attack.Value = _gameData.PlayerData.StatsData.StatsValues["Attack"];
             Magic.Value = _gameData.PlayerData.StatsData.StatsValues["Magic"];
             StatUpgradePrice = _gameData.PlayerData.StatsData.StatUpgradePrice;
             IsMusicMuted = _gameData.AudioData.isMusicMuted;
         }
-        
-        
+
         public void UpgradeHealth() => UpgradeStat("Health", Health, CanUpgradeHealth);
         public void UpgradeAttack() => UpgradeStat("Attack", Attack, CanUpgradeAttack);
         public void UpgradeMagic() => UpgradeStat("Magic", Magic, CanUpgradeMagic);
