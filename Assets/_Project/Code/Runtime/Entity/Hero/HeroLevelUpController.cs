@@ -1,7 +1,9 @@
-﻿using Code.Runtime.Data.PlayerData;
+﻿using Code.Runtime.Core.Audio;
+using Code.Runtime.Data.PlayerData;
 using Code.Runtime.Modules.StatSystem;
 using Code.Runtime.Services.PersistentProgress;
 using UnityEngine;
+using VContainer;
 
 namespace Code.Runtime.Entity.Hero
 {
@@ -9,7 +11,17 @@ namespace Code.Runtime.Entity.Hero
     {
         [SerializeField] private HeroStats _stats;
         [SerializeField] private VisualEffectController _vfxController;
+
+        private AudioService _audioService;
+        
+        private PlayerData _playerData;
         private int _heroLevel;
+        
+        [Inject]
+        public void Construct(AudioService audioService)
+        {
+            _audioService = audioService;
+        }
         public void LoadData(PlayerData data)
         {
             data.PlayerExp.OnLevelChanged += HandleLevelUp;
@@ -17,6 +29,8 @@ namespace Code.Runtime.Entity.Hero
 
         private void HandleLevelUp()
         {
+            _audioService.PlaySound("LevelUp", 1f);
+            
             var stats = _stats.Stats;
             
             foreach (var stat in stats.Values)
@@ -35,6 +49,11 @@ namespace Code.Runtime.Entity.Hero
         public void UpdateData(PlayerData data)
         {
            
+        }
+
+        private void OnDestroy()
+        {
+            _playerData.PlayerExp.OnLevelChanged -= HandleLevelUp;
         }
     }
 }

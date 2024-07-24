@@ -26,10 +26,14 @@ namespace Code.Runtime.Entity.Hero
         {
             _eventSystem = eventSystem;
         }
+
+        public void Revive()
+        {
+            _isDead = false;
+        }
         private void Start()
         {
             _health.Health.CurrentValueChanged += HealthChanged;
-            Debug.Log("awsd");
         }
 
         private void OnDestroy()
@@ -41,6 +45,7 @@ namespace Code.Runtime.Entity.Hero
         {
             if (!_isDead && _health.Health.CurrentValue <= 0) Die();
         }
+        
 
         private void Die()
         {

@@ -193,7 +193,10 @@ namespace Code.Runtime.Entity.Hero
                 AbilityCast,
                 HeroIdle, _animationData.Animations[AnimationKey.SpellCast].Length - 0.4f));
             
-
+            _stateMachine.AddTransition(new Transition(
+                nameof(HeroDeathState),
+                nameof(HeroIdle),
+                (transition) =>  !_heroDeath.IsDead));
 
 
             _stateMachine.InitStateMachine();

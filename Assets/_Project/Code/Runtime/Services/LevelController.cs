@@ -73,7 +73,7 @@ namespace Code.Runtime.Services
             _gameData.PlayerData.WorldData.LocationProgressData.CompletedLocations.Add(currentLevel.LevelId.Id);
             _saveLoad.SaveData();
             
-            _eventSystem.FireEvent<LevelEndEvent>(new LevelEndEvent());
+            _eventSystem.FireEvent(new LevelEndEvent());
         }
 
         private void BossKilled()
@@ -99,7 +99,7 @@ namespace Code.Runtime.Services
 
         private async UniTask LevelEndTask()
         {
-            await UniTask.Delay(TimeSpan.FromSeconds(5));
+            await UniTask.Delay(TimeSpan.FromSeconds(6));
             LevelEnd();
         }
 

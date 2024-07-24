@@ -162,6 +162,7 @@ namespace Code.Runtime.UI.Controller
         {
             _disposable.Dispose();
             _eventSystem.Unsubscribe<BossSpawnEvent>(SubscribeBossHealthBar);
+            _eventSystem.Unsubscribe<LevelEndEvent>(ShowReturnToMenuButton);
         }
     }
 }
