@@ -1,6 +1,5 @@
 using Code.Runtime.UI.Buttons;
 using Code.Runtime.UI.View.HUD.Skills;
-using UnityEngine.UI;
 
 namespace Code.Runtime.UI.View.HUD
 {
@@ -10,6 +9,7 @@ namespace Code.Runtime.UI.View.HUD
         public ComboCounter ComboCounter;
         public LootCounter LootCounter;
         public BaseButton SettingsButton;
+        public BaseButton ControlsButton;
         public StatusBar StatusBar;
         public BossHudHealthBar BossHudHealthBar;
         public AnimatedButton PortalButton;

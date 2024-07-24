@@ -389,6 +389,8 @@ GameObject:
   - component: {fileID: 7736638134194582469}
   - component: {fileID: 6436550140752444020}
   - component: {fileID: 12128738576509419}
+  - component: {fileID: 5931607980954380840}
+  - component: {fileID: 2576458396963732123}
   m_Layer: 0
   m_Name: WeaponCell
   m_TagString: Untagged
@@ -446,6 +448,32 @@ MonoBehaviour:
   _equippedFrame: {fileID: 650374784759908219}
   _weaponName: {fileID: 8958388359615666717}
   _weaponDescription: {fileID: 1014568819597230758}
+--- !u!114 &5931607980954380840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4150676367354844938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5287c8edf39730f4d861cc7e6fcd4e6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _elementId: {fileID: 0}
+  _canvas: {fileID: 2576458396963732123}
+--- !u!225 &2576458396963732123
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4150676367354844938}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &6042845590378382344
 GameObject:
   m_ObjectHideFlags: 0

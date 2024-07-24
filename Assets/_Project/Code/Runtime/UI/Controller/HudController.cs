@@ -5,6 +5,7 @@ using Code.Runtime.CustomEvents;
 using Code.Runtime.Entity.EntitiesComponents;
 using Code.Runtime.Entity.Hero;
 using Code.Runtime.Modules.Advertisement;
+using Code.Runtime.Modules.Utils;
 using Code.Runtime.Services;
 using Code.Runtime.Services.LevelLoaderService;
 using Code.Runtime.Services.PauseService;
@@ -92,6 +93,20 @@ namespace Code.Runtime.UI.Controller
                     _screenService.Open(ScreenID.HudSettingsPopup);
                 });
 
+            if (!WebApplication.IsDesktop)
+            {
+                _windowView.ControlsButton.Show(false);
+            }
+            else
+            {
+                _windowView.ControlsButton
+                    .OnClickAsObservable()
+                    .Subscribe(x =>
+                    {
+                        _pauseService.PauseGame();
+                        _screenService.Open(ScreenID.HudControlsScreen);
+                    });
+            }
         }
 
         private void LinkHeroComponents()

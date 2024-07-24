@@ -1,3 +1,6 @@
+using InstantGamesBridge;
+using InstantGamesBridge.Modules.Device;
+
 namespace Code.Runtime.Modules.Utils
 {
     public static class WebApplication
@@ -14,5 +17,8 @@ namespace Code.Runtime.Modules.Utils
 #pragma warning restore CS0162
             }
         }
+
+        public static bool IsMobile => Bridge.device.type == DeviceType.Mobile;
+        public static bool IsDesktop => Bridge.device.type == DeviceType.Desktop;
     }
 }

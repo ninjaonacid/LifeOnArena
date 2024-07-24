@@ -1040,6 +1040,7 @@ GameObject:
   - component: {fileID: 3953687927081849907}
   - component: {fileID: 4867455432025638488}
   - component: {fileID: 3647126736798332893}
+  - component: {fileID: 7874593795475727253}
   m_Layer: 12
   m_Name: Hero
   m_TagString: Player
@@ -1238,6 +1239,7 @@ MonoBehaviour:
     AbilitySlotID: 2
   - AbilityIdentifier: {fileID: 11400000, guid: bfb788b57061def4abcd06ad2d562dfa, type: 2}
     AbilitySlotID: 0
+  _inputHandler: {fileID: 7874593795475727253}
 --- !u!114 &6331987856363381589
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1427,6 +1429,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stats: {fileID: 6287642891397871327}
   _vfxController: {fileID: 4867455432025638488}
+--- !u!114 &7874593795475727253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6031708160037518034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33be9fd35bcb47f6932abe58163d9a86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6072728912024870471
 GameObject:
   m_ObjectHideFlags: 0

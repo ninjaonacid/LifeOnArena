@@ -257,6 +257,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1287394377001523860}
   - component: {fileID: 6499876677705050690}
+  - component: {fileID: 1313026577877497351}
+  - component: {fileID: 6053065717234581116}
   m_Layer: 5
   m_Name: LocationPoint
   m_TagString: Untagged
@@ -319,6 +321,32 @@ MonoBehaviour:
   _completedColor:
     serializedVersion: 2
     rgba: 3610705770
+--- !u!114 &1313026577877497351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5664819915433994772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5287c8edf39730f4d861cc7e6fcd4e6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _elementId: {fileID: 0}
+  _canvas: {fileID: 6053065717234581116}
+--- !u!225 &6053065717234581116
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5664819915433994772}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &7381437690002163306
 GameObject:
   m_ObjectHideFlags: 0

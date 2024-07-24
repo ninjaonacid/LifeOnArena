@@ -415,6 +415,7 @@ GameObject:
   - component: {fileID: 2028307909803030381}
   - component: {fileID: 6324344544946374914}
   - component: {fileID: 1790147313641873976}
+  - component: {fileID: 7075101735912903513}
   m_Layer: 0
   m_Name: ToFightButton
   m_TagString: Untagged
@@ -521,6 +522,20 @@ MonoBehaviour:
   _duration: 1.5
   BattleText: {fileID: 5334029909360056027}
   LockedText: {fileID: 7158524187287922263}
+--- !u!114 &7075101735912903513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2266840172711913475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5287c8edf39730f4d861cc7e6fcd4e6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _elementId: {fileID: 11400000, guid: 6f3b0de92d052ae4ea7013231dbe03ac, type: 2}
+  _canvas: {fileID: 6324344544946374914}
 --- !u!1 &3583570332870476986
 GameObject:
   m_ObjectHideFlags: 0
@@ -1567,6 +1582,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1313026577877497351, guid: 80fc8b02b2377434da409bfece7b9839, type: 3}
+      propertyPath: _elementId
+      value: 
+      objectReference: {fileID: 11400000, guid: 8d63dd38fc5653a4b83ed88ad3bb4ed5, type: 2}
     - target: {fileID: 2211788063474867232, guid: 80fc8b02b2377434da409bfece7b9839, type: 3}
       propertyPath: _targetRect
       value: 
@@ -1700,6 +1719,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1313026577877497351, guid: 80fc8b02b2377434da409bfece7b9839, type: 3}
+      propertyPath: _elementId
+      value: 
+      objectReference: {fileID: 11400000, guid: c4b7e2977c4f10e41913bec969b2a98f, type: 2}
     - target: {fileID: 2211788063474867232, guid: 80fc8b02b2377434da409bfece7b9839, type: 3}
       propertyPath: _targetRect
       value: 
@@ -2961,6 +2984,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1313026577877497351, guid: 80fc8b02b2377434da409bfece7b9839, type: 3}
+      propertyPath: _elementId
+      value: 
+      objectReference: {fileID: 11400000, guid: 52a3fcff67e60094b9c6d2e905751fc5, type: 2}
     - target: {fileID: 2211788063474867232, guid: 80fc8b02b2377434da409bfece7b9839, type: 3}
       propertyPath: _targetRect
       value: 
@@ -3098,6 +3125,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1313026577877497351, guid: 80fc8b02b2377434da409bfece7b9839, type: 3}
+      propertyPath: _elementId
+      value: 
+      objectReference: {fileID: 11400000, guid: 95e2cded798294b44b70fee31249b6af, type: 2}
     - target: {fileID: 2211788063474867232, guid: 80fc8b02b2377434da409bfece7b9839, type: 3}
       propertyPath: _targetRect
       value: 
@@ -3234,6 +3265,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1313026577877497351, guid: 80fc8b02b2377434da409bfece7b9839, type: 3}
+      propertyPath: _elementId
+      value: 
+      objectReference: {fileID: 11400000, guid: bf595930fd0b7ee4bbd84b09b8e20c00, type: 2}
     - target: {fileID: 5664819915433994772, guid: 80fc8b02b2377434da409bfece7b9839, type: 3}
       propertyPath: m_Name
       value: LocationPoint
@@ -3383,6 +3418,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1313026577877497351, guid: 80fc8b02b2377434da409bfece7b9839, type: 3}
+      propertyPath: _elementId
+      value: 
+      objectReference: {fileID: 11400000, guid: b3dcb071866fed7438ae1fc34c441d28, type: 2}
     - target: {fileID: 2211788063474867232, guid: 80fc8b02b2377434da409bfece7b9839, type: 3}
       propertyPath: _targetRect
       value: 

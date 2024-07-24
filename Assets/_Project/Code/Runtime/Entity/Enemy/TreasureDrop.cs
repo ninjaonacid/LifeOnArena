@@ -3,7 +3,6 @@ using System.Threading;
 using Code.Runtime.ConfigData.Reward;
 using Code.Runtime.Logic.TreasureChest;
 using Code.Runtime.Modules.RewardSystem;
-using Code.Runtime.Services.PersistentProgress;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using VContainer;
@@ -18,16 +17,14 @@ namespace Code.Runtime.Entity.Enemy
         [SerializeField] private TreasureChest _treasurePrefab;
         
         private GameRewardSystem _gameReward;
-        private IGameDataContainer _gameData;
-
+     
         private readonly CancellationTokenSource _cts = new();
         
         [Inject]
-        public void Construct(GameRewardSystem gameReward, IGameDataContainer gameData)
+        public void Construct(GameRewardSystem gameReward)
         {
             _gameReward = gameReward;
             _enemyDeath.Happened += SpawnTreasure;
-            _gameData = gameData;
         }
 
         private void SpawnTreasure()

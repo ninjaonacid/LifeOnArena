@@ -22,7 +22,8 @@ namespace Code.Runtime.UI.Services
         public ScreenControllerFactory(IGameDataContainer gameData,
             IEventSystem eventSystem,
             HeroFactory heroFactory, ISaveLoadService saveLoad,
-            AudioService audioService, LevelCollectableTracker collectableTracker, LevelLoader levelLoader,
+            AudioService audioService, PlayerControls playerControls,
+            LevelCollectableTracker collectableTracker, LevelLoader levelLoader,
             TutorialService tutorialService, PauseService pauseService,
             AdvertisementService adService, LocalizationService localService)
         {
@@ -54,7 +55,7 @@ namespace Code.Runtime.UI.Services
                 () => new RewardPopupController(localService, pauseService));
 
             _screenControllers.Add(typeof(MissionSummaryWindowController),
-                () => new MissionSummaryWindowController(levelLoader, collectableTracker));
+                () => new MissionSummaryWindowController(levelLoader, collectableTracker, playerControls));
             
             _screenControllers.Add(typeof(MainMenuSettingsPopupController), 
             () => new MainMenuSettingsPopupController(localService, audioService));
@@ -64,6 +65,9 @@ namespace Code.Runtime.UI.Services
             
             _screenControllers.Add(typeof(HeroDeathPopupController), 
                 () => new HeroDeathPopupController(levelLoader, adService, pauseService));
+            
+            _screenControllers.Add(typeof(HudControlsController), 
+                () => new HudControlsController(pauseService));
         }
 
         public IScreenController CreateController(Type controller)

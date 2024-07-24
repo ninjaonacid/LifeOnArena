@@ -18,11 +18,15 @@ namespace Code.Runtime.UI.Controller
 
         private readonly LevelLoader _levelLoader;
         private readonly LevelCollectableTracker _collectableTracker;
+        private readonly PlayerControls _playerControls;
 
-        public MissionSummaryWindowController(LevelLoader levelLoader, LevelCollectableTracker collectableTracker)
+        public MissionSummaryWindowController(LevelLoader levelLoader, 
+            LevelCollectableTracker collectableTracker,
+            PlayerControls playerControls)
         {
             _levelLoader = levelLoader;
             _collectableTracker = collectableTracker;
+            _playerControls = playerControls;
         }
 
         public void InitController(IScreenModel model, BaseWindowView windowView, ScreenService screenService)
@@ -33,17 +37,20 @@ namespace Code.Runtime.UI.Controller
             Assert.IsNotNull(_view);
             Assert.IsNotNull(_model);
             
+            _playerControls.Player.Disable();
+            
             _view.ConfirmButton
                 .OnClickAsObservable()
                 .Subscribe(x =>
                 {
                     Debug.Log("ConfirmButtonPressed");
+                    _playerControls.Enable();
                     _levelLoader.LoadLevel("MainMenu");
                 });
 
-            _view.EnemiesExp.SetText(_collectableTracker.GainedExperience.ToString());
-            _view.LevelExp.SetText(_collectableTracker.ObjectiveExperienceReward.ToString());
-            _view.TotalExp.SetText((_collectableTracker.GainedExperience + _collectableTracker.ObjectiveExperienceReward).ToString());
+            _view.EnemiesExp.SetText(_collectableTracker.GainedExperience.ToString("F0"));
+            _view.LevelExp.SetText(_collectableTracker.ObjectiveExperienceReward.ToString("F0"));
+            _view.TotalExp.SetText((_collectableTracker.GainedExperience + _collectableTracker.ObjectiveExperienceReward).ToString("F0"));
             
             _view.SoulsFromEnemies.SetText(_collectableTracker.SoulsLoot.ToString());
             _view.SoulsForLevel.SetText(_collectableTracker.ObjectiveSoulsReward.ToString());

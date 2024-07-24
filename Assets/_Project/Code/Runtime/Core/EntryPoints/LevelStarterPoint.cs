@@ -60,7 +60,7 @@ namespace Code.Runtime.Core.EntryPoints
             _collectableTracker.SetObjectiveExperience(config.ExpForComplete);
             _collectableTracker.SetObjectiveSoulsReward(config.SoulsForComplete);
             _saveLoad.LoadData();
-
+            _controls.UI.Enable();
             _enemySpawnerController.RunSpawner();
         }
 

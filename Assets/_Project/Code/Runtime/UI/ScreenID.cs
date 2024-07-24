@@ -9,7 +9,7 @@ namespace Code.Runtime.UI
         MainMenu = 5,
         HUD = 6,
         MessageWindow = 7,
-        MessageWindowTimer = 8,
+        HudControlsScreen = 8,
         ArenaSelectionScreen = 9,
         MissionSummaryWindow = 10,
         RewardPopup = 11,

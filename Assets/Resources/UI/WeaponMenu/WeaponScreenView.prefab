@@ -307,6 +307,7 @@ GameObject:
   - component: {fileID: 8441671981387228823}
   - component: {fileID: 6056748827312884306}
   - component: {fileID: 1604948072278883174}
+  - component: {fileID: 5460680499214105626}
   m_Layer: 5
   m_Name: EquipButton
   m_TagString: Untagged
@@ -373,6 +374,20 @@ MonoBehaviour:
   _buttonImage: {fileID: 1521385307982073450}
   _animationScale: {x: 1.1, y: 1.1}
   _duration: 1
+--- !u!114 &5460680499214105626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6800481585769077363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5287c8edf39730f4d861cc7e6fcd4e6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _elementId: {fileID: 11400000, guid: 1227395e51b644d44a14e94ac160aec0, type: 2}
+  _canvas: {fileID: 6056748827312884306}
 --- !u!1001 &1543204084871185362
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -388,6 +403,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: WeaponCell (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 5931607980954380840, guid: ec4c329cd9c839d46919bdcf8d6f354f, type: 3}
+      propertyPath: _elementId
+      value: 
+      objectReference: {fileID: 11400000, guid: b1164db3282c437418ad3be40cc353b6, type: 2}
     - target: {fileID: 7736638134194582469, guid: ec4c329cd9c839d46919bdcf8d6f354f, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -505,6 +524,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: WeaponCell
       objectReference: {fileID: 0}
+    - target: {fileID: 5931607980954380840, guid: ec4c329cd9c839d46919bdcf8d6f354f, type: 3}
+      propertyPath: _elementId
+      value: 
+      objectReference: {fileID: 11400000, guid: b41eb1c4cee91374f9a9e356554e39d2, type: 2}
     - target: {fileID: 7736638134194582469, guid: ec4c329cd9c839d46919bdcf8d6f354f, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -843,6 +866,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: WeaponCell (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5931607980954380840, guid: ec4c329cd9c839d46919bdcf8d6f354f, type: 3}
+      propertyPath: _elementId
+      value: 
+      objectReference: {fileID: 11400000, guid: 48b0d8dd7f3fc374f96e7f40080e8287, type: 2}
     - target: {fileID: 7736638134194582469, guid: ec4c329cd9c839d46919bdcf8d6f354f, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -960,6 +987,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: WeaponCell (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 5931607980954380840, guid: ec4c329cd9c839d46919bdcf8d6f354f, type: 3}
+      propertyPath: _elementId
+      value: 
+      objectReference: {fileID: 11400000, guid: fcbaaf037be28d2408040643143bb8d7, type: 2}
     - target: {fileID: 7736638134194582469, guid: ec4c329cd9c839d46919bdcf8d6f354f, type: 3}
       propertyPath: m_Pivot.x
       value: 0
