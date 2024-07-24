@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Code.Runtime.ConfigData.Identifiers;
 using Code.Runtime.Core.Config;
 using Code.Runtime.UI;
 using UnityEngine;
@@ -9,14 +10,18 @@ namespace Code.Runtime.Modules.TutorialService
 {
     public class TutorialService
     {
-        public Action<TutorialTask> OnTaskChanged;
+        public event Action<TutorialTask> OnTaskChanged;
+        public event Action<TutorialElementIdentifier> OnElementHighlighted;
+        public event Action<TutorialElementIdentifier> OnElementUnhighlighted;
+        public event Action OnTutorialCompleted;
+
         private readonly ConfigProvider _configProvider;
         private Queue<TutorialTask> _tutorialTasks = new();
         private List<TutorialTask> _completedTasks = new();
         private TutorialTask _currentTask;
         private ArrowUI _arrowPrefab;
         private ArrowUI _arrow;
-
+       
         public TutorialService(ConfigProvider configProvider)
         {
             _configProvider = configProvider;
@@ -28,24 +33,71 @@ namespace Code.Runtime.Modules.TutorialService
             var tutorialConfig = _configProvider.GetTutorialConfig();
             _tutorialTasks = new Queue<TutorialTask>(tutorialConfig.TutorialTasks);
             _arrowPrefab = tutorialConfig.ArrowPrefab;
-            _currentTask = _tutorialTasks.Peek();
+            _currentTask = _tutorialTasks.Count > 0 ? _tutorialTasks.Peek() : null;
         }
-        
-        public void UpdateTutorialStatus(TutorialTask task)
+
+        public void StartTutorial()
         {
-            _completedTasks.Add(_currentTask);
-            _tutorialTasks.Dequeue();
-            if (_tutorialTasks.Count > 0)
+            if (_currentTask != null)
             {
-                _currentTask = _tutorialTasks.Peek();
-                OnTaskChanged.Invoke(_currentTask);
+                OnTaskChanged?.Invoke(_currentTask);
+                HighlightCurrentElement();
             }
             else
             {
-                
+                OnTutorialCompleted?.Invoke();
             }
-            
-            Debug.Log($"Current task is {_currentTask}");
+        }
+
+        public void HandleElementInteraction(string elementId)
+        {
+            if (_currentTask == null) return;
+
+            if (elementId == _currentTask.ElementId.Name)
+            {
+                UpdateTutorialStatus();
+            }
+        }
+
+        private void UpdateTutorialStatus()
+        {
+            if (_currentTask != null)
+            {
+                UnhighlightCurrentElement();
+                _completedTasks.Add(_currentTask);
+                _tutorialTasks.Dequeue();
+
+                if (_tutorialTasks.Count > 0)
+                {
+                    _currentTask = _tutorialTasks.Peek();
+                    OnTaskChanged?.Invoke(_currentTask);
+                    HighlightCurrentElement();
+                }
+                else
+                {
+                    _currentTask = null;
+                    OnTutorialCompleted?.Invoke();
+                }
+
+                Debug.Log($"Current task is {_currentTask}");
+            }
+        }
+
+        private void HighlightCurrentElement()
+        {
+            if (_currentTask != null)
+            {
+                OnElementHighlighted?.Invoke(_currentTask.ElementId);
+                Debug.Log($"{_currentTask.ElementId.Name}");
+            }
+        }
+
+        private void UnhighlightCurrentElement()
+        {
+            if (_currentTask != null)
+            {
+                OnElementUnhighlighted?.Invoke(_currentTask.ElementId);
+            }
         }
 
         public void HandlePointer(TutorialElement element)
@@ -59,12 +111,12 @@ namespace Code.Runtime.Modules.TutorialService
             {
                 _arrow = Object.Instantiate(_arrowPrefab);
             }
-            
+
             _arrow.gameObject.SetActive(true);
-            
+
             RectTransform transform;
             (transform = (RectTransform)_arrow.transform).SetParent(element.transform);
-                
+
             transform.localScale = Vector3.one;
             transform.anchoredPosition = _currentTask.TaskData.TutorialArrowPosition;
             var transformLocalRotation = transform.localRotation;
@@ -78,10 +130,10 @@ namespace Code.Runtime.Modules.TutorialService
 
             Vector2 newPosition =
                 transform.anchoredPosition + forwardDirection * movementDistance;
-                
+
             _arrow.Movement(newPosition);
         }
-        
+
         public TutorialTask GetCurrentTask()
         {
             return _currentTask;

@@ -12,13 +12,13 @@ namespace Code.Runtime.UI.Controller
     public class TutorialWeaponScreenController : WeaponScreenController
     {
         private readonly TutorialService _tutorialService;
+        private List<TutorialElement> _tutorialElements = new();
 
         public TutorialWeaponScreenController(TutorialService tutorialService)
         {
             _tutorialService = tutorialService;
         }
 
-        private List<TutorialElement> _tutorialElements = new();
         public override void InitController(IScreenModel model, BaseWindowView windowView, ScreenService screenService)
         {
             base.InitController(model, windowView, screenService);
@@ -27,46 +27,39 @@ namespace Code.Runtime.UI.Controller
 
             foreach (var element in _tutorialElements)
             {
-                element.OnClickAsObservable().Subscribe(HandleTutorialLogic).AddTo(_disposables);
+                element.OnClickAsObservable().Subscribe(HandleElementInteraction).AddTo(_disposables);
             }
-            
-            _tutorialService.OnTaskChanged += UpdateTutorial;
+
+            _tutorialService.OnElementHighlighted += HandleElementHighlighted;
 
         }
 
         public override void Dispose()
         {
             base.Dispose();
-            _tutorialService.OnTaskChanged -= UpdateTutorial;
+            _tutorialService.OnElementHighlighted -= HandleElementHighlighted;
         }
 
-        private void HandleTutorialLogic(TutorialElementIdentifier tutorialElement)
+        private void HandleElementInteraction(TutorialElementIdentifier tutorialElement)
         {
-            var task = _tutorialService.GetCurrentTask();
-
-            if (tutorialElement.Id == task.ElementId.Id)
-            {
-                _tutorialService.UpdateTutorialStatus(task);
-            }
+            _tutorialService.HandleElementInteraction(tutorialElement.Name);
         }
 
-        private void UpdateTutorial(TutorialTask task)
+        private void HandleElementHighlighted(TutorialElementIdentifier elementId)
         {
-            TutorialElement currentElement = default;
-            
-            _tutorialElements.ForEach(x =>
+            foreach (var element in _tutorialElements)
             {
-                if (x.GetId() == task.ElementId)
+                if (element.GetId() == elementId)
                 {
-                    currentElement = x;
-                    currentElement.BlockInteractions(false);
-                    _tutorialService.HandlePointer(currentElement);
+                    _tutorialService.HandlePointer(element);
                 }
                 else
                 {
-                    x.BlockInteractions(true);
+                    element.BlockInteractions(true);
                 }
-            });
+            }
         }
+
+     
     }
 }

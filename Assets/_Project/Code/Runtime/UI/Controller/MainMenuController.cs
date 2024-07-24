@@ -109,7 +109,7 @@ namespace Code.Runtime.UI.Controller
             statView.OnPlusClicked().Subscribe(_ => upgrade()).AddTo(_disposables);
         }
 
-        public void Dispose()
+        public virtual void Dispose()
         {
             _disposables.Dispose();
         }

@@ -60,8 +60,16 @@ MonoBehaviour:
       Data: 
   _identifier: {fileID: 11400000, guid: b7e1b76dfa43a6a40aa37103371ec426, type: 2}
   _icon: {fileID: 21300000, guid: fa92a05800b96f74f8c3992964761763, type: 3}
-  _description: Strong ground strike
-  _cooldown: 2
+  _description:
+    m_TableReference:
+      m_TableCollectionName: 
+    m_TableEntryReference:
+      m_KeyId: 0
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  _cooldown: 5
   _activeTime: 2
   _isCastAbility: 0
   _visualEffect: {fileID: 11400000, guid: 95a5a09158e3c764cbc84af1ea8a7a6e, type: 2}
@@ -70,3 +78,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 27bcb6cffb236fd40ba8e195aee3e146, type: 2}
   _castDistance: 0
   _aoeRadius: 10
+  references:
+    version: 2
+    RefIds: []

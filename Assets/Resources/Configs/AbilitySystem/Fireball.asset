@@ -32,9 +32,28 @@ MonoBehaviour:
       Data: 1
     - Name: Price
       Entry: 3
-      Data: 0
+      Data: 100
     - Name: UnlockRequirements
-      Entry: 6
+      Entry: 7
+      Data: 1|System.Collections.Generic.List`1[[Code.Runtime.Modules.Requirements.IRequirement`1[[Code.Runtime.Data.PlayerData.PlayerData,
+        Assembly-CSharp]], Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 2|Code.Runtime.Modules.Requirements.SoulsRequirement, Assembly-CSharp
+    - Name: _requiredSouls
+      Entry: 3
+      Data: 100
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
       Data: 
     - Name: 
       Entry: 8
@@ -50,7 +69,7 @@ MonoBehaviour:
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
-  _cooldown: 3
+  _cooldown: 5
   _activeTime: 1
   _isCastAbility: 1
   _visualEffect: {fileID: 11400000, guid: 1436113d8ed112f409486750b254e9fc, type: 2}

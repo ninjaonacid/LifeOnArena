@@ -16,9 +16,8 @@ namespace Code.Runtime.UI.Controller
 {
     public class TutorialMainMenuController : MainMenuController
     {
-        private TutorialService _tutorialService;
+        private readonly TutorialService _tutorialService;
         private List<TutorialElement> _tutorialElements = new();
-
 
         public TutorialMainMenuController(IGameDataContainer gameData, AudioService audioService,
             LevelLoader levelLoader, LocalizationService localService, TutorialService tutorialService) : base(gameData,
@@ -35,41 +34,39 @@ namespace Code.Runtime.UI.Controller
 
             foreach (var element in _tutorialElements)
             {
-                element.OnClickAsObservable().Subscribe(HandleTutorialLogic);
+                element.OnClickAsObservable().Subscribe(HandleElementInteraction);
             }
-
-            _tutorialService.OnTaskChanged += UpdateTutorial;
-
-            UpdateTutorial(_tutorialService.GetCurrentTask());
+            
+            _tutorialService.OnElementHighlighted += HandleElementHighlighted;
+            _tutorialService.StartTutorial();
         }
 
-        private void HandleTutorialLogic(TutorialElementIdentifier tutorialElement)
+        public override void Dispose()
         {
-            var task = _tutorialService.GetCurrentTask();
-
-            if (tutorialElement.Id == task.ElementId.Id)
-            {
-                _tutorialService.UpdateTutorialStatus(task);
-            }
+            base.Dispose();
+            _tutorialService.OnElementHighlighted -= HandleElementHighlighted;
         }
 
-        private void UpdateTutorial(TutorialTask task)
-        {
-            TutorialElement currentElement = default;
 
-            _tutorialElements.ForEach(x =>
+        private void HandleElementInteraction(TutorialElementIdentifier tutorialElement)
+        {
+            _tutorialService.HandleElementInteraction(tutorialElement.Name);
+        }
+
+        private void HandleElementHighlighted(TutorialElementIdentifier elementId)
+        {
+            foreach (var element in _tutorialElements)
             {
-                if (x.GetId() == task.ElementId)
+                if (element.GetId() == elementId)
                 {
-                    currentElement = x;
-                    currentElement.BlockInteractions(false);
-                    _tutorialService.HandlePointer(currentElement);
+                    _tutorialService.HandlePointer(element);
                 }
                 else
                 {
-                    x.BlockInteractions(true);
+                    element.BlockInteractions(true);
                 }
-            });
+            }
         }
+       
     }
 }
