@@ -1,19 +1,23 @@
-﻿using Code.Runtime.Services.LevelLoaderService;
+﻿using System;
+using Code.Runtime.Services.LevelLoaderService;
 using Code.Runtime.UI.Model;
 using Code.Runtime.UI.Model.ArenaSelectionScreenModel;
 using Code.Runtime.UI.Services;
 using Code.Runtime.UI.View;
 using Code.Runtime.UI.View.ArenaSelection;
+using Cysharp.Threading.Tasks;
 using UniRx;
 using UnityEngine.Assertions;
 
 namespace Code.Runtime.UI.Controller
 {
-    public class ArenaSelectionScreenController : IScreenController
+    public class ArenaSelectionScreenController : IScreenController, IDisposable
     {
         protected ArenaSelectionScreenModel _model;
         protected ArenaSelectionScreenView _view;
-        private LevelLoader _levelLoader;
+        private readonly LevelLoader _levelLoader;
+
+        private CompositeDisposable _disposable = new();
 
         public ArenaSelectionScreenController(LevelLoader levelLoader)
         {
@@ -32,10 +36,18 @@ namespace Code.Runtime.UI.Controller
 
             _view.CloseButton
                 .OnClickAsObservable()
-                .Subscribe(x => screenService.Close(this));;
+                .Subscribe(x => screenService.Close(this))
+                .AddTo(_disposable);
 
-            _view.LevelContainer.OnLevelSelectedAsObservable().Subscribe(LevelSelected);
-            _view.StartBattleButton.OnClickAsObservable().Subscribe(x => StartBattle());
+            _view.LevelContainer
+                .OnLevelSelectedAsObservable()
+                .Subscribe(LevelSelected)
+                .AddTo(_disposable);
+            
+            _view.StartBattleButton
+                .OnClickAsObservable()
+                .Subscribe(x => StartBattle())
+                .AddTo(_disposable);
             
             UpdateData();
 
@@ -94,6 +106,11 @@ namespace Code.Runtime.UI.Controller
             }
             
             //UpdateData();
+        }
+
+        public virtual void Dispose()
+        {
+            _disposable?.Dispose();
         }
     }
 }

@@ -34,7 +34,9 @@ namespace Code.Runtime.UI.Services
                         tutorialService));
 
             _screenControllers.Add(typeof(WeaponScreenController),
-                () => new WeaponScreenController());
+                () => gameData.PlayerData.TutorialData.IsTutorialCompleted 
+                    ? new WeaponScreenController()
+                    : new TutorialWeaponScreenController(tutorialService));
 
             _screenControllers.Add(typeof(AbilityScreenController), () =>
                 gameData.PlayerData.TutorialData.IsTutorialCompleted

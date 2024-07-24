@@ -34,7 +34,13 @@ namespace Code.Runtime.UI.Controller
             _tutorialService.OnTaskChanged += UpdateTutorial;
 
         }
-        
+
+        public override void Dispose()
+        {
+            base.Dispose();
+            _tutorialService.OnTaskChanged -= UpdateTutorial;
+        }
+
         private void HandleTutorialLogic(TutorialElementIdentifier tutorialElement)
         {
             var task = _tutorialService.GetCurrentTask();

@@ -21,7 +21,9 @@ namespace Code.Runtime.Modules.TutorialService
 
         public void BlockInteractions(bool value)
         {
-            _canvas.blocksRaycasts = !value;
+            if(_canvas is null) Debug.LogError(gameObject);
+
+            if (_canvas != null) _canvas.blocksRaycasts = !value;
         }
 
         public TutorialElementIdentifier GetId() => _elementId;

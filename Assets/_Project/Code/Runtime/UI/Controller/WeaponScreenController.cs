@@ -12,10 +12,10 @@ namespace Code.Runtime.UI.Controller
     public class WeaponScreenController : IScreenController, IDisposable
     {
         private WeaponScreenModel _model;
-        private WeaponScreenView _windowView;
+        protected WeaponScreenView _windowView;
         private readonly CompositeDisposable _disposables = new();
 
-        public void InitController(IScreenModel model, BaseWindowView windowView, ScreenService screenService)
+        public virtual void InitController(IScreenModel model, BaseWindowView windowView, ScreenService screenService)
         {
             _model = model as WeaponScreenModel;
             _windowView = windowView as WeaponScreenView;
@@ -67,7 +67,7 @@ namespace Code.Runtime.UI.Controller
             UpdateView();
         }
 
-        public void Dispose()
+        public virtual void Dispose()
         {
             _disposables?.Dispose();
         }

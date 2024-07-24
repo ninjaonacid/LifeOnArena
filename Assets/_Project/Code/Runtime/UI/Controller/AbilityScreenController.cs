@@ -138,7 +138,7 @@ namespace Code.Runtime.UI.Controller
             UpdateData();
         }
 
-        public void Dispose()
+        public virtual void Dispose()
         {
             _disposable.Dispose();
             
