@@ -57,7 +57,7 @@ namespace Code.Runtime.UI.Controller
                 }
                 else
                 {
-                    if (!_tutorialService.IsPreviousStepElement(elementId))
+                    if (!_tutorialService.IsPreviousStepElement(element.GetId()))
                     {
                         element.Show(false);
                     }

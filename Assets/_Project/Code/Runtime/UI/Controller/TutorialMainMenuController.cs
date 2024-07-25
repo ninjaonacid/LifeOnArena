@@ -66,8 +66,13 @@ namespace Code.Runtime.UI.Controller
                 }
                 else
                 {
+                    if (!_tutorialService.IsPreviousStepElement(element.GetId()))
+                    {
+                        element.Show(false);
+                    }
+                    
                     element.BlockInteractions(true);
-                    element.Show(false);
+                    
                 }
             }
         }
