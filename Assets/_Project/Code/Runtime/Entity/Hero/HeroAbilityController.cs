@@ -28,9 +28,9 @@ namespace Code.Runtime.Entity.Hero
 
         private void OnAbilityActivated(int index)
         {
-            var abilityToUse = _abilitySlots[index].Ability;
+            var abilityToUse = _abilitySlots[index].AbilityIdentifier;
             if (abilityToUse == null) return;
-            TryActivateAbility(_abilitySlots[index].Ability);
+            TryActivateAbility(abilityToUse);
         }
         
         public void LoadData(PlayerData data)
@@ -43,11 +43,13 @@ namespace Code.Runtime.Entity.Hero
                 {
                     var slot = _abilitySlots[index];
 
-                    slot.Ability =
-                        _abilityFactory.CreateActiveAbility(skillsData.EquippedAbilities[index].AbilityId, this);
+                    var ability = _abilityFactory.CreateActiveAbility(skillsData.EquippedAbilities[index].AbilityId, this);
+
+                    slot.Ability = ability;
+                    slot.AbilityIdentifier = ability.AbilityBlueprint.Identifier;
                 }
             }
-
+            
             OnAbilityChanged();
         }
     }

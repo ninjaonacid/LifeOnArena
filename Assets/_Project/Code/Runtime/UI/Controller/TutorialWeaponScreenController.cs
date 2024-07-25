@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Code.Runtime.ConfigData.Identifiers;
+using Code.Runtime.Core.Factory;
 using Code.Runtime.Modules.TutorialService;
 using Code.Runtime.UI.Model;
 using Code.Runtime.UI.Services;
@@ -14,7 +15,7 @@ namespace Code.Runtime.UI.Controller
         private readonly TutorialService _tutorialService;
         private List<TutorialElement> _tutorialElements = new();
 
-        public TutorialWeaponScreenController(TutorialService tutorialService)
+        public TutorialWeaponScreenController(HeroFactory heroFactory, TutorialService tutorialService) : base(heroFactory)
         {
             _tutorialService = tutorialService;
         }
