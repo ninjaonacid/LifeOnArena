@@ -5,22 +5,20 @@ namespace Code.Runtime.UI.Buttons
 {
     public class MusicButton : BaseButton
     {
-        [SerializeField] private Image OnImage;
-        [SerializeField] private Image OffImage;
+        [SerializeField] private CanvasElement _onImage;
+        [SerializeField] private CanvasElement _offImage;
 
-        public void SetButton(bool isMusicOn)
+        public void SetButton(bool isSoundOn)
         {
-            if (isMusicOn)
+            if (isSoundOn)
             {
-                OffImage.enabled = false;
-                OnImage.enabled = true;
-                _buttonImage = OnImage;
+                _onImage.Show();
+                _offImage.Hide();
             }
             else
             {
-                OnImage.enabled = false;
-                OffImage.enabled = true;
-                _buttonImage = OffImage;
+                _onImage.Hide();
+                _offImage.Show();
             }
         }
     }

@@ -6,22 +6,20 @@ namespace Code.Runtime.UI.Buttons
     
     public class SoundButton : BaseButton
     {
-        [SerializeField] private Image OnImage;
-        [SerializeField] private Image OffImage;
+        [SerializeField] private CanvasElement _onImage;
+        [SerializeField] private CanvasElement _offImage;
 
         public void SetButton(bool isSoundOn)
         {
             if (isSoundOn)
             {
-                OnImage.enabled = true;
-                OffImage.enabled = false;
-                _buttonImage = OnImage;
+                _onImage.Show();
+                _offImage.Hide();
             }
             else
             {
-                OnImage.enabled = false;
-                OffImage.enabled = true;
-                _buttonImage = OffImage;
+                _onImage.Hide();
+                _offImage.Show();
             }
         }
     }
