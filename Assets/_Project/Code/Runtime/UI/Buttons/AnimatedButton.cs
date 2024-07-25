@@ -11,13 +11,12 @@ namespace Code.Runtime.UI.Buttons
         
         private Tween _tween;
         private Vector3 _baseScale;
-        private RectTransform _rectTransform;
+   
 
         protected override void Awake()
         {
             base.Awake();
-            _rectTransform = (RectTransform)transform;
-            _baseScale = _rectTransform.localScale;
+            _baseScale = RectTransform.localScale;
         }
 
         public void PlayScaleAnimation()
@@ -30,7 +29,7 @@ namespace Code.Runtime.UI.Buttons
                 _tween.Kill();
             }
             
-            _tween = _rectTransform.DOScale(new Vector3(_animationScale.x,
+            _tween = RectTransform.DOScale(new Vector3(_animationScale.x,
                 _animationScale.y), _duration)
                 .SetLoops(-1, LoopType.Yoyo)
                 .SetEase(Ease.OutBack)
@@ -46,7 +45,7 @@ namespace Code.Runtime.UI.Buttons
 
         private void ResetState()
         {
-            _rectTransform.localScale = _baseScale;
+            RectTransform.localScale = _baseScale;
         }
     }
 }

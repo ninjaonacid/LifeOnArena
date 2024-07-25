@@ -2,10 +2,8 @@ using Code.Runtime.ConfigData.Animations;
 using Code.Runtime.Core.EventSystem;
 using Code.Runtime.CustomEvents;
 using Code.Runtime.Entity.EntitiesComponents;
-using Code.Runtime.Modules.StatSystem;
 using Code.Runtime.Modules.StatSystem.StatModifiers;
 using UnityEngine;
-using UnityEngine.Serialization;
 using VContainer;
 
 namespace Code.Runtime.Entity.Hero

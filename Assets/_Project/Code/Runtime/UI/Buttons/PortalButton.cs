@@ -2,8 +2,16 @@ using UnityEngine;
 
 namespace Code.Runtime.UI.Buttons
 {
-    public class PortalButton : MonoBehaviour
+    public class PortalButton : AnimatedButton
     {
-        public ArrowUI ArrowUI;
+        private ArrowUI _arrowUI;
+
+        [SerializeField] private float _movementDistance;
+        public void AnimateArrow()
+        {
+            var movementDirection = _arrowUI.transform.forward;
+            
+           _arrowUI.Movement(_movementDistance * movementDirection);
+        }
     }
 }

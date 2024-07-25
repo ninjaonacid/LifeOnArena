@@ -26,17 +26,19 @@ namespace Code.Runtime.UI.Controller
         private readonly AdvertisementService _adService;
         private readonly PauseService _pauseService;
         private readonly HeroFactory _heroFactory;
+        private readonly PlayerControls _playerControls;
         private ScreenService _screenService;
 
         private readonly CompositeDisposable _disposable = new();
         private readonly CancellationTokenSource _cts = new();
         public HeroDeathPopupController(LevelLoader levelLoader, AdvertisementService adService,
-            PauseService pauseService, HeroFactory heroFactory)
+            PauseService pauseService, HeroFactory heroFactory, PlayerControls playerControls)
         {
             _levelLoader = levelLoader;
             _adService = adService;
             _pauseService = pauseService;
             _heroFactory = heroFactory;
+            _playerControls = playerControls;
         }
 
         public void InitController(IScreenModel model, BaseWindowView windowView, ScreenService screenService)
@@ -78,6 +80,7 @@ namespace Code.Runtime.UI.Controller
             heroMovement.Warp(playerInitialPoint);
             heroHealth.Health.ResetHealth();
             heroDeath.Revive();
+            _playerControls.Player.Enable();
             
             _screenService.Close(this);
         }

@@ -25,7 +25,7 @@ namespace Code.Runtime.Logic.CameraLogic
             
             Vector3 targetPosition = CalculateTargetPosition();
             Quaternion rotation = Quaternion.Euler(_rotationAngleX, _rotationAngleY, 0);
-            Vector3 position = rotation * new Vector3(0, 0, _distance) + targetPosition;
+            Vector3 position = rotation * new Vector3(0, 0, -_distance) + targetPosition;
 
             position.y = Mathf.Clamp(position.y, _initialCameraHeight, 40f);
                 

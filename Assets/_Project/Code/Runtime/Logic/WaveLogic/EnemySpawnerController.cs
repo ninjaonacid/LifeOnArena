@@ -100,8 +100,6 @@ namespace Code.Runtime.Logic.WaveLogic
                     CommonEnemiesCleared?.Invoke(TimeToNextWave);
                     _isCommonEnemiesCleared = true;
                 }
-                
-                await UniTask.Delay(200, cancellationToken: token);
 
                 if (IsWaveCleared() && _isCommonEnemiesCleared && _isBossLevel && !_isBossSpawned)
                 {
@@ -109,6 +107,8 @@ namespace Code.Runtime.Logic.WaveLogic
 
                     await SpawnBoss(token);
                 }
+                
+                await UniTask.Delay(200, cancellationToken: token);
 
                 if (token.IsCancellationRequested)
                 {

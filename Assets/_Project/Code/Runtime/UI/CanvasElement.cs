@@ -7,10 +7,21 @@ namespace Code.Runtime.UI
     public class CanvasElement : MonoBehaviour
     {
         [SerializeField] private CanvasGroup _canvasGroup;
+        
+        [SerializeField] 
+        [HideInInspector] 
+        public RectTransform RectTransform;
+
+        private void OnValidate()
+        {
+            _canvasGroup ??= GetComponent<CanvasGroup>();
+            RectTransform ??= GetComponent<RectTransform>();
+        }
 
         protected virtual void Awake()
         {
             _canvasGroup ??= GetComponent<CanvasGroup>();
+            RectTransform ??= GetComponent<RectTransform>();
         }
 
         public void Show(bool value)
