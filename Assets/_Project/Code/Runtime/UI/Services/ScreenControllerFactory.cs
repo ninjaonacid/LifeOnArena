@@ -66,7 +66,7 @@ namespace Code.Runtime.UI.Services
                 () => new HudSettingsPopupController(pauseService, levelLoader, audioService));
             
             _screenControllers.Add(typeof(HeroDeathPopupController), 
-                () => new HeroDeathPopupController(levelLoader, adService, pauseService));
+                () => new HeroDeathPopupController(levelLoader, adService, pauseService, heroFactory));
             
             _screenControllers.Add(typeof(HudControlsController), 
                 () => new HudControlsController(pauseService));

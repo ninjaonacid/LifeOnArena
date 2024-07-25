@@ -12,6 +12,7 @@ using Code.Runtime.UI.View.HeroDeathPopupView;
 using Cysharp.Threading.Tasks;
 using InstantGamesBridge.Modules.Advertisement;
 using UniRx;
+using UnityEngine;
 using UnityEngine.Assertions;
 
 namespace Code.Runtime.UI.Controller
@@ -25,7 +26,7 @@ namespace Code.Runtime.UI.Controller
         private readonly AdvertisementService _adService;
         private readonly PauseService _pauseService;
         private readonly HeroFactory _heroFactory;
-        private readonly ScreenService _screenService;
+        private ScreenService _screenService;
 
         private readonly CompositeDisposable _disposable;
         private readonly CancellationTokenSource _cts = new();
@@ -42,10 +43,12 @@ namespace Code.Runtime.UI.Controller
         {
             _model = model as HeroDeathPopupModel;
             _view = windowView as HeroDeathPopupView;
-
+                
             Assert.IsNotNull(_model);
             Assert.IsNotNull(_view);
 
+            _screenService = screenService;
+            
             _view.ReturnToPortalButton
                 .OnClickAsObservable()
                 .Subscribe(x => _levelLoader.LoadLevel("MainMenu")).AddTo(_disposable);
@@ -61,7 +64,8 @@ namespace Code.Runtime.UI.Controller
 
         private async UniTask WaitForAdTask(CancellationToken token)
         {
-            await UniTask.WaitUntil(() => _adService.RewardedState == RewardedState.Rewarded, cancellationToken: token);
+            await UniTask.WaitUntil(() => _adService.RewardedState != RewardedState.Loading, cancellationToken: token);
+            HandleAdResult(_adService.RewardedState);
             HandleReviveHero();
         }
         private void HandleReviveHero()
@@ -69,10 +73,33 @@ namespace Code.Runtime.UI.Controller
             var playerInitialPoint = _levelLoader.GetCurrentLevelConfig().HeroInitialPosition;
             var heroHealth = _heroFactory.HeroGameObject.GetComponent<HeroHealth>();
             var heroDeath = _heroFactory.HeroGameObject.GetComponent<HeroDeath>();
+            var heroMovement = _heroFactory.HeroGameObject.GetComponent<HeroMovement>();
             
+            heroMovement.Warp(playerInitialPoint);
             heroHealth.Health.ResetHealth();
             heroDeath.Revive();
             
+            _screenService.Close(this);
+        }
+        
+        private void HandleAdResult(RewardedState state)
+        {
+            switch (state)
+            {
+                case RewardedState.Rewarded:
+                    HandleReviveHero();
+                    break;
+                case RewardedState.Failed:
+                    _levelLoader.LoadLevel("MainMenu");
+                    break;
+                case RewardedState.Closed:
+                case RewardedState.Opened:
+                    break;
+                default:
+                    Debug.LogWarning($"Unexpected RewardedState: {state}");
+                    _screenService.Close(this);
+                    break;
+            }
         }
 
         public void Dispose()

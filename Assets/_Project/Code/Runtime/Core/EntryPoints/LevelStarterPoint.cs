@@ -67,7 +67,7 @@ namespace Code.Runtime.Core.EntryPoints
         private async UniTask<GameObject> InitHero(LevelConfig levelConfig)
         {
             GameObject hero = await _heroFactory.CreateHero(levelConfig.HeroInitialPosition);
-
+            
             return hero;
         }
 

@@ -11,7 +11,7 @@ namespace Code.Runtime.Entity.Hero
     {
         [SerializeField] private HeroStats _stats;
         [SerializeField] private VisualEffectController _vfxController;
-
+        [SerializeField] private FloatingLevel _floatingLevel;
         private AudioService _audioService;
         
         private PlayerData _playerData;
@@ -29,6 +29,7 @@ namespace Code.Runtime.Entity.Hero
 
         private void HandleLevelUp()
         {
+            _floatingLevel.LevelUpLogic();
             _audioService.PlaySound("LevelUp", 1f);
             
             var stats = _stats.Stats;

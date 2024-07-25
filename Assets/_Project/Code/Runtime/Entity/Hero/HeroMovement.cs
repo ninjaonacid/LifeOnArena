@@ -93,10 +93,10 @@ namespace Code.Runtime.Entity.Hero
             _characterController.Move(movementVector * MovementSpeed * Time.deltaTime);
         }
 
-        private void Warp(Vector3Data to)
+        public void Warp(Vector3 position)
         {
             _characterController.enabled = false;
-            transform.position = to.AsUnityVector().AddY(_characterController.height);
+            transform.position = position + new Vector3(0,_characterController.height, 0);
             _characterController.enabled = true;
         }
 
