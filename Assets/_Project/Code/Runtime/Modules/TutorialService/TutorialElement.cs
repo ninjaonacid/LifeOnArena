@@ -1,12 +1,13 @@
 using System;
 using Code.Runtime.ConfigData.Identifiers;
+using Code.Runtime.UI;
 using UniRx;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 namespace Code.Runtime.Modules.TutorialService
 {
-    public class TutorialElement : MonoBehaviour, IPointerClickHandler
+    public class TutorialElement : CanvasElement, IPointerClickHandler
     {
         [SerializeField] private TutorialElementIdentifier _elementId;
         [SerializeField] private CanvasGroup _canvas;
@@ -24,6 +25,16 @@ namespace Code.Runtime.Modules.TutorialService
             if(_canvas is null) Debug.LogError(gameObject);
 
             if (_canvas != null) _canvas.blocksRaycasts = !value;
+        }
+
+        public void Show()
+        {
+            
+        }
+
+        public void Hide()
+        {
+            
         }
 
         public TutorialElementIdentifier GetId() => _elementId;

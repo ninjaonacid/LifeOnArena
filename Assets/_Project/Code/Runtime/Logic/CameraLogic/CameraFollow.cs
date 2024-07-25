@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace Code.Runtime.Logic.CameraLogic
@@ -12,8 +11,8 @@ namespace Code.Runtime.Logic.CameraLogic
         [SerializeField] private float _rotationAngleY;
 
         private Transform _target;
+        private float _initialCameraHeight;
         private Transform _cameraTransform;
-
 
         private void Awake()
         {
@@ -24,12 +23,12 @@ namespace Code.Runtime.Logic.CameraLogic
         {
             if (_target == null) return;
             
-            var rotation = Quaternion.Euler(_rotationAngleX, _rotationAngleY, 0);
+            Vector3 targetPosition = CalculateTargetPosition();
+            Quaternion rotation = Quaternion.Euler(_rotationAngleX, _rotationAngleY, 0);
+            Vector3 position = rotation * new Vector3(0, 0, _distance) + targetPosition;
 
-            var position = rotation * new Vector3(0, 0, -_distance) +
-                           TargetFollowPosition();
-
-
+            position.y = Mathf.Clamp(position.y, _initialCameraHeight, 40f);
+                
             _cameraTransform.rotation = rotation;
             _cameraTransform.position = position;
         }
@@ -37,9 +36,12 @@ namespace Code.Runtime.Logic.CameraLogic
         public void Follow(GameObject followingTarget)
         {
             _target = followingTarget.transform;
+            var targetPos = _target.position;
+            _initialCameraHeight = targetPos.y += _offsetY;
+           
         }
 
-        private Vector3 TargetFollowPosition()
+        private Vector3 CalculateTargetPosition()
         {
             var targetPosition = _target.position;
             targetPosition.y += _offsetY;

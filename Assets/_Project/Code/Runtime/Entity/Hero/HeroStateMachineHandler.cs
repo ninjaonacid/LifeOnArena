@@ -74,7 +74,8 @@ namespace Code.Runtime.Entity.Hero
                 CharacterAnimator,
                 _heroMovement,
                 _heroRotation,
-                _animationData));
+                _animationData,
+                _heroDeath));
 
             _stateMachine.AddState(RollAbility, new RollDodgeState(
                 _heroWeapon, _heroAbilityController, CharacterAnimator, _heroMovement, _heroRotation, _animationData, true,

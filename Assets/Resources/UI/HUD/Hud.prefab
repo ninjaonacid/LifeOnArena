@@ -3037,18 +3037,38 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7946831047637556768}
     m_Modifications:
+    - target: {fileID: 1549578270588458689, guid: 0ed46aac957891546ae1d8e270615721, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ce20c48a9eb154c4abe1b021a06ee58e, type: 3}
+    - target: {fileID: 2879749550760268042, guid: 0ed46aac957891546ae1d8e270615721, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2879749550760268042, guid: 0ed46aac957891546ae1d8e270615721, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2879749550760268042, guid: 0ed46aac957891546ae1d8e270615721, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2879749550760268042, guid: 0ed46aac957891546ae1d8e270615721, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2879749550760268042, guid: 0ed46aac957891546ae1d8e270615721, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2879749550760268042, guid: 0ed46aac957891546ae1d8e270615721, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7509286359765785274, guid: 0ed46aac957891546ae1d8e270615721, type: 3}
       propertyPath: m_Name
       value: Joystick
       objectReference: {fileID: 0}
-    - target: {fileID: 7612268404531936476, guid: 0ed46aac957891546ae1d8e270615721, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: c9e7dac2263e62f49926275f709d72f2, type: 3}
-    - target: {fileID: 7612280175926605120, guid: 0ed46aac957891546ae1d8e270615721, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: ce20c48a9eb154c4abe1b021a06ee58e, type: 3}
     - target: {fileID: 7722653630205320918, guid: 0ed46aac957891546ae1d8e270615721, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -3079,11 +3099,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7722653630205320918, guid: 0ed46aac957891546ae1d8e270615721, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 350
+      value: 400
       objectReference: {fileID: 0}
     - target: {fileID: 7722653630205320918, guid: 0ed46aac957891546ae1d8e270615721, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 350
+      value: 400
       objectReference: {fileID: 0}
     - target: {fileID: 7722653630205320918, guid: 0ed46aac957891546ae1d8e270615721, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3115,7 +3135,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7722653630205320918, guid: 0ed46aac957891546ae1d8e270615721, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -562
+      value: -620
       objectReference: {fileID: 0}
     - target: {fileID: 7722653630205320918, guid: 0ed46aac957891546ae1d8e270615721, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -3133,51 +3153,23 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7723356781813026120, guid: 0ed46aac957891546ae1d8e270615721, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8076027890391316401, guid: 0ed46aac957891546ae1d8e270615721, type: 3}
-      propertyPath: m_Behaviour
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8076027890391316401, guid: 0ed46aac957891546ae1d8e270615721, type: 3}
-      propertyPath: m_ControlPath
-      value: <Gamepad>/leftStick
-      objectReference: {fileID: 0}
+      propertyPath: _background
+      value: 
+      objectReference: {fileID: 867168884344475102}
     - target: {fileID: 8076027890391316401, guid: 0ed46aac957891546ae1d8e270615721, type: 3}
       propertyPath: _joyStickCanvas
       value: 
-      objectReference: {fileID: 819556946041226097}
-    - target: {fileID: 8076027890391316401, guid: 0ed46aac957891546ae1d8e270615721, type: 3}
-      propertyPath: m_MovementRange
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 8076027890391316401, guid: 0ed46aac957891546ae1d8e270615721, type: 3}
-      propertyPath: m_DynamicOriginRange
-      value: 500
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ed46aac957891546ae1d8e270615721, type: 3}
+--- !u!224 &867168884344475102 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2879749550760268042, guid: 0ed46aac957891546ae1d8e270615721, type: 3}
+  m_PrefabInstance: {fileID: 3170007969961598164}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &4670868311564812802 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7722653630205320918, guid: 0ed46aac957891546ae1d8e270615721, type: 3}
   m_PrefabInstance: {fileID: 3170007969961598164}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &4884287234312849006 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7509286359765785274, guid: 0ed46aac957891546ae1d8e270615721, type: 3}
-  m_PrefabInstance: {fileID: 3170007969961598164}
-  m_PrefabAsset: {fileID: 0}
---- !u!225 &819556946041226097
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4884287234312849006}
-  m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
-  m_IgnoreParentGroups: 0

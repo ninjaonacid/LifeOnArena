@@ -1,3 +1,4 @@
+using Code.Runtime.Core.InputSystem;
 using Code.Runtime.UI.Buttons;
 using Code.Runtime.UI.View.HUD.Skills;
 
@@ -13,5 +14,6 @@ namespace Code.Runtime.UI.View.HUD
         public StatusBar StatusBar;
         public BossHudHealthBar BossHudHealthBar;
         public AnimatedButton PortalButton;
+        public DynamicJoyStick Joystick;
     }
 }

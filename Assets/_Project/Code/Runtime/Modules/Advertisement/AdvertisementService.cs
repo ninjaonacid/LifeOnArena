@@ -9,7 +9,9 @@ namespace Code.Runtime.Modules.Advertisement
 {
     public class AdvertisementService : IInitializable, IDisposable
     {
-        public RewardedState RewardedState;
+        public RewardedState RewardedState => Bridge.advertisement.rewardedState;
+        public InterstitialState InterstitialState => Bridge.advertisement.interstitialState;
+        
         private readonly AudioService _audioService;
         private readonly PauseService _pauseService;
         public AdvertisementService(AudioService audioService, PauseService pauseService)
