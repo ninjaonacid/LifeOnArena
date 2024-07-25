@@ -216,6 +216,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canvasGroup: {fileID: 7336485017775505466}
+  RectTransform: {fileID: 4934523880404230083}
   _highlightColor:
     serializedVersion: 2
     rgba: 4279228157
@@ -1256,6 +1257,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canvasGroup: {fileID: 7846410320494103143}
+  RectTransform: {fileID: 4982569524188735258}
   _highlightColor:
     serializedVersion: 2
     rgba: 4279228157
@@ -1504,7 +1506,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a80b76ede15c2342a04048d024ca46a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ArrowUI: {fileID: 7579305098906532503}
+  _canvasGroup: {fileID: 3142569278963308431}
+  RectTransform: {fileID: 9035674774526469063}
+  _highlightColor:
+    serializedVersion: 2
+    rgba: 4279228157
+  _pressedColor:
+    serializedVersion: 2
+    rgba: 4278231001
+  _baseColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  _buttonImage: {fileID: 0}
+  _animationScale: {x: 0, y: 0}
+  _duration: 0
+  _movementDistance: 0
 --- !u!1 &5620016431202410699
 GameObject:
   m_ObjectHideFlags: 0
@@ -2647,17 +2663,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7597778111184779799, guid: 5bebd9d31847b73409ec7ba717d92765, type: 3}
   m_PrefabInstance: {fileID: 1044329914998407326}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7579305098906532503 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: -1778590543674459639, guid: 5bebd9d31847b73409ec7ba717d92765, type: 3}
-  m_PrefabInstance: {fileID: 1044329914998407326}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da05107c7b0d20943831fae7aa5168dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!225 &8677724689332059702 stripped
 CanvasGroup:
   m_CorrespondingSourceObject: {fileID: 8508227849634545320, guid: 5bebd9d31847b73409ec7ba717d92765, type: 3}
@@ -3108,11 +3113,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7722653630205320918, guid: 0ed46aac957891546ae1d8e270615721, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 400
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 7722653630205320918, guid: 0ed46aac957891546ae1d8e270615721, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 400
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 7722653630205320918, guid: 0ed46aac957891546ae1d8e270615721, type: 3}
       propertyPath: m_LocalPosition.x

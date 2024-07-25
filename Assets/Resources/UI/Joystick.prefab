@@ -35,10 +35,10 @@ RectTransform:
   m_Father: {fileID: 7722653630205320918}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &663693954096623675
 CanvasRenderer:
@@ -68,7 +68,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: ce20c48a9eb154c4abe1b021a06ee58e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -103,7 +103,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canvasGroup: {fileID: 6520923158518911309}
-  _rectTransform: {fileID: 2879749550760268042}
+  RectTransform: {fileID: 2879749550760268042}
 --- !u!1 &7509286359765785274
 GameObject:
   m_ObjectHideFlags: 0
@@ -131,7 +131,7 @@ RectTransform:
   m_GameObject: {fileID: 7509286359765785274}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.6486487, y: 0.6486487, z: 0.6486487}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2879749550760268042}
@@ -141,7 +141,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -641, y: -225}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 450, y: 450}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7720889417078365002
@@ -165,9 +165,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _background: {fileID: 0}
-  _stick: {fileID: 7723356781813026120}
+  _stick: {fileID: 0}
   movementRange: 50
-  m_ControlPath: <Gamepad>/leftStick
+  m_ControlPath: 
 --- !u!1 &7509352685200135662
 GameObject:
   m_ObjectHideFlags: 0
@@ -271,4 +271,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canvasGroup: {fileID: 8651510037580943011}
-  _rectTransform: {fileID: 7723356781813026120}
+  RectTransform: {fileID: 7723356781813026120}
