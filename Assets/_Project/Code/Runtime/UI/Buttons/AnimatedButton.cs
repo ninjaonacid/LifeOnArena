@@ -1,5 +1,4 @@
-﻿using System;
-using DG.Tweening;
+﻿using PrimeTween;
 using UnityEngine;
 
 namespace Code.Runtime.UI.Buttons
@@ -8,10 +7,10 @@ namespace Code.Runtime.UI.Buttons
     {
         [SerializeField] private Vector2 _animationScale;
         [SerializeField] private float _duration;
-        
+
         private Tween _tween;
         private Vector3 _baseScale;
-   
+
 
         protected override void Awake()
         {
@@ -22,15 +21,12 @@ namespace Code.Runtime.UI.Buttons
         public void PlayScaleAnimation()
         {
             ResetState();
-            
-            if (_tween != null)
-            {
-                _tween.Complete();
-                _tween.Kill();
-            }
+
+            _tween.Complete();
+            _tween.Kill();
             
             _tween = RectTransform.DOScale(new Vector3(_animationScale.x,
-                _animationScale.y), _duration)
+                    _animationScale.y), _duration)
                 .SetLoops(-1, LoopType.Yoyo)
                 .SetEase(Ease.OutBack)
                 .SetLink(gameObject);

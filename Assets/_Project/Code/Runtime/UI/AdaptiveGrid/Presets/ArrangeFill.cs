@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
-using Code.Runtime.UI.AdaptiveGrid;
+using AdaptiveGrid;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace AdaptiveGrid
+namespace Code.Runtime.UI.AdaptiveGrid.Presets
 {
     [Serializable]
     public class ArrangeFill : AdaptivePreset

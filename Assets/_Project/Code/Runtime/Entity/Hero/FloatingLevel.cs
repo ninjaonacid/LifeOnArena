@@ -1,6 +1,5 @@
-using System;
 using Code.Runtime.UI;
-using DG.Tweening;
+using PrimeTween;
 using UnityEngine;
 
 namespace Code.Runtime.Entity.Hero
@@ -20,7 +19,7 @@ namespace Code.Runtime.Entity.Hero
         public void LevelUpLogic()
         {
             _levelUpIcon.Show();
-
+            
             transform.DOLocalMoveY( _targetPosition.y, 2f).SetLink(gameObject).OnComplete(() =>
             {
                 _levelUpIcon.Hide();

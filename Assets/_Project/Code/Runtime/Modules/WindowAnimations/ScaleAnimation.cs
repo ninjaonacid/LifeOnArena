@@ -1,5 +1,4 @@
-﻿
-using DG.Tweening;
+﻿using PrimeTween;
 using UnityEngine;
 
 namespace Code.Runtime.Modules.WindowAnimations
@@ -15,14 +14,14 @@ namespace Code.Runtime.Modules.WindowAnimations
 
         public override void ShowAnimation()
         {
-            if (_tween != null) _tween.Kill();
+            _tween.Complete();
             
             _tween = _windowRectTransform.DOScale(Vector3.one, 0.5f).SetEase(Ease.InOutExpo).SetLink(gameObject);
         }
 
         public override void CloseAnimation()
         {
-            if(_tween != null) _tween.Kill();
+            _tween.Complete();
 
             _tween = _windowRectTransform.DOScale(Vector3.zero, 0.5f).SetEase(Ease.InBack).OnComplete(() => Destroy(gameObject)).SetLink(gameObject);
         }

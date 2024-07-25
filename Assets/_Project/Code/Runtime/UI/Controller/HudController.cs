@@ -105,6 +105,8 @@ namespace Code.Runtime.UI.Controller
                     {
                         _screenService.Open(ScreenID.HudControlsScreen);
                     });
+                
+                _windowView.Joystick.EnableJoystick();
             }
         }
 

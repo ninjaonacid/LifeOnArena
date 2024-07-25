@@ -1,7 +1,7 @@
 using Code.Runtime.Core.EventSystem;
 using Code.Runtime.CustomEvents;
 using Cysharp.Threading.Tasks;
-using DG.Tweening;
+using PrimeTween;
 using UnityEngine;
 using VContainer;
 

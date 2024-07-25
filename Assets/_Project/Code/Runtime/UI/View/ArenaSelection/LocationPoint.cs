@@ -1,6 +1,6 @@
 using System;
 using Code.Runtime.ConfigData.Identifiers;
-using DG.Tweening;
+using PrimeTween;
 using UniRx;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -77,10 +77,8 @@ namespace Code.Runtime.UI.View.ArenaSelection
             } 
             
 
-            if (_tween != null)
-            {
-                _tween.Kill();
-            }
+            _tween.Complete();
+            
             
             ResetState();
             
@@ -107,11 +105,9 @@ namespace Code.Runtime.UI.View.ArenaSelection
             }
 
             _markerIcon.transform.localScale = _markerOriginalScale;
-            
-            if (_tween != null)
-            {
-                _tween.Kill();
-            }
+
+            _tween.Complete();
+
         }
 
         private void ResetState()

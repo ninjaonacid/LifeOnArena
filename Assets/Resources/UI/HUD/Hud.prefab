@@ -1669,8 +1669,8 @@ MonoBehaviour:
   ControlsButton: {fileID: 5444728862439595448}
   StatusBar: {fileID: 1096047173397762279}
   BossHudHealthBar: {fileID: 3993253544216075025}
-  PortalButton: {fileID: 0}
-  Joystick: {fileID: 0}
+  PortalButton: {fileID: 5986037191628196278}
+  Joystick: {fileID: 6624216605303516005}
 --- !u!1 &5704168799981072057
 GameObject:
   m_ObjectHideFlags: 0
@@ -3149,7 +3149,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7722653630205320918, guid: 0ed46aac957891546ae1d8e270615721, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -620
+      value: -648
       objectReference: {fileID: 0}
     - target: {fileID: 7722653630205320918, guid: 0ed46aac957891546ae1d8e270615721, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -3168,22 +3168,83 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8076027890391316401, guid: 0ed46aac957891546ae1d8e270615721, type: 3}
+      propertyPath: _stick
+      value: 
+      objectReference: {fileID: 3104978612229688750}
+    - target: {fileID: 8076027890391316401, guid: 0ed46aac957891546ae1d8e270615721, type: 3}
+      propertyPath: _behaviour
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8076027890391316401, guid: 0ed46aac957891546ae1d8e270615721, type: 3}
       propertyPath: _background
       value: 
-      objectReference: {fileID: 867168884344475102}
+      objectReference: {fileID: 7577072629572251599}
+    - target: {fileID: 8076027890391316401, guid: 0ed46aac957891546ae1d8e270615721, type: 3}
+      propertyPath: m_ControlPath
+      value: <Gamepad>/leftStick
+      objectReference: {fileID: 0}
     - target: {fileID: 8076027890391316401, guid: 0ed46aac957891546ae1d8e270615721, type: 3}
       propertyPath: _joyStickCanvas
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 8076027890391316401, guid: 0ed46aac957891546ae1d8e270615721, type: 3}
+      propertyPath: _joyStickCanvasGroup
+      value: 
+      objectReference: {fileID: 8944463141837731929}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ed46aac957891546ae1d8e270615721, type: 3}
---- !u!224 &867168884344475102 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 2879749550760268042, guid: 0ed46aac957891546ae1d8e270615721, type: 3}
+--- !u!114 &3104978612229688750 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 65646259487445370, guid: 0ed46aac957891546ae1d8e270615721, type: 3}
   m_PrefabInstance: {fileID: 3170007969961598164}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 551661f87e574e74ba1a61c42b03363b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &4670868311564812802 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7722653630205320918, guid: 0ed46aac957891546ae1d8e270615721, type: 3}
   m_PrefabInstance: {fileID: 3170007969961598164}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &4884287234312849006 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7509286359765785274, guid: 0ed46aac957891546ae1d8e270615721, type: 3}
+  m_PrefabInstance: {fileID: 3170007969961598164}
+  m_PrefabAsset: {fileID: 0}
+--- !u!225 &8944463141837731929
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4884287234312849006}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &6624216605303516005 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8076027890391316401, guid: 0ed46aac957891546ae1d8e270615721, type: 3}
+  m_PrefabInstance: {fileID: 3170007969961598164}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4884287234312849006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6d2c51063723d041892880821ae91a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7577072629572251599 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4816892397500429083, guid: 0ed46aac957891546ae1d8e270615721, type: 3}
+  m_PrefabInstance: {fileID: 3170007969961598164}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 551661f87e574e74ba1a61c42b03363b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

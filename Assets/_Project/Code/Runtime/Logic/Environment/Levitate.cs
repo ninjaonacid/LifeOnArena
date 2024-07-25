@@ -1,4 +1,4 @@
-using DG.Tweening;
+using PrimeTween;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -17,7 +17,7 @@ namespace Code.Runtime.Logic.Environment
                 .SetLink(gameObject);
             
             transform
-                .DORotate(new Vector3(0, 0, 180), 4, RotateMode.Fast)
+                .DORotate(new Vector3(0, 0, 180), 4)
                 .SetLoops(-1, LoopType.Yoyo)
                 .SetLink(gameObject);
         }

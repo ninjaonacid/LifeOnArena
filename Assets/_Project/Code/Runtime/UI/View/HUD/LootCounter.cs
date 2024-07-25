@@ -1,5 +1,5 @@
 using Code.Runtime.Data.PlayerData;
-using DG.Tweening;
+using PrimeTween;
 using TMPro;
 using UnityEngine;
 
@@ -28,11 +28,9 @@ namespace Code.Runtime.UI.View.HUD
             int collected = _worldData.LootData.Collected - value;
 
             _counterTween = DOTween
-                .To(() => collected, x => collected = x, collected + value, 1)
-                .OnUpdate(() =>
-                {
-                    Counter.text = $"{collected}";
-                });
+                .To(() => collected, x => collected = (int)x, collected + value, 1)
+                .OnUpdate( this, (target, _counterTween) => 
+                    target.Counter.text = $"{collected}");
             
         }
 

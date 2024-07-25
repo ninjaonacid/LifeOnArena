@@ -10,8 +10,8 @@ namespace Code.Runtime.UI.AdaptiveGrid
     public class AdaptiveGrid : UIBehaviour
     {
         private Vector2 _cellSize;
-        private RectTransform _gridRect;
-        private List<RectTransform> _gridChildList = new List<RectTransform>();
+        [SerializeField] private RectTransform _gridRect;
+        private readonly List<RectTransform> _gridChildList = new List<RectTransform>();
 
         [Header("Grid settings")]
         [SerializeField] private ArrangeLayout _arrangeLayout;

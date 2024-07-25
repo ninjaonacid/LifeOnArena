@@ -1,8 +1,6 @@
 using Code.Runtime.Modules.RewardSystem;
-using Code.Runtime.UI;
-using Code.Runtime.UI.Model.DTO;
 using Code.Runtime.UI.Services;
-using DG.Tweening;
+using PrimeTween;
 using UnityEngine;
 using VContainer;
 

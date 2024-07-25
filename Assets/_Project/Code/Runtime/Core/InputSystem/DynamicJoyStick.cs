@@ -1,16 +1,24 @@
 using Code.Runtime.UI;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem.Layouts;
 using UnityEngine.InputSystem.OnScreen;
 
-namespace _Project.Code.Runtime.Core.InputSystem
+namespace Code.Runtime.Core.InputSystem
 {
+    public enum JoystickBehaviour
+    {
+        Dynamic,
+        Static
+    }
     public class DynamicJoyStick : OnScreenControl, IPointerDownHandler, IPointerUpHandler, IDragHandler
     {
+        [SerializeField] private CanvasGroup _joyStickCanvasGroup;
         [SerializeField] private CanvasElement _background;
         [SerializeField] private CanvasElement _stick;
         [SerializeField] private float movementRange = 50f;
+        [SerializeField] private JoystickBehaviour _behaviour;
 
         [InputControl(layout = "Vector2")] [SerializeField]
         private string m_ControlPath;
@@ -28,14 +36,31 @@ namespace _Project.Code.Runtime.Core.InputSystem
         {
             base.OnEnable();
             _joystickCenter = _background.RectTransform.position;
-            _background.gameObject.SetActive(false);
+            
+            if (_behaviour == JoystickBehaviour.Static)
+            {
+                _background.Show();
+            }
         }
 
+        public void EnableJoystick()
+        {
+            _joyStickCanvasGroup.interactable = true;
+            _joyStickCanvasGroup.blocksRaycasts = true;
+            _joyStickCanvasGroup.alpha = 1;
+        }
+
+        public void DisableJoystick()
+        {
+            _joyStickCanvasGroup.interactable = false;
+            _joyStickCanvasGroup.blocksRaycasts = false;
+            _joyStickCanvasGroup.alpha = 0;
+        }
         public void OnPointerDown(PointerEventData eventData)
         {
             _background.RectTransform.position = eventData.position;
             _joystickCenter = eventData.position;
-            _background.gameObject.SetActive(true);
+            _background.Show();
             OnDrag(eventData);
         }
 
@@ -51,7 +76,11 @@ namespace _Project.Code.Runtime.Core.InputSystem
         {
             _input = Vector2.zero;
             _stick.RectTransform.position = _joystickCenter;
-            _background.gameObject.SetActive(false);
+            if (_behaviour == JoystickBehaviour.Dynamic)
+            {
+                _background.Hide();
+            }
+            
             SendValueToControl(_input);
         }
 

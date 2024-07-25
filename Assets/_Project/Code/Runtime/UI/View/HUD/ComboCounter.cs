@@ -2,7 +2,7 @@ using System.Threading;
 using Code.Runtime.Entity.Hero;
 using Code.Runtime.Utils;
 using Cysharp.Threading.Tasks;
-using DG.Tweening;
+using PrimeTween;
 using TMPro;
 using UnityEngine;
 using Timer = Code.Runtime.Logic.Timer.Timer;
