@@ -115,11 +115,7 @@ namespace Code.Runtime.Services
         {
             _controls.Player.Disable();
 
-           // var localizedString = _localService.GetLocalizedString("YouAreDead");
-
-          //  _screenService.Open(ScreenID.MessageWindow, new MessageDto(localizedString));
-
-            await UniTask.Delay(TimeSpan.FromSeconds(2),
+            await UniTask.Delay(TimeSpan.FromSeconds(1),
                 DelayType.DeltaTime,
                 PlayerLoopTiming.Update, _cancellationToken.Token);
             

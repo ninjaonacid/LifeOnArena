@@ -1,4 +1,6 @@
 using System;
+using Code.Runtime.Core.Factory;
+using Code.Runtime.Entity.Hero;
 using Code.Runtime.UI.Model;
 using Code.Runtime.UI.Model.WeaponScreen;
 using Code.Runtime.UI.Services;
@@ -13,7 +15,14 @@ namespace Code.Runtime.UI.Controller
     {
         private WeaponScreenModel _model;
         protected WeaponScreenView _windowView;
-        protected readonly CompositeDisposable _disposables = new();
+        private readonly CompositeDisposable _disposables = new();
+
+        private readonly HeroFactory _heroFactory;
+
+        public WeaponScreenController(HeroFactory heroFactory)
+        {
+            _heroFactory = heroFactory;
+        }
 
         public virtual void InitController(IScreenModel model, BaseWindowView windowView, ScreenService screenService)
         {
@@ -57,13 +66,12 @@ namespace Code.Runtime.UI.Controller
 
         private void EquipWeapon()
         {
-            int weaponId;
-
-            if (!_windowView.WeaponContainer.TryGetSelectedWeaponId(out weaponId)) return;
+            if (!_windowView.WeaponContainer.TryGetSelectedWeaponId(out var weaponId)) return;
             var weaponModel = _model.GetModel(weaponId);
             if (!weaponModel.isUnlocked) return;
 
             _model.EquipWeapon(weaponId);
+            _heroFactory.HeroGameObject.GetComponent<HeroWeapon>().EquipWeapon(weaponModel.WeaponId);
             UpdateView();
         }
 
