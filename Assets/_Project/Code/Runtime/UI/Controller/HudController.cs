@@ -96,6 +96,7 @@ namespace Code.Runtime.UI.Controller
             if (!WebApplication.IsDesktop)
             {
                 _windowView.ControlsButton.Show(false);
+                _windowView.Joystick.Show(true);
             }
             else
             {
@@ -105,8 +106,6 @@ namespace Code.Runtime.UI.Controller
                     {
                         _screenService.Open(ScreenID.HudControlsScreen);
                     });
-                
-                _windowView.Joystick.EnableJoystick();
             }
         }
 

@@ -11,7 +11,7 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
     {
         private List<AttackConfig> _attackConfigs;
         private readonly ITimer _timer;
-        public int ComboCount { get; private set; } = 0;
+        public int ComboCount { get; set; } = 0;
         public int MaxCombo { get; private set; } = 3;
         private float _comboWindow;
 

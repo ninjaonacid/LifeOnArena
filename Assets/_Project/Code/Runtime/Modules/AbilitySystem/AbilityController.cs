@@ -21,7 +21,7 @@ namespace Code.Runtime.Modules.AbilitySystem
         public ActiveAbility ActiveAbility => _activeAbility;
 
         private AbilityQueue _abilityQueue;
-        private readonly int _abilityQueueLimit = 1;
+        private readonly int _abilityQueueLimit = 2;
         private readonly float _queueTimeWindow = 1;
         private ActiveAbility _activeAbility;
 
@@ -78,7 +78,7 @@ namespace Code.Runtime.Modules.AbilitySystem
                     }
                     return;
                 }
-                else if (_activeAbility.State == AbilityState.Active)
+                else if (_activeAbility.State == AbilityState.Cooldown)
                 {
                     return;
                 }
@@ -112,17 +112,21 @@ namespace Code.Runtime.Modules.AbilitySystem
                 return false;
             }
 
-            if (slot.Ability.State == AbilityState.Ready || 
-                (_activeAbility != null && _activeAbility.CanCombo && slot.Ability.CanCombo))
+            if (slot.Ability.State == AbilityState.Ready || slot.Ability.CanCombo)
             {
-                if (CanActivateAbility(slot.Ability))
+                if (_activeAbility == null || !_activeAbility.IsActive())
                 {
-                    ActivateAbility(slot.Ability);
-                    return true;
+                    if (CanActivateAbility(slot.Ability))
+                    {
+                        ActivateAbility(slot.Ability);
+                        return true;
+                    }
                 }
+                
+                return _abilityQueue.TryEnqueue(slot.Ability);
             }
 
-            return _abilityQueue.TryEnqueue(slot.Ability);
+            return false;
         }
 
         private bool CanActivateAbility(ActiveAbility ability)

@@ -43,19 +43,13 @@ namespace Code.Runtime.Core.InputSystem
             }
         }
 
-        public void EnableJoystick()
+        public void Show(bool value)
         {
-            _joyStickCanvasGroup.interactable = true;
-            _joyStickCanvasGroup.blocksRaycasts = true;
-            _joyStickCanvasGroup.alpha = 1;
+            _joyStickCanvasGroup.alpha = value ? 1 : 0;
+            _joyStickCanvasGroup.interactable = value;
+            _joyStickCanvasGroup.blocksRaycasts = value;
         }
-
-        public void DisableJoystick()
-        {
-            _joyStickCanvasGroup.interactable = false;
-            _joyStickCanvasGroup.blocksRaycasts = false;
-            _joyStickCanvasGroup.alpha = 0;
-        }
+        
         public void OnPointerDown(PointerEventData eventData)
         {
             _background.RectTransform.position = eventData.position;
