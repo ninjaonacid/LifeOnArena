@@ -160,6 +160,7 @@ namespace Code.Runtime.UI.Controller
             _windowView.PortalButton.PlayScaleAnimation();
         }
         
+        
         public void Dispose()
         {
             _disposable.Dispose();

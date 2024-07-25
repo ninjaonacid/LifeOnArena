@@ -13,7 +13,7 @@ namespace Code.Runtime.ConfigData
         [SerializeField] private float _experienceExponentialFactor;
         [SerializeField] private WeaponId _startWeapon;
         [SerializeField] private bool _isNeedTutorial;
-
+        
         public StatDatabase CharacterStats => _characterStats;
         public int StartSouls => _startSouls;
         public int StatUpgradePrice => _statUpgradePrice;

@@ -68,7 +68,6 @@ namespace Code.Runtime.UI.Controller
         {
             await UniTask.WaitUntil(() => _adService.RewardedState != RewardedState.Loading, cancellationToken: token);
             HandleAdResult(_adService.RewardedState);
-            HandleReviveHero();
         }
         private void HandleReviveHero()
         {

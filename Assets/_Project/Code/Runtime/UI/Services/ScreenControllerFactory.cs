@@ -29,8 +29,8 @@ namespace Code.Runtime.UI.Services
         {
             _screenControllers.Add(typeof(MainMenuController),
                 () => gameData.PlayerData.TutorialData.IsTutorialCompleted
-                    ? new MainMenuController(gameData, audioService, levelLoader)
-                    : new TutorialMainMenuController(gameData, audioService, levelLoader, localService,
+                    ? new MainMenuController(gameData, audioService, levelLoader, adService)
+                    : new TutorialMainMenuController(gameData, audioService, levelLoader, adService,
                         tutorialService));
 
             _screenControllers.Add(typeof(WeaponScreenController),

@@ -14,20 +14,26 @@ namespace Code.Runtime.Modules.Advertisement
         
         private readonly AudioService _audioService;
         private readonly PauseService _pauseService;
-        public AdvertisementService(AudioService audioService, PauseService pauseService)
+        private readonly PlayerControls _playerControls;
+        public AdvertisementService(AudioService audioService, PauseService pauseService, PlayerControls controls)
         {
             _audioService = audioService;
             _pauseService = pauseService;
+            _playerControls = controls;
         }
 
         public void ShowReward()
         {
             Bridge.advertisement.ShowRewarded();
+            _playerControls.Disable();
+            _pauseService.PauseGame();
         }
 
         public void ShowInterstitial()
         {
             Bridge.advertisement.ShowInterstitial();
+            _playerControls.Disable();
+            _pauseService.PauseGame();
         }
 
         public void Initialize()
@@ -45,10 +51,12 @@ namespace Code.Runtime.Modules.Advertisement
             else if (state == InterstitialState.Closed)
             {
                 _audioService.UnpauseAll();
+                _playerControls.Enable();
             }
             else if (state == InterstitialState.Failed)
             {
                 _audioService.UnpauseAll();
+                _playerControls.Enable();
             }
         }
 
@@ -63,16 +71,19 @@ namespace Code.Runtime.Modules.Advertisement
             {
                 _audioService.UnpauseAll();
                 _pauseService.UnpauseGame();
+                _playerControls.Enable();
             } 
             else if (state == RewardedState.Failed)
             {
                 _audioService.UnpauseAll();
                 _pauseService.UnpauseGame();
+                _playerControls.Enable();
             } 
             else if (state == RewardedState.Rewarded)
             {
                 _audioService.UnpauseAll();
                 _pauseService.UnpauseGame();
+                _playerControls.Enable();
             }
         }
 

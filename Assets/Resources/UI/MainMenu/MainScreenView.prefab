@@ -1632,6 +1632,7 @@ MonoBehaviour:
   SettingsButton: {fileID: 2808865887320859768}
   StatWindow: {fileID: 6705742156930408979}
   ResourceCount: {fileID: 3760200384111449021}
+  RewardButton: {fileID: 0}
 --- !u!1 &7166265945657743081
 GameObject:
   m_ObjectHideFlags: 0
@@ -3177,9 +3178,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc446778d56f8c040bbb637379e7273b, type: 3}
+--- !u!1 &3200640078306925574 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 34289563701526153, guid: dc446778d56f8c040bbb637379e7273b, type: 3}
+  m_PrefabInstance: {fileID: 3175925166235607695}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &164351341005866954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3200640078306925574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5287c8edf39730f4d861cc7e6fcd4e6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _canvasGroup: {fileID: 7585671857065921362}
+  RectTransform: {fileID: 4720811811384098395}
+  _elementId: {fileID: 11400000, guid: 760e6900e6c5cc44c887554ed06b5bf5, type: 2}
+  _canvas: {fileID: 7585671857065921362}
 --- !u!224 &4720811811384098395 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7894975383764081876, guid: dc446778d56f8c040bbb637379e7273b, type: 3}
+  m_PrefabInstance: {fileID: 3175925166235607695}
+  m_PrefabAsset: {fileID: 0}
+--- !u!225 &7585671857065921362 stripped
+CanvasGroup:
+  m_CorrespondingSourceObject: {fileID: 4996355940847839709, guid: dc446778d56f8c040bbb637379e7273b, type: 3}
   m_PrefabInstance: {fileID: 3175925166235607695}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6640461385637078213

@@ -13,5 +13,6 @@ namespace Code.Runtime.UI.View.MainMenu
         public BaseButton SettingsButton;
         public StatWindow StatWindow;
         public ResourcesCountUI ResourceCount;
+        public AnimatedButton RewardButton;
     }
 }

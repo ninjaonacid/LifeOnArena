@@ -3,6 +3,7 @@ using System.Linq;
 using Code.Runtime.ConfigData.Identifiers;
 using Code.Runtime.Core.Audio;
 using Code.Runtime.Core.SceneManagement;
+using Code.Runtime.Modules.Advertisement;
 using Code.Runtime.Modules.LocalizationProvider;
 using Code.Runtime.Modules.TutorialService;
 using Code.Runtime.Services.LevelLoaderService;
@@ -20,8 +21,8 @@ namespace Code.Runtime.UI.Controller
         private List<TutorialElement> _tutorialElements = new();
 
         public TutorialMainMenuController(IGameDataContainer gameData, AudioService audioService,
-            LevelLoader levelLoader, LocalizationService localService, TutorialService tutorialService) : base(gameData,
-            audioService, levelLoader)
+            LevelLoader levelLoader, AdvertisementService adService, TutorialService tutorialService) : base(gameData,
+            audioService, levelLoader, adService)
         {
             _tutorialService = tutorialService;
         }
@@ -36,7 +37,7 @@ namespace Code.Runtime.UI.Controller
             {
                 element.OnClickAsObservable().Subscribe(HandleElementInteraction);
             }
-            
+
             _tutorialService.OnElementHighlighted += HandleElementHighlighted;
             _tutorialService.StartTutorial();
         }
@@ -68,6 +69,5 @@ namespace Code.Runtime.UI.Controller
                 }
             }
         }
-       
     }
 }
