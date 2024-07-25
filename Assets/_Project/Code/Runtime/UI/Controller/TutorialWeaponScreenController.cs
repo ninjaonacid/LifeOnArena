@@ -52,11 +52,18 @@ namespace Code.Runtime.UI.Controller
                 if (element.GetId() == elementId)
                 {
                     element.BlockInteractions(false);
+                    element.Show(true);
                     _tutorialService.HandlePointer(element);
                 }
                 else
                 {
+                    if (!_tutorialService.IsPreviousStepElement(elementId))
+                    {
+                        element.Show(false);
+                    }
+                    
                     element.BlockInteractions(true);
+                    
                 }
             }
         }

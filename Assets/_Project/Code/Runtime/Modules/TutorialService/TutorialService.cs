@@ -62,6 +62,19 @@ namespace Code.Runtime.Modules.TutorialService
                 UpdateTutorialStatus();
             }
         }
+        
+        public bool IsPreviousStepElement(TutorialElementIdentifier tutorialElementId)
+        {
+            foreach (var task in _completedTasks)
+            {
+                if (task.ElementId.Id == tutorialElementId.Id)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
 
         private void UpdateTutorialStatus()
         {
