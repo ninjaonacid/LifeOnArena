@@ -192,7 +192,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -172, y: -4.5595}
-  m_SizeDelta: {x: 150, y: 150}
+  m_SizeDelta: {x: 170, y: 170}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &5928299723357486704
 CanvasGroup:
@@ -229,8 +229,8 @@ MonoBehaviour:
     serializedVersion: 2
     rgba: 4294967295
   _buttonImage: {fileID: 0}
-  OnImage: {fileID: 4229076831938987154}
-  OffImage: {fileID: 2191107016436075573}
+  _onImage: {fileID: 0}
+  _offImage: {fileID: 0}
 --- !u!222 &4640295191493658765
 CanvasRenderer:
   m_ObjectHideFlags: 0

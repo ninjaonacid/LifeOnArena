@@ -131,6 +131,13 @@ namespace Code.Runtime.Entity
                     float height = Utilities.GetColliderHeight(gameObject);
                     return basePosition + (Vector3.up * height);
                 }
+
+                case PlayPosition.Below:
+                {
+                    var center = Utilities.GetCenterOfCollider(gameObject);
+                    float height = Utilities.GetColliderHeight(gameObject);
+                    return basePosition + center + (Vector3.down * (height * 0.4f));
+                }
             }
             
             return Vector3.one;
