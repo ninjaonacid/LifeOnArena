@@ -55,7 +55,7 @@ namespace Code.Runtime.Core.EntryPoints
             
             _adService.ShowInterstitial();
 
-            _audioService.PlayMusic("MainTheme", volume: 1, true);
+            _audioService.PlayMusic("MainTheme", volume: 0.7f, true);
 
             _screenService.Open(ScreenID.MainMenu);
         }

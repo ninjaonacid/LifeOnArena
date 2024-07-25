@@ -5,12 +5,14 @@ using Code.Runtime.Services.BattleService;
 namespace Code.Runtime.Modules.AbilitySystem
 {
     public abstract class ActiveAbility : Ability
-    {
+    {  
         public float Cooldown { get; set; }
         public float CurrentCooldown { get; set; }
         public float ActiveTime { get; set; }
         public float CurrentActiveTime { get; set; }
         public bool IsCastAbility { get; }
+        public virtual bool CanCombo => false;
+        
         public AbilityState State { get; set; }
         
         protected VisualEffectFactory _visualEffectFactory;
@@ -34,6 +36,7 @@ namespace Code.Runtime.Modules.AbilitySystem
             
             State = AbilityState.Ready;
         }
+        
 
         public void InjectServices(
             VisualEffectFactory visualEffectFactory,

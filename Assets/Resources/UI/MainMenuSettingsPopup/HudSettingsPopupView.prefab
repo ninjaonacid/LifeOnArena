@@ -65,6 +65,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canvasGroup: {fileID: 0}
+  RectTransform: {fileID: 5321755868242458222}
   _highlightColor:
     serializedVersion: 2
     rgba: 4279228157
@@ -166,6 +167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canvasGroup: {fileID: 7232908492584881087}
+  RectTransform: {fileID: 7861231099787519198}
   _highlightColor:
     serializedVersion: 2
     rgba: 4278242815
@@ -865,6 +867,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7014047334685419192, guid: 14881574abb194a4dbbba072ebcea8e6, type: 3}
+      propertyPath: _onImage
+      value: 
+      objectReference: {fileID: 8055444262637187965}
+    - target: {fileID: 7014047334685419192, guid: 14881574abb194a4dbbba072ebcea8e6, type: 3}
+      propertyPath: _offImage
+      value: 
+      objectReference: {fileID: 1668030410714361160}
+    - target: {fileID: 7014047334685419192, guid: 14881574abb194a4dbbba072ebcea8e6, type: 3}
+      propertyPath: _buttonImage
+      value: 
+      objectReference: {fileID: 7805078066450089181}
     - target: {fileID: 7768399256030163899, guid: 14881574abb194a4dbbba072ebcea8e6, type: 3}
       propertyPath: m_Name
       value: sound_button
@@ -901,6 +915,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canvasGroup: {fileID: 6202601995377233273}
+  RectTransform: {fileID: 8503401606280774062}
 --- !u!224 &1432226916100063605 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1755284073190023834, guid: 14881574abb194a4dbbba072ebcea8e6, type: 3}
@@ -936,6 +951,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canvasGroup: {fileID: 3013726702374898111}
+  RectTransform: {fileID: 5490641068738148547}
+--- !u!224 &5490641068738148547 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 5156308952045017900, guid: 14881574abb194a4dbbba072ebcea8e6, type: 3}
+  m_PrefabInstance: {fileID: 845638078902150127}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &7704156727695017303 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7014047334685419192, guid: 14881574abb194a4dbbba072ebcea8e6, type: 3}
@@ -947,6 +968,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 100955308a5c5d64295e701c1b945232, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7805078066450089181 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7488776444746852146, guid: 14881574abb194a4dbbba072ebcea8e6, type: 3}
+  m_PrefabInstance: {fileID: 845638078902150127}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!224 &8503401606280774062 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 9060795975691117121, guid: 14881574abb194a4dbbba072ebcea8e6, type: 3}
+  m_PrefabInstance: {fileID: 845638078902150127}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3691848067612014380
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1119,6 +1156,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9046008563389192202}
     m_Modifications:
+    - target: {fileID: 5865037619985775128, guid: 791bcbbf9d867164597b2dc93fba921a, type: 3}
+      propertyPath: _onImage
+      value: 
+      objectReference: {fileID: 7061491918687078548}
+    - target: {fileID: 5865037619985775128, guid: 791bcbbf9d867164597b2dc93fba921a, type: 3}
+      propertyPath: _offImage
+      value: 
+      objectReference: {fileID: 3765770844026185344}
     - target: {fileID: 7117200855786340361, guid: 791bcbbf9d867164597b2dc93fba921a, type: 3}
       propertyPath: m_Name
       value: music_button
@@ -1250,9 +1295,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canvasGroup: {fileID: 3747005052299330472}
+  RectTransform: {fileID: 6957850520646401036}
 --- !u!224 &4078639246163872681 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8721422002253735572, guid: 791bcbbf9d867164597b2dc93fba921a, type: 3}
+  m_PrefabInstance: {fileID: 4724992696178748733}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &6485194221138750240 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1986793434012747293, guid: 791bcbbf9d867164597b2dc93fba921a, type: 3}
+  m_PrefabInstance: {fileID: 4724992696178748733}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &6957850520646401036 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2386287667704336689, guid: 791bcbbf9d867164597b2dc93fba921a, type: 3}
   m_PrefabInstance: {fileID: 4724992696178748733}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &8057046503154249395 stripped
@@ -1285,3 +1341,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canvasGroup: {fileID: 6612174686958747094}
+  RectTransform: {fileID: 6485194221138750240}

@@ -21,7 +21,7 @@ namespace Code.Runtime.Modules.AbilitySystem
         public ActiveAbility ActiveAbility => _activeAbility;
 
         private AbilityQueue _abilityQueue;
-        private readonly int _abilityQueueLimit = 2;
+        private readonly int _abilityQueueLimit = 1;
         private readonly float _queueTimeWindow = 1;
         private ActiveAbility _activeAbility;
 
@@ -63,14 +63,29 @@ namespace Code.Runtime.Modules.AbilitySystem
 
         private void HandleAbilityActivation()
         {
-            if (_activeAbility != null && _activeAbility.IsActive())
+            if (_activeAbility != null)
             {
-                return;
-            }
-
-            if (_activeAbility != null && !_activeAbility.IsActive())
-            {
-                _activeAbility = null; 
+                if (_activeAbility.State == AbilityState.Active)
+                {
+                    if (_activeAbility.CanCombo && _abilityQueue.HasNext())
+                    {
+                        var nextAbility = _abilityQueue.Peek();
+                        if (nextAbility.CanCombo && !_cooldownController.IsOnCooldown(nextAbility))
+                        {
+                            _abilityQueue.Dequeue();
+                            ActivateAbility(nextAbility);
+                        }
+                    }
+                    return;
+                }
+                else if (_activeAbility.State == AbilityState.Active)
+                {
+                    return;
+                }
+                else
+                {
+                    _activeAbility = null;
+                }
             }
 
             if (_abilityQueue.HasNext())
@@ -92,13 +107,13 @@ namespace Code.Runtime.Modules.AbilitySystem
         public bool TryActivateAbility(AbilityIdentifier abilityId)
         {
             AbilitySlot slot = _abilitySlots.FirstOrDefault(x => x.AbilityIdentifier == abilityId);
-
-            if (slot?.Ability == null || slot.Ability.State != AbilityState.Ready)
+            if (slot?.Ability == null)
             {
                 return false;
             }
 
-            if (_activeAbility == null || !_activeAbility.IsActive())
+            if (slot.Ability.State == AbilityState.Ready || 
+                (_activeAbility != null && _activeAbility.CanCombo && slot.Ability.CanCombo))
             {
                 if (CanActivateAbility(slot.Ability))
                 {
@@ -112,7 +127,7 @@ namespace Code.Runtime.Modules.AbilitySystem
 
         private bool CanActivateAbility(ActiveAbility ability)
         {
-            return ability.State == AbilityState.Ready && ability.IsReady();
+            return ability.State == AbilityState.Ready && !_cooldownController.IsOnCooldown(ability);
         }
 
         private void ActivateAbility(ActiveAbility ability)
