@@ -28,7 +28,7 @@ namespace Code.Runtime.UI.Controller
         private readonly HeroFactory _heroFactory;
         private ScreenService _screenService;
 
-        private readonly CompositeDisposable _disposable;
+        private readonly CompositeDisposable _disposable = new();
         private readonly CancellationTokenSource _cts = new();
         public HeroDeathPopupController(LevelLoader levelLoader, AdvertisementService adService,
             PauseService pauseService, HeroFactory heroFactory)
