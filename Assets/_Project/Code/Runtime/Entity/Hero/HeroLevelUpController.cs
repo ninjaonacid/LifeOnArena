@@ -24,6 +24,7 @@ namespace Code.Runtime.Entity.Hero
         }
         public void LoadData(PlayerData data)
         {
+            _playerData = data;
             data.PlayerExp.OnLevelChanged += HandleLevelUp;
         }
 

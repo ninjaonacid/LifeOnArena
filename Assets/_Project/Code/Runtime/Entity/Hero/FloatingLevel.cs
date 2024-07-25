@@ -14,7 +14,7 @@ namespace Code.Runtime.Entity.Hero
 
         private void Awake()
         {
-            _originPosition = transform.position;
+            _originPosition = transform.localPosition;
         }
 
         public void LevelUpLogic()
@@ -24,7 +24,7 @@ namespace Code.Runtime.Entity.Hero
             transform.DOLocalMoveY( _targetPosition.y, 2f).SetLink(gameObject).OnComplete(() =>
             {
                 _levelUpIcon.Hide();
-                transform.position = _originPosition;
+                transform.localPosition = _originPosition;
             });
         }
     }
