@@ -15,6 +15,7 @@ using Code.Runtime.UI.Services;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using VContainer.Unity;
+using TimerMessageDto = Code.Runtime.UI.Model.DTO.TimerMessageDto;
 
 namespace Code.Runtime.Services
 {
@@ -97,9 +98,9 @@ namespace Code.Runtime.Services
             }
         }
 
-        private async UniTask LevelEndTask()
+        private async UniTaskVoid LevelEndTask()
         {
-            await UniTask.Delay(TimeSpan.FromSeconds(6));
+            await UniTask.Delay(TimeSpan.FromSeconds(5));
             LevelEnd();
         }
 

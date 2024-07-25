@@ -33,6 +33,7 @@ namespace Code.Runtime.Logic.WaveLogic
         private int _aliveCommonEnemies = 0;
         private int _aliveBosses = 0;
         private bool _isBossSpawned = false;
+        private bool _isBossLevel;
 
         public EnemySpawnerController(EnemyFactory enemyFactory, LevelCollectableTracker collectablesTracker)
         {
@@ -43,7 +44,8 @@ namespace Code.Runtime.Logic.WaveLogic
         public async UniTask Initialize(LevelConfig levelConfig, CancellationToken token = default)
         {
             _numberOfWaves = levelConfig.WavesToSpawn;
-
+            _isBossLevel = levelConfig.IsBossLevel;
+            
             foreach (EnemySpawnerData spawnerData in levelConfig.EnemySpawners)
             {
                 EnemySpawner spawner = await _enemyFactory.CreateSpawner(
@@ -92,12 +94,15 @@ namespace Code.Runtime.Logic.WaveLogic
                     waveCounter++;
                 }
 
-                await UniTask.Delay(200, cancellationToken: token);
-
-                if (IsWaveCleared() && waveCounter == _numberOfWaves && !_isBossSpawned)
+                if (IsWaveCleared() && waveCounter == _numberOfWaves)
                 {
                     CommonEnemiesCleared?.Invoke(TimeToNextWave);
+                }
+                
+                await UniTask.Delay(200, cancellationToken: token);
 
+                if (IsWaveCleared() && waveCounter == _numberOfWaves && _isBossLevel && !_isBossSpawned)
+                {
                     await UniTask.Delay(TimeSpan.FromSeconds(TimeToNextWave), cancellationToken: token);
 
                     await SpawnBoss(token);
