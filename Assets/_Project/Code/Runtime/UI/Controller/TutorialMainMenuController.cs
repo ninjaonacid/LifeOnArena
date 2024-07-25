@@ -61,11 +61,13 @@ namespace Code.Runtime.UI.Controller
                 if (element.GetId() == elementId)
                 {
                     element.BlockInteractions(false);
+                    element.Show(true);
                     _tutorialService.HandlePointer(element);
                 }
                 else
                 {
                     element.BlockInteractions(true);
+                    element.Show(false);
                 }
             }
         }

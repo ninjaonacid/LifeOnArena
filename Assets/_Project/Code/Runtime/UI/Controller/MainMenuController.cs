@@ -102,6 +102,8 @@ namespace Code.Runtime.UI.Controller
                     _adService.ShowReward();
                     WaitForAdTask(_cts.Token).Forget();
                 });
+            
+            _windowView.RewardButton.PlayScaleAnimation();
         }
 
         private void UpdateAllStatButtons()

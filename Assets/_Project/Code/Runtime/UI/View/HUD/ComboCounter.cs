@@ -69,7 +69,7 @@ namespace Code.Runtime.UI.View.HUD
                 _textMesh.color = new Color(0.7f, 0.1f, 0.2f);
             }
             
-            _textMesh.transform.DOShakePosition(0.5f, 2f * _hitCount)
+            _textMesh.transform.DOShakePosition(0.5f, 1.2f * _hitCount)
                 .SetLink(gameObject);
 
             ResetTimer(TaskHelper.CreateToken(ref _cts)).Forget();

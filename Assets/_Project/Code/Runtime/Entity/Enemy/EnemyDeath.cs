@@ -84,10 +84,7 @@ namespace Code.Runtime.Entity.Enemy
             
             HandleDeathVisuals();
             DisableEnemyInteractions();
-
             
-
-
             Happened?.Invoke();
         }
 
@@ -116,6 +113,8 @@ namespace Code.Runtime.Entity.Enemy
                         rb.AddForce(force, ForceMode.Impulse);
                         rb.AddTorque(new Vector3(0, 1f, 0));
                     }
+
+                    ReturnToPoolTimer(_disappearDuration).Forget();
                 }
             }
             else

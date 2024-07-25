@@ -25,15 +25,21 @@ namespace Code.Runtime.Modules.Advertisement
         public void ShowReward()
         {
             Bridge.advertisement.ShowRewarded();
+            
+            #if !UNITY_EDITOR
             _playerControls.Disable();
             _pauseService.PauseGame();
+            #endif
         }
 
         public void ShowInterstitial()
         {
             Bridge.advertisement.ShowInterstitial();
+            
+            #if !UNITY_EDITOR
             _playerControls.Disable();
             _pauseService.PauseGame();
+            #endif
         }
 
         public void Initialize()

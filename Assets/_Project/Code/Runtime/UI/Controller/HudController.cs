@@ -158,6 +158,7 @@ namespace Code.Runtime.UI.Controller
         {
             _windowView.PortalButton.Show(true);
             _windowView.PortalButton.PlayScaleAnimation();
+            _windowView.PortalButton.AnimateArrow();
         }
         
         

@@ -13,7 +13,7 @@ namespace Code.Runtime.UI.View.HUD
         public BaseButton ControlsButton;
         public StatusBar StatusBar;
         public BossHudHealthBar BossHudHealthBar;
-        public AnimatedButton PortalButton;
+        public PortalButton PortalButton;
         public DynamicJoyStick Joystick;
     }
 }
