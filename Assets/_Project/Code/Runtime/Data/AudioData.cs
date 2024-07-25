@@ -5,7 +5,7 @@ namespace Code.Runtime.Data
     [Serializable]
     public class AudioData
     {
-        public bool isMusicMuted;
-        public bool isSoundMuted;
+        public bool isMusicOn;
+        public bool isSoundOn;
     }
 }

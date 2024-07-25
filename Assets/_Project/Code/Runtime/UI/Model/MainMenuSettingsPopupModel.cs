@@ -16,8 +16,8 @@ namespace Code.Runtime.UI.Model
         
         public void Initialize()
         {
-            IsMusicOn = _gameData.AudioData.isMusicMuted;
-            IsSoundOn = _gameData.AudioData.isSoundMuted;
+            IsMusicOn = _gameData.AudioData.isMusicOn;
+            IsSoundOn = _gameData.AudioData.isSoundOn;
         }
 
         public void ChangeSoundState(bool value)
@@ -32,14 +32,14 @@ namespace Code.Runtime.UI.Model
 
         public void LoadData()
         {
-            _gameData.AudioData.isMusicMuted = IsMusicOn;
-            _gameData.AudioData.isSoundMuted = IsSoundOn;
+            IsMusicOn = _gameData.AudioData.isMusicOn;
+            IsSoundOn = _gameData.AudioData.isSoundOn;
         }
 
         public void SaveModelData()
         {
-            _gameData.AudioData.isMusicMuted = IsMusicOn;
-            _gameData.AudioData.isSoundMuted = IsSoundOn;
+            _gameData.AudioData.isMusicOn = IsMusicOn;
+            _gameData.AudioData.isSoundOn = IsSoundOn;
         }
     }
 }

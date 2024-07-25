@@ -11,21 +11,17 @@ namespace Code.Runtime.Core.EntryPoints
     {
         private readonly ConfigProvider _configProvider;
         private readonly IAssetProvider _assetProvider;
-        private readonly AudioService _audioService;
 
-        public CoreLoader(ConfigProvider configProvider, IAssetProvider assetProvider,
-            AudioService audioService)
+        public CoreLoader(ConfigProvider configProvider, IAssetProvider assetProvider)
         {
             _configProvider = configProvider;
             _assetProvider = assetProvider;
-            _audioService = audioService;
         }
 
         public void Initialize()
         {
             _configProvider.Load();
             _assetProvider.Initialize();
-            _audioService.InitializeAudio();
         }
         
     }

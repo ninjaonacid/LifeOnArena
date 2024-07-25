@@ -41,7 +41,7 @@ namespace Code.Runtime.UI.Model
             Attack.Value = _gameData.PlayerData.StatsData.StatsValues["Attack"];
             Magic.Value = _gameData.PlayerData.StatsData.StatsValues["Magic"];
             StatUpgradePrice = _gameData.PlayerData.StatsData.StatUpgradePrice;
-            IsMusicMuted = _gameData.AudioData.isMusicMuted;
+            IsMusicMuted = _gameData.AudioData.isMusicOn;
         }
 
         public void UpgradeHealth() => UpgradeStat("Health", Health, CanUpgradeHealth);

@@ -25,21 +25,11 @@ namespace Code.Runtime.Modules.Advertisement
         public void ShowReward()
         {
             Bridge.advertisement.ShowRewarded();
-            
-            #if !UNITY_EDITOR
-            _playerControls.Disable();
-            _pauseService.PauseGame();
-            #endif
         }
 
         public void ShowInterstitial()
         {
             Bridge.advertisement.ShowInterstitial();
-            
-            #if !UNITY_EDITOR
-            _playerControls.Disable();
-            _pauseService.PauseGame();
-            #endif
         }
 
         public void Initialize()
@@ -50,46 +40,45 @@ namespace Code.Runtime.Modules.Advertisement
 
         private void OnInterstitialStateChange(InterstitialState state)
         {
-            if (state == InterstitialState.Opened)
+            switch (state)
             {
-                _audioService.PauseAll();
-            } 
-            else if (state == InterstitialState.Closed)
-            {
-                _audioService.UnpauseAll();
-                _playerControls.Enable();
-            }
-            else if (state == InterstitialState.Failed)
-            {
-                _audioService.UnpauseAll();
-                _playerControls.Enable();
+                case InterstitialState.Opened:
+                    _playerControls.Disable();
+                    _pauseService.PauseGame();
+                    _audioService.PauseAll();
+                    break;
+                case InterstitialState.Closed:
+                    _audioService.UnpauseAll();
+                    _playerControls.Enable();
+                    _pauseService.UnpauseGame();
+                    break;
+                case InterstitialState.Failed:
+                    _audioService.UnpauseAll();
+                    _playerControls.Enable();
+                    _pauseService.UnpauseGame();
+                    break;
             }
         }
 
         private void OnRewardedStateChange(RewardedState state)
         {
-            if (state == RewardedState.Opened)
+            switch (state)
             {
-                _audioService.PauseAll();
-                _pauseService.PauseGame();
-            } 
-            else if (state == RewardedState.Closed)
-            {
-                _audioService.UnpauseAll();
-                _pauseService.UnpauseGame();
-                _playerControls.Enable();
-            } 
-            else if (state == RewardedState.Failed)
-            {
-                _audioService.UnpauseAll();
-                _pauseService.UnpauseGame();
-                _playerControls.Enable();
-            } 
-            else if (state == RewardedState.Rewarded)
-            {
-                _audioService.UnpauseAll();
-                _pauseService.UnpauseGame();
-                _playerControls.Enable();
+                case RewardedState.Opened:
+                    _playerControls.Disable();
+                    _pauseService.PauseGame();
+                    _audioService.PauseAll();
+                    break;
+                case RewardedState.Closed:
+                    _audioService.UnpauseAll();
+                    _pauseService.UnpauseGame();
+                    _playerControls.Enable();
+                    break;
+                case RewardedState.Failed:
+                    _audioService.UnpauseAll();
+                    _pauseService.UnpauseGame();
+                    _playerControls.Enable();
+                    break;
             }
         }
 

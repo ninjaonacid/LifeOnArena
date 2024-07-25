@@ -13,7 +13,7 @@ namespace Code.Runtime.Core.Scopes
         {
             builder.RegisterEntryPoint<GameEntryPoint>();
 
-            builder.Register<InitializeGameState>(Lifetime.Scoped);
+            builder.Register<GameStateInitializer>(Lifetime.Scoped);
             builder.RegisterInstance(_startLevelId);
         }
     }

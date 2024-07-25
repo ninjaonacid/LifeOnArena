@@ -1,4 +1,5 @@
 using Code.Runtime.ConfigData.Identifiers;
+using Code.Runtime.Core.Audio;
 using Code.Runtime.Core.Config;
 using Code.Runtime.Modules.LocalizationProvider;
 using Code.Runtime.Services.LevelLoaderService;
@@ -8,29 +9,31 @@ namespace Code.Runtime.Core.EntryPoints.GameEntry
 {
     public class GameEntryPoint : IInitializable
     {
-        private readonly InitializeGameState _gameState;
+        private readonly GameStateInitializer _gameStateInitializer;
         private readonly LevelLoader _levelLoader;
         private readonly ConfigProvider _config;
         private readonly LocalizationService _localizationService;
-        
+        private readonly AudioService _audioService;
         private readonly LevelIdentifier _startLevelId;
-        public GameEntryPoint(InitializeGameState gameState,
+        public GameEntryPoint(GameStateInitializer gameStateInitializer,
             LevelIdentifier startLevelId,
             LevelLoader levelLoader,
-            ConfigProvider config
+            ConfigProvider config,
+            AudioService audioService
           )
         {
-            _gameState = gameState;
+            _gameStateInitializer = gameStateInitializer;
             _startLevelId = startLevelId;
             _levelLoader = levelLoader;
             _config = config;
+            _audioService = audioService;
         }
 
         public void Initialize()
         {
-            _gameState.LoadDataOrCreateNew();
+            _gameStateInitializer.LoadDataOrCreateNew();
             _levelLoader.LoadLevel(_startLevelId);
-            
+            _audioService.InitializeAudio();
         }
         
     }

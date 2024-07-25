@@ -7,6 +7,7 @@ using Code.Runtime.ConfigData.Audio;
 using Code.Runtime.ConfigData.Settings;
 using Code.Runtime.Core.AssetManagement;
 using Code.Runtime.Core.Config;
+using Code.Runtime.Services.PersistentProgress;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -22,7 +23,8 @@ namespace Code.Runtime.Core.Audio
         
         private IAssetProvider _assetProvider;
         private ConfigProvider _configProvider;
-
+        private IGameDataContainer _gameData;
+        
         private readonly Dictionary<string, BaseAudioFile> _sfx = new();
         private readonly Dictionary<string, BaseAudioFile> _bgm = new();
 
@@ -37,16 +39,17 @@ namespace Code.Runtime.Core.Audio
         private AudioMixerGroup _masterMixer;
         private AudioMixerGroup _musicMixer;
         private AudioMixerGroup _sfxMixer;
+        
         private readonly CancellationTokenSource _cts = new();
-
-
+        
         [Inject]
-        public void Construct(IAssetProvider assetProvider, ConfigProvider configProvider)
+        public void Construct(IAssetProvider assetProvider, ConfigProvider configProvider, IGameDataContainer gameData)
         {
             _assetProvider = assetProvider;
             _configProvider = configProvider;
+            _gameData = gameData;
         }
-
+        
         public void InitializeAudio()
         {
             _audioLibrary = _configProvider.AudioLibrary();
@@ -71,6 +74,9 @@ namespace Code.Runtime.Core.Audio
             {
                 _mainMusicChannel = _musicChannelsPool[0];
             }
+
+            MuteMusic(!_gameData.AudioData.isMusicOn);
+            MuteSounds(!_gameData.AudioData.isSoundOn);
         }
 
         public void PlayMusic(string musicName, float volume = 1, bool isLoop = false)
@@ -86,12 +92,14 @@ namespace Code.Runtime.Core.Audio
 
             if (musicChannel.IsFree)
             {
+                musicChannel.AudioSource.volume = volume;
                 musicChannel.Play(music);
             }
             else if (!musicChannel.IsFree)
             {
                 musicChannel.Stop();
                 musicChannel.Play(music);
+                musicChannel.AudioSource.volume = volume;
             }
             else
             {

@@ -8,13 +8,12 @@ using Code.Runtime.Services.SaveLoad;
 
 namespace Code.Runtime.Core.EntryPoints.GameEntry
 {
-    public class InitializeGameState
+    public class GameStateInitializer
     {
         private readonly ConfigProvider _configProvider;
         private readonly ISaveLoadService _saveLoadService;
         private readonly IGameDataContainer _gameDataContainer;
-        
-        public InitializeGameState(
+        public GameStateInitializer(
             ConfigProvider configProvider, 
             IGameDataContainer dataContainer,
             ISaveLoadService saveLoad)
@@ -80,8 +79,8 @@ namespace Code.Runtime.Core.EntryPoints.GameEntry
         {
             AudioData audioData = new AudioData
             {
-                isMusicMuted = false,
-                isSoundMuted = false
+                isMusicOn = true,
+                isSoundOn = true
             };
 
             return audioData;

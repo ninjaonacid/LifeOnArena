@@ -2,7 +2,7 @@
 
 namespace Code.Runtime.UI.Model
 {
-    public class HudSettingsPopupModel : IScreenModel
+    public class HudSettingsPopupModel : IScreenModel, ISavableModel
     {
         public bool IsSoundOn { get; private set;}
         public bool IsMusicOn { get; private set;}
@@ -25,8 +25,20 @@ namespace Code.Runtime.UI.Model
         }
         public void Initialize()
         {
-            IsSoundOn = _gameData.AudioData.isSoundMuted;
-            IsMusicOn = _gameData.AudioData.isMusicMuted;
+            IsSoundOn = _gameData.AudioData.isSoundOn;
+            IsMusicOn = _gameData.AudioData.isMusicOn;
+        }
+
+        public void LoadData()
+        {
+            _gameData.AudioData.isMusicOn = IsMusicOn;
+            _gameData.AudioData.isSoundOn = IsSoundOn; 
+        }
+
+        public void SaveModelData()
+        {
+            _gameData.AudioData.isMusicOn = IsMusicOn;
+            _gameData.AudioData.isSoundOn = IsSoundOn;
         }
     }
 }
