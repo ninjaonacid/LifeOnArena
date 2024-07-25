@@ -149,6 +149,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1893535933881436335}
     - target: {fileID: 2892997724190106139, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
+      propertyPath: _animator
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2892997724190106139, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
       propertyPath: IsAnimatedDeath
       value: 1
       objectReference: {fileID: 0}
@@ -156,6 +160,10 @@ PrefabInstance:
       propertyPath: _isAnimatedDeath
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2892997724190106139, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
+      propertyPath: _animationsContainer
+      value: 
+      objectReference: {fileID: 11400000, guid: 2bfff877b82540e47933d35470a4d01f, type: 2}
     - target: {fileID: 3436043548892321881, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -449,6 +457,7 @@ MonoBehaviour:
   _mainReward: {fileID: 11400000, guid: 72a98bce9ea5b9a4cafc1de06798806c, type: 2}
   _secondReward: {fileID: 11400000, guid: bc9eacbbe1c3fa04eacb2eb58ab7ba12, type: 2}
   _treasurePrefab: {fileID: 3542508034450265144, guid: 297628a935eff4a4ba3efe6df6d4a0f0, type: 3}
+  _animationData: {fileID: 11400000, guid: 2bfff877b82540e47933d35470a4d01f, type: 2}
 --- !u!1001 &7055247972277369375
 PrefabInstance:
   m_ObjectHideFlags: 0

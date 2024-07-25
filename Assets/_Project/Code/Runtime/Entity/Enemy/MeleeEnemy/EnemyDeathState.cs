@@ -22,11 +22,9 @@ namespace Code.Runtime.Entity.Enemy.MeleeEnemy
         public override void OnEnter()
         {
             base.OnEnter();
+            
             _enemyTarget.enabled = false;
-            if (_enemyDeath.IsAnimatedDeath)
-            {
-                _characterAnimator.PlayAnimation(_animationData.Animations[AnimationKey.Die].Hash);
-            }
+     
         }
 
         public override void OnExit()

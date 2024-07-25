@@ -1,9 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Code.Runtime.ConfigData.Animations;
 using Code.Runtime.Core.ObjectPool;
+using Code.Runtime.Entity.EntitiesComponents;
 using Code.Runtime.Modules.StatSystem;
 using Code.Runtime.UI.View.HUD;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -13,7 +16,9 @@ namespace Code.Runtime.Entity.Enemy
     public class EnemyDeath : MonoBehaviour
     {
         public event Action Happened;
-        
+
+        [SerializeField] private CharacterAnimator _animator;
+        [SerializeField] private AnimationDataContainer _animationsContainer;
         [SerializeField] private StatController _stats;
         [SerializeField] private EnemyHealth _health;
         [SerializeField] private EntityUI _entityUI;
@@ -28,7 +33,6 @@ namespace Code.Runtime.Entity.Enemy
         [SerializeField] private float _minForce;
         [SerializeField] private float _maxHeight;
         public bool IsDead { get; private set; }
-        public bool IsAnimatedDeath => _isAnimatedDeath;
 
         private Rigidbody[] _fractureParts;
         private static readonly List<Vector3> _positions = new();
@@ -81,7 +85,7 @@ namespace Code.Runtime.Entity.Enemy
             HandleDeathVisuals();
             DisableEnemyInteractions();
 
-            StartCoroutine(ReturnToPoolTimer());
+            
 
 
             Happened?.Invoke();
@@ -114,11 +118,18 @@ namespace Code.Runtime.Entity.Enemy
                     }
                 }
             }
+            else
+            {
+                var deathAnimation = _animationsContainer.Animations[AnimationKey.Die];
+                
+                _animator.PlayAnimation(deathAnimation.Hash);
+                ReturnToPoolTimer(deathAnimation.Length).Forget();
+            }
         }
 
-        private IEnumerator ReturnToPoolTimer()
+        private async UniTask ReturnToPoolTimer(float secondsToReturn)
         {
-            yield return new WaitForSeconds(_disappearDuration);
+            await UniTask.Delay(TimeSpan.FromSeconds(secondsToReturn));
 
             ResetObject();
             

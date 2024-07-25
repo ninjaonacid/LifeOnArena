@@ -23,7 +23,6 @@ namespace Code.Runtime.UI.Buttons
             ResetState();
 
             _tween.Complete();
-            _tween.Kill();
             
             _tween = RectTransform.DOScale(new Vector3(_animationScale.x,
                     _animationScale.y), _duration)
@@ -36,7 +35,6 @@ namespace Code.Runtime.UI.Buttons
         {
             ResetState();
             _tween.Complete();
-            _tween.Kill();
         }
 
         private void ResetState()

@@ -64,6 +64,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canvasGroup: {fileID: 2783577918436093817}
+  RectTransform: {fileID: 5732932888565712961}
 --- !u!1 &1315603559841265608
 GameObject:
   m_ObjectHideFlags: 0
@@ -267,6 +268,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canvasGroup: {fileID: 4864136765251059845}
+  RectTransform: {fileID: 4139056311033119450}
 --- !u!1 &1868352287206482175
 GameObject:
   m_ObjectHideFlags: 0
@@ -442,8 +444,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -347.21, y: 179}
-  m_SizeDelta: {x: 500, y: 200}
+  m_AnchoredPosition: {x: -330.83777, y: 165.90213}
+  m_SizeDelta: {x: 467.255, y: 173.804}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8190241984415445692
 CanvasRenderer:
@@ -508,6 +510,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canvasGroup: {fileID: 6324344544946374914}
+  RectTransform: {fileID: 1297051454403812737}
   _highlightColor:
     serializedVersion: 2
     rgba: 4278252799
@@ -534,6 +537,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5287c8edf39730f4d861cc7e6fcd4e6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _canvasGroup: {fileID: 6324344544946374914}
+  RectTransform: {fileID: 1297051454403812737}
   _elementId: {fileID: 11400000, guid: 6f3b0de92d052ae4ea7013231dbe03ac, type: 2}
   _canvas: {fileID: 6324344544946374914}
 --- !u!1 &3583570332870476986
@@ -699,6 +704,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canvasGroup: {fileID: 8082231002391128016}
+  RectTransform: {fileID: 863541475345766772}
 --- !u!114 &4713103761472037179
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2287,6 +2293,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5287c8edf39730f4d861cc7e6fcd4e6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _canvasGroup: {fileID: 6681234612300144344}
+  RectTransform: {fileID: 6179014005807051193}
   _elementId: {fileID: 11400000, guid: 43d907c8fb41acc438cde0a5ea1d3fdf, type: 2}
   _canvas: {fileID: 6681234612300144344}
 --- !u!1 &2813369047110637454 stripped
@@ -2327,6 +2335,11 @@ MonoBehaviour:
   StartBattleButton: {fileID: 1790147313641873976}
   LocationInfo: {fileID: 8442578916213438544}
   LockedInfo: {fileID: 3150984296238828317}
+--- !u!224 &6179014005807051193 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1407042648255711365, guid: 86fff4179bbcf5a42beb980ec603bd16, type: 3}
+  m_PrefabInstance: {fileID: 5063899025197087036}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &6372059901910872519 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2173145069144099067, guid: 86fff4179bbcf5a42beb980ec603bd16, type: 3}

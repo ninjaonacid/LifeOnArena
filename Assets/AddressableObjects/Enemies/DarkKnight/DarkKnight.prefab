@@ -1617,9 +1617,17 @@ PrefabInstance:
       value: DarkKnight
       objectReference: {fileID: 0}
     - target: {fileID: 2892997724190106139, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
+      propertyPath: _animator
+      value: 
+      objectReference: {fileID: 1026964147362102650}
+    - target: {fileID: 2892997724190106139, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
       propertyPath: _isAnimatedDeath
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2892997724190106139, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
+      propertyPath: _animationsContainer
+      value: 
+      objectReference: {fileID: 11400000, guid: b5f085de244db7847b47154eb0e37b67, type: 2}
     - target: {fileID: 3436043548892321881, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -1809,6 +1817,7 @@ MonoBehaviour:
   _mainReward: {fileID: 11400000, guid: a60616072b0e08d499bbc072cb2d2afe, type: 2}
   _secondReward: {fileID: 11400000, guid: bc9eacbbe1c3fa04eacb2eb58ab7ba12, type: 2}
   _treasurePrefab: {fileID: 3542508034450265144, guid: 297628a935eff4a4ba3efe6df6d4a0f0, type: 3}
+  _animationData: {fileID: 11400000, guid: b5f085de244db7847b47154eb0e37b67, type: 2}
 --- !u!114 &837132179389367021
 MonoBehaviour:
   m_ObjectHideFlags: 0

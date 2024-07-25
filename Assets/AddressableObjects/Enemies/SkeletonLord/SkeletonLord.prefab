@@ -327,6 +327,10 @@ PrefabInstance:
       value: SkeletonLord
       objectReference: {fileID: 0}
     - target: {fileID: 2892997724190106139, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
+      propertyPath: _animator
+      value: 
+      objectReference: {fileID: 6636938242222681281}
+    - target: {fileID: 2892997724190106139, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
       propertyPath: _entityUI
       value: 
       objectReference: {fileID: 2056921130674259649}
@@ -334,6 +338,10 @@ PrefabInstance:
       propertyPath: _isAnimatedDeath
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2892997724190106139, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
+      propertyPath: _animationsContainer
+      value: 
+      objectReference: {fileID: 11400000, guid: 5a7cff166447ba446bbe3bb99c734253, type: 2}
     - target: {fileID: 3436043548892321881, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -517,6 +525,7 @@ MonoBehaviour:
   _mainReward: {fileID: 11400000, guid: 5f03ba0ff86d5314aadb285cb2324342, type: 2}
   _secondReward: {fileID: 11400000, guid: 87e98ef906211d7408f167ffdfc37037, type: 2}
   _treasurePrefab: {fileID: 3542508034450265144, guid: 297628a935eff4a4ba3efe6df6d4a0f0, type: 3}
+  _animationData: {fileID: 11400000, guid: 5a7cff166447ba446bbe3bb99c734253, type: 2}
 --- !u!4 &826365243024189229 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3436043548892321881, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
