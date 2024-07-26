@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Code.Runtime.Services.SaveLoad
 {
-    public class SaveLoadService : ISaveLoadService
+    public class SaveLoadService
     {
         private const string PlayerDataKey = "PlayerData";
         private const string AudioDataKey = "AudioData";

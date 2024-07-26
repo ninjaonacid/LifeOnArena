@@ -22,13 +22,13 @@ namespace Code.Runtime.Core.Factory
     public class ItemFactory
     {
         private readonly ConfigProvider _config;
-        private readonly ISaveLoadService _saveLoadService;
+        private readonly SaveLoadService _saveLoadService;
         private readonly IAssetProvider _assetProvider;
         private readonly IObjectResolver _objectResolver;
         private readonly ObjectPoolProvider _poolProvider;
 
         public ItemFactory(ConfigProvider config, 
-            ISaveLoadService saveLoadService, 
+            SaveLoadService saveLoadService, 
             IAssetProvider assetProvider,
             IObjectResolver objectResolver,
             ObjectPoolProvider poolProvider)

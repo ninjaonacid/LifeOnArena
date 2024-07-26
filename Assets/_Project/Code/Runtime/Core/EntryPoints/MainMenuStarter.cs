@@ -23,12 +23,12 @@ namespace Code.Runtime.Core.EntryPoints
         private readonly ScreenService _screenService;
         private readonly AudioService _audioService;
         private readonly PlayerControls _controls;
-        private readonly ISaveLoadService _saveLoad;
+        private readonly SaveLoadService _saveLoad;
         private readonly AdvertisementService _adService;
 
         public MainMenuStarter(HeroFactory heroFactory, UIFactory uiFactory,
             ScreenService screenService,
-            LevelLoader levelLoader, ISaveLoadService saveLoad, 
+            LevelLoader levelLoader, SaveLoadService saveLoad, 
             PlayerControls controls,
             AudioService audioService, AdvertisementService adService)
         {

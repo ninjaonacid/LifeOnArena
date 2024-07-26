@@ -11,12 +11,12 @@ namespace Code.Runtime.Core.EntryPoints.GameEntry
     public class GameStateInitializer
     {
         private readonly ConfigProvider _configProvider;
-        private readonly ISaveLoadService _saveLoadService;
+        private readonly SaveLoadService _saveLoadService;
         private readonly IGameDataContainer _gameDataContainer;
         public GameStateInitializer(
             ConfigProvider configProvider, 
             IGameDataContainer dataContainer,
-            ISaveLoadService saveLoad)
+            SaveLoadService saveLoad)
         {
             _configProvider = configProvider;
             _saveLoadService = saveLoad;

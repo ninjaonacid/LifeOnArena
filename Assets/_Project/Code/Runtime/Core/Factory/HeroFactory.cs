@@ -12,10 +12,10 @@ namespace Code.Runtime.Core.Factory
         public GameObject HeroGameObject { get; set; }
         
         private readonly IAssetProvider _assetProvider;
-        private readonly ISaveLoadService _saveLoadService;
+        private readonly SaveLoadService _saveLoadService;
         private readonly IObjectResolver _objectResolver;
 
-        public HeroFactory(IAssetProvider assetProvider, ISaveLoadService saveLoadService, IObjectResolver objectResolver)
+        public HeroFactory(IAssetProvider assetProvider, SaveLoadService saveLoadService, IObjectResolver objectResolver)
         {
             _assetProvider = assetProvider;
             _saveLoadService = saveLoadService;

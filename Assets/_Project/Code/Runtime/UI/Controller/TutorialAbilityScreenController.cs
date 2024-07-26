@@ -15,7 +15,7 @@ namespace Code.Runtime.UI.Controller
         private readonly TutorialService _tutorialService;
         private List<TutorialElement> _tutorialElements = new();
  
-        public TutorialAbilityScreenController(ISaveLoadService saveLoad, TutorialService tutorialService) : base(saveLoad)
+        public TutorialAbilityScreenController(SaveLoadService saveLoad, TutorialService tutorialService) : base(saveLoad)
         {
             _tutorialService = tutorialService;
         }

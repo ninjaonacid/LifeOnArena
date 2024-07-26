@@ -5,6 +5,7 @@ using Code.Runtime.Core.SceneManagement;
 using Code.Runtime.Modules.Advertisement;
 using Code.Runtime.Services.LevelLoaderService;
 using Code.Runtime.Services.PersistentProgress;
+using Code.Runtime.Services.SaveLoad;
 using Code.Runtime.UI.Model;
 using Code.Runtime.UI.Services;
 using Code.Runtime.UI.View;
@@ -28,17 +29,19 @@ namespace Code.Runtime.UI.Controller
         private readonly SceneLoader _sceneLoader;
         private readonly AdvertisementService _adService;
         private readonly AudioService _audioService;
+        private readonly SaveLoadService _saveLoad;
 
         private readonly CompositeDisposable _disposables = new();
         private readonly CancellationTokenSource _cts = new();
 
         public MainMenuController(IGameDataContainer gameData, AudioService audioService, LevelLoader levelLoader,
-            AdvertisementService adService)
+            AdvertisementService adService, SaveLoadService saveLoad)
         {
             _gameData = gameData;
             _levelLoader = levelLoader;
             _audioService = audioService;
             _adService = adService;
+            _saveLoad = saveLoad;
         }
 
         public virtual void InitController(IScreenModel model, BaseWindowView windowView, ScreenService screenService)
@@ -143,8 +146,8 @@ namespace Code.Runtime.UI.Controller
 
         private void HandleSoulsReward()
         {
-            _gameData.PlayerData.WorldData.LootData.Collect(500);
-            _screenService.Close(this);
+            _gameData.PlayerData.WorldData.LootData.Collect(1000);
+            _saveLoad.SaveData();
         }
 
         private void HandleAdResult(RewardedState state)

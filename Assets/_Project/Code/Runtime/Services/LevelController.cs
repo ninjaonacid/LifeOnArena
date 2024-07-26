@@ -28,7 +28,7 @@ namespace Code.Runtime.Services
         private readonly PlayerControls _controls;
         private readonly LocalizationService _localService;
         private readonly IGameDataContainer _gameData;
-        private readonly ISaveLoadService _saveLoad;
+        private readonly SaveLoadService _saveLoad;
         private readonly CancellationTokenSource _cancellationToken = new();
 
         public LevelController(EnemySpawnerController spawnerController, 
@@ -36,7 +36,7 @@ namespace Code.Runtime.Services
             IEventSystem eventSystem, PlayerControls controls,
             LevelLoader levelLoader, IGameDataContainer gameData, 
             LocalizationService localService,
-            ISaveLoadService saveLoad)
+            SaveLoadService saveLoad)
         {
             _spawnerController = spawnerController;
             _screenService = screenService;
@@ -79,7 +79,7 @@ namespace Code.Runtime.Services
 
         private void BossKilled()
         {
-            LevelEndTask().Forget();
+            LevelEndTask(_cancellationToken.Token).Forget();
         }
         
         private void CommonEnemiesCleared(int secondsToBoss)
@@ -94,13 +94,13 @@ namespace Code.Runtime.Services
             }
             else
             {
-                LevelEndTask().Forget();
+                LevelEndTask(_cancellationToken.Token).Forget();
             }
         }
 
-        private async UniTaskVoid LevelEndTask()
+        private async UniTaskVoid LevelEndTask(CancellationToken token)
         {
-            await UniTask.Delay(TimeSpan.FromSeconds(7));
+            await UniTask.Delay(TimeSpan.FromSeconds(8), cancellationToken: token);
             LevelEnd();
         }
 

@@ -8,6 +8,7 @@ using Code.Runtime.Modules.LocalizationProvider;
 using Code.Runtime.Modules.TutorialService;
 using Code.Runtime.Services.LevelLoaderService;
 using Code.Runtime.Services.PersistentProgress;
+using Code.Runtime.Services.SaveLoad;
 using Code.Runtime.UI.Model;
 using Code.Runtime.UI.Services;
 using Code.Runtime.UI.View;
@@ -21,8 +22,8 @@ namespace Code.Runtime.UI.Controller
         private List<TutorialElement> _tutorialElements = new();
 
         public TutorialMainMenuController(IGameDataContainer gameData, AudioService audioService,
-            LevelLoader levelLoader, AdvertisementService adService, TutorialService tutorialService) : base(gameData,
-            audioService, levelLoader, adService)
+            LevelLoader levelLoader, AdvertisementService adService, SaveLoadService saveLoad,
+            TutorialService tutorialService) : base(gameData, audioService, levelLoader, adService, saveLoad)
         {
             _tutorialService = tutorialService;
         }
@@ -70,9 +71,8 @@ namespace Code.Runtime.UI.Controller
                     {
                         element.Show(false);
                     }
-                    
+
                     element.BlockInteractions(true);
-                    
                 }
             }
         }

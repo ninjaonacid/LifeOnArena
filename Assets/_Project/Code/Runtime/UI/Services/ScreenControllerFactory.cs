@@ -21,7 +21,7 @@ namespace Code.Runtime.UI.Services
 
         public ScreenControllerFactory(IGameDataContainer gameData,
             IEventSystem eventSystem,
-            HeroFactory heroFactory, ISaveLoadService saveLoad,
+            HeroFactory heroFactory, SaveLoadService saveLoad,
             AudioService audioService, PlayerControls playerControls,
             LevelCollectableTracker collectableTracker, LevelLoader levelLoader,
             TutorialService tutorialService, PauseService pauseService,
@@ -29,8 +29,8 @@ namespace Code.Runtime.UI.Services
         {
             _screenControllers.Add(typeof(MainMenuController),
                 () => gameData.PlayerData.TutorialData.IsTutorialCompleted
-                    ? new MainMenuController(gameData, audioService, levelLoader, adService)
-                    : new TutorialMainMenuController(gameData, audioService, levelLoader, adService,
+                    ? new MainMenuController(gameData, audioService, levelLoader, adService, saveLoad)
+                    : new TutorialMainMenuController(gameData, audioService, levelLoader, adService, saveLoad,
                         tutorialService));
 
             _screenControllers.Add(typeof(WeaponScreenController),

@@ -31,7 +31,7 @@ namespace Code.Runtime.Core.Scopes
             builder.RegisterEntryPoint<CoreLoader>();
 
             builder.Register<ConfigProvider>(Lifetime.Singleton);
-            builder.Register<ISaveLoadService, SaveLoadService>(Lifetime.Singleton);
+            builder.Register<SaveLoadService, SaveLoadService>(Lifetime.Singleton);
             builder.Register<AdvertisementService>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
             builder.Register<LocalizationService>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
 

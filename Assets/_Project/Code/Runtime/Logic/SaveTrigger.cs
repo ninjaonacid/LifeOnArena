@@ -6,12 +6,12 @@ namespace Code.Runtime.Logic
 {
     public class SaveTrigger : MonoBehaviour
     {
-        private ISaveLoadService _saveLoadService;
+        private SaveLoadService _saveLoadService;
 
         [SerializeField] private BoxCollider _collider;
 
         [Inject]
-        private void Construct(ISaveLoadService saveLoadService)
+        private void Construct(SaveLoadService saveLoadService)
         {
             _saveLoadService = saveLoadService;
         }

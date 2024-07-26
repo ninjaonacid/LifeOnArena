@@ -18,7 +18,7 @@ namespace Code.Runtime.Core.EntryPoints
 {
     public class LevelStarterPoint : IAsyncStartable
     {
-        private readonly ISaveLoadService _saveLoad;
+        private readonly SaveLoadService _saveLoad;
         private readonly HeroFactory _heroFactory;
         private readonly ScreenService _screenService;
         private readonly PlayerControls _controls;
@@ -27,7 +27,7 @@ namespace Code.Runtime.Core.EntryPoints
         private readonly LevelCollectableTracker _collectableTracker;
 
         public LevelStarterPoint(
-            ISaveLoadService saveLoad, HeroFactory heroFactory, 
+            SaveLoadService saveLoad, HeroFactory heroFactory, 
             ScreenService screenService,
             PlayerControls controls, 
             EnemySpawnerController enemySpawnerController,
