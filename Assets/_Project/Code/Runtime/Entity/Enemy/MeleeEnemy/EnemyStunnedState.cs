@@ -22,7 +22,8 @@ namespace Code.Runtime.Entity.Enemy.MeleeEnemy
         public override void OnEnter()
         {
             base.OnEnter();
-
+            
+            _characterAnimator.PlayAnimation(_animationData.Animations[AnimationKey.Hit].Hash);
             _canExit = (state) => !_tagController.HasTag("Stun");
         }
     }

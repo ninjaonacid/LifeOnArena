@@ -53,12 +53,6 @@ namespace Code.Runtime.Entity.Enemy.MeleeEnemy
                 nameof(EnemyIdleState),
                 (transition) => _enemyAttackComponent.TargetInMeleeAttackRange));
 
-            _fsm.AddTriggerTransitionFromAny("OnDamage", 
-                new Transition(
-                    " ", 
-                    nameof(EnemyStaggerState),
-                    isForceTransition: true
-                ));
 
             _fsm.AddTransition(new Transition(
                 nameof(EnemyStaggerState),
@@ -80,11 +74,19 @@ namespace Code.Runtime.Entity.Enemy.MeleeEnemy
                 nameof(EnemyStunnedState),
                 (transition) => _tagController.HasTag("Stun"),
                 true));
-            
+
             _fsm.AddTransition(new Transition(
                 nameof(EnemyStunnedState),
                 nameof(EnemyIdleState),
                 (transition) => !_tagController.HasTag("Stun")));
+            
+            _fsm.AddTriggerTransitionFromAny("OnDamage", 
+                new Transition(
+                    " ", 
+                    nameof(EnemyStaggerState),
+                    isForceTransition: true
+                ));
+
 
             _fsm.InitStateMachine();
         }
