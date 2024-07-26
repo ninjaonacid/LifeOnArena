@@ -21,6 +21,7 @@ namespace Code.Runtime.Modules.Advertisement
         public InterstitialState InterstitialState => Bridge.advertisement.interstitialState;
         
         private ITimer _soulsRewardTimer;
+        private bool _soulRewardIsActive;
         
         private readonly AudioService _audioService;
         private readonly PauseService _pauseService;
@@ -36,7 +37,16 @@ namespace Code.Runtime.Modules.Advertisement
             _configProvider = configProvider;
         }
 
-        public bool IsCurrencyRewardActive() => _soulsRewardTimer.Elapsed > _adsConfig.SoulsRewardInterval;
+        public bool IsCurrencyRewardActive()
+        {
+            if (_soulRewardIsActive)
+            {
+            }
+            return _soulsRewardTimer.Elapsed > _adsConfig.SoulsRewardInterval;
+        }
+
+        public int ReviveRewardsPossible() => _adsConfig.HeroRevivePerLevel;
+        
         public void ShowReward(RewardId  rewardId)
         {
             if (rewardId == RewardId.Souls)
@@ -54,6 +64,7 @@ namespace Code.Runtime.Modules.Advertisement
 
         public void Initialize()
         {
+            _soulRewardIsActive = true;
             _adsConfig = _configProvider.GetAdsConfig();
             Bridge.advertisement.rewardedStateChanged += OnRewardedStateChange;
             Bridge.advertisement.interstitialStateChanged += OnInterstitialStateChange;

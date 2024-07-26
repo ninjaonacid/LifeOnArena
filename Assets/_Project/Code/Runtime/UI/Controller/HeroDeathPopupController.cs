@@ -65,7 +65,7 @@ namespace Code.Runtime.UI.Controller
             
             var heroDeath = _heroFactory.HeroGameObject.GetComponent<HeroDeath>();
 
-            if (heroDeath.RevivedNumber >= 1)
+            if (heroDeath.RevivedNumber >= _adService.ReviveRewardsPossible())
             {
                 _view.RewardRessurectButton.Show(false);
                 _view.ReturnToPortalButton.PlayScaleAnimation();
