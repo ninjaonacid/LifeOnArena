@@ -23,7 +23,7 @@ namespace Code.Runtime.Core.Scopes
             
             builder.Register<ProjectileFactory>(Lifetime.Scoped);
             builder.Register<GameRewardSystem>(Lifetime.Scoped).AsSelf();
-            builder.Register<ObjectPoolProvider>(Lifetime.Singleton);
+            builder.Register<ObjectPoolProvider>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
             
             builder.Register<ItemFactory>(Lifetime.Scoped);
             builder.Register<EnemyFactory>(Lifetime.Scoped);

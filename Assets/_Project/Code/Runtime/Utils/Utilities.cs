@@ -1,4 +1,5 @@
 ﻿using System;
+using Code.Runtime.Entity;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using Vector3 = UnityEngine.Vector3;
@@ -26,6 +27,11 @@ namespace Code.Runtime.Utils
                 return controller.center;
             };
 
+            if (target.TryGetComponent(out EntityHurtBox hurtBox))
+            {
+                return hurtBox.GetHitBoxCenter();
+            }
+
             return Vector3.zero;
         }
 
@@ -34,6 +40,11 @@ namespace Code.Runtime.Utils
             if (target.TryGetComponent(out CharacterController controller))
             {
                 return controller.height;
+            }
+
+            if (target.TryGetComponent<EntityHurtBox>(out var hurtBox))
+            {
+                return hurtBox.GetHeight().y;
             }
 
             return 0;
