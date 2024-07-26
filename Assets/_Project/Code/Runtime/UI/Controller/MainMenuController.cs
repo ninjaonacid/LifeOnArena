@@ -94,16 +94,21 @@ namespace Code.Runtime.UI.Controller
 
             _windowView.SettingsButton.OnClickAsObservable()
                 .Subscribe(x => _screenService.Open(ScreenID.MainMenuSettingsPopUpView));
-            
-            _windowView.RewardButton.OnClickAsObservable()
-                .Subscribe(x =>
-                {
 
-                    _adService.ShowReward();
-                    WaitForAdTask(_cts.Token).Forget();
-                });
+            if (_adService.IsCurrencyRewardActive())
+            {
+                _windowView.RewardButton.OnClickAsObservable()
+                    .Subscribe(x =>
+                    {
+
+                        _adService.ShowReward(RewardId.Souls);
+                        WaitForAdTask(_cts.Token).Forget();
+                    });
+                
+                _windowView.RewardButton.Show(_adService.IsCurrencyRewardActive());
+                _windowView.RewardButton.PlayScaleAnimation();
+            }
             
-            _windowView.RewardButton.PlayScaleAnimation();
         }
 
         private void UpdateAllStatButtons()

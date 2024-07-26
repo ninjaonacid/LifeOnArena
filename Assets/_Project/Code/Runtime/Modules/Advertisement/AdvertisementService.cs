@@ -1,4 +1,5 @@
 using System;
+using Code.Runtime.ConfigData;
 using Code.Runtime.Core.Audio;
 using Code.Runtime.Core.Config;
 using Code.Runtime.Logic.Timer;
@@ -9,16 +10,23 @@ using VContainer.Unity;
 
 namespace Code.Runtime.Modules.Advertisement
 {
+    public enum RewardId
+    {
+        Souls,
+        Revive
+    }
     public class AdvertisementService : IInitializable, IDisposable
     {
         public RewardedState RewardedState => Bridge.advertisement.rewardedState;
         public InterstitialState InterstitialState => Bridge.advertisement.interstitialState;
+        
         private ITimer _soulsRewardTimer;
         
         private readonly AudioService _audioService;
         private readonly PauseService _pauseService;
         private readonly PlayerControls _playerControls;
         private readonly ConfigProvider _configProvider;
+        private AdvertisementConfig _adsConfig;
 
         public AdvertisementService(AudioService audioService, PauseService pauseService, PlayerControls playerControls, ConfigProvider configProvider)
         {
@@ -28,8 +36,14 @@ namespace Code.Runtime.Modules.Advertisement
             _configProvider = configProvider;
         }
 
-        public void ShowReward()
+        public bool IsCurrencyRewardActive() => _soulsRewardTimer.Elapsed > _adsConfig.SoulsRewardInterval;
+        public void ShowReward(RewardId  rewardId)
         {
+            if (rewardId == RewardId.Souls)
+            {
+                _soulsRewardTimer = new Timer();
+            }
+            
             Bridge.advertisement.ShowRewarded();
         }
 
@@ -40,7 +54,7 @@ namespace Code.Runtime.Modules.Advertisement
 
         public void Initialize()
         {
-            
+            _adsConfig = _configProvider.GetAdsConfig();
             Bridge.advertisement.rewardedStateChanged += OnRewardedStateChange;
             Bridge.advertisement.interstitialStateChanged += OnInterstitialStateChange;
         }

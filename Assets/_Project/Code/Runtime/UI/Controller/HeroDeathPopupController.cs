@@ -59,7 +59,7 @@ namespace Code.Runtime.UI.Controller
                 .OnClickAsObservable()
                 .Subscribe(x =>
                 {
-                    _adService.ShowReward();
+                    _adService.ShowReward(RewardId.Revive);
                     WaitForAdTask(_cts.Token).Forget();
                 }).AddTo(_disposable);
             

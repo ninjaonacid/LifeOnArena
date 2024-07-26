@@ -170,7 +170,8 @@ namespace Code.Runtime.Core.Config
             _windowConfigs.TryGetValue(menuId, out ScreenConfig windowConfig)
                 ? windowConfig
                 : null;
-        
 
+
+        public AdvertisementConfig GetAdsConfig() => _adsConfig;
     }
 }
