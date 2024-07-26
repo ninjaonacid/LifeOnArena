@@ -8,8 +8,8 @@ namespace Code.Runtime.Entity.Enemy.MeleeEnemy
         protected override void Start()
         {
             base.Start();
-            
-            _enemyHealth.Health.CurrentValueChanged += TriggerDamageState;
+
+            _enemyStaggerComponent.Staggered += TriggerStaggerState;
             
             _fsm.AddState(nameof(MeleeEnemyAttackState), new MeleeEnemyAttackState(
                 _enemyAttackComponent,
@@ -56,13 +56,13 @@ namespace Code.Runtime.Entity.Enemy.MeleeEnemy
             _fsm.AddTriggerTransitionFromAny("OnDamage", 
                 new Transition(
                     " ", 
-                    nameof(EnemyStaggerState), isForceTransition: true
+                    nameof(EnemyStaggerState),
+                    isForceTransition: true
                 ));
 
-            _fsm.AddTransition(new TransitionAfter(
+            _fsm.AddTransition(new Transition(
                 nameof(EnemyStaggerState),
-                nameof(EnemyIdleState),
-                _statController.Stats["HitRecovery"].Value
+                nameof(EnemyIdleState)
             ));
 
             _fsm.AddTransition(new Transition(
@@ -90,7 +90,7 @@ namespace Code.Runtime.Entity.Enemy.MeleeEnemy
         }
 
 
-        private void TriggerDamageState()
+        private void TriggerStaggerState()
         {
             _fsm.Trigger("OnDamage");
         }

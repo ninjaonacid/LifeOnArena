@@ -98,6 +98,7 @@ namespace Code.Runtime.Core.Factory
             enemyFacade.EnemyWeapon.Construct(monsterData.PossibleWeapons);
             enemyFacade.EntityUI.Construct(enemyFacade.EnemyHealth);
             enemyFacade.EnemyDeath.Initialize();
+            enemyFacade.EnemyStaggerComponent.Initialize();
             enemyFacade.NavMeshMove.Construct(_heroFactory.HeroGameObject.transform);
             enemyFacade.NavMeshAgent.speed = monsterData.MoveSpeed;
             enemyFacade.EnemyTarget.Construct(_heroFactory.HeroGameObject.transform);

@@ -156,6 +156,7 @@ GameObject:
   - component: {fileID: 1349759437447274721}
   - component: {fileID: 6249724365430731878}
   - component: {fileID: 398656111628261698}
+  - component: {fileID: -3706231861567055569}
   m_Layer: 9
   m_Name: BaseEnemy
   m_TagString: Untagged
@@ -390,6 +391,7 @@ MonoBehaviour:
   _statController: {fileID: 6249724365430731878}
   _enemyDeath: {fileID: 2892997724190106139}
   _abilityController: {fileID: 7338046863862579743}
+  _enemyStaggerComponent: {fileID: 0}
 --- !u!114 &3027789663709577760
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -576,6 +578,20 @@ MonoBehaviour:
   ExpDrop: {fileID: 4845501457382912920}
   EntityUI: {fileID: 4058648672316291509}
   EnemyHealth: {fileID: 2892997724190106138}
+--- !u!114 &-3706231861567055569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2658416580451336931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3042df91ae1cb904a8cf21af321cc2f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _stats: {fileID: 6249724365430731878}
+  _staggerInterval: 2
 --- !u!1 &3762135731228810403
 GameObject:
   m_ObjectHideFlags: 0

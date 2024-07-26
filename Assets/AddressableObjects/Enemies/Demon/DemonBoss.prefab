@@ -271,6 +271,17 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 6716876832464804808, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
+--- !u!114 &30568720151963110 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -3706231861567055569, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
+  m_PrefabInstance: {fileID: 5547392218910358729}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7500987206885277226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3042df91ae1cb904a8cf21af321cc2f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1661251832953170136 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6625279289632298001, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
@@ -441,6 +452,7 @@ MonoBehaviour:
   _statController: {fileID: 1893535933881436335}
   _enemyDeath: {fileID: 7267039373793140434}
   _abilityController: {fileID: 2966096900913643222}
+  _enemyStaggerComponent: {fileID: 30568720151963110}
 --- !u!114 &8314494388240713692
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -25,6 +25,7 @@ namespace Code.Runtime.Entity.Enemy
         [SerializeField] protected StatController _statController;
         [SerializeField] protected EnemyDeath _enemyDeath;
         [SerializeField] protected AbilityController _abilityController;
+        [SerializeField] protected EnemyStaggerComponent _enemyStaggerComponent;
 
         protected virtual void Start()
         {
@@ -53,7 +54,7 @@ namespace Code.Runtime.Entity.Enemy
                 _animationData,
                 _enemyTarget,
                 true,
-                canExit: (state) => state.Timer.Elapsed >= (float)_statController.Stats["HitRecovery"].Value / 2));
+                canExit: (state) => state.Timer.Elapsed >= (float)_statController.Stats["HitRecovery"].Value));
 
 
             _fsm.AddState(nameof(EnemyStunnedState), new EnemyStunnedState(

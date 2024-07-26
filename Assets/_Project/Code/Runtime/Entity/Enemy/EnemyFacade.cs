@@ -16,6 +16,7 @@ namespace Code.Runtime.Entity.Enemy
         public ExpDrop ExpDrop;
         public EntityUI EntityUI;
         public EnemyHealth EnemyHealth;
+        public EnemyStaggerComponent EnemyStaggerComponent;
 
         private void OnValidate()
         {
@@ -29,6 +30,7 @@ namespace Code.Runtime.Entity.Enemy
             ExpDrop = GetComponent<ExpDrop>();
             EntityUI = GetComponent<EntityUI>();
             EnemyHealth = GetComponent<EnemyHealth>();
+            EnemyStaggerComponent = GetComponent<EnemyStaggerComponent>();
         }
     }
 }
