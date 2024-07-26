@@ -110,7 +110,7 @@ namespace Code.Runtime.Core.ObjectPool
             
             _objectsStock.Push(typedObject);
 
-            if (obj.gameObject != null)
+            if (obj != null)
             {
                 obj.gameObject.SetActive(false);
                 _onReturn?.Invoke(typedObject);

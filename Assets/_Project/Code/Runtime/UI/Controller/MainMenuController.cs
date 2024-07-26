@@ -94,7 +94,7 @@ namespace Code.Runtime.UI.Controller
 
             _windowView.SettingsButton.OnClickAsObservable()
                 .Subscribe(x => _screenService.Open(ScreenID.MainMenuSettingsPopUpView));
-
+            
             _windowView.RewardButton.OnClickAsObservable()
                 .Subscribe(x =>
                 {

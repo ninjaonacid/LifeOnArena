@@ -78,7 +78,7 @@ namespace Code.Runtime.Core.EntryPoints
 
         private static void CameraFollow(GameObject hero)
         {
-            Camera.main.GetComponent<CameraFollow>().Follow(hero);
+            Camera.main.GetComponent<MainCameraController>().SetTarget(hero);
         }
 
         private void InitializeInput()

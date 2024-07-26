@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Code.Runtime.Logic.CameraLogic
 {
-    public class CameraFollow : MonoBehaviour
+    public class MainCameraController : MonoBehaviour
     {
         [SerializeField] private float _distance;
         [SerializeField] private float _offsetY;
@@ -10,7 +10,7 @@ namespace Code.Runtime.Logic.CameraLogic
         [SerializeField] private float _rotationAngleX;
         [SerializeField] private float _rotationAngleY;
         
-        [SerializeField] private float _smoothSpeed = 0.125f;
+        [SerializeField] private float _smoothSpeed = 0.3f;
         
         private Transform _target;
         private float _initialCameraHeight;
@@ -39,7 +39,7 @@ namespace Code.Runtime.Logic.CameraLogic
             _cameraTransform.position = smoothedPosition;
         }
 
-        public void Follow(GameObject followingTarget)
+        public void SetTarget(GameObject followingTarget)
         {
             _target = followingTarget.transform;
             var targetPos = _target.position;

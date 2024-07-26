@@ -36,6 +36,7 @@ namespace Code.Runtime.Core.Config
         private TutorialConfig _tutorialConfig;
         private AudioLibrary _audioLibrary;
         private AudioServiceSettings _audioServiceSettings;
+        private AdvertisementConfig _adsConfig;
 
         public void Load()
         {
@@ -89,6 +90,8 @@ namespace Code.Runtime.Core.Config
 
             _initializeGameConfig = Resources
                 .Load<InitialGameConfig>($"{ConfigFolder}/InitialGameConfig");
+
+            _adsConfig = Resources.Load<AdvertisementConfig>($"{ConfigFolder}/AdvertisementConfig");
 
             _tutorialConfig = Resources.Load<TutorialConfig>($"{ConfigFolder}/Tutorial/StartGameTutorial");
 

@@ -1,5 +1,7 @@
 using System;
 using Code.Runtime.Core.Audio;
+using Code.Runtime.Core.Config;
+using Code.Runtime.Logic.Timer;
 using Code.Runtime.Services.PauseService;
 using InstantGamesBridge;
 using InstantGamesBridge.Modules.Advertisement;
@@ -11,15 +13,19 @@ namespace Code.Runtime.Modules.Advertisement
     {
         public RewardedState RewardedState => Bridge.advertisement.rewardedState;
         public InterstitialState InterstitialState => Bridge.advertisement.interstitialState;
+        private ITimer _soulsRewardTimer;
         
         private readonly AudioService _audioService;
         private readonly PauseService _pauseService;
         private readonly PlayerControls _playerControls;
-        public AdvertisementService(AudioService audioService, PauseService pauseService, PlayerControls controls)
+        private readonly ConfigProvider _configProvider;
+
+        public AdvertisementService(AudioService audioService, PauseService pauseService, PlayerControls playerControls, ConfigProvider configProvider)
         {
             _audioService = audioService;
             _pauseService = pauseService;
-            _playerControls = controls;
+            _playerControls = playerControls;
+            _configProvider = configProvider;
         }
 
         public void ShowReward()
@@ -34,6 +40,7 @@ namespace Code.Runtime.Modules.Advertisement
 
         public void Initialize()
         {
+            
             Bridge.advertisement.rewardedStateChanged += OnRewardedStateChange;
             Bridge.advertisement.interstitialStateChanged += OnInterstitialStateChange;
         }
@@ -81,8 +88,6 @@ namespace Code.Runtime.Modules.Advertisement
                     break;
             }
         }
-
-   
 
         public void Dispose()
         {
