@@ -95,7 +95,13 @@ namespace Code.Runtime.UI.Controller
             _windowView.SettingsButton.OnClickAsObservable()
                 .Subscribe(x => _screenService.Open(ScreenID.MainMenuSettingsPopUpView));
 
-            if (_gameData.PlayerData.WorldData.LocationProgressData.CompletedLocations.Count % 2 == 0)
+            int completedLocations = _gameData.PlayerData.WorldData.LocationProgressData.CompletedLocations.Count;
+
+            if (completedLocations == 0)
+            {
+                return;
+            }
+            if(completedLocations % 2 == 0)
             {
                 _windowView.RewardButton.OnClickAsObservable()
                     .Subscribe(x =>
