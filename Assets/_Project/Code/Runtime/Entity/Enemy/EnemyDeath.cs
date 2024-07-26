@@ -82,8 +82,8 @@ namespace Code.Runtime.Entity.Enemy
         {
             _health.Health.CurrentValueChanged -= HealthChanged;
             
-            HandleDeathVisuals();
             DisableEnemyInteractions();
+            HandleDeathVisuals();
             
             Happened?.Invoke();
         }

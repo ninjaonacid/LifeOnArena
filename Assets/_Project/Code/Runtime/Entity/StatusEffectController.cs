@@ -17,7 +17,7 @@ namespace Code.Runtime.Entity
         [SerializeField] private TagController _tagController;
         [SerializeField] private StatController _statController;
         [SerializeField] private VisualEffectController _vfxController;
-
+        
         private readonly List<DurationalGameplayEffect> _activeEffects = new List<DurationalGameplayEffect>();
         private readonly List<DurationalGameplayEffect> _effectsToRemove = new List<DurationalGameplayEffect>();
         
