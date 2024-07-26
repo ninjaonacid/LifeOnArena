@@ -5,6 +5,7 @@ using Code.Runtime.Core.Factory;
 using Code.Runtime.Entity.StatusEffects;
 using Code.Runtime.Modules.AbilitySystem.GameplayEffects;
 using Code.Runtime.Modules.StatSystem;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using VContainer;
 using Attribute = Code.Runtime.Modules.StatSystem.Attribute;
@@ -15,20 +16,11 @@ namespace Code.Runtime.Entity
     {
         [SerializeField] private TagController _tagController;
         [SerializeField] private StatController _statController;
-        [SerializeField] private EntityHurtBox _hurtBox;
-
-
-        private VisualEffectFactory _visualFactory;
+        [SerializeField] private VisualEffectController _vfxController;
 
         private readonly List<DurationalGameplayEffect> _activeEffects = new List<DurationalGameplayEffect>();
-        private List<DurationalGameplayEffect> _effectsToRemove = new List<DurationalGameplayEffect>();
-
-        [Inject]
-        public void Construct(VisualEffectFactory visualFactory)
-        {
-            _visualFactory = visualFactory;
-        }
-
+        private readonly List<DurationalGameplayEffect> _effectsToRemove = new List<DurationalGameplayEffect>();
+        
         private void Update()
         {
             HandleDuration();
@@ -57,7 +49,7 @@ namespace Code.Runtime.Entity
 
             if (effect.StatusVisualEffect != null)
             {
-                PlayVisualEffect(effect);
+                PlayVisualEffect(effect).Forget();
             }
         }
 
@@ -126,37 +118,9 @@ namespace Code.Runtime.Entity
             }
         }
 
-        private async void PlayVisualEffect(GameplayEffect effect)
+        private async UniTask PlayVisualEffect(GameplayEffect effect)
         {
-            var visualEffect =
-                await _visualFactory.CreateVisualEffect(effect.StatusVisualEffect.VisualEffectData.Identifier.Id);
-            var goCenter = _hurtBox.GetCenterTransform();
-            var goPosition = transform.position;
-
-            if (effect.StatusVisualEffect is not null)
-            {
-                if (effect.StatusVisualEffect.PlayLocation == PlayLocation.Above)
-                {
-                    var height = _hurtBox.GetHeight();
-
-                    visualEffect.transform.position =
-                        new Vector3(goPosition.x, (height.y * Vector3.up).y, goPosition.z);
-                }
-
-                else if (effect.StatusVisualEffect.PlayLocation == PlayLocation.Below)
-                {
-                    var height = _hurtBox.GetHeight();
-
-                    visualEffect.transform.position = new Vector3(goPosition.x, (-height.y), goPosition.z);
-                }
-
-                else if (effect.StatusVisualEffect.PlayLocation == PlayLocation.Center)
-                {
-                    var center = _hurtBox.GetCenterTransform();
-
-                    visualEffect.transform.position = center;
-                }
-            }
+            await _vfxController.PlayVisualEffect(effect.StatusVisualEffect);
         }
     }
 }

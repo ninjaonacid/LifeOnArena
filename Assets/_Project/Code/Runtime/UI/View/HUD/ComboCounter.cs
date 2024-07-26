@@ -1,5 +1,6 @@
 using System.Threading;
 using Code.Runtime.Entity.Hero;
+using Code.Runtime.Modules.LocalizationProvider;
 using Code.Runtime.Utils;
 using Cysharp.Threading.Tasks;
 using PrimeTween;
@@ -16,6 +17,7 @@ namespace Code.Runtime.UI.View.HUD
         
         private HeroAttackComponent _heroAttackComponent;
         private HeroHealth _heroHealth;
+        private LocalizationService _localService;
         
         private int _hitCount = 0;
         private const int CoolComboCap = 5;
@@ -26,19 +28,20 @@ namespace Code.Runtime.UI.View.HUD
         private Timer _resetTimer;
         private CancellationTokenSource _cts;
         
-        public void Construct(HeroAttackComponent heroAttackComponent, HeroHealth heroHealth)
+        public void Construct(HeroAttackComponent heroAttackComponent, HeroHealth heroHealth, LocalizationService localService)
         {
             _heroAttackComponent = heroAttackComponent;
             _heroHealth = heroHealth;
+            _localService = localService;
+            
             _heroAttackComponent.OnHit += IncreaseHitCounter;
             _heroHealth.Health.CurrentValueChanged += ResetHitCounter;
         }
         
-
         private void ResetHitCounter()
         {
             _hitCount = 0;
-            _textMesh.text = $"Combo {_hitCount}";
+            _textMesh.text = $"{_localService.GetLocalizedString("COMBO")} {_hitCount}";
             _textMesh.color = Color.white;
         }
         
@@ -55,17 +58,17 @@ namespace Code.Runtime.UI.View.HUD
             
             if (_hitCount < CoolComboCap)
             {
-                _textMesh.text = $"Combo {_hitCount}";
+                _textMesh.text = $"{_localService.GetLocalizedString("COMBO")} {_hitCount}";
             }
             else if (_hitCount >= CoolComboCap && _hitCount < BrutalComboCap)
             {
-                _textMesh.text = $"COOL! Combo {_hitCount}";
+                _textMesh.text = $"{_localService.GetLocalizedString("COOL_COMBO")} {_hitCount}";
                 _textMesh.color = new Color(0.1f, 0.8f, 0.1f);
             }
 
             else if (_hitCount >= BrutalComboCap)
             {
-                _textMesh.text = $"BRUTAL! Combo {_hitCount}";
+                _textMesh.text = $"{_localService.GetLocalizedString("BRUTAL_COMBO")} {_hitCount}";
                 _textMesh.color = new Color(0.7f, 0.1f, 0.2f);
             }
             

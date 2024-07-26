@@ -23,7 +23,7 @@ MonoBehaviour:
     SerializationNodes:
     - Name: _treeData
       Entry: 7
-      Data: 0|Code.Runtime.Modules.AbilitySystem.AbilityTreeData, Assembly-CSharp
+      Data: 0|Code.Runtime.Modules.AbilitySystem.AbilityTreeData, Runtime
     - Name: Branch
       Entry: 3
       Data: 2
@@ -36,13 +36,13 @@ MonoBehaviour:
     - Name: UnlockRequirements
       Entry: 7
       Data: 1|System.Collections.Generic.List`1[[Code.Runtime.Modules.Requirements.IRequirement`1[[Code.Runtime.Data.PlayerData.PlayerData,
-        Assembly-CSharp]], Assembly-CSharp]], mscorlib
+        Runtime]], Runtime]], mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 2|Code.Runtime.Modules.Requirements.SoulsRequirement, Assembly-CSharp
+      Data: 2|Code.Runtime.Modules.Requirements.SoulsRequirement, Runtime
     - Name: _requiredSouls
       Entry: 3
       Data: 100
@@ -75,7 +75,7 @@ MonoBehaviour:
   _visualEffect: {fileID: 11400000, guid: 1436113d8ed112f409486750b254e9fc, type: 2}
   _abilitySound: {fileID: 11400000, guid: bd9f3ae7798b1b44487f6d60a081c8ae, type: 2}
   _gameplayEffectBlueprints:
-  - {fileID: 11400000, guid: f565f745520be3b4a994c780df119ba7, type: 2}
+  - {fileID: 11400000, guid: de679b56f4eacc44d8b30da71bfe64ea, type: 2}
   _prefab: {fileID: 4140074422687958933, guid: eef611f69a043234daa794211d3ef4a7, type: 3}
   _lifeTime: 3
   _speed: 30

@@ -5,6 +5,7 @@ using Code.Runtime.CustomEvents;
 using Code.Runtime.Entity.EntitiesComponents;
 using Code.Runtime.Entity.Hero;
 using Code.Runtime.Modules.Advertisement;
+using Code.Runtime.Modules.LocalizationProvider;
 using Code.Runtime.Modules.Utils;
 using Code.Runtime.Services;
 using Code.Runtime.Services.LevelLoaderService;
@@ -32,6 +33,7 @@ namespace Code.Runtime.UI.Controller
         private readonly AdvertisementService _adService;
         private readonly PauseService _pauseService;
         private readonly LevelCollectableTracker _collectableTracker;
+        private readonly LocalizationService _localService;
         private ScreenService _screenService;
 
         private readonly CompositeDisposable _disposable = new();
@@ -43,7 +45,8 @@ namespace Code.Runtime.UI.Controller
             IEventSystem eventSystem, 
             AdvertisementService adService,
             PauseService pauseService,
-            LevelCollectableTracker collectableTracker)
+            LevelCollectableTracker collectableTracker,
+            LocalizationService localService)
         {
             _gameData = gameData;
             _heroFactory = heroFactory;
@@ -52,6 +55,7 @@ namespace Code.Runtime.UI.Controller
             _adService = adService;
             _collectableTracker = collectableTracker;
             _pauseService = pauseService;
+            _localService = localService;
         }
 
         public void InitController(IScreenModel model, BaseWindowView windowView, ScreenService screenService)
@@ -93,7 +97,7 @@ namespace Code.Runtime.UI.Controller
                     _screenService.Open(ScreenID.HudSettingsPopup);
                 });
 
-            if (!WebApplication.IsDesktop)
+            if (!WebApplication.IsDesktop && !WebApplication.IsTabletop)
             {
                 _windowView.ControlsButton.Show(false);
                 _windowView.Joystick.Show(true);
@@ -116,7 +120,7 @@ namespace Code.Runtime.UI.Controller
             _heroFactory.HeroGameObject.TryGetComponent(out HeroHealth heroHealth);
             _heroFactory.HeroGameObject.TryGetComponent(out AbilityCooldownController heroCooldown);
 
-            _windowView.ComboCounter.Construct(heroAttack, heroHealth);
+            _windowView.ComboCounter.Construct(heroAttack, heroHealth, _localService);
             _windowView.LootCounter.Construct(_gameData.PlayerData.WorldData);
             _windowView.HudSkillContainer.Construct(heroSkills, heroCooldown);
             _windowView.GetComponent<EntityUI>().Construct(heroHealth);

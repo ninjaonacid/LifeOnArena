@@ -20,5 +20,7 @@ namespace Code.Runtime.Modules.Utils
 
         public static bool IsMobile => Bridge.device.type == DeviceType.Mobile;
         public static bool IsDesktop => Bridge.device.type == DeviceType.Desktop;
+
+        public static bool IsTabletop => Bridge.device.type == DeviceType.Tablet;
     }
 }

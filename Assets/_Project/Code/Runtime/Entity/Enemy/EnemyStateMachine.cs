@@ -53,7 +53,7 @@ namespace Code.Runtime.Entity.Enemy
                 _animationData,
                 _enemyTarget,
                 true,
-                canExit: (state) => state.Timer.Elapsed >= _statController.Stats["HitRecovery"].Value));
+                canExit: (state) => state.Timer.Elapsed >= (float)_statController.Stats["HitRecovery"].Value / 2));
 
 
             _fsm.AddState(nameof(EnemyStunnedState), new EnemyStunnedState(

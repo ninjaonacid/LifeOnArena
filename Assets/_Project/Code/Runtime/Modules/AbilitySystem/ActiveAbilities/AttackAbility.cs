@@ -37,15 +37,15 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
 
             AttackConfig attackConfig = default;
             attackConfig = weaponData.AttacksConfigs[ComboCount];
-            _comboWindow = attackConfig.AnimationData.Length + 0.2f;
+            _comboWindow = attackConfig.AnimationData.Length;
 
-            ActiveTime = attackConfig.AnimationData.Length - 0.1f;
-            CurrentActiveTime = attackConfig.AnimationData.Length - 0.1f;
+            ActiveTime = attackConfig.ExitTime;
+            CurrentActiveTime = attackConfig.ExitTime;
             
             _audioService.PlaySound3D(weaponData.WeaponSound, caster.transform);
             ComboCount++;
             
-            _timer.Reset();
+            _timer.Reset(); 
         }
 
         public void ResetComboCounter()

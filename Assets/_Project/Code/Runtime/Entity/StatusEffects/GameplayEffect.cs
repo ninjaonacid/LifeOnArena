@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Code.Runtime.ConfigData;
 using Code.Runtime.Logic.Damage;
+using Code.Runtime.Logic.VisualEffects;
 using Code.Runtime.Modules.AbilitySystem;
 using Code.Runtime.Modules.AbilitySystem.GameplayEffects;
 using Code.Runtime.Modules.AbilitySystem.GameplayTags;
@@ -19,7 +20,7 @@ namespace Code.Runtime.Entity.StatusEffects
         public readonly ReadOnlyCollection<GameplayTag> EffectTags;
         public ReadOnlyCollection<StatModifier> Modifiers => _statModifiers.AsReadOnly();
         public readonly ReadOnlyCollection<StatModifierBlueprint> ModifierBlueprints;
-        public StatusVisualEffect StatusVisualEffect { get; }
+        public VisualEffectData StatusVisualEffect { get; }
         
         private readonly List<StatModifier> _statModifiers = new List<StatModifier>();
         private readonly AbilityController _owner;

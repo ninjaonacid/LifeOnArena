@@ -16,12 +16,11 @@ namespace Code.Runtime.Modules.AbilitySystem
 
         [SerializeField] protected AbilityCooldownController _cooldownController;
         [SerializeField] protected AbilitySlot[] _abilitySlots;
-
         public AbilitySlot[] AbilitySlots => _abilitySlots;
         public ActiveAbility ActiveAbility => _activeAbility;
 
         private AbilityQueue _abilityQueue;
-        private readonly int _abilityQueueLimit = 2;
+        private readonly int _abilityQueueLimit = 1;
         private readonly float _queueTimeWindow = 1;
         private ActiveAbility _activeAbility;
 

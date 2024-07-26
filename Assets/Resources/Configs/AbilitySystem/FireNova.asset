@@ -24,7 +24,7 @@ MonoBehaviour:
     SerializationNodes:
     - Name: _treeData
       Entry: 7
-      Data: 0|Code.Runtime.Modules.AbilitySystem.AbilityTreeData, Assembly-CSharp
+      Data: 0|Code.Runtime.Modules.AbilitySystem.AbilityTreeData, Runtime
     - Name: Branch
       Entry: 3
       Data: 2
@@ -37,13 +37,13 @@ MonoBehaviour:
     - Name: UnlockRequirements
       Entry: 7
       Data: 1|System.Collections.Generic.List`1[[Code.Runtime.Modules.Requirements.IRequirement`1[[Code.Runtime.Data.PlayerData.PlayerData,
-        Assembly-CSharp]], Assembly-CSharp]], mscorlib
+        Runtime]], Runtime]], mscorlib
     - Name: 
       Entry: 12
       Data: 2
     - Name: 
       Entry: 7
-      Data: 2|Code.Runtime.Modules.Requirements.PreviousAbilityRequirement, Assembly-CSharp
+      Data: 2|Code.Runtime.Modules.Requirements.PreviousAbilityRequirement, Runtime
     - Name: _requiredAbility
       Entry: 10
       Data: 0
@@ -52,7 +52,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 7
-      Data: 3|Code.Runtime.Modules.Requirements.SoulsRequirement, Assembly-CSharp
+      Data: 3|Code.Runtime.Modules.Requirements.SoulsRequirement, Runtime
     - Name: _requiredSouls
       Entry: 3
       Data: 2000
@@ -85,7 +85,7 @@ MonoBehaviour:
   _visualEffect: {fileID: 11400000, guid: 4f7012ae64bf3664ba2c9a968518f9fb, type: 2}
   _abilitySound: {fileID: 11400000, guid: bd9f3ae7798b1b44487f6d60a081c8ae, type: 2}
   _gameplayEffectBlueprints:
-  - {fileID: 11400000, guid: f565f745520be3b4a994c780df119ba7, type: 2}
+  - {fileID: 11400000, guid: f114e8258a49c634995636f9b9525679, type: 2}
   _castDistance: 0
   _aoeRadius: 30
   references:

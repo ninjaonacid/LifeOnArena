@@ -35,7 +35,7 @@ namespace Code.Runtime.Entity.Hero
             for (var index = 0; index < actionsList.Count; index++)
             {
                 var capturedIndex = index;
-                Action<InputAction.CallbackContext> actionDelegate = context => OnInputAction(context, capturedIndex);
+                Action<InputAction.CallbackContext> actionDelegate = context => OnAbilityInput(context, capturedIndex);
                 actionDelegates.Add(actionDelegate);
                 actionsList[index].performed += actionDelegate;
             }
@@ -63,7 +63,7 @@ namespace Code.Runtime.Entity.Hero
             }
         }
 
-        private void OnInputAction(InputAction.CallbackContext context, int actionIndex)
+        private void OnAbilityInput(InputAction.CallbackContext context, int actionIndex)
         {
             if (WebApplication.IsMobile)
             {
