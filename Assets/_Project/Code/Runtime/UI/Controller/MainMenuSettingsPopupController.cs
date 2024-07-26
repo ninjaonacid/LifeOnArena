@@ -56,12 +56,12 @@ namespace Code.Runtime.UI.Controller
         {
             _view.MusicButton.SetButton(_model.IsMusicOn);
             _view.SoundButton.SetButton(_model.IsSoundOn);
-            
+
             _view.MusicButton.OnClickAsObservable()
                 .Subscribe(x =>
                 {
                     _model.ChangeMusicState(!_model.IsMusicOn);
-                    _audioService.MuteMusic(_model.IsMusicOn);
+                    _audioService.MuteMusic(!_model.IsMusicOn);
                     _view.MusicButton.SetButton(_model.IsMusicOn);
                 });
 
@@ -69,17 +69,15 @@ namespace Code.Runtime.UI.Controller
                 .Subscribe(x =>
                 {
                     _model.ChangeSoundState(!_model.IsSoundOn);
-                    _audioService.MuteSounds(_model.IsSoundOn);
+                    _audioService.MuteSounds(!_model.IsSoundOn);
                     _view.SoundButton.SetButton(_model.IsSoundOn);
                 });
         }
 
         private void SubscribeCloseButton()
         {
-            _view.CloseButton.OnClickAsObservable().Subscribe(x => 
-            {
-                _screenService.Close(this);
-            });
+            _view.CloseButton.OnClickAsObservable()
+                .Subscribe(x => { _screenService.Close(this); });
         }
     }
 }

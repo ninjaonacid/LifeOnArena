@@ -8,7 +8,7 @@ namespace Code.Runtime.UI.View.MainMenu
 {
     public class StatsUI : MonoBehaviour
     {
-        [SerializeField] private BaseButton _plusButton;
+        [SerializeField] private AnimatedButton _plusButton;
         [SerializeField] private TextMeshProUGUI _statName;
         [SerializeField] private TextMeshProUGUI _statValue;
 
@@ -32,6 +32,7 @@ namespace Code.Runtime.UI.View.MainMenu
         public void ShowPlusButton(bool value)
         {
             _plusButton.Show(value);
+            _plusButton.PlayScaleAnimation();
         }
     }
 }

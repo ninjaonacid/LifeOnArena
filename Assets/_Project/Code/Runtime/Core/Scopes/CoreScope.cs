@@ -32,7 +32,7 @@ namespace Code.Runtime.Core.Scopes
 
             builder.Register<ConfigProvider>(Lifetime.Singleton);
             builder.Register<ISaveLoadService, SaveLoadService>(Lifetime.Singleton);
-            builder.Register<AdvertisementService>(Lifetime.Singleton);
+            builder.Register<AdvertisementService>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
             builder.Register<LocalizationService>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
 
             builder.Register<UIFactory, UIFactory>(Lifetime.Singleton);

@@ -49,6 +49,7 @@ namespace Code.Runtime.UI.AdaptiveGrid
                 _gridChildList.Add(child);
             }
         }
+        
         private void OnArrangePresetChanged()
         {
             AdaptivePreset.ChangeValue(ref _arrangePreset, _arrangeLayout);

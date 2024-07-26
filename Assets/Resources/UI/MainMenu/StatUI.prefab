@@ -53,7 +53,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87083d76f00ca6b4f90fc089bbbf62e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _plusButton: {fileID: 9037706785925401480}
+  _plusButton: {fileID: 6636259969196083755}
   _statName: {fileID: 4102834802655050075}
   _statValue: {fileID: 7572741940283208317}
 --- !u!114 &3828678239059008185
@@ -230,7 +230,7 @@ GameObject:
   - component: {fileID: 5338942843580689748}
   - component: {fileID: 7338428506066220410}
   - component: {fileID: 3387549641645446987}
-  - component: {fileID: 9037706785925401480}
+  - component: {fileID: 6636259969196083755}
   m_Layer: 0
   m_Name: PlusIcon
   m_TagString: Untagged
@@ -279,7 +279,7 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!114 &9037706785925401480
+--- !u!114 &6636259969196083755
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -288,10 +288,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 5303004302832629997}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc5770b812cd4f48ad99b591a095a08b, type: 3}
+  m_Script: {fileID: 11500000, guid: f1357ede348b486a8c088676285b6acd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _canvasGroup: {fileID: 3387549641645446987}
+  RectTransform: {fileID: 5338942843580689748}
   _highlightColor:
     serializedVersion: 2
     rgba: 4279228157
@@ -301,7 +302,9 @@ MonoBehaviour:
   _baseColor:
     serializedVersion: 2
     rgba: 4294967295
-  _buttonImage: {fileID: 6592885546650212635}
+  _buttonImage: {fileID: 0}
+  _animationScale: {x: 1.1, y: 1.1}
+  _duration: 1.5
 --- !u!1 &5601847443542883495
 GameObject:
   m_ObjectHideFlags: 0

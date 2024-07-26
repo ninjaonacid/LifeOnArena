@@ -95,20 +95,18 @@ namespace Code.Runtime.UI.Controller
             _windowView.SettingsButton.OnClickAsObservable()
                 .Subscribe(x => _screenService.Open(ScreenID.MainMenuSettingsPopUpView));
 
-            if (_adService.IsCurrencyRewardActive())
+            if (_gameData.PlayerData.WorldData.LocationProgressData.CompletedLocations.Count % 2 == 0)
             {
                 _windowView.RewardButton.OnClickAsObservable()
                     .Subscribe(x =>
                     {
-
-                        _adService.ShowReward(RewardId.Souls);
+                        _adService.ShowReward();
                         WaitForAdTask(_cts.Token).Forget();
                     });
-                
-                _windowView.RewardButton.Show(_adService.IsCurrencyRewardActive());
+
+                _windowView.RewardButton.Show();
                 _windowView.RewardButton.PlayScaleAnimation();
             }
-            
         }
 
         private void UpdateAllStatButtons()
