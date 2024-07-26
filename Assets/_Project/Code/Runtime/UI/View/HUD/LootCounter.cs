@@ -15,12 +15,12 @@ namespace Code.Runtime.UI.View.HUD
         public void Construct(WorldData worldData)
         {
             _worldData = worldData;
-            _worldData.LootData.CountChanged += UpdateCounter;
+            //_worldData.LootData.CountChanged += UpdateCounter;
         }
 
         private void Start()
         {
-            UpdateCounter();
+            //UpdateCounter();
         }
 
         private void UpdateCounter(int value)
@@ -31,7 +31,6 @@ namespace Code.Runtime.UI.View.HUD
                 .To(() => collected, x => collected = (int)x, collected + value, 1)
                 .OnUpdate( this, (target, _counterTween) => 
                     target.Counter.text = $"{collected}");
-            
         }
 
         private void UpdateCounter()

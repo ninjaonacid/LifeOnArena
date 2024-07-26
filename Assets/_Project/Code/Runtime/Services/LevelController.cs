@@ -100,7 +100,7 @@ namespace Code.Runtime.Services
 
         private async UniTaskVoid LevelEndTask()
         {
-            await UniTask.Delay(TimeSpan.FromSeconds(5));
+            await UniTask.Delay(TimeSpan.FromSeconds(7));
             LevelEnd();
         }
 

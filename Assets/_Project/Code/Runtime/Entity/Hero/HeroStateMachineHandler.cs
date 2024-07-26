@@ -108,7 +108,7 @@ namespace Code.Runtime.Entity.Hero
                 _heroRotation,
                 _animationData,
                 true, false,
-                canExit: (state) => state.Timer.Elapsed >= _heroAbilityController.ActiveAbility.ActiveTime - 0.3f));
+                canExit: (state) => state.Timer.Elapsed >= _animationData.Animations[AnimationKey.SpellCast].Length - 5.13) );
             
            _stateMachine.AddState(nameof(HeroWaveSlashAbilityState), new HeroWaveSlashAbilityState(
                _heroWeapon,

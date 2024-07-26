@@ -17,7 +17,8 @@ namespace Code.Runtime.Entity.Hero
         [SerializeField] private HeroHealth _health;
         [SerializeField] private HeroMovement _heroMovement;
         [SerializeField] private AnimationDataContainer _heroAnimations;
-        
+
+        public int RevivedNumber { get; private set; } = 0;
         private bool _isDead;
         public bool IsDead => _isDead;
         
@@ -32,6 +33,7 @@ namespace Code.Runtime.Entity.Hero
         public void Revive()
         {
             _isDead = false;
+            RevivedNumber++;
         }
 
         public void ForceDeath()

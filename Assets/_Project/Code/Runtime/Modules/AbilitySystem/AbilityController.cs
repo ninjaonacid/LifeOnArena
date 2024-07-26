@@ -77,14 +77,13 @@ namespace Code.Runtime.Modules.AbilitySystem
                     }
                     return;
                 }
-                else if (_activeAbility.State == AbilityState.Cooldown)
+
+                if (_activeAbility.State == AbilityState.Active)
                 {
                     return;
                 }
-                else
-                {
-                    _activeAbility = null;
-                }
+
+                _activeAbility = null;
             }
 
             if (_abilityQueue.HasNext())

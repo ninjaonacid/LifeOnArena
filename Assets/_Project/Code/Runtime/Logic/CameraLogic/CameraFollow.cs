@@ -9,10 +9,13 @@ namespace Code.Runtime.Logic.CameraLogic
 
         [SerializeField] private float _rotationAngleX;
         [SerializeField] private float _rotationAngleY;
-
+        
+        [SerializeField] private float _smoothSpeed = 0.125f;
+        
         private Transform _target;
         private float _initialCameraHeight;
         private Transform _cameraTransform;
+        private Vector3 _currentVelocity = Vector3.zero;
 
         private void Awake()
         {
@@ -28,9 +31,12 @@ namespace Code.Runtime.Logic.CameraLogic
             Vector3 position = rotation * new Vector3(0, 0, -_distance) + targetPosition;
 
             position.y = Mathf.Clamp(position.y, _initialCameraHeight, 40f);
+
+            var smoothedPosition =
+                Vector3.SmoothDamp(_cameraTransform.position, position, ref _currentVelocity, _smoothSpeed);
                 
             _cameraTransform.rotation = rotation;
-            _cameraTransform.position = position;
+            _cameraTransform.position = smoothedPosition;
         }
 
         public void Follow(GameObject followingTarget)

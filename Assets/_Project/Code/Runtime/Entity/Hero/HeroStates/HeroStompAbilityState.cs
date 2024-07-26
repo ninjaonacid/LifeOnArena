@@ -28,7 +28,7 @@ namespace Code.Runtime.Entity.Hero.HeroStates
         {
             base.OnLogic();
             
-            if(Timer.Elapsed >= _animationData.Animations[AnimationKey.Stomp].Length - 0.3f)
+            if(Timer.Elapsed >= _animationData.Animations[AnimationKey.Stomp].Length - 0.86f)
             {
                 fsm.StateCanExit();
             }

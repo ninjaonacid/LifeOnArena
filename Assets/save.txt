@@ -3,10 +3,10 @@
   "PlayerExp": {
     "$type": "Code.Runtime.Data.PlayerData.PlayerExp, Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
     "ExponentialFactor": 2.2,
-    "Level": 4,
-    "CurrentExperience": 399.9942,
-    "ProgressToNextLevel": 0.189461827,
-    "ExperienceToNextLevel": 2111.21265
+    "Level": 5,
+    "CurrentExperience": 2499.358,
+    "ProgressToNextLevel": 0.724593461,
+    "ExperienceToNextLevel": 3449.32446
   },
   "KillData": {
     "$type": "Code.Runtime.Data.PlayerData.KillData, Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
@@ -23,10 +23,10 @@
     "$type": "Code.Runtime.Data.PlayerData.WorldData, Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
     "LootData": {
       "$type": "Code.Runtime.Data.PlayerData.LootData, Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "Collected": 1425,
+      "Collected": 1597,
       "CollectedLoot": {
         "$type": "UniRx.ReactiveProperty`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], UniRx, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-        "Value": 1425,
+        "Value": 1597,
         "HasValue": true
       }
     },
@@ -42,7 +42,8 @@
       "CompletedLocations": {
         "$type": "System.Collections.Generic.List`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
         "$values": [
-          229687619
+          229687619,
+          229687620
         ]
       }
     }
@@ -54,7 +55,7 @@
       "$values": [
         {
           "$type": "Code.Runtime.UI.Model.AbilityMenu.AbilityModel, Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-          "IsEquipped": true,
+          "IsEquipped": false,
           "IsUnlocked": true,
           "AbilityId": 74492325,
           "Price": 200,
@@ -144,8 +145,8 @@
         },
         {
           "$type": "Code.Runtime.UI.Model.AbilityMenu.AbilityModel, Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-          "IsEquipped": false,
-          "IsUnlocked": false,
+          "IsEquipped": true,
+          "IsUnlocked": true,
           "AbilityId": 1463881339,
           "Price": 500,
           "AbilityTreeData": {
@@ -199,13 +200,13 @@
           "$type": "Code.Runtime.UI.Model.AbilityMenu.AbilityModel, Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
           "IsEquipped": true,
           "IsUnlocked": true,
-          "AbilityId": 74492325,
-          "Price": 200,
+          "AbilityId": 1778802000,
+          "Price": 100,
           "AbilityTreeData": {
             "$type": "Code.Runtime.Modules.AbilitySystem.AbilityTreeData, Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-            "Branch": 1,
+            "Branch": 2,
             "Position": 1,
-            "Price": 200,
+            "Price": 100,
             "UnlockRequirements": {
               "$type": "System.Collections.Generic.List`1[[Code.Runtime.Modules.Requirements.IRequirement`1[[Code.Runtime.Data.PlayerData.PlayerData, Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
               "$values": [
@@ -220,18 +221,21 @@
           "$type": "Code.Runtime.UI.Model.AbilityMenu.AbilityModel, Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
           "IsEquipped": true,
           "IsUnlocked": true,
-          "AbilityId": 1778802000,
-          "Price": 100,
+          "AbilityId": 1463881339,
+          "Price": 500,
           "AbilityTreeData": {
             "$type": "Code.Runtime.Modules.AbilitySystem.AbilityTreeData, Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
             "Branch": 2,
-            "Position": 1,
-            "Price": 100,
+            "Position": 2,
+            "Price": 500,
             "UnlockRequirements": {
               "$type": "System.Collections.Generic.List`1[[Code.Runtime.Modules.Requirements.IRequirement`1[[Code.Runtime.Data.PlayerData.PlayerData, Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
               "$values": [
                 {
                   "$type": "Code.Runtime.Modules.Requirements.SoulsRequirement, Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+                },
+                {
+                  "$type": "Code.Runtime.Modules.Requirements.PreviousAbilityRequirement, Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                 }
               ]
             }
@@ -244,7 +248,7 @@
       "$values": [
         {
           "$type": "Code.Runtime.UI.Model.AbilityMenu.AbilityModel, Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-          "IsEquipped": true,
+          "IsEquipped": false,
           "IsUnlocked": true,
           "AbilityId": 74492325,
           "Price": 200,
@@ -283,13 +287,37 @@
               ]
             }
           }
+        },
+        {
+          "$type": "Code.Runtime.UI.Model.AbilityMenu.AbilityModel, Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+          "IsEquipped": true,
+          "IsUnlocked": true,
+          "AbilityId": 1463881339,
+          "Price": 500,
+          "AbilityTreeData": {
+            "$type": "Code.Runtime.Modules.AbilitySystem.AbilityTreeData, Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+            "Branch": 2,
+            "Position": 2,
+            "Price": 500,
+            "UnlockRequirements": {
+              "$type": "System.Collections.Generic.List`1[[Code.Runtime.Modules.Requirements.IRequirement`1[[Code.Runtime.Data.PlayerData.PlayerData, Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+              "$values": [
+                {
+                  "$type": "Code.Runtime.Modules.Requirements.SoulsRequirement, Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+                },
+                {
+                  "$type": "Code.Runtime.Modules.Requirements.PreviousAbilityRequirement, Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+                }
+              ]
+            }
+          }
         }
       ]
     }
   },
   "HeroEquipment": {
     "$type": "Code.Runtime.Data.PlayerData.HeroEquipment, Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-    "WeaponIntId": 253792097
+    "WeaponIntId": -2132645565
   },
   "PassiveSkills": {
     "$type": "Code.Runtime.Data.PlayerData.PassiveSkills, Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
@@ -302,13 +330,13 @@
     "$type": "Code.Runtime.Data.PlayerData.StatsData, Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
     "StatsValues": {
       "$type": "System.Collections.Generic.Dictionary`2[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
-      "Attack": 25,
+      "Attack": 30,
       "Defense": 10,
       "AttackSpeed": 1,
       "AttackRadius": 5,
       "MoveSpeed": 20,
-      "Magic": 25,
-      "Health": 130
+      "Magic": 30,
+      "Health": 140
     },
     "StatsCapacities": {
       "$type": "System.Collections.Generic.Dictionary`2[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089],[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",

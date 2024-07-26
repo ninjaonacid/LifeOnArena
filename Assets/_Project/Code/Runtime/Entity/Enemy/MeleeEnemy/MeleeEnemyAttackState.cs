@@ -35,7 +35,6 @@ namespace Code.Runtime.Entity.Enemy.MeleeEnemy
             _characterAnimator.PlayAnimation(_currentAttack.AnimationData.Hash);
             _characterAnimator.SetAttackAnimationSpeed(_enemyAttackComponent.GetAttacksPerSecond());
             _navMeshMoveToPlayer.ShouldMove(false);
-            Debug.Log("MeleeSTATE ENTER");
         }
 
         public override void OnLogic()
@@ -54,7 +53,6 @@ namespace Code.Runtime.Entity.Enemy.MeleeEnemy
             _enemyWeapon.DisableWeaponCollider();
             _enemyAttackComponent.AttackEnded();
             _enemyAttackComponent.ClearCollisionData();
-            Debug.Log("MeleeSTATE EXIT");
         }
 
         public override void OnExitRequest()

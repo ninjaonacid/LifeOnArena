@@ -59,6 +59,18 @@ namespace Code.Runtime.Entity.Enemy.BossEnemy.DarkViking
             _fsm.AddTransition(new Transition(
                 nameof(MeleeEnemyAttackState),
                 nameof(EnemyIdleState)));
+            
+            _fsm.AddTransitionFromAny(new Transition(
+                "",
+                nameof(EnemyStunnedState),
+                (transition) => _tagController.HasTag("Stun"),
+                true));
+
+            _fsm.AddTransition(new Transition(
+                nameof(EnemyStunnedState),
+                nameof(EnemyIdleState),
+                (transition) => !_tagController.HasTag("Stun")));
+
 
             _fsm.AddTransitionFromAny(new Transition("", nameof(EnemyDeathState),
                 (condition) => _enemyDeath.IsDead,

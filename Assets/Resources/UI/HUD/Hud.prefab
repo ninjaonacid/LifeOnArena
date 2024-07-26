@@ -1561,7 +1561,8 @@ MonoBehaviour:
   _buttonImage: {fileID: 4428985303902882674}
   _animationScale: {x: 1.1, y: 1.1}
   _duration: 1
-  _movementDistance: 40
+  _arrowUI: {fileID: 7579305098906532503}
+  _movementDistance: 20
 --- !u!1 &5620016431202410699
 GameObject:
   m_ObjectHideFlags: 0
@@ -2704,6 +2705,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7597778111184779799, guid: 5bebd9d31847b73409ec7ba717d92765, type: 3}
   m_PrefabInstance: {fileID: 1044329914998407326}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7579305098906532503 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -1778590543674459639, guid: 5bebd9d31847b73409ec7ba717d92765, type: 3}
+  m_PrefabInstance: {fileID: 1044329914998407326}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da05107c7b0d20943831fae7aa5168dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!225 &8677724689332059702 stripped
 CanvasGroup:
   m_CorrespondingSourceObject: {fileID: 8508227849634545320, guid: 5bebd9d31847b73409ec7ba717d92765, type: 3}

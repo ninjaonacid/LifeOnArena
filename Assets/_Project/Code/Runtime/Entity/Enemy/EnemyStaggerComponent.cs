@@ -14,11 +14,11 @@ namespace Code.Runtime.Entity.Enemy
 
         private float _staggerDuration;
         private ITimer _staggerTimer;
-        public bool IsStaggered { get; private set; }
+        private bool _isStaggered = false;
 
         private bool IsCanBeStaggered => 
             _staggerDuration != 0 && 
-            !IsStaggered && 
+            !_isStaggered && 
             _staggerInterval < _staggerTimer.Elapsed;
 
         public void Initialize()
@@ -37,11 +37,11 @@ namespace Code.Runtime.Entity.Enemy
 
         private void Update()
         {
-            if(IsStaggered)
+            if(_isStaggered)
             {
                 if (_staggerTimer.Elapsed >= _staggerDuration)
                 {
-                    IsStaggered = false;
+                    _isStaggered = false;
                 }
             }
         }
@@ -63,7 +63,7 @@ namespace Code.Runtime.Entity.Enemy
 
         private void TriggerStagger()
         {
-            IsStaggered = true;
+            _isStaggered = true;
             _staggerTimer.Reset();
             Staggered?.Invoke();
         }

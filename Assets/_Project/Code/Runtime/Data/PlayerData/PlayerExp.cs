@@ -35,9 +35,7 @@ namespace Code.Runtime.Data.PlayerData
                 Level++;
                 OnLevelChanged?.Invoke();
             }
-            
-            Debug.Log($"CurrentExperience added  {CurrentExperience}");
-            
+
             OnExpChanged?.Invoke();
         }
 

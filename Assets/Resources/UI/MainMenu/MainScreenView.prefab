@@ -3052,6 +3052,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RewardButton
       objectReference: {fileID: 0}
+    - target: {fileID: 427789300088205861, guid: dc446778d56f8c040bbb637379e7273b, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3821329899415742361, guid: dc446778d56f8c040bbb637379e7273b, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 145
@@ -3176,7 +3180,8 @@ PrefabInstance:
       propertyPath: m_fontSize
       value: 48.45
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 427789300088205861, guid: dc446778d56f8c040bbb637379e7273b, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: dc446778d56f8c040bbb637379e7273b, type: 3}
 --- !u!114 &1261526790624142658 stripped
 MonoBehaviour:

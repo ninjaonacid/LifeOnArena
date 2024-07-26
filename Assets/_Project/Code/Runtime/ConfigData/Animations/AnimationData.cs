@@ -32,6 +32,7 @@ namespace Code.Runtime.ConfigData.Animations
         [field: FoldoutGroup("$GetClipName")]
         [field: BoxGroup("$GetClipName/Settings")]
         public string AnimationName;
+        
 
 #if UNITY_EDITOR
         private void GetClipData()

@@ -25,13 +25,13 @@ MonoBehaviour:
       m_Items:
       - rid: 3708976529188323328
   - m_Id: 895913914368
-    m_Localized: A wall of fire repeatedly damage enemies<color=#40E0D0> deals100%
+    m_Localized: A wall of fire repeatedly damage enemies<color=#40E0D0> deals 100%
       of the hero magic</color>
     m_Metadata:
       m_Items:
       - rid: 3708976529188323328
   - m_Id: 1463575212032
-    m_Localized: 'The hero spins quickly, dealing '
+    m_Localized: 'The hero spins quickly, <color="red">dealing 100% of hero attack</color> '
     m_Metadata:
       m_Items:
       - rid: 3708976529188323328
@@ -83,7 +83,7 @@ MonoBehaviour:
       m_Items:
       - rid: 3708976529188323328
   - m_Id: 2517209056374784
-    m_Localized: Viking armor set with Norse warrior strength and courage.
+    m_Localized: Viking armor set with Norse warrior strength and courage
     m_Metadata:
       m_Items:
       - rid: 3708976529188323328
@@ -235,13 +235,24 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 11863024617738240
-    m_Localized: The flames spread around <color=#40E0D0>inflicting 150% of the hero's
+    m_Localized: The flames spread around <color=#40E0D0>deals 150% of the hero's
       magic</color>
     m_Metadata:
       m_Items: []
   - m_Id: 11866990046957568
     m_Localized: The character hits the ground stunning enemies in the area and <color="red">dealing
-      100% of the attack</color>
+      100% of the hero attack</color>
+    m_Metadata:
+      m_Items:
+      - rid: 3708976529188323328
+  - m_Id: 11917255169101824
+    m_Localized: You lost, but the experience gained and souls retained, arm yourself
+      and try again....
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11921201505849344
+    m_Localized: The hero swings his weapon and unleashes a force wave that deals
+      200% of the hero's attack damage
     m_Metadata:
       m_Items:
       - rid: 3708976529188323328
@@ -251,4 +262,4 @@ MonoBehaviour:
     - rid: 3708976529188323328
       type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
       data:
-        m_Entries: 00706188220000000070a198d00000000070e1c3540100000070217accab07000070a1f245ad07000070a1c46fac07000070a1ec89ad07000070612132ae07000070615658ae07000070e1ad76f008000070a16763f1080000706141e661100000702184476210000070e112e26310000070a177897d1000007061fcae7d100000702191827e100000504deef6282a000070219320c42600
+        m_Entries: 00706188220000000070a198d00000000070e1c3540100000070217accab07000070a1f245ad07000070a1c46fac07000070a1ec89ad07000070612132ae07000070615658ae07000070e1ad76f008000070a16763f1080000706141e661100000702184476210000070e112e26310000070a177897d1000007061fcae7d100000702191827e100000504deef6282a000070219320c4260000500d05455a2a00

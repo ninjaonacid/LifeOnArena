@@ -36,16 +36,6 @@ namespace Code.Runtime.Entity.Hero.HeroStates
             
         }
         
-        public override void OnLogic()
-        {
-            base.OnLogic();
-
-            if (Timer.Elapsed >= _attackConfig.AnimationData.Length - 0.2f)
-            {
-                fsm.StateCanExit();
-            }
-        }
-
 
         public override void OnExit()
         {

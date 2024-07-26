@@ -62,6 +62,14 @@ namespace Code.Runtime.UI.Controller
                     _adService.ShowReward();
                     WaitForAdTask(_cts.Token).Forget();
                 }).AddTo(_disposable);
+            
+            var heroDeath = _heroFactory.HeroGameObject.GetComponent<HeroDeath>();
+
+            if (heroDeath.RevivedNumber >= 1)
+            {
+                _view.RewardRessurectButton.Show(false);
+                _view.ReturnToPortalButton.PlayScaleAnimation();
+            }
         }
 
         private async UniTask WaitForAdTask(CancellationToken token)
