@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading;
-using Cysharp.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.Pool;
 using VContainer;
 using VContainer.Unity;
 
 namespace Code.Runtime.Core.ObjectPool
 {
-    public class ObjectPoolProvider : IDisposable
+    public class ObjectPoolProvider : IInitializable, IDisposable
     {
         private readonly IObjectResolver _objectResolver;
         private readonly Dictionary<int, ObjectPool<PooledObject>> _prefabToPoolMap;
@@ -23,6 +20,22 @@ namespace Code.Runtime.Core.ObjectPool
 
             _prefabToPoolMap = new Dictionary<int, ObjectPool<PooledObject>>();
             _prefabToPoolOwnerMap = new Dictionary<int, Dictionary<GameObject, ObjectPool<PooledObject>>>();
+        }
+
+        public void Initialize()
+        {
+            if (_poolRoot == null)
+            {
+                _poolRoot = new GameObject("RootOfObjectPools");
+            }
+        }
+
+        public void Dispose()
+        {
+            foreach (var pool in _prefabToPoolMap.Values)
+            {
+                pool.ReleaseAll();
+            }
         }
 
         public GameObject Spawn(GameObject prefab,
@@ -48,7 +61,7 @@ namespace Code.Runtime.Core.ObjectPool
                 {
                     objectPool = CreatePool(prefab, onCreate, onRelease, onGet, onReturn);
                     objectPools.Add(owner, objectPool);
-                    objectPool.Initialize(prefab.name);
+                    objectPool.Initialize(prefab.name, _poolRoot.transform);
                 }
             }
             else
@@ -57,7 +70,7 @@ namespace Code.Runtime.Core.ObjectPool
                 {
                     objectPool = CreatePool(prefab, onCreate, onRelease, onGet, onReturn);
                     _prefabToPoolMap.Add(prefabInstanceId, objectPool);
-                    objectPool.Initialize(prefab.name);
+                    objectPool.Initialize(prefab.name, _poolRoot.transform);
                 }
             }
 
@@ -74,7 +87,7 @@ namespace Code.Runtime.Core.ObjectPool
 
                 _prefabToPoolMap.Add(prefabInstanceId, objectPool);
 
-                objectPool.Initialize(prefab.name);
+                objectPool.Initialize(prefab.name, _poolRoot.transform);
                 objectPool.Warm(size);
             }
             else
@@ -110,15 +123,6 @@ namespace Code.Runtime.Core.ObjectPool
         {
             var go = _objectResolver?.Instantiate(prefab, parent, true);
             return go.GetComponent<PooledObject>();
-        }
-
-
-        public void Dispose()
-        {
-            foreach (var pool in _prefabToPoolMap.Values)
-            {
-                pool.ReleaseAll();
-            }
         }
     }
 }

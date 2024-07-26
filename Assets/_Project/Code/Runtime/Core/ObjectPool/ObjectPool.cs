@@ -31,11 +31,12 @@ namespace Code.Runtime.Core.ObjectPool
             _objectsStock = new Stack<T>();
         }
 
-        public void Initialize(string prefabName)
+        public void Initialize(string prefabName, Transform objectPoolRoot)
         {
             if (_poolRoot is null)
             {
                 _poolRoot = new GameObject($"{prefabName} Pool");
+                _poolRoot.transform.SetParent(objectPoolRoot);
             }
         }
 
