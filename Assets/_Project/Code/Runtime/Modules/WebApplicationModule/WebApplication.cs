@@ -1,7 +1,7 @@
-using InstantGamesBridge;
+﻿using InstantGamesBridge;
 using InstantGamesBridge.Modules.Device;
 
-namespace Code.Runtime.Modules.Utils
+namespace Code.Runtime.Modules.WebApplicationModule
 {
     public static class WebApplication
     {
@@ -20,7 +20,6 @@ namespace Code.Runtime.Modules.Utils
 
         public static bool IsMobile => Bridge.device.type == DeviceType.Mobile;
         public static bool IsDesktop => Bridge.device.type == DeviceType.Desktop;
-
         public static bool IsTabletop => Bridge.device.type == DeviceType.Tablet;
     }
 }

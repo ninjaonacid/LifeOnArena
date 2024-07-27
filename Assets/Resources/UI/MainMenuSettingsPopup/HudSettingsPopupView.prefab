@@ -64,7 +64,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc5770b812cd4f48ad99b591a095a08b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _canvasGroup: {fileID: 0}
+  _canvasGroup: {fileID: 6445217685591352510}
   RectTransform: {fileID: 5321755868242458222}
   _highlightColor:
     serializedVersion: 2
@@ -346,7 +346,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: TO PORTAL
+  m_text: "\u0412\u041E\u0417\u0412\u0420\u0410\u0429\u0415\u041D\u0418\u0415 \u041A
+    \u041F\u041E\u0420\u0422\u0410\u041B\u0423"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d236c4df2154a634a9aa61c3a8716c17, type: 2}
   m_sharedMaterial: {fileID: 2932045166731928380, guid: d236c4df2154a634a9aa61c3a8716c17, type: 2}
@@ -373,7 +374,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 46.55
+  m_fontSize: 40.15
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -559,6 +560,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5954602034695825343}
+  - component: {fileID: 2578903353737985027}
   m_Layer: 5
   m_Name: Title
   m_TagString: Untagged
@@ -587,6 +589,46 @@ RectTransform:
   m_AnchoredPosition: {x: -2.751, y: 0}
   m_SizeDelta: {x: 333.889, y: 116.577}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2578903353737985027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4698171738626358292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_StringReference:
+    m_TableReference:
+      m_TableCollectionName: GUID:908445a34d696ec449ffe62e7e3cd673
+    m_TableEntryReference:
+      m_KeyId: 7646368728444928
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  m_FormatArguments: []
+  m_UpdateString:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1851878678612966798}
+        m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
+        m_MethodName: set_text
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &7104357974903145323
 GameObject:
   m_ObjectHideFlags: 0
@@ -672,8 +714,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4469994848376334822}
+  - component: {fileID: 8701896058518379852}
   m_Layer: 5
-  m_Name: GameObject
+  m_Name: Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -700,6 +743,46 @@ RectTransform:
   m_AnchoredPosition: {x: 0.483, y: 0}
   m_SizeDelta: {x: 324.617, y: 117.597}
   m_Pivot: {x: 0.5, y: 1}
+--- !u!114 &8701896058518379852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8480927388401068306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_StringReference:
+    m_TableReference:
+      m_TableCollectionName: GUID:908445a34d696ec449ffe62e7e3cd673
+    m_TableEntryReference:
+      m_KeyId: 12240049955500032
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  m_FormatArguments: []
+  m_UpdateString:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3419395660292572399}
+        m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
+        m_MethodName: set_text
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &8630890451565170377
 GameObject:
   m_ObjectHideFlags: 0
@@ -1167,6 +1250,10 @@ PrefabInstance:
     - target: {fileID: 7117200855786340361, guid: 791bcbbf9d867164597b2dc93fba921a, type: 3}
       propertyPath: m_Name
       value: music_button
+      objectReference: {fileID: 0}
+    - target: {fileID: 8227696886188058872, guid: 791bcbbf9d867164597b2dc93fba921a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8721422002253735572, guid: 791bcbbf9d867164597b2dc93fba921a, type: 3}
       propertyPath: m_Pivot.x

@@ -45,7 +45,7 @@ namespace Code.Runtime.Entity.Enemy
 
         private async UniTask ActivateTreasureTask(TreasureChest chest, CancellationToken token)
         {
-            await UniTask.Delay(TimeSpan.FromSeconds(2f), cancellationToken: token);
+            await UniTask.Delay(TimeSpan.FromSeconds(1f), cancellationToken: token);
             chest.Open();
         }
 

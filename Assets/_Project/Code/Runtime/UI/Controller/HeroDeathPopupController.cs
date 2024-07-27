@@ -74,8 +74,20 @@ namespace Code.Runtime.UI.Controller
 
         private async UniTask WaitForAdTask(CancellationToken token)
         {
-            await UniTask.WaitUntil(() => _adService.RewardedState != RewardedState.Loading, cancellationToken: token);
-            HandleAdResult(_adService.RewardedState);
+            RewardedState finalState;
+            do
+            {
+                await UniTask.WaitUntil(() => _adService.RewardedState != RewardedState.Loading, cancellationToken: token);
+                finalState = _adService.RewardedState;
+                
+                if (finalState == RewardedState.Opened)
+                {
+                    _playerControls.Disable();
+                } 
+
+            } while (finalState != RewardedState.Rewarded && finalState != RewardedState.Failed && finalState != RewardedState.Closed);
+
+            HandleAdResult(finalState);
         }
         private void HandleReviveHero()
         {
@@ -87,7 +99,7 @@ namespace Code.Runtime.UI.Controller
             heroMovement.Warp(playerInitialPoint);
             heroHealth.Health.ResetHealth();
             heroDeath.Revive();
-            _playerControls.Player.Enable();
+            _playerControls.Enable();
             
             _screenService.Close(this);
         }

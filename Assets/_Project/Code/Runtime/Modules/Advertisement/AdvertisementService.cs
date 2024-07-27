@@ -86,25 +86,17 @@ namespace Code.Runtime.Modules.Advertisement
             switch (state)
             {
                 case RewardedState.Opened:
-                    _playerControls.Disable();
                     _pauseService.PauseGame();
                     _audioService.PauseAll();
                     break;
                 case RewardedState.Closed:
                     _audioService.UnpauseAll();
                     _pauseService.UnpauseGame();
-                    if (_levelLoader.GetCurrentLevelConfig().LevelId.Name != "MainMenu")
-                    {
-                        _playerControls.Enable();
-                    }
+                  
                     break;
                 case RewardedState.Failed:
                     _audioService.UnpauseAll();
                     _pauseService.UnpauseGame();
-                    if (_levelLoader.GetCurrentLevelConfig().LevelId.Name != "MainMenu")
-                    {
-                        _playerControls.Enable();
-                    }
                     break;
             }
         }

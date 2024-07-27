@@ -6,7 +6,7 @@ using Code.Runtime.Entity.EntitiesComponents;
 using Code.Runtime.Entity.Hero;
 using Code.Runtime.Modules.Advertisement;
 using Code.Runtime.Modules.LocalizationProvider;
-using Code.Runtime.Modules.Utils;
+using Code.Runtime.Modules.WebApplicationModule;
 using Code.Runtime.Services;
 using Code.Runtime.Services.LevelLoaderService;
 using Code.Runtime.Services.PauseService;
@@ -72,7 +72,13 @@ namespace Code.Runtime.UI.Controller
             SubscribeButtons();
 
             _eventSystem.Subscribe<BossSpawnEvent>(SubscribeBossHealthBar);
+            _eventSystem.Subscribe<BossKillEvent>(HideSettingsButton);
             _eventSystem.Subscribe<LevelEndEvent>(ShowReturnToMenuButton);
+        }
+
+        private void HideSettingsButton(BossKillEvent bossKillEvent)
+        {
+            _windowView.SettingsButton.Show(false);
         }
 
         private void SubscribeButtons()
@@ -170,6 +176,7 @@ namespace Code.Runtime.UI.Controller
             _disposable.Dispose();
             _eventSystem.Unsubscribe<BossSpawnEvent>(SubscribeBossHealthBar);
             _eventSystem.Unsubscribe<LevelEndEvent>(ShowReturnToMenuButton);
+            _eventSystem.Unsubscribe<BossKillEvent>(HideSettingsButton);
         }
     }
 }

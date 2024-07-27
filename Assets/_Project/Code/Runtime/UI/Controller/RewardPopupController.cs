@@ -42,7 +42,7 @@ namespace Code.Runtime.UI.Controller
             else if (_model.RewardDto is SoulRewardDto soulRewardDto)
             {
                 _view.RewardIcon.sprite = soulRewardDto.Icon;
-                _view.RewardName.text = soulRewardDto.Value + _localService.GetLocalizedString("SOULS");
+                _view.RewardName.text = soulRewardDto.Value + " " + _localService.GetLocalizedString("SOULS");
             }
 
             _view.ClaimButton.OnClickAsObservable().Subscribe(x => screenService.Close(this));

@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Code.Runtime.Modules.Utils;
+using Code.Runtime.Modules.WebApplicationModule;
 using InstantGamesBridge;
 using UnityEngine;
 using UnityEngine.Localization;

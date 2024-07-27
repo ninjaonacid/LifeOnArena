@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Code.Runtime.Modules.Utils;
+using Code.Runtime.Modules.WebApplicationModule;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;

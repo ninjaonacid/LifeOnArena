@@ -79,6 +79,7 @@ namespace Code.Runtime.Services
 
         private void BossKilled()
         {
+            _eventSystem.FireEvent((new BossKillEvent()));
             LevelEndTask(_cancellationToken.Token).Forget();
         }
         
@@ -100,7 +101,15 @@ namespace Code.Runtime.Services
 
         private async UniTaskVoid LevelEndTask(CancellationToken token)
         {
-            await UniTask.Delay(TimeSpan.FromSeconds(8), cancellationToken: token);
+            if (_levelLoader.GetCurrentLevelConfig().IsBossLevel)
+            {
+                await UniTask.Delay(TimeSpan.FromSeconds(10), cancellationToken: token);
+            }
+            else
+            {
+                await UniTask.Delay(TimeSpan.FromSeconds(4), cancellationToken: token);
+            }
+            
             LevelEnd();
         }
 

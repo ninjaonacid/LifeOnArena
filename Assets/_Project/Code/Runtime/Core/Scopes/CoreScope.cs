@@ -7,6 +7,7 @@ using Code.Runtime.Core.SceneManagement;
 using Code.Runtime.Modules.Advertisement;
 using Code.Runtime.Modules.LocalizationProvider;
 using Code.Runtime.Modules.TutorialService;
+using Code.Runtime.Modules.WebApplicationModule;
 using Code.Runtime.Services.BattleService;
 using Code.Runtime.Services.LevelLoaderService;
 using Code.Runtime.Services.PauseService;
@@ -47,6 +48,7 @@ namespace Code.Runtime.Core.Scopes
             builder.Register<LevelLoader>(Lifetime.Singleton);
             builder.Register<TutorialService>(Lifetime.Singleton);
             builder.Register<PauseService>(Lifetime.Singleton);
+            builder.Register<WebAppController>(Lifetime.Singleton);
 
             builder.RegisterComponentInNewPrefab(AudioService, Lifetime.Singleton).DontDestroyOnLoad().AsSelf();
             builder.RegisterComponentInNewPrefab(Screen, Lifetime.Singleton).AsImplementedInterfaces();
