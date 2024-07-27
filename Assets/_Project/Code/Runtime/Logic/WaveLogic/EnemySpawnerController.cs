@@ -133,6 +133,11 @@ namespace Code.Runtime.Logic.WaveLogic
         {
             _cancellationTokenSource.Cancel();
             _cancellationTokenSource.Dispose();
+
+            foreach (var spawner in _enemySpawnPoints)
+            {
+                spawner.SpawnerCleared -= SpawnerCleared;
+            }
         }
 
         private void SpawnerCleared(EnemySpawner spawner)

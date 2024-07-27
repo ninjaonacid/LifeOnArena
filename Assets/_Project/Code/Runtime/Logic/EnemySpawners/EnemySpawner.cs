@@ -88,8 +88,8 @@ namespace Code.Runtime.Logic.EnemySpawners
             if (_enemyDeath != null)
                   _enemyDeath.Happened -= Slay;
             
-            SpawnerCleared?.Invoke(this);
             Alive = false;
+            SpawnerCleared?.Invoke(this);
         }
 
         private void OnSpawn(PooledObject monster)

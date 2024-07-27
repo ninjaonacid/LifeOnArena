@@ -32,7 +32,13 @@ namespace Code.Runtime.UI.View.MainMenu
         public void ShowPlusButton(bool value)
         {
             _plusButton.Show(value);
+            PlayPlusAnimation();
+        }
+
+        public void PlayPlusAnimation()
+        {
             _plusButton.PlayScaleAnimation();
+            
         }
     }
 }

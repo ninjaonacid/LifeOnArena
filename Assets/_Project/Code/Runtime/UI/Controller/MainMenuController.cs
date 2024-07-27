@@ -64,6 +64,8 @@ namespace Code.Runtime.UI.Controller
             _windowView.ResourceCount.ChangeText(_model.Souls.Value.ToString());
 
             _model.Souls.Subscribe(x => { _windowView.ResourceCount.ChangeText(_model.Souls.Value.ToString()); });
+            
+            _model.Souls.Subscribe(_ => UpdateAllStatButtons()).AddTo(_disposables);
         }
 
         private void InitializeStats()
@@ -73,8 +75,6 @@ namespace Code.Runtime.UI.Controller
             InitializeStat(_model.Health, _windowView.StatWindow.Health, _model.CanUpgradeHealth, _model.UpgradeHealth);
             InitializeStat(_model.Attack, _windowView.StatWindow.Attack, _model.CanUpgradeAttack, _model.UpgradeAttack);
             InitializeStat(_model.Magic, _windowView.StatWindow.Magic, _model.CanUpgradeMagic, _model.UpgradeMagic);
-
-            _model.Souls.Subscribe(_ => UpdateAllStatButtons()).AddTo(_disposables);
 
             _windowView.StatWindow.StatUpgradePrice.text = _model.StatUpgradePrice.ToString();
         }

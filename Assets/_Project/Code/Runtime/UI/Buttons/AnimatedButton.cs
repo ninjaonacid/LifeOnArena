@@ -22,7 +22,8 @@ namespace Code.Runtime.UI.Buttons
         {
             ResetState();
 
-            _tween.Complete();
+            if (_tween.IsPlaying())
+                return;
             
             _tween = RectTransform.DOScale(new Vector3(_animationScale.x,
                     _animationScale.y), _duration)
