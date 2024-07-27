@@ -29,12 +29,11 @@ namespace Code.Runtime.UI.Services
         {
             _screenControllers.Add(typeof(MainMenuController),
                 () => gameData.PlayerData.TutorialData.IsTutorialCompleted
-                    ? new MainMenuController(gameData, audioService, levelLoader, adService, saveLoad)
-                    : new TutorialMainMenuController(gameData, audioService, levelLoader, adService, saveLoad,
-                        tutorialService));
+                    ? new MainMenuController(gameData, adService, audioService, saveLoad, pauseService)
+                    : new TutorialMainMenuController(gameData, adService, audioService, saveLoad, pauseService, tutorialService));
 
             _screenControllers.Add(typeof(WeaponScreenController),
-                () => gameData.PlayerData.TutorialData.IsTutorialCompleted 
+                () => gameData.PlayerData.TutorialData.IsTutorialCompleted
                     ? new WeaponScreenController(heroFactory)
                     : new TutorialWeaponScreenController(heroFactory, tutorialService));
 
@@ -44,7 +43,8 @@ namespace Code.Runtime.UI.Services
                     : new TutorialAbilityScreenController(saveLoad, tutorialService));
 
             _screenControllers.Add(typeof(HudController), () =>
-                new HudController(gameData, heroFactory, levelLoader, eventSystem, adService, pauseService, collectableTracker, localService));
+                new HudController(gameData, heroFactory, levelLoader, eventSystem, adService, pauseService,
+                    collectableTracker, localService));
 
             _screenControllers.Add(typeof(MessageWindowController), () => new MessageWindowController());
 
@@ -58,17 +58,18 @@ namespace Code.Runtime.UI.Services
 
             _screenControllers.Add(typeof(MissionSummaryWindowController),
                 () => new MissionSummaryWindowController(levelLoader, collectableTracker, playerControls));
-            
-            _screenControllers.Add(typeof(MainMenuSettingsPopupController), 
-            () => new MainMenuSettingsPopupController(localService, audioService));
-            
-            _screenControllers.Add(typeof(HudSettingsPopupController), 
+
+            _screenControllers.Add(typeof(MainMenuSettingsPopupController),
+                () => new MainMenuSettingsPopupController(localService, audioService));
+
+            _screenControllers.Add(typeof(HudSettingsPopupController),
                 () => new HudSettingsPopupController(pauseService, levelLoader, audioService, saveLoad));
-            
-            _screenControllers.Add(typeof(HeroDeathPopupController), 
-                () => new HeroDeathPopupController(levelLoader, adService, pauseService, heroFactory, playerControls));
-            
-            _screenControllers.Add(typeof(HudControlsController), 
+
+            _screenControllers.Add(typeof(HeroDeathPopupController),
+                () => new HeroDeathPopupController(levelLoader, adService, pauseService, heroFactory, playerControls,
+                    audioService));
+
+            _screenControllers.Add(typeof(HudControlsController),
                 () => new HudControlsController(pauseService));
         }
 

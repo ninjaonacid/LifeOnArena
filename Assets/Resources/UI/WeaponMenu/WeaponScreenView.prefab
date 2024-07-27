@@ -308,6 +308,7 @@ GameObject:
   - component: {fileID: 6056748827312884306}
   - component: {fileID: 1604948072278883174}
   - component: {fileID: 5460680499214105626}
+  - component: {fileID: 5430060067651303497}
   m_Layer: 5
   m_Name: EquipButton
   m_TagString: Untagged
@@ -362,6 +363,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canvasGroup: {fileID: 6056748827312884306}
+  RectTransform: {fileID: 8441671981387228823}
   _highlightColor:
     serializedVersion: 2
     rgba: 4279228157
@@ -386,8 +388,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5287c8edf39730f4d861cc7e6fcd4e6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _canvasGroup: {fileID: 6056748827312884306}
+  RectTransform: {fileID: 8441671981387228823}
   _elementId: {fileID: 11400000, guid: 1227395e51b644d44a14e94ac160aec0, type: 2}
   _canvas: {fileID: 6056748827312884306}
+--- !u!114 &5430060067651303497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6800481585769077363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_StringReference:
+    m_TableReference:
+      m_TableCollectionName: GUID:908445a34d696ec449ffe62e7e3cd673
+    m_TableEntryReference:
+      m_KeyId: 6452906192629760
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  m_FormatArguments: []
+  m_UpdateString:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3421816939951782900}
+        m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
+        m_MethodName: set_text
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  references:
+    version: 2
+    RefIds: []
 --- !u!1001 &1543204084871185362
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -816,6 +860,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5287c8edf39730f4d861cc7e6fcd4e6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _canvasGroup: {fileID: 6775837419138692502}
+  RectTransform: {fileID: 6300636761684220663}
   _elementId: {fileID: 11400000, guid: 43d907c8fb41acc438cde0a5ea1d3fdf, type: 2}
   _canvas: {fileID: 6775837419138692502}
 --- !u!1 &2718775040675265728 stripped
@@ -865,6 +911,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &6300636761684220663 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1407042648255711365, guid: 86fff4179bbcf5a42beb980ec603bd16, type: 3}
+  m_PrefabInstance: {fileID: 4969311065271685746}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &6547677474784156297 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2173145069144099067, guid: 86fff4179bbcf5a42beb980ec603bd16, type: 3}

@@ -52,17 +52,18 @@ namespace Code.Runtime.Core.InputSystem
         
         public void OnPointerDown(PointerEventData eventData)
         {
-            _background.RectTransform.position = eventData.position;
-            _joystickCenter = eventData.position;
-            _background.Show();
-            OnDrag(eventData);
+            if (RectTransformUtility.RectangleContainsScreenPoint(_background.RectTransform, eventData.position))
+            {
+                OnDrag(eventData);
+            }
         }
 
         public void OnDrag(PointerEventData eventData)
         {
             Vector2 direction = eventData.position - _joystickCenter;
-            _input = (direction.magnitude > movementRange) ? direction.normalized : direction / movementRange;
-            _stick.RectTransform.position = _joystickCenter + (_input * movementRange);
+            direction = Vector2.ClampMagnitude(direction, movementRange);
+            _input = direction / movementRange;
+            _stick.RectTransform.position = _joystickCenter + direction;
             SendValueToControl(_input);
         }
 

@@ -1,5 +1,6 @@
 using Code.Runtime.Core.Audio;
 using Code.Runtime.Services.PauseService;
+using Code.Runtime.Services.SaveLoad;
 using InstantGamesBridge.Modules.Game;
 using UnityEngine.Device;
 using VContainer.Unity;
@@ -8,13 +9,15 @@ namespace Code.Runtime.Modules.WebApplicationModule
 {
     public class WebAppController : IInitializable
     {
-        private AudioService _audioService;
-        private PauseService _pauseService;
+        private readonly AudioService _audioService;
+        private readonly PauseService _pauseService;
+        private SaveLoadService _saveLoad;
 
-        public WebAppController(AudioService audioService, PauseService pauseService)
+        public WebAppController(AudioService audioService, PauseService pauseService, SaveLoadService saveLoad)
         {
             _audioService = audioService;
             _pauseService = pauseService;
+            _saveLoad = saveLoad;
         }
 
         public void Initialize()
@@ -32,7 +35,8 @@ namespace Code.Runtime.Modules.WebApplicationModule
             {
                 case VisibilityState.Hidden:
                     _pauseService.PauseGame();
-                    _audioService.UnpauseAll();
+                    _audioService.PauseAll();
+                    _saveLoad.SaveData();
                     break;
                 case VisibilityState.Visible:
                     _pauseService.UnpauseGame();

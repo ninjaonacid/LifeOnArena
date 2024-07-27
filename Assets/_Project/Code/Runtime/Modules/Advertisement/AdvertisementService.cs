@@ -86,17 +86,10 @@ namespace Code.Runtime.Modules.Advertisement
             switch (state)
             {
                 case RewardedState.Opened:
-                    _pauseService.PauseGame();
-                    _audioService.PauseAll();
                     break;
                 case RewardedState.Closed:
-                    _audioService.UnpauseAll();
-                    _pauseService.UnpauseGame();
-                  
                     break;
                 case RewardedState.Failed:
-                    _audioService.UnpauseAll();
-                    _pauseService.UnpauseGame();
                     break;
             }
         }

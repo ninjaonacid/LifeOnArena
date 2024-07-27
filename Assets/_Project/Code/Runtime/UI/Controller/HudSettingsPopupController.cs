@@ -1,4 +1,5 @@
-﻿using Code.Runtime.Core.Audio;
+﻿using System;
+using Code.Runtime.Core.Audio;
 using Code.Runtime.Services.LevelLoaderService;
 using Code.Runtime.Services.PauseService;
 using Code.Runtime.Services.SaveLoad;
@@ -6,12 +7,13 @@ using Code.Runtime.UI.Model;
 using Code.Runtime.UI.Services;
 using Code.Runtime.UI.View;
 using Code.Runtime.UI.View.HudSettingsPopupView;
+using Cysharp.Threading.Tasks;
 using UniRx;
 using UnityEngine.Assertions;
 
 namespace Code.Runtime.UI.Controller
 {
-    public class HudSettingsPopupController : IScreenController
+    public class HudSettingsPopupController : IScreenController, IDisposable
     {
         private HudSettingsPopupView _view;
         private HudSettingsPopupModel _model;
@@ -20,6 +22,8 @@ namespace Code.Runtime.UI.Controller
         private readonly LevelLoader _levelLoader;
         private readonly AudioService _audioService;
         private readonly SaveLoadService _saveLoad;
+
+        private readonly CompositeDisposable _disposable = new();
 
         public HudSettingsPopupController(PauseService pauseService, LevelLoader levelLoader, AudioService audioService, SaveLoadService saveLoad)
         {
@@ -51,7 +55,7 @@ namespace Code.Runtime.UI.Controller
                 _pauseService.UnpauseGame();
                 _saveLoad.SaveData();
                 _levelLoader.LoadLevel("MainMenu");
-            });
+            }).AddTo(_disposable);
         }
 
         private void SubscribeCloseButton(ScreenService screenService)
@@ -61,7 +65,7 @@ namespace Code.Runtime.UI.Controller
                 {
                     _pauseService.UnpauseGame();
                     screenService.Close(this);
-                });
+                }).AddTo(_disposable);
         }
 
         private void SubscribeAudioButtons()
@@ -75,7 +79,7 @@ namespace Code.Runtime.UI.Controller
                     _model.ChangeMusicState(!_model.IsMusicOn);
                     _audioService.MuteMusic(!_model.IsMusicOn);
                     _view.MusicButton.SetButton(_model.IsMusicOn);
-                });
+                }).AddTo(_disposable);
 
             _view.SoundButton.OnClickAsObservable()
                 .Subscribe(x =>
@@ -83,7 +87,13 @@ namespace Code.Runtime.UI.Controller
                     _model.ChangeSoundState(!_model.IsSoundOn);
                     _audioService.MuteSounds(!_model.IsSoundOn);
                     _view.SoundButton.SetButton(_model.IsSoundOn);
-                });
+                }).AddTo(_disposable);
+        }
+
+        public void Dispose()
+        {
+            _disposable?.Dispose();
+            
         }
     }
 }

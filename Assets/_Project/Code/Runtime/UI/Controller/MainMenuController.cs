@@ -4,6 +4,7 @@ using Code.Runtime.Core.Audio;
 using Code.Runtime.Core.SceneManagement;
 using Code.Runtime.Modules.Advertisement;
 using Code.Runtime.Services.LevelLoaderService;
+using Code.Runtime.Services.PauseService;
 using Code.Runtime.Services.PersistentProgress;
 using Code.Runtime.Services.SaveLoad;
 using Code.Runtime.UI.Model;
@@ -25,23 +26,21 @@ namespace Code.Runtime.UI.Controller
 
         private ScreenService _screenService;
         private readonly IGameDataContainer _gameData;
-        private readonly LevelLoader _levelLoader;
-        private readonly SceneLoader _sceneLoader;
         private readonly AdvertisementService _adService;
         private readonly AudioService _audioService;
         private readonly SaveLoadService _saveLoad;
+        private readonly PauseService _pauseService;
 
         private readonly CompositeDisposable _disposables = new();
         private readonly CancellationTokenSource _cts = new();
 
-        public MainMenuController(IGameDataContainer gameData, AudioService audioService, LevelLoader levelLoader,
-            AdvertisementService adService, SaveLoadService saveLoad)
+        public MainMenuController(IGameDataContainer gameData, AdvertisementService adService, AudioService audioService, SaveLoadService saveLoad, PauseService pauseService)
         {
             _gameData = gameData;
-            _levelLoader = levelLoader;
-            _audioService = audioService;
             _adService = adService;
+            _audioService = audioService;
             _saveLoad = saveLoad;
+            _pauseService = pauseService;
         }
 
         public virtual void InitController(IScreenModel model, BaseWindowView windowView, ScreenService screenService)
@@ -64,7 +63,7 @@ namespace Code.Runtime.UI.Controller
             _windowView.ResourceCount.ChangeText(_model.Souls.Value.ToString());
 
             _model.Souls.Subscribe(x => { _windowView.ResourceCount.ChangeText(_model.Souls.Value.ToString()); });
-            
+
             _model.Souls.Subscribe(_ => UpdateAllStatButtons()).AddTo(_disposables);
         }
 
@@ -104,7 +103,8 @@ namespace Code.Runtime.UI.Controller
             {
                 return;
             }
-            if(completedLocations % 2 == 0)
+
+            if (completedLocations % 2 == 0)
             {
                 _windowView.RewardButton.OnClickAsObservable()
                     .Subscribe(x =>
@@ -140,8 +140,38 @@ namespace Code.Runtime.UI.Controller
 
         private async UniTask WaitForAdTask(CancellationToken token)
         {
-            await UniTask.WaitUntil(() => _adService.RewardedState != RewardedState.Loading, cancellationToken: token);
-            HandleAdResult(_adService.RewardedState);
+            RewardedState finalState;
+            bool wasRewarded = false;
+
+            do
+            {
+                await UniTask.WaitUntil(() => _adService.RewardedState != RewardedState.Loading,
+                    cancellationToken: token);
+                finalState = _adService.RewardedState;
+
+                switch (finalState)
+                {
+                    case RewardedState.Opened:
+                        _pauseService.PauseGame();
+                        _audioService.PauseAll();
+                        break;
+                    case RewardedState.Rewarded:
+                        wasRewarded = true;
+                        break;
+                    case RewardedState.Closed:
+                    case RewardedState.Failed:
+                        _audioService.UnpauseAll();
+                        _pauseService.UnpauseGame();
+
+                        break;
+                }
+            } while (finalState != RewardedState.Closed && finalState != RewardedState.Failed);
+
+            if (wasRewarded)
+            {
+                HandleSoulsReward();
+                _windowView.RewardButton.Show(false);
+            }
         }
 
         private void HandleSoulsReward()
@@ -150,25 +180,6 @@ namespace Code.Runtime.UI.Controller
             _saveLoad.SaveData();
         }
 
-        private void HandleAdResult(RewardedState state)
-        {
-            switch (state)
-            {
-                case RewardedState.Rewarded:
-                    HandleSoulsReward();
-                    break;
-                case RewardedState.Failed:
-                    _levelLoader.LoadLevel("MainMenu");
-                    break;
-                case RewardedState.Closed:
-                case RewardedState.Opened:
-                    break;
-                default:
-                    Debug.LogWarning($"Unexpected RewardedState: {state}");
-                    _screenService.Close(this);
-                    break;
-            }
-        }
 
         public virtual void Dispose()
         {

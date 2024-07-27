@@ -24,7 +24,6 @@ namespace Code.Runtime.Core.Scopes
     public class CoreScope : LifetimeScope
     {
         [SerializeField] private LoadingScreen Screen;
-        [SerializeField] private GameAudioPlayer GameAudioPlayer;
         [SerializeField] private AudioService AudioService;
 
         protected override void Configure(IContainerBuilder builder)
@@ -48,7 +47,7 @@ namespace Code.Runtime.Core.Scopes
             builder.Register<LevelLoader>(Lifetime.Singleton);
             builder.Register<TutorialService>(Lifetime.Singleton);
             builder.Register<PauseService>(Lifetime.Singleton);
-            builder.Register<WebAppController>(Lifetime.Singleton);
+            builder.Register<WebAppController>(Lifetime.Singleton).AsImplementedInterfaces();
 
             builder.RegisterComponentInNewPrefab(AudioService, Lifetime.Singleton).DontDestroyOnLoad().AsSelf();
             builder.RegisterComponentInNewPrefab(Screen, Lifetime.Singleton).AsImplementedInterfaces();
