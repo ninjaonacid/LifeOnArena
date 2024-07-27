@@ -27,7 +27,7 @@ namespace Code.Runtime.UI.Model.AbilityMenu
 
         public void Initialize()
         {
-            var souls = _gameData.PlayerData.WorldData.LootData.Collected;
+            var souls = _gameData.PlayerData.WorldData.LootData.CollectedLoot.Value;
             Souls = _gameData.PlayerData.WorldData.LootData.CollectedLoot;
        
             _abilities = new List<AbilityModel>();
@@ -126,7 +126,7 @@ namespace Code.Runtime.UI.Model.AbilityMenu
 
         public int GetResourceCount()
         {
-            return _gameData.PlayerData.WorldData.LootData.Collected;
+            return Souls.Value;
         }
         
         
@@ -153,7 +153,7 @@ namespace Code.Runtime.UI.Model.AbilityMenu
         {
             _gameData.PlayerData.AbilityData.Abilities = _abilities;
             _gameData.PlayerData.AbilityData.EquippedAbilities = _equippedAbilities;
-            _gameData.PlayerData.WorldData.LootData.Collected = Souls.Value;
+            _gameData.PlayerData.WorldData.LootData.CollectedLoot.Value = Souls.Value;
         }
     }
 }

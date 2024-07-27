@@ -9,7 +9,7 @@ namespace Code.Runtime.Modules.Requirements
         
         public bool CheckRequirement(PlayerData value)
         {
-            return value.WorldData.LootData.Collected >= _requiredSouls;
+            return value.WorldData.LootData.CollectedLoot.Value >= _requiredSouls;
         }
     }
 }

@@ -65,13 +65,12 @@ namespace Code.Runtime.UI.Model
 
         private bool CanUpgradeStat(string statName, ReactiveProperty<int> stat)
         {
-            return _gameData.PlayerData.WorldData.LootData.Collected >= StatUpgradePrice &&
+            return Souls.Value >= StatUpgradePrice &&
                    stat.Value < _gameData.PlayerData.StatsData.StatsCapacities[statName];
         }
 
         private void SpendLoot(int value)
         {
-            _gameData.PlayerData.WorldData.LootData.Collected -= value;
             Souls.Value -= value;
         }
 
