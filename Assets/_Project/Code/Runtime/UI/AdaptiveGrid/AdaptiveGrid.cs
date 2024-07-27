@@ -30,7 +30,11 @@ namespace Code.Runtime.UI.AdaptiveGrid
         private void AdjustElements()
         {
             _arrangePreset.Apply(_gridChildList, _gridRect, _gridMargin, _cellPadding);
-            _scalePreset.Apply(_gridChildList, _gridRect, _gridMargin, _cellPadding);
+
+            if (_scalePreset != null)
+            {
+                _scalePreset.Apply(_gridChildList, _gridRect, _gridMargin, _cellPadding);
+            }
         }
         private bool ApproptiatePresetKey(AdaptivePreset preset, System.Enum keyValue)
         {

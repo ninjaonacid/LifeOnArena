@@ -2,9 +2,9 @@ using System;
 using Code.Runtime.ConfigData;
 using Code.Runtime.Core.Audio;
 using Code.Runtime.Core.Config;
-using Code.Runtime.Logic.Timer;
 using Code.Runtime.Services.LevelLoaderService;
 using Code.Runtime.Services.PauseService;
+using Code.Runtime.Services.PersistentProgress;
 using InstantGamesBridge;
 using InstantGamesBridge.Modules.Advertisement;
 using VContainer.Unity;
@@ -21,17 +21,18 @@ namespace Code.Runtime.Modules.Advertisement
         private readonly PlayerControls _playerControls;
         private readonly ConfigProvider _configProvider;
         private readonly LevelLoader _levelLoader;
-        
+        private readonly IGameDataContainer _gameData;
         private AdvertisementConfig _adsConfig;
 
         public AdvertisementService(AudioService audioService, PauseService pauseService, PlayerControls playerControls,
-            ConfigProvider configProvider, LevelLoader levelLoader)
+            ConfigProvider configProvider, LevelLoader levelLoader, IGameDataContainer gameData)
         {
             _audioService = audioService;
             _pauseService = pauseService;
             _playerControls = playerControls;
             _configProvider = configProvider;
             _levelLoader = levelLoader;
+            _gameData = gameData;
         }
 
         public int ReviveRewardsPossible() => _adsConfig.HeroRevivePerLevel;
@@ -60,22 +61,27 @@ namespace Code.Runtime.Modules.Advertisement
                 case InterstitialState.Opened:
                     _playerControls.Disable();
                     _pauseService.PauseGame();
-                    _audioService.PauseAll();
+                    _audioService.MuteAll(true);
                     break;
                 case InterstitialState.Closed:
-                    _audioService.UnpauseAll();
+                    
+                    _audioService.MuteMusic(!_gameData.AudioData.isMusicOn);
+                    _audioService.MuteSounds(!_gameData.AudioData.isSoundOn);
                     if (_levelLoader.GetCurrentLevelConfig().LevelId.Name != "MainMenu")
                     {
                         _playerControls.Enable();
                     }
+
                     _pauseService.UnpauseGame();
                     break;
                 case InterstitialState.Failed:
-                    _audioService.UnpauseAll();
+                    _audioService.MuteMusic(!_gameData.AudioData.isMusicOn);
+                    _audioService.MuteSounds(!_gameData.AudioData.isSoundOn);
                     if (_levelLoader.GetCurrentLevelConfig().LevelId.Name != "MainMenu")
                     {
                         _playerControls.Enable();
                     }
+
                     _pauseService.UnpauseGame();
                     break;
             }

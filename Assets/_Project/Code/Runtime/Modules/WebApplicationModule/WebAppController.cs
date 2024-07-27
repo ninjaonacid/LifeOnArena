@@ -11,7 +11,7 @@ namespace Code.Runtime.Modules.WebApplicationModule
     {
         private readonly AudioService _audioService;
         private readonly PauseService _pauseService;
-        private SaveLoadService _saveLoad;
+        private readonly SaveLoadService _saveLoad;
 
         public WebAppController(AudioService audioService, PauseService pauseService, SaveLoadService saveLoad)
         {
@@ -35,12 +35,12 @@ namespace Code.Runtime.Modules.WebApplicationModule
             {
                 case VisibilityState.Hidden:
                     _pauseService.PauseGame();
-                    _audioService.PauseAll();
+                    _audioService.MuteAll(true);
                     _saveLoad.SaveData();
                     break;
                 case VisibilityState.Visible:
                     _pauseService.UnpauseGame();
-                    _audioService.UnpauseAll();
+                    _audioService.MuteAll(false);
                     break;
             }
         }

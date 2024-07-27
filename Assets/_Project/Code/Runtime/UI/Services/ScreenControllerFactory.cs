@@ -60,14 +60,14 @@ namespace Code.Runtime.UI.Services
                 () => new MissionSummaryWindowController(levelLoader, collectableTracker, playerControls));
 
             _screenControllers.Add(typeof(MainMenuSettingsPopupController),
-                () => new MainMenuSettingsPopupController(localService, audioService));
+                () => new MainMenuSettingsPopupController(localService, audioService, saveLoad));
 
             _screenControllers.Add(typeof(HudSettingsPopupController),
                 () => new HudSettingsPopupController(pauseService, levelLoader, audioService, saveLoad));
 
             _screenControllers.Add(typeof(HeroDeathPopupController),
                 () => new HeroDeathPopupController(levelLoader, adService, pauseService, heroFactory, playerControls,
-                    audioService));
+                    audioService, gameData));
 
             _screenControllers.Add(typeof(HudControlsController),
                 () => new HudControlsController(pauseService));

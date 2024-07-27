@@ -64,6 +64,7 @@ namespace Code.Runtime.UI.Controller
                 .Subscribe(x =>
                 {
                     _pauseService.UnpauseGame();
+                    _saveLoad.SaveData();
                     screenService.Close(this);
                 }).AddTo(_disposable);
         }

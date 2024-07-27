@@ -139,6 +139,16 @@ namespace Code.Runtime.Core.Audio
             }
         }
 
+        public void MuteAll(bool value)
+        {
+            _mainMusicChannel.AudioSource.mute = value;
+            
+            foreach (var channel in _soundChannelsPool)
+            {
+                channel.AudioSource.mute = value;
+            }
+        }
+
         public void PlaySound(SoundAudioFile sound) => PlaySoundInternal(sound);
 
         public void PlaySound3D(string soundName, Transform soundTransform, float volume = 1f)

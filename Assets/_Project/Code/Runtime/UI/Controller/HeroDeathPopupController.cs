@@ -6,6 +6,7 @@ using Code.Runtime.Entity.Hero;
 using Code.Runtime.Modules.Advertisement;
 using Code.Runtime.Services.LevelLoaderService;
 using Code.Runtime.Services.PauseService;
+using Code.Runtime.Services.PersistentProgress;
 using Code.Runtime.UI.Model;
 using Code.Runtime.UI.Services;
 using Code.Runtime.UI.View;
@@ -28,7 +29,7 @@ namespace Code.Runtime.UI.Controller
         private readonly HeroFactory _heroFactory;
         private readonly PlayerControls _playerControls;
         private readonly AudioService _audioService;
-
+        private readonly IGameDataContainer _gameData;
         private ScreenService _screenService;
 
         private readonly CompositeDisposable _disposable = new();
@@ -36,7 +37,7 @@ namespace Code.Runtime.UI.Controller
 
         public HeroDeathPopupController(LevelLoader levelLoader, AdvertisementService adService,
             PauseService pauseService, HeroFactory heroFactory, PlayerControls playerControls,
-            AudioService audioService)
+            AudioService audioService, IGameDataContainer gameData)
         {
             _levelLoader = levelLoader;
             _adService = adService;
@@ -44,6 +45,7 @@ namespace Code.Runtime.UI.Controller
             _heroFactory = heroFactory;
             _playerControls = playerControls;
             _audioService = audioService;
+            _gameData = gameData;
         }
 
         public void InitController(IScreenModel model, BaseWindowView windowView, ScreenService screenService)
@@ -93,31 +95,28 @@ namespace Code.Runtime.UI.Controller
                     case RewardedState.Opened:
                         _playerControls.Disable();
                         _pauseService.PauseGame();
-                        _audioService.PauseAll();
+                        _audioService.MuteAll(true);
                         break;
                     case RewardedState.Rewarded:
                         wasRewarded = true;
                         break;
                     case RewardedState.Closed:
-                    case RewardedState.Failed:
-                        _audioService.UnpauseAll();
+                        _audioService.MuteMusic(!_gameData.AudioData.isMusicOn);
+                        _audioService.MuteSounds(!_gameData.AudioData.isSoundOn);
                         _pauseService.UnpauseGame();
-                        if (_levelLoader.GetCurrentLevelConfig().LevelId.Name != "MainMenu")
-                        {
-                            _playerControls.Enable();
-                        }
-
+                        break;
+                    case RewardedState.Failed:
+                        _audioService.MuteMusic(!_gameData.AudioData.isMusicOn);
+                        _audioService.MuteSounds(!_gameData.AudioData.isSoundOn);
+                        _pauseService.UnpauseGame();
                         break;
                 }
-            } while (finalState != RewardedState.Closed && finalState != RewardedState.Failed);
+                
+            } while (finalState != RewardedState.Closed | finalState != RewardedState.Failed);
 
             if (wasRewarded)
             {
                 HandleReviveHero();
-            }
-            else if (finalState == RewardedState.Failed)
-            {
-                _levelLoader.LoadLevel("MainMenu");
             }
         }
 

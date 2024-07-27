@@ -12,7 +12,7 @@ namespace Code.Runtime.Core.InputSystem
         Dynamic,
         Static
     }
-    public class DynamicJoyStick : OnScreenControl, IPointerDownHandler, IPointerUpHandler, IDragHandler
+    public class DynamicJoyStick : OnScreenControl, IPointerDownHandler, IPointerUpHandler, IDragHandler, IEndDragHandler
     {
         [SerializeField] private CanvasGroup _joyStickCanvasGroup;
         [SerializeField] private CanvasElement _background;
@@ -69,14 +69,7 @@ namespace Code.Runtime.Core.InputSystem
 
         public void OnPointerUp(PointerEventData eventData)
         {
-            _input = Vector2.zero;
-            _stick.RectTransform.position = _joystickCenter;
-            if (_behaviour == JoystickBehaviour.Dynamic)
-            {
-                _background.Hide();
-            }
-            
-            SendValueToControl(_input);
+            ResetStick();
         }
 
         protected override void OnDisable()
@@ -86,5 +79,21 @@ namespace Code.Runtime.Core.InputSystem
             SendValueToControl(_input);
         }
 
+        private void ResetStick()
+        {
+            _input = Vector2.zero;
+            _stick.RectTransform.position = _joystickCenter;
+            
+            if (_behaviour == JoystickBehaviour.Dynamic)
+            {
+                _background.Hide();
+            }
+            SendValueToControl(_input);
+        }
+
+        public void OnEndDrag(PointerEventData eventData)
+        {
+            ResetStick();
+        }
     }
 }

@@ -96,7 +96,7 @@ namespace Code.Runtime.Entity.Hero
         public void Warp(Vector3 position)
         {
             _characterController.enabled = false;
-            transform.position = position + new Vector3(0,_characterController.height, 0);
+            transform.position = position + new Vector3(0,_characterController.height / 2, 0);
             _characterController.enabled = true;
         }
 

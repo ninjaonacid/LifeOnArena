@@ -31,12 +31,12 @@ namespace Code.Runtime.Entity.Enemy.BossEnemy.DarkViking
                 true
             ));
 
-            _fsm.AddTransition(new Transition(nameof(EnemyIdleState),
+            _fsm.AddTransition(new Transition(nameof(EnemyIdleState), 
                 nameof(MeleeEnemyAttackState),
-                (transition) => _enemyAttackComponent.CanAttack()
+                (transition) => _enemyAttackComponent.CanAttack() && _enemyTarget.HasTarget()
             ));
 
-
+            
             _fsm.AddTransition(new Transition(
                 nameof(EnemyIdleState),
                 nameof(EnemyChaseState),

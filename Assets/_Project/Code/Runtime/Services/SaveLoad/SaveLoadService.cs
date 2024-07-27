@@ -50,7 +50,10 @@ namespace Code.Runtime.Services.SaveLoad
             PlayerPrefs.SetString(PlayerDataKey, _gameDataContainer.PlayerData.ToJson());
             PlayerPrefs.SetString(AudioDataKey, _gameDataContainer.AudioData.ToJson());
             
+            
+            #if UNITY_EDITOR
             SaveProgressAtPath();
+            #endif
         }
 
         public void LoadData()

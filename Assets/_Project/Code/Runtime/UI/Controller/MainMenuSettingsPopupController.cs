@@ -1,5 +1,6 @@
 ﻿using Code.Runtime.Core.Audio;
 using Code.Runtime.Modules.LocalizationProvider;
+using Code.Runtime.Services.SaveLoad;
 using Code.Runtime.UI.Model;
 using Code.Runtime.UI.Services;
 using Code.Runtime.UI.View;
@@ -17,12 +18,14 @@ namespace Code.Runtime.UI.Controller
 
         private readonly LocalizationService _localService;
         private readonly AudioService _audioService;
+        private readonly SaveLoadService _saveLoad;
         private ScreenService _screenService;
 
-        public MainMenuSettingsPopupController(LocalizationService localizationService, AudioService audioService)
+        public MainMenuSettingsPopupController(LocalizationService localizationService, AudioService audioService, SaveLoadService saveLoad)
         {
             _localService = localizationService;
             _audioService = audioService;
+            _saveLoad = saveLoad;
         }
 
         public void InitController(IScreenModel model, BaseWindowView windowView, ScreenService screenService)
@@ -77,7 +80,11 @@ namespace Code.Runtime.UI.Controller
         private void SubscribeCloseButton()
         {
             _view.CloseButton.OnClickAsObservable()
-                .Subscribe(x => { _screenService.Close(this); });
+                .Subscribe(x =>
+                {
+                    
+                    _screenService.Close(this);
+                });
         }
     }
 }

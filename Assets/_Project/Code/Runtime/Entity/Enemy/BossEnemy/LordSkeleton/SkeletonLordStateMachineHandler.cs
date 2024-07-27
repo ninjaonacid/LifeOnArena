@@ -35,8 +35,9 @@ namespace Code.Runtime.Entity.Enemy.BossEnemy.LordSkeleton
             
             _fsm.AddTransition(new Transition(nameof(EnemyIdleState), 
                 nameof(MeleeEnemyAttackState),
-                (transition) => _enemyAttackComponent.CanAttack()
-                ));
+                (transition) => _enemyAttackComponent.CanAttack() && _enemyTarget.HasTarget()
+            ));
+
 
             _fsm.AddTransition(new Transition(
                 nameof(EnemyIdleState),
