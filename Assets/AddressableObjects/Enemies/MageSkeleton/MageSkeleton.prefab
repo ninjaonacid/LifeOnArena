@@ -758,7 +758,7 @@ Transform:
   - {fileID: 70478224537662243}
   - {fileID: 2604406514226397242}
   m_Father: {fileID: 5058825195789397958}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5278124583304427034
 GameObject:
@@ -856,64 +856,6 @@ Transform:
   m_Father: {fileID: 5950703069777841044}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &6347371237424607736
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6776639351922998516}
-  - component: {fileID: 8472671451417616624}
-  - component: {fileID: 429340229416842495}
-  m_Layer: 15
-  m_Name: RangeAttackZone
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6776639351922998516
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6347371237424607736}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 5058825195789397958}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &8472671451417616624
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6347371237424607736}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 23.902208
-  m_Center: {x: 0, y: 0.9812822, z: 9.630524}
---- !u!114 &429340229416842495
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6347371237424607736}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 175f2de3de5f6c04c865c07ba8fbdf2c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &6464347049540699057
 GameObject:
   m_ObjectHideFlags: 0
@@ -1539,7 +1481,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 718340089616829875, guid: 9720fc178328f11468d3f41ed8261401, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 718340089616829875, guid: 9720fc178328f11468d3f41ed8261401, type: 3}
       propertyPath: m_LocalScale.x
@@ -1850,6 +1792,10 @@ PrefabInstance:
       value: HurtBox
       objectReference: {fileID: 0}
     - target: {fileID: 6610648692135647668, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
+      propertyPath: _showGizmos
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6610648692135647668, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
       propertyPath: AttackComponent
       value: 
       objectReference: {fileID: 663686600793623067}
@@ -1944,6 +1890,7 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 6716876832464804808, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
     - {fileID: 2500014843645060732, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
+    - {fileID: 6610648692135647668, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: c0d276ec4f2378b4b8d470bda6f5b999, type: 3}
 --- !u!114 &429120299824953409 stripped
 MonoBehaviour:
@@ -2110,8 +2057,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c423221f79d6429586ea46f4621d37e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _attackComponent: {fileID: 663686600793623067}
+  _enemyTarget: {fileID: 4872639131029550527}
+  _statController: {fileID: 4548832314929923065}
+  _showGizmos: 1
+  _gizmoColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   _castComponent: {fileID: 7665401954657485101}
-  _rangeTrigger: {fileID: 429340229416842495}
 --- !u!114 &6694467252649749588
 MonoBehaviour:
   m_ObjectHideFlags: 0

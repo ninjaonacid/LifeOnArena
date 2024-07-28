@@ -30,6 +30,7 @@ namespace Code.Runtime.Entity.Enemy
         private void OnEnable()
         {
             _isAttacking = false;
+            _meleeAttackIsActive = false;
         }
 
         private void Update()

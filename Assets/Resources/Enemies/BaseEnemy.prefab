@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3436043548892321881}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1294684749611248837
 MonoBehaviour:
@@ -122,6 +122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 950f08e4255fddc4fa9fabae713c622c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _flipAxis: 0
 --- !u!1 &2658416580451336931
 GameObject:
   m_ObjectHideFlags: 0
@@ -176,7 +177,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 749506597942017328}
   - {fileID: 8232564334694540974}
   - {fileID: 4305021687328221953}
   - {fileID: 3513420929685160314}
@@ -312,7 +312,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _attackComponent: {fileID: 6966552553589898628}
-  _meleeRangeObserver: {fileID: 8949411577163398733}
+  _enemyTarget: {fileID: 3027789663709577760}
+  _meleeRangeObserver: {fileID: 0}
+  _statController: {fileID: 6249724365430731878}
+  _showGizmos: 0
+  _gizmoColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &2892997724190106139
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -391,7 +395,7 @@ MonoBehaviour:
   _statController: {fileID: 6249724365430731878}
   _enemyDeath: {fileID: 2892997724190106139}
   _abilityController: {fileID: 7338046863862579743}
-  _enemyStaggerComponent: {fileID: 0}
+  _enemyStaggerComponent: {fileID: -3706231861567055569}
 --- !u!114 &3027789663709577760
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -578,6 +582,7 @@ MonoBehaviour:
   ExpDrop: {fileID: 4845501457382912920}
   EntityUI: {fileID: 4058648672316291509}
   EnemyHealth: {fileID: 2892997724190106138}
+  EnemyStaggerComponent: {fileID: -3706231861567055569}
 --- !u!114 &-3706231861567055569
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -701,7 +706,7 @@ RectTransform:
   m_Children:
   - {fileID: 5317502170642238590}
   m_Father: {fileID: 3436043548892321881}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -801,7 +806,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3436043548892321881}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &2192902159981610960
 BoxCollider:
@@ -823,64 +828,6 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6349715764893115343}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 175f2de3de5f6c04c865c07ba8fbdf2c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!1 &7069914734065314859
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 749506597942017328}
-  - component: {fileID: 5505409481669168970}
-  - component: {fileID: 8949411577163398733}
-  m_Layer: 14
-  m_Name: AttackZone
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &749506597942017328
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7069914734065314859}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 3436043548892321881}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &5505409481669168970
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7069914734065314859}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 6
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8949411577163398733
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7069914734065314859}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 175f2de3de5f6c04c865c07ba8fbdf2c, type: 3}
