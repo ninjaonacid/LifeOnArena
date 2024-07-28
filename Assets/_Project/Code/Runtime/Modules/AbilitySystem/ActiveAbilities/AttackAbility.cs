@@ -42,9 +42,9 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
 
             _comboWindow = attackAnimationLength / attackAnimationSpeed;
 
-            ActiveTime = attackAnimationLength / attackAnimationSpeed - 0.3f;
+            ActiveTime = attackAnimationLength / attackAnimationSpeed - 0.2f;
 
-            CurrentActiveTime = attackAnimationLength / attackAnimationSpeed - 0.3f;
+            CurrentActiveTime = attackAnimationLength / attackAnimationSpeed - 0.2f;
 
             _audioService.PlaySound3D(weaponData.WeaponSound, caster.transform);
             ComboCount++;
