@@ -80,21 +80,37 @@ namespace Code.Runtime.UI.Controller
         private void InitializeButtons()
         {
             _windowView.StartFightButton.OnClickAsObservable()
-                .Subscribe(_ => _screenService.Open(ScreenID.ArenaSelectionScreen))
+                .Subscribe(_ =>
+                {
+                    _audioService.PlaySound("ClickButton");
+                    _screenService.Open(ScreenID.ArenaSelectionScreen);
+                })
                 .AddTo(_disposables);
 
             _windowView.StartFightButton.PlayScaleAnimation();
 
             _windowView.SkillScreen.OnClickAsObservable()
-                .Subscribe(_ => _screenService.Open(_windowView.SkillScreen.WindowId))
+                .Subscribe(_ =>
+                {
+                    _audioService.PlaySound("ClickButton");
+                    _screenService.Open(_windowView.SkillScreen.WindowId);
+                })
                 .AddTo(_disposables);
 
             _windowView.WeaponScreen.OnClickAsObservable()
-                .Subscribe(_ => _screenService.Open(_windowView.WeaponScreen.WindowId))
+                .Subscribe(_ =>
+                {
+                    _audioService.PlaySound("ClickButton");
+                    _screenService.Open(_windowView.WeaponScreen.WindowId);
+                })
                 .AddTo(_disposables);
 
             _windowView.SettingsButton.OnClickAsObservable()
-                .Subscribe(x => _screenService.Open(ScreenID.MainMenuSettingsPopUpView));
+                .Subscribe(x =>
+                {
+                    _audioService.PlaySound("ClickButton");
+                    _screenService.Open(ScreenID.MainMenuSettingsPopUpView);
+                });
 
             int completedLocations = _gameData.PlayerData.WorldData.LocationProgressData.CompletedLocations.Count;
 
@@ -130,7 +146,11 @@ namespace Code.Runtime.UI.Controller
                 UpdateAllStatButtons();
             }).AddTo(_disposables);
 
-            statView.OnPlusClicked().Subscribe(_ => upgrade()).AddTo(_disposables);
+            statView.OnPlusClicked().Subscribe(_ =>
+            {
+                _audioService.PlaySound("ClickButton");
+                upgrade();
+            }).AddTo(_disposables);
         }
 
         private void HandleRewardedStateChange(RewardedState state)

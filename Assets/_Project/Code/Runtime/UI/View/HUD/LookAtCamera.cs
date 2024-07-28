@@ -6,6 +6,7 @@ namespace Code.Runtime.UI.View.HUD
     {
         private Camera _mainCamera;
 
+        [SerializeField] private bool _flipAxis;
         private void Start()
         {
             _mainCamera = Camera.main;
@@ -13,10 +14,21 @@ namespace Code.Runtime.UI.View.HUD
 
         private void Update()
         {
-            var rotation = _mainCamera.transform.rotation;
-            transform.LookAt(transform.position + rotation
-                * Vector3.back,
-                rotation * Vector3.up);
+            if (_flipAxis)
+            {
+                var rotation = _mainCamera.transform.rotation;
+                transform.LookAt(transform.position + rotation
+                    * -Vector3.back,
+                    rotation * Vector3.up);
+            }
+            else
+            {
+                var rotation = _mainCamera.transform.rotation;
+                transform.LookAt(transform.position + rotation
+                    * Vector3.back,
+                    rotation * Vector3.up); 
+            } 
+            
         }
     }
 }

@@ -41,6 +41,7 @@ namespace Code.Runtime.UI.Controller
                 .OnClickAsObservable()
                 .Subscribe(x =>
                 {
+                    _audioService.PlaySound("ClickButton");
                     _screenService.Close(this);
                 });
             
@@ -51,17 +52,29 @@ namespace Code.Runtime.UI.Controller
             
             _screenView.EquipButton
                 .OnClickAsObservable()
-                .Subscribe(x => Equip())
+                .Subscribe(x =>
+                {
+                    _audioService.PlaySound("ClickButton");
+                    Equip();
+                })
                 .AddTo(_disposable);
             
             _screenView.UnEquipButton
                 .OnClickAsObservable()
-                .Subscribe(x => UnEquip())
+                .Subscribe(x =>
+                {
+                    _audioService.PlaySound("ClickButton");
+                    UnEquip();
+                })
                 .AddTo(_disposable);
             
             _screenView.UnlockButton
                 .OnClickAsObservable()
-                .Subscribe(x => Unlock())
+                .Subscribe(x =>
+                {
+                    _audioService.PlaySound("ClickButton");
+                    Unlock();
+                })
                 .AddTo(_disposable);  
             
             _screenView.AbilityDescription.Show(false);

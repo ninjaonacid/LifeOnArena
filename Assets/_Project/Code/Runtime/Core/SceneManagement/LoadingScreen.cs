@@ -1,12 +1,14 @@
 using System.Collections;
+using Sirenix.Reflection.Editor;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Code.Runtime.Core.SceneManagement
 {
     public class LoadingScreen : MonoBehaviour, ILoadingScreen
     {
-        public CanvasGroup Curtain;
-
+        public CanvasGroup _loadingScreen;
+        public Image _progressBar;
         private void Awake()
         {
             DontDestroyOnLoad(this);
@@ -15,7 +17,7 @@ namespace Code.Runtime.Core.SceneManagement
         public void Show()
         {
             gameObject.SetActive(true);
-            Curtain.alpha = 1;
+            _loadingScreen.alpha = 1;
         }
 
         public void Hide()
@@ -23,11 +25,16 @@ namespace Code.Runtime.Core.SceneManagement
             StartCoroutine(DoFadeIn());
         }
 
+        public void UpdateProgress(float progress)
+        {
+            _progressBar.fillAmount = progress;
+        }
+
         private IEnumerator DoFadeIn()
         {
-            while (Curtain.alpha > 0)
+            while (_loadingScreen.alpha > 0)
             {
-                Curtain.alpha -= 0.03f;
+                _loadingScreen.alpha -= 0.03f;
                 yield return new WaitForSeconds(0.03f);
             }
 

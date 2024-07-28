@@ -39,11 +39,19 @@ namespace Code.Runtime.UI.Controller
 
             _windowView.CloseButton
                 .OnClickAsObservable()
-                .Subscribe(x => screenService.Close(this)).AddTo(_disposables);
+                .Subscribe(x =>
+                {
+                    _audioService.PlaySound("ClickButton");
+                    screenService.Close(this);
+                }).AddTo(_disposables);
 
             _windowView.WeaponContainer.Initialize();
             _windowView.WeaponContainer.OnWeaponCellSelectedAsObservable().Subscribe(WeaponSelected);
-            _windowView.EquipButton.OnClickAsObservable().Subscribe(x => EquipWeapon());
+            _windowView.EquipButton.OnClickAsObservable().Subscribe(x =>
+            {
+                _audioService.PlaySound("ClickButton");
+                EquipWeapon();
+            });
             UpdateView();
         }
 
@@ -76,7 +84,8 @@ namespace Code.Runtime.UI.Controller
             if (!_windowView.WeaponContainer.TryGetSelectedWeaponId(out var weaponId)) return;
             var weaponModel = _model.GetModel(weaponId);
             if (!weaponModel.isUnlocked) return;
-
+            
+            _audioService.PlaySound("Equip");
             _model.EquipWeapon(weaponId);
             _heroFactory.HeroGameObject.GetComponent<HeroWeapon>().EquipWeapon(weaponModel.WeaponId);
             UpdateView();

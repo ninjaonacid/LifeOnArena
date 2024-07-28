@@ -9,9 +9,10 @@ namespace Code.Runtime.UI.Buttons
         
         public void AnimateArrow()
         {
-            var movementDirection = _arrowUI.transform.forward;
-            
-           _arrowUI.Movement(_movementDistance * movementDirection);
+            Vector2 movementDirection = _arrowUI.RectTransform.up;
+            var arrowPos = _arrowUI.RectTransform.anchoredPosition;
+            Vector2 newPos = arrowPos + movementDirection * _movementDistance;
+           _arrowUI.Movement(newPos);
         }
     }
 }

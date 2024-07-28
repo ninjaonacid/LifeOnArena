@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Code.Runtime.ConfigData.Identifiers;
+using Code.Runtime.Core.Audio;
 using Code.Runtime.Modules.TutorialService;
 using Code.Runtime.Services.LevelLoaderService;
+using Code.Runtime.Services.SaveLoad;
 using Code.Runtime.UI.Model;
 using Code.Runtime.UI.Services;
 using Code.Runtime.UI.View;
@@ -17,7 +19,8 @@ namespace Code.Runtime.UI.Controller
         private List<TutorialElement> _tutorialElements;
 
 
-        public TutorialArenaSelectionController(LevelLoader levelLoader, TutorialService tutorialService) : base(levelLoader)
+        public TutorialArenaSelectionController(LevelLoader levelLoader, SaveLoadService saveLoad,
+            AudioService audioService, TutorialService tutorialService) : base(levelLoader, saveLoad, audioService)
         {
             _tutorialService = tutorialService;
         }
@@ -25,7 +28,7 @@ namespace Code.Runtime.UI.Controller
         public override void InitController(IScreenModel model, BaseWindowView windowView, ScreenService screenService)
         {
             base.InitController(model, windowView, screenService);
-            
+
             _tutorialElements = _view.GetComponentsInChildren<TutorialElement>().ToList();
 
             foreach (var element in _tutorialElements)
@@ -34,7 +37,6 @@ namespace Code.Runtime.UI.Controller
             }
 
             _tutorialService.OnElementHighlighted += HandleElementHighlighted;
-
         }
 
         public override void Dispose()

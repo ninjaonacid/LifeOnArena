@@ -45,11 +45,8 @@ namespace Code.Runtime.Core.Scopes
             builder.RegisterBuildCallback(container =>
             {
                 var enemyFactory = container.Resolve<EnemyFactory>();
-                var itemFactory = container.Resolve<ItemFactory>();
 
                 enemyFactory.InitAssets().Forget();
-                itemFactory.InitAssets().Forget();
-                
             });
         }
 

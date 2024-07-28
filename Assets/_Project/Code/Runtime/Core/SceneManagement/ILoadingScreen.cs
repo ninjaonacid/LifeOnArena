@@ -4,5 +4,6 @@ namespace Code.Runtime.Core.SceneManagement
     {
         void Show();
         void Hide();
+        void UpdateProgress(float progress);
     }
 }

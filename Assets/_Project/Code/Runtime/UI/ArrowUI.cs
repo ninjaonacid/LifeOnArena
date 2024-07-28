@@ -9,5 +9,6 @@ namespace Code.Runtime.UI
         {
             RectTransform.DOAnchorPos(movementDirection, 1).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo).SetLink(this.gameObject);
         }
+        
     }
 }

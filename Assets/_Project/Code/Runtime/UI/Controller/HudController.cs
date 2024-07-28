@@ -72,13 +72,15 @@ namespace Code.Runtime.UI.Controller
             SubscribeButtons();
 
             _eventSystem.Subscribe<BossSpawnEvent>(SubscribeBossHealthBar);
-            _eventSystem.Subscribe<BossKillEvent>(HideSettingsButton);
+            _eventSystem.Subscribe<BossKillEvent>(HandleBossKilledLogic);
             _eventSystem.Subscribe<LevelEndEvent>(ShowReturnToMenuButton);
+            
         }
 
-        private void HideSettingsButton(BossKillEvent bossKillEvent)
+        private void HandleBossKilledLogic(BossKillEvent bossKillEvent)
         {
             _windowView.SettingsButton.Show(false);
+            _windowView.BossHudHealthBar.Show(false);
         }
 
         private void SubscribeButtons()
@@ -176,7 +178,7 @@ namespace Code.Runtime.UI.Controller
             _disposable.Dispose();
             _eventSystem.Unsubscribe<BossSpawnEvent>(SubscribeBossHealthBar);
             _eventSystem.Unsubscribe<LevelEndEvent>(ShowReturnToMenuButton);
-            _eventSystem.Unsubscribe<BossKillEvent>(HideSettingsButton);
+            _eventSystem.Unsubscribe<BossKillEvent>(HandleBossKilledLogic);
         }
     }
 }

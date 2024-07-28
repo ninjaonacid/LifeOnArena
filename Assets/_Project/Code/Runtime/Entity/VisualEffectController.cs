@@ -42,7 +42,6 @@ namespace Code.Runtime.Entity
                 var effectTransform = effect.transform;
                 
                 Vector3 basePosition;
-                GameObject targetObject = null;
 
                 if (target != null)
                 {

@@ -50,8 +50,8 @@ namespace Code.Runtime.UI.Services
 
             _screenControllers.Add(typeof(ArenaSelectionScreenController),
                 () => gameData.PlayerData.TutorialData.IsTutorialCompleted
-                    ? new ArenaSelectionScreenController(levelLoader)
-                    : new TutorialArenaSelectionController(levelLoader, tutorialService));
+                    ? new ArenaSelectionScreenController(levelLoader, saveLoad, audioService)
+                    : new TutorialArenaSelectionController(levelLoader, saveLoad, audioService, tutorialService));
 
             _screenControllers.Add(typeof(RewardPopupController),
                 () => new RewardPopupController(localService, pauseService));

@@ -1,5 +1,7 @@
 ﻿using System;
+using Code.Runtime.Core.Audio;
 using Code.Runtime.Services.LevelLoaderService;
+using Code.Runtime.Services.SaveLoad;
 using Code.Runtime.UI.Model;
 using Code.Runtime.UI.Model.ArenaSelectionScreenModel;
 using Code.Runtime.UI.Services;
@@ -16,12 +18,16 @@ namespace Code.Runtime.UI.Controller
         protected ArenaSelectionScreenModel _model;
         protected ArenaSelectionScreenView _view;
         private readonly LevelLoader _levelLoader;
+        private readonly SaveLoadService _saveLoad;
+        private readonly AudioService _audioService;
+        
+        protected readonly CompositeDisposable _disposable = new();
 
-        protected CompositeDisposable _disposable = new();
-
-        public ArenaSelectionScreenController(LevelLoader levelLoader)
+        public ArenaSelectionScreenController(LevelLoader levelLoader, SaveLoadService saveLoad, AudioService audioService)
         {
             _levelLoader = levelLoader;
+            _saveLoad = saveLoad;
+            _audioService = audioService;
         }
 
         public virtual void InitController(IScreenModel model, BaseWindowView windowView, ScreenService screenService)
@@ -46,7 +52,10 @@ namespace Code.Runtime.UI.Controller
             
             _view.StartBattleButton
                 .OnClickAsObservable()
-                .Subscribe(x => StartBattle())
+                .Subscribe(x =>
+                {
+                    StartBattle();
+                })
                 .AddTo(_disposable);
             
             UpdateData();
@@ -76,8 +85,11 @@ namespace Code.Runtime.UI.Controller
             
             if (levelModel.IsUnlocked)
             {
-                if(locationId != -1)
+                if (locationId != -1)
+                {
+                    _saveLoad.SaveData();
                     _levelLoader.LoadLevel(locationId);
+                }
             }
         }
         

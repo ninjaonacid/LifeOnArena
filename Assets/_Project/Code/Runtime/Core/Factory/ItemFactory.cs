@@ -39,11 +39,7 @@ namespace Code.Runtime.Core.Factory
             _objectResolver = objectResolver;
             _poolProvider = poolProvider;
         }
-
-        public async UniTaskVoid InitAssets()
-        {
-            await _assetProvider.Load<GameObject>(AssetAddress.WeaponPlatformSpawner);
-        }
+        
 
         public WeaponData LoadWeapon(int weaponId)
         {
