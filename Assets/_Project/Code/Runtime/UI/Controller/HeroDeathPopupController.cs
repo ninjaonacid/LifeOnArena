@@ -119,6 +119,7 @@ namespace Code.Runtime.UI.Controller
             heroMovement.Warp(playerInitialPoint);
             heroHealth.Health.ResetHealth();
             heroDeath.Revive();
+            _playerControls.Enable();
         }
 
         public void Dispose()

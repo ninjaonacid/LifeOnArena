@@ -33,6 +33,7 @@ namespace Code.Runtime.Entity.Hero
         public void Revive()
         {
             _isDead = false;
+            _heroMovement.enabled = true;
             RevivedNumber++;
         }
 

@@ -29,7 +29,7 @@ namespace Code.Runtime.Entity.Hero.HeroStates
 
             _characterAnimator.PlayAnimation(_attackConfig.AnimationData.Hash);
 
-
+            _characterAnimator.SetAttackAnimationSpeed(_attackConfig.AttackAnimationSpeed);
             _vfxController.PlaySlashVisualEffect(
                 _attackConfig.SlashConfig.VisualEffect.Identifier, _attackConfig.SlashDirection, 
                 _attackConfig.SlashConfig.SlashSize, _attackConfig.SlashDelay).Forget();
