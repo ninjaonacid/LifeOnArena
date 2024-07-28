@@ -100,8 +100,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1b9610bc512e23488b3a409ae795f8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _abilitySlotFrame: {fileID: 0}
   _selectionFrame: {fileID: 0}
+  _equippedFrame: {fileID: 0}
   _lockIcon: {fileID: 0}
   _line: {fileID: 0}
   _abilityItem: {fileID: 0}
@@ -116,6 +116,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: AbilityTreeCell (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2459922960459365147, guid: 3b82e939c3b9902459fe5898e585575f, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 9f1d04355404c344d89f9bd2a8d3ed09, type: 2}
+    - target: {fileID: 2459922960459365147, guid: 3b82e939c3b9902459fe5898e585575f, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -6002676334442629458, guid: 9f1d04355404c344d89f9bd2a8d3ed09, type: 2}
     - target: {fileID: 5404366335466105168, guid: 3b82e939c3b9902459fe5898e585575f, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -233,6 +241,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: AbilityTreeCell (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 2459922960459365147, guid: 3b82e939c3b9902459fe5898e585575f, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 9f1d04355404c344d89f9bd2a8d3ed09, type: 2}
+    - target: {fileID: 2459922960459365147, guid: 3b82e939c3b9902459fe5898e585575f, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -6002676334442629458, guid: 9f1d04355404c344d89f9bd2a8d3ed09, type: 2}
     - target: {fileID: 5404366335466105168, guid: 3b82e939c3b9902459fe5898e585575f, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -358,6 +374,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: AbilityTreeCell (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 2459922960459365147, guid: 3b82e939c3b9902459fe5898e585575f, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 9f1d04355404c344d89f9bd2a8d3ed09, type: 2}
+    - target: {fileID: 2459922960459365147, guid: 3b82e939c3b9902459fe5898e585575f, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -6002676334442629458, guid: 9f1d04355404c344d89f9bd2a8d3ed09, type: 2}
     - target: {fileID: 2957422146246487659, guid: 3b82e939c3b9902459fe5898e585575f, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -479,6 +503,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: AbilityTreeCell (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 2459922960459365147, guid: 3b82e939c3b9902459fe5898e585575f, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 9f1d04355404c344d89f9bd2a8d3ed09, type: 2}
+    - target: {fileID: 2459922960459365147, guid: 3b82e939c3b9902459fe5898e585575f, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -6002676334442629458, guid: 9f1d04355404c344d89f9bd2a8d3ed09, type: 2}
     - target: {fileID: 5404366335466105168, guid: 3b82e939c3b9902459fe5898e585575f, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -608,6 +640,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: AbilityTreeCell
       objectReference: {fileID: 0}
+    - target: {fileID: 2459922960459365147, guid: 3b82e939c3b9902459fe5898e585575f, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 9f1d04355404c344d89f9bd2a8d3ed09, type: 2}
+    - target: {fileID: 2459922960459365147, guid: 3b82e939c3b9902459fe5898e585575f, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -6002676334442629458, guid: 9f1d04355404c344d89f9bd2a8d3ed09, type: 2}
     - target: {fileID: 2957422146246487659, guid: 3b82e939c3b9902459fe5898e585575f, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -729,6 +769,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: AbilityTreeCell (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 2459922960459365147, guid: 3b82e939c3b9902459fe5898e585575f, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 9f1d04355404c344d89f9bd2a8d3ed09, type: 2}
+    - target: {fileID: 2459922960459365147, guid: 3b82e939c3b9902459fe5898e585575f, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -6002676334442629458, guid: 9f1d04355404c344d89f9bd2a8d3ed09, type: 2}
     - target: {fileID: 5404366335466105168, guid: 3b82e939c3b9902459fe5898e585575f, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
