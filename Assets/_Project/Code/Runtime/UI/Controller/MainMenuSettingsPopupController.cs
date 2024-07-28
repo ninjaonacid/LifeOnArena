@@ -82,7 +82,7 @@ namespace Code.Runtime.UI.Controller
             _view.CloseButton.OnClickAsObservable()
                 .Subscribe(x =>
                 {
-                    
+                    _saveLoad.SaveData();
                     _screenService.Close(this);
                 });
         }

@@ -158,16 +158,22 @@ namespace Code.Runtime.Entity.Hero
            _stateMachine.AddTransition(new TransitionAfter(nameof(FirstAttackState), HeroIdle,
                _heroWeapon
                    .WeaponData
-                   .AttacksConfigs[0].ExitTime));
+                   .AttacksConfigs[0].AnimationData.Length / _heroWeapon
+                   .WeaponData
+                   .AttacksConfigs[0].AttackAnimationSpeed));
            
            _stateMachine.AddTransition(new TransitionAfter(nameof(SecondAttackState), HeroIdle,
                _heroWeapon
                    .WeaponData
-                   .AttacksConfigs[1].ExitTime));
+                   .AttacksConfigs[1].AnimationData.Length / _heroWeapon
+                   .WeaponData
+                   .AttacksConfigs[1].AttackAnimationSpeed));
            _stateMachine.AddTransition(new TransitionAfter(nameof(ThirdAttackState), HeroIdle,
                _heroWeapon
                    .WeaponData
-                   .AttacksConfigs[2].ExitTime - 0.2f));
+                   .AttacksConfigs[2].AnimationData.Length / _heroWeapon
+                   .WeaponData
+                   .AttacksConfigs[2].AttackAnimationSpeed));
 
             _stateMachine.AddTwoWayTransition(new Transition(
                 HeroIdle,

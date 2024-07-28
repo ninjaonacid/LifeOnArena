@@ -24,7 +24,7 @@ MonoBehaviour:
     SerializationNodes:
     - Name: UnlockRequirement
       Entry: 7
-      Data: 0|Code.Runtime.Modules.Requirements.LevelCompleteRequirement, Assembly-CSharp
+      Data: 0|Code.Runtime.Modules.Requirements.LevelCompleteRequirement, Runtime
     - Name: _levelId
       Entry: 10
       Data: 0
@@ -57,12 +57,6 @@ MonoBehaviour:
   IsBossLevel: 0
   LevelDifficulty: 2
   EnemySpawners:
-  - Id: FantasyArena_2_14638c5d-d277-4453-97e0-28c748ea9d54
-    SpawnCount: 3
-    TimeToSpawn: 1
-    MobId: {fileID: 11400000, guid: c926abab697947a4a9b6547139ee0e4d, type: 2}
-    Position: {x: -30.4, y: 0, z: 9.1}
-    EnemyType: 0
   - Id: FantasyArena_2_5c75f9ab-5034-40c1-8d6d-ae80105a4479
     SpawnCount: 1
     TimeToSpawn: 0
@@ -72,7 +66,7 @@ MonoBehaviour:
   - Id: FantasyArena 2_9ffeac14-8ce9-4c23-b3af-51a2cdd93909
     SpawnCount: 3
     TimeToSpawn: 1
-    MobId: {fileID: 11400000, guid: c926abab697947a4a9b6547139ee0e4d, type: 2}
+    MobId: {fileID: 11400000, guid: 45a4721211337914681937d214d0c029, type: 2}
     Position: {x: 22.7, y: 0, z: 5.3}
     EnemyType: 0
   - Id: FantasyArena 2_af73c76d-7dce-4df0-83ec-f18ad60142b6
@@ -84,8 +78,14 @@ MonoBehaviour:
   - Id: FantasyArena 2_46b9ae44-50df-409f-b3b4-0dea89c785a4
     SpawnCount: 3
     TimeToSpawn: 1
-    MobId: {fileID: 11400000, guid: c926abab697947a4a9b6547139ee0e4d, type: 2}
+    MobId: {fileID: 11400000, guid: 45a4721211337914681937d214d0c029, type: 2}
     Position: {x: -30.4, y: 0, z: 1.3}
+    EnemyType: 0
+  - Id: FantasyArena_2_14638c5d-d277-4453-97e0-28c748ea9d54
+    SpawnCount: 3
+    TimeToSpawn: 1
+    MobId: {fileID: 11400000, guid: 45a4721211337914681937d214d0c029, type: 2}
+    Position: {x: -30.4, y: 0, z: 9.1}
     EnemyType: 0
   HeroInitialPosition: {x: 0, y: 0, z: -37.4}
   HeroInitialRotation: {x: 0, y: 0, z: 0, w: 1}

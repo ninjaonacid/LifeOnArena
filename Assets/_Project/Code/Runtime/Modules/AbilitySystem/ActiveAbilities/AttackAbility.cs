@@ -15,7 +15,7 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
         public int MaxCombo { get; private set; } = 3;
         private float _comboWindow;
 
-        public override bool CanCombo => ComboCount < MaxCombo && 
+        public override bool CanCombo => ComboCount < MaxCombo &&
                                          State == AbilityState.Active &&
                                          _timer.Elapsed <= _comboWindow;
 
@@ -37,21 +37,24 @@ namespace Code.Runtime.Modules.AbilitySystem.ActiveAbilities
 
             AttackConfig attackConfig = default;
             attackConfig = weaponData.AttacksConfigs[ComboCount];
-            _comboWindow = attackConfig.AnimationData.Length;
+            float attackAnimationLength = attackConfig.AnimationData.Length;
+            float attackAnimationSpeed = attackConfig.AttackAnimationSpeed;
 
-            ActiveTime = attackConfig.ExitTime;
-            CurrentActiveTime = attackConfig.ExitTime;
-            
+            _comboWindow = attackAnimationLength / attackAnimationSpeed;
+
+            ActiveTime = attackAnimationLength / attackAnimationSpeed - 0.3f;
+
+            CurrentActiveTime = attackAnimationLength / attackAnimationSpeed - 0.3f;
+
             _audioService.PlaySound3D(weaponData.WeaponSound, caster.transform);
             ComboCount++;
-            
-            _timer.Reset(); 
+
+            _timer.Reset();
         }
 
         public void ResetComboCounter()
         {
             ComboCount = 0;
         }
-        
     }
 }

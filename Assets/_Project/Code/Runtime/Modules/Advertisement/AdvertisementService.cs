@@ -7,13 +7,16 @@ using Code.Runtime.Services.PauseService;
 using Code.Runtime.Services.PersistentProgress;
 using InstantGamesBridge;
 using InstantGamesBridge.Modules.Advertisement;
+using UnityEngine;
 using VContainer.Unity;
 
 namespace Code.Runtime.Modules.Advertisement
 {
     public class AdvertisementService : IInitializable, IDisposable
     {
-        public RewardedState RewardedState => Bridge.advertisement.rewardedState;
+        public event Action<RewardedState> OnRewardedStateChange;
+        
+        public RewardedState RewardedState { get; private set; }
         public InterstitialState InterstitialState => Bridge.advertisement.interstitialState;
 
         private readonly AudioService _audioService;
@@ -40,6 +43,7 @@ namespace Code.Runtime.Modules.Advertisement
         public void ShowReward()
         {
             Bridge.advertisement.ShowRewarded();
+           
         }
 
         public void ShowInterstitial()
@@ -86,19 +90,7 @@ namespace Code.Runtime.Modules.Advertisement
                     break;
             }
         }
-
-        private void OnRewardedStateChange(RewardedState state)
-        {
-            switch (state)
-            {
-                case RewardedState.Opened:
-                    break;
-                case RewardedState.Closed:
-                    break;
-                case RewardedState.Failed:
-                    break;
-            }
-        }
+        
 
         public void Dispose()
         {

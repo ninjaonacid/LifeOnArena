@@ -1,5 +1,6 @@
 using Code.Runtime.Core.Audio;
 using Code.Runtime.Services.PauseService;
+using Code.Runtime.Services.PersistentProgress;
 using Code.Runtime.Services.SaveLoad;
 using InstantGamesBridge.Modules.Game;
 using UnityEngine.Device;
@@ -12,12 +13,14 @@ namespace Code.Runtime.Modules.WebApplicationModule
         private readonly AudioService _audioService;
         private readonly PauseService _pauseService;
         private readonly SaveLoadService _saveLoad;
-
-        public WebAppController(AudioService audioService, PauseService pauseService, SaveLoadService saveLoad)
+        private readonly IGameDataContainer _gameData;
+        
+        public WebAppController(AudioService audioService, PauseService pauseService, SaveLoadService saveLoad, IGameDataContainer gameData)
         {
             _audioService = audioService;
             _pauseService = pauseService;
             _saveLoad = saveLoad;
+            _gameData = gameData;
         }
 
         public void Initialize()
@@ -40,7 +43,8 @@ namespace Code.Runtime.Modules.WebApplicationModule
                     break;
                 case VisibilityState.Visible:
                     _pauseService.UnpauseGame();
-                    _audioService.MuteAll(false);
+                    _audioService.MuteMusic(!_gameData.AudioData.isMusicOn);
+                    _audioService.MuteSounds(!_gameData.AudioData.isSoundOn);
                     break;
             }
         }

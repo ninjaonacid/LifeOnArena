@@ -32,7 +32,8 @@ namespace Code.Runtime.UI.Controller
         private readonly CompositeDisposable _disposables = new();
         private readonly CancellationTokenSource _cts = new();
 
-        public MainMenuController(IGameDataContainer gameData, AdvertisementService adService, AudioService audioService, SaveLoadService saveLoad, PauseService pauseService)
+        public MainMenuController(IGameDataContainer gameData, AdvertisementService adService,
+            AudioService audioService, SaveLoadService saveLoad, PauseService pauseService)
         {
             _gameData = gameData;
             _adService = adService;
@@ -97,19 +98,16 @@ namespace Code.Runtime.UI.Controller
 
             int completedLocations = _gameData.PlayerData.WorldData.LocationProgressData.CompletedLocations.Count;
 
-            if (completedLocations == 0)
-            {
-                return;
-            }
-
             if (completedLocations % 2 == 1)
             {
+                _adService.OnRewardedStateChange += HandleRewardedStateChange;
                 _windowView.RewardButton.OnClickAsObservable()
                     .Subscribe(x =>
                     {
-                        ShowAdTask(_cts.Token).Forget();
+                        
+                        _adService.ShowReward();
                     });
-
+                
                 _windowView.RewardButton.Show();
                 _windowView.RewardButton.PlayScaleAnimation();
             }
@@ -135,54 +133,37 @@ namespace Code.Runtime.UI.Controller
             statView.OnPlusClicked().Subscribe(_ => upgrade()).AddTo(_disposables);
         }
 
-        private async UniTask ShowAdTask(CancellationToken token)
+        private void HandleRewardedStateChange(RewardedState state)
         {
-            _adService.ShowReward();
-            RewardedState finalState;
-            bool wasRewarded = false;
-            do
+            switch (state)
             {
-                await UniTask.WaitUntil(() => _adService.RewardedState != RewardedState.Loading,
-                    cancellationToken: token);
-                finalState = _adService.RewardedState;
+                case RewardedState.Opened:
+                    _pauseService.PauseGame();
+                    _audioService.MuteSounds(true);
+                    _audioService.MuteMusic(true);
+                    break;
 
-                switch (finalState)
-                {
-                    case RewardedState.Opened:
-                        _pauseService.PauseGame();
-                        _audioService.MuteAll(true);
-                        break;
-                    
-                    case RewardedState.Rewarded:
-                        wasRewarded = true;
-                        break;
-                    
-                    case RewardedState.Closed:
-                        _audioService.MuteMusic(!_gameData.AudioData.isMusicOn);
-                        _audioService.MuteSounds(!_gameData.AudioData.isSoundOn);
-                        _pauseService.UnpauseGame();
-                        break;
-                    case RewardedState.Failed:
-                        _audioService.MuteMusic(!_gameData.AudioData.isMusicOn);
-                        _audioService.MuteSounds(!_gameData.AudioData.isSoundOn);
-                        _pauseService.UnpauseGame();
-                        break;
-                }
-                
-            } while (finalState != RewardedState.Closed | finalState != RewardedState.Failed);
+                case RewardedState.Rewarded:
+                    HandleSoulsReward();
+                    break;
 
-            if (wasRewarded)
-            {
-                Debug.Log("SOUL REWARDED");
-                HandleSoulsReward();
-                _windowView.RewardButton.Show(false);
+                case RewardedState.Closed:
+                    _audioService.MuteMusic(!_gameData.AudioData.isMusicOn);
+                    _audioService.MuteSounds(!_gameData.AudioData.isSoundOn);
+                    _pauseService.UnpauseGame();
+                    break;
+
+                case RewardedState.Failed:
+                    _audioService.MuteMusic(!_gameData.AudioData.isMusicOn);
+                    _audioService.MuteSounds(!_gameData.AudioData.isSoundOn);
+                    _pauseService.UnpauseGame();
+                    break;
             }
         }
 
         private void HandleSoulsReward()
         {
             _gameData.PlayerData.WorldData.LootData.Collect(1000);
-            Debug.Log("Player was rewarded");
             _saveLoad.SaveData();
         }
 
@@ -192,6 +173,7 @@ namespace Code.Runtime.UI.Controller
             _disposables.Dispose();
             _cts.Cancel();
             _cts.Dispose();
+            _adService.OnRewardedStateChange -= HandleRewardedStateChange;
         }
     }
 }

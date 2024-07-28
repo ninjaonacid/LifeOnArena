@@ -67,9 +67,11 @@ namespace Code.Runtime.UI.Controller
                 .Subscribe(x =>
                 {
                     _adService.ShowReward();
-                    WaitForAdTask(_cts.Token).Forget();
+                    
                 }).AddTo(_disposable);
-
+            
+            _adService.OnRewardedStateChange += HandleRewardedStateChange;
+            
             var heroDeath = _heroFactory.HeroGameObject.GetComponent<HeroDeath>();
 
             if (heroDeath.RevivedNumber >= _adService.ReviveRewardsPossible())
@@ -79,47 +81,33 @@ namespace Code.Runtime.UI.Controller
             }
         }
 
-        private async UniTask WaitForAdTask(CancellationToken token)
+        private void HandleRewardedStateChange(RewardedState state)
         {
-            RewardedState finalState;
-            bool wasRewarded = false;
-
-            do
+            switch (state)
             {
-                await UniTask.WaitUntil(() => _adService.RewardedState != RewardedState.Loading,
-                    cancellationToken: token);
-                finalState = _adService.RewardedState;
-
-                switch (finalState)
-                {
-                    case RewardedState.Opened:
-                        _playerControls.Disable();
-                        _pauseService.PauseGame();
-                        _audioService.MuteAll(true);
-                        break;
-                    case RewardedState.Rewarded:
-                        wasRewarded = true;
-                        break;
-                    case RewardedState.Closed:
-                        _audioService.MuteMusic(!_gameData.AudioData.isMusicOn);
-                        _audioService.MuteSounds(!_gameData.AudioData.isSoundOn);
-                        _pauseService.UnpauseGame();
-                        break;
-                    case RewardedState.Failed:
-                        _audioService.MuteMusic(!_gameData.AudioData.isMusicOn);
-                        _audioService.MuteSounds(!_gameData.AudioData.isSoundOn);
-                        _pauseService.UnpauseGame();
-                        break;
-                }
+                case RewardedState.Opened:
+                    _pauseService.PauseGame();
+                    _audioService.MuteSounds(true);
+                    _audioService.MuteMusic(true);
+                    break;
                 
-            } while (finalState != RewardedState.Closed | finalState != RewardedState.Failed);
+                case RewardedState.Rewarded:
+                    HandleReviveHero();
+                    break;
 
-            if (wasRewarded)
-            {
-                HandleReviveHero();
+                case RewardedState.Closed:
+                    _audioService.MuteMusic(!_gameData.AudioData.isMusicOn);
+                    _audioService.MuteSounds(!_gameData.AudioData.isSoundOn);
+                    _pauseService.UnpauseGame();
+                    break;
+
+                case RewardedState.Failed:
+                    _audioService.MuteMusic(!_gameData.AudioData.isMusicOn);
+                    _audioService.MuteSounds(!_gameData.AudioData.isSoundOn);
+                    _pauseService.UnpauseGame();
+                    break;
             }
         }
-
         private void HandleReviveHero()
         {
             var playerInitialPoint = _levelLoader.GetCurrentLevelConfig().HeroInitialPosition;
@@ -138,6 +126,7 @@ namespace Code.Runtime.UI.Controller
         {
             _disposable.Dispose();
             _cts.Cancel();
+            _adService.OnRewardedStateChange -= HandleRewardedStateChange;
         }
     }
 }

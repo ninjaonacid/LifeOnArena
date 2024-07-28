@@ -16,5 +16,7 @@ namespace Code.Runtime.ConfigData.Attack
         public float AnimationSpeedUpThreshold = 0.2f;
         [Title("Animation exit time")]
         public float ExitTime;
+
+        public float AttackAnimationSpeed = 1f;
     }
 }

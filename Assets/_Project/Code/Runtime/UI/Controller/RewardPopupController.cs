@@ -36,7 +36,7 @@ namespace Code.Runtime.UI.Controller
             if (_model.RewardDto is WeaponRewardDto weaponRewardDto)
             {
                 _view.RewardIcon.sprite = weaponRewardDto.WeaponData.WeaponIcon;
-                _view.RewardName.text = weaponRewardDto.WeaponData.name;
+                _view.RewardName.text = weaponRewardDto.WeaponData.WeaponName.GetLocalizedString();
                 _view.ClaimButton.ButtonText.text = _localService.GetLocalizedString("ToInventory");
             }
             else if (_model.RewardDto is SoulRewardDto soulRewardDto)

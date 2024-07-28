@@ -27,7 +27,7 @@ namespace Code.Runtime.Entity.Hero.HeroStates
             
             _attackConfig = _heroWeapon.WeaponData.AttacksConfigs[0];
             _characterAnimator.PlayAnimation(_attackConfig.AnimationData.Hash);
-            
+            _characterAnimator.SetAttackAnimationSpeed(_attackConfig.AttackAnimationSpeed);
             _vfxController.PlaySlashVisualEffect(
                 _attackConfig.SlashConfig.VisualEffect.Identifier, _attackConfig.SlashDirection, 
                 _attackConfig.SlashConfig.SlashSize, _attackConfig.SlashDelay).Forget();
