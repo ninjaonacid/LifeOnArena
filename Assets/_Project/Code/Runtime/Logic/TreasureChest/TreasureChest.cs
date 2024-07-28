@@ -1,3 +1,4 @@
+using Code.Runtime.Core.Audio;
 using Code.Runtime.Modules.RewardSystem;
 using Code.Runtime.UI.Services;
 using PrimeTween;
@@ -12,15 +13,9 @@ namespace Code.Runtime.Logic.TreasureChest
         [SerializeField] private GameObject _chestLid;
 
         private ScreenService _screenService;
-
+        
         private IReward _reward;
         
-        [Inject]
-        private void Construct(ScreenService screenService)
-        {
-            _screenService = screenService;
-        }
-
         public void SetReward(IReward reward)
         {
             _reward = reward;

@@ -11,7 +11,7 @@ namespace Code.Runtime.ConfigData.Reward
         
         public override IReward GetReward()
         {
-            return new WeaponReward(_weapon, _playerData, _screenService);
+            return new WeaponReward(_weapon, _playerData, _screenService, _audioService);
         }
     }
 }

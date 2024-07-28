@@ -98,7 +98,7 @@ namespace Code.Runtime.UI.Controller
 
             int completedLocations = _gameData.PlayerData.WorldData.LocationProgressData.CompletedLocations.Count;
 
-            if (completedLocations % 2 == 1)
+            if (completedLocations % 2 != 1)
             {
                 _adService.OnRewardedStateChange += HandleRewardedStateChange;
                 _windowView.RewardButton.OnClickAsObservable()
@@ -145,6 +145,7 @@ namespace Code.Runtime.UI.Controller
 
                 case RewardedState.Rewarded:
                     HandleSoulsReward();
+                    _windowView.RewardButton.Show(false);
                     break;
 
                 case RewardedState.Closed:

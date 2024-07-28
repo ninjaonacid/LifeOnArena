@@ -61,6 +61,7 @@ namespace Code.Runtime.Logic.EnemySpawners
             
             var monster = await _factory.CreateMonster(MobId.Id, transform, token, onCreate: OnSpawn);
             
+            monster.transform.SetParent(gameObject.transform);
             monster.GetComponent<NavMeshMoveToPlayer>().Warp(position);
             
             _enemyDeath = monster.GetComponent<EnemyDeath>();

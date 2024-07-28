@@ -7,6 +7,7 @@ using Code.Runtime.Services.PauseService;
 using Code.Runtime.Services.PersistentProgress;
 using InstantGamesBridge;
 using InstantGamesBridge.Modules.Advertisement;
+using UnityEditor;
 using UnityEngine;
 using VContainer.Unity;
 
@@ -15,9 +16,6 @@ namespace Code.Runtime.Modules.Advertisement
     public class AdvertisementService : IInitializable, IDisposable
     {
         public event Action<RewardedState> OnRewardedStateChange;
-        
-        public RewardedState RewardedState { get; private set; }
-        public InterstitialState InterstitialState => Bridge.advertisement.interstitialState;
 
         private readonly AudioService _audioService;
         private readonly PauseService _pauseService;
@@ -54,7 +52,7 @@ namespace Code.Runtime.Modules.Advertisement
         public void Initialize()
         {
             _adsConfig = _configProvider.GetAdsConfig();
-            Bridge.advertisement.rewardedStateChanged += OnRewardedStateChange;
+            Bridge.advertisement.rewardedStateChanged += HandleRewardedStateChange;
             Bridge.advertisement.interstitialStateChanged += OnInterstitialStateChange;
         }
 
@@ -87,6 +85,31 @@ namespace Code.Runtime.Modules.Advertisement
                     }
 
                     _pauseService.UnpauseGame();
+                    break;
+            }
+        }
+
+        private void HandleRewardedStateChange(RewardedState state)
+        {
+            switch (state)
+            {
+                case RewardedState.Loading:
+                    OnRewardedStateChange?.Invoke(state);
+                    break;
+                case RewardedState.Opened:
+                    OnRewardedStateChange?.Invoke(state);
+                    break;
+                case RewardedState.Failed:
+                    OnRewardedStateChange?.Invoke(state);
+                    break;
+                case RewardedState.Closed:
+                    OnRewardedStateChange?.Invoke(state);
+                    break;
+                case RewardedState.Rewarded:
+                    OnRewardedStateChange?.Invoke(state);
+                    break;
+                
+                default:
                     break;
             }
         }

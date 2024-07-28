@@ -113,6 +113,7 @@ namespace Code.Runtime.Core.ObjectPool
             if (obj != null)
             {
                 obj.gameObject.SetActive(false);
+                obj.transform.SetParent(_poolRoot.transform);
                 _onReturn?.Invoke(typedObject);
             }
         }

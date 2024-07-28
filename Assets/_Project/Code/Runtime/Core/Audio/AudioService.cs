@@ -148,9 +148,20 @@ namespace Code.Runtime.Core.Audio
                 channel.AudioSource.mute = value;
             }
         }
-
+        
         public void PlaySound(SoundAudioFile sound) => PlaySoundInternal(sound);
 
+        public void PlaySound(string soundId)
+        {
+            var sound = _audioLibrary.Sounds.FirstOrDefault(x => x.Id == soundId);
+            if (sound == null)
+            {
+                Debug.LogError("No sound in library with name " + soundId);
+                return;
+            }
+
+            PlaySoundInternal(sound);
+        }
         public void PlaySound3D(string soundName, Transform soundTransform, float volume = 1f)
         {
             var sound = _audioLibrary.Sounds.FirstOrDefault(x => x.Id == soundName);

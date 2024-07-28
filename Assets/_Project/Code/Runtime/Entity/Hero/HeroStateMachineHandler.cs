@@ -89,7 +89,7 @@ namespace Code.Runtime.Entity.Hero
                 _heroMovement,
                 _heroRotation,
                 _animationData, true,
-                canExit: (state) => state.Timer.Elapsed >= _heroAbilityController.ActiveAbility.ActiveTime));
+                canExit: (state) => _heroAbilityController.ActiveAbility == null));
 
             _stateMachine.AddState(nameof(HeroStompAbilityState), new HeroStompAbilityState(
                 _heroWeapon,

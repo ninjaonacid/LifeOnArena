@@ -34,13 +34,13 @@ namespace Code.Runtime.UI.Services
 
             _screenControllers.Add(typeof(WeaponScreenController),
                 () => gameData.PlayerData.TutorialData.IsTutorialCompleted
-                    ? new WeaponScreenController(heroFactory)
-                    : new TutorialWeaponScreenController(heroFactory, tutorialService));
+                    ? new WeaponScreenController(heroFactory, audioService)
+                    : new TutorialWeaponScreenController(heroFactory, audioService, tutorialService));
 
             _screenControllers.Add(typeof(AbilityScreenController), () =>
                 gameData.PlayerData.TutorialData.IsTutorialCompleted
-                    ? new AbilityScreenController(saveLoad)
-                    : new TutorialAbilityScreenController(saveLoad, tutorialService));
+                    ? new AbilityScreenController(saveLoad, audioService)
+                    : new TutorialAbilityScreenController(saveLoad, audioService, tutorialService));
 
             _screenControllers.Add(typeof(HudController), () =>
                 new HudController(gameData, heroFactory, levelLoader, eventSystem, adService, pauseService,

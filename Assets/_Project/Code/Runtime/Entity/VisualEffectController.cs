@@ -49,6 +49,7 @@ namespace Code.Runtime.Entity
                     basePosition = target.transform.position;
                    
                     effect.transform.position = CalculatePlayPositionTarget(effectData.PlayPosition, target);
+                    effect.transform.SetParent(target.transform);
                 }
                 else
                 {

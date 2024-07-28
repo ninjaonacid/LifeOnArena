@@ -1,4 +1,5 @@
 using System;
+using Code.Runtime.Core.Audio;
 using Code.Runtime.Services.SaveLoad;
 using Code.Runtime.UI.Model;
 using Code.Runtime.UI.Model.AbilityMenu;
@@ -14,12 +15,15 @@ namespace Code.Runtime.UI.Controller
     {
         protected AbilityScreenModel _model;
         protected AbilityScreenView _screenView;
+
+        private AudioService _audioService;
         private ScreenService _screenService;
         private readonly SaveLoadService _saveLoad;
         protected readonly CompositeDisposable _disposable = new CompositeDisposable();
-        public AbilityScreenController(SaveLoadService saveLoad)
+        public AbilityScreenController(SaveLoadService saveLoad, AudioService audioService)
         {
             _saveLoad = saveLoad;
+            _audioService = audioService;
         }
 
         public virtual void InitController(IScreenModel model, BaseWindowView windowView, ScreenService screenService)
@@ -90,6 +94,8 @@ namespace Code.Runtime.UI.Controller
 
         private void AbilitySelected(int abilityIndex)
         {
+            _audioService.PlaySound("Select");
+            
             var isEquipped = _model.IsAbilityEquipped(abilityIndex);
             var isUnlocked = _model.IsAbilityUnlocked(abilityIndex);
             
@@ -120,6 +126,7 @@ namespace Code.Runtime.UI.Controller
         {
             if (_screenView.AbilityContainer.TryGetSelectedSlotIndex(out var index))
             {
+                _audioService.PlaySound("Equip");
                 _model.UnEquipAbility(index);
                 AbilitySelected(index);
             };
@@ -132,6 +139,7 @@ namespace Code.Runtime.UI.Controller
             if (_screenView.AbilityContainer.TryGetSelectedSlotIndex(out var index))
             {
                 _model.EquipAbility(index);
+                _audioService.PlaySound("Equip");
                 AbilitySelected(index);
             };
 

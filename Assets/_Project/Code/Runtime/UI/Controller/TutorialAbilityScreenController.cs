@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Code.Runtime.ConfigData.Identifiers;
+using Code.Runtime.Core.Audio;
 using Code.Runtime.Modules.TutorialService;
 using Code.Runtime.Services.SaveLoad;
 using Code.Runtime.UI.Model;
@@ -14,8 +15,9 @@ namespace Code.Runtime.UI.Controller
     {
         private readonly TutorialService _tutorialService;
         private List<TutorialElement> _tutorialElements = new();
- 
-        public TutorialAbilityScreenController(SaveLoadService saveLoad, TutorialService tutorialService) : base(saveLoad)
+
+
+        public TutorialAbilityScreenController(SaveLoadService saveLoad, AudioService audioService, TutorialService tutorialService) : base(saveLoad, audioService)
         {
             _tutorialService = tutorialService;
         }

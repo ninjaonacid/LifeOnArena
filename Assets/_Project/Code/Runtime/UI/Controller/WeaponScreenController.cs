@@ -1,4 +1,5 @@
 using System;
+using Code.Runtime.Core.Audio;
 using Code.Runtime.Core.Factory;
 using Code.Runtime.Entity.Hero;
 using Code.Runtime.UI.Model;
@@ -15,13 +16,17 @@ namespace Code.Runtime.UI.Controller
     {
         private WeaponScreenModel _model;
         protected WeaponScreenView _windowView;
+        
+        
         private readonly CompositeDisposable _disposables = new();
 
+        private readonly AudioService _audioService;
         private readonly HeroFactory _heroFactory;
 
-        public WeaponScreenController(HeroFactory heroFactory)
+        public WeaponScreenController(HeroFactory heroFactory, AudioService audioService)
         {
             _heroFactory = heroFactory;
+            _audioService = audioService;
         }
 
         public virtual void InitController(IScreenModel model, BaseWindowView windowView, ScreenService screenService)
@@ -59,6 +64,8 @@ namespace Code.Runtime.UI.Controller
 
         private void WeaponSelected(int index)
         {
+            _audioService.PlaySound("Select");
+            
             if (_model.IsEquipped(index))
             {
             }

@@ -27,16 +27,6 @@ namespace Code.Runtime.Modules.TutorialService
             if (_canvas != null) _canvas.blocksRaycasts = !value;
         }
 
-        public void Show()
-        {
-            
-        }
-
-        public void Hide()
-        {
-            
-        }
-
         public TutorialElementIdentifier GetId() => _elementId;
     }
 }

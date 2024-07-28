@@ -9,8 +9,8 @@ namespace Code.Runtime.Entity.Hero.HeroStates
     public class SpinAbilityState : HeroBaseAbilityState
     {
         private readonly HeroAttackComponent _heroAttack;
-        private float _damageInterval = 0.5f;
-        private ITimer _intervalTimer;
+        private readonly float _damageInterval = 0.5f;
+        private readonly ITimer _intervalTimer;
         public SpinAbilityState(HeroWeapon heroWeapon, HeroAttackComponent heroAttack, HeroAbilityController heroAbilityController, CharacterAnimator characterAnimator,
             HeroMovement heroMovement, HeroRotation heroRotation, AnimationDataContainer animationData,
             bool needExitTime = false, bool isGhostState = false, Action<State<string, string>> onEnter = null,

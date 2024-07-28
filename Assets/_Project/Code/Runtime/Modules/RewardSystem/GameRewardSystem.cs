@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Code.Runtime.ConfigData.Reward;
+using Code.Runtime.Core.Audio;
 using Code.Runtime.Core.Config;
 using Code.Runtime.Logic;
 using Code.Runtime.Logic.TreasureChest;
@@ -16,13 +17,16 @@ namespace Code.Runtime.Modules.RewardSystem
         private readonly IGameDataContainer _gameData;
         private readonly IObjectResolver _objectResolver;
         private readonly ScreenService _screenService;
+        private readonly AudioService _audioService;
 
-        public GameRewardSystem(ConfigProvider configs, IGameDataContainer gameData, IObjectResolver objectResolver, ScreenService screenService)
+        public GameRewardSystem(ConfigProvider configs, IGameDataContainer gameData, IObjectResolver objectResolver,
+            ScreenService screenService, AudioService audioService)
         {
             _configs = configs;
             _gameData = gameData;
             _objectResolver = objectResolver;
             _screenService = screenService;
+            _audioService = audioService;
         }
 
         public IReward CreateReward(int rewardId)
@@ -33,7 +37,7 @@ namespace Code.Runtime.Modules.RewardSystem
         public TreasureChest CreateTreasureWithReward(int rewardId, TreasureChest treasurePrefab)
         {
             var rewardConfig = _configs.Reward(rewardId);
-            rewardConfig.InjectServices(_gameData.PlayerData, _screenService);
+            rewardConfig.InjectServices(_gameData.PlayerData, _screenService, _audioService);
             _objectResolver.Instantiate(rewardConfig);
             IReward reward = rewardConfig.GetReward();
             reward.RewardIdentifier = rewardConfig.RewardId;
@@ -46,36 +50,34 @@ namespace Code.Runtime.Modules.RewardSystem
         public TreasureChest CreateTreasureWithReward(List<RewardBlueprintBase> possibleRewards,
             TreasureChest chestPrefab)
         {
-            
             IReward reward;
-            
+
             foreach (var rewardBlueprint in possibleRewards)
             {
                 if (rewardBlueprint.IsOneTimeReward)
                 {
-                    if(rewardBlueprint.ClaimRequirement.CheckRequirement(_gameData.PlayerData))
+                    if (rewardBlueprint.ClaimRequirement.CheckRequirement(_gameData.PlayerData))
                     {
-                        rewardBlueprint.InjectServices(_gameData.PlayerData, _screenService);
+                        rewardBlueprint.InjectServices(_gameData.PlayerData, _screenService, _audioService);
                         reward = rewardBlueprint.GetReward();
                         reward.RewardIdentifier = rewardBlueprint.RewardId;
                         reward.IsOneTimeReward = rewardBlueprint.IsOneTimeReward;
                         break;
                     }
-                } 
+                }
             }
 
             return null;
-            
         }
 
         public TreasureChest CreateTreasureWithReward(RewardBlueprintBase mainReward,
             RewardBlueprintBase secondReward, TreasureChest chestPrefab)
         {
-            IReward reward; 
+            IReward reward;
 
             if (mainReward.ClaimRequirement.CheckRequirement(_gameData.PlayerData))
             {
-                mainReward.InjectServices(_gameData.PlayerData, _screenService);
+                mainReward.InjectServices(_gameData.PlayerData, _screenService,_audioService);
                 reward = mainReward.GetReward();
                 reward.RewardIdentifier = mainReward.RewardId;
                 reward.IsOneTimeReward = mainReward.IsOneTimeReward;
@@ -83,7 +85,7 @@ namespace Code.Runtime.Modules.RewardSystem
             }
             else
             {
-                secondReward.InjectServices(_gameData.PlayerData, _screenService);
+                secondReward.InjectServices(_gameData.PlayerData, _screenService, _audioService);
                 reward = secondReward.GetReward();
                 reward.RewardIdentifier = secondReward.RewardId;
                 reward.IsOneTimeReward = secondReward.IsOneTimeReward;

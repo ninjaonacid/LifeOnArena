@@ -99,6 +99,7 @@ namespace Code.Runtime.UI.Controller
                     _audioService.MuteMusic(!_gameData.AudioData.isMusicOn);
                     _audioService.MuteSounds(!_gameData.AudioData.isSoundOn);
                     _pauseService.UnpauseGame();
+                    _screenService.Close(this);
                     break;
 
                 case RewardedState.Failed:
@@ -118,8 +119,6 @@ namespace Code.Runtime.UI.Controller
             heroMovement.Warp(playerInitialPoint);
             heroHealth.Health.ResetHealth();
             heroDeath.Revive();
-
-            _screenService.Close(this);
         }
 
         public void Dispose()

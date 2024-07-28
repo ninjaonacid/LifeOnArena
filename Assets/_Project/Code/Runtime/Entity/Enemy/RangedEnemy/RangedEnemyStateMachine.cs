@@ -64,7 +64,7 @@ namespace Code.Runtime.Entity.Enemy.RangedEnemy
             _fsm.AddTransition(new Transition(
                 nameof(EnemyChaseState),
                 nameof(EnemyCastState),
-                (transition) => _enemyCastComponent.CanAttack()));
+                (transition) => _enemyCastComponent.CanAttack() && _enemyTarget.HasTarget()));
 
             _fsm.AddTransition(new TransitionAfter(
                 nameof(EnemyCastState),
