@@ -143,6 +143,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canvasGroup: {fileID: 266977353701108312}
+  RectTransform: {fileID: 8721422002253735572}
   _highlightColor:
     serializedVersion: 2
     rgba: 4279228157
@@ -153,8 +154,8 @@ MonoBehaviour:
     serializedVersion: 2
     rgba: 4294967295
   _buttonImage: {fileID: 1014147999253082310}
-  OnImage: {fileID: 5608525475840575669}
-  OffImage: {fileID: 273621103031043390}
+  _onImage: {fileID: 0}
+  _offImage: {fileID: 0}
 --- !u!222 &1932639856711996698
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -183,7 +184,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a55540f89e777394987f924199bdc802, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 39b9215fa9d1494458fb8cd3db811e73, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

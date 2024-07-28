@@ -54,6 +54,7 @@ namespace Code.Runtime.UI.Controller
                 .OnClickAsObservable()
                 .Subscribe(x =>
                 {
+                    _audioService.PlaySound("ClickButton");
                     StartBattle();
                 })
                 .AddTo(_disposable);

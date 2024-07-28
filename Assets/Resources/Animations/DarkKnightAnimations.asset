@@ -20,6 +20,7 @@ MonoBehaviour:
     - {fileID: 7400000, guid: c6abee8685ca60d4584bb0b342e85511, type: 2}
     - {fileID: 7400000, guid: 6aaa21394771e0f46be3b0350183adb6, type: 2}
     - {fileID: 7400000, guid: b0524780309f22e4ca40d49fbe215ce4, type: 2}
+    - {fileID: 7400000, guid: 052a6e52779244d43b12cf7d25c8f384, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -28,12 +29,11 @@ MonoBehaviour:
     - Name: Animations
       Entry: 7
       Data: 0|System.Collections.Generic.Dictionary`2[[Code.Runtime.ConfigData.Animations.AnimationKey,
-        Assembly-CSharp],[Code.Runtime.ConfigData.Animations.AnimationData, Assembly-CSharp]],
-        mscorlib
+        Runtime],[Code.Runtime.ConfigData.Animations.AnimationData, Runtime]], mscorlib
     - Name: comparer
       Entry: 7
       Data: 1|System.Collections.Generic.EnumEqualityComparer`1[[Code.Runtime.ConfigData.Animations.AnimationKey,
-        Assembly-CSharp]], mscorlib
+        Runtime]], mscorlib
     - Name: 
       Entry: 12
       Data: 0
@@ -45,7 +45,7 @@ MonoBehaviour:
       Data: 
     - Name: 
       Entry: 12
-      Data: 4
+      Data: 5
     - Name: 
       Entry: 7
       Data: 
@@ -54,7 +54,7 @@ MonoBehaviour:
       Data: 7
     - Name: $v
       Entry: 7
-      Data: 2|Code.Runtime.ConfigData.Animations.AnimationData, Assembly-CSharp
+      Data: 2|Code.Runtime.ConfigData.Animations.AnimationData, Runtime
     - Name: clip
       Entry: 10
       Data: 0
@@ -81,7 +81,7 @@ MonoBehaviour:
       Data: 4
     - Name: $v
       Entry: 7
-      Data: 3|Code.Runtime.ConfigData.Animations.AnimationData, Assembly-CSharp
+      Data: 3|Code.Runtime.ConfigData.Animations.AnimationData, Runtime
     - Name: clip
       Entry: 10
       Data: 1
@@ -108,7 +108,7 @@ MonoBehaviour:
       Data: 8
     - Name: $v
       Entry: 7
-      Data: 4|Code.Runtime.ConfigData.Animations.AnimationData, Assembly-CSharp
+      Data: 4|Code.Runtime.ConfigData.Animations.AnimationData, Runtime
     - Name: clip
       Entry: 10
       Data: 2
@@ -135,7 +135,7 @@ MonoBehaviour:
       Data: 6
     - Name: $v
       Entry: 7
-      Data: 5|Code.Runtime.ConfigData.Animations.AnimationData, Assembly-CSharp
+      Data: 5|Code.Runtime.ConfigData.Animations.AnimationData, Runtime
     - Name: clip
       Entry: 10
       Data: 3
@@ -148,6 +148,33 @@ MonoBehaviour:
     - Name: AnimationName
       Entry: 1
       Data: KneeDeath
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 
+    - Name: $k
+      Entry: 3
+      Data: 5
+    - Name: $v
+      Entry: 7
+      Data: 6|Code.Runtime.ConfigData.Animations.AnimationData, Runtime
+    - Name: clip
+      Entry: 10
+      Data: 4
+    - Name: <Length>k__BackingField
+      Entry: 4
+      Data: 1.66666675
+    - Name: <Hash>k__BackingField
+      Entry: 3
+      Data: 1654612129
+    - Name: AnimationName
+      Entry: 1
+      Data: Hit
     - Name: 
       Entry: 8
       Data: 
