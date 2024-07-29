@@ -1,5 +1,3 @@
-using System;
-using Code.Runtime.Logic.Animator;
 using UnityEngine;
 
 namespace Code.Runtime.Entity.Enemy
@@ -11,14 +9,11 @@ namespace Code.Runtime.Entity.Enemy
 
         private Animator _enemyAnimator;
 
-        public AnimatorState State { get; private set; }
-
         public void PlayAnimation(int hash)
         {
             _enemyAnimator.CrossFade(hash, 0.1f);
             
         }
-
         private void Awake()
         {
             _enemyAnimator = GetComponent<Animator>();

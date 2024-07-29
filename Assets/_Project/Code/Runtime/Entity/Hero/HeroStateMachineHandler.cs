@@ -1,15 +1,12 @@
 using Code.Runtime.ConfigData.Animations;
 using Code.Runtime.ConfigData.Identifiers;
 using Code.Runtime.Core.Audio;
-using Code.Runtime.Core.Config;
 using Code.Runtime.Entity.EntitiesComponents;
 using Code.Runtime.Entity.Hero.HeroStates;
 using Code.Runtime.Logic;
-using Code.Runtime.Logic.Animator;
 using Code.Runtime.Modules.AbilitySystem;
 using Code.Runtime.Modules.AbilitySystem.ActiveAbilities;
 using Code.Runtime.Modules.StateMachine;
-using Code.Runtime.Modules.StateMachine.States;
 using Code.Runtime.Modules.StateMachine.Transitions;
 using UnityEngine;
 using VContainer;
@@ -32,8 +29,7 @@ namespace Code.Runtime.Entity.Hero
         [SerializeField] private AbilityIdentifier _spinAttackAbilityId;
         [SerializeField] private AbilityIdentifier _stompAbilityId;
         [SerializeField] private AbilityIdentifier _waveSlashAbilityId;
-
-        [SerializeField] private AnimationEventReceiver _eventReceiver;
+        
         [SerializeField] private CharacterAnimator CharacterAnimator;
         [SerializeField] private HeroMovement _heroMovement;
         [SerializeField] private HeroRotation _heroRotation;

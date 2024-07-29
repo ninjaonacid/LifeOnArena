@@ -1,27 +1,17 @@
-using Code.Runtime.Services.BattleService;
 using UnityEngine;
-using VContainer;
 
 namespace Code.Runtime.Entity.Enemy
 {
-    [RequireComponent(typeof(EnemyAnimator))]
     public class EnemyAttackComponent : EntityAttackComponent
     {
         [SerializeField] private float _attackInterval;
-        private float _attackCooldown;
-        private bool _meleeAttackIsActive;
         public bool TargetInMeleeAttackRange => _meleeAttackIsActive;
         
+        private float _attackCooldown;
+        
+        private bool _meleeAttackIsActive;
         private bool _isAttacking;
         
-        private BattleService _battleService;
-        
-        [Inject]
-        public void Construct(BattleService battleService)
-        {
-            _battleService = battleService;
-        }
-
         private void OnDisable()
         {
             _meleeAttackIsActive = false;

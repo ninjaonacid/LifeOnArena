@@ -1,4 +1,4 @@
-using Code.Runtime.Logic.Animator;
+
 using UnityEngine;
 
 namespace Code.Runtime.Entity.EntitiesComponents
@@ -6,13 +6,11 @@ namespace Code.Runtime.Entity.EntitiesComponents
     [RequireComponent(typeof(Animator))]
     public class CharacterAnimator : MonoBehaviour
     {
-        private static int AnimationSpeed = Animator.StringToHash("AnimationSpeed");
-        private static int AttackSpeed = Animator.StringToHash("AttackSpeed");
-        
+        private static readonly int AnimationSpeed = Animator.StringToHash("AnimationSpeed");
+        private static readonly int AttackSpeed = Animator.StringToHash("AttackSpeed");
         
         [SerializeField] private Animator _characterAnimator;
-
-        public AnimatorState State { get; private set; }
+        
 
         public void PlayAnimation(int hash)
         {
