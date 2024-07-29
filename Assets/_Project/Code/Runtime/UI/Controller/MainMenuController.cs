@@ -150,6 +150,7 @@ namespace Code.Runtime.UI.Controller
             {
                 _audioService.PlaySound("ClickButton");
                 upgrade();
+                _saveLoad.SaveData();
             }).AddTo(_disposables);
         }
 
