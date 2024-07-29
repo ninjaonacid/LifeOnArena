@@ -66,6 +66,7 @@ namespace Code.Runtime.UI.Controller
                     _model.ChangeMusicState(!_model.IsMusicOn);
                     _audioService.MuteMusic(!_model.IsMusicOn);
                     _view.MusicButton.SetButton(_model.IsMusicOn);
+                    _saveLoad.SaveData();
                 });
 
             _view.SoundButton.OnClickAsObservable()
@@ -74,6 +75,7 @@ namespace Code.Runtime.UI.Controller
                     _model.ChangeSoundState(!_model.IsSoundOn);
                     _audioService.MuteSounds(!_model.IsSoundOn);
                     _view.SoundButton.SetButton(_model.IsSoundOn);
+                    _saveLoad.SaveData();
                 });
         }
 
@@ -82,7 +84,6 @@ namespace Code.Runtime.UI.Controller
             _view.CloseButton.OnClickAsObservable()
                 .Subscribe(x =>
                 {
-                    _saveLoad.SaveData();
                     _screenService.Close(this);
                 });
         }

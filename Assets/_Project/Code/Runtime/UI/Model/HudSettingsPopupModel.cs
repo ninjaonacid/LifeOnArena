@@ -1,4 +1,4 @@
-﻿using Code.Runtime.Services.PersistentProgress;
+﻿using Code.Runtime.Data;
 
 namespace Code.Runtime.UI.Model
 {
@@ -7,38 +7,40 @@ namespace Code.Runtime.UI.Model
         public bool IsSoundOn { get; private set;}
         public bool IsMusicOn { get; private set;}
         
-        private readonly IGameDataContainer _gameData;
+        private readonly AudioData _audioData;
         
-        public HudSettingsPopupModel(IGameDataContainer gameData)
+        public HudSettingsPopupModel(AudioData audioData)
         {
-            _gameData = gameData;
+            _audioData = audioData;
         }
 
         public void ChangeMusicState(bool value)
         {
             IsMusicOn = value;
+            _audioData.isMusicOn = IsMusicOn;
         }
 
         public void ChangeSoundState(bool value)
         {
             IsSoundOn = value;
+            _audioData.isSoundOn = IsSoundOn;
         }
         public void Initialize()
         {
-            IsSoundOn = _gameData.AudioData.isSoundOn;
-            IsMusicOn = _gameData.AudioData.isMusicOn;
+            _audioData.isMusicOn = IsMusicOn;
+            _audioData.isSoundOn = IsSoundOn; 
         }
 
         public void LoadData()
         {
-            _gameData.AudioData.isMusicOn = IsMusicOn;
-            _gameData.AudioData.isSoundOn = IsSoundOn; 
+            _audioData.isMusicOn = IsMusicOn;
+            _audioData.isSoundOn = IsSoundOn; 
         }
 
         public void SaveModelData()
         {
-            _gameData.AudioData.isMusicOn = IsMusicOn;
-            _gameData.AudioData.isSoundOn = IsSoundOn;
+            _audioData.isMusicOn = IsMusicOn;
+            _audioData.isSoundOn = IsSoundOn; 
         }
     }
 }

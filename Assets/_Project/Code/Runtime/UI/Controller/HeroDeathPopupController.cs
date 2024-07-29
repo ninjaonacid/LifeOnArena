@@ -106,6 +106,7 @@ namespace Code.Runtime.UI.Controller
                     _audioService.MuteMusic(!_gameData.AudioData.isMusicOn);
                     _audioService.MuteSounds(!_gameData.AudioData.isSoundOn);
                     _pauseService.UnpauseGame();
+                    _levelLoader.LoadLevel("MainMenu");
                     break;
             }
         }

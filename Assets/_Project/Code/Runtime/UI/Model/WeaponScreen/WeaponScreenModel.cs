@@ -1,20 +1,21 @@
 using System.Collections.Generic;
 using Code.Runtime.Core.Config;
+using Code.Runtime.Data.PlayerData;
 using Code.Runtime.Services.PersistentProgress;
 
 namespace Code.Runtime.UI.Model.WeaponScreen
 {
     public class WeaponScreenModel : IScreenModel
     {
-        private readonly IGameDataContainer _gameData;
+        private readonly PlayerData _playerData;
         private readonly ConfigProvider _configProvider;
 
         private readonly List<WeaponUIModel> _weaponModels = new();
         private WeaponUIModel _equippedWeapon;
 
-        public WeaponScreenModel(IGameDataContainer gameData, ConfigProvider configProvider)
+        public WeaponScreenModel(PlayerData playerData, ConfigProvider configProvider)
         {
-            _gameData = gameData;
+            _playerData = playerData;
             _configProvider = configProvider;
         }
 
@@ -34,7 +35,7 @@ namespace Code.Runtime.UI.Model.WeaponScreen
                 
                 if (weapon.UnlockRequirement != null)
                 {
-                    if(weapon.UnlockRequirement.CheckRequirement(_gameData.PlayerData)) 
+                    if(weapon.UnlockRequirement.CheckRequirement(_playerData)) 
                         weaponUIModel.isUnlocked = true;
                 }
                 else
@@ -51,7 +52,7 @@ namespace Code.Runtime.UI.Model.WeaponScreen
                     weaponUIModel.WeaponDescription = weapon.UnlockDescription;
                 }
 
-                if (_gameData.PlayerData.HeroEquipment.WeaponIntId == weapon.WeaponId.Id)
+                if (_playerData.HeroEquipment.WeaponIntId == weapon.WeaponId.Id)
                 {
                     weaponUIModel.isEquipped = true;
                     _equippedWeapon = weaponUIModel;
@@ -89,7 +90,7 @@ namespace Code.Runtime.UI.Model.WeaponScreen
                 {
                     weaponModel.isEquipped = true;
                     _equippedWeapon = weaponModel;
-                    _gameData.PlayerData.HeroEquipment.WeaponIntId = weaponModel.WeaponId;
+                    _playerData.HeroEquipment.WeaponIntId = weaponModel.WeaponId;
                 }
             }
         }

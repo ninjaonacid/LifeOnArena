@@ -80,6 +80,7 @@ namespace Code.Runtime.UI.Controller
                     _model.ChangeMusicState(!_model.IsMusicOn);
                     _audioService.MuteMusic(!_model.IsMusicOn);
                     _view.MusicButton.SetButton(_model.IsMusicOn);
+                    _saveLoad.SaveData();
                 }).AddTo(_disposable);
 
             _view.SoundButton.OnClickAsObservable()
@@ -88,6 +89,7 @@ namespace Code.Runtime.UI.Controller
                     _model.ChangeSoundState(!_model.IsSoundOn);
                     _audioService.MuteSounds(!_model.IsSoundOn);
                     _view.SoundButton.SetButton(_model.IsSoundOn);
+                    _saveLoad.SaveData();
                 }).AddTo(_disposable);
         }
 

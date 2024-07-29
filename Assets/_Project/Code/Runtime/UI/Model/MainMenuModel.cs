@@ -1,4 +1,5 @@
 using System;
+using Code.Runtime.Data.PlayerData;
 using Code.Runtime.Services.PersistentProgress;
 using TMPro;
 using UniRx;
@@ -7,9 +8,7 @@ namespace Code.Runtime.UI.Model
 {
     public class MainMenuModel : IScreenModel, ISavableModel
     {
-        private readonly IGameDataContainer _gameData;
-
-        public bool IsTutorialEnabled { get; set; } = new();
+        private readonly PlayerData _playerData;
 
         public int Level { get; private set; } = new();
         
@@ -19,29 +18,23 @@ namespace Code.Runtime.UI.Model
         public ReactiveProperty<int> Magic { get; } = new();
 
         public int StatUpgradePrice;
+        
 
-        public bool IsMusicMuted;
-
-        public void ChangeMusicButtonState()
+        public MainMenuModel(PlayerData playerData)
         {
-            IsMusicMuted = !IsMusicMuted;
-        }
-
-        public MainMenuModel(IGameDataContainer gameData)
-        {
-            _gameData = gameData;
+            _playerData = playerData;
         }
         
         public void Initialize()
         {
-            Level = _gameData.PlayerData.PlayerExp.Level;
-            Souls = _gameData.PlayerData.WorldData.LootData.CollectedLoot;
+            Level = _playerData.PlayerExp.Level;
+            Souls = _playerData.WorldData.LootData.CollectedLoot;
          
-            Health.Value = _gameData.PlayerData.StatsData.StatsValues["Health"];
-            Attack.Value = _gameData.PlayerData.StatsData.StatsValues["Attack"];
-            Magic.Value = _gameData.PlayerData.StatsData.StatsValues["Magic"];
-            StatUpgradePrice = _gameData.PlayerData.StatsData.StatUpgradePrice;
-            IsMusicMuted = _gameData.AudioData.isMusicOn;
+            Health.Value = _playerData.StatsData.StatsValues["Health"];
+            Attack.Value = _playerData.StatsData.StatsValues["Attack"];
+            Magic.Value = _playerData.StatsData.StatsValues["Magic"];
+            StatUpgradePrice = _playerData.StatsData.StatUpgradePrice;
+    
         }
 
         public void UpgradeHealth() => UpgradeStat("Health", Health, CanUpgradeHealth);
@@ -57,8 +50,8 @@ namespace Code.Runtime.UI.Model
             if (canUpgrade())
             {
                 SpendLoot(StatUpgradePrice);
-                var statPerLevel = _gameData.PlayerData.StatsData.StatPerLevel[statName];
-                _gameData.PlayerData.StatsData.StatsValues[statName] += statPerLevel;
+                var statPerLevel = _playerData.StatsData.StatPerLevel[statName];
+                _playerData.StatsData.StatsValues[statName] += statPerLevel;
                 stat.Value += statPerLevel;
             }
         }
@@ -66,7 +59,7 @@ namespace Code.Runtime.UI.Model
         private bool CanUpgradeStat(string statName, ReactiveProperty<int> stat)
         {
             return Souls.Value >= StatUpgradePrice &&
-                   stat.Value < _gameData.PlayerData.StatsData.StatsCapacities[statName];
+                   stat.Value < _playerData.StatsData.StatsCapacities[statName];
         }
 
         private void SpendLoot(int value)

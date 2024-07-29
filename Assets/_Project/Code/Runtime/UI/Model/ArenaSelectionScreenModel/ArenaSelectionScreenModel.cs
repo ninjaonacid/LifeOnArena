@@ -2,6 +2,7 @@
 using System.Linq;
 using Code.Runtime.ConfigData.Levels;
 using Code.Runtime.Core.Config;
+using Code.Runtime.Data.PlayerData;
 using Code.Runtime.Services.PersistentProgress;
 using UnityEngine;
 
@@ -9,13 +10,13 @@ namespace Code.Runtime.UI.Model.ArenaSelectionScreenModel
 {
     public class ArenaSelectionScreenModel : IScreenModel
     {
-        private ConfigProvider _configProvider;
-        private IGameDataContainer _gameData;
+        private readonly ConfigProvider _configProvider;
+        private readonly PlayerData _playerData;
         public List<LocationPointModel> LocationPointModel { get; private set; } = new();
-        public ArenaSelectionScreenModel(ConfigProvider configProvider, IGameDataContainer gameData)
+        public ArenaSelectionScreenModel(ConfigProvider configProvider, PlayerData playerData)
         {
             _configProvider = configProvider;
-            _gameData = gameData;
+            _playerData = playerData;
         }
 
         public void Initialize()
@@ -30,8 +31,8 @@ namespace Code.Runtime.UI.Model.ArenaSelectionScreenModel
                 {
                     LocationName =  level.LocationName.GetLocalizedString(),
                     LevelId = level.LevelId.Id,
-                    IsUnlocked = level.UnlockRequirement == null || level.UnlockRequirement.CheckRequirement(_gameData.PlayerData),
-                    IsCompleted =  _gameData.PlayerData.WorldData.LocationProgressData.CompletedLocations.Contains(level.LevelId.Id),
+                    IsUnlocked = level.UnlockRequirement == null || level.UnlockRequirement.CheckRequirement(_playerData),
+                    IsCompleted =  _playerData.WorldData.LocationProgressData.CompletedLocations.Contains(level.LevelId.Id),
                     LevelObjective = level.LocationObjective.GetLocalizedString(),
                     Difficulty = level.LevelDifficulty
                     

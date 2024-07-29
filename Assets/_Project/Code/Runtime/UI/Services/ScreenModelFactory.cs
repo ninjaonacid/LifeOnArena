@@ -23,17 +23,17 @@ namespace Code.Runtime.UI.Services
 
         private void InitializeModelMap(IGameDataContainer gameData, ConfigProvider config)
         {
-            _modelMap.Add(typeof(MainMenuModel), (dto) => new MainMenuModel(gameData));
-            _modelMap.Add(typeof(WeaponScreenModel), (dto) => new WeaponScreenModel(gameData, config));
-            _modelMap.Add(typeof(AbilityScreenModel), (dto) => new AbilityScreenModel(gameData, config));
+            _modelMap.Add(typeof(MainMenuModel), (dto) => new MainMenuModel(gameData.PlayerData));
+            _modelMap.Add(typeof(WeaponScreenModel), (dto) => new WeaponScreenModel(gameData.PlayerData, config));
+            _modelMap.Add(typeof(AbilityScreenModel), (dto) => new AbilityScreenModel(gameData.PlayerData, config));
             _modelMap.Add(typeof(HudModel), (dto) => new HudModel());
             _modelMap.Add(typeof(MessageWindowCompositeModel), (dto) => new MessageWindowCompositeModel(dto));
-            _modelMap.Add(typeof(ArenaSelectionScreenModel), (dto) => new ArenaSelectionScreenModel(config, gameData));
+            _modelMap.Add(typeof(ArenaSelectionScreenModel), (dto) => new ArenaSelectionScreenModel(config, gameData.PlayerData));
             _modelMap.Add(typeof(RewardPopupModel), (dto) => new RewardPopupModel(dto));
             _modelMap.Add(typeof(MissionSummaryWindowModel), (dto) => new MissionSummaryWindowModel(dto));
-            _modelMap.Add(typeof(MainMenuSettingsPopupModel), (dto) => new MainMenuSettingsPopupModel(gameData));
+            _modelMap.Add(typeof(MainMenuSettingsPopupModel), (dto) => new MainMenuSettingsPopupModel(gameData.AudioData));
             _modelMap.Add(typeof(HeroDeathPopupModel), (dto) => new HeroDeathPopupModel());
-            _modelMap.Add(typeof(HudSettingsPopupModel), (dto) => new HudSettingsPopupModel(gameData));
+            _modelMap.Add(typeof(HudSettingsPopupModel), (dto) => new HudSettingsPopupModel(gameData.AudioData));
             _modelMap.Add(typeof(HudControlsScreenModel), (dto) => new HudControlsScreenModel());
         }
 

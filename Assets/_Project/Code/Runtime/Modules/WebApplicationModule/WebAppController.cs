@@ -2,6 +2,7 @@ using Code.Runtime.Core.Audio;
 using Code.Runtime.Services.PauseService;
 using Code.Runtime.Services.PersistentProgress;
 using Code.Runtime.Services.SaveLoad;
+using InstantGamesBridge;
 using InstantGamesBridge.Modules.Game;
 using UnityEngine.Device;
 using VContainer.Unity;
@@ -28,7 +29,7 @@ namespace Code.Runtime.Modules.WebApplicationModule
             if (WebApplication.IsWebApp)
             {
                 Application.targetFrameRate = 60;
-                InstantGamesBridge.Bridge.game.visibilityStateChanged += HandleVisibilityLogic;
+                Bridge.game.visibilityStateChanged += HandleVisibilityLogic;
             }
         }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Code.Runtime.Core.Config;
 using Code.Runtime.Data.DataStructures;
+using Code.Runtime.Data.PlayerData;
 using Code.Runtime.Modules.AbilitySystem;
 using Code.Runtime.Services.PersistentProgress;
 using UniRx;
@@ -14,21 +15,21 @@ namespace Code.Runtime.UI.Model.AbilityMenu
     {
         public ReactiveProperty<int> Souls;
 
-        private readonly IGameDataContainer _gameData;
+        private readonly PlayerData _playerData;
         private readonly ConfigProvider _configProvider;
         private List<AbilityModel> _abilities;
         private IndexedQueue<AbilityModel> _equippedAbilities;
 
-        public AbilityScreenModel(IGameDataContainer gameData, ConfigProvider configProvider)
+        public AbilityScreenModel(PlayerData playerData, ConfigProvider configProvider)
         {
-            _gameData = gameData;
+            _playerData = playerData;
             _configProvider = configProvider;
         }
 
         public void Initialize()
         {
-            var souls = _gameData.PlayerData.WorldData.LootData.CollectedLoot.Value;
-            Souls = _gameData.PlayerData.WorldData.LootData.CollectedLoot;
+            var souls = _playerData.WorldData.LootData.CollectedLoot.Value;
+            Souls = _playerData.WorldData.LootData.CollectedLoot;
        
             _abilities = new List<AbilityModel>();
             _equippedAbilities = new IndexedQueue<AbilityModel>();
@@ -53,7 +54,7 @@ namespace Code.Runtime.UI.Model.AbilityMenu
                 if (abilityModel.Price == 0)
                 {
                     abilityModel.IsUnlocked = true;
-                    _gameData.PlayerData.AbilityData.UnlockedAbilities.Add(abilityModel);
+                    _playerData.AbilityData.UnlockedAbilities.Add(abilityModel);
                 }
                 
                 _abilities.Add(abilityModel);
@@ -85,11 +86,12 @@ namespace Code.Runtime.UI.Model.AbilityMenu
         {
             var ability = _abilities[index];
             
-            if (ability.AbilityTreeData.UnlockRequirements.All(x => x.CheckRequirement(_gameData.PlayerData))) 
+            if (ability.AbilityTreeData.UnlockRequirements.All(x =>
+                    x.CheckRequirement(_playerData))) 
             {
                 Souls.Value -= ability.Price;
                 ability.IsUnlocked = true;
-                _gameData.PlayerData.AbilityData.UnlockedAbilities.Add(ability);
+                _playerData.AbilityData.UnlockedAbilities.Add(ability);
             };
         }
 
@@ -132,16 +134,16 @@ namespace Code.Runtime.UI.Model.AbilityMenu
         
         public void LoadData()
         {
-            if (_gameData.PlayerData.AbilityData.Abilities.Count <= 0) return;
+            if (_playerData.AbilityData.Abilities.Count <= 0) return;
 
             for (var index = 0; index < _abilities.Count; index++)
             {
                 var abilitySlot = _abilities[index];
-                abilitySlot.IsEquipped = _gameData.PlayerData.AbilityData.Abilities[index].IsEquipped;
-                abilitySlot.IsUnlocked = _gameData.PlayerData.AbilityData.Abilities[index].IsUnlocked;
+                abilitySlot.IsEquipped = _playerData.AbilityData.Abilities[index].IsEquipped;
+                abilitySlot.IsUnlocked = _playerData.AbilityData.Abilities[index].IsUnlocked;
             }
 
-            foreach (var slot in _gameData.PlayerData.AbilityData.EquippedAbilities)
+            foreach (var slot in _playerData.AbilityData.EquippedAbilities)
             {
                 var ability = _abilities.FirstOrDefault(x => x.AbilityId == slot.AbilityId);
                 _equippedAbilities.Enqueue(ability);
@@ -151,9 +153,9 @@ namespace Code.Runtime.UI.Model.AbilityMenu
 
         public void SaveModelData()
         {
-            _gameData.PlayerData.AbilityData.Abilities = _abilities;
-            _gameData.PlayerData.AbilityData.EquippedAbilities = _equippedAbilities;
-            _gameData.PlayerData.WorldData.LootData.CollectedLoot.Value = Souls.Value;
+            _playerData.AbilityData.Abilities = _abilities;
+            _playerData.AbilityData.EquippedAbilities = _equippedAbilities;
+            _playerData.WorldData.LootData.CollectedLoot.Value = Souls.Value;
         }
     }
 }

@@ -374,16 +374,13 @@ GameObject:
   - component: {fileID: -8125679809969938510}
   - component: {fileID: -4398335753682384271}
   - component: {fileID: -7543322082994891675}
-  - component: {fileID: 6331987856363381589}
   - component: {fileID: 7773590576850612865}
-  - component: {fileID: 8173807624078759481}
   - component: {fileID: 4195340829786993569}
   - component: {fileID: -4749970168048390944}
   - component: {fileID: 6287642891397871327}
   - component: {fileID: 8287232461833603833}
   - component: {fileID: 6959288946234994809}
   - component: {fileID: 2730041049963062100}
-  - component: {fileID: 3953687927081849907}
   - component: {fileID: 4867455432025638488}
   - component: {fileID: 3647126736798332893}
   - component: {fileID: 7874593795475727253}
@@ -588,18 +585,6 @@ MonoBehaviour:
   - AbilityIdentifier: {fileID: 11400000, guid: bfb788b57061def4abcd06ad2d562dfa, type: 2}
     AbilitySlotID: 0
   _inputHandler: {fileID: 7874593795475727253}
---- !u!114 &6331987856363381589
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6031708160037518034}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 038f77f71c9416a4eada08847a63fa6d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &7773590576850612865
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -612,23 +597,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d128eafd50474b441b7186ab87d9318e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &8173807624078759481
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6031708160037518034}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e23610a8e35628b4f81885971821a415, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _interactPoint: {fileID: 4420980359280050101}
-  _interactRadius: 1
-  _interactMask:
-    serializedVersion: 2
-    m_Bits: 131072
 --- !u!114 &4195340829786993569
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -644,7 +612,6 @@ MonoBehaviour:
   _spinAttackAbilityId: {fileID: 11400000, guid: 630144b53aba86245b26160679af021d, type: 2}
   _stompAbilityId: {fileID: 11400000, guid: b7e1b76dfa43a6a40aa37103371ec426, type: 2}
   _waveSlashAbilityId: {fileID: 11400000, guid: 7bc8ad567e6c77e4d8e5b8fd25a87e6d, type: 2}
-  _eventReceiver: {fileID: 3953687927081849907}
   CharacterAnimator: {fileID: 7390316171520665867}
   _heroMovement: {fileID: 7390316171520665878}
   _heroRotation: {fileID: -8125679809969938510}
@@ -736,18 +703,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 202b34f87cfc3b14eb9de7c0b349df02, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &3953687927081849907
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6031708160037518034}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb9284629ce65c74f9a7490cfa0f1b9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &4867455432025638488
