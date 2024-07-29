@@ -7,5 +7,6 @@ namespace Code.Runtime.Data.PlayerData
     public class RewardsData
     {
         public List<int> ClaimedRewards = new();
+        public int AdSoulsRewards = 0;
     }
 }

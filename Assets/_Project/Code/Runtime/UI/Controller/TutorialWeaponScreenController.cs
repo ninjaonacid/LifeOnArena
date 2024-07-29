@@ -4,6 +4,7 @@ using Code.Runtime.ConfigData.Identifiers;
 using Code.Runtime.Core.Audio;
 using Code.Runtime.Core.Factory;
 using Code.Runtime.Modules.TutorialService;
+using Code.Runtime.Services.SaveLoad;
 using Code.Runtime.UI.Model;
 using Code.Runtime.UI.Services;
 using Code.Runtime.UI.View;
@@ -16,7 +17,8 @@ namespace Code.Runtime.UI.Controller
         private readonly TutorialService _tutorialService;
         private List<TutorialElement> _tutorialElements = new();
 
-        public TutorialWeaponScreenController(HeroFactory heroFactory, AudioService audioService, TutorialService tutorialService) : base(heroFactory, audioService)
+        public TutorialWeaponScreenController(AudioService audioService, HeroFactory heroFactory,
+            SaveLoadService saveLoad, TutorialService tutorialService) : base(audioService, heroFactory, saveLoad)
         {
             _tutorialService = tutorialService;
         }
@@ -24,7 +26,7 @@ namespace Code.Runtime.UI.Controller
         public override void InitController(IScreenModel model, BaseWindowView windowView, ScreenService screenService)
         {
             base.InitController(model, windowView, screenService);
-            
+
             _tutorialElements = _windowView.GetComponentsInChildren<TutorialElement>().ToList();
 
             foreach (var element in _tutorialElements)
@@ -62,13 +64,10 @@ namespace Code.Runtime.UI.Controller
                     {
                         element.Show(false);
                     }
-                    
+
                     element.BlockInteractions(true);
-                    
                 }
             }
         }
-
-     
     }
 }

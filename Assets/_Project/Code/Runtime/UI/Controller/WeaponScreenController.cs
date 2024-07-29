@@ -2,6 +2,7 @@ using System;
 using Code.Runtime.Core.Audio;
 using Code.Runtime.Core.Factory;
 using Code.Runtime.Entity.Hero;
+using Code.Runtime.Services.SaveLoad;
 using Code.Runtime.UI.Model;
 using Code.Runtime.UI.Model.WeaponScreen;
 using Code.Runtime.UI.Services;
@@ -16,17 +17,19 @@ namespace Code.Runtime.UI.Controller
     {
         private WeaponScreenModel _model;
         protected WeaponScreenView _windowView;
-        
-        
+
+
         private readonly CompositeDisposable _disposables = new();
 
         private readonly AudioService _audioService;
         private readonly HeroFactory _heroFactory;
+        private readonly SaveLoadService _saveLoad;
 
-        public WeaponScreenController(HeroFactory heroFactory, AudioService audioService)
+        public WeaponScreenController(AudioService audioService, HeroFactory heroFactory, SaveLoadService saveLoad)
         {
-            _heroFactory = heroFactory;
             _audioService = audioService;
+            _heroFactory = heroFactory;
+            _saveLoad = saveLoad;
         }
 
         public virtual void InitController(IScreenModel model, BaseWindowView windowView, ScreenService screenService)
@@ -73,7 +76,7 @@ namespace Code.Runtime.UI.Controller
         private void WeaponSelected(int index)
         {
             _audioService.PlaySound("Select");
-            
+
             if (_model.IsEquipped(index))
             {
             }
@@ -84,10 +87,11 @@ namespace Code.Runtime.UI.Controller
             if (!_windowView.WeaponContainer.TryGetSelectedWeaponId(out var weaponId)) return;
             var weaponModel = _model.GetModel(weaponId);
             if (!weaponModel.isUnlocked) return;
-            
+
             _audioService.PlaySound("Equip");
             _model.EquipWeapon(weaponId);
             _heroFactory.HeroGameObject.GetComponent<HeroWeapon>().EquipWeapon(weaponModel.WeaponId);
+            _saveLoad.SaveData();
             UpdateView();
         }
 

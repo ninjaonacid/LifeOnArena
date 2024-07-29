@@ -113,17 +113,17 @@ namespace Code.Runtime.UI.Controller
                 });
 
             int completedLocations = _gameData.PlayerData.WorldData.LocationProgressData.CompletedLocations.Count;
+            int soulsRewards = _gameData.PlayerData.RewardsData.AdSoulsRewards;
 
-            if (completedLocations % 2 != 1)
+            bool showReward = soulsRewards == 0 || completedLocations % soulsRewards == 0;
+
+
+            if (showReward)
             {
                 _adService.OnRewardedStateChange += HandleRewardedStateChange;
                 _windowView.RewardButton.OnClickAsObservable()
-                    .Subscribe(x =>
-                    {
-                        
-                        _adService.ShowReward();
-                    });
-                
+                    .Subscribe(x => { _adService.ShowReward(); });
+
                 _windowView.RewardButton.Show();
                 _windowView.RewardButton.PlayScaleAnimation();
             }
@@ -165,6 +165,7 @@ namespace Code.Runtime.UI.Controller
 
                 case RewardedState.Rewarded:
                     HandleSoulsReward();
+
                     _windowView.RewardButton.Show(false);
                     break;
 
@@ -184,7 +185,8 @@ namespace Code.Runtime.UI.Controller
 
         private void HandleSoulsReward()
         {
-            _gameData.PlayerData.WorldData.LootData.Collect(1000);
+            _gameData.PlayerData.WorldData.LootData.Collect(500);
+            _gameData.PlayerData.RewardsData.AdSoulsRewards++;
             _saveLoad.SaveData();
         }
 

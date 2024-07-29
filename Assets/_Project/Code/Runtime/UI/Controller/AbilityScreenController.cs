@@ -16,9 +16,9 @@ namespace Code.Runtime.UI.Controller
         protected AbilityScreenModel _model;
         protected AbilityScreenView _screenView;
 
-        private AudioService _audioService;
-        private ScreenService _screenService;
+        private readonly AudioService _audioService;
         private readonly SaveLoadService _saveLoad;
+        private ScreenService _screenService;
         protected readonly CompositeDisposable _disposable = new CompositeDisposable();
         public AbilityScreenController(SaveLoadService saveLoad, AudioService audioService)
         {
@@ -130,8 +130,9 @@ namespace Code.Runtime.UI.Controller
             {
                 _model.UnlockAbility(index);
                 AbilitySelected(index);
+                _saveLoad.SaveData();
             };
-
+            
             UpdateData();
         }
 
@@ -142,6 +143,7 @@ namespace Code.Runtime.UI.Controller
                 _audioService.PlaySound("Equip");
                 _model.UnEquipAbility(index);
                 AbilitySelected(index);
+                _saveLoad.SaveData();
             };
 
             UpdateData();
@@ -154,6 +156,7 @@ namespace Code.Runtime.UI.Controller
                 _model.EquipAbility(index);
                 _audioService.PlaySound("Equip");
                 AbilitySelected(index);
+                _saveLoad.SaveData();
             };
 
             UpdateData();
