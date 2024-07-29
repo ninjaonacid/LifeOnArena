@@ -149,7 +149,6 @@ GameObject:
   - component: {fileID: -2428386047012113892}
   - component: {fileID: 1713337227256712141}
   - component: {fileID: 5837056075893014178}
-  - component: {fileID: 6549393848085028640}
   - component: {fileID: 6625279289632298001}
   - component: {fileID: 5485434957042966360}
   - component: {fileID: 7338046863862579743}
@@ -313,7 +312,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _attackComponent: {fileID: 6966552553589898628}
   _enemyTarget: {fileID: 3027789663709577760}
-  _meleeRangeObserver: {fileID: 0}
   _statController: {fileID: 6249724365430731878}
   _showGizmos: 0
   _gizmoColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
@@ -458,18 +456,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 202b34f87cfc3b14eb9de7c0b349df02, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &6549393848085028640
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2658416580451336931}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb9284629ce65c74f9a7490cfa0f1b9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &6625279289632298001

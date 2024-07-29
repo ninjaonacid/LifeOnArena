@@ -15,27 +15,28 @@ namespace Code.Runtime.UI.Model
             _audioData = audioData;
         }
 
-        public void ChangeMusicState(bool value)
+        public void ChangeMusicState()
         {
-            IsMusicOn = value;
+            IsMusicOn = !IsMusicOn;
             _audioData.isMusicOn = IsMusicOn;
         }
 
-        public void ChangeSoundState(bool value)
+        public void ChangeSoundState()
         {
-            IsSoundOn = value;
+            IsSoundOn = !IsSoundOn;
             _audioData.isSoundOn = IsSoundOn;
         }
+        
         public void Initialize()
         {
-            _audioData.isMusicOn = IsMusicOn;
-            _audioData.isSoundOn = IsSoundOn; 
+            IsMusicOn = _audioData.isMusicOn;
+            IsSoundOn = _audioData.isSoundOn;
         }
 
         public void LoadData()
         {
-            _audioData.isMusicOn = IsMusicOn;
-            _audioData.isSoundOn = IsSoundOn; 
+            IsMusicOn = _audioData.isMusicOn;
+            IsSoundOn = _audioData.isSoundOn;
         }
 
         public void SaveModelData()

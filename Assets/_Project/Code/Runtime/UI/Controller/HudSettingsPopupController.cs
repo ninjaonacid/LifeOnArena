@@ -77,7 +77,7 @@ namespace Code.Runtime.UI.Controller
             _view.MusicButton.OnClickAsObservable()
                 .Subscribe(x =>
                 {
-                    _model.ChangeMusicState(!_model.IsMusicOn);
+                    _model.ChangeMusicState();
                     _audioService.MuteMusic(!_model.IsMusicOn);
                     _view.MusicButton.SetButton(_model.IsMusicOn);
                     _saveLoad.SaveData();
@@ -86,7 +86,7 @@ namespace Code.Runtime.UI.Controller
             _view.SoundButton.OnClickAsObservable()
                 .Subscribe(x =>
                 {
-                    _model.ChangeSoundState(!_model.IsSoundOn);
+                    _model.ChangeSoundState();
                     _audioService.MuteSounds(!_model.IsSoundOn);
                     _view.SoundButton.SetButton(_model.IsSoundOn);
                     _saveLoad.SaveData();
