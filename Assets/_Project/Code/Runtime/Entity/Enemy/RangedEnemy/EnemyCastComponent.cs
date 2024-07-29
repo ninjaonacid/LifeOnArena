@@ -1,4 +1,5 @@
-﻿using Code.Runtime.ConfigData.Identifiers;
+﻿using System;
+using Code.Runtime.ConfigData.Identifiers;
 using Code.Runtime.Modules.AbilitySystem;
 using UnityEngine;
 
@@ -11,12 +12,10 @@ namespace Code.Runtime.Entity.Enemy.RangedEnemy
         [SerializeField] private float _castCooldown;
 
         private float _currentCooldown;
-
         private bool _isCastCooldown;
         private bool _targetInAttackRange;
         public bool TargetInAttackRange => _targetInAttackRange;
-
-
+        
         private void Update()
         {
             if (_isCastCooldown)
@@ -27,6 +26,11 @@ namespace Code.Runtime.Entity.Enemy.RangedEnemy
                     _isCastCooldown = false;
                 }
             }
+        }
+
+        private void OnEnable()
+        {
+            DisableCast();
         }
 
         public void Cast()

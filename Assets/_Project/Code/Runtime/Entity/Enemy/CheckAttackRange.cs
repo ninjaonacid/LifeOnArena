@@ -33,9 +33,13 @@ namespace Code.Runtime.Entity.Enemy
 
         private void Update()
         {
-            if (_target != null)
+            if (_enemyTarget.HasTarget())
             {
                 CheckDistance();
+            }
+            else
+            {
+                AttackRangeExit();
             }
         }
 

@@ -3,10 +3,10 @@
   "PlayerExp": {
     "$type": "Code.Runtime.Data.PlayerData.PlayerExp, Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
     "ExponentialFactor": 3.0,
-    "Level": 6,
-    "CurrentExperience": 5239.6084,
-    "ProgressToNextLevel": 0.242574468,
-    "ExperienceToNextLevel": 21600.0
+    "Level": 7,
+    "CurrentExperience": 3658.23438,
+    "ProgressToNextLevel": 0.106654063,
+    "ExperienceToNextLevel": 34300.0
   },
   "KillData": {
     "$type": "Code.Runtime.Data.PlayerData.KillData, Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
@@ -25,7 +25,7 @@
       "$type": "Code.Runtime.Data.PlayerData.LootData, Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
       "CollectedLoot": {
         "$type": "UniRx.ReactiveProperty`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], UniRx, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-        "Value": 1849,
+        "Value": 79,
         "HasValue": true
       }
     },
@@ -47,7 +47,8 @@
           229687619,
           229687620,
           1403319364,
-          1403319365
+          1403319365,
+          -387620542
         ]
       }
     }
@@ -59,7 +60,7 @@
       "$values": [
         {
           "$type": "Code.Runtime.UI.Model.AbilityMenu.AbilityModel, Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-          "IsEquipped": true,
+          "IsEquipped": false,
           "IsUnlocked": true,
           "AbilityId": 74492325,
           "Price": 200,
@@ -104,8 +105,8 @@
         },
         {
           "$type": "Code.Runtime.UI.Model.AbilityMenu.AbilityModel, Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-          "IsEquipped": false,
-          "IsUnlocked": false,
+          "IsEquipped": true,
+          "IsUnlocked": true,
           "AbilityId": 1622972859,
           "Price": 2000,
           "AbilityTreeData": {
@@ -198,22 +199,25 @@
       ]
     },
     "EquippedAbilities": {
-      "$type": "System.Collections.Generic.List`1[[Code.Runtime.UI.Model.AbilityMenu.AbilityModel, Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+      "$type": "Code.Runtime.Data.DataStructures.IndexedQueue`1[[Code.Runtime.UI.Model.AbilityMenu.AbilityModel, Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
       "$values": [
         {
           "$type": "Code.Runtime.UI.Model.AbilityMenu.AbilityModel, Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
           "IsEquipped": true,
           "IsUnlocked": true,
-          "AbilityId": 74492325,
-          "Price": 200,
+          "AbilityId": 1219435613,
+          "Price": 2000,
           "AbilityTreeData": {
             "$type": "Code.Runtime.Modules.AbilitySystem.AbilityTreeData, Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-            "Branch": 1,
-            "Position": 1,
-            "Price": 200,
+            "Branch": 2,
+            "Position": 3,
+            "Price": 2000,
             "UnlockRequirements": {
               "$type": "System.Collections.Generic.List`1[[Code.Runtime.Modules.Requirements.IRequirement`1[[Code.Runtime.Data.PlayerData.PlayerData, Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
               "$values": [
+                {
+                  "$type": "Code.Runtime.Modules.Requirements.PreviousAbilityRequirement, Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+                },
                 {
                   "$type": "Code.Runtime.Modules.Requirements.SoulsRequirement, Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                 }
@@ -225,11 +229,11 @@
           "$type": "Code.Runtime.UI.Model.AbilityMenu.AbilityModel, Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
           "IsEquipped": true,
           "IsUnlocked": true,
-          "AbilityId": 1219435613,
+          "AbilityId": 1622972859,
           "Price": 2000,
           "AbilityTreeData": {
             "$type": "Code.Runtime.Modules.AbilitySystem.AbilityTreeData, Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-            "Branch": 2,
+            "Branch": 1,
             "Position": 3,
             "Price": 2000,
             "UnlockRequirements": {
@@ -349,6 +353,30 @@
           "AbilityTreeData": {
             "$type": "Code.Runtime.Modules.AbilitySystem.AbilityTreeData, Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
             "Branch": 2,
+            "Position": 3,
+            "Price": 2000,
+            "UnlockRequirements": {
+              "$type": "System.Collections.Generic.List`1[[Code.Runtime.Modules.Requirements.IRequirement`1[[Code.Runtime.Data.PlayerData.PlayerData, Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+              "$values": [
+                {
+                  "$type": "Code.Runtime.Modules.Requirements.PreviousAbilityRequirement, Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+                },
+                {
+                  "$type": "Code.Runtime.Modules.Requirements.SoulsRequirement, Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "$type": "Code.Runtime.UI.Model.AbilityMenu.AbilityModel, Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+          "IsEquipped": true,
+          "IsUnlocked": true,
+          "AbilityId": 1622972859,
+          "Price": 2000,
+          "AbilityTreeData": {
+            "$type": "Code.Runtime.Modules.AbilitySystem.AbilityTreeData, Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+            "Branch": 1,
             "Position": 3,
             "Price": 2000,
             "UnlockRequirements": {
