@@ -58,6 +58,8 @@ GameObject:
   - component: {fileID: 6715782926488362135}
   - component: {fileID: 6716832012151853455}
   - component: {fileID: 3766484426012382019}
+  - component: {fileID: 4820669089949273682}
+  - component: {fileID: 2639121751509300726}
   m_Layer: 5
   m_Name: HpBar
   m_TagString: Untagged
@@ -123,6 +125,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _flipAxis: 0
+--- !u!225 &4820669089949273682
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2091178329331578730}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &2639121751509300726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2091178329331578730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 551661f87e574e74ba1a61c42b03363b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _canvasGroup: {fileID: 4820669089949273682}
+  RectTransform: {fileID: 5317502170642238590}
 --- !u!1 &2658416580451336931
 GameObject:
   m_ObjectHideFlags: 0

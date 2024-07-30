@@ -6,5 +6,6 @@ namespace Code.Runtime.UI.View.WeaponShopView
     {
         public WeaponCellContainer WeaponContainer;
         public AnimatedButton EquipButton;
+        public AnimatedButton LockedButton;
     }
 }

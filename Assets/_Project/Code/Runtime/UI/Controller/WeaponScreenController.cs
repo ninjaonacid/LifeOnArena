@@ -73,13 +73,15 @@ namespace Code.Runtime.UI.Controller
             }
         }
 
-        private void WeaponSelected(int index)
+        private void WeaponSelected(int weaponId)
         {
             _audioService.PlaySound("Select");
 
-            if (_model.IsEquipped(index))
-            {
-            }
+            bool isWeaponEquipped = _model.IsEquipped(weaponId);
+            bool isWeaponUnlocked = _model.IsUnlocked(weaponId);
+            
+            _windowView.EquipButton.Show(!isWeaponEquipped && isWeaponUnlocked);
+            _windowView.LockedButton.Show(!isWeaponUnlocked);
         }
 
         private void EquipWeapon()

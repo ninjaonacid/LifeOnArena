@@ -95,9 +95,30 @@ namespace Code.Runtime.UI.Model.WeaponScreen
             }
         }
         
-        public bool IsEquipped(int index)
+        public bool IsEquipped(int weaponId)
         {
-            return _weaponModels[index].isEquipped;
+            foreach (var weapon in _weaponModels)
+            {
+                if (weaponId == weapon.WeaponId)
+                {
+                    return weapon.isEquipped;
+                }
+            }
+
+            return false;
+        }
+
+        public bool IsUnlocked(int weaponId)
+        {
+            foreach (var weapon in _weaponModels)
+            {
+                if (weaponId == weapon.WeaponId)
+                {
+                    return weapon.isUnlocked;
+                }
+            }
+
+            return false;
         }
     }
 }

@@ -49,8 +49,7 @@ namespace Code.Runtime.UI.View.WeaponShopView
             int selectedItemIndex = _weaponCells.IndexOf(obj);
             
             var selectedWeaponCell = _weaponCells[selectedItemIndex];
-            
-            
+
             if (_selectedCell is not null && _selectedCell != obj)
             {
                 var previousSelectedCell = _weaponCells[_weaponCells.IndexOf(_selectedCell)];
@@ -61,7 +60,7 @@ namespace Code.Runtime.UI.View.WeaponShopView
             
             selectedWeaponCell.Select();
 
-            _weaponCellSelected?.OnNext(_weaponCells.IndexOf(obj));
+            _weaponCellSelected?.OnNext(selectedWeaponCell.WeaponId.Id);
         }
 
     }

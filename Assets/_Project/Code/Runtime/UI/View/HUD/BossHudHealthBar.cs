@@ -10,7 +10,6 @@ namespace Code.Runtime.UI.View.HUD
         [SerializeField] private TextMeshProUGUI _bossName;
         [SerializeField] private CanvasGroup _canvasGroup;
 
-
         public void UpdateHpBar(float value, float currentValue)
         {
             _healthBar.fillAmount = currentValue / value;
