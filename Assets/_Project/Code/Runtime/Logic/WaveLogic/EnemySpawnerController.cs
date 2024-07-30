@@ -91,17 +91,6 @@ namespace Code.Runtime.Logic.WaveLogic
                             }
                         }
                     }
-                    foreach (EnemySpawner spawner in _enemySpawnPoints)
-                    {
-                        if (spawner.EnemyType == EnemyType.Common)
-                        {
-                            var monster = await spawner.Spawn(token);
-                            if (monster != null)
-                            {
-                                _aliveCommonEnemies++;
-                            }
-                        }
-                    }
 
                     waveCounter++;
                 }

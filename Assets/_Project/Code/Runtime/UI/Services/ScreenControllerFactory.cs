@@ -39,8 +39,8 @@ namespace Code.Runtime.UI.Services
 
             _screenControllers.Add(typeof(AbilityScreenController), () =>
                 gameData.PlayerData.TutorialData.IsTutorialCompleted
-                    ? new AbilityScreenController(saveLoad, audioService)
-                    : new TutorialAbilityScreenController(saveLoad, audioService, tutorialService));
+                    ? new AbilityScreenController(saveLoad, audioService, gameData.PlayerData)
+                    : new TutorialAbilityScreenController(saveLoad, audioService, gameData.PlayerData, tutorialService));
 
             _screenControllers.Add(typeof(HudController), () =>
                 new HudController(gameData, heroFactory, levelLoader, eventSystem, adService, pauseService,
