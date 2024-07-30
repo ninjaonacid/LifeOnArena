@@ -19,6 +19,20 @@ namespace Code.Editor.EditorWindows
 
             Debug.Log("Animation events setup complete.");
         }
+        
+        [MenuItem("Tools/Remove Animation Events")]
+        public static void RemoveAnimationEvents()
+        {
+            AnimationClip[] animationClips = GetAllAnimationClips();
+
+            foreach (AnimationClip clip in animationClips)
+            {
+                RemoveSpecificAnimationEvents(clip, "AnimationStartEvent", "AnimationEndEvent");
+            }
+
+            Debug.Log("Animation events removal complete.");
+        }
+
 
         private static AnimationClip[] GetAllAnimationClips()
         {
@@ -56,6 +70,18 @@ namespace Code.Editor.EditorWindows
             
             EditorUtility.SetDirty(clip);
             AssetDatabase.SaveAssets();
+        }
+        
+        private static void RemoveSpecificAnimationEvents(AnimationClip clip, params string[] eventNames)
+        {
+            AnimationEvent[] existingEvents = AnimationUtility.GetAnimationEvents(clip);
+            var newEvents = existingEvents.Where(e => !eventNames.Contains(e.functionName)).ToArray();
+
+            AnimationUtility.SetAnimationEvents(clip, newEvents);
+
+            EditorUtility.SetDirty(clip);
+            AssetDatabase.SaveAssets();
+            AssetDatabase.Refresh();
         }
     }
 }

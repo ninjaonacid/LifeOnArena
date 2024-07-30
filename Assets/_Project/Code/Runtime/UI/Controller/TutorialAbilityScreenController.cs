@@ -2,6 +2,7 @@
 using System.Linq;
 using Code.Runtime.ConfigData.Identifiers;
 using Code.Runtime.Core.Audio;
+using Code.Runtime.Data.PlayerData;
 using Code.Runtime.Modules.TutorialService;
 using Code.Runtime.Services.SaveLoad;
 using Code.Runtime.UI.Model;
@@ -16,8 +17,8 @@ namespace Code.Runtime.UI.Controller
         private readonly TutorialService _tutorialService;
         private List<TutorialElement> _tutorialElements = new();
 
-
-        public TutorialAbilityScreenController(SaveLoadService saveLoad, AudioService audioService, TutorialService tutorialService) : base(saveLoad, audioService)
+        public TutorialAbilityScreenController(SaveLoadService saveLoad, AudioService audioService,
+            PlayerData playerData, TutorialService tutorialService) : base(saveLoad, audioService, playerData)
         {
             _tutorialService = tutorialService;
         }
@@ -25,16 +26,15 @@ namespace Code.Runtime.UI.Controller
         public override void InitController(IScreenModel model, BaseWindowView windowView, ScreenService screenService)
         {
             base.InitController(model, windowView, screenService);
-            
+
             _tutorialElements = _screenView.GetComponentsInChildren<TutorialElement>().ToList();
 
             foreach (var element in _tutorialElements)
             {
                 element.OnClickAsObservable().Subscribe(HandleElementInteraction).AddTo(_screenView);
             }
-            
-            _tutorialService.OnElementHighlighted += HandleElementHighlighted;
 
+            _tutorialService.OnElementHighlighted += HandleElementHighlighted;
         }
 
         public override void Dispose()
@@ -63,6 +63,5 @@ namespace Code.Runtime.UI.Controller
                 }
             }
         }
-        
     }
 }

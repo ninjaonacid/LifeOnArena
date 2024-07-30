@@ -1,5 +1,6 @@
 using System;
 using Code.Runtime.Core.Audio;
+using Code.Runtime.Data.PlayerData;
 using Code.Runtime.Services.SaveLoad;
 using Code.Runtime.UI.Model;
 using Code.Runtime.UI.Model.AbilityMenu;
@@ -18,12 +19,15 @@ namespace Code.Runtime.UI.Controller
 
         private readonly AudioService _audioService;
         private readonly SaveLoadService _saveLoad;
+        private readonly PlayerData _playerData;
+        
         private ScreenService _screenService;
         protected readonly CompositeDisposable _disposable = new CompositeDisposable();
-        public AbilityScreenController(SaveLoadService saveLoad, AudioService audioService)
+        public AbilityScreenController(SaveLoadService saveLoad, AudioService audioService, PlayerData playerData)
         {
             _saveLoad = saveLoad;
             _audioService = audioService;
+            _playerData = playerData;
         }
 
         public virtual void InitController(IScreenModel model, BaseWindowView windowView, ScreenService screenService)
