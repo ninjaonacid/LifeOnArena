@@ -1,6 +1,7 @@
 using System;
 using Code.Runtime.Core.Audio;
 using Code.Runtime.Core.Factory;
+using Code.Runtime.Data.PlayerData;
 using Code.Runtime.Entity.Hero;
 using Code.Runtime.Services.SaveLoad;
 using Code.Runtime.UI.Model;
@@ -17,7 +18,6 @@ namespace Code.Runtime.UI.Controller
     {
         private WeaponScreenModel _model;
         protected WeaponScreenView _windowView;
-
 
         private readonly CompositeDisposable _disposables = new();
 
@@ -79,7 +79,7 @@ namespace Code.Runtime.UI.Controller
 
             bool isWeaponEquipped = _model.IsEquipped(weaponId);
             bool isWeaponUnlocked = _model.IsUnlocked(weaponId);
-            
+
             _windowView.EquipButton.Show(!isWeaponEquipped && isWeaponUnlocked);
             _windowView.LockedButton.Show(!isWeaponUnlocked);
         }

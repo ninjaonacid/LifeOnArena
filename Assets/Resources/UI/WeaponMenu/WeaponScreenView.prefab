@@ -383,8 +383,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u042D\u041A\u0418\u041F\u0418\u0420\u041E\u0412\u0410\u0422\u042C"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 86571f0fa44f5a04e9af8d4b3dad6dca, type: 2}
-  m_sharedMaterial: {fileID: 7710686745712427692, guid: 86571f0fa44f5a04e9af8d4b3dad6dca, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 917cd2707dd098348a5c0bd1a8b29625, type: 2}
+  m_sharedMaterial: {fileID: -8586151201807168795, guid: 917cd2707dd098348a5c0bd1a8b29625, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -691,8 +691,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: LOCKED
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 86571f0fa44f5a04e9af8d4b3dad6dca, type: 2}
-  m_sharedMaterial: {fileID: 7710686745712427692, guid: 86571f0fa44f5a04e9af8d4b3dad6dca, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 917cd2707dd098348a5c0bd1a8b29625, type: 2}
+  m_sharedMaterial: {fileID: -8586151201807168795, guid: 917cd2707dd098348a5c0bd1a8b29625, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -852,7 +852,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canvasGroup: {fileID: 6481244367876859952}
   RectTransform: {fileID: 7931578345648060696}
-  _elementId: {fileID: 11400000, guid: 1227395e51b644d44a14e94ac160aec0, type: 2}
+  _elementId: {fileID: 11400000, guid: 9400a2eabc547d249a8e0dfd6545e2aa, type: 2}
   _canvas: {fileID: 6481244367876859952}
 --- !u!114 &7507317482301974732
 MonoBehaviour:
@@ -905,6 +905,14 @@ PrefabInstance:
       propertyPath: WeaponId
       value: 
       objectReference: {fileID: 11400000, guid: d2c169cc5e808b74c8e3976000b05073, type: 2}
+    - target: {fileID: 1014568819597230758, guid: ec4c329cd9c839d46919bdcf8d6f354f, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 917cd2707dd098348a5c0bd1a8b29625, type: 2}
+    - target: {fileID: 1014568819597230758, guid: ec4c329cd9c839d46919bdcf8d6f354f, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -8586151201807168795, guid: 917cd2707dd098348a5c0bd1a8b29625, type: 2}
     - target: {fileID: 4150676367354844938, guid: ec4c329cd9c839d46919bdcf8d6f354f, type: 3}
       propertyPath: m_Name
       value: WeaponCell (3)
@@ -997,6 +1005,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8958388359615666717, guid: ec4c329cd9c839d46919bdcf8d6f354f, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 917cd2707dd098348a5c0bd1a8b29625, type: 2}
+    - target: {fileID: 8958388359615666717, guid: ec4c329cd9c839d46919bdcf8d6f354f, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -8586151201807168795, guid: 917cd2707dd098348a5c0bd1a8b29625, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec4c329cd9c839d46919bdcf8d6f354f, type: 3}
 --- !u!114 &1531673532168202809 stripped
@@ -1026,6 +1042,14 @@ PrefabInstance:
       propertyPath: WeaponId
       value: 
       objectReference: {fileID: 11400000, guid: 9973a098b15332541b4b7680eaf8f4e5, type: 2}
+    - target: {fileID: 1014568819597230758, guid: ec4c329cd9c839d46919bdcf8d6f354f, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 917cd2707dd098348a5c0bd1a8b29625, type: 2}
+    - target: {fileID: 1014568819597230758, guid: ec4c329cd9c839d46919bdcf8d6f354f, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -8586151201807168795, guid: 917cd2707dd098348a5c0bd1a8b29625, type: 2}
     - target: {fileID: 4150676367354844938, guid: ec4c329cd9c839d46919bdcf8d6f354f, type: 3}
       propertyPath: m_Name
       value: WeaponCell
@@ -1118,6 +1142,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8958388359615666717, guid: ec4c329cd9c839d46919bdcf8d6f354f, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 917cd2707dd098348a5c0bd1a8b29625, type: 2}
+    - target: {fileID: 8958388359615666717, guid: ec4c329cd9c839d46919bdcf8d6f354f, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -8586151201807168795, guid: 917cd2707dd098348a5c0bd1a8b29625, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec4c329cd9c839d46919bdcf8d6f354f, type: 3}
 --- !u!114 &2823912822353956288 stripped
@@ -1251,6 +1283,14 @@ PrefabInstance:
       propertyPath: m_text
       value: WEAPONS
       objectReference: {fileID: 0}
+    - target: {fileID: 8009996639393403278, guid: 86fff4179bbcf5a42beb980ec603bd16, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 917cd2707dd098348a5c0bd1a8b29625, type: 2}
+    - target: {fileID: 8009996639393403278, guid: 86fff4179bbcf5a42beb980ec603bd16, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -8586151201807168795, guid: 917cd2707dd098348a5c0bd1a8b29625, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 86fff4179bbcf5a42beb980ec603bd16, type: 3}
 --- !u!114 &1016382811940273648 stripped
@@ -1404,6 +1444,14 @@ PrefabInstance:
       propertyPath: WeaponId
       value: 
       objectReference: {fileID: 11400000, guid: 2bb90049b182d3e4e862dce85ce642cd, type: 2}
+    - target: {fileID: 1014568819597230758, guid: ec4c329cd9c839d46919bdcf8d6f354f, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 917cd2707dd098348a5c0bd1a8b29625, type: 2}
+    - target: {fileID: 1014568819597230758, guid: ec4c329cd9c839d46919bdcf8d6f354f, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -8586151201807168795, guid: 917cd2707dd098348a5c0bd1a8b29625, type: 2}
     - target: {fileID: 4150676367354844938, guid: ec4c329cd9c839d46919bdcf8d6f354f, type: 3}
       propertyPath: m_Name
       value: WeaponCell (1)
@@ -1496,6 +1544,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8958388359615666717, guid: ec4c329cd9c839d46919bdcf8d6f354f, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 917cd2707dd098348a5c0bd1a8b29625, type: 2}
+    - target: {fileID: 8958388359615666717, guid: ec4c329cd9c839d46919bdcf8d6f354f, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -8586151201807168795, guid: 917cd2707dd098348a5c0bd1a8b29625, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec4c329cd9c839d46919bdcf8d6f354f, type: 3}
 --- !u!224 &4610620298619835885 stripped
@@ -1525,6 +1581,14 @@ PrefabInstance:
       propertyPath: WeaponId
       value: 
       objectReference: {fileID: 11400000, guid: 06ff3464e6becd445a415b461ad63aec, type: 2}
+    - target: {fileID: 1014568819597230758, guid: ec4c329cd9c839d46919bdcf8d6f354f, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 917cd2707dd098348a5c0bd1a8b29625, type: 2}
+    - target: {fileID: 1014568819597230758, guid: ec4c329cd9c839d46919bdcf8d6f354f, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -8586151201807168795, guid: 917cd2707dd098348a5c0bd1a8b29625, type: 2}
     - target: {fileID: 4150676367354844938, guid: ec4c329cd9c839d46919bdcf8d6f354f, type: 3}
       propertyPath: m_Name
       value: WeaponCell (2)
@@ -1617,6 +1681,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8958388359615666717, guid: ec4c329cd9c839d46919bdcf8d6f354f, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 917cd2707dd098348a5c0bd1a8b29625, type: 2}
+    - target: {fileID: 8958388359615666717, guid: ec4c329cd9c839d46919bdcf8d6f354f, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -8586151201807168795, guid: 917cd2707dd098348a5c0bd1a8b29625, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec4c329cd9c839d46919bdcf8d6f354f, type: 3}
 --- !u!224 &369144513502629107 stripped
