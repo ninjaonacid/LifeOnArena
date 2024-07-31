@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using Code.Runtime.Data;
@@ -10,6 +11,8 @@ namespace Code.Runtime.Services.SaveLoad
 {
     public class SaveLoadService
     {
+        public event Action DataSaved;
+        
         private const string PlayerDataKey = "PlayerData";
         private const string AudioDataKey = "AudioData";
         private readonly IGameDataContainer _gameDataContainer;
