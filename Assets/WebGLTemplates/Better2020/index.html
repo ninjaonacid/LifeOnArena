@@ -23,6 +23,41 @@
     </div>
     <div id="unity-fullscreen-button" style="display: none;"></div>
     <script>
+window.onGPInit = async (gp) => {
+    const { player, ads } = gp;
+
+    // Wait while the player syncs with the server
+    await player.ready;
+    // Show the ad preloader and wait until it ends
+    await ads.showPreloader();
+    // Show the sticky banner (then it will update itself)
+    ads.showSticky();
+
+    // You can start the game :)
+
+    /**
+     * Below you can see examples of functions for work with ads
+     */
+
+    // Call a fullscreen banner when the level is over
+    // onLevelEnd();
+    function onLevelEnd() {
+        ads.showFullscreen();
+    }
+
+    // Player wants to get x5 reward for watching video
+    // getX5Reward(500);
+    async function getX5Reward(basicReward) {
+        const success = await ads.showRewardedVideo();
+        if (success) {
+            // See out the video
+            player.add('gold', 5 * basicReward);
+        } else {
+            // Doesn’t want to
+            player.add('gold', basicReward);
+        }
+    }
+};
       const hideFullScreenButton = "{{{ HIDE_FULL_SCREEN_BUTTON }}}";
       const buildUrl = "Build";
       const loaderUrl = buildUrl + "/{{{ LOADER_FILENAME }}}";

@@ -53,14 +53,11 @@ namespace Code.Runtime.Core.EntryPoints
             DisableInput();
             
             _saveLoad.LoadData();
-            
-            _adService.ShowInterstitial();
-            
+
             _audioService.PlayMusic("MainTheme", volume: 0.7f, true);
 
             _screenService.Open(ScreenID.MainMenu);
             
-            GP_Game.GameReady();
             GP_Game.GameplayStop();
         }
 

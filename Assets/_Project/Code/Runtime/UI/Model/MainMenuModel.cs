@@ -13,7 +13,7 @@ namespace Code.Runtime.UI.Model
         private readonly PlayerData _playerData;
         private readonly HeroFactory _heroFactory;
 
-        private HeroStats _heroStats;
+        private readonly HeroStats _heroStats;
         public int Level { get; private set; } = new();
         
         public ReactiveProperty<int> Souls;

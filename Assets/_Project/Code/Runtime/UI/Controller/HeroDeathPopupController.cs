@@ -59,7 +59,11 @@ namespace Code.Runtime.UI.Controller
 
             _view.ReturnToPortalButton
                 .OnClickAsObservable()
-                .Subscribe(x => _levelLoader.LoadLevel("MainMenu")).AddTo(_disposable);
+                .Subscribe(x =>
+                {
+                    _adService.ShowInterstitial();
+                    _levelLoader.LoadLevel("MainMenu");
+                }).AddTo(_disposable);
 
             _view.RewardRessurectButton
                 .OnClickAsObservable()
@@ -89,7 +93,7 @@ namespace Code.Runtime.UI.Controller
         private void Rewarded(string rewardId)
         {
             HandleReviveHero();
-            GP_Game.GameplayStart();
+            
         }
 
         private void Closed(bool success)
@@ -97,12 +101,14 @@ namespace Code.Runtime.UI.Controller
             _audioService.MuteMusic(!_gameData.AudioData.isMusicOn);
             _audioService.MuteSounds(!_gameData.AudioData.isSoundOn);
             _pauseService.UnpauseGame();
-
+            
             if (!success)
             {
                 _levelLoader.LoadLevel("MainMenu");
             }
             
+            _screenService.Close(this);
+            GP_Game.GameplayStart();
         }
         private void HandleReviveHero()
         {

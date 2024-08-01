@@ -1,5 +1,6 @@
 ﻿using System;
 using Code.Runtime.Core.Audio;
+using Code.Runtime.Modules.Advertisement;
 using Code.Runtime.Services.LevelLoaderService;
 using Code.Runtime.Services.PauseService;
 using Code.Runtime.Services.SaveLoad;
@@ -22,27 +23,30 @@ namespace Code.Runtime.UI.Controller
         private readonly LevelLoader _levelLoader;
         private readonly AudioService _audioService;
         private readonly SaveLoadService _saveLoad;
-
+        private readonly AdvertisementService _adService;
+        
         private readonly CompositeDisposable _disposable = new();
 
-        public HudSettingsPopupController(PauseService pauseService, LevelLoader levelLoader, AudioService audioService, SaveLoadService saveLoad)
+        public HudSettingsPopupController(PauseService pauseService, LevelLoader levelLoader, AudioService audioService,
+            SaveLoadService saveLoad, AdvertisementService adService)
         {
             _pauseService = pauseService;
             _levelLoader = levelLoader;
             _audioService = audioService;
             _saveLoad = saveLoad;
+            _adService = adService;
         }
 
         public void InitController(IScreenModel model, BaseWindowView windowView, ScreenService screenService)
         {
             _view = windowView as HudSettingsPopupView;
             _model = model as HudSettingsPopupModel;
-            
+
             Assert.IsNotNull(_view);
             Assert.IsNotNull(_model);
-            
+
             SubscribeAudioButtons();
-            
+
             SubscribeCloseButton(screenService);
 
             SubscribePortalButton();
@@ -54,6 +58,7 @@ namespace Code.Runtime.UI.Controller
             {
                 _pauseService.UnpauseGame();
                 _saveLoad.SaveData();
+                _adService.ShowInterstitial();
                 _levelLoader.LoadLevel("MainMenu");
             }).AddTo(_disposable);
         }
@@ -96,7 +101,6 @@ namespace Code.Runtime.UI.Controller
         public void Dispose()
         {
             _disposable?.Dispose();
-            
         }
     }
 }

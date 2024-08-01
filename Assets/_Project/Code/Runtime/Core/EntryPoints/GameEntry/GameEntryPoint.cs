@@ -47,6 +47,7 @@ namespace Code.Runtime.Core.EntryPoints.GameEntry
 
         private void OnGamePushReady()
         {
+            GP_Game.GameReady();
             _levelLoader.LoadLevel(_startLevelId);
         }
     }

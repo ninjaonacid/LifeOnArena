@@ -105,7 +105,7 @@ namespace Code.Runtime.UI.Controller
                     _screenService.Open(ScreenID.HudSettingsPopup);
                 });
 
-            if (!WebApplication.IsDesktop)
+            if (WebApplication.IsMobile)
             {
                 _windowView.ControlsButton.Show(false);
                 _windowView.Joystick.Show(true);
