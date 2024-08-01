@@ -1,15 +1,19 @@
 using System;
+using Code.Runtime.Core.Factory;
 using Code.Runtime.Data.PlayerData;
-using Code.Runtime.Services.PersistentProgress;
-using TMPro;
+using Code.Runtime.Entity.Hero;
+using Code.Runtime.Modules.StatSystem;
 using UniRx;
+using Attribute = Code.Runtime.Modules.StatSystem.Attribute;
 
 namespace Code.Runtime.UI.Model
 {
     public class MainMenuModel : IScreenModel, ISavableModel
     {
         private readonly PlayerData _playerData;
+        private readonly HeroFactory _heroFactory;
 
+        private HeroStats _heroStats;
         public int Level { get; private set; } = new();
         
         public ReactiveProperty<int> Souls;
@@ -20,19 +24,21 @@ namespace Code.Runtime.UI.Model
         public int StatUpgradePrice;
         
 
-        public MainMenuModel(PlayerData playerData)
+        public MainMenuModel(PlayerData playerData, HeroFactory heroFactory)
         {
             _playerData = playerData;
+            _heroFactory = heroFactory;
+            _heroStats = heroFactory.HeroGameObject.GetComponent<HeroStats>();
         }
         
         public void Initialize()
         {
             Level = _playerData.PlayerExp.Level;
             Souls = _playerData.WorldData.LootData.CollectedLoot;
-         
-            Health.Value = _playerData.StatsData.StatsValues["Health"];
-            Attack.Value = _playerData.StatsData.StatsValues["Attack"];
-            Magic.Value = _playerData.StatsData.StatsValues["Magic"];
+
+            Health.Value = _heroStats.Stats["Health"].Value;
+            Attack.Value = _heroStats.Stats["Attack"].Value;
+            Magic.Value = _heroStats.Stats["Magic"].Value;
             StatUpgradePrice = _playerData.StatsData.StatUpgradePrice;
     
         }
@@ -52,6 +58,17 @@ namespace Code.Runtime.UI.Model
                 SpendLoot(StatUpgradePrice);
                 var statPerLevel = _playerData.StatsData.StatPerLevel[statName];
                 _playerData.StatsData.StatsValues[statName] += statPerLevel;
+
+                var heroStat = _heroStats.Stats[statName];
+                if (heroStat is Attribute attribute)
+                {
+                    attribute.Add(statPerLevel);
+                } 
+                else if (heroStat is PrimaryStat primaryStat)
+                {
+                    primaryStat.Add(statPerLevel);
+                }
+                
                 stat.Value += statPerLevel;
             }
         }

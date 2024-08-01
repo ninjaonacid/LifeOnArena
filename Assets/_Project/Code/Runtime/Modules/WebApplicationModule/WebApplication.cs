@@ -1,5 +1,4 @@
-﻿using InstantGamesBridge;
-using InstantGamesBridge.Modules.Device;
+﻿using GamePush;
 
 namespace Code.Runtime.Modules.WebApplicationModule
 {
@@ -18,8 +17,7 @@ namespace Code.Runtime.Modules.WebApplicationModule
             }
         }
 
-        public static bool IsMobile => Bridge.device.type == DeviceType.Mobile;
-        public static bool IsDesktop => Bridge.device.type == DeviceType.Desktop;
-        public static bool IsTabletop => Bridge.device.type == DeviceType.Tablet;
+        public static bool IsMobile => GP_Device.IsMobile();
+        public static bool IsDesktop => GP_Device.IsDesktop();
     }
 }

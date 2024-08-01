@@ -1,7 +1,6 @@
-using System;
 using System.Collections.Generic;
 using Code.Runtime.Modules.WebApplicationModule;
-using InstantGamesBridge;
+using GamePush;
 using UnityEngine;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
@@ -34,7 +33,7 @@ namespace Code.Runtime.Modules.LocalizationProvider
 
             if (WebApplication.IsWebApp)
             {
-                ChangeLanguage(Bridge.platform.language);
+                ChangeLanguage(GP_Language.Current().ToString());
             }
             else
             {

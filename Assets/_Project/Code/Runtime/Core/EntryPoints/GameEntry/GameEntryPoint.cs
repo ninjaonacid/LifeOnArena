@@ -3,6 +3,7 @@ using Code.Runtime.Core.Audio;
 using Code.Runtime.Core.Config;
 using Code.Runtime.Modules.LocalizationProvider;
 using Code.Runtime.Services.LevelLoaderService;
+using GamePush;
 using VContainer.Unity;
 
 namespace Code.Runtime.Core.EntryPoints.GameEntry
@@ -32,9 +33,21 @@ namespace Code.Runtime.Core.EntryPoints.GameEntry
         public void Initialize()
         {
             _gameStateInitializer.LoadDataOrCreateNew();
-            _levelLoader.LoadLevel(_startLevelId);
             _audioService.InitializeAudio();
+            
+            if (GP_Init.isReady)
+            {
+                _levelLoader.LoadLevel(_startLevelId);
+            }
+            else
+            {
+                GP_Init.OnReady += OnGamePushReady;
+            }
         }
-        
+
+        private void OnGamePushReady()
+        {
+            _levelLoader.LoadLevel(_startLevelId);
+        }
     }
 }

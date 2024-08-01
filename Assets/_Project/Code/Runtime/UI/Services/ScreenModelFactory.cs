@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Code.Runtime.Core.Config;
+using Code.Runtime.Core.Factory;
 using Code.Runtime.Services.PersistentProgress;
 using Code.Runtime.Services.SaveLoad;
 using Code.Runtime.UI.Model;
@@ -16,14 +17,14 @@ namespace Code.Runtime.UI.Services
     {
         private readonly Dictionary<Type, Func<IScreenModelDto, IScreenModel>> _modelMap = new();
 
-        public ScreenModelFactory(IGameDataContainer gameData, ConfigProvider config, SaveLoadService saveLoad)
+        public ScreenModelFactory(IGameDataContainer gameData, HeroFactory heroFactory,  ConfigProvider config)
         {
-            InitializeModelMap(gameData, config);
+            InitializeModelMap(gameData, config, heroFactory);
         }
 
-        private void InitializeModelMap(IGameDataContainer gameData, ConfigProvider config)
+        private void InitializeModelMap(IGameDataContainer gameData, ConfigProvider config, HeroFactory heroFactory)
         {
-            _modelMap.Add(typeof(MainMenuModel), (dto) => new MainMenuModel(gameData.PlayerData));
+            _modelMap.Add(typeof(MainMenuModel), (dto) => new MainMenuModel(gameData.PlayerData, heroFactory));
             _modelMap.Add(typeof(WeaponScreenModel), (dto) => new WeaponScreenModel(gameData.PlayerData, config));
             _modelMap.Add(typeof(AbilityScreenModel), (dto) => new AbilityScreenModel(gameData.PlayerData, config));
             _modelMap.Add(typeof(HudModel), (dto) => new HudModel());

@@ -11,8 +11,7 @@ using Code.Runtime.UI.Model;
 using Code.Runtime.UI.Services;
 using Code.Runtime.UI.View;
 using Code.Runtime.UI.View.HeroDeathPopupView;
-using Cysharp.Threading.Tasks;
-using InstantGamesBridge.Modules.Advertisement;
+using GamePush;
 using UniRx;
 using UnityEngine.Assertions;
 
@@ -66,12 +65,10 @@ namespace Code.Runtime.UI.Controller
                 .OnClickAsObservable()
                 .Subscribe(x =>
                 {
-                    _adService.ShowReward();
+                    _adService.ShowReward(StartAd, Rewarded, Closed);
                     
                 }).AddTo(_disposable);
-            
-            _adService.OnRewardedStateChange += HandleRewardedStateChange;
-            
+
             var heroDeath = _heroFactory.HeroGameObject.GetComponent<HeroDeath>();
 
             if (heroDeath.RevivedNumber >= _adService.ReviveRewardsPossible())
@@ -81,34 +78,31 @@ namespace Code.Runtime.UI.Controller
             }
         }
 
-        private void HandleRewardedStateChange(RewardedState state)
+        private void StartAd()
         {
-            switch (state)
+            _pauseService.PauseGame();
+            _audioService.MuteSounds(true);
+            _audioService.MuteMusic(true);
+            GP_Game.GameplayStop();
+        }
+
+        private void Rewarded(string rewardId)
+        {
+            HandleReviveHero();
+            GP_Game.GameplayStart();
+        }
+
+        private void Closed(bool success)
+        {
+            _audioService.MuteMusic(!_gameData.AudioData.isMusicOn);
+            _audioService.MuteSounds(!_gameData.AudioData.isSoundOn);
+            _pauseService.UnpauseGame();
+
+            if (!success)
             {
-                case RewardedState.Opened:
-                    _pauseService.PauseGame();
-                    _audioService.MuteSounds(true);
-                    _audioService.MuteMusic(true);
-                    break;
-                
-                case RewardedState.Rewarded:
-                    HandleReviveHero();
-                    break;
-
-                case RewardedState.Closed:
-                    _audioService.MuteMusic(!_gameData.AudioData.isMusicOn);
-                    _audioService.MuteSounds(!_gameData.AudioData.isSoundOn);
-                    _pauseService.UnpauseGame();
-                    _screenService.Close(this);
-                    break;
-
-                case RewardedState.Failed:
-                    _audioService.MuteMusic(!_gameData.AudioData.isMusicOn);
-                    _audioService.MuteSounds(!_gameData.AudioData.isSoundOn);
-                    _pauseService.UnpauseGame();
-                    _levelLoader.LoadLevel("MainMenu");
-                    break;
+                _levelLoader.LoadLevel("MainMenu");
             }
+            
         }
         private void HandleReviveHero()
         {
@@ -127,7 +121,6 @@ namespace Code.Runtime.UI.Controller
         {
             _disposable.Dispose();
             _cts.Cancel();
-            _adService.OnRewardedStateChange -= HandleRewardedStateChange;
         }
     }
 }

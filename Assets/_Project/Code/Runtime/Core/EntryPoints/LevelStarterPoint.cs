@@ -10,6 +10,7 @@ using Code.Runtime.Services.SaveLoad;
 using Code.Runtime.UI;
 using Code.Runtime.UI.Services;
 using Cysharp.Threading.Tasks;
+using GamePush;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using VContainer.Unity;
@@ -62,6 +63,8 @@ namespace Code.Runtime.Core.EntryPoints
             _saveLoad.LoadData();
             _controls.UI.Enable();
             _enemySpawnerController.RunSpawner();
+            
+            GP_Game.GameplayStart();
         }
 
         private async UniTask<GameObject> InitHero(LevelConfig levelConfig)

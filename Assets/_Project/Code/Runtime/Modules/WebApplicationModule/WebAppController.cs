@@ -4,8 +4,7 @@ using Code.Runtime.Core.Audio;
 using Code.Runtime.Services.PauseService;
 using Code.Runtime.Services.PersistentProgress;
 using Code.Runtime.Services.SaveLoad;
-using InstantGamesBridge;
-using InstantGamesBridge.Modules.Game;
+using GamePush;
 using UnityEngine;
 using VContainer.Unity;
 using Application = UnityEngine.Device.Application;
@@ -35,68 +34,75 @@ namespace Code.Runtime.Modules.WebApplicationModule
             if (WebApplication.IsWebApp)
             {
                 Application.targetFrameRate = 60;
-                Bridge.game.visibilityStateChanged += HandleVisibilityLogic;
+                
+              
+                
+                //Bridge.game.visibilityStateChanged += HandleVisibilityLogic;
             }
-
-            if (WebApplication.IsWebApp && IsLeaderboardSupported)
-            {
-                _saveLoad.DataSaved += WriteLeaderboard;
-            }
+            //
+            // if (WebApplication.IsWebApp && IsLeaderboardSupported)
+            // {
+            //     _saveLoad.DataSaved += WriteLeaderboard;
+            //     
+            // }
         }
 
-        private void WriteLeaderboard()
-        {
-            _leaderBoard.Clear();
-
-            var heroLevel = _gameData.PlayerData.PlayerExp.Level;
-            
-            switch (Bridge.platform.id)
-            {
-                case "yandex":
-                    _leaderBoard.Add("Level", heroLevel);
-                    _leaderBoard.Add("LevelLeaderboard", YANDEX_LEADERBOARD_NAME);
-                    break;
-            }
-            
-            Bridge.leaderboard.SetScore(_leaderBoard, LeaderBoardWriteOperation);
-        }
-
-        private void LeaderBoardWriteOperation(bool result)
-        {
-            if (result)
-            {
-                Debug.Log("LeaderboardWriteSuccessful");
-            }
-            else
-            {
-                Debug.LogError("Leaderboard write error");
-            }
-        }
-
-        private void HandleVisibilityLogic(VisibilityState state)
-        {
-            switch (state)
-            {
-                case VisibilityState.Hidden:
-                    _pauseService.PauseGame();
-                    _audioService.MuteAll(true);
-                    _saveLoad.SaveData();
-                    break;
-                case VisibilityState.Visible:
-                    _pauseService.UnpauseGame();
-                    _audioService.MuteMusic(!_gameData.AudioData.isMusicOn);
-                    _audioService.MuteSounds(!_gameData.AudioData.isSoundOn);
-                    break;
-            }
-        }
-        
-
-        private bool IsLeaderboardSupported => Bridge.leaderboard.isSupported;
-
+        // private void WriteLeaderboard()
+        // {
+        //     _leaderBoard.Clear();
+        //
+        //     var heroLevel = _gameData.PlayerData.PlayerExp.Level;
+        //
+        //     switch (Bridge.platform.id)
+        //     {
+        //         case "yandex":
+        //             _leaderBoard.Add("Level", heroLevel);
+        //             _leaderBoard.Add("LevelLeaderboard", YANDEX_LEADERBOARD_NAME);
+        //             break;
+        //     }
+        //
+        //     Bridge.leaderboard.SetScore(_leaderBoard, LeaderBoardWriteOperation);
+        // }
+        //
+        // private void LeaderBoardWriteOperation(bool result)
+        // {
+        //     if (result)
+        //     {
+        //         Debug.Log("LeaderboardWriteSuccessful");
+        //     }
+        //     else
+        //     {
+        //         Debug.LogError("Leaderboard write error");
+        //     }
+        // }
+        //
+        // private void HandleVisibilityLogic(VisibilityState state)
+        // {
+        //     switch (state)
+        //     {
+        //         case VisibilityState.Hidden:
+        //             _pauseService.PauseGame();
+        //             _audioService.MuteAll(true);
+        //             _saveLoad.SaveData();
+        //             break;
+        //         case VisibilityState.Visible:
+        //             _pauseService.UnpauseGame();
+        //             _audioService.MuteMusic(!_gameData.AudioData.isMusicOn);
+        //             _audioService.MuteSounds(!_gameData.AudioData.isSoundOn);
+        //             break;
+        //     }
+        // }
+        //
+        //
+        // private bool IsLeaderboardSupported => Bridge.leaderboard.isSupported;
+        //
+        // public void Dispose()
+        // {
+        //     _saveLoad.DataSaved -= WriteLeaderboard;
+        //     Bridge.game.visibilityStateChanged -= HandleVisibilityLogic;
+        // }
         public void Dispose()
         {
-            _saveLoad.DataSaved -= WriteLeaderboard;
-            Bridge.game.visibilityStateChanged -= HandleVisibilityLogic;
         }
     }
 }

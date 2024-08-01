@@ -9,10 +9,7 @@ using Code.Runtime.UI.Model;
 using Code.Runtime.UI.Services;
 using Code.Runtime.UI.View;
 using Code.Runtime.UI.View.MainMenu;
-using Cysharp.Threading.Tasks;
-using InstantGamesBridge.Modules.Advertisement;
 using UniRx;
-using UnityEngine;
 using UnityEngine.Assertions;
 
 namespace Code.Runtime.UI.Controller
@@ -120,9 +117,8 @@ namespace Code.Runtime.UI.Controller
 
             if (showReward)
             {
-                _adService.OnRewardedStateChange += HandleRewardedStateChange;
                 _windowView.RewardButton.OnClickAsObservable()
-                    .Subscribe(x => { _adService.ShowReward(); });
+                    .Subscribe(x => { _adService.ShowReward(StartAd, Rewarded, Closed); });
 
                 _windowView.RewardButton.Show();
                 _windowView.RewardButton.PlayScaleAnimation();
@@ -154,34 +150,24 @@ namespace Code.Runtime.UI.Controller
             }).AddTo(_disposables);
         }
 
-        private void HandleRewardedStateChange(RewardedState state)
+        private void StartAd()
         {
-            switch (state)
-            {
-                case RewardedState.Opened:
-                    _pauseService.PauseGame();
-                    _audioService.MuteSounds(true);
-                    _audioService.MuteMusic(true);
-                    break;
+            _pauseService.PauseGame();
+            _audioService.MuteSounds(true);
+            _audioService.MuteMusic(true);
+        }
 
-                case RewardedState.Rewarded:
-                    HandleSoulsReward();
+        private void Rewarded(string rewardId)
+        {
+            HandleSoulsReward();
+            _windowView.RewardButton.Show(false);
+        }
 
-                    _windowView.RewardButton.Show(false);
-                    break;
-
-                case RewardedState.Closed:
-                    _audioService.MuteMusic(!_gameData.AudioData.isMusicOn);
-                    _audioService.MuteSounds(!_gameData.AudioData.isSoundOn);
-                    _pauseService.UnpauseGame();
-                    break;
-
-                case RewardedState.Failed:
-                    _audioService.MuteMusic(!_gameData.AudioData.isMusicOn);
-                    _audioService.MuteSounds(!_gameData.AudioData.isSoundOn);
-                    _pauseService.UnpauseGame();
-                    break;
-            }
+        private void Closed(bool success)
+        {
+            _audioService.MuteMusic(!_gameData.AudioData.isMusicOn);
+            _audioService.MuteSounds(!_gameData.AudioData.isSoundOn);
+            _pauseService.UnpauseGame();
         }
 
         private void HandleSoulsReward()
@@ -197,7 +183,6 @@ namespace Code.Runtime.UI.Controller
             _disposables.Dispose();
             _cts.Cancel();
             _cts.Dispose();
-            _adService.OnRewardedStateChange -= HandleRewardedStateChange;
         }
     }
 }

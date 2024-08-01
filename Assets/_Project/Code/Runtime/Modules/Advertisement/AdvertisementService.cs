@@ -5,17 +5,13 @@ using Code.Runtime.Core.Config;
 using Code.Runtime.Services.LevelLoaderService;
 using Code.Runtime.Services.PauseService;
 using Code.Runtime.Services.PersistentProgress;
-using InstantGamesBridge;
-using InstantGamesBridge.Modules.Advertisement;
-using UnityEditor;
-using UnityEngine;
+using GamePush;
 using VContainer.Unity;
 
 namespace Code.Runtime.Modules.Advertisement
 {
     public class AdvertisementService : IInitializable, IDisposable
     {
-        public event Action<RewardedState> OnRewardedStateChange;
 
         private readonly AudioService _audioService;
         private readonly PauseService _pauseService;
@@ -38,82 +34,39 @@ namespace Code.Runtime.Modules.Advertisement
 
         public int ReviveRewardsPossible() => _adsConfig.HeroRevivePerLevel;
 
-        public void ShowReward()
+        public void ShowReward(Action onRewardedStart, Action<string> onRewarded, Action<bool> onRewardedClose)
         {
-            Bridge.advertisement.ShowRewarded();
-           
+            GP_Ads.ShowRewarded(onRewardedStart: onRewardedStart,
+                onRewardedReward: onRewarded,
+                onRewardedClose: onRewardedClose);
         }
 
-        public void ShowInterstitial()
-        {
-            Bridge.advertisement.ShowInterstitial();
-        }
+        public void ShowInterstitial() => GP_Ads.ShowFullscreen(OnInterstitialStart, OnInterstitialClosed);
 
         public void Initialize()
         {
             _adsConfig = _configProvider.GetAdsConfig();
-            Bridge.advertisement.rewardedStateChanged += HandleRewardedStateChange;
-            Bridge.advertisement.interstitialStateChanged += OnInterstitialStateChange;
         }
 
-        private void OnInterstitialStateChange(InterstitialState state)
+        private void OnInterstitialStart()
         {
-            switch (state)
-            {
-                case InterstitialState.Opened:
-                    _playerControls.Disable();
-                    _pauseService.PauseGame();
-                    _audioService.MuteAll(true);
-                    break;
-                case InterstitialState.Closed:
-                    
-                    _audioService.MuteMusic(!_gameData.AudioData.isMusicOn);
-                    _audioService.MuteSounds(!_gameData.AudioData.isSoundOn);
-                    if (_levelLoader.GetCurrentLevelConfig().LevelId.Name != "MainMenu")
-                    {
-                        _playerControls.Enable();
-                    }
-
-                    _pauseService.UnpauseGame();
-                    break;
-                case InterstitialState.Failed:
-                    _audioService.MuteMusic(!_gameData.AudioData.isMusicOn);
-                    _audioService.MuteSounds(!_gameData.AudioData.isSoundOn);
-                    if (_levelLoader.GetCurrentLevelConfig().LevelId.Name != "MainMenu")
-                    {
-                        _playerControls.Enable();
-                    }
-
-                    _pauseService.UnpauseGame();
-                    break;
-            }
+            _playerControls.Disable();
+            _pauseService.PauseGame();
+            _audioService.MuteAll(true);
         }
 
-        private void HandleRewardedStateChange(RewardedState state)
+        private void OnInterstitialClosed(bool success)
         {
-            switch (state)
+            _audioService.MuteMusic(!_gameData.AudioData.isMusicOn);
+            _audioService.MuteSounds(!_gameData.AudioData.isSoundOn);
+            
+            if (_levelLoader.GetCurrentLevelConfig().LevelId.Name != "MainMenu")
             {
-                case RewardedState.Loading:
-                    OnRewardedStateChange?.Invoke(state);
-                    break;
-                case RewardedState.Opened:
-                    OnRewardedStateChange?.Invoke(state);
-                    break;
-                case RewardedState.Failed:
-                    OnRewardedStateChange?.Invoke(state);
-                    break;
-                case RewardedState.Closed:
-                    OnRewardedStateChange?.Invoke(state);
-                    break;
-                case RewardedState.Rewarded:
-                    OnRewardedStateChange?.Invoke(state);
-                    break;
-                
-                default:
-                    break;
+                _playerControls.Enable();
             }
+
+            _pauseService.UnpauseGame();
         }
-        
 
         public void Dispose()
         {
