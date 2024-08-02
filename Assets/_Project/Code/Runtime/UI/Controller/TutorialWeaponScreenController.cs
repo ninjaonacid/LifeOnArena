@@ -19,7 +19,8 @@ namespace Code.Runtime.UI.Controller
         private List<TutorialElement> _tutorialElements = new();
 
         public TutorialWeaponScreenController(AudioService audioService, HeroFactory heroFactory,
-            SaveLoadService saveLoad, TutorialService tutorialService) : base(audioService, heroFactory, saveLoad)
+            SaveLoadService saveLoad, PlayerData playerData, TutorialService tutorialService) : base(audioService,
+            heroFactory, saveLoad, playerData)
         {
             _tutorialService = tutorialService;
         }

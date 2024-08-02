@@ -24,12 +24,15 @@ namespace Code.Runtime.UI.Controller
         private readonly AudioService _audioService;
         private readonly HeroFactory _heroFactory;
         private readonly SaveLoadService _saveLoad;
+        private readonly PlayerData _playerData;
 
-        public WeaponScreenController(AudioService audioService, HeroFactory heroFactory, SaveLoadService saveLoad)
+        public WeaponScreenController(AudioService audioService, HeroFactory heroFactory, SaveLoadService saveLoad,
+            PlayerData playerData)
         {
             _audioService = audioService;
             _heroFactory = heroFactory;
             _saveLoad = saveLoad;
+            _playerData = playerData;
         }
 
         public virtual void InitController(IScreenModel model, BaseWindowView windowView, ScreenService screenService)
@@ -93,7 +96,12 @@ namespace Code.Runtime.UI.Controller
             _audioService.PlaySound("Equip");
             _model.EquipWeapon(weaponId);
             _heroFactory.HeroGameObject.GetComponent<HeroWeapon>().EquipWeapon(weaponModel.WeaponId);
-            _saveLoad.SaveData();
+
+            if (_playerData.TutorialData.IsTutorialCompleted)
+            {
+                _saveLoad.SaveData(); 
+            }
+            
             UpdateView();
         }
 

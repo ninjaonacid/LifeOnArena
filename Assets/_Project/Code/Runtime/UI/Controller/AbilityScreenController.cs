@@ -134,6 +134,7 @@ namespace Code.Runtime.UI.Controller
             {
                 _model.UnlockAbility(index);
                 AbilitySelected(index);
+                
                 if (_playerData.TutorialData.IsTutorialCompleted)
                 {
                     _saveLoad.SaveData();
@@ -150,6 +151,7 @@ namespace Code.Runtime.UI.Controller
                 _audioService.PlaySound("Equip");
                 _model.UnEquipAbility(index);
                 AbilitySelected(index);
+                
                 if (_playerData.TutorialData.IsTutorialCompleted)
                 {
                     _saveLoad.SaveData();
@@ -166,6 +168,7 @@ namespace Code.Runtime.UI.Controller
                 _model.EquipAbility(index);
                 _audioService.PlaySound("Equip");
                 AbilitySelected(index);
+                
                 if (_playerData.TutorialData.IsTutorialCompleted)
                 {
                     _saveLoad.SaveData();
