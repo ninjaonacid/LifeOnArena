@@ -1,9 +1,10 @@
+using Code.Editor.ScriptableObjects;
 using Code.Runtime.Modules.AbilitySystem.GameplayEffects;
 using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine.UIElements;
 
-namespace Code.Editor.ScriptableObjects
+namespace Code.Runtime.Modules.AbilitySystem.Editor
 {
     [CustomEditor(typeof(DurationalGameplayEffectBlueprint))]
     public class DurationalGameplayEffectBlueprintEditor : GameplayEffectBlueprintEditor

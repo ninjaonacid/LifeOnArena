@@ -212,27 +212,6 @@
               ]
             }
           }
-        },
-        {
-          "$type": "Code.Runtime.UI.Model.AbilityMenu.AbilityModel, Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-          "IsEquipped": true,
-          "IsUnlocked": true,
-          "AbilityId": 1778802000,
-          "Price": 100,
-          "AbilityTreeData": {
-            "$type": "Code.Runtime.Modules.AbilitySystem.AbilityTreeData, Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-            "Branch": 2,
-            "Position": 1,
-            "Price": 100,
-            "UnlockRequirements": {
-              "$type": "System.Collections.Generic.List`1[[Code.Runtime.Modules.Requirements.IRequirement`1[[Code.Runtime.Data.PlayerData.PlayerData, Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
-              "$values": [
-                {
-                  "$type": "Code.Runtime.Modules.Requirements.SoulsRequirement, Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-                }
-              ]
-            }
-          }
         }
       ]
     },
@@ -303,7 +282,7 @@
   },
   "TutorialData": {
     "$type": "Code.Runtime.Data.PlayerData.TutorialData, Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-    "IsTutorialCompleted": false
+    "IsTutorialCompleted": true
   },
   "RewardsData": {
     "$type": "Code.Runtime.Data.PlayerData.RewardsData, Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",

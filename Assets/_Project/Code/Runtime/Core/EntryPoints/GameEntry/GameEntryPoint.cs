@@ -1,6 +1,5 @@
 using Code.Runtime.ConfigData.Identifiers;
 using Code.Runtime.Core.Audio;
-using Code.Runtime.Core.Config;
 using Code.Runtime.Modules.LocalizationProvider;
 using Code.Runtime.Services.LevelLoaderService;
 using GamePush;
@@ -12,22 +11,21 @@ namespace Code.Runtime.Core.EntryPoints.GameEntry
     {
         private readonly GameStateInitializer _gameStateInitializer;
         private readonly LevelLoader _levelLoader;
-        private readonly ConfigProvider _config;
         private readonly LocalizationService _localizationService;
         private readonly AudioService _audioService;
         private readonly LevelIdentifier _startLevelId;
         public GameEntryPoint(GameStateInitializer gameStateInitializer,
             LevelIdentifier startLevelId,
             LevelLoader levelLoader,
-            ConfigProvider config,
-            AudioService audioService
+            AudioService audioService,
+            LocalizationService localizationService
           )
         {
             _gameStateInitializer = gameStateInitializer;
             _startLevelId = startLevelId;
             _levelLoader = levelLoader;
-            _config = config;
             _audioService = audioService;
+            _localizationService = localizationService;
         }
 
         public void Initialize()
@@ -37,6 +35,7 @@ namespace Code.Runtime.Core.EntryPoints.GameEntry
             
             if (GP_Init.isReady)
             {
+                _localizationService.Initialize();
                 _levelLoader.LoadLevel(_startLevelId);
             }
             else
@@ -47,7 +46,7 @@ namespace Code.Runtime.Core.EntryPoints.GameEntry
 
         private void OnGamePushReady()
         {
-            GP_Game.GameReady();
+            _localizationService.Initialize();
             _levelLoader.LoadLevel(_startLevelId);
         }
     }

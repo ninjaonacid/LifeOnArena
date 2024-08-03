@@ -5,11 +5,10 @@ using UnityEngine;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
 using UnityEngine.ResourceManagement.AsyncOperations;
-using VContainer.Unity;
 
 namespace Code.Runtime.Modules.LocalizationProvider
 {
-    public class LocalizationService : IInitializable
+    public class LocalizationService
     {
         private LocalizationSettings _localizationSettings;
         private Locale _currentLocale;

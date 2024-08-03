@@ -2,7 +2,6 @@
 using System.Threading;
 using Code.Runtime.ConfigData.Levels;
 using Code.Runtime.Core.Audio;
-using Code.Runtime.Core.Config;
 using Code.Runtime.Core.Factory;
 using Code.Runtime.Modules.Advertisement;
 using Code.Runtime.Services.LevelLoaderService;
@@ -12,7 +11,6 @@ using Code.Runtime.UI.Services;
 using Cysharp.Threading.Tasks;
 using GamePush;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using VContainer.Unity;
 
 namespace Code.Runtime.Core.EntryPoints
@@ -58,6 +56,7 @@ namespace Code.Runtime.Core.EntryPoints
 
             _screenService.Open(ScreenID.MainMenu);
             
+            GP_Game.GameReady();
             GP_Game.GameplayStop();
         }
 
