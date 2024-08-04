@@ -3,6 +3,7 @@ using Code.Runtime.Core.Factory;
 using Code.Runtime.Data.PlayerData;
 using Code.Runtime.Entity.Hero;
 using Code.Runtime.Modules.StatSystem;
+using Code.Runtime.Modules.StatSystem.Runtime;
 using UniRx;
 using Attribute = Code.Runtime.Modules.StatSystem.Attribute;
 

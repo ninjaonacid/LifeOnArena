@@ -1,7 +1,7 @@
 using Code.Runtime.Data.PlayerData;
 using Code.Runtime.Services.PersistentProgress;
 
-namespace Code.Runtime.Modules.StatSystem
+namespace Code.Runtime.Modules.StatSystem.Runtime
 {
     public class PrimaryStat : Stat, ISave
     {

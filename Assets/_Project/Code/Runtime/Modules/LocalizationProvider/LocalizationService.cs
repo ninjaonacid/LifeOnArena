@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 using Code.Runtime.Modules.WebApplicationModule;
 using GamePush;
 using UnityEngine;
@@ -32,7 +34,13 @@ namespace Code.Runtime.Modules.LocalizationProvider
 
             if (WebApplication.IsWebApp)
             {
-                ChangeLanguage(GP_Language.Current().ToString());
+                var language = GP_Language.Current();
+
+                CultureInfo cultureInfo = CultureInfo.GetCultures(CultureTypes.AllCultures)
+                    .FirstOrDefault(x => x.EnglishName == language.ToString());
+                
+                ChangeLanguage(cultureInfo);
+                
             }
             else
             {
@@ -46,6 +54,15 @@ namespace Code.Runtime.Modules.LocalizationProvider
         public void ChangeLanguage(string localeCode)
         {
             if (_availableLocales.TryGetValue(localeCode, out var locale))
+            {
+                _localizationSettings.SetSelectedLocale(locale);
+                _currentLocale = locale;
+            }
+        }
+
+        public void ChangeLanguage(CultureInfo cultureInfo)
+        {
+            if (_availableLocales.TryGetValue(cultureInfo, out var locale))
             {
                 _localizationSettings.SetSelectedLocale(locale);
                 _currentLocale = locale;

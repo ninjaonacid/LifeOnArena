@@ -1,6 +1,7 @@
 ﻿using Code.Runtime.Core.Audio;
 using Code.Runtime.Data.PlayerData;
 using Code.Runtime.Modules.StatSystem;
+using Code.Runtime.Modules.StatSystem.Runtime;
 using Code.Runtime.Services.PersistentProgress;
 using UnityEngine;
 using VContainer;
