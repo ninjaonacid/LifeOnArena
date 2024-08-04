@@ -6,9 +6,8 @@ using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
-using Object = System.Object;
 
-namespace Code.Editor.ScriptableObjects
+namespace Code.Runtime.Modules.AbilitySystem.Editor
 {
     [CustomEditor(typeof(GameplayEffectBlueprint))]
     public class GameplayEffectBlueprintEditor : OdinEditor
