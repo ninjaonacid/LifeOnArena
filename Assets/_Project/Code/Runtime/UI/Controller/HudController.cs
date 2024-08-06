@@ -112,6 +112,8 @@ namespace Code.Runtime.UI.Controller
             }
             else
             {
+                _windowView.ControlsButton.Show(true);
+                
                 _windowView.ControlsButton
                     .OnClickAsObservable()
                     .Subscribe(x =>

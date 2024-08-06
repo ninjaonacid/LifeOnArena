@@ -4,6 +4,7 @@ using Code.Runtime.ConfigData.Weapon;
 using Code.Runtime.Modules.StatSystem;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using UnityEngine.Localization;
 
 namespace Code.Runtime.ConfigData
 {
@@ -11,6 +12,7 @@ namespace Code.Runtime.ConfigData
     public class EnemyDataConfig : ScriptableObject
     {
         [SerializeField] private string _name;
+        [SerializeField] private LocalizedString _localizedName;
         [Range(0, 1000)]
         [SerializeField] private int _maxSouls;
         [Range(0, 1000)]
@@ -26,6 +28,7 @@ namespace Code.Runtime.ConfigData
         [SerializeField] private float _moveSpeed;
         
         public string Name => _name;
+        public LocalizedString LocalizedName => _localizedName;
         public int MaxSouls => _maxSouls;
         public int MinSouls => _minSouls;
 
