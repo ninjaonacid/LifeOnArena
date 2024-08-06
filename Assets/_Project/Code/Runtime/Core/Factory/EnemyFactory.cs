@@ -90,6 +90,11 @@ namespace Code.Runtime.Core.Factory
             monster.transform.SetParent(parent);
 
             EnemyFacade enemyFacade = monster.GetComponent<EnemyFacade>();
+
+            if (monsterData.LocalizedName != null)
+            {
+                enemyFacade.EnemyActor.ActorName = monsterData.LocalizedName;
+            }
             
             enemyFacade.EnemyTarget.Construct(_heroFactory.HeroGameObject.transform);
             enemyFacade.EnemyStats.SetStats(monsterData.PossibleStats.Count > 1

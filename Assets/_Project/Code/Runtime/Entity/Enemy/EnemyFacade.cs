@@ -6,6 +6,7 @@ namespace Code.Runtime.Entity.Enemy
 {
     public class EnemyFacade : MonoBehaviour
     {
+        public Actor EnemyActor;
         public EnemyDeath EnemyDeath;
         public EnemyWeapon EnemyWeapon;
         public EnemyTarget EnemyTarget;

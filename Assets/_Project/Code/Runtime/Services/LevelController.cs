@@ -65,7 +65,7 @@ namespace Code.Runtime.Services
 
         private void OnBossSpawn(GameObject go, MobIdentifier mobId)
         {
-            _eventSystem.FireEvent(new BossSpawnEvent(go, mobId));
+            _eventSystem.FireEvent(new BossSpawnEvent(go));
         }
 
         private void LevelEnd()

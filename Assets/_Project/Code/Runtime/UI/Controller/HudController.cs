@@ -2,6 +2,7 @@ using System;
 using Code.Runtime.Core.EventSystem;
 using Code.Runtime.Core.Factory;
 using Code.Runtime.CustomEvents;
+using Code.Runtime.Entity;
 using Code.Runtime.Entity.EntitiesComponents;
 using Code.Runtime.Entity.Hero;
 using Code.Runtime.Modules.Advertisement;
@@ -158,7 +159,7 @@ namespace Code.Runtime.UI.Controller
             var damageable = obj.BossGo.GetComponent<IDamageable>();
 
             _windowView.BossHudHealthBar.Show(true);
-            _windowView.BossHudHealthBar.SetBossName(obj.BossId.name);
+            _windowView.BossHudHealthBar.SetBossName(obj.BossGo.GetComponent<Actor>().ActorName.GetLocalizedString());
 
             Observable.FromEvent(x => damageable.Health.CurrentValueChanged += x,
                     x => damageable.Health.CurrentValueChanged -= x)

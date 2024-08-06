@@ -13,13 +13,22 @@ MonoBehaviour:
   m_Name: DemonBoss
   m_EditorClassIdentifier: 
   _name: Demon Lord
+  _localizedName:
+    m_TableReference:
+      m_TableCollectionName: GUID:908445a34d696ec449ffe62e7e3cd673
+    m_TableEntryReference:
+      m_KeyId: 15792510997721088
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   _maxSouls: 200
   _minSouls: 50
   _maxExp: 300
   _minExp: 150
-  _isScalableStats: 0
   _stats:
   - {fileID: 11400000, guid: 8f6c8fc4240948f4e98ab573a51b0ac1, type: 2}
+  _weapons: []
   _mobId: {fileID: 11400000, guid: da24c5c5806845a4ebed54c799031191, type: 2}
   _moveSpeed: 10
   PrefabReference:
@@ -27,3 +36,6 @@ MonoBehaviour:
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
+  references:
+    version: 2
+    RefIds: []
