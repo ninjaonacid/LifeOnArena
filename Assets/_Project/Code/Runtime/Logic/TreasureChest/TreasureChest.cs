@@ -1,9 +1,7 @@
-using Code.Runtime.Core.Audio;
 using Code.Runtime.Modules.RewardSystem;
 using Code.Runtime.UI.Services;
 using PrimeTween;
 using UnityEngine;
-using VContainer;
 
 namespace Code.Runtime.Logic.TreasureChest
 {
