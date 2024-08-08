@@ -5,10 +5,11 @@ using Code.Runtime.Core.Factory;
 using Code.Runtime.Entity.StatusEffects;
 using Code.Runtime.Modules.AbilitySystem.GameplayEffects;
 using Code.Runtime.Modules.StatSystem;
+using Code.Runtime.Modules.StatSystem.Runtime;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using VContainer;
-using Attribute = Code.Runtime.Modules.StatSystem.Attribute;
+using Attribute = Code.Runtime.Modules.StatSystem.Runtime.Attribute;
 
 namespace Code.Runtime.Entity
 {

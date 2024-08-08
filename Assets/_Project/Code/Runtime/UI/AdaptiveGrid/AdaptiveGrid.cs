@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using AdaptiveGrid;
 using UnityEngine;
 using UnityEngine.EventSystems;
 

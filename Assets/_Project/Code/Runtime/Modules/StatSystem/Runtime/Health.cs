@@ -1,4 +1,4 @@
-namespace Code.Runtime.Modules.StatSystem
+namespace Code.Runtime.Modules.StatSystem.Runtime
 {
     public class Health : Attribute
     {

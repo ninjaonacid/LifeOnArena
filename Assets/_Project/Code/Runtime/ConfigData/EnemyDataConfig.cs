@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Code.Runtime.ConfigData.Identifiers;
 using Code.Runtime.ConfigData.Weapon;
 using Code.Runtime.Modules.StatSystem;
+using Code.Runtime.Modules.StatSystem.Runtime;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.Localization;

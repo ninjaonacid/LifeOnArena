@@ -2,7 +2,7 @@ using System;
 
 /* msmshazan TexturePacker
  * https://github.com/msmshazan/TexturePacker/ */
-namespace msmshazan.TexturePacker
+namespace Code.Runtime.UI.AdaptiveGrid.MaxRects
 {
     public struct Point
     {

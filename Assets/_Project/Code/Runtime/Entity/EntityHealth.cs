@@ -1,7 +1,8 @@
 using Code.Runtime.Entity.EntitiesComponents;
 using Code.Runtime.Logic.Damage;
 using Code.Runtime.Modules.StatSystem;
-using Code.Runtime.Modules.StatSystem.StatModifiers;
+using Code.Runtime.Modules.StatSystem.Runtime;
+using Code.Runtime.Modules.StatSystem.Runtime.StatModifiers;
 using UnityEngine;
 
 namespace Code.Runtime.Entity

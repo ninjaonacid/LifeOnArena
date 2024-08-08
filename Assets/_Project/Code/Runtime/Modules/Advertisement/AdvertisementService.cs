@@ -2,7 +2,7 @@ using System;
 using Code.Runtime.ConfigData;
 using Code.Runtime.Core.Audio;
 using Code.Runtime.Core.Config;
-using Code.Runtime.Services.LevelLoaderService;
+using Code.Runtime.Core.LevelLoaderService;
 using Code.Runtime.Services.PauseService;
 using Code.Runtime.Services.PersistentProgress;
 using GamePush;

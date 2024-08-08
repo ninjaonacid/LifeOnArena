@@ -1,9 +1,8 @@
 using System;
 using System.Collections.Generic;
-using Code.Runtime.Modules.StatSystem.Runtime;
 using UnityEngine;
 
-namespace Code.Runtime.Modules.StatSystem
+namespace Code.Runtime.Modules.StatSystem.Runtime
 {
     public class StatController : MonoBehaviour
     {

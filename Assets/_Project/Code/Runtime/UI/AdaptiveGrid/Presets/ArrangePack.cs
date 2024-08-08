@@ -1,12 +1,10 @@
-using msmshazan.TexturePacker;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using Code.Runtime.UI.AdaptiveGrid;
+using Code.Runtime.UI.AdaptiveGrid.MaxRects;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace AdaptiveGrid
+namespace Code.Runtime.UI.AdaptiveGrid.Presets
 {
     public class ArrangePack : AdaptivePreset
     {

@@ -2,7 +2,7 @@ using Code.Runtime.ConfigData.Animations;
 using Code.Runtime.Core.EventSystem;
 using Code.Runtime.CustomEvents;
 using Code.Runtime.Entity.EntitiesComponents;
-using Code.Runtime.Modules.StatSystem.StatModifiers;
+using Code.Runtime.Modules.StatSystem.Runtime.StatModifiers;
 using UnityEngine;
 using VContainer;
 

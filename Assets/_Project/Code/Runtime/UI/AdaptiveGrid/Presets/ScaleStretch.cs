@@ -1,9 +1,8 @@
 using System;
 using System.Collections.Generic;
-using Code.Runtime.UI.AdaptiveGrid;
 using UnityEngine;
 
-namespace AdaptiveGrid
+namespace Code.Runtime.UI.AdaptiveGrid.Presets
 {
     [Serializable]
     public class ScaleNone : AdaptivePreset

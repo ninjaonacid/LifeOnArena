@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using AdaptiveGrid;
 using UnityEngine;
 
 namespace Code.Runtime.UI.AdaptiveGrid.Presets

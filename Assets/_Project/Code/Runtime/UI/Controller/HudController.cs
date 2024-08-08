@@ -1,6 +1,7 @@
 using System;
 using Code.Runtime.Core.EventSystem;
 using Code.Runtime.Core.Factory;
+using Code.Runtime.Core.LevelLoaderService;
 using Code.Runtime.CustomEvents;
 using Code.Runtime.Entity;
 using Code.Runtime.Entity.EntitiesComponents;
@@ -9,7 +10,6 @@ using Code.Runtime.Modules.Advertisement;
 using Code.Runtime.Modules.LocalizationProvider;
 using Code.Runtime.Modules.WebApplicationModule;
 using Code.Runtime.Services;
-using Code.Runtime.Services.LevelLoaderService;
 using Code.Runtime.Services.PauseService;
 using Code.Runtime.Services.PersistentProgress;
 using Code.Runtime.UI.Model;

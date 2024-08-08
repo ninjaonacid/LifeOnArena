@@ -1,9 +1,9 @@
-using msmshazan.TexturePacker;
 using System;
 using System.Collections.Generic;
+using Code.Runtime.UI.AdaptiveGrid.MaxRects;
 using UnityEngine;
 
-namespace AdaptiveGrid
+namespace Code.Runtime.UI.AdaptiveGrid
 {
     [Serializable]
     public struct GridSize

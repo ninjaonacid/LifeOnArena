@@ -5,6 +5,7 @@ using Code.Runtime.ConfigData.Animations;
 using Code.Runtime.Core.ObjectPool;
 using Code.Runtime.Entity.EntitiesComponents;
 using Code.Runtime.Modules.StatSystem;
+using Code.Runtime.Modules.StatSystem.Runtime;
 using Code.Runtime.UI.View.HUD;
 using Cysharp.Threading.Tasks;
 using UnityEngine;

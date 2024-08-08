@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 /* msmshazan TexturePacker 
  * https://github.com/msmshazan/TexturePacker/ */
-namespace msmshazan.TexturePacker
+namespace Code.Runtime.UI.AdaptiveGrid.MaxRects
 {
     public class MaxRectsBinPack
     {

@@ -3,7 +3,7 @@ using Code.Runtime.ConfigData.Levels;
 using Code.Runtime.Core.Config;
 using Code.Runtime.Core.SceneManagement;
 
-namespace Code.Runtime.Services.LevelLoaderService
+namespace Code.Runtime.Core.LevelLoaderService
 {
     public class LevelLoader
     {

@@ -1,7 +1,7 @@
 using Code.Runtime.ConfigData.Identifiers;
 using Code.Runtime.Core.Audio;
+using Code.Runtime.Core.LevelLoaderService;
 using Code.Runtime.Modules.LocalizationProvider;
-using Code.Runtime.Services.LevelLoaderService;
 using GamePush;
 using VContainer.Unity;
 
@@ -9,19 +9,19 @@ namespace Code.Runtime.Core.EntryPoints.GameEntry
 {
     public class GameEntryPoint : IInitializable
     {
-        private readonly GameStateInitializer _gameStateInitializer;
+        private readonly GameInitializer _gameInitializer;
         private readonly LevelLoader _levelLoader;
         private readonly LocalizationService _localizationService;
         private readonly AudioService _audioService;
         private readonly LevelIdentifier _startLevelId;
-        public GameEntryPoint(GameStateInitializer gameStateInitializer,
+        public GameEntryPoint(GameInitializer gameInitializer,
             LevelIdentifier startLevelId,
             LevelLoader levelLoader,
             AudioService audioService,
             LocalizationService localizationService
           )
         {
-            _gameStateInitializer = gameStateInitializer;
+            _gameInitializer = gameInitializer;
             _startLevelId = startLevelId;
             _levelLoader = levelLoader;
             _audioService = audioService;
@@ -30,7 +30,7 @@ namespace Code.Runtime.Core.EntryPoints.GameEntry
 
         public void Initialize()
         {
-            _gameStateInitializer.LoadDataOrCreateNew();
+            _gameInitializer.LoadDataOrCreateNew();
             _audioService.InitializeAudio();
             
             if (GP_Init.isReady)

@@ -6,7 +6,6 @@ using Code.Runtime.Core.SceneManagement;
 using Code.Runtime.Modules.Advertisement;
 using Code.Runtime.Modules.LocalizationProvider;
 using Code.Runtime.Modules.TutorialService;
-using Code.Runtime.Services.LevelLoaderService;
 using Code.Runtime.Services.PauseService;
 using Code.Runtime.Services.PersistentProgress;
 using Code.Runtime.Services.SaveLoad;

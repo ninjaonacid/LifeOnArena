@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace Code.Runtime.Modules.StatSystem
+namespace Code.Runtime.Modules.StatSystem.Runtime
 {
     public class Stat
     {

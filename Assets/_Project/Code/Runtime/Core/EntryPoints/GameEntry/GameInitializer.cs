@@ -3,17 +3,18 @@ using Code.Runtime.Core.Config;
 using Code.Runtime.Data;
 using Code.Runtime.Data.PlayerData;
 using Code.Runtime.Modules.StatSystem;
+using Code.Runtime.Modules.StatSystem.Runtime;
 using Code.Runtime.Services.PersistentProgress;
 using Code.Runtime.Services.SaveLoad;
 
 namespace Code.Runtime.Core.EntryPoints.GameEntry
 {
-    public class GameStateInitializer
+    public class GameInitializer
     {
         private readonly ConfigProvider _configProvider;
         private readonly SaveLoadService _saveLoadService;
         private readonly IGameDataContainer _gameDataContainer;
-        public GameStateInitializer(
+        public GameInitializer(
             ConfigProvider configProvider, 
             IGameDataContainer dataContainer,
             SaveLoadService saveLoad)

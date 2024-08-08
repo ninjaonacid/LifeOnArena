@@ -1,4 +1,5 @@
 ﻿using Code.Runtime.Modules.StatSystem;
+using Code.Runtime.Modules.StatSystem.Runtime;
 
 namespace Code.Runtime.Entity.Enemy
 {

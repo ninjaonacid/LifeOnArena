@@ -5,6 +5,7 @@ using Code.Runtime.Entity.EntitiesComponents;
 using Code.Runtime.Modules.AbilitySystem;
 using Code.Runtime.Modules.StateMachine;
 using Code.Runtime.Modules.StatSystem;
+using Code.Runtime.Modules.StatSystem.Runtime;
 using UnityEngine;
 
 namespace Code.Runtime.Entity.Enemy

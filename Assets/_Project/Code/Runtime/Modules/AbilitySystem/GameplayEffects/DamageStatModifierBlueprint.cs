@@ -1,5 +1,6 @@
 using Code.Runtime.Logic.Damage;
 using Code.Runtime.Modules.StatSystem;
+using Code.Runtime.Modules.StatSystem.Runtime;
 using UnityEngine;
 
 namespace Code.Runtime.Modules.AbilitySystem.GameplayEffects

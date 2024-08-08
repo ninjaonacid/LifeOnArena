@@ -8,7 +8,8 @@ using Code.Runtime.Modules.AbilitySystem;
 using Code.Runtime.Modules.AbilitySystem.GameplayEffects;
 using Code.Runtime.Modules.AbilitySystem.GameplayTags;
 using Code.Runtime.Modules.StatSystem;
-using Code.Runtime.Modules.StatSystem.StatModifiers;
+using Code.Runtime.Modules.StatSystem.Runtime;
+using Code.Runtime.Modules.StatSystem.Runtime.StatModifiers;
 using UnityEngine;
 
 

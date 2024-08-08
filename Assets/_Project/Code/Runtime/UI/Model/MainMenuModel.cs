@@ -5,7 +5,7 @@ using Code.Runtime.Entity.Hero;
 using Code.Runtime.Modules.StatSystem;
 using Code.Runtime.Modules.StatSystem.Runtime;
 using UniRx;
-using Attribute = Code.Runtime.Modules.StatSystem.Attribute;
+using Attribute = Code.Runtime.Modules.StatSystem.Runtime.Attribute;
 
 namespace Code.Runtime.UI.Model
 {
