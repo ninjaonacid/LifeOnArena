@@ -27,7 +27,6 @@
 # Recordings can get excessive in size
 /[Rr]ecordings/
 
-
 # Uncomment this line if you wish to ignore the asset store tools plugin
 # /[Aa]ssets/AssetStoreTools*
 
@@ -44,6 +43,8 @@
 *.DotSettings
 .DS_Store
 .idea
+# Configs
+.config
 
 # VScode
 .vscode/*
@@ -121,3 +122,9 @@ crashlytics-build.properties
 # Never ignore these Bakery Editor files
 !/**/ftModelPostProcessor.cs
 !/**/ftSavedPadding2.cs
+
+
+#Other
+/.UIElementsSchema
+/.UMotionData
+
