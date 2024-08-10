@@ -23,8 +23,10 @@
 !/[Aa]ssets/Plugins/ftLocalStorage.cs
 !/[Aa]ssets/Plugins/Bakery/ftGlobalStorage.cs
 !/[Aa]ssets/Plugins/Bakery/BakeryProjectSettings.cs
+
 # Recordings can get excessive in size
 /[Rr]ecordings/
+
 
 # Uncomment this line if you wish to ignore the asset store tools plugin
 # /[Aa]ssets/AssetStoreTools*
@@ -40,6 +42,8 @@
 
 # Resharper
 *.DotSettings
+.DS_Store
+.idea
 
 # VScode
 .vscode/*
@@ -111,6 +115,8 @@ crashlytics-build.properties
 /[Aa]ssets/_Project/Code/Editor/x64/Bakery/shaderSrc/*
 /[Aa]ssets/_Project/Code/Editor/x64/Bakery/scripts/*
 
+#Bakery Log
+/bakery_times.log
 
 # Never ignore these Bakery Editor files
 !/**/ftModelPostProcessor.cs
