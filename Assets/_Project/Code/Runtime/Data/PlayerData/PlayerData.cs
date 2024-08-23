@@ -24,6 +24,7 @@ namespace Code.Runtime.Data.PlayerData
             PlayerExp = new PlayerExp();
             TutorialData = new TutorialData();
             RewardsData = new RewardsData();
+            
         }
     }
 }
